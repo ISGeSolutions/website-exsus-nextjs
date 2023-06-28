@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.description}>
-        <p>This is the test deployment</p>
+        <p>This is the deployment - NextJs</p>
         <p>
           Get started by editing&nbsp;
           <code className={styles.code}>app/page.js</code>
