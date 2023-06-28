@@ -67,30 +67,21 @@ function App({ Component, pageProps }) {
         <Layout>
             <Head>
                 {/* eslint-disable-next-line @next/next/no-css-tags */}
-                <meta charset="UTF-8" />
-                <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                <meta charSet="UTF-8" />
+                <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <title>Luxury Holiday Destinations</title>
                 <link rel="icon" type="images/png" href="images/fav-icon.png" />
 
 
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-                <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&family=Slabo+27px&display=swap" rel="stylesheet" />
-                <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css' />
-
+                <link rel="preconnect" href="https://fonts.gstatic.com" />
+                
                 {/* <link href="//netdna.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
                 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
                 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
                 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> */}
 
-                <script type="text/javascript" src="/assets/javascripts/popper.min.js"></script>
-                <script type="text/javascript" src="/assets/javascripts/bootstrap.min.js"></script>
-                <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
-                <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script>
-                <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-                <script type="text/javascript" src="/assets/javascripts/bootstrap-select.min.js"></script>
-                <script type="text/javascript" src="/assets/javascripts/navigation.js"></script>
             </Head>
 
             <div>
@@ -98,6 +89,17 @@ function App({ Component, pageProps }) {
                     <Component {...pageProps} />
                 }
             </div>
+            <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&family=Slabo+27px&display=swap" rel="stylesheet" />
+                <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css' />
+
+            <script type="text/javascript" src="/assets/javascripts/popper.min.js"></script>
+                <script type="text/javascript" src="/assets/javascripts/bootstrap.min.js"></script>
+                <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
+                <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script>
+                <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+                <script type="text/javascript" src="/assets/javascripts/bootstrap-select.min.js"></script>
+                <script type="text/javascript" src="/assets/javascripts/navigation.js"></script>
+
             {/* credits */}
 
         </Layout>
