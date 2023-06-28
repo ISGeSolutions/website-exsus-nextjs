@@ -15,22 +15,22 @@ function Index() {
 
     return (
         <Layout>
-            <section class="trvl_info_row terms_conditions_row">
-                <div class="container-md">
-                    <div class="bookmark_row">
+            <section className="trvl_info_row terms_conditions_row">
+                <div className="container-md">
+                    <div className="bookmark_row">
                         <ul>
                             <li><a href="homepage.html">Home</a></li>
                             <li>Terms and conditions</li>
                         </ul>
                     </div>
-                    <div class="trvl_info_cntnt">
-                        <h2 class="trvl_title">WEBSITE TERMS OF USE</h2>
-                        <h2 class="transfrm_none">Your attention is drawn to the clauses in these Conditions in bold type which exclude or limit Exsus Travel Limited's liability.</h2>
-                        <h2 class="small_title_text">1. BASIS OF AGREEMENT</h2>
-                        <p class="mb-4">Your use of this website ("the Website") is subject to these Conditions, which may be amended from time to time. Accordingly, by using the Website you are deemed to accept these Conditions without modification by you. If you do not agree with these Conditions you are not authorised to use the Website.</p>
+                    <div className="trvl_info_cntnt">
+                        <h2 className="trvl_title">WEBSITE TERMS OF USE</h2>
+                        <h2 className="transfrm_none">Your attention is drawn to the clauses in these Conditions in bold type which exclude or limit Exsus Travel Limited's liability.</h2>
+                        <h2 className="small_title_text">1. BASIS OF AGREEMENT</h2>
+                        <p className="mb-4">Your use of this website ("the Website") is subject to these Conditions, which may be amended from time to time. Accordingly, by using the Website you are deemed to accept these Conditions without modification by you. If you do not agree with these Conditions you are not authorised to use the Website.</p>
                     </div>
-                    <div class="trvl_info_cntnt">
-                        <h2 class="small_title_text">2.0 USE OF THE WEBSITE</h2>
+                    <div className="trvl_info_cntnt">
+                        <h2 className="small_title_text">2.0 USE OF THE WEBSITE</h2>
                         <ul>
                             <li><i>2.1</i> You acknowledge that your use of the Website and submittal of an enquiry reply form does not constitute a contract or other agreement between you and us and that the Website solely provides a venue for us to advertise our products and services.</li>
                             <li><i>2.2</i> We grant you the right to access the Website for your personal and non-commercial use. You may for your own use only, view, copy and print out materials included on it (except for any source codes).</li>
@@ -40,16 +40,16 @@ function Index() {
                             <li><i>2.6</i> You acknowledge that when you click on a link which takes you to a third party website, we are not responsible for the content on the website.</li>
                         </ul>
                     </div>
-                    <div class="trvl_info_cntnt">
-                        <h2 class="small_title_text">3. INTELLECTUAL PROPERTY RIGHTS</h2>
-                        <p class="mb-4">You acknowledge that the copyright in and all other intellectual property rights in the Website, its contents and the underlying software and any related software belong to, or are licensed to us and that, except as provided by these Conditions, you will acquire no rights in the Website, its contents and/or the underlying software and/or any related software</p>
+                    <div className="trvl_info_cntnt">
+                        <h2 className="small_title_text">3. INTELLECTUAL PROPERTY RIGHTS</h2>
+                        <p className="mb-4">You acknowledge that the copyright in and all other intellectual property rights in the Website, its contents and the underlying software and any related software belong to, or are licensed to us and that, except as provided by these Conditions, you will acquire no rights in the Website, its contents and/or the underlying software and/or any related software</p>
                     </div>
-                    <div class="trvl_info_cntnt">
-                        <h2 class="small_title_text">4. VIRUSESS</h2>
+                    <div className="trvl_info_cntnt">
+                        <h2 className="small_title_text">4. VIRUSESS</h2>
                         <p>Whilst we will take reasonable steps to exclude viruses from the Website, we cannot guarantee such exclusion and no liability is accepted for viruses. You are recommended to take all appropriate safeguards against viruses before accessing the Website, its contents and the underlying software and/or any related software.</p>
                     </div>
-                    <div class="trvl_info_cntnt">
-                        <h2 class="small_title_text">5. OUR OBLIGATIONS AND DISCLAIMER</h2>
+                    <div className="trvl_info_cntnt">
+                        <h2 className="small_title_text">5. OUR OBLIGATIONS AND DISCLAIMER</h2>
                         <ul>
                             <li><i>5.1</i> We may at any time and for any reason correct without liability any typographical, clerical or other error or omission in the information contained on the Website, and we reserve the right to make amendments and/or improvements of or to the Website at any time.</li>
                             <li><i>5.2</i> The material featured on the Website is provided on an "as is" and "as available" basis. The descriptions given on the Website are based on inspections made on our behalf and on information passed to us. Inspections can take place several months before the information appears on the Website. Descriptions given are therefore descriptions of what normally exists at a given destination or venue. Further, the available facilities and amenities may be affected by local conditions, such as inclement weather, or the season: for example, but without limitation, entertainment is often sporadic or non-existent in low season. Accordingly we do not give any warranty (express or implied) or make any representation that:</li>
@@ -59,8 +59,8 @@ function Index() {
                             <li><i>5.3</i> We have no liability for any errors or omissions in postings or for hyperlinks contained on the Website. We shall exercise reasonable care in compiling the Website; however we have no liability for any action (or any lack of action) taken by any person or organisation, wherever they are based, as a result, direct or otherwise, of information contained on the Website.</li>
                         </ul>
                     </div>
-                    <div class="trvl_info_cntnt">
-                        <h2 class="small_title_text">6. LIABILITY</h2>
+                    <div className="trvl_info_cntnt">
+                        <h2 className="small_title_text">6. LIABILITY</h2>
                         <ul>
                             <li><i>6.1</i> Subject to clauses</li>
                             <li><i>6.2</i> our liability, and the liability of our agents, employees and sub-contractors, to you or any other party for any loss or damage whatsoever arising in connection with the Website, its contents or any use of it or them (whether under these Conditions or any contract or in consequence of misrepresentation, mis-statement or tortious act or omission, or otherwise, including, without limitation, liability for negligence or breach of statutory duty) is limited as follows:</li>
@@ -71,12 +71,12 @@ function Index() {
                             <li><i>6.3</i> In accordance with the Consumer Transactions (Restrictions on Statements) Order 1976 nothing in these Conditions shall affect your statutory rights as a consumer.</li>
                         </ul>
                     </div>
-                    <div class="trvl_info_cntnt">
-                        <h2 class="small_title_text">7. MATTERS BEYOND OUR REASONABLE CONTROL</h2>
+                    <div className="trvl_info_cntnt">
+                        <h2 className="small_title_text">7. MATTERS BEYOND OUR REASONABLE CONTROL</h2>
                         <p>If we cannot provide you with access to the Website and/or the on-line services in accordance with these Conditions because of something beyond our reasonable control, including (without limitation) act of God, lightning, flood, exceptionally severe weather, fire, explosion, war, civil disorder, industrial disputes, acts or omissions of persons for whom we are not responsible (including telecommunications and internet service providers) or acts of local or central Government or other competent authorities, we will not be liable to you as a result.</p>
                     </div>
-                    <div class="trvl_info_cntnt">
-                        <h2 class="small_title_text">8. GENERAL</h2>
+                    <div className="trvl_info_cntnt">
+                        <h2 className="small_title_text">8. GENERAL</h2>
                         <ul>
                             <li><i>8.1</i> These Conditions constitute the entire agreement between you and us relating to your use of the Website, supersede any previous agreement or understanding and may not be varied by you. All other terms and conditions, express or implied by statute or otherwise, but subject to clauses 1 above and</li>
                             <li><i>8.2</i> below, are excluded to the fullest extent permitted by law.</li>
@@ -93,30 +93,30 @@ function Index() {
                 </div>
             </section>
 
-            <section class="make_enqury_row">
-                <div class="container-md">
+            <section className="make_enqury_row">
+                <div className="container-md">
                     <h3>YOUR JOURNEY STARTS HERE</h3>
                     <p>call us on 020 7337 9010 to start planning your perfect trip</p>
-                    <button class="btn prmry_btn make_enqury_btn" onClick="window.open('contact_us.html')">Make an enquiry
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 267 512.43"><path fill-rule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                    <button className="btn prmry_btn make_enqury_btn" onClick="window.open('contact_us.html')">Make an enquiry
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 267 512.43"><path fill-rule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                     </button>
                 </div>
             </section>
 
-            <section aria-label="Sign up for newsletter" class="newslettr_row">
-                <div class="container-md">
+            <section aria-label="Sign up for newsletter" className="newslettr_row">
+                <div className="container-md">
                     <h4>Sign up for our newsletter</h4>
                     <h5>Receive our latest news and special offers</h5>
-                    <form class="newslettr_form d-block d-sm-flex">
-                        <div class="newlettr_inpt">
-                            <input type="text" class="form-control" placeholder="Full name and title" />
+                    <form className="newslettr_form d-block d-sm-flex">
+                        <div className="newlettr_inpt">
+                            <input type="text" className="form-control" placeholder="Full name and title" />
                         </div>
-                        <div class="newlettr_inpt ps-0 ps-sm-2">
-                            <input type="email" class="form-control" placeholder="Your email address" />
+                        <div className="newlettr_inpt ps-0 ps-sm-2">
+                            <input type="email" className="form-control" placeholder="Your email address" />
                         </div>
-                        <div class="newlettr_btn ps-0 ps-sm-2">
-                            <button type="submit" class="btn btn-primary prmry_btn">Sign up
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 267 512.43"><path fill-rule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                        <div className="newlettr_btn ps-0 ps-sm-2">
+                            <button type="submit" className="btn btn-primary prmry_btn">Sign up
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 267 512.43"><path fill-rule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                             </button>
                         </div>
                     </form>

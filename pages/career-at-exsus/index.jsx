@@ -15,9 +15,9 @@ function Index() {
 
     return (
         <Layout>
-            <section class="trvl_info_row">
-                <div class="container-md">
-                    <div class="bookmark_row">
+            <section className="trvl_info_row">
+                <div className="container-md">
+                    <div className="bookmark_row">
                         <ul>
                             <li><a href="homepage.html">Home</a></li>
                             <li><a href="about_us.html">About us</a></li>
@@ -25,18 +25,18 @@ function Index() {
                         </ul>
                     </div>
 
-                    <div class="trvl_info_cntnt">
-                        <h2 class="trvl_title">JOBS IN TRAVEL | CAREERS AT EXSUS TRAVEL</h2>
-                        <p class="mb-4">Exsus Travel has been creating luxury tailor-made holidays and bespoke honeymoons for over 20 years - our success stems from our staff, the experts responsible for crafting and personalising the itineraries and the exceptional luxury holidays that we offer. They are chosen because of their matchless destination knowledge and because they absolutely understand that it's the little touches and intangible extras that really make a client's time away special and that much more individual.</p>
+                    <div className="trvl_info_cntnt">
+                        <h2 className="trvl_title">JOBS IN TRAVEL | CAREERS AT EXSUS TRAVEL</h2>
+                        <p className="mb-4">Exsus Travel has been creating luxury tailor-made holidays and bespoke honeymoons for over 20 years - our success stems from our staff, the experts responsible for crafting and personalising the itineraries and the exceptional luxury holidays that we offer. They are chosen because of their matchless destination knowledge and because they absolutely understand that it's the little touches and intangible extras that really make a client's time away special and that much more individual.</p>
                         <p>Working for Exsus Travel is exciting and varied. There are lots of opportunities for development and progression, allowing people to achieve their personal goals. So, share your passion for travel with the people who continuously offer exceptional service and start on a career with one of the leading luxury travel tour operators.</p>
                     </div>
-                    <div class="trvl_info_cntnt">
-                        <h2 class="trvl_title_white">Sales & Marketing Support (Assistant Level)</h2>
-                        <p class="mb-4">Are you passionate about travelling? Keen to work in the travel and leisure industry? If so, an exciting job opportunity has arisen to join Exsus Travel in Sales and Marketing Support.</p>
-                        <p class="mb-4">This is an excellent opportunity to get involved in all aspects of the daily running of Exsus Travel.</p>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <div class="careers_list_blk">
+                    <div className="trvl_info_cntnt">
+                        <h2 className="trvl_title_white">Sales & Marketing Support (Assistant Level)</h2>
+                        <p className="mb-4">Are you passionate about travelling? Keen to work in the travel and leisure industry? If so, an exciting job opportunity has arisen to join Exsus Travel in Sales and Marketing Support.</p>
+                        <p className="mb-4">This is an excellent opportunity to get involved in all aspects of the daily running of Exsus Travel.</p>
+                        <div className="row">
+                            <div className="col-md-6 mb-3">
+                                <div className="careers_list_blk">
                                     <p>On the sales side, duties may include:</p>
                                     <ul>
                                         <li>Working on the travel booking system</li>
@@ -48,8 +48,8 @@ function Index() {
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <div class="careers_list_blk">
+                            <div className="col-md-6 mb-3">
+                                <div className="careers_list_blk">
                                     <p>On the marketing side, duties may include:</p>
                                     <ul>
                                         <li>Using the Content Management System to update content and images on the website</li>
@@ -61,11 +61,11 @@ function Index() {
                                 </div>
                             </div>
                         </div>
-                        <p class="mb-4">No two days are the same, and there will be a range of other miscellaneous tasks to assist with as and when they come up.</p>
-                        <p class="mb-4">This position is ideal for someone who has a passion for travel, an eye for writing inspiring content, and is a hard-working all-rounder. In return, you’ll learn about all aspects of sales and marketing.</p>
-                        <div class="row">
-                            <div class="col-12 mb-3">
-                                <div class="careers_list_blk">
+                        <p className="mb-4">No two days are the same, and there will be a range of other miscellaneous tasks to assist with as and when they come up.</p>
+                        <p className="mb-4">This position is ideal for someone who has a passion for travel, an eye for writing inspiring content, and is a hard-working all-rounder. In return, you’ll learn about all aspects of sales and marketing.</p>
+                        <div className="row">
+                            <div className="col-12 mb-3">
+                                <div className="careers_list_blk">
                                     <p>Desired skills & requirements:</p>
                                     <ul>
                                         <li>Must have excellent copywriting skills and an eye for attention to detail.</li>
@@ -81,13 +81,13 @@ function Index() {
                             </div>
                         </div>
                     </div>
-                    <div class="trvl_info_cntnt">
-                        <h2 class="trvl_title_white">Accounts Assistant</h2>
-                        <p class="mb-4">A great opportunity has arisen to join Exsus Travel as an Accounts Assistant. The purpose of this role is to support the Finance Director to deliver all financial requirements of the business.</p>
-                        <p class="mb-4">This position would suit someone who has either recently graduated university with an accounts degree or has some experience working in a finance department.</p>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <div class="careers_list_blk">
+                    <div className="trvl_info_cntnt">
+                        <h2 className="trvl_title_white">Accounts Assistant</h2>
+                        <p className="mb-4">A great opportunity has arisen to join Exsus Travel as an Accounts Assistant. The purpose of this role is to support the Finance Director to deliver all financial requirements of the business.</p>
+                        <p className="mb-4">This position would suit someone who has either recently graduated university with an accounts degree or has some experience working in a finance department.</p>
+                        <div className="row">
+                            <div className="col-md-6 mb-3">
+                                <div className="careers_list_blk">
                                     <p>Key Responsibilities:</p>
                                     <ul>
                                         <li>Posting and reconciliation of all bank transactions</li>
@@ -98,8 +98,8 @@ function Index() {
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <div class="careers_list_blk">
+                            <div className="col-md-6 mb-3">
+                                <div className="careers_list_blk">
                                     <p>Key Requirements:</p>
                                     <ul>
                                         <li>Strong MS Excel skills</li>
@@ -112,14 +112,14 @@ function Index() {
                                 </div>
                             </div>
                         </div>
-                        <p class="mb-4">To apply, please send your CV and cover letter to <a href="#">recruitment@exsus.com</a></p>
+                        <p className="mb-4">To apply, please send your CV and cover letter to <a href="#">recruitment@exsus.com</a></p>
                     </div>
-                    <div class="trvl_info_cntnt">
-                        <h2 class="trvl_title_white">Travel Sales Specialist (various destinations WORLDWIDE)</h2>
-                        <p class="mb-4">We are looking for a travel sales specialist to join our busy team, covering various destinations worldwide. If you share our passion for travel, have at least two years' travel sales experience (ideally in the luxury sector) and love creating unique, inspirational trips, we would love to hear from you.</p>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <div class="careers_list_blk">
+                    <div className="trvl_info_cntnt">
+                        <h2 className="trvl_title_white">Travel Sales Specialist (various destinations WORLDWIDE)</h2>
+                        <p className="mb-4">We are looking for a travel sales specialist to join our busy team, covering various destinations worldwide. If you share our passion for travel, have at least two years' travel sales experience (ideally in the luxury sector) and love creating unique, inspirational trips, we would love to hear from you.</p>
+                        <div className="row">
+                            <div className="col-md-6 mb-3">
+                                <div className="careers_list_blk">
                                     <p>Reporting to the Head of Sales, your key responsibilities will be:</p>
                                     <ul>
                                         <li>To work closely with high-end, discerning clients to create tailor-made trips using your first-hand knowledge and personal expertise</li>
@@ -129,8 +129,8 @@ function Index() {
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <div class="careers_list_blk">
+                            <div className="col-md-6 mb-3">
+                                <div className="careers_list_blk">
                                     <p>Desired skills and experience:</p>
                                     <ul>
                                         <li>At least two years' previous sales experience within the travel industry, preferably the luxury sector</li>
@@ -144,35 +144,35 @@ function Index() {
                                 </div>
                             </div>
                         </div>
-                        <p class="mb-4">To apply, please send your CV and cover letter, stating clearly which area/s you specialise in, to <a href="#">recruitment@exsus.com </a></p>
+                        <p className="mb-4">To apply, please send your CV and cover letter, stating clearly which area/s you specialise in, to <a href="#">recruitment@exsus.com </a></p>
                     </div>
                 </div>
             </section>
 
-            <section class="make_enqury_row">
-                <div class="container-md">
+            <section className="make_enqury_row">
+                <div className="container-md">
                     <h3>YOUR JOURNEY STARTS HERE</h3>
                     <p>call us on 020 7337 9010 to start planning your perfect trip</p>
-                    <button class="btn prmry_btn make_enqury_btn" onClick="window.open('contact_us.html')">Make an enquiry
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 267 512.43"><path fill-rule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                    <button className="btn prmry_btn make_enqury_btn" onClick="window.open('contact_us.html')">Make an enquiry
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 267 512.43"><path fill-rule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                     </button>
                 </div>
             </section>
 
-            <section aria-label="Sign up for newsletter" class="newslettr_row">
-                <div class="container-md">
+            <section aria-label="Sign up for newsletter" className="newslettr_row">
+                <div className="container-md">
                     <h4>Sign up for our newsletter</h4>
                     <h5>Receive our latest news and special offers</h5>
-                    <form class="newslettr_form d-block d-sm-flex">
-                        <div class="newlettr_inpt">
-                            <input type="text" class="form-control" placeholder="Full name and title" />
+                    <form className="newslettr_form d-block d-sm-flex">
+                        <div className="newlettr_inpt">
+                            <input type="text" className="form-control" placeholder="Full name and title" />
                         </div>
-                        <div class="newlettr_inpt ps-0 ps-sm-2">
-                            <input type="email" class="form-control" placeholder="Your email address" />
+                        <div className="newlettr_inpt ps-0 ps-sm-2">
+                            <input type="email" className="form-control" placeholder="Your email address" />
                         </div>
-                        <div class="newlettr_btn ps-0 ps-sm-2">
-                            <button type="submit" class="btn btn-primary prmry_btn">Sign up
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 267 512.43"><path fill-rule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                        <div className="newlettr_btn ps-0 ps-sm-2">
+                            <button type="submit" className="btn btn-primary prmry_btn">Sign up
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 267 512.43"><path fill-rule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                             </button>
                         </div>
                     </form>

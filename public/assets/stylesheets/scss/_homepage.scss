@@ -9,7 +9,7 @@
         display: flex;
         p{
             color: $white-color;
-            text-align: justify;
+            // text-align: justify;
             padding: 10px 0;
             font: 300 0.875rem/1.5rem $Roboto-Regular;
         }
@@ -262,7 +262,8 @@
             .card_slider_inr{
                 position: relative;
                 padding: 0 10px;
-                flex: 0 0 33.3%;
+                flex: 0 0 25%;
+                // flex: 0 0 33.3%;
                 &.card_slider_optn02{                    
                     flex: 0 0 25%;
                 }
