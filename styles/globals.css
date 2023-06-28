@@ -1,0 +1,46 @@
+a {
+    cursor: pointer;
+}
+
+.app-container {
+    min-height: 350px;
+}
+
+.carousel-slider {
+    height: 400px;
+}
+
+.thumbnail {
+    position: relative;
+    padding: 12px;
+    margin-bottom: 20px;
+}
+
+.thumbnail img {
+    width: 100%;
+}
+
+.no-underline-link {
+    text-decoration: none;
+}
+
+.carousel .slide .legend {
+    position: unset !important;
+    margin-left: 4% !important;
+    margin-top: revert;
+    background: none !important;
+    height: auto !important;
+
+}
+
+/* .carousel-slider {
+    height: auto !important;
+}
+
+.control-dots {
+    display: none;
+} */
+
+.carousel-slider {
+    height: auto !important;
+}

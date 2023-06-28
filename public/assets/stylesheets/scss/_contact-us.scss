@@ -1,0 +1,149 @@
+.contact_form_row{
+    padding: 50px 0;
+    background: $light-grey;
+    h2{
+        font: 2.5rem/2.5rem $Slabo;
+        color: $primary-color;
+        text-transform: uppercase;
+        text-align: center;
+    }
+    form{
+        margin-bottom: 50px;
+        input{
+            background: #c8c7c8;
+            font: 400 0.875rem/1rem $Roboto-Regular;
+            border-radius: 0;
+            color: $font-color;
+            height: 40px;
+            margin-bottom: 10px;
+            // & [type=number"]{
+
+            // }
+            &::placeholder{
+                color: $font-color;
+            }
+            &:focus{
+                background: #c8c7c8;
+            }
+        }
+        textarea{
+            background: #c8c7c8;
+            font: 400 0.875rem/1rem $Roboto-Regular;
+            border-radius: 0;
+            color: $font-color;
+            margin-bottom: 10px;
+            &::placeholder{
+                color: $font-color;
+            }
+            &:focus{
+                background: #c8c7c8;
+            }
+        }
+        .form_input_info{
+            font: 400 0.625rem/0.625rem $Roboto-Regular;
+            color: $white-color;
+        }
+        .select_drpdwn{
+            background: #c8c7c8;
+            border-radius: 0;
+            color: $font-color;
+            height: 40px;
+            margin-bottom: 10px;
+            .form-select{
+                background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' fill='black' width='20' viewBox='0 0 512 266.77'%3e%3cpath fill-rule='nonzero' d='M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z'/%3e%3c/svg%3e") !important;
+                background-position-x: 97% !important;
+                height: 40px;
+                border: none;
+                font: 400 0.875rem/1rem $Roboto-Regular;
+                border-radius: 0;
+            }
+        }
+        button{
+            width: 100%;
+            border: 1px solid $white-color;
+        }
+    }
+    .contact_form_cntnt{
+        color: $white-color;
+        .contact_form_cntnt_left{
+            h3{
+                font: 1.5rem/1.5rem $Slabo;
+                margin-bottom: 15px;
+            }
+            p{
+                font: 300 0.75rem/1.125rem $Roboto-Light;
+                margin-bottom: 15px;
+                a{
+                    color: $white-color;
+                }
+            }
+        }
+        img{
+            max-height: 63px;
+        }
+        .contact_form_cntnt_right{
+            p{
+                font: 300 1.375rem/1.75rem $Roboto-Light;
+                span{
+                    font-weight: 400;
+                }
+                a{
+                    color: $white-color;
+                }
+            }
+        }
+    }
+}
+
+.text_overlay_row{
+    padding: 60px 0;
+    background: url('../../images/book-with-confidence.jpg') no-repeat;
+    background-size: cover;
+    text-align: center;
+    color: $white-color;
+    h4{
+        font: 2.5rem/2.875rem $Slabo;
+    }
+    h5{
+        font: 2rem/2.25rem $Slabo;
+        margin-bottom: 0;
+    }
+    ul{
+        padding: 30px 10px 0;
+        display: inline-block;
+        list-style-type: disc;
+        list-style-position: inside;
+        li{
+            font: 400 1.25rem/1.5rem $Roboto-Regular;
+            text-align: left;
+            margin-bottom: 15px;
+            &:last-child{
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+.destination_text_overlay_row{
+    padding: 140px 0;
+    background: url('../../images/destination_overlay.jpg') no-repeat;
+    background-size: cover;
+    text-align: center;
+    .destination_text_overlay_inr{
+        background: rgba(255, 255, 255, 0.5);
+        padding: 50px 10px;
+        max-width: 600px;
+        display: inline-block;
+        width: 100%;
+        h4{
+            font: 300 2.25rem/2.25rem $Roboto-Light;
+            text-transform: uppercase;
+        }
+        h5{
+            font: 400 1.5rem/1.875rem $Roboto-Regular;
+            margin-bottom: 15px;
+        }
+        button{
+            margin: auto;
+        }
+    }
+}
