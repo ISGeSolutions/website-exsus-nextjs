@@ -1,0 +1,29 @@
+[
+    {
+        "firstName": "Shashikant",
+        "lastName": "Chobhe",
+        "username": "spchobhe",
+        "hash": "$2a$10$xTAPVJ2SNGjkFBQcDeimne1TRMuj1hnJ27NRXA2DOIWSLIIrNTwKK",
+        "id": 1,
+        "dateCreated": "2023-04-14T17:14:22.032Z",
+        "dateUpdated": "2023-04-14T17:14:22.032Z"
+    },
+    {
+        "firstName": "Priya",
+        "lastName": "Shewale",
+        "username": "pshewale",
+        "hash": "$2a$10$fPTQ5ZZOm28Cx0hnMCcYKOQKUHqY54azyD3QMlzrP8asxWtGgKyzG",
+        "id": 2,
+        "dateCreated": "2023-04-14T17:43:40.339Z",
+        "dateUpdated": "2023-04-14T17:43:40.339Z"
+    },
+    {
+        "firstName": "Mayur1",
+        "lastName": "Mayur1",
+        "username": "Mayur1Mayur1",
+        "hash": "$2a$10$e1sMxi8br4hHKpJj9.ffxuJpaYY.3ZvA6PzyyXa.fv9z8Yx.xPRcy",
+        "id": 4,
+        "dateCreated": "2023-04-26T17:52:44.335Z",
+        "dateUpdated": "2023-04-26T17:52:44.335Z"
+    }
+]

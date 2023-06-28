@@ -1,18 +1,33 @@
 {
-  "name": "nextjs",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "eslint": "8.43.0",
-    "eslint-config-next": "13.4.7",
-    "next": "13.4.7",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
-  }
+    "name": "exsus-travel",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "build": "next build",
+        "lint": "next lint",
+       "dev": "next dev -p 8081",
+       "start": "next start -p 8081"
+    },
+    "dependencies": {
+        "@hookform/resolvers": "^2.7.1",
+        "bcryptjs": "^2.4.3",
+        "express-jwt": "^6.1.0",
+        "jquery": "^3.6.4",
+        "jsonwebtoken": "^8.5.1",
+        "next": "^11.1.0",
+        "prop-types": "^15.7.2",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-hook-form": "^7.12.1",
+        "react-iframe": "^1.8.5",
+        "react-responsive-carousel": "^3.2.23",
+        "rxjs": "^7.3.0",
+        "state-pool": "^0.9.0",
+        "yup": "^0.32.9"
+    },
+    "devDependencies": {
+        "eslint": "7.32.0",
+        "eslint-config-next": "11.1.0",
+        "sass": "^1.62.0"
+    }
 }
