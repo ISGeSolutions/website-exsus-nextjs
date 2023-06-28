@@ -106,7 +106,7 @@ function Index() {
                             <h2>Tailor-made Luxury Holidays</h2>
                             <p>If the world is your oyster when choosing where to go, our team of travel experts can help you by providing inspiration and advice on travelling to all seven continents. From perennial favourites to emerging gems, much-loved destinations to places that are truly off the beaten track, we can take you all around the world, and in a style appropriate for a tailor-made luxury holiday, with handpicked places to stay and incredible experiences to enjoy. Whatever the destination and style of trip, we will design a trip like no other, a luxury tailor-made holiday, bespoke honeymoon or family adventure that's exclusive to you.</p>
                         </div>
-                        <div className="col-sm-6">
+                        <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="#" target="_blank">
                                     <img src="images/destination01.jpg" alt="destination01" className="img-fluid" />
@@ -126,7 +126,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6">
+                        <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="#">
                                     <img src="images/destination02.jpg" alt="destination02" className="img-fluid" />
@@ -147,7 +147,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6">
+                        <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="#">
                                     <img src="images/destination03.jpg" alt="destination03" className="img-fluid" />
@@ -167,7 +167,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6">
+                        <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="#">
                                     <img src="images/destination04.jpg" alt="destination04" className="img-fluid" />
@@ -188,7 +188,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6">
+                        <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="#">
                                     <img src="images/destination05.jpg" alt="destination05" className="img-fluid" />
@@ -209,7 +209,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6">
+                        <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="#">
                                     <img src="images/destination06.jpg" alt="destination06" className="img-fluid" />
@@ -230,7 +230,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6">
+                        <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="#">
                                     <img src="images/destination07.jpg" alt="destination07" className="img-fluid" />
@@ -251,7 +251,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6">
+                        <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="#">
                                     <img src="images/destination08.jpg" alt="destination08" className="img-fluid" />
@@ -272,7 +272,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6">
+                        <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="#">
                                     <img src="images/destination09.jpg" alt="destination09" className="img-fluid" />
@@ -293,7 +293,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6">
+                        <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="#">
                                     <img src="images/destination10.jpg" alt="destination10" className="img-fluid" />

@@ -102,7 +102,7 @@ function Index() {
                 </ul>
             </div>
             <div className="row">
-                <div className="col-sm-6 col-lg-4">
+                <div className="col-sm-6 col-lg-3">
                     <div className="our_exprts_inr">
                         <img src="images/expert01.jpg" alt="expert01" className="img-fluid" />
                         <div className="expert_info">                            
@@ -115,7 +115,7 @@ function Index() {
                         </button>
                     </div>
                 </div>
-                <div className="col-sm-6 col-lg-4">
+                <div className="col-sm-6 col-lg-3">
                     <div className="our_exprts_inr">
                         <img src="images/expert02.jpg" alt="expert02" className="img-fluid" />
                         <div className="expert_info">                            
@@ -128,7 +128,7 @@ function Index() {
                         </button>
                     </div>
                 </div>
-                <div className="col-sm-6 col-lg-4">
+                <div className="col-sm-6 col-lg-3">
                     <div className="our_exprts_inr">
                         <img src="images/expert03.jpg" alt="expert03" className="img-fluid" />
                         <div className="expert_info">                            
@@ -141,7 +141,7 @@ function Index() {
                         </button>
                     </div>
                 </div>
-                <div className="col-sm-6 col-lg-4">
+                <div className="col-sm-6 col-lg-3">
                     <div className="our_exprts_inr">
                         <img src="images/expert04.jpg" alt="expert04" className="img-fluid" />
                         <div className="expert_info">  
@@ -154,7 +154,7 @@ function Index() {
                         </button>
                     </div>
                 </div>
-                <div className="col-sm-6 col-lg-4">
+                <div className="col-sm-6 col-lg-3">
                     <div className="our_exprts_inr">
                         <img src="images/expert05.jpg" alt="expert05" className="img-fluid" />
                         <div className="expert_info">   
@@ -167,7 +167,7 @@ function Index() {
                         </button>
                     </div>
                 </div>
-                <div className="col-sm-6 col-lg-4">
+                <div className="col-sm-6 col-lg-3">
                     <div className="our_exprts_inr">
                         <img src="images/expert06.jpg" alt="expert06" className="img-fluid" />
                         <div className="expert_info"> 
@@ -180,7 +180,7 @@ function Index() {
                         </button>
                     </div>
                 </div>
-                <div className="col-sm-6 col-lg-4">
+                <div className="col-sm-6 col-lg-3">
                     <div className="our_exprts_inr">
                         <img src="images/expert07.jpg" alt="expert07" className="img-fluid" />
                         <div className="expert_info">   
@@ -193,7 +193,7 @@ function Index() {
                         </button>
                     </div>
                 </div>
-                <div className="col-sm-6 col-lg-4">
+                <div className="col-sm-6 col-lg-3">
                     <div className="our_exprts_inr">
                         <img src="images/expert08.jpg" alt="expert08" className="img-fluid" />
                         <div className="expert_info">          
@@ -206,7 +206,7 @@ function Index() {
                         </button>
                     </div>
                 </div>
-                <div className="col-sm-6 col-lg-4">
+                <div className="col-sm-6 col-lg-3">
                     <div className="our_exprts_inr">
                         <img src="images/expert09.jpg" alt="expert09" className="img-fluid" />
                         <div className="expert_info">  
@@ -219,7 +219,7 @@ function Index() {
                         </button>
                     </div>
                 </div>
-                <div className="col-sm-6 col-lg-4">
+                <div className="col-sm-6 col-lg-3">
                     <div className="our_exprts_inr">
                         <img src="images/expert10.jpg" alt="expert10" className="img-fluid" />
                         <div className="expert_info">                            
