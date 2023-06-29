@@ -5,6 +5,9 @@ import { Layout } from 'components/users';
 import { userService } from 'services';
 import Iframe from 'react-iframe'
 
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+var Carousel = require('react-responsive-carousel').Carousel;
+
 export default Index;
 
 function Index() {
@@ -17,7 +20,50 @@ function Index() {
     return (
         <Layout>
             <section className="banner_blk_row">
-                <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
+
+                <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
+                    <div>
+                        <img src="/assets/images/destination_banner01.jpg" />
+                    </div>
+                    <div>
+                        <img src="/assets/images/destination_banner02.jpg" />
+                    </div>
+                    <div>
+                        <img src="/assets/images/destination_banner03.jpg" />
+                    </div>
+                    <div>
+                        <img src="/assets/images/destination_banner04.jpg" />
+                    </div>
+                    <div>
+                        <img src="/assets/images/destination_banner05.jpg" />
+                    </div>
+                    <div>
+                        <img src="/assets/images/destination_banner06.jpg" />
+                    </div>
+                    <div>
+                        <img src="/assets/images/destination_banner07.jpg" />
+                    </div>
+                    <div>
+                        <img src="/assets/images/destination_banner08.jpg" />
+                    </div>
+                    <div>
+                        <img src="/assets/images/destination_banner09.jpg" />
+                    </div>
+                    <div>
+                        <img src="/assets/images/destination_banner10.jpg" />
+                    </div>
+                    <div>
+                        <img src="/assets/images/destination_banner11.jpg" />
+                    </div>
+                    <div>
+                        <img src="/assets/images/destination_banner12.jpg" />
+                    </div>
+                    <div>
+                        <img src="/assets/images/destination_banner13.jpg" />
+                    </div>
+                </Carousel>
+
+                {/* <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -74,19 +120,19 @@ function Index() {
                             <div className="destination_overvw_banner13 banner_commn_cls"></div>
                         </a>
                     </div>
-                </div>
+                </div> */}
                 <div className="banner_tab_blk">
                     <button className="btn banner_map_tab">Map</button>
                     <button className="btn banner_img_tab banner_tab_active">../images</button>
                 </div>
                 <div className="banner_map_blk">
-                <Iframe url="https://www.sdrive.app/embed/1ptBQD"
-        width="640px"
-        height="320px"
-        id=""
-        className=""
-        display="block"
-        position="relative"/>
+                    <Iframe url="https://www.sdrive.app/embed/1ptBQD"
+                        width="640px"
+                        height="320px"
+                        id=""
+                        className=""
+                        display="block"
+                        position="relative" />
                     {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" style="border:0;" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe> */}
                 </div>
             </section>
@@ -396,7 +442,7 @@ function Index() {
                         <section className="card_blk_row dark_grey">
                             <div className="container-md">
                                 <div className="row">
-                                    <div className="col-sm-6">
+                                    <div className="col-sm-4">
                                         <div className="card_blk_inr card_blk_overlay">
                                             <a href="#" target="_blank">
                                                 <img src="../images/destination_overview01.jpg" alt="Card image 07" className="img-fluid" />
@@ -416,7 +462,7 @@ function Index() {
                                         </div>
                                     </div>
 
-                                    <div className="col-sm-6">
+                                    <div className="col-sm-4">
                                         <div className="card_blk_inr card_blk_overlay">
                                             <a href="#">
                                                 <img src="../images/destination_overview02.jpg" alt="Card image 08" className="img-fluid" />
@@ -716,7 +762,7 @@ function Index() {
                         <section className="card_blk_row dark_grey">
                             <div className="container-md">
                                 <div className="row">
-                                    <div className="col-sm-6">
+                                    <div className="col-sm-4">
                                         <div className="card_blk_inr card_blk_overlay">
                                             <a href="#" target="_blank">
                                                 <img src="../images/destination_overview01.jpg" alt="Card image 07" className="img-fluid" />
@@ -736,7 +782,7 @@ function Index() {
                                         </div>
                                     </div>
 
-                                    <div className="col-sm-6">
+                                    <div className="col-sm-4">
                                         <div className="card_blk_inr card_blk_overlay">
                                             <a href="#">
                                                 <img src="../images/destination_overview02.jpg" alt="Card image 08" className="img-fluid" />

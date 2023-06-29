@@ -1,6 +1,9 @@
 import { Layout } from 'components/users';
 import { Signup } from 'components';
 
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+var Carousel = require('react-responsive-carousel').Carousel;
+
 export default Index;
 
 function Index() {
@@ -9,7 +12,21 @@ function Index() {
         <Layout>
             {/* <h4 className='mt-2'>This is destination page</h4> */}
             <section className="banner_blk_row">
-                <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
+                <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
+                    <div>
+                        <img src="/assets/images/about_us_banner01.jpg" />
+                    </div>
+                    <div>
+                        <img src="/assets/images/about_us_banner02.jpg" />
+                    </div>
+                    <div>
+                        <img src="/assets/images/about_us_banner03.jpg" />
+                    </div>
+                    <div>
+                        <img src="/assets/images/about_us_banner04.jpg" />
+                    </div>
+                </Carousel>
+                {/* <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -30,7 +47,7 @@ function Index() {
                             <div className="banner_commn_cls about_us_banner04"></div>
                         </a>
                     </div>
-                </div>
+                </div> */}
             </section>
 
             <section className="trvl_info_row">

@@ -4,6 +4,9 @@ import { Link, Spinner } from 'components';
 import { Layout } from 'components/users';
 import { userService } from 'services';
 
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+var Carousel = require('react-responsive-carousel').Carousel;
+
 export default Index;
 
 function Index() {
@@ -16,7 +19,13 @@ function Index() {
     return (
         <Layout>
             <section className="banner_blk_row">
-                <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
+                <Carousel showArrows={false} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
+                    <div>
+                        <img src="/assets/images/holiday_types_banner.jpg" />
+                        {/* /static/media/holiday_types_banner.1e97daba.jpg */}
+                    </div>
+                </Carousel>
+                {/* <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
                     </div>
@@ -25,7 +34,7 @@ function Index() {
                             <div className="banner_commn_cls holiday_types_banner"></div>
                         </a>
                     </div>
-                </div>
+                </div> */}
                 <div className="banner_dropdwn_row">
                     <div className="container-md">
                         <div className="banner_dropdwn_inr d-block d-md-flex">
@@ -121,7 +130,7 @@ function Index() {
                                 </ul>
                             </div>
                         </div>
-                        <div className="col-sm-6">
+                        <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="holiday_types.html" target="_blank">
                                     <img src="images/holiday_type01.jpg" alt="holiday_type01" className="img-fluid" />
@@ -141,7 +150,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6">
+                        <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="holiday_types.html" target="_blank">
                                     <img src="images/holiday_type02.jpg" alt="holiday_type02" className="img-fluid" />
@@ -162,7 +171,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6">
+                        <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="holiday_types.html" target="_blank">
                                     <img src="images/holiday_type03.jpg" alt="holiday_type03" className="img-fluid" />
@@ -182,7 +191,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6">
+                        <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="holiday_types.html" target="_blank">
                                     <img src="images/holiday_type04.jpg" alt="holiday_type04" className="img-fluid" />
@@ -203,7 +212,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6">
+                        <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="holiday_types.html" target="_blank">
                                     <img src="images/holiday_type05.jpg" alt="holiday_type05" className="img-fluid" />
@@ -224,7 +233,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6">
+                        <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="holiday_types.html" target="_blank">
                                     <img src="images/holiday_type06.jpg" alt="holiday_type06" className="img-fluid" />
@@ -245,7 +254,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6">
+                        <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="holiday_types.html" target="_blank">
                                     <img src="images/holiday_type07.jpg" alt="holiday_type07" className="img-fluid" />
@@ -266,7 +275,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6">
+                        <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="holiday_types.html" target="_blank">
                                     <img src="images/holiday_type08.jpg" alt="holiday_type08" className="img-fluid" />
@@ -287,7 +296,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6">
+                        <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="holiday_types.html" target="_blank">
                                     <img src="images/holiday_type09.jpg" alt="holiday_type09" className="img-fluid" />
@@ -308,7 +317,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6">
+                        <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="holiday_types.html" target="_blank">
                                     <img src="images/holiday_type10.jpg" alt="holiday_type10" className="img-fluid" />
@@ -329,7 +338,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6">
+                        <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="holiday_types.html" target="_blank">
                                     <img src="images/holiday_type11.jpg" alt="holiday_type01" className="img-fluid" />

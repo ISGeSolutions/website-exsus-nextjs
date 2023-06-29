@@ -22,8 +22,7 @@ function Index() {
         <Layout>
             <section className="banner_blk_row">
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
-                    <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showThumbs={false}>
-                        <div>
+                <Carousel showArrows={false} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>                        <div>
                             <img src="/assets/images/offer_banner01.jpg" />
                         </div>
                         <div>

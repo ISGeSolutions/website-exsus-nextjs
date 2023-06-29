@@ -6,6 +6,7 @@ import { userService } from 'services';
 
 var React = require('react');
 var ReactDOM = require('react-dom');
+
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 var Carousel = require('react-responsive-carousel').Carousel;
 
@@ -20,7 +21,7 @@ function Index() {
 
     return (
         <Layout>
-            <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showThumbs={false}>
+            <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
                 <div>
                     <img src="/assets/images/about_us_banner01.jpg" />
                     {/* <p className="legend">Legend 1</p> */}
