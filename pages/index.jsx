@@ -17,7 +17,7 @@ function Index() {
     return (
         <>
             <section className="banner_blk_row">
-                <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
+                <Carousel showArrows={false} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
                     <div>
                         <img src="/assets/images/banner01.png" />
                     </div>
@@ -64,7 +64,7 @@ function Index() {
             <section className="card_blk_row">
                 <div className="container-md">
                     <div className="row">
-                        <div className="col-sm-6 col-md-6 col-lg-4">
+                        <div className="col-sm-6 col-md-6 col-lg-3">
                             <div className="card_blk_inr">
                                 <a href="#" target="_blank">
                                     <img src="images/card_img01.jpg" alt="Card image 01" className="img-fluid" />
@@ -85,7 +85,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6 col-md-6 col-lg-4">
+                        <div className="col-sm-6 col-md-6 col-lg-3">
                             <div className="card_blk_inr">
                                 <a href="#">
                                     <img src="images/card_img02.jpg" alt="Card image 02" className="img-fluid" />
@@ -107,7 +107,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6 col-md-6 col-lg-4">
+                        <div className="col-sm-6 col-md-6 col-lg-3">
                             <div className="card_blk_inr">
                                 <a href="#">
                                     <img src="images/card_img03.jpg" alt="Card image 03" className="img-fluid" />
@@ -128,7 +128,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6 col-md-6 col-lg-4">
+                        <div className="col-sm-6 col-md-6 col-lg-3">
                             <div className="card_blk_inr">
                                 <a href="#">
                                     <img src="images/card_img04.jpg" alt="Card image 04" className="img-fluid" />
@@ -150,7 +150,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6 col-md-6 col-lg-4">
+                        <div className="col-sm-6 col-md-6 col-lg-3">
                             <div className="card_blk_inr">
                                 <a href="#">
                                     <img src="images/card_img05.jpg" alt="Card image 05" className="img-fluid" />
@@ -172,7 +172,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6 col-md-6 col-lg-4">
+                        <div className="col-sm-6 col-md-6 col-lg-3">
                             <div className="card_blk_inr">
                                 <a href="#">
                                     <img src="images/card_img06.jpg" alt="Card image 06" className="img-fluid" />

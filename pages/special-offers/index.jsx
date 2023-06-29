@@ -21,7 +21,7 @@ function Index() {
     return (
         <Layout>
             <section className="banner_blk_row">
-            <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
+            <Carousel showArrows={false} autoPlay={true} infiniteLoop={true} showIndicators={false} showThumbs={false}>
                         <div>
                             <img src="/assets/images/offer_banner01.jpg" />
                         </div>
