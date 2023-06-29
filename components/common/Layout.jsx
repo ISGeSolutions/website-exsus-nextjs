@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { userService } from 'services';
 import { NavLink } from './../NavLink';
 import { Nav, Alert } from 'components';
+import { Analytics } from '@vercel/analytics/react';
 
 export { Layout };
 
@@ -98,6 +99,8 @@ function Layout({ children }) {
 
             {children}
 
+            <Analytics />
+            
             <footer>
                 <div className="container-md">
                     <section className="footer_img_row d-block d-sm-flex">
