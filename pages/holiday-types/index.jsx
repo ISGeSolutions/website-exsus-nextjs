@@ -19,7 +19,7 @@ function Index() {
     return (
         <Layout>
             <section className="banner_blk_row">
-                <Carousel showArrows={false} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
+                <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
                     <div>
                         <img src="/assets/images/holiday_types_banner.jpg" />
                         {/* /static/media/holiday_types_banner.1e97daba.jpg */}

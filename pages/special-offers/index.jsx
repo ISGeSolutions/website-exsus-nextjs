@@ -21,8 +21,8 @@ function Index() {
     return (
         <Layout>
             <section className="banner_blk_row">
-                <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
-                <Carousel showArrows={false} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>                        <div>
+            <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
+                        <div>
                             <img src="/assets/images/offer_banner01.jpg" />
                         </div>
                         <div>
@@ -44,6 +44,8 @@ function Index() {
                             <img src="/assets/images/offer_banner07.jpg" />
                         </div>
                     </Carousel>
+
+                    {/* <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel"> */}
 
                     {/* <div className="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
@@ -77,7 +79,7 @@ function Index() {
                     <div className="offer_banner07 banner_commn_cls"></div>
                 </a>           
             </div> */}
-                </div>
+                {/* </div> */}
             </section>
 
             <section className="card_blk_row destinations_blk_row light_grey">
