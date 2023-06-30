@@ -2,18 +2,33 @@ import { useState, useEffect } from 'react';
 
 import { Link, Spinner, Signup } from 'components';
 import { Layout } from 'components/users';
-import { userService } from 'services';
+import { destinationService, alertService, userService } from 'services';
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 var Carousel = require('react-responsive-carousel').Carousel;
 
+// export const getStaticProps = async () => {
+
+// const res = await destinationService.getAll();
+// console.log('res', res);
+// const data = await res;
+// console.log('data', data);
+// return {
+//     props: { data }
+// };
+//     return;
+// }
+
 export default Index;
 
 function Index() {
-    const [users, setUsers] = useState(null);
+    const [destinations, setDestinations] = useState();
 
     useEffect(() => {
-        userService.getAll().then(x => setUsers(x));
+        destinationService.getAll().then(x => {
+            console.log('x', x);
+            setDestinations(x)
+        });
     }, []);
 
     return (
@@ -21,9 +36,9 @@ function Index() {
             {/* <h4 className='mt-2'>This is destination page</h4> */}
             <section className="banner_blk_row">
                 <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
-                        <div>
-                            <img src="/assets/images/destination_banner.jpg" />
-                        </div>
+                    <div>
+                        <img src="/assets/images/destination_banner.jpg" />
+                    </div>
                 </Carousel>
 
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
@@ -39,7 +54,24 @@ function Index() {
                 <div className="banner_dropdwn_row">
                     <div className="container-md">
                         <div className="banner_dropdwn_inr d-block d-md-flex">
+
                             <div className="banner_dropdwn_blk">
+                                <div className="select_drpdwn">
+                                    <select className="form-select" aria-label="Choose a destination">
+                                        <option defaultValue>
+                                            Choose a destination
+                                            {/* {destinations | json} */}
+                                        </option>
+                                        {
+                                            destinations?.map((destination, index) => {
+                                                return <option key={index} value={destination}>{destination}</option>
+                                            })
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            {/* <div className="banner_dropdwn_blk">
                                 <div className="select_drpdwn">
                                     <select className="form-select" aria-label="Choose a destination">
                                         <option defaultValue>Choose a destination</option>
@@ -55,7 +87,7 @@ function Index() {
                                         <option value="Indian ocean">Indian ocean</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                                 <div className="select_drpdwn">
                                     <select className="form-select" aria-label="Choose a reason">

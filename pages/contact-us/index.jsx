@@ -50,7 +50,7 @@ function Index() {
         return contactusService.makeanenquiry(data)
             .then(() => {
                 alertService.success('Make an enquiry successful', { keepAfterRouteChange: true });
-                router.push('contactus');
+                router.push('contact-us');
             })
             .catch(alertService.error);
     }

@@ -1,29 +1,129 @@
-[
+{
+  "users": [
     {
-        "firstName": "Shashikant",
-        "lastName": "Chobhe",
-        "username": "spchobhe",
-        "hash": "$2a$10$xTAPVJ2SNGjkFBQcDeimne1TRMuj1hnJ27NRXA2DOIWSLIIrNTwKK",
-        "id": 1,
-        "dateCreated": "2023-04-14T17:14:22.032Z",
-        "dateUpdated": "2023-04-14T17:14:22.032Z"
+      "firstName": "Shashikant",
+      "lastName": "Chobhe",
+      "username": "spchobhe",
+      "hash": "$2a$10$xTAPVJ2SNGjkFBQcDeimne1TRMuj1hnJ27NRXA2DOIWSLIIrNTwKK",
+      "id": 1,
+      "dateCreated": "2023-04-14T17:14:22.032Z",
+      "dateUpdated": "2023-04-14T17:14:22.032Z"
     },
     {
-        "firstName": "Priya",
-        "lastName": "Shewale",
-        "username": "pshewale",
-        "hash": "$2a$10$fPTQ5ZZOm28Cx0hnMCcYKOQKUHqY54azyD3QMlzrP8asxWtGgKyzG",
-        "id": 2,
-        "dateCreated": "2023-04-14T17:43:40.339Z",
-        "dateUpdated": "2023-04-14T17:43:40.339Z"
+      "firstName": "Priya",
+      "lastName": "Shewale",
+      "username": "pshewale",
+      "hash": "$2a$10$fPTQ5ZZOm28Cx0hnMCcYKOQKUHqY54azyD3QMlzrP8asxWtGgKyzG",
+      "id": 2,
+      "dateCreated": "2023-04-14T17:43:40.339Z",
+      "dateUpdated": "2023-04-14T17:43:40.339Z"
     },
     {
-        "firstName": "Mayur1",
-        "lastName": "Mayur1",
-        "username": "Mayur1Mayur1",
-        "hash": "$2a$10$e1sMxi8br4hHKpJj9.ffxuJpaYY.3ZvA6PzyyXa.fv9z8Yx.xPRcy",
-        "id": 4,
-        "dateCreated": "2023-04-26T17:52:44.335Z",
-        "dateUpdated": "2023-04-26T17:52:44.335Z"
+      "firstName": "Mayur1",
+      "lastName": "Mayur1",
+      "username": "Mayur1Mayur1",
+      "hash": "$2a$10$e1sMxi8br4hHKpJj9.ffxuJpaYY.3ZvA6PzyyXa.fv9z8Yx.xPRcy",
+      "id": 4,
+      "dateCreated": "2023-04-26T17:52:44.335Z",
+      "dateUpdated": "2023-04-26T17:52:44.335Z"
     }
-]
+  ],
+  "enquiries": [
+    {
+      "title": "Mr",
+      "id": 1,
+      "firstname": "Ganesh",
+      "surname": "Devkar",
+      "email": "ganesh@abc.com",
+      "telephone": "02347202933",
+      "besttimetocall": "8:30am-12pm (GMT)",
+      "liketogo": "Africa - July End",
+      "tellus": "no description",
+      "getintouch": "Google search"
+    },
+    {
+      "title": "Mrs",
+      "id": 3,
+      "firstname": "julee",
+      "surname": "Lisa",
+      "email": "july@abc.com",
+      "telephone": "02347202944",
+      "besttimetocall": "8:30am-12pm (GMT)",
+      "liketogo": "Amazon - July End",
+      "tellus": "no description",
+      "getintouch": "Google search"
+    },
+    {
+      "title": "Mr",
+      "firstname": "Rahul",
+      "surname": "Harer",
+      "email": "rahul@abc.com",
+      "telephone": "023346921",
+      "besttimetocall": "8.30am - 12pm (GMT)",
+      "liketogo": "Bali in Last week of August",
+      "tellus": "no description",
+      "getintouch": "Google advert",
+      "id": 2
+    },
+    {
+      "title": "Miss",
+      "firstname": "Riya",
+      "surname": "Sawant",
+      "email": "riya@abc.com",
+      "telephone": "784030404303",
+      "besttimetocall": "12pm - 3pm (GMT)",
+      "liketogo": "paris Jan end",
+      "tellus": "test",
+      "getintouch": "Social media",
+      "id": 4
+    },
+    {
+      "title": "Dr",
+      "firstname": "Rajeev",
+      "surname": "Jha",
+      "email": "rajeev@abc.com",
+      "telephone": "7983892823",
+      "besttimetocall": "3pm - 6pm (GMT)",
+      "liketogo": "Singapore  End of dec",
+      "tellus": "test",
+      "getintouch": "Other*",
+      "id": 5
+    },
+    {
+      "title": "Mr",
+      "firstname": "Ganesh",
+      "surname": "Mohite",
+      "email": "Ganesh@xyz",
+      "telephone": "56515616116",
+      "besttimetocall": "8.30am - 12pm (GMT)",
+      "liketogo": "paris Jan end",
+      "tellus": "....",
+      "getintouch": "Friend or Family",
+      "id": 6
+    },
+    {
+      "title": "Mr",
+      "firstname": "Shashikant",
+      "surname": "Chobhe",
+      "email": "spchobhe@live.com",
+      "telephone": "14708542623",
+      "besttimetocall": "8.30am - 12pm (GMT)",
+      "liketogo": "Nashville",
+      "tellus": "This is test",
+      "getintouch": "Repeat client",
+      "id": 7
+    }
+  ],
+  "destinations": [
+    "Asia",
+    "Europe",
+    "South America",
+    "Indian Subcontinent",
+    "North America & Caribbean",
+    "Africa",
+    "Central America",
+    "Australasia & South Pacific",
+    "Middle East & North Africa",
+    "Indian oceana"
+  ]
+}
