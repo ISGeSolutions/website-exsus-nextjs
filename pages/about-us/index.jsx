@@ -55,7 +55,7 @@ function Index() {
                     <div className="bookmark_row">
                         <ul>
                             <li><a href="homepage.html">Home</a></li>
-                            <li>Why us?</li>
+                            <li>Why us??</li>
                         </ul>
                     </div>
                     <div className="trvl_info_cntnt">
