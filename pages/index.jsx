@@ -12,12 +12,12 @@ function Index() {
         console.log('region', window.site_region);
     }, []);
 
-    const router = useRouter(); 
+    const router = useRouter();
 
     return (
         <>
             <section className="banner_blk_row">
-                <Carousel showArrows={false} autoPlay={true} infiniteLoop={true} showIndicators={false} showThumbs={false}>
+                <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
                     <div>
                         <img src="/assets/images/banner01.png" />
                     </div>
