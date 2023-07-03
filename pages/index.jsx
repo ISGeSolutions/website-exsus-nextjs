@@ -12,7 +12,7 @@ function Index() {
         console.log('region', window.site_region);
     }, []);
 
-    const router = useRouter();
+    const router = useRouter(); 
 
     return (
         <>
