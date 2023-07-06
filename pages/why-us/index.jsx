@@ -8,7 +8,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-var Carousel = require('react-responsive-carousel').Carousel;
+// var Carousel = require('react-responsive-carousel').Carousel;
 
 export default Index;
 
@@ -16,31 +16,19 @@ function Index() {
     const [users, setUsers] = useState(null);
 
     useEffect(() => {
+        const carousel = document.querySelector('#carouselExampleInterval');
+        new bootstrap.Carousel(carousel);
+    }, []);
+
+    useEffect(() => {
         userService.getAll().then(x => setUsers(x));
     }, []);
 
     return (
         <Layout>
-            <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
-                <div>
-                    <img src="/assets/images/about_us_banner01.jpg" />
-                    {/* <p className="legend">Legend 1</p> */}
-                </div>
-                <div>
-                    <img src="/assets/images/about_us_banner02.jpg" />
-                    {/* <p className="legend">Legend 1</p> */}
-                </div>
-                <div>
-                    <img src="/assets/images/about_us_banner03.jpg" />
-                    {/* <p className="legend">Legend 1</p> */}
-                </div>
-                <div>
-                    <img src="/assets/images/about_us_banner04.jpg" />
-                    {/* <p className="legend">Legend 1</p> */}
-                </div>
-            </Carousel>
 
-            {/* <section className="banner_blk_row">
+
+            <section className="banner_blk_row">
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
@@ -63,7 +51,7 @@ function Index() {
                         </a>
                     </div>
                 </div>
-            </section> */}
+            </section>
 
             <section className="trvl_info_row">
                 <div className="container-md">
