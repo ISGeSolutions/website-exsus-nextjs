@@ -14,12 +14,14 @@ function Index() {
 
     useEffect(() => {
         userService.getAll().then(x => setUsers(x));
+        const carousel = document.querySelector('#carouselExampleInterval');
+        new bootstrap.Carousel(carousel);
     }, []);
 
     return (
         <Layout>
             <section className="banner_blk_row">
-                <Carousel showArrows={false} autoPlay={true} infiniteLoop={true} showIndicators={false} showThumbs={false}>
+                {/* <Carousel showArrows={false} autoPlay={true} infiniteLoop={true} showIndicators={false} showThumbs={false}>
                     <div>
                         <img src="/assets/images/offer_banner01.jpg" />
                     </div>
@@ -41,43 +43,43 @@ function Index() {
                     <div>
                         <img src="/assets/images/offer_banner07.jpg" />
                     </div>
-                </Carousel>
+                </Carousel> */}
 
-                {/* <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel"> */}
+                <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
 
-                {/* <div className="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="4" aria-label="Slide 5"></button>
-                <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="5" aria-label="Slide 6"></button>
-                <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="6" aria-label="Slide 7"></button>
-            </div>
-            <div className="carousel-inner">
-                <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
-                    <div className="banner_commn_cls offer_banner01"></div>
-                </a>
-                <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                    <div className="offer_banner02 banner_commn_cls"></div>
-                </a>
-                <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                    <div className="offer_banner03 banner_commn_cls"></div>
-                </a>           
-                <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                    <div className="offer_banner04 banner_commn_cls"></div>
-                </a>           
-                <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                    <div className="offer_banner05 banner_commn_cls"></div>
-                </a>           
-                <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                    <div className="offer_banner06 banner_commn_cls"></div>
-                </a>           
-                <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                    <div className="offer_banner07 banner_commn_cls"></div>
-                </a>           
-            </div> */}
-                {/* </div> */}
+                    <div className="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="6" aria-label="Slide 7"></button>
+                    </div>
+                    <div className="carousel-inner">
+                        <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
+                            <div className="banner_commn_cls offer_banner01"></div>
+                        </a>
+                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                            <div className="offer_banner02 banner_commn_cls"></div>
+                        </a>
+                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                            <div className="offer_banner03 banner_commn_cls"></div>
+                        </a>
+                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                            <div className="offer_banner04 banner_commn_cls"></div>
+                        </a>
+                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                            <div className="offer_banner05 banner_commn_cls"></div>
+                        </a>
+                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                            <div className="offer_banner06 banner_commn_cls"></div>
+                        </a>
+                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                            <div className="offer_banner07 banner_commn_cls"></div>
+                        </a>
+                    </div>
+                </div>
             </section>
 
             <section className="card_blk_row destinations_blk_row light_grey">

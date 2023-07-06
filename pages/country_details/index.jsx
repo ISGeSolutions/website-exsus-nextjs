@@ -1,17 +1,23 @@
+import { useState, useEffect } from 'react';
 import { Layout } from 'components/users';
 import { Signup } from 'components';
 
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-var Carousel = require('react-responsive-carousel').Carousel;
+// import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+// var Carousel = require('react-responsive-carousel').Carousel;
 
 export default Index;
 
 function Index() {
 
+    useEffect(() => {
+        const carousel = document.querySelector('#carouselExampleInterval');
+        new bootstrap.Carousel(carousel);
+    }, []);
+
     return (
         <Layout>
             <section className="banner_blk_row">
-                <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
+                {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
                     <div>
                         <img src="/assets/images/country_banner01.jpg" />
                     </div>
@@ -48,8 +54,8 @@ function Index() {
                     <div>
                         <img src="/assets/images/country_banner12.jpg" />
                     </div>
-                </Carousel>
-                {/* <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
+                </Carousel> */}
+                <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -102,7 +108,7 @@ function Index() {
                             <div className="country_overvw_banner12 banner_commn_cls"></div>
                         </a>
                     </div>
-                </div> */}
+                </div>
             </section>
             <section className="destination_tab_row light_grey pb-0">
                 <div className="container-md">

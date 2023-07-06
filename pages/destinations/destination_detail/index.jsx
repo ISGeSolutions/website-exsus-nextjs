@@ -14,14 +14,17 @@ function Index() {
     const [users, setUsers] = useState(null);
 
     useEffect(() => {
-        userService.getAll().then(x => setUsers(x));
+        userService.getAll().then(x => setUsers(x));    
+        const carousel = document.querySelector('#carouselExampleInterval');
+        new bootstrap.Carousel(carousel);
     }, []);
+    
 
     return (
         <Layout>
             <section className="banner_blk_row">
 
-                <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
+                {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
                     <div>
                         <img src="/assets/images/destination_banner01.jpg" />
                     </div>
@@ -61,9 +64,9 @@ function Index() {
                     <div>
                         <img src="/assets/images/destination_banner13.jpg" />
                     </div>
-                </Carousel>
+                </Carousel> */}
 
-                {/* <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
+                <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -120,7 +123,7 @@ function Index() {
                             <div className="destination_overvw_banner13 banner_commn_cls"></div>
                         </a>
                     </div>
-                </div> */}
+                </div>
                 <div className="banner_tab_blk">
                     <button className="btn banner_map_tab">Map</button>
                     <button className="btn banner_img_tab banner_tab_active">../images</button>

@@ -10,11 +10,10 @@ export default Index;
 function Index() {
     useEffect(() => {
         console.log('region', window.site_region);
-    }, []);
 
-    useEffect(() => {
         const carousel1 = document.querySelector('#carouselExampleInterval');
         new bootstrap.Carousel(carousel1);
+        
         const carousel = document.querySelector('#Testimonials');
         new bootstrap.Carousel(carousel);
     }, []);

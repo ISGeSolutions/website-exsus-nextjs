@@ -14,17 +14,23 @@ function Index() {
 
     useEffect(() => {
         userService.getAll().then(x => setUsers(x));
+
+        const carousel = document.querySelector('#carouselExampleInterval');
+        new bootstrap.Carousel(carousel);
+
+        const carousel1 = document.querySelector('#Testimonials');
+        new bootstrap.Carousel(carousel1);
     }, []);
 
     return (
         <Layout>
             <section className="banner_blk_row">
-                <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
+                {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
                     <div>
                         <img src="/assets/images/our_experts_banner01.jpg" />
                     </div>
-                </Carousel>
-                {/* <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
+                </Carousel> */}
+                <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
                     </div>
@@ -33,7 +39,7 @@ function Index() {
                             <div className="banner_commn_cls our_experts_banner01"></div>
                         </a>
                     </div>
-                </div> */}
+                </div>
                 <div className="banner_dropdwn_row">
                     <div className="container-md">
                         <div className="banner_dropdwn_inr d-block d-md-flex">

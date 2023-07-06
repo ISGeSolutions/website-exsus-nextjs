@@ -5,8 +5,8 @@ import { Layout } from 'components/users';
 import { destinationService, alertService, userService } from 'services';
 import { Inspireme } from 'components';
 
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-var Carousel = require('react-responsive-carousel').Carousel;
+// import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+// var Carousel = require('react-responsive-carousel').Carousel;
 
 // export const getStaticProps = async () => {
 
@@ -30,24 +30,31 @@ function Index() {
             console.log('x', x);
             setDestinations(x)
         });
+
+        const carousel1 = document.querySelector('#carouselExampleInterval');
+        new bootstrap.Carousel(carousel1);
+
+        const carousel = document.querySelector('#Testimonials');
+        new bootstrap.Carousel(carousel);
+
     }, []);
 
     return (
         <Layout>
             {/* <h4 className='mt-2'>This is destination page</h4> */}
             <section className="banner_blk_row">
-                <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
+                {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
                     <div>
                         <img src="/assets/images/destination_banner.jpg" />
                     </div>
-                </Carousel>
-                <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
-                    <div className="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+                </Carousel> */}
+                <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                     </div>
-                    <div className="carousel-inner">
-                        <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
-                            <div className="banner_commn_cls destination_banner"></div>
+                    <div class="carousel-inner">
+                        <a href="#" target="_blank" class="carousel-item active" data-bs-interval="5000">
+                            <div class="banner_commn_cls destination_banner"></div>
                         </a>
                     </div>
                 </div>

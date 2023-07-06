@@ -22,6 +22,9 @@ function Index() {
 
     useEffect(() => {
         userService.getAll().then(x => setUsers(x));
+        
+        const carousel = document.querySelector('#carouselExampleInterval');
+        new bootstrap.Carousel(carousel);
     }, []);
 
     return (
