@@ -12,12 +12,19 @@ function Index() {
         console.log('region', window.site_region);
     }, []);
 
+    useEffect(() => {
+        const carousel1 = document.querySelector('#carouselExampleInterval');
+        new bootstrap.Carousel(carousel1);
+        const carousel = document.querySelector('#Testimonials');
+        new bootstrap.Carousel(carousel);
+    }, []);
+
     const router = useRouter();
 
     return (
         <>
             <section className="banner_blk_row">
-                <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
+                {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
                     <div>
                         <img src="/assets/images/banner01.png" />
                     </div>
@@ -27,8 +34,8 @@ function Index() {
                     <div>
                         <img src="/assets/images/banner03.png" />
                     </div>
-                </Carousel>
-                {/* <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
+                </Carousel> */}
+                <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -57,7 +64,7 @@ function Index() {
                             </div>
                         </a>
                     </div>
-                </div> */}
+                </div>
                 <Inspireme />
             </section>
 
@@ -333,7 +340,7 @@ function Index() {
             </section>
 
             <section aria-label="Client Testimonials" className="testimonials_blk_row">
-                <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showThumbs={false}>
+                {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showThumbs={false}>
                     <div className="legend">
                         <div className="carousel-item active" data-bs-interval="5000">
                             <div className="carousel-caption">
@@ -398,8 +405,8 @@ function Index() {
                             </div>
                         </div>
                     </div>
-                </Carousel>
-                {/* <div className="container-md">
+                </Carousel> */}
+                <div className="container-md">
                     <div id="Testimonials" className="carousel slide" data-bs-ride="carousel">
                         <div className="carousel-indicators">
                             <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
@@ -462,7 +469,7 @@ function Index() {
                             </div>
                         </div>
                     </div>
-                </div> */}
+                </div>
             </section>
 
             <section className="card_blk_row">
