@@ -20,23 +20,20 @@ function Index() {
     // form validation rules 
     const validationSchema = Yup.object().shape({
         title: Yup.string()
-            .required('Title is required'),
+            .required('Please select title'),
         firstname: Yup.string()
             .required('First Name is required'),
         surname: Yup.string()
-            .required('Sur Name is required'),
+            .required('Surname is required'),
         email: Yup.string()
-            .required('Email is required'),
+            .required('Email address is required'),
         telephone: Yup.string()
             .required('Telephone is required'),
-        besttimetocall: Yup.string()
-            .required('Best Time to Call is required'),
+        besttimetocall: Yup.string(),
         liketogo: Yup.string()
-            .required('Like to go is required'),
-        tellus: Yup.string()
-            .required('Tell us more about your plans is required'),
+            .required('Please enter where would you like to go?'),
+        tellus: Yup.string(),
         getintouch: Yup.string()
-            .required('Get in touch is required')
     });
 
     const formOptions = { resolver: yupResolver(validationSchema) };
