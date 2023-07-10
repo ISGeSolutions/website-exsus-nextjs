@@ -21,32 +21,7 @@ function Index() {
     return (
         <Layout>
             <section className="banner_blk_row">
-                {/* <Carousel showArrows={false} autoPlay={true} infiniteLoop={true} showIndicators={false} showThumbs={false}>
-                    <div>
-                        <img src="/assets/images/offer_banner01.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/offer_banner02.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/offer_banner03.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/offer_banner04.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/offer_banner05.jpeg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/offer_banner06.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/offer_banner07.jpg" />
-                    </div>
-                </Carousel> */}
-
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
-
                     <div className="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2"></button>

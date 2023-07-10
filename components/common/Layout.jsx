@@ -12,6 +12,8 @@ function Layout({ children }) {
 
     const router = useRouter();
 
+    const currentUrl = router.asPath;
+
     // const regionWiseUrl = '/uk';
 
     const [regionWiseUrl, setMyVariable] = useState('/uk');
@@ -34,13 +36,24 @@ function Layout({ children }) {
 
         // regionWiseUrl = region;
         setMyVariable(regionWiseUrl);
+
+        // console.log('currentUrl', currentUrl);
+        // console.log('regionWiseUrl', regionWiseUrl);
+        // if(currentUrl == '/') {
+        //     router.push('/' + regionWiseUrl + '/destinations');
+        // } else {
+        //     const myArray = currentUrl.split("/");
+        //     const urltest = regionWiseUrl + '/' + myArray[2];
+        //     router.push(urltest);
+        // }
+        // router.push('/' + regionWiseUrl);
     }
 
     useEffect(() => {
         // redirect to home if already logged in
-        if (userService.userValue) {
-            router.push('/');
-        }
+        // if (userService.userValue) {
+        //     router.push('/');
+        // }
     },
         []);
 
@@ -55,7 +68,7 @@ function Layout({ children }) {
                                 <div className="side_menu_hdr">
                                     <button className="btn fa-solid fa-xmark"></button>
                                 </div>
-                                <div className="dropdown header_drpdown">
+                                <div className="dropdown header_drpdown">                                    
                                     <select className="btn btn-secondary dropdown-toggle" onChange={e => handleRegion(e.target.value)}>
                                         <option className="dropdown-item" value="uk">UK</option>
                                         <option className="dropdown-item" value="us">US</option>
