@@ -45,7 +45,7 @@ function Index() {
             <section className="banner_blk_row">
                 {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
                     <div>
-                        <img src="/assets/images/destination_banner.jpg" />
+                        <img src="/assets/./../images//destination_banner.jpg" />
                     </div>
                 </Carousel> */}
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
@@ -78,7 +78,7 @@ function Index() {
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="#" target="_blank">
-                                    <img src="images/destination01.jpg" alt="destination01" className="img-fluid" />
+                                    <img src="./../images//destination01.jpg" alt="destination01" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
@@ -98,7 +98,7 @@ function Index() {
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="#">
-                                    <img src="images/destination02.jpg" alt="destination02" className="img-fluid" />
+                                    <img src="./../images//destination02.jpg" alt="destination02" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
@@ -119,7 +119,7 @@ function Index() {
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="#">
-                                    <img src="images/destination03.jpg" alt="destination03" className="img-fluid" />
+                                    <img src="./../images//destination03.jpg" alt="destination03" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
@@ -139,7 +139,7 @@ function Index() {
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="#">
-                                    <img src="images/destination04.jpg" alt="destination04" className="img-fluid" />
+                                    <img src="./../images//destination04.jpg" alt="destination04" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
@@ -160,7 +160,7 @@ function Index() {
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="#">
-                                    <img src="images/destination05.jpg" alt="destination05" className="img-fluid" />
+                                    <img src="./../images//destination05.jpg" alt="destination05" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
@@ -181,7 +181,7 @@ function Index() {
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="#">
-                                    <img src="images/destination06.jpg" alt="destination06" className="img-fluid" />
+                                    <img src="./../images//destination06.jpg" alt="destination06" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
@@ -202,7 +202,7 @@ function Index() {
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="#">
-                                    <img src="images/destination07.jpg" alt="destination07" className="img-fluid" />
+                                    <img src="./../images//destination07.jpg" alt="destination07" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
@@ -223,7 +223,7 @@ function Index() {
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="#">
-                                    <img src="images/destination08.jpg" alt="destination08" className="img-fluid" />
+                                    <img src="./../images//destination08.jpg" alt="destination08" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
@@ -244,7 +244,7 @@ function Index() {
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="#">
-                                    <img src="images/destination09.jpg" alt="destination09" className="img-fluid" />
+                                    <img src="./../images//destination09.jpg" alt="destination09" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
@@ -265,7 +265,7 @@ function Index() {
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="#">
-                                    <img src="images/destination10.jpg" alt="destination10" className="img-fluid" />
+                                    <img src="./../images//destination10.jpg" alt="destination10" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">

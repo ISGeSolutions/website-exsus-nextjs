@@ -10,6 +10,7 @@ export default Index;
 function Index() {
     useEffect(() => {
         console.log('region', window.site_region);
+        var site_region = localStorage.getItem('site_region'); 
 
         const carousel1 = document.querySelector('#carouselExampleInterval');
         new bootstrap.Carousel(carousel1);

@@ -124,7 +124,7 @@ function Index() {
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
-                                                <img src="images/offer_card01.png" alt="offer_card01" className="img-fluid" />
+                                                <img src="./../images/offer_card01.png" alt="offer_card01" className="img-fluid" />
                                                 <span className="img_specl_offer">Special offer</span>
                                             </a>
                                             <div className="card_slider_cnt">
@@ -147,7 +147,7 @@ function Index() {
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
-                                                <img src="images/offer_card02.jpg" alt="offer_card02" className="img-fluid" />
+                                                <img src="./../images/offer_card02.jpg" alt="offer_card02" className="img-fluid" />
                                                 <span className="img_specl_offer">Special offer</span>
                                             </a>
                                             <div className="card_slider_cnt">
@@ -170,7 +170,7 @@ function Index() {
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
-                                                <img src="images/offer_card03.jpg" alt="offer_card03" className="img-fluid" />
+                                                <img src="./../images/offer_card03.jpg" alt="offer_card03" className="img-fluid" />
                                                 <span className="img_specl_offer">Special offer</span>
                                             </a>
                                             <div className="card_slider_cnt">
@@ -193,7 +193,7 @@ function Index() {
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
-                                                <img src="images/offer_card04.jpg" alt="offer_card04" className="img-fluid" />
+                                                <img src="./../images/offer_card04.jpg" alt="offer_card04" className="img-fluid" />
                                                 <span className="img_specl_offer">Special offer</span>
                                             </a>
                                             <div className="card_slider_cnt">
@@ -216,7 +216,7 @@ function Index() {
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
-                                                <img src="images/offer_card05.jpg" alt="offer_card05" className="img-fluid" />
+                                                <img src="./../images/offer_card05.jpg" alt="offer_card05" className="img-fluid" />
                                                 <span className="img_specl_offer">Special offer</span>
                                             </a>
                                             <div className="card_slider_cnt">

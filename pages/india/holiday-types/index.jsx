@@ -2,88 +2,72 @@ import { useState, useEffect } from 'react';
 
 import { Link, Spinner, Signup } from 'components';
 import { Layout } from 'components/users';
-import { destinationService, alertService, userService } from 'services';
+import { userService } from 'services';
 import { Inspireme } from 'components';
 
-// import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-// var Carousel = require('react-responsive-carousel').Carousel;
-
-// export const getStaticProps = async () => {
-
-// const res = await destinationService.getAll();
-// console.log('res', res);
-// const data = await res;
-// console.log('data', data);
-// return {
-//     props: { data }
-// };
-//     return;
-// }
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+var Carousel = require('react-responsive-carousel').Carousel;
 
 export default Index;
 
 function Index() {
-    const [destinations, setDestinations] = useState();
+    const [users, setUsers] = useState(null);
 
     useEffect(() => {
-        destinationService.getAll().then(x => {
-            console.log('x', x);
-            setDestinations(x)
-        });
-
-        const carousel1 = document.querySelector('#carouselExampleInterval');
-        new bootstrap.Carousel(carousel1);
-
-        const carousel = document.querySelector('#Testimonials');
-        new bootstrap.Carousel(carousel);
-
+        userService.getAll().then(x => setUsers(x));
     }, []);
 
     return (
         <Layout>
-            {/* <h4 className='mt-2'>This is destination page</h4> */}
             <section className="banner_blk_row">
-                {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
+                <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
                     <div>
-                        <img src="/assets/images/destination_banner.jpg" />
+                        <img src="/assets/images/holiday_types_banner.jpg" />
+                        {/* /static/media/holiday_types_banner.1e97daba.jpg */}
                     </div>
-                </Carousel> */}
-                <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
-                    <div className="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-                    </div>
-                    <div className="carousel-inner">
-                        <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
-                            <div className="banner_commn_cls destination_banner"></div>
-                        </a>
-                    </div>
-                </div>
+                </Carousel>
+                
                 <Inspireme />
-
             </section>
 
-            <section className="card_blk_row destinations_blk_row">
+            <section className="card_blk_row destinations_blk_row light_grey">
                 <div className="container-md">
                     <div className="bookmark_row">
                         <ul>
                             <li><a href="homepage.html">Home</a></li>
-                            <li>Destinations</li>
+                            <li>Holiday types</li>
                         </ul>
                     </div>
                     <div className="row">
                         <div className="destinations_cntnt_blk">
-                            <h2>Tailor-made Luxury Holidays</h2>
-                            <p>If the world is your oyster when choosing where to go, our team of travel experts can help you by providing inspiration and advice on travelling to all seven continents. From perennial favourites to emerging gems, much-loved destinations to places that are truly off the beaten track, we can take you all around the world, and in a style appropriate for a tailor-made luxury holiday, with handpicked places to stay and incredible experiences to enjoy. Whatever the destination and style of trip, we will design a trip like no other, a luxury tailor-made holiday, bespoke honeymoon or family adventure that's exclusive to you.</p>
+                            <h2>CHOOSE YOUR STYLE OF HOLIDAY</h2>
+                            <p>Whether you’re after a relaxing break and some barefoot luxury for two, or are planning an epic adventure of a lifetime and looking for luxury experiences, our team of travel specialists can transport you wherever you want to go, in whichever style you’d like to travel. We can set you up on a classic road trip across the USA, arrange a close-up wildlife encounter with the Big Five in South Africa, take you on an expedition-style cruise to the Galapagos or arrange a family adventure in Costa Rica. Essentially, wherever the destination and whatever the style of trip, we can help. The following collections of itinerary ideas are designed to guide and inspire you. They’re not off-the-shelf options though. From the time spent away to the way you travel and where you stay, you can tailor every element to suit your own interests, ensuring that the trip we design for you is bespoke and unlike any other.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="card_blk_row destinations_blk_row">
+                <div className="container-md">
+                    <div className="row">
+                        <div className="col-12 favrites_blk_row pb-0">
+                            <h3 className="title_cls pb-0">Our favourite holiday types</h3>
+                            <div className="destination_contries_filter d-flex justify-content-around">
+                                <ul>
+                                    <li><a href="#" className="active">Exsus recommends</a></li>
+                                    <li><a href="#">Alphabetical</a></li>
+                                </ul>
+                            </div>
                         </div>
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
-                                <a href="#" target="_blank">
-                                    <img src="images/destination01.jpg" alt="destination01" className="img-fluid" />
+                                <a href="holiday_types.html" target="_blank">
+                                    <img src="./../images/holiday_type01.jpg" alt="holiday_type01" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
                                                 <div className="card_blk_txt">
-                                                    <h3 className="mb-0">Asia</h3>
+                                                    <h3 className="mb-0">Once In A Lifetime Holidays</h3>
                                                 </div>
                                             </div>
                                             <div className="col-1 ps-0">
@@ -97,54 +81,13 @@ function Index() {
 
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
-                                <a href="#">
-                                    <img src="images/destination02.jpg" alt="destination02" className="img-fluid" />
+                                <a href="holiday_types.html" target="_blank">
+                                    <img src="./../images/holiday_type02.jpg" alt="holiday_type02" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
                                                 <div className="card_blk_txt">
-                                                    <h3 className="mb-0">Europe</h3>
-                                                </div>
-                                            </div>
-                                            <div className="col-1 ps-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div className="col-sm-4">
-                            <div className="card_blk_inr">
-                                <a href="#">
-                                    <img src="images/destination03.jpg" alt="destination03" className="img-fluid" />
-                                    <div className="card_blk_cntnt card_blk_sml_arw">
-                                        <div className="row align-items-center">
-                                            <div className="col-11">
-                                                <div className="card_blk_txt">
-                                                    <h3 className="mb-0">South America</h3>
-                                                </div>
-                                            </div>
-                                            <div className="col-1 ps-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div className="col-sm-4">
-                            <div className="card_blk_inr">
-                                <a href="#">
-                                    <img src="images/destination04.jpg" alt="destination04" className="img-fluid" />
-                                    <div className="card_blk_cntnt card_blk_sml_arw">
-                                        <div className="row align-items-center">
-                                            <div className="col-11">
-                                                <div className="card_blk_txt">
-                                                    <h3 className="mb-0">Indian Subcontinent</h3>
+                                                    <h3 className="mb-0">Honeymoons</h3>
                                                 </div>
                                             </div>
                                             <div className="col-1 ps-0">
@@ -159,13 +102,33 @@ function Index() {
 
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
-                                <a href="#">
-                                    <img src="images/destination05.jpg" alt="destination05" className="img-fluid" />
+                                <a href="holiday_types.html" target="_blank">
+                                    <img src="./../images/holiday_type03.jpg" alt="holiday_type03" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
                                                 <div className="card_blk_txt">
-                                                    <h3 className="mb-0">North America & Caribbean</h3>
+                                                    <h3 className="mb-0">Family Holidays</h3>
+                                                </div>
+                                            </div>
+                                            <div className="col-1 ps-0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div className="col-sm-4">
+                            <div className="card_blk_inr">
+                                <a href="holiday_types.html" target="_blank">
+                                    <img src="./../images/holiday_type04.jpg" alt="holiday_type04" className="img-fluid" />
+                                    <div className="card_blk_cntnt card_blk_sml_arw">
+                                        <div className="row align-items-center">
+                                            <div className="col-11">
+                                                <div className="card_blk_txt">
+                                                    <h3 className="mb-0">Adventure Holidays</h3>
                                                 </div>
                                             </div>
                                             <div className="col-1 ps-0">
@@ -180,13 +143,13 @@ function Index() {
 
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
-                                <a href="#">
-                                    <img src="images/destination06.jpg" alt="destination06" className="img-fluid" />
+                                <a href="holiday_types.html" target="_blank">
+                                    <img src="./../images/holiday_type05.jpg" alt="holiday_type05" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
                                                 <div className="card_blk_txt">
-                                                    <h3 className="mb-0">Africa</h3>
+                                                    <h3 className="mb-0">Food & Culture Holidays</h3>
                                                 </div>
                                             </div>
                                             <div className="col-1 ps-0">
@@ -201,13 +164,13 @@ function Index() {
 
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
-                                <a href="#">
-                                    <img src="images/destination07.jpg" alt="destination07" className="img-fluid" />
+                                <a href="holiday_types.html" target="_blank">
+                                    <img src="./../images/holiday_type06.jpg" alt="holiday_type06" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
                                                 <div className="card_blk_txt">
-                                                    <h3 className="mb-0">Central America</h3>
+                                                    <h3 className="mb-0">Luxury Beach Holidays</h3>
                                                 </div>
                                             </div>
                                             <div className="col-1 ps-0">
@@ -222,13 +185,13 @@ function Index() {
 
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
-                                <a href="#">
-                                    <img src="images/destination08.jpg" alt="destination08" className="img-fluid" />
+                                <a href="holiday_types.html" target="_blank">
+                                    <img src="./../images/holiday_type07.jpg" alt="holiday_type07" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
                                                 <div className="card_blk_txt">
-                                                    <h3 className="mb-0">Australasia & South Pacific</h3>
+                                                    <h3 className="mb-0">Wildlife & Safari Holidays</h3>
                                                 </div>
                                             </div>
                                             <div className="col-1 ps-0">
@@ -243,13 +206,13 @@ function Index() {
 
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
-                                <a href="#">
-                                    <img src="images/destination09.jpg" alt="destination09" className="img-fluid" />
+                                <a href="holiday_types.html" target="_blank">
+                                    <img src="./../images/holiday_type08.jpg" alt="holiday_type08" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
                                                 <div className="card_blk_txt">
-                                                    <h3 className="mb-0">Middle East & North Africa</h3>
+                                                    <h3 className="mb-0">Special Occasions</h3>
                                                 </div>
                                             </div>
                                             <div className="col-1 ps-0">
@@ -264,13 +227,55 @@ function Index() {
 
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
-                                <a href="#">
-                                    <img src="images/destination10.jpg" alt="destination10" className="img-fluid" />
+                                <a href="holiday_types.html" target="_blank">
+                                    <img src="./../images/holiday_type09.jpg" alt="holiday_type09" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
                                                 <div className="card_blk_txt">
-                                                    <h3 className="mb-0">Indian ocean</h3>
+                                                    <h3 className="mb-0">Short Breaks & Escapes</h3>
+                                                </div>
+                                            </div>
+                                            <div className="col-1 ps-0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div className="col-sm-4">
+                            <div className="card_blk_inr">
+                                <a href="holiday_types.html" target="_blank">
+                                    <img src="./../images/holiday_type10.jpg" alt="holiday_type10" className="img-fluid" />
+                                    <div className="card_blk_cntnt card_blk_sml_arw">
+                                        <div className="row align-items-center">
+                                            <div className="col-11">
+                                                <div className="card_blk_txt">
+                                                    <h3 className="mb-0">Trains, Planes, Cars & Cruises</h3>
+                                                </div>
+                                            </div>
+                                            <div className="col-1 ps-0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div className="col-sm-4">
+                            <div className="card_blk_inr">
+                                <a href="holiday_types.html" target="_blank">
+                                    <img src="./../images/holiday_type11.jpg" alt="holiday_type01" className="img-fluid" />
+                                    <div className="card_blk_cntnt card_blk_sml_arw">
+                                        <div className="row align-items-center">
+                                            <div className="col-11">
+                                                <div className="card_blk_txt">
+                                                    <h3 className="mb-0">Classic Journeys</h3>
                                                 </div>
                                             </div>
                                             <div className="col-1 ps-0">
@@ -289,11 +294,13 @@ function Index() {
 
             <section className="destination_text_overlay_row">
                 <div className="container-md">
-                    <h4>When to go where</h4>
-                    <h5>Find out the best time to travel</h5>
-                    <button className="btn prmry_btn make_enqury_btn">View travel calender
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                    </button>
+                    <div className="destination_text_overlay_inr">
+                        <h4>When to go where</h4>
+                        <h5>Find out the best time to travel</h5>
+                        <button className="btn prmry_btn make_enqury_btn">View travel calender
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                        </button>
+                    </div>
                 </div>
             </section>
 
@@ -394,6 +401,7 @@ function Index() {
                     </form> */}
                 </div>
             </section>
+
         </Layout>
     );
 }

@@ -1,23 +1,48 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { userService } from 'services';
 import { NavLink } from './../NavLink';
 import { Nav, Alert } from 'components';
 import { Analytics } from '@vercel/analytics/react';
+import React from "react";
 
 export { Layout };
 
 function Layout({ children }) {
+
     const router = useRouter();
+
+    // const regionWiseUrl = '/uk';
+
+    const [regionWiseUrl, setMyVariable] = useState('/uk');
+
+    const handleRegion = (regionWiseUrl) => {
+        // Do something
+        localStorage.setItem('site_region', regionWiseUrl);
+        window.site_region = regionWiseUrl;
+
+        // if(region == 'UK') {
+        //     regionWiseUrl = '/uk';
+        // } else if(region == 'US') {
+        //     regionWiseUrl = '/us';        
+        // } else if(region == 'Asia') {
+        //     regionWiseUrl = '/asia';
+        // } else if(region == 'India') {
+        //     regionWiseUrl = '/india';
+        // }
+        // console.log('regionWiseUrl', regionWiseUrl);
+
+        // regionWiseUrl = region;
+        setMyVariable(regionWiseUrl);
+    }
 
     useEffect(() => {
         // redirect to home if already logged in
         if (userService.userValue) {
             router.push('/');
         }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    },
+        []);
 
     return (
         <div className="">
@@ -31,15 +56,24 @@ function Layout({ children }) {
                                     <button className="btn fa-solid fa-xmark"></button>
                                 </div>
                                 <div className="dropdown header_drpdown">
-                                    <NavLink className="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <img src="images/uk-flag-round-circle-icon.svg" alt="united-kingdom-flag-icon" />UK site
+                                    <select className="btn btn-secondary dropdown-toggle" onChange={e => handleRegion(e.target.value)}>
+                                        <option className="dropdown-item" value="uk">UK</option>
+                                        <option className="dropdown-item" value="us">US</option>
+                                        <option className="dropdown-item" value="asia">Asia</option>
+                                        <option className="dropdown-item" value="india">India</option>
+                                    </select>
+                                    {/* <NavLink className="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(region) => handleRegion('uk')}>
+                                        <img src="./../../images/uk-flag-round-circle-icon.svg" alt="united-kingdom-flag-icon" />UK site
                                     </NavLink>
                                     <ul className="dropdown-menu">
-
-                                        <li><NavLink className="dropdown-item" href="#"><img src="images/usa-flag-round-circle-icon.svg" alt="usa-flag-round-circle-icon" />US site</NavLink></li>
-                                        <li><NavLink className="dropdown-item" href="#"><img src="images/thailand-flag-round-circle-icon.svg" alt="thailand-flag-round-circle-icon" /> Asia site</NavLink></li>
-                                        <li><NavLink className="dropdown-item" href="#"><img src="images/india-flag-round-circle-icon.svg" alt="india-flag-round-circle-icon" />India site</NavLink></li>
-                                    </ul>
+                                        <li>
+                                            <NavLink className="dropdown-item" value="us" onClick={(region) => handleRegion('us')} href="#">
+                                                <img src="./../../images/usa-flag-round-circle-icon.svg" alt="usa-flag-round-circle-icon" />
+                                                US site
+                                            </NavLink></li>
+                                        <li><NavLink className="dropdown-item" value="asia" onClick={(region) => handleRegion('asia')} href="#"><img src="./../.././../../images/thailand-flag-round-circle-icon.svg" alt="thailand-flag-round-circle-icon" /> Asia site</NavLink></li>
+                                        <li><NavLink className="dropdown-item" value="india" onClick={(region) => handleRegion('india')} href="#"><img src="./../../images/india-flag-round-circle-icon.svg" alt="india-flag-round-circle-icon" />India site</NavLink></li>
+                                    </ul> */}
                                 </div>
                                 <div className="input-group srch_site_box">
                                     <input type="text" className="form-control" placeholder="Search site" aria-label="Search site" aria-describedby="button-addon2" />
@@ -70,12 +104,12 @@ function Layout({ children }) {
                                 </div>
                                 <div className="dropdown header_drpdown">
                                     <NavLink className="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <img src="images/uk-flag-round-circle-icon.svg" alt="united-kingdom-flag-icon" />UK site
+                                        <img src="./../../images/uk-flag-round-circle-icon.svg" alt="united-kingdom-flag-icon" />UK site
                                     </NavLink>
                                     <ul className="dropdown-menu">
-                                        <li><NavLink className="dropdown-item" href="#"><img src="images/usa-flag-round-circle-icon.svg" alt="usa-flag-round-circle-icon" />US site</NavLink></li>
-                                        <li><NavLink className="dropdown-item" href="#"><img src="images/thailand-flag-round-circle-icon.svg" alt="thailand-flag-round-circle-icon" /> Asia site</NavLink></li>
-                                        <li><NavLink className="dropdown-item" href="#"><img src="images/india-flag-round-circle-icon.svg" alt="india-flag-round-circle-icon" />India site</NavLink></li>
+                                        <li><NavLink className="dropdown-item" href="#"><img src="./../../images/usa-flag-round-circle-icon.svg" alt="usa-flag-round-circle-icon" />US site</NavLink></li>
+                                        <li><NavLink className="dropdown-item" href="#"><img src="./../.././../../images/thailand-flag-round-circle-icon.svg" alt="thailand-flag-round-circle-icon" /> Asia site</NavLink></li>
+                                        <li><NavLink className="dropdown-item" href="#"><img src="./../../images/india-flag-round-circle-icon.svg" alt="india-flag-round-circle-icon" />India site</NavLink></li>
                                     </ul>
                                 </div>
                                 <div className="input-group srch_site_box">
@@ -96,11 +130,8 @@ function Layout({ children }) {
                     <Alert />
                 </div>
             </header> */}
-
             {children}
-
             <Analytics />
-            
             <footer>
                 <div className="container-md">
                     <section className="footer_img_row d-block d-sm-flex">
@@ -144,7 +175,7 @@ function Layout({ children }) {
                                 <div className="quick_links_parnt" aria-label="More Exsus">
                                     <h6>More Exsus</h6>
                                     <ul>
-                                        <li><NavLink href="/destinations">Destinations</NavLink></li>
+                                        <li><NavLink href={regionWiseUrl + '/destinations'}>Destinations</NavLink></li>
                                         <li><NavLink href="/holiday-types">Holiday Types</NavLink></li>
                                         <li><NavLink href="/offers">Offers</NavLink></li>
                                         <li><NavLink href="/blogs">Blog</NavLink></li>
@@ -210,11 +241,9 @@ function Layout({ children }) {
                         </p>
 
                     </section>
-
                 </div>
+
             </footer>
-
-
         </div>
     );
 }
