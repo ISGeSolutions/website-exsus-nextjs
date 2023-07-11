@@ -12,8 +12,8 @@ function Index() {
 
     useEffect(() => {
         userService.getAll().then(x => setUsers(x));
-        $(document).ready(function(){
-            $(".country_highlight_row .country_highlight_inr button").click(function(){
+        $(document).ready(function () {
+            $(".country_highlight_row .country_highlight_inr button").click(function () {
                 $(this).toggleClass('read_more');
                 $(".country_hightlight_expnded").slideToggle();
             });
@@ -917,7 +917,7 @@ function Index() {
                                                             <img src="./../../images/country_hotel04.jpg" alt="country_hotel04" className="img-fluid" />
                                                         </a>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">Jing's Residence</a></h4>
+                                                            <h4><a href="/destinations/destination_detail/country-detail/accomodation_detail">Jing's Residence</a></h4>
                                                             <ul>
                                                                 <li>Location: Beijing & Northern China | China</li>
                                                                 <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
@@ -939,7 +939,7 @@ function Index() {
                                                             <img src="./../../images/country_hotel05.jpg" alt="country_hotel05" className="img-fluid" />
                                                         </a>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">The Peninsula Shanghai</a></h4>
+                                                            <h4><a href="/destinations/destination_detail/country-detail/accomodation_detail">The Peninsula Shanghai</a></h4>
                                                             <ul>
                                                                 <li>Location: Shanghai, Hangzhou & Eastern China | China</li>
                                                                 <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
@@ -961,7 +961,7 @@ function Index() {
                                                             <img src="./../../images/country_hotel06.jpg" alt="country_hotel06" className="img-fluid" />
                                                         </a>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">Aman Summer Palace</a></h4>
+                                                            <h4><a href="/destinations/destination_detail/country-detail/accomodation_detail">Aman Summer Palace</a></h4>
                                                             <ul>
                                                                 <li>Location: Beijing & Northern China | China</li>
                                                                 <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
@@ -983,7 +983,7 @@ function Index() {
                                                             <img src="./../../images/country_hotel07.jpg" alt="country_hotel07" className="img-fluid" />
                                                         </a>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">Alila Yangshuo</a></h4>
+                                                            <h4><a href="/destinations/destination_detail/country-detail/accomodation_detail">Alila Yangshuo</a></h4>
                                                             <ul>
                                                                 <li>Location: Southern China | China</li>
                                                                 <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
@@ -1005,7 +1005,7 @@ function Index() {
                                                             <img src="./../../images/country_hotel08.jpg" alt="country_hotel08" className="img-fluid" />
                                                         </a>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">LUX* Tea Horse Road</a></h4>
+                                                            <h4><a href="/destinations/destination_detail/country-detail/accomodation_detail">LUX* Tea Horse Road</a></h4>
                                                             <ul>
                                                                 <li>Location: Yunnan | China</li>
                                                                 <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
@@ -1027,7 +1027,7 @@ function Index() {
                                                             <img src="./../../images/country_hotel09.jpg" alt="country_hotel09" className="img-fluid" />
                                                         </a>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">Rosewood Beijing</a></h4>
+                                                            <h4><a href="/destinations/destination_detail/country-detail/accomodation_detail">Rosewood Beijing</a></h4>
                                                             <ul>
                                                                 <li>Location: Beijing & Northern China | China</li>
                                                                 <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
@@ -1049,7 +1049,7 @@ function Index() {
                                                             <img src="./../../images/country_hotel10.jpg" alt="country_hotel10" className="img-fluid" />
                                                         </a>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">Amandayan</a></h4>
+                                                            <h4><a href="/destinations/destination_detail/country-detail/accomodation_detail">Amandayan</a></h4>
                                                             <ul>
                                                                 <li>Location: Yunnan | China</li>
                                                                 <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
@@ -1071,7 +1071,7 @@ function Index() {
                                                             <img src="./../../images/country_hotel11.jpg" alt="country_hotel11" className="img-fluid" />
                                                         </a>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">Banyan Tree Yangshuo</a></h4>
+                                                            <h4><a href="/destinations/destination_detail/country-detail/accomodation_detail">Banyan Tree Yangshuo</a></h4>
                                                             <ul>
                                                                 <li>Location: Southern China | China</li>
                                                                 <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
@@ -1093,7 +1093,7 @@ function Index() {
                                                             <img src="./../../images/country_hotel12.jpg" alt="country_hotel12" className="img-fluid" />
                                                         </a>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">Sanctuary Yangzi Explorer</a></h4>
+                                                            <h4><a href="/destinations/destination_detail/country-detail/accomodation_detail">Sanctuary Yangzi Explorer</a></h4>
                                                             <ul>
                                                                 <li>Location: Xi'an, Sichuan & Central China | China</li>
                                                                 <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
