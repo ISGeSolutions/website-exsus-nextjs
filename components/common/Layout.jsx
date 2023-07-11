@@ -11,42 +11,35 @@ export { Layout };
 function Layout({ children }) {
 
     const router = useRouter();
-
     const currentUrl = router.asPath;
-
     // const regionWiseUrl = '/uk';
-
     const [regionWiseUrl, setMyVariable] = useState('/uk');
-
     const handleRegion = (regionWiseUrl) => {
         // Do something
+
         localStorage.setItem('site_region', regionWiseUrl);
         window.site_region = regionWiseUrl;
 
-        // if(region == 'UK') {
-        //     regionWiseUrl = '/uk';
-        // } else if(region == 'US') {
-        //     regionWiseUrl = '/us';        
-        // } else if(region == 'Asia') {
-        //     regionWiseUrl = '/asia';
-        // } else if(region == 'India') {
-        //     regionWiseUrl = '/india';
-        // }
-        // console.log('regionWiseUrl', regionWiseUrl);
-
-        // regionWiseUrl = region;
         setMyVariable(regionWiseUrl);
 
-        // console.log('currentUrl', currentUrl);
-        // console.log('regionWiseUrl', regionWiseUrl);
-        // if(currentUrl == '/') {
-        //     router.push('/' + regionWiseUrl + '/destinations');
-        // } else {
-        //     const myArray = currentUrl.split("/");
-        //     const urltest = regionWiseUrl + '/' + myArray[2];
-        //     router.push(urltest);
-        // }
-        // router.push('/' + regionWiseUrl);
+        const pathRouter = router.asPath;
+        const myArray = pathRouter.split("/");
+
+        var newPath = '';
+        myArray.forEach((element, index) => {
+            if (index == 0) {
+                newPath = element;
+            } else if (index == 1) {
+                if(myArray.length > 2) {
+                    if (element) {
+                        newPath = newPath + '/' + regionWiseUrl;
+                    }
+                }
+            } else if (index > 1) {
+                newPath = newPath + '/' + element;
+            }
+        });
+        router.push(newPath);
     }
 
     useEffect(() => {
@@ -68,7 +61,7 @@ function Layout({ children }) {
                                 <div className="side_menu_hdr">
                                     <button className="btn fa-solid fa-xmark"></button>
                                 </div>
-                                <div className="dropdown header_drpdown">                                    
+                                <div className="dropdown header_drpdown">
                                     <select className="btn btn-secondary dropdown-toggle" onChange={e => handleRegion(e.target.value)}>
                                         <option className="dropdown-item" value="uk">UK</option>
                                         <option className="dropdown-item" value="us">US</option>
