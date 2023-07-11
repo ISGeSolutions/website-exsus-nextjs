@@ -304,13 +304,13 @@ function Nav() {
                                                 <div className="header_country_list">
                                                     <ul>
                                                         <li className="header_country_label active">
-                                                            <NavLink href="#">Once In A Lifetime Holidays
+                                                            <NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type'}>Once In A Lifetime Holidays
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                             </NavLink>
                                                             <div className="header_country_list_inr">
                                                                 <ul>
-                                                                    <li><NavLink href="#">Ultimate Journeys</NavLink></li>
-                                                                    <li><NavLink href="#">Ultimate Adventures</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Ultimate Journeys</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Ultimate Adventures</NavLink></li>
                                                                 </ul>
                                                                 <button className="btn header_nav_btn">See all Once In A Lifetime Holidays
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -318,16 +318,16 @@ function Nav() {
                                                             </div>
                                                         </li>
                                                         <li className="header_country_label">
-                                                            <NavLink href="#">Honeymoons
+                                                            <NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type'}>Honeymoons
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                             </NavLink>
                                                             <div className="header_country_list_inr">
                                                                 <ul>
-                                                                    <li><NavLink href="#">Ultimate Honeymoons</NavLink></li>
-                                                                    <li><NavLink href="#">Perfect Honeymoons</NavLink></li>
-                                                                    <li><NavLink href="#">Beach Honeymoons</NavLink></li>
-                                                                    <li><NavLink href="#">Adventure Honeymoons</NavLink></li>
-                                                                    <li><NavLink href="#">Mini-Moons</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Ultimate Honeymoons</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Perfect Honeymoons</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Beach Honeymoons</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Adventure Honeymoons</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Mini-Moons</NavLink></li>
                                                                 </ul>
                                                                 <button className="btn header_nav_btn">See all Honeymoons
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -335,18 +335,18 @@ function Nav() {
                                                             </div>
                                                         </li>
                                                         <li className="header_country_label">
-                                                            <NavLink href="#">Family Holidays
+                                                            <NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type'}>Family Holidays
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                             </NavLink>
                                                             <div className="header_country_list_inr">
                                                                 <ul>
-                                                                    <li><NavLink href="#">Half-term Escapes</NavLink></li>
-                                                                    <li><NavLink href="#">Easter Family Holidays</NavLink></li>
-                                                                    <li><NavLink href="#">Summer Family Holidays</NavLink></li>
-                                                                    <li><NavLink href="#">Winter Family Holidays</NavLink></li>
-                                                                    <li><NavLink href="#">Family Adventure Holidays</NavLink></li>
-                                                                    <li><NavLink href="#">Family Safaris & Wildlife Holidays</NavLink></li>
-                                                                    <li><NavLink href="#">Family Road Trips</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Half-term Escapes</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Easter Family Holidays</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Summer Family Holidays</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Winter Family Holidays</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Family Adventure Holidays</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Family Safaris & Wildlife Holidays</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Family Road Trips</NavLink></li>
                                                                 </ul>
                                                                 <button className="btn header_nav_btn">See all Family Holidays
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -354,18 +354,18 @@ function Nav() {
                                                             </div>
                                                         </li>
                                                         <li className="header_country_label">
-                                                            <NavLink href="#">Adventure Holidays
+                                                            <NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type'}>Adventure Holidays
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                             </NavLink>
                                                             <div className="header_country_list_inr">
                                                                 <ul>
-                                                                    <li><NavLink href="#">Active Adventures</NavLink></li>
-                                                                    <li><NavLink href="#">Magnificent Landscapes</NavLink></li>
-                                                                    <li><NavLink href="#">Walking & Trekking Holidays</NavLink></li>
-                                                                    <li><NavLink href="#">Ranches, Estancias & Country Retreats</NavLink></li>
-                                                                    <li><NavLink href="#">4x4 Adventures</NavLink></li>
-                                                                    <li><NavLink href="#">Guatemala</NavLink></li>
-                                                                    <li><NavLink href="#">Nicaragua</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Active Adventures</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Magnificent Landscapes</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Walking & Trekking Holidays</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Ranches, Estancias & Country Retreats</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>4x4 Adventures</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Guatemala</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Nicaragua</NavLink></li>
                                                                 </ul>
                                                                 <button className="btn header_nav_btn">See all Adventure Holidays
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -373,17 +373,17 @@ function Nav() {
                                                             </div>
                                                         </li>
                                                         <li className="header_country_label">
-                                                            <NavLink href="#">Luxury Beach Holidays
+                                                            <NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type'}>Luxury Beach Holidays
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                             </NavLink>
                                                             <div className="header_country_list_inr">
                                                                 <ul>
-                                                                    <li><NavLink href="#">Beach Holidays For Couples</NavLink></li>
-                                                                    <li><NavLink href="#">Family Beach Holidays</NavLink></li>
-                                                                    <li><NavLink href="#">Beach Holidays In Europe</NavLink></li>
-                                                                    <li><NavLink href="#">Exotic Beach Holidays</NavLink></li>
-                                                                    <li><NavLink href="#">Beach & Culture Holidays</NavLink></li>
-                                                                    <li><NavLink href="#">Alternative Beach Holidays</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Beach Holidays For Couples</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Family Beach Holidays</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Beach Holidays In Europe</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Exotic Beach Holidays</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Beach & Culture Holidays</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Alternative Beach Holidays</NavLink></li>
                                                                 </ul>
                                                                 <button className="btn header_nav_btn">See all Luxury Beach Holidays
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -391,14 +391,14 @@ function Nav() {
                                                             </div>
                                                         </li>
                                                         <li className="header_country_label">
-                                                            <NavLink href="#">Food & Culture Holidays
+                                                            <NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type'}>Food & Culture Holidays
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                             </NavLink>
                                                             <div className="header_country_list_inr">
                                                                 <ul>
-                                                                    <li><NavLink href="#">Food & Wine Holidays</NavLink></li>
-                                                                    <li><NavLink href="#">People & Festivals</NavLink></li>
-                                                                    <li><NavLink href="#">History & Heritage</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Food & Wine Holidays</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>People & Festivals</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>History & Heritage</NavLink></li>
                                                                 </ul>
                                                                 <button className="btn header_nav_btn">See all Food & Culture Holidays
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -406,16 +406,16 @@ function Nav() {
                                                             </div>
                                                         </li>
                                                         <li className="header_country_label">
-                                                            <NavLink href="#">Wildlife & Safari Holidays
+                                                            <NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type'}>Wildlife & Safari Holidays
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                             </NavLink>
                                                             <div className="header_country_list_inr">
                                                                 <ul>
-                                                                    <li><NavLink href="#">African Safaris</NavLink></li>
-                                                                    <li><NavLink href="#">Wildlife Holidays Beyond Africa</NavLink></li>
-                                                                    <li><NavLink href="#">Specialist Wildlife Encounters</NavLink></li>
-                                                                    <li><NavLink href="#">Wildlife Cruises</NavLink></li>
-                                                                    <li><NavLink href="#">Wonders of the Natural World</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>African Safaris</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Wildlife Holidays Beyond Africa</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Specialist Wildlife Encounters</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Wildlife Cruises</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Wonders of the Natural World</NavLink></li>
                                                                 </ul>
                                                                 <button className="btn header_nav_btn">See all Wildlife & Safari Holidays
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -423,18 +423,18 @@ function Nav() {
                                                             </div>
                                                         </li>
                                                         <li className="header_country_label">
-                                                            <NavLink href="#">Special Occasions
+                                                            <NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type'}>Special Occasions
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                             </NavLink>
                                                             <div className="header_country_list_inr">
                                                                 <ul>
-                                                                    <li><NavLink href="#">Milestone Birthdays & Anniversaries</NavLink></li>
-                                                                    <li><NavLink href="#">Exclusive-Use Hotels</NavLink></li>
-                                                                    <li><NavLink href="#">Proposals</NavLink></li>
-                                                                    <li><NavLink href="#">Morocco</NavLink></li>
-                                                                    <li><NavLink href="#">Jordan</NavLink></li>
-                                                                    <li><NavLink href="#">UAE</NavLink></li>
-                                                                    <li><NavLink href="#">Qatar</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Milestone Birthdays & Anniversaries</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Exclusive-Use Hotels</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Proposals</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Morocco</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Jordan</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>UAE</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Qatar</NavLink></li>
                                                                 </ul>
                                                                 <button className="btn header_nav_btn">See all Special Occasions
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -442,15 +442,15 @@ function Nav() {
                                                             </div>
                                                         </li>
                                                         <li className="header_country_label">
-                                                            <NavLink href="#">Short Breaks & Escapes
+                                                            <NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type'}>Short Breaks & Escapes
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                             </NavLink>
                                                             <div className="header_country_list_inr">
                                                                 <ul>
-                                                                    <li><NavLink href="#">Adventure Escapes</NavLink></li>
-                                                                    <li><NavLink href="#">Cultural Escapes</NavLink></li>
-                                                                    <li><NavLink href="#">Food & Wine Escapes</NavLink></li>
-                                                                    <li><NavLink href="#">Spa & Wellness Escapes</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Adventure Escapes</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Cultural Escapes</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Food & Wine Escapes</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Spa & Wellness Escapes</NavLink></li>
                                                                 </ul>
                                                                 <button className="btn header_nav_btn">See all Short Breaks & Escapes
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -458,15 +458,15 @@ function Nav() {
                                                             </div>
                                                         </li>
                                                         <li className="header_country_label">
-                                                            <NavLink href="#">Trains, Planes, Cars & Cruises
+                                                            <NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type'}>Trains, Planes, Cars & Cruises
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                             </NavLink>
                                                             <div className="header_country_list_inr">
                                                                 <ul>
-                                                                    <li><NavLink href="#">Self-Drive Holidays</NavLink></li>
-                                                                    <li><NavLink href="#">Train Journeys</NavLink></li>
-                                                                    <li><NavLink href="#">Cruising & Sailing</NavLink></li>
-                                                                    <li><NavLink href="#">Private Jets & Flying Adventures</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Self-Drive Holidays</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Train Journeys</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Cruising & Sailing</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Private Jets & Flying Adventures</NavLink></li>
                                                                 </ul>
                                                                 <button className="btn header_nav_btn">See all Trains, Planes, Cars & Cruises
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -474,15 +474,15 @@ function Nav() {
                                                             </div>
                                                         </li>
                                                         <li className="header_country_label">
-                                                            <NavLink href="#">Classic Journeys
+                                                            <NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type'}>Classic Journeys
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                             </NavLink>
                                                             <div className="header_country_list_inr">
                                                                 <ul>
-                                                                    <li><NavLink href="#">Immersive Journeys</NavLink></li>
-                                                                    <li><NavLink href="#">Essential Journeys</NavLink></li>
-                                                                    <li><NavLink href="#">Off-the-beaten-track Journeys</NavLink></li>
-                                                                    <li><NavLink href="#">Signature Journeys</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Immersive Journeys</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Essential Journeys</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Off-the-beaten-track Journeys</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/holiday-types/holiday-types-type/holiday-types-detail'}>Signature Journeys</NavLink></li>
                                                                 </ul>
                                                                 <button className="btn header_nav_btn">See all Classic Journeys
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -520,7 +520,7 @@ function Nav() {
                             </div>
                         </li>
                         <li className="menu-item-has-children"><NavLink href={regionWiseUrl + '/special-offers'}>Special offers</NavLink></li>
-                        <li className="menu-item-has-children"><NavLink href="/blogs">Blog</NavLink></li>
+                        <li className="menu-item-has-children"><NavLink href="/blog">Blog</NavLink></li>
                         <li className="menu-item-has-children">
                             <NavLink href="/why-us">Why us
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
