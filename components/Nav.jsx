@@ -77,40 +77,40 @@ function Nav() {
                                                 <div className="header_country_list">
                                                     <ul>
                                                         <li className="header_country_label active">
-                                                            <NavLink href="/destinations/destination_detail">Africa
+                                                            <NavLink href={regionWiseUrl + '/destinations/destination_detail'}>Africa
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                             </NavLink>
                                                             <div className="header_country_list_inr">
                                                                 <ul>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">South Africa</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Tanzania</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Kenya</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Zimbabwe</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Namibia</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Malawi</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Zambia</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Uganda</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>South Africa</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Tanzania</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Kenya</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Zimbabwe</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Namibia</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Malawi</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Zambia</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Uganda</NavLink></li>
                                                                 </ul>
                                                                 <button className="btn header_nav_btn">See all Africa
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </button>
                                                             </div>
                                                         </li>
-                                                        <li className="header_country_label"><NavLink href="/destinations/destination_detail">Antartica</NavLink></li>
+                                                        <li className="header_country_label"><NavLink href={regionWiseUrl + '/destinations/destination_detail'}>Antartica</NavLink></li>
                                                         <li className="header_country_label">
-                                                            <NavLink href="/destinations/destination_detail">Asia
+                                                            <NavLink href={regionWiseUrl + '/destinations/destination_detail'}>Asia
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                             </NavLink>
                                                             <div className="header_country_list_inr">
                                                                 <ul>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Indonesia</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Japan</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Cambodia</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Vietnam</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">China</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Thailand</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Malaysia & Borneo</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Burma</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Indonesia</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Japan</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Cambodia</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Vietnam</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>China</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Thailand</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Malaysia & Borneo</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Burma</NavLink></li>
                                                                 </ul>
                                                                 <button className="btn header_nav_btn">See all Asia
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -118,16 +118,16 @@ function Nav() {
                                                             </div>
                                                         </li>
                                                         <li className="header_country_label">
-                                                            <NavLink href="/destinations/destination_detail">Australasia & South Pacific
+                                                            <NavLink href={regionWiseUrl + '/destinations/destination_detail'}>Australasia & South Pacific
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                             </NavLink>
                                                             <div className="header_country_list_inr">
                                                                 <ul>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Australia</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">New Zealand</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Cook Islands</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Fiji</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">French Polynesia</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Australia</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>New Zealand</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Cook Islands</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Fiji</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>French Polynesia</NavLink></li>
                                                                 </ul>
                                                                 <button className="btn header_nav_btn">See all Australasia & South Pacific
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -135,18 +135,18 @@ function Nav() {
                                                             </div>
                                                         </li>
                                                         <li className="header_country_label">
-                                                            <NavLink href="/destinations/destination_detail">Central America
+                                                            <NavLink href={regionWiseUrl + '/destinations/destination_detail'}>Central America
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                             </NavLink>
                                                             <div className="header_country_list_inr">
                                                                 <ul>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Belize</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Honduras</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Mexico</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Panama</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Costa Rica</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Guatemala</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Nicaragua</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Belize</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Honduras</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Mexico</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Panama</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Costa Rica</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Guatemala</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Nicaragua</NavLink></li>
                                                                 </ul>
                                                                 <button className="btn header_nav_btn">See all Central America
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -154,19 +154,19 @@ function Nav() {
                                                             </div>
                                                         </li>
                                                         <li className="header_country_label">
-                                                            <NavLink href="/destinations/destination_detail">Europe
+                                                            <NavLink href={regionWiseUrl + '/destinations/destination_detail'}>Europe
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                             </NavLink>
                                                             <div className="header_country_list_inr">
                                                                 <ul>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Italy</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Greece</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Spain</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Iceland</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Turkey</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Norway</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Sweden</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Croatia</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Italy</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Greece</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Spain</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Iceland</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Turkey</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Norway</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Sweden</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Croatia</NavLink></li>
                                                                 </ul>
                                                                 <button className="btn header_nav_btn">See all Europe
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -174,14 +174,14 @@ function Nav() {
                                                             </div>
                                                         </li>
                                                         <li className="header_country_label">
-                                                            <NavLink href="/destinations/destination_detail">Indian Ocean
+                                                            <NavLink href={regionWiseUrl + '/destinations/destination_detail'}>Indian Ocean
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                             </NavLink>
                                                             <div className="header_country_list_inr">
                                                                 <ul>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Seychelles</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Mauritius</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Maldives</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Seychelles</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Mauritius</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Maldives</NavLink></li>
                                                                 </ul>
                                                                 <button className="btn header_nav_btn">See all Indian Ocean
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -189,14 +189,14 @@ function Nav() {
                                                             </div>
                                                         </li>
                                                         <li className="header_country_label">
-                                                            <NavLink href="/destinations/destination_detail">Indian Subcontinent
+                                                            <NavLink href={regionWiseUrl + '/destinations/destination_detail'}>Indian Subcontinent
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                             </NavLink>
                                                             <div className="header_country_list_inr">
                                                                 <ul>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Bhutan</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">India</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Sri Lanka</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Bhutan</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>India</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Sri Lanka</NavLink></li>
                                                                 </ul>
                                                                 <button className="btn header_nav_btn">See all Indian Subcontinent
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -204,18 +204,18 @@ function Nav() {
                                                             </div>
                                                         </li>
                                                         <li className="header_country_label">
-                                                            <NavLink href="/destinations/destination_detail">Middle East & North Africa
+                                                            <NavLink href={regionWiseUrl + '/destinations/destination_detail'}>Middle East & North Africa
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                             </NavLink>
                                                             <div className="header_country_list_inr">
                                                                 <ul>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Egypt</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Oman</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Israel</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Morocco</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Jordan</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">UAE</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Qatar</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Egypt</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Oman</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Israel</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Morocco</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Jordan</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>UAE</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Qatar</NavLink></li>
                                                                 </ul>
                                                                 <button className="btn header_nav_btn">See all Middle East & North Africa
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -223,19 +223,19 @@ function Nav() {
                                                             </div>
                                                         </li>
                                                         <li className="header_country_label">
-                                                            <NavLink href="/destinations/destination_detail">North America & Caribbean
+                                                            <NavLink href={regionWiseUrl + '/destinations/destination_detail'}>North America & Caribbean
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                             </NavLink>
                                                             <div className="header_country_list_inr">
                                                                 <ul>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">USA</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Canada</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">St Lucia</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Grenada</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Barbados</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Antigua</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Guadeloupe</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Cuba</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>USA</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Canada</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>St Lucia</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Grenada</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Barbados</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Antigua</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Guadeloupe</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Cuba</NavLink></li>
                                                                 </ul>
                                                                 <button className="btn header_nav_btn">See all North America & Caribbean
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -243,19 +243,19 @@ function Nav() {
                                                             </div>
                                                         </li>
                                                         <li className="header_country_label">
-                                                            <NavLink href="/destinations/destination_detail">South America
+                                                            <NavLink href={regionWiseUrl + '/destinations/destination_detail'}>South America
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                             </NavLink>
                                                             <div className="header_country_list_inr">
                                                                 <ul>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Peru</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Ecuador & the Galapagos</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Brazil</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Argentina</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Chile</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Colombia</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Antarctica</NavLink></li>
-                                                                    <li><NavLink href="/destinations/destination_detail/country-detail">Bolivia</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Peru</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Ecuador & the Galapagos</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Brazil</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Argentina</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Chile</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Colombia</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Antarctica</NavLink></li>
+                                                                    <li><NavLink href={regionWiseUrl + '/destinations/destination_detail/country-detail'}>Bolivia</NavLink></li>
                                                                 </ul>
                                                                 <button className="btn header_nav_btn">See all South America
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>

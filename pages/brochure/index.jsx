@@ -158,7 +158,7 @@ function Index() {
                             <div className="col-sm-6 col-md-4">
                                 <div name="country" {...register('country')} className={`select_drpdwn ${errors.country ? 'is-invalid' : ''}`}>
                                     <select className="form-select" aria-label="Country">
-                                        <option selected="">Country</option>
+                                        <option defaultValue>Country</option>
                                         <option value="USA">USA</option>
                                         <option value="Bangladesh">Bangladesh</option>
                                         <option value="Chad">Chad</option>

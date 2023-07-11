@@ -62,7 +62,7 @@ function Index() {
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="holiday_types.html" target="_blank">
-                                    <img src="../images/holiday_type01.jpg" alt="holiday_type01" className="img-fluid" />
+                                    <img src="./../images/holiday_type01.jpg" alt="holiday_type01" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
@@ -82,7 +82,7 @@ function Index() {
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="holiday_types.html" target="_blank">
-                                    <img src="../images/holiday_type02.jpg" alt="holiday_type02" className="img-fluid" />
+                                    <img src="./../images/holiday_type02.jpg" alt="holiday_type02" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
@@ -103,7 +103,7 @@ function Index() {
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="holiday_types.html" target="_blank">
-                                    <img src="../images/holiday_type03.jpg" alt="holiday_type03" className="img-fluid" />
+                                    <img src="./../images/holiday_type03.jpg" alt="holiday_type03" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
@@ -123,7 +123,7 @@ function Index() {
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="holiday_types.html" target="_blank">
-                                    <img src="../images/holiday_type04.jpg" alt="holiday_type04" className="img-fluid" />
+                                    <img src="./../images/holiday_type04.jpg" alt="holiday_type04" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
@@ -144,7 +144,7 @@ function Index() {
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="holiday_types.html" target="_blank">
-                                    <img src="../images/holiday_type05.jpg" alt="holiday_type05" className="img-fluid" />
+                                    <img src="./../images/holiday_type05.jpg" alt="holiday_type05" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
@@ -165,7 +165,7 @@ function Index() {
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="holiday_types.html" target="_blank">
-                                    <img src="../images/holiday_type06.jpg" alt="holiday_type06" className="img-fluid" />
+                                    <img src="./../images/holiday_type06.jpg" alt="holiday_type06" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
@@ -186,7 +186,7 @@ function Index() {
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="holiday_types.html" target="_blank">
-                                    <img src="../images/holiday_type07.jpg" alt="holiday_type07" className="img-fluid" />
+                                    <img src="./../images/holiday_type07.jpg" alt="holiday_type07" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
@@ -207,7 +207,7 @@ function Index() {
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="holiday_types.html" target="_blank">
-                                    <img src="../images/holiday_type08.jpg" alt="holiday_type08" className="img-fluid" />
+                                    <img src="./../images/holiday_type08.jpg" alt="holiday_type08" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
@@ -228,7 +228,7 @@ function Index() {
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="holiday_types.html" target="_blank">
-                                    <img src="../images/holiday_type09.jpg" alt="holiday_type09" className="img-fluid" />
+                                    <img src="./../images/holiday_type09.jpg" alt="holiday_type09" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
@@ -249,7 +249,7 @@ function Index() {
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="holiday_types.html" target="_blank">
-                                    <img src="../images/holiday_type10.jpg" alt="holiday_type10" className="img-fluid" />
+                                    <img src="./../images/holiday_type10.jpg" alt="holiday_type10" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
@@ -270,7 +270,7 @@ function Index() {
                         <div className="col-sm-4">
                             <div className="card_blk_inr">
                                 <a href="holiday_types.html" target="_blank">
-                                    <img src="../images/holiday_type11.jpg" alt="holiday_type01" className="img-fluid" />
+                                    <img src="./../images/holiday_type11.jpg" alt="holiday_type01" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
                                             <div className="col-11">
