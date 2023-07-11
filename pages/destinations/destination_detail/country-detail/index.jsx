@@ -12,8 +12,13 @@ function Index() {
 
     useEffect(() => {
         userService.getAll().then(x => setUsers(x));
+        $(document).ready(function(){
+            $(".country_highlight_row .country_highlight_inr button").click(function(){
+                $(this).toggleClass('read_more');
+                $(".country_hightlight_expnded").slideToggle();
+            });
+        });
     }, []);
-
 
     return (
         <Layout>
@@ -120,17 +125,17 @@ function Index() {
                                     <h3>HIGHLIGHTS OF China</h3>
                                     <p>Climbing the Great Wall of China – Scale the giant structure and have a whale of a time tobogganing your way down afterwards.</p>
                                     <p>The Forbidden City – Explore China’s largest collection of ancient structures, once home to 24 emperors across the Ming and Qing dynasties.</p>
-                                    {/* <div className="country_hightlight_expnded" style="display: none;">
+                                    <div className="country_hightlight_expnded" style={{ display: 'none' }}>
                                         <p>Rice terraces – Meander along the verdant ridges of Yunnan, with soaring mountains and dense jungles which make you feel completely at one with nature.</p>
                                         <p>The Zhangjiajie Mountains – if you’ve stared wistfully at Avatar’s gorgeous craggy landscape, don’t despair – the ‘Hallelujah Mountains’ are inspired by Zhangjiajie.</p>
                                         <p>Terracotta warriors – See thousands of life-size clay soldiers in Xi’an which stand guard by the tomb of China’s first emperor.</p>
                                         <p>The Silk Road – Discover the network used by merchants and traders to trade silk and other goods. This was far more significant than exchanging material goods however, as through this passage, intellectual and cultural exchanges also took place (including scientific, artistic and literary one)</p>
                                         <p>Amazing food – Relish in delicious local food, from Peking duck in Beijing to Dim Sum in Hong Kong.</p>
-                                    </div> */}
+                                    </div>
                                     <button className="btn">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" className="up_arrow" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
-                                        <span>Read more</span>
-                                        <span className="read_less">Read less</span>
+                                        <span>Read More</span>
+                                        <span className="read_less">Read Less</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
                                     </button>
 
