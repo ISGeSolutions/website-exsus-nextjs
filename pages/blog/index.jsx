@@ -84,7 +84,7 @@ function Index() {
                                         <div className="banner_dropdwn_blk">
                                             <div className="select_drpdwn">
                                                 <select className="selectpicker" multiple aria-label="Filter by country" data-live-search="true">
-                                                    <option selected="">Filter by country</option>
+                                                    <option defaultValue>Filter by country</option>
                                                     <option value="Asia">Asia</option>
                                                     <option value="Hong Kong & Macau">Hong Kong & Macau</option>
                                                     <option value="Malaysia & Borneo">Malaysia & Borneo</option>
@@ -103,7 +103,7 @@ function Index() {
                                         <div className="banner_dropdwn_blk ps-0 ps-md-2">
                                             <div className="select_drpdwn">
                                                 <select className="selectpicker" multiple aria-label="Filter by property type" data-live-search="true">
-                                                    <option selected="">Filter by property type</option>
+                                                    <option defaultValue>Filter by property type</option>
                                                     <option value="Everything">Everything</option>
                                                     <option value="Barefoot">Barefoot</option>
                                                     <option value="Beach">Beach</option>
@@ -147,7 +147,7 @@ function Index() {
                                         <div className="banner_dropdwn_blk ps-0 ps-md-2">
                                             <div className="select_drpdwn">
                                                 <select className="selectpicker" multiple aria-label="Filter by month" data-live-search="true">
-                                                    <option selected="">Filter by month</option>
+                                                    <option defaultValue>Filter by month</option>
                                                     <option value="All months">All months</option>
                                                     <option value="January">January</option>
                                                     <option value="February">February</option>
