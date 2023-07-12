@@ -197,7 +197,7 @@ function Index() {
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
-                                                <img src="images/country_card06.jpg" alt="country_card06" className="img-fluid" />
+                                                <img src="./../../../../../images/country_card06.jpg" alt="country_card06" className="img-fluid" />
                                             </a>
                                             <div className="card_slider_cnt">
                                                 <h4>Down the Golden River</h4>
@@ -232,7 +232,7 @@ function Index() {
                             <div className="card_slider_inr">
                                 <div className="card_slider">
                                     <a className="card_slider_img">
-                                        <img src="images/region_hotel02.jpg" alt="region_hotel02" className="img-fluid" />
+                                        <img src="./../../../../../images/region_hotel02.jpg" alt="region_hotel02" className="img-fluid" />
                                     </a>
                                     <div className="card_slider_cnt">
                                         <h4><a href="#">The Opposite House</a></h4>
@@ -251,7 +251,7 @@ function Index() {
                             <div className="card_slider_inr">
                                 <div className="card_slider">
                                     <a className="card_slider_img">
-                                        <img src="images/country_hotel06.jpg" alt="country_hotel06" className="img-fluid" />
+                                        <img src="./../../../../../images/country_hotel06.jpg" alt="country_hotel06" className="img-fluid" />
                                     </a>
                                     <div className="card_slider_cnt">
                                         <h4><a href="#">Aman Summer Palace</a></h4>
@@ -270,7 +270,7 @@ function Index() {
                             <div className="card_slider_inr">
                                 <div className="card_slider">
                                     <a className="card_slider_img">
-                                        <img src="images/region_hotel03.jpg" alt="region_hotel03" className="img-fluid" />
+                                        <img src="./../../../../../images/region_hotel03.jpg" alt="region_hotel03" className="img-fluid" />
                                     </a>
                                     <div className="card_slider_cnt">
                                         <h4><a href="#">Jing's Residence</a></h4>
@@ -289,7 +289,7 @@ function Index() {
                             <div className="card_slider_inr">
                                 <div className="card_slider">
                                     <a className="card_slider_img">
-                                        <img src="images/region_hotel01.jpg" alt="region_hotel01" className="img-fluid" />
+                                        <img src="./../../../../../images/region_hotel01.jpg" alt="region_hotel01" className="img-fluid" />
                                     </a>
                                     <div className="card_slider_cnt">
                                         <h4><a href="#">Four Seasons Beijing</a></h4>

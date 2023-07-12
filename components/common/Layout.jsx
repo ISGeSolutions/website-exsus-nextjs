@@ -14,6 +14,8 @@ function Layout({ children }) {
     const currentUrl = router.asPath;
     // const regionWiseUrl = '/uk';
     const [regionWiseUrl, setMyVariable] = useState('/uk');
+    const [selectedRegion, setVariable] = useState('');
+
     const handleRegion = (regionWiseUrl) => {
         // Do something
 
@@ -25,12 +27,14 @@ function Layout({ children }) {
         const pathRouter = router.asPath;
         const myArray = pathRouter.split("/");
 
+        console.log('myArray2', myArray);
+
         var newPath = '';
         myArray.forEach((element, index) => {
             if (index == 0) {
                 newPath = element;
             } else if (index == 1) {
-                if(myArray.length > 2) {
+                if (myArray.length > 2) {
                     if (element) {
                         newPath = newPath + '/' + regionWiseUrl;
                     }
@@ -46,6 +50,32 @@ function Layout({ children }) {
         // redirect to home if already logged in
         // if (userService.userValue) {
         //     router.push('/');
+        // }
+
+        // const pathRouter = router.asPath;
+        // const myArray = pathRouter.split("/");
+
+        // console.log('myArray2', myArray);
+
+        // myArray.forEach((element, index) => {
+        //     if (index == 1) {
+        //         if (element) {
+        // console.log('element', element);
+        // localStorage.setItem('site_region', element);
+        // window.site_region = element;
+        // setVariable(element);
+        // setMyVariable(element);
+        //         }
+        //     }
+        // });
+
+        // if (typeof localStorage !== 'undefined') {
+        //     if (localStorage.getItem("site_region") != null) {
+        //         const selectedRegion = localStorage.getItem("site_region");
+        //         console.log('selectedRegion22', selectedRegion);
+        //         setVariable(selectedRegion);
+        //         // setMyVariable(selectedRegion);
+        //     }
         // }
     },
         []);
