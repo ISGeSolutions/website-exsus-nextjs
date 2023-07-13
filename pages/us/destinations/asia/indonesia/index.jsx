@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { Link, Spinner, Signup } from 'components';
 import { Layout } from 'components/users';
-import { userService, destinationService } from 'services';
+import { userService, countriesService } from 'services';
 import Iframe from 'react-iframe'
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -12,20 +12,15 @@ export default Index;
 
 function Index() {
     const [users, setUsers] = useState(null);
-    const [destinationDropdown, setDestinationDropdown] = useState(null);
-    const [destination, setDestination] = useState(null);
-
+    const [country, setCountry] = useState(null);
 
     useEffect(() => {
-
-        destinationService.getAllDropdown().then(x => {
-            console.log('destinationServiceDropdown', x);
-            setDestinationDropdown(x)
-        });
-
-        destinationService.getAll().then(x => {
-            console.log('destinationService', x);
-            setDestination(x)
+        countriesService.getAll().then(x => {
+            // console.log('destinationService', x);
+            const desiredKey = 2; // The desired key to access
+            const desiredCountry = x.find(item => item.id == desiredKey);
+            // console.log('desiredCountry2', desiredCountry.country_translations[0].country_overview_text);
+            setCountry(desiredCountry.country_translations[0].country_overview_text);
         });
 
         userService.getAll().then(x => setUsers(x));
@@ -140,7 +135,7 @@ function Index() {
                 </div>
                 <div className="banner_tab_blk">
                     <button className="btn banner_map_tab">Map</button>
-                    <button className="btn banner_img_tab banner_tab_active">./../../images</button>
+                    <button className="btn banner_img_tab banner_tab_active">Images</button>
                 </div>
                 <div className="banner_map_blk">
                     <Iframe url="https://www.sdrive.app/embed/1ptBQD"
@@ -188,6 +183,7 @@ function Index() {
                             <section className="destination_para">
                                 {/* <p>{destination | json}</p> */}
                                 {/* {/* <p><pre>{JSON.stringify(destination, null, 2)}</pre></p> */}
+                                <p dangerouslySetInnerHTML={{ __html: country }} />
                                 <p>Warning: Asia is highly addictive. Whether it’s a rickshaw ride through hectic Hanoi, a fascinating adventure amidst the ancient Angkor temples or diving and snorkelling in some of the warmest, clearest seas on the planet, Asia is jam-packed with culture, adventure - and variety.</p>
                                 <p>A truly tantalising continent, Asia promises extraordinary experiences for every traveller. Whether you’re after a luxury honeymoon in South-East Asia, a family adventure holiday in Southern Asia or a cultural holiday to the Far East, you can expect some of the most beautiful beaches and most incredible luxury hotels in the world, fast-paced cities, tranquil village life and mouthwatering food. Asia has it all.</p>
                                 <p>Take a journey through temple-laced Cambodia or Malaysia; island-hop across the other-worldly archipelago of Indonesia; and soak up the buzz of floating markets in Vietnam, Laos and Thailand. Delve into emerald jungles and encounter enthralling wildlife in Borneo; or relish the pulsating energy of Asia’s most cosmopolitan cities: Hong Kong, Macau and Singapore. Then there’s beguiling Japan, a cultural odyssey through time, while Bhutan and Myanmar have just begun to unveil their treasures to the world, and we wouldn’t want you to miss it.</p>

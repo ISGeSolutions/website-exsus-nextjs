@@ -15,7 +15,6 @@ function Index() {
     const [destinationDropdown, setDestinationDropdown] = useState(null);
     const [destination, setDestination] = useState(null);
 
-
     useEffect(() => {
 
         destinationService.getAllDropdown().then(x => {
@@ -24,8 +23,11 @@ function Index() {
         });
 
         destinationService.getAll().then(x => {
-            console.log('destinationService', x);
-            setDestination(x)
+            // console.log('destinationService', x);
+            const desiredKey = 2; // The desired key to access
+            const desiredDestination = x.find(item => item.id == desiredKey);
+            console.log('desiredDestinatio2', desiredDestination.destination_translations[0].destination_overview_text);
+            setDestination(desiredDestination.destination_translations[0].destination_overview_text);
         });
 
         userService.getAll().then(x => setUsers(x));
@@ -140,7 +142,7 @@ function Index() {
                 </div>
                 <div className="banner_tab_blk">
                     <button className="btn banner_map_tab">Map</button>
-                    <button className="btn banner_img_tab banner_tab_active">./../../images</button>
+                    <button className="btn banner_img_tab banner_tab_active">Images</button>
                 </div>
                 <div className="banner_map_blk">
                     <Iframe url="https://www.sdrive.app/embed/1ptBQD"
@@ -509,7 +511,8 @@ function Index() {
                     <div className="tab-pane fade" id="pills-countries" role="tabpanel" aria-labelledby="pills-countries-tab" tabIndex="0">
                         <div className="container-md">
                             <section className="destination_para">
-                                <p>Whether it’s a rickshaw ride through hectic Hanoi in Vietnam, a fascinating adventure amidst the ancient Angkor temples in Cambodia, or diving and snorkelling in some of the warmest, clearest seas on the planet, Asia is jam-packed with culture, adventure - and variety.</p>
+                                <p dangerouslySetInnerHTML={{ __html: destination }} />
+                                {/* <p>Whether it’s a rickshaw ride through hectic Hanoi in Vietnam, a fascinating adventure amidst the ancient Angkor temples in Cambodia, or diving and snorkelling in some of the warmest, clearest seas on the planet, Asia is jam-packed with culture, adventure - and variety.</p> */}
                             </section>
                         </div>
 

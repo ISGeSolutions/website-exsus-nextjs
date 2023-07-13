@@ -140,7 +140,7 @@ function Index() {
                 </div>
                 <div className="banner_tab_blk">
                     <button className="btn banner_map_tab">Map</button>
-                    <button className="btn banner_img_tab banner_tab_active">./../../images</button>
+                    <button className="btn banner_img_tab banner_tab_active">Images</button>
                 </div>
                 <div className="banner_map_blk">
                     <Iframe url="https://www.sdrive.app/embed/1ptBQD"

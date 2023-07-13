@@ -15,17 +15,18 @@ function Index() {
     const [destinationDropdown, setDestinationDropdown] = useState(null);
     const [destination, setDestination] = useState(null);
 
-
     useEffect(() => {
-
         destinationService.getAllDropdown().then(x => {
             console.log('destinationServiceDropdown', x);
             setDestinationDropdown(x)
         });
 
         destinationService.getAll().then(x => {
-            console.log('destinationService', x);
-            setDestination(x)
+            // console.log('destinationService', x);
+            const desiredKey = 1; // The desired key to access
+            const desiredDestination = x.find(item => item.id == desiredKey);
+            console.log('desiredDestinatio2', desiredDestination.destination_translations[0].destination_overview_text);
+            setDestination(desiredDestination.destination_translations[0].destination_overview_text);
         });
 
         userService.getAll().then(x => setUsers(x));
@@ -140,7 +141,7 @@ function Index() {
                 </div>
                 <div className="banner_tab_blk">
                     <button className="btn banner_map_tab">Map</button>
-                    <button className="btn banner_img_tab banner_tab_active">./../../images</button>
+                    <button className="btn banner_img_tab banner_tab_active">Images</button>
                 </div>
                 <div className="banner_map_blk">
                     <Iframe url="https://www.sdrive.app/embed/1ptBQD"
@@ -186,12 +187,11 @@ function Index() {
                     <div className="tab-pane fade show active" id="pills-overview" role="tabpanel" aria-labelledby="pills-overview-tab" tabIndex="0">
                         <div className="container-md">
                             <section className="destination_para">
-                                {/* <p>{destination | json}</p> */}
-                                {/* <p><pre>{JSON.stringify(destination, null, 2)}</pre></p> */}
-                                <p>Warning: Asia is highly addictive. Whether it’s a rickshaw ride through hectic Hanoi, a fascinating adventure amidst the ancient Angkor temples or diving and snorkelling in some of the warmest, clearest seas on the planet, Asia is jam-packed with culture, adventure - and variety.</p>
+                                <p dangerouslySetInnerHTML={{ __html: destination }} />
+                                {/* <p>Warning: Asia is highly addictive. Whether it’s a rickshaw ride through hectic Hanoi, a fascinating adventure amidst the ancient Angkor temples or diving and snorkelling in some of the warmest, clearest seas on the planet, Asia is jam-packed with culture, adventure - and variety.</p>
                                 <p>A truly tantalising continent, Asia promises extraordinary experiences for every traveller. Whether you’re after a luxury honeymoon in South-East Asia, a family adventure holiday in Southern Asia or a cultural holiday to the Far East, you can expect some of the most beautiful beaches and most incredible luxury hotels in the world, fast-paced cities, tranquil village life and mouthwatering food. Asia has it all.</p>
                                 <p>Take a journey through temple-laced Cambodia or Malaysia; island-hop across the other-worldly archipelago of Indonesia; and soak up the buzz of floating markets in Vietnam, Laos and Thailand. Delve into emerald jungles and encounter enthralling wildlife in Borneo; or relish the pulsating energy of Asia’s most cosmopolitan cities: Hong Kong, Macau and Singapore. Then there’s beguiling Japan, a cultural odyssey through time, while Bhutan and Myanmar have just begun to unveil their treasures to the world, and we wouldn’t want you to miss it.</p>
-                                <p>To design your own bespoke Asian holiday, call and speak to one of our experts on 020 7337 9010 or <a href="#">Enquire Now.</a></p>
+                                <p>To design your own bespoke Asian holiday, call and speak to one of our experts on 020 7337 9010 or <a href="#">Enquire Now.</a></p> */}
                             </section>
 
                             <section className="favrites_blk_row favrites_blk_small_card_row">
