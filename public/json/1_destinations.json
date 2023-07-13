@@ -1,0 +1,55 @@
+{
+    "destinations": [
+        {
+            "id": 1,
+            "code": "AF",
+            "serial_number": 1,
+            "freeze_ind": false,
+            "freeze_at": null,
+            "updated_place": null,
+            "errors": {},
+            "destination_translations": [
+                {
+                    "id": 1,
+                    "app_language_id": 1,
+                    "destination_id": 1,
+                    "destination_name": "Africa",
+                    "destination_short_text": "",
+                    "destination_overview_text": "\n\t\t<p>Luxury safari holidays in Africa are one of life's most magical experiences. Think spine-tingling wildlife encounters, mighty&nbsp;waterfalls and cool gin and tonics under baobab trees.&nbsp;</p>\n\t\t<p>This heady mix of wildlife, adventure, culture and spectacular scenery could find you partying in Cape Town, taking a helicopter over Victoria Falls, going on safari in the Serengeti and snorkelling off the coast of Zanzibar. Whether you're after a luxury African safari honeymoon, dedicated family safari or, more specifically, a walking safari or riding safari, by travelling with Exsus&nbsp;Travel you'll stay in some of the very best luxury safari lodges with the very best professional guides.</p>\n\t\t<p>Africa is not short on once-in-a-lifetime experiences, and whether it’s climbing Mount Kilimanjaro or coming face-to-face with mountain gorillas in Uganda or Rwanda, a tailor-made luxury African holiday is a great opportunity to tick off a few items on the bucket list.<br><br>Amazing experiences and stunning wildlife aside, Africa is also a great location for a beach holiday with an exotic twist: go island hopping in Mozambique and combine Africa’s cultural intrigue with the ultimate in secluded desert island relaxation, or enjoy a classic&nbsp;bush and beach safari in Kenya&nbsp;or Tanzania.<br><br></p>\n\t\t<h3><br>YOUR LUXURY AFRICAN SAFARI STARTS HERE</h3>\n\t\t<p><br>At Exsus&nbsp;Travel we're enormously passionate about Africa, and our experts have travelled extensively across the continent so they really know their stuff. To ensure you have the safari holiday of a lifetime, get in touch with one of the team today to tailor-make your African safari holiday around your own personal&nbsp;wishlist. Get in touch by&nbsp;<span>calling&nbsp;</span><span class='mediahawkNumber1793 mhMobile'><a href='tel:02036135633'>020 3613 5633</a></span><span><span>&nbsp;</span>or by<span>&nbsp;</span></span><a href='https://www.exsus.com/make-an-enquiry?ptype=CUST&amp;pcode=home' target='_blank' class='simple-link'>making an online enquiry</a><span>.</span></p>        ",
+                    "freeze_ind": false,
+                    "freeze_at": null,
+                    "updated_place": null
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "code": "AS",
+            "serial_number": 2,
+            "freeze_ind": false,
+            "freeze_at": null,
+            "updated_place": null,
+            "errors": {},
+            "destination_translations": [
+                {
+                    "id": 2,
+                    "app_language_id": 1,
+                    "destination_id": 2,
+                    "destination_name": "Asia",
+                    "destination_short_text": "",
+                    "destination_overview_text": "\n<p>Warning: Asia is highly addictive. Whether it’s a rickshaw ride through hectic Hanoi, a fascinating adventure amidst the ancient Angkor temples or diving and snorkelling in some of the warmest, clearest seas on the planet, Asia is jam-packed with culture, adventure - and variety.</p>\n<p>A truly tantalising continent, Asia promises extraordinary experiences for every traveller. Whether you’re after a luxury honeymoon in South-East Asia, a family adventure holiday in Southern Asia or a cultural holiday to the Far East, you can expect some of the most beautiful beaches and most incredible luxury hotels in the world, fast-paced cities, tranquil village life and mouthwatering food. Asia has it all.</p>\n<p>Take a journey through temple-laced Cambodia or Malaysia; island-hop across the other-worldly archipelago of Indonesia; and soak up the buzz of floating markets in Vietnam, Laos and Thailand. Delve into emerald jungles and encounter enthralling wildlife in Borneo; or relish the pulsating energy of Asia’s most cosmopolitan cities: Hong Kong, Macau and Singapore. Then there’s beguiling Japan, a cultural odyssey through time, while Bhutan and Myanmar have just begun to unveil their treasures to the world, and we wouldn’t want you to miss it.</p>\n<p>To design your own bespoke Asian holiday, call and speak to one of our experts on <span class='mediahawkNumber1793 mhMobile'>020 7337 9010</span> or <a href='https://www.exsus.com/make-an-enquiry' class='simple-link'>Enquire Now</a>.</p>",
+                    "freeze_ind": false,
+                    "freeze_at": null,
+                    "updated_place": null
+                }
+            ]
+        }
+    ],
+    "meta": {
+        "pagination": {
+            "per_page": 10,
+            "total_pages": 1,
+            "total_objects": 2
+        }
+    }
+}

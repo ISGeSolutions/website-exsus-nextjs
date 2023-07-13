@@ -1,0 +1,57 @@
+{
+    "holiday_types": [
+        {
+            "id": 1,
+            "code": "0001",
+            "serial_number": 1,
+            "freeze_ind": false,
+            "freeze_at": null,
+            "updated_place": null,
+            "created_at": "2023-07-12T15:10:11.000Z",
+            "updated_at": "2023-07-12T15:10:11.000Z",
+            "holiday_type_translations": [
+                {
+                    "id": 1,
+                    "holiday_type_id": 1,
+                    "app_language_id": 1,
+                    "holiday_type_name": "Once In A Lifetime Holidays",
+                    "holiday_type_short_text": "",
+                    "holiday_type_overview_text": "<p>Everyone’s definition of a dream trip is different. &nbsp;</p>\n\t\t<p>Whether you are after the big one, the holiday that you have always dreamed of but never went on, or want an adventure that leaves nothing out, we are ready to help - how about dinner with a geisha in Japan, an oceanfront lodge only reached by boat in Costa Rica, a helicopter ride over New Zealand’s stunning scenery or a luxurious cross country train journey with unparalleled views of South Africa.<br><br><span>Whatever a 'once-in-a-lifetime' holiday or honeymoon means to you, our experts can create a totally tailor-made luxury experience that perfectly satisfies your wishlist.<br><br>All our itineraries are designed as inspiration.&nbsp;Tell us what you're after on your trip and we'll help you select the best hotels and experiences.</span></p>",
+                    "freeze_ind": false,
+                    "freeze_at": null,
+                    "updated_place": null
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "code": "0002",
+            "serial_number": 2,
+            "freeze_ind": false,
+            "freeze_at": null,
+            "updated_place": null,
+            "created_at": "2023-07-12T15:10:11.000Z",
+            "updated_at": "2023-07-12T15:10:11.000Z",
+            "holiday_type_translations": [
+                {
+                    "id": 2,
+                    "holiday_type_id": 2,
+                    "app_language_id": 1,
+                    "holiday_type_name": "Honeymoons",
+                    "holiday_type_short_text": "",
+                    "holiday_type_overview_text": "<p>Everyone's definition of their dream honeymoon differs.</p>\n<p>At Exsus Travel, we have over 20 years' experience in creating luxury tailor-made holidays, which make outstanding luxury honeymoons that are as individual as you are. Whether you're seeking pure relaxation and luxury in the most incredible surrounds, exotic adventure or a combination of the two - our highly-experienced travel experts can plan the perfect honeymoon - it’s not just a holiday, but an unforgettable experience.</p>\n<p>With a choice of over 90 honeymoon destinations, talk to our well-travelled experts about your honeymoon ideas and together start planning the luxury honeymoon you’d always dreamed of. Find that idyllic castaway island in the Maldives. Plan a short but sweet mini-moon, such as a romantic escape to Italy. Arrange a twin-centre honeymoon that takes in destinations like New Zealand and Bora Bora, or put together an epic adventure that lets you tick something off your travel wish list, such as a chance to go on safari in Africa, explore Indonesia or get to know elephants on <a href='https://www.exsus.com/landing/luxury-honeymoons-in-thailand' class='simple-link'>honeymoon in Thailand</a>.</p>\n<p>For luxury honeymoon inspiration, take a look at some of our classic honeymoons or explore our range of ultimate honeymoons. Alternatively call and speak to a Travel Expert on <span class='mediahawkNumber1793 mhMobile'>020 7337 9010</span> or click on Make an Enquiry to create your own totally bespoke honeymoon.</p>",
+                    "freeze_ind": false,
+                    "freeze_at": null,
+                    "updated_place": null
+                }
+            ]
+        }
+    ],
+    "meta": {
+        "pagination": {
+            "per_page": 10,
+            "total_pages": 1,
+            "total_objects": 2
+        }
+    }
+}

@@ -5,7 +5,7 @@ import Router from 'next/router';
 import { fetchWrapper } from 'helpers';
 
 const { publicRuntimeConfig } = getConfig();
-const baseUrl = `${publicRuntimeConfig.apiUrl}/destinations`;;
+const baseUrl = `${publicRuntimeConfig.apiUrl}/destinations_dropdown`;;
 
 // export const destiantionsService = {
 //     getDestinationsList

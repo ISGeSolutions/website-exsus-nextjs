@@ -176,7 +176,7 @@ function Index() {
                                         <p>We’d love to contact you by newsletter from time to time, including holiday inspiration and special offers for your clients. Please tick the box below if you'd like to hear from us.</p>
                                         <div className="form-check mb-3">
                                             <input type="checkbox" name="yescheckbox" {...register('yescheckbox')} className={`form-check-input ${errors.yescheckbox ? 'is-invalid' : ''}`} id="exampleCheck1" />
-                                            <label className="form-check-label" for="exampleCheck1">YES, I'd like to receive the latest news, offers and brochure by email.</label>
+                                            <label className="form-check-label" htmlFor="exampleCheck1">YES, I'd like to receive the latest news, offers and brochure by email.</label>
                                             <div className="invalid-feedback mb-1">{errors.yescheckbox?.message}</div>
                                         </div>
                                         <p>Should you wish to unsubscribe from our e-newsletters at any point, you can do so using the link in the footer of any e-newsletter you receive from us. We will not share your details at any point. For more information about our privacy practices please visit our website. By confirming your subscription below, you agree that we will process your information in accordance with this policy.</p>

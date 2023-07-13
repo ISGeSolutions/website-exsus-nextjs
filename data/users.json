@@ -114,7 +114,7 @@
       "id": 7
     }
   ],
-  "destinations": [
+  "destinations_dropdown": [
     "Asia",
     "Europe",
     "South America",
@@ -125,5 +125,287 @@
     "Australasia & South Pacific",
     "Middle East & North Africa",
     "Indian oceana"
-  ]
+  ],
+  "destinations": [
+    {
+      "id": 1,
+      "code": "AF",
+      "serial_number": 1,
+      "freeze_ind": false,
+      "freeze_at": null,
+      "updated_place": null,
+      "errors": {},
+      "destination_translations": [
+        {
+          "id": 1,
+          "app_language_id": 1,
+          "destination_id": 1,
+          "destination_name": "Africa",
+          "destination_short_text": "",
+          "destination_overview_text": "\n\t\t<p>Luxury safari holidays in Africa are one of life's most magical experiences. Think spine-tingling wildlife encounters, mighty&nbsp;waterfalls and cool gin and tonics under baobab trees.&nbsp;</p>\n\t\t<p>This heady mix of wildlife, adventure, culture and spectacular scenery could find you partying in Cape Town, taking a helicopter over Victoria Falls, going on safari in the Serengeti and snorkelling off the coast of Zanzibar. Whether you're after a luxury African safari honeymoon, dedicated family safari or, more specifically, a walking safari or riding safari, by travelling with Exsus&nbsp;Travel you'll stay in some of the very best luxury safari lodges with the very best professional guides.</p>\n\t\t<p>Africa is not short on once-in-a-lifetime experiences, and whether it’s climbing Mount Kilimanjaro or coming face-to-face with mountain gorillas in Uganda or Rwanda, a tailor-made luxury African holiday is a great opportunity to tick off a few items on the bucket list.<br><br>Amazing experiences and stunning wildlife aside, Africa is also a great location for a beach holiday with an exotic twist: go island hopping in Mozambique and combine Africa’s cultural intrigue with the ultimate in secluded desert island relaxation, or enjoy a classic&nbsp;bush and beach safari in Kenya&nbsp;or Tanzania.<br><br></p>\n\t\t<h3><br>YOUR LUXURY AFRICAN SAFARI STARTS HERE</h3>\n\t\t<p><br>At Exsus&nbsp;Travel we're enormously passionate about Africa, and our experts have travelled extensively across the continent so they really know their stuff. To ensure you have the safari holiday of a lifetime, get in touch with one of the team today to tailor-make your African safari holiday around your own personal&nbsp;wishlist. Get in touch by&nbsp;<span>calling&nbsp;</span><span class='mediahawkNumber1793 mhMobile'><a href='tel:02036135633'>020 3613 5633</a></span><span><span>&nbsp;</span>or by<span>&nbsp;</span></span><a href='https://www.exsus.com/make-an-enquiry?ptype=CUST&amp;pcode=home' target='_blank' class='simple-link'>making an online enquiry</a><span>.</span></p>        ",
+          "freeze_ind": false,
+          "freeze_at": null,
+          "updated_place": null
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "code": "AS",
+      "serial_number": 2,
+      "freeze_ind": false,
+      "freeze_at": null,
+      "updated_place": null,
+      "errors": {},
+      "destination_translations": [
+        {
+          "id": 2,
+          "app_language_id": 1,
+          "destination_id": 2,
+          "destination_name": "Asia",
+          "destination_short_text": "",
+          "destination_overview_text": "\n<p>Warning: Asia is highly addictive. Whether it’s a rickshaw ride through hectic Hanoi, a fascinating adventure amidst the ancient Angkor temples or diving and snorkelling in some of the warmest, clearest seas on the planet, Asia is jam-packed with culture, adventure - and variety.</p>\n<p>A truly tantalising continent, Asia promises extraordinary experiences for every traveller. Whether you’re after a luxury honeymoon in South-East Asia, a family adventure holiday in Southern Asia or a cultural holiday to the Far East, you can expect some of the most beautiful beaches and most incredible luxury hotels in the world, fast-paced cities, tranquil village life and mouthwatering food. Asia has it all.</p>\n<p>Take a journey through temple-laced Cambodia or Malaysia; island-hop across the other-worldly archipelago of Indonesia; and soak up the buzz of floating markets in Vietnam, Laos and Thailand. Delve into emerald jungles and encounter enthralling wildlife in Borneo; or relish the pulsating energy of Asia’s most cosmopolitan cities: Hong Kong, Macau and Singapore. Then there’s beguiling Japan, a cultural odyssey through time, while Bhutan and Myanmar have just begun to unveil their treasures to the world, and we wouldn’t want you to miss it.</p>\n<p>To design your own bespoke Asian holiday, call and speak to one of our experts on <span class='mediahawkNumber1793 mhMobile'>020 7337 9010</span> or <a href='https://www.exsus.com/make-an-enquiry' class='simple-link'>Enquire Now</a>.</p>",
+          "freeze_ind": false,
+          "freeze_at": null,
+          "updated_place": null
+        }
+      ]
+    }
+  ],
+  "countries": [
+    {
+      "id": 1,
+      "code": "BWA",
+      "serial_number": 1,
+      "destination_id": 1,
+      "freeze_ind": false,
+      "freeze_at": null,
+      "updated_place": null,
+      "created_at": "2023-07-12T15:10:11.000Z",
+      "updated_at": "2023-07-12T15:10:11.000Z",
+      "country_translations": [
+        {
+          "id": 1,
+          "app_language_id": 1,
+          "country_id": 1,
+          "country_name": "Botswana",
+          "country_short_text": "",
+          "country_overview_text": "<p>Botswana offers world-class safaris, and whether it’s a luxury honeymoon or a once in a lifetime safari holiday, it promises a privileged wilderness adventure.</p>\n\t\t<p>In Botswana’s heavily protected reserves, you’ll rarely&nbsp;pass more than one other safari vehicle, which means un-interrupted encounters with some of the most spectacular game in Africa.</p>\n\t\t<p>Botswana is also known for its stunningly diverse landscapes, so having awoken to bellowing hippo in the Okavango Delta, you can take a canoe safari along the spillways of Linyanti, Kwando, and Selinda; visit predator-rich Chobe, and then head to the arid Makgadikgadi Pans for a safari holiday rich in contrast.</p>",
+          "freeze_ind": false,
+          "freeze_at": null,
+          "updated_place": null
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "code": "ID",
+      "serial_number": 2,
+      "destination_id": 2,
+      "freeze_ind": false,
+      "freeze_at": null,
+      "updated_place": null,
+      "created_at": "2023-07-12T15:10:11.000Z",
+      "updated_at": "2023-07-12T15:10:11.000Z",
+      "country_translations": [
+        {
+          "id": 2,
+          "app_language_id": 1,
+          "country_id": 2,
+          "country_name": "Indonesia",
+          "country_short_text": "",
+          "country_overview_text": "<p>A luxury holiday or honeymoon in Indonesia, a mind-blowing archipelago of more than 17,000 islands graced with majestic volcanoes and pristine beaches, delivers an intoxicating mix of cultures and extraordinary wildlife that’s hard to beat.</p>\n<p>Bali and Lombok have some of the best beaches and surfing in the world, but there’s so much more we want you to experience including Bali’s vibrant gourmet-scene, Indonesia’s cultural heart of Ubud, and our hand-picked luxury wellness retreats which nestle amongst the rice terraces. As for Java, you’ll be blown away by the ancient Buddhist temple of Borobudur, and magnificent sunsets seen from the summit of Mount Bromo. Then, as you venture into the protected rainforests of Sumatra - and Kalimantan on Indonesian Borneo - you’ll come face to face with orangutans before continuing your unforgettable Indonesia island odyssey.</p>\n<p>No two islands are the same in Indonesia, and as one of the most varied countries in South East Asia from religion to ethnicity, landscape to language, it holds infinite possibilities for a luxury holiday, honeymoon, or family adventure. Call an expert now on <span class='mediahawkNumber1793 mhMobile''>020 7337 9010</span>.</p>",
+          "freeze_ind": false,
+          "freeze_at": null,
+          "updated_place": null
+        }
+      ]
+    }
+  ],
+  "holiday_types": [
+    {
+      "id": 1,
+      "code": "0001",
+      "serial_number": 1,
+      "freeze_ind": false,
+      "freeze_at": null,
+      "updated_place": null,
+      "created_at": "2023-07-12T15:10:11.000Z",
+      "updated_at": "2023-07-12T15:10:11.000Z",
+      "holiday_type_translations": [
+        {
+          "id": 1,
+          "holiday_type_id": 1,
+          "app_language_id": 1,
+          "holiday_type_name": "Once In A Lifetime Holidays",
+          "holiday_type_short_text": "",
+          "holiday_type_overview_text": "<p>Everyone’s definition of a dream trip is different. &nbsp;</p>\n\t\t<p>Whether you are after the big one, the holiday that you have always dreamed of but never went on, or want an adventure that leaves nothing out, we are ready to help - how about dinner with a geisha in Japan, an oceanfront lodge only reached by boat in Costa Rica, a helicopter ride over New Zealand’s stunning scenery or a luxurious cross country train journey with unparalleled views of South Africa.<br><br><span>Whatever a 'once-in-a-lifetime' holiday or honeymoon means to you, our experts can create a totally tailor-made luxury experience that perfectly satisfies your wishlist.<br><br>All our itineraries are designed as inspiration.&nbsp;Tell us what you're after on your trip and we'll help you select the best hotels and experiences.</span></p>",
+          "freeze_ind": false,
+          "freeze_at": null,
+          "updated_place": null
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "code": "0002",
+      "serial_number": 2,
+      "freeze_ind": false,
+      "freeze_at": null,
+      "updated_place": null,
+      "created_at": "2023-07-12T15:10:11.000Z",
+      "updated_at": "2023-07-12T15:10:11.000Z",
+      "holiday_type_translations": [
+        {
+          "id": 2,
+          "holiday_type_id": 2,
+          "app_language_id": 1,
+          "holiday_type_name": "Honeymoons",
+          "holiday_type_short_text": "",
+          "holiday_type_overview_text": "<p>Everyone's definition of their dream honeymoon differs.</p>\n<p>At Exsus Travel, we have over 20 years' experience in creating luxury tailor-made holidays, which make outstanding luxury honeymoons that are as individual as you are. Whether you're seeking pure relaxation and luxury in the most incredible surrounds, exotic adventure or a combination of the two - our highly-experienced travel experts can plan the perfect honeymoon - it’s not just a holiday, but an unforgettable experience.</p>\n<p>With a choice of over 90 honeymoon destinations, talk to our well-travelled experts about your honeymoon ideas and together start planning the luxury honeymoon you’d always dreamed of. Find that idyllic castaway island in the Maldives. Plan a short but sweet mini-moon, such as a romantic escape to Italy. Arrange a twin-centre honeymoon that takes in destinations like New Zealand and Bora Bora, or put together an epic adventure that lets you tick something off your travel wish list, such as a chance to go on safari in Africa, explore Indonesia or get to know elephants on <a href='https://www.exsus.com/landing/luxury-honeymoons-in-thailand' class='simple-link'>honeymoon in Thailand</a>.</p>\n<p>For luxury honeymoon inspiration, take a look at some of our classic honeymoons or explore our range of ultimate honeymoons. Alternatively call and speak to a Travel Expert on <span class='mediahawkNumber1793 mhMobile'>020 7337 9010</span> or click on Make an Enquiry to create your own totally bespoke honeymoon.</p>",
+          "freeze_ind": false,
+          "freeze_at": null,
+          "updated_place": null
+        }
+      ]
+    }
+  ],
+  "itineraries": [
+    {
+      "id": 1,
+      "code": "0001",
+      "serial_number": 1,
+      "destination_id": 1,
+      "country_id": 1,
+      "freeze_ind": false,
+      "freeze_at": null,
+      "updated_place": null,
+      "created_at": "2023-07-12T15:10:11.000Z",
+      "updated_at": "2023-07-12T15:10:11.000Z",
+      "itinerary_translations": [
+        {
+          "id": 1,
+          "app_language_id": 1,
+          "itinerary_id": 1,
+          "itin_name": "BUSH TALES & CAMPFIRES",
+          "itin_short_text": "",
+          "itin_overview_text": "<div class='txt_cntnr10 light_para'>\n        <h3>Duration: <b>28 nights</b></h3>\n              <h3>Price: <b>From £37,685 per person in mid season based on two adults travelling together and including international flights in business class, accommodation, most meals, private transfers, light aircraft transportation, experiences as stated and taxes</b></h3>\n              <div class='para01'>\n          <span>Taking luxury hotels and wildlife experiences to a whole new level, this ultimate holiday to Southern Africa has you starting in the Western Cape, ticking off the South African essentials of Cape Town and the Winelands, before transporting you to the land engulfed by sands, Namibia, where you’ll explore the eerie Skeleton Coast. <br><br>Next, you’ll be immersed in Botswana’s incredible natural landscape, walking with local San people on salt pans and watching wildlife in the Okavango wetlands. Stopping in the famous Victoria Falls, you’ll continue to Zambia, adding another notch to your country belt before ending on the calming banks of Lake Malawi. A total of five countries, 28 nights and countless unimaginable experiences - what more could you want from this once-in-a-lifetime adventure?</span>\n          <div style='display:none;' class='additionalSlide'></div>\n        </div>\n    </div>",
+          "itin_perfect_for_text": null,
+          "itin_in_the_know_text": null,
+          "itin_best_for_text": null,
+          "freeze_ind": false,
+          "freeze_at": null,
+          "updated_place": null,
+          "itinerary_detail_translations": []
+        }
+      ],
+      "itinerary_travel_months": [],
+      "itinerary_hotels": []
+    },
+    {
+      "id": 2,
+      "code": "0002",
+      "serial_number": 2,
+      "destination_id": 2,
+      "country_id": 2,
+      "freeze_ind": false,
+      "freeze_at": null,
+      "updated_place": null,
+      "created_at": "2023-07-12T15:10:11.000Z",
+      "updated_at": "2023-07-12T15:10:11.000Z",
+      "itinerary_translations": [
+        {
+          "id": 2,
+          "app_language_id": 1,
+          "itinerary_id": 2,
+          "itin_name": "GAMELAN & SONGLINES",
+          "itin_short_text": "",
+          "itin_overview_text": "<h3>Duration: <b>14 nights</b></h3>\n              <h3>Price: <b>From £6,300 per person in low season based on two adults travelling together and including all flights in economy class, accommodation, some meals, private transfers and taxes</b></h3>\n              <div class='para01'>\n          So close to each other in locations yet so different in cultures, Indonesia and Australia make a great contrast for a honeymoon of equal parts activity and relaxation; sighting seeing and spa days; white beaches and thick jungles. A revitalising antidote to the stresses of wedding planning and long working weeks, this itinerary makes the most of your time by island hopping from Java to Bali, exploring Australia’s breath-taking Top End national parks and by finishing in Port Douglas, where you’ll spend your last days swimming along the world famous Great Barrier Reef.\n          <div style='display:none;' class='additionalSlide'></div>\n        </div>",
+          "itin_perfect_for_text": null,
+          "itin_in_the_know_text": null,
+          "itin_best_for_text": null,
+          "freeze_ind": false,
+          "freeze_at": null,
+          "updated_place": null,
+          "itinerary_detail_translations": []
+        }
+      ],
+      "itinerary_travel_months": [],
+      "itinerary_hotels": []
+    }
+  ],
+  "hotels": [
+    {
+      "id": 1,
+      "code": "0001",
+      "serial_number": 1,
+      "destination_id": 1,
+      "country_id": 1,
+      "freeze_ind": false,
+      "freeze_at": null,
+      "updated_place": null,
+      "created_at": "2023-07-12T15:10:11.000Z",
+      "updated_at": "2023-07-12T15:10:11.000Z",
+      "destination": {
+        "id": 1,
+        "serial_number": 1,
+        "destination_translations": [
+          {
+            "id": 1,
+            "app_language_id": 1,
+            "destination_id": 1,
+            "destination_name": "Africa",
+            "destination_short_text": "",
+            "destination_overview_text": "\n\t\t<p>Luxury safari holidays in Africa are one of life's most magical experiences. Think spine-tingling wildlife encounters, mighty&nbsp;waterfalls and cool gin and tonics under baobab trees.&nbsp;</p>\n\t\t<p>This heady mix of wildlife, adventure, culture and spectacular scenery could find you partying in Cape Town, taking a helicopter over Victoria Falls, going on safari in the Serengeti and snorkelling off the coast of Zanzibar. Whether you're after a luxury African safari honeymoon, dedicated family safari or, more specifically, a walking safari or riding safari, by travelling with Exsus&nbsp;Travel you'll stay in some of the very best luxury safari lodges with the very best professional guides.</p>\n\t\t<p>Africa is not short on once-in-a-lifetime experiences, and whether it’s climbing Mount Kilimanjaro or coming face-to-face with mountain gorillas in Uganda or Rwanda, a tailor-made luxury African holiday is a great opportunity to tick off a few items on the bucket list.<br><br>Amazing experiences and stunning wildlife aside, Africa is also a great location for a beach holiday with an exotic twist: go island hopping in Mozambique and combine Africa’s cultural intrigue with the ultimate in secluded desert island relaxation, or enjoy a classic&nbsp;bush and beach safari in Kenya&nbsp;or Tanzania.<br><br></p>\n\t\t<h3><br>YOUR LUXURY AFRICAN SAFARI STARTS HERE</h3>\n\t\t<p><br>At Exsus&nbsp;Travel we're enormously passionate about Africa, and our experts have travelled extensively across the continent so they really know their stuff. To ensure you have the safari holiday of a lifetime, get in touch with one of the team today to tailor-make your African safari holiday around your own personal&nbsp;wishlist. Get in touch by&nbsp;<span>calling&nbsp;</span><span class='mediahawkNumber1793 mhMobile'><a href='tel:02036135633'>020 3613 5633</a></span><span><span>&nbsp;</span>or by<span>&nbsp;</span></span><a href='https://www.exsus.com/make-an-enquiry?ptype=CUST&amp;pcode=home' target='_blank' class='simple-link'>making an online enquiry</a><span>.</span></p>        ",
+            "freeze_ind": false,
+            "freeze_at": null,
+            "updated_place": null
+          }
+        ]
+      },
+      "country": {
+        "id": 1,
+        "code": "BWA",
+        "serial_number": 1,
+        "country_translations": [
+          {
+            "id": 1,
+            "app_language_id": 1,
+            "country_id": 1,
+            "country_name": "Botswana",
+            "country_short_text": "",
+            "country_overview_text": "<p>Botswana offers world-class safaris, and whether it’s a luxury honeymoon or a once in a lifetime safari holiday, it promises a privileged wilderness adventure.</p>\n\t\t<p>In Botswana’s heavily protected reserves, you’ll rarely&nbsp;pass more than one other safari vehicle, which means un-interrupted encounters with some of the most spectacular game in Africa.</p>\n\t\t<p>Botswana is also known for its stunningly diverse landscapes, so having awoken to bellowing hippo in the Okavango Delta, you can take a canoe safari along the spillways of Linyanti, Kwando, and Selinda; visit predator-rich Chobe, and then head to the arid Makgadikgadi Pans for a safari holiday rich in contrast.</p>",
+            "freeze_ind": false,
+            "freeze_at": null,
+            "updated_place": null
+          }
+        ]
+      },
+      "hotel_translations": [
+        {
+          "id": 1,
+          "hotel_id": 1,
+          "app_language_id": 1,
+          "hotel_name": "Abu Camp",
+          "hotel_location": "Okavango Delta & Moremi",
+          "hotel_price_text": "£200-£350 per person per night",
+          "hotel_short_text": "<span>Named after a 'special' bull elephant, Abu Camp was the base of Africa's first elephant safaris seventeen years ago. Now it shares its location with the local pod of hippos on the edge of a lagoon in the Okavango Delta where six luxurious tents sit under the shade of the indigenous hardwood trees. The camp still specialises in elephant safaris and during your stay at Abu you can get to know the resident heard, learn all about these fascinating, intelligent animals and take part in their daily routine.</span>",
+          "hotel_overview_text": "\n        <div class='htl_txt_blk02 itnry_parnt'>\n            <h3>sense of place</h3>\n                      <div class='para01'>\n              Named after a special bull elephant, the private Abu Concession in the Okavango Delta hosts Abu Camp.<br>\n              <div style='display:none;' class='additionalSlide'> </div>\n            </div>\n        </div>\n        <div class='htl_txt_blk02 itnry_parnt'>\n            <h3>rooms at abu camp</h3>\n                      <div class='para01'>\n              The six en-suite rooms that Abu Camp offers are all designed to be in keeping with its beautiful natural surroundings. Rooms are spacious, airy and are built of raised platforms. Each room is fitted with stylish interiors, including inside and outside showers and private viewing deck with views across the lagoon with tree shaded viewing areas.<br>\n              <div style='display:none;' class='additionalSlide'> </div>\n            </div>\n        </div>\n        <div class='htl_txt_blk02 itnry_parnt'>\n            <h3>food &amp; facilities</h3>\n                      <div class='para01'>\n              Meals at Abu Camp are served in the open plan dining area, meals are often influenced using local and seasonal produce. Lunch can be served in the bush for those guests who wish to do a full day of adventuress safari.<br>\n              <div style='display:none;' class='additionalSlide'> </div>\n            </div>\n        </div>\n        <div class='htl_txt_blk02 itnry_parnt'>\n            <h3>activities at abu camp</h3>\n                      <div class='para01'>\n              As the resident herd of elephants play such a dominant role in the concession, the majority of the activities that Abu Camp offers are centred around elephant encounters. Activities with the elephants include walking, riding and gaining a greater understanding of the heard. Activities in the morning and afternoon also include game drives, motor boat trips and mokoros. However, the lounge, plunge pool, gym and library are the perfect places to relax in camp.<br>\n              <div style='display:none;' class='additionalSlide'> </div>\n            </div>\n        </div>",
+          "hotel_perfect_for_text": "Honeymooners and couples seeking a unique elephant safari experience.",
+          "hotel_in_the_know_text": "Abu camp is the perfect place for those who love to interact with the animals and nature surrounding them.",
+          "hotel_recommended_text": "<ul>\n                    <li>Eco-tourism</li>\n                    <li>Food &amp; Wine</li>\n                    <li>Guiding</li>\n                    <li>Honeymoon</li>\n              </ul>",
+          "freeze_ind": false,
+          "freeze_at": null,
+          "updated_place": null
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "per_page": 10,
+      "total_pages": 1,
+      "total_objects": 1
+    }
+  }
 }

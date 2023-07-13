@@ -1,0 +1,73 @@
+{
+    "itineraries": [
+        {
+            "id": 1,
+            "code": "0001",
+            "serial_number": 1,
+            "destination_id": 1,
+            "country_id": 1,
+            "freeze_ind": false,
+            "freeze_at": null,
+            "updated_place": null,
+            "created_at": "2023-07-12T15:10:11.000Z",
+            "updated_at": "2023-07-12T15:10:11.000Z",
+            "itinerary_translations": [
+                {
+                    "id": 1,
+                    "app_language_id": 1,
+                    "itinerary_id": 1,
+                    "itin_name": "BUSH TALES & CAMPFIRES",
+                    "itin_short_text": "",
+                    "itin_overview_text": "<div class='txt_cntnr10 light_para'>\n        <h3>Duration: <b>28 nights</b></h3>\n              <h3>Price: <b>From £37,685 per person in mid season based on two adults travelling together and including international flights in business class, accommodation, most meals, private transfers, light aircraft transportation, experiences as stated and taxes</b></h3>\n              <div class='para01'>\n          <span>Taking luxury hotels and wildlife experiences to a whole new level, this ultimate holiday to Southern Africa has you starting in the Western Cape, ticking off the South African essentials of Cape Town and the Winelands, before transporting you to the land engulfed by sands, Namibia, where you’ll explore the eerie Skeleton Coast. <br><br>Next, you’ll be immersed in Botswana’s incredible natural landscape, walking with local San people on salt pans and watching wildlife in the Okavango wetlands. Stopping in the famous Victoria Falls, you’ll continue to Zambia, adding another notch to your country belt before ending on the calming banks of Lake Malawi. A total of five countries, 28 nights and countless unimaginable experiences - what more could you want from this once-in-a-lifetime adventure?</span>\n          <div style='display:none;' class='additionalSlide'></div>\n        </div>\n    </div>",
+                    "itin_perfect_for_text": null,
+                    "itin_in_the_know_text": null,
+                    "itin_best_for_text": null,
+                    "freeze_ind": false,
+                    "freeze_at": null,
+                    "updated_place": null,
+                    "itinerary_detail_translations": []
+                }
+            ],
+            "itinerary_travel_months": [],
+            "itinerary_hotels": []
+        },
+        {
+            "id": 2,
+            "code": "0002",
+            "serial_number": 2,
+            "destination_id": 2,
+            "country_id": 2,
+            "freeze_ind": false,
+            "freeze_at": null,
+            "updated_place": null,
+            "created_at": "2023-07-12T15:10:11.000Z",
+            "updated_at": "2023-07-12T15:10:11.000Z",
+            "itinerary_translations": [
+                {
+                    "id": 2,
+                    "app_language_id": 1,
+                    "itinerary_id": 2,
+                    "itin_name": "GAMELAN & SONGLINES",
+                    "itin_short_text": "",
+                    "itin_overview_text": "<h3>Duration: <b>14 nights</b></h3>\n              <h3>Price: <b>From £6,300 per person in low season based on two adults travelling together and including all flights in economy class, accommodation, some meals, private transfers and taxes</b></h3>\n              <div class='para01'>\n          So close to each other in locations yet so different in cultures, Indonesia and Australia make a great contrast for a honeymoon of equal parts activity and relaxation; sighting seeing and spa days; white beaches and thick jungles. A revitalising antidote to the stresses of wedding planning and long working weeks, this itinerary makes the most of your time by island hopping from Java to Bali, exploring Australia’s breath-taking Top End national parks and by finishing in Port Douglas, where you’ll spend your last days swimming along the world famous Great Barrier Reef.\n          <div style='display:none;' class='additionalSlide'></div>\n        </div>",
+                    "itin_perfect_for_text": null,
+                    "itin_in_the_know_text": null,
+                    "itin_best_for_text": null,
+                    "freeze_ind": false,
+                    "freeze_at": null,
+                    "updated_place": null,
+                    "itinerary_detail_translations": []
+                }
+            ],
+            "itinerary_travel_months": [],
+            "itinerary_hotels": []
+        }
+    ],
+    "meta": {
+        "pagination": {
+            "per_page": 10,
+            "total_pages": 1,
+            "total_objects": 2
+        }
+    }
+}

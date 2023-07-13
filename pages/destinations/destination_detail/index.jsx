@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { Link, Spinner, Signup } from 'components';
 import { Layout } from 'components/users';
-import { userService } from 'services';
+import { userService, destinationService } from 'services';
 import Iframe from 'react-iframe'
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -14,6 +14,12 @@ function Index() {
     const [users, setUsers] = useState(null);
 
     useEffect(() => {
+
+        destinationService.getAll().then(x => {
+            console.log('destinationService', x);
+            setDestinations(x)
+        });
+
         userService.getAll().then(x => setUsers(x));    
         const carousel = document.querySelector('#carouselExampleInterval');
         new bootstrap.Carousel(carousel);
