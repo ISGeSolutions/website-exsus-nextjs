@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { Link, Spinner, Signup } from 'components';
 import { Layout } from 'components/users';
-import { userService } from 'services';
+import { userService, destinationService } from 'services';
 import Iframe from 'react-iframe'
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -12,13 +12,27 @@ export default Index;
 
 function Index() {
     const [users, setUsers] = useState(null);
+    const [destinationDropdown, setDestinationDropdown] = useState(null);
+    const [destination, setDestination] = useState(null);
+
 
     useEffect(() => {
-        userService.getAll().then(x => setUsers(x));    
+
+        destinationService.getAllDropdown().then(x => {
+            console.log('destinationServiceDropdown', x);
+            setDestinationDropdown(x)
+        });
+
+        destinationService.getAll().then(x => {
+            console.log('destinationService', x);
+            setDestination(x)
+        });
+
+        userService.getAll().then(x => setUsers(x));
         const carousel = document.querySelector('#carouselExampleInterval');
         new bootstrap.Carousel(carousel);
     }, []);
-    
+
 
     return (
         <Layout>
@@ -172,6 +186,8 @@ function Index() {
                     <div className="tab-pane fade show active" id="pills-overview" role="tabpanel" aria-labelledby="pills-overview-tab" tabIndex="0">
                         <div className="container-md">
                             <section className="destination_para">
+                                {/* <p>{destination | json}</p> */}
+                                {/* <p><pre>{JSON.stringify(destination, null, 2)}</pre></p> */}
                                 <p>Warning: Asia is highly addictive. Whether it’s a rickshaw ride through hectic Hanoi, a fascinating adventure amidst the ancient Angkor temples or diving and snorkelling in some of the warmest, clearest seas on the planet, Asia is jam-packed with culture, adventure - and variety.</p>
                                 <p>A truly tantalising continent, Asia promises extraordinary experiences for every traveller. Whether you’re after a luxury honeymoon in South-East Asia, a family adventure holiday in Southern Asia or a cultural holiday to the Far East, you can expect some of the most beautiful beaches and most incredible luxury hotels in the world, fast-paced cities, tranquil village life and mouthwatering food. Asia has it all.</p>
                                 <p>Take a journey through temple-laced Cambodia or Malaysia; island-hop across the other-worldly archipelago of Indonesia; and soak up the buzz of floating markets in Vietnam, Laos and Thailand. Delve into emerald jungles and encounter enthralling wildlife in Borneo; or relish the pulsating energy of Asia’s most cosmopolitan cities: Hong Kong, Macau and Singapore. Then there’s beguiling Japan, a cultural odyssey through time, while Bhutan and Myanmar have just begun to unveil their treasures to the world, and we wouldn’t want you to miss it.</p>
