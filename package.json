@@ -5,8 +5,8 @@
     "scripts": {
         "dev": "NODE_OPTIONS=--max-old-space-size=50000 next dev",
         "build": "NODE_OPTIONS=--max-old-space-size=50000 next build",
-        "start": "next start",
-        "lint": "next lint"
+        "start": "NODE_OPTIONS=--max-old-space-size=50000 next start",
+        "lint": "NODE_OPTIONS=--max-old-space-size=50000 next lint"
     },
     "dependencies": {
         "@hookform/resolvers": "^3.1.0",
