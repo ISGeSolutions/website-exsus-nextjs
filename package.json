@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
-        "build": "next build cross-env NODE_OPTIONS=--max-old-space-size=15000",
+        "build": "cross-env NODE_OPTIONS=--max-old-space-size=15000 next build",
         "start": "next start",
         "lint": "next lint"
     },
@@ -32,6 +32,7 @@
         "yup": "^1.1.1"
     },
     "devDependencies": {
+        "cross-env": "^7.0.3",
         "eslint": "7.32.0",
         "eslint-config-next": "11.1.0",
         "intercept-stdout": "^0.1.2",
