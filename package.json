@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
-        "build": "cross-env NODE_OPTIONS=--max-old-space-size=15000 next build",
+        "build": "next build NODE_OPTIONS=--max-old-space-size=8192",
         "start": "next start",
         "lint": "next lint"
     },
