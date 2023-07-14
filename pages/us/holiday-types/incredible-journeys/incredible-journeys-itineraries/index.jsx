@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { Link, Spinner, Signup } from 'components';
 import { Layout } from 'components/users';
-import { userService } from 'services';
+import { userService, holidaytypesService } from 'services';
 import { Inspireme } from 'components';
 
 
@@ -10,8 +10,15 @@ export default Index;
 
 function Index() {
     const [users, setUsers] = useState(null);
+    const [holidayTypes, setholidayTypes] = useState(null);
 
     useEffect(() => {
+        holidaytypesService.getAll().then(x => {
+            // console.log('destinationService', x);
+            const desiredKey = 1; // The desired key to access
+            const desiredHolidayTypes = x.find(item => item.id == desiredKey);
+            setholidayTypes(desiredHolidayTypes.holiday_type_translations[0].holiday_type_overview_text);
+        });
         userService.getAll().then(x => setUsers(x));
     }, []);
 
@@ -41,9 +48,10 @@ function Index() {
                     <div className="destination_tab_inr">
                         <h2 className="tab_tilte">ULTIMATE JOURNEYS & INSPIRATION</h2>
                         <div className="destinations_cntnt_blk destination_para pt-0">
-                            <p>This is the big one, the holiday that you’ve been dreaming of. If you’ve been building up to taking the ultimate journey, we can help. If you want your tailor-made holiday to be the most remarkable, experience-filled time away that you can have than talk to our travel specialists about their ideas for no-holds-barred adventure, escapism and exploration.</p>
+                            <p dangerouslySetInnerHTML={{ __html: holidayTypes }} />
+                            {/* <p>This is the big one, the holiday that you’ve been dreaming of. If you’ve been building up to taking the ultimate journey, we can help. If you want your tailor-made holiday to be the most remarkable, experience-filled time away that you can have than talk to our travel specialists about their ideas for no-holds-barred adventure, escapism and exploration.</p>
                             <p>Maybe your idea of the ultimate holiday is unadulterated luxury and the chance to enjoy some of the most incredible places to stay anywhere in the world. Perhaps it’s an extra-special experience or exclusive opportunity to do something truly once-in-a-lifetime. Maybe it’s about being away longer, travelling further, going deeper into a destination or even ticking off more than one country in the course of the same trip.</p>
-                            <p>Whatever your definition of the ultimate journey we’re experienced at delivering the most exceptional holidays in the most extraordinary destinations, whether it’s a chance to explore <a href="#">America’s Southwest in incomparable style, undertake a grand tour of Indochina</a> or roam through some of the great wilderness and wildlife areas of the world on our <a href="#">tour of Legendary Southern Africa.</a> For more inspiration contact our team of creative, well-travelled specialists.</p>
+                            <p>Whatever your definition of the ultimate journey we’re experienced at delivering the most exceptional holidays in the most extraordinary destinations, whether it’s a chance to explore <a href="#">America’s Southwest in incomparable style, undertake a grand tour of Indochina</a> or roam through some of the great wilderness and wildlife areas of the world on our <a href="#">tour of Legendary Southern Africa.</a> For more inspiration contact our team of creative, well-travelled specialists.</p> */}
                         </div>
                     </div>
                 </div>
