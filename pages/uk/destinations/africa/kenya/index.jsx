@@ -16,6 +16,7 @@ function Index() {
     // const [destination, setDestination] = useState(null);
     const [country, setCountry] = useState(null);
     const [itinerary, setItinerary] = useState(null);
+    const [hotel, setHotel] = useState(null);
 
     useEffect(() => {
         countriesService.getAll().then(x => {
@@ -31,6 +32,13 @@ function Index() {
             // const desiredItinerary = x.find(item => item.id == desiredKey);
             console.log('desiredItinerary', desiredItinerary);
             setItinerary(desiredItinerary);
+        });
+
+        hotelService.getAll().then(desiredHotel => {
+            // const desiredKey = 1; // The desired key to access
+            // const desiredHotel = x.find(item => item.id == desiredKey);
+            console.log('desiredHotel', desiredHotel);
+            setHotel(desiredHotel);
         });
 
         userService.getAll().then(x => setUsers(x));
@@ -1322,6 +1330,42 @@ function Index() {
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            {hotel?.map((hotelDetail, i) => (
+                                                <div className="col-sm-6 col-lg-4" key={hotelDetail?.id}>
+                                                    <div className="card_slider_inr">
+                                                        <div className="card_slider">
+                                                            <a className="card_slider_img">
+                                                                <img src="./../../../images/destination_hotel01.jpg" alt="destination_hotel01" className="img-fluid" />
+                                                            </a>
+                                                            <div className="card_slider_cnt places_to_stay_cnt">
+                                                                <h4>
+                                                                    <a href="#">{hotelDetail['hotel_translations'][0]?.hotel_name}
+                                                                    </a>
+                                                                </h4>
+                                                                <ul>
+                                                                    <li>Location: {hotelDetail['hotel_translations'][0]?.hotel_location} | {hotelDetail['country']['country_translations'][0]?.country_name}</li>
+                                                                    <li>Price guide:
+                                                                        {hotelDetail['hotel_translations'][0]?.hotel_price_text}
+                                                                        {/* <span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span> */}
+                                                                    </li>
+                                                                    <li>
+                                                                        {/* <p dangerouslySetInnerHTML={{ __html: hotelDetail['hotel_translations'][0]?.hotel_overview_text }} /> */}
+                                                                        {hotelDetail['hotel_translations'][0]?.hotel_in_the_know_text}
+                                                                    </li>
+                                                                    {/* <li>Located in the heart of the Keliki rainforest in Bali, 1 is the perfect hotel for getting back to nature and disconnecting from the outside world. Designed by renowned architect Bill Bensley, as well as adding a touch of luxury and signature Bensley style, not a single tree was destroyed in its construction, guaranteeing an unspoilt experience of the lush green forests it sits in.</li> */}
+                                                                    <li>Best for:<span>Setting & Views, Eco-tourism, Wildlife & Nature, Peace & Quiet</span></li>
+                                                                </ul>
+                                                                <span dangerouslySetInnerHTML={{ __html: hotelDetail['hotel_translations'][0]?.hotel_recommended_text }} />
+                                                            </div>
+                                                            <button className="btn card_slider_btn justify-content-end">
+                                                                <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+
 
                                             <div className="col-sm-6 col-lg-4">
                                                 <div className="card_slider_inr">

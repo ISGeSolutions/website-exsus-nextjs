@@ -5,9 +5,8 @@ import Router from 'next/router';
 import { fetchWrapper } from 'helpers';
 
 const { publicRuntimeConfig } = getConfig();
-const baseUrl_dropdown = `${publicRuntimeConfig.apiUrl}/destinations_dropdown`;;
 
-const baseUrl = `${publicRuntimeConfig.apiUrl}/destinations`;;
+const baseUrl = `${publicRuntimeConfig.apiUrl}/hotels`;;
 
 // export const destiantionsService = {
 //     getDestinationsList
@@ -24,14 +23,8 @@ export const hotelService = {
     user: userSubject.asObservable(),
     get userValue() { return userSubject.value },
     getAll,
-    getById,
-    getAllDropdown
+    getById
 };
-
-function getAllDropdown() {
-    console.log('baseUrl_dropdown', baseUrl_dropdown);
-    return fetchWrapper.get(baseUrl_dropdown);
-}
 
 function getAll() {
     console.log('baseUrl', baseUrl);
