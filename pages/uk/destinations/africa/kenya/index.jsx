@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { Link, Spinner, Signup } from 'components';
 import { Layout } from 'components/users';
-import { userService, countriesService } from 'services';
+import { userService, countriesService, itinerariesService, hotelService } from 'services';
 import Iframe from 'react-iframe'
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -15,6 +15,7 @@ function Index() {
     // const [destinationDropdown, setDestinationDropdown] = useState(null);
     // const [destination, setDestination] = useState(null);
     const [country, setCountry] = useState(null);
+    const [itinerary, setItinerary] = useState(null);
 
     useEffect(() => {
         countriesService.getAll().then(x => {
@@ -25,16 +26,21 @@ function Index() {
             setCountry(desiredCountry.country_translations[0].country_overview_text);
         });
 
+        itinerariesService.getAll().then(desiredItinerary => {
+            // const desiredKey = 1; // The desired key to access
+            // const desiredItinerary = x.find(item => item.id == desiredKey);
+            console.log('desiredItinerary', desiredItinerary);
+            setItinerary(desiredItinerary);
+        });
+
         userService.getAll().then(x => setUsers(x));
         const carousel = document.querySelector('#carouselExampleInterval');
         new bootstrap.Carousel(carousel);
     }, []);
 
-
     return (
         <Layout>
             <section className="banner_blk_row">
-
                 {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
                     <div>
                         <img src="/assets/images/destination_banner01.jpg" />
@@ -945,6 +951,38 @@ function Index() {
                                                     </div>
                                                 </div>
                                             </div>
+
+
+
+                                            {itinerary?.map((itineraryDetail, i) => (
+                                                <div className="col-sm-6 col-lg-4" key={itineraryDetail?.id}>
+                                                    <div className="card_slider_inr">
+                                                        <div className="card_slider">
+                                                            <a className="card_slider_img">
+                                                                <img src="./../../../images/destination_card01.jpg" alt="destination card01" className="img-fluid" />
+                                                            </a>
+                                                            <div className="card_slider_cnt">
+                                                                <h4>
+                                                                    <a href="#">
+                                                                        {itineraryDetail['itinerary_translations'][0]?.itin_name}
+                                                                    </a>
+                                                                </h4>
+                                                                <ul>
+                                                                    <li>Indonesia in Idyllic Style</li>
+                                                                    <li>Indonesia</li>
+                                                                    <li>From £3,950 per person</li>
+                                                                    <li>Travel to:<span>Bali, Java, Kalimantan, Lombok</span></li>
+                                                                </ul>
+                                                                {/* <p dangerouslySetInnerHTML={{ __html: itineraryDetail['itinerary_translations'][0].itin_overview_text }} /> */}
+                                                            </div>
+                                                            <button className="btn card_slider_btn">
+                                                                <span>14 nights</span>
+                                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
 
                                             <div className="col-sm-6 col-lg-4">
                                                 <div className="card_slider_inr">
