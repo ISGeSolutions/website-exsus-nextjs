@@ -96,7 +96,7 @@ function Layout({ children }) {
                                         <option className="dropdown-item" value="uk">UK</option>
                                         <option className="dropdown-item" value="us">US</option>
                                         <option className="dropdown-item" value="asia">Asia</option>
-                                        <option className="dropdown-item" value="india">India</option>
+                                        <option className="dropdown-item" value="in">India</option>
                                     </select>
                                     {/* <NavLink className="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" onClick={(region) => handleRegion('uk')}>
                                         <img src="./../../images/uk-flag-round-circle-icon.svg" alt="united-kingdom-flag-icon" />UK site
@@ -108,7 +108,7 @@ function Layout({ children }) {
                                                 US site
                                             </NavLink></li>
                                         <li><NavLink className="dropdown-item" value="asia" onClick={(region) => handleRegion('asia')} href="#"><img src="./../.././../../images/thailand-flag-round-circle-icon.svg" alt="thailand-flag-round-circle-icon" /> Asia site</NavLink></li>
-                                        <li><NavLink className="dropdown-item" value="india" onClick={(region) => handleRegion('india')} href="#"><img src="./../../images/india-flag-round-circle-icon.svg" alt="india-flag-round-circle-icon" />India site</NavLink></li>
+                                        <li><NavLink className="dropdown-item" value="in" onClick={(region) => handleRegion('india')} href="#"><img src="./../../images/india-flag-round-circle-icon.svg" alt="india-flag-round-circle-icon" />India site</NavLink></li>
                                     </ul> */}
                                 </div>
                                 <div className="input-group srch_site_box">
