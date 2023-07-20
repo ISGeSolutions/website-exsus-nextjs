@@ -14,7 +14,7 @@ function Index() {
 
     useEffect(() => {
         holidaytypesService.getAll().then(x => {
-            // console.log('destinationService', x);
+            // // console.log('destinationService', x);
             const desiredKey = 1; // The desired key to access
             const desiredHolidayTypes = x.find(item => item.id == desiredKey);
             setholidayTypes(desiredHolidayTypes.holiday_type_translations[0].holiday_type_overview_text);

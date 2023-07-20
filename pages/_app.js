@@ -71,7 +71,7 @@ function App({ Component, pageProps }) {
                 <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <title>Luxury Holiday Destinations</title>
-                <link rel="icon" type="images/png" href="images/fav-icon.png" />
+                <link rel="icon" type="images/png" href="/images/fav-icon.png" />
 
 
                 <link rel="preconnect" href="https://fonts.googleapis.com" />

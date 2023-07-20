@@ -27,7 +27,7 @@ function Index() {
 
     useEffect(() => {
         destinationService.getAll().then(x => {
-            console.log('x', x);
+            // console.log('x', x);
             setDestinations(x)
         });
 

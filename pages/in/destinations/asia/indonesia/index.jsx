@@ -16,7 +16,7 @@ function Index() {
 
     useEffect(() => {
         countriesService.getAll().then(x => {
-            // console.log('destinationService', x);
+            // // console.log('destinationService', x);
             const desiredKey = 2; // The desired key to access
             const desiredCountry = x.find(item => item.id == desiredKey);
             // console.log('desiredCountry2', desiredCountry.country_translations[0].country_overview_text);

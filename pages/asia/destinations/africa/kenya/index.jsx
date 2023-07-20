@@ -20,7 +20,7 @@ function Index() {
 
     useEffect(() => {
         countriesService.getAll().then(x => {
-            // console.log('destinationService', x);
+            // // console.log('destinationService', x);
             const desiredKey = 1; // The desired key to access
             const desiredCountry = x.find(item => item.id == desiredKey);
             // console.log('desiredCountry2', desiredCountry.country_translations[0].country_overview_text);
@@ -30,14 +30,14 @@ function Index() {
         itinerariesService.getAll().then(desiredItinerary => {
             // const desiredKey = 1; // The desired key to access
             // const desiredItinerary = x.find(item => item.id == desiredKey);
-            console.log('desiredItinerary', desiredItinerary);
+            // console.log('desiredItinerary', desiredItinerary);
             setItinerary(desiredItinerary);
         });
 
         hotelService.getAll().then(desiredHotel => {
             // const desiredKey = 1; // The desired key to access
             // const desiredHotel = x.find(item => item.id == desiredKey);
-            console.log('desiredHotel', desiredHotel);
+            // console.log('desiredHotel', desiredHotel);
             setHotel(desiredHotel);
         });
 

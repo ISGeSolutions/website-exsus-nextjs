@@ -19,12 +19,12 @@ function Index() {
     useEffect(() => {
 
         destinationService.getAllDropdown().then(x => {
-            console.log('destinationServiceDropdown', x);
+            // console.log('destinationServiceDropdown', x);
             setDestinationDropdown(x)
         });
 
         destinationService.getAll().then(x => {
-            console.log('destinationService', x);
+            // console.log('destinationService', x);
             setDestination(x)
         });
 
