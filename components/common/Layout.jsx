@@ -144,7 +144,9 @@ function Layout({ children }) {
                     }
                 });
                 // console.log('newPath', newPath);
-                router.push(newPath);
+                setTimeout(() => {
+                    router.push(newPath);                    
+                }, 300);
             }
 
             // var oldSrc = 'http://example.com/smith.gif';
