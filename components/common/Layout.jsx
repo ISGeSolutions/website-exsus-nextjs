@@ -21,31 +21,31 @@ function Layout({ children }) {
 
         // console.log('This is a test');
 
-        // localStorage.setItem('site_region', regionWiseUrl);
-        // window.site_region = regionWiseUrl;
+        localStorage.setItem('site_region', regionWiseUrl);
+        window.site_region = regionWiseUrl;
 
-        // setMyVariable(regionWiseUrl);
+        setMyVariable(regionWiseUrl);
 
-        // const pathRouter = router.asPath;
-        // const myArray = pathRouter.split("/");
+        const pathRouter = router.asPath;
+        const myArray = pathRouter.split("/");
 
-        // console.log('myArray2', myArray);
+        console.log('myArray2', myArray);
 
-        // var newPath = '';
-        // myArray.forEach((element, index) => {
-        //     if (index == 0) {
-        //         newPath = element;
-        //     } else if (index == 1) {
-        //         if (myArray.length > 2) {
-        //             if (element) {
-        //                 newPath = newPath + '/' + regionWiseUrl;
-        //             }
-        //         }
-        //     } else if (index > 1) {
-        //         newPath = newPath + '/' + element;
-        //     }
-        // });
-        // router.push(newPath);
+        var newPath = '';
+        myArray.forEach((element, index) => {
+            if (index == 0) {
+                newPath = element;
+            } else if (index == 1) {
+                if (myArray.length > 2) {
+                    if (element) {
+                        newPath = newPath + '/' + regionWiseUrl;
+                    }
+                }
+            } else if (index > 1) {
+                newPath = newPath + '/' + element;
+            }
+        });
+        router.push(newPath);
     }
 
     useEffect(() => {
@@ -82,7 +82,7 @@ function Layout({ children }) {
 
         // const currentUrl1 = router.asPath;
 
-        $('li').click(function () {
+        // $('li').click(function () {
             //your code
             // console.log('this is second test');
             // console.log($(this).text());
@@ -91,74 +91,74 @@ function Layout({ children }) {
             // console.log('test1', $('.main-role').text());
             // console.log('test2', $('.main-role-image').attr('src'));
 
-            const selected_country = $(this).text();
+            // const selected_country = $(this).text();
 
-            let image_path;
-            let handle_region_value;
-            if (selected_country == 'UK site') {
-                image_path = "./../../../../images/uk-flag-round-circle-icon.svg";
-                handle_region_value = 'uk';
-                $('.main-role-image').attr('src', image_path);
-                $('.main-role').text($(this).text());
-            } else if (selected_country == 'US site') {
-                image_path = "./../../../../images/usa-flag-round-circle-icon.svg";
-                handle_region_value = 'us';
-                $('.main-role-image').attr('src', image_path);
-                $('.main-role').text($(this).text());
-            } else if (selected_country == 'Asia site') {
-                image_path = "./../.././../../images/thailand-flag-round-circle-icon.svg";
-                handle_region_value = 'asia';
-                $('.main-role-image').attr('src', image_path);
-                $('.main-role').text($(this).text());
-            } else if (selected_country == 'India site') {
-                image_path = "./../../../../images/india-flag-round-circle-icon.svg";
-                handle_region_value = 'in';
-                $('.main-role-image').attr('src', image_path);
-                $('.main-role').text($(this).text());
-            }
+            // let image_path;
+            // let handle_region_value;
+            // if (selected_country == 'UK site') {
+            //     image_path = "./../../../../images/uk-flag-round-circle-icon.svg";
+            //     handle_region_value = 'uk';
+            //     $('.main-role-image').attr('src', image_path);
+            //     $('.main-role').text($(this).text());
+            // } else if (selected_country == 'US site') {
+            //     image_path = "./../../../../images/usa-flag-round-circle-icon.svg";
+            //     handle_region_value = 'us';
+            //     $('.main-role-image').attr('src', image_path);
+            //     $('.main-role').text($(this).text());
+            // } else if (selected_country == 'Asia site') {
+            //     image_path = "./../.././../../images/thailand-flag-round-circle-icon.svg";
+            //     handle_region_value = 'asia';
+            //     $('.main-role-image').attr('src', image_path);
+            //     $('.main-role').text($(this).text());
+            // } else if (selected_country == 'India site') {
+            //     image_path = "./../../../../images/india-flag-round-circle-icon.svg";
+            //     handle_region_value = 'in';
+            //     $('.main-role-image').attr('src', image_path);
+            //     $('.main-role').text($(this).text());
+            // }
 
             // this.handleRegion('handle_region_value');
 
             // console.log('handle_region_value', handle_region_value);
             // console.log('currentUrl', currentUrl);
 
-            if (handle_region_value) {
-                // regionWiseUrl = handle_region_value;
-                localStorage.setItem('site_region', handle_region_value);
-                window.site_region = handle_region_value;
-                setMyVariable(handle_region_value);
-                const pathRouter = router.asPath;
-                const myArray = pathRouter.split("/");
-                // console.log('myArray2', myArray);
-                var newPath = '';
-                myArray.forEach((element, index) => {
-                    if (index == 0) {
-                        newPath = element;
-                    } else if (index == 1) {
-                        if (myArray.length > 2) {
-                            if (element) {
-                                newPath = newPath + '/' + handle_region_value;
-                            }
-                        }
-                    } else if (index > 1) {
-                        newPath = newPath + '/' + element;
-                    }
-                });
-                // console.log('newPath', newPath);
-                router.push(newPath);      
-                
-                router.events.on("routeChangeError", (err, url, { shallow }) => {
-                    console.log("Navigating to: " + "url: " + url, {cancelled: err.cancelled} )
-                });
-                
-            }
+            // if (handle_region_value) {
+            //     // regionWiseUrl = handle_region_value;
+            //     localStorage.setItem('site_region', handle_region_value);
+            //     window.site_region = handle_region_value;
+            //     setMyVariable(handle_region_value);
+            //     const pathRouter = router.asPath;
+            //     const myArray = pathRouter.split("/");
+            //     // console.log('myArray2', myArray);
+            //     var newPath = '';
+            //     myArray.forEach((element, index) => {
+            //         if (index == 0) {
+            //             newPath = element;
+            //         } else if (index == 1) {
+            //             if (myArray.length > 2) {
+            //                 if (element) {
+            //                     newPath = newPath + '/' + handle_region_value;
+            //                 }
+            //             }
+            //         } else if (index > 1) {
+            //             newPath = newPath + '/' + element;
+            //         }
+            //     });
+            //     // console.log('newPath', newPath);
+            //     router.push(newPath);      
+
+            //     router.events.on("routeChangeError", (err, url, { shallow }) => {
+            //         console.log("Navigating to: " + "url: " + url, {cancelled: err.cancelled} )
+            //     });
+
+            // }
 
             // var oldSrc = 'http://example.com/smith.gif';
             // var newSrc = 'http://example.com/johnson.gif';
             // $('img[src="' + oldSrc + '"]').attr('src', newSrc);
             // $('li').value($(this).text());
             // return false;
-        });
+        // });
     },
         [, [router.asPath]]);
 
@@ -174,13 +174,13 @@ function Layout({ children }) {
                                     <button className="btn fa-solid fa-xmark"></button>
                                 </div>
                                 <div className="dropdown header_drpdown">
-                                    {/* <select className="btn btn-secondary dropdown-toggle" onChange={e => handleRegion(e.target.value)}>
+                                    <select className="btn btn-secondary dropdown-toggle" onChange={e => handleRegion(e.target.value)}>
                                         <option className="dropdown-item" value="uk">UK</option>
                                         <option className="dropdown-item" value="us">US</option>
                                         <option className="dropdown-item" value="asia">Asia</option>
                                         <option className="dropdown-item" value="in">India</option>
-                                    </select> */}
-                                    <NavLink className="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    </select>
+                                    {/* <NavLink className="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <img className="main-role-image" src="./../../images/uk-flag-round-circle-icon.svg" alt="united-kingdom-flag-icon" /><span className=' main-role'>
                                             UK site
                                         </span>
@@ -198,7 +198,7 @@ function Layout({ children }) {
                                             </NavLink></li>
                                         <li><NavLink className="dropdown-item" value="asia" href="#"><img src="./../.././../../images/thailand-flag-round-circle-icon.svg" alt="thailand-flag-round-circle-icon" />Asia site</NavLink></li>
                                         <li><NavLink className="dropdown-item" value="in" href="#"><img src="./../../images/india-flag-round-circle-icon.svg" alt="india-flag-round-circle-icon" />India site</NavLink></li>
-                                    </ul>
+                                    </ul> */}
                                 </div>
                                 <div className="input-group srch_site_box">
                                     <input type="text" className="form-control" placeholder="Search site" aria-label="Search site" aria-describedby="button-addon2" />
