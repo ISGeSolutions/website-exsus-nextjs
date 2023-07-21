@@ -17,7 +17,7 @@ function Nav() {
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
         if (window && window.site_region) {
-            console.log('window.site_region', window.site_region);
+            // console.log('window.site_region', window.site_region);
             regionWiseUrl = '/' + window.site_region;
             // setMyVariable(window.site_region);
         }

@@ -31,7 +31,7 @@ function Signup() {
 
     // get functions to build form with useForm() hook
     function onSignup(data) {
-        console.log('onSignup', data);
+        // console.log('onSignup', data);
         return homeService.inspireMe(data)
             .then(() => {
                 alertService.success('Sign up successfull', { keepAfterRouteChange: true });

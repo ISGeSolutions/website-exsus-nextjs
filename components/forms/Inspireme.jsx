@@ -33,7 +33,7 @@ function Inspireme() {
     const { errors } = formState;
 
     function onSubmit(data) {
-        console.log('onSubmit', data);
+        // console.log('onSubmit', data);
         return homeService.inspireMe(data)
             .then(() => {
                 alertService.success('Make an enquiry successful', { keepAfterRouteChange: true });

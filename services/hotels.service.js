@@ -16,7 +16,7 @@ const baseUrl = `${publicRuntimeConfig.apiUrl}/hotels`;;
 //     return fetchWrapper.get(`${baseUrl}`);
 // }
 
-console.log('publicRuntimeConfig.apiUrl', publicRuntimeConfig);
+// console.log('publicRuntimeConfig.apiUrl', publicRuntimeConfig);
 const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('user')));
 
 export const hotelService = {
@@ -27,7 +27,7 @@ export const hotelService = {
 };
 
 function getAll() {
-    console.log('baseUrl', baseUrl);
+    // console.log('baseUrl', baseUrl);
     return fetchWrapper.get(baseUrl);
 }
 

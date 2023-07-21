@@ -6,7 +6,7 @@ import { fetchWrapper } from 'helpers';
 
 const { publicRuntimeConfig } = getConfig();
 const baseUrl = `${publicRuntimeConfig.apiUrl}/users`;
-console.log('publicRuntimeConfig.apiUrl', publicRuntimeConfig);
+// console.log('publicRuntimeConfig.apiUrl', publicRuntimeConfig);
 const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('user')));
 
 export const userService = {
@@ -44,7 +44,7 @@ function register(user) {
 }
 
 function getAll() {
-    console.log('baseUrl', baseUrl);
+    // console.log('baseUrl', baseUrl);
     return fetchWrapper.get(baseUrl);
 }
 

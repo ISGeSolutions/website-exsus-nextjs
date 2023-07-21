@@ -25,7 +25,7 @@ function Index() {
             // // console.log('destinationService', x);
             const desiredKey = 1; // The desired key to access
             const desiredDestination = x.find(item => item.id == desiredKey);
-            console.log('desiredDestinatio2', desiredDestination.destination_translations[0].destination_overview_text);
+            // console.log('desiredDestinatio2', desiredDestination.destination_translations[0].destination_overview_text);
             setDestination(desiredDestination.destination_translations[0].destination_overview_text);
         });
 

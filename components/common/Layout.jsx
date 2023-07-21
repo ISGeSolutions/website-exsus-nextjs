@@ -19,7 +19,7 @@ function Layout({ children }) {
     const handleRegion = (regionWiseUrl) => {
         // Do something
 
-        // console.log('This is a test');
+        console.log('This is a test', regionWiseUrl);
 
         localStorage.setItem('site_region', regionWiseUrl);
         window.site_region = regionWiseUrl;
@@ -29,7 +29,7 @@ function Layout({ children }) {
         const pathRouter = router.asPath;
         const myArray = pathRouter.split("/");
 
-        console.log('myArray2', myArray);
+        // console.log('myArray2', myArray);
 
         var newPath = '';
         myArray.forEach((element, index) => {
