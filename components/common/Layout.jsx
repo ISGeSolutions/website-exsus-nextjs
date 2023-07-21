@@ -80,7 +80,7 @@ function Layout({ children }) {
         //     }
         // }
 
-        const currentUrl = router.asPath;
+        // const currentUrl1 = router.asPath;
 
         $('li').click(function () {
             //your code
@@ -121,13 +121,14 @@ function Layout({ children }) {
 
             // console.log('handle_region_value', handle_region_value);
             // console.log('currentUrl', currentUrl);
+
             if (handle_region_value) {
                 // regionWiseUrl = handle_region_value;
                 localStorage.setItem('site_region', handle_region_value);
                 window.site_region = handle_region_value;
                 setMyVariable(handle_region_value);
                 const pathRouter = router.asPath;
-                const myArray = currentUrl.split("/");
+                const myArray = pathRouter.split("/");
                 // console.log('myArray2', myArray);
                 var newPath = '';
                 myArray.forEach((element, index) => {
@@ -144,9 +145,12 @@ function Layout({ children }) {
                     }
                 });
                 // console.log('newPath', newPath);
-                setTimeout(() => {
-                    router.push(newPath);                    
-                }, 300);
+                router.push(newPath);      
+                
+                router.events.on("routeChangeError", (err, url, { shallow }) => {
+                    console.log("Navigating to: " + "url: " + url, {cancelled: err.cancelled} )
+                });
+                
             }
 
             // var oldSrc = 'http://example.com/smith.gif';
