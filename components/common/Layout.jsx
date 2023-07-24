@@ -5,6 +5,7 @@ import { NavLink } from './../NavLink';
 import { Nav, Alert } from 'components';
 import { Analytics } from '@vercel/analytics/react';
 import React from "react";
+import Select from "react-select";
 
 export { Layout };
 
@@ -13,23 +14,28 @@ function Layout({ children }) {
     const router = useRouter();
     const currentUrl = router.asPath;
     // const regionWiseUrl = '/uk';
-    const [regionWiseUrl, setMyVariable] = useState('/uk');
+    const [regionWiseUrl, setMyVariable] = useState('uk');
     const [selectedRegion, setVariable] = useState('');
+    const countries = [
+        { value: 'uk', label: 'UK SITE', image: './../../images/uk-flag-round-circle-icon.svg' },
+        { value: 'us', label: 'US SITE', image: '/../../images/usa-flag-round-circle-icon.svg' },
+        { value: 'asia', label: 'ASIA SITE', image: './../../images/thailand-flag-round-circle-icon.svg' },
+        { value: 'in', label: 'INDIA SITE', image: '/../../images/india-flag-round-circle-icon.svg' }
+    ];
 
-    const handleRegion = (regionWiseUrl) => {
+    const [selected, setSelected] = useState(countries[0]);
+
+    const handleChange = (selectedOption) => {
+
         // Do something
+        setMyVariable(selectedOption.value);
+        setSelected(selectedOption);
 
-        console.log('This is a test', regionWiseUrl);
-
-        localStorage.setItem('site_region', regionWiseUrl);
-        window.site_region = regionWiseUrl;
-
-        setMyVariable(regionWiseUrl);
+        localStorage.setItem('site_region', selectedOption.value);
+        window.site_region = selectedOption.value;
 
         const pathRouter = router.asPath;
         const myArray = pathRouter.split("/");
-
-        // console.log('myArray2', myArray);
 
         var newPath = '';
         myArray.forEach((element, index) => {
@@ -38,7 +44,7 @@ function Layout({ children }) {
             } else if (index == 1) {
                 if (myArray.length > 2) {
                     if (element) {
-                        newPath = newPath + '/' + regionWiseUrl;
+                        newPath = newPath + '/' + selectedOption.value;
                     }
                 }
             } else if (index > 1) {
@@ -50,34 +56,8 @@ function Layout({ children }) {
 
     useEffect(() => {
 
-        function custom_template(obj) {
-            var data = $(obj.element).data();
-            var text = $(obj.element).text();
-            if (data && data['img_src']) {
-                var img_src = data['img_src'];
-                var template = $("<div><img src=\"" + img_src + "\"/><p>" + text + "</p></div>");
-                return template;
-            }
-        }
-
-        var aScript = document.createElement('script');
-        aScript.type = 'text/javascript';
-        aScript.src = "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.js";
-
-        document.head.appendChild(aScript);
-        aScript.onload = () => {
-
-
-            var options = {
-                'templateSelection': custom_template,
-                'templateResult': custom_template,
-            }
-            $('#id_select2_example').select2(options);
-            $('.select2-container--default .select2-selection--single').css({ 'height': '220px' });
-
-        };
-
-
+        // const [selected, setSelected] = useState(null);
+        // setSelected(countries[0]);
         // redirect to home if already logged in
         // if (userService.userValue) {
         //     router.push('/');
@@ -181,13 +161,6 @@ function Layout({ children }) {
         //     });
 
         // }
-
-        // var oldSrc = 'http://example.com/smith.gif';
-        // var newSrc = 'http://example.com/johnson.gif';
-        // $('img[src="' + oldSrc + '"]').attr('src', newSrc);
-        // $('li').value($(this).text());
-        // return false;
-        // });
     },
         [, [router.asPath]]);
 
@@ -203,12 +176,25 @@ function Layout({ children }) {
                                     <button className="btn fa-solid fa-xmark"></button>
                                 </div>
                                 <div className="dropdown header_drpdown">
-                                    <select className="btn btn-secondary dropdown-toggle" onChange={e => handleRegion(e.target.value)}>
+                                    <Select id="long-value-select"
+                                        instanceId="long-value-select"
+                                        options={countries}
+                                        value={selected}
+                                        onChange={handleChange} autoFocus={true}
+                                        formatOptionLabel={country => (
+                                            <div className="country-option">
+                                                <img src={country.image} alt="country-image" />
+                                                <span>{country.label}</span>
+                                            </div>
+                                        )}
+                                    />
+
+                                    {/* <select className="btn btn-secondary dropdown-toggle" onChange={e => handleRegion(e.target.value)}>
                                         <option className="dropdown-item" value="uk">UK</option>
                                         <option className="dropdown-item" value="us">US</option>
                                         <option className="dropdown-item" value="asia">Asia</option>
                                         <option className="dropdown-item" value="in">India</option>
-                                    </select>
+                                    </select> */}
                                     {/* <select id="id_select2_example" onChange={e => handleRegion(e.target.value)}>
                                         <option data-img_src="images/uk-flag-round-circle-icon.svg">UK site</option>
                                         <option data-img_src="images/usa-flag-round-circle-icon.svg">US site</option>
