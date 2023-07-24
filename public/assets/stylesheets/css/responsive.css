@@ -8,6 +8,7 @@
 
 	.card_blk_row .card_blk_inr .card_blk_cntnt.card_blk_cntnt_top .card_blk_txt h3{font-size: 25px;line-height: 25px;}
 	.newslettr_row .newslettr_form .newlettr_inpt.newlettr_width, .newslettr_row .newslettr_form .newlettr_btn.newlettr_btn_width{max-width: 100%;}
+
 	
 }
 
@@ -28,7 +29,7 @@
 	.side_menu_hdr a{padding: 10px;}
     .side_menu_hdr button{color: #757575; background: transparent; border: none; font-size: 25px; font-weight: normal;font-family: FontAwesome;width: 50px;height: 50px; border-left: 1px solid #424242; border-radius: 0;}
 	.side_menu_hdr button:hover{border-left: 1px solid #424242;}
-    .header_drpdown{padding: 0 10px;margin-bottom: 20px;}
+    .header_drpdown{padding: 0 10px;}
     .header_blk_row .header_blk_inr section.header_item_left .srch_site_box{width: calc(100% - 20px);max-width: 100%;margin: auto;}
    
 
@@ -81,35 +82,29 @@
 	.menu-overlay.active{visibility: visible; opacity:1;}
 
 	.book_wth_confdnce .row > div{border-right: none;}
+} 
 
+
+/* MEDIA QUERY FOR HOMEPAGE CARD SLIDER */  
+/* @media screen and (max-width: 1200px){
+	.favrites_blk_row .card_slider_row .carousel00 .card_slider_inr.card_slider_optn02{flex: 0 0 33.3%;}
+} */
+
+@media all and (max-width: 991.98px){
 	.favrites_blk_row .card_slider_row .carousel00 .card_slider_inr, .favrites_blk_row .card_slider_row .carousel00 .card_slider_inr.card_slider_optn02, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr{flex: 0 0 50%;}
 
 	.itinery_detls_cntnt .itinery_detls_img img {margin: unset;}
-} 
-
-/* MEDIA QUERY FOR HOMEPAGE MEGA-MENU NAVIGATION AND CARD SLIDER  */
-/* @media all and (max-width: 991.98px){
-	
-} */
+}
 
 @media all and (max-width: 575.98px){
 
 	.favrites_blk_row .card_slider_row .carousel00 .card_slider_inr, .favrites_blk_row .card_slider_row .carousel00 .card_slider_inr.card_slider_optn02, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr{flex: 0 0 100%;}
+	/* .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider .card_slider_cnt_sml h4{text-align: center;} */
+
 	
 	.destination_tab_row .nav-pills .nav-link.active {border: 1px solid;background: #8aad56;color: #fff;}
 
 	.itinery_detls_cntnt .row div:nth-child(2){order: -1;}
-}
 
-@media all and (min-width: 992px){
-	.header .menu > ul > li .sub-menu.mega-menu-column-4{max-width: 940px;}
-
-	.favrites_blk_row .card_slider_row .carousel00 .card_slider_inr, .favrites_blk_row .card_slider_row .carousel01 .card_slider_inr, .favrites_blk_row .card_slider_row .width_100 .card_slider_inr{flex: 0 0 33.3%;}
-}
-@media all and (min-width: 1200px){
-	.header .menu > ul > li .sub-menu.mega-menu-column-4{max-width: 1120px;}
-}
-@media all and (min-width: 1400px){
-	.header .menu > ul > li .sub-menu.mega-menu-column-4{max-width: 1300px;}
-	.favrites_blk_row .card_slider_row .carousel00 .card_slider_inr, .favrites_blk_row .card_slider_row .carousel01 .card_slider_inr, .favrites_blk_row .card_slider_row .width_100 .card_slider_inr{flex: 0 0 25%;}
+	.cookies_parnt_blk{bottom: 0;}
 }

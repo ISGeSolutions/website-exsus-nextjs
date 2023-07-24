@@ -49,6 +49,35 @@ function Layout({ children }) {
     }
 
     useEffect(() => {
+
+        function custom_template(obj) {
+            var data = $(obj.element).data();
+            var text = $(obj.element).text();
+            if (data && data['img_src']) {
+                var img_src = data['img_src'];
+                var template = $("<div><img src=\"" + img_src + "\"/><p>" + text + "</p></div>");
+                return template;
+            }
+        }
+
+        var aScript = document.createElement('script');
+        aScript.type = 'text/javascript';
+        aScript.src = "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.js";
+
+        document.head.appendChild(aScript);
+        aScript.onload = () => {
+
+
+            var options = {
+                'templateSelection': custom_template,
+                'templateResult': custom_template,
+            }
+            $('#id_select2_example').select2(options);
+            $('.select2-container--default .select2-selection--single').css({ 'height': '220px' });
+
+        };
+
+
         // redirect to home if already logged in
         // if (userService.userValue) {
         //     router.push('/');
@@ -180,6 +209,12 @@ function Layout({ children }) {
                                         <option className="dropdown-item" value="asia">Asia</option>
                                         <option className="dropdown-item" value="in">India</option>
                                     </select>
+                                    {/* <select id="id_select2_example" onChange={e => handleRegion(e.target.value)}>
+                                        <option data-img_src="images/uk-flag-round-circle-icon.svg">UK site</option>
+                                        <option data-img_src="images/usa-flag-round-circle-icon.svg">US site</option>
+                                        <option data-img_src="images/thailand-flag-round-circle-icon.svg">Asia site</option>
+                                        <option data-img_src="images/india-flag-round-circle-icon.svg">India site</option>
+                                    </select> */}
                                     {/* <NavLink className="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <img className="main-role-image" src="./../../images/uk-flag-round-circle-icon.svg" alt="united-kingdom-flag-icon" /><span className=' main-role'>
                                             UK site
