@@ -176,7 +176,20 @@ function Layout({ children }) {
                                     <button className="btn fa-solid fa-xmark"></button>
                                 </div>
                                 <div className="dropdown header_drpdown">
-                                    <Select id="long-value-select"
+                                    {/* <Select id="long-value-select" 
+                                        instanceId="long-value-select"
+                                        options={countries}
+                                        value={selected}
+                                        onChange={handleChange} autoFocus={true}
+                                        formatOptionLabel={country => (
+                                            <div className="country-option">
+                                                <img src={country.image} alt="country-image" />
+                                                <span>{country.label}</span>
+                                            </div>
+                                        )}
+                                    /> */}
+
+                                    <Select id="long-value-select" className='react-select-container' classNamePrefix="react-select"
                                         instanceId="long-value-select"
                                         options={countries}
                                         value={selected}
