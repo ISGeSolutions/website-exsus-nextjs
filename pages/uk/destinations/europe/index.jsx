@@ -4,6 +4,8 @@ import { Link, Spinner, Signup } from 'components';
 import { Layout } from 'components/users';
 import { userService, destinationService } from 'services';
 import Iframe from 'react-iframe'
+import Head from 'next/head';
+import Script from 'next/script';
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 var Carousel = require('react-responsive-carousel').Carousel;
@@ -36,49 +38,53 @@ function Index() {
 
     return (
         <Layout>
+            <Head>
+                <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
+
+            </Head>
             <section className="banner_blk_row">
 
                 {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
-                    <div>
-                        <img src="/assets/images/destination_banner01.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/destination_banner02.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/destination_banner03.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/destination_banner04.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/destination_banner05.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/destination_banner06.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/destination_banner07.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/destination_banner08.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/destination_banner09.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/destination_banner10.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/destination_banner11.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/destination_banner12.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/destination_banner13.jpg" />
-                    </div>
-                </Carousel> */}
+                <div>
+                    <img src="/assets/images/destination_banner01.jpg" />
+                </div>
+                <div>
+                    <img src="/assets/images/destination_banner02.jpg" />
+                </div>
+                <div>
+                    <img src="/assets/images/destination_banner03.jpg" />
+                </div>
+                <div>
+                    <img src="/assets/images/destination_banner04.jpg" />
+                </div>
+                <div>
+                    <img src="/assets/images/destination_banner05.jpg" />
+                </div>
+                <div>
+                    <img src="/assets/images/destination_banner06.jpg" />
+                </div>
+                <div>
+                    <img src="/assets/images/destination_banner07.jpg" />
+                </div>
+                <div>
+                    <img src="/assets/images/destination_banner08.jpg" />
+                </div>
+                <div>
+                    <img src="/assets/images/destination_banner09.jpg" />
+                </div>
+                <div>
+                    <img src="/assets/images/destination_banner10.jpg" />
+                </div>
+                <div>
+                    <img src="/assets/images/destination_banner11.jpg" />
+                </div>
+                <div>
+                    <img src="/assets/images/destination_banner12.jpg" />
+                </div>
+                <div>
+                    <img src="/assets/images/destination_banner13.jpg" />
+                </div>
+            </Carousel> */}
 
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">
@@ -1528,6 +1534,8 @@ function Index() {
                     </form>
                 </div>
             </section>
+            <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
+
         </Layout>
     );
 }

@@ -3,7 +3,8 @@
 const nextConfig = {
     reactStrictMode: false,
     experimental: {
-        newNextLinkBehavior: false
+        newNextLinkBehavior: false,
+        nextScriptWorkers: true
     },
     eslint: {
         // Warning: This allows production builds to successfully complete even if

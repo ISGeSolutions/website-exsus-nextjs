@@ -33,6 +33,7 @@
         "yup": "^1.1.1"
     },
     "devDependencies": {
+        "@builder.io/partytown": "^0.8.0",
         "cross-env": "^7.0.3",
         "eslint": "7.32.0",
         "eslint-config-next": "11.1.0",
