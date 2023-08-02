@@ -4,6 +4,7 @@ import { Link, Spinner, Signup } from 'components';
 import { Layout } from 'components/users';
 import { userService, destinationService } from 'services';
 import Iframe from 'react-iframe'
+import Head from 'next/head';
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 var Carousel = require('react-responsive-carousel').Carousel;
@@ -37,6 +38,9 @@ function Index() {
 
     return (
         <Layout>
+            <Head>
+                <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
+            </Head>
             <section className="banner_blk_row">
 
                 {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
@@ -314,154 +318,154 @@ function Index() {
                         </div>
 
                         <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
-                            <div className="container-md">
-                                <h3 className="title_cls">Favourite trip ideas</h3>
-                                <div className="card_slider_row">
-                                    <div className="carousel00">
-                                        <div className="row">
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <a className="card_slider_img">
-                                                            <img src="./../../images/destination_card01.jpg" alt="destination card01" className="img-fluid" />
-                                                        </a>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">THE SCENT OF CLOVES</a></h4>
-                                                            <ul>
-                                                                <li>Indonesia in Idyllic Style</li>
-                                                                <li>Indonesia</li>
-                                                                <li>From £3,950 per person</li>
-                                                                <li>Travel to:<span>Bali, Java, Kalimantan, Lombok</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>14 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
+                    <div className="container-md">
+                        <h3 className="title_cls">Favourite trip ideas</h3>        
+                        <div className="card_slider_row">
+                            <div className="carousel00">
+                                <div className="row">
+                                    <div className="col-sm-6 col-lg-4">
+                                        <div className="card_slider_inr">
+                                            <div className="card_slider">
+                                                <a className="card_slider_img">
+                                                    <img src="./../../images/destination_card01.jpg" alt="destination card01" className="img-fluid" />
+                                                </a>
+                                                <div className="card_slider_cnt">
+                                                    <h4><a href="#">THE SCENT OF CLOVES</a></h4>
+                                                    <ul>
+                                                        <li>Indonesia in Idyllic Style</li>
+                                                        <li>Indonesia</li>
+                                                        <li>From £3,950 per person</li>
+                                                        <li>Travel to:<span>Bali, Java, Kalimantan, Lombok</span></li>
+                                                    </ul>                            
                                                 </div>
-                                            </div>
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../images/destination_card02.jpg" alt="destination card02" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">LAND OF THE RISING SUN</a></h4>
-                                                            <ul>
-                                                                <li>Japan in Classic Style</li>
-                                                                <li>Japan</li>
-                                                                <li>From £4,600 per person</li>
-                                                                <li>Travel to:<span>Japanese Alps & Northern Honshu, Kyoto, Southern Honshu & Kyushu, Tokyo & Around</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>10 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../images/destination_card03.jpg" alt="destination card03" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">Ultimate Grand Tour of Indochina</a></h4>
-                                                            <ul>
-                                                                <li>Spirit of the Water Dragon</li>
-                                                                <li>Vietnam, Cambodia, Laos & Thailand</li>
-                                                                <li>From £8,7500 per person</li>
-                                                                <li>Travel to:<span>Hanoi, Halong Bay & Northern Vietnam, Koh Kood & Koh Chang, Luang Prabang, Saigon & Mekong Delta</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>18 nights</span>
-                                                            <span className="view_itnry_link">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../images/destination_card04.jpg" alt="destination card04" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">FROGS' LEGS & PHO</a></h4>
-                                                            <ul>
-                                                                <li>Vietnam Culinary Adventure</li>
-                                                                <li>Vietnam</li>
-                                                                <li>From £3,950 per person</li>
-                                                                <li>Travel to:<span>Central Vietnam, Hanoi, Halong Bay & Northern Vietnam, Saigon & Mekong Delta</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>11 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../images/destination_card05.jpg" alt="destination card05" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">CALL OF THE GIBBON</a></h4>
-                                                            <ul>
-                                                                <li>Wildlife Adventure to Thailand</li>
-                                                                <li>Thailand</li>
-                                                                <li>From £5,350 per person</li>
-                                                                <li>Travel to:<span>Bangkok & Central Thailand, Koh Samui & Gulf of Thailand, Northern Thailand, Phuket & Western Thailand</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>11 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../images/destination_card06.jpg" alt="destination card06" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">Stupas, Sanctuaries & the Andaman Sea</a></h4>
-                                                            <ul>
-                                                                <li>Perfect Honeymoon to Burma</li>
-                                                                <li>Burma (Myanmar), Thailand</li>
-                                                                <li>From £3,150 per person</li>
-                                                                <li>Travel to: <span>Bagan, Phuket & Western Thailand, The Irrawaddy, Yangon</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>12 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
+                                                <button className="btn card_slider_btn">
+                                                    <span>14 nights</span>
+                                                    <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
-
-                                </div>
+                                    <div className="col-sm-6 col-lg-4">
+                                        <div className="card_slider_inr">
+                                            <div className="card_slider">
+                                                <div className="card_slider_img">
+                                                    <img src="./../../images/destination_card02.jpg" alt="destination card02" className="img-fluid" />
+                                                </div>                            
+                                                <div className="card_slider_cnt">
+                                                    <h4><a href="#">LAND OF THE RISING SUN</a></h4>
+                                                    <ul>
+                                                        <li>Japan in Classic Style</li>
+                                                        <li>Japan</li>
+                                                        <li>From £4,600 per person</li>
+                                                        <li>Travel to:<span>Japanese Alps & Northern Honshu, Kyoto, Southern Honshu & Kyushu, Tokyo & Around</span></li>
+                                                    </ul>
+                                                </div>
+                                                <button className="btn card_slider_btn">
+                                                    <span>10 nights</span>
+                                                    <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-6 col-lg-4">
+                                        <div className="card_slider_inr">
+                                            <div className="card_slider">
+                                                <div className="card_slider_img">
+                                                    <img src="./../../images/destination_card03.jpg" alt="destination card03" className="img-fluid" />
+                                                </div>
+                                                <div className="card_slider_cnt">
+                                                    <h4><a href="#">Ultimate Grand Tour of Indochina</a></h4>
+                                                    <ul>
+                                                        <li>Spirit of the Water Dragon</li>
+                                                        <li>Vietnam, Cambodia, Laos & Thailand</li>
+                                                        <li>From £8,7500 per person</li>
+                                                        <li>Travel to:<span>Hanoi, Halong Bay & Northern Vietnam, Koh Kood & Koh Chang, Luang Prabang, Saigon & Mekong Delta</span></li>
+                                                    </ul>
+                                                </div>
+                                                <button className="btn card_slider_btn">
+                                                    <span>18 nights</span>
+                                                    <span className="view_itnry_link">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-6 col-lg-4">
+                                        <div className="card_slider_inr">
+                                            <div className="card_slider">
+                                                <div className="card_slider_img">
+                                                    <img src="./../../images/destination_card04.jpg" alt="destination card04" className="img-fluid" />
+                                                </div>                            
+                                                <div className="card_slider_cnt">
+                                                    <h4><a href="#">FROGS' LEGS & PHO</a></h4>
+                                                    <ul>
+                                                        <li>Vietnam Culinary Adventure</li>
+                                                        <li>Vietnam</li>
+                                                        <li>From £3,950 per person</li>
+                                                        <li>Travel to:<span>Central Vietnam, Hanoi, Halong Bay & Northern Vietnam, Saigon & Mekong Delta</span></li>
+                                                    </ul>
+                                                </div>
+                                                <button className="btn card_slider_btn">
+                                                    <span>11 nights</span>
+                                                    <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-6 col-lg-4">
+                                        <div className="card_slider_inr">
+                                            <div className="card_slider">
+                                                <div className="card_slider_img">
+                                                    <img src="./../../images/destination_card05.jpg" alt="destination card05" className="img-fluid" />
+                                                </div>                            
+                                                <div className="card_slider_cnt">
+                                                    <h4><a href="#">CALL OF THE GIBBON</a></h4>
+                                                    <ul>
+                                                        <li>Wildlife Adventure to Thailand</li>
+                                                        <li>Thailand</li>
+                                                        <li>From £5,350 per person</li>
+                                                        <li>Travel to:<span>Bangkok & Central Thailand, Koh Samui & Gulf of Thailand, Northern Thailand, Phuket & Western Thailand</span></li>
+                                                    </ul>
+                                                </div>
+                                                <button className="btn card_slider_btn">
+                                                    <span>11 nights</span>
+                                                    <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-6 col-lg-4">
+                                        <div className="card_slider_inr">
+                                            <div className="card_slider">
+                                                <div className="card_slider_img">
+                                                    <img src="./../../images/destination_card06.jpg" alt="destination card06" className="img-fluid" />
+                                                </div>                            
+                                                <div className="card_slider_cnt">
+                                                    <h4><a href="#">Stupas, Sanctuaries & the Andaman Sea</a></h4>
+                                                    <ul>
+                                                        <li>Perfect Honeymoon to Burma</li>
+                                                        <li>Burma (Myanmar), Thailand</li>
+                                                        <li>From £3,150 per person</li>
+                                                        <li>Travel to: <span>Bagan, Phuket & Western Thailand, The Irrawaddy, Yangon</span></li>
+                                                    </ul>
+                                                </div>
+                                                <button className="btn card_slider_btn">
+                                                    <span>12 nights</span>
+                                                    <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                    
                             </div>
-                        </section>
+                            
+                        </div>
+                    </div>
+                </section>
 
                         <section className="card_blk_row dark_grey">
                             <div className="container-md">
                                 <div className="row">
-                                    <div className="col-sm-4">
+                                    <div className="col-sm-6">
                                         <div className="card_blk_inr card_blk_overlay">
                                             <a href="#" target="_blank">
                                                 <img src="./../../images/destination_overview01.jpg" alt="Card image 07" className="img-fluid" />
@@ -481,7 +485,7 @@ function Index() {
                                         </div>
                                     </div>
 
-                                    <div className="col-sm-4">
+                                    <div className="col-sm-6">
                                         <div className="card_blk_inr card_blk_overlay">
                                             <a href="#">
                                                 <img src="./../../images/destination_overview02.jpg" alt="Card image 08" className="img-fluid" />
@@ -835,336 +839,327 @@ function Index() {
                         </div>
 
                         <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
-                            <div className="container-md">
-                                <h3 className="title_cls">All Luxury Holiday Ideas in Asia</h3>
-                                <div className="card_slider_row">
-                                    <div className="carousel00">
-                                        <div className="row">
-                                            <div className="col-12">
-                                                <div className="destination_dropdwn_row d-block d-md-flex">
-                                                    <div className="banner_dropdwn_blk">
-                                                        <div className="select_drpdwn">
-                                                            <select className="selectpicker" multiple aria-label="Filter by country" data-live-search="true">
-                                                                <option value="">Filter by country</option>
-                                                                <option value="Asia">Asia</option>
-                                                                <option value="Hong Kong & Macau">Hong Kong & Macau</option>
-                                                                <option value="Malaysia & Borneo">Malaysia & Borneo</option>
-                                                                <option value="Singapore">Singapore</option>
-                                                                <option value="Indonesia">Indonesia</option>
-                                                                <option value="Japan">Japan</option>
-                                                                <option value="Cambodia">Cambodia</option>
-                                                                <option value="Vietnam">Vietnam</option>
-                                                                <option value="China">China</option>
-                                                                <option value="Thailand">Thailand</option>
-                                                                <option value="Burma">Burma</option>
-                                                                <option value="Laos">Laos</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                                                        <div className="select_drpdwn">
-                                                            <select className="selectpicker" multiple aria-label="Filter by property type" data-live-search="true">
-                                                                <option value="">Filter by property type</option>
-                                                                <option value="Everything">Everything</option>
-                                                                <option value="Barefoot">Barefoot</option>
-                                                                <option value="Beach">Beach</option>
-                                                                <option value="Boutique hotel">Boutique hotel</option>
-                                                                <option value="Chic design">Chic design</option>
-                                                                <option value="Cultural Immersion">Cultural Immersion</option>
-                                                                <option value="Eco tourism">Eco tourism</option>
-                                                                <option value="Family-Friendly">Family-Friendly</option>
-                                                                <option value="Food & Wine">Food & Wine</option>
-                                                                <option value="Guiding">Guiding</option>
-                                                                <option value="Hideaway">Hideaway</option>
-                                                                <option value="Honeymoon">Honeymoon</option>
-                                                                <option value="Lodge">Lodge</option>
-                                                                <option value="Luxury hotel">Luxury Hotel</option>
-                                                                <option value="Off the beaten track">Off the beaten track</option>
-                                                                <option value="Owner run">Owner run</option>
-                                                                <option value="Peace & quiet">Peace & quiet</option>
-                                                                <option value="Private groups">Private groups</option>
-                                                                <option value="Romantic">Romantic</option>
-                                                                <option value="Rustic">Rustic</option>
-                                                                <option value="Seriously special">Seriously special</option>
-                                                                <option value="Service & Hospitality">Service & Hospitality</option>
-                                                                <option value="Setting & Views">Setting & Views</option>
-                                                                <option value="Snorkelling & Driving">Snorkelling & Driving</option>
-                                                                <option value="Spa & Wellness">Spa & Wellness</option>
-                                                                <option value="Unusal">Unusal</option>
-                                                                <option value="Village life">Village life</option>
-                                                                <option value="Walking & trekking">Walking & trekking</option>
-                                                                <option value="Water activities">Water activities</option>
-                                                                <option value="Wildlife & Nature">Wildlife & Nature</option>
-                                                                <option value="Adventure">Adventure</option>
-                                                                <option value="Couples">Couples</option>
-                                                                <option value="Educational">Educational</option>
-                                                                <option value="Multi-activity">Multi-activity</option>
-                                                                <option value="Teenagers">Teenagers</option>
-                                                                <option value="Landscapes & Scenery">Landscapes & Scenery</option>
-                                                                <option value="City hotel">City hotel</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                                                        <div className="select_drpdwn">
-                                                            <select className="selectpicker" multiple aria-label="Filter by month" data-live-search="true">
-                                                                <option value="">Filter by month</option>
-                                                                <option value="All months">All months</option>
-                                                                <option value="January">January</option>
-                                                                <option value="February">February</option>
-                                                                <option value="March">March</option>
-                                                                <option value="April">April</option>
-                                                                <option value="May">May</option>
-                                                                <option value="June">June</option>
-                                                                <option value="July">July</option>
-                                                                <option value="August">August</option>
-                                                                <option value="September">September</option>
-                                                                <option value="October">October</option>
-                                                                <option value="November">November</option>
-                                                                <option value="December">December</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div className="banner_inspire_btn ps-0 ps-md-2">
-                                                        <button type="button" className="btn btn-primary prmry_btn">Inspire me
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path></svg>
-                                                        </button>
-                                                    </div>
+                    <div className="container-md">
+                        <h3 className="title_cls">All Luxury Holiday Ideas in Asia</h3>        
+                        <div className="card_slider_row">
+                            <div className="carousel00">
+                                <div className="row">                                    
+                                    <div className="col-12">
+                                        <div className="destination_dropdwn_row d-block d-md-flex">
+                                            <div className="banner_dropdwn_blk">
+                                                <div className="select_drpdwn">
+                                                    <select className="selectpicker form-select" multiple aria-label="Filter by country" data-live-search="true">
+                                                        <option selected="">Filter by country</option>
+                                                        <option value="Asia">Asia</option>
+                                                        <option value="Hong Kong & Macau">Hong Kong & Macau</option>
+                                                        <option value="Malaysia & Borneo">Malaysia & Borneo</option>
+                                                        <option value="Singapore">Singapore</option>
+                                                        <option value="Indonesia">Indonesia</option>
+                                                        <option value="Japan">Japan</option>
+                                                        <option value="Cambodia">Cambodia</option>
+                                                        <option value="Vietnam">Vietnam</option>
+                                                        <option value="China">China</option>
+                                                        <option value="Thailand">Thailand</option>
+                                                        <option value="Burma">Burma</option>
+                                                        <option value="Laos">Laos</option>
+                                                    </select>
                                                 </div>
                                             </div>
-                                            <div className="col-12">
-                                                <div className="destination_filter_result d-block d-lg-flex">
-                                                    <p>We've found 77 holiday ideas in Asia for you</p>
-                                                    <div className="destination_contries_filter d-inline-block d-lg-flex">
-                                                        <label className="pt-2 pt-lg-0">Arrange by:</label>
-                                                        <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
-                                                            <li><a href="#">By price</a></li>
-                                                            <li><a href="#" className="active">Recommended</a></li>
-                                                            <li><a href="#">Alphabetical</a></li>
-                                                            <li><a href="#">By duration</a></li>
-                                                        </ul>
-                                                    </div>
+                                            <div className="banner_dropdwn_blk ps-0 ps-md-2">
+                                                <div className="select_drpdwn">
+                                                    <select className="selectpicker" multiple aria-label="Filter by property type" data-live-search="true">
+                                                        <option selected="">Filter by property type</option>
+                                                        <option value="Everything">Everything</option>
+                                                        <option value="Barefoot">Barefoot</option>
+                                                        <option value="Beach">Beach</option>
+                                                        <option value="Boutique hotel">Boutique hotel</option>
+                                                        <option value="Chic design">Chic design</option>
+                                                        <option value="Cultural Immersion">Cultural Immersion</option>
+                                                        <option value="Eco tourism">Eco tourism</option>
+                                                        <option value="Family-Friendly">Family-Friendly</option>
+                                                        <option value="Food & Wine">Food & Wine</option>
+                                                        <option value="Guiding">Guiding</option>
+                                                        <option value="Hideaway">Hideaway</option>
+                                                        <option value="Honeymoon">Honeymoon</option>
+                                                        <option value="Lodge">Lodge</option>
+                                                        <option value="Luxury hotel">Luxury Hotel</option>
+                                                        <option value="Off the beaten track">Off the beaten track</option>
+                                                        <option value="Owner run">Owner run</option>
+                                                        <option value="Peace & quiet">Peace & quiet</option>
+                                                        <option value="Private groups">Private groups</option>
+                                                        <option value="Romantic">Romantic</option>
+                                                        <option value="Rustic">Rustic</option>
+                                                        <option value="Seriously special">Seriously special</option>
+                                                        <option value="Service & Hospitality">Service & Hospitality</option>
+                                                        <option value="Setting & Views">Setting & Views</option>
+                                                        <option value="Snorkelling & Driving">Snorkelling & Driving</option>
+                                                        <option value="Spa & Wellness">Spa & Wellness</option>
+                                                        <option value="Unusal">Unusal</option>
+                                                        <option value="Village life">Village life</option>
+                                                        <option value="Walking & trekking">Walking & trekking</option>
+                                                        <option value="Water activities">Water activities</option>
+                                                        <option value="Wildlife & Nature">Wildlife & Nature</option>
+                                                        <option value="Adventure">Adventure</option>
+                                                        <option value="Couples">Couples</option>
+                                                        <option value="Educational">Educational</option>
+                                                        <option value="Multi-activity">Multi-activity</option>
+                                                        <option value="Teenagers">Teenagers</option>
+                                                        <option value="Landscapes & Scenery">Landscapes & Scenery</option>
+                                                        <option value="City hotel">City hotel</option>
+                                                    </select>
                                                 </div>
                                             </div>
-
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <a className="card_slider_img">
-                                                            <img src="./../../images/destination_card01.jpg" alt="destination card01" className="img-fluid" />
-                                                        </a>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">THE SCENT OF CLOVES</a></h4>
-                                                            <ul>
-                                                                <li>Indonesia in Idyllic Style</li>
-                                                                <li>Indonesia</li>
-                                                                <li>From £3,950 per person</li>
-                                                                <li>Travel to:<span>Bali, Java, Kalimantan, Lombok</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>14 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
+                                            <div className="banner_dropdwn_blk ps-0 ps-md-2">
+                                                <div className="select_drpdwn">
+                                                    <select className="selectpicker" multiple aria-label="Filter by month" data-live-search="true">
+                                                        <option selected="">Filter by month</option>
+                                                        <option value="All months">All months</option>
+                                                        <option value="January">January</option>
+                                                        <option value="February">February</option>
+                                                        <option value="March">March</option>
+                                                        <option value="April">April</option>
+                                                        <option value="May">May</option>
+                                                        <option value="June">June</option>
+                                                        <option value="July">July</option>
+                                                        <option value="August">August</option>
+                                                        <option value="September">September</option>
+                                                        <option value="October">October</option>
+                                                        <option value="November">November</option>
+                                                        <option value="December">December</option>
+                                                    </select>
                                                 </div>
                                             </div>
-
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../images/destination_card05.jpg" alt="destination card05" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">CALL OF THE GIBBON</a></h4>
-                                                            <ul>
-                                                                <li>Wildlife Adventure to Thailand</li>
-                                                                <li>Thailand</li>
-                                                                <li>From £5,350 per person</li>
-                                                                <li>Travel to:<span>Bangkok & Central Thailand, Koh Samui & Gulf of Thailand, Northern Thailand, Phuket & Western Thailand</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>11 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
+                                            <div className="banner_inspire_btn ps-0 ps-md-2">
+                                                <button type="button" className="btn btn-primary prmry_btn">Inspire me
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 267 512.43"><path fill-rule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path></svg>
+                                                </button>
                                             </div>
-
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../images/destination_card03.jpg" alt="destination card03" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">Ultimate Grand Tour of Indochina</a></h4>
-                                                            <ul>
-                                                                <li>Spirit of the Water Dragon</li>
-                                                                <li>Vietnam, Cambodia, Laos & Thailand</li>
-                                                                <li>From £8,7500 per person</li>
-                                                                <li>Travel to:<span>Hanoi, Halong Bay & Northern Vietnam, Koh Kood & Koh Chang, Luang Prabang, Saigon & Mekong Delta</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>18 nights</span>
-                                                            <span className="view_itnry_link">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-12">
+                                        <div className="destination_filter_result d-block d-lg-flex">
+                                            <p>We've found 77 holiday ideas in Asia for you</p>
+                                            <div className="destination_contries_filter d-inline-block d-lg-flex">
+                                                <label className="pt-2 pt-lg-0">Arrange by:</label>
+                                                <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
+                                                    <li><a href="#">By price</a></li>
+                                                    <li><a href="#" className="active">Recommended</a></li>
+                                                    <li><a href="#">Alphabetical</a></li>
+                                                    <li><a href="#">By duration</a></li>
+                                                </ul>
+                                            </div>                                    
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="col-sm-6 col-lg-4">
+                                        <div class="card_slider_inr">
+                                            <div class="card_slider">
+                                                <a class="card_slider_img">
+                                                    <img src="./../../images/destination_hotel01.jpg" alt="destination_hotel01" class="img-fluid" />
+                                                </a>
+                                                <div class="card_slider_cnt places_to_stay_cnt">
+                                                    <h4><a href="#">CAPELLA UBUD</a></h4>
+                                                    <ul>
+                                                        <li>Location: Bali | Indonesia</li>                                                        
+                                                        <li>Price guide:<span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
+                                                        <li>Located in the heart of the Keliki rainforest in Bali, Capella Ubud is the perfect hotel for getting back to nature and disconnecting from the outside world. Designed by renowned architect Bill Bensley, as well as adding a touch of luxury and signature Bensley style, not a single tree was destroyed in its construction, guaranteeing an unspoilt experience of the lush green forests it sits in.</li>
+                                                        <li>Best for:<span>Setting & Views, Eco-tourism, Wildlife & Nature, Peace & Quiet</span></li>
+                                                    </ul>                            
                                                 </div>
-                                            </div>
-
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../images/destination_card02.jpg" alt="destination card02" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">LAND OF THE RISING SUN</a></h4>
-                                                            <ul>
-                                                                <li>Japan in Classic Style</li>
-                                                                <li>Japan</li>
-                                                                <li>From £4,600 per person</li>
-                                                                <li>Travel to:<span>Japanese Alps & Northern Honshu, Kyoto, Southern Honshu & Kyushu, Tokyo & Around</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>10 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../images/destination_card06.jpg" alt="destination card06" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">Stupas, Sanctuaries & the Andaman Sea</a></h4>
-                                                            <ul>
-                                                                <li>Perfect Honeymoon to Burma</li>
-                                                                <li>Burma (Myanmar), Thailand</li>
-                                                                <li>From £3,150 per person</li>
-                                                                <li>Travel to: <span>Bagan, Phuket & Western Thailand, The Irrawaddy, Yangon</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>12 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../images/destination_card04.jpg" alt="destination card04" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">FROGS' LEGS & PHO</a></h4>
-                                                            <ul>
-                                                                <li>Vietnam Culinary Adventure</li>
-                                                                <li>Vietnam</li>
-                                                                <li>From £3,950 per person</li>
-                                                                <li>Travel to:<span>Central Vietnam, Hanoi, Halong Bay & Northern Vietnam, Saigon & Mekong Delta</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>11 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../images/destination_card07.jpg" alt="destination card07" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">FLAGSHIP JAPAN</a></h4>
-                                                            <ul>
-                                                                <li>Japan in Exsus Signature Style</li>
-                                                                <li>Japan</li>
-                                                                <li>From £12,200 per person</li>
-                                                                <li>Travel to:<span>Japanese Alps & Northern Honshu, Kyoto, Southern Honshu & Kyushu, Tokyo & Around</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>13 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../images/destination_card08.jpg" alt="destination card08" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">Headhunters & Beyond</a></h4>
-                                                            <ul>
-                                                                <li>Borneo Holiday in Sabah & Sarawak</li>
-                                                                <li>Borneo</li>
-                                                                <li>From £3,450 per person</li>
-                                                                <li>Travel to:<span>Borneo, Gunung Mulu National Park, Kota Kinabalu & Surrounds, Kuching & Surrounds</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>16 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../images/destination_card09.jpg" alt="destination card09" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">ORANGUTANS & DRAGONS</a></h4>
-                                                            <ul>
-                                                                <li>Wildlife Adventure to Indonesia</li>
-                                                                <li>Indonesia</li>
-                                                                <li>From £4,650 per person</li>
-                                                                <li>Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>13 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-12">
-                                                <button className="btn prmry_btn make_enqury_btn mx-auto text-uppercase">Show 9 more holiday ideas
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
+                                                <button class="btn card_slider_btn justify-content-end">
+                                                    <span class="view_itnry_link">View this hotel<em class="fa-solid fa-chevron-right"></em></span>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
 
-                                </div>
+                                    <div class="col-sm-6 col-lg-4">
+                                        <div class="card_slider_inr">
+                                            <div class="card_slider">
+                                                <a class="card_slider_img">
+                                                    <img src="./../../images/destination_hotel02.jpg" alt="destination_hotel02" class="img-fluid" />
+                                                </a>
+                                                <div class="card_slider_cnt places_to_stay_cnt">
+                                                    <h4><a href="#">Four Seasons Hong Kong</a></h4>
+                                                    <ul>
+                                                        <li>Location: Hong Kong & Macau</li>                                                        
+                                                        <li>Price guide:<span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
+                                                        <li>Four Seasons Hong Kong offers an enticing destination within a destination. As part of the prestigious International Finance Centre, it offers unrivalled links to Hong Kong Station, with the famed Star Ferry steps away.</li>
+                                                        <li>Best for:<span>City Hotel, Owner-run, Spa & Wellness, Cultural Immersion</span></li>
+                                                    </ul>                            
+                                                </div>
+                                                <button class="btn card_slider_btn justify-content-end">
+                                                    <span class="view_itnry_link">View this hotel<em class="fa-solid fa-chevron-right"></em></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-lg-4">
+                                        <div class="card_slider_inr">
+                                            <div class="card_slider">
+                                                <a class="card_slider_img">
+                                                    <img src="./../../images/destination_hotel03.jpg" alt="destination_hotel03" class="img-fluid" />
+                                                </a>
+                                                <div class="card_slider_cnt places_to_stay_cnt">
+                                                    <h4><a href="#">JW Marriott Phu Quoc, Vietnam</a></h4>
+                                                    <ul>
+                                                        <li>Location: Southern Beaches & Islands | Vietnam</li>                                                        
+                                                        <li>Price guide:<span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
+                                                        <li>Set on a private beach on a sweeping bay, the luxurious JW Marriott Phu Quoc Emerald Bay Resort & Spa has a stunning setting, and thanks to being designed by inimitable architect Bill Bensley, this hotel is unique and quirky to say the least. Taking inspiration from its former alleged incarnation as a university, on arrival you will be greeted by the university mascots before entering a fantastical and brightly-coloured world.</li>
+                                                        <li>Best for:<span>Chic Design, Luxury Hotel, Beach, Unusual</span></li>
+                                                    </ul>                            
+                                                </div>
+                                                <button class="btn card_slider_btn justify-content-end">
+                                                    <span class="view_itnry_link">View this hotel<em class="fa-solid fa-chevron-right"></em></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-lg-4">
+                                        <div class="card_slider_inr">
+                                            <div class="card_slider">
+                                                <a class="card_slider_img">
+                                                    <img src="./../../images/destination_hotel04.jpg" alt="destination_hotel04" class="img-fluid" />
+                                                </a>
+                                                <div class="card_slider_cnt places_to_stay_cnt">
+                                                    <h4><a href="#">Kanamean Nishitomiya</a></h4>
+                                                    <ul>
+                                                        <li>Location: Kyoto, Southern Honshu & Kyushu | Japan</li>                                                        
+                                                        <li>Price guide:<span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
+                                                        <li>Kanamean Nishitomiya is a traditional Japanese ryokan inn with a history dating back to the 19th century. With its tatami floors, sliding screens, slippers and kimonos, it offers a quintessential ryokan experience - alongside a Michelin-starred restaurant serving up magnificent multi-course kaiseki cuisine.</li>
+                                                        <li>Best for:<span>History & Heritage, Cultural Immersion, Setting & Views, Food & Wine</span></li>
+                                                    </ul>                            
+                                                </div>
+                                                <button class="btn card_slider_btn justify-content-end">
+                                                    <span class="view_itnry_link">View this hotel<em class="fa-solid fa-chevron-right"></em></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-sm-6 col-lg-4">
+                                        <div class="card_slider_inr">
+                                            <div class="card_slider">
+                                                <a class="card_slider_img">
+                                                    <img src="./../../images/destination_hotel05.jpg" alt="destination_hotel05" class="img-fluid" />
+                                                </a>
+                                                <div class="card_slider_cnt places_to_stay_cnt">
+                                                    <h4><a href="#">Kata Rocks</a></h4>
+                                                    <ul>
+                                                        <li>Location: Phuket & Western Thailand | Thailand</li>                                                        
+                                                        <li>Price guide:<span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
+                                                        <li>Set on a headland between the beaches of Kata and Kata Noi on Phuket’s vibrant southwest coast, Kata Rocks is a cool and contemporary all-villa resort offering signature Thai hospitality, gorgeous infinity pools, five-star facilities and dazzling views of the Andaman Sea.</li>
+                                                        <li>Best for:<span>Private Villa, Chic Design, Honeymoon, Family-friendly</span></li>
+                                                    </ul>                            
+                                                </div>
+                                                <button class="btn card_slider_btn justify-content-end">
+                                                    <span class="view_itnry_link">View this hotel<em class="fa-solid fa-chevron-right"></em></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-lg-4">
+                                        <div class="card_slider_inr">
+                                            <div class="card_slider">
+                                                <a class="card_slider_img">
+                                                    <img src="./../../images/destination_hotel06.jpg" alt="destination_hotel06" class="img-fluid" />
+                                                </a>
+                                                <div class="card_slider_cnt places_to_stay_cnt">
+                                                    <h4><a href="#">L'Alyana Ninh Van Bay</a></h4>
+                                                    <ul>
+                                                        <li>Location: Southern Beaches & Islands | Vietnam</li>                                                        
+                                                        <li>Price guide:<span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
+                                                        <li>If you're looking for a luxury hideaway but don't want to miss out on an immersive Vietnamese experience, L'Alyana Ninh Van Bay is the perfect place. This tropical paradise, overlooking the bay and the South Vietnam highlands beyond, practices three core values to ensure that guests have an unforgettable stay: space and privacy, quality service, and expertise.</li>
+                                                        <li>Best for:<span>Luxury Hotel, Setting & Views, Beach, Multi-activity</span></li>
+                                                    </ul>                            
+                                                </div>
+                                                <button class="btn card_slider_btn justify-content-end">
+                                                    <span class="view_itnry_link">View this hotel<em class="fa-solid fa-chevron-right"></em></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-lg-4">
+                                        <div class="card_slider_inr">
+                                            <div class="card_slider">
+                                                <a class="card_slider_img">
+                                                    <img src="./../../images/destination_hotel07.jpg" alt="destination_hotel07" class="img-fluid" />
+                                                </a>
+                                                <div class="card_slider_cnt places_to_stay_cnt">
+                                                    <h4><a href="#">Plataran Menjangan</a></h4>
+                                                    <ul>
+                                                        <li><p>Location: Bali | Indonesia</p></li>                                                        
+                                                        <li>Price guide:<span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
+                                                        <li>Plataran Menjangan is a luxurious haven in West Bali National Park. This nature reserve is home to countless endemic species who live across mangroves, jungles and coast, and the hotel’s luxurious villas are dotted across similarly diverse environments, providing stunning views over the untouched wilderness.</li>
+                                                        <li>Best for:<span>Wildlife & Nature, Beach, Multi-activity, Setting & Views</span></li>
+                                                    </ul>                            
+                                                </div>
+                                                <button class="btn card_slider_btn justify-content-end">
+                                                    <span class="view_itnry_link">View this hotel<em class="fa-solid fa-chevron-right"></em></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-lg-4">
+                                        <div class="card_slider_inr">
+                                            <div class="card_slider">
+                                                <a class="card_slider_img">
+                                                    <img src="./../../images/destination_hotel08.jpg" alt="destination_hotel08" class="img-fluid" />
+                                                </a>
+                                                <div class="card_slider_cnt places_to_stay_cnt">
+                                                    <h4><a href="#">Raya Heritage</a></h4>
+                                                    <ul>
+                                                        <li><p>Location: Northern Thailand | Thailand</p></li>                                                        
+                                                        <li>Price guide:<span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
+                                                        <li>The elegant Raya Heritage has a serene setting in lush gardens on the banks of the Ping River. This beautiful hotel takes inspiration from Lanna culture, and combines a sleek, contemporary style with traditional Thai design, alongside local touches from authentic gourmet cuisine to gorgeous suites showcasing the expert work of local craftspeople, such as handwoven baskets and pots.</li>
+                                                        <li>Best for:<span>History & Heritage, Cultural Immersion, Chic Design, Luxury Hotel</span></li>
+                                                    </ul>                            
+                                                </div>
+                                                <button class="btn card_slider_btn justify-content-end">
+                                                    <span class="view_itnry_link">View this hotel<em class="fa-solid fa-chevron-right"></em></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-lg-4">
+                                        <div class="card_slider_inr">
+                                            <div class="card_slider">
+                                                <a class="card_slider_img">
+                                                    <img src="./../../images/destination_hotel09.jpg" alt="destination_hotel09" class="img-fluid" />
+                                                </a>
+                                                <div class="card_slider_cnt places_to_stay_cnt">
+                                                    <h4><a href="#">The Bale Phnom Penh</a></h4>
+                                                    <ul>
+                                                        <li><p>Location: Phnom Penh | Cambodia</p></li>                                                        
+                                                        <li>Price guide:<span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
+                                                        <li>The Balé Phnom Penh stands regally on the banks of the majestic Mekong River, set around tropical gardens of frangipani trees, black-bottomed infinity ponds and serene Buddhas. It is a tranquil haven, set away from the bustle of the city centre. Designed for complete relaxation, the Balé showcases modern Asian architecture, giving an attractive Zen-like feel to this luxury hotel.</li>
+                                                        <li>Best for:<span>Luxury Hotel, Setting & Views, Service & Hospitality, Chic Design</span></li>
+                                                    </ul>                            
+                                                </div>
+                                                <button class="btn card_slider_btn justify-content-end">
+                                                    <span class="view_itnry_link">View this hotel<em class="fa-solid fa-chevron-right"></em></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="col-12">
+                                        <button className="btn prmry_btn make_enqury_btn mx-auto text-uppercase">Show 9 more holiday ideas 
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 266.77"><path fill-rule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"/></svg>
+                                        </button>
+                                    </div>
+                                </div>                    
                             </div>
-                        </section>
+                            
+                        </div>
+                    </div>
+                </section>
                     </div>
                     <div className="tab-pane fade" id="pills-places-to-stay" role="tabpanel" aria-labelledby="pills-places-to-stay-tab" tabIndex="0">
                         <div className="container-md">
@@ -1183,7 +1178,7 @@ function Index() {
                                                 <div className="destination_dropdwn_row d-block d-md-flex">
                                                     <div className="banner_dropdwn_blk">
                                                         <div className="select_drpdwn">
-                                                            <select className="selectpicker" multiple aria-label="Filter by country" data-live-search="true">
+                                                            <select className="form-select" multiple aria-label="Filter by country" data-live-search="true">
                                                                 <option value="">Filter by country</option>
                                                                 <option value="Asia">Asia</option>
                                                                 <option value="Hong Kong & Macau">Hong Kong & Macau</option>

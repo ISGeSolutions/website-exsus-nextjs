@@ -5,8 +5,6 @@ setTimeout(() => {
         firstImg = carousel.querySelectorAll(".card_slider_inr")[0],
         arrowIcons = document.querySelectorAll(".card_slider_row i");
 
-    console.log('carousel', carousel);
-
     let isDragStart = false, isDragging = false, prevPageX, prevScrollLeft, positionDiff;
 
     const showHideIcons = () => {

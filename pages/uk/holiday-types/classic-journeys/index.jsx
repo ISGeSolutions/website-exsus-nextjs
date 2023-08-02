@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Iframe from 'react-iframe'
 import { Layout } from 'components/users';
 import { userService } from 'services';
+import Head from 'next/head';
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 var Carousel = require('react-responsive-carousel').Carousel;
@@ -17,6 +18,9 @@ function Index() {
 
     return (
         <Layout>
+            <Head>
+                <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
+            </Head>
             <section className="banner_blk_row">
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">

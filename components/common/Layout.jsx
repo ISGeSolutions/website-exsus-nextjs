@@ -6,6 +6,8 @@ import { Nav, Alert } from 'components';
 import { Analytics } from '@vercel/analytics/react';
 import React from "react";
 import Select from "react-select";
+import Head from 'next/head';
+// import plusSlides from "public/assets/javascripts/navigation.js";
 
 export { Layout };
 
@@ -54,7 +56,28 @@ function Layout({ children }) {
         router.push(newPath);
     }
 
+    const handleChange1 = (selectedOption) => {
+        this.plusSlides.openLeftNav();
+    };
+
     useEffect(() => {
+
+        $(".header_country_list > ul .header_country_label").on('mouseenter', function (event) {
+            $('.header_country_list > ul .header_country_label').removeClass("active");
+            $(this).addClass("active");
+        });
+
+        $('.header_country_label').click(function () {
+            $('.header_country_label').removeClass("responsive_drpdwn_cls");
+            $(this).addClass('responsive_drpdwn_cls');
+        });
+
+        //         const script = document.createElement("script");
+        //   script.src = "public/assets/javascripts/navigation.js";
+        //   script.async = true;
+        //   script.onload = () => this.scriptLoaded();
+
+        //   document.body.appendChild(script);
 
         // const [selected, setSelected] = useState(null);
         // setSelected(countries[0]);
@@ -167,13 +190,27 @@ function Layout({ children }) {
     return (
         <div className="">
             <header className="header_blk_row header">
+                <Head>
+                    <script type="text/javascript" src="/assets/javascripts/navigation.js"></script>
+                </Head>
                 <div className="container">
                     <div className="header_blk_inr">
                         <section className="header_item_left ">
-                            <div className="mobile_trigger_btn d-block d-lg-none"><NavLink href="#"><em className="fa-solid fa-ellipsis"></em></NavLink></div>
+                            <div className="mobile_trigger_btn d-block d-lg-none">
+                                <NavLink href="#">
+                                    <em className="fa-solid fa-ellipsis" onClick={() => {
+                                        document.getElementById('sideMenuLeft').style.width = "100%";
+                                    }}>
+                                    </em>
+                                </NavLink>
+                            </div>
                             <div className="side_menu_left" id="sideMenuLeft">
                                 <div className="side_menu_hdr">
-                                    <button className="btn fa-solid fa-xmark"></button>
+                                    <button className="btn fa-solid fa-xmark"
+                                        onClick={() => {
+                                            document.getElementById('sideMenuLeft').style.width = "0";
+                                        }}>
+                                    </button>
                                 </div>
                                 <div className="dropdown header_drpdown">
                                     {/* <Select id="long-value-select" 
@@ -245,7 +282,11 @@ function Layout({ children }) {
                         </section>
                         <section className="header_item_right d-flex d-lg-inline-block justify-content-end align-items-center">
                             <div className="header_call_icn"><NavLink href="#"><em className="material-symbols-outlined">call</em><span className="d-none d-lg-block">020 7337 9010</span></NavLink></div>
-                            <div className="mobile_trigger_btn mobile-menu-trigger d-block d-lg-none"><NavLink href="#"><em className="fa-solid fa-bars"></em></NavLink></div>
+                            <div className="mobile_trigger_btn mobile-menu-trigger d-block d-lg-none" onClick={() => {
+                                const menu = document.querySelector(".menu"); //Nav tag
+                                menu.classList.toggle("active");
+                                document.querySelector(".menu-overlay").classList.toggle("active");
+                            }}><a href="#"><em className="fa-solid fa-bars"></em></a></div>
                         </section>
                     </div>
                     <Nav />

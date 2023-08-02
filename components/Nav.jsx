@@ -24,8 +24,18 @@ function Nav() {
     }
 
     useEffect(() => {
+        const script = document.createElement('script');
+
+  script.src = "https://use.typekit.net/foobar.js";
+  script.async = true;
+
+  document.body.appendChild(script);
+
         const subscription = userService.user.subscribe(x => setUser(x));
-        return () => subscription.unsubscribe();
+        return () => {
+            subscription.unsubscribe();
+            document.body.removeChild(script);
+        }
     }, []);
 
     // const [value, setValue] = React.useState('fruit');

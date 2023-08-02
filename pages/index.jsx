@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Inspireme, Signup } from 'components';
+import Head from 'next/head';
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 var Carousel = require('react-responsive-carousel').Carousel;
@@ -10,11 +11,11 @@ export default Index;
 function Index() {
     useEffect(() => {
         // console.log('region', window.site_region);
-        var site_region = localStorage.getItem('site_region'); 
+        var site_region = localStorage.getItem('site_region');
 
         const carousel1 = document.querySelector('#carouselExampleInterval');
         new bootstrap.Carousel(carousel1);
-        
+
         const carousel = document.querySelector('#Testimonials');
         new bootstrap.Carousel(carousel);
     }, []);
@@ -23,6 +24,9 @@ function Index() {
 
     return (
         <>
+            <Head>
+                <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
+            </Head>
             <section className="banner_blk_row">
                 {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
                     <div>
@@ -71,7 +75,7 @@ function Index() {
             <section className="card_blk_row">
                 <div className="container-md">
                     <div className="row">
-                        <div className="col-sm-6 col-md-6 col-lg-3">
+                        <div className="col-sm-6 col-md-6 col-lg-4">
                             <div className="card_blk_inr">
                                 <a href="#" target="_blank">
                                     <img src="images/card_img01.jpg" alt="Card image 01" className="img-fluid" />
@@ -92,7 +96,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6 col-md-6 col-lg-3">
+                        <div className="col-sm-6 col-md-6 col-lg-4">
                             <div className="card_blk_inr">
                                 <a href="#">
                                     <img src="images/card_img02.jpg" alt="Card image 02" className="img-fluid" />
@@ -114,7 +118,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6 col-md-6 col-lg-3">
+                        <div className="col-sm-6 col-md-6 col-lg-4">
                             <div className="card_blk_inr">
                                 <a href="#">
                                     <img src="images/card_img03.jpg" alt="Card image 03" className="img-fluid" />
@@ -135,7 +139,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6 col-md-6 col-lg-3">
+                        <div className="col-sm-6 col-md-6 col-lg-4">
                             <div className="card_blk_inr">
                                 <a href="#">
                                     <img src="images/card_img04.jpg" alt="Card image 04" className="img-fluid" />
@@ -157,7 +161,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6 col-md-6 col-lg-3">
+                        <div className="col-sm-6 col-md-6 col-lg-4">
                             <div className="card_blk_inr">
                                 <a href="#">
                                     <img src="images/card_img05.jpg" alt="Card image 05" className="img-fluid" />
@@ -179,7 +183,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-6 col-md-6 col-lg-3">
+                        <div className="col-sm-6 col-md-6 col-lg-4">
                             <div className="card_blk_inr">
                                 <a href="#">
                                     <img src="images/card_img06.jpg" alt="Card image 06" className="img-fluid" />
@@ -337,7 +341,9 @@ function Index() {
                         </i>
                     </div>
                 </div>
+                {/* <div className="full_loader_parnt_blk loader_parnt_blk" style="display: none;"><div className="loader-circle-2"></div></div> */}
             </section>
+            
 
             <section aria-label="Client Testimonials" className="testimonials_blk_row">
                 {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showThumbs={false}>

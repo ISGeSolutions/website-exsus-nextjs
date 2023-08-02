@@ -29,7 +29,7 @@
 	.side_menu_hdr a{padding: 10px;}
     .side_menu_hdr button{color: #757575; background: transparent; border: none; font-size: 25px; font-weight: normal;font-family: FontAwesome;width: 50px;height: 50px; border-left: 1px solid #424242; border-radius: 0;}
 	.side_menu_hdr button:hover{border-left: 1px solid #424242;}
-    .header_drpdown{padding: 0 10px;}
+    .header_drpdown{padding: 0 10px;margin-bottom: 20px;}
     .header_blk_row .header_blk_inr section.header_item_left .srch_site_box{width: calc(100% - 20px);max-width: 100%;margin: auto;}
    
 
