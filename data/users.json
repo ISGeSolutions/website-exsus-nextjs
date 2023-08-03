@@ -407,5 +407,18 @@
       "total_pages": 1,
       "total_objects": 1
     }
+  },
+  "auth": {
+    "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjkxMDMwODIzLCJleHAiOjE2OTM2MjI4MjN9.Tm0ihRX8XGmH43CblgRfjO6egcn2sMWts0kgcEnST5k",
+    "user": {
+      "id": 1,
+      "username": "vidya@isgesolutions.com",
+      "email": "vidya@isgesolutions.com",
+      "provider": "local",
+      "confirmed": false,
+      "blocked": false,
+      "createdAt": "2023-08-02T18:37:25.243Z",
+      "updatedAt": "2023-08-02T18:37:25.243Z"
+    }
   }
 }
