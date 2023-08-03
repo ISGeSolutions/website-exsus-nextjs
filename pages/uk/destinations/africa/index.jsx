@@ -96,7 +96,7 @@ function Index() {
                         <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
                             <div className="banner_commn_cls" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
                         </a>
-                        <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
+                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="banner_commn_cls destination_overvw_banner01"></div>
                         </a>
                         <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">

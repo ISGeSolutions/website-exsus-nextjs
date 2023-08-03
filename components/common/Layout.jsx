@@ -226,7 +226,7 @@ function Layout({ children }) {
                                         )}
                                     /> */}
 
-                                    <Select id="long-value-select" className='react-select-container' classNamePrefix="react-select"
+                                    <Select id="long-value-select" className='react-select-container' style={{ boxShadow: `none !important` }} classNamePrefix="react-select"
                                         instanceId="long-value-select"
                                         options={countries}
                                         value={selected}
