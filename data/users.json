@@ -551,5 +551,45 @@
         "total": 7
       }
     }
+  },
+  "destination_details": {
+    "data": {
+      "id": 1,
+      "attributes": {
+        "destination_code": "AF",
+        "destination_name": "Africa",
+        "serial_number": 1,
+        "createdAt": "2023-08-03T11:28:06.510Z",
+        "updatedAt": "2023-08-03T11:44:29.517Z",
+        "publishedAt": "2023-08-03T13:04:49.032Z",
+        "friendly_url": null,
+        "page_meta_title": "Luxury Safari Holidays in Africa | Exsus Travel",
+        "page_meta_description": "Luxury safari ${holidays} in Africa are one of life's most magical experiences. To plan your own African adventure, contact one of the Exsus Travel experts.",
+        "map_latitude": "0.0000000000",
+        "map_longitude": "0.0000000000",
+        "map_zoom_level": 4,
+        "header_text": "Luxury Safari Holidays in Africa",
+        "overview_text": "<p>Luxury safari holidays in Africa are one of life's most magical experiences. Think spine-tingling wildlife encounters, mighty&nbsp;waterfalls and cool gin and tonics under baobab trees.&nbsp;</p>\\n<p>This heady mix of wildlife, adventure, culture and spectacular scenery could find you partying in Cape Town, taking a helicopter over Victoria Falls, going on safari in the Serengeti and snorkelling off the coast of Zanzibar. Whether you're after a luxury African safari honeymoon, dedicated family safari or, more specifically, a walking safari or riding safari, by travelling with Exsus&nbsp;Travel you'll stay in some of the very best luxury safari lodges with the very best professional guides.</p>\\n<p>Africa is not short on once-in-a-lifetime experiences, and whether it&rsquo;s climbing Mount Kilimanjaro or coming face-to-face with mountain gorillas in Uganda or Rwanda, a ${tailor-made} luxury African holiday is a great opportunity to tick off a few items on the bucket list.<br /><br />Amazing experiences and stunning wildlife aside, Africa is also a great location for a beach ${holiday} with an exotic twist: go island hopping in Mozambique and combine Africa&rsquo;s cultural intrigue with the ultimate in secluded desert island relaxation, or enjoy a classic&nbsp;bush and beach safari in Kenya&nbsp;or Tanzania.<br /><br /></p>\\n<h3><br />YOUR LUXURY AFRICAN SAFARI STARTS HERE</h3>\\n<p><br />At Exsus&nbsp;Travel we're enormously passionate about Africa, and our experts have travelled extensively across the continent so they really know their stuff. To ensure you have the safari ${holiday} of a lifetime, get in touch with one of the team today to tailor-make your African safari ${holiday} around your own personal&nbsp;wishlist. Get in touch by&nbsp;<span>calling&nbsp;</span><span class=\\\"mediahawkNumber1793 mhMobile\\\"><a href=\\\"tel:02036135633\\\">020 3613 5633</a></span><span><span>&nbsp;</span>or by<span>&nbsp;</span></span><a href=\\\"https://www.exsus.com/make-an-enquiry?ptype=CUST&amp;pcode=home\\\" target=\\\"_blank\\\" class=\\\"simple-link\\\">making an online enquiry</a><span>.</span></p>",
+        "destination_images": {
+          "data": [
+            {
+              "id": 1,
+              "attributes": {
+                "image_id": null,
+                "image_name": "shutterstock6711039611.jpg",
+                "image_path": "/mc/Interest/Africa/shutterstock6711039611.jpg",
+                "image_alt_text": "Africa",
+                "image_type": "main",
+                "image_text": null,
+                "createdAt": "2023-08-03T12:08:10.190Z",
+                "updatedAt": "2023-08-03T12:08:10.190Z",
+                "publishedAt": "2023-08-03T13:05:04.242Z"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "meta": {}
   }
 }
