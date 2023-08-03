@@ -15,6 +15,9 @@ function Index() {
     const [users, setUsers] = useState(null);
     const [destinationDropdown, setDestinationDropdown] = useState(null);
     const [destination, setDestination] = useState(null);
+    const [destinationDetails, setDestinationDetails] = useState();
+    const [backgroundImage, setBackgroundImage] = useState('');
+    const [valueWithBr, setnewValueWithBr] = useState('');
 
     useEffect(() => {
 
@@ -33,6 +36,18 @@ function Index() {
             const desiredDestination = x.find(item => item.id == desiredKey);
             // console.log('desiredDestinatio2', desiredDestination.destination_translations[0].destination_overview_text);
             setDestination(desiredDestination.destination_translations[0].destination_overview_text);
+        });
+
+        destinationService.getDestinationDetails().then(x => {
+            console.log('getDestinationDetails', x);
+            setDestinationDetails(x.data.attributes);
+            // const lines = x.data.attributes?.overview_text.split('\n');
+            // console.log('lines', lines);
+            const oldText = x.data.attributes?.overview_text;
+            var newValueWithBr = oldText?.replace(/\n/g,"<br />");
+            setnewValueWithBr(newValueWithBr);
+            setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + x.data.attributes.destination_images.data[0].attributes.image_path);
+            // setDestinationLandingDetails(x)
         });
 
         $('.banner_map_tab').click(function () {
@@ -83,7 +98,11 @@ function Index() {
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="12" aria-label="Slide 13"></button>
                     </div>
                     <div className="carousel-inner">
+
                         <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
+                            <div className="banner_commn_cls" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
+                        </a>
+                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="banner_commn_cls destination_overvw_banner01"></div>
                         </a>
                         <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
@@ -129,14 +148,20 @@ function Index() {
                     <button className="btn banner_img_tab banner_tab_active">Images</button>
                 </div>
                 <div className="banner_map_blk">
-                    <Iframe url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin"
+                    {/* <Iframe url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin"
                         width="640px"
                         height="320px"
                         id=""
                         className=""
                         display="block"
-                        position="relative" />
-                    {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" style="border:0;" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe> */}
+                        position="relative"/> */}
+                    <Iframe width="640px"
+                        height="320px"
+                        id=""
+                        className=""
+                        display="block"
+                        position="relative" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" style="border:0;" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+
                 </div>
             </section>
 
@@ -150,7 +175,10 @@ function Index() {
                         </ul>
                     </div>
                     <div className="destination_tab_inr">
-                        <h2 className="tab_tilte">LUXURY HOLIDAYS IN ASIA</h2>
+                        <h2 className="tab_tilte">
+
+                            {destinationDetails?.header_text}
+                        </h2>
                         <ul className="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
                             <li className="nav-item" role="presentation">
                                 <button className="nav-link active" id="pills-overview-tab" data-bs-toggle="pill" data-bs-target="#pills-overview" type="button" role="tab" aria-controls="pills-overview" aria-selected="true">Ovierview</button>
@@ -172,7 +200,11 @@ function Index() {
                     <div className="tab-pane fade show active" id="pills-overview" role="tabpanel" aria-labelledby="pills-overview-tab" tabIndex="0">
                         <div className="container-md">
                             <section className="destination_para">
-                                <p dangerouslySetInnerHTML={{ __html: destination }} />
+                            {/* {valueWithBr.map((line, index) => (
+        <p dangerouslySetInnerHTML={{ __html: line}} key={index} />
+      ))} */}
+                                <div dangerouslySetInnerHTML={{ __html: valueWithBr }} />
+                                {/* <p dangerouslySetInnerHTML={{ __html: destination }} /> */}
                                 {/* <p>Warning: Asia is highly addictive. Whether it’s a rickshaw ride through hectic Hanoi, a fascinating adventure amidst the ancient Angkor temples or diving and snorkelling in some of the warmest, clearest seas on the planet, Asia is jam-packed with culture, adventure - and variety.</p>
                                 <p>A truly tantalising continent, Asia promises extraordinary experiences for every traveller. Whether you’re after a luxury honeymoon in South-East Asia, a family adventure holiday in Southern Asia or a cultural holiday to the Far East, you can expect some of the most beautiful beaches and most incredible luxury hotels in the world, fast-paced cities, tranquil village life and mouthwatering food. Asia has it all.</p>
                                 <p>Take a journey through temple-laced Cambodia or Malaysia; island-hop across the other-worldly archipelago of Indonesia; and soak up the buzz of floating markets in Vietnam, Laos and Thailand. Delve into emerald jungles and encounter enthralling wildlife in Borneo; or relish the pulsating energy of Asia’s most cosmopolitan cities: Hong Kong, Macau and Singapore. Then there’s beguiling Japan, a cultural odyssey through time, while Bhutan and Myanmar have just begun to unveil their treasures to the world, and we wouldn’t want you to miss it.</p>
