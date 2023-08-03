@@ -210,139 +210,139 @@ function Index() {
             </section>
 
             <section className="favrites_blk_row">
-                <div className="container-md">
-                    <h3 className="title_cls">Favourite trip ideas</h3>
-                    <div className="card_slider_row">
-                        <i id="left">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z" /></svg>
-                        </i>
-                        <div className="carousel00">
-                            <div className="card_slider_inr">
-                                <div className="card_slider">
-                                    <a className="card_slider_img">
-                                        <img src="images/card_slider01.jpg" alt="slider image 01" className="img-fluid" />
-                                    </a>
-                                    <div className="card_slider_cnt">
-                                        <h4>Luxury Holidays to Egypt</h4>
-                                        <ul>
-                                            <li>Egypt</li>
-                                            <li>From £3,690 per person</li>
-                                            <li>Travel to:<span>Alexandria, Aswan, Cairo</span></li>
-                                        </ul>
-                                    </div>
-                                    <button className="btn card_slider_btn">
-                                        <span>9 nights</span>
-                                        <span className="view_itnry_link">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                    </button>
-                                </div>
+        <div className="container-md">
+            <h3 className="title_cls">Favourite trip ideas</h3>        
+            <div className="card_slider_row">
+                <i id="left">                    
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z"/></svg>
+                </i>
+                <div className="carousel00">
+                    <div className="card_slider_inr">
+                        <div className="card_slider">
+                            <a className="card_slider_img">
+                                <img src="images/card_slider01.jpg" alt="slider image 01" className="img-fluid" />
+                            </a>
+                            <div className="card_slider_cnt">
+                                <h4>Luxury Holidays to Egypt</h4>
+                                <ul>
+                                    <li>Egypt</li>
+                                    <li>From £3,690 per person</li>
+                                    <li>Travel to:<span>Alexandria, Aswan, Cairo</span></li>
+                                </ul>                            
                             </div>
-
-                            <div className="card_slider_inr">
-                                <div className="card_slider">
-                                    <div className="card_slider_img">
-                                        <img src="images/card_slider02.jpg" alt="slider image 02" className="img-fluid" />
-                                    </div>
-                                    <div className="card_slider_cnt">
-                                        <h4>Luxury India train journey: Delhi to Mumbai</h4>
-                                        <ul>
-                                            <li>India</li>
-                                            <li>From £5,595 per person</li>
-                                            <li>Travel to:<span>Delhi & Around, Mumbai & Western India</span></li>
-                                        </ul>
-                                    </div>
-                                    <button className="btn card_slider_btn">
-                                        <span>9 nights</span>
-                                        <span className="view_itnry_link">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div className="card_slider_inr">
-                                <div className="card_slider">
-                                    <div className="card_slider_img">
-                                        <img src="images/card_slider03.jpg" alt="slider image 03" className="img-fluid" />
-                                    </div>
-                                    <div className="card_slider_cnt">
-                                        <h4>Magical Maldives holiday</h4>
-                                        <ul>
-                                            <li>Maldives</li>
-                                            <li>From £3,200 per person</li>
-                                            <li>Travel to:<span>Maldives</span></li>
-                                        </ul>
-                                    </div>
-                                    <button className="btn card_slider_btn">
-                                        <span>7 nights</span>
-                                        <span className="view_itnry_link">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div className="card_slider_inr">
-                                <div className="card_slider">
-                                    <div className="card_slider_img">
-                                        <img src="images/card_slider04.jpg" alt="slider image 04" className="img-fluid" />
-                                    </div>
-                                    <div className="card_slider_cnt">
-                                        <h4>Masai Mara Migration</h4>
-                                        <ul>
-                                            <li>Kenya</li>
-                                            <li>From £7,265 per person</li>
-                                            <li>Travel to:<span>Kenya coast, Laikipia, Meru & Central Kenya, Masai Mara</span></li>
-                                        </ul>
-                                    </div>
-                                    <button className="btn card_slider_btn">
-                                        <span>9 nights</span>
-                                        <span className="view_itnry_link">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div className="card_slider_inr">
-                                <div className="card_slider">
-                                    <div className="card_slider_img">
-                                        <img src="images/card_slider05.jpg" alt="slider image 05" className="img-fluid" />
-                                    </div>
-                                    <div className="card_slider_cnt">
-                                        <h4>A luxury british isles cruise</h4>
-                                        <ul>
-                                            <li>UK</li>
-                                            <li>From £5,190 per person</li>
-                                        </ul>
-                                    </div>
-                                    <button className="btn card_slider_btn">
-                                        <span>12 nights</span>
-                                        <span className="view_itnry_link">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div className="card_slider_inr">
-                                <div className="card_slider">
-                                    <div className="card_slider_img">
-                                        <img src="images/card_slider06.jpg" alt="slider image 06" className="img-fluid" />
-                                    </div>
-                                    <div className="card_slider_cnt">
-                                        <h4>Big game & grapevines</h4>
-                                        <ul>
-                                            <li>South Africa</li>
-                                            <li>From £5,185 per person</li>
-                                            <li>Travel to: <span>Cape town & around, greater kruger & panorama region, Winelands</span></li>
-                                        </ul>
-                                    </div>
-                                    <button className="btn card_slider_btn">
-                                        <span>9 nights</span>
-                                        <span className="view_itnry_link">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                    </button>
-                                </div>
-                            </div>
+                            <button className="btn card_slider_btn">
+                                <span>9 nights</span>
+                                <span className="view_itnry_link">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                            </button>
                         </div>
-                        <i id="right">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                        </i>
+                    </div>
+
+                    <div className="card_slider_inr">
+                        <div className="card_slider">
+                            <div className="card_slider_img">
+                                <img src="images/card_slider02.jpg" alt="slider image 02" className="img-fluid" />
+                            </div>                            
+                            <div className="card_slider_cnt">
+                                <h4>Luxury India train journey: Delhi to Mumbai</h4>
+                                <ul>
+                                    <li>India</li>
+                                    <li>From £5,595 per person</li>
+                                    <li>Travel to:<span>Delhi & Around, Mumbai & Western India</span></li>
+                                </ul>
+                            </div>
+                            <button className="btn card_slider_btn">
+                                <span>9 nights</span>
+                                <span className="view_itnry_link">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="card_slider_inr">
+                        <div className="card_slider">
+                            <div className="card_slider_img">
+                                <img src="images/card_slider03.jpg" alt="slider image 03" className="img-fluid" />
+                            </div>
+                            <div className="card_slider_cnt">
+                                <h4>Magical Maldives holiday</h4>
+                                <ul>
+                                    <li>Maldives</li>
+                                    <li>From £3,200 per person</li>
+                                    <li>Travel to:<span>Maldives</span></li>
+                                </ul>
+                            </div>
+                            <button className="btn card_slider_btn">
+                                <span>7 nights</span>
+                                <span className="view_itnry_link">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="card_slider_inr">
+                        <div className="card_slider">
+                            <div className="card_slider_img">
+                                <img src="images/card_slider04.jpg" alt="slider image 04" className="img-fluid" />
+                            </div>                            
+                            <div className="card_slider_cnt">
+                                <h4>Masai Mara Migration</h4>
+                                <ul>
+                                    <li>Kenya</li>
+                                    <li>From £7,265 per person</li>
+                                    <li>Travel to:<span>Kenya coast, Laikipia, Meru & Central Kenya, Masai Mara</span></li>
+                                </ul>
+                            </div>
+                            <button className="btn card_slider_btn">
+                                <span>9 nights</span>
+                                <span className="view_itnry_link">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="card_slider_inr">
+                        <div className="card_slider">
+                            <div className="card_slider_img">
+                                <img src="images/card_slider05.jpg" alt="slider image 05" className="img-fluid" />
+                            </div>                            
+                            <div className="card_slider_cnt">
+                                <h4>A luxury british isles cruise</h4>
+                                <ul>
+                                    <li>UK</li>
+                                    <li>From £5,190 per person</li>
+                                </ul>
+                            </div>
+                            <button className="btn card_slider_btn">
+                                <span>12 nights</span>
+                                <span className="view_itnry_link">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="card_slider_inr">
+                        <div className="card_slider">
+                            <div className="card_slider_img">
+                                <img src="images/card_slider06.jpg" alt="slider image 06" className="img-fluid" />
+                            </div>                            
+                            <div className="card_slider_cnt">
+                                <h4>Big game & grapevines</h4>
+                                <ul>
+                                    <li>South Africa</li>
+                                    <li>From £5,185 per person</li>
+                                    <li>Travel to: <span>Cape town & around, greater kruger & panorama region, Winelands</span></li>
+                                </ul>
+                            </div>
+                            <button className="btn card_slider_btn">
+                                <span>9 nights</span>
+                                <span className="view_itnry_link">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                            </button>
+                        </div>
                     </div>
                 </div>
-                {/* <div className="full_loader_parnt_blk loader_parnt_blk" style="display: none;"><div className="loader-circle-2"></div></div> */}
-            </section>
+                <i id="right">                    
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"/></svg>
+                </i>
+              </div>
+        </div>
+        {/* <div className="full_loader_parnt_blk loader_parnt_blk" style="display: none;"><div className="loader-circle-2"></div></div> */}
+    </section>
             
 
             <section aria-label="Client Testimonials" className="testimonials_blk_row">

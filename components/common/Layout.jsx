@@ -191,7 +191,7 @@ function Layout({ children }) {
         <div className="">
             <header className="header_blk_row header">
                 <Head>
-                    <script type="text/javascript" src="/assets/javascripts/navigation.js"></script>
+                    {/* <script type="text/javascript" src="/assets/javascripts/navigation.js"></script> */}
                 </Head>
                 <div className="container">
                     <div className="header_blk_inr">
