@@ -5,13 +5,13 @@ import Router from 'next/router';
 import { fetchWrapper } from 'helpers';
 
 const { publicRuntimeConfig } = getConfig();
-const baseUrl = `${publicRuntimeConfig.apiUrl}/users`;
+const baseUrl = `${publicRuntimeConfig.apiUrl}`;
 // console.log('publicRuntimeConfig.apiUrl', publicRuntimeConfig);
 const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('user')));
 
 export const userService = {
     user: userSubject.asObservable(),
-    get userValue () { return userSubject.value },
+    get userValue() { return userSubject.value },
     login,
     logout,
     register,
@@ -21,13 +21,13 @@ export const userService = {
     delete: _delete
 };
 
-function login(username, password) {
-    return fetchWrapper.post(`${baseUrl}/authenticate`, { username, password })
+function login(identifier, password) {
+    return fetchWrapper.get(`${baseUrl}/auth`, { identifier, password })
         .then(user => {
-            // publish user to subscribers and store in local storage to stay logged in between page refreshes
+            console.log('user', user);
+            // publish user to subscribers and store in local storage to stay logged in between page refreshes            
             userSubject.next(user);
             localStorage.setItem('user', JSON.stringify(user));
-
             return user;
         });
 }

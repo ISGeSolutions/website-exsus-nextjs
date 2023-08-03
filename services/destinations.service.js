@@ -5,9 +5,15 @@ import Router from 'next/router';
 import { fetchWrapper } from 'helpers';
 
 const { publicRuntimeConfig } = getConfig();
-const baseUrl_dropdown = `${publicRuntimeConfig.apiUrl}/destinations_dropdown`;;
+const baseUrl_dropdown = `${publicRuntimeConfig.apiUrl}/destinations_dropdown`;
 
-const baseUrl = `${publicRuntimeConfig.apiUrl}/destinations`;;
+// const destinationLandingPageUrl = `${publicRuntimeConfig.apiUrl}/api/custom-pages?filters[custom-page][page_code][$eq]=Destinations&populate[0]=custom_page_images`;
+const destinationLandingPageUrl = `${publicRuntimeConfig.apiUrl}/destination_landing_page`;
+
+// const destinationLandingListUrl = `${publicRuntimeConfig.apiUrl}//api/destinations?fields[0]=destination_code&fields[1]=destination_name&populate[0]=destination_images;
+const destinationLandingListUrl = `${publicRuntimeConfig.apiUrl}/destination_landing_list`;
+
+const baseUrl = `${publicRuntimeConfig.apiUrl}/destinations`;
 
 // export const destiantionsService = {
 //     getDestinationsList
@@ -25,7 +31,9 @@ export const destinationService = {
     get userValue() { return userSubject.value },
     getAll,
     getById,
-    getAllDropdown
+    getAllDropdown,
+    getDestinationLandingPage,
+    getDestinationLandingList
 };
 
 function getAllDropdown() {
@@ -40,4 +48,14 @@ function getAll() {
 
 function getById(id) {
     return fetchWrapper.get(`${baseUrl}/${id}`);
+}
+
+function getDestinationLandingPage() {
+    // console.log('baseUrl_dropdown', baseUrl_dropdown);
+    return fetchWrapper.get(destinationLandingPageUrl);
+}
+
+function getDestinationLandingList() {
+    // console.log('baseUrl_dropdown', baseUrl_dropdown);
+    return fetchWrapper.get(destinationLandingListUrl);
 }

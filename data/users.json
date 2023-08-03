@@ -420,5 +420,136 @@
       "createdAt": "2023-08-02T18:37:25.243Z",
       "updatedAt": "2023-08-02T18:37:25.243Z"
     }
+  },
+  "destination_landing_page": {
+    "data": [
+      {
+        "id": 1,
+        "attributes": {
+          "page_code": "Destinations",
+          "page_title": "Luxury Holiday Destinations",
+          "page_url": "/destinations",
+          "page_friendly_url": "Home/destinations",
+          "page_header_text": "Tailor-made  Luxury Holidays",
+          "page_content_1": "If the world is your oyster when choosing where to go, our team of travel experts can help you by providing inspiration and advice on travelling to all seven continents. ",
+          "page_content_2": null,
+          "page_content_3": "YOUR JOURNEY STARTS HERE",
+          "page_content_4": "Call us on 020 7337 9010 to start planning your perfect trip",
+          "page_content_5": null,
+          "page_content_6": null,
+          "createdAt": "2023-08-02T16:52:02.011Z",
+          "updatedAt": "2023-08-02T17:07:54.001Z",
+          "publishedAt": "2023-08-02T17:21:12.744Z",
+          "freeze_ind": false,
+          "custom_page_images": {
+            "data": [
+              {
+                "id": 1,
+                "attributes": {
+                  "image_id": null,
+                  "image_name": "geishastunnelshutterstock55060959111_1920_521.jpg",
+                  "image_header_text_1": null,
+                  "image_header_text_2": null,
+                  "image_title": null,
+                  "image_short_text": null,
+                  "image_type": "banner",
+                  "createdAt": "2023-08-02T17:17:21.130Z",
+                  "updatedAt": "2023-08-02T17:17:21.130Z",
+                  "publishedAt": "2023-08-02T17:21:23.891Z",
+                  "freeze_ind": false,
+                  "image_path": "/custom_page/destinations/geishastunnelshutterstock55060959111_1920_521.jpg"
+                }
+              },
+              {
+                "id": 2,
+                "attributes": {
+                  "image_id": null,
+                  "image_name": "dst_when_to_go.jpg",
+                  "image_header_text_1": "WHEN TO GO WHERE",
+                  "image_header_text_2": "Find out the best time to travel",
+                  "image_title": null,
+                  "image_short_text": null,
+                  "image_type": "center",
+                  "createdAt": "2023-08-02T17:19:57.817Z",
+                  "updatedAt": "2023-08-02T17:19:57.817Z",
+                  "publishedAt": "2023-08-02T17:21:23.891Z",
+                  "freeze_ind": false,
+                  "image_path": "/custompage/destinations/mc/dst_when_to_go.jpg"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "meta": {
+      "pagination": {
+        "page": 1,
+        "pageSize": 25,
+        "pageCount": 1,
+        "total": 1
+      }
+    }
+  },
+  "destination_landing_list": {
+    "data": [
+      {
+        "id": 1,
+        "attributes": {
+          "destination_code": "AF",
+          "destination_name": "Africa"
+        }
+      },
+      {
+        "id": 2,
+        "attributes": {
+          "destination_code": "AS",
+          "destination_name": "Asia"
+        }
+      },
+      {
+        "id": 3,
+        "attributes": {
+          "destination_code": "AU",
+          "destination_name": "Australasia & South Pacific"
+        }
+      },
+      {
+        "id": 4,
+        "attributes": {
+          "destination_code": "CA",
+          "destination_name": "Central America"
+        }
+      },
+      {
+        "id": 5,
+        "attributes": {
+          "destination_code": "EU",
+          "destination_name": "Europe"
+        }
+      },
+      {
+        "id": 6,
+        "attributes": {
+          "destination_code": "IO",
+          "destination_name": "Indian Ocean"
+        }
+      },
+      {
+        "id": 7,
+        "attributes": {
+          "destination_code": "IS",
+          "destination_name": "Indian Subcontinent"
+        }
+      }
+    ],
+    "meta": {
+      "pagination": {
+        "page": 1,
+        "pageSize": 25,
+        "pageCount": 1,
+        "total": 7
+      }
+    }
   }
 }

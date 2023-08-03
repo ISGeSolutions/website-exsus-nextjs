@@ -37,6 +37,13 @@ function App({ Component, pageProps }) {
         // on route change complete - run auth check 
         router.events.on('routeChangeComplete', authCheck)
 
+        const identifier = "vidya@isgesolutions.com";
+        const password = "vpIsg@2023";
+
+        userService.login(identifier. password).then(x => {
+            console.log('x', x);
+        });
+
         // unsubscribe from events in useEffect return function
         return () => {
             router.events.off('routeChangeStart', hideContent);
@@ -76,6 +83,9 @@ function App({ Component, pageProps }) {
 
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" />
+                <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
+                <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script>
+
 
                 {/* <link href="//netdna.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
                 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
