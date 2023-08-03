@@ -17,6 +17,7 @@ function Index() {
     const [destination, setDestination] = useState(null);
     const [destinationDetails, setDestinationDetails] = useState();
     const [backgroundImage, setBackgroundImage] = useState('');
+    const [valueWithBr, setnewValueWithBr] = useState('');
 
     useEffect(() => {
 
@@ -40,6 +41,9 @@ function Index() {
         destinationService.getDestinationDetails().then(x => {
             console.log('getDestinationDetails', x);
             setDestinationDetails(x.data.attributes);
+            const oldText = destinationDetails?.overview_text;
+            var newValueWithBr = oldText?.replace(/\n/g,"<br />");
+            setnewValueWithBr(newValueWithBr);
             setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + x.data.attributes.destination_images.data[0].attributes.image_path);
             // setDestinationLandingDetails(x)
         });
@@ -188,8 +192,7 @@ function Index() {
                     <div className="tab-pane fade show active" id="pills-overview" role="tabpanel" aria-labelledby="pills-overview-tab" tabIndex="0">
                         <div className="container-md">
                             <section className="destination_para">
-
-                                <p dangerouslySetInnerHTML={{ __html: destinationDetails?.overview_text }} />
+                                <div dangerouslySetInnerHTML={{ __html: valueWithBr }} />
                                 {/* <p dangerouslySetInnerHTML={{ __html: destination }} /> */}
                                 {/* <p>Warning: Asia is highly addictive. Whether it’s a rickshaw ride through hectic Hanoi, a fascinating adventure amidst the ancient Angkor temples or diving and snorkelling in some of the warmest, clearest seas on the planet, Asia is jam-packed with culture, adventure - and variety.</p>
                                 <p>A truly tantalising continent, Asia promises extraordinary experiences for every traveller. Whether you’re after a luxury honeymoon in South-East Asia, a family adventure holiday in Southern Asia or a cultural holiday to the Far East, you can expect some of the most beautiful beaches and most incredible luxury hotels in the world, fast-paced cities, tranquil village life and mouthwatering food. Asia has it all.</p>
