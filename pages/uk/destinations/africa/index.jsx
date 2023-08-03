@@ -41,7 +41,9 @@ function Index() {
         destinationService.getDestinationDetails().then(x => {
             console.log('getDestinationDetails', x);
             setDestinationDetails(x.data.attributes);
-            const oldText = destinationDetails?.overview_text;
+            // const lines = x.data.attributes?.overview_text.split('\n');
+            // console.log('lines', lines);
+            const oldText = x.data.attributes?.overview_text;
             var newValueWithBr = oldText?.replace(/\n/g,"<br />");
             setnewValueWithBr(newValueWithBr);
             setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + x.data.attributes.destination_images.data[0].attributes.image_path);
@@ -192,6 +194,9 @@ function Index() {
                     <div className="tab-pane fade show active" id="pills-overview" role="tabpanel" aria-labelledby="pills-overview-tab" tabIndex="0">
                         <div className="container-md">
                             <section className="destination_para">
+                            {/* {valueWithBr.map((line, index) => (
+        <p dangerouslySetInnerHTML={{ __html: line}} key={index} />
+      ))} */}
                                 <div dangerouslySetInnerHTML={{ __html: valueWithBr }} />
                                 {/* <p dangerouslySetInnerHTML={{ __html: destination }} /> */}
                                 {/* <p>Warning: Asia is highly addictive. Whether it’s a rickshaw ride through hectic Hanoi, a fascinating adventure amidst the ancient Angkor temples or diving and snorkelling in some of the warmest, clearest seas on the planet, Asia is jam-packed with culture, adventure - and variety.</p>
