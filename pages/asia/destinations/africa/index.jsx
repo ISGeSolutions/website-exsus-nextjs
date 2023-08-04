@@ -18,6 +18,31 @@ function Index() {
     const [destinationDetails, setDestinationDetails] = useState();
     const [backgroundImage, setBackgroundImage] = useState('');
     const [valueWithBr, setnewValueWithBr] = useState('');
+    const [headingText, setHeadingText] = useState('LUXURY SAFARI HOLIDAYS IN AFRICA');
+
+    const selectedSec = (itemId) => {
+        console.log('itemId', itemId);
+
+        var text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
+        if(itemId == 'overview') {
+            text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
+        } else if(itemId == 'countries') {
+            text = "COUNTRIES IN AFRICA";
+        } else if(itemId == 'itineraries') {
+            text = "TAILOR-MADE AFRICA HOLIDAY ITINERARIES";
+        } else if(itemId == 'places_to_stay') {
+            text = "PLACES TO STAY IN AFRICA";
+        } else {
+            text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
+        }
+        setHeadingText(text)
+
+        // LUXURY SAFARI HOLIDAYS IN AFRICA
+        // COUNTRIES IN AFRICA
+        // TAILOR-MADE AFRICA HOLIDAY ITINERARIES
+        // PLACES TO STAY IN AFRICA
+        // EXPERIENCES IN AFRICA
+    };
 
     useEffect(() => {
 
@@ -70,7 +95,6 @@ function Index() {
         });
 
     }, []);
-
 
     return (
         <Layout>
@@ -175,21 +199,21 @@ function Index() {
                     </div>
                     <div className="destination_tab_inr">
                         <h2 className="tab_tilte">
-
-                            {destinationDetails?.header_text}
+                            {/* {destinationDetails?.header_text} */}
+                            {headingText}
                         </h2>
                         <ul className="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
                             <li className="nav-item" role="presentation">
-                                <button className="nav-link active" id="pills-overview-tab" data-bs-toggle="pill" data-bs-target="#pills-overview" type="button" role="tab" aria-controls="pills-overview" aria-selected="true">Ovierview</button>
+                                <button className="nav-link active" id="pills-overview-tab" data-bs-toggle="pill" data-bs-target="#pills-overview" type="button" role="tab" aria-controls="pills-overview" aria-selected="true"><span onClick={() => selectedSec('ovierview')}>Ovierview</span></button>
                             </li>
                             <li className="nav-item" role="presentation">
-                                <button className="nav-link" id="pills-countries-tab" data-bs-toggle="pill" data-bs-target="#pills-countries" type="button" role="tab" aria-controls="pills-countries" aria-selected="false">Countries</button>
+                                <button className="nav-link" id="pills-countries-tab" data-bs-toggle="pill" data-bs-target="#pills-countries" type="button" role="tab" aria-controls="pills-countries" aria-selected="false" onClick={() => selectedSec('countries')}>Countries</button>
                             </li>
                             <li className="nav-item" role="presentation">
-                                <button className="nav-link" id="pills-itineraries-tab" data-bs-toggle="pill" data-bs-target="#pills-itineraries" type="button" role="tab" aria-controls="pills-itineraries" aria-selected="false">Itineraries</button>
+                                <button className="nav-link" id="pills-itineraries-tab" data-bs-toggle="pill" data-bs-target="#pills-itineraries" type="button" role="tab" aria-controls="pills-itineraries" aria-selected="false" onClick={() => selectedSec('itineraries')}>Itineraries</button>
                             </li>
                             <li className="nav-item" role="presentation">
-                                <button className="nav-link" id="pills-places-to-stay-tab" data-bs-toggle="pill" data-bs-target="#pills-places-to-stay" type="button" role="tab" aria-controls="pills-places-to-stay" aria-selected="false">Places to stay</button>
+                                <button className="nav-link" id="pills-places-to-stay-tab" data-bs-toggle="pill" data-bs-target="#pills-places-to-stay" type="button" role="tab" aria-controls="pills-places-to-stay" aria-selected="false" onClick={() => selectedSec('places_to_stay')}>Places to stay</button>
                             </li>
                         </ul>
                     </div>

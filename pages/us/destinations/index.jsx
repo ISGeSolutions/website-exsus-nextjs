@@ -5,6 +5,9 @@ import { Layout } from 'components/users';
 import { destinationService, alertService, userService } from 'services';
 import { Inspireme } from 'components';
 import Head from 'next/head';
+import { NavLink } from 'components';
+import { useRouter } from 'next/router';
+import generateDynamicLink from 'components/utils/generateLink';
 
 // import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 // var Carousel = require('react-responsive-carousel').Carousel;
@@ -29,6 +32,30 @@ function Index() {
     const [destinationLandingList, setDestinationLandingList] = useState();
     const [backgroundImage, setBackgroundImage] = useState('');
     const [backgroundImgWhentogo, setBackgroundImgWhentogo] = useState('');
+
+    const router = useRouter();
+
+    // const itemId = 123; // Replace this with the actual itemId or fetch it from your data
+
+    // const dynamicLink() = generateDynamicLink(itemId);
+
+    const dynamicLink = (itemId) => {
+        if (itemId && itemId == 'AF') {
+            return `/destination/africa`;
+        } else if (itemId && itemId == 'AS') {
+            return `/destination/asia`;
+        } else if (itemId && itemId == 'AU') {
+            return `/destination/australasia-and-south-pacific`;
+        } else if (itemId && itemId == 'CA') {
+            return `/destination/central-america`;
+        } else if (itemId && itemId == 'EU') {
+            return `/destination/europe`;
+        } else if (itemId && itemId == 'IO') {
+            return `/destination/indian-ocean`;
+        } else if (itemId && itemId == 'IS') {
+            return `/destination/indian-subcontinent`;
+        }
+    }
 
     useEffect(() => {
         // destinationService.getAll().then(x => {
@@ -79,9 +106,9 @@ function Index() {
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
                     </div>
                     <div className="carousel-inner">
-                        <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
+                        <NavLink href="#" className="carousel-item active" data-bs-interval="5000">
                             <div className="banner_commn_cls" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
-                        </a>
+                        </NavLink>
                     </div>
                 </div>
                 <Inspireme />
@@ -92,7 +119,7 @@ function Index() {
                 <div className="container-md">
                     <div className="bookmark_row">
                         <ul>
-                            <li><a href="homepage.html">Home</a></li>
+                            <li><NavLink href="homepage.html">Home</NavLink></li>
                             <li>Destinations</li>
                         </ul>
                     </div>
@@ -118,7 +145,7 @@ function Index() {
                         {destinationLandingList?.map((destinationItem, i) => (
                             <div className="col-sm-6" key={destinationItem?.id}>
                                 <div className="card_blk_inr">
-                                    <a href="destination_overview.html" target="_blank">
+                                    <NavLink href={dynamicLink(destinationItem?.attributes?.destination_code)}>
                                         <img src="./../images/destination01.jpg" alt="destination01" className="img-fluid" />
                                         <div className="card_blk_cntnt card_blk_sml_arw">
                                             <div className="row align-items-center">
@@ -132,14 +159,14 @@ function Index() {
                                                 </div>
                                             </div>
                                         </div>
-                                    </a>
+                                    </NavLink>
                                 </div>
                             </div>
                         ))}
 
                         <div className="col-sm-6">
                             <div className="card_blk_inr">
-                                <a href="destination_overview.html" target="_blank">
+                                <NavLink href="destinations/asia">
                                     <img src="./../images/destination01.jpg" alt="destination01" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
@@ -153,13 +180,13 @@ function Index() {
                                             </div>
                                         </div>
                                     </div>
-                                </a>
+                                </NavLink>
                             </div>
                         </div>
 
                         <div className="col-sm-6">
                             <div className="card_blk_inr">
-                                <a href="destination_overview.html" target="_blank">
+                                <NavLink href="destinations/europe">
                                     <img src="./../images/destination02.jpg" alt="destination02" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
@@ -174,13 +201,13 @@ function Index() {
                                         </div>
 
                                     </div>
-                                </a>
+                                </NavLink>
                             </div>
                         </div>
 
                         <div className="col-sm-6">
                             <div className="card_blk_inr">
-                                <a href="destination_overview.html" target="_blank">
+                                <NavLink href="destinations/south-america">
                                     <img src="./../images/destination03.jpg" alt="destination03" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
@@ -194,13 +221,13 @@ function Index() {
                                             </div>
                                         </div>
                                     </div>
-                                </a>
+                                </NavLink>
                             </div>
                         </div>
 
                         <div className="col-sm-6">
                             <div className="card_blk_inr">
-                                <a href="destination_overview.html" target="_blank">
+                                <NavLink href="destinations/indian-subcontinent">
                                     <img src="./../images/destination04.jpg" alt="destination04" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
@@ -215,13 +242,13 @@ function Index() {
                                         </div>
 
                                     </div>
-                                </a>
+                                </NavLink>
                             </div>
                         </div>
 
                         <div className="col-sm-6">
                             <div className="card_blk_inr">
-                                <a href="destination_overview.html" target="_blank">
+                                <NavLink href="destinations/north-america-and-caribbean">
                                     <img src="./../images/destination05.jpg" alt="destination05" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
@@ -236,13 +263,13 @@ function Index() {
                                         </div>
 
                                     </div>
-                                </a>
+                                </NavLink>
                             </div>
                         </div>
 
                         <div className="col-sm-6">
                             <div className="card_blk_inr">
-                                <a href="destination_overview.html" target="_blank">
+                                <NavLink href="destinations/africa">
                                     <img src="./../images/destination06.jpg" alt="destination06" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
@@ -257,13 +284,13 @@ function Index() {
                                         </div>
 
                                     </div>
-                                </a>
+                                </NavLink>
                             </div>
                         </div>
 
                         <div className="col-sm-6">
                             <div className="card_blk_inr">
-                                <a href="destination_overview.html" target="_blank">
+                                <NavLink href="destinations/central-america">
                                     <img src="./../images/destination07.jpg" alt="destination07" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
@@ -278,13 +305,13 @@ function Index() {
                                         </div>
 
                                     </div>
-                                </a>
+                                </NavLink>
                             </div>
                         </div>
 
                         <div className="col-sm-6">
                             <div className="card_blk_inr">
-                                <a href="destination_overview.html" target="_blank">
+                                <NavLink href="destinations/australasia-and-south-pacific">
                                     <img src="./../images/destination08.jpg" alt="destination08" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
@@ -299,13 +326,13 @@ function Index() {
                                         </div>
 
                                     </div>
-                                </a>
+                                </NavLink>
                             </div>
                         </div>
 
                         <div className="col-sm-6">
                             <div className="card_blk_inr">
-                                <a href="destination_overview.html" target="_blank">
+                                <NavLink href="destinations/middle-east-and-north-africa">
                                     <img src="./../images/destination09.jpg" alt="destination09" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
@@ -320,13 +347,13 @@ function Index() {
                                         </div>
 
                                     </div>
-                                </a>
+                                </NavLink>
                             </div>
                         </div>
 
                         <div className="col-sm-6">
                             <div className="card_blk_inr">
-                                <a href="destination_overview.html" target="_blank">
+                                <NavLink href="destinations/indian-ocean">
                                     <img src="./../images/destination10.jpg" alt="destination10" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
@@ -341,7 +368,7 @@ function Index() {
                                         </div>
 
                                     </div>
-                                </a>
+                                </NavLink>
                             </div>
                         </div>
 
@@ -349,7 +376,7 @@ function Index() {
                 </div>
             </section>
 
-            <section className="destination_text_overlay_row" style={{ backgroundImage: `url(${backgroundImgWhentogo})`  }}>
+            <section className="destination_text_overlay_row" style={{ backgroundImage: `url(${backgroundImgWhentogo})` }}>
                 <div className="container-md">
                     <div className="destination_text_overlay_inr">
                         <h4>When to go where</h4>
