@@ -32,6 +32,25 @@ function Index() {
         userService.getAll().then(x => setUsers(x));
         const carousel = document.querySelector('#carouselExampleInterval');
         new bootstrap.Carousel(carousel);
+
+        $('.banner_map_tab').click(function () {
+            $('.banner_map_blk').toggleClass('banner_map_active')
+        });
+        $('.banner_img_tab').click(function () {
+            $('.banner_map_blk').removeClass('banner_map_active')
+        });
+
+        $('.banner_tab_blk button').click(function () {
+            $('.banner_tab_blk button').removeClass("banner_tab_active");
+            $(this).addClass('banner_tab_active');
+        });
+
+        $(document).ready(function () {
+            $('.destination_contries_filter li a').click(function () {
+                $('.destination_contries_filter li a').removeClass('active');
+                $(this).addClass('active');
+            });
+        });
     }, []);
 
 
