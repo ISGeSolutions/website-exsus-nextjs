@@ -25,8 +25,8 @@ function Index() {
     return (
         <>
             <Head>
-                <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
-                <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script>
+                {/* <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
+                <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script> */}
             </Head>
             
             <section className="banner_blk_row">

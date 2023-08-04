@@ -21,7 +21,7 @@ function Index() {
     const [headingText, setHeadingText] = useState('LUXURY SAFARI HOLIDAYS IN AFRICA');
 
     const selectedSec = (itemId) => {
-        console.log('itemId', itemId);
+        // console.log('itemId', itemId);
 
         var text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
         if(itemId == 'overview') {

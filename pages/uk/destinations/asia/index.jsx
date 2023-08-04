@@ -5,6 +5,7 @@ import { Layout } from 'components/users';
 import { userService, destinationService } from 'services';
 import Iframe from 'react-iframe'
 import Head from 'next/head';
+import Script from 'next/script';
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 var Carousel = require('react-responsive-carousel').Carousel;
@@ -1554,6 +1555,8 @@ function Index() {
                     </form>
                 </div>
             </section>
+            <Script id="card-slider" type="text/javascript" src="/assets/javascripts/card-slider.js"></Script>
+            <Script id="card-slider-height" type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></Script>
         </Layout>
     );
 }

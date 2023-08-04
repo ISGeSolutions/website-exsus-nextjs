@@ -15,7 +15,7 @@ import 'public/assets/google-icon-fonts/MaterialSymbolsOutlined/MaterialSymbolsO
 import 'public/assets/stylesheets/css/master.css';
 import 'public/assets/stylesheets/css/style.css';
 import 'public/assets/stylesheets/css/responsive.css';
-import Script from "next/script";
+import Script from 'next/script';
 
 import { userService } from 'services';
 
@@ -83,8 +83,8 @@ function App({ Component, pageProps }) {
 
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" />
-                <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
-                <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script>
+                {/* <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
+                <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script> */}
 
 
                 {/* <link href="//netdna.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
@@ -102,8 +102,11 @@ function App({ Component, pageProps }) {
 
             <script type="text/javascript" src="/assets/javascripts/popper.min.js"></script>
             <script type="text/javascript" src="/assets/javascripts/bootstrap.min.js"></script>
-            <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
-            <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script>
+            <Script id="card-slider" type="text/javascript" src="/assets/javascripts/card-slider.js"></Script>
+            <Script id="card-slider-height" type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></Script>
+
+            {/* <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script> */}
+            {/* <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script> */}
             <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
             <script type="text/javascript" src="/assets/javascripts/bootstrap-select.min.js"></script>
             <script type="text/javascript" src="/assets/javascripts/navigation.js"></script>
