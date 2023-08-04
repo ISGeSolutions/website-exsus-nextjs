@@ -40,9 +40,6 @@ function Index() {
     // const dynamicLink() = generateDynamicLink(itemId);
 
     const dynamicLink = (itemId) => {
-
-        // const newPath = generateDynamicLink(code);
-        console.log('itemId', itemId);
         if (itemId && itemId == 'AF') {
             return `/destination/africa`;
         } else if (itemId && itemId == 'AS') {
