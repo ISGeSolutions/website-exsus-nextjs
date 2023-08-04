@@ -30,14 +30,14 @@ function Index() {
         itinerariesService.getAll().then(desiredItinerary => {
             // const desiredKey = 1; // The desired key to access
             // const desiredItinerary = x.find(item => item.id == desiredKey);
-            console.log('desiredItinerary', desiredItinerary);
+            // console.log('desiredItinerary', desiredItinerary);
             setItinerary(desiredItinerary);
         });
 
         hotelService.getAll().then(desiredHotel => {
             // const desiredKey = 1; // The desired key to access
             // const desiredHotel = x.find(item => item.id == desiredKey);
-            console.log('desiredHotel', desiredHotel);
+            // console.log('desiredHotel', desiredHotel);
             setHotel(desiredHotel);
         });
 
@@ -49,48 +49,6 @@ function Index() {
     return (
         <Layout>
             <section className="banner_blk_row">
-                {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
-                    <div>
-                        <img src="/assets/images/destination_banner01.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/destination_banner02.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/destination_banner03.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/destination_banner04.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/destination_banner05.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/destination_banner06.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/destination_banner07.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/destination_banner08.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/destination_banner09.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/destination_banner10.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/destination_banner11.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/destination_banner12.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/destination_banner13.jpg" />
-                    </div>
-                </Carousel> */}
-
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>

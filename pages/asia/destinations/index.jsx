@@ -39,21 +39,30 @@ function Index() {
 
     // const dynamicLink() = generateDynamicLink(itemId);
 
+    let regionWiseUrl = '/uk';
+    if (typeof window !== 'undefined') {
+        if (window && window.site_region) {
+            // console.log('window.site_region', window.site_region);
+            regionWiseUrl = '/' + window.site_region;
+            // setMyVariable(window.site_region);
+        }
+    }
+
     const dynamicLink = (itemId) => {
         if (itemId && itemId == 'AF') {
-            return `/destination/africa`;
+            return regionWiseUrl + `/destinations/africa`;
         } else if (itemId && itemId == 'AS') {
-            return `/destination/asia`;
+            return regionWiseUrl + `/destinations/asia`;
         } else if (itemId && itemId == 'AU') {
-            return `/destination/australasia-and-south-pacific`;
+            return regionWiseUrl + `/destinations/australasia-and-south-pacific`;
         } else if (itemId && itemId == 'CA') {
-            return `/destination/central-america`;
+            return regionWiseUrl + `/destinations/central-america`;
         } else if (itemId && itemId == 'EU') {
-            return `/destination/europe`;
+            return regionWiseUrl + `/destinations/europe`;
         } else if (itemId && itemId == 'IO') {
-            return `/destination/indian-ocean`;
+            return regionWiseUrl + `/destinations/indian-ocean`;
         } else if (itemId && itemId == 'IS') {
-            return `/destination/indian-subcontinent`;
+            return regionWiseUrl + `/destinations/indian-subcontinent`;
         }
     }
 
