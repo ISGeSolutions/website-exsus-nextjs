@@ -188,7 +188,7 @@ function Layout({ children }) {
         [, [router.asPath]]);
 
     return (
-        <div className="">
+        <div>
             <header className="header_blk_row header">
                 <Head>
                     {/* <script type="text/javascript" src="/assets/javascripts/navigation.js"></script> */}
@@ -292,46 +292,9 @@ function Layout({ children }) {
                     <Nav />
                     <Alert />
                 </div>
-            </header>
-            {/* <header className="header_blk_row header">
-                <div className="container-md">
-                    <div className="header_blk_inr">
-                        <section className="header_item_left ">
-                            <div className="mobile_trigger_btn d-block d-lg-none" onClick={() => openLeftNav()}><NavLink href="#"><em className="fa-solid fa-ellipsis"></em></NavLink></div>
-                            <div className="side_menu_left" id="sideMenuLeft">
-                                <div className="side_menu_hdr">
-                                    <button className="btn fa-solid fa-xmark" onClick={() => closeLeftNav()}></button>
-                                </div>
-                                <div className="dropdown header_drpdown">
-                                    <NavLink className="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <img src="./../../images/uk-flag-round-circle-icon.svg" alt="united-kingdom-flag-icon" />UK site
-                                    </NavLink>
-                                    <ul className="dropdown-menu">
-                                        <li><NavLink className="dropdown-item" href="#"><img src="./../../images/usa-flag-round-circle-icon.svg" alt="usa-flag-round-circle-icon" />US site</NavLink></li>
-                                        <li><NavLink className="dropdown-item" href="#"><img src="./../.././../../images/thailand-flag-round-circle-icon.svg" alt="thailand-flag-round-circle-icon" /> Asia site</NavLink></li>
-                                        <li><NavLink className="dropdown-item" href="#"><img src="./../../images/india-flag-round-circle-icon.svg" alt="india-flag-round-circle-icon" />India site</NavLink></li>
-                                    </ul>
-                                </div>
-                                <div className="input-group srch_site_box">
-                                    <input type="text" className="form-control" placeholder="Search site" aria-label="Search site" aria-describedby="button-addon2" />
-                                    <button className="btn btn-outline-secondary" type="button" id="button-addon2"><span className="material-symbols-outlined">search</span></button>
-                                </div>
-                            </div>
-                        </section>
-                        <section className="header_item_center">
-                            <h1><NavLink href="/">Exsus<span>Travel</span></NavLink></h1>
-                        </section>
-                        <section className="header_item_right d-flex d-lg-inline-block justify-content-end align-items-center">
-                            <div className="header_call_icn"><NavLink href="#"><em className="material-symbols-outlined">call</em><span className="d-none d-lg-block">020 7337 9010</span></NavLink></div>
-                            <div className="mobile_trigger_btn mobile-menu-trigger d-block d-lg-none"><NavLink href="#"><em className="fa-solid fa-bars"></em></NavLink></div>
-                        </section>
-                    </div>
-                    <Nav />
-                    <Alert />
-                </div>
-            </header> */}
-            {children}
-            <Analytics />
+            </header> 
+            <main>{children}</main>           
+            {/* <Analytics /> */}
             <footer>
                 <div className="container-md">
                     <section className="footer_img_row d-block d-sm-flex">

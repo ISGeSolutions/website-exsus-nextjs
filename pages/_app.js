@@ -40,7 +40,7 @@ function App({ Component, pageProps }) {
         const identifier = "vidya@isgesolutions.com";
         const password = "vpIsg@2023";
 
-        userService.login(identifier. password).then(x => {
+        userService.login(identifier.password).then(x => {
             console.log('x', x);
         });
 
@@ -93,12 +93,10 @@ function App({ Component, pageProps }) {
                 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> */}
 
             </Head>
-
-            <div>
-                {authorized &&
-                    <Component {...pageProps} />
-                }
-            </div>
+            
+            {authorized &&
+                <Component {...pageProps} />
+            }
             <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&family=Slabo+27px&display=swap" rel="stylesheet" />
             <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css' />
 
