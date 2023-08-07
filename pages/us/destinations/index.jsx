@@ -177,7 +177,7 @@ function Index() {
                             </div>
                         ))}
 
-                        <div className="col-sm-6">
+                        {/* <div className="col-sm-6">
                             <div className="card_blk_inr">
                                 <NavLink href="destinations/asia">
                                     <img src="./../images/destination01.jpg" alt="destination01" className="img-fluid" />
@@ -383,7 +383,7 @@ function Index() {
                                     </div>
                                 </NavLink>
                             </div>
-                        </div>
+                        </div> */}
 
                     </div>
                 </div>
