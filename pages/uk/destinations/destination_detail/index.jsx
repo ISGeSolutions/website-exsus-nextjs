@@ -55,7 +55,7 @@ function Index() {
 
 
     return (
-        <Layout>
+        <>
             <section className="banner_blk_row">
 
                 {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
@@ -1549,6 +1549,6 @@ function Index() {
                 </div>
             </section>
             <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
-        </Layout>
+        </>
     );
 }

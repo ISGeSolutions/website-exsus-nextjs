@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
 import { Link, Spinner, Signup } from 'components';
-import { Layout } from 'components/users';
 import { destinationService, alertService, userService } from 'services';
 import { Inspireme } from 'components';
 import Head from 'next/head';
@@ -46,6 +45,10 @@ function Index() {
             regionWiseUrl = '/' + window.site_region;
             // setMyVariable(window.site_region);
         }
+    }
+
+    const dynamicImage = (itemId) => {       
+        return `https://d33ys3jnmuivbg.cloudfront.net/ilimages` + itemId;
     }
 
     const dynamicLink = (itemId) => {
@@ -98,7 +101,7 @@ function Index() {
     }, []);
 
     return (
-        <Layout>
+        <>
             <Head>
                 <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
                 <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script>
@@ -155,6 +158,7 @@ function Index() {
                             <div className="col-sm-6" key={destinationItem?.id}>
                                 <div className="card_blk_inr">
                                     <NavLink href={dynamicLink(destinationItem?.attributes?.destination_code)}>
+                                        {/* <img src={dynamicImage(destinationItem?.attributes?.destination_images?.data[0].attributes.image_path)} alt="destination01" className="img-fluid" /> */}
                                         <img src="./../images/destination01.jpg" alt="destination01" className="img-fluid" />
                                         <div className="card_blk_cntnt card_blk_sml_arw">
                                             <div className="row align-items-center">
@@ -495,6 +499,6 @@ function Index() {
                     </form> */}
                 </div>
             </section>
-        </Layout>
+        </>
     );
 }

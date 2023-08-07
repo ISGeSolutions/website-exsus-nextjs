@@ -71,119 +71,6 @@ function Layout({ children }) {
             $('.header_country_label').removeClass("responsive_drpdwn_cls");
             $(this).addClass('responsive_drpdwn_cls');
         });
-
-        //         const script = document.createElement("script");
-        //   script.src = "public/assets/javascripts/navigation.js";
-        //   script.async = true;
-        //   script.onload = () => this.scriptLoaded();
-
-        //   document.body.appendChild(script);
-
-        // const [selected, setSelected] = useState(null);
-        // setSelected(countries[0]);
-        // redirect to home if already logged in
-        // if (userService.userValue) {
-        //     router.push('/');
-        // }
-
-        // const pathRouter = router.asPath;
-        // const myArray = pathRouter.split("/");
-
-        // console.log('myArray2', myArray);
-
-        // myArray.forEach((element, index) => {
-        //     if (index == 1) {
-        //         if (element) {
-        // console.log('element', element);
-        // localStorage.setItem('site_region', element);
-        // window.site_region = element;
-        // setVariable(element);
-        // setMyVariable(element);
-        //         }
-        //     }
-        // });
-
-        // if (typeof localStorage !== 'undefined') {
-        //     if (localStorage.getItem("site_region") != null) {
-        //         const selectedRegion = localStorage.getItem("site_region");
-        //         console.log('selectedRegion22', selectedRegion);
-        //         setVariable(selectedRegion);
-        //         // setMyVariable(selectedRegion);
-        //     }
-        // }
-
-        // const currentUrl1 = router.asPath;
-
-        // $('li').click(function () {
-        //your code
-        // console.log('this is second test');
-        // console.log($(this).text());
-
-        // main-role
-        // console.log('test1', $('.main-role').text());
-        // console.log('test2', $('.main-role-image').attr('src'));
-
-        // const selected_country = $(this).text();
-
-        // let image_path;
-        // let handle_region_value;
-        // if (selected_country == 'UK site') {
-        //     image_path = "./../../../../images/uk-flag-round-circle-icon.svg";
-        //     handle_region_value = 'uk';
-        //     $('.main-role-image').attr('src', image_path);
-        //     $('.main-role').text($(this).text());
-        // } else if (selected_country == 'US site') {
-        //     image_path = "./../../../../images/usa-flag-round-circle-icon.svg";
-        //     handle_region_value = 'us';
-        //     $('.main-role-image').attr('src', image_path);
-        //     $('.main-role').text($(this).text());
-        // } else if (selected_country == 'Asia site') {
-        //     image_path = "./../.././../../images/thailand-flag-round-circle-icon.svg";
-        //     handle_region_value = 'asia';
-        //     $('.main-role-image').attr('src', image_path);
-        //     $('.main-role').text($(this).text());
-        // } else if (selected_country == 'India site') {
-        //     image_path = "./../../../../images/india-flag-round-circle-icon.svg";
-        //     handle_region_value = 'in';
-        //     $('.main-role-image').attr('src', image_path);
-        //     $('.main-role').text($(this).text());
-        // }
-
-        // this.handleRegion('handle_region_value');
-
-        // console.log('handle_region_value', handle_region_value);
-        // console.log('currentUrl', currentUrl);
-
-        // if (handle_region_value) {
-        //     // regionWiseUrl = handle_region_value;
-        //     localStorage.setItem('site_region', handle_region_value);
-        //     window.site_region = handle_region_value;
-        //     setMyVariable(handle_region_value);
-        //     const pathRouter = router.asPath;
-        //     const myArray = pathRouter.split("/");
-        //     // console.log('myArray2', myArray);
-        //     var newPath = '';
-        //     myArray.forEach((element, index) => {
-        //         if (index == 0) {
-        //             newPath = element;
-        //         } else if (index == 1) {
-        //             if (myArray.length > 2) {
-        //                 if (element) {
-        //                     newPath = newPath + '/' + handle_region_value;
-        //                 }
-        //             }
-        //         } else if (index > 1) {
-        //             newPath = newPath + '/' + element;
-        //         }
-        //     });
-        //     // console.log('newPath', newPath);
-        //     router.push(newPath);      
-
-        //     router.events.on("routeChangeError", (err, url, { shallow }) => {
-        //         console.log("Navigating to: " + "url: " + url, {cancelled: err.cancelled} )
-        //     });
-
-        // }
     },
         [, [router.asPath]]);
 
@@ -292,9 +179,9 @@ function Layout({ children }) {
                     <Nav />
                     <Alert />
                 </div>
-            </header> 
-            <main>{children}</main>           
-            {/* <Analytics /> */}
+            </header>
+            <main>{children}</main>
+            <Analytics />
             <footer>
                 <div className="container-md">
                     <section className="footer_img_row d-block d-sm-flex">

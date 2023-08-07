@@ -497,49 +497,119 @@
         "id": 1,
         "attributes": {
           "destination_code": "AF",
-          "destination_name": "Africa"
+          "destination_name": "Africa",
+          "destination_images": {
+            "data": [
+              {
+                "id": 1,
+                "attributes": {
+                  "image_path": "/mc/Interest/Africa/shutterstock6711039611.jpg"
+                }
+              }
+            ]
+          }
         }
       },
       {
         "id": 2,
         "attributes": {
           "destination_code": "AS",
-          "destination_name": "Asia"
+          "destination_name": "Asia",
+          "destination_images": {
+            "data": [
+              {
+                "id": 2,
+                "attributes": {
+                  "image_path": "/Interest/Asia/mc/shutterstock_154213739.jpg"
+                }
+              }
+            ]
+          }
         }
       },
       {
         "id": 3,
         "attributes": {
           "destination_code": "AU",
-          "destination_name": "Australasia & South Pacific"
+          "destination_name": "Australasia & South Pacific",
+          "destination_images": {
+            "data": [
+              {
+                "id": 3,
+                "attributes": {
+                  "image_path": "/Interest/AustralasiaampSouthPacific/mc/Kangaroo Lucky Bay Esperance.jpg"
+                }
+              }
+            ]
+          }
         }
       },
       {
         "id": 4,
         "attributes": {
           "destination_code": "CA",
-          "destination_name": "Central America"
+          "destination_name": "Central America",
+          "destination_images": {
+            "data": [
+              {
+                "id": 4,
+                "attributes": {
+                  "image_path": "/Interest/CentralAmerica/mc/shutterstock_426909238.jpg"
+                }
+              }
+            ]
+          }
         }
       },
       {
         "id": 5,
         "attributes": {
           "destination_code": "EU",
-          "destination_name": "Europe"
+          "destination_name": "Europe",
+          "destination_images": {
+            "data": [
+              {
+                "id": 5,
+                "attributes": {
+                  "image_path": "/Interest/Europe/mc/shutterstock_99297359.jpg"
+                }
+              }
+            ]
+          }
         }
       },
       {
         "id": 6,
         "attributes": {
           "destination_code": "IO",
-          "destination_name": "Indian Ocean"
+          "destination_name": "Indian Ocean",
+          "destination_images": {
+            "data": [
+              {
+                "id": 6,
+                "attributes": {
+                  "image_path": "/Interest/IndianOcean/mc/picnic.jpg"
+                }
+              }
+            ]
+          }
         }
       },
       {
         "id": 7,
         "attributes": {
           "destination_code": "IS",
-          "destination_name": "Indian Subcontinent"
+          "destination_name": "Indian Subcontinent",
+          "destination_images": {
+            "data": [
+              {
+                "id": 7,
+                "attributes": {
+                  "image_path": "/Holidaytype/PeopleampFestivals/mc/Holi - Close up.jpg"
+                }
+              }
+            ]
+          }
         }
       }
     ],

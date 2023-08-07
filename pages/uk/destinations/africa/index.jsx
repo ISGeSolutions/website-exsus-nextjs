@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
 import { Link, Spinner, Signup } from 'components';
-import { Layout } from 'components/users';
 import { userService, destinationService } from 'services';
 import Iframe from 'react-iframe'
 import Head from 'next/head';
@@ -97,7 +96,7 @@ function Index() {
     }, []);
 
     return (
-        <Layout>
+        <>
             <Head>
                 <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
                 <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script>
@@ -1568,6 +1567,6 @@ function Index() {
                     </form>
                 </div>
             </section>
-        </Layout>
+        </>
     );
 }

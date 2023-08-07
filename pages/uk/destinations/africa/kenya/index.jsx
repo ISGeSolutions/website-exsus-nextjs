@@ -47,7 +47,7 @@ function Index() {
     }, []);
 
     return (
-        <Layout>
+        <>
             <section className="banner_blk_row">
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">
@@ -1567,6 +1567,6 @@ function Index() {
                     </form>
                 </div>
             </section>
-        </Layout>
+        </>
     );
 }

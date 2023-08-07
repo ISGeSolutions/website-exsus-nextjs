@@ -47,7 +47,7 @@ function Index() {
     }, []);
 
     return (
-        <Layout>
+        <>
             <section className="banner_blk_row">
                 {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
                     <div>
@@ -1609,6 +1609,6 @@ function Index() {
                     </form>
                 </div>
             </section>
-        </Layout>
+        </>
     );
 }

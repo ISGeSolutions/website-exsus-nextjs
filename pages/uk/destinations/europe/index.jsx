@@ -57,7 +57,7 @@ function Index() {
 
 
     return (
-        <Layout>
+        <>
             <Head>
                 <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
 
@@ -1555,6 +1555,6 @@ function Index() {
                 </div>
             </section>
             <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
-        </Layout>
+        </>
     );
 }
