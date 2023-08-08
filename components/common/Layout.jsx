@@ -78,18 +78,18 @@ function Layout({ children }) {
         <div>
             <header className="header_blk_row header">
                 <Head>
-                    {/* <script type="text/javascript" src="/assets/javascripts/navigation.js"></script> */}
+                    <script type="text/javascript" src="/assets/javascripts/navigation.js"></script>
                 </Head>
                 <div className="container">
                     <div className="header_blk_inr">
                         <section className="header_item_left ">
                             <div className="mobile_trigger_btn d-block d-lg-none">
-                                <NavLink href="#">
-                                    <em className="fa-solid fa-ellipsis" onClick={() => {
+                                <a className="btn-link" href="#" onClick={() => {
                                         document.getElementById('sideMenuLeft').style.width = "100%";
                                     }}>
+                                    <em className="fa-solid fa-ellipsis">
                                     </em>
-                                </NavLink>
+                                </a>
                             </div>
                             <div className="side_menu_left" id="sideMenuLeft">
                                 <div className="side_menu_hdr">
@@ -168,12 +168,14 @@ function Layout({ children }) {
                             <h1><NavLink href="/">Exsus<span>Travel</span></NavLink></h1>
                         </section>
                         <section className="header_item_right d-flex d-lg-inline-block justify-content-end align-items-center">
-                            <div className="header_call_icn"><NavLink href="#"><em className="material-symbols-outlined">call</em><span className="d-none d-lg-block">020 7337 9010</span></NavLink></div>
-                            <div className="mobile_trigger_btn mobile-menu-trigger d-block d-lg-none" onClick={() => {
+                            <div className="header_call_icn">
+                                <NavLink href="#"><em className="material-symbols-outlined">call</em><span className="d-none d-lg-block">020 7337 9010</span></NavLink></div>
+                            <div className="mobile_trigger_btn mobile-menu-trigger d-block d-lg-none">
+                                <a href="#" onClick={() => {
                                 const menu = document.querySelector(".menu"); //Nav tag
                                 menu.classList.toggle("active");
                                 document.querySelector(".menu-overlay").classList.toggle("active");
-                            }}><a href="#"><em className="fa-solid fa-bars"></em></a></div>
+                            }}><em className="fa-solid fa-bars"></em></a></div>
                         </section>
                     </div>
                     <Nav />

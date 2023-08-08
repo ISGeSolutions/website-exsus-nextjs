@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { NavLink } from '.';
 import { userService } from 'services';
-
+import Head from 'next/head';
 import * as React from 'react';
 
 import { store, useGlobalState } from 'state-pool';
@@ -68,6 +68,9 @@ function Nav() {
 
         <>
             <nav>
+                <Head>
+                    <script type="text/javascript" src="/assets/javascripts/navigation.js"></script>
+                </Head>
                 <div className="menu-overlay">
                 </div>
                 <div className="menu">
@@ -76,7 +79,11 @@ function Nav() {
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z" /></svg>
                         </div>
                         <div className="current-menu-title"></div>
-                        <button className="btn fa-solid fa-xmark mobile-menu-close"></button>
+                        <button className="btn fa-solid fa-xmark mobile-menu-close" onClick={() => {
+                                const menu = document.querySelector(".menu"); //Nav tag
+                                menu.classList.toggle("active");
+                                document.querySelector(".menu-overlay").classList.toggle("active");
+                            }}></button>
                     </div>
                     <ul className="menu-main">
                         <li className="menu-item-has-children">
