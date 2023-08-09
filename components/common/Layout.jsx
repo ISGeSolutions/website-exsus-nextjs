@@ -117,7 +117,7 @@ function Layout({ children }) {
                                         instanceId="long-value-select"
                                         options={countries}
                                         value={selected}
-                                        onChange={handleChange} autoFocus={true}
+                                        onChange={handleChange} autoFocus={false}
                                         formatOptionLabel={country => (
                                             <div className="country-option">
                                                 <img src={country.image} alt="country-image" />
