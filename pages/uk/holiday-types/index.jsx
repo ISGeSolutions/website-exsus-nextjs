@@ -60,10 +60,14 @@ function Index() {
 
         holidaytypesService.getHolidaytypesLandingPage().then(x => {
             console.log('getHolidaytypesLandingPage', x);
+
+
+
             setHolidayTypes(x.data[0]);
             // setDestinationLandingDetails(x)
-            // setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/mc" + x.data[0].attributes.custom_page_images.data[0].attributes.image_path);
-            // setBackgroundImgWhentogo("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + x.data[0].attributes.custom_page_images.data[1].attributes.image_path);
+            console.log('aa', "https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data[0].attributes.custom_page_images.data[0].attributes.image_path);
+            setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data[0].attributes.custom_page_images.data[0].attributes.image_path);
+            setBackgroundImgWhentogo("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + x.data[0].attributes.custom_page_images.data[1].attributes.image_path);
         });
 
         holidaytypesService.getHolidaytypesLandingList().then(x => {
@@ -79,7 +83,7 @@ function Index() {
             <section className="banner_blk_row">
                 <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
                     <div>
-                        <img src="/assets/images/holiday_types_banner.jpg" />
+                        <img src={backgroundImage} alt="holiday_types_detls" className="img-fluid" />
                         {/* /static/media/holiday_types_banner.1e97daba.jpg */}
                     </div>
                 </Carousel>
@@ -148,7 +152,7 @@ function Index() {
                 </div>
             </section>
 
-            <section className="destination_text_overlay_row">
+            <section className="destination_text_overlay_row" style={{ backgroundImage: `url(${backgroundImgWhentogo})` }}>
                 <div className="container-md">
                     <div className="destination_text_overlay_inr">
                         <h4>When to go where</h4>
