@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Iframe from 'react-iframe'
 import { Layout } from 'components/users';
-import { userService } from 'services';
+import { userService, holidaytypesService } from 'services';
 import Head from 'next/head';
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -12,8 +12,47 @@ export default Index;
 function Index() {
     const [users, setUsers] = useState(null);
 
+    const [holidaytypesDetails, setHolidaytypesDetails] = useState();
+    const [backgroundImage, setBackgroundImage] = useState('');
+    const [valueWithBr, setnewValueWithBr] = useState('');
+    const [headingText, setHeadingText] = useState('LUXURY SAFARI HOLIDAYS IN AFRICA');
+
+    const selectedSec = (itemId) => {
+        // console.log('itemId', itemId);
+        var text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
+        if (itemId == 'overview') {
+            text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
+        } else if (itemId == 'countries') {
+            text = "COUNTRIES IN AFRICA";
+        } else if (itemId == 'itineraries') {
+            text = "TAILOR-MADE AFRICA HOLIDAY ITINERARIES";
+        } else if (itemId == 'places_to_stay') {
+            text = "PLACES TO STAY IN AFRICA";
+        } else {
+            text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
+        }
+        setHeadingText(text)
+        // LUXURY SAFARI HOLIDAYS IN AFRICA
+        // COUNTRIES IN AFRICA
+        // TAILOR-MADE AFRICA HOLIDAY ITINERARIES
+        // PLACES TO STAY IN AFRICA
+        // EXPERIENCES IN AFRICA
+    };
+
     useEffect(() => {
         userService.getAll().then(x => setUsers(x));
+        holidaytypesService.getHolidaytypeDetails().then(x => {
+            console.log('getHolidaytypesDetails', x);
+            setHolidaytypesDetails(x.data.attributes);
+            // const lines = x.data.attributes?.overview_text.split('\n');
+            // console.log('lines', lines);
+            const oldText = x.data.attributes?.overview_text;
+            var newValueWithBr = oldText?.replace(/\n/g, "<br />");
+            setnewValueWithBr(newValueWithBr);
+            console.log('x.data.attributes.holiday_type_images.data[0].attributes.image_path2', 'https://d33ys3jnmuivbg.cloudfront.net/ilimages/' + x.data.attributes.holiday_type_images.data[0].attributes.image_path);
+            setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data.attributes.holiday_type_images.data[0].attributes.image_path);
+            // setDestinationLandingDetails(x)
+        });
     }, []);
 
     return (
@@ -28,7 +67,10 @@ function Index() {
                     </div>
                     <div className="carousel-inner">
                         <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
-                            <div className="banner_commn_cls holiday_types_detls_banner"></div>
+                            {/* {backgroundImage} */}                            
+                            <div className="banner_commn_cls"> {/*  holiday_types_detls_banner */}
+                            <img src={backgroundImage} alt="holiday_types_detls_card02" className="img-fluid" />
+                            </div>
                         </a>
                     </div>
                 </div>
@@ -52,17 +94,18 @@ function Index() {
                         <ul>
                             <li><a href="homepage.html">Home</a></li>
                             <li><a href="holiday_types_landing.html">Holiday Types</a></li>
-                            <li>Once In A Lifetime Holidays</li>
+                            <li>{headingText}</li>
                         </ul>
                     </div>
 
                     <div className="destination_tab_inr">
                         <h2 className="tab_tilte">ONCE IN A LIFETIME HOLIDAYS</h2>
                         <div className="destinations_cntnt_blk destination_para pt-0">
-                            <p>Everyone’s definition of a dream trip is different.</p>
+                            <div dangerouslySetInnerHTML={{ __html: valueWithBr }} />
+                            {/* <p>Everyone’s definition of a dream trip is different.</p>
                             <p>Whether you are after the big one, the holiday that you have always dreamed of but never went on, or want an adventure that leaves nothing out, we are ready to help - how about dinner with a geisha in Japan, an oceanfront lodge only reached by boat in Costa Rica, a helicopter ride over New Zealand’s stunning scenery or a luxurious cross country train journey with unparalleled views of South Africa.</p>
                             <p>Whatever a 'once-in-a-lifetime' holiday or honeymoon means to you, our experts can create a totally tailor-made luxury experience that perfectly satisfies your wishlist.</p>
-                            <p>All our itineraries are designed as inspiration. Tell us what you're after on your trip and we'll help you select the best hotels and experiences.</p>
+                            <p>All our itineraries are designed as inspiration. Tell us what you're after on your trip and we'll help you select the best hotels and experiences.</p> */}
                         </div>
                     </div>
 

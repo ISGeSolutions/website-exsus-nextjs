@@ -8,15 +8,10 @@ const { publicRuntimeConfig } = getConfig();
 
 const baseUrl = `${publicRuntimeConfig.apiUrl}/holiday_types`;;
 
-// export const destiantionsService = {
-//     getDestinationsList
-// };
+const holidaytypesLandingPageUrl = `${publicRuntimeConfig.apiUrl}/api/custom-pages?filters[page_code][$eq]=holiday_types&populate[0]=custom_page_images`;
+const holidaytypesLandingListUrl = `${publicRuntimeConfig.apiUrl}/api/holiday-types?fields[0]=holiday_type_code&fields[1]=holiday_type_name&populate[holiday_type_images][fields][2]=image_path&populate[holiday_type_images][fields][3]=image_type`;
+const holidaytypesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/holiday-types/1?populate[0]=holiday_type_images`;
 
-// function getDestinationsList() {
-//     return fetchWrapper.get(`${baseUrl}`);
-// }
-
-// console.log('publicRuntimeConfig.apiUrl', publicRuntimeConfig);
 const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('user')));
 
 export const holidaytypesService = {
@@ -24,13 +19,27 @@ export const holidaytypesService = {
     get userValue() { return userSubject.value },
     getAll,
     getById,
+    getHolidaytypesLandingPage,
+    getHolidaytypesLandingList,
+    getHolidaytypeDetails
 };
 
 function getAll() {
-    // console.log('baseUrl', baseUrl);
     return fetchWrapper.get(baseUrl);
 }
 
 function getById(id) {
     return fetchWrapper.get(`${baseUrl}/${id}`);
+}
+
+function getHolidaytypesLandingPage() {
+    return fetchWrapper.get(holidaytypesLandingPageUrl);
+}
+
+function getHolidaytypesLandingList() {
+    return fetchWrapper.get(holidaytypesLandingListUrl);
+}
+
+function getHolidaytypeDetails() {
+    return fetchWrapper.get(holidaytypesDetailsUrl);
 }

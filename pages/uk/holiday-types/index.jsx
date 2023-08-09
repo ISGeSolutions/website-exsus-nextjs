@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 
 import { Link, Spinner, Signup } from 'components';
 import { Layout } from 'components/users';
-import { userService } from 'services';
+import { userService, holidaytypesService } from 'services';
 import { Inspireme } from 'components';
+import generateDynamicLink from 'components/utils/generateLink';
+import { NavLink } from 'components';
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 var Carousel = require('react-responsive-carousel').Carousel;
@@ -12,9 +14,64 @@ export default Index;
 
 function Index() {
     const [users, setUsers] = useState(null);
+    const [holidaytypes, setHolidayTypes] = useState();
+    // const [destinationLandingDetails, setDestinationLandingDetails] = useState();
+    const [holidaytypesLandingList, setHolidaytypesLandingList] = useState();
+    const [backgroundImage, setBackgroundImage] = useState('');
+    const [backgroundImgWhentogo, setBackgroundImgWhentogo] = useState('');
+
+    let regionWiseUrl = '/uk';
+    if (typeof window !== 'undefined') {
+        if (window && window.site_region) {
+            // console.log('window.site_region', window.site_region);
+            regionWiseUrl = '/' + window.site_region;
+            // setMyVariable(window.site_region);
+        }
+    }
+
+    const dynamicImage = (itemId) => {
+        return `https://d33ys3jnmuivbg.cloudfront.net/ilimages` + itemId;
+    }
+
+    const dynamicLink = (itemId) => {
+        if (itemId && itemId == '01') {
+            return regionWiseUrl + `/holiday-types/incredible-journeys`;
+        } else if (itemId && itemId == '02') {
+            return regionWiseUrl + `/holiday-types/luxury-honeymoons`;
+        } else if (itemId && itemId == '03') {
+            return regionWiseUrl + `/holiday-types/family-holidays`;
+        } else if (itemId && itemId == '04') {
+            return regionWiseUrl + `/holiday-types/adventure-holidays`;
+        } else if (itemId && itemId == '05') {
+            return regionWiseUrl + `/holiday-types/luxury-beach-holidays`;
+        } else if (itemId && itemId == '06') {
+            return regionWiseUrl + `/holiday-types/culture-holidays`;
+        } else if (itemId && itemId == '07') {
+            return regionWiseUrl + `/holiday-types/wildlife-holidays`;
+        } else if (itemId && itemId == '08') {
+            return regionWiseUrl + `/holiday-types/classic-journeyst`;
+        } else if (itemId && itemId == '09') {
+            return regionWiseUrl + `/holiday-types/spcial-occasions`;
+        }
+    }
 
     useEffect(() => {
         userService.getAll().then(x => setUsers(x));
+
+        holidaytypesService.getHolidaytypesLandingPage().then(x => {
+            console.log('getHolidaytypesLandingPage', x);
+            setHolidayTypes(x.data[0]);
+            // setDestinationLandingDetails(x)
+            // setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/mc" + x.data[0].attributes.custom_page_images.data[0].attributes.image_path);
+            // setBackgroundImgWhentogo("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + x.data[0].attributes.custom_page_images.data[1].attributes.image_path);
+        });
+
+        holidaytypesService.getHolidaytypesLandingList().then(x => {
+            console.log('getHolidaytypesLandingList', x);
+            setHolidaytypesLandingList(x.data);
+            // setDestinationLandingDetails(x)
+        });
+
     }, []);
 
     return (
@@ -26,7 +83,7 @@ function Index() {
                         {/* /static/media/holiday_types_banner.1e97daba.jpg */}
                     </div>
                 </Carousel>
-                
+
                 <Inspireme />
             </section>
 
@@ -40,8 +97,12 @@ function Index() {
                     </div>
                     <div className="row">
                         <div className="destinations_cntnt_blk">
-                            <h2>CHOOSE YOUR STYLE OF HOLIDAY</h2>
-                            <p>Whether you’re after a relaxing break and some barefoot luxury for two, or are planning an epic adventure of a lifetime and looking for luxury experiences, our team of travel specialists can transport you wherever you want to go, in whichever style you’d like to travel. We can set you up on a classic road trip across the USA, arrange a close-up wildlife encounter with the Big Five in South Africa, take you on an expedition-style cruise to the Galapagos or arrange a family adventure in Costa Rica. Essentially, wherever the destination and whatever the style of trip, we can help. The following collections of itinerary ideas are designed to guide and inspire you. They’re not off-the-shelf options though. From the time spent away to the way you travel and where you stay, you can tailor every element to suit your own interests, ensuring that the trip we design for you is bespoke and unlike any other.</p>
+                            <h2>
+                                {holidaytypes?.attributes?.page_header_text}
+                            </h2>
+                            <p>
+                                {holidaytypes?.attributes?.page_content_1}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -51,7 +112,9 @@ function Index() {
                 <div className="container-md">
                     <div className="row">
                         <div className="col-12 favrites_blk_row pb-0">
-                            <h3 className="title_cls pb-0">Our favourite holiday types</h3>
+                            <h3 className="title_cls pb-0">
+                                {holidaytypes?.attributes?.page_content_2}
+                            </h3>
                             <div className="destination_contries_filter d-flex justify-content-around">
                                 <ul>
                                     <li><a href="#" className="active">Exsus recommends</a></li>
@@ -59,235 +122,28 @@ function Index() {
                                 </ul>
                             </div>
                         </div>
-                        <div className="col-sm-4">
-                            <div className="card_blk_inr">
-                                <a href="holiday_types.html" target="_blank">
-                                    <img src="./../images/holiday_type01.jpg" alt="holiday_type01" className="img-fluid" />
-                                    <div className="card_blk_cntnt card_blk_sml_arw">
-                                        <div className="row align-items-center">
-                                            <div className="col-11">
-                                                <div className="card_blk_txt">
-                                                    <h3 className="mb-0">Once In A Lifetime Holidays</h3>
+                        {holidaytypesLandingList?.map((holidaytypesItem, i) => (
+                            <div className="col-sm-4" key={holidaytypesItem?.id}>
+                                <div className="card_blk_inr">
+                                    <NavLink href={dynamicLink(holidaytypesItem?.attributes?.holiday_type_code)}>
+                                        {/* <img src={dynamicImage(destinationItem?.attributes?.holiday_type_images?.data[0].attributes.image_path)} alt="destination01" className="img-fluid" /> */}
+                                        <img src="./../images/holiday_type01.jpg" alt="holiday_type01" className="img-fluid" />
+                                        <div className="card_blk_cntnt card_blk_sml_arw">
+                                            <div className="row align-items-center">
+                                                <div className="col-11">
+                                                    <div className="card_blk_txt">
+                                                        <h3 className="mb-0">{holidaytypesItem?.attributes?.holiday_type_name}</h3>
+                                                    </div>
+                                                </div>
+                                                <div className="col-1 ps-0">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                 </div>
                                             </div>
-                                            <div className="col-1 ps-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                            </div>
                                         </div>
-                                    </div>
-                                </a>
+                                    </NavLink>
+                                </div>
                             </div>
-                        </div>
-
-                        <div className="col-sm-4">
-                            <div className="card_blk_inr">
-                                <a href="holiday_types.html" target="_blank">
-                                    <img src="./../images/holiday_type02.jpg" alt="holiday_type02" className="img-fluid" />
-                                    <div className="card_blk_cntnt card_blk_sml_arw">
-                                        <div className="row align-items-center">
-                                            <div className="col-11">
-                                                <div className="card_blk_txt">
-                                                    <h3 className="mb-0">Honeymoons</h3>
-                                                </div>
-                                            </div>
-                                            <div className="col-1 ps-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div className="col-sm-4">
-                            <div className="card_blk_inr">
-                                <a href="holiday_types.html" target="_blank">
-                                    <img src="./../images/holiday_type03.jpg" alt="holiday_type03" className="img-fluid" />
-                                    <div className="card_blk_cntnt card_blk_sml_arw">
-                                        <div className="row align-items-center">
-                                            <div className="col-11">
-                                                <div className="card_blk_txt">
-                                                    <h3 className="mb-0">Family Holidays</h3>
-                                                </div>
-                                            </div>
-                                            <div className="col-1 ps-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div className="col-sm-4">
-                            <div className="card_blk_inr">
-                                <a href="holiday_types.html" target="_blank">
-                                    <img src="./../images/holiday_type04.jpg" alt="holiday_type04" className="img-fluid" />
-                                    <div className="card_blk_cntnt card_blk_sml_arw">
-                                        <div className="row align-items-center">
-                                            <div className="col-11">
-                                                <div className="card_blk_txt">
-                                                    <h3 className="mb-0">Adventure Holidays</h3>
-                                                </div>
-                                            </div>
-                                            <div className="col-1 ps-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div className="col-sm-4">
-                            <div className="card_blk_inr">
-                                <a href="holiday_types.html" target="_blank">
-                                    <img src="./../images/holiday_type05.jpg" alt="holiday_type05" className="img-fluid" />
-                                    <div className="card_blk_cntnt card_blk_sml_arw">
-                                        <div className="row align-items-center">
-                                            <div className="col-11">
-                                                <div className="card_blk_txt">
-                                                    <h3 className="mb-0">Food & Culture Holidays</h3>
-                                                </div>
-                                            </div>
-                                            <div className="col-1 ps-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div className="col-sm-4">
-                            <div className="card_blk_inr">
-                                <a href="holiday_types.html" target="_blank">
-                                    <img src="./../images/holiday_type06.jpg" alt="holiday_type06" className="img-fluid" />
-                                    <div className="card_blk_cntnt card_blk_sml_arw">
-                                        <div className="row align-items-center">
-                                            <div className="col-11">
-                                                <div className="card_blk_txt">
-                                                    <h3 className="mb-0">Luxury Beach Holidays</h3>
-                                                </div>
-                                            </div>
-                                            <div className="col-1 ps-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div className="col-sm-4">
-                            <div className="card_blk_inr">
-                                <a href="holiday_types.html" target="_blank">
-                                    <img src="./../images/holiday_type07.jpg" alt="holiday_type07" className="img-fluid" />
-                                    <div className="card_blk_cntnt card_blk_sml_arw">
-                                        <div className="row align-items-center">
-                                            <div className="col-11">
-                                                <div className="card_blk_txt">
-                                                    <h3 className="mb-0">Wildlife & Safari Holidays</h3>
-                                                </div>
-                                            </div>
-                                            <div className="col-1 ps-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div className="col-sm-4">
-                            <div className="card_blk_inr">
-                                <a href="holiday_types.html" target="_blank">
-                                    <img src="./../images/holiday_type08.jpg" alt="holiday_type08" className="img-fluid" />
-                                    <div className="card_blk_cntnt card_blk_sml_arw">
-                                        <div className="row align-items-center">
-                                            <div className="col-11">
-                                                <div className="card_blk_txt">
-                                                    <h3 className="mb-0">Special Occasions</h3>
-                                                </div>
-                                            </div>
-                                            <div className="col-1 ps-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div className="col-sm-4">
-                            <div className="card_blk_inr">
-                                <a href="holiday_types.html" target="_blank">
-                                    <img src="./../images/holiday_type09.jpg" alt="holiday_type09" className="img-fluid" />
-                                    <div className="card_blk_cntnt card_blk_sml_arw">
-                                        <div className="row align-items-center">
-                                            <div className="col-11">
-                                                <div className="card_blk_txt">
-                                                    <h3 className="mb-0">Short Breaks & Escapes</h3>
-                                                </div>
-                                            </div>
-                                            <div className="col-1 ps-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div className="col-sm-4">
-                            <div className="card_blk_inr">
-                                <a href="holiday_types.html" target="_blank">
-                                    <img src="./../images/holiday_type10.jpg" alt="holiday_type10" className="img-fluid" />
-                                    <div className="card_blk_cntnt card_blk_sml_arw">
-                                        <div className="row align-items-center">
-                                            <div className="col-11">
-                                                <div className="card_blk_txt">
-                                                    <h3 className="mb-0">Trains, Planes, Cars & Cruises</h3>
-                                                </div>
-                                            </div>
-                                            <div className="col-1 ps-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div className="col-sm-4">
-                            <div className="card_blk_inr">
-                                <a href="holiday_types.html" target="_blank">
-                                    <img src="./../images/holiday_type11.jpg" alt="holiday_type01" className="img-fluid" />
-                                    <div className="card_blk_cntnt card_blk_sml_arw">
-                                        <div className="row align-items-center">
-                                            <div className="col-11">
-                                                <div className="card_blk_txt">
-                                                    <h3 className="mb-0">Classic Journeys</h3>
-                                                </div>
-                                            </div>
-                                            <div className="col-1 ps-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
+                        ))}
                     </div>
                 </div>
             </section>
@@ -373,8 +229,12 @@ function Index() {
 
             <section className="make_enqury_row">
                 <div className="container-md">
-                    <h3>YOUR JOURNEY STARTS HERE</h3>
-                    <p>call us on 020 7337 9010 to start planning your perfect trip</p>
+                    <h3>
+                        {holidaytypes?.attributes?.page_content_3}
+                    </h3>
+                    <p>
+                        {holidaytypes?.attributes?.page_content_4}
+                    </p>
                     <button className="btn prmry_btn make_enqury_btn">Make an enquiry
                         <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                     </button>

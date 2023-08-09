@@ -225,7 +225,7 @@ function Index() {
                             {/* {valueWithBr.map((line, index) => (
         <p dangerouslySetInnerHTML={{ __html: line}} key={index} />
       ))} */}
-                                <div dangerouslySetInnerHTML={{ __html: valueWithBr }} />
+                                {<div dangerouslySetInnerHTML={{ __html: valueWithBr }} />}
                                 {/* <p dangerouslySetInnerHTML={{ __html: destination }} /> */}
                                 {/* <p>Warning: Asia is highly addictive. Whether it’s a rickshaw ride through hectic Hanoi, a fascinating adventure amidst the ancient Angkor temples or diving and snorkelling in some of the warmest, clearest seas on the planet, Asia is jam-packed with culture, adventure - and variety.</p>
                                 <p>A truly tantalising continent, Asia promises extraordinary experiences for every traveller. Whether you’re after a luxury honeymoon in South-East Asia, a family adventure holiday in Southern Asia or a cultural holiday to the Far East, you can expect some of the most beautiful beaches and most incredible luxury hotels in the world, fast-paced cities, tranquil village life and mouthwatering food. Asia has it all.</p>
