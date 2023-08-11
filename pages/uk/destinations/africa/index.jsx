@@ -7,6 +7,7 @@ import Head from 'next/head';
 
 import React from 'react';
 import Select from 'react-select';
+
 // Import Bootstarp CSS
 // import "bootstrap/dist/css/bootstrap.css";
 // import { MultiSelect } from "react-multi-select-component";
@@ -33,6 +34,12 @@ function Index() {
     const [isRtl, setIsRtl] = useState(false);
 
     const [selectedOption, setSelectedOption] = useState(null);
+
+    // state = {
+    //     selectedOption: null,
+    //   };
+
+    // const { selectedOption } = this.state;
 
     const countryOptions = [
         { value: "", label: "Filter by country" },
@@ -130,6 +137,15 @@ function Index() {
         // PLACES TO STAY IN AFRICA
         // EXPERIENCES IN AFRICA
     };
+
+    // this.handleChange = handleChange.bind(this);
+
+    const handleChange = (selectedOption) => {
+        console.log('selectedOption', selectedOption);
+        // this.setState({ selectedOption }, () =>
+        //   console.log(`Option selected:`, this.state.selectedOption)
+        // );
+      };
 
     useEffect(() => {
         userService.getAll().then(x => setUsers(x));
@@ -978,7 +994,8 @@ function Index() {
                                                                 isSearchable={isSearchable}
                                                                 name="color"
                                                                 options={countryOptions}
-                                                                isMulti
+                                                                isMulti 
+                                                                onChange={handleChange}
                                                             />
                                                         </div>
                                                         <div className="banner_dropdwn_blk ps-0 ps-md-2">
@@ -994,7 +1011,8 @@ function Index() {
                                                                 isSearchable={isSearchable}
                                                                 name="color"
                                                                 options={regionOptions}
-                                                                isMulti
+                                                                isMulti 
+                                                                onChange={handleChange}
                                                             />
                                                         </div>
                                                         <div className="banner_dropdwn_blk ps-0 ps-md-2">
@@ -1010,7 +1028,8 @@ function Index() {
                                                                 isSearchable={isSearchable}
                                                                 name="color"
                                                                 options={monthOptions}
-                                                                isMulti
+                                                                isMulti 
+                                                                onChange={handleChange}
                                                             />
                                                         </div>
                                                         <div className="banner_dropdwn_blk ps-0 ps-md-2">
