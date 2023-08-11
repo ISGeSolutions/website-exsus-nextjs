@@ -145,7 +145,7 @@ function Index() {
         // this.setState({ selectedOption }, () =>
         //   console.log(`Option selected:`, this.state.selectedOption)
         // );
-      };
+    };
 
     useEffect(() => {
         userService.getAll().then(x => setUsers(x));
@@ -166,14 +166,23 @@ function Index() {
         });
 
         destinationService.getDestinationDetails().then(x => {
-            console.log('getDestinationDetails', x);
+            // console.log('getDestinationDetails', x);
             setDestinationDetails(x.data.attributes);
             // const lines = x.data.attributes?.overview_text.split('\n');
             // console.log('lines', lines);
             const oldText = x.data.attributes?.overview_text;
             var newValueWithBr = oldText?.replace(/\n/g, "<br />");
             setnewValueWithBr(newValueWithBr);
-            setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + x.data.attributes.destination_images.data[0].attributes.image_path);
+            console.log('x.data.attributes.destination_images.data', x.data.attributes.destination_images.data);
+
+            const imageCheck = x.data.attributes.destination_images.data;
+            imageCheck.forEach(element => {
+                if (element.attributes.image_type == 'main') {
+                    // console.log('element.attributes.image_path', element.attributes.image_path);
+                    setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + element.attributes.image_path);
+                }
+            });
+
             // setDestinationLandingDetails(x)
         });
 
@@ -994,7 +1003,7 @@ function Index() {
                                                                 isSearchable={isSearchable}
                                                                 name="color"
                                                                 options={countryOptions}
-                                                                isMulti 
+                                                                isMulti
                                                                 onChange={handleChange}
                                                             />
                                                         </div>
@@ -1011,7 +1020,7 @@ function Index() {
                                                                 isSearchable={isSearchable}
                                                                 name="color"
                                                                 options={regionOptions}
-                                                                isMulti 
+                                                                isMulti
                                                                 onChange={handleChange}
                                                             />
                                                         </div>
@@ -1028,7 +1037,7 @@ function Index() {
                                                                 isSearchable={isSearchable}
                                                                 name="color"
                                                                 options={monthOptions}
-                                                                isMulti 
+                                                                isMulti
                                                                 onChange={handleChange}
                                                             />
                                                         </div>

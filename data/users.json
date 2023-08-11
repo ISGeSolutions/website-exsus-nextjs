@@ -661,5 +661,420 @@
       }
     },
     "meta": {}
+  },
+  "destination_list_with_images": {
+    "data": [
+      {
+        "id": 1,
+        "attributes": {
+          "destination_code": "AF",
+          "destination_name": "Africa",
+          "destination_images": {
+            "data": [
+              {
+                "id": 1,
+                "attributes": {
+                  "image_path": "/mc/Interest/Africa/shutterstock6711039611.jpg"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": 2,
+        "attributes": {
+          "destination_code": "AS",
+          "destination_name": "Asia",
+          "destination_images": {
+            "data": [
+              {
+                "id": 2,
+                "attributes": {
+                  "image_path": "/Interest/Asia/mc/shutterstock_154213739.jpg"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": 3,
+        "attributes": {
+          "destination_code": "AU",
+          "destination_name": "Australasia & South Pacific",
+          "destination_images": {
+            "data": [
+              {
+                "id": 3,
+                "attributes": {
+                  "image_path": "/Interest/AustralasiaampSouthPacific/mc/Kangaroo Lucky Bay Esperance.jpg"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": 4,
+        "attributes": {
+          "destination_code": "CA",
+          "destination_name": "Central America",
+          "destination_images": {
+            "data": [
+              {
+                "id": 4,
+                "attributes": {
+                  "image_path": "/Interest/CentralAmerica/mc/shutterstock_426909238.jpg"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": 5,
+        "attributes": {
+          "destination_code": "EU",
+          "destination_name": "Europe",
+          "destination_images": {
+            "data": [
+              {
+                "id": 5,
+                "attributes": {
+                  "image_path": "/Interest/Europe/mc/shutterstock_99297359.jpg"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": 6,
+        "attributes": {
+          "destination_code": "IO",
+          "destination_name": "Indian Ocean",
+          "destination_images": {
+            "data": [
+              {
+                "id": 6,
+                "attributes": {
+                  "image_path": "/Interest/IndianOcean/mc/picnic.jpg"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": 7,
+        "attributes": {
+          "destination_code": "IS",
+          "destination_name": "Indian Subcontinent",
+          "destination_images": {
+            "data": [
+              {
+                "id": 7,
+                "attributes": {
+                  "image_path": "/Holidaytype/PeopleampFestivals/mc/Holi - Close up.jpg"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "meta": {
+      "pagination": {
+        "page": 1,
+        "pageSize": 25,
+        "pageCount": 1,
+        "total": 7
+      }
+    }
+  },
+  "holiday_types_landing_page": {
+    "data": [
+      {
+        "id": 2,
+        "attributes": {
+          "page_code": "holiday_types",
+          "page_title": "Holiday types",
+          "page_url": "/holiday_types",
+          "page_friendly_url": "Home / Holiday types",
+          "page_header_text": "Choose Your Type Of Holiday",
+          "page_content_1": "Whether you’re after a relaxing break and some barefoot luxury for two, or are planning an epic adventure of a lifetime and looking for luxury experiences, our team of travel specialists can transport you wherever you want to go, in whichever style you’d like to travel. We can set you up on a classic road trip across the USA, arrange a close-up wildlife encounter with the Big Five in South Africa, take you on an expedition-style cruise to the Galapagos or arrange a family adventure in Costa Rica. Essentially, wherever the destination and whatever the style of trip, we can help. The following collections of itinerary ideas are designed to guide and inspire you. They’re not off-the-shelf options though. From the time spent away to the way you travel and where you stay, you can tailor every element to suit your own interests, ensuring that the trip we design for you is bespoke and unlike any other.",
+          "page_content_2": "Our favourite holiday types",
+          "page_content_3": "YOUR JOURNEY STARTS HERE",
+          "page_content_4": "Call us on 020 7337 9010 to start planning your perfect trip",
+          "page_content_5": null,
+          "page_content_6": null,
+          "createdAt": "2023-08-08T11:41:20.946Z",
+          "updatedAt": "2023-08-08T12:12:48.678Z",
+          "publishedAt": "2023-08-08T12:12:48.647Z",
+          "freeze_ind": false,
+          "custom_page_images": {
+            "data": [
+              {
+                "id": 3,
+                "attributes": {
+                  "image_id": null,
+                  "image_name": "shutterstock678502927elephantskilimanjaro44_1920_521.jpg",
+                  "image_header_text_1": null,
+                  "image_header_text_2": null,
+                  "image_title": null,
+                  "image_type": "banner",
+                  "createdAt": "2023-08-08T12:09:46.731Z",
+                  "updatedAt": "2023-08-08T12:11:22.037Z",
+                  "publishedAt": "2023-08-08T12:13:03.233Z",
+                  "freeze_ind": false,
+                  "image_path": "/mc/custom_page/holiday_types/shutterstock678502927elephantskilimanjaro44_1920_521.jpg",
+                  "image_alt_text": null
+                }
+              },
+              {
+                "id": 4,
+                "attributes": {
+                  "image_id": null,
+                  "image_name": "dst_when_to_go.jpg",
+                  "image_header_text_1": "WHEN TO GO WHERE",
+                  "image_header_text_2": "Find out the best time to go where",
+                  "image_title": null,
+                  "image_type": "center",
+                  "createdAt": "2023-08-08T12:12:13.374Z",
+                  "updatedAt": "2023-08-08T12:12:13.374Z",
+                  "publishedAt": "2023-08-08T12:13:03.233Z",
+                  "freeze_ind": false,
+                  "image_path": "/custompage/destinations/mc/dst_when_to_go.jpg",
+                  "image_alt_text": null
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "meta": {
+      "pagination": {
+        "page": 1,
+        "pageSize": 25,
+        "pageCount": 1,
+        "total": 1
+      }
+    }
+  },
+  "holiday_types_landing_list": {
+    "data": [
+      {
+        "id": 1,
+        "attributes": {
+          "holiday_type_code": "01",
+          "holiday_type_name": "Once In A Lifetime Holidays",
+          "holiday_type_images": {
+            "data": [
+              {
+                "id": 1,
+                "attributes": {
+                  "image_path": "holidaytypegroup/onceinalifetimejourneys/mc/elephant-shutterstock 365085710 1_1280_389.jpg",
+                  "image_type": "banner"
+                }
+              },
+              {
+                "id": 7,
+                "attributes": {
+                  "image_path": "mc/country/thailand/onceinalifetime_480_240.jpg",
+                  "image_type": "thumbnail"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": 2,
+        "attributes": {
+          "holiday_type_code": "02",
+          "holiday_type_name": "Honeymoons ",
+          "holiday_type_images": {
+            "data": [
+              {
+                "id": 2,
+                "attributes": {
+                  "image_path": "holidaytypegroup/honeymoons/mc/waterstudioview10_1280_389.jpg",
+                  "image_type": "banner"
+                }
+              },
+              {
+                "id": 8,
+                "attributes": {
+                  "image_path": "holidaytypegroup/honeymoons/mc/waterstudioview212_480_240.jpg",
+                  "image_type": "thumbnail"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": 3,
+        "attributes": {
+          "holiday_type_code": "03",
+          "holiday_type_name": "Family Holidays",
+          "holiday_type_images": {
+            "data": [
+              {
+                "id": 3,
+                "attributes": {
+                  "image_path": "holidaytypegroup/familyholidays/mc/sshutterstock_416764756_1280_389.jpg",
+                  "image_type": "banner"
+                }
+              },
+              {
+                "id": 9,
+                "attributes": {
+                  "image_path": "holidaytypegroup/familyholidays/mc/sshhutterstock_4167647561_480_240.jpg",
+                  "image_type": "thumbnail"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": 4,
+        "attributes": {
+          "holiday_type_code": "04",
+          "holiday_type_name": "Adventure Holidays",
+          "holiday_type_images": {
+            "data": [
+              {
+                "id": 4,
+                "attributes": {
+                  "image_path": "holidaytypegroup/adventureholidays/mc/shutterstock_168342398_1280_389.jpg",
+                  "image_type": "banner"
+                }
+              },
+              {
+                "id": 10,
+                "attributes": {
+                  "image_path": "holidaytypegroup/adventureholidays/mc/sshutterstock_168342398_480_240.jpg",
+                  "image_type": "thumbnail"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": 5,
+        "attributes": {
+          "holiday_type_code": "05",
+          "holiday_type_name": "Luxury Beach Holidays",
+          "holiday_type_images": {
+            "data": [
+              {
+                "id": 5,
+                "attributes": {
+                  "image_path": "mc/holiday_type/luxury_beach_holidays/shutterstock1180837143_1280_389.jpg",
+                  "image_type": "banner"
+                }
+              },
+              {
+                "id": 11,
+                "attributes": {
+                  "image_path": "mc/holiday_type/luxury_beach_holidays/praiadarochashutterstock282116426_480_240.jpg",
+                  "image_type": "thumbnail"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": 6,
+        "attributes": {
+          "holiday_type_code": "06",
+          "holiday_type_name": "Food & Culture Holidays",
+          "holiday_type_images": {
+            "data": [
+              {
+                "id": 6,
+                "attributes": {
+                  "image_path": "holidaytypegroup/cultureholidays/mc/shutterstock_325456289_1280_389.jpg",
+                  "image_type": "banner"
+                }
+              },
+              {
+                "id": 12,
+                "attributes": {
+                  "image_path": "holidaytypegroup/cultureholidays/mc/sshutterstock_325456289_480_240.jpg",
+                  "image_type": "thumbnail"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "meta": {
+      "pagination": {
+        "page": 1,
+        "pageSize": 25,
+        "pageCount": 1,
+        "total": 6
+      }
+    }
+  },
+  "holiday_types_details": {
+    "data": {
+      "id": 1,
+      "attributes": {
+        "holiday_type_code": "01",
+        "holiday_type_name": "Once In A Lifetime Holidays",
+        "serial_number": 1,
+        "show_on_web_ind": true,
+        "friendly_url": "Home / Holiday types / Once In A Lifetime Holidays",
+        "page_meta_title": null,
+        "page_meta_description": null,
+        "header_text": "Once In A Lifetime Holidays",
+        "overview_text": "<p>Everyone’s definition of a dream trip is different. &nbsp;</p>\n<p>Whether you are after the big one, the holiday that you have always dreamed of but never went on, or want an adventure that leaves nothing out, we are ready to help - how about dinner with a geisha in Japan, an oceanfront lodge only reached by boat in Costa Rica, a helicopter ride over New Zealand’s stunning scenery or a luxurious cross country train journey with unparalleled views of South Africa.<br><br><span>Whatever a 'once-in-a-lifetime' holiday or honeymoon means to you, our experts can create a totally tailor-made luxury experience that perfectly satisfies your wishlist.<br><br>All our itineraries are designed as inspiration.&nbsp;Tell us what you're after on your trip and we'll help you select the best hotels and experiences.</span></p>",
+        "createdAt": "2023-08-09T10:44:08.949Z",
+        "updatedAt": "2023-08-09T11:39:22.256Z",
+        "publishedAt": "2023-08-09T12:28:23.783Z",
+        "holiday_type_images": {
+          "data": [
+            {
+              "id": 1,
+              "attributes": {
+                "image_id": null,
+                "image_name": "elephant-shutterstock 365085710 1_1280_389.jpg",
+                "image_path": "holidaytypegroup/onceinalifetimejourneys/mc/elephant-shutterstock 365085710 1_1280_389.jpg",
+                "image_alt_text": null,
+                "image_type": "banner",
+                "image_text": null,
+                "createdAt": "2023-08-09T12:17:27.598Z",
+                "updatedAt": "2023-08-09T12:17:27.598Z",
+                "publishedAt": "2023-08-09T12:28:45.738Z"
+              }
+            },
+            {
+              "id": 7,
+              "attributes": {
+                "image_id": null,
+                "image_name": "onceinalifetime_480_240.jpg",
+                "image_path": "mc/country/thailand/onceinalifetime_480_240.jpg",
+                "image_alt_text": null,
+                "image_type": "thumbnail",
+                "image_text": null,
+                "createdAt": "2023-08-09T12:50:03.286Z",
+                "updatedAt": "2023-08-09T12:50:03.286Z",
+                "publishedAt": "2023-08-09T12:53:58.798Z"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "meta": {}
   }
 }
