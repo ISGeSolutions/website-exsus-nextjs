@@ -217,7 +217,7 @@ function Index() {
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2"></button>
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2" aria-label="Slide 3"></button>
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="3" aria-label="Slide 4"></button>
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="4" aria-label="Slide 5"></button>
@@ -228,13 +228,13 @@ function Index() {
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="9" aria-label="Slide 10"></button>
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="10" aria-label="Slide 11"></button>
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="11" aria-label="Slide 12"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="12" aria-label="Slide 13"></button>
+                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="12" aria-label="Slide 13"></button> */}
                     </div>
                     <div className="carousel-inner">
                         <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
                             <div className="banner_commn_cls" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
                         </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                        {/* <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="banner_commn_cls destination_overvw_banner01"></div>
                         </a>
                         <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
@@ -272,7 +272,7 @@ function Index() {
                         </a>
                         <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="destination_overvw_banner13 banner_commn_cls"></div>
-                        </a>
+                        </a> */}
                     </div>
                 </div>
                 <div className="banner_tab_blk">

@@ -11,7 +11,9 @@ const baseUrl_dropdown = `${publicRuntimeConfig.apiUrl}/destinations_dropdown`;
 const destinationLandingPageUrl = `${publicRuntimeConfig.apiUrl}/destination_landing_page`;
 
 // const destinationLandingListUrl = `${publicRuntimeConfig.apiUrl}/api/destinations?fields[0]=destination_code&fields[1]=destination_name&populate[0]=destination_images`;
-const destinationLandingListUrl = `${publicRuntimeConfig.apiUrl}/destination_landing_list`;
+// const destinationLandingListUrl = `${publicRuntimeConfig.apiUrl}/destination_landing_list`;
+const destinationLandingListUrl = `${publicRuntimeConfig.apiUrl}/destination_list_with_images`;
+
 
 // const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/destinations/1?populate[0]=destination_images`;
 const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/destination_details`;
