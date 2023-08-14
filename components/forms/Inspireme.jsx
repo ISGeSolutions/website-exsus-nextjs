@@ -4,13 +4,27 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import { homeService, alertService } from 'services';
+import { element } from 'prop-types';
+import { destinationService, holidaytypesService, userService, homeService, alertService } from 'services';
 
 export { Inspireme };
 
 function Inspireme() {
 
+    const [destinationLandingList, setDestinationLandingList] = useState();
+    const [holidaytypesLandingList, setHolidaytypesLandingList] = useState();
+
     useEffect(() => {
+
+        destinationService.getDestinationLandingList().then(x => {
+            console.log('getDestinationLandingList', x);
+            setDestinationLandingList(x.data);
+            // setDestinationLandingDetails(x)
+        });
+
+        holidaytypesService.getHolidaytypesLandingList().then(x => {
+            setHolidaytypesLandingList(x.data);
+        });
 
     }, []);
 
@@ -51,7 +65,10 @@ function Inspireme() {
                             <div className="select_drpdwn">
                                 <select aria-label="Choose a destination" name="destination" {...register('destination')} className={`form-select ${errors.destination ? 'is-invalid' : ''}`}>
                                     <option value="">Choose a destination</option>
-                                    <option value="Asia">Asia</option>
+                                    {destinationLandingList?.map((element, i) => (
+                                        <option key={element?.id} value={element?.attributes?.destination_code}>{element?.attributes?.destination_name}</option>
+                                    ))}
+                                    {/* <option value="Asia">Asia</option>
                                     <option value="Europe">Europe</option>
                                     <option value="South America">South America</option>
                                     <option value="Indian Subcontinent">Indian Subcontinent</option>
@@ -60,7 +77,7 @@ function Inspireme() {
                                     <option value="Central America">Central America</option>
                                     <option value="Australasia & South Pacific">Australasia & South Pacific</option>
                                     <option value="Middle East & North Africa">Middle East & North Africa</option>
-                                    <option value="Indian ocean">Indian ocean</option>
+                                    <option value="Indian ocean">Indian ocean</option> */}
                                 </select>
                                 <div className="invalid-feedback mb-1">{errors.destination?.message}</div>
                             </div>
@@ -68,7 +85,10 @@ function Inspireme() {
                         <div className="banner_dropdwn_blk ps-0 ps-md-2">
                             <div className="select_drpdwn">
                                 <select aria-label="Choose a reason" name="reason" {...register('reason')} className={`form-select ${errors.reason ? 'is-invalid' : ''}`}>
-                                    <option value="">Choose a reason</option>
+                                    <option value="">Choose a reason</option>                                    
+                                    {holidaytypesLandingList?.map((element, i) => (
+                                        <option key={element?.id} value={element?.attributes?.holiday_types_code}>{element?.attributes?.holiday_type_name}</option>
+                                    ))}
                                     <option value="Adventure Holidays">Adventure Holidays</option>
                                     <option value="Classic Journeys">Classic Journeys</option>
                                     <option value="Trains, Planes, Cars & Cruises">Trains, Planes, Cars & Cruises</option>
