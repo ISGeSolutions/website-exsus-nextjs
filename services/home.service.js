@@ -5,9 +5,14 @@ const { publicRuntimeConfig } = getConfig();
 const baseUrl = `${publicRuntimeConfig.apiUrl}/inspireMe`;
 
 export const homeService = {
-    inspireMe
+    inspireMe,
+    signUp
 };
 
 function inspireMe(inspiremeData) {
+    return fetchWrapper.post(`${baseUrl}`, inspiremeData);
+}
+
+function signUp(inspiremeData) {
     return fetchWrapper.post(`${baseUrl}`, inspiremeData);
 }
