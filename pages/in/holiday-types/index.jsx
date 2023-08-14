@@ -19,6 +19,8 @@ function Index() {
     const [holidaytypesLandingList, setHolidaytypesLandingList] = useState();
     const [backgroundImage, setBackgroundImage] = useState('');
     const [backgroundImgWhentogo, setBackgroundImgWhentogo] = useState('');
+    const [bannerImageArr, setBannerImageArr] = useState([]);
+    const [thumbnailImageArr, setThumbnailImageArr] = useState([]);
 
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
@@ -55,23 +57,58 @@ function Index() {
         }
     }
 
+    const dynamicBannerImage = (item) => {
+        console.log('data', `https://d33ys3jnmuivbg.cloudfront.net/ilimages` + item);
+        return `https://d33ys3jnmuivbg.cloudfront.net/ilimages/` + item;
+    }
+
+    const dynamicThumbnailImage = (item) => {
+        console.log('data32', `https://d33ys3jnmuivbg.cloudfront.net/ilimages` + item);
+        return `https://d33ys3jnmuivbg.cloudfront.net/ilimages/` + item;
+    }
+
     useEffect(() => {
         userService.getAll().then(x => setUsers(x));
 
         holidaytypesService.getHolidaytypesLandingPage().then(x => {
             console.log('getHolidaytypesLandingPage', x);
 
-
-
             setHolidayTypes(x.data[0]);
             // setDestinationLandingDetails(x)
             console.log('aa', "https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data[0].attributes.custom_page_images.data[0].attributes.image_path);
-            setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data[0].attributes.custom_page_images.data[0].attributes.image_path);
-            setBackgroundImgWhentogo("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + x.data[0].attributes.custom_page_images.data[1].attributes.image_path);
+
+            const imageCheck = x.data[0].attributes.custom_page_images.data;
+            imageCheck.forEach(element => {
+                if (element.attributes.image_type == 'center') {
+                    setBackgroundImgWhentogo("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + x.data[0].attributes.custom_page_images.data[1].attributes.image_path);
+                } else if (element.attributes.image_type == 'banner') {
+                    setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data[0].attributes.custom_page_images.data[0].attributes.image_path);
+                }
+            });
         });
 
         holidaytypesService.getHolidaytypesLandingList().then(x => {
-            console.log('getHolidaytypesLandingList', x);
+            const imageCheckType = x.data;
+            imageCheckType.forEach(elementMain => {
+                if (elementMain.attributes.holiday_type_images.data) {
+                    const dataInner = elementMain.attributes.holiday_type_images.data;
+                    dataInner.forEach(element => {
+                        if (element.attributes.image_type == 'banner') {
+                            bannerImageArr.push(element.attributes.image_path);
+                        } else if (element.attributes.image_type == 'thumbnail') {
+                            const objThumbnail = {
+                                "holiday_type_code": elementMain.attributes.holiday_type_code,
+                                "holiday_type_name": elementMain.attributes.holiday_type_name,
+                                "image_path": element.attributes.image_path
+                            }
+                            thumbnailImageArr.push(objThumbnail);
+                        }
+                    });
+                }
+            });
+
+            setBannerImageArr(bannerImageArr);
+            setThumbnailImageArr(thumbnailImageArr);
             setHolidaytypesLandingList(x.data);
             // setDestinationLandingDetails(x)
         });
@@ -82,10 +119,13 @@ function Index() {
         <>
             <section className="banner_blk_row">
                 <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
-                    <div>
-                        <img src={backgroundImage} alt="holiday_types_detls" className="img-fluid" />
-                        {/* /static/media/holiday_types_banner.1e97daba.jpg */}
-                    </div>
+                    {bannerImageArr?.map((bannerImage, i) => (
+                        <div>
+                            <img src={dynamicBannerImage(bannerImage)} alt="holiday_types_detls" className="img-fluid" />
+                        </div>
+                    ))}
+                    {/* <img src={backgroundImage} alt="holiday_types_detls" className="img-fluid" /> */}
+                    {/* /static/media/holiday_types_banner.1e97daba.jpg */}
                 </Carousel>
 
                 <Inspireme />
@@ -126,17 +166,17 @@ function Index() {
                                 </ul>
                             </div>
                         </div>
-                        {holidaytypesLandingList?.map((holidaytypesItem, i) => (
+                        {thumbnailImageArr?.map((holidaytypesItem, i) => (
                             <div className="col-sm-4" key={holidaytypesItem?.id}>
                                 <div className="card_blk_inr">
-                                    <NavLink href={dynamicLink(holidaytypesItem?.attributes?.holiday_type_code)}>
+                                    <NavLink href={dynamicLink(holidaytypesItem?.holiday_type_code)}>
                                         {/* <img src={dynamicImage(destinationItem?.attributes?.holiday_type_images?.data[0].attributes.image_path)} alt="destination01" className="img-fluid" /> */}
-                                        <img src="./../images/holiday_type01.jpg" alt="holiday_type01" className="img-fluid" />
+                                        <img src={dynamicThumbnailImage(holidaytypesItem.image_path)} alt="holiday_type01" className="img-fluid" />
                                         <div className="card_blk_cntnt card_blk_sml_arw">
                                             <div className="row align-items-center">
                                                 <div className="col-11">
                                                     <div className="card_blk_txt">
-                                                        <h3 className="mb-0">{holidaytypesItem?.attributes?.holiday_type_name}</h3>
+                                                        <h3 className="mb-0">{holidaytypesItem?.holiday_type_name}</h3>
                                                     </div>
                                                 </div>
                                                 <div className="col-1 ps-0">
@@ -265,7 +305,6 @@ function Index() {
                     </form> */}
                 </div>
             </section>
-
         </>
     );
 }

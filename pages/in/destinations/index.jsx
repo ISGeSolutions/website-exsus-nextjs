@@ -47,7 +47,7 @@ function Index() {
         }
     }
 
-    const dynamicImage = (itemId) => {       
+    const dynamicImage = (itemId) => {
         return `https://d33ys3jnmuivbg.cloudfront.net/ilimages` + itemId;
     }
 
@@ -79,8 +79,14 @@ function Index() {
             console.log('getDestinationLandingPage', x);
             setDestinations(x.data[0]);
             // setDestinationLandingDetails(x)
-            setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/mc" + x.data[0].attributes.custom_page_images.data[0].attributes.image_path);
-            setBackgroundImgWhentogo("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + x.data[0].attributes.custom_page_images.data[1].attributes.image_path);
+            const imageCheck = x.data[0].attributes.custom_page_images.data;
+            imageCheck.forEach(element => {
+                if (element.attributes.image_type == 'center') {
+                    setBackgroundImgWhentogo("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + x.data[0].attributes.custom_page_images.data[1].attributes.image_path);
+                } else if (element.attributes.image_type == 'banner') {
+                    setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/mc" + x.data[0].attributes.custom_page_images.data[0].attributes.image_path);
+                }
+            });
         });
 
         destinationService.getDestinationLandingList().then(x => {
@@ -88,9 +94,6 @@ function Index() {
             setDestinationLandingList(x.data);
             // setDestinationLandingDetails(x)
         });
-
-
-
 
         const carousel1 = document.querySelector('#carouselExampleInterval');
         new bootstrap.Carousel(carousel1);
