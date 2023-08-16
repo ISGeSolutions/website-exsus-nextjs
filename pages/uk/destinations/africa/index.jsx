@@ -7,6 +7,7 @@ import Head from 'next/head';
 
 import React from 'react';
 import Select from 'react-select';
+import Image from "next/image";
 
 // Import Bootstarp CSS
 // import "bootstrap/dist/css/bootstrap.css";
@@ -34,6 +35,172 @@ function Index() {
     const [isRtl, setIsRtl] = useState(false);
 
     const [selectedOption, setSelectedOption] = useState(null);
+    const [visible, setVisible] = useState(3);
+    const [visiblePagination, setVisiblePagination] = useState(true);
+
+    <div className="col-sm-6 col-lg-4">
+        <div className="card_slider_inr">
+            <div className="card_slider">
+                <div className="card_slider_img">
+                    <img src="./../../images/destination_card09.jpg" alt="destination card09" className="img-fluid" />
+                </div>
+                <div className="card_slider_cnt">
+                    <h4><a href="#">ORANGUTANS & DRAGONS</a></h4>
+                    <ul>
+                        <li>Wildlife Adventure to Indonesia</li>
+                        <li>Indonesia</li>
+                        <li>From £4,650 per person</li>
+                        <li>Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span></li>
+                    </ul>
+                </div>
+                <button className="btn card_slider_btn">
+                    <span>13 nights</span>
+                    <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    const freshProds = [
+        {
+            id: "1",
+            src: "./../../images/destination_card09.jpg",
+            title: "ORANGUTANS & DRAGONS",
+            list: [
+                "Wildlife Adventure to Indonesia",
+                "Indonesia",
+                "From £4,650 per person",
+                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
+            ],
+            nights: "13 nights",
+            itinerariesLink: ""
+        },
+        {
+            id: "2",
+            src: "./../../images/destination_card09.jpg",
+            title: "ORANGUTANS & DRAGONS",
+            list: [
+                "Wildlife Adventure to Indonesia",
+                "Indonesia",
+                "From £4,650 per person",
+                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
+            ],
+            nights: "13 nights",
+            itinerariesLink: ""
+        },
+        {
+            id: "3",
+            src: "./../../images/destination_card09.jpg",
+            title: "ORANGUTANS & DRAGONS",
+            list: [
+                "Wildlife Adventure to Indonesia",
+                "Indonesia",
+                "From £4,650 per person",
+                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
+            ],
+            nights: "13 nights",
+            itinerariesLink: ""
+        },
+        {
+            id: "4",
+            src: "./../../images/destination_card09.jpg",
+            title: "ORANGUTANS & DRAGONS",
+            list: [
+                "Wildlife Adventure to Indonesia",
+                "Indonesia",
+                "From £4,650 per person",
+                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
+            ],
+            nights: "13 nights",
+            itinerariesLink: ""
+        },
+        {
+            id: "5",
+            src: "./../../images/destination_card09.jpg",
+            title: "ORANGUTANS & DRAGONS",
+            list: [
+                "Wildlife Adventure to Indonesia",
+                "Indonesia",
+                "From £4,650 per person",
+                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
+            ],
+            nights: "13 nights",
+            itinerariesLink: ""
+        },
+        {
+            id: "6",
+            src: "./../../images/destination_card09.jpg",
+            title: "ORANGUTANS & DRAGONS",
+            list: [
+                "Wildlife Adventure to Indonesia",
+                "Indonesia",
+                "From £4,650 per person",
+                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
+            ],
+            nights: "13 nights",
+            itinerariesLink: ""
+        },
+        {
+            id: "7",
+            src: "./../../images/destination_card09.jpg",
+            title: "ORANGUTANS & DRAGONS",
+            list: [
+                "Wildlife Adventure to Indonesia",
+                "Indonesia",
+                "From £4,650 per person",
+                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
+            ],
+            nights: "13 nights",
+            itinerariesLink: ""
+        },
+        {
+            id: "8",
+            src: "./../../images/destination_card09.jpg",
+            title: "ORANGUTANS & DRAGONS",
+            list: [
+                "Wildlife Adventure to Indonesia",
+                "Indonesia",
+                "From £4,650 per person",
+                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
+            ],
+            nights: "13 nights",
+            itinerariesLink: ""
+        },
+        {
+            id: "9",
+            src: "./../../images/destination_card09.jpg",
+            title: "ORANGUTANS & DRAGONS",
+            list: [
+                "Wildlife Adventure to Indonesia",
+                "Indonesia",
+                "From £4,650 per person",
+                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
+            ],
+            nights: "13 nights",
+            itinerariesLink: ""
+        },
+        {
+            id: "10",
+            src: "./../../images/destination_card09.jpg",
+            title: "ORANGUTANS & DRAGONS",
+            list: [
+                "Wildlife Adventure to Indonesia",
+                "Indonesia",
+                "From £4,650 per person",
+                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
+            ],
+            nights: "13 nights",
+            itinerariesLink: ""
+        },
+    ];
+
+    let length = freshProds.length;
+    const showMoreItems = () => {
+        setVisible((prevValue) => prevValue + 3);
+        if ((visible + 3) >= (length)) {
+            setVisiblePagination(false);
+        }
+    };
 
     // state = {
     //     selectedOption: null,
@@ -1157,7 +1324,7 @@ function Index() {
                                                 </div>
                                             </div>
 
-                                            <div className="col-sm-6 col-lg-4">
+                                            {/* <div className="col-sm-6 col-lg-4">
                                                 <div className="card_slider_inr">
                                                     <div className="card_slider">
                                                         <a className="card_slider_img">
@@ -1362,12 +1529,38 @@ function Index() {
                                                         </button>
                                                     </div>
                                                 </div>
-                                            </div>
-
+                                            </div> */}
+                                            {freshProds?.slice(0, visible).map((freshprod) => (
+                                                <div className="col-sm-6 col-lg-4">
+                                                    <div className="card_slider_inr">
+                                                        <div className="card_slider">
+                                                            <div className="card_slider_img">
+                                                                <img src={freshprod?.src} alt="destination card09" className="img-fluid" />
+                                                            </div>
+                                                            <div className="card_slider_cnt">
+                                                                <h4><a href="#">{freshprod.title}</a></h4>
+                                                                <ul>
+                                                                    {freshprod?.list.map((item) => (
+                                                                        <li>{item}</li>
+                                                                    ))}
+                                                                </ul>
+                                                            </div>
+                                                            <button className="btn card_slider_btn">
+                                                                <span>{freshprod?.nights}</span>
+                                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
                                             <div className="col-12">
-                                                <button className="btn prmry_btn make_enqury_btn mx-auto text-uppercase">Show 9 more holiday ideas
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
-                                                </button>
+                                                {visiblePagination ? (
+                                                    <button className="btn prmry_btn make_enqury_btn mx-auto text-uppercase" onClick={showMoreItems}>Show 9 more holiday ideas
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
+                                                    </button>
+                                                ) : (
+                                                    ''
+                                                )}
                                             </div>
                                         </div>
                                     </div>

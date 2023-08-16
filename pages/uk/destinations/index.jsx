@@ -7,6 +7,7 @@ import Head from 'next/head';
 import { NavLink } from 'components';
 import { useRouter } from 'next/router';
 import generateDynamicLink from 'components/utils/generateLink';
+import Image from "next/image";
 
 // import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 // var Carousel = require('react-responsive-carousel').Carousel;
@@ -31,6 +32,8 @@ function Index() {
     const [destinationLandingList, setDestinationLandingList] = useState();
     const [backgroundImage, setBackgroundImage] = useState('');
     const [backgroundImgWhentogo, setBackgroundImgWhentogo] = useState('');
+    const [visible, setVisible] = useState(2);
+    const [visiblePagination, setVisiblePagination] = useState(true);
 
     const router = useRouter();
 
@@ -46,6 +49,72 @@ function Index() {
             // setMyVariable(window.site_region);
         }
     }
+
+    // const freshProds = [
+    //     {
+    //         id: "1",
+    //         src: "/images1/100p.jpeg",
+    //         name: "100 Plus",
+    //         category: "Groceries",
+    //     },
+    //     {
+    //         id: "2",
+    //         src: "/images1/Ajinomoto.jpeg",
+    //         name: "Ajinomoto",
+    //         category: "Groceries",
+    //     },
+    //     {
+    //         id: "3",
+    //         src: "/images1/Almondnuts.jpg",
+    //         name: "Almondnuts",
+    //         category: "Groceries",
+    //     },
+    //     {
+    //         id: "4",
+    //         src: "/images1/100p.jpeg",
+    //         name: "100 Plus",
+    //         category: "Groceries",
+    //     },
+    //     {
+    //         id: "5",
+    //         src: "/images1/Ajinomoto.jpeg",
+    //         name: "Ajinomoto",
+    //         category: "Groceries",
+    //     },
+    //     {
+    //         id: "6",
+    //         src: "/images1/Almondnuts.jpg",
+    //         name: "Almondnuts",
+    //         category: "Groceries",
+    //     },
+    //     {
+    //         id: "7",
+    //         src: "/images1/100p.jpeg",
+    //         name: "100 Plus",
+    //         category: "Groceries",
+    //     },
+    //     {
+    //         id: "8",
+    //         src: "/images1/Ajinomoto.jpeg",
+    //         name: "Ajinomoto",
+    //         category: "Groceries",
+    //     },
+    //     {
+    //         id: "9",
+    //         src: "/images1/Almondnuts.jpg",
+    //         name: "Almondnuts",
+    //         category: "Groceries",
+    //     },
+    // ];
+
+    // let length = freshProds.length;
+    // console.log('length', length);
+    // const showMoreItems = () => {
+    //     setVisible((prevValue) => prevValue + 2);
+    //     if((visible+2) >= (length)) {
+    //         setVisiblePagination(false);
+    //     }
+    // };
 
     const dynamicImage = (itemId) => {
         return `https://d33ys3jnmuivbg.cloudfront.net/ilimages` + itemId;
@@ -68,6 +137,8 @@ function Index() {
             return regionWiseUrl + `/destinations/indian-subcontinent`;
         }
     }
+
+
 
     useEffect(() => {
         // destinationService.getAll().then(x => {
@@ -159,6 +230,54 @@ function Index() {
             <section className="card_blk_row destinations_blk_row">
                 <div className="container-md">
                     <div className="row">
+                        <div>
+                            <div className="grid grid-cols-3">
+                                {freshProds?.slice(0, visible).map((freshprod) => (
+
+                                    <div className="py-4">
+                                        <div className="max-w-sm rounded overflow-hidden shadow-lg">
+                                            <Image
+                                                className="rounded-md"
+                                                objectFit="fill"
+                                                src={freshprod.src}
+                                                width={150}
+                                                height={150}
+                                            />
+                                            <div className="px-6 py-4">
+                                                <div className="font-bold text-xl mb-2 text-white">{freshprod.id}</div>
+                                                <p className="text-gray-700 text-base text-white">{freshprod.category}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    // <Product
+                                    //     key={freshprod.id}
+                                    //     src={freshprod.src}
+                                    //     name={freshprod.name}
+                                    //     category={freshprod.category}
+                                    // />
+                                ))}
+
+                                {/* <div>
+      {visiblePagination ? (
+        <div className="flex flex-col pt-8">
+        <button
+            className=" content-between bg-transparent hover:bg-green-800 
+text-green-800 font-semibold hover:text-white py-2 px-4 border
+border-green-800 hover:border-transparent rounded"
+            onClick={showMoreItems} >
+            Load More
+        </button>
+    </div>
+      ) : (
+        ''
+      )}
+    </div> */}
+
+
+                            </div>
+                        </div>
+
                         {destinationLandingList?.map((destinationItem, i) => (
                             <div className="col-sm-6" key={destinationItem?.id}>
                                 <div className="card_blk_inr">
