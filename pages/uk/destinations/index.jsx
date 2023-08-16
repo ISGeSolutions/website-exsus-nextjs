@@ -86,7 +86,7 @@ function Index() {
                     setBackgroundImgWhentogo("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + element.attributes.image_path);
                 } else if (element.attributes.image_type == 'banner') {
                     console.log('2element.attributes.image_path', element.attributes.image_path);
-                    setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/mc" + element.attributes.image_path);
+                    setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + element.attributes.image_path);
                 }
             });
         });
