@@ -40,9 +40,9 @@ function App({ Component, pageProps }) {
         const identifier = "vidya@isgesolutions.com";
         const password = "vpIsg@2023";
 
-        userService.login(identifier, password).then(x => {
-            console.log('x', x);
-        });
+        // userService.login(identifier, password).then(x => {
+        //     console.log('x', x);
+        // });
 
         // unsubscribe from events in useEffect return function
         return () => {

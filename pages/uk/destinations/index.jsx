@@ -76,15 +76,17 @@ function Index() {
         // });
 
         destinationService.getDestinationLandingPage().then(x => {
-            console.log('getDestinationLandingPage', x);
+            console.log('22getDestinationLandingPage', x);
             setDestinations(x.data[0]);
             // setDestinationLandingDetails(x)
             const imageCheck = x.data[0].attributes.custom_page_images.data;
+            console.log('imageCheck', imageCheck);
             imageCheck.forEach(element => {
                 if (element.attributes.image_type == 'center') {
-                    setBackgroundImgWhentogo("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + x.data[0].attributes.custom_page_images.data[1].attributes.image_path);
+                    setBackgroundImgWhentogo("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + element.attributes.image_path);
                 } else if (element.attributes.image_type == 'banner') {
-                    setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/mc" + x.data[0].attributes.custom_page_images.data[0].attributes.image_path);
+                    console.log('2element.attributes.image_path', element.attributes.image_path);
+                    setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/mc" + element.attributes.image_path);
                 }
             });
         });

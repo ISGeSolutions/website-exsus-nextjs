@@ -97,7 +97,7 @@ function Index() {
                             bannerImageArr.push(element.attributes.image_path);
                         } else if (element.attributes.image_type == 'thumbnail') {
                             const objThumbnail = {
-                                "holiday_type_code": elementMain.attributes.holiday_type_code,
+                                "holiday_type_code": elementMain.attributes.holiday_type_groups.data[0].attributes.holiday_type_group_code,
                                 "holiday_type_name": elementMain.attributes.holiday_type_name,
                                 "image_path": element.attributes.image_path
                             }
@@ -106,6 +106,8 @@ function Index() {
                     });
                 }
             });
+
+            console.log('thumbnailImageArr', thumbnailImageArr);
 
             setBannerImageArr(bannerImageArr);
             setThumbnailImageArr(thumbnailImageArr);
@@ -120,7 +122,7 @@ function Index() {
             <section className="banner_blk_row">
                 <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
                     {bannerImageArr?.map((bannerImage, i) => (
-                        <div>
+                        <div key={i}>
                             <img src={dynamicBannerImage(bannerImage)} alt="holiday_types_detls" className="img-fluid" />
                         </div>
                     ))}
@@ -169,7 +171,7 @@ function Index() {
                         {thumbnailImageArr?.map((holidaytypesItem, i) => (
                             <div className="col-sm-4" key={holidaytypesItem?.id}>
                                 <div className="card_blk_inr">
-                                    <NavLink href={dynamicLink(holidaytypesItem?.holiday_type_code)}>
+                                    {/* <NavLink href={dynamicLink(holidaytypesItem?.holiday_type_code)}> */}
                                         {/* <img src={dynamicImage(destinationItem?.attributes?.holiday_type_images?.data[0].attributes.image_path)} alt="destination01" className="img-fluid" /> */}
                                         <img src={dynamicThumbnailImage(holidaytypesItem.image_path)} alt="holiday_type01" className="img-fluid" />
                                         <div className="card_blk_cntnt card_blk_sml_arw">
@@ -184,7 +186,7 @@ function Index() {
                                                 </div>
                                             </div>
                                         </div>
-                                    </NavLink>
+                                    {/* </NavLink> */}
                                 </div>
                             </div>
                         ))}

@@ -16,15 +16,15 @@ function Inspireme() {
 
     useEffect(() => {
 
-        destinationService.getDestinationLandingList().then(x => {
-            console.log('getDestinationLandingList', x);
-            setDestinationLandingList(x.data);
-            // setDestinationLandingDetails(x)
-        });
+        // destinationService.getDestinationLandingList().then(x => {
+        //     // console.log('getDestinationLandingList', x);
+        //     setDestinationLandingList(x.data);
+        //     // setDestinationLandingDetails(x)
+        // });
 
-        holidaytypesService.getHolidaytypesLandingList().then(x => {
-            setHolidaytypesLandingList(x.data);
-        });
+        // holidaytypesService.getHolidaytypesLandingList().then(x => {
+        //     setHolidaytypesLandingList(x.data);
+        // });
 
     }, []);
 
