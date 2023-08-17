@@ -58,24 +58,18 @@ function Index() {
     }
 
     const dynamicBannerImage = (item) => {
-        console.log('data', `https://d33ys3jnmuivbg.cloudfront.net/ilimages` + item);
         return `https://d33ys3jnmuivbg.cloudfront.net/ilimages/` + item;
     }
 
     const dynamicThumbnailImage = (item) => {
-        console.log('data32', `https://d33ys3jnmuivbg.cloudfront.net/ilimages` + item);
         return `https://d33ys3jnmuivbg.cloudfront.net/ilimages/` + item;
     }
 
     useEffect(() => {
         userService.getAll().then(x => setUsers(x));
-
         holidaytypesService.getHolidaytypesLandingPage().then(x => {
-            console.log('getHolidaytypesLandingPage', x);
-
             setHolidayTypes(x.data[0]);
-            // setDestinationLandingDetails(x)
-            console.log('aa', "https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data[0].attributes.custom_page_images.data[0].attributes.image_path);
+            // setDestinationLandingDetails(x);
 
             const imageCheck = x.data[0].attributes.custom_page_images.data;
             imageCheck.forEach(element => {
@@ -106,8 +100,6 @@ function Index() {
                     });
                 }
             });
-
-            console.log('thumbnailImageArr', thumbnailImageArr);
 
             setBannerImageArr(bannerImageArr);
             setThumbnailImageArr(thumbnailImageArr);
@@ -169,23 +161,23 @@ function Index() {
                             </div>
                         </div>
                         {thumbnailImageArr?.map((holidaytypesItem, i) => (
-                            <div className="col-sm-4" key={holidaytypesItem?.id}>
+                            <div className="col-sm-4" key={i}>
                                 <div className="card_blk_inr">
                                     {/* <NavLink href={dynamicLink(holidaytypesItem?.holiday_type_code)}> */}
-                                        {/* <img src={dynamicImage(destinationItem?.attributes?.holiday_type_images?.data[0].attributes.image_path)} alt="destination01" className="img-fluid" /> */}
-                                        <img src={dynamicThumbnailImage(holidaytypesItem.image_path)} alt="holiday_type01" className="img-fluid" />
-                                        <div className="card_blk_cntnt card_blk_sml_arw">
-                                            <div className="row align-items-center">
-                                                <div className="col-11">
-                                                    <div className="card_blk_txt">
-                                                        <h3 className="mb-0">{holidaytypesItem?.holiday_type_name}</h3>
-                                                    </div>
-                                                </div>
-                                                <div className="col-1 ps-0">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                    {/* <img src="./../../../images/holiday_type01.jpg" alt="destination01" className="img-fluid" /> */}
+                                    <img src={dynamicThumbnailImage(holidaytypesItem.image_path)} alt="holiday_type01" className="img-fluid" />
+                                    <div className="card_blk_cntnt card_blk_sml_arw">
+                                        <div className="row align-items-center">
+                                            <div className="col-11">
+                                                <div className="card_blk_txt">
+                                                    <h3 className="mb-0">{holidaytypesItem?.holiday_type_name}</h3>
                                                 </div>
                                             </div>
+                                            <div className="col-1 ps-0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                            </div>
                                         </div>
+                                    </div>
                                     {/* </NavLink> */}
                                 </div>
                             </div>
