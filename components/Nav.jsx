@@ -1,18 +1,30 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { NavLink } from '.';
-import { userService } from 'services';
+import { userService, destinationService, holidaytypesService } from 'services';
 import Head from 'next/head';
 import * as React from 'react';
-
 import { store, useGlobalState } from 'state-pool';
-
 
 export { Nav };
 
 function Nav() {
     const [user, setUser] = useState(null);
     // const [regionWiseUrl, setMyVariable] = useState("");
+    const [destinationLandingList, setDestinationLandingList] = useState();
+    const [holidaytypesList, setHolidaytypesList] = useState();
+    const [activeIndex, setActiveIndex] = useState(null);
+
+    
+    const handleMouseEnter = (index) => {
+        setActiveIndex(index);
+    };
+
+    const handleMouseLeave = () => {
+        setActiveIndex(0);
+        // setActiveIndex(null);
+    };
+
     const router = useRouter();
 
     let regionWiseUrl = '/uk';
@@ -24,7 +36,38 @@ function Nav() {
         }
     }
 
+    const dynamicLink = (itemId) => {
+        // {regionWiseUrl + '/destinations/africa/south-africa'}
+        if (itemId && itemId == 'AF') {
+            return regionWiseUrl + `/destinations/africa`;
+        } else if (itemId && itemId == 'AS') {
+            return regionWiseUrl + `/destinations/asia`;
+        } else if (itemId && itemId == 'AU') {
+            return regionWiseUrl + `/destinations/australasia-and-south-pacific`;
+        } else if (itemId && itemId == 'CA') {
+            return regionWiseUrl + `/destinations/central-america`;
+        } else if (itemId && itemId == 'EU') {
+            return regionWiseUrl + `/destinations/europe`;
+        } else if (itemId && itemId == 'IO') {
+            return regionWiseUrl + `/destinations/indian-ocean`;
+        } else if (itemId && itemId == 'IS') {
+            return regionWiseUrl + `/destinations/indian-subcontinent`;
+        } else {
+            return "#";
+        }
+    };
 
+    const dynamicLinkCountry = (itemId, itemIdCountry) => {
+        if (itemId && itemId == 'AF') {
+            if (itemIdCountry == 'TZ') {
+                return regionWiseUrl + `/destinations/africa/tanzania`;
+            } else if (itemIdCountry == 'ZA') {
+                return regionWiseUrl + `/destinations/africa/south-africa`;
+            }
+        } else {
+            return "#";
+        }
+    };
 
     useEffect(() => {
         const script = document.createElement('script');
@@ -34,6 +77,17 @@ function Nav() {
 
         document.body.appendChild(script);
 
+        destinationService.getDestinationLandingList().then(x => {
+            setDestinationLandingList(x.data);
+        });
+
+        holidaytypesService.getHolidaytypesLandingList().then(x => {
+            console.log('x.data - holiday types', x.data);
+            setHolidaytypesList(x.data);
+        });
+
+        setActiveIndex(0);
+
         const subscription = userService.user.subscribe(x => setUser(x));
         return () => {
             subscription.unsubscribe();
@@ -41,7 +95,7 @@ function Nav() {
     }, []);
 
     const makeAnEnquiry = () => {
-        console.log('makeAnEnquiry');
+        // console.log('makeAnEnquiry');
         // Do something
         router.push('/contact-us');
     }
@@ -80,10 +134,10 @@ function Nav() {
                         </div>
                         <div className="current-menu-title"></div>
                         <button className="btn fa-solid fa-xmark mobile-menu-close" onClick={() => {
-                                const menu = document.querySelector(".menu"); //Nav tag
-                                menu.classList.toggle("active");
-                                document.querySelector(".menu-overlay").classList.toggle("active");
-                            }}></button>
+                            const menu = document.querySelector(".menu"); //Nav tag
+                            menu.classList.toggle("active");
+                            document.querySelector(".menu-overlay").classList.toggle("active");
+                        }}></button>
                     </div>
                     <ul className="menu-main">
                         <li className="menu-item-has-children">
@@ -101,7 +155,31 @@ function Nav() {
                                             <div className="col-lg-6">
                                                 <div className="header_country_list">
                                                     <ul>
-                                                        <li className="header_country_label active">
+                                                        {destinationLandingList?.map((destinationItem, i) => (
+                                                            <li key={destinationItem?.id}
+                                                                className={`header_country_label ${activeIndex === i ? 'active' : ''}`}
+                                                                onMouseEnter={() => handleMouseEnter(i)}
+                                                                onMouseLeave={handleMouseLeave}>
+                                                                <NavLink href={dynamicLink(destinationItem?.attributes?.destination_code)}>
+                                                                    {destinationItem?.attributes?.destination_name}
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                                                </NavLink>
+                                                                <div className="header_country_list_inr">
+                                                                    <ul>
+                                                                        {destinationItem?.attributes?.countries?.data.map((destinationCountry, i) => (
+                                                                            <li key={destinationCountry?.id}>
+                                                                                <NavLink href={dynamicLinkCountry(destinationItem?.attributes?.destination_code, destinationCountry?.attributes?.country_code)}>
+                                                                                    {destinationCountry?.attributes?.country_name}
+                                                                                </NavLink>
+                                                                            </li>
+                                                                        ))
+                                                                        }
+                                                                    </ul>
+                                                                </div>
+                                                            </li>
+                                                        ))}
+
+                                                        {/* <li className="header_country_label">
                                                             <NavLink href={regionWiseUrl + '/destinations/africa'}>Africa
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                             </NavLink>
@@ -286,7 +364,7 @@ function Nav() {
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </button>
                                                             </div>
-                                                        </li>
+                                                        </li> */}
                                                     </ul>
                                                 </div>
                                             </div>
