@@ -240,10 +240,10 @@ function Layout({ children }) {
                                 <div className="quick_links_parnt" aria-label="Exsus Sites">
                                     <h6>Exsus Sites</h6>
                                     <ul>
-                                        <li><NavLink href="/country_details">UK</NavLink></li>
-                                        <li><NavLink href="/country_details">Asia</NavLink></li>
-                                        <li><NavLink href="/country_details">India</NavLink></li>
-                                        <li><NavLink href="/country_details">USA</NavLink></li>
+                                        <li><NavLink href="/uk" target="_blank">UK</NavLink></li>
+                                        <li><NavLink href="/asia" target="_blank">Asia</NavLink></li>
+                                        <li><NavLink href="/india" target="_blank">India</NavLink></li>
+                                        <li><NavLink href="/usa" target="_blank">USA</NavLink></li>
                                     </ul>
                                 </div>
                             </div>
