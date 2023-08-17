@@ -1530,7 +1530,7 @@ function Index() {
                                                     </div>
                                                 </div>
                                             </div> */}
-                                            {/* {freshProds?.slice(0, visible).map((freshprod) => (
+                                            {freshProds?.slice(0, visible).map((freshprod) => (
                                                 <div className="col-sm-6 col-lg-4">
                                                     <div className="card_slider_inr">
                                                         <div className="card_slider">
@@ -1552,7 +1552,7 @@ function Index() {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            ))} */}
+                                            ))}
                                             <div className="col-12">
                                                 {visiblePagination ? (
                                                     <button className="btn prmry_btn make_enqury_btn mx-auto text-uppercase" onClick={showMoreItems}>Show 9 more holiday ideas
