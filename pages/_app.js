@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import React from 'react';
+// import React from 'react';
 
 // import { NavLink } from './../components/NavLink';
 import { Layout } from './../components/common';
