@@ -21,7 +21,7 @@ function Nav() {
     };
 
     const handleMouseLeave = () => {
-        setActiveIndex(0);
+        // setActiveIndex(0);
         // setActiveIndex(null);
     };
 
@@ -63,6 +63,24 @@ function Nav() {
                 return regionWiseUrl + `/destinations/africa/tanzania`;
             } else if (itemIdCountry == 'ZA') {
                 return regionWiseUrl + `/destinations/africa/south-africa`;
+            }
+        } else if (itemId && itemId == 'AS') {
+            if (itemIdCountry == 'ID') {
+                return regionWiseUrl + `/destinations/asia/indonesia`;
+            } else if (itemIdCountry == 'JP') {
+                return regionWiseUrl + `/destinations/asia/japan`;
+            }
+        } else if (itemId && itemId == 'AU') {
+            if (itemIdCountry == 'AU') {
+                return regionWiseUrl + `/destinations/australia/australia`;
+            } else if (itemIdCountry == 'NZ') {
+                return regionWiseUrl + `/destinations/australia/new-zealand`;
+            }
+        } else if (itemId && itemId == 'IS') {
+            if (itemIdCountry == 'BT') {
+                return regionWiseUrl + `/destinations/indian-subcontinent/bhutan`;
+            } else if (itemIdCountry == 'IN') {
+                return regionWiseUrl + `/destinations/indian-subcontinent/india`;
             }
         } else {
             return "#";
