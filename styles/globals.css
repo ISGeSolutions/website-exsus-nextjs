@@ -375,3 +375,161 @@ input .react-select__input-container:hover {
     display: flex;
     align-items: center;
 }
+
+
+
+
+
+
+/* dropdown CSS change */
+.select__control{
+    background: transparent;
+    border-radius: 0;
+    border-color: #fff;
+    color: #fff;
+    height: 40px;
+}
+
+.select__control{
+    min-height: 40px;
+}
+.select__placeholder {
+    color: #fff;
+}
+
+.select__value-container{
+    padding: 0 0 0 5px;
+    display: flex;
+}
+.select__multi-value__label{
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.select__indicator.select__clear-indicator, .select__input-container  {
+    display: none;
+}
+
+.select__multi-value:nth-child(1){
+    background: transparent;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 2px 0;
+    margin-right: 5px;
+    border-radius: 4px;
+}
+.select__multi-value:nth-child(1) .select__multi-value__label + .select__multi-value__remove{
+    display: none;
+}
+.select__multi-value__label{
+    color: #fff;
+}
+
+.select__control{
+    background: transparent;
+    border-radius: 0;
+    border-color: #fff;
+    color: #fff;
+    height: 40px;
+}
+
+.select__control{
+    min-height: 40px;
+}
+.select__placeholder {
+    color: #fff;
+}
+
+.select__value-container{
+    padding: 0 0 0 5px;
+    display: flex;
+    width: calc(100% - 37px);
+    overflow: hidden;
+}
+.select__multi-value__label{
+    font-size: 16px;
+    line-height: 28px;
+}
+
+.select__indicator.select__clear-indicator, .select__input-container, .select__indicator-separator{
+    display: none;
+}
+
+.select__multi-value:nth-child(n+2){
+    background: #8aad56;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 2px 4px;
+    margin-right: 5px;
+    border-radius: 4px;
+}
+.select__multi-value__remove{
+    padding: 0 5px;
+}
+.select__menu {
+    margin: 0;
+    border-radius: 0;
+    background: #333132;
+}
+.select__option{
+    font-size: 16px;
+    padding: 8px 10px;
+    color: #fff;
+    cursor: pointer;
+}
+.select__option:hover, .select__option:focus, .select__option:active, .select__option--is-focused {
+    background-color: #8aad56;
+    color: #000;
+}
+.select__indicators{
+    background: #333132;
+    cursor: pointer;
+}
+
+.dropdown_grp_blk{
+    width: calc(100% - 160px);
+    float: left;
+    margin-left: -10px;
+    /* display: flex; */
+}
+
+.destination_dropdwn_row .dropdown_grp_blk .banner_dropdwn_blk{
+    padding-bottom: 15px;
+    width: calc(100% - 66.7%);
+    max-width: 100%;
+    float: left;
+    /* flex: 1; */
+}
+.destination_dropdwn_row .dropdown_grp_blk .banner_dropdwn_blk:nth-child(n+2){
+    padding-left: 10px;
+}
+.select__dropdown-indicator{
+    position: relative;
+    width: 37px;
+    padding: 0;
+    height: 38px;
+}
+.select__dropdown-indicator > svg{
+    display: none;
+}
+.select__dropdown-indicator::after{
+    background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' fill='white' width='20' viewBox='0 0 512 266.77'%3e%3cpath fill-rule='nonzero' d='M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z'/%3e%3c/svg%3e") no-repeat !important;
+    border: none;
+    right: 0;
+    top: 0;
+    position: absolute;
+    content: "";
+    width: 20px;
+    background-size: 20px !important;
+    height: 11px;
+    border-bottom: none !important;
+    margin: auto;
+    border-left: none !important;
+    left: 0;
+    bottom: 0;
+}
+.destination_dropdwn_row .dropdown_grp_blk + .banner_inspire_btn{
+    min-width: 170px;
+}
