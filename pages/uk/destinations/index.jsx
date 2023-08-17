@@ -232,7 +232,7 @@ function Index() {
                     <div className="row">
                         <div>
                             <div className="grid grid-cols-3">
-                                {freshProds?.slice(0, visible).map((freshprod) => (
+                                {/* {freshProds?.slice(0, visible).map((freshprod) => (
 
                                     <div className="py-4">
                                         <div className="max-w-sm rounded overflow-hidden shadow-lg">
@@ -249,14 +249,7 @@ function Index() {
                                             </div>
                                         </div>
                                     </div>
-
-                                    // <Product
-                                    //     key={freshprod.id}
-                                    //     src={freshprod.src}
-                                    //     name={freshprod.name}
-                                    //     category={freshprod.category}
-                                    // />
-                                ))}
+                                ))} */}
 
                                 {/* <div>
       {visiblePagination ? (
