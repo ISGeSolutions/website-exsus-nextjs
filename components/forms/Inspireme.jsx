@@ -16,15 +16,15 @@ function Inspireme() {
 
     useEffect(() => {
 
-        // destinationService.getDestinationLandingList().then(x => {
-        //     // console.log('getDestinationLandingList', x);
-        //     setDestinationLandingList(x.data);
-        //     // setDestinationLandingDetails(x)
-        // });
+        destinationService.getDestinationLandingList().then(x => {
+            // console.log('getDestinationLandingList', x);
+            setDestinationLandingList(x.data);
+            // setDestinationLandingDetails(x)
+        });
 
-        // holidaytypesService.getHolidaytypesLandingList().then(x => {
-        //     setHolidaytypesLandingList(x.data);
-        // });
+        holidaytypesService.getHolidaytypesLandingList().then(x => {
+            setHolidaytypesLandingList(x.data);
+        });
 
     }, []);
 
@@ -89,7 +89,7 @@ function Inspireme() {
                                     {holidaytypesLandingList?.map((element, i) => (
                                         <option key={element?.id} value={element?.attributes?.holiday_types_code}>{element?.attributes?.holiday_type_name}</option>
                                     ))}
-                                    <option value="Adventure Holidays">Adventure Holidays</option>
+                                    {/* <option value="Adventure Holidays">Adventure Holidays</option>
                                     <option value="Classic Journeys">Classic Journeys</option>
                                     <option value="Trains, Planes, Cars & Cruises">Trains, Planes, Cars & Cruises</option>
                                     <option value="Food & Culture Holidays">Food & Culture Holidays</option>
@@ -98,7 +98,7 @@ function Inspireme() {
                                     <option value="Short breaks & Escapes">Short breaks & Escapes</option>
                                     <option value="Wildlife & Safari Holidays">Wildlife & Safari Holidays</option>
                                     <option value="Luxury Beach holidays">Luxury Beach holidays</option>
-                                    <option value="Special occasions">Special occasions</option>
+                                    <option value="Special occasions">Special occasions</option> */}
                                 </select>
                                 <div className="invalid-feedback mb-1">{errors.reason?.message}</div>
                             </div>

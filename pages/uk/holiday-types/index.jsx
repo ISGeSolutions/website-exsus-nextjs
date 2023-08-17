@@ -97,7 +97,7 @@ function Index() {
                             bannerImageArr.push(element.attributes.image_path);
                         } else if (element.attributes.image_type == 'thumbnail') {
                             const objThumbnail = {
-                                "holiday_type_code": elementMain.attributes.holiday_type_groups.data[0].attributes.holiday_type_group_code,
+                                "holiday_type_code": elementMain.attributes.holiday_type_code,
                                 "holiday_type_name": elementMain.attributes.holiday_type_name,
                                 "image_path": element.attributes.image_path
                             }

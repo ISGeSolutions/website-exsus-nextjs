@@ -42,6 +42,7 @@ function getHolidaytypesLandingPage() {
 }
 
 function getHolidaytypesLandingList() {
+    console.log('holidaytypesLandingListUrl', holidaytypesLandingListUrl);
     return fetchWrapper.get(holidaytypesLandingListUrl);
 }
 
