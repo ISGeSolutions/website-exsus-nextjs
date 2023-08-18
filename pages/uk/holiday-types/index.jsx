@@ -84,8 +84,8 @@ function Index() {
         holidaytypesService.getHolidaytypesLandingList().then(x => {
             const imageCheckType = x.data;
             imageCheckType.forEach(elementMain => {
-                if (elementMain.attributes.holiday_type_images.data) {
-                    const dataInner = elementMain.attributes.holiday_type_images.data;
+                if (elementMain.attributes.holiday_type_group_images.data) {
+                    const dataInner = elementMain.attributes.holiday_type_group_images.data;
                     dataInner.forEach(element => {
                         if (element.attributes.image_type == 'banner') {
                             bannerImageArr.push(element.attributes.image_path);
@@ -113,12 +113,12 @@ function Index() {
         <>
             <section className="banner_blk_row">
                 <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
-                    {bannerImageArr?.map((bannerImage, i) => (
+                    {/* {bannerImageArr?.map((bannerImage, i) => (
                         <div key={i}>
                             <img src={dynamicBannerImage(bannerImage)} alt="holiday_types_detls" className="img-fluid" />
                         </div>
-                    ))}
-                    {/* <img src={backgroundImage} alt="holiday_types_detls" className="img-fluid" /> */}
+                    ))} */}
+                    <img src={backgroundImage} alt="holiday_types_detls" className="img-fluid" />
                     {/* /static/media/holiday_types_banner.1e97daba.jpg */}
                 </Carousel>
 
