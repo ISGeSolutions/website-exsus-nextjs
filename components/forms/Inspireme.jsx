@@ -87,7 +87,7 @@ function Inspireme() {
                                 <select aria-label="Choose a reason" name="reason" {...register('reason')} className={`form-select ${errors.reason ? 'is-invalid' : ''}`}>
                                     <option value="">Choose a reason</option>                                    
                                     {holidaytypesLandingList?.map((element, i) => (
-                                        <option key={element?.id} value={element?.attributes?.holiday_types_code}>{element?.attributes?.holiday_type_name}</option>
+                                        <option key={element?.id} value={element?.attributes?.holiday_type_group_code}>{element?.attributes?.holiday_type_group_name}</option>
                                     ))}
                                     {/* <option value="Adventure Holidays">Adventure Holidays</option>
                                     <option value="Classic Journeys">Classic Journeys</option>
