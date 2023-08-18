@@ -36,17 +36,17 @@ function Index() {
     }
 
     const dynamicLink = (itemId) => {
-        if (itemId && itemId == '01') {
+        if (itemId && itemId == 'HG6') {
             return regionWiseUrl + `/holiday-types/incredible-journeys`;
-        } else if (itemId && itemId == '02') {
+        } else if (itemId && itemId == 'HG5') {
             return regionWiseUrl + `/holiday-types/luxury-honeymoons`;
-        } else if (itemId && itemId == '03') {
+        } else if (itemId && itemId == 'HG4') {
             return regionWiseUrl + `/holiday-types/family-holidays`;
-        } else if (itemId && itemId == '04') {
+        } else if (itemId && itemId == 'ADHL') {
             return regionWiseUrl + `/holiday-types/adventure-holidays`;
-        } else if (itemId && itemId == '05') {
+        } else if (itemId && itemId == 'LBHG') {
             return regionWiseUrl + `/holiday-types/luxury-beach-holidays`;
-        } else if (itemId && itemId == '06') {
+        } else if (itemId && itemId == 'HG3') {
             return regionWiseUrl + `/holiday-types/culture-holidays`;
         } else if (itemId && itemId == '07') {
             return regionWiseUrl + `/holiday-types/wildlife-holidays`;
@@ -91,8 +91,8 @@ function Index() {
                             bannerImageArr.push(element.attributes.image_path);
                         } else if (element.attributes.image_type == 'thumbnail') {
                             const objThumbnail = {
-                                "holiday_type_code": elementMain.attributes.holiday_type_code,
-                                "holiday_type_name": elementMain.attributes.holiday_type_name,
+                                "holiday_type_code": elementMain?.attributes?.holiday_type_group_code,
+                                "holiday_type_name": elementMain?.attributes?.holiday_type_group_name,
                                 "image_path": element.attributes.image_path
                             }
                             thumbnailImageArr.push(objThumbnail);
@@ -163,7 +163,7 @@ function Index() {
                         {thumbnailImageArr?.map((holidaytypesItem, i) => (
                             <div className="col-sm-4" key={i}>
                                 <div className="card_blk_inr">
-                                    {/* <NavLink href={dynamicLink(holidaytypesItem?.holiday_type_code)}> */}
+                                    <NavLink href={dynamicLink(holidaytypesItem?.holiday_type_code)}>
                                     {/* <img src="./../../../images/holiday_type01.jpg" alt="destination01" className="img-fluid" /> */}
                                     <img src={dynamicThumbnailImage(holidaytypesItem.image_path)} alt="holiday_type01" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
@@ -178,7 +178,7 @@ function Index() {
                                             </div>
                                         </div>
                                     </div>
-                                    {/* </NavLink> */}
+                                    </NavLink>
                                 </div>
                             </div>
                         ))}
