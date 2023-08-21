@@ -8,6 +8,7 @@ import Head from 'next/head';
 import React from 'react';
 import Select from 'react-select';
 import Image from "next/image";
+import { useRouter } from 'next/router';
 
 // Import Bootstarp CSS
 // import "bootstrap/dist/css/bootstrap.css";
@@ -283,7 +284,6 @@ function Index() {
     ];
 
     const selectedSec = (itemId) => {
-        // console.log('itemId', itemId);
         var text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
         if (itemId == 'overview') {
             text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
@@ -308,11 +308,13 @@ function Index() {
     // this.handleChange = handleChange.bind(this);
 
     const handleChange = (selectedOption) => {
-        console.log('selectedOption', selectedOption);
         // this.setState({ selectedOption }, () =>
         //   console.log(`Option selected:`, this.state.selectedOption)
         // );
     };
+
+    const router = useRouter();
+    const { id } = router.query;
 
     useEffect(() => {
         userService.getAll().then(x => setUsers(x));
@@ -320,36 +322,28 @@ function Index() {
         new bootstrap.Carousel(carousel);
 
         destinationService.getAllDropdown().then(x => {
-            // console.log('destinationServiceDropdown', x);
             setDestinationDropdown(x)
         });
 
         destinationService.getAll().then(x => {
-            // // console.log('destinationService', x);
             const desiredKey = 1; // The desired key to access
             const desiredDestination = x.find(item => item.id == desiredKey);
-            // console.log('desiredDestinatio2', desiredDestination.destination_translations[0].destination_overview_text);
             setDestination(desiredDestination.destination_translations[0].destination_overview_text);
         });
 
-        destinationService.getDestinationDetails().then(x => {
-            // console.log('getDestinationDetails', x);
+        // let id = 1;
+        destinationService.getDestinationDetails(id).then(x => {
             setDestinationDetails(x.data.attributes);
             // const lines = x.data.attributes?.overview_text.split('\n');
-            // console.log('lines', lines);
             const oldText = x.data.attributes?.overview_text;
             var newValueWithBr = oldText?.replace(/\n/g, "<br />");
             setnewValueWithBr(newValueWithBr);
-            console.log('x.data.attributes.destination_images.data', x.data.attributes.destination_images.data);
-
             const imageCheck = x.data.attributes.destination_images.data;
             imageCheck.forEach(element => {
                 if (element.attributes.image_type == 'main') {
-                    // console.log('element.attributes.image_path', element.attributes.image_path);
                     setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + element.attributes.image_path);
                 }
             });
-
             // setDestinationLandingDetails(x)
         });
 
@@ -371,7 +365,6 @@ function Index() {
                 $(this).addClass('active');
             });
         });
-
     }, []);
 
     return (

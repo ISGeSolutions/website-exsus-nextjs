@@ -47,6 +47,8 @@ function getHolidaytypesLandingList() {
     return fetchWrapper.get(holidaytypesLandingListUrl);
 }
 
-function getHolidaytypeDetails() {
+function getHolidaytypeDetails(id) {
+    let id1 = 1;
+    const holidaytypesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/holiday-types/` + id1 + `?populate[0]=holiday_type_images`;
     return fetchWrapper.get(holidaytypesDetailsUrl);
 }

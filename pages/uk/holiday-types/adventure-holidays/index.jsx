@@ -3,6 +3,7 @@ import Iframe from 'react-iframe'
 import { Layout } from 'components/users';
 import { userService, holidaytypesService } from 'services';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 var Carousel = require('react-responsive-carousel').Carousel;
@@ -38,9 +39,12 @@ function Index() {
         // EXPERIENCES IN AFRICA
     };
 
+    const router = useRouter();
+    const { id } = router.query;
+
     useEffect(() => {
         userService.getAll().then(x => setUsers(x));
-        holidaytypesService.getHolidaytypeDetails().then(x => {
+        holidaytypesService.getHolidaytypeDetails(id).then(x => {
             console.log('getHolidaytypesDetails', x);
             setHolidaytypesDetails(x.data.attributes);
             // const lines = x.data.attributes?.overview_text.split('\n');

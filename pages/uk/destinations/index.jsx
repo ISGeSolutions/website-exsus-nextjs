@@ -9,24 +9,12 @@ import { useRouter } from 'next/router';
 import generateDynamicLink from 'components/utils/generateLink';
 import Image from "next/image";
 
-// import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-// var Carousel = require('react-responsive-carousel').Carousel;
-
-// export const getStaticProps = async () => {
-
-// const res = await destinationService.getAll();
-// console.log('res', res);
-// const data = await res;
-// console.log('data', data);
-// return {
-//     props: { data }
-// };
-//     return;
-// }
-
 export default Index;
 
 function Index() {
+
+    const router = useRouter();
+
     const [destinations, setDestinations] = useState();
     // const [destinationLandingDetails, setDestinationLandingDetails] = useState();
     const [destinationLandingList, setDestinationLandingList] = useState();
@@ -34,12 +22,6 @@ function Index() {
     const [backgroundImgWhentogo, setBackgroundImgWhentogo] = useState('');
     const [visible, setVisible] = useState(2);
     const [visiblePagination, setVisiblePagination] = useState(true);
-
-    const router = useRouter();
-
-    // const itemId = 123; // Replace this with the actual itemId or fetch it from your data
-
-    // const dynamicLink() = generateDynamicLink(itemId);
 
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
@@ -72,8 +54,6 @@ function Index() {
         }
     }
 
-
-
     useEffect(() => {
         // destinationService.getAll().then(x => {
         //     console.log('x', x);
@@ -81,23 +61,19 @@ function Index() {
         // });
 
         destinationService.getDestinationLandingPage().then(x => {
-            console.log('22getDestinationLandingPage', x);
             setDestinations(x.data[0]);
             // setDestinationLandingDetails(x)
             const imageCheck = x.data[0].attributes.custom_page_images.data;
-            console.log('imageCheck', imageCheck);
             imageCheck.forEach(element => {
                 if (element.attributes.image_type == 'center') {
                     setBackgroundImgWhentogo("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + element.attributes.image_path);
                 } else if (element.attributes.image_type == 'banner') {
-                    console.log('2element.attributes.image_path', element.attributes.image_path);
                     setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + element.attributes.image_path);
                 }
             });
         });
 
         destinationService.getDestinationLandingList().then(x => {
-            console.log('getDestinationLandingList', x);
             setDestinationLandingList(x.data);
             // setDestinationLandingDetails(x)
         });

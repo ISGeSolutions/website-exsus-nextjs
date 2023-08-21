@@ -15,7 +15,7 @@ const destinationLandingListUrl = `${publicRuntimeConfig.apiUrl}/api/destination
 // const destinationLandingListUrl = `${publicRuntimeConfig.apiUrl}/destination_list_with_images`;
 
 
-const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/destinations/1?populate[0]=destination_images`;
+// const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/destinations/1?populate[0]=destination_images`;
 // const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/destination_details`;
 
 const baseUrl = `${publicRuntimeConfig.apiUrl}/destinations`;
@@ -66,8 +66,9 @@ function getDestinationLandingList() {
     return fetchWrapper.get(destinationLandingListUrl);
 }
 
-function getDestinationDetails() {
+function getDestinationDetails(id) {
     // console.log('baseUrl_dropdown', baseUrl_dropdown);
+    const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/destinations/` + id + `?populate[0]=destination_images`;
     return fetchWrapper.get(destinationDetailsUrl);
 }
 
