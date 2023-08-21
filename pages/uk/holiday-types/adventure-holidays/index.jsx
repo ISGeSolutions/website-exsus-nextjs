@@ -52,15 +52,15 @@ function Index() {
             const oldText = x.data.attributes?.overview_text;
             var newValueWithBr = oldText?.replace(/\n/g, "<br />");
             setnewValueWithBr(newValueWithBr);
-            console.log('x.data.attributes.holiday_type_images.data[0].attributes.image_path2', 'https://d33ys3jnmuivbg.cloudfront.net/ilimages/' + x.data.attributes.holiday_type_images.data[0].attributes.image_path);
+            console.log('x.data.attributes.holiday_type_group_images.data[0].attributes.image_path2', 'https://d33ys3jnmuivbg.cloudfront.net/ilimages/' + x.data.attributes.holiday_type_group_images.data[0].attributes.image_path);
 
-            const imageCheck = x.data.attributes.holiday_type_images.data;
+            const imageCheck = x.data.attributes.holiday_type_group_images.data;
             console.log('imageCheck', imageCheck);
             imageCheck.forEach(element => {
                 if (element.attributes.image_type == 'banner') {
-                    setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data.attributes.holiday_type_images.data[0].attributes.image_path);
+                    setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data.attributes.holiday_type_group_images.data[0].attributes.image_path);
                 } else if (element.attributes.image_type == 'thumbnail') {
-                    setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data.attributes.holiday_type_images.data[0].attributes.image_path);
+                    // setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data.attributes.holiday_type_group_images.data[0].attributes.image_path);
                 }
             });
         });

@@ -27,7 +27,8 @@ export const holidaytypesService = {
     getById,
     getHolidaytypesLandingPage,
     getHolidaytypesLandingList,
-    getHolidaytypeDetails
+    getHolidaytypeDetails,
+    getHolidaytypeDetailsById
 };
 
 function getAll() {
@@ -48,6 +49,13 @@ function getHolidaytypesLandingList() {
 }
 
 function getHolidaytypeDetails(id) {
+    let id1 = 1;
+    // https://mock.apidog.com/m1/379394-0-default/api/holiday-type-groups/1?populate[0]=holiday_type_group_images
+    const holidaytypesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/holiday-type-groups/` + id1 + `?populate[0]=holiday_type_group_images`;
+    return fetchWrapper.get(holidaytypesDetailsUrl);
+}
+
+function getHolidaytypeDetailsById(id) {
     let id1 = 1;
     const holidaytypesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/holiday-types/` + id1 + `?populate[0]=holiday_type_images`;
     return fetchWrapper.get(holidaytypesDetailsUrl);
