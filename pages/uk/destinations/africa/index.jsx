@@ -117,6 +117,8 @@ function Index() {
     const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
     const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
 
+    const [itineraries, setItineraries] = useState(null);
+
     <div className="col-sm-6 col-lg-4">
         <div className="card_slider_inr">
             <div className="card_slider">
@@ -287,7 +289,7 @@ function Index() {
 
     // const { selectedOption } = this.state;
 
-    
+
     const selectedSec = (itemId) => {
         var text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
         if (itemId == 'overview') {
@@ -333,6 +335,8 @@ function Index() {
     const router = useRouter();
     const { id } = router.query;
 
+    // https://d33ys3jnmuivbg.cloudfront.net/ilimages" + item?.attributes?.itinerary_images?.data[3]?.attributes?.image_path
+
     useEffect(() => {
 
         setSelectedOptionCountry(countryOptions[0]);
@@ -351,6 +355,10 @@ function Index() {
             const desiredKey = 1; // The desired key to access
             const desiredDestination = x.find(item => item.id == desiredKey);
             setDestination(desiredDestination.destination_translations[0].destination_overview_text);
+        });
+
+        destinationService.getAllItineraries().then(x => {
+            setItineraries(x.data);
         });
 
         // let id = 1;
@@ -399,62 +407,11 @@ function Index() {
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-                        {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="4" aria-label="Slide 5"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="5" aria-label="Slide 6"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="6" aria-label="Slide 7"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="7" aria-label="Slide 8"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="8" aria-label="Slide 9"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="9" aria-label="Slide 10"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="10" aria-label="Slide 11"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="11" aria-label="Slide 12"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="12" aria-label="Slide 13"></button> */}
                     </div>
                     <div className="carousel-inner">
                         <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
                             <div className="banner_commn_cls" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
                         </a>
-                        {/* <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                            <div className="banner_commn_cls destination_overvw_banner01"></div>
-                        </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                            <div className="destination_overvw_banner02 banner_commn_cls"></div>
-                        </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                            <div className="destination_overvw_banner03 banner_commn_cls"></div>
-                        </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                            <div className="destination_overvw_banner04 banner_commn_cls"></div>
-                        </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                            <div className="destination_overvw_banner05 banner_commn_cls"></div>
-                        </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                            <div className="destination_overvw_banner06 banner_commn_cls"></div>
-                        </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                            <div className="destination_overvw_banner07 banner_commn_cls"></div>
-                        </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                            <div className="destination_overvw_banner08 banner_commn_cls"></div>
-                        </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                            <div className="destination_overvw_banner09 banner_commn_cls"></div>
-                        </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                            <div className="destination_overvw_banner10 banner_commn_cls"></div>
-                        </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                            <div className="destination_overvw_banner11 banner_commn_cls"></div>
-                        </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                            <div className="destination_overvw_banner12 banner_commn_cls"></div>
-                        </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                            <div className="destination_overvw_banner13 banner_commn_cls"></div>
-                        </a> */}
                     </div>
                 </div>
                 <div className="banner_tab_blk">
@@ -462,13 +419,6 @@ function Index() {
                     <button className="btn banner_img_tab banner_tab_active">Images</button>
                 </div>
                 <div className="banner_map_blk">
-                    {/* <Iframe url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin"
-                        width="640px"
-                        height="320px"
-                        id=""
-                        className=""
-                        display="block"
-                        position="relative"/> */}
                     <Iframe width="640px"
                         height="320px"
                         id=""
@@ -513,15 +463,7 @@ function Index() {
                     <div className="tab-pane fade show active" id="pills-overview" role="tabpanel" aria-labelledby="pills-overview-tab" tabIndex="0">
                         <div className="container-md">
                             <section className="destination_para">
-                                {/* {valueWithBr.map((line, index) => (
-        <p dangerouslySetInnerHTML={{ __html: line}} key={index} />
-      ))} */}
                                 {<div dangerouslySetInnerHTML={{ __html: valueWithBr }} />}
-                                {/* <p dangerouslySetInnerHTML={{ __html: destination }} /> */}
-                                {/* <p>Warning: Asia is highly addictive. Whether it’s a rickshaw ride through hectic Hanoi, a fascinating adventure amidst the ancient Angkor temples or diving and snorkelling in some of the warmest, clearest seas on the planet, Asia is jam-packed with culture, adventure - and variety.</p>
-                                <p>A truly tantalising continent, Asia promises extraordinary experiences for every traveller. Whether you’re after a luxury honeymoon in South-East Asia, a family adventure holiday in Southern Asia or a cultural holiday to the Far East, you can expect some of the most beautiful beaches and most incredible luxury hotels in the world, fast-paced cities, tranquil village life and mouthwatering food. Asia has it all.</p>
-                                <p>Take a journey through temple-laced Cambodia or Malaysia; island-hop across the other-worldly archipelago of Indonesia; and soak up the buzz of floating markets in Vietnam, Laos and Thailand. Delve into emerald jungles and encounter enthralling wildlife in Borneo; or relish the pulsating energy of Asia’s most cosmopolitan cities: Hong Kong, Macau and Singapore. Then there’s beguiling Japan, a cultural odyssey through time, while Bhutan and Myanmar have just begun to unveil their treasures to the world, and we wouldn’t want you to miss it.</p>
-                                <p>To design your own bespoke Asian holiday, call and speak to one of our experts on 020 7337 9010 or <a href="#">Enquire Now.</a></p> */}
                             </section>
 
                             <section className="favrites_blk_row favrites_blk_small_card_row">
@@ -649,7 +591,40 @@ function Index() {
                                 <div className="card_slider_row">
                                     <div className="carousel00">
                                         <div className="row">
-                                            <div className="col-sm-6 col-lg-4">
+                                            {itineraries?.map((item) => (
+                                                <div className="col-sm-6 col-lg-4">
+                                                    <div className="card_slider_inr">
+                                                        <div className="card_slider">
+                                                            <a className="card_slider_img">
+                                                                {item?.attributes?.itinerary_images?.data.map((element, index) => (
+                                                                    element.attributes.image_type == 'thumbnail' ? (
+                                                                        <img src={`https://d33ys3jnmuivbg.cloudfront.net/ilimages` + element.attributes.image_path} alt="destination card01" className="img-fluid" />
+                                                                    ) : (
+                                                                        ''
+                                                                    )
+                                                                ))}
+                                                                {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
+                                                            </a>
+                                                            <div className="card_slider_cnt">
+                                                                <h4><a href="#">{item?.attributes?.itin_name}</a></h4>
+                                                                <ul>
+                                                                    <li>{item?.attributes?.header_text}</li>
+                                                                    <li>Indonesia</li>
+                                                                    <li>{item?.attributes?.itinerary_country_contents?.data[0]?.attributes?.guideline_price_notes_index}</li>
+                                                                    <li>Travel to:<span>{item?.attributes?.sub_header_text}</span></li>
+                                                                </ul>
+                                                            </div>
+                                                            <button className="btn card_slider_btn">
+                                                                <span>{item?.attributes?.no_of_nites_notes}</span>
+                                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )
+                                            )}
+
+                                            {/* <div className="col-sm-6 col-lg-4">
                                                 <div className="card_slider_inr">
                                                     <div className="card_slider">
                                                         <a className="card_slider_img">
@@ -780,7 +755,7 @@ function Index() {
                                                         </button>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </div>
 
@@ -1341,213 +1316,46 @@ function Index() {
                                                 </div>
                                             </div>
 
-                                            {/* <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <a className="card_slider_img">
-                                                            <img src="./../../images/destination_card01.jpg" alt="destination card01" className="img-fluid" />
-                                                        </a>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">THE SCENT OF CLOVES</a></h4>
-                                                            <ul>
-                                                                <li>Indonesia in Idyllic Style</li>
-                                                                <li>Indonesia</li>
-                                                                <li>From £3,950 per person</li>
-                                                                <li>Travel to:<span>Bali, Java, Kalimantan, Lombok</span></li>
-                                                            </ul>
+                                            {itineraries?.map((item) => (
+                                                <div className="col-sm-6 col-lg-4">
+                                                    <div className="card_slider_inr">
+                                                        <div className="card_slider">
+                                                            <a className="card_slider_img">
+                                                                {item?.attributes?.itinerary_images?.data.map((element, index) => (
+                                                                    element.attributes.image_type == 'thumbnail' ? (
+                                                                        <img src={`https://d33ys3jnmuivbg.cloudfront.net/ilimages` + element.attributes.image_path} alt="destination card01" className="img-fluid" />
+                                                                    ) : (
+                                                                        ''
+                                                                    )
+                                                                ))}
+                                                                {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
+                                                            </a>
+                                                            <div className="card_slider_cnt">
+                                                                <h4><a href="#">{item?.attributes?.itin_name}</a></h4>
+                                                                <ul>
+                                                                    <li>{item?.attributes?.header_text}</li>
+                                                                    <li>Indonesia</li>
+                                                                    <li>{item?.attributes?.itinerary_country_contents?.data[0]?.attributes?.guideline_price_notes_index}</li>
+                                                                    <li>Travel to:<span>{item?.attributes?.sub_header_text}</span></li>
+                                                                </ul>
+                                                            </div>
+                                                            <button className="btn card_slider_btn">
+                                                                <span>{item?.attributes?.no_of_nites_notes}</span>
+                                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                                            </button>
                                                         </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>14 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            )
+                                            )}
+                                            
+                                            <div className="col-12">
+                                                    <button className="btn prmry_btn make_enqury_btn mx-auto text-uppercase" onClick={showMoreItems}>Show 9 more holiday ideas
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
+                                                    </button>
+                                                    </div>
 
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../images/destination_card05.jpg" alt="destination card05" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">CALL OF THE GIBBON</a></h4>
-                                                            <ul>
-                                                                <li>Wildlife Adventure to Thailand</li>
-                                                                <li>Thailand</li>
-                                                                <li>From £5,350 per person</li>
-                                                                <li>Travel to:<span>Bangkok & Central Thailand, Koh Samui & Gulf of Thailand, Northern Thailand, Phuket & Western Thailand</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>11 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../images/destination_card03.jpg" alt="destination card03" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">Ultimate Grand Tour of Indochina</a></h4>
-                                                            <ul>
-                                                                <li>Spirit of the Water Dragon</li>
-                                                                <li>Vietnam, Cambodia, Laos & Thailand</li>
-                                                                <li>From £8,7500 per person</li>
-                                                                <li>Travel to:<span>Hanoi, Halong Bay & Northern Vietnam, Koh Kood & Koh Chang, Luang Prabang, Saigon & Mekong Delta</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>18 nights</span>
-                                                            <span className="view_itnry_link">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../images/destination_card02.jpg" alt="destination card02" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">LAND OF THE RISING SUN</a></h4>
-                                                            <ul>
-                                                                <li>Japan in Classic Style</li>
-                                                                <li>Japan</li>
-                                                                <li>From £4,600 per person</li>
-                                                                <li>Travel to:<span>Japanese Alps & Northern Honshu, Kyoto, Southern Honshu & Kyushu, Tokyo & Around</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>10 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../images/destination_card06.jpg" alt="destination card06" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">Stupas, Sanctuaries & the Andaman Sea</a></h4>
-                                                            <ul>
-                                                                <li>Perfect Honeymoon to Burma</li>
-                                                                <li>Burma (Myanmar), Thailand</li>
-                                                                <li>From £3,150 per person</li>
-                                                                <li>Travel to: <span>Bagan, Phuket & Western Thailand, The Irrawaddy, Yangon</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>12 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../images/destination_card04.jpg" alt="destination card04" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">FROGS' LEGS & PHO</a></h4>
-                                                            <ul>
-                                                                <li>Vietnam Culinary Adventure</li>
-                                                                <li>Vietnam</li>
-                                                                <li>From £3,950 per person</li>
-                                                                <li>Travel to:<span>Central Vietnam, Hanoi, Halong Bay & Northern Vietnam, Saigon & Mekong Delta</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>11 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../images/destination_card07.jpg" alt="destination card07" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">FLAGSHIP JAPAN</a></h4>
-                                                            <ul>
-                                                                <li>Japan in Exsus Signature Style</li>
-                                                                <li>Japan</li>
-                                                                <li>From £12,200 per person</li>
-                                                                <li>Travel to:<span>Japanese Alps & Northern Honshu, Kyoto, Southern Honshu & Kyushu, Tokyo & Around</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>13 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../images/destination_card08.jpg" alt="destination card08" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">Headhunters & Beyond</a></h4>
-                                                            <ul>
-                                                                <li>Borneo Holiday in Sabah & Sarawak</li>
-                                                                <li>Borneo</li>
-                                                                <li>From £3,450 per person</li>
-                                                                <li>Travel to:<span>Borneo, Gunung Mulu National Park, Kota Kinabalu & Surrounds, Kuching & Surrounds</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>16 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../images/destination_card09.jpg" alt="destination card09" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">ORANGUTANS & DRAGONS</a></h4>
-                                                            <ul>
-                                                                <li>Wildlife Adventure to Indonesia</li>
-                                                                <li>Indonesia</li>
-                                                                <li>From £4,650 per person</li>
-                                                                <li>Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>13 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div> */}
-                                            {freshProds?.slice(0, visible).map((freshprod) => (
+                                            {/* {freshProds?.slice(0, visible).map((freshprod) => (
                                                 <div className="col-sm-6 col-lg-4">
                                                     <div className="card_slider_inr">
                                                         <div className="card_slider">
@@ -1569,8 +1377,8 @@ function Index() {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            ))}
-                                            <div className="col-12">
+                                            ))} */}
+                                            {/* <div className="col-12">
                                                 {visiblePagination ? (
                                                     <button className="btn prmry_btn make_enqury_btn mx-auto text-uppercase" onClick={showMoreItems}>Show 9 more holiday ideas
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
@@ -1578,7 +1386,7 @@ function Index() {
                                                 ) : (
                                                     ''
                                                 )}
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </div>
 

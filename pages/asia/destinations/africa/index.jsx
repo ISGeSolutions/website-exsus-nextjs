@@ -95,13 +95,9 @@ function Index() {
     ];
 
     const [users, setUsers] = useState(null);
-    const [destinationDropdown, setDestinationDropdown] = useState(null);
-    const [destination, setDestination] = useState(null);
-    const [destinationDetails, setDestinationDetails] = useState();
     const [backgroundImage, setBackgroundImage] = useState('');
     const [valueWithBr, setnewValueWithBr] = useState('');
     const [headingText, setHeadingText] = useState('LUXURY SAFARI HOLIDAYS IN AFRICA');
-    const [selected, setSelected] = useState([]);
 
     const [isClearable, setIsClearable] = useState(true);
     const [isSearchable, setIsSearchable] = useState(true);
@@ -114,29 +110,6 @@ function Index() {
     const [selectedOptionCountry, setSelectedOptionCountry] = useState(null);
     const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
     const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
-
-    <div className="col-sm-6 col-lg-4">
-        <div className="card_slider_inr">
-            <div className="card_slider">
-                <div className="card_slider_img">
-                    <img src="./../../images/destination_card09.jpg" alt="destination card09" className="img-fluid" />
-                </div>
-                <div className="card_slider_cnt">
-                    <h4><a href="#">ORANGUTANS & DRAGONS</a></h4>
-                    <ul>
-                        <li>Wildlife Adventure to Indonesia</li>
-                        <li>Indonesia</li>
-                        <li>From £4,650 per person</li>
-                        <li>Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span></li>
-                    </ul>
-                </div>
-                <button className="btn card_slider_btn">
-                    <span>13 nights</span>
-                    <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                </button>
-            </div>
-        </div>
-    </div>
 
     const freshProds = [
         {
@@ -337,9 +310,12 @@ function Index() {
         const carousel = document.querySelector('#carouselExampleInterval');
         new bootstrap.Carousel(carousel);
 
-        destinationService.getAllDropdown().then(x => {
-            // console.log('destinationServiceDropdown', x);
-            setDestinationDropdown(x)
+
+        destinationService.getAllItineraries().then(x => {
+            console.log('x===>', x);
+            // const desiredKey = 1; // The desired key to access
+            // const desiredDestination = x.find(item => item.id == desiredKey);
+            // setDestination(desiredDestination.destination_translations[0].destination_overview_text);
         });
 
         destinationService.getAll().then(x => {
@@ -1175,7 +1151,7 @@ function Index() {
                                             <div className="col-12">
                                                 <div className="destination_dropdwn_row d-block d-md-flex">
                                                     <div className="dropdown_grp_blk">
-                                                        <div class="d-flex justify-content-between">
+                                                        <div className="d-flex justify-content-between">
                                                             <div className="banner_dropdwn_blk">
                                                                 <Select
                                                                     placeholder="Select Portfolio"
@@ -1235,10 +1211,6 @@ function Index() {
                                                                 </div>
                                                             </div>
                                                         </div>
-
-
-
-
                                                     </div>
                                                 </div>
 
