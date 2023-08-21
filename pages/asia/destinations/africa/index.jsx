@@ -1150,7 +1150,7 @@ function Index() {
                                             <div className="col-12">
                                                 <div className="destination_dropdwn_row d-block d-md-flex">
                                                     <div className="dropdown_grp_blk">
-                                                        <div className="banner_dropdwn_blk">
+                                                        <div className="banner_dropdwn_blk ps-0 ps-md-2">
                                                             <Select
                                                                 placeholder="Select Portfolio"
                                                                 className="basic-single"
