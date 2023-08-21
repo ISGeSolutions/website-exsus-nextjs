@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, Spinner, Signup } from 'components';
 import { Layout } from 'components/users';
-import { hotelService } from 'services';
+import { hotelService, destinationService } from 'services';
 import Iframe from 'react-iframe'
 import Head from 'next/head';
 
@@ -9,10 +9,11 @@ export default Index;
 
 function Index() {
 
+    const [itineraries, setItineraries] = useState(null);
+
     useEffect(() => {
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
-
 
         $(document).ready(function () {
             $(".itinery_detls_expnded").hide();
@@ -21,6 +22,12 @@ function Index() {
                 $(this).prev(".itinery_detls_expnded").slideToggle("slow");
             });
         });
+
+        destinationService.getAllItineraries().then(x => {
+            console.log('x.data', x.data);
+            setItineraries(x.data[0]);
+        });
+
     }, []);
 
     return (
@@ -90,32 +97,36 @@ function Index() {
                     </div>
 
                     <div className="trvl_info_cntnt">
-                        <h2 className="trvl_title">CHINA LIKE AN EMPEROR
-                            <span className="mt-2 d-block white_text_colr">China in Ultimate Style</span>
+                        <h2 className="trvl_title">{itineraries?.attributes?.itin_name}
+                            <span className="mt-2 d-block white_text_colr">{itineraries?.attributes?.header_text}</span>
                         </h2>
-                        <h3 className="trvl_title_sub">BEIJING & NORTHERN CHINA, SHANGHAI, HANGZHOU & EASTERN CHINA, YUNNAN</h3>
-                        <p className="mb-4"><span>Duration:</span> 12 nights</p>
-                        <p className="mb-4"><span>Price:</span> From £11,250 per person in low season based on two adults travelling together and including international flights in business className, accommodation, some meals, internal flights, experiences as stated, train transportation, private transfers and taxes</p>
-                        <p className="mb-4">Explore China in ultimate style on this exclusive holiday, and enjoy private guided tours of landmarks such as the Summer Palace, the Forbidden City, the Great Wall, and beautiful historic towns, villages and temples. During this memorable trip, you’ll also get to explore markets, dine in handpicked restaurants, join a local tai chi session, walk in the mountains and enjoy cocktails in stunning rooftop bars. Along the way, you’ll stay in idyllic Aman hotels which not only take luxury to a whole new level, but have incredible locations including a former guests’ residence in the grounds of the Summer Palace. We've also included extras such as signature Aman massages and reflexology treatments at each hotel - the ideal way to unwind after all that sightseeing. </p>
+                        <h3 className="trvl_title_sub">{itineraries?.attributes?.sub_header_text}</h3>
+                        <p className="mb-4"><span>Duration: </span>{itineraries?.attributes?.no_of_nites_notes}</p>
+                        <p className="mb-4"><span>Price: </span>
+                            {itineraries?.attributes?.itinerary_country_contents?.data[0]?.attributes?.guideline_price_notes}
+                            {/* From £11,250 per person in low season based on two adults travelling together and including international flights in business className, accommodation, some meals, internal flights, experiences as stated, train transportation, private transfers and taxes</p>
+                            <p className="mb-4">Explore China in ultimate style on this exclusive holiday, and enjoy private guided tours of landmarks such as the Summer Palace, the Forbidden City, the Great Wall, and beautiful historic towns, villages and temples. During this memorable trip, you’ll also get to explore markets, dine in handpicked restaurants, join a local tai chi session, walk in the mountains and enjoy cocktails in stunning rooftop bars. Along the way, you’ll stay in idyllic Aman hotels which not only take luxury to a whole new level, but have incredible locations including a former guests’ residence in the grounds of the Summer Palace. We've also included extras such as signature Aman massages and reflexology treatments at each hotel - the ideal way to unwind after all that sightseeing. */}
+                        </p>
                     </div>
 
                     <section className="country_highlight_row itinery_hightlight_row mb-0">
                         <div className="row">
                             <div className="col-sm-9">
                                 <div className="country_highlight_inr">
-                                    <p><span>Perfect for</span>Those who want to explore China in ultimate luxury – all the way.</p>
+                                    <p><span>Perfect for</span>{itineraries?.attributes?.perfect_for_text}</p>
                                     <p><span>In the know</span>Combine your holiday in China with a stopover in glamorous <span className="me-0 text-capitalize">Dubai</span>.</p>
                                 </div>
                             </div>
                             <div className="col-sm-3">
                                 <div className="itinery_highlight_inr">
-                                    <ul>
+                                    <div dangerouslySetInnerHTML={{ __html: itineraries?.attributes?.best_for_text }} />
+                                    {/* <ul>
                                         <li>Best for</li>
                                         <li>Seriously special</li>
                                         <li>Luxury hotel</li>
                                         <li>Cultural immersion</li>
                                         <li>Honeymoon</li>
-                                    </ul>
+                                    </ul> */}
                                 </div>
                             </div>
                         </div>
@@ -501,7 +512,6 @@ function Index() {
                 </div>
                 {/* <div className="full_loader_parnt_blk loader_parnt_blk" style="display: none;"><div className="loader-circle-2"></div></div> */}
             </section>
-
         </>
     );
 }
