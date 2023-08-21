@@ -2,20 +2,15 @@ import { useState, useEffect } from 'react';
 
 import { Link, Spinner, Signup } from 'components';
 import { userService, destinationService } from 'services';
-import Iframe from 'react-iframe'
+import Iframe from 'react-iframe';
 import Head from 'next/head';
 
 import React from 'react';
 import Select from 'react-select';
 import Image from "next/image";
 import { useRouter } from 'next/router';
-
-// Import Bootstarp CSS
-// import "bootstrap/dist/css/bootstrap.css";
-// import { MultiSelect } from "react-multi-select-component";
-
-// import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-// var Carousel = require('react-responsive-carousel').Carousel;
+import { NavLink } from 'components';
+import generateDynamicLink from 'components/utils/generateLink';
 
 export default Index;
 
@@ -118,29 +113,6 @@ function Index() {
     const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
 
     const [itineraries, setItineraries] = useState(null);
-
-    <div className="col-sm-6 col-lg-4">
-        <div className="card_slider_inr">
-            <div className="card_slider">
-                <div className="card_slider_img">
-                    <img src="./../../images/destination_card09.jpg" alt="destination card09" className="img-fluid" />
-                </div>
-                <div className="card_slider_cnt">
-                    <h4><a href="#">ORANGUTANS & DRAGONS</a></h4>
-                    <ul>
-                        <li>Wildlife Adventure to Indonesia</li>
-                        <li>Indonesia</li>
-                        <li>From £4,650 per person</li>
-                        <li>Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span></li>
-                    </ul>
-                </div>
-                <button className="btn card_slider_btn">
-                    <span>13 nights</span>
-                    <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                </button>
-            </div>
-        </div>
-    </div>
 
     const freshProds = [
         {
@@ -335,10 +307,26 @@ function Index() {
     const router = useRouter();
     const { id } = router.query;
 
+    let regionWiseUrl = '/uk';
+    if (typeof window !== 'undefined') {
+        if (window && window.site_region) {
+            // console.log('window.site_region', window.site_region);
+            regionWiseUrl = '/' + window.site_region;
+            // setMyVariable(window.site_region);
+        }
+    }
+
+    const generateDynamicLink = (item) => {
+        return regionWiseUrl + `/destinations/africa/africa-itineraries/vietnam-in-classic-style`;
+    };
+
+    const handleRedirect = () => {
+        router.push(regionWiseUrl + `/destinations/africa/africa-itineraries/vietnam-in-classic-style`);
+    };
+
     // https://d33ys3jnmuivbg.cloudfront.net/ilimages" + item?.attributes?.itinerary_images?.data[3]?.attributes?.image_path
 
     useEffect(() => {
-
         setSelectedOptionCountry(countryOptions[0]);
         setSelectedOptionRegion(countryOptions[0]);
         setSelectedOptionMonth(countryOptions[0]);
@@ -592,19 +580,19 @@ function Index() {
                                     <div className="carousel00">
                                         <div className="row">
                                             {itineraries?.map((item) => (
-                                                <div className="col-sm-6 col-lg-4">
+                                                <div className="col-sm-6 col-lg-4" key={item.id}>
                                                     <div className="card_slider_inr">
                                                         <div className="card_slider">
-                                                            <a className="card_slider_img">
+                                                            <NavLink href={generateDynamicLink(item)} className="card_slider_img">
                                                                 {item?.attributes?.itinerary_images?.data.map((element, index) => (
                                                                     element.attributes.image_type == 'thumbnail' ? (
-                                                                        <img src={`https://d33ys3jnmuivbg.cloudfront.net/ilimages` + element.attributes.image_path} alt="destination card01" className="img-fluid" />
+                                                                        <img key={index} src={`https://d33ys3jnmuivbg.cloudfront.net/ilimages` + element.attributes.image_path} alt="destination card01" className="img-fluid" />
                                                                     ) : (
                                                                         ''
                                                                     )
                                                                 ))}
                                                                 {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
-                                                            </a>
+                                                            </NavLink>
                                                             <div className="card_slider_cnt">
                                                                 <h4><a href="#">{item?.attributes?.itin_name}</a></h4>
                                                                 <ul>
@@ -616,7 +604,7 @@ function Index() {
                                                             </div>
                                                             <button className="btn card_slider_btn">
                                                                 <span>{item?.attributes?.no_of_nites_notes}</span>
-                                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                                                <span className="view_itnry_link" onClick={handleRedirect}>View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
                                                             </button>
                                                         </div>
                                                     </div>
@@ -1317,10 +1305,10 @@ function Index() {
                                             </div>
 
                                             {itineraries?.map((item) => (
-                                                <div className="col-sm-6 col-lg-4">
+                                                <div className="col-sm-6 col-lg-4" key={item.id}>
                                                     <div className="card_slider_inr">
                                                         <div className="card_slider">
-                                                            <a className="card_slider_img">
+                                                            <NavLink href={generateDynamicLink(item)} className="card_slider_img">
                                                                 {item?.attributes?.itinerary_images?.data.map((element, index) => (
                                                                     element.attributes.image_type == 'thumbnail' ? (
                                                                         <img src={`https://d33ys3jnmuivbg.cloudfront.net/ilimages` + element.attributes.image_path} alt="destination card01" className="img-fluid" />
@@ -1329,7 +1317,7 @@ function Index() {
                                                                     )
                                                                 ))}
                                                                 {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
-                                                            </a>
+                                                            </NavLink>
                                                             <div className="card_slider_cnt">
                                                                 <h4><a href="#">{item?.attributes?.itin_name}</a></h4>
                                                                 <ul>
@@ -1341,19 +1329,19 @@ function Index() {
                                                             </div>
                                                             <button className="btn card_slider_btn">
                                                                 <span>{item?.attributes?.no_of_nites_notes}</span>
-                                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                                                <span className="view_itnry_link" onClick={handleRedirect}>View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
                                                             </button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             )
                                             )}
-                                            
+
                                             <div className="col-12">
-                                                    <button className="btn prmry_btn make_enqury_btn mx-auto text-uppercase" onClick={showMoreItems}>Show 9 more holiday ideas
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
-                                                    </button>
-                                                    </div>
+                                                <button className="btn prmry_btn make_enqury_btn mx-auto text-uppercase" onClick={showMoreItems}>Show 9 more holiday ideas
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
+                                                </button>
+                                            </div>
 
                                             {/* {freshProds?.slice(0, visible).map((freshprod) => (
                                                 <div className="col-sm-6 col-lg-4">
