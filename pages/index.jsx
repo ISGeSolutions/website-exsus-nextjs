@@ -432,7 +432,6 @@ function Index() {
                         </i>
                     </div>
                 </div>
-                {/* <div className="full_loader_parnt_blk loader_parnt_blk" style="display: none;"><div className="loader-circle-2"></div></div> */}
             </section>
 
 
