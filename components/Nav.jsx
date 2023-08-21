@@ -204,7 +204,7 @@ function Nav() {
         <>
             <nav>
                 <Head>
-                    <script type="text/javascript" src="/assets/javascripts/navigation.js"></script>
+                    {/* <script type="text/javascript" src="/assets/javascripts/navigation.js"></script> */}
                 </Head>
                 <div className="menu-overlay">
                 </div>
@@ -215,8 +215,8 @@ function Nav() {
                         </div>
                         <div className="current-menu-title"></div>
                         <button className="btn fa-solid fa-xmark mobile-menu-close" onClick={() => {
-                            const menu = document.querySelector(".menu"); //Nav tag
-                            menu.classList.toggle("active");
+                            const menuNav = document.querySelector(".menu"); //Nav tag
+                            menuNav.classList.toggle("active");
                             document.querySelector(".menu-overlay").classList.toggle("active");
                         }}></button>
                     </div>

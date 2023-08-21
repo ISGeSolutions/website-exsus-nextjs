@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-    reactStrictMode: false,
+    reactStrictMode: true,
     experimental: {
         newNextLinkBehavior: false,
         nextScriptWorkers: true

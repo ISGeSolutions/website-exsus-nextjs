@@ -1,7 +1,9 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Inspireme, Signup } from 'components';
 import Head from 'next/head';
+import { holidaytypesService } from 'services';
+import { NavLink } from 'components';
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 var Carousel = require('react-responsive-carousel').Carousel;
@@ -9,7 +11,67 @@ var Carousel = require('react-responsive-carousel').Carousel;
 export default Index;
 
 function Index() {
+
+    const [thumbnailImage, setThumbnailImageArr] = useState([]);
+
+    let regionWiseUrl = '/uk';
+    if (typeof window !== 'undefined') {
+        if (window && window.site_region) {
+            // console.log('window.site_region', window.site_region);
+            regionWiseUrl = '/' + window.site_region;
+            // setMyVariable(window.site_region);
+        }
+    }
+
+    const dynamicThumbnailImage = (itemId) => {
+        return `https://d33ys3jnmuivbg.cloudfront.net/ilimages/` + itemId;
+    }
+
+    const dynamicLink = (itemId) => {
+        if (itemId && itemId == 'HG6') {
+            return regionWiseUrl + `/holiday-types/incredible-journeys`;
+        } else if (itemId && itemId == 'HG5') {
+            return regionWiseUrl + `/holiday-types/luxury-honeymoons`;
+        } else if (itemId && itemId == 'HG4') {
+            return regionWiseUrl + `/holiday-types/family-holidays`;
+        } else if (itemId && itemId == 'ADHL') {
+            return regionWiseUrl + `/holiday-types/adventure-holidays`;
+        } else if (itemId && itemId == 'LBHG') {
+            return regionWiseUrl + `/holiday-types/luxury-beach-holidays`;
+        } else if (itemId && itemId == 'HG3') {
+            return regionWiseUrl + `/holiday-types/culture-holidays`;
+        } else if (itemId && itemId == '07') {
+            return regionWiseUrl + `/holiday-types/wildlife-holidays`;
+        } else if (itemId && itemId == '08') {
+            return regionWiseUrl + `/holiday-types/classic-journeyst`;
+        } else if (itemId && itemId == '09') {
+            return regionWiseUrl + `/holiday-types/spcial-occasions`;
+        }
+    }
+
     useEffect(() => {
+        const thumbnailImageArr = [];
+        holidaytypesService.getHolidaytypesLandingList().then(x => {
+            const imageCheckType = x.data;
+            imageCheckType.forEach(elementMain => {
+                if (elementMain.attributes.holiday_type_group_images.data) {
+                    const dataInner = elementMain.attributes.holiday_type_group_images.data;
+                    dataInner.forEach(element => {
+                        if (element.attributes.image_type == 'thumbnail') {
+                            const objThumbnail = {
+                                "holiday_type_code": elementMain?.attributes?.holiday_type_group_code,
+                                "holiday_type_name": elementMain?.attributes?.holiday_type_group_name,
+                                "image_path": element.attributes.image_path
+                            }
+                            thumbnailImageArr.push(objThumbnail);
+                        }
+                    });
+                }
+            });
+            console.log('thumbnailImageArr', thumbnailImageArr);
+            setThumbnailImageArr(thumbnailImageArr);
+        });
+
         // console.log('region', window.site_region);
         var site_region = localStorage.getItem('site_region');
 
@@ -28,7 +90,7 @@ function Index() {
                 {/* <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
                 <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script> */}
             </Head>
-            
+
             <section className="banner_blk_row">
                 {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
                     <div>
@@ -77,135 +139,162 @@ function Index() {
             <section className="card_blk_row">
                 <div className="container-md">
                     <div className="row">
-                        <div className="col-sm-6 col-md-6 col-lg-4">
-                            <div className="card_blk_inr">
-                                <a href="#" target="_blank">
-                                    <img src="images/card_img01.jpg" alt="Card image 01" className="img-fluid" />
-                                    <div className="card_blk_cntnt">
-                                        <div className="row align-items-center">
-                                            <div className="col-11">
-                                                <div className="card_blk_txt">
-                                                    <h3>Bespoke Honeymoon ideas</h3>
-                                                    <p>The ultimate romantic escapes</p>
+
+                        {/* <pre>{JSON.stringify(thumbnailImageArr, null, 2) }
+                    </pre> */}
+
+                        {thumbnailImage?.map((holidaytypesItem, i) => (
+                            <div className="col-sm-6 col-md-6 col-lg-4" key={i}>
+                                <div className="card_blk_inr">
+                                    <NavLink href={dynamicLink(holidaytypesItem?.holiday_type_code)}>
+                                        <img src={dynamicThumbnailImage(holidaytypesItem.image_path)} alt="holiday_type01" className="img-fluid" />
+                                        <div className="card_blk_cntnt">
+                                            <div className="row align-items-center">
+                                                <div className="col-11">
+                                                    <div className="card_blk_txt">
+                                                        <h3>{holidaytypesItem?.holiday_type_name}</h3>
+                                                        <p></p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-1 ps-0">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                 </div>
                                             </div>
-                                            <div className="col-1 ps-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                            </div>
                                         </div>
-                                    </div>
-                                </a>
+                                    </NavLink>
+                                </div>
                             </div>
-                        </div>
+                        ))}
 
-                        <div className="col-sm-6 col-md-6 col-lg-4">
-                            <div className="card_blk_inr">
-                                <a href="#">
-                                    <img src="images/card_img02.jpg" alt="Card image 02" className="img-fluid" />
-                                    <div className="card_blk_cntnt">
-                                        <div className="row align-items-center">
-                                            <div className="col-11">
-                                                <div className="card_blk_txt">
-                                                    <h3>Once in a lifetime journeys</h3>
-                                                    <p>Holidays out of the ordinary</p>
+                        {/* <div className="col-sm-6 col-md-6 col-lg-4">
+                                <div className="card_blk_inr">
+                                    <a href="#" target="_blank">
+                                        <img src="images/card_img01.jpg" alt="Card image 01" className="img-fluid" />
+                                        <div className="card_blk_cntnt">
+                                            <div className="row align-items-center">
+                                                <div className="col-11">
+                                                    <div className="card_blk_txt">
+                                                        <h3>Bespoke Honeymoon ideas</h3>
+                                                        <p>The ultimate romantic escapes</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-1 ps-0">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                 </div>
                                             </div>
-                                            <div className="col-1 ps-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                            </div>
                                         </div>
-
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
 
-                        <div className="col-sm-6 col-md-6 col-lg-4">
-                            <div className="card_blk_inr">
-                                <a href="#">
-                                    <img src="images/card_img03.jpg" alt="Card image 03" className="img-fluid" />
-                                    <div className="card_blk_cntnt">
-                                        <div className="row align-items-center">
-                                            <div className="col-11">
-                                                <div className="card_blk_txt">
-                                                    <h3>Tailor-made Family holidays</h3>
-                                                    <p>Memorable family trips worldwide</p>
+                            <div className="col-sm-6 col-md-6 col-lg-4">
+                                <div className="card_blk_inr">
+                                    <a href="#">
+                                        <img src="images/card_img02.jpg" alt="Card image 02" className="img-fluid" />
+                                        <div className="card_blk_cntnt">
+                                            <div className="row align-items-center">
+                                                <div className="col-11">
+                                                    <div className="card_blk_txt">
+                                                        <h3>Once in a lifetime journeys</h3>
+                                                        <p>Holidays out of the ordinary</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-1 ps-0">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                 </div>
                                             </div>
-                                            <div className="col-1 ps-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
 
-                        <div className="col-sm-6 col-md-6 col-lg-4">
-                            <div className="card_blk_inr">
-                                <a href="#">
-                                    <img src="images/card_img04.jpg" alt="Card image 04" className="img-fluid" />
-                                    <div className="card_blk_cntnt">
-                                        <div className="row align-items-center">
-                                            <div className="col-11">
-                                                <div className="card_blk_txt">
-                                                    <h3>Adventure holidays</h3>
-                                                    <p>Off-the-beaten-track holidays</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div className="col-sm-6 col-md-6 col-lg-4">
+                                <div className="card_blk_inr">
+                                    <a href="#">
+                                        <img src="images/card_img03.jpg" alt="Card image 03" className="img-fluid" />
+                                        <div className="card_blk_cntnt">
+                                            <div className="row align-items-center">
+                                                <div className="col-11">
+                                                    <div className="card_blk_txt">
+                                                        <h3>Tailor-made Family holidays</h3>
+                                                        <p>Memorable family trips worldwide</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-1 ps-0">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                 </div>
                                             </div>
-                                            <div className="col-1 ps-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                            </div>
                                         </div>
-
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
 
-                        <div className="col-sm-6 col-md-6 col-lg-4">
-                            <div className="card_blk_inr">
-                                <a href="#">
-                                    <img src="images/card_img05.jpg" alt="Card image 05" className="img-fluid" />
-                                    <div className="card_blk_cntnt">
-                                        <div className="row align-items-center">
-                                            <div className="col-11">
-                                                <div className="card_blk_txt">
-                                                    <h3>Cultural holidays</h3>
-                                                    <p>Immerse yourself in culture</p>
+                            <div className="col-sm-6 col-md-6 col-lg-4">
+                                <div className="card_blk_inr">
+                                    <a href="#">
+                                        <img src="images/card_img04.jpg" alt="Card image 04" className="img-fluid" />
+                                        <div className="card_blk_cntnt">
+                                            <div className="row align-items-center">
+                                                <div className="col-11">
+                                                    <div className="card_blk_txt">
+                                                        <h3>Adventure holidays</h3>
+                                                        <p>Off-the-beaten-track holidays</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-1 ps-0">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                 </div>
                                             </div>
-                                            <div className="col-1 ps-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                            </div>
+
                                         </div>
-
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
 
-                        <div className="col-sm-6 col-md-6 col-lg-4">
-                            <div className="card_blk_inr">
-                                <a href="#">
-                                    <img src="images/card_img06.jpg" alt="Card image 06" className="img-fluid" />
-                                    <div className="card_blk_cntnt">
-                                        <div className="row align-items-center">
-                                            <div className="col-11">
-                                                <div className="card_blk_txt">
-                                                    <h3>Wildlife holidays</h3>
-                                                    <p>Ultimate wildlife-spotting adventures</p>
+                            <div className="col-sm-6 col-md-6 col-lg-4">
+                                <div className="card_blk_inr">
+                                    <a href="#">
+                                        <img src="images/card_img05.jpg" alt="Card image 05" className="img-fluid" />
+                                        <div className="card_blk_cntnt">
+                                            <div className="row align-items-center">
+                                                <div className="col-11">
+                                                    <div className="card_blk_txt">
+                                                        <h3>Cultural holidays</h3>
+                                                        <p>Immerse yourself in culture</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-1 ps-0">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                 </div>
                                             </div>
-                                            <div className="col-1 ps-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                            </div>
-                                        </div>
 
-                                    </div>
-                                </a>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
+
+                            <div className="col-sm-6 col-md-6 col-lg-4">
+                                <div className="card_blk_inr">
+                                    <a href="#">
+                                        <img src="images/card_img06.jpg" alt="Card image 06" className="img-fluid" />
+                                        <div className="card_blk_cntnt">
+                                            <div className="row align-items-center">
+                                                <div className="col-11">
+                                                    <div className="card_blk_txt">
+                                                        <h3>Wildlife holidays</h3>
+                                                        <p>Ultimate wildlife-spotting adventures</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-1 ps-0">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </a>
+                                </div>
+                            </div> */}
 
                     </div>
                 </div>
