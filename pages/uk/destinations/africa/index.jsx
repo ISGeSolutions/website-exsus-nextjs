@@ -20,6 +20,81 @@ import { useRouter } from 'next/router';
 export default Index;
 
 function Index() {
+
+    const countryOptions = [
+        { value: "", label: "Filter by country" },
+        { value: "Asia", label: "Asia" },
+        { value: "Hong Kong & Macau", label: "Hong Kong & Macau" },
+        { value: "Malaysia & Borneo", label: "Malaysia & Borneo" },
+        { value: "Singapore", label: "Singapore" },
+        { value: "Indonesia", label: "Indonesia" },
+        { value: "Japan", label: "Japan" },
+        { value: "Cambodia", label: "Cambodia" },
+        { value: "Vietnam", label: "Vietnam" },
+        { value: "China", label: "China" },
+        { value: "Thailand", label: "Thailand" },
+        { value: "Burma", label: "Burma" },
+        { value: "Laos", label: "Laos" }
+    ];
+
+    const regionOptions = [
+        { value: "", label: "Filter by region" },
+        { value: "Everything", label: "Everything" },
+        { value: "Barefoot", label: "Barefoot" },
+        { value: "Beach", label: "Beach" },
+        { value: "Boutique hotel", label: "Boutique hotel" },
+        { value: "Chic design", label: "Chic design" },
+        { value: "Cultural Immersion", label: "Cultural Immersion" },
+        { value: "Eco tourism", label: "Eco tourism" },
+        { value: "Family-Friendly", label: "Family-Friendly" },
+        { value: "Food & Wine", label: "Food & Wine" },
+        { value: "Guiding", label: "Guiding" },
+        { value: "Hideaway", label: "Hideaway" },
+        { value: "Honeymoon", label: "Honeymoon" },
+        { value: "Lodge", label: "Lodge" },
+        { value: "Luxury hotel", label: "Luxury Hotel" },
+        { value: "Off the beaten track", label: "Off the beaten track" },
+        { value: "Owner run", label: "Owner run" },
+        { value: "Peace & quiet", label: "Peace & quiet" },
+        { value: "Private groups", label: "Private groups" },
+        { value: "Romantic", label: "Romantic" },
+        { value: "Rustic", label: "Rustic" },
+        { value: "Seriously special", label: "Seriously special" },
+        { value: "Service & Hospitality", label: "Service & Hospitality" },
+        { value: "Setting & Views", label: "Setting & Views" },
+        { value: "Snorkelling & Driving", label: "Snorkelling & Driving" },
+        { value: "Spa & Wellness", label: "Spa & Wellness" },
+        { value: "Unusal", label: "Unusal" },
+        { value: "Village life", label: "Village life" },
+        { value: "Walking & trekking", label: "Walking & trekking" },
+        { value: "Water activities", label: "Water activities" },
+        { value: "Wildlife & Nature", label: "Wildlife & Nature" },
+        { value: "Adventure", label: "Adventure" },
+        { value: "Couples", label: "Couples" },
+        { value: "Educational", label: "Educational" },
+        { value: "Multi-activity", label: "Multi-activity" },
+        { value: "Teenagers", label: "Teenagers" },
+        { value: "Landscapes & Scenery", label: "Landscapes & Scenery" },
+        { value: "City hotel", label: "City hotel" }
+    ];
+
+    const monthOptions = [
+        { value: "", label: "Filter by month" },
+        { value: "All months", label: "All months" },
+        { value: "January", label: "January" },
+        { value: "February", label: "February" },
+        { value: "March", label: "March" },
+        { value: "April", label: "April" },
+        { value: "May", label: "May" },
+        { value: "June", label: "June" },
+        { value: "July", label: "July" },
+        { value: "August", label: "August" },
+        { value: "September", label: "September" },
+        { value: "October", label: "October" },
+        { value: "November", label: "November" },
+        { value: "December", label: "December" }
+    ];
+
     const [users, setUsers] = useState(null);
     const [destinationDropdown, setDestinationDropdown] = useState(null);
     const [destination, setDestination] = useState(null);
@@ -38,6 +113,9 @@ function Index() {
     const [selectedOption, setSelectedOption] = useState(null);
     const [visible, setVisible] = useState(3);
     const [visiblePagination, setVisiblePagination] = useState(true);
+    const [selectedOptionCountry, setSelectedOptionCountry] = useState(null);
+    const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
+    const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
 
     <div className="col-sm-6 col-lg-4">
         <div className="card_slider_inr">
@@ -209,80 +287,7 @@ function Index() {
 
     // const { selectedOption } = this.state;
 
-    const countryOptions = [
-        { value: "", label: "Filter by country" },
-        { value: "Asia", label: "Asia" },
-        { value: "Hong Kong & Macau", label: "Hong Kong & Macau" },
-        { value: "Malaysia & Borneo", label: "Malaysia & Borneo" },
-        { value: "Singapore", label: "Singapore" },
-        { value: "Indonesia", label: "Indonesia" },
-        { value: "Japan", label: "Japan" },
-        { value: "Cambodia", label: "Cambodia" },
-        { value: "Vietnam", label: "Vietnam" },
-        { value: "China", label: "China" },
-        { value: "Thailand", label: "Thailand" },
-        { value: "Burma", label: "Burma" },
-        { value: "Laos", label: "Laos" }
-    ];
-
-    const regionOptions = [
-        { value: "", label: "Filter by property type" },
-        { value: "Everything", label: "Everything" },
-        { value: "Barefoot", label: "Barefoot" },
-        { value: "Beach", label: "Beach" },
-        { value: "Boutique hotel", label: "Boutique hotel" },
-        { value: "Chic design", label: "Chic design" },
-        { value: "Cultural Immersion", label: "Cultural Immersion" },
-        { value: "Eco tourism", label: "Eco tourism" },
-        { value: "Family-Friendly", label: "Family-Friendly" },
-        { value: "Food & Wine", label: "Food & Wine" },
-        { value: "Guiding", label: "Guiding" },
-        { value: "Hideaway", label: "Hideaway" },
-        { value: "Honeymoon", label: "Honeymoon" },
-        { value: "Lodge", label: "Lodge" },
-        { value: "Luxury hotel", label: "Luxury Hotel" },
-        { value: "Off the beaten track", label: "Off the beaten track" },
-        { value: "Owner run", label: "Owner run" },
-        { value: "Peace & quiet", label: "Peace & quiet" },
-        { value: "Private groups", label: "Private groups" },
-        { value: "Romantic", label: "Romantic" },
-        { value: "Rustic", label: "Rustic" },
-        { value: "Seriously special", label: "Seriously special" },
-        { value: "Service & Hospitality", label: "Service & Hospitality" },
-        { value: "Setting & Views", label: "Setting & Views" },
-        { value: "Snorkelling & Driving", label: "Snorkelling & Driving" },
-        { value: "Spa & Wellness", label: "Spa & Wellness" },
-        { value: "Unusal", label: "Unusal" },
-        { value: "Village life", label: "Village life" },
-        { value: "Walking & trekking", label: "Walking & trekking" },
-        { value: "Water activities", label: "Water activities" },
-        { value: "Wildlife & Nature", label: "Wildlife & Nature" },
-        { value: "Adventure", label: "Adventure" },
-        { value: "Couples", label: "Couples" },
-        { value: "Educational", label: "Educational" },
-        { value: "Multi-activity", label: "Multi-activity" },
-        { value: "Teenagers", label: "Teenagers" },
-        { value: "Landscapes & Scenery", label: "Landscapes & Scenery" },
-        { value: "City hotel", label: "City hotel" }
-    ];
-
-    const monthOptions = [
-        { value: "", label: "Filter by month" },
-        { value: "All months", label: "All months" },
-        { value: "January", label: "January" },
-        { value: "February", label: "February" },
-        { value: "March", label: "March" },
-        { value: "April", label: "April" },
-        { value: "May", label: "May" },
-        { value: "June", label: "June" },
-        { value: "July", label: "July" },
-        { value: "August", label: "August" },
-        { value: "September", label: "September" },
-        { value: "October", label: "October" },
-        { value: "November", label: "November" },
-        { value: "December", label: "December" }
-    ];
-
+    
     const selectedSec = (itemId) => {
         var text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
         if (itemId == 'overview') {
@@ -307,16 +312,33 @@ function Index() {
 
     // this.handleChange = handleChange.bind(this);
 
-    const handleChange = (selectedOption) => {
+    const handleOptionCountryChange = (selectedOption) => {
+        selectedOption = selectedOption.filter((i) => i.value !== '' && typeof i.value !== 'undefined');
+        setSelectedOptionCountry(selectedOption);
         // this.setState({ selectedOption }, () =>
         //   console.log(`Option selected:`, this.state.selectedOption)
         // );
+    };
+
+    const handleOptionRegionChange = (selectedOption) => {
+        selectedOption = selectedOption.filter((i) => i.value !== '' && typeof i.value !== 'undefined');
+        setSelectedOptionRegion(selectedOption);
+    };
+
+    const handleOptionMonthChange = (selectedOption) => {
+        selectedOption = selectedOption.filter((i) => i.value !== '' && typeof i.value !== 'undefined');
+        setSelectedOptionMonth(selectedOption);
     };
 
     const router = useRouter();
     const { id } = router.query;
 
     useEffect(() => {
+
+        setSelectedOptionCountry(countryOptions[0]);
+        setSelectedOptionRegion(countryOptions[0]);
+        setSelectedOptionMonth(countryOptions[0]);
+
         userService.getAll().then(x => setUsers(x));
         const carousel = document.querySelector('#carouselExampleInterval');
         new bootstrap.Carousel(carousel);
@@ -1150,62 +1172,64 @@ function Index() {
                                             <div className="col-12">
                                                 <div className="destination_dropdwn_row d-block d-md-flex">
                                                     <div className="dropdown_grp_blk">
-                                                        <div className="banner_dropdwn_blk">
-                                                            <Select
-                                                                placeholder="Select Portfolio"
-                                                                className="basic-single"
-                                                                classNamePrefix="select"
-                                                                defaultValue={countryOptions[0]}
-                                                                isDisabled={isDisabled}
-                                                                isLoading={isLoading}
-                                                                isClearable={isClearable}
-                                                                isRtl={isRtl}
-                                                                isSearchable={isSearchable}
-                                                                name="color"
-                                                                options={countryOptions}
-                                                                isMulti
-                                                                onChange={handleChange}
-                                                            />
-                                                        </div>
-                                                        <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                                                            <Select
-                                                                placeholder="Select Portfolio"
-                                                                className="basic-single"
-                                                                classNamePrefix="select"
-                                                                defaultValue={regionOptions[0]}
-                                                                isDisabled={isDisabled}
-                                                                isLoading={isLoading}
-                                                                isClearable={isClearable}
-                                                                isRtl={isRtl}
-                                                                isSearchable={isSearchable}
-                                                                name="color"
-                                                                options={regionOptions}
-                                                                isMulti
-                                                                onChange={handleChange}
-                                                            />
-                                                        </div>
-                                                        <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                                                            <Select
-                                                                placeholder="Select Portfolio"
-                                                                className="basic-single"
-                                                                classNamePrefix="select"
-                                                                defaultValue={monthOptions[0]}
-                                                                isDisabled={isDisabled}
-                                                                isLoading={isLoading}
-                                                                isClearable={isClearable}
-                                                                isRtl={isRtl}
-                                                                isSearchable={isSearchable}
-                                                                name="color"
-                                                                options={monthOptions}
-                                                                isMulti
-                                                                onChange={handleChange}
-                                                            />
-                                                        </div>
-                                                        <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                                                            <div className="banner_inspire_btn ps-0 ps-md-2">
-                                                                <button type="button" className="btn btn-primary prmry_btn">Inspire me
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path></svg>
-                                                                </button>
+                                                        <div class="d-flex justify-content-between">
+                                                            <div className="banner_dropdwn_blk">
+                                                                <Select
+                                                                    placeholder="Select Portfolio"
+                                                                    className="basic-single"
+                                                                    classNamePrefix="select"
+                                                                    isDisabled={isDisabled}
+                                                                    isLoading={isLoading}
+                                                                    isClearable={isClearable}
+                                                                    isRtl={isRtl}
+                                                                    isSearchable={isSearchable}
+                                                                    name="color"
+                                                                    options={countryOptions}
+                                                                    isMulti
+                                                                    onChange={handleOptionCountryChange}
+                                                                    value={selectedOptionCountry}
+                                                                />
+                                                            </div>
+                                                            <div className="banner_dropdwn_blk ps-0 ps-md-2">
+                                                                <Select
+                                                                    placeholder="Filter by property type"
+                                                                    className="basic-single"
+                                                                    classNamePrefix="select"
+                                                                    isDisabled={isDisabled}
+                                                                    isLoading={isLoading}
+                                                                    isClearable={isClearable}
+                                                                    isRtl={isRtl}
+                                                                    isSearchable={isSearchable}
+                                                                    name="color"
+                                                                    options={regionOptions}
+                                                                    isMulti
+                                                                    onChange={handleOptionRegionChange}
+                                                                    value={selectedOptionRegion}
+                                                                />
+                                                            </div>
+                                                            <div className="banner_dropdwn_blk ps-0 ps-md-2">
+                                                                <Select
+                                                                    placeholder="Filter by month"
+                                                                    className="basic-single"
+                                                                    classNamePrefix="select"
+                                                                    isDisabled={isDisabled}
+                                                                    isLoading={isLoading}
+                                                                    isClearable={isClearable}
+                                                                    isRtl={isRtl}
+                                                                    isSearchable={isSearchable}
+                                                                    name="color"
+                                                                    options={monthOptions}
+                                                                    isMulti
+                                                                    onChange={handleOptionMonthChange}
+                                                                    value={selectedOptionMonth}
+                                                                />
+                                                            </div>
+                                                            <div className="banner_dropdwn_blk ps-0 ps-md-2">
+                                                                <div className="banner_inspire_btn ps-0 ps-md-2">
+                                                                    <button type="button" className="btn btn-primary prmry_btn">Inspire me
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path></svg>
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
