@@ -68,7 +68,7 @@ function Index() {
                 if (element.attributes.image_type == 'center') {
                     setBackgroundImgWhentogo("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + element.attributes.image_path);
                 } else if (element.attributes.image_type == 'banner') {
-                    setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + element.attributes.image_path);
+                    setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/mc" + element.attributes.image_path);
                 }
             });
         });
@@ -122,9 +122,9 @@ function Index() {
                     </div>
                     <div className="row">
                         <div className="destinations_cntnt_blk">
-                            <p>
+                            <h2>
                                 {destinations?.attributes?.page_header_text}
-                            </p>
+                            </h2>
                             <p>
                                 {destinations?.attributes?.page_content_1}
                             </p>

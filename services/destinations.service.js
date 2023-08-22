@@ -59,6 +59,7 @@ function getById(id) {
 
 function getDestinationLandingPage() {
     // console.log('baseUrl_dropdown', baseUrl_dropdown);
+    const destinationLandingPageUrl = `${publicRuntimeConfig.apiUrl}/api/custom-pages-destinations`;
     return fetchWrapper.get(destinationLandingPageUrl);
 }
 

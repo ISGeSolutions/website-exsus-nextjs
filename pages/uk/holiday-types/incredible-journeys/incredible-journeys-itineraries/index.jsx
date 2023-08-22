@@ -11,14 +11,69 @@ export default Index;
 function Index() {
     const [users, setUsers] = useState(null);
     const [holidayTypes, setholidayTypes] = useState(null);
+    const [holidaytypesDetails, setHolidaytypesDetails] = useState();
+    const [backgroundImage, setBackgroundImage] = useState('');
+    const [valueWithBr, setnewValueWithBr] = useState('');
+    const [headingText, setHeadingText] = useState('LUXURY SAFARI HOLIDAYS IN AFRICA');
+
+    const selectedSec = (itemId) => {
+        // console.log('itemId', itemId);
+        var text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
+        if (itemId == 'overview') {
+            text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
+        } else if (itemId == 'countries') {
+            text = "COUNTRIES IN AFRICA";
+        } else if (itemId == 'itineraries') {
+            text = "TAILOR-MADE AFRICA HOLIDAY ITINERARIES";
+        } else if (itemId == 'places_to_stay') {
+            text = "PLACES TO STAY IN AFRICA";
+        } else {
+            text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
+        }
+        setHeadingText(text);
+        // LUXURY SAFARI HOLIDAYS IN AFRICA
+        // COUNTRIES IN AFRICA
+        // TAILOR-MADE AFRICA HOLIDAY ITINERARIES
+        // PLACES TO STAY IN AFRICA
+        // EXPERIENCES IN AFRICA
+    };
 
     useEffect(() => {
-        holidaytypesService.getAll().then(x => {
-            // // console.log('destinationService', x);
-            const desiredKey = 1; // The desired key to access
-            const desiredHolidayTypes = x.find(item => item.id == desiredKey);
-            setholidayTypes(desiredHolidayTypes.holiday_type_translations[0].holiday_type_overview_text);
+        // holidaytypesService.getAll().then(x => {
+        //     // // console.log('destinationService', x);
+        //     const desiredKey = 1; // The desired key to access
+        //     const desiredHolidayTypes = x.find(item => item.id == desiredKey);
+        //     setholidayTypes(desiredHolidayTypes.holiday_type_translations[0].holiday_type_overview_text);
+        // });
+
+        let id = 1;
+        holidaytypesService.getHolidaytypeDetailsById(id).then(x => {
+            console.log('getHolidaytypesDetails', x);
+            setHolidaytypesDetails(x.data.attributes);
+            // const lines = x.data.attributes?.overview_text.split('\n');
+            // console.log('lines', lines);
+            const oldText = x.data.attributes?.overview_text;
+            var newValueWithBr = oldText?.replace(/\n/g, "<br />");
+            setnewValueWithBr(newValueWithBr);
+            console.log('x.data.attributes.holiday_type_images.data[0].attributes.image_path2', 'https://d33ys3jnmuivbg.cloudfront.net/ilimages/' + x.data.attributes.holiday_type_images.data[0].attributes.image_path);
+
+            const imageCheck = x.data.attributes.holiday_type_images.data;
+            console.log('imageCheck', imageCheck);
+            imageCheck.forEach(element => {
+                if (element.attributes.image_type == 'banner') {
+
+                    console.log('x.data.attributes.holiday_type_images.data[0].attributes.image_path', x.data.attributes.holiday_type_images.data[0].attributes.image_path);
+
+                    setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data.attributes.holiday_type_images.data[0].attributes.image_path);
+                } else if (element.attributes.image_type == 'thumbnail') {
+                    // setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data.attributes.holiday_type_images.data[0].attributes.image_path);
+                }
+            });
         });
+
+        console.log('background image', backgroundImage);
+
+        
         userService.getAll().then(x => setUsers(x));
     }, []);
 
@@ -28,7 +83,9 @@ function Index() {
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-inner">
                         <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
-                            <div className="banner_commn_cls holiday_types_detls_banner02"></div>
+                        <div className="banner_commn_cls"> {/*  holiday_types_detls_banner */}
+                                <img src={backgroundImage} alt="holiday_types_detls_card02" className="img-fluid" />
+                            </div>
                         </a>
                     </div>
                 </div>
@@ -41,14 +98,15 @@ function Index() {
                             <li><a href="homepage.html">Home</a></li>
                             <li><a href="holiday_types_landing.html">Holiday Types</a></li>
                             <li><a href="holiday_types_type.html">Once In A Lifetime Holidays</a></li>
-                            <li>Ultimate Journeys</li>
+                            {/* <li>Ultimate Journeys</li> */}
+                            <li>{headingText}</li>
                         </ul>
                     </div>
 
                     <div className="destination_tab_inr">
-                        <h2 className="tab_tilte">ULTIMATE JOURNEYS & INSPIRATION</h2>
+                        <h2 className="tab_tilte">{holidaytypesDetails?.holiday_type_name} ULTIMATE JOURNEYS & INSPIRATION</h2>
                         <div className="destinations_cntnt_blk destination_para pt-0">
-                            <p dangerouslySetInnerHTML={{ __html: holidayTypes }} />
+                            <p dangerouslySetInnerHTML={{ __html: valueWithBr }} />
                             {/* <p>This is the big one, the holiday that you’ve been dreaming of. If you’ve been building up to taking the ultimate journey, we can help. If you want your tailor-made holiday to be the most remarkable, experience-filled time away that you can have than talk to our travel specialists about their ideas for no-holds-barred adventure, escapism and exploration.</p>
                             <p>Maybe your idea of the ultimate holiday is unadulterated luxury and the chance to enjoy some of the most incredible places to stay anywhere in the world. Perhaps it’s an extra-special experience or exclusive opportunity to do something truly once-in-a-lifetime. Maybe it’s about being away longer, travelling further, going deeper into a destination or even ticking off more than one country in the course of the same trip.</p>
                             <p>Whatever your definition of the ultimate journey we’re experienced at delivering the most exceptional holidays in the most extraordinary destinations, whether it’s a chance to explore <a href="#">America’s Southwest in incomparable style, undertake a grand tour of Indochina</a> or roam through some of the great wilderness and wildlife areas of the world on our <a href="#">tour of Legendary Southern Africa.</a> For more inspiration contact our team of creative, well-travelled specialists.</p> */}

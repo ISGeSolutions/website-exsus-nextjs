@@ -290,7 +290,6 @@ function Index() {
         selectedOption = selectedOption.filter((i) => i.value !== '' && typeof i.value !== 'undefined');
         setSelectedOptionCountry(selectedOption);
         // this.setState({ selectedOption }, () =>
-        //   console.log(`Option selected:`, this.state.selectedOption)
         // );
     };
 
@@ -310,7 +309,6 @@ function Index() {
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
         if (window && window.site_region) {
-            // console.log('window.site_region', window.site_region);
             regionWiseUrl = '/' + window.site_region;
             // setMyVariable(window.site_region);
         }
@@ -360,6 +358,7 @@ function Index() {
             imageCheck.forEach(element => {
                 if (element.attributes.image_type == 'main') {
                     setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + element.attributes.image_path);
+                } else if (element.attributes.image_type == 'thumbnail') {
                 }
             });
             // setDestinationLandingDetails(x)
@@ -451,7 +450,8 @@ function Index() {
                     <div className="tab-pane fade show active" id="pills-overview" role="tabpanel" aria-labelledby="pills-overview-tab" tabIndex="0">
                         <div className="container-md">
                             <section className="destination_para">
-                                {<div dangerouslySetInnerHTML={{ __html: valueWithBr }} />}
+                                {/* <div dangerouslySetInnerHTML={{ __html: valueWithBr }} /> */}
+                                <div dangerouslySetInnerHTML={{ __html: valueWithBr }} />
                             </section>
 
                             <section className="favrites_blk_row favrites_blk_small_card_row">
