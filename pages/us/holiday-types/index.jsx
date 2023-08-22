@@ -68,9 +68,9 @@ function Index() {
     useEffect(() => {
         userService.getAll().then(x => setUsers(x));
         holidaytypesService.getHolidaytypesLandingPage().then(x => {
+            // console.log('holidaytypesService.getHolidaytypes', x);
             setHolidayTypes(x.data[0]);
             // setDestinationLandingDetails(x);
-
             const imageCheck = x.data[0].attributes.custom_page_images.data;
             imageCheck.forEach(element => {
                 if (element.attributes.image_type == 'center') {
@@ -83,6 +83,7 @@ function Index() {
 
         holidaytypesService.getHolidaytypesLandingList().then(x => {
             const imageCheckType = x.data;
+            const thumbnailImageArr = [];
             imageCheckType.forEach(elementMain => {
                 if (elementMain.attributes.holiday_type_group_images.data) {
                     const dataInner = elementMain.attributes.holiday_type_group_images.data;
@@ -164,7 +165,6 @@ function Index() {
                             <div className="col-sm-4" key={i}>
                                 <div className="card_blk_inr">
                                     <NavLink href={dynamicLink(holidaytypesItem?.holiday_type_code)}>
-                                    {/* <img src="./../../../images/holiday_type01.jpg" alt="destination01" className="img-fluid" /> */}
                                     <img src={dynamicThumbnailImage(holidaytypesItem.image_path)} alt="holiday_type01" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_sml_arw">
                                         <div className="row align-items-center">
