@@ -321,15 +321,13 @@ function Index() {
         }
     }
 
-    // console.log('regionWiseUrl', regionWiseUrl);
-
     const generateDynamicLink = (item) => {
         // console.log('item', item);
         return regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`;
     };
 
     const handleRedirect = () => {
-        router.push(regionWiseUrl + `/destinations/africa/africa-itineraries/vietnam-in-classic-style`);
+        router.push(regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`);
     };
 
     // https://d33ys3jnmuivbg.cloudfront.net/ilimages" + item?.attributes?.itinerary_images?.data[3]?.attributes?.image_path

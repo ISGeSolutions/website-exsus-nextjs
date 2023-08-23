@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 
 import { Link, Spinner, Signup } from 'components';
 import { Layout } from 'components/users';
-import { userService, countriesService, itinerariesService, hotelService } from 'services';
+import { userService, countriesService, destinationService, itinerariesService, hotelService } from 'services';
 import Iframe from 'react-iframe'
+import { NavLink } from 'components';
+import { useRouter } from 'next/router';
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 var Carousel = require('react-responsive-carousel').Carousel;
@@ -11,12 +13,34 @@ var Carousel = require('react-responsive-carousel').Carousel;
 export default Index;
 
 function Index() {
+
+    const router = useRouter();
+    const { destinationcode } = router.query;
+
     const [users, setUsers] = useState(null);
     // const [destinationDropdown, setDestinationDropdown] = useState(null);
     // const [destination, setDestination] = useState(null);
     const [country, setCountry] = useState(null);
     const [itinerary, setItinerary] = useState(null);
     const [hotel, setHotel] = useState(null);
+    const [itineraries, setItineraries] = useState(null);
+
+    let regionWiseUrl = '/uk';
+    if (typeof window !== 'undefined') {
+        if (window && window.site_region) {
+            regionWiseUrl = '/' + window.site_region;
+            // setMyVariable(window.site_region);
+        }
+    }
+
+    const generateDynamicLink = (item) => {
+        // console.log('item', item);
+        return regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`;
+    };
+
+    const handleRedirect = () => {
+        router.push(regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`);
+    };
 
     useEffect(() => {
 
@@ -33,6 +57,10 @@ function Index() {
             // const desiredItinerary = x.find(item => item.id == desiredKey);
             // console.log('desiredItinerary', desiredItinerary);
             setItinerary(desiredItinerary);
+        });
+
+        destinationService.getAllItineraries().then(x => {
+            setItineraries(x.data);
         });
 
         hotelService.getAll().then(desiredHotel => {
@@ -290,138 +318,38 @@ function Index() {
                                 <div className="card_slider_row">
                                     <div className="carousel00">
                                         <div className="row">
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <a className="card_slider_img">
-                                                            <img src="./../../../images/destination_card01.jpg" alt="destination card01" className="img-fluid" />
-                                                        </a>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">THE SCENT OF CLOVES</a></h4>
-                                                            <ul>
-                                                                <li>Indonesia in Idyllic Style</li>
-                                                                <li>Indonesia</li>
-                                                                <li>From £3,950 per person</li>
-                                                                <li>Travel to:<span>Bali, Java, Kalimantan, Lombok</span></li>
-                                                            </ul>
+                                            {itineraries?.map((item) => (
+                                                <div className="col-sm-6 col-lg-4" key={item.id}>
+                                                    <div className="card_slider_inr">
+                                                        <div className="card_slider">
+                                                            <NavLink href={generateDynamicLink(item)} className="card_slider_img">
+                                                                {item?.attributes?.itinerary_images?.data.map((element, index) => (
+                                                                    element.attributes.image_type == 'thumbnail' ? (
+                                                                        <img key={index} src={`https://d33ys3jnmuivbg.cloudfront.net/ilimages` + element.attributes.image_path} alt="destination card01" className="img-fluid" />
+                                                                    ) : (
+                                                                        ''
+                                                                    )
+                                                                ))}
+                                                                {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
+                                                            </NavLink>
+                                                            <div className="card_slider_cnt">
+                                                                <h4><a href="#">{item?.attributes?.itin_name}</a></h4>
+                                                                <ul>
+                                                                    <li>{item?.attributes?.header_text}</li>
+                                                                    <li>Indonesia</li>
+                                                                    <li>{item?.attributes?.itinerary_country_contents?.data[0]?.attributes?.guideline_price_notes_index}</li>
+                                                                    <li>Travel to:<span>{item?.attributes?.sub_header_text}</span></li>
+                                                                </ul>
+                                                            </div>
+                                                            <button className="btn card_slider_btn">
+                                                                <span>{item?.attributes?.no_of_nites_notes}</span>
+                                                                <span className="view_itnry_link" onClick={handleRedirect}>View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                                            </button>
                                                         </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>14 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../../images/destination_card02.jpg" alt="destination card02" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">LAND OF THE RISING SUN</a></h4>
-                                                            <ul>
-                                                                <li>Japan in Classic Style</li>
-                                                                <li>Japan</li>
-                                                                <li>From £4,600 per person</li>
-                                                                <li>Travel to:<span>Japanese Alps & Northern Honshu, Kyoto, Southern Honshu & Kyushu, Tokyo & Around</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>10 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../../images/destination_card03.jpg" alt="destination card03" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">Ultimate Grand Tour of Indochina</a></h4>
-                                                            <ul>
-                                                                <li>Spirit of the Water Dragon</li>
-                                                                <li>Vietnam, Cambodia, Laos & Thailand</li>
-                                                                <li>From £8,7500 per person</li>
-                                                                <li>Travel to:<span>Hanoi, Halong Bay & Northern Vietnam, Koh Kood & Koh Chang, Luang Prabang, Saigon & Mekong Delta</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>18 nights</span>
-                                                            <span className="view_itnry_link">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../../images/destination_card04.jpg" alt="destination card04" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">FROGS' LEGS & PHO</a></h4>
-                                                            <ul>
-                                                                <li>Vietnam Culinary Adventure</li>
-                                                                <li>Vietnam</li>
-                                                                <li>From £3,950 per person</li>
-                                                                <li>Travel to:<span>Central Vietnam, Hanoi, Halong Bay & Northern Vietnam, Saigon & Mekong Delta</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>11 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../../images/destination_card05.jpg" alt="destination card05" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">CALL OF THE GIBBON</a></h4>
-                                                            <ul>
-                                                                <li>Wildlife Adventure to Thailand</li>
-                                                                <li>Thailand</li>
-                                                                <li>From £5,350 per person</li>
-                                                                <li>Travel to:<span>Bangkok & Central Thailand, Koh Samui & Gulf of Thailand, Northern Thailand, Phuket & Western Thailand</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>11 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-sm-6 col-lg-4">
-                                                <div className="card_slider_inr">
-                                                    <div className="card_slider">
-                                                        <div className="card_slider_img">
-                                                            <img src="./../../../images/destination_card06.jpg" alt="destination card06" className="img-fluid" />
-                                                        </div>
-                                                        <div className="card_slider_cnt">
-                                                            <h4><a href="#">Stupas, Sanctuaries & the Andaman Sea</a></h4>
-                                                            <ul>
-                                                                <li>Perfect Honeymoon to Burma</li>
-                                                                <li>Burma (Myanmar), Thailand</li>
-                                                                <li>From £3,150 per person</li>
-                                                                <li>Travel to: <span>Bagan, Phuket & Western Thailand, The Irrawaddy, Yangon</span></li>
-                                                            </ul>
-                                                        </div>
-                                                        <button className="btn card_slider_btn">
-                                                            <span>12 nights</span>
-                                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            )
+                                            )}
                                         </div>
                                     </div>
 

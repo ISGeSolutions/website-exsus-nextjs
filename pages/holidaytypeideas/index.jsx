@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 
 import { Link, Spinner, Signup } from 'components';
 import { Layout } from 'components/users';
-import { userService, holidaytypesService } from 'services';
+import { userService, holidaytypesService, destinationService } from 'services';
 import { Inspireme } from 'components';
 import { useRouter } from 'next/router';
 import Select from 'react-select';
+import { NavLink } from 'components';
 
 export default Index;
 
@@ -16,6 +17,7 @@ function Index() {
     const [backgroundImage, setBackgroundImage] = useState('');
     const [valueWithBr, setnewValueWithBr] = useState('');
     const [headingText, setHeadingText] = useState('LUXURY SAFARI HOLIDAYS IN AFRICA');
+    const [itineraries, setItineraries] = useState(null);
 
     const optionsData = [
         { value: "", label: "Filter by destination" },
@@ -70,6 +72,23 @@ function Index() {
         selectedOptionData(selectedOption);
     };
 
+    let regionWiseUrl = '/uk';
+    if (typeof window !== 'undefined') {
+        if (window && window.site_region) {
+            regionWiseUrl = '/' + window.site_region;
+            // setMyVariable(window.site_region);
+        }
+    }
+
+    const generateDynamicLink = (item) => {
+        // console.log('item', item);
+        return regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`;
+    };
+
+    const handleRedirect = () => {
+        router.push(regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`);
+    };
+
     const selectedSec = (itemId) => {
         // console.log('itemId', itemId);
         var text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
@@ -105,6 +124,10 @@ function Index() {
         //     const desiredHolidayTypes = x.find(item => item.id == desiredKey);
         //     setholidayTypes(desiredHolidayTypes.holiday_type_translations[0].holiday_type_overview_text);
         // });
+
+        destinationService.getAllItineraries().then(x => {
+            setItineraries(x.data);
+        });
 
         // let id = 1;
         holidaytypesService.getHolidaytypeDetailsById(id).then(x => {
@@ -220,212 +243,38 @@ function Index() {
                                     </div>
                                 </div>
 
-                                <div className="col-sm-6 col-lg-4 col-xxl-4">
-                                    <div className="card_slider_inr">
-                                        <div className="card_slider">
-                                            <a className="card_slider_img">
-                                                <img src="./../../../images/holiday_types01.jpg" alt="holiday_types01" className="img-fluid" />
-                                            </a>
-                                            <div className="card_slider_cnt">
-                                                <h4><a href="#">BIG GAME & GRAPEVINES</a></h4>
-                                                <ul>
-                                                    <li>South Africa in Serious Style</li>
-                                                    <li>South Africa</li>
-                                                    <li>From £5,185 per person</li>
-                                                    <li>Travel to:<span>Cape Town & Around, Greater Kruger & Panorama Region, Winelands</span></li>
-                                                </ul>
-                                            </div>
-                                            <button className="btn card_slider_btn">
-                                                <span>9 nights</span>
-                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-sm-6 col-lg-4 col-xxl-4">
-                                    <div className="card_slider_inr">
-                                        <div className="card_slider">
-                                            <a className="card_slider_img">
-                                                <img src="./../../../images/holiday_types02.jpg" alt="holiday_types02" className="img-fluid" />
-                                            </a>
-                                            <div className="card_slider_cnt">
-                                                <h4><a href="#">A FASHION HOLIDAY IN ITALY</a></h4>
-                                                <ul>
-                                                    <li>Milan, Florence and Rome in Style</li>
-                                                    <li>Italy</li>
-                                                    <li>From £8,250 per person</li>
-                                                    <li>Travel to:<span>Florence and Tuscany, Milan, Italian Lakes & Northern Italy, Rome, Umbria & Central Italy</span></li>
-                                                </ul>
-                                            </div>
-                                            <button className="btn card_slider_btn">
-                                                <span>9 nights</span>
-                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-sm-6 col-lg-4 col-xxl-4">
-                                    <div className="card_slider_inr">
-                                        <div className="card_slider">
-                                            <a className="card_slider_img">
-                                                <img src="./../../../images/holiday_types03.jpg" alt="holiday_types03" className="img-fluid" />
-                                            </a>
-                                            <div className="card_slider_cnt">
-                                                <h4><a href="#">TASTING SOUTH AMERICAg</a></h4>
-                                                <ul>
-                                                    <li>Seriously Stylish Gourmet Adventure To Peru, Chile & Argentina</li>
-                                                    <li>Argentina, Peru, Chile</li>
-                                                    <li>From £9,950 per person</li>
-                                                    <li>Travel to:<span>Buenos Aires & the Pampas, Cordoba, Mendoza & Winelands, Lima & The Desert Coast, Santiago & Central Chile</span></li>
-                                                </ul>
-                                            </div>
-                                            <button className="btn card_slider_btn">
-                                                <span>12 nights</span>
-                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-sm-6 col-lg-4 col-xxl-4">
-                                    <div className="card_slider_inr">
-                                        <div className="card_slider">
-                                            <a className="card_slider_img">
-                                                <img src="./../../../images/holiday_types04.jpg" alt="holiday_types04" className="img-fluid" />
-                                            </a>
-                                            <div className="card_slider_cnt">
-                                                <h4><a href="#">THE PEARLS OF SERENDIP</a></h4>
-                                                <ul>
-                                                    <li>Sri Lanka in Ultimate Style</li>
-                                                    <li>Sri Lanka</li>
-                                                    <li>From £7,850 per person</li>
-                                                    <li>Travel to:<span>Colombo & Western Sri Lanka, Southern & Southwest Coast, Sri Lanka's Hill Country</span></li>
-                                                </ul>
-                                            </div>
-                                            <button className="btn card_slider_btn">
-                                                <span>12 nights</span>
-                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-sm-6 col-lg-4 col-xxl-4">
-                                    <div className="card_slider_inr">
-                                        <div className="card_slider">
-                                            <a className="card_slider_img">
-                                                <img src="./../../../images/holiday_types05.jpg" alt="holiday_types05" className="img-fluid" />
-                                            </a>
-                                            <div className="card_slider_cnt">
-                                                <h4><a href="#">BUSH TALES & CAMPFIRES</a></h4>
-                                                <ul>
-                                                    <li>Ultimate Southern Africa Adventure</li>
-                                                    <li>South Africa, Namibia, Botswana, Zambia & Malawi</li>
-                                                    <li>From £37,685 per person</li>
-                                                    <li>Travel to:<span>Cape Town & Around, Lake Malawi & Likoma Island, Livingstone & Victoria Falls, Luangwa Valley</span></li>
-                                                </ul>
-                                            </div>
-                                            <button className="btn card_slider_btn">
-                                                <span>28 nights</span>
-                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-sm-6 col-lg-4 col-xxl-4">
-                                    <div className="card_slider_inr">
-                                        <div className="card_slider">
-                                            <a className="card_slider_img">
-                                                <img src="./../../../images/holiday_types06.jpg" alt="holiday_types06" className="img-fluid" />
-                                            </a>
-                                            <div className="card_slider_cnt">
-                                                <h4><a href="#">MARVELLOUS MEERKATS & FABULOUS FYNBOS</a></h4>
-                                                <ul>
-                                                    <li>Ultimate Family Adventure to South Africa</li>
-                                                    <li>South Africa</li>
-                                                    <li>From £9,825 per person</li>
-                                                    <li>Travel to:<span>Cape Town & Around, Garden Route & Little Karoo, Madikwe & Northwest, Western & Northern Cape</span></li>
-                                                </ul>
-                                            </div>
-                                            <button className="btn card_slider_btn">
-                                                <span>12 nights</span>
-                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-sm-6 col-lg-4 col-xxl-4">
-                                    <div className="card_slider_inr">
-                                        <div className="card_slider">
-                                            <a className="card_slider_img">
-                                                <img src="./../../../images/holiday_types07.jpg" alt="holiday_types07" className="img-fluid" />
-                                            </a>
-                                            <div className="card_slider_cnt">
-                                                <h4><a href="#">UNDER THE VOLCANO</a></h4>
-                                                <ul>
-                                                    <li>Mexico In Ultimate Style</li>
-                                                    <li>Mexico</li>
-                                                    <li>From £8,150 per person</li>
-                                                    <li>Travel to:<span>Colonial Mexico & the North, Mexico City & Around, Mexico's Pacific Coast, Southern Mexico</span></li>
-                                                </ul>
-                                            </div>
-                                            <button className="btn card_slider_btn">
-                                                <span>12 nights</span>
-                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-sm-6 col-lg-4 col-xxl-4">
-                                    <div className="card_slider_inr">
-                                        <div className="card_slider">
-                                            <a className="card_slider_img">
-                                                <img src="./../../../images/holiday_types08.jpg" alt="holiday_types08" className="img-fluid" />
-                                            </a>
-                                            <div className="card_slider_cnt">
-                                                <h4><a href="#">YOU ABSOLUTE BEAUTY!</a></h4>
-                                                <ul>
-                                                    <li>Australia in Ultimate Style</li>
-                                                    <li>Australia</li>
-                                                    <li>From £31,050 per person</li>
-                                                    <li>Travel to:<span>New South Wales, Northern Australia, Queensland, South Australia</span></li>
-                                                </ul>
-                                            </div>
-                                            <button className="btn card_slider_btn">
-                                                <span>22 nights</span>
-                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-sm-6 col-lg-4 col-xxl-4">
-                                    <div className="card_slider_inr">
-                                        <div className="card_slider">
-                                            <a className="card_slider_img">
-                                                <img src="./../../../images/holiday_types09.jpg" alt="holiday_types09" className="img-fluid" />
-                                            </a>
-                                            <div className="card_slider_cnt">
-                                                <h4><a href="#">THE ROYAL ROAD TO ANGKOR</a></h4>
-                                                <ul>
-                                                    <li>Thailand & Cambodia in Ultimate Style</li>
-                                                    <li>Thailand & Cambodia</li>
-                                                    <li>From £13,900 per person</li>
-                                                    <li>Travel to:<span>Bangkok & Central Thailand, Koh Kood & Koh Chang, Phnom Penh, Saigon & Mekong Delta</span></li>
-                                                </ul>
-                                            </div>
-                                            <button className="btn card_slider_btn">
-                                                <span>13 nights</span>
-                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                                {itineraries?.map((item) => (
+                                                <div className="col-sm-6 col-lg-4" key={item.id}>
+                                                    <div className="card_slider_inr">
+                                                        <div className="card_slider">
+                                                            <NavLink href={generateDynamicLink(item)} className="card_slider_img">
+                                                                {item?.attributes?.itinerary_images?.data.map((element, index) => (
+                                                                    element.attributes.image_type == 'thumbnail' ? (
+                                                                        <img key={index} src={`https://d33ys3jnmuivbg.cloudfront.net/ilimages` + element.attributes.image_path} alt="destination card01" className="img-fluid" />
+                                                                    ) : (
+                                                                        ''
+                                                                    )
+                                                                ))}
+                                                                {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
+                                                            </NavLink>
+                                                            <div className="card_slider_cnt">
+                                                                <h4><a href="#">{item?.attributes?.itin_name}</a></h4>
+                                                                <ul>
+                                                                    <li>{item?.attributes?.header_text}</li>
+                                                                    <li>Indonesia</li>
+                                                                    <li>{item?.attributes?.itinerary_country_contents?.data[0]?.attributes?.guideline_price_notes_index}</li>
+                                                                    <li>Travel to:<span>{item?.attributes?.sub_header_text}</span></li>
+                                                                </ul>
+                                                            </div>
+                                                            <button className="btn card_slider_btn">
+                                                                <span>{item?.attributes?.no_of_nites_notes}</span>
+                                                                <span className="view_itnry_link" onClick={handleRedirect}>View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )
+                                            )}
 
                                 <div className="col-12">
                                     <button className="btn prmry_btn make_enqury_btn mx-auto text-uppercase" fdprocessedid="r5vpm6s">Show 9 more holiday ideas
