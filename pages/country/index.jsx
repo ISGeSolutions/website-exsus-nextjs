@@ -849,7 +849,7 @@ function Index() {
 
 
 
-                                            {itinerary?.map((itineraryDetail, i) => (
+                                            {/* {itinerary?.map((itineraryDetail, i) => (
                                                 <div className="col-sm-6 col-lg-4" key={itineraryDetail?.id}>
                                                     <div className="card_slider_inr">
                                                         <div className="card_slider">
@@ -868,7 +868,6 @@ function Index() {
                                                                     <li>From £3,950 per person</li>
                                                                     <li>Travel to:<span>Bali, Java, Kalimantan, Lombok</span></li>
                                                                 </ul>
-                                                                {/* <p dangerouslySetInnerHTML={{ __html: itineraryDetail['itinerary_translations'][0].itin_overview_text }} /> */}
                                                             </div>
                                                             <button className="btn card_slider_btn">
                                                                 <span>14 nights</span>
@@ -877,9 +876,42 @@ function Index() {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            ))}
+                                            ))} */}
 
-                                            <div className="col-sm-6 col-lg-4">
+                                            {itineraries?.map((item) => (
+                                                <div className="col-sm-6 col-lg-4" key={item.id}>
+                                                    <div className="card_slider_inr">
+                                                        <div className="card_slider">
+                                                            <NavLink href={generateDynamicLink(item)} className="card_slider_img">
+                                                                {item?.attributes?.itinerary_images?.data.map((element, index) => (
+                                                                    element.attributes.image_type == 'thumbnail' ? (
+                                                                        <img key={index} src={`https://d33ys3jnmuivbg.cloudfront.net/ilimages` + element.attributes.image_path} alt="destination card01" className="img-fluid" />
+                                                                    ) : (
+                                                                        ''
+                                                                    )
+                                                                ))}
+                                                                {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
+                                                            </NavLink>
+                                                            <div className="card_slider_cnt">
+                                                                <h4><a href="#">{item?.attributes?.itin_name}</a></h4>
+                                                                <ul>
+                                                                    <li>{item?.attributes?.header_text}</li>
+                                                                    <li>Indonesia</li>
+                                                                    <li>{item?.attributes?.itinerary_country_contents?.data[0]?.attributes?.guideline_price_notes_index}</li>
+                                                                    <li>Travel to:<span>{item?.attributes?.sub_header_text}</span></li>
+                                                                </ul>
+                                                            </div>
+                                                            <button className="btn card_slider_btn">
+                                                                <span>{item?.attributes?.no_of_nites_notes}</span>
+                                                                <span className="view_itnry_link" onClick={handleRedirect}>View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )
+                                            )}
+
+                                            {/* <div className="col-sm-6 col-lg-4">
                                                 <div className="card_slider_inr">
                                                     <div className="card_slider">
                                                         <a className="card_slider_img">
@@ -1084,7 +1116,7 @@ function Index() {
                                                         </button>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> */}
                                             <div className="col-12">
                                                 <button className="btn prmry_btn make_enqury_btn mx-auto text-uppercase">Show 9 more holiday ideas
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
