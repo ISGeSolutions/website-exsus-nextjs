@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Inspireme, Signup } from 'components';
 import Head from 'next/head';
-import { holidaytypesService } from 'services';
+import { holidaytypesService, destinationService } from 'services';
 import { NavLink } from 'components';
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -13,6 +13,7 @@ export default Index;
 function Index() {
 
     const [thumbnailImage, setThumbnailImageArr] = useState([]);
+    const [itineraries, setItineraries] = useState(null);
 
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
@@ -22,6 +23,15 @@ function Index() {
             // setMyVariable(window.site_region);
         }
     }
+
+    const generateDynamicLink = (item) => {
+        // console.log('item', item);
+        return regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`;
+    };
+
+    const handleRedirect = () => {
+        router.push(regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`);
+    };
 
     const dynamicThumbnailImage = (itemId) => {
         return `https://d33ys3jnmuivbg.cloudfront.net/ilimages/` + itemId;
@@ -88,6 +98,10 @@ function Index() {
             });
             // console.log('thumbnailImageArr', thumbnailImageArr);
             setThumbnailImageArr(thumbnailImageArr);
+        });
+
+        destinationService.getAllItineraries().then(x => {
+            setItineraries(x.data);
         });
 
         // console.log('region', window.site_region);
@@ -192,7 +206,39 @@ function Index() {
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z" /></svg>
                         </i>
                         <div className="carousel00">
-                            <div className="card_slider_inr">
+
+                            {itineraries?.map((item) => (
+                                <div className="card_slider_inr" key={item.id}>
+                                    <div className="card_slider">
+                                        <NavLink href={generateDynamicLink(item)} className="card_slider_img">
+                                            {item?.attributes?.itinerary_images?.data.map((element, index) => (
+                                                element.attributes.image_type == 'thumbnail' ? (
+                                                    <img key={index} src={`https://d33ys3jnmuivbg.cloudfront.net/ilimages` + element.attributes.image_path} alt="destination card01" className="img-fluid" />
+                                                ) : (
+                                                    ''
+                                                )
+                                            ))}
+                                            {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
+                                        </NavLink>
+                                        <div className="card_slider_cnt">
+                                            <h4><a href="#">{item?.attributes?.itin_name}</a></h4>
+                                            <ul>
+                                                <li>{item?.attributes?.header_text}</li>
+                                                <li>Indonesia</li>
+                                                <li>{item?.attributes?.itinerary_country_contents?.data[0]?.attributes?.guideline_price_notes_index}</li>
+                                                <li>Travel to:<span>{item?.attributes?.sub_header_text}</span></li>
+                                            </ul>
+                                        </div>
+                                        <button className="btn card_slider_btn">
+                                            <span>{item?.attributes?.no_of_nites_notes}</span>
+                                            <span className="view_itnry_link" onClick={handleRedirect}>View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            )
+                            )}
+
+                            {/* <div className="card_slider_inr">
                                 <div className="card_slider">
                                     <a className="card_slider_img">
                                         <img src="images/card_slider01.jpg" alt="slider image 01" className="img-fluid" />
@@ -309,7 +355,7 @@ function Index() {
                                         <span className="view_itnry_link">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
                                     </button>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                         <i id="right">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
