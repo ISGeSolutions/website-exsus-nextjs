@@ -44,12 +44,6 @@ function Index() {
     return (
         <>
             <Head>
-                <script>
-                </script>
-
-                <script>
-
-                </script>
             </Head>
 
             <section className="banner_blk_row">
@@ -101,7 +95,8 @@ function Index() {
             <section className="trvl_info_row">
                 <div className="container-md">
                     <div className="bookmark_row">
-                        <ul>
+                        <p style={{color: `white`}}>{itineraries?.attributes?.friendly_url}</p>
+                        {/* <ul>
                             <li><a href="homepage.html">Home</a></li>
                             <li><a href="destinations.html">Destinations</a></li>
                             <li><a href="destination_detail.html">Asia</a></li>
@@ -109,7 +104,7 @@ function Index() {
                             <li><a href="region_detail.html">Beijing & Northern China</a></li>
                             <li><a href="region_detail.html">Beijing & Northern China Itineraries</a></li>
                             <li>China like an Emperor</li>
-                        </ul>
+                        </ul> */}
                     </div>
 
                     <div className="trvl_info_cntnt">

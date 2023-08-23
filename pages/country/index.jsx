@@ -154,7 +154,8 @@ function Index() {
 
             <section className="destination_tab_row light_grey pb-0">
                 <div className="container-md">
-                    <div className="bookmark_row">
+                    <div className="bookmark_row">  
+                        {/* <p style={{color: `white`}}>{holidaytypes?.attributes?.page_friendly_url}</p> */}
                         <ul>
                             <li><a href="homepage.html">Home</a></li>
                             <li><a href="destinations.html">Destinations</a></li>

@@ -345,12 +345,6 @@ function Index() {
         //     setDestinationDropdown(x)
         // });
 
-        destinationService.getAll().then(x => {
-            // const desiredKey = 1; // The desired key to access
-            // const desiredDestination = x.find(item => item.id == desiredKey);
-            // setDestination(desiredDestination.destination_translations[0].destination_overview_text);
-        });
-
         destinationService.getAllItineraries().then(x => {
             setItineraries(x.data);
         });
@@ -426,11 +420,12 @@ function Index() {
             <section className="destination_tab_row light_grey pb-0">
                 <div className="container-md">
                     <div className="bookmark_row">
-                        <ul>
+                        <p style={{ color: `white` }}>{destinationDetails?.attributes?.page_friendly_url}</p>
+                        {/* <ul>
                             <li><a href="homepage.html">Home</a></li>
                             <li><a href="destinations.html">Destinations</a></li>
                             <li>Asia</li>
-                        </ul>
+                        </ul> */}
                     </div>
                     <div className="destination_tab_inr">
                         <h2 className="tab_tilte">

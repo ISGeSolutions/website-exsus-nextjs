@@ -147,10 +147,11 @@ function Index() {
             <section className="card_blk_row destinations_blk_row light_grey">
                 <div className="container-md">
                     <div className="bookmark_row">
-                        <ul>
+                        <p style={{color: `white`}}>{holidaytypes?.attributes?.page_friendly_url}</p>
+                        {/* <ul>
                             <li><a href="homepage.html">Home</a></li>
                             <li>Holiday types</li>
-                        </ul>
+                        </ul> */}
                     </div>
                     <div className="row">
                         <div className="destinations_cntnt_blk">
