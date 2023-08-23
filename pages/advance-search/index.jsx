@@ -33,7 +33,7 @@ function Index() {
         router.push(regionWiseUrl + `/destinations/africa/africa-itineraries/vietnam-in-classic-style`);
     };
 
-    useEffect(() => {
+    useEffect(() => { 
         destinationService.getAllItineraries().then(x => {
             setItineraries(x.data);
         });
