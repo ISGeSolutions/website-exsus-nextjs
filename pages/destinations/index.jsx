@@ -36,22 +36,23 @@ function Index() {
         return `https://d33ys3jnmuivbg.cloudfront.net/ilimages/` + itemId;
     }
 
-    const dynamicLink = (itemId) => {
+    const dynamicLink = (itemId, id) => {
         if (itemId && itemId == 'AF') {
-            return regionWiseUrl + `/destinations/africa`;
+            return regionWiseUrl + `/continent?destinationcode=africa&id=` + id;
         } else if (itemId && itemId == 'AS') {
-            return regionWiseUrl + `/destinations/asia`;
+            return regionWiseUrl + `/continent?destinationcode=asia&id=` + id;
         } else if (itemId && itemId == 'AU') {
-            return regionWiseUrl + `/destinations/australasia-and-south-pacific`;
+            return regionWiseUrl + `/continent?destinationcode=australasia-and-south-pacific&id=` + id;
         } else if (itemId && itemId == 'CA') {
-            return regionWiseUrl + `/destinations/central-america`;
+            return regionWiseUrl + `/continent?destinationcode=/central-america&id=` + id;
         } else if (itemId && itemId == 'EU') {
-            return regionWiseUrl + `/destinations/europe`;
+            return regionWiseUrl + `//continent?destinationcode=europe&id=` + id;
         } else if (itemId && itemId == 'IO') {
-            return regionWiseUrl + `/destinations/indian-ocean`;
+            return regionWiseUrl + `/continent?destinationcode=indian-ocean&id=` + id;
         } else if (itemId && itemId == 'IS') {
-            return regionWiseUrl + `/destinations/indian-subcontinent`;
+            return regionWiseUrl + `/continent?destinationcode=indian-subcontinent&id=` + id;
         }
+        console.log('regionWiseUrl', regionWiseUrl);
     }
 
     useEffect(() => {
@@ -139,7 +140,7 @@ function Index() {
                         {destinationLandingList?.map((destinationItem, i) => (
                             <div className="col-sm-6" key={destinationItem?.id}>
                                 <div className="card_blk_inr">
-                                    <NavLink href={dynamicLink(destinationItem?.attributes?.destination_code)}>
+                                    <NavLink href={dynamicLink(destinationItem?.attributes?.destination_code, destinationItem?.id)}>
                                         <img src={dynamicImage(destinationItem?.attributes?.destination_images?.data[1].attributes.image_path)} alt="destination01" className="img-fluid" />
                                         {/* <img src="./../images/destination01.jpg" alt="destination01" className="img-fluid" /> */}
                                         <div className="card_blk_cntnt card_blk_sml_arw">
