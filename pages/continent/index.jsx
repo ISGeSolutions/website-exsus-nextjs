@@ -117,6 +117,7 @@ function Index() {
     const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
 
     const [itineraries, setItineraries] = useState(null);
+    const [mapVariable, setMapVariable] = useState(null);
 
     const freshProds = [
         {
@@ -265,7 +266,6 @@ function Index() {
 
     // const { selectedOption } = this.state;
 
-
     const selectedSec = (itemId) => {
         var text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
         if (itemId == 'overview') {
@@ -352,6 +352,15 @@ function Index() {
         // let id = 1;
         destinationService.getDestinationDetails(destinationcode).then(x => {
             setDestinationDetails(x.data.attributes);
+
+            const map_latitude = x.data.attributes?.map_latitude;
+            const map_longitude = x.data.attributes?.map_longitude;
+            // const map_latitude = "40.7128";
+            // const map_longitude = "-74.0060";
+
+            const test = `https://www.google.com/maps/embed/v1/place?q=` + map_latitude + `,` + map_longitude + `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
+            setMapVariable(test);
+
             // const lines = x.data.attributes?.overview_text.split('\n');
             const oldText = x.data.attributes?.overview_text;
             var newValueWithBr = oldText?.replace(/\n/g, "<br />");
@@ -367,7 +376,7 @@ function Index() {
         });
 
         $('.banner_map_tab').click(function () {
-            $('.banner_map_blk').toggleClass('banner_map_active')
+            $('.banner_map_blk').addClass('banner_map_active')
         });
         $('.banner_img_tab').click(function () {
             $('.banner_map_blk').removeClass('banner_map_active')
@@ -384,6 +393,7 @@ function Index() {
                 $(this).addClass('active');
             });
         });
+
     }, []);
 
     return (
@@ -404,6 +414,7 @@ function Index() {
                     </div>
                 </div>
                 <div className="banner_tab_blk">
+
                     <button className="btn banner_map_tab">Map</button>
                     <button className="btn banner_img_tab banner_tab_active">Images</button>
                 </div>
@@ -413,8 +424,13 @@ function Index() {
                         id=""
                         className=""
                         display="block"
-                        position="relative" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" style="border:0;" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+                        src={mapVariable}
+                        position="relative" style="border:0;" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"
+                    />
+
+                    {/* src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" */}
                 </div>
+                {/* <p>{mapVariable}</p> */}
             </section>
 
             <section className="destination_tab_row light_grey pb-0">
