@@ -27,25 +27,42 @@ function Index() {
         return `https://d33ys3jnmuivbg.cloudfront.net/ilimages/` + itemId;
     }
 
-    const dynamicLink = (itemId) => {
+    const dynamicLink = (itemId, id) => {
         if (itemId && itemId == 'HG6') {
-            return regionWiseUrl + `/holiday-types/incredible-journeys`;
+            return regionWiseUrl + `/holidaytypeitineraries?hcode=incredible-journeys&id=` + id;
         } else if (itemId && itemId == 'HG5') {
-            return regionWiseUrl + `/holiday-types/luxury-honeymoons`;
+            return regionWiseUrl + `/holidaytypeitineraries?hcode=luxury-honeymoons&id=` + id;
         } else if (itemId && itemId == 'HG4') {
-            return regionWiseUrl + `/holiday-types/family-holidays`;
+            return regionWiseUrl + `/holidaytypeitineraries?hcode=family-holidays&id=` + id;
         } else if (itemId && itemId == 'ADHL') {
-            return regionWiseUrl + `/holiday-types/adventure-holidays`;
+            return regionWiseUrl + `/holidaytypeitineraries?hcode=adventure-holidays&id=` + id;
         } else if (itemId && itemId == 'LBHG') {
-            return regionWiseUrl + `/holiday-types/luxury-beach-holidays`;
+            return regionWiseUrl + `/holidaytypeitineraries?hcode=luxury-beach-holidays&id=` + id;
         } else if (itemId && itemId == 'HG3') {
-            return regionWiseUrl + `/holiday-types/culture-holidays`;
-        } else if (itemId && itemId == '07') {
-            return regionWiseUrl + `/holiday-types/wildlife-holidays`;
-        } else if (itemId && itemId == '08') {
-            return regionWiseUrl + `/holiday-types/classic-journeyst`;
-        } else if (itemId && itemId == '09') {
-            return regionWiseUrl + `/holiday-types/spcial-occasions`;
+            return regionWiseUrl + `/holidaytypeitineraries?hcode=culture-holidays&id=` + id;
+        } else {
+            return "#";
+        }
+    }
+
+    const dynamicLinkHolidayas = (itemId, id) => {
+        // if (itemId && itemId == 'AF') {
+        //     return regionWiseUrl + `/destinations/africa/` + id;
+        // }
+        if (itemId && itemId == 'HG6') {
+            return regionWiseUrl + `/holidaytypeitineraries/incredible-journeys/id`;
+        } else if (itemId && itemId == 'HG5') {
+            return regionWiseUrl + `/holidaytypeitineraries/luxury-honeymoons/id`;
+        } else if (itemId && itemId == 'HG4') {
+            return regionWiseUrl + `/holidaytypeitineraries/family-holidays/id`;
+        } else if (itemId && itemId == 'ADHL') {
+            return regionWiseUrl + `/holidaytypeitineraries/adventure-holidays/id`;
+        } else if (itemId && itemId == 'LBHG') {
+            return regionWiseUrl + `/holidaytypeitineraries/luxury-beach-holidays/id`;
+        } else if (itemId && itemId == 'HG3') {
+            return regionWiseUrl + `/holidaytypeitineraries/culture-holidays/id`;
+        } else {
+            return "#";
         }
     }
 
@@ -59,6 +76,7 @@ function Index() {
                     dataInner.forEach(element => {
                         if (element.attributes.image_type == 'thumbnail') {
                             const objThumbnail = {
+                                "id": elementMain?.id,
                                 "holiday_type_code": elementMain?.attributes?.holiday_type_group_code,
                                 "holiday_type_name": elementMain?.attributes?.holiday_type_group_name,
                                 "image_path": element.attributes.image_path
@@ -68,7 +86,7 @@ function Index() {
                     });
                 }
             });
-            console.log('thumbnailImageArr', thumbnailImageArr);
+            // console.log('thumbnailImageArr', thumbnailImageArr);
             setThumbnailImageArr(thumbnailImageArr);
         });
 
@@ -139,14 +157,11 @@ function Index() {
             <section className="card_blk_row">
                 <div className="container-md">
                     <div className="row">
-
-                        {/* <pre>{JSON.stringify(thumbnailImageArr, null, 2) }
-                    </pre> */}
-
+                        {/* <pre>{JSON.stringify(thumbnailImageArr, null, 2) } </pre> */}
                         {thumbnailImage?.map((holidaytypesItem, i) => (
                             <div className="col-sm-6 col-md-6 col-lg-4" key={i}>
                                 <div className="card_blk_inr">
-                                    <NavLink href={dynamicLink(holidaytypesItem?.holiday_type_code)}>
+                                    <NavLink href={dynamicLink(holidaytypesItem?.holiday_type_code, holidaytypesItem?.id)} as={dynamicLinkHolidayas(holidaytypesItem?.attributes?.holiday_type_group_code, holidaytypesItem?.id)}>
                                         <img src={dynamicThumbnailImage(holidaytypesItem.image_path)} alt="holiday_type01" className="img-fluid" />
                                         <div className="card_blk_cntnt">
                                             <div className="row align-items-center">

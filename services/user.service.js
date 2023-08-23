@@ -24,7 +24,7 @@ export const userService = {
 function login(identifier, password) {
     return fetchWrapper.post(`${baseUrl}/api/auth/local`, { identifier, password })
         .then(user => {
-            console.log('user', user);
+            // console.log('user', user);
             // publish user to subscribers and store in local storage to stay logged in between page refreshes            
             userSubject.next(user);
             localStorage.setItem('user', JSON.stringify(user));

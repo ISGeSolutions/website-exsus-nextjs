@@ -17,12 +17,12 @@ function Index() {
         // const [count, setCount] = useGlobalState("site_region");
         // const [user, setUser, updateUser] = useGlobalState("site_region", {default: null});
         // setCountFun();
-        console.log('region', window.site_region);
+        // console.log('region', window.site_region);
     }, []);
 
     function setCountFun() {
         setCount(e.target.value);
-        console.log('count', count);
+        // console.log('count', count);
     }
 
     const router = useRouter();
@@ -44,7 +44,7 @@ function Index() {
     const { errors } = formState;
 
     function onSubmit(data) {
-        console.log('onSubmit', data);
+        // console.log('onSubmit', data);
         return homeService.inspireMe(data)
             .then(() => {
                 alertService.success('Make an enquiry successful', { keepAfterRouteChange: true });
@@ -71,7 +71,7 @@ function Index() {
     // const { errorsSignup } = formStateSignup;
 
     function onSignup(data) {
-        console.log('onSignup', data);
+        // console.log('onSignup', data);
         // return homeService.inspireMe(data)
         //     .then(() => {
         //         alertService.success('Sign up successfull', { keepAfterRouteChange: true });

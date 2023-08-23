@@ -15,7 +15,7 @@ function Edit({ id }) {
             .then(x => setUser(x))
             .catch(alertService.error)
 
-            console.log('region', window.site_region);
+            // console.log('region', window.site_region);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
