@@ -311,7 +311,7 @@ function Index() {
 
     const router = useRouter();
     const { destinationcode } = router.query;
-    const { id } = router.query;
+    // const { id } = router.query;
 
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
@@ -358,7 +358,7 @@ function Index() {
         });
 
         // let id = 1;
-        destinationService.getDestinationDetails(id).then(x => {
+        destinationService.getDestinationDetails(destinationcode).then(x => {
             setDestinationDetails(x.data.attributes);
             // const lines = x.data.attributes?.overview_text.split('\n');
             const oldText = x.data.attributes?.overview_text;

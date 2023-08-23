@@ -48,19 +48,19 @@ function Nav() {
     const dynamicLink = (itemId, id) => {
         // {regionWiseUrl + '/destinations/africa/south-africa'}
         if (itemId && itemId == 'AF') {
-            return regionWiseUrl + `/continent?destinationcode=africa&id=` + id;
+            return regionWiseUrl + `/continent?destinationcode=` + id;
         } else if (itemId && itemId == 'AS') {
-            return regionWiseUrl + `/continent?destinationcode=asia&id=` + id;
+            return regionWiseUrl + `/continent?destinationcode=` + id;
         } else if (itemId && itemId == 'AU') {
-            return regionWiseUrl + `/continent?destinationcode=australasia-and-south-pacific&id=` + id;
+            return regionWiseUrl + `/continent?destinationcode=` + id;
         } else if (itemId && itemId == 'CA') {
-            return regionWiseUrl + `/continent?destinationcode=central-america&id=` + id;
+            return regionWiseUrl + `/continent?destinationcode=` + id;
         } else if (itemId && itemId == 'EU') {
-            return regionWiseUrl + `/continent?destinationcode=europe&id=` + id;
+            return regionWiseUrl + `/continent?destinationcode=` + id;
         } else if (itemId && itemId == 'IO') {
-            return regionWiseUrl + `/continent?destinationcode=indian-ocean&id=` + id;
+            return regionWiseUrl + `/continent?destinationcode=` + id;
         } else if (itemId && itemId == 'IS') {
-            return regionWiseUrl + `/continent?destinationcode=indian-subcontinent&id=` + id;
+            return regionWiseUrl + `/continent?destinationcode=` + id;
         } else {
             return "#";
         }
@@ -71,19 +71,19 @@ function Nav() {
         //     return regionWiseUrl + `/destinations/africa/` + id;
         // }
         if (itemId && itemId == 'AF') {
-            return regionWiseUrl + `/continent/africa/` + id;
+            return regionWiseUrl + `/continent/` + id;
         } else if (itemId && itemId == 'AS') {
-            return regionWiseUrl + `/continent/asia/` + id;
+            return regionWiseUrl + `/continent/` + id;
         } else if (itemId && itemId == 'AU') {
-            return regionWiseUrl + `/continent/australasia-and-south-pacific/` + id;
+            return regionWiseUrl + `/continent/` + id;
         } else if (itemId && itemId == 'CA') {
-            return regionWiseUrl + `/continent/central-america/` + id;
+            return regionWiseUrl + `/continent/` + id;
         } else if (itemId && itemId == 'EU') {
-            return regionWiseUrl + `/continent/europe/` + id;
+            return regionWiseUrl + `/continent/` + id;
         } else if (itemId && itemId == 'IO') {
-            return regionWiseUrl + `/continent/indian-ocean/` + id;
+            return regionWiseUrl + `/continent/` + id;
         } else if (itemId && itemId == 'IS') {
-            return regionWiseUrl + `/continent/indian-subcontinent/` + id;
+            return regionWiseUrl + `/continent/` + id;
         } else {
             return "#";
         }
@@ -121,17 +121,17 @@ function Nav() {
 
     const dynamicLinkHoliday = (itemId, id) => {
         if (itemId && itemId == 'HG6') {
-            return regionWiseUrl + `/holidaytypeitineraries?hcode=incredible-journeys&id=` + id;
+            return regionWiseUrl + `/holidaytypeitineraries?hcode=` + id;
         } else if (itemId && itemId == 'HG5') {
-            return regionWiseUrl + `/holidaytypeitineraries?hcode=luxury-honeymoons&id=` + id;
+            return regionWiseUrl + `/holidaytypeitineraries?hcode=` + id;
         } else if (itemId && itemId == 'HG4') {
-            return regionWiseUrl + `/holidaytypeitineraries?hcode=family-holidays&id=` + id;
+            return regionWiseUrl + `/holidaytypeitineraries?hcode=` + id;
         } else if (itemId && itemId == 'ADHL') {
-            return regionWiseUrl + `/holidaytypeitineraries?hcode=adventure-holidays&id=` + id;
+            return regionWiseUrl + `/holidaytypeitineraries?hcode=` + id;
         } else if (itemId && itemId == 'LBHG') {
-            return regionWiseUrl + `/holidaytypeitineraries?hcode=luxury-beach-holidays&id=` + id;
+            return regionWiseUrl + `/holidaytypeitineraries?hcode=` + id;
         } else if (itemId && itemId == 'HG3') {
-            return regionWiseUrl + `/holidaytypeitineraries?hcode=culture-holidays&id=` + id;
+            return regionWiseUrl + `/holidaytypeitineraries?hcode=` + id;
         } else {
             return "#";
         }
@@ -142,17 +142,17 @@ function Nav() {
         //     return regionWiseUrl + `/destinations/africa/` + id;
         // }
         if (itemId && itemId == 'HG6') {
-            return regionWiseUrl + `/holidaytypeitineraries/incredible-journeys/id`;
+            return regionWiseUrl + `/holidaytypeitineraries/id`;
         } else if (itemId && itemId == 'HG5') {
-            return regionWiseUrl + `/holidaytypeitineraries/luxury-honeymoons/id`;
+            return regionWiseUrl + `/holidaytypeitineraries/id`;
         } else if (itemId && itemId == 'HG4') {
-            return regionWiseUrl + `/holidaytypeitineraries/family-holidays/id`;
+            return regionWiseUrl + `/holidaytypeitineraries/id`;
         } else if (itemId && itemId == 'ADHL') {
-            return regionWiseUrl + `/holidaytypeitineraries/adventure-holidays/id`;
+            return regionWiseUrl + `/holidaytypeitineraries/id`;
         } else if (itemId && itemId == 'LBHG') {
-            return regionWiseUrl + `/holidaytypeitineraries/luxury-beach-holidays/id`;
+            return regionWiseUrl + `/holidaytypeitineraries/id`;
         } else if (itemId && itemId == 'HG3') {
-            return regionWiseUrl + `/holidaytypeitineraries/culture-holidays/id`;
+            return regionWiseUrl + `/holidaytypeitineraries/id`;
         } else {
             return "#";
         }
@@ -161,32 +161,32 @@ function Nav() {
     const dynamicLinkCountryHoliday = (itemId, itemIdCountry, id) => {
         if (itemId && itemId == 'HG6') {
             if (itemIdCountry == 'ULAD') {
-                return regionWiseUrl + `/holidaytypeideas?hcode=ultimate-journeys&id=` + id;
+                return regionWiseUrl + `/holidaytypeideas?hcode=` + id;
             }
         } else if (itemId && itemId == 'HG5') {
             if (itemIdCountry == 'ADHN') {
-                return regionWiseUrl + `/holidaytypeideas?hcode=Adventure-honeymoons&id=` + id; // Adventure Honeymoons
+                return regionWiseUrl + `/holidaytypeideas?hcode=` + id; // Adventure Honeymoons
             } else if (itemIdCountry == 'BEHN') {
-                return regionWiseUrl + `/holidaytypeideas?hcode=beach-honeymoons&id=` + id; // Beach Honeymoons
+                return regionWiseUrl + `/holidaytypeideas?hcode=` + id; // Beach Honeymoons
             }
         } else if (itemId && itemId == 'HG4') {
-            return regionWiseUrl + `/holidaytypeideas?hcode=family-holidays&id=` + id;
+            return regionWiseUrl + `/holidaytypeideas?hcode=` + id;
         } else if (itemId && itemId == 'ADHL') {
             if (itemIdCountry == 'ULAD') {
-                return regionWiseUrl + `/holidaytypeideas?hcode=magnificent-landscapes&id=` + id; // Ultimate Adventures
+                return regionWiseUrl + `/holidaytypeideas?hcode=` + id; // Ultimate Adventures
             } else if (itemIdCountry == 'ACBA') {
-                return regionWiseUrl + `/holidaytypeideas?hcode=active-adventures&id=` + id; // Active Adventures
+                return regionWiseUrl + `/holidaytypeideas?hcode=` + id; // Active Adventures
             } else if (itemIdCountry == 'ADVE') {
-                return regionWiseUrl + `/holidaytypeideas?hcode=4-by-4-adventures&id=` + id; // 4x4 Adventures
+                return regionWiseUrl + `/holidaytypeideas?hcode=` + id; // 4x4 Adventures
             }
         } else if (itemId && itemId == 'LBHG') {
             if (itemIdCountry == 'ABH') {
-                return regionWiseUrl + `/holidaytypeideas?hcode=alternative-beach-holidays&id=` + id; // Alternative Beach Holidays
+                return regionWiseUrl + `/holidaytypeideas?hcode=` + id; // Alternative Beach Holidays
             } else if (itemIdCountry == 'BCH') {
-                return regionWiseUrl + `/holidaytypeideas?hcode=/beach-culture-holidays&id=` + id; // Beach & Culture Holidays
+                return regionWiseUrl + `/holidaytypeideas?hcode=` + id; // Beach & Culture Holidays
             }
         } else if (itemId && itemId == 'HG3') {
-            return regionWiseUrl + `/holidaytypeideas?hcode=culture-holidays&id=` + id;
+            return regionWiseUrl + `/holidaytypeideas?hcode=` + id;
         } else {
             return "#";
         }

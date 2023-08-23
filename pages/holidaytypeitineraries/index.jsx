@@ -45,7 +45,7 @@ function Index() {
 
     useEffect(() => {
         userService.getAll().then(x => setUsers(x));
-        holidaytypesService.getHolidaytypeDetails(id).then(x => {
+        holidaytypesService.getHolidaytypeDetails(destination_code).then(x => {
             // console.log('getHolidaytypesDetails', x);
             setHolidaytypesDetails(x.data.attributes);
             // const lines = x.data.attributes?.overview_text.split('\n');

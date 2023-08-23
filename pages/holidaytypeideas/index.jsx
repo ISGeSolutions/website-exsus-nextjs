@@ -47,7 +47,7 @@ function Index() {
         // });
 
         let id = 1;
-        holidaytypesService.getHolidaytypeDetailsById(id).then(x => {
+        holidaytypesService.getHolidaytypeDetailsById(destination_code).then(x => {
             // console.log('getHolidaytypesDetails', x);
             setHolidaytypesDetails(x.data.attributes);
             // const lines = x.data.attributes?.overview_text.split('\n');

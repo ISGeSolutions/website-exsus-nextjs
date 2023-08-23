@@ -38,19 +38,19 @@ function Index() {
 
     const dynamicLink = (itemId, id) => {
         if (itemId && itemId == 'AF') {
-            return regionWiseUrl + `/continent?destinationcode=africa&id=` + id;
+            return regionWiseUrl + `/continent?destinationcode=` + id;
         } else if (itemId && itemId == 'AS') {
-            return regionWiseUrl + `/continent?destinationcode=asia&id=` + id;
+            return regionWiseUrl + `/continent?destinationcode=` + id;
         } else if (itemId && itemId == 'AU') {
-            return regionWiseUrl + `/continent?destinationcode=australasia-and-south-pacific&id=` + id;
+            return regionWiseUrl + `/continent?destinationcode=` + id;
         } else if (itemId && itemId == 'CA') {
-            return regionWiseUrl + `/continent?destinationcode=/central-america&id=` + id;
+            return regionWiseUrl + `/continent?destinationcode=` + id;
         } else if (itemId && itemId == 'EU') {
-            return regionWiseUrl + `/continent?destinationcode=europe&id=` + id;
+            return regionWiseUrl + `/continent?destinationcode=` + id;
         } else if (itemId && itemId == 'IO') {
-            return regionWiseUrl + `/continent?destinationcode=indian-ocean&id=` + id;
+            return regionWiseUrl + `/continent?destinationcode=` + id;
         } else if (itemId && itemId == 'IS') {
-            return regionWiseUrl + `/continent?destinationcode=indian-subcontinent&id=` + id;
+            return regionWiseUrl + `/continent?destinationcode=` + id;
         }
         console.log('regionWiseUrl', regionWiseUrl);
     }
