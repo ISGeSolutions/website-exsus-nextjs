@@ -47,7 +47,7 @@ function Index() {
 
     return (
         <>
-            <section className="banner_blk_row" style={{ height: `300px` }}>
+            <section className="banner_blk_row" style={{ height: `200px` }}>
                 <Inspireme />
             </section>
             <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">

@@ -18,12 +18,9 @@ function Inspireme() {
 
     // form validation rules 
     const validationSchema = Yup.object().shape({
-        destination: Yup.string()
-            .required('Destination is required'),
-        reason: Yup.string()
-            .required('Reason is required'),
+        destination: Yup.string(),
+        reason: Yup.string(),
         month: Yup.string()
-            .required('Month is required')
     });
 
     const formOptions = { resolver: yupResolver(validationSchema) };
@@ -33,7 +30,13 @@ function Inspireme() {
     const { errors } = formState;
 
     function onSubmit(data) {
-        router.push(`advance-search?where=` + data?.destination + `&what=` + data?.reason + `&when=` + data?.month);
+        console.log('data', data);
+        if(!data.destination && !data.reason && !data.month) {
+            alertService.success('Sorry, we could not filter your request. Please select atleast one option', { keepAfterRouteChange: true });
+        } else {
+            router.push(`advance-search?where=` + data?.destination + `&what=` + data?.reason + `&when=` + data?.month);
+        }
+
     }
 
     useEffect(() => {
