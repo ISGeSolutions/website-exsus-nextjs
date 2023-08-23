@@ -1,17 +1,14 @@
 import { useState, useEffect } from 'react';
-
-import { Link, Spinner, Signup } from 'components';
 import { userService, destinationService } from 'services';
 import Iframe from 'react-iframe';
 import Head from 'next/head';
-
+import { Inspireme } from 'components';
 import React from 'react';
 import Select from 'react-select';
 import Image from "next/image";
 import { useRouter } from 'next/router';
 import { NavLink } from 'components';
 import generateDynamicLink from 'components/utils/generateLink';
-
 import MyComponent from 'pages'; './../continentcountries/index';
 
 export default Index;
@@ -21,7 +18,7 @@ function Index() {
     const handleUrlChange = () => {
         const newUrl = '/new-url'; // Specify the new URL you want
         window.history.pushState(null, null, newUrl);
-      };
+    };
 
     const countryOptions = [
         { value: "", label: "Filter by country" },
@@ -273,7 +270,7 @@ function Index() {
         var text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
         if (itemId == 'overview') {
             const newUrl = '/continentcountries'; // Specify the new URL you want
-            window.history.pushState(null, null, newUrl);    
+            window.history.pushState(null, null, newUrl);
             text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
         } else if (itemId == 'countries') {
             text = "COUNTRIES IN AFRICA";
@@ -1325,7 +1322,7 @@ function Index() {
                                                             <NavLink href={generateDynamicLink(item)} className="card_slider_img">
                                                                 {item?.attributes?.itinerary_images?.data.map((element, index) => (
                                                                     element.attributes.image_type == 'thumbnail' ? (
-                                                                        <img src={`https://d33ys3jnmuivbg.cloudfront.net/ilimages` + element.attributes.image_path} alt="destination card01" className="img-fluid" />
+                                                                        <img key={index} src={`https://d33ys3jnmuivbg.cloudfront.net/ilimages` + element.attributes.image_path} alt="destination card01" className="img-fluid" />
                                                                     ) : (
                                                                         ''
                                                                     )

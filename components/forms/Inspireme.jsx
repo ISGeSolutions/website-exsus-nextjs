@@ -14,20 +14,6 @@ function Inspireme() {
     const [destinationLandingList, setDestinationLandingList] = useState();
     const [holidaytypesLandingList, setHolidaytypesLandingList] = useState();
 
-    useEffect(() => {
-
-        destinationService.getDestinationLandingList().then(x => {
-            // console.log('getDestinationLandingList', x);
-            setDestinationLandingList(x.data);
-            // setDestinationLandingDetails(x)
-        });
-
-        holidaytypesService.getHolidaytypesLandingList().then(x => {
-            setHolidaytypesLandingList(x.data);
-        });
-
-    }, []);
-
     const router = useRouter();
 
     // form validation rules 
@@ -47,14 +33,22 @@ function Inspireme() {
     const { errors } = formState;
 
     function onSubmit(data) {
-        // console.log('onSubmit', data);
-        return homeService.inspireMe(data)
-            .then(() => {
-                alertService.success('Make an enquiry successful', { keepAfterRouteChange: true });
-                router.push('home');
-            })
-            .catch(alertService.error);
+        router.push(`advance-search?where=` + data?.destination + `&what=` + data?.reason + `&when=` + data?.month);
     }
+
+    useEffect(() => {
+
+        destinationService.getDestinationLandingList().then(x => {
+            // console.log('getDestinationLandingList', x);
+            setDestinationLandingList(x.data);
+            // setDestinationLandingDetails(x)
+        });
+
+        holidaytypesService.getHolidaytypesLandingList().then(x => {
+            setHolidaytypesLandingList(x.data);
+        });
+
+    }, []);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -85,7 +79,7 @@ function Inspireme() {
                         <div className="banner_dropdwn_blk ps-0 ps-md-2">
                             <div className="select_drpdwn">
                                 <select aria-label="Choose a reason" name="reason" {...register('reason')} className={`form-select ${errors.reason ? 'is-invalid' : ''}`}>
-                                    <option value="">Choose a reason</option>                                    
+                                    <option value="">Choose a reason</option>
                                     {holidaytypesLandingList?.map((element, i) => (
                                         <option key={element?.id} value={element?.attributes?.holiday_type_group_code}>{element?.attributes?.holiday_type_group_name}</option>
                                     ))}

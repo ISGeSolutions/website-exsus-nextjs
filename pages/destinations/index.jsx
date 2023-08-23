@@ -46,7 +46,7 @@ function Index() {
         } else if (itemId && itemId == 'CA') {
             return regionWiseUrl + `/continent?destinationcode=/central-america&id=` + id;
         } else if (itemId && itemId == 'EU') {
-            return regionWiseUrl + `//continent?destinationcode=europe&id=` + id;
+            return regionWiseUrl + `/continent?destinationcode=europe&id=` + id;
         } else if (itemId && itemId == 'IO') {
             return regionWiseUrl + `/continent?destinationcode=indian-ocean&id=` + id;
         } else if (itemId && itemId == 'IS') {
