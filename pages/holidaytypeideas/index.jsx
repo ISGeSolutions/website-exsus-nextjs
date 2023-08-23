@@ -4,7 +4,8 @@ import { Link, Spinner, Signup } from 'components';
 import { Layout } from 'components/users';
 import { userService, holidaytypesService } from 'services';
 import { Inspireme } from 'components';
-
+import { useRouter } from 'next/router';
+import Select from 'react-select';
 
 export default Index;
 
@@ -15,6 +16,59 @@ function Index() {
     const [backgroundImage, setBackgroundImage] = useState('');
     const [valueWithBr, setnewValueWithBr] = useState('');
     const [headingText, setHeadingText] = useState('LUXURY SAFARI HOLIDAYS IN AFRICA');
+
+    const optionsData = [
+        { value: "", label: "Filter by destination" },
+        { value: "Everything", label: "Everything" },
+        { value: "Barefoot", label: "Barefoot" },
+        { value: "Beach", label: "Beach" },
+        { value: "Boutique hotel", label: "Boutique hotel" },
+        { value: "Chic design", label: "Chic design" },
+        { value: "Cultural Immersion", label: "Cultural Immersion" },
+        { value: "Eco tourism", label: "Eco tourism" },
+        { value: "Family-Friendly", label: "Family-Friendly" },
+        { value: "Food & Wine", label: "Food & Wine" },
+        { value: "Guiding", label: "Guiding" },
+        { value: "Hideaway", label: "Hideaway" },
+        { value: "Honeymoon", label: "Honeymoon" },
+        { value: "Lodge", label: "Lodge" },
+        { value: "Luxury hotel", label: "Luxury Hotel" },
+        { value: "Off the beaten track", label: "Off the beaten track" },
+        { value: "Owner run", label: "Owner run" },
+        { value: "Peace & quiet", label: "Peace & quiet" },
+        { value: "Private groups", label: "Private groups" },
+        { value: "Romantic", label: "Romantic" },
+        { value: "Rustic", label: "Rustic" },
+        { value: "Seriously special", label: "Seriously special" },
+        { value: "Service & Hospitality", label: "Service & Hospitality" },
+        { value: "Setting & Views", label: "Setting & Views" },
+        { value: "Snorkelling & Driving", label: "Snorkelling & Driving" },
+        { value: "Spa & Wellness", label: "Spa & Wellness" },
+        { value: "Unusal", label: "Unusal" },
+        { value: "Village life", label: "Village life" },
+        { value: "Walking & trekking", label: "Walking & trekking" },
+        { value: "Water activities", label: "Water activities" },
+        { value: "Wildlife & Nature", label: "Wildlife & Nature" },
+        { value: "Adventure", label: "Adventure" },
+        { value: "Couples", label: "Couples" },
+        { value: "Educational", label: "Educational" },
+        { value: "Multi-activity", label: "Multi-activity" },
+        { value: "Teenagers", label: "Teenagers" },
+        { value: "Landscapes & Scenery", label: "Landscapes & Scenery" },
+        { value: "City hotel", label: "City hotel" }
+    ]
+
+    const [isClearable, setIsClearable] = useState(true);
+    const [isSearchable, setIsSearchable] = useState(true);
+    const [isDisabled, setIsDisabled] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isRtl, setIsRtl] = useState(false);
+    const [selectedOptionMonth, selectedOptionData] = useState(null);
+
+    const handleOptionChange = (selectedOption) => {
+        // selectedOption1 = selectedOption.filter((i) => i.value !== '' && typeof i.value !== 'undefined');
+        selectedOptionData(selectedOption);
+    };
 
     const selectedSec = (itemId) => {
         // console.log('itemId', itemId);
@@ -38,7 +92,13 @@ function Index() {
         // EXPERIENCES IN AFRICA
     };
 
+    const router = useRouter();
+    const { id } = router.query;
+    const { hcode } = router.query;
+
+
     useEffect(() => {
+        selectedOptionData(optionsData[0]);
         // holidaytypesService.getAll().then(x => {
         // console.log('destinationService', x);
         //     const desiredKey = 1; // The desired key to access
@@ -46,8 +106,8 @@ function Index() {
         //     setholidayTypes(desiredHolidayTypes.holiday_type_translations[0].holiday_type_overview_text);
         // });
 
-        let id = 1;
-        holidaytypesService.getHolidaytypeDetailsById(destination_code).then(x => {
+        // let id = 1;
+        holidaytypesService.getHolidaytypeDetailsById(id).then(x => {
             // console.log('getHolidaytypesDetails', x);
             setHolidaytypesDetails(x.data.attributes);
             // const lines = x.data.attributes?.overview_text.split('\n');
@@ -69,7 +129,7 @@ function Index() {
             });
         });
 
-        console.log('background image', backgroundImage);
+        // console.log('background image', backgroundImage);
 
         
         userService.getAll().then(x => setUsers(x));
@@ -123,46 +183,21 @@ function Index() {
                                     <div className="destination_dropdwn_row d-block d-md-flex">
                                         <div className="banner_dropdwn_blk">
                                             <div className="select_drpdwn">
-                                                <select className="selectpicker" multiple aria-label="Filter by destination" data-live-search="true">
-                                                    <option defaultValue>Filter by destination</option>
-                                                    <option value="Everything">Everything</option>
-                                                    <option value="Barefoot">Barefoot</option>
-                                                    <option value="Beach">Beach</option>
-                                                    <option value="Boutique hotel">Boutique hotel</option>
-                                                    <option value="Chic design">Chic design</option>
-                                                    <option value="Cultural Immersion">Cultural Immersion</option>
-                                                    <option value="Eco tourism">Eco tourism</option>
-                                                    <option value="Family-Friendly">Family-Friendly</option>
-                                                    <option value="Food & Wine">Food & Wine</option>
-                                                    <option value="Guiding">Guiding</option>
-                                                    <option value="Hideaway">Hideaway</option>
-                                                    <option value="Honeymoon">Honeymoon</option>
-                                                    <option value="Lodge">Lodge</option>
-                                                    <option value="Luxury hotel">Luxury Hotel</option>
-                                                    <option value="Off the beaten track">Off the beaten track</option>
-                                                    <option value="Owner run">Owner run</option>
-                                                    <option value="Peace & quiet">Peace & quiet</option>
-                                                    <option value="Private groups">Private groups</option>
-                                                    <option value="Romantic">Romantic</option>
-                                                    <option value="Rustic">Rustic</option>
-                                                    <option value="Seriously special">Seriously special</option>
-                                                    <option value="Service & Hospitality">Service & Hospitality</option>
-                                                    <option value="Setting & Views">Setting & Views</option>
-                                                    <option value="Snorkelling & Driving">Snorkelling & Driving</option>
-                                                    <option value="Spa & Wellness">Spa & Wellness</option>
-                                                    <option value="Unusal">Unusal</option>
-                                                    <option value="Village life">Village life</option>
-                                                    <option value="Walking & trekking">Walking & trekking</option>
-                                                    <option value="Water activities">Water activities</option>
-                                                    <option value="Wildlife & Nature">Wildlife & Nature</option>
-                                                    <option value="Adventure">Adventure</option>
-                                                    <option value="Couples">Couples</option>
-                                                    <option value="Educational">Educational</option>
-                                                    <option value="Multi-activity">Multi-activity</option>
-                                                    <option value="Teenagers">Teenagers</option>
-                                                    <option value="Landscapes & Scenery">Landscapes & Scenery</option>
-                                                    <option value="City hotel">City hotel</option>
-                                                </select>
+                                            <Select
+                                                placeholder="Filter by month"
+                                                className="basic-single"
+                                                classNamePrefix="select"
+                                                isDisabled={isDisabled}
+                                                isLoading={isLoading}
+                                                isClearable={isClearable}
+                                                isRtl={isRtl}
+                                                isSearchable={isSearchable}
+                                                name="color"
+                                                options={optionsData}
+                                                isMulti
+                                                onChange={handleOptionChange}
+                                                value={selectedOptionMonth}
+                                            />                                                
                                             </div>
                                         </div>
                                         <div className="banner_inspire_btn ps-0 ps-md-2">
@@ -185,7 +220,7 @@ function Index() {
                                     </div>
                                 </div>
 
-                                <div className="col-sm-6 col-lg-4 col-xxl-3">
+                                <div className="col-sm-6 col-lg-4 col-xxl-4">
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
@@ -208,7 +243,7 @@ function Index() {
                                     </div>
                                 </div>
 
-                                <div className="col-sm-6 col-lg-4 col-xxl-3">
+                                <div className="col-sm-6 col-lg-4 col-xxl-4">
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
@@ -231,7 +266,7 @@ function Index() {
                                     </div>
                                 </div>
 
-                                <div className="col-sm-6 col-lg-4 col-xxl-3">
+                                <div className="col-sm-6 col-lg-4 col-xxl-4">
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
@@ -254,7 +289,7 @@ function Index() {
                                     </div>
                                 </div>
 
-                                <div className="col-sm-6 col-lg-4 col-xxl-3">
+                                <div className="col-sm-6 col-lg-4 col-xxl-4">
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
@@ -277,7 +312,7 @@ function Index() {
                                     </div>
                                 </div>
 
-                                <div className="col-sm-6 col-lg-4 col-xxl-3">
+                                <div className="col-sm-6 col-lg-4 col-xxl-4">
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
@@ -300,7 +335,7 @@ function Index() {
                                     </div>
                                 </div>
 
-                                <div className="col-sm-6 col-lg-4 col-xxl-3">
+                                <div className="col-sm-6 col-lg-4 col-xxl-4">
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
@@ -323,7 +358,7 @@ function Index() {
                                     </div>
                                 </div>
 
-                                <div className="col-sm-6 col-lg-4 col-xxl-3">
+                                <div className="col-sm-6 col-lg-4 col-xxl-4">
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
@@ -346,7 +381,7 @@ function Index() {
                                     </div>
                                 </div>
 
-                                <div className="col-sm-6 col-lg-4 col-xxl-3">
+                                <div className="col-sm-6 col-lg-4 col-xxl-4">
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
@@ -369,7 +404,7 @@ function Index() {
                                     </div>
                                 </div>
 
-                                <div className="col-sm-6 col-lg-4 col-xxl-3">
+                                <div className="col-sm-6 col-lg-4 col-xxl-4">
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">

@@ -336,8 +336,8 @@ function Index() {
 
     useEffect(() => {
         setSelectedOptionCountry(countryOptions[0]);
-        setSelectedOptionRegion(countryOptions[0]);
-        setSelectedOptionMonth(countryOptions[0]);
+        setSelectedOptionRegion(regionOptions[0]);
+        setSelectedOptionMonth(monthOptions[0]);
 
         userService.getAll().then(x => setUsers(x));
         const carousel = document.querySelector('#carouselExampleInterval');
