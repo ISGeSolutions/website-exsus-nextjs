@@ -1179,7 +1179,7 @@ function Index() {
                                         <div className="row">
                                             <div className="col-12">
                                                 <div className="destination_dropdwn_row d-block d-md-flex">
-                                                    <div className="dropdown_grp_blk">
+                                                    {/* <div className="dropdown_grp_blk">
                                                         <div className="d-flex justify-content-between">
                                                             <div className="banner_dropdwn_blk">
                                                                 <Select
@@ -1240,7 +1240,7 @@ function Index() {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> */}
                                                 </div>
 
                                                 {/* <div className="destination_dropdwn_row d-block d-md-flex">
@@ -1442,7 +1442,7 @@ function Index() {
                                         <div className="row">
                                             <div className="col-12">
                                                 <div className="destination_dropdwn_row d-block d-md-flex">
-                                                    <div className="banner_dropdwn_blk">
+                                                    {/* <div className="banner_dropdwn_blk">
                                                         <div className="select_drpdwn">
                                                             <select className="form-select" multiple aria-label="Filter by country" data-live-search="true">
                                                                 <option value="">Filter by country</option>
@@ -1529,7 +1529,7 @@ function Index() {
                                                         <button type="button" className="btn btn-primary prmry_btn">Inspire me
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path></svg>
                                                         </button>
-                                                    </div>
+                                                    </div> */}
                                                 </div>
                                             </div>
                                             <div className="col-12">
