@@ -363,7 +363,7 @@ function Index() {
                         <section className="card_blk_row dark_grey">
                             <div className="container-md">
                                 <div className="row">
-                                    <div className="col-sm-4">
+                                    <div className="col-sm-6">
                                         <div className="card_blk_inr card_blk_overlay">
                                             <a href="#" target="_blank">
                                                 <img src="./../../../images/destination_overview01.jpg" alt="Card image 07" className="img-fluid" />
@@ -371,7 +371,7 @@ function Index() {
                                                     <div className="row align-items-center">
                                                         <div className="col-11">
                                                             <div className="card_blk_txt">
-                                                                <h3>See all Itinerary Ideas in Asia</h3>
+                                                                <h3>See all Itinerary Ideas in Africa</h3>
                                                             </div>
                                                         </div>
                                                         <div className="col-1 ps-0">
@@ -383,7 +383,7 @@ function Index() {
                                         </div>
                                     </div>
 
-                                    <div className="col-sm-4">
+                                    <div className="col-sm-6">
                                         <div className="card_blk_inr card_blk_overlay">
                                             <a href="#">
                                                 <img src="./../../../images/destination_overview02.jpg" alt="Card image 08" className="img-fluid" />

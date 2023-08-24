@@ -66,6 +66,16 @@ function Index() {
     const [isLoading, setIsLoading] = useState(false);
     const [isRtl, setIsRtl] = useState(false);
     const [selectedOptionMonth, selectedOptionData] = useState(null);
+    const itemsPerPage = 9; // Number of items to load per page
+    const [visibleItems, setVisibleItems] = useState(itemsPerPage)
+
+    const LoadMorePagination = ({ data }) => {
+        const [visibleItems, setVisibleItems] = useState(itemsPerPage);
+    }
+
+    const handleLoadMore = () => {
+        setVisibleItems(prevVisibleItems => prevVisibleItems + itemsPerPage);
+    };
 
     const handleOptionChange = (selectedOption) => {
         // selectedOption1 = selectedOption.filter((i) => i.value !== '' && typeof i.value !== 'undefined');
@@ -154,7 +164,7 @@ function Index() {
 
         // console.log('background image', backgroundImage);
 
-        
+
         userService.getAll().then(x => setUsers(x));
     }, []);
 
@@ -164,7 +174,7 @@ function Index() {
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-inner">
                         <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
-                        <div className="banner_commn_cls"> {/*  holiday_types_detls_banner */}
+                            <div className="banner_commn_cls"> {/*  holiday_types_detls_banner */}
                                 <img src={backgroundImage} alt="holiday_types_detls_card02" className="img-fluid" />
                             </div>
                         </a>
@@ -204,23 +214,24 @@ function Index() {
                             <div className="row">
                                 <div className="col-12">
                                     <div className="destination_dropdwn_row d-block d-md-flex">
-                                        <div className="banner_dropdwn_blk">
+                                        <div className="">
+                                            {/* banner_dropdwn_blk */}
                                             <div className="select_drpdwn">
-                                            <Select
-                                                placeholder="Filter by month"
-                                                className="basic-single"
-                                                classNamePrefix="select"
-                                                isDisabled={isDisabled}
-                                                isLoading={isLoading}
-                                                isClearable={isClearable}
-                                                isRtl={isRtl}
-                                                isSearchable={isSearchable}
-                                                name="color"
-                                                options={optionsData}
-                                                isMulti
-                                                onChange={handleOptionChange}
-                                                value={selectedOptionMonth}
-                                            />                                                
+                                                <Select
+                                                    placeholder="Filter by month"
+                                                    className="basic-single"
+                                                    classNamePrefix="select"
+                                                    isDisabled={isDisabled}
+                                                    isLoading={isLoading}
+                                                    isClearable={isClearable}
+                                                    isRtl={isRtl}
+                                                    isSearchable={isSearchable}
+                                                    name="color"
+                                                    options={optionsData}
+                                                    isMulti
+                                                    onChange={handleOptionChange}
+                                                    value={selectedOptionMonth}
+                                                />
                                             </div>
                                         </div>
                                         <div className="banner_inspire_btn ps-0 ps-md-2">
@@ -243,43 +254,44 @@ function Index() {
                                     </div>
                                 </div>
 
-                                {itineraries?.map((item) => (
-                                                <div className="col-sm-6 col-lg-4" key={item.id}>
-                                                    <div className="card_slider_inr">
-                                                        <div className="card_slider">
-                                                            <NavLink href={generateDynamicLink(item)} className="card_slider_img">
-                                                                {item?.attributes?.itinerary_images?.data.map((element, index) => (
-                                                                    element.attributes.image_type == 'thumbnail' ? (
-                                                                        <img key={index} src={`https://d33ys3jnmuivbg.cloudfront.net/ilimages` + element.attributes.image_path} alt="destination card01" className="img-fluid" />
-                                                                    ) : (
-                                                                        ''
-                                                                    )
-                                                                ))}
-                                                                {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
-                                                            </NavLink>
-                                                            <div className="card_slider_cnt">
-                                                                <h4><a href="#">{item?.attributes?.itin_name}</a></h4>
-                                                                <ul>
-                                                                    <li>{item?.attributes?.header_text}</li>
-                                                                    <li>Indonesia</li>
-                                                                    <li>{item?.attributes?.itinerary_country_contents?.data[0]?.attributes?.guideline_price_notes_index}</li>
-                                                                    <li>Travel to:<span>{item?.attributes?.sub_header_text}</span></li>
-                                                                </ul>
-                                                            </div>
-                                                            <button className="btn card_slider_btn">
-                                                                <span>{item?.attributes?.no_of_nites_notes}</span>
-                                                                <span className="view_itnry_link" onClick={handleRedirect}>View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                            </button>
-                                                        </div>
-                                                    </div>
+                                {/* {itineraries?.map((item) => ( */}
+                                {itineraries?.slice(0, visibleItems).map((item, index) => (
+                                    <div className="col-sm-6 col-lg-4" key={item.id}>
+                                        <div className="card_slider_inr">
+                                            <div className="card_slider">
+                                                <NavLink href={generateDynamicLink(item)} className="card_slider_img">
+                                                    {item?.attributes?.itinerary_images?.data.map((element, index) => (
+                                                        element.attributes.image_type == 'thumbnail' ? (
+                                                            <img key={index} src={`https://d33ys3jnmuivbg.cloudfront.net/ilimages` + element.attributes.image_path} alt="destination card01" className="img-fluid" />
+                                                        ) : (
+                                                            ''
+                                                        )
+                                                    ))}
+                                                    {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
+                                                </NavLink>
+                                                <div className="card_slider_cnt">
+                                                    <h4><a href="#">{item?.attributes?.itin_name}</a></h4>
+                                                    <ul>
+                                                        <li>{item?.attributes?.header_text}</li>
+                                                        <li>Indonesia</li>
+                                                        <li>{item?.attributes?.itinerary_country_contents?.data[0]?.attributes?.guideline_price_notes_index}</li>
+                                                        <li>Travel to:<span>{item?.attributes?.sub_header_text}</span></li>
+                                                    </ul>
                                                 </div>
-                                            )
-                                            )}
-
+                                                <button className="btn card_slider_btn">
+                                                    <span>{item?.attributes?.no_of_nites_notes}</span>
+                                                    <span className="view_itnry_link" onClick={handleRedirect}>View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
                                 <div className="col-12">
-                                    <button className="btn prmry_btn make_enqury_btn mx-auto text-uppercase" fdprocessedid="r5vpm6s">Show 9 more holiday ideas
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"></path></svg>
-                                    </button>
+                                    {visibleItems < itineraries?.length && (
+                                        <button onClick={handleLoadMore} className="btn prmry_btn make_enqury_btn mx-auto text-uppercase" fdprocessedid="r5vpm6s">Show 9 more holiday ideas
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"></path></svg>
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         </div>
