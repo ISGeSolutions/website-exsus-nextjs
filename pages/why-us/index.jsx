@@ -29,8 +29,6 @@ function Index() {
 
     return (
         <Layout>
-
-
             <section className="banner_blk_row">
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">
@@ -105,7 +103,7 @@ function Index() {
                     </div>
 
                     <div className="row">
-                        <div className="col-sm-4">
+                        <div className="col-sm-6">
                             <div className="card_blk_inr">
                                 <a href="#" target="_blank">
                                     <img src="images/about_us_card01.jpg" alt="Card image 07" className="img-fluid" />
@@ -125,7 +123,7 @@ function Index() {
                             </div>
                         </div>
 
-                        <div className="col-sm-4">
+                        <div className="col-sm-6">
                             <div className="card_blk_inr">
                                 <a href="#">
                                     <img src="images/about_us_card02.jpg" alt="Card image 08" className="img-fluid" />

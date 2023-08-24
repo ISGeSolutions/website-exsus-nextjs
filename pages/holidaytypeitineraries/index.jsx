@@ -126,6 +126,29 @@ function Index() {
     const { id } = router.query;
     const { hcode } = router.query;
 
+    const equalHeight = (resize) => {
+        var elements = document.getElementsByClassName("card_slider_cnt"),
+            allHeights = [],
+            i = 0;
+        if (resize === true) {
+            for (i = 0; i < elements.length; i++) {
+                elements[i].style.height = 'auto';
+            }
+        }
+        for (i = 0; i < elements.length; i++) {
+            var elementHeight = elements[i].clientHeight;
+            allHeights.push(elementHeight);
+        }
+        for (i = 0; i < elements.length; i++) {
+            elements[i].style.height = Math.max.apply(Math, allHeights) + 'px';
+            if (resize === false) {
+                elements[i].className = elements[i].className + " show";
+            }
+        }
+    }
+
+    equalHeight(false);
+
     useEffect(() => {
         selectedOptionData(optionsData[0]);
         userService.getAll().then(x => setUsers(x));
@@ -153,6 +176,8 @@ function Index() {
         destinationService.getAllItineraries().then(x => {
             setItineraries(x.data);
         });
+
+        window.addEventListener('resize', equalHeight(true));
 
     }, []);
 

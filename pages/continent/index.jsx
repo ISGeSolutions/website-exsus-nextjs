@@ -332,6 +332,29 @@ function Index() {
 
     // https://d33ys3jnmuivbg.cloudfront.net/ilimages" + item?.attributes?.itinerary_images?.data[3]?.attributes?.image_path
 
+    const equalHeight = (resize) => {
+        var elements = document.getElementsByClassName("card_slider_cnt"),
+            allHeights = [],
+            i = 0;
+        if (resize === true) {
+            for (i = 0; i < elements.length; i++) {
+                elements[i].style.height = 'auto';
+            }
+        }
+        for (i = 0; i < elements.length; i++) {
+            var elementHeight = elements[i].clientHeight;
+            allHeights.push(elementHeight);
+        }
+        for (i = 0; i < elements.length; i++) {
+            elements[i].style.height = Math.max.apply(Math, allHeights) + 'px';
+            if (resize === false) {
+                elements[i].className = elements[i].className + " show";
+            }
+        }
+    }
+
+    equalHeight(false);
+    
     useEffect(() => {
         setSelectedOptionCountry(countryOptions[0]);
         setSelectedOptionRegion(regionOptions[0]);
@@ -393,6 +416,8 @@ function Index() {
                 $(this).addClass('active');
             });
         });
+
+        window.addEventListener('resize', equalHeight(true));
 
     }, []);
 

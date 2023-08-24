@@ -131,23 +131,42 @@ function Index() {
     return (
         <>
             <section className="banner_blk_row">
-                <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
-                    {/* {bannerImageArr?.map((bannerImage, i) => (
+                {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
+                    <div>
+                        <img src="/assets/./../images//destination_banner.jpg" />
+                    </div>
+                </Carousel> */}
+                <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
+                    <div className="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+                    </div>
+                    <div className="carousel-inner">
+                        <NavLink href="#" className="carousel-item active" data-bs-interval="5000">
+                            <div className="banner_commn_cls" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
+                        </NavLink>
+                    </div>
+                </div>
+                <Inspireme />
+            </section>
+
+            {/* <section className="banner_blk_row">
+                <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}> */}
+            {/* {bannerImageArr?.map((bannerImage, i) => (
                         <div key={i}>
                             <img src={dynamicBannerImage(bannerImage)} alt="holiday_types_detls" className="img-fluid" />
                         </div>
                     ))} */}
-                    <img src={backgroundImage} alt="holiday_types_detls" className="img-fluid" />
-                    {/* /static/media/holiday_types_banner.1e97daba.jpg */}
-                </Carousel>
+            {/* <img src={backgroundImage} alt="holiday_types_detls" className="img-fluid" /> */}
+            {/* /static/media/holiday_types_banner.1e97daba.jpg */}
+            {/* </Carousel> */}
 
-                <Inspireme />
-            </section>
+            {/* <Inspireme />
+            </section> */}
 
             <section className="card_blk_row destinations_blk_row light_grey">
                 <div className="container-md">
                     <div className="bookmark_row">
-                        <p style={{color: `white`}}>{holidaytypes?.attributes?.page_friendly_url}</p>
+                        <p style={{ color: `white` }}>{holidaytypes?.attributes?.page_friendly_url}</p>
                         {/* <ul>
                             <li><a href="homepage.html">Home</a></li>
                             <li>Holiday types</li>
@@ -183,20 +202,20 @@ function Index() {
                         {thumbnailImageArr?.map((holidaytypesItem, i) => (
                             <div className="col-sm-4" key={i}>
                                 <div className="card_blk_inr">
-                                <NavLink href={dynamicLink(holidaytypesItem?.holiday_type_code, holidaytypesItem?.id)} as={dynamicLinkHolidayas(holidaytypesItem?.attributes?.holiday_type_group_code, holidaytypesItem?.id)}>
-                                    <img src={dynamicThumbnailImage(holidaytypesItem.image_path)} alt="holiday_type01" className="img-fluid" />
-                                    <div className="card_blk_cntnt card_blk_sml_arw">
-                                        <div className="row align-items-center">
-                                            <div className="col-11">
-                                                <div className="card_blk_txt">
-                                                    <h3 className="mb-0">{holidaytypesItem?.holiday_type_name}</h3>
+                                    <NavLink href={dynamicLink(holidaytypesItem?.holiday_type_code, holidaytypesItem?.id)} as={dynamicLinkHolidayas(holidaytypesItem?.attributes?.holiday_type_group_code, holidaytypesItem?.id)}>
+                                        <img src={dynamicThumbnailImage(holidaytypesItem.image_path)} alt="holiday_type01" className="img-fluid" />
+                                        <div className="card_blk_cntnt card_blk_sml_arw">
+                                            <div className="row align-items-center">
+                                                <div className="col-11">
+                                                    <div className="card_blk_txt">
+                                                        <h3 className="mb-0">{holidaytypesItem?.holiday_type_name}</h3>
+                                                    </div>
+                                                </div>
+                                                <div className="col-1 ps-0">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                 </div>
                                             </div>
-                                            <div className="col-1 ps-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                            </div>
                                         </div>
-                                    </div>
                                     </NavLink>
                                 </div>
                             </div>

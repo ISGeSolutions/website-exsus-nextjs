@@ -37,6 +37,29 @@ function Index() {
         return `https://d33ys3jnmuivbg.cloudfront.net/ilimages/` + itemId;
     }
 
+    const equalHeight = (resize) => {
+        var elements = document.getElementsByClassName("card_slider_cnt"),
+            allHeights = [],
+            i = 0;
+        if (resize === true) {
+            for (i = 0; i < elements.length; i++) {
+                elements[i].style.height = 'auto';
+            }
+        }
+        for (i = 0; i < elements.length; i++) {
+            var elementHeight = elements[i].clientHeight;
+            allHeights.push(elementHeight);
+        }
+        for (i = 0; i < elements.length; i++) {
+            elements[i].style.height = Math.max.apply(Math, allHeights) + 'px';
+            if (resize === false) {
+                elements[i].className = elements[i].className + " show";
+            }
+        }
+    }
+
+    equalHeight(false);
+
     const dynamicLink = (itemId, id) => {
         if (itemId && itemId == 'HG6') {
             return regionWiseUrl + `/holidaytypeitineraries?hcode=incredible-journeys&id=` + id;
@@ -112,6 +135,8 @@ function Index() {
 
         const carousel = document.querySelector('#Testimonials');
         new bootstrap.Carousel(carousel);
+
+        window.addEventListener('resize', equalHeight(true));
     }, []);
 
     const router = useRouter();
