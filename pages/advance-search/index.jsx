@@ -98,7 +98,7 @@ function Index() {
                             <div className="row">
                                 <div className="col-12">
                                     <div className="destination_dropdwn_row d-block d-md-flex">
-                                        {/* <Inspireme /> */}
+                                        {/* <Inspireme /> */} 
                                     </div>
                                 </div>
                                 <div className="col-12">
