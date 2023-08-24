@@ -363,7 +363,7 @@ function Index() {
 
             // const lines = x.data.attributes?.overview_text.split('\n');
             const oldText = x.data.attributes?.overview_text;
-            var newValueWithBr = oldText?.replace(/\n/g, "<br />");
+            var newValueWithBr = oldText?.replace(/\\n/g, "");
             setnewValueWithBr(newValueWithBr);
             const imageCheck = x.data.attributes.destination_images.data;
             imageCheck.forEach(element => {

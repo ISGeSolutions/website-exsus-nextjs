@@ -126,7 +126,7 @@ function Index() {
             // const lines = x.data.attributes?.overview_text.split('\n');
             // console.log('lines', lines);
             const oldText = x.data.attributes?.overview_text;
-            var newValueWithBr = oldText?.replace(/\n/g, "<br />");
+            var newValueWithBr = oldText?.replace(/\\n/g, "");
             setnewValueWithBr(newValueWithBr);
             // console.log('x.data.attributes.holiday_type_group_images.data[0].attributes.image_path2', 'https://d33ys3jnmuivbg.cloudfront.net/ilimages/' + x.data.attributes.holiday_type_group_images.data[0].attributes.image_path);
 

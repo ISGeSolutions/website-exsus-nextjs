@@ -49,7 +49,9 @@ function Index() {
             const desiredKey = 1; // The desired key to access
             const desiredCountry = x.find(item => item.id == desiredKey);
             // console.log('desiredCountry2', desiredCountry.country_translations[0].country_overview_text);
-            setCountry(desiredCountry.country_translations[0].country_overview_text);
+            var oldText = desiredCountry.country_translations[0].country_overview_text;
+            var newValueWithBr = oldText?.replace(/\\n/g, "");
+            setCountry(newValueWithBr);
         });
 
         itinerariesService.getAll().then(desiredItinerary => {
