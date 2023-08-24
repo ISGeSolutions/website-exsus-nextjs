@@ -327,7 +327,7 @@ function Index() {
                         <section className="card_blk_row dark_grey">
                             <div className="container-md">
                                 <div className="row">
-                                    <div className="col-sm-4">
+                                    <div className="col-sm-6">
                                         <div className="card_blk_inr card_blk_overlay">
                                             <a href="#" target="_blank">
                                                 <img src="images/country_detail01.jpg" alt="Card image 07" className="img-fluid" />
@@ -347,7 +347,7 @@ function Index() {
                                         </div>
                                     </div>
 
-                                    <div className="col-sm-4">
+                                    <div className="col-sm-6">
                                         <div className="card_blk_inr card_blk_overlay">
                                             <a href="#">
                                                 <img src="images/country_detail02.jpg" alt="Card image 08" className="img-fluid" />
@@ -547,7 +547,7 @@ function Index() {
                             <div className="container-md">
                                 <div className="row">
 
-                                    <div className="col-sm-4">
+                                    <div className="col-sm-6">
                                         <div className="card_blk_inr card_blk_overlay">
                                             <a href="#" target="_blank">
                                                 <img src="images/country_detail01.jpg" alt="Card image 07" className="img-fluid" />
@@ -568,7 +568,7 @@ function Index() {
                                     </div>
 
 
-                                    <div className="col-sm-4">
+                                    <div className="col-sm-6">
                                         <div className="card_blk_inr card_blk_overlay">
                                             <a href="#">
                                                 <img src="images/country_detail02.jpg" alt="Card image 08" className="img-fluid" />
@@ -1172,7 +1172,7 @@ function Index() {
                         <section className="card_blk_row dark_grey">
                             <div className="container-md">
                                 <div className="row">
-                                    <div className="col-sm-4">
+                                    <div className="col-sm-6">
                                         <div className="card_blk_inr card_blk_overlay">
                                             <a href="#" target="_blank">
                                                 <img src="images/country_detail01.jpg" alt="Card image 07" className="img-fluid" />
@@ -1192,7 +1192,7 @@ function Index() {
                                         </div>
                                     </div>
 
-                                    <div className="col-sm-4">
+                                    <div className="col-sm-6">
                                         <div className="card_blk_inr card_blk_overlay">
                                             <a href="#">
                                                 <img src="images/country_detail02.jpg" alt="Card image 08" className="img-fluid" />
