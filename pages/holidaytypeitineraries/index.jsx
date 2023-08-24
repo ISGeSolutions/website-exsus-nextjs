@@ -18,8 +18,6 @@ function Index() {
     const [valueWithBr, setnewValueWithBr] = useState('');
     const [headingText, setHeadingText] = useState('LUXURY SAFARI HOLIDAYS IN AFRICA');
     const [itineraries, setItineraries] = useState(null);
-
-
     const itemsPerPage = 9; // Number of items to load per page
     const [visibleItems, setVisibleItems] = useState(itemsPerPage)
 
@@ -127,8 +125,6 @@ function Index() {
     const { id } = router.query;
     const { hcode } = router.query;
 
-
-
     useEffect(() => {
         selectedOptionData(optionsData[0]);
         userService.getAll().then(x => setUsers(x));
@@ -212,52 +208,6 @@ function Index() {
                             <p>All our itineraries are designed as inspiration. Tell us what you're after on your trip and we'll help you select the best hotels and experiences.</p> */}
                         </div>
                     </div>
-
-                    {/* <section className="favrites_blk_row favrites_blk_small_card_row">
-                        <div className="container">
-                            <h3 className="title_cls">DISCOVER YOUR ONCE IN A LIFETIME HOLIDAY</h3>
-                            <div className="row">
-                                <div className="col-sm-6 col-md-4 col-lg-3">
-                                    <div className="holiday_types_card">
-                                        <a href="#">
-                                            <div className="holiday_types_card_img">
-                                                <img src="./../../images/holiday_types_detls_card01.jpg" alt="holiday_types_detls_card01" className="img-fluid" />
-                                            </div>
-                                            <h4>
-                                                Ultimate Journeys
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path></svg>
-                                            </h4>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div className="col-sm-6 col-md-4 col-lg-3">
-                                    <div className="holiday_types_card">
-                                        <a href="#">
-                                            <div className="holiday_types_card_img">
-                                                <img src="./../../images/holiday_types_detls_card02.jpg" alt="holiday_types_detls_card02" className="img-fluid" />
-                                            </div>
-                                            <h4>
-                                                Ultimate Adventures
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path></svg>
-                                            </h4>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div className="col-sm-6 col-md-4 col-lg-3">
-                                    <div className="holiday_types_card">
-                                        <a href="#">
-                                            <div className="holiday_types_card_img">
-                                                <img src="./../../images/holiday_types_detls_card03.jpg" alt="holiday_types_detls_card03" className="img-fluid" />
-                                            </div>
-                                            <h4>See all
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path></svg>
-                                            </h4>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section> */}
                 </div>
             </section>
 
@@ -269,26 +219,28 @@ function Index() {
                             <div className="row">
                                 <div className="col-12">
                                     <div className="destination_dropdwn_row d-block d-md-flex">
-                                        <div className="banner_dropdwn_blk">
+                                        <div className="text-center">
+                                            {/* banner_dropdwn_blk */}
                                             <div className="select_drpdwn">
-                                                <select className="selectpicker" multiple aria-label="Filter by destination" data-live-search="true">
+                                                {/* <select className="selectpicker" multiple aria-label="Filter by destination" data-live-search="true">
                                                 </select>
+                                            </div> */}
+                                                <Select
+                                                    placeholder="Filter by month"
+                                                    className="basic-single"
+                                                    classNamePrefix="select"
+                                                    isDisabled={isDisabled}
+                                                    isLoading={isLoading}
+                                                    isClearable={isClearable}
+                                                    isRtl={isRtl}
+                                                    isSearchable={isSearchable}
+                                                    name="color"
+                                                    options={optionsData}
+                                                    isMulti
+                                                    onChange={handleOptionChange}
+                                                    value={selectedOptionMonth}
+                                                />
                                             </div>
-                                            <Select
-                                                placeholder="Filter by month"
-                                                className="basic-single"
-                                                classNamePrefix="select"
-                                                isDisabled={isDisabled}
-                                                isLoading={isLoading}
-                                                isClearable={isClearable}
-                                                isRtl={isRtl}
-                                                isSearchable={isSearchable}
-                                                name="color"
-                                                options={optionsData}
-                                                isMulti
-                                                onChange={handleOptionChange}
-                                                value={selectedOptionMonth}
-                                            />
                                         </div>
                                         <div className="banner_inspire_btn ps-0 ps-md-2">
                                             <button type="button" className="btn btn-primary prmry_btn">Inspire me
@@ -384,7 +336,6 @@ function Index() {
                     </form>
                 </div>
             </section>
-
         </>
     );
 }
