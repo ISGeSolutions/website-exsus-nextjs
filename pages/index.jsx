@@ -205,8 +205,8 @@ function Index() {
                                             <div className="row align-items-center">
                                                 <div className="col-11">
                                                     <div className="card_blk_txt">
-                                                        <h3>Bespoke Honeymoon ideas</h3>
-                                                        <p>The ultimate romantic escapes</p>
+                                                        <h3>{holidaytypesItem?.holiday_type_name}</h3>
+                                                        {/* <p>The ultimate romantic escapes</p> */}
                                                     </div>
                                                 </div>
                                                 <div className="col-1 ps-0">
