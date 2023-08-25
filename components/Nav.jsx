@@ -217,31 +217,28 @@ function Nav() {
         setmenu(closeMenu);
 
         window.onresize = function () {
-        if (this.innerWidth > 991) {
-            if (menu.classList.contains("active")) {
-                toggleMenu();
+            if (this.innerWidth > 991) {
+                if (menu.classList.contains("active")) {
+                    toggleMenu();
+                }
+
             }
-
         }
-    }
 
-    $(".header_country_list > ul .header_country_label").on('mouseenter', function (event) {
-        $('.header_country_list > ul .header_country_label').removeClass("active");
-        $(this).addClass("active");
-    });
+        $(".header_country_list > ul .header_country_label").on('mouseenter', function (event) {
+            $('.header_country_list > ul .header_country_label').removeClass("active");
+            $(this).addClass("active");
+        });
 
-    $('.header_country_label').click(function () {
-        $('.header_country_label').removeClass("responsive_drpdwn_cls");
-        $(this).addClass('responsive_drpdwn_cls');
-    });
+        $('.header_country_label').click(function () {
+            $('.header_country_label').removeClass("responsive_drpdwn_cls");
+            $(this).addClass('responsive_drpdwn_cls');
+        });
 
-    document.querySelector(".menu-overlay").addEventListener("click", () => {
-        toggleMenu();
-    })
+        document.querySelector(".menu-overlay").addEventListener("click", () => {
+            toggleMenu();
+        })
 
-
-
-        
         const script = document.createElement('script');
 
         script.src = "https://use.typekit.net/foobar.js";
@@ -312,7 +309,7 @@ function Nav() {
     closeMenu?.addEventListener("click", () => {
         toggleMenu();
     })
-    
+
 
     function toggleMenu() {
         menu.classList.toggle("active");
@@ -344,7 +341,7 @@ function Nav() {
     function openLeftNav() {
         document.getElementById('sideMenuLeft').style.width = "100%";
     }
-    
+
 
 
     // only show nav when logged in
