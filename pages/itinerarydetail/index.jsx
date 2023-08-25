@@ -35,7 +35,7 @@ function Index() {
                 }
             });
 
-            console.log('bannerImages', bannerImages);
+            // console.log('bannerImages', bannerImages);
             setBannerImages(bannerImages);
             setItineraries(x.data[0]);
         });
