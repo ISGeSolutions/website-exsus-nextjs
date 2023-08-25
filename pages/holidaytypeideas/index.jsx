@@ -162,9 +162,9 @@ function Index() {
         });
 
         // let id = 1;
-        console.log('hcode', hcode);
+        // console.log('hcode', hcode);
         holidaytypesService.getHolidaytypeDetailsById(hcode).then(x => {
-            console.log('getHolidaytypesDetails', x);
+            // console.log('getHolidaytypesDetails', x);
             setHolidaytypesDetails(x.data.attributes);
             // const lines = x.data.attributes?.overview_text.split('\n');
             // console.log('lines', lines);
