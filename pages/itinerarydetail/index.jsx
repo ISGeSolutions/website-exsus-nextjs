@@ -5,6 +5,8 @@ import { hotelService, destinationService } from 'services';
 import Iframe from 'react-iframe'
 import Head from 'next/head';
 import { NavLink } from 'components';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+var Carousel = require('react-responsive-carousel').Carousel;
 
 export default Index;
 
@@ -12,6 +14,29 @@ function Index() {
 
     const [itineraries, setItineraries] = useState(null);
     const [bannerImages, setBannerImages] = useState(null);
+
+    const equalHeight = (resize) => {
+        var elements = document.getElementsByClassName("card_slider_cnt"),
+            allHeights = [],
+            i = 0;
+        if (resize === true) {
+            for (i = 0; i < elements.length; i++) {
+                elements[i].style.height = 'auto';
+            }
+        }
+        for (i = 0; i < elements.length; i++) {
+            var elementHeight = elements[i].clientHeight;
+            allHeights.push(elementHeight);
+        }
+        for (i = 0; i < elements.length; i++) {
+            elements[i].style.height = Math.max.apply(Math, allHeights) + 'px';
+            if (resize === false) {
+                elements[i].className = elements[i].className + " show";
+            }
+        }
+    }
+
+    equalHeight(false);
 
     useEffect(() => {
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
@@ -38,6 +63,12 @@ function Index() {
             // console.log('bannerImages', bannerImages);
             setBannerImages(bannerImages);
             setItineraries(x.data[0]);
+
+            // const carousel = document.querySelector('#Testimonials');
+            // new bootstrap.Carousel(carousel);
+    
+
+            window.addEventListener('resize', equalHeight(true));
         });
 
     }, []);
@@ -45,6 +76,8 @@ function Index() {
     return (
         <>
             <Head>
+                <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
+                <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script>
             </Head>
 
             <section className="banner_blk_row">
