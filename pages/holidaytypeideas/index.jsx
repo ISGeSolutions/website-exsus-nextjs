@@ -195,11 +195,14 @@ function Index() {
             <section className="banner_blk_row">
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-inner">
-                        <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
-                            <div className="banner_commn_cls"> {/*  holiday_types_detls_banner */}
+                        <NavLink href="#" className="carousel-item active" data-bs-interval="5000">
+                            <div className="banner_commn_cls" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
+                        </NavLink>
+                        {/* <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
+                            <div className="banner_commn_cls"> 
                                 <img src={backgroundImage} alt="holiday_types_detls_card02" className="img-fluid" />
                             </div>
-                        </a>
+                        </a> */}
                     </div>
                 </div>
             </section>

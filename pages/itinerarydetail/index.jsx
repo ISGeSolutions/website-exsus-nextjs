@@ -4,6 +4,7 @@ import { Layout } from 'components/users';
 import { hotelService, destinationService } from 'services';
 import Iframe from 'react-iframe'
 import Head from 'next/head';
+import { NavLink } from 'components';
 
 export default Index;
 
@@ -34,7 +35,7 @@ function Index() {
                 }
             });
 
-            // console.log('bannerImages', bannerImages);
+            console.log('bannerImages', bannerImages);
             setBannerImages(bannerImages);
             setItineraries(x.data[0]);
         });
@@ -48,7 +49,19 @@ function Index() {
 
             <section className="banner_blk_row">
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
-                    {/* <div className="carousel-indicators">
+                    <div className="carousel-inner">
+                        {bannerImages?.map((element, index) => (
+                            <NavLink href="#" className="carousel-item active" data-bs-interval="5000" key={index}>
+                                <div className="banner_commn_cls" style={{ backgroundImage: `url(${`https://d33ys3jnmuivbg.cloudfront.net/ilimages` + element})` }}></div>
+                            </NavLink>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* <section className="banner_blk_row">
+                <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel"> */}
+            {/* <div className="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2"></button>
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2" aria-label="Slide 3"></button>
@@ -58,15 +71,15 @@ function Index() {
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="6" aria-label="Slide 7"></button>
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="7" aria-label="Slide 8"></button>
                     </div> */}
-                    <div className="carousel-inner">
+            {/* <div className="carousel-inner">
                         {bannerImages?.map((element, index) => (
                             <img key={index} src={`https://d33ys3jnmuivbg.cloudfront.net/ilimages` + element} alt="destination card01" className="img-fluid" />
-                        ))}
-                        {/* <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
+                        ))} */}
+            {/* <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
                             <div className="banner_commn_cls itinery_overvw_banner01"></div>
                         </a> */}
 
-                        {/* <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+            {/* <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="itinery_overvw_banner02 banner_commn_cls"></div>
                         </a>
                         <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
@@ -88,14 +101,14 @@ function Index() {
                             <div className="itinery_overvw_banner08 banner_commn_cls"></div>
                         </a> */}
 
-                    </div>
+            {/* </div>
                 </div>
-            </section>
+            </section> */}
 
             <section className="trvl_info_row">
                 <div className="container-md">
                     <div className="bookmark_row">
-                        <p style={{color: `white`}}>{itineraries?.attributes?.friendly_url}</p>
+                        <p style={{ color: `white` }}>{itineraries?.attributes?.friendly_url}</p>
                         {/* <ul>
                             <li><a href="homepage.html">Home</a></li>
                             <li><a href="destinations.html">Destinations</a></li>
