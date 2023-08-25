@@ -105,7 +105,7 @@ function App({ Component, pageProps }) {
             {/* <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script> */}
             <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
             <script type="text/javascript" src="/assets/javascripts/bootstrap-select.min.js"></script>
-            <script type="text/javascript" src="/assets/javascripts/navigation.js"></script>
+            {/* <script type="text/javascript" src="/assets/javascripts/navigation.js"></script> */}
 
             {/* credits */}
 
