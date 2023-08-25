@@ -21,7 +21,7 @@ function Nav() {
     const [goBack, setgoBack] = useState(null);
     const [menuTrigger, setmenuTrigger] = useState(null);
     const [closeMenu, setcloseMenu] = useState(null);
-
+    const [overlayVisible, setOverlayVisible] = useState(true);
 
     const handleMouseEnter = (index) => {
         setActiveIndex(index);
@@ -39,6 +39,14 @@ function Nav() {
     const handleMouseLeaveHoliday = () => {
         // setActiveIndexHoliday(0);
         // setActiveIndexHoliday(null);
+    };
+
+    const hideOverlay = () => {
+        setOverlayVisible(false);
+    };
+
+    const showOverlay = () => {
+        setOverlayVisible(true);
     };
 
     const router = useRouter();
@@ -204,16 +212,16 @@ function Nav() {
         const menu = document.querySelector(".menu"); //Nav tag
         setmenu(menu);
 
-        const menuMain = menu.querySelector(".menu-main"); //ul tag
+        const menuMain = menu?.querySelector(".menu-main"); //ul tag
         setmmenuMain(menuMain);
 
-        const goBack = menu.querySelector(".go-back"); //mobile back
+        const goBack = menu?.querySelector(".go-back"); //mobile back
         setmenu(goBack);
 
         const menuTrigger = document.querySelector(".mobile-menu-trigger"); //header icon
         setmenu(menuTrigger);
 
-        const closeMenu = menu.querySelector(".mobile-menu-close"); // mobile close
+        const closeMenu = menu?.querySelector(".mobile-menu-close"); // mobile close
         setmenu(closeMenu);
 
         window.onresize = function () {
@@ -286,9 +294,6 @@ function Nav() {
         userService.logout();
     }
 
-
-
-
     let subMenu;
     menuMain?.addEventListener("click", (e) => {
         if (!menu.classList.contains("active")) {
@@ -342,8 +347,6 @@ function Nav() {
         document.getElementById('sideMenuLeft').style.width = "100%";
     }
 
-
-
     // only show nav when logged in
     // if (!user) return null;
 
@@ -355,7 +358,8 @@ function Nav() {
                 </Head>
                 <div className="menu-overlay">
                 </div>
-                <div className="menu">
+
+                <div className="menu overlay">
                     <div className="mobile-menu-head">
                         <div className="go-back">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z" /></svg>
@@ -367,79 +371,85 @@ function Nav() {
                             document.querySelector(".menu-overlay").classList.toggle("active");
                         }}></button>
                     </div>
-                    <ul className="menu-main">
+
+                    <ul className="menu-main overlay">
                         <li className="menu-item-has-children">
-                            <NavLink href={regionWiseUrl + '/destinations'} className="nav-item nav-link">
+                            <NavLink onMouseEnter={showOverlay} onClick={hideOverlay}
+                                href={regionWiseUrl + '/destinations'} className="nav-item nav-link">
                                 Destinations
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                             </NavLink>
                             {/* <NavLink href="#">Destinations
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                     </NavLink> */}
-                            <div className="sub-menu mega-menu mega-menu-column-4">
-                                <div className="row">
-                                    <div className="col-lg-6">
-                                        <div className="row">
-                                            <div className="col-lg-6">
-                                                <div className="header_country_list">
-                                                    <ul>
-                                                        {destinationLandingList?.map((destinationItem, i) => (
-                                                            <li key={destinationItem?.id}
-                                                                className={`header_country_label ${activeIndex === i ? 'active' : ''}`}
-                                                                onMouseEnter={() => handleMouseEnter(i)}
-                                                                onMouseLeave={handleMouseLeave}>
-                                                                <NavLink href={dynamicLink(destinationItem?.attributes?.destination_code, destinationItem?.id)} as={dynamicLinkas(destinationItem?.attributes?.destination_code, destinationItem?.id)}>
-                                                                    {destinationItem?.attributes?.destination_name}
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                                                </NavLink>
-                                                                <div className="header_country_list_inr">
-                                                                    <ul>
-                                                                        {destinationItem?.attributes?.countries?.data.map((destinationCountry, i) => (
-                                                                            <li key={destinationCountry?.id}>
-                                                                                <NavLink href={dynamicLinkCountry(destinationItem?.attributes?.destination_code, destinationCountry?.attributes?.country_code)}>
-                                                                                    {destinationCountry?.attributes?.country_name}
-                                                                                </NavLink>
-                                                                            </li>
-                                                                        ))
-                                                                        }
-                                                                    </ul>
-                                                                </div>
-                                                            </li>
-                                                        ))}
-                                                    </ul>
+                            {/* {overlayVisible && ( */}
+                                <div className="sub-menu mega-menu mega-menu-column-4">
+                                    <div className="row">
+                                        <div className="col-lg-6">
+                                            <div className="row">
+                                                <div className="col-lg-6">
+                                                    <div className="header_country_list">
+                                                        <ul>
+                                                            {destinationLandingList?.map((destinationItem, i) => (
+                                                                <li key={destinationItem?.id}
+                                                                    className={`header_country_label ${activeIndex === i ? 'active' : ''}`}
+                                                                    onMouseEnter={() => handleMouseEnter(i)}
+                                                                    onMouseLeave={handleMouseLeave}>
+                                                                    <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={dynamicLink(destinationItem?.attributes?.destination_code, destinationItem?.id)} as={dynamicLinkas(destinationItem?.attributes?.destination_code, destinationItem?.id)}>
+                                                                        {destinationItem?.attributes?.destination_name}
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                                                    </NavLink>
+                                                                    <div className="header_country_list_inr">
+                                                                        <ul>
+                                                                            {destinationItem?.attributes?.countries?.data.map((destinationCountry, i) => (
+                                                                                <li key={destinationCountry?.id}>
+                                                                                    <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={dynamicLinkCountry(destinationItem?.attributes?.destination_code, destinationCountry?.attributes?.country_code)}>
+                                                                                        {destinationCountry?.attributes?.country_name}
+                                                                                    </NavLink>
+                                                                                </li>
+                                                                            ))
+                                                                            }
+                                                                        </ul>
+                                                                    </div>
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <div className="row">
-                                            <div className="col-md-6">
-                                                <div className="header_nav_cnt">
-                                                    <h4>Socially-Distanced holidays</h4>
-                                                    <p>Get away from it all, in Exsus style. We're championing the art of socially-distanced luxury holidays, from private islands and exceptional villas to awesome adventures and unique glamping experiences. Escape, explore and relax in beautiful destinations all over the world. Get away from the crowds and enjoy a memorable off-the-beaten-track holiday like no other.</p>
-                                                    <button className="btn header_nav_btn">Discover more
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                                    </button>
+                                        <div className="col-lg-6">
+                                            <div className="row">
+                                                <div className="col-md-6">
+                                                    <div className="header_nav_cnt">
+                                                        <h4>Socially-Distanced holidays</h4>
+                                                        <p>Get away from it all, in Exsus style. We're championing the art of socially-distanced luxury holidays, from private islands and exceptional villas to awesome adventures and unique glamping experiences. Escape, explore and relax in beautiful destinations all over the world. Get away from the crowds and enjoy a memorable off-the-beaten-track holiday like no other.</p>
+                                                        <button className="btn header_nav_btn">Discover more
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="col-md-6">
-                                                <div className="header_nav_cnt">
-                                                    <h4>Special occasions</h4>
-                                                    <p>Discover some of our favourite ways to celebrate a special occasion, whether that's an anniversary, a birthday, a proposal, or just because... From proposing in a secluded spot by Iguazu Falls to enjoying exclusive use of your very own private island in the Maldives, get some inspiration for your own celebration and give yourself something to look forward to!</p>
-                                                    <button className="btn header_nav_btn">Discover more
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                                    </button>
+                                                <div className="col-md-6">
+                                                    <div className="header_nav_cnt">
+                                                        <h4>Special occasions</h4>
+                                                        <p>Discover some of our favourite ways to celebrate a special occasion, whether that's an anniversary, a birthday, a proposal, or just because... From proposing in a secluded spot by Iguazu Falls to enjoying exclusive use of your very own private island in the Maldives, get some inspiration for your own celebration and give yourself something to look forward to!</p>
+                                                        <button className="btn header_nav_btn">Discover more
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            {/* )} */}
+
                         </li>
-                        <li className="menu-item-has-children">
-                            <NavLink href={regionWiseUrl + '/holiday-types'}>Holiday types
+                        <li className="menu-item-has-children overlay">
+                            <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types'}>Holiday types
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                             </NavLink>
+                            {/* {overlayVisible && ( */}
                             <div className="sub-menu mega-menu mega-menu-column-4">
                                 <div className="row">
                                     <div className="col-lg-6">
@@ -452,7 +462,7 @@ function Nav() {
                                                                 className={`header_country_label ${activeIndexHoliday === i ? 'active' : ''}`}
                                                                 onMouseEnter={() => handleMouseEnterHoliday(i)}
                                                                 onMouseLeave={handleMouseLeaveHoliday}>
-                                                                <NavLink href={dynamicLinkHoliday(holidaystypesItem?.attributes?.holiday_type_group_code, holidaystypesItem?.id)} as={dynamicLinkHolidayas(holidaystypesItem?.attributes?.holiday_type_group_code, holidaystypesItem?.id)}>
+                                                                <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={dynamicLinkHoliday(holidaystypesItem?.attributes?.holiday_type_group_code, holidaystypesItem?.id)} as={dynamicLinkHolidayas(holidaystypesItem?.attributes?.holiday_type_group_code, holidaystypesItem?.id)}>
                                                                     {holidaystypesItem?.attributes?.holiday_type_group_name}
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </NavLink>
@@ -460,7 +470,7 @@ function Nav() {
                                                                     <ul>
                                                                         {holidaystypesItem?.attributes?.holiday_types?.data.map((holidaytypesCountry, i) => (
                                                                             <li key={holidaytypesCountry?.id}>
-                                                                                <NavLink href={dynamicLinkCountryHoliday(holidaystypesItem?.attributes?.holiday_type_group_code, holidaytypesCountry?.attributes?.holiday_type_code, holidaytypesCountry?.id)}>
+                                                                                <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={dynamicLinkCountryHoliday(holidaystypesItem?.attributes?.holiday_type_group_code, holidaytypesCountry?.attributes?.holiday_type_code, holidaytypesCountry?.id)}>
                                                                                     {holidaytypesCountry?.attributes?.holiday_type_name}
                                                                                 </NavLink>
                                                                             </li>
@@ -472,13 +482,13 @@ function Nav() {
                                                         ))}
 
                                                         {/* <li className="header_country_label">
-                                                                <NavLink href={regionWiseUrl + '/holiday-types/incredible-journeys'}>Once In A Lifetime Holidays
+                                                                <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/incredible-journeys'}>Once In A Lifetime Holidays
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </NavLink>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/incredible/ultimate-journeys'}>Ultimate Journeys</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/incredible/ultimate-adventure-holidays'}>Ultimate Adventures</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/incredible/ultimate-journeys'}>Ultimate Journeys</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/incredible/ultimate-adventure-holidays'}>Ultimate Adventures</NavLink></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Once In A Lifetime Holidays
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -487,13 +497,13 @@ function Nav() {
                                                             </li>
 
                                                             <li className="header_country_label active">
-                                                                <NavLink href={regionWiseUrl + '/holiday-types/incredible-journeys'}>Once In A Lifetime Holidays
+                                                                <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/incredible-journeys'}>Once In A Lifetime Holidays
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </NavLink>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/incredible/ultimate-journeys'}>Ultimate Journeys</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/incredible/ultimate-adventure-holidays'}>Ultimate Adventures</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/incredible/ultimate-journeys'}>Ultimate Journeys</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/incredible/ultimate-adventure-holidays'}>Ultimate Adventures</NavLink></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Once In A Lifetime Holidays
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -501,16 +511,16 @@ function Nav() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <NavLink href={regionWiseUrl + '/holiday-types/luxury-honeymoons'}>Honeymoons
+                                                                <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/luxury-honeymoons'}>Honeymoons
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </NavLink>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/luxury-honeymoons/ultimate-honeymoons'}>Ultimate Honeymoons</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/luxury-honeymoons/perfect-honeymoons'}>Perfect Honeymoons</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/luxury-honeymoons/beach-honeymoons'}>Beach Honeymoons</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/luxury-honeymoons/Adventure-honeymoons'}>Adventure Honeymoons</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/luxury-honeymoons/mini-moons'}>Mini-Moons</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/luxury-honeymoons/ultimate-honeymoons'}>Ultimate Honeymoons</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/luxury-honeymoons/perfect-honeymoons'}>Perfect Honeymoons</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/luxury-honeymoons/beach-honeymoons'}>Beach Honeymoons</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/luxury-honeymoons/Adventure-honeymoons'}>Adventure Honeymoons</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/luxury-honeymoons/mini-moons'}>Mini-Moons</NavLink></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Honeymoons
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -518,18 +528,18 @@ function Nav() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <NavLink href={regionWiseUrl + '/holiday-types/family-holidays'}>Family Holidays
+                                                                <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/family-holidays'}>Family Holidays
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </NavLink>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/family-holidays/half-term-escapes'}>Half-term Escapes</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/family-holidays/easter-family-holidays'}>Easter Family Holidays</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/family-holidays/summer-family-holidays'}>Summer Family Holidays</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/family-holidays/winter-family-holidays'}>Winter Family Holidays</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/family-holidays/family-adventure-holidays'}>Family Adventure Holidays</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/family-holidays/family-safari-and-wildlife-holidays'}>Family Safaris & Wildlife Holidays</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/family-holidays/family-road-trips'}>Family Road Trips</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/family-holidays/half-term-escapes'}>Half-term Escapes</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/family-holidays/easter-family-holidays'}>Easter Family Holidays</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/family-holidays/summer-family-holidays'}>Summer Family Holidays</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/family-holidays/winter-family-holidays'}>Winter Family Holidays</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/family-holidays/family-adventure-holidays'}>Family Adventure Holidays</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/family-holidays/family-safari-and-wildlife-holidays'}>Family Safaris & Wildlife Holidays</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/family-holidays/family-road-trips'}>Family Road Trips</NavLink></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Family Holidays
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -537,16 +547,16 @@ function Nav() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <NavLink href={regionWiseUrl + '/holiday-types/adventure-holidays'}>Adventure Holidays
+                                                                <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/adventure-holidays'}>Adventure Holidays
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </NavLink>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/adventure-holidays/active-adventures'}>Active Adventures</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/adventure-holidays/magnificent-landscapes'}>Magnificent Landscapes</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/adventure-holidays/walking-trekking-holidays'}>Walking & Trekking Holidays</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/adventure-holidays/ranches-estancies-country-retreats'}>Ranches, Estancias & Country Retreats</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/adventure-holidays/4-by-4-adventures'}>4x4 Adventures</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/adventure-holidays/active-adventures'}>Active Adventures</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/adventure-holidays/magnificent-landscapes'}>Magnificent Landscapes</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/adventure-holidays/walking-trekking-holidays'}>Walking & Trekking Holidays</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/adventure-holidays/ranches-estancies-country-retreats'}>Ranches, Estancias & Country Retreats</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/adventure-holidays/4-by-4-adventures'}>4x4 Adventures</NavLink></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Adventure Holidays
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -554,17 +564,17 @@ function Nav() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <NavLink href={regionWiseUrl + '/holiday-types/luxury-beach-holidays'}>Luxury Beach Holidays
+                                                                <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/luxury-beach-holidays'}>Luxury Beach Holidays
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </NavLink>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/luxury-beach-holidays/couples-beach-holidays'}>Beach Holidays For Couples</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/luxury-beach-holidays/family-beach-holidays'}>Family Beach Holidays</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/luxury-beach-holidays/beach-holidays-europe'}>Beach Holidays In Europe</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/luxury-beach-holidays/exotic-beach-holidays'}>Exotic Beach Holidays</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/luxury-beach-holidays/beach-culture-holidays'}>Beach & Culture Holidays</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/luxury-beach-holidays/alternative-beach-holidays'}>Alternative Beach Holidays</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/luxury-beach-holidays/couples-beach-holidays'}>Beach Holidays For Couples</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/luxury-beach-holidays/family-beach-holidays'}>Family Beach Holidays</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/luxury-beach-holidays/beach-holidays-europe'}>Beach Holidays In Europe</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/luxury-beach-holidays/exotic-beach-holidays'}>Exotic Beach Holidays</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/luxury-beach-holidays/beach-culture-holidays'}>Beach & Culture Holidays</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/luxury-beach-holidays/alternative-beach-holidays'}>Alternative Beach Holidays</NavLink></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Luxury Beach Holidays
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -572,14 +582,14 @@ function Nav() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <NavLink href={regionWiseUrl + '/holiday-types/culture-holidays'}>Food & Culture Holidays
+                                                                <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/culture-holidays'}>Food & Culture Holidays
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </NavLink>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/culture-holidays/food-and-wine-holidays'}>Food & Wine Holidays</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/culture-holidays/people-and-festivals'}>People & Festivals</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/culture-holidays/history-and-heritage-holidays'}>History & Heritage</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/culture-holidays/food-and-wine-holidays'}>Food & Wine Holidays</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/culture-holidays/people-and-festivals'}>People & Festivals</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/culture-holidays/history-and-heritage-holidays'}>History & Heritage</NavLink></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Food & Culture Holidays
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -587,16 +597,16 @@ function Nav() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <NavLink href={regionWiseUrl + '/holiday-types/wildlife-holidays'}>Wildlife & Safari Holidays
+                                                                <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/wildlife-holidays'}>Wildlife & Safari Holidays
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </NavLink>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/wildlife-holidays/african-safaris'}>African Safaris</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/wildlife-holidays/wildlife-holidays-beyond-africa'}>Wildlife Holidays Beyond Africa</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/wildlife-holidays/specialist-wildlife-encounters'}>Specialist Wildlife Encounters</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/wildlife-holidays/wildlife-cruises'}>Wildlife Cruises</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/wildlife-holidays/wonders-of-the-natural-world'}>Wonders of the Natural World</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/wildlife-holidays/african-safaris'}>African Safaris</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/wildlife-holidays/wildlife-holidays-beyond-africa'}>Wildlife Holidays Beyond Africa</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/wildlife-holidays/specialist-wildlife-encounters'}>Specialist Wildlife Encounters</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/wildlife-holidays/wildlife-cruises'}>Wildlife Cruises</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/wildlife-holidays/wonders-of-the-natural-world'}>Wonders of the Natural World</NavLink></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Wildlife & Safari Holidays
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -604,14 +614,14 @@ function Nav() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <NavLink href={regionWiseUrl + '/holiday-types/special-occasions'}>Special Occasions
+                                                                <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/special-occasions'}>Special Occasions
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </NavLink>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/special-occasions/milestone-birthdays-and-anniversaries'}>Milestone Birthdays & Anniversaries</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/special-occasions/exclusive-use-hotels'}>Exclusive-Use Hotels</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/special-occasions/proposals'}>Proposals</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/special-occasions/milestone-birthdays-and-anniversaries'}>Milestone Birthdays & Anniversaries</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/special-occasions/exclusive-use-hotels'}>Exclusive-Use Hotels</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/special-occasions/proposals'}>Proposals</NavLink></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Special Occasions
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -619,15 +629,15 @@ function Nav() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <NavLink href={regionWiseUrl + '/holiday-types/luxury-short-breaks'}>Short Breaks & Escapes
+                                                                <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/luxury-short-breaks'}>Short Breaks & Escapes
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </NavLink>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/luxury-short-breaks/adventure-escapes'}>Adventure Escapes</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/luxury-short-breaks/cultural-escapes'}>Cultural Escapes</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/luxury-short-breaks/food-and-wine-escapes'}>Food & Wine Escapes</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/luxury-short-breaks/wellness-escapes'}>Spa & Wellness Escapes</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/luxury-short-breaks/adventure-escapes'}>Adventure Escapes</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/luxury-short-breaks/cultural-escapes'}>Cultural Escapes</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/luxury-short-breaks/food-and-wine-escapes'}>Food & Wine Escapes</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/luxury-short-breaks/wellness-escapes'}>Spa & Wellness Escapes</NavLink></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Short Breaks & Escapes
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -635,15 +645,15 @@ function Nav() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <NavLink href={regionWiseUrl + '/holiday-types/trains-planes-and-automobiles'}>Trains, Planes, Cars & Cruises
+                                                                <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/trains-planes-and-automobiles'}>Trains, Planes, Cars & Cruises
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </NavLink>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/trains-planes-and-automobiles/self-drive-holidays'}>Self-Drive Holidays</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/trains-planes-and-automobiles/train-journeys'}>Train Journeys</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/trains-planes-and-automobiles/cruising-and-sailing'}>Cruising & Sailing</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/trains-planes-and-automobiles/private-jets-and-flying-adventures'}>Private Jets & Flying Adventures</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/trains-planes-and-automobiles/self-drive-holidays'}>Self-Drive Holidays</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/trains-planes-and-automobiles/train-journeys'}>Train Journeys</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/trains-planes-and-automobiles/cruising-and-sailing'}>Cruising & Sailing</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/trains-planes-and-automobiles/private-jets-and-flying-adventures'}>Private Jets & Flying Adventures</NavLink></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Trains, Planes, Cars & Cruises
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -651,15 +661,15 @@ function Nav() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <NavLink href={regionWiseUrl + '/holiday-types/classic-journeys'}>Classic Journeys
+                                                                <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/classic-journeys'}>Classic Journeys
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </NavLink>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/classic-journeys/immersive-journeys'}>Immersive Journeys</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/classic-journeys/essential-journeys'}>Essential Journeys</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/classic-journeys/journeys-off-the-beaten-path'}>Off-the-beaten-track Journeys</NavLink></li>
-                                                                        <li><NavLink href={regionWiseUrl + '/holiday-types/classic-journeys/signature-journeys'}>Signature Journeys</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/classic-journeys/immersive-journeys'}>Immersive Journeys</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/classic-journeys/essential-journeys'}>Essential Journeys</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/classic-journeys/journeys-off-the-beaten-path'}>Off-the-beaten-track Journeys</NavLink></li>
+                                                                        <li><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/classic-journeys/signature-journeys'}>Signature Journeys</NavLink></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Classic Journeys
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -695,13 +705,15 @@ function Nav() {
                                     </div>
                                 </div>
                             </div>
+                            {/* )} */}
                         </li>
-                        <li className="menu-item-has-children"><NavLink href={regionWiseUrl + '/special-offers'}>Special offers</NavLink></li>
-                        <li className="menu-item-has-children"><NavLink href="/blog">Blog</NavLink></li>
+                        <li className="menu-item-has-children"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/special-offers'}>Special offers</NavLink></li>
+                        <li className="menu-item-has-children"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/blog">Blog</NavLink></li>
                         <li className="menu-item-has-children">
-                            <NavLink href="/why-us">Why us
+                            <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/why-us">Why us
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                             </NavLink>
+                            {/* {overlayVisible && ( */}
                             <div className="sub-menu mega-menu mega-menu-column-4">
                                 <div className="row">
                                     <div className="col-lg-6">
@@ -709,13 +721,13 @@ function Nav() {
                                             <div className="col-lg-6">
                                                 <div className="header_country_list">
                                                     <ul>
-                                                        <li className="header_country_label active"><NavLink href="/about-us">About us</NavLink></li>
-                                                        <li className="header_country_label"><NavLink href="/request-a-brochure">Request a brochure</NavLink></li>
-                                                        <li className="header_country_label"><NavLink href="/creating-your-trip">Creating your trip</NavLink></li>
-                                                        <li className="header_country_label"><NavLink href="/meet-the-exsus-team">Meet the Exsus Team</NavLink></li>
-                                                        <li className="header_country_label"><NavLink href="/client-reviews">Client reviews</NavLink></li>
-                                                        <li className="header_country_label"><NavLink href="/honeymoon-gift-list">Honeymoon Gift List</NavLink></li>
-                                                        <li className="header_country_label"><NavLink href="/contact-us">Contact Us</NavLink></li>
+                                                        <li className="header_country_label active"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/about-us">About us</NavLink></li>
+                                                        <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/request-a-brochure">Request a brochure</NavLink></li>
+                                                        <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/creating-your-trip">Creating your trip</NavLink></li>
+                                                        <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/meet-the-exsus-team">Meet the Exsus Team</NavLink></li>
+                                                        <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/client-reviews">Client reviews</NavLink></li>
+                                                        <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/honeymoon-gift-list">Honeymoon Gift List</NavLink></li>
+                                                        <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/contact-us">Contact Us</NavLink></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -745,18 +757,21 @@ function Nav() {
                                     </div>
                                 </div>
                             </div>
+                            {/* )} */}
                         </li>
-                        <li className="menu-item-has-children"><NavLink href="/brochure">Brochure</NavLink></li>
+                        <li className="menu-item-has-children"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/brochure">Brochure</NavLink></li>
                     </ul>
+
                     <button className="btn prmry_btn make_enqury_btn" onClick={makeAnEnquiry}>Make an enquiry
                         <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                     </button>
                     {/* <button className="btn prmry_btn make_enqury_btn">
-                            <NavLink className="text-white no-underline-link" href="/contact-us">Make an enquiry
+                            <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} className="text-white no-underline-link" href="/contact-us">Make an enquiry
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                             </NavLink>
                         </button> */}
                 </div>
+
             </nav>
         </>
     );
