@@ -83,7 +83,7 @@ function Index() {
     }
 
     useEffect(() => {
-        userService.getAll().then(x => setUsers(x));
+        // userService.getAll().then(x => setUsers(x));
         holidaytypesService.getHolidaytypesLandingPage().then(x => {
             // console.log('holidaytypesService.getHolidaytypes', x);
             setHolidayTypes(x.data[0]);

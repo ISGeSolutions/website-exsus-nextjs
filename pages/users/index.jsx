@@ -10,10 +10,10 @@ function Index() {
     const [users, setUsers] = useState(null);
 
     useEffect(() => {
-        userService.getAll().then(x => {
+        // userService.getAll().then(x => {
             // console.log('x', x);
-            setUsers(x)
-        });
+        //     setUsers(x)
+        // });
         // var site_region = localStorage.getItem('site_region');        
         // console.log('site_region', site_region);
     }, []);

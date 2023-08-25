@@ -52,7 +52,7 @@ function Index() {
         } else if (itemId && itemId == 'IS') {
             return regionWiseUrl + `/continent?destinationcode=` + id;
         }
-        console.log('regionWiseUrl', regionWiseUrl);
+        // console.log('regionWiseUrl', regionWiseUrl);
     }
 
     useEffect(() => {

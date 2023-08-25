@@ -67,40 +67,40 @@ function Index() {
 
     useEffect(() => {
 
-        countriesService.getAll().then(x => {
-            // console.log('destinationService', x);
-            const desiredKey = 1; // The desired key to access
-            const desiredCountry = x.find(item => item.id == desiredKey);
-            // console.log('desiredCountry2', desiredCountry.country_translations[0].country_overview_text);
-            var oldText = desiredCountry.country_translations[0].country_overview_text;
-            var newValueWithBr = oldText?.replace(/\\n/g, "");
-            setCountry(newValueWithBr);
-        });
+        // countriesService.getAll().then(x => {
+        //     // console.log('destinationService', x);
+        //     const desiredKey = 1; // The desired key to access
+        //     const desiredCountry = x.find(item => item.id == desiredKey);
+        //     // console.log('desiredCountry2', desiredCountry.country_translations[0].country_overview_text);
+        //     var oldText = desiredCountry.country_translations[0].country_overview_text;
+        //     var newValueWithBr = oldText?.replace(/\\n/g, "");
+        //     setCountry(newValueWithBr);
+        // });
 
-        itinerariesService.getAll().then(desiredItinerary => {
-            // const desiredKey = 1; // The desired key to access
-            // const desiredItinerary = x.find(item => item.id == desiredKey);
-            // console.log('desiredItinerary', desiredItinerary);
-            setItinerary(desiredItinerary);
-        });
+        // itinerariesService.getAll().then(desiredItinerary => {
+        //     // const desiredKey = 1; // The desired key to access
+        //     // const desiredItinerary = x.find(item => item.id == desiredKey);
+        //     // console.log('desiredItinerary', desiredItinerary);
+        //     setItinerary(desiredItinerary);
+        // });
 
         destinationService.getAllItineraries().then(x => {
             setItineraries(x.data);
         });
 
-        hotelService.getAll().then(desiredHotel => {
-            // const desiredKey = 1; // The desired key to access
-            // const desiredHotel = x.find(item => item.id == desiredKey);
-            // console.log('desiredHotel', desiredHotel);
-            setHotel(desiredHotel);
-        });
+        // hotelService.getAll().then(desiredHotel => {
+        //     // const desiredKey = 1; // The desired key to access
+        //     // const desiredHotel = x.find(item => item.id == desiredKey);
+        //     // console.log('desiredHotel', desiredHotel);
+        //     setHotel(desiredHotel);
+        // });
 
-        userService.getAll().then(x => setUsers(x));
+        // userService.getAll().then(x => setUsers(x));
         const carousel = document.querySelector('#carouselExampleInterval');
         new bootstrap.Carousel(carousel);
 
         window.addEventListener('resize', equalHeight(true));
-        
+
     }, []);
 
     return (
@@ -182,7 +182,7 @@ function Index() {
 
             <section className="destination_tab_row light_grey pb-0">
                 <div className="container-md">
-                    <div className="bookmark_row">  
+                    <div className="bookmark_row">
                         {/* <p style={{color: `white`}}>{holidaytypes?.attributes?.page_friendly_url}</p> */}
                         <ul>
                             <li><a href="homepage.html">Home</a></li>
@@ -359,7 +359,6 @@ function Index() {
                                                                         ''
                                                                     )
                                                                 ))}
-                                                                {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
                                                             </NavLink>
                                                             <div className="card_slider_cnt">
                                                                 <h4><a href="#">{item?.attributes?.itin_name}</a></h4>
@@ -381,7 +380,6 @@ function Index() {
                                             )}
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </section>
@@ -1276,7 +1274,7 @@ function Index() {
                                                 </div>
                                             </div>
 
-                                            {hotel?.map((hotelDetail, i) => (
+                                            {/* {hotel?.map((hotelDetail, i) => (
                                                 <div className="col-sm-6 col-lg-4" key={hotelDetail?.id}>
                                                     <div className="card_slider_inr">
                                                         <div className="card_slider">
@@ -1292,13 +1290,10 @@ function Index() {
                                                                     <li>Location: {hotelDetail['hotel_translations'][0]?.hotel_location} | {hotelDetail['country']['country_translations'][0]?.country_name}</li>
                                                                     <li>Price guide:
                                                                         {hotelDetail['hotel_translations'][0]?.hotel_price_text}
-                                                                        {/* <span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span> */}
                                                                     </li>
                                                                     <li>
-                                                                        {/* <p dangerouslySetInnerHTML={{ __html: hotelDetail['hotel_translations'][0]?.hotel_overview_text }} /> */}
                                                                         {hotelDetail['hotel_translations'][0]?.hotel_in_the_know_text}
                                                                     </li>
-                                                                    {/* <li>Located in the heart of the Keliki rainforest in Bali, 1 is the perfect hotel for getting back to nature and disconnecting from the outside world. Designed by renowned architect Bill Bensley, as well as adding a touch of luxury and signature Bensley style, not a single tree was destroyed in its construction, guaranteeing an unspoilt experience of the lush green forests it sits in.</li> */}
                                                                     <li>Best for:<span>Setting & Views, Eco-tourism, Wildlife & Nature, Peace & Quiet</span></li>
                                                                 </ul>
                                                                 <span dangerouslySetInnerHTML={{ __html: hotelDetail['hotel_translations'][0]?.hotel_recommended_text }} />
@@ -1309,7 +1304,7 @@ function Index() {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            ))}
+                                            ))} */}
 
 
                                             <div className="col-sm-6 col-lg-4">

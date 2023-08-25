@@ -26,7 +26,7 @@ function Index() {
     }
 
     const handleLoadMore = () => {
-        console.log('handleLoadMore')
+        // console.log('handleLoadMore')
         setVisibleItems(prevVisibleItems => prevVisibleItems + itemsPerPage);
     };
 
@@ -151,7 +151,7 @@ function Index() {
 
     useEffect(() => {
         selectedOptionData(optionsData[0]);
-        userService.getAll().then(x => setUsers(x));
+        // userService.getAll().then(x => setUsers(x));
         holidaytypesService.getHolidaytypeDetails(hcode).then(x => {
             // console.log('getHolidaytypesDetails', x);
             setHolidaytypesDetails(x.data.attributes);
@@ -217,15 +217,16 @@ function Index() {
             <section className="destination_tab_row light_grey">
                 <div className="container">
                     <div className="bookmark_row">
-                        <ul>
+                    <p style={{ color: `white` }}>{holidaytypesDetails?.friendly_url}</p>
+                        {/* <ul>
                             <li><a href="homepage.html">Home</a></li>
                             <li><a href="holiday_types_landing.html">Holiday Types</a></li>
                             <li>{headingText}</li>
-                        </ul>
+                        </ul> */}
                     </div>
 
                     <div className="destination_tab_inr">
-                        <h2 className="tab_tilte">ONCE IN A LIFETIME HOLIDAYS</h2>
+                        <h2 className="tab_tilte">{holidaytypesDetails?.header_text}</h2>
                         <div className="destinations_cntnt_blk destination_para pt-0">
                             <div dangerouslySetInnerHTML={{ __html: valueWithBr }} />
                             {/* <p>Everyone’s definition of a dream trip is different.</p>

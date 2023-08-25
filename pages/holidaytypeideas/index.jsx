@@ -162,8 +162,9 @@ function Index() {
         });
 
         // let id = 1;
-        holidaytypesService.getHolidaytypeDetailsById(id).then(x => {
-            // console.log('getHolidaytypesDetails', x);
+        console.log('hcode', hcode);
+        holidaytypesService.getHolidaytypeDetailsById(hcode).then(x => {
+            console.log('getHolidaytypesDetails', x);
             setHolidaytypesDetails(x.data.attributes);
             // const lines = x.data.attributes?.overview_text.split('\n');
             // console.log('lines', lines);
@@ -185,7 +186,7 @@ function Index() {
         });
 
         // console.log('background image', backgroundImage);
-        userService.getAll().then(x => setUsers(x));
+        // userService.getAll().then(x => setUsers(x));
         window.addEventListener('resize', equalHeight(true));
     }, []);
 
@@ -206,17 +207,17 @@ function Index() {
             <section className="destination_tab_row light_grey pb-0">
                 <div className="container">
                     <div className="bookmark_row">
-                        <ul>
+                        <p style={{ color: `white` }}>{holidaytypesDetails?.friendly_url}</p>
+                        {/* <ul>
                             <li><a href="homepage.html">Home</a></li>
                             <li><a href="holiday_types_landing.html">Holiday Types</a></li>
                             <li><a href="holiday_types_type.html">Once In A Lifetime Holidays</a></li>
-                            {/* <li>Ultimate Journeys</li> */}
                             <li>{headingText}</li>
-                        </ul>
+                        </ul> */}
                     </div>
 
                     <div className="destination_tab_inr">
-                        <h2 className="tab_tilte">ULTIMATE JOURNEYS & INSPIRATION</h2>
+                        <h2 className="tab_tilte">{holidaytypesDetails?.header_text}</h2>
                         <div className="destinations_cntnt_blk destination_para pt-0">
                             <p dangerouslySetInnerHTML={{ __html: valueWithBr }} />
                             {/* <p>This is the big one, the holiday that you’ve been dreaming of. If you’ve been building up to taking the ultimate journey, we can help. If you want your tailor-made holiday to be the most remarkable, experience-filled time away that you can have than talk to our travel specialists about their ideas for no-holds-barred adventure, escapism and exploration.</p>

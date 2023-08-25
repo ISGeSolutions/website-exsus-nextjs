@@ -30,7 +30,7 @@ function Inspireme() {
     const { errors } = formState;
 
     function onSubmit(data) {
-        console.log('data', data);
+        // console.log('data', data);
         if(!data.destination && !data.reason && !data.month) {
             alertService.success('Sorry, we could not filter your request. Please select atleast one option', { keepAfterRouteChange: true });
         } else {

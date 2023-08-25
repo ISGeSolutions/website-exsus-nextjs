@@ -45,16 +45,16 @@ export const destinationService = {
 
 function getAllDropdown() {
     // console.log('baseUrl_dropdown', baseUrl_dropdown);
-    return fetchWrapper.get(baseUrl_dropdown);
+    // return fetchWrapper.get(baseUrl_dropdown);
 }
 
 function getAll() {
     // console.log('baseUrl', baseUrl);
-    return fetchWrapper.get(baseUrl);
+    // return fetchWrapper.get(baseUrl);
 }
 
 function getById(id) {
-    return fetchWrapper.get(`${baseUrl}/${id}`);
+    // return fetchWrapper.get(`${baseUrl}/${id}`);
 }
 
 function getDestinationLandingPage() {

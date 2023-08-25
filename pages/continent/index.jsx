@@ -360,7 +360,7 @@ function Index() {
         setSelectedOptionRegion(regionOptions[0]);
         setSelectedOptionMonth(monthOptions[0]);
 
-        userService.getAll().then(x => setUsers(x));
+        // userService.getAll().then(x => setUsers(x));
         const carousel = document.querySelector('#carouselExampleInterval');
         new bootstrap.Carousel(carousel);
 

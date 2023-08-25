@@ -45,7 +45,7 @@ function register(user) {
 
 function getAll() {
     // console.log('baseUrl', baseUrl);
-    return fetchWrapper.get(baseUrl);
+    // return fetchWrapper.get(baseUrl);
 }
 
 function getById(id) {
