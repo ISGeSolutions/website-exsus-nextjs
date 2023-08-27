@@ -130,8 +130,8 @@ function Index() {
         // console.log('region', window.site_region);
         var site_region = localStorage.getItem('site_region');
 
-        const carousel1 = document.querySelector('#carouselExampleInterval');
-        new bootstrap.Carousel(carousel1);
+        const carouselMain = document.querySelector('#carouselExampleIntervalMain');
+        new bootstrap.Carousel(carouselMain);
 
         const carousel = document.querySelector('#Testimonials');
         new bootstrap.Carousel(carousel);
@@ -160,11 +160,11 @@ function Index() {
                         <img src="/assets/images/banner03.png" />
                     </div>
                 </Carousel> */}
-                <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
+                <div id="carouselExampleIntervalMain" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#carouselExampleIntervalMain" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIntervalMain" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIntervalMain" data-bs-slide-to="2" aria-label="Slide 3"></button>
                     </div>
                     <div className="carousel-inner">
                         <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
