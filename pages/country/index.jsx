@@ -173,32 +173,32 @@ function Country() {
 
     const [redirectUrl, setRedirectUrl] = useState(null);
     const [activeTab, setActiveTab] = useState('overview'); // State to track the active tab
-    const [headingText, setHeadingText] = useState('LUXURY SAFARI HOLIDAYS IN AFRICA');
+    const [headingText, setHeadingText] = useState('LUXURY HOLIDAYS IN ' + countrycode.toUpperCase());
 
     const toggleTab = (itemId) => {
-        var text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
+        var text = "LUXURY SAFARI HOLIDAYS IN " + countrycode.toUpperCase();
         if (itemId == 'overview') {
             const redirectUrl = regionWiseUrl + '/country?countrycode=' + countrycode;
             window.history.pushState(null, null, redirectUrl);
-            text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
+            text = "LUXURY HOLIDAYS IN " + countrycode.toUpperCase();
         } else if (itemId == 'regions') {
             const redirectUrl = regionWiseUrl + '/countryregions?countrycode=' + countrycode;
             window.history.pushState(null, null, redirectUrl);
-            text = "COUNTRIES IN AFRICA"; // action="/countryregions?countrycode=south-africa"
+            text = "REGIONS IN " + countrycode.toUpperCase(); // action="/countryregions?countrycode=south-africa"
         } else if (itemId == 'itineraries') {
             const redirectUrl = regionWiseUrl + '/countryitineraries?countrycode=' + countrycode;
             window.history.pushState(null, null, redirectUrl);
-            text = "TAILOR-MADE AFRICA HOLIDAY ITINERARIES"; // action="/countryitineraries?countrycode=south-africa"
+            text = countrycode.toUpperCase() + " ITINERARIES"; // action="/countryitineraries?countrycode=south-africa"
         } else if (itemId == 'places-to-stay') {
             const redirectUrl = regionWiseUrl + '/countryplacetostay?countrycode=' + countrycode;
             window.history.pushState(null, null, redirectUrl);
-            text = "PLACES TO STAY IN AFRICA"; // action="/countryplacetostay?countrycode=south-africa"
+            text = "LUXURY HOTELS, CAMPS & LODGES IN " + countrycode.toUpperCase(); // action="/countryplacetostay?countrycode=south-africa"
         }  else if (itemId == 'when-to-go') {
             const redirectUrl = regionWiseUrl + '/countrywhentogo?countrycode=' + countrycode;
             window.history.pushState(null, null, redirectUrl);
-            text = "PLACES TO STAY IN AFRICA"; // action="/countryplacetostay?countrycode=south-africa"
+            text = "WHEN TO GO TO " + countrycode.toUpperCase(); // action="/countryplacetostay?countrycode=south-africa"
         } else {
-            text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
+            text = "LUXURY SAFARI HOLIDAYS IN " + countrycode.toUpperCase();
         }
         setHeadingText(text);
         if (activeTab !== itemId) {
@@ -208,7 +208,6 @@ function Country() {
     };
 
     useEffect(() => {
-
         setSelectedOptionCountry(countryOptions[0]);
         setSelectedOptionRegion(regionOptions[0]);
         setSelectedOptionMonth(monthOptions[0]);
@@ -341,7 +340,7 @@ function Country() {
                         </ul>
                     </div>
                     <div className="destination_tab_inr">
-                        <h2 className="tab_tilte">LUXURY HOLIDAYS IN ASIA</h2>
+                        <h2 className="tab_tilte">{headingText}</h2>
                         <ul className="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
                             <li className="nav-item" role="presentation">
                                 <button className={activeTab === 'overview' ? 'active nav-link' : 'nav-link'}
