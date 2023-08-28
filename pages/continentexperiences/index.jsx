@@ -8,9 +8,9 @@ import { useRouter } from 'next/router';
 import generateDynamicLink from 'components/utils/generateLink';
 import Image from "next/image";
 
-export default Index;
+export default ContinentExperience;
 
-function Index() {
+function ContinentExperience() {
 
     const router = useRouter();
 
@@ -30,6 +30,7 @@ function Index() {
 
     return (
         <>
+            <h1>Continent Experience</h1>
         </>
     );
 }

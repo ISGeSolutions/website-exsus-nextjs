@@ -10,9 +10,9 @@ import Select from 'react-select';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 var Carousel = require('react-responsive-carousel').Carousel;
 
-export default Index;
+export default Country;
 
-function Index() {
+function Country() {
 
     const router = useRouter();
     const [isClearable, setIsClearable] = useState(true);
