@@ -1902,7 +1902,7 @@ nav .menu .menu-main .header_country_list ul li.active a + .header_country_list_
   padding-left: 2px;
   position: relative;
   cursor: pointer;
-  top: 2px;
+  top: 0px;
 }
 
 /* line 1455, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/master.scss */
