@@ -2025,3 +2025,7 @@ nav .menu .menu-main .header_country_list ul li.active a + .header_country_list_
 }
 
 /*# sourceMappingURL=master.css.map */
+
+.header .menu.menu_new>ul>li>a {
+  line-height: 35px !important;
+}
