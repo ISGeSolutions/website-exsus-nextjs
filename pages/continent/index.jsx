@@ -141,8 +141,8 @@ function Index() {
     const toggleTab = (itemId) => {
         var text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
         if (itemId == 'overview') {
-            // const redirectUrl = '/country?countrycode=' + destinationcode;
-            // window.history.pushState(null, null, redirectUrl);
+            const redirectUrl = regionWiseUrl + '/continent?destinationcode=' + destinationcode;
+            window.history.pushState(null, null, redirectUrl);
             text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
         } else if (itemId == 'countries') {
             const redirectUrl = regionWiseUrl + '/continentcountries?countrycode=' + destinationcode;
