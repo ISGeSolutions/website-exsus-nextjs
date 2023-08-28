@@ -51,6 +51,30 @@ const nextConfig = {
             { source: '/asia/country', destination: '/country' },
             { source: '/in/country', destination: '/country' },
 
+            // countryregions
+            { source: '/uk/countryregions', destination: '/countryregions' },
+            { source: '/us/countryregions', destination: '/countryregions' },
+            { source: '/asia/countryregions', destination: '/countryregions' },
+            { source: '/in/countryregions', destination: '/countryregions' },
+
+            // countryitineraries
+            { source: '/uk/countryitineraries', destination: '/countryitineraries' },
+            { source: '/us/countryitineraries', destination: '/countryitineraries' },
+            { source: '/asia/countryitineraries', destination: '/countryitineraries' },
+            { source: '/in/countryitineraries', destination: '/countryitineraries' },
+
+            // countrywhentogo
+            { source: '/uk/countrywhentogo', destination: '/countrywhentogo' },
+            { source: '/us/countrywhentogo', destination: '/countrywhentogo' },
+            { source: '/asia/countrywhentogo', destination: '/countrywhentogo' },
+            { source: '/in/countrywhentogo', destination: '/countrywhentogo' },
+
+            // countryplacestostay
+            { source: '/uk/countryplacestostay', destination: '/countryplacestostay' },
+            { source: '/us/countryplacestostay', destination: '/countryplacestostay' },
+            { source: '/asia/countryplacestostay', destination: '/countryplacestostay' },
+            { source: '/in/countryplacestostay', destination: '/countryplacestostay' },
+
             // country_details
             { source: '/uk/country_details', destination: '/country_details' },
             { source: '/us/country_details', destination: '/country_details' },
