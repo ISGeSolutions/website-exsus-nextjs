@@ -5,7 +5,7 @@ import { NavLink } from './../NavLink';
 import { Nav, Alert } from 'components';
 import { Analytics } from '@vercel/analytics/react';
 import React from "react";
-import Select from "react-select";
+// import Select from "react-select";
 import Head from 'next/head';
 // import plusSlides from "public/assets/javascripts/navigation.js";
 
@@ -114,7 +114,7 @@ function Layout({ children }) {
                                         )}
                                     /> */}
 
-                                    <Select id="long-value-select" className='react-select-container' style={{ boxShadow: `none !important` }} classNamePrefix="react-select"
+                                    {/* <Select id="long-value-select" className='react-select-container' style={{ boxShadow: `none !important` }} classNamePrefix="react-select"
                                         instanceId="long-value-select"
                                         options={countries}
                                         value={selected}
@@ -125,7 +125,7 @@ function Layout({ children }) {
                                                 <span>{country.label}</span>
                                             </div>
                                         )}
-                                    />
+                                    /> */}
 
                                     {/* <select className="btn btn-secondary dropdown-toggle" onChange={e => handleRegion(e.target.value)}>
                                         <option className="dropdown-item" value="uk">UK</option>
