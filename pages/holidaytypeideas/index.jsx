@@ -5,7 +5,7 @@ import { Layout } from 'components/users';
 import { userService, holidaytypesService, destinationService } from 'services';
 import { Inspireme } from 'components';
 import { useRouter } from 'next/router';
-// import Select from 'react-select';
+import Select from 'react-select';
 import { NavLink } from 'components';
 
 export default Index;

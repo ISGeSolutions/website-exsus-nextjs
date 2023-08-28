@@ -4,7 +4,7 @@ import Iframe from 'react-iframe';
 import Head from 'next/head';
 import { Inspireme } from 'components';
 import React from 'react';
-// import Select from 'react-select';
+import Select from 'react-select';
 import Image from "next/image";
 import { useRouter } from 'next/router';
 import { NavLink } from 'components';

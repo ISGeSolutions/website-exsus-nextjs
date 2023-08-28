@@ -4,7 +4,7 @@ import { Layout } from 'components/users';
 import { userService, holidaytypesService, destinationService } from 'services';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-// import Select from 'react-select';
+import Select from 'react-select';
 import { NavLink } from 'components';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 var Carousel = require('react-responsive-carousel').Carousel;
