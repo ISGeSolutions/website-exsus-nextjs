@@ -115,6 +115,7 @@ function ContinentItinararies() {
         selectedOption = selectedOption.filter((i) => i.value !== '' && typeof i.value !== 'undefined');
         setSelectedOptionMonth(selectedOption);
     };
+    
 
     const freshProds = [
         {
@@ -317,7 +318,7 @@ function ContinentItinararies() {
                                                     name="color"
                                                     options={countryOptions}
                                                     isMulti
-                                                    value={selectedOptionCountry}
+                                                    // value={selectedOptionCountry}
                                                     onChange={handleOptionCountryChange}
                                                 />
                                             </div>
