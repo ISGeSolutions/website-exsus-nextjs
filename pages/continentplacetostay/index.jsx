@@ -26,7 +26,6 @@ function ContinentPlacesToStay() {
     const router = useRouter();
 
     const countryOptions = [
-        { value: "", label: "Filter by country" },
         { value: "Asia", label: "Asia" },
         { value: "Hong Kong & Macau", label: "Hong Kong & Macau" },
         { value: "Malaysia & Borneo", label: "Malaysia & Borneo" },
@@ -42,7 +41,6 @@ function ContinentPlacesToStay() {
     ];
 
     const regionOptions = [
-        { value: "", label: "Filter by region" },
         { value: "Everything", label: "Everything" },
         { value: "Barefoot", label: "Barefoot" },
         { value: "Beach", label: "Beach" },
@@ -83,7 +81,6 @@ function ContinentPlacesToStay() {
     ];
 
     const monthOptions = [
-        { value: "", label: "Filter by month" },
         { value: "All months", label: "All months" },
         { value: "January", label: "January" },
         { value: "February", label: "February" },
@@ -303,11 +300,9 @@ function ContinentPlacesToStay() {
                                 <div className="col-12">
                                     <div className="destination_dropdwn_row d-block d-md-flex">
                                         <div className="dropdown_grp_blk">
-                                            <div className="banner_dropdwn_blk ps-0 ps-md-2">
+                                        <div className="banner_dropdwn_blk ps-0 ps-md-2">
                                                 <Select
-                                                    placeholder="Select Portfolio"
-                                                    className="basic-single"
-                                                    classNamePrefix="select"
+                                                    placeholder="Filter by country"
                                                     // defaultValue={countryOptions[0]}
                                                     isDisabled={isDisabled}
                                                     isLoading={isLoading}
@@ -317,16 +312,14 @@ function ContinentPlacesToStay() {
                                                     name="color"
                                                     options={countryOptions}
                                                     isMulti
-                                                    value={selectedOptionCountry}
+                                                    // value={selectedOptionCountry}
                                                     onChange={handleOptionCountryChange}
                                                 />
                                             </div>
                                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                                                 <Select
-                                                    placeholder="Select Portfolio"
-                                                    className="basic-single"
-                                                    classNamePrefix="select"
-                                                    defaultValue={regionOptions[0]}
+                                                    placeholder="Filter by region"
+                                                    // defaultValue={regionOptions[0]}
                                                     isDisabled={isDisabled}
                                                     isLoading={isLoading}
                                                     isClearable={isClearable}
@@ -335,16 +328,14 @@ function ContinentPlacesToStay() {
                                                     name="color"
                                                     options={regionOptions}
                                                     isMulti
-                                                    value={selectedOptionRegion}
+                                                    // value={selectedOptionRegion}
                                                     onChange={handleOptionRegionChange}
                                                 />
                                             </div>
                                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                                                 <Select
-                                                    placeholder="Select Portfolio"
-                                                    className="basic-single"
-                                                    classNamePrefix="select"
-                                                    defaultValue={monthOptions[0]}
+                                                    placeholder="Filter by month"
+                                                    // defaultValue={monthOptions[0]}
                                                     isDisabled={isDisabled}
                                                     isLoading={isLoading}
                                                     isClearable={isClearable}
@@ -353,7 +344,7 @@ function ContinentPlacesToStay() {
                                                     name="color"
                                                     options={monthOptions}
                                                     isMulti
-                                                    value={selectedOptionMonth}
+                                                    // value={selectedOptionMonth}
                                                     onChange={handleOptionMonthChange}
                                                 />
                                             </div>

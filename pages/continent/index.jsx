@@ -406,8 +406,8 @@ function Index() {
         setSelectedOptionMonth(monthOptions[0]);
 
         // userService.getAll().then(x => setUsers(x));
-        const carousel = document.querySelector('#carouselExampleInterval');
-        new bootstrap.Carousel(carousel);
+        // const carousel = document.querySelector('#carouselExampleInterval');
+        // new bootstrap.Carousel(carousel);
 
         // destinationService.getAllDropdown().then(x => {
         //     setDestinationDropdown(x)

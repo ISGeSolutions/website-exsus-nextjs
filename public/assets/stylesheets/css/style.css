@@ -275,7 +275,7 @@
 
 /* line 240, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00, .favrites_blk_row .card_slider_row .carousel01, .favrites_blk_row .card_slider_row .width_100 {
-  font-size: 0px;
+  /* font-size: 0px; */
   cursor: pointer;
   overflow: hidden;
   white-space: nowrap;
