@@ -32,6 +32,29 @@ function ContinentOverview() {
         return regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`;
     };
 
+    const equalHeight = (resize) => {
+        var elements = document.getElementsByClassName("card_slider_cnt"),
+            allHeights = [],
+            i = 0;
+        if (resize === true) {
+            for (i = 0; i < elements.length; i++) {
+                elements[i].style.height = 'auto';
+            }
+        }
+        for (i = 0; i < elements.length; i++) {
+            var elementHeight = elements[i].clientHeight;
+            allHeights.push(elementHeight);
+        }
+        for (i = 0; i < elements.length; i++) {
+            elements[i].style.height = Math.max.apply(Math, allHeights) + 'px';
+            if (resize === false) {
+                elements[i].className = elements[i].className + " show";
+            }
+        }
+    }
+
+    equalHeight(false);
+
     useEffect(() => {
 
         destinationService.getDestinationDetails(destinationcode).then(x => {
@@ -39,19 +62,14 @@ function ContinentOverview() {
             const oldText = x.data.attributes?.overview_text;
             var newValueWithBr = oldText?.replace(/\\n/g, "");
             setnewValueWithBr(newValueWithBr);
-            const imageCheck = x.data.attributes.destination_images.data;
-            imageCheck.forEach(element => {
-                if (element.attributes.image_type == 'main') {
-                    setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + element.attributes.image_path);
-                } else if (element.attributes.image_type == 'thumbnail') {
-                }
-            });
             // setDestinationLandingDetails(x)
         });
 
         destinationService.getAllItineraries().then(x => {
             setItineraries(x.data);
         });
+
+        window.addEventListener('resize', equalHeight(true));
 
     }, []);
 
