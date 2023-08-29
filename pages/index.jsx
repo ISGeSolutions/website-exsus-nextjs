@@ -55,7 +55,7 @@ function Index() {
             if (resize === false) {
                 elements[i].className = elements[i].className + " show";
             }
-        }
+        } 
     }
 
     equalHeight(true);
