@@ -170,7 +170,7 @@ function Country() {
         }
     }
 
-    equalHeight(false);
+    equalHeight(true);
 
     const [redirectUrl, setRedirectUrl] = useState(null);
     const [activeTab, setActiveTab] = useState('overview'); // State to track the active tab

@@ -58,7 +58,7 @@ function Index() {
         }
     }
 
-    equalHeight(false);
+    equalHeight(true);
 
     const dynamicLink = (itemId, id) => {
         if (itemId && itemId == 'HG6') {

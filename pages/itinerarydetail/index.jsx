@@ -36,7 +36,7 @@ function Index() {
         }
     }
 
-    equalHeight(false);
+    equalHeight(true);
 
     useEffect(() => {
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');

@@ -33,7 +33,7 @@ function Index() {
         }
     }
 
-    equalHeight(false);
+    equalHeight(true);
 
     useEffect(() => {
         // userService.getAll().then(x => setUsers(x));

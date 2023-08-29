@@ -116,147 +116,6 @@ function CountryItinararies() {
         setSelectedOptionMonth(selectedOption);
     };
 
-    const freshProds = [
-        {
-            id: "1",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "2",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "3",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "4",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "5",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "6",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "7",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "8",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "9",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "10",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-    ];
-
-    let length = freshProds.length;
-    const showMoreItems = () => {
-        setVisible((prevValue) => prevValue + 3);
-        if ((visible + 3) >= (length)) {
-            setVisiblePagination(false);
-        }
-    };
-
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
         if (window && window.site_region) {
@@ -274,6 +133,29 @@ function CountryItinararies() {
         router.push(regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`);
     };
 
+    const equalHeight = (resize) => {
+        var elements = document.getElementsByClassName("card_slider_cnt"),
+            allHeights = [],
+            i = 0;
+        if (resize === true) {
+            for (i = 0; i < elements.length; i++) {
+                elements[i].style.height = 'auto';
+            }
+        }
+        for (i = 0; i < elements.length; i++) {
+            var elementHeight = elements[i].clientHeight;
+            allHeights.push(elementHeight);
+        }
+        for (i = 0; i < elements.length; i++) {
+            elements[i].style.height = Math.max.apply(Math, allHeights) + 'px';
+            if (resize === false) {
+                elements[i].className = elements[i].className + " show";
+            }
+        }
+    }
+
+    equalHeight(true);
+
     useEffect(() => {
         setSelectedOptionCountry(countryOptions[0]);
         setSelectedOptionRegion(regionOptions[0]);
@@ -283,6 +165,7 @@ function CountryItinararies() {
             setItineraries(x.data);
         });
 
+        window.addEventListener('resize', equalHeight(true));
     }, []);
 
     return (

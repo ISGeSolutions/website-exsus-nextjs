@@ -79,7 +79,7 @@ function Index() {
         }
     }
 
-    equalHeight(false);
+    equalHeight(true);
 
     useEffect(() => {
         // destinationService.getAllItineraries().then(x => {

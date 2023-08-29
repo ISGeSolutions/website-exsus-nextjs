@@ -53,7 +53,7 @@ function ContinentOverview() {
         }
     }
 
-    equalHeight(false);
+    equalHeight(true);
 
     useEffect(() => {
 

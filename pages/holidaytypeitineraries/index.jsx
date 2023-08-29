@@ -147,7 +147,7 @@ function Index() {
         }
     }
 
-    equalHeight(false);
+    equalHeight(true);
 
     useEffect(() => {
         selectedOptionData(optionsData[0]);

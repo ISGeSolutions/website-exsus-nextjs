@@ -64,7 +64,7 @@ function Index() {
         }
     }
     
-    equalHeight(false);
+    equalHeight(true);
 
     
 

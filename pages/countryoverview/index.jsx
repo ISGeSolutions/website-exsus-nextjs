@@ -52,7 +52,7 @@ function CountryOverview() {
         }
     }
 
-    equalHeight(false);
+    equalHeight(true);
 
     useEffect(() => {
         destinationService.getAllItineraries().then(x => {
