@@ -14,6 +14,13 @@ function ContinentOverview() {
     const [itineraries, setItineraries] = useState(null);
     const [valueWithBr, setnewValueWithBr] = useState('');
     const { destinationcode } = router.query;
+    const itemsPerPage = 9; // Number of items to load per page
+    const [visibleItems, setVisibleItems] = useState(itemsPerPage)
+
+    const handleLoadMore = () => {
+        // console.log('handleLoadMore')
+        setVisibleItems(prevVisibleItems => prevVisibleItems + itemsPerPage);
+    };
 
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
@@ -236,6 +243,8 @@ function ContinentOverview() {
                                     </div>
                                 )
                                 )}
+
+                                
                             </div>
                         </div>
                     </div>
