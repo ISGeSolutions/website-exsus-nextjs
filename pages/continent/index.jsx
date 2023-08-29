@@ -1,14 +1,9 @@
 import { useState, useEffect } from 'react';
-import { userService, destinationService } from 'services';
+import { destinationService } from 'services';
 import Iframe from 'react-iframe';
 import Head from 'next/head';
-import { Inspireme } from 'components';
 import React from 'react';
-import Select from 'react-select';
-import Image from "next/image";
 import { useRouter } from 'next/router';
-import { NavLink } from 'components';
-import generateDynamicLink from 'components/utils/generateLink';
 
 import Country from '../country/index'; // Adjust the path accordingly
 import ContinentCountry from '../continentcountries/index'; // Adjust the path accordingly
@@ -19,114 +14,11 @@ import ContinentOverview from '../continentoverview/index'; // Adjust the path a
 export default Index;
 
 function Index() {
-
-    const handleUrlChange = () => {
-        const newUrl = '/new-url'; // Specify the new URL you want
-        window.history.pushState(null, null, newUrl);
-    };
-
-    const countryOptions = [
-        { value: "", label: "Filter by country" },
-        { value: "Asia", label: "Asia" },
-        { value: "Hong Kong & Macau", label: "Hong Kong & Macau" },
-        { value: "Malaysia & Borneo", label: "Malaysia & Borneo" },
-        { value: "Singapore", label: "Singapore" },
-        { value: "Indonesia", label: "Indonesia" },
-        { value: "Japan", label: "Japan" },
-        { value: "Cambodia", label: "Cambodia" },
-        { value: "Vietnam", label: "Vietnam" },
-        { value: "China", label: "China" },
-        { value: "Thailand", label: "Thailand" },
-        { value: "Burma", label: "Burma" },
-        { value: "Laos", label: "Laos" }
-    ];
-
-    const regionOptions = [
-        { value: "", label: "Filter by region" },
-        { value: "Everything", label: "Everything" },
-        { value: "Barefoot", label: "Barefoot" },
-        { value: "Beach", label: "Beach" },
-        { value: "Boutique hotel", label: "Boutique hotel" },
-        { value: "Chic design", label: "Chic design" },
-        { value: "Cultural Immersion", label: "Cultural Immersion" },
-        { value: "Eco tourism", label: "Eco tourism" },
-        { value: "Family-Friendly", label: "Family-Friendly" },
-        { value: "Food & Wine", label: "Food & Wine" },
-        { value: "Guiding", label: "Guiding" },
-        { value: "Hideaway", label: "Hideaway" },
-        { value: "Honeymoon", label: "Honeymoon" },
-        { value: "Lodge", label: "Lodge" },
-        { value: "Luxury hotel", label: "Luxury Hotel" },
-        { value: "Off the beaten track", label: "Off the beaten track" },
-        { value: "Owner run", label: "Owner run" },
-        { value: "Peace & quiet", label: "Peace & quiet" },
-        { value: "Private groups", label: "Private groups" },
-        { value: "Romantic", label: "Romantic" },
-        { value: "Rustic", label: "Rustic" },
-        { value: "Seriously special", label: "Seriously special" },
-        { value: "Service & Hospitality", label: "Service & Hospitality" },
-        { value: "Setting & Views", label: "Setting & Views" },
-        { value: "Snorkelling & Driving", label: "Snorkelling & Driving" },
-        { value: "Spa & Wellness", label: "Spa & Wellness" },
-        { value: "Unusal", label: "Unusal" },
-        { value: "Village life", label: "Village life" },
-        { value: "Walking & trekking", label: "Walking & trekking" },
-        { value: "Water activities", label: "Water activities" },
-        { value: "Wildlife & Nature", label: "Wildlife & Nature" },
-        { value: "Adventure", label: "Adventure" },
-        { value: "Couples", label: "Couples" },
-        { value: "Educational", label: "Educational" },
-        { value: "Multi-activity", label: "Multi-activity" },
-        { value: "Teenagers", label: "Teenagers" },
-        { value: "Landscapes & Scenery", label: "Landscapes & Scenery" },
-        { value: "City hotel", label: "City hotel" }
-    ];
-
-    const monthOptions = [
-        { value: "", label: "Filter by month" },
-        { value: "All months", label: "All months" },
-        { value: "January", label: "January" },
-        { value: "February", label: "February" },
-        { value: "March", label: "March" },
-        { value: "April", label: "April" },
-        { value: "May", label: "May" },
-        { value: "June", label: "June" },
-        { value: "July", label: "July" },
-        { value: "August", label: "August" },
-        { value: "September", label: "September" },
-        { value: "October", label: "October" },
-        { value: "November", label: "November" },
-        { value: "December", label: "December" }
-    ];
-
-    const [users, setUsers] = useState(null);
-    const [destinationDropdown, setDestinationDropdown] = useState(null);
-    const [destination, setDestination] = useState(null);
     const [destinationDetails, setDestinationDetails] = useState();
     const [backgroundImage, setBackgroundImage] = useState('');
-    const [valueWithBr, setnewValueWithBr] = useState('');
     const [headingText, setHeadingText] = useState('LUXURY SAFARI HOLIDAYS IN AFRICA');
-    const [selected, setSelected] = useState([]);
-
-    const [isClearable, setIsClearable] = useState(true);
-    const [isSearchable, setIsSearchable] = useState(true);
-    const [isDisabled, setIsDisabled] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-    const [isRtl, setIsRtl] = useState(false);
-
-    const [selectedOption, setSelectedOption] = useState(null);
-    const [visible, setVisible] = useState(3);
-    const [visiblePagination, setVisiblePagination] = useState(true);
-    const [selectedOptionCountry, setSelectedOptionCountry] = useState(null);
-    const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
-    const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
-
-    const [itineraries, setItineraries] = useState(null);
     const [mapVariable, setMapVariable] = useState(null);
-    const [redirectUrl, setRedirectUrl] = useState(null);
-
     const [activeTab, setActiveTab] = useState('overview'); // State to track the active tab
-
     const router = useRouter();
     const { destinationcode } = router.query;
 
@@ -166,217 +58,6 @@ function Index() {
         }
     };
 
-    const freshProds = [
-        {
-            id: "1",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "2",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "3",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "4",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "5",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "6",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "7",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "8",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "9",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "10",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-    ];
-
-    let length = freshProds.length;
-    const showMoreItems = () => {
-        setVisible((prevValue) => prevValue + 3);
-        if ((visible + 3) >= (length)) {
-            setVisiblePagination(false);
-        }
-    };
-
-    // state = {
-    //     selectedOption: null,
-    //   };
-
-    // const { selectedOption } = this.state;
-
-    const selectedSec = (itemId) => {
-        var text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
-        if (itemId == 'overview') {
-            const newUrl = '/continentcountries'; // Specify the new URL you want
-            window.history.pushState(null, null, newUrl);
-            text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
-        } else if (itemId == 'countries') {
-            text = "COUNTRIES IN AFRICA";
-        } else if (itemId == 'itineraries') {
-            text = "TAILOR-MADE AFRICA HOLIDAY ITINERARIES";
-        } else if (itemId == 'places_to_stay') {
-            text = "PLACES TO STAY IN AFRICA";
-        } else {
-            text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
-        }
-        setHeadingText(text);
-
-        // LUXURY SAFARI HOLIDAYS IN AFRICA
-        // COUNTRIES IN AFRICA
-        // TAILOR-MADE AFRICA HOLIDAY ITINERARIES
-        // PLACES TO STAY IN AFRICA
-        // EXPERIENCES IN AFRICA
-    };
-
-    // this.handleChange = handleChange.bind(this);
-
-    const handleOptionCountryChange = (selectedOption) => {
-        selectedOption = selectedOption.filter((i) => i.value !== '' && typeof i.value !== 'undefined');
-        setSelectedOptionCountry(selectedOption);
-        // this.setState({ selectedOption }, () =>
-        // );
-    };
-
-    const handleOptionRegionChange = (selectedOption) => {
-        selectedOption = selectedOption.filter((i) => i.value !== '' && typeof i.value !== 'undefined');
-        setSelectedOptionRegion(selectedOption);
-    };
-
-    const handleOptionMonthChange = (selectedOption) => {
-        selectedOption = selectedOption.filter((i) => i.value !== '' && typeof i.value !== 'undefined');
-        setSelectedOptionMonth(selectedOption);
-    };
-
-    const handleChange = (selectedOption) => {
-        selectedOption = selectedOption.filter((i) => i.value !== '' && typeof i.value !== 'undefined');
-        setSelectedOptionMonth(selectedOption);
-    };
-
-
-    // const { id } = router.query;
-
-   
-
-    const generateDynamicLink = (item) => {
-        // console.log('item', item);
-        return regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`;
-    };
-
-    const handleRedirect = () => {
-        router.push(regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`);
-    };
-
-    // https://d33ys3jnmuivbg.cloudfront.net/ilimages" + item?.attributes?.itinerary_images?.data[3]?.attributes?.image_path
-
     const equalHeight = (resize) => {
         var elements = document.getElementsByClassName("card_slider_cnt"),
             allHeights = [],
@@ -401,21 +82,9 @@ function Index() {
     equalHeight(false);
 
     useEffect(() => {
-        setSelectedOptionCountry(countryOptions[0]);
-        setSelectedOptionRegion(regionOptions[0]);
-        setSelectedOptionMonth(monthOptions[0]);
-
-        // userService.getAll().then(x => setUsers(x));
-        // const carousel = document.querySelector('#carouselExampleInterval');
-        // new bootstrap.Carousel(carousel);
-
-        // destinationService.getAllDropdown().then(x => {
-        //     setDestinationDropdown(x)
+        // destinationService.getAllItineraries().then(x => {
+        //     setItineraries(x.data);
         // });
-
-        destinationService.getAllItineraries().then(x => {
-            setItineraries(x.data);
-        });
 
         // let id = 1;
         destinationService.getDestinationDetails(destinationcode).then(x => {
@@ -430,9 +99,9 @@ function Index() {
             setMapVariable(test);
 
             // const lines = x.data.attributes?.overview_text.split('\n');
-            const oldText = x.data.attributes?.overview_text;
-            var newValueWithBr = oldText?.replace(/\\n/g, "");
-            setnewValueWithBr(newValueWithBr);
+            // const oldText = x.data.attributes?.overview_text;
+            // var newValueWithBr = oldText?.replace(/\\n/g, "");
+            // setnewValueWithBr(newValueWithBr);
             const imageCheck = x.data.attributes.destination_images.data;
             imageCheck.forEach(element => {
                 if (element.attributes.image_type == 'main') {
@@ -545,7 +214,7 @@ function Index() {
                 {activeTab === 'about' && <div>About Content</div>}
                 {activeTab === 'contact' && <div>Contact Content</div>} */}
                     {activeTab === 'overview' && <div className={activeTab === 'overview' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-overview" role="tabpanel" aria-labelledby="pills-overview-tab" tabIndex="0">
-                        <ContinentOverview />                    
+                        <ContinentOverview />
                     </div>}
                     {activeTab === 'countries' && <div className={activeTab === 'countries' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-countries" role="tabpanel" aria-labelledby="pills-countries-tab" tabIndex="0">
                         <ContinentCountry />

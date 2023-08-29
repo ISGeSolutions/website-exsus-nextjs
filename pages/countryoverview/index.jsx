@@ -6,6 +6,13 @@ export default CountryOverview;
 
 function CountryOverview() {
     const [itineraries, setItineraries] = useState(null);
+    const itemsPerPage = 9; // Number of items to load per page
+    const [visibleItems, setVisibleItems] = useState(itemsPerPage)
+
+    const handleLoadMore = () => {
+        // console.log('handleLoadMore')
+        setVisibleItems(prevVisibleItems => prevVisibleItems + itemsPerPage);
+    };
 
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
@@ -22,7 +29,7 @@ function CountryOverview() {
     const generateDynamicLink = (item) => {
         // console.log('item', item);
         return regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`;
-    };  
+    };
 
     const equalHeight = (resize) => {
         var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -223,6 +230,14 @@ function CountryOverview() {
                                     </div>
                                 )
                                 )}
+
+                                <div className="col-12">
+                                    {visibleItems < itineraries?.length && (
+                                        <button className="btn prmry_btn make_enqury_btn mx-auto text-uppercase" onClick={handleLoadMore}>Show 9 more holiday ideas
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
+                                        </button>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>
