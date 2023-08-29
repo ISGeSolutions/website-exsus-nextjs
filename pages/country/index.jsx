@@ -175,7 +175,7 @@ function Country() {
     const [redirectUrl, setRedirectUrl] = useState(null);
     const [activeTab, setActiveTab] = useState('overview'); // State to track the active tab
     const [headingText, setHeadingText] = useState('LUXURY HOLIDAYS IN ' + countrycode.toUpperCase());
-
+ 
     const toggleTab = (itemId) => {
         var text = "LUXURY SAFARI HOLIDAYS IN " + countrycode.toUpperCase();
         if (itemId == 'overview') {
