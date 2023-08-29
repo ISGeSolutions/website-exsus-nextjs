@@ -16,7 +16,6 @@ import makeAnimated from 'react-select/animated';
 
 const animatedComponents = makeAnimated();
 
-
 export default ContinentItinararies;
 
 function ContinentItinararies() {
