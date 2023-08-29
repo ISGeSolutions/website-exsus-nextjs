@@ -145,15 +145,15 @@ function Index() {
             window.history.pushState(null, null, redirectUrl);
             text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
         } else if (itemId == 'countries') {
-            const redirectUrl = regionWiseUrl + '/continentcountries?countrycode=' + destinationcode;
+            const redirectUrl = regionWiseUrl + '/continentcountries?destinationcode=' + destinationcode;
             window.history.pushState(null, null, redirectUrl);
             text = "COUNTRIES IN AFRICA"; // action="/countryregions?countrycode=south-africa"
         } else if (itemId == 'itineraries') {
-            const redirectUrl = regionWiseUrl + '/countryitineraries?countrycode=' + destinationcode;
+            const redirectUrl = regionWiseUrl + '/countryitineraries?destinationcode=' + destinationcode;
             window.history.pushState(null, null, redirectUrl);
             text = "TAILOR-MADE AFRICA HOLIDAY ITINERARIES"; // action="/countryitineraries?countrycode=south-africa"
         } else if (itemId == 'places-to-stay') {
-            const redirectUrl = regionWiseUrl + '/countryplacetostay?countrycode=' + destinationcode;
+            const redirectUrl = regionWiseUrl + '/countryplacetostay?destinationcode=' + destinationcode;
             window.history.pushState(null, null, redirectUrl);
             text = "PLACES TO STAY IN AFRICA"; // action="/countryplacetostay?countrycode=south-africa"
         } else {
