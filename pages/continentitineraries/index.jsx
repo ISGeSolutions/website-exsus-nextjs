@@ -13,7 +13,6 @@ import React from 'react';
 
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import { colourOptions } from './data';
 
 const animatedComponents = makeAnimated();
 
@@ -311,15 +310,6 @@ function ContinentItinararies() {
                                     <div className="destination_dropdwn_row d-block d-md-flex">
                                         <div className="dropdown_grp_blk">
                                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
-
-                                            {/* <Select
-                                                closeMenuOnSelect={false}
-                                                components={animatedComponents}
-                                                defaultValue={[colourOptions[4], colourOptions[5]]}
-                                                isMulti
-                                                options={colourOptions}
-                                            /> */}
-
                                                 <Select
                                                     placeholder="Filter by country"
                                                     // defaultValue={countryOptions[0]}
