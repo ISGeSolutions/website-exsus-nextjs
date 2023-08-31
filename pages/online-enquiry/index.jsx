@@ -18,7 +18,7 @@ function Index() {
             <section className="card_blk_row">
                 <div className="container-md">
                     <div className="bookmark_row">
-                        <p className='font-weight-normal display-7 text-light'>This is offers enquiry page</p>
+                        <p className='font-weight-normal display-7 text-light'>This is a online enquiry page</p>
                     </div>
                 </div>
             </section>

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link, Spinner, Signup } from 'components';
 import { Layout } from 'components/users';
 import { userService } from 'services';
-
+import Head from 'next/head';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 var Carousel = require('react-responsive-carousel').Carousel;
 
@@ -11,6 +11,29 @@ export default Index;
 
 function Index() {
     const [users, setUsers] = useState(null);
+
+    const equalHeight = (resize) => {
+        var elements = document.getElementsByClassName("card_slider_cnt"),
+            allHeights = [],
+            i = 0;
+        if (resize === true) {
+            for (i = 0; i < elements.length; i++) {
+                elements[i].style.height = 'auto';
+            }
+        }
+        for (i = 0; i < elements.length; i++) {
+            var elementHeight = elements[i].clientHeight;
+            allHeights.push(elementHeight);
+        }
+        for (i = 0; i < elements.length; i++) {
+            elements[i].style.height = Math.max.apply(Math, allHeights) + 'px';
+            if (resize === false) {
+                elements[i].className = elements[i].className + " show";
+            }
+        } 
+    }
+
+    equalHeight(true);
 
     useEffect(() => {
         // userService.getAll().then(x => setUsers(x));
@@ -20,10 +43,15 @@ function Index() {
 
         const carousel1 = document.querySelector('#Testimonials');
         new bootstrap.Carousel(carousel1);
+        
+        window.addEventListener('resize', equalHeight(true));
     }, []);
 
     return (
         <Layout>
+            <Head>
+                <script src="assets/javascripts/experts-equal-height.js"></script>
+            </Head>
             <section className="banner_blk_row">
                 {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
                     <div>

@@ -256,7 +256,7 @@ function Layout({ children }) {
                                         <li><NavLink href={regionWiseUrl + '/destinations'}>Destinations</NavLink></li>
                                         <li><NavLink href="/holiday-types">Holiday Types</NavLink></li>
                                         <li><NavLink href="/offers">Offers</NavLink></li>
-                                        <li><NavLink href="/blogs">Blog</NavLink></li>
+                                        <li><NavLink href="/blog">Blog</NavLink></li>
                                         <li><NavLink href="/when-to-go">When to go</NavLink></li>
                                     </ul>
                                 </div>
