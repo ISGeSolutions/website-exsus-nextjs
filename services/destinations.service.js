@@ -40,7 +40,8 @@ export const destinationService = {
     getDestinationLandingPage,
     getDestinationLandingList,
     getDestinationDetails,
-    getAllItineraries
+    getAllItineraries,
+    getItineraryDetails
 };
 
 function getAllDropdown() {
@@ -78,6 +79,11 @@ function getAllItineraries() {
     const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=UK`;
     return fetchWrapper.get(itinerariesDetailsUrl);
 }
+function getItineraryDetails() {
+    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries/1?populate[0]=itinerary_details&filters[itin_code]=0000000348`;
+    return fetchWrapper.get(itinerariesDetailsUrl);
+}
+
 
 
 

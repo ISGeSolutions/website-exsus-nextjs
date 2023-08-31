@@ -38,6 +38,10 @@ function Index() {
 
     equalHeight(true);
 
+    const overTextFun = (text) => {
+        return text?.replace(/\\n/g, "");        
+    }
+
     useEffect(() => {
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
@@ -50,19 +54,23 @@ function Index() {
             });
         });
 
-        destinationService.getAllItineraries().then(x => {
+        destinationService.getItineraryDetails().then(x => {
+            debugger;
             // console.log('x.data', x.data);
             const bannerImages = [];
-            const imageCheck = x.data[0].attributes?.itinerary_images.data;
+            const imageCheck = x.data[0].attributes?.itinerary_details.data;
             imageCheck.forEach((banner, index) => {
-                if (banner?.attributes?.image_type == 'banner') {
-                    bannerImages.push(banner?.attributes?.image_path);
-                }
+                bannerImages.push(banner?.attributes?.image_path);
+                // if (banner?.attributes?.image_type == 'banner') {
+                //     bannerImages.push(banner?.attributes?.image_path);
+                // }
             });
 
-            // console.log('bannerImages', bannerImages);
+            console.log('bannerImages', bannerImages);
             setBannerImages(bannerImages);
             setItineraries(x.data[0]);
+
+            debugger;
 
             // const carousel = document.querySelector('#Testimonials');
             // new bootstrap.Carousel(carousel);
@@ -82,10 +90,14 @@ function Index() {
 
             <section className="banner_blk_row">
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
+                <div className="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2"></button>                        
+                    </div>
                     <div className="carousel-inner">
                         {bannerImages?.map((element, index) => (
                             <NavLink href="#" className="carousel-item active" data-bs-interval="5000" key={index}>
-                                <div className="banner_commn_cls" style={{ backgroundImage: `url(${`https://d33ys3jnmuivbg.cloudfront.net/ilimages` + element})` }}></div>
+                                <div className="banner_commn_cls" style={{ backgroundImage: `url(${element})` }}></div>
                             </NavLink>
                         ))}
                     </div>
@@ -164,6 +176,7 @@ function Index() {
                             {/* From £11,250 per person in low season based on two adults travelling together and including international flights in business className, accommodation, some meals, internal flights, experiences as stated, train transportation, private transfers and taxes</p>
                             <p className="mb-4">Explore China in ultimate style on this exclusive holiday, and enjoy private guided tours of landmarks such as the Summer Palace, the Forbidden City, the Great Wall, and beautiful historic towns, villages and temples. During this memorable trip, you’ll also get to explore markets, dine in handpicked restaurants, join a local tai chi session, walk in the mountains and enjoy cocktails in stunning rooftop bars. Along the way, you’ll stay in idyllic Aman hotels which not only take luxury to a whole new level, but have incredible locations including a former guests’ residence in the grounds of the Summer Palace. We've also included extras such as signature Aman massages and reflexology treatments at each hotel - the ideal way to unwind after all that sightseeing. */}
                         </p>
+                        <p>{itineraries?.attributes?.overview_text}</p>
                     </div>
 
                     <section className="country_highlight_row itinery_hightlight_row mb-0">
@@ -207,7 +220,35 @@ function Index() {
             <section className="itinery_detls_row">
                 <div className="container-md">
                     <h3 className="title_cls">Itinerary details</h3>
+
+
+                    {itineraries?.attributes?.itinerary_details?.data?.map((element, index) => (
                     <div className="itinery_detls_cntnt">
+                        <div className="row">
+                            <div className="col-sm-7 pe-sm-0">
+                                <div className="itinery_detls_para">
+                                    {/* <h3><span>3 nights</span>BEIJING</h3> */}
+                                    <div dangerouslySetInnerHTML={{ __html: overTextFun(element?.attributes?.overview_text) }} />
+                                    {/* <div className="itinery_detls_expnded">
+                                        <p>from the East Gate. You’ll enjoy a private guided tour of the palace, which was the summer retreat of the royals of the Qing dynasty, walking along its pretty waterfront paths and around landscaped gardens.</p>
+                                        <p>During your stay here you’ll also be expertly guided around many of Beijing’s other landmarks, including Tiananmen Square, the unmissable Forbidden City, an impressive complex dating back to the Ming and Qing dynasties, and the Temple of Heaven, where you can join in a local tai chi session. In the evening, visit a bustling night market and feast on Peking duck at one of the city’s best restaurants.</p>
+                                        <p>You’ll also spend a day visiting the iconic Great Wall, including a tour of the Tibetan-Buddhist Lama Temple on the way. Get under the wall’s skin with a guided tour of Mutianyu, one of the best-preserved sections of the wall.</p>
+                                    </div>
+                                    <button className="btn itinery_btn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" className="up_arrow" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
+                                    </button> */}
+                                </div>
+                            </div>
+                            <div className="col-sm-5 ps-sm-0">
+                                <div className="itinery_detls_img">
+                                    <img src={element?.attributes?.image_path} alt="itinery_cntnt01" className="img-fluid" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    ))}
+
+                    {/* <div className="itinery_detls_cntnt">
                         <div className="row">
                             <div className="col-sm-7 pe-sm-0">
                                 <div className="itinery_detls_para">
@@ -299,7 +340,7 @@ function Index() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </section>
 
