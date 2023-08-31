@@ -230,7 +230,6 @@ function Index() {
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z" /></svg>
                         </i>
                         <div className="carousel00">
-
                             {itineraries?.map((item) => (
                                 <div className="card_slider_inr" key={item.id}>
                                     <div className="card_slider">
@@ -261,125 +260,6 @@ function Index() {
                                 </div>
                             )
                             )}
-
-                            {/* <div className="card_slider_inr">
-                                <div className="card_slider">
-                                    <a className="card_slider_img">
-                                        <img src="images/card_slider01.jpg" alt="slider image 01" className="img-fluid" />
-                                    </a>
-                                    <div className="card_slider_cnt">
-                                        <h4>Luxury Holidays to Egypt</h4>
-                                        <ul>
-                                            <li>Egypt</li>
-                                            <li>From £3,690 per person</li>
-                                            <li>Travel to:<span>Alexandria, Aswan, Cairo</span></li>
-                                        </ul>
-                                    </div>
-                                    <button className="btn card_slider_btn">
-                                        <span>9 nights</span>
-                                        <span className="view_itnry_link">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div className="card_slider_inr">
-                                <div className="card_slider">
-                                    <div className="card_slider_img">
-                                        <img src="images/card_slider02.jpg" alt="slider image 02" className="img-fluid" />
-                                    </div>
-                                    <div className="card_slider_cnt">
-                                        <h4>Luxury India train journey: Delhi to Mumbai</h4>
-                                        <ul>
-                                            <li>India</li>
-                                            <li>From £5,595 per person</li>
-                                            <li>Travel to:<span>Delhi & Around, Mumbai & Western India</span></li>
-                                        </ul>
-                                    </div>
-                                    <button className="btn card_slider_btn">
-                                        <span>9 nights</span>
-                                        <span className="view_itnry_link">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div className="card_slider_inr">
-                                <div className="card_slider">
-                                    <div className="card_slider_img">
-                                        <img src="images/card_slider03.jpg" alt="slider image 03" className="img-fluid" />
-                                    </div>
-                                    <div className="card_slider_cnt">
-                                        <h4>Magical Maldives holiday</h4>
-                                        <ul>
-                                            <li>Maldives</li>
-                                            <li>From £3,200 per person</li>
-                                            <li>Travel to:<span>Maldives</span></li>
-                                        </ul>
-                                    </div>
-                                    <button className="btn card_slider_btn">
-                                        <span>7 nights</span>
-                                        <span className="view_itnry_link">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div className="card_slider_inr">
-                                <div className="card_slider">
-                                    <div className="card_slider_img">
-                                        <img src="images/card_slider04.jpg" alt="slider image 04" className="img-fluid" />
-                                    </div>
-                                    <div className="card_slider_cnt">
-                                        <h4>Masai Mara Migration</h4>
-                                        <ul>
-                                            <li>Kenya</li>
-                                            <li>From £7,265 per person</li>
-                                            <li>Travel to:<span>Kenya coast, Laikipia, Meru & Central Kenya, Masai Mara</span></li>
-                                        </ul>
-                                    </div>
-                                    <button className="btn card_slider_btn">
-                                        <span>9 nights</span>
-                                        <span className="view_itnry_link">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div className="card_slider_inr">
-                                <div className="card_slider">
-                                    <div className="card_slider_img">
-                                        <img src="images/card_slider05.jpg" alt="slider image 05" className="img-fluid" />
-                                    </div>
-                                    <div className="card_slider_cnt">
-                                        <h4>A luxury british isles cruise</h4>
-                                        <ul>
-                                            <li>UK</li>
-                                            <li>From £5,190 per person</li>
-                                        </ul>
-                                    </div>
-                                    <button className="btn card_slider_btn">
-                                        <span>12 nights</span>
-                                        <span className="view_itnry_link">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div className="card_slider_inr">
-                                <div className="card_slider">
-                                    <div className="card_slider_img">
-                                        <img src="images/card_slider06.jpg" alt="slider image 06" className="img-fluid" />
-                                    </div>
-                                    <div className="card_slider_cnt">
-                                        <h4>Big game & grapevines</h4>
-                                        <ul>
-                                            <li>South Africa</li>
-                                            <li>From £5,185 per person</li>
-                                            <li>Travel to: <span>Cape town & around, greater kruger & panorama region, Winelands</span></li>
-                                        </ul>
-                                    </div>
-                                    <button className="btn card_slider_btn">
-                                        <span>9 nights</span>
-                                        <span className="view_itnry_link">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                    </button>
-                                </div>
-                            </div> */}
                         </div>
                         <i id="right">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -389,73 +269,7 @@ function Index() {
             </section>
 
 
-            <section aria-label="Client Testimonials" className="testimonials_blk_row">
-                {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showThumbs={false}>
-                    <div className="legend">
-                        <div className="carousel-item active" data-bs-interval="5000">
-                            <div className="carousel-caption">
-                                <p>All the personal details and touches were amazing and much appreciated. Too many highlights to say! So much history, lovely spots to stay, the people, the curries, the fruit...</p>
-                                <span>Suzie & Henry travelled to Sri Lanka, March 2022</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="legend">
-                        <div className="carousel-item active" data-bs-interval="5000">
-                            <div className="carousel-caption">
-                                <p>Charlotte was excellent as always - friendly and approachable, with lots of ideas when discussing itineraries, and the mix of city and sea worked well.</p>
-                                <span>Filippo E travelled to Portugal, February 2022</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="legend">
-                        <div className="carousel-item active" data-bs-interval="5000">
-                            <div className="carousel-caption">
-                                <p>We loved Costa Rica. Ashleigh was great at organising our trip, and when coronavirus changed everything, she comforted us and reassured us that we were able to get home.</p>
-                                <span>Suzie & Henry travelled to Costa Rica, March 2020</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="legend">
-                        <div className="carousel-item active" data-bs-interval="5000">
-                            <div className="carousel-caption">
-                                <p>Katie was a very good communicator and was quick to research our specific requests. We loved everything about our trip, especially seeing penguins and giraffes!</p>
-                                <span>Exsus travellers who travelled to South Africa in December 2019/January 2020</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="legend">
-                        <div className="carousel-item active" data-bs-interval="5000">
-                            <div className="carousel-caption">
-                                <p>Our holiday in Africa was excellent. Mark went out of his way to organise this trip for us. We loved it - OMG it was the most magical place.</p>
-                                <span>Ms J. Tighe travelled to South Africa, Botswana and Zimbabwe, September 2019</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="legend">
-                        <div className="carousel-item active" data-bs-interval="5000">
-                            <div className="carousel-caption">
-                                <p>Ashleigh was amazing. She listened to all our preferences and interests and put together the most perfect itinerary for us.</p>
-                                <span>Exsus travellers who travelled to Peru, September 2019</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="legend">
-                        <div className="carousel-item active" data-bs-interval="5000">
-                            <div className="carousel-caption">
-                                <p>Our holiday was honestly awesome. Gina tailored the trip extremely well to our needs, and everything was brilliant. We had a fantastic time.</p>
-                                <span>The Tonge family travelled to Norway, August 2019</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="legend">
-                        <div className="carousel-item active" data-bs-interval="5000">
-                            <div className="carousel-caption">
-                                <p>From beginning to end, our holiday was like a fairytale. We would not change a thing.</p>
-                                <span>Mike & Debbie Edwards travelled to Italy, July/August 2019</span>
-                            </div>
-                        </div>
-                    </div>
-                </Carousel> */}
+            <section aria-label="Client Testimonials" className="testimonials_blk_row">                
                 <div className="container-md">
                     <div id="Testimonials" className="carousel slide" data-bs-ride="carousel">
                         <div className="carousel-indicators">
