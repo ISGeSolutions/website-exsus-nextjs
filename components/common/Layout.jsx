@@ -16,19 +16,28 @@ function Layout({ children }) {
     const router = useRouter();
     const currentUrl = router.asPath;
     // const regionWiseUrl = '/uk';
-    const [regionWiseUrl, setMyVariable] = useState('uk');
+    const [regionWiseUrl, setMyVariable] = useState('');
     const [selectedRegion, setVariable] = useState('');
+    const { ver } = router.query;
     const countries = [
         { value: 'uk', label: 'UK SITE', image: './../../images/uk-flag-round-circle-icon.svg' },
         { value: 'us', label: 'US SITE', image: '/../../images/usa-flag-round-circle-icon.svg' },
         { value: 'asia', label: 'ASIA SITE', image: './../../images/thailand-flag-round-circle-icon.svg' },
         { value: 'in', label: 'INDIA SITE', image: '/../../images/india-flag-round-circle-icon.svg' }
     ];
+    const [selected, setSelected] = useState();
 
-    const [selected, setSelected] = useState(countries[0]);
+    const isObjectEmpty = (obj) => {
+        for (const key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     const handleChange = (selectedOption) => {
-
+        // debugger;
         // Do something
         setMyVariable(selectedOption.value);
         setSelected(selectedOption);
@@ -72,8 +81,23 @@ function Layout({ children }) {
             $('.header_country_label').removeClass("responsive_drpdwn_cls");
             $(this).addClass('responsive_drpdwn_cls');
         });
-    },
-        [, [router.asPath]]);
+        // setSelected(countries[0]);
+        if(ver) {
+            const foundPerson = countries.find(person => person.value === ver);
+            console.log('foundPerson', foundPerson);
+            const foundPersonBoolean = isObjectEmpty(foundPerson);
+            console.log('foundPersonBoolean', foundPersonBoolean);
+    
+            if (!foundPersonBoolean) {
+                 // handleChange(foundPerson);
+                 setSelected(foundPerson);
+                 setMyVariable(foundPerson.value);
+                 localStorage.setItem('site_region', foundPerson.value);
+                 window.site_region = foundPerson.value;                
+            }
+        }
+
+    }, [ver]);
 
     return (
         <div>
@@ -86,8 +110,8 @@ function Layout({ children }) {
                         <section className="header_item_left ">
                             <div className="mobile_trigger_btn d-block d-lg-none">
                                 <a className="btn-link" href="#" onClick={() => {
-                                        document.getElementById('sideMenuLeft').style.width = "100%";
-                                    }}>
+                                    document.getElementById('sideMenuLeft').style.width = "100%";
+                                }}>
                                     <em className="fa-solid fa-ellipsis">
                                     </em>
                                 </a>
@@ -118,6 +142,7 @@ function Layout({ children }) {
                                         instanceId="long-value-select"
                                         options={countries}
                                         value={selected}
+                                        defaultValue={countries[0]}
                                         onChange={handleChange} autoFocus={false}
                                         formatOptionLabel={country => (
                                             <div className="country-option">
@@ -173,10 +198,10 @@ function Layout({ children }) {
                                 <NavLink href="#"><em className="material-symbols-outlined">call</em><span className="d-none d-lg-block">020 7337 9010</span></NavLink></div>
                             <div className="mobile_trigger_btn mobile-menu-trigger d-block d-lg-none">
                                 <a href="#" onClick={() => {
-                                const menuLayout = document.querySelector(".menu"); //Nav tag
-                                menuLayout.classList.toggle("active");
-                                document.querySelector(".menu-overlay").classList.toggle("active");
-                            }}><em className="fa-solid fa-bars"></em></a></div>
+                                    const menuLayout = document.querySelector(".menu"); //Nav tag
+                                    menuLayout.classList.toggle("active");
+                                    document.querySelector(".menu-overlay").classList.toggle("active");
+                                }}><em className="fa-solid fa-bars"></em></a></div>
                         </section>
                     </div>
                     <Nav />
@@ -241,10 +266,10 @@ function Layout({ children }) {
                                 <div className="quick_links_parnt" aria-label="Exsus Sites">
                                     <h6>Exsus Sites</h6>
                                     <ul>
-                                        <li><NavLink href="/uk" target="_blank">UK</NavLink></li>
-                                        <li><NavLink href="/asia" target="_blank">Asia</NavLink></li>
-                                        <li><NavLink href="/india" target="_blank">India</NavLink></li>
-                                        <li><NavLink href="/usa" target="_blank">USA</NavLink></li>
+                                        <li><NavLink href="/?ver=uk" target="_blank">UK</NavLink></li>
+                                        <li><NavLink href="/?ver=asia" target="_blank">Asia</NavLink></li>
+                                        <li><NavLink href="/?ver=in" target="_blank">India</NavLink></li>
+                                        <li><NavLink href="/?ver=us" target="_blank">USA</NavLink></li>
                                     </ul>
                                 </div>
                             </div>
