@@ -8,7 +8,7 @@ const { publicRuntimeConfig } = getConfig();
 export const whyusService = {
     getAll,
     getById,
-    getAboutusPage
+    getWhyusPage
 };
 
 function getAllDropdown() {
@@ -25,7 +25,7 @@ function getById(id) {
     // return fetchWrapper.get(`${baseUrl}/${id}`);
 }
 
-function getAboutusPage() {
+function getWhyusPage() {
     // console.log('baseUrl_dropdown', baseUrl_dropdown);
     const whyusPageUrl = `${publicRuntimeConfig.apiUrl}/api/custom-pages/3?filters[page_code][$eq]=Why-us&populate[0]=custom_page_images`;
     return fetchWrapper.get(whyusPageUrl);
