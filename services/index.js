@@ -8,4 +8,5 @@ export * from './holiday_types.service';
 export * from './itineraries.service';
 export * from './hotels.service';
 export * from './whyus.service';
+export * from './aboutus.service';
 

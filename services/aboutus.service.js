@@ -3,9 +3,9 @@ import getConfig from 'next/config';
 import Router from 'next/router';
 import { fetchWrapper } from 'helpers';
 const { publicRuntimeConfig } = getConfig();
-// const whyusPageUrl = `${publicRuntimeConfig.apiUrl}/api/custom-pages?filters[custom-page][page_code][$eq]=Destinations&populate[0]=custom_page_images`;
+// const aboutusPageUrl = `${publicRuntimeConfig.apiUrl}/api/custom-pages?filters[custom-page][page_code][$eq]=Destinations&populate[0]=custom_page_images`;
 
-export const whyusService = {
+export const aboutusService = {
     getAll,
     getById,
     getAboutusPage
@@ -27,6 +27,6 @@ function getById(id) {
 
 function getAboutusPage() {
     // console.log('baseUrl_dropdown', baseUrl_dropdown);
-    const whyusPageUrl = `${publicRuntimeConfig.apiUrl}/api/custom-pages/3?filters[page_code][$eq]=Why-us&populate[0]=custom_page_images`;
-    return fetchWrapper.get(whyusPageUrl);
+    const aboutusPageUrl = `${publicRuntimeConfig.apiUrl}/api/custom-pages/4?filters[page_code][$eq]=About-us&populate[0]=custom_page_images`;
+    return fetchWrapper.get(aboutusPageUrl);
 }
