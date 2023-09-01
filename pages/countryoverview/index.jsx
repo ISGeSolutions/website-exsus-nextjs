@@ -4,10 +4,12 @@ import { NavLink } from 'components';
 
 export default CountryOverview;
 
-function CountryOverview() {
+function CountryOverview(props) {
     const [itineraries, setItineraries] = useState(null);
     const itemsPerPage = 9; // Number of items to load per page
     const [visibleItems, setVisibleItems] = useState(itemsPerPage)
+    
+    const { overview_text } = props?.data || {};
 
     const handleLoadMore = () => {
         // console.log('handleLoadMore')
@@ -66,15 +68,8 @@ function CountryOverview() {
         <>
             <div className="container-md">
                 <section className="destination_para">
-                    {/* <p>{destination | json}</p> */}
-                    {/* {/* <p><pre>{JSON.stringify(destination, null, 2)}</pre></p> */}
-                    {/* <p dangerouslySetInnerHTML={{ __html: country }} /> */}
-                    <p>Warning: Asia is highly addictive. Whether it’s a rickshaw ride through hectic Hanoi, a fascinating adventure amidst the ancient Angkor temples or diving and snorkelling in some of the warmest, clearest seas on the planet, Asia is jam-packed with culture, adventure - and variety.</p>
-                    <p>A truly tantalising continent, Asia promises extraordinary experiences for every traveller. Whether you’re after a luxury honeymoon in South-East Asia, a family adventure holiday in Southern Asia or a cultural holiday to the Far East, you can expect some of the most beautiful beaches and most incredible luxury hotels in the world, fast-paced cities, tranquil village life and mouthwatering food. Asia has it all.</p>
-                    <p>Take a journey through temple-laced Cambodia or Malaysia; island-hop across the other-worldly archipelago of Indonesia; and soak up the buzz of floating markets in Vietnam, Laos and Thailand. Delve into emerald jungles and encounter enthralling wildlife in Borneo; or relish the pulsating energy of Asia’s most cosmopolitan cities: Hong Kong, Macau and Singapore. Then there’s beguiling Japan, a cultural odyssey through time, while Bhutan and Myanmar have just begun to unveil their treasures to the world, and we wouldn’t want you to miss it.</p>
-                    <p>To design your own bespoke Asian holiday, call and speak to one of our experts on 020 7337 9010 or <a href="#">Enquire Now.</a></p>
+                    <p dangerouslySetInnerHTML={{ __html: overview_text }} />
                 </section>
-
                 <section className="favrites_blk_row favrites_blk_small_card_row">
                     <div className="container-md">
                         <h3 className="title_cls">Popular countries in Asia</h3>

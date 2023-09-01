@@ -104,34 +104,40 @@ function Nav() {
         }
     }
 
-    const dynamicLinkCountry = (itemId, itemIdCountry) => {
-        if (itemId && itemId == 'AF') {
-            if (itemIdCountry == 'TZ') {
-                return regionWiseUrl + `/country?countrycode=tanzania`;
-            } else if (itemIdCountry == 'ZA') {
-                return regionWiseUrl + `/country?countrycode=south-africa`;
-            }
-        } else if (itemId && itemId == 'AS') {
-            if (itemIdCountry == 'ID') {
-                return regionWiseUrl + `/country?countrycode=indonesia`;
-            } else if (itemIdCountry == 'JP') {
-                return regionWiseUrl + `/country?countrycode=japan`;
-            }
-        } else if (itemId && itemId == 'AU') {
-            if (itemIdCountry == 'AU') {
-                return regionWiseUrl + `/country?countrycode=australia`;
-            } else if (itemIdCountry == 'NZ') {
-                return regionWiseUrl + `/country?countrycode=new-zealand`;
-            }
-        } else if (itemId && itemId == 'IS') {
-            if (itemIdCountry == 'BT') {
-                return regionWiseUrl + `/country?countrycode=bhutan`;
-            } else if (itemIdCountry == 'IN') {
-                return regionWiseUrl + `/country?countrycode=india`;
-            }
+    const dynamicLinkCountry = (itemId, itemIdCountry, id) => {
+        if (itemId) {
+            return regionWiseUrl + `/country?countrycode=` + id;
         } else {
             return "#";
         }
+
+        // if (itemId && itemId == 'AF') {
+        //     if (itemIdCountry == 'TZ') {
+        //         return regionWiseUrl + `/country?countrycode=tanzania`;
+        //     } else if (itemIdCountry == 'ZA') {
+        //         return regionWiseUrl + `/country?countrycode=south-africa`;
+        //     }
+        // } else if (itemId && itemId == 'AS') {
+        //     if (itemIdCountry == 'ID') {
+        //         return regionWiseUrl + `/country?countrycode=indonesia`;
+        //     } else if (itemIdCountry == 'JP') {
+        //         return regionWiseUrl + `/country?countrycode=japan`;
+        //     }
+        // } else if (itemId && itemId == 'AU') {
+        //     if (itemIdCountry == 'AU') {
+        //         return regionWiseUrl + `/country?countrycode=australia`;
+        //     } else if (itemIdCountry == 'NZ') {
+        //         return regionWiseUrl + `/country?countrycode=new-zealand`;
+        //     }
+        // } else if (itemId && itemId == 'IS') {
+        //     if (itemIdCountry == 'BT') {
+        //         return regionWiseUrl + `/country?countrycode=bhutan`;
+        //     } else if (itemIdCountry == 'IN') {
+        //         return regionWiseUrl + `/country?countrycode=india`;
+        //     }
+        // } else {
+        //     return "#";
+        // }
     };
 
     const dynamicLinkHoliday = (itemId, id) => {
@@ -403,7 +409,7 @@ function Nav() {
                                                                         <ul>
                                                                             {destinationItem?.attributes?.countries?.data.map((destinationCountry, i) => (
                                                                                 <li key={destinationCountry?.id}>
-                                                                                    <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={dynamicLinkCountry(destinationItem?.attributes?.destination_code, destinationCountry?.attributes?.country_code)}>
+                                                                                    <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={dynamicLinkCountry(destinationItem?.attributes?.destination_code, destinationCountry?.attributes?.country_code, destinationCountry?.id)}>
                                                                                         {destinationCountry?.attributes?.country_name}
                                                                                     </NavLink>
                                                                                 </li>
@@ -450,38 +456,38 @@ function Nav() {
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                             </NavLink>
                             {overlayVisible && (
-                            <div className="sub-menu mega-menu mega-menu-column-4">
-                                <div className="row">
-                                    <div className="col-lg-6">
-                                        <div className="row">
-                                            <div className="col-lg-6">
-                                                <div className="header_country_list">
-                                                    <ul>
-                                                        {holidaytypesList?.map((holidaystypesItem, i) => (
-                                                            <li key={holidaystypesItem?.id}
-                                                                className={`header_country_label ${activeIndexHoliday === i ? 'active' : ''}`}
-                                                                onMouseEnter={() => handleMouseEnterHoliday(i)}
-                                                                onMouseLeave={handleMouseLeaveHoliday}>
-                                                                <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={dynamicLinkHoliday(holidaystypesItem?.attributes?.holiday_type_group_code, holidaystypesItem?.id)} as={dynamicLinkHolidayas(holidaystypesItem?.attributes?.holiday_type_group_code, holidaystypesItem?.id)}>
-                                                                    {holidaystypesItem?.attributes?.holiday_type_group_name}
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                                                </NavLink>
-                                                                <div className="header_country_list_inr">
-                                                                    <ul>
-                                                                        {holidaystypesItem?.attributes?.holiday_types?.data.map((holidaytypesCountry, i) => (
-                                                                            <li key={holidaytypesCountry?.id}>
-                                                                                <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={dynamicLinkCountryHoliday(holidaystypesItem?.attributes?.holiday_type_group_code, holidaytypesCountry?.attributes?.holiday_type_code, holidaytypesCountry?.id)}>
-                                                                                    {holidaytypesCountry?.attributes?.holiday_type_name}
-                                                                                </NavLink>
-                                                                            </li>
-                                                                        ))
-                                                                        }
-                                                                    </ul>
-                                                                </div>
-                                                            </li>
-                                                        ))}
+                                <div className="sub-menu mega-menu mega-menu-column-4">
+                                    <div className="row">
+                                        <div className="col-lg-6">
+                                            <div className="row">
+                                                <div className="col-lg-6">
+                                                    <div className="header_country_list">
+                                                        <ul>
+                                                            {holidaytypesList?.map((holidaystypesItem, i) => (
+                                                                <li key={holidaystypesItem?.id}
+                                                                    className={`header_country_label ${activeIndexHoliday === i ? 'active' : ''}`}
+                                                                    onMouseEnter={() => handleMouseEnterHoliday(i)}
+                                                                    onMouseLeave={handleMouseLeaveHoliday}>
+                                                                    <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={dynamicLinkHoliday(holidaystypesItem?.attributes?.holiday_type_group_code, holidaystypesItem?.id)} as={dynamicLinkHolidayas(holidaystypesItem?.attributes?.holiday_type_group_code, holidaystypesItem?.id)}>
+                                                                        {holidaystypesItem?.attributes?.holiday_type_group_name}
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                                                    </NavLink>
+                                                                    <div className="header_country_list_inr">
+                                                                        <ul>
+                                                                            {holidaystypesItem?.attributes?.holiday_types?.data.map((holidaytypesCountry, i) => (
+                                                                                <li key={holidaytypesCountry?.id}>
+                                                                                    <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={dynamicLinkCountryHoliday(holidaystypesItem?.attributes?.holiday_type_group_code, holidaytypesCountry?.attributes?.holiday_type_code, holidaytypesCountry?.id)}>
+                                                                                        {holidaytypesCountry?.attributes?.holiday_type_name}
+                                                                                    </NavLink>
+                                                                                </li>
+                                                                            ))
+                                                                            }
+                                                                        </ul>
+                                                                    </div>
+                                                                </li>
+                                                            ))}
 
-                                                        {/* <li className="header_country_label">
+                                                            {/* <li className="header_country_label">
                                                                 <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types/incredible-journeys'}>Once In A Lifetime Holidays
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </NavLink>
@@ -676,35 +682,35 @@ function Nav() {
                                                                     </button>
                                                                 </div>
                                                             </li> */}
-                                                    </ul>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <div className="row">
-                                            <div className="col-md-6">
-                                                <div className="header_nav_cnt">
-                                                    <h4>FOODIE HOLIDAYS</h4>
-                                                    <p>A big part of any luxury holiday is enjoying the local food and drink. Make the most of it with a foodie-focused holiday, whether that's sampling the gourmet delights of Italy or tasting world-renowned wines in sun-dappled vineyards in stunning worldwide locations.</p>
-                                                    <button className="btn header_nav_btn">Discover more
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                                    </button>
+                                        <div className="col-lg-6">
+                                            <div className="row">
+                                                <div className="col-md-6">
+                                                    <div className="header_nav_cnt">
+                                                        <h4>FOODIE HOLIDAYS</h4>
+                                                        <p>A big part of any luxury holiday is enjoying the local food and drink. Make the most of it with a foodie-focused holiday, whether that's sampling the gourmet delights of Italy or tasting world-renowned wines in sun-dappled vineyards in stunning worldwide locations.</p>
+                                                        <button className="btn header_nav_btn">Discover more
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="col-md-6">
-                                                <div className="header_nav_cnt">
-                                                    <h4>WILDLIFE HOLIDAYS</h4>
-                                                    <p>Come face to face with the world's most iconic animals on an epic luxury wildlife holiday. Go on safari with the Big Five in South Africa, explore the wildlife-rich Galapagos, meet orangutans in Borneo, and see polar bears in Canada or penguins in Antarctica. The options are endless...</p>
-                                                    <button className="btn header_nav_btn">Discover more
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                                    </button>
+                                                <div className="col-md-6">
+                                                    <div className="header_nav_cnt">
+                                                        <h4>WILDLIFE HOLIDAYS</h4>
+                                                        <p>Come face to face with the world's most iconic animals on an epic luxury wildlife holiday. Go on safari with the Big Five in South Africa, explore the wildlife-rich Galapagos, meet orangutans in Borneo, and see polar bears in Canada or penguins in Antarctica. The options are endless...</p>
+                                                        <button className="btn header_nav_btn">Discover more
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             )}
                         </li>
                         <li className="menu-item-has-children"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/special-offers'}>Special offers</NavLink></li>
@@ -714,49 +720,49 @@ function Nav() {
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                             </NavLink>
                             {overlayVisible && (
-                            <div className="sub-menu mega-menu mega-menu-column-4">
-                                <div className="row">
-                                    <div className="col-lg-6">
-                                        <div className="row">
-                                            <div className="col-lg-6">
-                                                <div className="header_country_list">
-                                                    <ul>
-                                                        <li className="header_country_label active"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/about-us">About us</NavLink></li>
-                                                        <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/request-a-brochure">Request a brochure</NavLink></li>
-                                                        <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/creating-your-trip">Creating your trip</NavLink></li>
-                                                        <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/meet-the-exsus-team">Meet the Exsus Team</NavLink></li>
-                                                        <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/client-reviews">Client reviews</NavLink></li>
-                                                        <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/honeymoon-gift-list">Honeymoon Gift List</NavLink></li>
-                                                        <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/contact-us">Contact Us</NavLink></li>
-                                                    </ul>
+                                <div className="sub-menu mega-menu mega-menu-column-4">
+                                    <div className="row">
+                                        <div className="col-lg-6">
+                                            <div className="row">
+                                                <div className="col-lg-6">
+                                                    <div className="header_country_list">
+                                                        <ul>
+                                                            <li className="header_country_label active"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/about-us">About us</NavLink></li>
+                                                            <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/request-a-brochure">Request a brochure</NavLink></li>
+                                                            <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/creating-your-trip">Creating your trip</NavLink></li>
+                                                            <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/meet-the-exsus-team">Meet the Exsus Team</NavLink></li>
+                                                            <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/client-reviews">Client reviews</NavLink></li>
+                                                            <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/honeymoon-gift-list">Honeymoon Gift List</NavLink></li>
+                                                            <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/contact-us">Contact Us</NavLink></li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <div className="row">
-                                            <div className="col-md-6">
-                                                <div className="header_nav_cnt">
-                                                    <h4>MEET OUR EXPERTS</h4>
-                                                    <p>Our passionate and knowledgeable team of well-travelled experts can tailor-make your perfect luxury holiday, honeymoon or family adventure to over 90 destinations all over the world, from Italy to India.</p>
-                                                    <button className="btn header_nav_btn">MEET OUR EXPERTS
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                                    </button>
+                                        <div className="col-lg-6">
+                                            <div className="row">
+                                                <div className="col-md-6">
+                                                    <div className="header_nav_cnt">
+                                                        <h4>MEET OUR EXPERTS</h4>
+                                                        <p>Our passionate and knowledgeable team of well-travelled experts can tailor-make your perfect luxury holiday, honeymoon or family adventure to over 90 destinations all over the world, from Italy to India.</p>
+                                                        <button className="btn header_nav_btn">MEET OUR EXPERTS
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="col-md-6">
-                                                <div className="header_nav_cnt">
-                                                    <h4>What clients say about us</h4>
-                                                    <p>From honeymooners to families, find out what our recent travellers have to say about their holidays with Exsus and how our experts have ensured their experience goes above and beyond, from start to finish.</p>
-                                                    <button className="btn header_nav_btn">Read Our Reviews
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                                    </button>
+                                                <div className="col-md-6">
+                                                    <div className="header_nav_cnt">
+                                                        <h4>What clients say about us</h4>
+                                                        <p>From honeymooners to families, find out what our recent travellers have to say about their holidays with Exsus and how our experts have ensured their experience goes above and beyond, from start to finish.</p>
+                                                        <button className="btn header_nav_btn">Read Our Reviews
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             )}
                         </li>
                         <li className="menu-item-has-children"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/brochure">Brochure</NavLink></li>

@@ -22,7 +22,6 @@ function Index() {
             console.log('x1', x);
             setWhyusDetails(x.data[0].attributes);
         });
-
     }, []);
 
     return (

@@ -32,6 +32,7 @@ function Country() {
     const [selectedOptionCountry, setSelectedOptionCountry] = useState(null);
     const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
     const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
+    const [countryData, setCountryData] = useState(null);
 
     const countryOptions = [
         { value: "", label: "Filter by country" },
@@ -174,9 +175,9 @@ function Country() {
 
     const [redirectUrl, setRedirectUrl] = useState(null);
     const [activeTab, setActiveTab] = useState('overview'); // State to track the active tab
-    const [headingText, setHeadingText] = useState('LUXURY HOLIDAYS IN ' + countrycode.toUpperCase());
- 
-    const toggleTab = (itemId) => {   
+    const [headingText, setHeadingText] = useState('LUXURY HOLIDAYS IN ' + countrycode?.toUpperCase());
+
+    const toggleTab = (itemId) => {
         var text = "LUXURY SAFARI HOLIDAYS IN " + countrycode.toUpperCase();
         if (itemId == 'overview') {
             const redirectUrl = regionWiseUrl + '/country?countrycode=' + countrycode;
@@ -194,7 +195,7 @@ function Country() {
             const redirectUrl = regionWiseUrl + '/countryplacetostay?countrycode=' + countrycode;
             window.history.pushState(null, null, redirectUrl);
             text = "LUXURY HOTELS, CAMPS & LODGES IN " + countrycode.toUpperCase(); // action="/countryplacetostay?countrycode=south-africa"
-        }  else if (itemId == 'when-to-go') {
+        } else if (itemId == 'when-to-go') {
             const redirectUrl = regionWiseUrl + '/countrywhentogo?countrycode=' + countrycode;
             window.history.pushState(null, null, redirectUrl);
             text = "WHEN TO GO TO " + countrycode.toUpperCase(); // action="/countryplacetostay?countrycode=south-africa"
@@ -245,9 +246,15 @@ function Country() {
         const carousel = document.querySelector('#carouselExampleInterval');
         new bootstrap.Carousel(carousel);
 
+        console.log('countrycode', countrycode);
+        if (countrycode) {
+            countriesService.getCountryDetails(countrycode).then(x => {
+                setCountryData(x.data);
+            });
+        }
         window.addEventListener('resize', equalHeight(true));
 
-    }, []);
+    }, [countrycode]);
 
     return (
         <>
@@ -260,7 +267,7 @@ function Country() {
                     <div className="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2" aria-label="Slide 3"></button>
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="3" aria-label="Slide 4"></button>
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="4" aria-label="Slide 5"></button>
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="5" aria-label="Slide 6"></button>
@@ -270,10 +277,19 @@ function Country() {
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="9" aria-label="Slide 10"></button>
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="10" aria-label="Slide 11"></button>
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="11" aria-label="Slide 12"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="12" aria-label="Slide 13"></button>
+                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="12" aria-label="Slide 13"></button> */}
                     </div>
                     <div className="carousel-inner">
-                        <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
+                        {
+                            countryData?.attributes?.country_images?.data?.map((element, index) => (
+                                element?.attributes?.image_type == 'banner' && (
+                                    <NavLink href="#" className="carousel-item active" data-bs-interval="5000" key={index}>
+                                        <div className="banner_commn_cls" style={{ backgroundImage: `url(${`https://d33ys3jnmuivbg.cloudfront.net/ilimages/` + element?.attributes?.image_path})` }}></div>
+                                    </NavLink>
+                                )
+                            ))}
+
+                        {/* <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
                             <div className="banner_commn_cls destination_overvw_banner01"></div>
                         </a>
                         <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
@@ -311,7 +327,7 @@ function Country() {
                         </a>
                         <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="destination_overvw_banner13 banner_commn_cls"></div>
-                        </a>
+                        </a> */}
                     </div>
                 </div>
                 <div className="banner_tab_blk">
@@ -333,15 +349,15 @@ function Country() {
             <section className="destination_tab_row light_grey pb-0">
                 <div className="container-md">
                     <div className="bookmark_row">
-                        {/* <p style={{color: `white`}}>{holidaytypes?.attributes?.page_friendly_url}</p> */}
-                        <ul>
+                        <p style={{ color: `white` }}>{countryData?.attributes?.friendly_url}</p>
+                        {/* <ul>
                             <li><a href="homepage.html">Home</a></li>
                             <li><a href="destinations.html">Destinations</a></li>
                             <li>Asia</li>
-                        </ul>
+                        </ul> */}
                     </div>
                     <div className="destination_tab_inr">
-                        <h2 className="tab_tilte">{headingText}</h2>
+                        <h2 className="tab_tilte">{countryData?.attributes?.header_text}</h2>
                         <ul className="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
                             <li className="nav-item" role="presentation">
                                 <button className={activeTab === 'overview' ? 'active nav-link' : 'nav-link'}
@@ -369,20 +385,20 @@ function Country() {
                 </div>
 
                 <div className="tab-content" id="pills-tabContent">
-                    {activeTab === 'overview' && <div className={activeTab === 'overview' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-overview" role="tabpanel" aria-labelledby="pills-overview-tab" tabIndex="0">                        
-                    <CountryOverview />
+                    {activeTab === 'overview' && <div className={activeTab === 'overview' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-overview" role="tabpanel" aria-labelledby="pills-overview-tab" tabIndex="0">
+                        <CountryOverview data={countryData?.attributes} />
                     </div>}
                     {activeTab === 'regions' && <div className={activeTab === 'regions' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-countries" role="tabpanel" aria-labelledby="pills-countries-tab" tabIndex="0">
-                        <CountryRegions />
+                        <CountryRegions data={countryData?.attributes} />
                     </div>}
                     {activeTab === 'itineraries' && <div className={activeTab === 'itineraries' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-itineraries" role="tabpanel" aria-labelledby="pills-itineraries-tab" tabIndex="0">
-                        <CountrytItinararies />
+                        <CountrytItinararies data={countryData?.attributes} />
                     </div>}
                     {activeTab === 'places-to-stay' && <div className={activeTab === 'places-to-stay' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-places-to-stay" role="tabpanel" aria-labelledby="pills-places-to-stay-tab" tabIndex="0">
-                        <CountryPlacesToStay />
+                        <CountryPlacesToStay data={countryData?.attributes} />
                     </div>}
                     {activeTab === 'when-to-go' && <div className={activeTab === 'when-to-go' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-when-to-go" role="tabpanel" aria-labelledby="pills-when-to-go-tab" tabIndex="0">
-                        <CountryWhentogo />
+                        <CountryWhentogo data={countryData?.attributes} />
                     </div>}
                 </div>
             </section>

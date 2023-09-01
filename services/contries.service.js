@@ -23,7 +23,7 @@ export const countriesService = {
     user: userSubject.asObservable(),
     get userValue() { return userSubject.value },
     getAll,
-    getById,
+    getCountryDetails,
 };
 
 function getAll() {
@@ -31,6 +31,7 @@ function getAll() {
     return fetchWrapper.get(baseUrl);
 }
 
-function getById(id) {
-    return fetchWrapper.get(`${baseUrl}/${id}`);
+function getCountryDetails(id) {
+    const countryPageUrl = `${publicRuntimeConfig.apiUrl}/api/countries/` + id + `?populate[0]=country_images`;
+    return fetchWrapper.get(countryPageUrl);
 }
