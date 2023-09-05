@@ -120,7 +120,7 @@ function Index() {
                     </div>
                     <div className="carousel-inner">
                         {backgroundImage.map((imagePath, index) => (
-                            <NavLink href="#"  className={`carousel-item ${index === 0 ? 'active' : ''}`} data-bs-interval="5000">
+                            <NavLink href="#" className={`carousel-item ${index === 0 ? 'active' : ''}`} data-bs-interval="5000">
                                 <div className="banner_commn_cls" style={{ backgroundImage: `url(${imagePath})` }}></div>
                             </NavLink>
                         ))}

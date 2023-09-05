@@ -19,7 +19,7 @@ function Index() {
         new bootstrap.Carousel(carousel);
 
         aboutusService.getAboutusPage().then(x => {
-            console.log('x1', x);
+            // console.log('x1', x);
             setWhyusDetails(x.data[0].attributes);
         });
 

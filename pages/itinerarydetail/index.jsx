@@ -39,7 +39,7 @@ function Index() {
     equalHeight(true);
 
     const overTextFun = (text) => {
-        return text?.replace(/\\n/g, "");        
+        return text?.replace(/\\n/g, "");
     }
 
     useEffect(() => {
@@ -55,7 +55,7 @@ function Index() {
         });
 
         destinationService.getItineraryDetails().then(x => {
-            debugger;
+            // debugger;
             // console.log('x.data', x.data);
             const bannerImages = [];
             const imageCheck = x.data[0].attributes?.itinerary_details.data;
@@ -66,15 +66,13 @@ function Index() {
                 // }
             });
 
-            console.log('bannerImages', bannerImages);
+            // console.log('bannerImages', bannerImages);
             setBannerImages(bannerImages);
             setItineraries(x.data[0]);
 
-            debugger;
-
             // const carousel = document.querySelector('#Testimonials');
             // new bootstrap.Carousel(carousel);
-    
+
 
             window.addEventListener('resize', equalHeight(true));
         });
@@ -90,9 +88,21 @@ function Index() {
 
             <section className="banner_blk_row">
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
-                <div className="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2"></button>                        
+                    <div className="carousel-indicators">
+                        {bannerImages?.map((element, index) => (
+                            element?.attributes?.image_type == 'banner' && (
+                                <button
+                                    key={index}
+                                    type="button"
+                                    data-bs-target="#carouselExampleInterval"
+                                    data-bs-slide-to={index}
+                                    className={index === 0 ? 'active' : ''}
+                                    aria-current={index === 0 ? 'true' : 'false'}
+                                    aria-label={`Slide ${index + 1}`}
+                                ></button>
+                            )
+                        ))}
+                        {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
                     </div>
                     <div className="carousel-inner">
                         {bannerImages?.map((element, index) => (
@@ -223,13 +233,13 @@ function Index() {
 
 
                     {itineraries?.attributes?.itinerary_details?.data?.map((element, index) => (
-                    <div className="itinery_detls_cntnt">
-                        <div className="row">
-                            <div className="col-sm-7 pe-sm-0">
-                                <div className="itinery_detls_para">
-                                    {/* <h3><span>3 nights</span>BEIJING</h3> */}
-                                    <div dangerouslySetInnerHTML={{ __html: overTextFun(element?.attributes?.overview_text) }} />
-                                    {/* <div className="itinery_detls_expnded">
+                        <div className="itinery_detls_cntnt">
+                            <div className="row">
+                                <div className="col-sm-7 pe-sm-0">
+                                    <div className="itinery_detls_para">
+                                        {/* <h3><span>3 nights</span>BEIJING</h3> */}
+                                        <div dangerouslySetInnerHTML={{ __html: overTextFun(element?.attributes?.overview_text) }} />
+                                        {/* <div className="itinery_detls_expnded">
                                         <p>from the East Gate. You’ll enjoy a private guided tour of the palace, which was the summer retreat of the royals of the Qing dynasty, walking along its pretty waterfront paths and around landscaped gardens.</p>
                                         <p>During your stay here you’ll also be expertly guided around many of Beijing’s other landmarks, including Tiananmen Square, the unmissable Forbidden City, an impressive complex dating back to the Ming and Qing dynasties, and the Temple of Heaven, where you can join in a local tai chi session. In the evening, visit a bustling night market and feast on Peking duck at one of the city’s best restaurants.</p>
                                         <p>You’ll also spend a day visiting the iconic Great Wall, including a tour of the Tibetan-Buddhist Lama Temple on the way. Get under the wall’s skin with a guided tour of Mutianyu, one of the best-preserved sections of the wall.</p>
@@ -237,15 +247,15 @@ function Index() {
                                     <button className="btn itinery_btn">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" className="up_arrow" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
                                     </button> */}
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="col-sm-5 ps-sm-0">
-                                <div className="itinery_detls_img">
-                                    <img src={element?.attributes?.image_path} alt="itinery_cntnt01" className="img-fluid" />
+                                <div className="col-sm-5 ps-sm-0">
+                                    <div className="itinery_detls_img">
+                                        <img src={element?.attributes?.image_path} alt="itinery_cntnt01" className="img-fluid" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     ))}
 
                     {/* <div className="itinery_detls_cntnt">
