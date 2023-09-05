@@ -18,7 +18,7 @@ function Index() {
     const [destinations, setDestinations] = useState();
     // const [destinationLandingDetails, setDestinationLandingDetails] = useState();
     const [destinationLandingList, setDestinationLandingList] = useState();
-    const [backgroundImage, setBackgroundImage] = useState('');
+    const [backgroundImage, setBackgroundImage] = useState([]);
     const [backgroundImgWhentogo, setBackgroundImgWhentogo] = useState('');
     const [visible, setVisible] = useState(2);
     const [visiblePagination, setVisiblePagination] = useState(true);
@@ -65,13 +65,16 @@ function Index() {
             setDestinations(x.data[0]);
             // setDestinationLandingDetails(x)
             const imageCheck = x.data[0].attributes.custom_page_images.data;
+            const newBackgroundImages = [];
             imageCheck.forEach(element => {
                 if (element.attributes.image_type == 'center') {
                     setBackgroundImgWhentogo("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + element.attributes.image_path);
                 } else if (element.attributes.image_type == 'banner') {
-                    setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/mc" + element.attributes.image_path);
+                    newBackgroundImages.push("https://d33ys3jnmuivbg.cloudfront.net/ilimages/mc" + element.attributes.image_path);
+                    // setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/mc" + element.attributes.image_path);
                 }
             });
+            setBackgroundImage(newBackgroundImages);
         });
 
         destinationService.getDestinationLandingList().then(x => {
@@ -102,12 +105,28 @@ function Index() {
                 </Carousel> */}
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+                        {backgroundImage.map((_, index) => (
+                            <button
+                                key={index}
+                                type="button"
+                                data-bs-target="#carouselExampleInterval"
+                                data-bs-slide-to={index}
+                                className={index === 0 ? 'active' : ''}
+                                aria-current={index === 0 ? 'true' : 'false'}
+                                aria-label={`Slide ${index + 1}`}
+                            ></button>
+                        ))}
+                        {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
                     </div>
                     <div className="carousel-inner">
-                        <NavLink href="#" className="carousel-item active" data-bs-interval="5000">
+                        {backgroundImage.map((imagePath, index) => (
+                            <NavLink href="#"  className={`carousel-item ${index === 0 ? 'active' : ''}`} data-bs-interval="5000">
+                                <div className="banner_commn_cls" style={{ backgroundImage: `url(${imagePath})` }}></div>
+                            </NavLink>
+                        ))}
+                        {/* <NavLink href="#" className="carousel-item active" data-bs-interval="5000">
                             <div className="banner_commn_cls" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
-                        </NavLink>
+                        </NavLink> */}
                     </div>
                 </div>
                 <Inspireme />
@@ -116,7 +135,7 @@ function Index() {
             <section className="card_blk_row destinations_blk_row light_grey">
                 <div className="container-md">
                     <div className="bookmark_row">
-                        <p style={{color: `white`}}>{destinations?.attributes?.page_friendly_url}</p>
+                        <p style={{ color: `white` }}>{destinations?.attributes?.page_friendly_url}</p>
                         {/* <ul>
                             <li><NavLink href="homepage.html">Home</NavLink></li>
                             <li>Destinations</li>

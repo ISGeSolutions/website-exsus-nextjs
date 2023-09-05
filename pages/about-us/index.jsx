@@ -30,10 +30,23 @@ function Index() {
             <section className="banner_blk_row">
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+                        {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
                         {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2"></button> */}
                         {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2" aria-label="Slide 3"></button>
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="3" aria-label="Slide 4"></button> */}
+                        {whyusDetails?.custom_page_images?.data?.map((element, index) => (
+                            element?.attributes?.image_type == 'banner' && (
+                                <button
+                                    key={index}
+                                    type="button"
+                                    data-bs-target="#carouselExampleInterval"
+                                    data-bs-slide-to={index}
+                                    className={index === 0 ? 'active' : ''}
+                                    aria-current={index === 0 ? 'true' : 'false'}
+                                    aria-label={`Slide ${index + 1}`}
+                                ></button>
+                            )
+                        ))}
                     </div>
                     <div className="carousel-inner">
                         {

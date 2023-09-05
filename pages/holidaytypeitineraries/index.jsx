@@ -14,7 +14,7 @@ export default Index;
 function Index() {
     const [users, setUsers] = useState(null);
     const [holidaytypesDetails, setHolidaytypesDetails] = useState();
-    const [backgroundImage, setBackgroundImage] = useState('');
+    const [backgroundImage, setBackgroundImage] = useState([]);
     const [valueWithBr, setnewValueWithBr] = useState('');
     const [headingText, setHeadingText] = useState('LUXURY SAFARI HOLIDAYS IN AFRICA');
     const [itineraries, setItineraries] = useState(null);
@@ -163,14 +163,16 @@ function Index() {
             // console.log('x.data.attributes.holiday_type_group_images.data[0].attributes.image_path2', 'https://d33ys3jnmuivbg.cloudfront.net/ilimages/' + x.data.attributes.holiday_type_group_images.data[0].attributes.image_path);
 
             const imageCheck = x.data.attributes.holiday_type_group_images.data;
-            // console.log('imageCheck', imageCheck);
+            const newBackgroundImages = [];
             imageCheck.forEach(element => {
                 if (element.attributes.image_type == 'banner') {
-                    setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data.attributes.holiday_type_group_images.data[0].attributes.image_path);
+                    newBackgroundImages.push("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + element.attributes.image_path);
+                    // setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data.attributes.holiday_type_group_images.data[0].attributes.image_path);
                 } else if (element.attributes.image_type == 'thumbnail') {
                     // setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data.attributes.holiday_type_group_images.data[0].attributes.image_path);
                 }
             });
+            setBackgroundImage(newBackgroundImages);
         });
 
         destinationService.getAllItineraries().then(x => {
@@ -189,13 +191,28 @@ function Index() {
             <section className="banner_blk_row">
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+                        {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
+                        {backgroundImage.map((_, index) => (
+                            <button
+                                key={index}
+                                type="button"
+                                data-bs-target="#carouselExampleInterval"
+                                data-bs-slide-to={index}
+                                className={index === 0 ? 'active' : ''}
+                                aria-current={index === 0 ? 'true' : 'false'}
+                                aria-label={`Slide ${index + 1}`}
+                            ></button>
+                        ))}
                     </div>
                     <div className="carousel-inner">
                         <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
-                            {/* {backgroundImage} */}
-                            <div className="banner_commn_cls"> {/*  holiday_types_detls_banner */}
-                                <img src={backgroundImage} alt="holiday_types_detls_card02" className="img-fluid" />
+                            <div className="banner_commn_cls">
+                                {backgroundImage.map((imagePath, index) => (
+                                    <img src={imagePath} alt="holiday_types_detls_card02" className="img-fluid" />
+                                    //     <NavLink href="#"  className={`carousel-item ${index === 0 ? 'active' : ''}`} data-bs-interval="5000">
+                                    //     <div className="banner_commn_cls" style={{ backgroundImage: `url(${imagePath})` }}></div>
+                                    // </NavLink>
+                                ))}
                             </div>
                         </a>
                     </div>
@@ -217,7 +234,7 @@ function Index() {
             <section className="destination_tab_row light_grey">
                 <div className="container">
                     <div className="bookmark_row">
-                    <p style={{ color: `white` }}>{holidaytypesDetails?.friendly_url}</p>
+                        <p style={{ color: `white` }}>{holidaytypesDetails?.friendly_url}</p>
                         {/* <ul>
                             <li><a href="homepage.html">Home</a></li>
                             <li><a href="holiday_types_landing.html">Holiday Types</a></li>

@@ -14,7 +14,7 @@ function Index() {
     const [users, setUsers] = useState(null);
     const [holidayTypes, setholidayTypes] = useState(null);
     const [holidaytypesDetails, setHolidaytypesDetails] = useState();
-    const [backgroundImage, setBackgroundImage] = useState('');
+    const [backgroundImage, setBackgroundImage] = useState([]);
     const [valueWithBr, setnewValueWithBr] = useState('');
     const [headingText, setHeadingText] = useState('LUXURY SAFARI HOLIDAYS IN AFRICA');
     const [itineraries, setItineraries] = useState(null);
@@ -174,15 +174,16 @@ function Index() {
             // console.log('x.data.attributes.holiday_type_images.data[0].attributes.image_path2', 'https://d33ys3jnmuivbg.cloudfront.net/ilimages/' + x.data.attributes.holiday_type_images.data[0].attributes.image_path);
 
             const imageCheck = x.data.attributes.holiday_type_images.data;
-            // console.log('imageCheck', imageCheck);
+            const newBackgroundImages = [];
             imageCheck.forEach(element => {
                 if (element.attributes.image_type == 'banner') {
-                    // console.log('x.data.attributes.holiday_type_images.data[0].attributes.image_path', x.data.attributes.holiday_type_images.data[0].attributes.image_path);
-                    setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data.attributes.holiday_type_images.data[0].attributes.image_path);
+                    newBackgroundImages.push("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + element.attributes.image_path);
+                    // setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data.attributes.holiday_type_images.data[0].attributes.image_path);
                 } else if (element.attributes.image_type == 'thumbnail') {
                     // setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data.attributes.holiday_type_images.data[0].attributes.image_path);
                 }
             });
+            setBackgroundImage(newBackgroundImages);
         });
 
         // console.log('background image', backgroundImage);
@@ -193,11 +194,30 @@ function Index() {
     return (
         <>
             <section className="banner_blk_row">
-                <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
+            <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
+                    <div className="carousel-indicators">
+                        {backgroundImage.map((_, index) => (
+                            <button
+                                key={index}
+                                type="button"
+                                data-bs-target="#carouselExampleInterval"
+                                data-bs-slide-to={index}
+                                className={index === 0 ? 'active' : ''}
+                                aria-current={index === 0 ? 'true' : 'false'}
+                                aria-label={`Slide ${index + 1}`}
+                            ></button>
+                        ))}
+                        {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
+                    </div>
                     <div className="carousel-inner">
-                        <NavLink href="#" className="carousel-item active" data-bs-interval="5000">
+                    {backgroundImage.map((imagePath, index) => (
+                            <NavLink href="#"  className={`carousel-item ${index === 0 ? 'active' : ''}`} data-bs-interval="5000">
+                                <div className="banner_commn_cls" style={{ backgroundImage: `url(${imagePath})` }}></div>
+                            </NavLink>
+                        ))}
+                        {/* <NavLink href="#" className="carousel-item active" data-bs-interval="5000">
                             <div className="banner_commn_cls" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
-                        </NavLink>
+                        </NavLink> */}
                         {/* <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
                             <div className="banner_commn_cls"> 
                                 <img src={backgroundImage} alt="holiday_types_detls_card02" className="img-fluid" />
