@@ -15,7 +15,7 @@ export default Index;
 
 function Index() {
     const [destinationDetails, setDestinationDetails] = useState();
-    const [backgroundImage, setBackgroundImage] = useState('');
+    const [backgroundImage, setBackgroundImage] = useState([]);
     const [headingText, setHeadingText] = useState('LUXURY SAFARI HOLIDAYS IN AFRICA');
     const [mapVariable, setMapVariable] = useState(null);
     const [activeTab, setActiveTab] = useState('overview'); // State to track the active tab
@@ -87,9 +87,9 @@ function Index() {
         // });
 
         // let id = 1;
+        // console.log(router.query)
         destinationService.getDestinationDetails(destinationcode).then(x => {
             setDestinationDetails(x.data.attributes);
-
             const map_latitude = x.data.attributes?.map_latitude;
             const map_longitude = x.data.attributes?.map_longitude;
             // const map_latitude = "40.7128";
@@ -103,12 +103,17 @@ function Index() {
             // var newValueWithBr = oldText?.replace(/\\n/g, "");
             // setnewValueWithBr(newValueWithBr);
             const imageCheck = x.data.attributes.destination_images.data;
+            const newBackgroundImages = [];
             imageCheck.forEach(element => {
                 if (element.attributes.image_type == 'main') {
-                    setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + element.attributes.image_path);
+                    newBackgroundImages.push(
+                        `https://d33ys3jnmuivbg.cloudfront.net/ilimages${element.attributes.image_path}`
+                    );
                 } else if (element.attributes.image_type == 'thumbnail') {
+
                 }
             });
+            setBackgroundImage(newBackgroundImages);
             // setDestinationLandingDetails(x)
         });
 
@@ -144,16 +149,28 @@ function Index() {
             <section className="banner_blk_row">
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+                        {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
+                        {backgroundImage.map((_, index) => (
+                            <button
+                                key={index}
+                                type="button"
+                                data-bs-target="#carouselExampleInterval"
+                                data-bs-slide-to={index}
+                                className={index === 0 ? 'active' : ''}
+                                aria-current={index === 0 ? 'true' : 'false'}
+                                aria-label={`Slide ${index + 1}`}
+                            ></button>
+                        ))}
                     </div>
                     <div className="carousel-inner">
-                        <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
-                            <div className="banner_commn_cls" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
-                        </a>
+                        {backgroundImage.map((imagePath, index) => (
+                            <a href="#" key={index} target="_blank" className={`carousel-item ${index === 0 ? 'active' : ''}`} data-bs-interval="5000">
+                                <div className="banner_commn_cls" style={{ backgroundImage: `url(${imagePath})` }}></div>
+                            </a>
+                        ))}
                     </div>
                 </div>
                 <div className="banner_tab_blk">
-
                     <button className="btn banner_map_tab">Map</button>
                     <button className="btn banner_img_tab banner_tab_active">Images</button>
                 </div>
