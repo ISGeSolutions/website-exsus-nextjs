@@ -1,27 +1,91 @@
 import { useState, useEffect } from 'react';
-import { Link, Spinner, Signup } from 'components';
 import { destinationService, alertService, userService } from 'services';
-import { Inspireme } from 'components';
-import Head from 'next/head';
 import { NavLink } from 'components';
 import { useRouter } from 'next/router';
-import generateDynamicLink from 'components/utils/generateLink';
-import Image from "next/image";
-// import Select from 'react-select';
-
+// import stylesCon from './ContinentItenararies.module.css';
 import React from 'react';
-
-import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
-
-const animatedComponents = makeAnimated();
+import Select, { components } from 'react-select';
+import CustomMultiValue from "./CustomMultiValue";
 
 export default ContinentItinararies;
 
+const width = "250px";
+const styles = {
+    control: (provided) => ({
+        ...provided,
+        width
+    }),
+    menu: (provided) => ({
+        ...provided,
+        width
+    }),
+    valueContainer: (provided, state) => ({
+        whiteSpace: "nowrap",
+        // textOverflow: "ellipsis",
+        overflow: "hidden",
+        flex: "1 1 0%",
+        position: "relative"
+    }),
+    input: (provided, state) => ({
+        ...provided,
+        display: "inline"
+    })
+};
+
+const InputOption = ({
+    getStyles,
+    Icon,
+    isDisabled,
+    isFocused,
+    isSelected,
+    children,
+    innerProps,
+    ...rest
+}) => {
+    const [isActive, setIsActive] = useState(false);
+    const onMouseDown = () => setIsActive(true);
+    const onMouseUp = () => setIsActive(false);
+    const onMouseLeave = () => setIsActive(false);
+
+    // styles
+    let bg = "transparent";
+    if (isFocused) bg = "#eee";
+    if (isActive) bg = "#B2D4FF";
+
+    const style = {
+        alignItems: "center",
+        backgroundColor: bg,
+        color: "inherit",
+        display: "flex "
+    };
+
+    // prop assignment
+    const props = {
+        ...innerProps,
+        onMouseDown,
+        onMouseUp,
+        onMouseLeave,
+        style
+    };
+
+    return (
+        <components.Option
+            {...rest}
+            isDisabled={isDisabled}
+            isFocused={isFocused}
+            isSelected={isSelected}
+            getStyles={getStyles}
+            innerProps={props}
+        >
+            <input type="checkbox" checked={isSelected} readOnly />
+            {children}
+        </components.Option>
+    );
+};
+
 function ContinentItinararies() {
- 
     const [isClearable, setIsClearable] = useState(true);
-    const [isSearchable, setIsSearchable] = useState(true);
+    const [isSearchable, setIsSearchable] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isRtl, setIsRtl] = useState(false);
@@ -32,7 +96,7 @@ function ContinentItinararies() {
     const [visible, setVisible] = useState(3);
     const [visiblePagination, setVisiblePagination] = useState(true);
     const itemsPerPage = 9; // Number of items to load per page
-    const [visibleItems, setVisibleItems] = useState(itemsPerPage)
+    const [visibleItems, setVisibleItems] = useState(itemsPerPage);
 
     const router = useRouter();
 
@@ -116,8 +180,6 @@ function ContinentItinararies() {
         const [visibleItems, setVisibleItems] = useState(itemsPerPage);
     }
 
-
-
     const handleOptionCountryChange = (selectedOption) => {
         selectedOption = selectedOption.filter((i) => i.value !== '' && typeof i.value !== 'undefined');
         setSelectedOptionCountry(selectedOption);
@@ -134,7 +196,7 @@ function ContinentItinararies() {
         selectedOption = selectedOption.filter((i) => i.value !== '' && typeof i.value !== 'undefined');
         setSelectedOptionMonth(selectedOption);
     };
-    
+
     const freshProds = [
         {
             id: "1",
@@ -317,9 +379,10 @@ function ContinentItinararies() {
     equalHeight(true);
 
     useEffect(() => {
-        setSelectedOptionCountry(countryOptions[0]);
-        setSelectedOptionRegion(regionOptions[0]);
-        setSelectedOptionMonth(monthOptions[0]);
+        console.log('refresh');
+        setSelectedOptionCountry();
+        setSelectedOptionRegion();
+        setSelectedOptionMonth();
 
         destinationService.getAllItineraries().then(x => {
             setItineraries(x.data);
@@ -336,10 +399,9 @@ function ContinentItinararies() {
                     <p>From the gems of South-East Asia, to the exotic Far East and exquisite Southern Asia, we've put together the following Asia holiday itineraries below to inspire you. Call 020 7337 9010 and speak to one of our experts to create your perfect bespoke Asia holiday.</p>
                 </section>
             </div>
-
             <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
                 <div className="container-md">
-                    <h3 className="title_cls">All Luxury Holiday Ideas in Asia</h3>
+                    <h3 className="title_cls">221All Luxury Holiday Ideas in Asia</h3>
                     <div className="card_slider_row">
                         <div className="carousel00">
                             <div className="row">
@@ -348,6 +410,25 @@ function ContinentItinararies() {
                                         <div className="dropdown_grp_blk">
                                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                                                 <Select
+                                                    placeholder={"Filter by country"}
+                                                    styles={styles}
+                                                    isMulti
+                                                    isDisabled={isDisabled}
+                                                    isLoading={isLoading}
+                                                    isClearable={isClearable}
+                                                    isRtl={isRtl}
+                                                    isSearchable={isSearchable}
+                                                    value={selectedOptionCountry}
+                                                    onChange={handleOptionCountryChange}
+                                                    closeMenuOnSelect={false}
+                                                    hideSelectedOptions={false}
+                                                    options={countryOptions}
+                                                    components={{
+                                                        Option: InputOption, MultiValue: CustomMultiValue
+                                                    }}
+                                                />
+                                                {/* <pre>{JSON.stringify({ selected: selectedOptions }, null, 2)}</pre> */}
+                                                {/* <Select
                                                     placeholder="Filter by country"
                                                     // defaultValue={countryOptions[0]}
                                                     isDisabled={isDisabled}
@@ -360,7 +441,7 @@ function ContinentItinararies() {
                                                     isMulti
                                                     // value={selectedOptionCountry}
                                                     onChange={handleOptionCountryChange}
-                                                />
+                                                /> */}
                                             </div>
                                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                                                 <Select
@@ -450,11 +531,11 @@ function ContinentItinararies() {
                                 )}
 
                                 <div className="col-12">
-                                {visibleItems < itineraries?.length && (
-                                    <button className="btn prmry_btn make_enqury_btn mx-auto text-uppercase" onClick={handleLoadMore}>Show 9 more holiday ideas
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
-                                    </button>
-                                )}
+                                    {visibleItems < itineraries?.length && (
+                                        <button className="btn prmry_btn make_enqury_btn mx-auto text-uppercase" onClick={handleLoadMore}>Show 9 more holiday ideas
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         </div>
