@@ -83,6 +83,7 @@ function Index() {
         <>
             <Head>
                 <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
+                <script type="text/javascript" src="/assets/javascripts/card-slider02.js"></script>
                 <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script>
             </Head>
 
@@ -492,12 +493,12 @@ function Index() {
             <section className="favrites_blk_row light_grey">
                 <div className="container-md">
                     <h3 className="title_cls">More itineraries in China</h3>
-                    <div className="card_slider_row">
+                    <div className="card_slider_row01">
                         <i id="leftt">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z" /></svg>
                         </i>
                         <div className="carousel01">
-                            <div className="card_slider_inr">
+                            <div className="card_slider_inr01">
                                 <div className="card_slider">
                                     <a className="card_slider_img">
                                         <img src="../../../../../images/country_card04.jpg" alt="country card04" className="img-fluid" />
@@ -518,7 +519,7 @@ function Index() {
                                 </div>
                             </div>
 
-                            <div className="card_slider_inr">
+                            <div className="card_slider_inr01">
                                 <div className="card_slider">
                                     <div className="card_slider_img">
                                         <img src="../../../../../images/country_card02.jpg" alt="country card02" className="img-fluid" />
@@ -539,7 +540,7 @@ function Index() {
                                 </div>
                             </div>
 
-                            <div className="card_slider_inr">
+                            <div className="card_slider_inr01">
                                 <div className="card_slider">
                                     <div className="card_slider_img">
                                         <img src="../../../../../images/country_card03.jpg" alt="country card03" className="img-fluid" />
@@ -560,7 +561,7 @@ function Index() {
                                 </div>
                             </div>
 
-                            <div className="card_slider_inr">
+                            <div className="card_slider_inr01">
                                 <div className="card_slider">
                                     <div className="card_slider_img">
                                         <img src="../../../../../images/country_card06.jpg" alt="country card06" className="img-fluid" />
