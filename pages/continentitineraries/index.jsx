@@ -401,7 +401,7 @@ function ContinentItinararies() {
             </div>
             <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
                 <div className="container-md">
-                    <h3 className="title_cls">221All Luxury Holiday Ideas in Asia</h3>
+                    <h3 className="title_cls">All Luxury Holiday Ideas in Asia</h3>
                     <div className="card_slider_row">
                         <div className="carousel00">
                             <div className="row">
