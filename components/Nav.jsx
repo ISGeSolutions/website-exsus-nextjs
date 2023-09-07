@@ -261,7 +261,7 @@ function Nav() {
         document.body.appendChild(script);
 
         destinationService.getDestinationLandingList().then(x => {
-            // console.log('x.data', x.data);
+            console.log('x.data', x.data);
             setDestinationLandingList(x.data);
         });
 
@@ -397,7 +397,7 @@ function Nav() {
                                                     <div className="header_country_list">
                                                         <ul>
                                                             {destinationLandingList?.map((destinationItem, i) => (
-                                                                <li key={destinationItem?.id}
+                                                                <li key={i}
                                                                     className={`header_country_label ${activeIndex === i ? 'active' : ''}`}
                                                                     onMouseEnter={() => handleMouseEnter(i)}
                                                                     onMouseLeave={handleMouseLeave}>
@@ -408,7 +408,7 @@ function Nav() {
                                                                     <div className="header_country_list_inr">
                                                                         <ul>
                                                                             {destinationItem?.attributes?.countries?.data.map((destinationCountry, i) => (
-                                                                                <li key={destinationCountry?.id}>
+                                                                                <li key={i}>
                                                                                     <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={dynamicLinkCountry(destinationItem?.attributes?.destination_code, destinationCountry?.attributes?.country_code, destinationCountry?.id)}>
                                                                                         {destinationCountry?.attributes?.country_name}
                                                                                     </NavLink>
