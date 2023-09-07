@@ -12,7 +12,7 @@ export default Index;
 
 function Index() {
 
-    const [thumbnailImage, setThumbnailImageArr] = useState([]);
+    const [thumbnailImage, setThumbnailImageArr] = useState();
     const [itineraries, setItineraries] = useState(null);
 
     let regionWiseUrl = '/uk';
