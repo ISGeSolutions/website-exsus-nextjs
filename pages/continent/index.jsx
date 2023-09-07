@@ -105,10 +105,8 @@ function Index() {
             const imageCheck = x.data.attributes.destination_images.data;
             const newBackgroundImages = [];
             imageCheck.forEach(element => {
-                if (element.attributes.image_type == 'main') {
-                    newBackgroundImages.push(
-                        `https://d33ys3jnmuivbg.cloudfront.net/ilimages${element.attributes.image_path}`
-                    );
+                if (element.attributes.image_type == 'banner') {
+                    newBackgroundImages.push(element.attributes.image_path);
                 } else if (element.attributes.image_type == 'thumbnail') {
 
                 }

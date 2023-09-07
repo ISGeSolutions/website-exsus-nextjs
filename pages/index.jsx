@@ -34,7 +34,7 @@ function Index() {
     };
 
     const dynamicThumbnailImage = (itemId) => {
-        return `https://d33ys3jnmuivbg.cloudfront.net/ilimages/` + itemId;
+        return itemId;
     }
 
     const equalHeight = (resize) => {
@@ -55,7 +55,7 @@ function Index() {
             if (resize === false) {
                 elements[i].className = elements[i].className + " show";
             }
-        } 
+        }
     }
 
     equalHeight(true);
@@ -236,7 +236,7 @@ function Index() {
                                         <NavLink href={generateDynamicLink(item)} className="card_slider_img">
                                             {item?.attributes?.itinerary_images?.data.map((element, index) => (
                                                 element.attributes.image_type == 'thumbnail' ? (
-                                                    <img key={index} src={`https://d33ys3jnmuivbg.cloudfront.net/ilimages` + element.attributes.image_path} alt="destination card01" className="img-fluid" />
+                                                    <img key={index} src={element.attributes.image_path} alt="destination card01" className="img-fluid" />
                                                 ) : (
                                                     ''
                                                 )
@@ -269,7 +269,7 @@ function Index() {
             </section>
 
 
-            <section aria-label="Client Testimonials" className="testimonials_blk_row">                
+            <section aria-label="Client Testimonials" className="testimonials_blk_row">
                 <div className="container-md">
                     <div id="Testimonials" className="carousel slide" data-bs-ride="carousel">
                         <div className="carousel-indicators">

@@ -6,6 +6,8 @@ import { userService, holidaytypesService } from 'services';
 import { Inspireme } from 'components';
 import generateDynamicLink from 'components/utils/generateLink';
 import { NavLink } from 'components';
+import { useRouter } from 'next/router';
+
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 var Carousel = require('react-responsive-carousel').Carousel;
@@ -22,6 +24,22 @@ function Index() {
     const [backgroundImgWhentogo, setBackgroundImgWhentogo] = useState('');
     const [bannerImageArr, setBannerImageArr] = useState([]);
     const [thumbnailImageArr, setThumbnailImageArr] = useState([]);
+
+
+    const EnquiryButton = () => {
+        const router = useRouter();
+
+        const handleEnquiryClick = () => {
+            router.push('/contact-us'); // Navigate to the /enquiry page
+        };
+
+        return (
+            <button className="btn prmry_btn make_enqury_btn" onClick={handleEnquiryClick}>
+                Make an enquiry
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+            </button>
+        );
+    };
 
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
@@ -76,11 +94,11 @@ function Index() {
     }
 
     const dynamicBannerImage = (item) => {
-        return `https://d33ys3jnmuivbg.cloudfront.net/ilimages/` + item;
+        return item;
     }
 
     const dynamicThumbnailImage = (item) => {
-        return `https://d33ys3jnmuivbg.cloudfront.net/ilimages/` + item;
+        return item;
     }
 
     useEffect(() => {
@@ -89,13 +107,13 @@ function Index() {
             // console.log('holidaytypesService.getHolidaytypes', x);
             setHolidayTypes(x.data[0]);
             // setDestinationLandingDetails(x);
-            const imageCheck = x.data[0].attributes.custom_page_images.data;
+            const imageCheck = x?.data[0]?.attributes?.custom_page_images?.data;
             const newBackgroundImages = [];
-            imageCheck.forEach(element => {
+            imageCheck?.forEach(element => {
                 if (element.attributes.image_type == 'center') {
-                    setBackgroundImgWhentogo("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + x.data[0].attributes.custom_page_images.data[1].attributes.image_path);
+                    setBackgroundImgWhentogo(x.data[0].attributes.custom_page_images.data[1].attributes.image_path);
                 } else if (element.attributes.image_type == 'banner') {
-                    newBackgroundImages.push("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + element.attributes.image_path);
+                    newBackgroundImages.push(element.attributes.image_path);
                     // setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data[0].attributes.custom_page_images.data[0].attributes.image_path);
                 }
             });
@@ -142,7 +160,7 @@ function Index() {
                 </Carousel> */}
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">
-                    {backgroundImage.map((_, index) => (
+                        {backgroundImage.map((_, index) => (
                             <button
                                 key={index}
                                 type="button"
@@ -160,7 +178,7 @@ function Index() {
                             <div className="banner_commn_cls" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
                         </NavLink> */}
                         {backgroundImage.map((imagePath, index) => (
-                            <NavLink href="#"  className={`carousel-item ${index === 0 ? 'active' : ''}`} data-bs-interval="5000">
+                            <NavLink href="#" className={`carousel-item ${index === 0 ? 'active' : ''}`} data-bs-interval="5000">
                                 <div className="banner_commn_cls" style={{ backgroundImage: `url(${imagePath})` }}></div>
                             </NavLink>
                         ))}
@@ -331,9 +349,7 @@ function Index() {
                     <p>
                         {holidaytypes?.attributes?.page_content_4}
                     </p>
-                    <button className="btn prmry_btn make_enqury_btn">Make an enquiry
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                    </button>
+                    <EnquiryButton />
                 </div>
             </section>
 

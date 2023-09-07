@@ -33,7 +33,7 @@ function Index() {
     }
 
     const dynamicImage = (itemId) => {
-        return `https://d33ys3jnmuivbg.cloudfront.net/ilimages/` + itemId;
+        return itemId;
     }
 
     const dynamicLink = (itemId, id) => {
@@ -68,9 +68,9 @@ function Index() {
             const newBackgroundImages = [];
             imageCheck.forEach(element => {
                 if (element.attributes.image_type == 'center') {
-                    setBackgroundImgWhentogo("https://d33ys3jnmuivbg.cloudfront.net/ilimages" + element.attributes.image_path);
+                    setBackgroundImgWhentogo(element.attributes.image_path);
                 } else if (element.attributes.image_type == 'banner') {
-                    newBackgroundImages.push("https://d33ys3jnmuivbg.cloudfront.net/ilimages/mc" + element.attributes.image_path);
+                    newBackgroundImages.push(element.attributes.image_path);
                     // setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/mc" + element.attributes.image_path);
                 }
             });
@@ -161,7 +161,7 @@ function Index() {
                             <div className="col-sm-6" key={destinationItem?.id}>
                                 <div className="card_blk_inr">
                                     <NavLink href={dynamicLink(destinationItem?.attributes?.destination_code, destinationItem?.id)}>
-                                        <img src={dynamicImage(destinationItem?.attributes?.destination_images?.data[1].attributes.image_path)} alt="destination01" className="img-fluid" />
+                                        <img src={dynamicImage(destinationItem?.attributes?.destination_images?.data[1]?.attributes.image_path)} alt="destination01" className="img-fluid" />
                                         {/* <img src="./../images/destination01.jpg" alt="destination01" className="img-fluid" /> */}
                                         <div className="card_blk_cntnt card_blk_sml_arw">
                                             <div className="row align-items-center">

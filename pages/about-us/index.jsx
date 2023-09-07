@@ -20,7 +20,7 @@ function Index() {
 
         aboutusService.getAboutusPage().then(x => {
             // console.log('x1', x);
-            setWhyusDetails(x.data[0].attributes);
+            setWhyusDetails(x.data.attributes);
         });
 
     }, []);
@@ -53,7 +53,7 @@ function Index() {
                             whyusDetails?.custom_page_images?.data?.map((element, index) => (
                                 element?.attributes?.image_type == 'banner' && (
                                     <NavLink href="#" className="carousel-item active" data-bs-interval="5000" key={index}>
-                                        <div className="banner_commn_cls" style={{ backgroundImage: `url(${`https://d33ys3jnmuivbg.cloudfront.net/ilimages` + element?.attributes?.image_path})` }}></div>
+                                        <div className="banner_commn_cls" style={{ backgroundImage: `url(${element?.attributes?.image_path})` }}></div>
                                     </NavLink>
                                 )
                             ))}

@@ -177,7 +177,7 @@ function Index() {
             const newBackgroundImages = [];
             imageCheck.forEach(element => {
                 if (element.attributes.image_type == 'banner') {
-                    newBackgroundImages.push("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + element.attributes.image_path);
+                    newBackgroundImages.push(element.attributes.image_path);
                     // setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data.attributes.holiday_type_images.data[0].attributes.image_path);
                 } else if (element.attributes.image_type == 'thumbnail') {
                     // setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data.attributes.holiday_type_images.data[0].attributes.image_path);
@@ -194,7 +194,7 @@ function Index() {
     return (
         <>
             <section className="banner_blk_row">
-            <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
+                <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">
                         {backgroundImage.map((_, index) => (
                             <button
@@ -210,8 +210,8 @@ function Index() {
                         {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
                     </div>
                     <div className="carousel-inner">
-                    {backgroundImage.map((imagePath, index) => (
-                            <NavLink href="#"  className={`carousel-item ${index === 0 ? 'active' : ''}`} data-bs-interval="5000">
+                        {backgroundImage.map((imagePath, index) => (
+                            <NavLink href="#" className={`carousel-item ${index === 0 ? 'active' : ''}`} data-bs-interval="5000">
                                 <div className="banner_commn_cls" style={{ backgroundImage: `url(${imagePath})` }}></div>
                             </NavLink>
                         ))}
