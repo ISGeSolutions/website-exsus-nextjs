@@ -4,6 +4,8 @@ import { Link, Spinner } from 'components';
 import { Layout } from 'components/users';
 import { whyusService } from 'services';
 import { NavLink } from 'components';
+import { useRouter } from 'next/router';
+
 
 var React = require('react');
 
@@ -14,13 +16,28 @@ export default Index;
 function Index() {
     const [whyusDetails, setWhyusDetails] = useState(null);
 
+    const EnquiryButton = () => {
+        const router = useRouter();
+
+        const handleEnquiryClick = () => {
+            router.push('/contact-us'); // Navigate to the /enquiry page
+        };
+
+        return (
+            <button className="btn prmry_btn make_enqury_btn" onClick={handleEnquiryClick}>
+                Make an enquiry
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+            </button>
+        );
+    };
+
     useEffect(() => {
         const carousel = document.querySelector('#carouselExampleInterval');
         new bootstrap.Carousel(carousel);
 
         whyusService.getWhyusPage().then(x => {
             // console.log('x1', x);
-            setWhyusDetails(x.data[0].attributes);
+            setWhyusDetails(x?.data?.attributes);
         });
     }, []);
 
@@ -52,7 +69,7 @@ function Index() {
                             whyusDetails?.custom_page_images?.data?.map((element, index) => (
                                 element?.attributes?.image_type == 'banner' && (
                                     <NavLink href="#" className="carousel-item active" data-bs-interval="5000" key={index}>
-                                        <div className="banner_commn_cls" style={{ backgroundImage: `url(${`https://d33ys3jnmuivbg.cloudfront.net/ilimages` + element?.attributes?.image_path})` }}></div>
+                                        <div className="banner_commn_cls" style={{ backgroundImage: `url(${element?.attributes?.image_path})` }}></div>
                                     </NavLink>
                                 )
                             ))}
@@ -128,7 +145,7 @@ function Index() {
                     <div className="row">
                         <div className="col-sm-6">
                             <div className="card_blk_inr">
-                                <a href="#" target="_blank">
+                                <NavLink href="/destinations" target="_blank">
                                     <img src="images/about_us_card01.jpg" alt="Card image 07" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_cntnt_top">
                                         <div className="row align-items-center">
@@ -142,13 +159,15 @@ function Index() {
                                             </div>
                                         </div>
                                     </div>
-                                </a>
+                                </NavLink>
                             </div>
                         </div>
 
                         <div className="col-sm-6">
                             <div className="card_blk_inr">
-                                <a href="#">
+                                {/* <a href="#"> */}
+                                <NavLink href="/holiday-types" target="_blank">
+
                                     <img src="images/about_us_card02.jpg" alt="Card image 08" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_cntnt_top">
                                         <div className="row align-items-center">
@@ -162,7 +181,8 @@ function Index() {
                                             </div>
                                         </div>
                                     </div>
-                                </a>
+                                    {/* </a> */}
+                                </NavLink>
                             </div>
                         </div>
                     </div>
@@ -173,9 +193,10 @@ function Index() {
                 <div className="container-md">
                     <h3>{whyusDetails?.page_content_3}</h3>
                     <p>{whyusDetails?.page_content_4}</p>
-                    <button className="btn prmry_btn make_enqury_btn">Make an enquiry
+                    {/* <button className="btn prmry_btn make_enqury_btn">Make an enquiry
                         <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                    </button>
+                    </button> */}
+                    <EnquiryButton />
                 </div>
             </section>
 

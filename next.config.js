@@ -152,8 +152,11 @@ const nextConfig = {
             // : 'https://e922710a-cb11-401b-ae5b-ef73740e1501.mock.pstmn.io' // production api
             // ? 'http://localhost:4000' // development api
             // : 'http://localhost:4000' // production api
-            ? 'https://mock.apidog.com/m1/379394-0-default' // development api
-            : 'https://mock.apidog.com/m1/379394-0-default' // production api
+            // ? 'https://mock.apidog.com/m1/379394-0-default' // development api
+            // : 'https://mock.apidog.com/m1/379394-0-default' // production api
+
+            ? 'http://3.110.223.197:1337' // development api
+            : 'http://3.110.223.197:1337' // production api
     }
 }
 
