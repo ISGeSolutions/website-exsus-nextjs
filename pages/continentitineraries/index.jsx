@@ -410,6 +410,10 @@ function ContinentItinararies() {
                                         <div className="dropdown_grp_blk">
                                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                                                 <Select
+                                                    id="long-value-select" 
+                                                    instanceId="long-value-select" 
+                                                    className='select_container_country' 
+                                                    classNamePrefix="select_country" 
                                                     placeholder={"Filter by country"}
                                                     styles={styles}
                                                     isMulti
