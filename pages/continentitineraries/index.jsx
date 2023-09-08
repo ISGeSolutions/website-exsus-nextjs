@@ -505,7 +505,7 @@ function ContinentItinararies() {
                                                 <NavLink href={generateDynamicLink(item)} className="card_slider_img">
                                                     {item?.attributes?.itinerary_images?.data.map((element, index) => (
                                                         element.attributes.image_type == 'thumbnail' ? (
-                                                            <img key={index} src={`https://d33ys3jnmuivbg.cloudfront.net/ilimages` + element.attributes.image_path} alt="destination card01" className="img-fluid" />
+                                                            <img key={index} src={element.attributes.image_path} alt="destination card01" className="img-fluid" />
                                                         ) : (
                                                             ''
                                                         )

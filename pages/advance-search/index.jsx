@@ -23,7 +23,7 @@ function Index() {
     const handleLoadMore = () => {
         setVisibleItems(prevVisibleItems => prevVisibleItems + itemsPerPage);
     };
-    
+
 
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
@@ -63,10 +63,10 @@ function Index() {
             }
         }
     }
-    
+
     equalHeight(true);
 
-    
+
 
     useEffect(() => {
         destinationService.getAllItineraries().then(x => {
@@ -98,7 +98,7 @@ function Index() {
                             <div className="row">
                                 <div className="col-12">
                                     <div className="destination_dropdwn_row d-block d-md-flex">
-                                        {/* <Inspireme /> */} 
+                                        {/* <Inspireme /> */}
                                     </div>
                                 </div>
                                 <div className="col-12">
@@ -116,14 +116,14 @@ function Index() {
                                 </div>
 
                                 {itineraries?.slice(0, visibleItems).map((item, index) => (
-                                // {itineraries?.map((item) => (
+                                    // {itineraries?.map((item) => (
                                     <div className="col-sm-6 col-lg-4" key={item.id}>
                                         <div className="card_slider_inr">
                                             <div className="card_slider">
                                                 <NavLink href={generateDynamicLink(item)} className="card_slider_img">
                                                     {item?.attributes?.itinerary_images?.data.map((element, index) => (
                                                         element.attributes.image_type == 'thumbnail' ? (
-                                                            <img key={index} src={`https://d33ys3jnmuivbg.cloudfront.net/ilimages` + element.attributes.image_path} alt="destination card01" className="img-fluid" />
+                                                            <img key={index} src={element.attributes.image_path} alt="destination card01" className="img-fluid" />
                                                         ) : (
                                                             ''
                                                         )
@@ -153,7 +153,7 @@ function Index() {
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"></path></svg>
                                         </button>
                                     )}
-                                    </div>
+                                </div>
                             </div>
                         </div>
 

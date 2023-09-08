@@ -51,7 +51,7 @@ function Index() {
     }
 
     const dynamicImage = (itemId) => {
-        return `https://d33ys3jnmuivbg.cloudfront.net/ilimages` + itemId;
+        return itemId;
     }
 
     const dynamicLink = (itemId, id) => {

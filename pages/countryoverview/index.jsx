@@ -8,7 +8,7 @@ function CountryOverview(props) {
     const [itineraries, setItineraries] = useState(null);
     const itemsPerPage = 9; // Number of items to load per page
     const [visibleItems, setVisibleItems] = useState(itemsPerPage)
-    
+
     const { overview_text } = props?.data || {};
 
     const handleLoadMore = () => {
@@ -17,7 +17,7 @@ function CountryOverview(props) {
     };
 
     let regionWiseUrl = '/uk';
-    if (typeof window !== 'undefined') { 
+    if (typeof window !== 'undefined') {
         if (window && window.site_region) {
             regionWiseUrl = '/' + window.site_region;
             // setMyVariable(window.site_region);
@@ -201,7 +201,7 @@ function CountryOverview(props) {
                                                 <NavLink href={generateDynamicLink(item)} className="card_slider_img">
                                                     {item?.attributes?.itinerary_images?.data.map((element, index) => (
                                                         element.attributes.image_type == 'thumbnail' ? (
-                                                            <img key={index} src={`https://d33ys3jnmuivbg.cloudfront.net/ilimages` + element.attributes.image_path} alt="destination card01" className="img-fluid" />
+                                                            <img key={index} src={element.attributes.image_path} alt="destination card01" className="img-fluid" />
                                                         ) : (
                                                             ''
                                                         )
@@ -287,4 +287,3 @@ function CountryOverview(props) {
         </>
     );
 }
- 

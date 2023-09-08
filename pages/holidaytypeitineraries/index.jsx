@@ -169,6 +169,7 @@ function Index() {
         // userService.getAll().then(x => setUsers(x));
         holidaytypesService.getHolidaytypeDetails(hcode).then(x => {
             // console.log('getHolidaytypesDetails', x);
+            console.log(x);
             setHolidaytypesDetails(x.data.attributes);
             // const lines = x.data.attributes?.overview_text.split('\n');
             // console.log('lines', lines);
@@ -326,7 +327,7 @@ function Index() {
                                                 <NavLink href={generateDynamicLink(item)} className="card_slider_img">
                                                     {item?.attributes?.itinerary_images?.data.map((element, index) => (
                                                         element.attributes.image_type == 'thumbnail' ? (
-                                                            <img key={index} src={`https://d33ys3jnmuivbg.cloudfront.net/ilimages` + element.attributes.image_path} alt="destination card01" className="img-fluid" />
+                                                            <img key={index} src={element.attributes.image_path} alt="destination card01" className="img-fluid" />
                                                         ) : (
                                                             ''
                                                         )
