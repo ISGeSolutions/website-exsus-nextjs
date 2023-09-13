@@ -4,29 +4,109 @@ import { Layout } from 'components/users';
 import { userService, holidaytypesService, destinationService } from 'services';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Select from 'react-select';
 import { NavLink } from 'components';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 var Carousel = require('react-responsive-carousel').Carousel;
+import CustomMultiValue from "./CustomMultiValue";
+import Select, { components } from 'react-select';
+
+
 
 export default Index;
 
 function Index() {
+    console.log('Component re-rendered');
     const [users, setUsers] = useState(null);
     const [holidaytypesDetails, setHolidaytypesDetails] = useState();
     const [backgroundImage, setBackgroundImage] = useState([]);
     const [valueWithBr, setnewValueWithBr] = useState('');
     const [headingText, setHeadingText] = useState('LUXURY SAFARI HOLIDAYS IN AFRICA');
-    const [itineraries, setItineraries] = useState(null);
+    const [itineraries, setItineraries] = useState([]);
+    const [page, setPage] = useState(0); // Current page
     const itemsPerPage = 9; // Number of items to load per page
-    const [visibleItems, setVisibleItems] = useState(itemsPerPage)
+    const [metaData, setMetaData] = useState([]);
+    // const [visibleItems, setVisibleItems] = useState(itemsPerPage)
 
+    const width = '250px'
+    const styles = {
+        control: (provided) => ({
+            ...provided,
+            width
+        }),
+        menu: (provided) => ({
+            ...provided,
+            width
+        }),
+        valueContainer: (provided, state) => ({
+            whiteSpace: "nowrap",
+            // textOverflow: "ellipsis",
+            overflow: "hidden",
+            flex: "1 1 0%",
+            position: "relative"
+        }),
+        input: (provided, state) => ({
+            ...provided,
+            display: "inline"
+        })
+    };
+
+
+    const InputOption = ({
+        getStyles,
+        Icon,
+        isDisabled,
+        isFocused,
+        isSelected,
+        children,
+        innerProps,
+        ...rest
+    }) => {
+        const [isActive, setIsActive] = useState(false);
+        const onMouseDown = () => setIsActive(true);
+        const onMouseUp = () => setIsActive(false);
+        const onMouseLeave = () => setIsActive(false);
+
+        // styles
+        let bg = "transparent";
+        if (isFocused) bg = "#eee";
+        if (isActive) bg = "#B2D4FF";
+
+        const style = {
+            alignItems: "center",
+            backgroundColor: bg,
+            color: "inherit",
+            display: "flex "
+        };
+
+        // prop assignment
+        const props = {
+            ...innerProps,
+            onMouseDown,
+            onMouseUp,
+            onMouseLeave,
+            style
+        };
+
+        return (
+            <components.Option
+                {...rest}
+                isDisabled={isDisabled}
+                isFocused={isFocused}
+                isSelected={isSelected}
+                getStyles={getStyles}
+                innerProps={props}
+            >
+                <input type="checkbox" checked={isSelected} readOnly />
+                {children}
+            </components.Option>
+        );
+    };
 
     const EnquiryButton = () => {
         const router = useRouter();
 
         const handleEnquiryClick = () => {
-            router.push('/contact-us'); // Navigate to the /enquiry page
+            router.push(regionWiseUrl + '/contact-us'); // Navigate to the /enquiry page
         };
 
         return (
@@ -36,14 +116,14 @@ function Index() {
         );
     };
 
-    const LoadMorePagination = ({ data }) => {
-        const [visibleItems, setVisibleItems] = useState(itemsPerPage);
-    }
+    // const LoadMorePagination = ({ data }) => {
+    //     const [visibleItems, setVisibleItems] = useState(itemsPerPage);
+    // }
 
-    const handleLoadMore = () => {
-        // console.log('handleLoadMore')
-        setVisibleItems(prevVisibleItems => prevVisibleItems + itemsPerPage);
-    };
+    // const handleLoadMore = () => {
+    //     // console.log('handleLoadMore')
+    //     setVisibleItems(prevVisibleItems => prevVisibleItems + itemsPerPage);
+    // };
 
     const optionsData = [
         { value: "", label: "Filter by destination" },
@@ -94,12 +174,25 @@ function Index() {
     const [selectedOptionMonth, selectedOptionData] = useState(null);
 
     let regionWiseUrl = '/uk';
+    let region = 'uk';
     if (typeof window !== 'undefined') {
         if (window && window.site_region) {
             regionWiseUrl = '/' + window.site_region;
+            region = window.site_region;
             // setMyVariable(window.site_region);
         }
     }
+
+    const loadMoreData = () => {
+        destinationService.getAllItineraries(page + 1).then((response) => {
+            setMetaData(response.meta.pagination);
+            const newItineraries = response.data;
+            if (newItineraries.length > 0) {
+                setItineraries((prevItineraries) => [...prevItineraries, ...newItineraries].reduce((accumulator, current) => accumulator.some(item => item.id === current.id) ? accumulator : [...accumulator, current], []));
+                setPage(page + 1);
+            }
+        });
+    };
 
     const handleOptionChange = (selectedOption) => {
         // selectedOption1 = selectedOption.filter((i) => i.value !== '' && typeof i.value !== 'undefined');
@@ -108,11 +201,11 @@ function Index() {
 
     const generateDynamicLink = (item) => {
         // console.log('item', item);
-        return regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`;
+        return regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=${region}`;
     };
 
     const handleRedirect = () => {
-        router.push(regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`);
+        router.push(regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=${region}`);
     };
 
     const selectedSec = (itemId) => {
@@ -166,38 +259,37 @@ function Index() {
 
     useEffect(() => {
         selectedOptionData(optionsData[0]);
-        // userService.getAll().then(x => setUsers(x));
         holidaytypesService.getHolidaytypeDetails(hcode).then(x => {
-            // console.log('getHolidaytypesDetails', x);
             console.log(x);
             setHolidaytypesDetails(x.data.attributes);
-            // const lines = x.data.attributes?.overview_text.split('\n');
-            // console.log('lines', lines);
             const oldText = x.data.attributes?.overview_text;
             var newValueWithBr = oldText?.replace(/\\n/g, "");
             setnewValueWithBr(newValueWithBr);
-            // console.log('x.data.attributes.holiday_type_group_images.data[0].attributes.image_path2', 'https://d33ys3jnmuivbg.cloudfront.net/ilimages/' + x.data.attributes.holiday_type_group_images.data[0].attributes.image_path);
 
             const imageCheck = x.data.attributes.holiday_type_group_images.data;
             const newBackgroundImages = [];
             imageCheck.forEach(element => {
                 if (element.attributes.image_type == 'banner') {
                     newBackgroundImages.push(element.attributes.image_path);
-                    // setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data.attributes.holiday_type_group_images.data[0].attributes.image_path);
                 } else if (element.attributes.image_type == 'thumbnail') {
-                    // setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data.attributes.holiday_type_group_images.data[0].attributes.image_path);
                 }
             });
             setBackgroundImage(newBackgroundImages);
         });
 
-        destinationService.getAllItineraries().then(x => {
-            setItineraries(x.data);
-        });
+        // destinationService.getAllItineraries().then(x => {
+        //     setItineraries(x.data);
+        //     setIsLoading(false);
+        // });
+
+        loadMoreData();
 
         window.addEventListener('resize', equalHeight(true));
 
     }, []);
+
+
+
 
     return (
         <>
@@ -221,16 +313,16 @@ function Index() {
                         ))}
                     </div>
                     <div className="carousel-inner">
-                        <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
-                            <div className="banner_commn_cls">
-                                {backgroundImage.map((imagePath, index) => (
-                                    <img src={imagePath} alt="holiday_types_detls_card02" className="img-fluid" />
-                                    //     <NavLink href="#"  className={`carousel-item ${index === 0 ? 'active' : ''}`} data-bs-interval="5000">
-                                    //     <div className="banner_commn_cls" style={{ backgroundImage: `url(${imagePath})` }}></div>
-                                    // </NavLink>
-                                ))}
-                            </div>
-                        </a>
+                        {/* <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
+                            <div className="banner_commn_cls"> */}
+                        {backgroundImage.map((imagePath, index) => (
+                            // <img src={imagePath} alt="holiday_types_detls_card02" className="img-fluid" />
+                            <NavLink href="#" className={`carousel-item ${index === 0 ? 'active' : ''}`} data-bs-interval="5000">
+                                <div className="banner_commn_cls" style={{ backgroundImage: `url(${imagePath})` }}></div>
+                            </NavLink>
+                        ))}
+                        {/* </div>
+                        </a> */}
                     </div>
                 </div>
                 <div className="banner_map_blk">
@@ -283,19 +375,24 @@ function Index() {
                                         <div className="banner_dropdwn_blk">
                                             <div className="select_drpdwn">
                                                 <Select
-                                                    placeholder="Filter by month"
-                                                    className="basic-single"
-                                                    classNamePrefix="select"
+                                                    placeholder="Filter by destinations"
+                                                    className='select_container_country'
+                                                    classNamePrefix="select_country"
                                                     isDisabled={isDisabled}
                                                     isLoading={isLoading}
                                                     isClearable={isClearable}
                                                     isRtl={isRtl}
+                                                    styles={styles}
                                                     isSearchable={isSearchable}
                                                     name="color"
                                                     options={optionsData}
                                                     isMulti
+                                                    hideSelectedOptions={false}
                                                     onChange={handleOptionChange}
                                                     value={selectedOptionMonth}
+                                                    components={{
+                                                        Option: InputOption, MultiValue: CustomMultiValue
+                                                    }}
                                                 />
                                             </div>
                                             {/* </div> */}
@@ -309,7 +406,7 @@ function Index() {
                                 </div>
                                 <div className="col-12">
                                     <div className="destination_filter_result d-block d-lg-flex">
-                                        <p>We've found 25 destinations for Ultimate journeys</p>
+                                        <p>We've found {metaData?.total} destinations for Ultimate journeys</p>
                                         <div className="destination_contries_filter d-inline-block d-lg-flex">
                                             <label className="pt-2 pt-lg-0">Arrange by:</label>
                                             <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
@@ -320,8 +417,8 @@ function Index() {
                                     </div>
                                 </div>
 
-                                {itineraries?.slice(0, visibleItems).map((item, index) => (
-                                    <div className="col-sm-6 col-lg-4" key={item.id}>
+                                {itineraries?.slice(0, itineraries.length).map((item, index) => (
+                                    <div className="col-sm-6 col-lg-4" key={index}>
                                         <div className="card_slider_inr">
                                             <div className="card_slider">
                                                 <NavLink href={generateDynamicLink(item)} className="card_slider_img">
@@ -337,7 +434,7 @@ function Index() {
                                                     <h4><a href="#">{item?.attributes?.itin_name}</a></h4>
                                                     <ul>
                                                         <li>{item?.attributes?.header_text}</li>
-                                                        <li>Indonesia</li>
+                                                        {/* <li>Indonesia</li> */}
                                                         <li>{item?.attributes?.itinerary_country_contents?.data[0]?.attributes?.guideline_price_notes_index}</li>
                                                         <li>Travel to:<span>{item?.attributes?.sub_header_text}</span></li>
                                                     </ul>
@@ -352,8 +449,8 @@ function Index() {
                                 ))}
 
                                 <div className="col-12">
-                                    {visibleItems < itineraries?.length && (
-                                        <button onClick={handleLoadMore} className="btn prmry_btn make_enqury_btn mx-auto text-uppercase" fdprocessedid="r5vpm6s">Show 9 more holiday ideas
+                                    {metaData.total > page * itemsPerPage && (
+                                        <button onClick={loadMoreData} className="btn prmry_btn make_enqury_btn mx-auto text-uppercase" fdprocessedid="r5vpm6s">Show {(metaData.total - page * itemsPerPage) > 9 ? 9 : (metaData.total - page * itemsPerPage) > 9} more items
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"></path></svg>
                                         </button>
                                     )}

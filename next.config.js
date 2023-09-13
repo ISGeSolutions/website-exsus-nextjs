@@ -123,6 +123,12 @@ const nextConfig = {
             { source: '/asia/advance-search', destination: '/advance-search' },
             { source: '/in/advance-search', destination: '/advance-search' },
 
+            // contact-us
+            { source: '/uk/contact-us', destination: '/contact-us' },
+            { source: '/us/contact-us', destination: '/contact-us' },
+            { source: '/asia/contact-us', destination: '/contact-us' },
+            { source: '/in/contact-us', destination: '/advance-search' },
+
             // Add more custom routes as needed
         ];
     },

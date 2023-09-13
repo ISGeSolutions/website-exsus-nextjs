@@ -7,7 +7,8 @@ import { NavLink } from 'components';
 import { useRouter } from 'next/router';
 import generateDynamicLink from 'components/utils/generateLink';
 import Image from "next/image";
-import Select from 'react-select';
+import Select, { components } from 'react-select';
+import CustomMultiValue from "./CustomMultiValue";
 
 export default ContinentPlacesToStay;
 
@@ -95,6 +96,81 @@ function ContinentPlacesToStay() {
         { value: "November", label: "November" },
         { value: "December", label: "December" }
     ];
+
+
+    const width = "250px";
+    const styles = {
+        control: (provided) => ({
+            ...provided,
+            width
+        }),
+        menu: (provided) => ({
+            ...provided,
+            width
+        }),
+        valueContainer: (provided, state) => ({
+            whiteSpace: "nowrap",
+            // textOverflow: "ellipsis",
+            overflow: "hidden",
+            flex: "1 1 0%",
+            position: "relative"
+        }),
+        input: (provided, state) => ({
+            ...provided,
+            display: "inline"
+        })
+    };
+
+    const InputOption = ({
+        getStyles,
+        Icon,
+        isDisabled,
+        isFocused,
+        isSelected,
+        children,
+        innerProps,
+        ...rest
+    }) => {
+        const [isActive, setIsActive] = useState(false);
+        const onMouseDown = () => setIsActive(true);
+        const onMouseUp = () => setIsActive(false);
+        const onMouseLeave = () => setIsActive(false);
+
+        // styles
+        let bg = "transparent";
+        if (isFocused) bg = "#eee";
+        if (isActive) bg = "#B2D4FF";
+
+        const style = {
+            alignItems: "center",
+            backgroundColor: bg,
+            color: "inherit",
+            display: "flex "
+        };
+
+        // prop assignment
+        const props = {
+            ...innerProps,
+            onMouseDown,
+            onMouseUp,
+            onMouseLeave,
+            style
+        };
+
+        return (
+            <components.Option
+                {...rest}
+                isDisabled={isDisabled}
+                isFocused={isFocused}
+                isSelected={isSelected}
+                getStyles={getStyles}
+                innerProps={props}
+            >
+                <input type="checkbox" checked={isSelected} readOnly />
+                {children}
+            </components.Option>
+        );
+    };
 
     const handleOptionCountryChange = (selectedOption) => {
         selectedOption = selectedOption.filter((i) => i.value !== '' && typeof i.value !== 'undefined');
@@ -300,7 +376,7 @@ function ContinentPlacesToStay() {
                                 <div className="col-12">
                                     <div className="destination_dropdwn_row d-block d-md-flex">
                                         <div className="dropdown_grp_blk">
-                                        <div className="banner_dropdwn_blk ps-0 ps-md-2">
+                                            <div className="banner_dropdwn_blk ps-0 ps-md-2">
                                                 <Select
                                                     placeholder="Filter by country"
                                                     // defaultValue={countryOptions[0]}
@@ -314,6 +390,14 @@ function ContinentPlacesToStay() {
                                                     isMulti
                                                     // value={selectedOptionCountry}
                                                     onChange={handleOptionCountryChange}
+                                                    closeMenuOnSelect={false}
+                                                    hideSelectedOptions={false}
+                                                    className='select_container_country'
+                                                    classNamePrefix="select_country"
+                                                    styles={styles}
+                                                    components={{
+                                                        Option: InputOption, MultiValue: CustomMultiValue
+                                                    }}
                                                 />
                                             </div>
                                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
@@ -330,6 +414,14 @@ function ContinentPlacesToStay() {
                                                     isMulti
                                                     // value={selectedOptionRegion}
                                                     onChange={handleOptionRegionChange}
+                                                    closeMenuOnSelect={false}
+                                                    hideSelectedOptions={false}
+                                                    className='select_container_country'
+                                                    classNamePrefix="select_country"
+                                                    styles={styles}
+                                                    components={{
+                                                        Option: InputOption, MultiValue: CustomMultiValue
+                                                    }}
                                                 />
                                             </div>
                                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
@@ -346,6 +438,14 @@ function ContinentPlacesToStay() {
                                                     isMulti
                                                     // value={selectedOptionMonth}
                                                     onChange={handleOptionMonthChange}
+                                                    closeMenuOnSelect={false}
+                                                    hideSelectedOptions={false}
+                                                    className='select_container_country'
+                                                    classNamePrefix="select_country"
+                                                    styles={styles}
+                                                    components={{
+                                                        Option: InputOption, MultiValue: CustomMultiValue
+                                                    }}
                                                 />
                                             </div>
                                         </div>

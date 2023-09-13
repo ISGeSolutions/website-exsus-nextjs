@@ -410,10 +410,10 @@ function ContinentItinararies() {
                                         <div className="dropdown_grp_blk">
                                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                                                 <Select
-                                                    id="long-value-select" 
-                                                    instanceId="long-value-select" 
-                                                    className='select_container_country' 
-                                                    classNamePrefix="select_country" 
+                                                    id="long-value-select"
+                                                    instanceId="long-value-select"
+                                                    className='select_container_country'
+                                                    classNamePrefix="select_country"
                                                     placeholder={"Filter by country"}
                                                     styles={styles}
                                                     isMulti
@@ -451,32 +451,48 @@ function ContinentItinararies() {
                                                 <Select
                                                     placeholder="Filter by region"
                                                     // defaultValue={regionOptions[0]}
+                                                    className='select_container_country'
+                                                    classNamePrefix="select_country"
                                                     isDisabled={isDisabled}
                                                     isLoading={isLoading}
                                                     isClearable={isClearable}
                                                     isRtl={isRtl}
+                                                    hideSelectedOptions={false}
+                                                    styles={styles}
+                                                    closeMenuOnSelect={false}
                                                     isSearchable={isSearchable}
                                                     name="color"
                                                     options={regionOptions}
                                                     isMulti
                                                     // value={selectedOptionRegion}
                                                     onChange={handleOptionRegionChange}
+                                                    components={{
+                                                        Option: InputOption, MultiValue: CustomMultiValue
+                                                    }}
                                                 />
                                             </div>
                                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                                                 <Select
                                                     placeholder="Filter by month"
+                                                    className='select_container_country'
+                                                    classNamePrefix="select_country"
                                                     // defaultValue={monthOptions[0]}
                                                     isDisabled={isDisabled}
                                                     isLoading={isLoading}
                                                     isClearable={isClearable}
+                                                    styles={styles}
                                                     isRtl={isRtl}
                                                     isSearchable={isSearchable}
                                                     name="color"
+                                                    closeMenuOnSelect={false}
                                                     options={monthOptions}
+                                                    hideSelectedOptions={false}
                                                     isMulti
                                                     // value={selectedOptionMonth}
                                                     onChange={handleOptionMonthChange}
+                                                    components={{
+                                                        Option: InputOption, MultiValue: CustomMultiValue
+                                                    }}
                                                 />
                                             </div>
                                         </div>

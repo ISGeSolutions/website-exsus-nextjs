@@ -3,7 +3,13 @@ import getConfig from 'next/config';
 import Router from 'next/router';
 
 import { fetchWrapper } from 'helpers';
-
+let region = 'uk';
+if (typeof window !== 'undefined') {
+    if (window && window.site_region) {
+        region = window.site_region;
+        // setMyVariable(window.site_region);
+    }
+}
 const { publicRuntimeConfig } = getConfig();
 const baseUrl_dropdown = `${publicRuntimeConfig.apiUrl}/destinations_dropdown`;
 
@@ -75,8 +81,8 @@ function getDestinationDetails(id) {
     return fetchWrapper.get(destinationDetailsUrl);
 }
 
-function getAllItineraries() {
-    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=UK`;
+function getAllItineraries(page) {
+    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&pagination[page]=${page}&pagination[pageSize]=9`;
     return fetchWrapper.get(itinerariesDetailsUrl);
 }
 function getItineraryDetails() {
