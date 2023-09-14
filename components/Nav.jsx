@@ -728,7 +728,7 @@ function Nav() {
                                                     <div className="header_country_list">
                                                         <ul>
                                                             <li className="header_country_label active"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/about-us">About us</NavLink></li>
-                                                            <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/request-a-brochure">Request a brochure</NavLink></li>
+                                                            <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/brochure">Request a brochure</NavLink></li>
                                                             <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/creating-your-trip">Creating your trip</NavLink></li>
                                                             <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/meet-the-exsus-team">Meet the Exsus Team</NavLink></li>
                                                             <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/client-reviews">Client reviews</NavLink></li>

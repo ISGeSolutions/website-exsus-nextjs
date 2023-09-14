@@ -1,21 +1,24 @@
-.country_highlight_row.itinery_hightlight_row{
-    .country_highlight_inr{
-        p{
-            span{
+.country_highlight_row.itinery_hightlight_row {
+    .country_highlight_inr {
+        p {
+            span {
                 color: $primary-color;
                 text-transform: uppercase;
                 margin-right: 5px;
             }
         }
     }
-    .itinery_highlight_inr{
-        ul{
+
+    .itinery_highlight_inr {
+        ul {
             padding-left: 20px;
             border-left: 1px solid $white-color;
-            li{
+
+            li {
                 font: 400 1rem/1.5rem $Roboto-Regular;
                 color: $white-color;
-                &:first-child{
+
+                &:first-child {
                     text-transform: uppercase;
                     color: $primary-color;
                     margin-bottom: 5px;
@@ -24,25 +27,30 @@
         }
     }
 }
-.itinery_detls_row{
+
+.itinery_detls_row {
     background: $light-dark-grey;
     padding: 50px 0;
-    h3{        
+
+    h3 {
         font: 2.5rem/2.875rem $Slabo;
         color: #8aad56;
         text-align: center;
         padding: 0 0 30px;
         text-transform: uppercase;
-    }    
+    }
 }
-.best_time_blk_row{
+
+.best_time_blk_row {
     background: $light-grey;
     padding: 50px 0;
-    .best_time_blk_inr{
+
+    .best_time_blk_inr {
         padding: 20px;
         border: 10px solid #535152;
         margin-bottom: 50px;
-        h3{
+
+        h3 {
             font: 1.875rem/2.25rem $Slabo;
             color: #8aad56;
             text-align: left;
@@ -52,128 +60,153 @@
         }
     }
 }
-.map_blk_row{
-    h3{        
+
+.map_blk_row {
+    h3 {
         font: 2.5rem/2.875rem $Slabo;
         color: #8aad56;
         text-align: center;
         padding: 20px 0 30px;
         text-transform: uppercase;
-    }  
-    P{
+    }
+
+    P {
         font: 400 1rem/1.375rem $Roboto-Regular;
         color: $white-color;
         text-align: center;
         padding-bottom: 30px;
-    }  
-    .map_blk_inr{
-        iframe{
+    }
+
+    .map_blk_inr {
+        iframe {
             width: 100%;
             height: 450px;
         }
     }
 }
 
-.best_time_blk_left{
+.best_time_blk_left {
     margin-top: 20px;
-    li{
+
+    li {
         font: 300 0.75rem/0.9375rem $Roboto-Light;
         color: $white-color;
         padding-bottom: 5px;
         display: flex;
         align-items: center;
-        span{
+
+        span {
             width: 40px;
             height: 7px;
             margin-right: 10px;
-            &.shade01{
+
+            &.shade01 {
                 background-color: $primary-color;
             }
-            &.shade02{
+
+            &.shade02 {
                 background-color: #c3de9a;
             }
-            &.shade03{
+
+            &.shade03 {
                 background-color: #e9fccc;
             }
-            &.shade04{
+
+            &.shade04 {
                 background-color: $white-color;
             }
         }
     }
 }
 
-.itinery_detls_cntnt{
+.itinery_detls_cntnt {
     margin-bottom: 25px;
-    &:last-child{
+
+    &:last-child {
         margin-bottom: 0;
     }
-    .itinery_detls_para{
+
+    .itinery_detls_para {
         background: #3e3c3d;
         padding: 20px;
         height: 100%;
-        h3{
+
+        h3 {
             font: 1.5rem/1.75rem $Slabo;
             text-align: left;
             padding: 0;
             margin-bottom: 10px;
-            span{
+
+            span {
                 color: $white-color;
                 margin-right: 10px;
             }
         }
-        p{
+
+        p {
             font: 300 1rem/1.375rem $Roboto-Light;
             margin-bottom: 10px;
             color: $white-color;
-            a{
+
+            a {
                 color: $primary-color;
-                text-decoration:none;
+                text-decoration: none;
             }
-            &:nth-child(3){
+
+            &:nth-child(3) {
                 margin-bottom: 0;
             }
         }
-        button{
+
+        button {
             color: $white-color;
             font: 300 0.75rem/0.9375rem $Roboto-Light;
             text-transform: uppercase;
             display: block;
             margin: 5px auto 0;
-            svg{                    
+
+            svg {
                 width: 20px;
                 display: block;
                 margin: 0 auto;
-                &.up_arrow{
+
+                &.up_arrow {
                     margin: 0 auto;
                 }
             }
-            &.read_more{
-                span{
+
+            &.read_more {
+                span {
                     display: none;
-                    &.read_less{
+
+                    &.read_less {
                         display: block;
                     }
                 }
-                svg{
-                    &.up_arrow{
+
+                svg {
+                    &.up_arrow {
                         transform: rotate(180deg);
                         margin: 0 auto;
                     }
                 }
-                
+
             }
-            span{
-                &.read_less{
+
+            span {
+                &.read_less {
                     display: none;
                 }
             }
         }
     }
-    .itinery_detls_img{
+
+    .itinery_detls_img {
         background: #3e3c3d;
         height: 100%;
         display: flex;
-        img{
+
+        img {
             width: 100%;
             max-height: 230px;
             margin: auto;
@@ -181,12 +214,13 @@
     }
 }
 
-.best_time_blk_right{
+.best_time_blk_right {
     display: flex;
     flex-wrap: wrap;
     height: 100%;
     align-items: center;
-    li{
+
+    li {
         font: 1.125rem/1.5rem $Slabo;
         color: $white-color;
         display: flex;
@@ -194,22 +228,61 @@
         flex-direction: column;
         margin-right: 8px;
         text-transform: uppercase;
-        span{
+
+        span {
             width: 40px;
             height: 7px;
             margin-top: 5px;
-            &.shade01{
+
+            &.shade01 {
                 background-color: $primary-color;
             }
-            &.shade02{
+
+            &.shade02 {
                 background-color: #c3de9a;
             }
-            &.shade03{
+
+            &.shade03 {
                 background-color: #e9fccc;
             }
-            &.shade04{
+
+            &.shade04 {
                 background-color: $white-color;
             }
         }
     }
 }
+
+.search_result_title {
+    font: 2.25rem/2.5rem $Slabo;
+    color: $white-color;
+    text-align: center;
+}
+
+.title_cls.search_result_title_green {
+    font: 2rem/2.25rem $Slabo;
+    text-transform: unset;
+}
+
+// SOF Country, property and month dropdown scss
+.select_container_country {
+    background: transparent;
+    border-radius: 0;
+    border-color: #fff;
+    color: #fff;
+    height: 40px;
+}
+
+.select_country__value-container {
+    height: 40px;
+    padding: 0 5px;
+}
+
+.select_country__placeholder {
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    color: #fff;
+}
+
+// EOF Country, property and month dropdown scss
