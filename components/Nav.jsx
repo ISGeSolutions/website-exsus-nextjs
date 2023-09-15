@@ -62,7 +62,7 @@ function Nav() {
 
     const dynamicLink = (itemId, id) => {
         // {regionWiseUrl + '/destinations/africa/south-africa'}
-        if (itemId && itemId == 'AF') {
+        if (itemId) {
             return regionWiseUrl + `/continent?destinationcode=` + id;
         } else if (itemId && itemId == 'AS') {
             return regionWiseUrl + `/continent?destinationcode=` + id;
@@ -85,7 +85,7 @@ function Nav() {
         // if (itemId && itemId == 'AF') {
         //     return regionWiseUrl + `/destinations/africa/` + id;
         // }
-        if (itemId && itemId == 'AF') {
+        if (itemId) {
             return regionWiseUrl + `/continent/` + id;
         } else if (itemId && itemId == 'AS') {
             return regionWiseUrl + `/continent/` + id;
@@ -141,7 +141,7 @@ function Nav() {
     };
 
     const dynamicLinkHoliday = (itemId, id) => {
-        if (itemId && itemId == 'HG6') {
+        if (itemId) {
             return regionWiseUrl + `/holidaytypeitineraries?hcode=` + id;
         } else if (itemId && itemId == 'HG5') {
             return regionWiseUrl + `/holidaytypeitineraries?hcode=` + id;
@@ -162,7 +162,7 @@ function Nav() {
         // if (itemId && itemId == 'AF') {
         //     return regionWiseUrl + `/destinations/africa/` + id;
         // }
-        if (itemId && itemId == 'HG6') {
+        if (itemId) {
             return regionWiseUrl + `/holidaytypeitineraries/id`;
         } else if (itemId && itemId == 'HG5') {
             return regionWiseUrl + `/holidaytypeitineraries/id`;
@@ -180,8 +180,8 @@ function Nav() {
     }
 
     const dynamicLinkCountryHoliday = (itemId, itemIdCountry, id) => {
-        if (itemId && itemId == 'HG6') {
-            if (itemIdCountry == 'ULAD') {
+        if (itemId) {
+            if (itemIdCountry) {
                 return regionWiseUrl + `/holidaytypeideas?hcode=` + id;
             }
         } else if (itemId && itemId == 'HG5') {

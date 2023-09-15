@@ -37,7 +37,7 @@ function Index() {
     }
 
     const dynamicLink = (itemId, id) => {
-        if (itemId && itemId == 'AF') {
+        if (itemId) {
             return regionWiseUrl + `/continent?destinationcode=` + id;
         } else if (itemId && itemId == 'AS') {
             return regionWiseUrl + `/continent?destinationcode=` + id;
