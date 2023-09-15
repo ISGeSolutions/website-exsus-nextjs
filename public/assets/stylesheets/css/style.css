@@ -2782,4 +2782,9 @@
   line-height: 38px;
 }
 
+.select_country__input-container input:focus,
+.select_country__input-container input:focus-visible {
+  box-shadow: none !important;
+}
+
 /*# sourceMappingURL=style.css.map */
