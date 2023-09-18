@@ -30,9 +30,310 @@ function Nav() {
   const ExpertsButton = () => {
     const router = useRouter();
 
-    const handleClick = () => {
-      router.push(`/meet-our-travel-experts`); // Navigate to the /enquiry page
+    let regionWiseUrl = '/uk';
+    if (typeof window !== 'undefined') {
+        if (window && window.site_region) {
+            // console.log('window.site_region', window.site_region);
+            regionWiseUrl = '/' + window.site_region;
+            // setMyVariable(window.site_region);
+        }
+    }
+
+    const dynamicLink = (itemId, id) => {
+        // {regionWiseUrl + '/destinations/africa/south-africa'}
+        if (itemId) {
+            return regionWiseUrl + `/continent?destinationcode=` + id;
+        } else if (itemId && itemId == 'AS') {
+            return regionWiseUrl + `/continent?destinationcode=` + id;
+        } else if (itemId && itemId == 'AU') {
+            return regionWiseUrl + `/continent?destinationcode=` + id;
+        } else if (itemId && itemId == 'CA') {
+            return regionWiseUrl + `/continent?destinationcode=` + id;
+        } else if (itemId && itemId == 'EU') {
+            return regionWiseUrl + `/continent?destinationcode=` + id;
+        } else if (itemId && itemId == 'IO') {
+            return regionWiseUrl + `/continent?destinationcode=` + id;
+        } else if (itemId && itemId == 'IS') {
+            return regionWiseUrl + `/continent?destinationcode=` + id;
+        } else {
+            return "#";
+        }
     };
+
+    const dynamicLinkas = (itemId, id) => {
+        // if (itemId && itemId == 'AF') {
+        //     return regionWiseUrl + `/destinations/africa/` + id;
+        // }
+        if (itemId) {
+            return regionWiseUrl + `/continent/` + id;
+        } else if (itemId && itemId == 'AS') {
+            return regionWiseUrl + `/continent/` + id;
+        } else if (itemId && itemId == 'AU') {
+            return regionWiseUrl + `/continent/` + id;
+        } else if (itemId && itemId == 'CA') {
+            return regionWiseUrl + `/continent/` + id;
+        } else if (itemId && itemId == 'EU') {
+            return regionWiseUrl + `/continent/` + id;
+        } else if (itemId && itemId == 'IO') {
+            return regionWiseUrl + `/continent/` + id;
+        } else if (itemId && itemId == 'IS') {
+            return regionWiseUrl + `/continent/` + id;
+        } else {
+            return "#";
+        }
+    }
+
+    const dynamicLinkCountry = (itemId, itemIdCountry, id) => {
+        if (itemId) {
+            return regionWiseUrl + `/country?countrycode=` + id;
+        } else {
+            return "#";
+        }
+
+        // if (itemId && itemId == 'AF') {
+        //     if (itemIdCountry == 'TZ') {
+        //         return regionWiseUrl + `/country?countrycode=tanzania`;
+        //     } else if (itemIdCountry == 'ZA') {
+        //         return regionWiseUrl + `/country?countrycode=south-africa`;
+        //     }
+        // } else if (itemId && itemId == 'AS') {
+        //     if (itemIdCountry == 'ID') {
+        //         return regionWiseUrl + `/country?countrycode=indonesia`;
+        //     } else if (itemIdCountry == 'JP') {
+        //         return regionWiseUrl + `/country?countrycode=japan`;
+        //     }
+        // } else if (itemId && itemId == 'AU') {
+        //     if (itemIdCountry == 'AU') {
+        //         return regionWiseUrl + `/country?countrycode=australia`;
+        //     } else if (itemIdCountry == 'NZ') {
+        //         return regionWiseUrl + `/country?countrycode=new-zealand`;
+        //     }
+        // } else if (itemId && itemId == 'IS') {
+        //     if (itemIdCountry == 'BT') {
+        //         return regionWiseUrl + `/country?countrycode=bhutan`;
+        //     } else if (itemIdCountry == 'IN') {
+        //         return regionWiseUrl + `/country?countrycode=india`;
+        //     }
+        // } else {
+        //     return "#";
+        // }
+    };
+
+    const dynamicLinkHoliday = (itemId, id) => {
+        if (itemId) {
+            return regionWiseUrl + `/holidaytypeitineraries?hcode=` + id;
+        } else if (itemId && itemId == 'HG5') {
+            return regionWiseUrl + `/holidaytypeitineraries?hcode=` + id;
+        } else if (itemId && itemId == 'HG4') {
+            return regionWiseUrl + `/holidaytypeitineraries?hcode=` + id;
+        } else if (itemId && itemId == 'ADHL') {
+            return regionWiseUrl + `/holidaytypeitineraries?hcode=` + id;
+        } else if (itemId && itemId == 'LBHG') {
+            return regionWiseUrl + `/holidaytypeitineraries?hcode=` + id;
+        } else if (itemId && itemId == 'HG3') {
+            return regionWiseUrl + `/holidaytypeitineraries?hcode=` + id;
+        } else {
+            return "#";
+        }
+    };
+
+    const dynamicLinkHolidayas = (itemId, id) => {
+        // if (itemId && itemId == 'AF') {
+        //     return regionWiseUrl + `/destinations/africa/` + id;
+        // }
+        if (itemId) {
+            return regionWiseUrl + `/holidaytypeitineraries/id`;
+        } else if (itemId && itemId == 'HG5') {
+            return regionWiseUrl + `/holidaytypeitineraries/id`;
+        } else if (itemId && itemId == 'HG4') {
+            return regionWiseUrl + `/holidaytypeitineraries/id`;
+        } else if (itemId && itemId == 'ADHL') {
+            return regionWiseUrl + `/holidaytypeitineraries/id`;
+        } else if (itemId && itemId == 'LBHG') {
+            return regionWiseUrl + `/holidaytypeitineraries/id`;
+        } else if (itemId && itemId == 'HG3') {
+            return regionWiseUrl + `/holidaytypeitineraries/id`;
+        } else {
+            return "#";
+        }
+    }
+
+    const dynamicLinkCountryHoliday = (itemId, itemIdCountry, id) => {
+        if (itemId) {
+            if (itemIdCountry) {
+                return regionWiseUrl + `/holidaytypeideas?hcode=` + id;
+            }
+        } else if (itemId && itemId == 'HG5') {
+            if (itemIdCountry == 'ADHN') {
+                return regionWiseUrl + `/holidaytypeideas?hcode=` + id; // Adventure Honeymoons
+            } else if (itemIdCountry == 'BEHN') {
+                return regionWiseUrl + `/holidaytypeideas?hcode=` + id; // Beach Honeymoons
+            }
+        } else if (itemId && itemId == 'HG4') {
+            return regionWiseUrl + `/holidaytypeideas?hcode=` + id;
+        } else if (itemId && itemId == 'ADHL') {
+            if (itemIdCountry == 'ULAD') {
+                return regionWiseUrl + `/holidaytypeideas?hcode=` + id; // Ultimate Adventures
+            } else if (itemIdCountry == 'ACBA') {
+                return regionWiseUrl + `/holidaytypeideas?hcode=` + id; // Active Adventures
+            } else if (itemIdCountry == 'ADVE') {
+                return regionWiseUrl + `/holidaytypeideas?hcode=` + id; // 4x4 Adventures
+            }
+        } else if (itemId && itemId == 'LBHG') {
+            if (itemIdCountry == 'ABH') {
+                return regionWiseUrl + `/holidaytypeideas?hcode=` + id; // Alternative Beach Holidays
+            } else if (itemIdCountry == 'BCH') {
+                return regionWiseUrl + `/holidaytypeideas?hcode=` + id; // Beach & Culture Holidays
+            }
+        } else if (itemId && itemId == 'HG3') {
+            return regionWiseUrl + `/holidaytypeideas?hcode=` + id;
+        } else {
+            return "#";
+        }
+    };
+
+    useEffect(() => {
+
+        const menu = document.querySelector(".menu"); //Nav tag
+        setmenu(menu);
+
+        const menuMain = menu?.querySelector(".menu-main"); //ul tag
+        setmmenuMain(menuMain);
+
+        const goBack = menu?.querySelector(".go-back"); //mobile back
+        setmenu(goBack);
+
+        const menuTrigger = document.querySelector(".mobile-menu-trigger"); //header icon
+        setmenu(menuTrigger);
+
+        const closeMenu = menu?.querySelector(".mobile-menu-close"); // mobile close
+        setmenu(closeMenu);
+
+        window.onresize = function () {
+            if (this.innerWidth > 991) {
+                if (menu.classList.contains("active")) {
+                    toggleMenu();
+                }
+
+            }
+        }
+
+        $(".header_country_list > ul .header_country_label").on('mouseenter', function (event) {
+            $('.header_country_list > ul .header_country_label').removeClass("active");
+            $(this).addClass("active");
+        });
+
+        $('.header_country_label').click(function () {
+            $('.header_country_label').removeClass("responsive_drpdwn_cls");
+            $(this).addClass('responsive_drpdwn_cls');
+        });
+
+        document.querySelector(".menu-overlay").addEventListener("click", () => {
+            toggleMenu();
+        })
+
+        const script = document.createElement('script');
+
+        script.src = "https://use.typekit.net/foobar.js";
+        script.async = true;
+
+        document.body.appendChild(script);
+
+        destinationService.getDestinationLandingList().then(x => {
+            console.log('x.data', x.data);
+            setDestinationLandingList(x.data);
+        });
+
+        holidaytypesService.getHolidaytypesLandingList().then(x => {
+            // console.log('x.data - holiday types', x.data);
+            setHolidaytypesList(x.data);
+        });
+
+        setActiveIndex(0);
+        setActiveIndexHoliday(0);
+
+        const subscription = userService.user.subscribe(x => setUser(x));
+        return () => {
+            subscription.unsubscribe();
+        }
+    }, []);
+
+    const makeAnEnquiry = () => {
+        // console.log('makeAnEnquiry');
+        // Do something
+        router.push('/contact-us');
+    }
+
+    // const [value, setValue] = React.useState('fruit');
+
+    // const handleChange = (event) => {
+    //     setValue(event.target.value);
+
+    // localStorage.setItem('site_region', event.target.value);
+    // store.setState("site_region", event.target.value);
+
+    //     window.site_region = event.target.value;
+    // };
+
+    function logout() {
+        userService.logout();
+    }
+
+    let subMenu;
+    menuMain?.addEventListener("click", (e) => {
+        if (!menu.classList.contains("active")) {
+            return;
+        }
+        if (e.target.closest(".menu-item-has-children")) {
+            const hasChildren = e.target.closest(".menu-item-has-children");
+            showSubMenu(hasChildren);
+        }
+
+    });
+    goBack?.addEventListener("click", () => {
+        hideSubMenu();
+    })
+    menuTrigger?.addEventListener("click", () => {
+        toggleMenu();
+    })
+    closeMenu?.addEventListener("click", () => {
+        toggleMenu();
+    })
+
+
+    function toggleMenu() {
+        menu.classList.toggle("active");
+        document.querySelector(".menu-overlay").classList.toggle("active");
+    }
+
+    function showSubMenu(hasChildren) {
+        subMenu = hasChildren.querySelector(".sub-menu");
+        subMenu.classList.add("active");
+        subMenu.style.animation = "slideLeft 0.5s ease forwards";
+        const menuTitle = hasChildren.querySelector("svg").parentNode.childNodes[0].textContent;
+        menu.querySelector(".current-menu-title").innerHTML = menuTitle;
+        menu.querySelector(".mobile-menu-head").classList.add("active");
+    }
+
+    function hideSubMenu() {
+        subMenu.style.animation = "slideRight 0.5s ease forwards";
+        setTimeout(() => {
+            subMenu.classList.remove("active");
+        }, 300);
+        menu.querySelector(".current-menu-title").innerHTML = "";
+        menu.querySelector(".mobile-menu-head").classList.remove("active");
+    }
+
+    function closeLeftNav() {
+        document.getElementById('sideMenuLeft').style.width = "0";
+    }
+
+    function openLeftNav() {
+        document.getElementById('sideMenuLeft').style.width = "100%";
+    }
+
+    // only show nav when logged in
+    // if (!user) return null;
 
     return (
       <button className="btn header_nav_btn" onClick={handleClick}>
@@ -915,277 +1216,91 @@ function Nav() {
                                                                     </button>
                                                                 </div>
                                                             </li> */}
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-lg-6">
-                      <div className="row">
-                        <div className="col-md-6">
-                          <div className="header_nav_cnt">
-                            <h4>FOODIE HOLIDAYS</h4>
-                            <p>
-                              A big part of any luxury holiday is enjoying the
-                              local food and drink. Make the most of it with a
-                              foodie-focused holiday, whether that's sampling
-                              the gourmet delights of Italy or tasting
-                              world-renowned wines in sun-dappled vineyards in
-                              stunning worldwide locations.
-                            </p>
-                            <button className="btn header_nav_btn">
-                              Discover more
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="#000"
-                                shapeRendering="geometricPrecision"
-                                textRendering="geometricPrecision"
-                                imageRendering="optimizeQuality"
-                                fillRule="evenodd"
-                                clipRule="evenodd"
-                                viewBox="0 0 267 512.43"
-                              >
-                                <path
-                                  fillRule="nonzero"
-                                  d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                                />
-                              </svg>
-                            </button>
-                          </div>
-                        </div>
-                        <div className="col-md-6">
-                          <div className="header_nav_cnt">
-                            <h4>WILDLIFE HOLIDAYS</h4>
-                            <p>
-                              Come face to face with the world's most iconic
-                              animals on an epic luxury wildlife holiday. Go on
-                              safari with the Big Five in South Africa, explore
-                              the wildlife-rich Galapagos, meet orangutans in
-                              Borneo, and see polar bears in Canada or penguins
-                              in Antarctica. The options are endless...
-                            </p>
-                            <button className="btn header_nav_btn">
-                              Discover more
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="#000"
-                                shapeRendering="geometricPrecision"
-                                textRendering="geometricPrecision"
-                                imageRendering="optimizeQuality"
-                                fillRule="evenodd"
-                                clipRule="evenodd"
-                                viewBox="0 0 267 512.43"
-                              >
-                                <path
-                                  fillRule="nonzero"
-                                  d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                                />
-                              </svg>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </li>
-            <li className="menu-item-has-children">
-              <NavLink
-                onMouseEnter={showOverlay}
-                onClick={hideOverlay}
-                href={regionWiseUrl + "/special-offers"}
-              >
-                Special offers
-              </NavLink>
-            </li>
-            <li className="menu-item-has-children">
-              <NavLink
-                onMouseEnter={showOverlay}
-                onClick={hideOverlay}
-                href="/blog"
-              >
-                Blog
-              </NavLink>
-            </li>
-            <li className="menu-item-has-children">
-              <NavLink
-                onMouseEnter={showOverlay}
-                onClick={hideOverlay}
-                href="/why-us"
-              >
-                Why us
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="#ffffff"
-                  shapeRendering="geometricPrecision"
-                  textRendering="geometricPrecision"
-                  imageRendering="optimizeQuality"
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  viewBox="0 0 267 512.43"
-                >
-                  <path
-                    fillRule="nonzero"
-                    d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                  />
-                </svg>
-              </NavLink>
-              {overlayVisible && (
-                <div className="sub-menu mega-menu mega-menu-column-4">
-                  <div className="row">
-                    <div className="col-lg-6">
-                      <div className="row">
-                        <div className="col-lg-6">
-                          <div className="header_country_list">
-                            <ul>
-                              <li className="header_country_label active">
-                                <NavLink
-                                  onMouseEnter={showOverlay}
-                                  onClick={hideOverlay}
-                                  href="/about-us"
-                                >
-                                  About us
-                                </NavLink>
-                              </li>
-                              <li className="header_country_label">
-                                <NavLink
-                                  onMouseEnter={showOverlay}
-                                  onClick={hideOverlay}
-                                  href="/request-a-brochure"
-                                >
-                                  Request a brochure
-                                </NavLink>
-                              </li>
-                              <li className="header_country_label">
-                                <NavLink
-                                  onMouseEnter={showOverlay}
-                                  onClick={hideOverlay}
-                                  href="/creating-your-trip"
-                                >
-                                  Creating your trip
-                                </NavLink>
-                              </li>
-                              <li className="header_country_label">
-                                <NavLink
-                                  onMouseEnter={showOverlay}
-                                  onClick={hideOverlay}
-                                  href="/meet-our-travel-experts"
-                                >
-                                  Meet the Exsus Team
-                                </NavLink>
-                              </li>
-                              <li className="header_country_label">
-                                <NavLink
-                                  onMouseEnter={showOverlay}
-                                  onClick={hideOverlay}
-                                  href="/client-reviews"
-                                >
-                                  Client reviews
-                                </NavLink>
-                              </li>
-                              <li className="header_country_label">
-                                <NavLink
-                                  onMouseEnter={showOverlay}
-                                  onClick={hideOverlay}
-                                  href="/honeymoon-gift-list"
-                                >
-                                  Honeymoon Gift List
-                                </NavLink>
-                              </li>
-                              <li className="header_country_label">
-                                <NavLink
-                                  onMouseEnter={showOverlay}
-                                  onClick={hideOverlay}
-                                  href="/contact-us"
-                                >
-                                  Contact Us
-                                </NavLink>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-lg-6">
-                      <div className="row">
-                        <div className="col-md-6">
-                          <div className="header_nav_cnt">
-                            <h4>MEET OUR EXPERTS</h4>
-                            <p>
-                              Our passionate and knowledgeable team of
-                              well-travelled experts can tailor-make your
-                              perfect luxury holiday, honeymoon or family
-                              adventure to over 90 destinations all over the
-                              world, from Italy to India.
-                            </p>
-                            {/* <button className="btn header_nav_btn">
-                              MEET OUR EXPERTS
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="#000"
-                                shapeRendering="geometricPrecision"
-                                textRendering="geometricPrecision"
-                                imageRendering="optimizeQuality"
-                                fillRule="evenodd"
-                                clipRule="evenodd"
-                                viewBox="0 0 267 512.43"
-                              >
-                                <path
-                                  fillRule="nonzero"
-                                  d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                                />
-                              </svg>
-                            </button> */}
-                            <ExpertsButton />
-                          </div>
-                        </div>
-                        <div className="col-md-6">
-                          <div className="header_nav_cnt">
-                            <h4>What clients say about us</h4>
-                            <p>
-                              From honeymooners to families, find out what our
-                              recent travellers have to say about their holidays
-                              with Exsus and how our experts have ensured their
-                              experience goes above and beyond, from start to
-                              finish.
-                            </p>
-                            <button className="btn header_nav_btn">
-                              Read Our Reviews
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="#000"
-                                shapeRendering="geometricPrecision"
-                                textRendering="geometricPrecision"
-                                imageRendering="optimizeQuality"
-                                fillRule="evenodd"
-                                clipRule="evenodd"
-                                viewBox="0 0 267 512.43"
-                              >
-                                <path
-                                  fillRule="nonzero"
-                                  d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                                />
-                              </svg>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </li>
-            <li className="menu-item-has-children">
-              <NavLink
-                onMouseEnter={showOverlay}
-                onClick={hideOverlay}
-                href="/brochure"
-              >
-                Brochure
-              </NavLink>
-            </li>
-          </ul>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-6">
+                                            <div className="row">
+                                                <div className="col-md-6">
+                                                    <div className="header_nav_cnt">
+                                                        <h4>FOODIE HOLIDAYS</h4>
+                                                        <p>A big part of any luxury holiday is enjoying the local food and drink. Make the most of it with a foodie-focused holiday, whether that's sampling the gourmet delights of Italy or tasting world-renowned wines in sun-dappled vineyards in stunning worldwide locations.</p>
+                                                        <button className="btn header_nav_btn">Discover more
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-6">
+                                                    <div className="header_nav_cnt">
+                                                        <h4>WILDLIFE HOLIDAYS</h4>
+                                                        <p>Come face to face with the world's most iconic animals on an epic luxury wildlife holiday. Go on safari with the Big Five in South Africa, explore the wildlife-rich Galapagos, meet orangutans in Borneo, and see polar bears in Canada or penguins in Antarctica. The options are endless...</p>
+                                                        <button className="btn header_nav_btn">Discover more
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </li>
+                        <li className="menu-item-has-children"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/special-offers'}>Special offers</NavLink></li>
+                        <li className="menu-item-has-children"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/blog">Blog</NavLink></li>
+                        <li className="menu-item-has-children">
+                            <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/why-us">Why us
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                            </NavLink>
+                            {overlayVisible && (
+                                <div className="sub-menu mega-menu mega-menu-column-4">
+                                    <div className="row">
+                                        <div className="col-lg-6">
+                                            <div className="row">
+                                                <div className="col-lg-6">
+                                                    <div className="header_country_list">
+                                                        <ul>
+                                                            <li className="header_country_label active"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/about-us">About us</NavLink></li>
+                                                            <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/brochure">Request a brochure</NavLink></li>
+                                                            <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/creating-your-trip">Creating your trip</NavLink></li>
+                                                            <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/meet-the-exsus-team">Meet the Exsus Team</NavLink></li>
+                                                            <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/client-reviews">Client reviews</NavLink></li>
+                                                            <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/honeymoon-gift-list">Honeymoon Gift List</NavLink></li>
+                                                            <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/contact-us">Contact Us</NavLink></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-6">
+                                            <div className="row">
+                                                <div className="col-md-6">
+                                                    <div className="header_nav_cnt">
+                                                        <h4>MEET OUR EXPERTS</h4>
+                                                        <p>Our passionate and knowledgeable team of well-travelled experts can tailor-make your perfect luxury holiday, honeymoon or family adventure to over 90 destinations all over the world, from Italy to India.</p>
+                                                        <button className="btn header_nav_btn">MEET OUR EXPERTS
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-6">
+                                                    <div className="header_nav_cnt">
+                                                        <h4>What clients say about us</h4>
+                                                        <p>From honeymooners to families, find out what our recent travellers have to say about their holidays with Exsus and how our experts have ensured their experience goes above and beyond, from start to finish.</p>
+                                                        <button className="btn header_nav_btn">Read Our Reviews
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </li>
+                        <li className="menu-item-has-children"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/brochure">Brochure</NavLink></li>
+                    </ul>
 
           <button
             className="btn prmry_btn make_enqury_btn"

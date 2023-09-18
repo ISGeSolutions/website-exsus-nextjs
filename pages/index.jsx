@@ -12,7 +12,7 @@ export default Index;
 
 function Index() {
 
-    const [thumbnailImage, setThumbnailImageArr] = useState();
+    const [thumbnailImage, setThumbnailImageArr] = useState([]);
     const [itineraries, setItineraries] = useState(null);
 
     let regionWiseUrl = '/uk';
@@ -196,7 +196,7 @@ function Index() {
             <section className="card_blk_row">
                 <div className="container-md">
                     <div className="row">
-                        {thumbnailImage?.map((holidaytypesItem, i) => (
+                        {thumbnailImage?.slice(0, 6).map((holidaytypesItem, i) => (
                             <div className="col-sm-6 col-md-6 col-lg-4" key={i}>
                                 <div className="card_blk_inr">
                                     <NavLink target="_blank" href={dynamicLink(holidaytypesItem?.holiday_type_code, holidaytypesItem?.id)} as={dynamicLinkHolidayas(holidaytypesItem?.attributes?.holiday_type_group_code, holidaytypesItem?.id)}>

@@ -42,10 +42,10 @@ function Header() {
             <div className="container-md">
                 <div className="header_blk_inr">
                     <section className="header_item_left ">
-                        <div className="mobile_trigger_btn d-block d-lg-none" onClick={()=>openLeftNav()}><a href="#"><em className="fa-solid fa-ellipsis"></em></a></div>
+                        <div className="mobile_trigger_btn d-block d-lg-none" onClick={() => openLeftNav()}><a href="#"><em className="fa-solid fa-ellipsis"></em></a></div>
                         <div className="side_menu_left" id="sideMenuLeft">
                             <div className="side_menu_hdr">
-                                <button className="btn fa-solid fa-xmark" onClick={()=>closeLeftNav()}></button>
+                                <button className="btn fa-solid fa-xmark" onClick={() => closeLeftNav()}></button>
                             </div>
                             <div className="dropdown header_drpdown">
                                 <a className="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

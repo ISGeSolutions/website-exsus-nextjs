@@ -7,7 +7,8 @@ import { NavLink } from "components";
 import { useRouter } from "next/router";
 import generateDynamicLink from "components/utils/generateLink";
 import Image from "next/image";
-import Select from "react-select";
+import Select, { components } from 'react-select';
+import CustomMultiValue from "./CustomMultiValue";
 
 export default ContinentPlacesToStay;
 
@@ -39,6 +40,7 @@ function ContinentPlacesToStay() {
     { value: "Burma", label: "Burma" },
     { value: "Laos", label: "Laos" },
   ];
+
 
   const regionOptions = [
     { value: "Everything", label: "Everything" },
@@ -77,7 +79,7 @@ function ContinentPlacesToStay() {
     { value: "Multi-activity", label: "Multi-activity" },
     { value: "Teenagers", label: "Teenagers" },
     { value: "Landscapes & Scenery", label: "Landscapes & Scenery" },
-    { value: "City hotel", label: "City hotel" },
+    { value: "City hotel", label: "City hotel" }
   ];
 
   const monthOptions = [
@@ -93,17 +95,93 @@ function ContinentPlacesToStay() {
     { value: "September", label: "September" },
     { value: "October", label: "October" },
     { value: "November", label: "November" },
-    { value: "December", label: "December" },
+    { value: "December", label: "December" }
   ];
 
-  const handleOptionCountryChange = (selectedOption) => {
-    selectedOption = selectedOption.filter(
-      (i) => i.value !== "" && typeof i.value !== "undefined"
+
+  const width = "250px";
+  const styles = {
+    control: (provided) => ({
+      ...provided,
+      width
+    }),
+    menu: (provided) => ({
+      ...provided,
+      width
+    }),
+    valueContainer: (provided, state) => ({
+      whiteSpace: "nowrap",
+      // textOverflow: "ellipsis",
+      overflow: "hidden",
+      flex: "1 1 0%",
+      position: "relative"
+    }),
+    input: (provided, state) => ({
+      ...provided,
+      display: "inline"
+    })
+  };
+
+  const InputOption = ({
+    getStyles,
+    Icon,
+    isDisabled,
+    isFocused,
+    isSelected,
+    children,
+    innerProps,
+    ...rest
+  }) => {
+    const [isActive, setIsActive] = useState(false);
+    const onMouseDown = () => setIsActive(true);
+    const onMouseUp = () => setIsActive(false);
+    const onMouseLeave = () => setIsActive(false);
+
+    // styles
+    let bg = "transparent";
+    if (isFocused) bg = "#eee";
+    if (isActive) bg = "#B2D4FF";
+
+    const style = {
+      alignItems: "center",
+      backgroundColor: bg,
+      color: "inherit",
+      display: "flex "
+    };
+
+    // prop assignment
+    const props = {
+      ...innerProps,
+      onMouseDown,
+      onMouseUp,
+      onMouseLeave,
+      style
+    };
+
+    return (
+      <components.Option
+        {...rest}
+        isDisabled={isDisabled}
+        isFocused={isFocused}
+        isSelected={isSelected}
+        getStyles={getStyles}
+        innerProps={props}
+      >
+        <input type="checkbox" checked={isSelected} readOnly />
+        {children}
+      </components.Option>
     );
+  };
+
+  const handleOptionCountryChange = (selectedOption) => {
+    selectedOption = selectedOption.filter((i) => i.value !== '' && typeof i.value !== 'undefined');
     setSelectedOptionCountry(selectedOption);
     // this.setState({ selectedOption }, () =>
     // );
   };
+
+
+
 
   const handleOptionRegionChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
@@ -279,7 +357,7 @@ function ContinentPlacesToStay() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`
+      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`
     );
   };
 
