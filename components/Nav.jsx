@@ -49,6 +49,12 @@ function Nav() {
         setOverlayVisible(true);
     };
 
+    const redirectToAllLink = (id) => {
+        const lowercasecountry = id.replace(/ /g, '-').toLowerCase();
+        router.push('/continentcountries?destinationcode=' + lowercasecountry);
+        setOverlayVisible(false);
+    };
+
     const router = useRouter();
 
     let regionWiseUrl = '/uk';
@@ -408,14 +414,21 @@ function Nav() {
                                                                     <div className="header_country_list_inr">
                                                                         <ul>
                                                                             {destinationItem?.attributes?.countries?.data.map((destinationCountry, i) => (
-                                                                                <li key={i}>
-                                                                                    <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={dynamicLinkCountry(destinationItem?.attributes?.destination_code, destinationCountry?.attributes?.country_code, destinationCountry?.id)}>
-                                                                                        {destinationCountry?.attributes?.country_name}
-                                                                                    </NavLink>
-                                                                                </li>
+                                                                                (i <= 7) ? (
+                                                                                    <li key={i}>
+                                                                                        <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={dynamicLinkCountry(destinationItem?.attributes?.destination_code, destinationCountry?.attributes?.country_code, destinationCountry?.id)}>
+                                                                                            {destinationCountry?.attributes?.country_name}
+                                                                                        </NavLink>
+                                                                                    </li>
+                                                                                ) : (
+                                                                                    ''
+                                                                                )
                                                                             ))
                                                                             }
                                                                         </ul>
+                                                                        <button className="btn header_nav_btn" onClick={() => redirectToAllLink(destinationItem?.attributes?.destination_name)}>See all {destinationItem?.attributes?.destination_name}
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                                                        </button>
                                                                     </div>
                                                                 </li>
                                                             ))}
