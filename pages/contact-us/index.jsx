@@ -21,19 +21,21 @@ function Index() {
     const validationSchema = Yup.object().shape({
         title: Yup.string()
             .required('Please select title'),
-        firstname: Yup.string()
+        first_name: Yup.string()
             .required('First Name is required'),
-        surname: Yup.string()
-            .required('Surname is required'),
-        email: Yup.string()
-            .required('Email address is required'),
-        telephone: Yup.string()
+        last_name: Yup.string()
+            .required('Last Name is required'),
+        email_id: Yup.string()
+            .required('Email id address is required'),
+        telephone_no: Yup.string()
             .required('Telephone is required'),
-        besttimetocall: Yup.string(),
-        liketogo: Yup.string()
+        best_time_to_call: Yup.string(),
+        preferred_place_time: Yup.string()
             .required('Please enter where would you like to go?'),
-        tellus: Yup.string(),
-        getintouch: Yup.string()
+        note: Yup.string(),
+        source_of_marketing: Yup.string(),
+        source_of_marketing_other_text: Yup.string('test source_of_marketing_other_text'),
+        marketing_mail_ind: Yup.boolean(false),
     });
 
     const formOptions = { resolver: yupResolver(validationSchema) };
@@ -43,8 +45,11 @@ function Index() {
     const { errors } = formState;
 
     function onSubmit(data) {
-        // console.log('onSubmit', data);
-        return contactusService.makeanenquiry(data)
+        console.log('onSubmit', data);
+        const serviceObj = {
+            data
+        }
+        return contactusService.makeanenquiry(serviceObj)
             .then(() => {
                 alertService.success('Make an enquiry successful', { keepAfterRouteChange: true });
                 router.push('contact-us');
@@ -80,31 +85,31 @@ function Index() {
                             </div>
                             <div className="col-sm-6 col-md-4">
                                 <div className="form-input">
-                                    <input type="text" aria-label="First name *" placeholder="First name *" name="firstname" {...register('firstname')} className={`form-control ${errors.firstname ? 'is-invalid' : ''}`} />
-                                    <div className="invalid-feedback mb-1">{errors.firstname?.message}</div>
+                                    <input type="text" aria-label="First name *" placeholder="First name *" name="first_name" {...register('first_name')} className={`form-control ${errors.first_name ? 'is-invalid' : ''}`} />
+                                    <div className="invalid-feedback mb-1">{errors.first_name?.message}</div>
                                 </div>
                             </div>
                             <div className="col-sm-6 col-md-4">
                                 <div className="form-input">
-                                    <input type="text" aria-label="Surname *" placeholder="Surname *" name="surname" {...register('surname')} className={`form-control ${errors.surname ? 'is-invalid' : ''}`} />
-                                    <div className="invalid-feedback mb-1">{errors.surname?.message}</div>
+                                    <input type="text" aria-label="last_name *" placeholder="last name *" name="last_name" {...register('last_name')} className={`form-control ${errors.last_name ? 'is-invalid' : ''}`} />
+                                    <div className="invalid-feedback mb-1">{errors.last_name?.message}</div>
                                 </div>
                             </div>
                             <div className="col-sm-6 col-md-4">
                                 <div className="form-input">
-                                    <input type="email" aria-label="Email *" placeholder="Email *" name="email" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} />
-                                    <div className="invalid-feedback mb-1">{errors.email?.message}</div>
+                                    <input type="email_id" aria-label="email_id *" placeholder="Email *" name="email_id" {...register('email_id')} className={`form-control ${errors.email_id ? 'is-invalid' : ''}`} />
+                                    <div className="invalid-feedback mb-1">{errors.email_id?.message}</div>
                                 </div>
                             </div>
                             <div className="col-sm-6 col-md-4">
                                 <div className="form-input">
-                                    <input type="number" aria-label="Telephone *" placeholder="Telephone *" name="telephone" {...register('telephone')} className={`form-control ${errors.telephone ? 'is-invalid' : ''}`} />
-                                    <div className="invalid-feedback mb-1">{errors.telephone?.message}</div>
+                                    <input type="number" aria-label="Telephone *" placeholder="Telephone *" name="telephone_no" {...register('telephone_no')} className={`form-control ${errors.telephone_no ? 'is-invalid' : ''}`} />
+                                    <div className="invalid-feedback mb-1">{errors.telephone_no?.message}</div>
                                 </div>
                             </div>
                             <div className="col-sm-6 col-md-4">
                                 <div className="select_drpdwn">
-                                    <select aria-label="Best time to call" name="besttimetocall" {...register('besttimetocall')} className={`form-select ${errors.besttimetocall ? 'is-invalid' : ''}`}>
+                                    <select aria-label="Best time to call" name="Best time to call" {...register('best_time_to_call')} className={`form-select ${errors.best_time_to_call ? 'is-invalid' : ''}`}>
                                         <option value="">Best time to call</option>
                                         <option value="No Preference">No Preference</option>
                                         <option value="8.30am - 12pm (GMT)">8.30am - 12pm (GMT)</option>
@@ -112,7 +117,7 @@ function Index() {
                                         <option value="12pm - 3pm (GMT)">12pm - 3pm (GMT)</option>
                                         <option value="3pm - 6pm (GMT)">3pm - 6pm (GMT)</option>
                                     </select>
-                                    <div className="invalid-feedback mb-1">{errors.besttimetocall?.message}</div>
+                                    <div className="invalid-feedback mb-1">{errors.best_time_to_call?.message}</div>
                                 </div>
                             </div>
                         </div>
@@ -120,15 +125,15 @@ function Index() {
                         <div className="row pt-4">
                             <div className="col-12">
                                 <div className="form_input">
-                                    <input type="text" aria-label="Where & When you would like to go?" placeholder="Where & When you would like to go? *" name="liketogo" {...register('liketogo')} className={`form-control ${errors.liketogo ? 'is-invalid' : ''}`} />
-                                    <div className="invalid-feedback mb-1">{errors.liketogo?.message}</div>
+                                    <input type="text" aria-label="Where & When you would like to go?" placeholder="Where & When you would like to go? *" name="preferred_place_time" {...register('preferred_place_time')} className={`form-control ${errors.preferred_place_time ? 'is-invalid' : ''}`} />
+                                    <div className="invalid-feedback mb-1">{errors.preferred_place_time?.message}</div>
                                 </div>
                             </div>
                             <div className="col-12">
                                 <div className="form_textarea">
-                                    <textarea placeholder="Tell us more about your plans i.e. how much you would like to spend, who is travelling, what is important to you etc?" rows="3" name="tellus" {...register('tellus')} className={`form-control ${errors.tellus ? 'is-invalid' : ''}`}>
+                                    <textarea placeholder="Tell us more about your plans i.e. how much you would like to spend, who is travelling, what is important to you etc?" rows="3" name="note" {...register('note')} className={`form-control ${errors.note ? 'is-invalid' : ''}`}>
                                     </textarea>
-                                    <div className="invalid-feedback mb-1">{errors.tellus?.message}</div>
+                                    <div className="invalid-feedback mb-1">{errors.note?.message}</div>
                                 </div>
                             </div>
                         </div>
@@ -136,7 +141,7 @@ function Index() {
                         <div className="row pt-4">
                             <div className="col-sm-6 col-md-7">
                                 <div className="select_drpdwn">
-                                    <select aria-label="What prompted you to get in touch?" name="getintouch" {...register('getintouch')} className={`form-select ${errors.getintouch ? 'is-invalid' : ''}`}>
+                                    <select aria-label="What prompted you to get in touch?" name="source_of_marketing" {...register('source_of_marketing')} className={`form-select ${errors.source_of_marketing ? 'is-invalid' : ''}`}>
                                         <option value="">What prompted you to get in touch?</option>
                                         <option value="Repeat client">Repeat client</option>
                                         <option value="Friend or Family">Friend or Family</option>
@@ -146,7 +151,7 @@ function Index() {
                                         <option value="Website or blog">Website or blog</option>
                                         <option value="Other*">Other*</option>
                                     </select>
-                                    <div className="invalid-feedback mb-1">{errors.getintouch?.message}</div>
+                                    <div className="invalid-feedback mb-1">{errors.source_of_marketing?.message}</div>
                                     <span className="form_input_info">* Required form fields</span>
                                 </div>
                             </div>
