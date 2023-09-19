@@ -84,9 +84,9 @@ function Layout({ children }) {
         // setSelected(countries[0]);
         if(ver) {
             const foundPerson = countries.find(person => person.value === ver);
-            // console.log('foundPerson', foundPerson);
+            console.log('foundPerson', foundPerson);
             const foundPersonBoolean = isObjectEmpty(foundPerson);
-            // console.log('foundPersonBoolean', foundPersonBoolean);
+            console.log('foundPersonBoolean', foundPersonBoolean);
     
             if (!foundPersonBoolean) {
                  // handleChange(foundPerson);

@@ -5,6 +5,7 @@ export default function CustomMultiValue(props) {
 
   const selectedOptions = getValue();
 //   debugger;
+console.log
   const currentOptionIdx = selectedOptions.findIndex(
     (option) => option.value === data.value
   );
