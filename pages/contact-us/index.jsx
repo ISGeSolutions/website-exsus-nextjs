@@ -45,7 +45,7 @@ function Index() {
     const { errors } = formState;
 
     function onSubmit(data) {
-        console.log('onSubmit', data);
+        // console.log('onSubmit', data);
         return contactusService.makeanenquiry({data})
             .then(() => {
                 alertService.success('Make an enquiry successful', { keepAfterRouteChange: true });

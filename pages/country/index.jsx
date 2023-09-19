@@ -246,7 +246,7 @@ function Country() {
         const carousel = document.querySelector('#carouselExampleInterval');
         new bootstrap.Carousel(carousel);
 
-        console.log('countrycode', countrycode);
+        // console.log('countrycode', countrycode);
         if (countrycode) {
             countriesService.getCountryDetails(countrycode).then(x => {
                 setCountryData(x.data);
