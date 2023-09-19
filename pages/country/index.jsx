@@ -249,6 +249,7 @@ function Country() {
         // console.log('countrycode', countrycode);
         if (countrycode) {
             countriesService.getCountryDetails(countrycode).then(x => {
+                console.log('x229', x.data);
                 setCountryData(x.data);
             });
         }
@@ -362,7 +363,7 @@ function Country() {
                             </li>
                             <li className="nav-item" role="presentation">
                                 <button className={activeTab === 'regions' ? 'active nav-link' : 'nav-link'}
-                                    onClick={() => toggleTab('regions')} id="pills-countries-tab" data-bs-toggle="pill" data-bs-target="#pills-countries" type="button" role="tab" aria-controls="pills-countries" aria-selected="false">Countries</button>
+                                    onClick={() => toggleTab('regions')} id="pills-countries-tab" data-bs-toggle="pill" data-bs-target="#pills-countries" type="button" role="tab" aria-controls="pills-countries" aria-selected="false">Regions</button>
                             </li>
                             <li className="nav-item" role="presentation">
                                 <button className={activeTab === 'itineraries' ? 'active nav-link' : 'nav-link'}
