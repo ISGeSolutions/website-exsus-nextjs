@@ -2,12 +2,20 @@ import getConfig from 'next/config';
 import { fetchWrapper } from 'helpers';
 
 const { publicRuntimeConfig } = getConfig();
-const baseUrl = `${publicRuntimeConfig.apiUrl}/api/enquiries`;;
+const baseUrlEnquiries = `${publicRuntimeConfig.apiUrl}/api/enquiries`;
+const baseUrlBrochure = `${publicRuntimeConfig.apiUrl}/api/brochure-requests`;;
 
 export const contactusService = {
-    makeanenquiry
+    makeanenquiry,
+    brochureRequest
 };
 
 function makeanenquiry(contactusData) {
-    return fetchWrapper.post(`${baseUrl}`, contactusData);
+    return fetchWrapper.post(`${baseUrlEnquiries}`, contactusData);
 }
+
+function brochureRequest(brochureData) {
+    return fetchWrapper.post(`${baseUrlBrochure}`, brochureData);
+}
+
+

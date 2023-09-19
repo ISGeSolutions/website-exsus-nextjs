@@ -46,10 +46,7 @@ function Index() {
 
     function onSubmit(data) {
         console.log('onSubmit', data);
-        const serviceObj = {
-            data
-        }
-        return contactusService.makeanenquiry(serviceObj)
+        return contactusService.makeanenquiry({data})
             .then(() => {
                 alertService.success('Make an enquiry successful', { keepAfterRouteChange: true });
                 router.push('contact-us');
