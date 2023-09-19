@@ -15,7 +15,7 @@ import Select, { components } from 'react-select';
 export default Index;
 
 function Index() {
-    console.log('Component re-rendered');
+    // console.log('Component re-rendered');
     const [users, setUsers] = useState(null);
     const [holidaytypesDetails, setHolidaytypesDetails] = useState();
     const [backgroundImage, setBackgroundImage] = useState([]);
@@ -260,7 +260,7 @@ function Index() {
     useEffect(() => {
         selectedOptionData(optionsData[0]);
         holidaytypesService.getHolidaytypeDetails(hcode).then(x => {
-            console.log(x);
+            // console.log(x);
             setHolidaytypesDetails(x.data.attributes);
             const oldText = x.data.attributes?.overview_text;
             var newValueWithBr = oldText?.replace(/\\n/g, "");

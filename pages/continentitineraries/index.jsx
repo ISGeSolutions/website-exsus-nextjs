@@ -379,7 +379,7 @@ function ContinentItinararies() {
     equalHeight(true);
 
     useEffect(() => {
-        console.log('refresh');
+        // console.log('refresh');
         setSelectedOptionCountry();
         setSelectedOptionRegion();
         setSelectedOptionMonth();
