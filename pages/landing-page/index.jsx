@@ -115,7 +115,7 @@ function Index() {
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="banner_dropdwn_row">
-                        <div className="container-md">
+                        <div className="container">
                             <div className="banner_dropdwn_inr d-block d-md-flex">
                                 <div className="banner_dropdwn_blk">
                                     <div className="select_drpdwn">
@@ -185,7 +185,7 @@ function Index() {
             </section>
 
             <section className="card_blk_row">
-                <div className="container-md">
+                <div className="container">
                     <div className="row">
                         <div className="col-sm-6 col-md-6 col-lg-4">
                             <div className="card_blk_inr">
@@ -322,7 +322,7 @@ function Index() {
             </section>
 
             <section className="favrites_blk_row">
-                <div className="container-md">
+                <div className="container">
                     <h3 className="title_cls">Favourite trip ideas</h3>
                     <div className="card_slider_row">
                         <i id="left">
@@ -456,7 +456,7 @@ function Index() {
             </section>
 
             <section aria-label="Client Testimonials" className="testimonials_blk_row">
-                <div className="container-md">
+                <div className="container">
                     <div id="Testimonials" className="carousel slide" data-bs-ride="carousel">
                         <div className="carousel-indicators">
                             <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
@@ -523,7 +523,7 @@ function Index() {
             </section>
 
             <section className="card_blk_row">
-                <div className="container-md">
+                <div className="container">
                     <div className="row">
                         <div className="col-sm-6 col-md-6 col-lg-4">
                             <div className="card_blk_inr">
@@ -573,7 +573,7 @@ function Index() {
             </section>
 
             <section aria-label="Sign up for newsletter" className="newslettr_row">
-                <div className="container-md">
+                <div className="container">
                     <h4>Sign up for our newsletter</h4>
                     <h5>Receive our latest news and special offers</h5>
                     <form className="newslettr_form d-block d-sm-flex" onSubmit={handleSubmit2(onSignup)}>

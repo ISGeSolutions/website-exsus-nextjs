@@ -46,7 +46,7 @@ function Index() {
 
     function onSubmit(data) {
         // console.log('onSubmit', data);
-        return contactusService.makeanenquiry({data})
+        return contactusService.makeanenquiry({ data })
             .then(() => {
                 alertService.success('Make an enquiry successful', { keepAfterRouteChange: true });
                 router.push('contact-us');
@@ -59,7 +59,7 @@ function Index() {
         <Layout>
             {/* <h4 className='mt-2'>This is destination page</h4> */}
             <section className="contact_form_row">
-                <div className="container-md">
+                <div className="container">
                     <h2>Escape the obvious - tailor-make your trip today</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="row pt-4">
@@ -183,7 +183,7 @@ function Index() {
             </section>
 
             <section className="text_overlay_row">
-                <div className="container-md">
+                <div className="container">
                     <h4>Book with Confidence</h4>
                     <h5>ATOL, ABTA & AITO PROTECTED</h5>
                     <ul>
@@ -197,7 +197,7 @@ function Index() {
             </section>
 
             <section aria-label="Sign up htmlFor newsletter" className="newslettr_row">
-                <div className="container-md">
+                <div className="container">
                     <h4>Sign up htmlFor our newsletter</h4>
                     <h5>Receive our latest news and special offers</h5>
                     <Signup />

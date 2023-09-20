@@ -39,7 +39,7 @@ function Footer() {
     return (
 
         <footer>
-            <div className="container-md">
+            <div className="container">
                 <section className="footer_img_row d-block d-sm-flex">
                     <div className="atol_logo_blk">
                         <img src="images/abta_new_logo.png" alt="Abta logo" className="img-fluid" />

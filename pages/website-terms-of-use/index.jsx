@@ -17,7 +17,7 @@ function Index() {
         <Layout>
             {/* <h4 className='mt-2'>This is destination page</h4> */}
             <section className="card_blk_row">
-                <div className="container-md">
+                <div className="container">
                     <div className="bookmark_row">
                         <p className='font-weight-normal display-7 text-light'>This is website-terms-of-use page</p>
                     </div>

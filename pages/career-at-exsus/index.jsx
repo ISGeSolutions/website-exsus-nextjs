@@ -16,7 +16,7 @@ function Index() {
     return (
         <Layout>
             <section className="trvl_info_row">
-                <div className="container-md">
+                <div className="container">
                     <div className="bookmark_row">
                         <ul>
                             <li><a href="homepage.html">Home</a></li>
@@ -150,7 +150,7 @@ function Index() {
             </section>
 
             <section className="make_enqury_row">
-                <div className="container-md">
+                <div className="container">
                     <h3>YOUR JOURNEY STARTS HERE</h3>
                     <p>call us on 020 7337 9010 to start planning your perfect trip</p>
                     <button className="btn prmry_btn make_enqury_btn" onClick="window.open('contact_us.html')">Make an enquiry
@@ -160,7 +160,7 @@ function Index() {
             </section>
 
             <section aria-label="Sign up for newsletter" className="newslettr_row">
-                <div className="container-md">
+                <div className="container">
                     <h4>Sign up for our newsletter</h4>
                     <h5>Receive our latest news and special offers</h5>
                     <Signup />

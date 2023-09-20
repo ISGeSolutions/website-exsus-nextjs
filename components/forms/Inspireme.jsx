@@ -31,7 +31,7 @@ function Inspireme() {
 
     function onSubmit(data) {
         // console.log('data', data);
-        if(!data.destination && !data.reason && !data.month) {
+        if (!data.destination && !data.reason && !data.month) {
             alertService.success('Sorry, we could not filter your request. Please select atleast one option', { keepAfterRouteChange: true });
         } else {
             router.push(`advance-search?where=` + data?.destination + `&what=` + data?.reason + `&when=` + data?.month);
@@ -56,7 +56,7 @@ function Inspireme() {
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="banner_dropdwn_row">
-                <div className="container-md">
+                <div className="container">
                     <div className="banner_dropdwn_inr d-block d-md-flex">
                         <div className="banner_dropdwn_blk">
                             <div className="select_drpdwn">

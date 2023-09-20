@@ -30,7 +30,7 @@ function Index() {
             if (resize === false) {
                 elements[i].className = elements[i].className + " show";
             }
-        } 
+        }
     }
 
     equalHeight(true);
@@ -43,7 +43,7 @@ function Index() {
 
         const carousel1 = document.querySelector('#Testimonials');
         new bootstrap.Carousel(carousel1);
-        
+
         window.addEventListener('resize', equalHeight(true));
     }, []);
 
@@ -69,7 +69,7 @@ function Index() {
                     </div>
                 </div>
                 <div className="banner_dropdwn_row">
-                    <div className="container-md">
+                    <div className="container">
                         <div className="banner_dropdwn_inr d-block d-md-flex">
                             <div className="banner_dropdwn_blk">
                                 <div className="select_drpdwn">
@@ -135,7 +135,7 @@ function Index() {
             </section>
 
             <section className="our_exprts_row">
-                <div className="container-md">
+                <div className="container">
                     <div className="bookmark_row">
                         <ul>
                             <li><a href="homepage.html">Home</a></li>
@@ -279,7 +279,7 @@ function Index() {
             </section>
 
             <section aria-label="Client Testimonials" className="testimonials_blk_row">
-                <div className="container-md">
+                <div className="container">
                     <div id="Testimonials" className="carousel slide" data-bs-ride="carousel">
                         <div className="carousel-indicators">
                             <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
@@ -346,7 +346,7 @@ function Index() {
             </section>
 
             <section className="make_enqury_row">
-                <div className="container-md">
+                <div className="container">
                     <h3>YOUR JOURNEY STARTS HERE</h3>
                     <p>call us on 020 7337 9010 to start planning your perfect trip</p>
                     <button className="btn prmry_btn make_enqury_btn" onClick="window.open('contact_us.html')">Make an enquiry
@@ -356,7 +356,7 @@ function Index() {
             </section>
 
             <section aria-label="Sign up for newsletter" className="newslettr_row">
-                <div className="container-md">
+                <div className="container">
                     <h4>Sign up for our newsletter</h4>
                     <h5>Receive our latest news and special offers</h5>
                     <Signup />

@@ -111,7 +111,7 @@ function Index() {
                 </div>
             </section>
             <section className="destination_tab_row light_grey pb-0">
-                <div className="container-md">
+                <div className="container">
                     <div className="bookmark_row">
                         <ul>
                             <li><a href="homepage.html">Home</a></li>
@@ -145,7 +145,7 @@ function Index() {
 
                 <div className="tab-content" id="pills-tabContent">
                     <div className="tab-pane fade show active" id="pills-overview" role="tabpanel" aria-labelledby="pills-overview-tab" tabIndex="0">
-                        <div className="container-md">
+                        <div className="container">
                             <section className="destination_para">
                                 <p>China is a country on fast-forward. With its sprawling cities developing at an unmatchable speed, few places change faces as fast and as often as it does. Beijing is home to landmarks such as the Summer Palace, while those with an adventurous streak will have a blast tobogganing down the Great Wall - and you can’t leave without trying some scrumptious Peking duck. With a medley of Art Deco buildings and colossal towers, Shanghai is a thriving art scene that is famous for its acrobatics.</p>
                                 <p>From incredible architecture to natural gems, be transported to the classic Chinese landscapes of Guilin, with their karst mountains and winding rivers, immortalised by poets and writers over the centuries. Don't miss the chance to visit Avatar’s ‘Hallelujah Mountains’, inspired by Zhangjiajie National Forest Park in the heart of China, or head to the roof of the world – the Tibetan plateau.</p>
@@ -174,7 +174,7 @@ function Index() {
                         </div>
 
                         <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
-                            <div className="container-md">
+                            <div className="container">
                                 <h3 className="title_cls pt-5">Holidays in China Handpicked by Exsus</h3>
                                 <div className="card_slider_row">
                                     <div className="carousel00">
@@ -252,7 +252,7 @@ function Index() {
                         </section>
 
                         <section className="favrites_blk_row favrites_blk_no_slider_row light_grey">
-                            <div className="container-md">
+                            <div className="container">
                                 <h3 className="title_cls pt-5">PLACES TO STAY IN CHINA HANDPICKED BY EXSUS</h3>
                                 <div className="card_slider_row">
                                     <div className="carousel00">
@@ -325,7 +325,7 @@ function Index() {
                         </section>
 
                         <section className="card_blk_row dark_grey">
-                            <div className="container-md">
+                            <div className="container">
                                 <div className="row">
                                     <div className="col-sm-6">
                                         <div className="card_blk_inr card_blk_overlay">
@@ -375,14 +375,14 @@ function Index() {
                     </div>
 
                     <div className="tab-pane fade" id="pills-region" role="tabpanel" aria-labelledby="pills-region-tab" tabIndex="0">
-                        <div className="container-md">
+                        <div className="container">
                             <section className="destination_para">
                                 <p>With all of its diversity and vastness, one trip to China will leave you wanting more – from bustling cities of modern skyscrapers and historic temples such as Beijing and Shanghai, to the giant pandas in Chengdu and magical Guilin, where you'll find beautiful landscapes of jagged mountains and winding rivers, China simply has everything.</p>
                             </section>
                         </div>
 
                         <section className="card_blk_row destinations_blk_row light_dark_grey">
-                            <div className="container-md">
+                            <div className="container">
                                 <div className="row">
                                     <div className="col-12">
                                         <div className="destination_contries_filter d-block d-md-flex">
@@ -544,7 +544,7 @@ function Index() {
                         </section>
 
                         <section className="card_blk_row dark_grey">
-                            <div className="container-md">
+                            <div className="container">
                                 <div className="row">
 
                                     <div className="col-sm-6">
@@ -595,14 +595,14 @@ function Index() {
 
                     </div>
                     <div className="tab-pane fade" id="pills-itineraries" role="tabpanel" aria-labelledby="pills-itineraries-tab" tabIndex="0">
-                        <div className="container-md">
+                        <div className="container">
                             <section className="destination_para">
                                 <p>Whether you’re after a dose of history and culture, natural gems that stop you in your tracks or thrilling adventures that you’ll find nowhere else, these sample itineraries will whet your appetite and provide some inspiration for your trip to China. Can’t find what you want? Give our experts a call for a bespoke, tailor-made itinerary that’s made with your personal interests in mind or make an enquiry.</p>
                             </section>
                         </div>
 
                         <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
-                            <div className="container-md">
+                            <div className="container">
                                 <h3 className="title_cls">All Luxury Holiday Ideas in China</h3>
                                 <div className="card_slider_row">
                                     <div className="carousel00">
@@ -883,14 +883,14 @@ function Index() {
                         </section>
                     </div>
                     <div className="tab-pane fade" id="pills-places-to-stay" role="tabpanel" aria-labelledby="pills-places-to-stay-tab" tabIndex="0">
-                        <div className="container-md">
+                        <div className="container">
                             <section className="destination_para">
                                 <p>From the traditional lattice-ridden Jing’s Residence in the ancient town of Pingyao and the Temple Hotel in Chengdu (built inside a real restored temple) to a luxurious retreat in the grounds of the majestic Summer Palace, once used by royal guests, we have a wide range of luxury hotels, lodges and resorts for every type of traveller.</p>
                             </section>
                         </div>
 
                         <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
-                            <div className="container-md">
+                            <div className="container">
                                 <h3 className="title_cls">All recommended hotels in China</h3>
                                 <div className="card_slider_row">
                                     <div className="carousel00">
@@ -1163,14 +1163,14 @@ function Index() {
                         </section>
                     </div>
                     <div className="tab-pane fade" id="pills-when-to-go" role="tabpanel" aria-labelledby="pills-when-to-go-tab" tabIndex="0">
-                        <div className="container-md">
+                        <div className="container">
                             <section className="destination_para">
                                 <p>As the world’s second largest state by land area and with a host of diverse terrains and latitudes, the climate changes radically. With too-hot-to-handle summers and bone-chillingly cold winters, the best time to visit is in spring (April-May in the north and March-April in the south) and autumn (October-November in the north and September-October in the south), when temperatures are mild – unless experiencing extreme weather climates is your thing.</p>
                             </section>
                         </div>
 
                         <section className="card_blk_row dark_grey">
-                            <div className="container-md">
+                            <div className="container">
                                 <div className="row">
                                     <div className="col-sm-6">
                                         <div className="card_blk_inr card_blk_overlay">
@@ -1221,7 +1221,7 @@ function Index() {
             </section>
 
             <section className="make_enqury_row">
-                <div className="container-md">
+                <div className="container">
                     <h3>YOUR JOURNEY STARTS HERE</h3>
                     <p>call us on 020 7337 9010 to start planning your perfect trip</p>
                     <button className="btn prmry_btn make_enqury_btn">Make an enquiry
@@ -1231,7 +1231,7 @@ function Index() {
             </section>
 
             <section aria-label="Sign up for newsletter" className="newslettr_row">
-                <div className="container-md">
+                <div className="container">
                     <h4>Sign up for our newsletter</h4>
                     <h5>Receive our latest news and special offers</h5>
                     <form className="newslettr_form d-block d-sm-flex">

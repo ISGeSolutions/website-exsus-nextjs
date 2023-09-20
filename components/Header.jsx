@@ -39,7 +39,7 @@ function Header() {
     return (
 
         <header className="header_blk_row header">
-            <div className="container-md">
+            <div className="container">
                 <div className="header_blk_inr">
                     <section className="header_item_left ">
                         <div className="mobile_trigger_btn d-block d-lg-none" onClick={() => openLeftNav()}><a href="#"><em className="fa-solid fa-ellipsis"></em></a></div>

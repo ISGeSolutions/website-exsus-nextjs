@@ -345,7 +345,7 @@ function Country() {
             </section>
 
             <section className="destination_tab_row light_grey pb-0">
-                <div className="container-md">
+                <div className="container">
                     <div className="bookmark_row">
                         <p style={{ color: `white` }}>{countryData?.attributes?.friendly_url}</p>
                         {/* <ul>
@@ -402,7 +402,7 @@ function Country() {
             </section>
 
             <section className="make_enqury_row">
-                <div className="container-md">
+                <div className="container">
                     <h3>YOUR JOURNEY STARTS HERE</h3>
                     <p>call us on 020 7337 9010 to start planning your perfect trip</p>
                     <button className="btn prmry_btn make_enqury_btn">Make an enquiry
@@ -412,7 +412,7 @@ function Country() {
             </section>
 
             <section aria-label="Sign up for newsletter" className="newslettr_row">
-                <div className="container-md">
+                <div className="container">
                     <h4>Sign up for our newsletter</h4>
                     <h5>Receive our latest news and special offers</h5>
                     <form className="newslettr_form d-block d-sm-flex">

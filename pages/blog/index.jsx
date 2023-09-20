@@ -52,27 +52,27 @@ function Index() {
                     </div>
                 </Carousel> */}
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
-            <div className="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-            <div className="carousel-inner">
-                <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
-                    <div className="banner_commn_cls blog_banner01"></div>
-                </a>
-                <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                    <div className="blog_banner02 banner_commn_cls"></div>
-                </a>
-                <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                    <div className="blog_banner03 banner_commn_cls"></div>
-                </a>           
-            </div>
-        </div> 
+                    <div className="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                    <div className="carousel-inner">
+                        <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
+                            <div className="banner_commn_cls blog_banner01"></div>
+                        </a>
+                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                            <div className="blog_banner02 banner_commn_cls"></div>
+                        </a>
+                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                            <div className="blog_banner03 banner_commn_cls"></div>
+                        </a>
+                    </div>
+                </div>
             </section>
 
             <section className="card_blk_row destinations_blk_row light_grey">
-                <div className="container-md">
+                <div className="container">
                     <div className="bookmark_row">
                         <ul>
                             <li><a href="homepage.html">Home</a></li>
@@ -99,7 +99,7 @@ function Index() {
             </section>
 
             <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
-                <div className="container-md">
+                <div className="container">
                     <h3 className="title_cls">Search our blog</h3>
                     <div className="card_slider_row">
                         <div className="carousel00">
@@ -334,7 +334,7 @@ function Index() {
             </section>
 
             <section className="make_enqury_row">
-                <div className="container-md">
+                <div className="container">
                     <h3>YOUR JOURNEY STARTS HERE</h3>
                     <p>call us on 020 7337 9010 to start planning your perfect trip</p>
                     <button className="btn prmry_btn make_enqury_btn">Make an enquiry
@@ -344,7 +344,7 @@ function Index() {
             </section>
 
             <section aria-label="Sign up for newsletter" className="newslettr_row">
-                <div className="container-md">
+                <div className="container">
                     <h4>Sign up for our newsletter</h4>
                     <h5>Receive our latest news and special offers</h5>
                     <Signup />

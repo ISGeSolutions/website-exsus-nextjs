@@ -66,12 +66,12 @@ function CountryOverview(props) {
 
     return (
         <>
-            <div className="container-md">
+            <div className="container">
                 <section className="destination_para">
                     <p dangerouslySetInnerHTML={{ __html: overview_text }} />
                 </section>
                 <section className="favrites_blk_row favrites_blk_small_card_row">
-                    <div className="container-md">
+                    <div className="container">
                         <h3 className="title_cls">Popular countries in Asia</h3>
                         <div className="card_slider_row">
                             <i id="left">
@@ -189,7 +189,7 @@ function CountryOverview(props) {
                 </section>
             </div>
             <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
-                <div className="container-md">
+                <div className="container">
                     <h3 className="title_cls">Favourite trip ideas</h3>
                     <div className="card_slider_row">
                         <div className="carousel00">
@@ -239,7 +239,7 @@ function CountryOverview(props) {
                 </div>
             </section>
             <section className="card_blk_row dark_grey">
-                <div className="container-md">
+                <div className="container">
                     <div className="row">
                         <div className="col-sm-6">
                             <div className="card_blk_inr card_blk_overlay">

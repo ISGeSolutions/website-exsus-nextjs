@@ -82,18 +82,18 @@ function Layout({ children }) {
             $(this).addClass('responsive_drpdwn_cls');
         });
         // setSelected(countries[0]);
-        if(ver) {
+        if (ver) {
             const foundPerson = countries.find(person => person.value === ver);
             // console.log('foundPerson', foundPerson);
             const foundPersonBoolean = isObjectEmpty(foundPerson);
             // console.log('foundPersonBoolean', foundPersonBoolean);
-    
+
             if (!foundPersonBoolean) {
-                 // handleChange(foundPerson);
-                 setSelected(foundPerson);
-                 setMyVariable(foundPerson.value);
-                 localStorage.setItem('site_region', foundPerson.value);
-                 window.site_region = foundPerson.value;                
+                // handleChange(foundPerson);
+                setSelected(foundPerson);
+                setMyVariable(foundPerson.value);
+                localStorage.setItem('site_region', foundPerson.value);
+                window.site_region = foundPerson.value;
             }
         }
 
@@ -211,7 +211,7 @@ function Layout({ children }) {
             <main>{children}</main>
             <Analytics />
             <footer>
-                <div className="container-md">
+                <div className="container">
                     <section className="footer_img_row d-block d-sm-flex">
                         <div className="atol_logo_blk">
                             <img src="/images/abta_new_logo.png" alt="Abta logo" className="img-fluid" />

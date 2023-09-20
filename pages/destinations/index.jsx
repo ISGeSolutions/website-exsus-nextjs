@@ -133,7 +133,7 @@ function Index() {
             </section>
 
             <section className="card_blk_row destinations_blk_row light_grey">
-                <div className="container-md">
+                <div className="container">
                     <div className="bookmark_row">
                         <p style={{ color: `white` }}>{destinations?.attributes?.page_friendly_url}</p>
                         {/* <ul>
@@ -155,7 +155,7 @@ function Index() {
             </section>
 
             <section className="card_blk_row destinations_blk_row">
-                <div className="container-md">
+                <div className="container">
                     <div className="row">
                         {destinationLandingList?.map((destinationItem, i) => (
                             <div className="col-sm-6" key={destinationItem?.id}>
@@ -184,7 +184,7 @@ function Index() {
             </section>
 
             <section className="destination_text_overlay_row" style={{ backgroundImage: `url(${backgroundImgWhentogo})` }}>
-                <div className="container-md">
+                <div className="container">
                     <div className="destination_text_overlay_inr">
                         <h4>When to go where</h4>
                         <h5>Find out the best time to travel</h5>
@@ -197,7 +197,7 @@ function Index() {
             </section>
 
             <section aria-label="Client Testimonials" className="testimonials_blk_row">
-                <div className="container-md">
+                <div className="container">
                     <div id="Testimonials" className="carousel slide" data-bs-ride="carousel">
                         <div className="carousel-indicators">
                             <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
@@ -264,7 +264,7 @@ function Index() {
             </section>
 
             <section className="make_enqury_row">
-                <div className="container-md">
+                <div className="container">
                     <h3>{destinations?.attributes?.page_content_3}</h3>
                     <p>{destinations?.attributes?.page_content_4}</p>
                     <button className="btn prmry_btn make_enqury_btn">Make an enquiry
@@ -274,7 +274,7 @@ function Index() {
             </section>
 
             <section aria-label="Sign up for newsletter" className="newslettr_row">
-                <div className="container-md">
+                <div className="container">
                     <h4>Sign up for our newsletter</h4>
                     <h5>Receive our latest news and special offers</h5>
                     <Signup />

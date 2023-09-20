@@ -69,7 +69,7 @@ function Index() {
     return (
         <Layout>
             <header className="brochure_header_row">
-                <div className="container-md">
+                <div className="container">
                     <img src="images/brochure_header_img.jpg" alt="brochure_header_img" />
                     <h1>Request Brochures</h1>
                     <p>Our brochure, titled ‘Escape the Obvious’, highlights the very finest experiences in our most popular destinations, and can be used to inspire your clients to discover some of the most spectacular places in the world on a unique, bespoke holiday crafted by our knowledgeable and experienced experts.
@@ -79,7 +79,7 @@ function Index() {
             </header>
             <main className="contact_form_row">
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="container-md">
+                    <div className="container">
                         <div className="row pt-4">
                             <div className="col-sm-6 col-md-4">
                                 <div className="select_drpdwn">
@@ -231,7 +231,7 @@ function Index() {
 
             </main>
             <section className="brochure_testimonial_row">
-                <div className="container-md">
+                <div className="container">
                     <p>“Probably the best family holiday we've ever had. The activities were spot on for our adventurous kids”
                         <span>— A Tonge and family travelled to Canada</span>
                     </p>

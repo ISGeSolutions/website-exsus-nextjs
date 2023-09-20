@@ -23,8 +23,10 @@ function ContinentPlacesToStay() {
     const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
     const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
     const [itineraries, setItineraries] = useState(null);
-
     const router = useRouter();
+    const { destinationcode } = router.query;
+    const [destinationName, setdestinationName] = useState("");
+
 
     const countryOptions = [
         { value: "Asia", label: "Asia" },
@@ -355,21 +357,23 @@ function ContinentPlacesToStay() {
         destinationService.getAllItineraries().then(x => {
             setItineraries(x.data);
         });
-
+        destinationService.getDestinationDetails(destinationcode).then((x) => {
+            setdestinationName(x.data.attributes.destination_name);
+        });
     }, []);
 
 
     return (
         <>
-            <div className="container-md">
+            <div className="container">
                 <section className="destination_para">
                     <p>Whether you’re after a luxury honeymoon in South-East Asia, a family adventure holiday in Southern Asia or a cultural holiday to the Far East, you can expect some of the most beautiful beaches and most incredible luxury hotels in the world, fast-paced cities, tranquil village life and mouthwatering food. Asia has it all.</p>
                 </section>
             </div>
 
             <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
-                <div className="container-md">
-                    <h3 className="title_cls">All recommended hotels in Asia</h3>
+                <div className="container">
+                    <h3 className="title_cls">All recommended hotels in {destinationName}</h3>
                     <div className="card_slider_row">
                         <div className="carousel00">
                             <div className="row">
@@ -472,7 +476,7 @@ function ContinentPlacesToStay() {
                                     </div>
                                 </div>
 
-                                <div className="col-sm-6 col-lg-4">
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
@@ -494,7 +498,7 @@ function ContinentPlacesToStay() {
                                     </div>
                                 </div>
 
-                                <div className="col-sm-6 col-lg-4">
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
@@ -516,7 +520,7 @@ function ContinentPlacesToStay() {
                                     </div>
                                 </div>
 
-                                <div className="col-sm-6 col-lg-4">
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
@@ -538,7 +542,7 @@ function ContinentPlacesToStay() {
                                     </div>
                                 </div>
 
-                                <div className="col-sm-6 col-lg-4">
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
@@ -560,7 +564,7 @@ function ContinentPlacesToStay() {
                                     </div>
                                 </div>
 
-                                <div className="col-sm-6 col-lg-4">
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
@@ -582,7 +586,7 @@ function ContinentPlacesToStay() {
                                     </div>
                                 </div>
 
-                                <div className="col-sm-6 col-lg-4">
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
@@ -604,7 +608,7 @@ function ContinentPlacesToStay() {
                                     </div>
                                 </div>
 
-                                <div className="col-sm-6 col-lg-4">
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
@@ -626,7 +630,7 @@ function ContinentPlacesToStay() {
                                     </div>
                                 </div>
 
-                                <div className="col-sm-6 col-lg-4">
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
@@ -648,7 +652,7 @@ function ContinentPlacesToStay() {
                                     </div>
                                 </div>
 
-                                <div className="col-sm-6 col-lg-4">
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
