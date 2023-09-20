@@ -90,7 +90,7 @@ function Index() {
             </section>
 
             <section className="trvl_info_row">
-                <div className="container-md">
+                <div className="container">
                     <div className="bookmark_row">
                         <p style={{ color: `white` }} dangerouslySetInnerHTML={{ __html: whyusDetails?.page_friendly_url }} />
                         {/* <ul>
@@ -120,7 +120,7 @@ function Index() {
             </section>
 
             <section className="card_blk_row dark_grey py-5">
-                <div className="container-md">
+                <div className="container">
                     <div className="book_wth_confdnce">
                         <h2>{whyusDetails?.page_content_2}</h2>
                         <div className="row">
@@ -190,7 +190,7 @@ function Index() {
             </section>
 
             <section className="make_enqury_row">
-                <div className="container-md">
+                <div className="container">
                     <h3>{whyusDetails?.page_content_3}</h3>
                     <p>{whyusDetails?.page_content_4}</p>
                     {/* <button className="btn prmry_btn make_enqury_btn">Make an enquiry
@@ -201,7 +201,7 @@ function Index() {
             </section>
 
             <section aria-label="Sign up for newsletter" className="newslettr_row">
-                <div className="container-md">
+                <div className="container">
                     <h4>Sign up for our newsletter</h4>
                     <h5>Receive our latest news and special offers</h5>
                     <Signup />

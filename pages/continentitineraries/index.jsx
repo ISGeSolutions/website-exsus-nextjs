@@ -99,26 +99,27 @@ function ContinentItinararies() {
     const [visibleItems, setVisibleItems] = useState(itemsPerPage);
 
     const router = useRouter();
-
+    const { destinationcode } = router.query;
+    const [countryOptions, setAllCountries] = useState([])
     const handleLoadMore = () => {
         // console.log('handleLoadMore')
         setVisibleItems(prevVisibleItems => prevVisibleItems + itemsPerPage);
     };
 
-    const countryOptions = [
-        { value: "Asia", label: "Asia" },
-        { value: "Hong Kong & Macau", label: "Hong Kong & Macau" },
-        { value: "Malaysia & Borneo", label: "Malaysia & Borneo" },
-        { value: "Singapore", label: "Singapore" },
-        { value: "Indonesia", label: "Indonesia" },
-        { value: "Japan", label: "Japan" },
-        { value: "Cambodia", label: "Cambodia" },
-        { value: "Vietnam", label: "Vietnam" },
-        { value: "China", label: "China" },
-        { value: "Thailand", label: "Thailand" },
-        { value: "Burma", label: "Burma" },
-        { value: "Laos", label: "Laos" }
-    ];
+    // const countryOptions = [
+    //     { value: "Asia", label: "Asia" },
+    //     { value: "Hong Kong & Macau", label: "Hong Kong & Macau" },
+    //     { value: "Malaysia & Borneo", label: "Malaysia & Borneo" },
+    //     { value: "Singapore", label: "Singapore" },
+    //     { value: "Indonesia", label: "Indonesia" },
+    //     { value: "Japan", label: "Japan" },
+    //     { value: "Cambodia", label: "Cambodia" },
+    //     { value: "Vietnam", label: "Vietnam" },
+    //     { value: "China", label: "China" },
+    //     { value: "Thailand", label: "Thailand" },
+    //     { value: "Burma", label: "Burma" },
+    //     { value: "Laos", label: "Laos" }
+    // ];
 
     const regionOptions = [
         { value: "Everything", label: "Everything" },
@@ -388,19 +389,37 @@ function ContinentItinararies() {
             setItineraries(x.data);
         });
 
+
+        destinationService.getDestinationDetails(destinationcode).then((x) => {
+            // const lines = x.data.attributes?.overview_text.split('\n');
+            // const oldText = x.data.attributes?.overview_text;
+            // var newValueWithBr = oldText?.replace(/\\n/g, "");
+            // setnewValueWithBr(newValueWithBr);
+            setAllCountries(
+                x.data?.attributes?.countries?.data.map((item) => ({
+                    id: item.id,
+                    country_code: item?.attributes?.country_code,
+                    value: item?.attributes?.country_name,
+                    label: item?.attributes?.country_name,
+                }))
+            );
+
+            // setDestinationLandingDetails(x)
+        });
+
         window.addEventListener('resize', equalHeight(true));
     }, []);
 
     return (
         <>
-            <div className="container-md">
+            <div className="container">
                 <section className="destination_para">
                     <p>Tailor-made luxury holidays in Asia are highly addictive.  Jam-packed with culture, adventure, wildlife and some of the most beautiful beaches in the world, Asia offers countless options for creating bespoke holidays. If you’re looking for a luxury honeymoon or family adventure holiday, travelling as a couple, group or solo, Asia has limitless opportunities for an unforgettable trip.</p>
                     <p>From the gems of South-East Asia, to the exotic Far East and exquisite Southern Asia, we've put together the following Asia holiday itineraries below to inspire you. Call 020 7337 9010 and speak to one of our experts to create your perfect bespoke Asia holiday.</p>
                 </section>
             </div>
             <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
-                <div className="container-md">
+                <div className="container">
                     <h3 className="title_cls">All Luxury Holiday Ideas in Asia</h3>
                     <div className="card_slider_row">
                         <div className="carousel00">

@@ -78,7 +78,7 @@ function getDestinationLandingList() {
 
 function getDestinationDetails(id) {
     // console.log('baseUrl_dropdown', baseUrl_dropdown);
-    const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/destinations/` + id + `?populate[0]=destination_images`;
+    const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/destinations/` + id + `?populate[0]=destination_images&populate[1]=countries`;
     return fetchWrapper.get(destinationDetailsUrl);
 }
 

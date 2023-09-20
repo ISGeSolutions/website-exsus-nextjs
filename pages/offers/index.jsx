@@ -8,7 +8,7 @@ export default Index;
 
 function Index() {
     const [users, setUsers] = useState(null);
-    
+
     const equalHeight = (resize) => {
         var elements = document.getElementsByClassName("card_slider_cnt"),
             allHeights = [],
@@ -27,7 +27,7 @@ function Index() {
             if (resize === false) {
                 elements[i].className = elements[i].className + " show";
             }
-        } 
+        }
     }
 
     equalHeight(true);
@@ -78,7 +78,7 @@ function Index() {
             </section>
 
             <section class="card_blk_row destinations_blk_row light_grey">
-                <div class="container-md">
+                <div class="container">
                     <div class="bookmark_row">
                         <ul>
                             <li><a href="homepage.html">Home</a></li>
@@ -95,7 +95,7 @@ function Index() {
             </section>
 
             <section class="card_blk_row destinations_blk_row pb-0">
-                <div class="container-md">
+                <div class="container">
                     <div class="row">
                         <div class="col-12 favrites_blk_row pb-0">
                             <h3 class="title_cls pb-0">Our favourite special offers on luxury holidays</h3>
@@ -111,7 +111,7 @@ function Index() {
             </section>
 
             <section class="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
-                <div class="container-md">
+                <div class="container">
                     <div class="card_slider_row">
                         <div class="carousel00 width_100">
                             <div class="row">
@@ -238,7 +238,7 @@ function Index() {
             </section>
 
             <section class="make_enqury_row">
-                <div class="container-md">
+                <div class="container">
                     <h3>YOUR JOURNEY STARTS HERE</h3>
                     <p>call us on 020 7337 9010 to start planning your perfect trip</p>
                     <button class="btn prmry_btn make_enqury_btn" onclick="window.open('contact_us.html')">Make an enquiry
@@ -248,7 +248,7 @@ function Index() {
             </section>
 
             <section aria-label="Sign up for newsletter" class="newslettr_row">
-                <div class="container-md">
+                <div class="container">
                     <h4>Sign up for our newsletter</h4>
                     <h5>Receive our latest news and special offers</h5>
                     <form class="newslettr_form d-block d-sm-flex">

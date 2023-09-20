@@ -10,12 +10,12 @@ export { Nav };
 
 function Nav() {
     const [user, setUser] = useState(null);
+
     // const [regionWiseUrl, setMyVariable] = useState("");
     const [destinationLandingList, setDestinationLandingList] = useState();
     const [holidaytypesList, setHolidaytypesList] = useState();
     const [activeIndex, setActiveIndex] = useState(null);
     const [activeIndexHoliday, setActiveIndexHoliday] = useState(null);
-
     const [menu, setmenu] = useState(null);
     const [menuMain, setmmenuMain] = useState(null);
     const [goBack, setgoBack] = useState(null);
@@ -56,6 +56,35 @@ function Nav() {
     };
 
     const router = useRouter();
+
+    const ExpertsButton = () => {
+        const router = useRouter();
+
+        const handleClick = () => {
+            router.push(`/meet-our-travel-experts`); // Navigate to the /enquiry page
+        };
+
+        return (
+            <button className="btn header_nav_btn" onClick={handleClick}>
+                MEET OUR EXPERTS
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="#000"
+                    shapeRendering="geometricPrecision"
+                    textRendering="geometricPrecision"
+                    imageRendering="optimizeQuality"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    viewBox="0 0 267 512.43"
+                >
+                    <path
+                        fillRule="nonzero"
+                        d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                    />
+                </svg>
+            </button>
+        );
+    };
 
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
@@ -570,9 +599,7 @@ function Nav() {
                                                     <div className="header_nav_cnt">
                                                         <h4>MEET OUR EXPERTS</h4>
                                                         <p>Our passionate and knowledgeable team of well-travelled experts can tailor-make your perfect luxury holiday, honeymoon or family adventure to over 90 destinations all over the world, from Italy to India.</p>
-                                                        <button className="btn header_nav_btn">MEET OUR EXPERTS
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                                        </button>
+                                                        <ExpertsButton />
                                                     </div>
                                                 </div>
                                                 <div className="col-md-6">

@@ -90,7 +90,7 @@ function Index() {
                 <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script>
             </Head>
             <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey pt-5">
-                <div className="container-md">
+                <div className="container">
                     <h2 className="search_result_title">Your search result</h2>
                     <h3 className="title_cls search_result_title_green">Find and plan your perfect tailor-made holiday worldwide</h3>
                     <div className="card_slider_row">
@@ -162,7 +162,7 @@ function Index() {
             </section>
 
             <section className="make_enqury_row">
-                <div className="container-md">
+                <div className="container">
                     <h3>YOUR JOURNEY STARTS HERE</h3>
                     <p>call us on 020 7337 9010 to start planning your perfect trip</p>
                     <button className="btn prmry_btn make_enqury_btn">Make an enquiry
@@ -172,7 +172,7 @@ function Index() {
             </section>
 
             <section aria-label="Sign up for newsletter" className="newslettr_row">
-                <div className="container-md">
+                <div className="container">
                     <h4>Sign up for our newsletter</h4>
                     <h5>Receive our latest news and special offers</h5>
                     <form className="newslettr_form d-block d-sm-flex">

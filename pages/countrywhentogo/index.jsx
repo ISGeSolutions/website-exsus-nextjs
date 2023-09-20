@@ -9,14 +9,14 @@ function CountryWhentogo() {
 
     return (
         <>
-            <div className="container-md">
+            <div className="container">
                 <section className="destination_para">
                     <p>As the world’s second largest state by land area and with a host of diverse terrains and latitudes, the climate changes radically. With too-hot-to-handle summers and bone-chillingly cold winters, the best time to visit is in spring (April-May in the north and March-April in the south) and autumn (October-November in the north and September-October in the south), when temperatures are mild – unless experiencing extreme weather climates is your thing.</p>
                 </section>
             </div>
 
             <section className="card_blk_row dark_grey">
-                <div className="container-md">
+                <div className="container">
                     <div className="row">
                         <div className="col-sm-6">
                             <div className="card_blk_inr card_blk_overlay">

@@ -364,7 +364,7 @@ function Index() {
             </section>
 
             <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
-                <div className="container-md">
+                <div className="container">
                     <h3 className="title_cls">TOP DESTINATIONS FOR ULTIMATE JOURNEYS</h3>
                     <div className="card_slider_row">
                         <div className="carousel00 region_carousel00">
@@ -418,7 +418,7 @@ function Index() {
                                 </div>
 
                                 {itineraries?.slice(0, itineraries.length).map((item, index) => (
-                                    <div className="col-sm-6 col-lg-4" key={index}>
+                                    <div className="col-sm-6 col-lg-4 col-xxl-3" key={index}>
                                         <div className="card_slider_inr">
                                             <div className="card_slider">
                                                 <NavLink href={generateDynamicLink(item)} className="card_slider_img">

@@ -192,7 +192,7 @@ function CountryItinararies() {
 
     return (
         <>
-            <div className="container-md">
+            <div className="container">
                 <section className="destination_para">
                     <p>Tailor-made luxury holidays in Asia are highly addictive.  Jam-packed with culture, adventure, wildlife and some of the most beautiful beaches in the world, Asia offers countless options for creating bespoke holidays. If you’re looking for a luxury honeymoon or family adventure holiday, travelling as a couple, group or solo, Asia has limitless opportunities for an unforgettable trip.</p>
                     <p>From the gems of South-East Asia, to the exotic Far East and exquisite Southern Asia, we've put together the following Asia holiday itineraries below to inspire you. Call 020 7337 9010 and speak to one of our experts to create your perfect bespoke Asia holiday.</p>
@@ -200,7 +200,7 @@ function CountryItinararies() {
             </div>
 
             <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
-                <div className="container-md">
+                <div className="container">
                     <h3 className="title_cls">All Luxury Holiday Ideas in Asia</h3>
                     <div className="card_slider_row">
                         <div className="carousel00">

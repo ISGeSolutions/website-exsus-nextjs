@@ -108,7 +108,7 @@ function Index() {
             </section>
 
             <section className="card_blk_row destinations_blk_row light_grey">
-                <div className="container-md">
+                <div className="container">
                     <div className="bookmark_row">
                         <ul>
                             <li><a href="homepage.html">Home</a></li>
@@ -125,7 +125,7 @@ function Index() {
             </section>
 
             <section className="card_blk_row destinations_blk_row pb-0">
-                <div className="container-md">
+                <div className="container">
                     <div className="row">
                         <div className="col-12 favrites_blk_row pb-0">
                             <h3 className="title_cls pb-0">Our favourite special offers on luxury holidays</h3>
@@ -141,11 +141,11 @@ function Index() {
             </section>
 
             <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
-                <div className="container-md">
+                <div className="container">
                     <div className="card_slider_row">
                         <div className="carousel00 width_100">
                             <div className="row">
-                                <div className="col-sm-6 col-lg-4">
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
@@ -168,7 +168,7 @@ function Index() {
                                     </div>
                                 </div>
 
-                                <div className="col-sm-6 col-lg-4">
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
@@ -191,7 +191,7 @@ function Index() {
                                     </div>
                                 </div>
 
-                                <div className="col-sm-6 col-lg-4">
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
@@ -214,7 +214,7 @@ function Index() {
                                     </div>
                                 </div>
 
-                                <div className="col-sm-6 col-lg-4">
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
@@ -237,7 +237,7 @@ function Index() {
                                     </div>
                                 </div>
 
-                                <div className="col-sm-6 col-lg-4">
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
                                     <div className="card_slider_inr">
                                         <div className="card_slider">
                                             <a className="card_slider_img">
@@ -268,7 +268,7 @@ function Index() {
             </section>
 
             <section className="make_enqury_row">
-                <div className="container-md">
+                <div className="container">
                     <h3>YOUR JOURNEY STARTS HERE</h3>
                     <p>call us on 020 7337 9010 to start planning your perfect trip</p>
                     <button className="btn prmry_btn make_enqury_btn">Make an enquiry
@@ -278,7 +278,7 @@ function Index() {
             </section>
 
             <section aria-label="Sign up for newsletter" className="newslettr_row">
-                <div className="container-md">
+                <div className="container">
                     <h4>Sign up for our newsletter</h4>
                     <h5>Receive our latest news and special offers</h5>
                     <Signup />

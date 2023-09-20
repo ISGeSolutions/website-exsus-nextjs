@@ -162,7 +162,7 @@ function Index() {
             </section> */}
 
             <section className="trvl_info_row">
-                <div className="container-md">
+                <div className="container">
                     <div className="bookmark_row">
                         <p style={{ color: `white` }}>{itineraries?.attributes?.friendly_url}</p>
                         {/* <ul>
@@ -229,7 +229,7 @@ function Index() {
             </section>
 
             <section className="itinery_detls_row">
-                <div className="container-md">
+                <div className="container">
                     <h3 className="title_cls">Itinerary details</h3>
 
 
@@ -356,7 +356,7 @@ function Index() {
             </section>
 
             <section className="best_time_blk_row">
-                <div className="container-md">
+                <div className="container">
                     <section className="best_time_blk_inr">
                         <h3>BEST TIME TO GO</h3>
                         <div className="row">
@@ -398,7 +398,7 @@ function Index() {
             </section>
 
             <section className="favrites_blk_row">
-                <div className="container-md">
+                <div className="container">
                     <h3 className="title_cls">Hotels we've recommended for this trip</h3>
                     <div className="card_slider_row">
                         <i id="left">
@@ -491,7 +491,7 @@ function Index() {
             </section>
 
             <section className="favrites_blk_row light_grey">
-                <div className="container-md">
+                <div className="container">
                     <h3 className="title_cls">More itineraries in China</h3>
                     <div className="card_slider_row01">
                         <i id="leftt">
@@ -592,7 +592,7 @@ function Index() {
             </section>
 
             <section className="make_enqury_row">
-                <div className="container-md">
+                <div className="container">
                     <h3>YOUR JOURNEY STARTS HERE</h3>
                     <p>call us on 020 7337 9010 to start planning your perfect trip</p>
                     <button className="btn prmry_btn make_enqury_btn">Make an enquiry
@@ -602,7 +602,7 @@ function Index() {
             </section>
 
             <section aria-label="Sign up for newsletter" className="newslettr_row">
-                <div className="container-md">
+                <div className="container">
                     <h4>Sign up for our newsletter</h4>
                     <h5>Receive our latest news and special offers</h5>
                     <form className="newslettr_form d-block d-sm-flex">

@@ -21,6 +21,8 @@ function Index() {
     const [activeTab, setActiveTab] = useState('overview'); // State to track the active tab
     const router = useRouter();
     const { destinationcode } = router.query;
+    const [destinationName, setdestinationName] = useState("");
+
 
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
@@ -67,25 +69,25 @@ function Index() {
 
 
     const toggleTab = (itemId) => {
-        var text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
+        var text = `LUXURY SAFARI HOLIDAYS IN ${destinationName}`;
         if (itemId == 'overview') {
             const redirectUrl = regionWiseUrl + '/continent?destinationcode=' + destinationcode;
             window.history.pushState(null, null, redirectUrl);
-            text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
+            text = `LUXURY SAFARI HOLIDAYS IN ${destinationName}`;
         } else if (itemId == 'countries') {
             const redirectUrl = regionWiseUrl + '/continentcountries?destinationcode=' + destinationcode;
             window.history.pushState(null, null, redirectUrl);
-            text = "COUNTRIES IN AFRICA"; // action="/countryregions?countrycode=south-africa"
+            text = `COUNTRIES IN ${destinationName}`;
         } else if (itemId == 'itineraries') {
             const redirectUrl = regionWiseUrl + '/continentitineraries?destinationcode=' + destinationcode;
             window.history.pushState(null, null, redirectUrl);
-            text = "TAILOR-MADE AFRICA HOLIDAY ITINERARIES"; // action="/countryitineraries?countrycode=south-africa"
+            text = `TAILOR-MADE ${destinationName} HOLIDAY ITINERARIES`;
         } else if (itemId == 'places-to-stay') {
             const redirectUrl = regionWiseUrl + '/continentplacetostay?destinationcode=' + destinationcode;
             window.history.pushState(null, null, redirectUrl);
-            text = "PLACES TO STAY IN AFRICA"; // action="/countryplacetostay?countrycode=south-africa"
+            text = `PLACES TO STAY IN ${destinationName}`;
         } else {
-            text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
+            text = `LUXURY SAFARI HOLIDAYS IN ${destinationName}`;
         }
         setHeadingText(text);
         if (activeTab !== itemId) {
@@ -128,6 +130,7 @@ function Index() {
             setDestinationDetails(x.data.attributes);
             const map_latitude = x.data.attributes?.map_latitude;
             const map_longitude = x.data.attributes?.map_longitude;
+            setdestinationName(x.data.attributes.destination_name);
             // const map_latitude = "40.7128";
             // const map_longitude = "-74.0060";
 
@@ -224,7 +227,7 @@ function Index() {
             </section>
 
             <section className="destination_tab_row light_grey pb-0">
-                <div className="container-md">
+                <div className="container">
                     <div className="bookmark_row">
                         <p style={{ color: `white` }}>{destinationDetails?.attributes?.page_friendly_url}</p>
                         {/* <ul>
@@ -280,7 +283,7 @@ function Index() {
             </section>
 
             <section className="make_enqury_row">
-                <div className="container-md">
+                <div className="container">
                     <h3>YOUR JOURNEY STARTS HERE</h3>
                     <p>call us on 020 7337 9010 to start planning your perfect trip</p>
                     {/* <button className="btn prmry_btn make_enqury_btn">Make an enquiry
@@ -291,7 +294,7 @@ function Index() {
             </section>
 
             <section aria-label="Sign up for newsletter" className="newslettr_row">
-                <div className="container-md">
+                <div className="container">
                     <h4>Sign up for our newsletter</h4>
                     <h5>Receive our latest news and special offers</h5>
                     <form className="newslettr_form d-block d-sm-flex">

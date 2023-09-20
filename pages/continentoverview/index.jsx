@@ -16,6 +16,9 @@ function ContinentOverview() {
     const { destinationcode } = router.query;
     const itemsPerPage = 9; // Number of items to load per page
     const [visibleItems, setVisibleItems] = useState(itemsPerPage)
+    const [allCountries, setAllCountries] = useState([]);
+    const [destinationName, setdestinationName] = useState("");
+
 
     const handleLoadMore = () => {
         // console.log('handleLoadMore')
@@ -27,6 +30,12 @@ function ContinentOverview() {
         if (window && window.site_region) {
             regionWiseUrl = '/' + window.site_region;
             // setMyVariable(window.site_region);
+        }
+    }
+
+    const handleCountryClick = (id) => {
+        if (id) {
+            router.push(regionWiseUrl + `/country?countrycode=` + id);
         }
     }
 
@@ -68,7 +77,9 @@ function ContinentOverview() {
             // const lines = x.data.attributes?.overview_text.split('\n');
             const oldText = x.data.attributes?.overview_text;
             var newValueWithBr = oldText?.replace(/\\n/g, "");
+            setdestinationName(x.data.attributes.destination_name);
             setnewValueWithBr(newValueWithBr);
+            setAllCountries(x.data?.attributes?.countries?.data);
             // setDestinationLandingDetails(x)
         });
 
@@ -76,127 +87,41 @@ function ContinentOverview() {
             setItineraries(x.data);
         });
 
+        // destinationService.getAllCountries().then(x => {
+        //     setAllCountries(x.data);
+        // })
+
         window.addEventListener('resize', equalHeight(true));
 
     }, []);
 
     return (
         <>
-            <div className="container-md">
+            <div className="container">
                 <section className="destination_para">
                     <div dangerouslySetInnerHTML={{ __html: valueWithBr }} />
                 </section>
 
                 <section className="favrites_blk_row favrites_blk_small_card_row">
-                    <div className="container-md">
-                        <h3 className="title_cls">Popular countries in Asia</h3>
+                    <div className="container">
+                        <h3 className="title_cls">Popular countries in {destinationName}</h3>
                         <div className="card_slider_row">
                             <i id="left">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z" /></svg>
                             </i>
                             <div className="carousel00">
-                                <div className="card_slider_inr card_slider_inr_sml">
-                                    <a href="#">
-                                        <div className="card_slider_inr_sml_img">
-                                            <img src="./../../images/small_card_img01.jpg" alt="small_card_img01" className="img-fluid" />
-                                        </div>
-                                        <h4>
-                                            China
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                        </h4>
-                                    </a>
-                                </div>
-
-                                <div className="card_slider_inr card_slider_inr_sml">
-                                    <a href="#">
-                                        <div className="card_slider_inr_sml_img">
-                                            <img src="./../../images/small_card_img02.jpg" alt="small_card_img02" className="img-fluid" />
-                                        </div>
-                                        <h4>
-                                            Japan
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                        </h4>
-                                    </a>
-                                </div>
-
-                                <div className="card_slider_inr card_slider_inr_sml">
-                                    <a href="#">
-                                        <div className="card_slider_inr_sml_img">
-                                            <img src="./../../images/small_card_img03.jpg" alt="small_card_img03" className="img-fluid" />
-                                        </div>
-                                        <h4>Thailand
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                        </h4>
-                                    </a>
-                                </div>
-
-                                <div className="card_slider_inr card_slider_inr_sml">
-                                    <a href="#">
-                                        <div className="card_slider_inr_sml_img">
-                                            <img src="./../../images/small_card_img04.jpg" alt="small_card_img04" className="img-fluid" />
-                                        </div>
-                                        <h4>Vietnam
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                        </h4>
-                                    </a>
-                                </div>
-
-                                <div className="card_slider_inr card_slider_inr_sml">
-                                    <a href="#">
-                                        <div className="card_slider_inr_sml_img">
-                                            <img src="./../../images/small_card_img05.jpg" alt="small_card_img05" className="img-fluid" />
-                                        </div>
-                                        <h4>
-                                            Indonesia
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                        </h4>
-                                    </a>
-                                </div>
-
-                                <div className="card_slider_inr card_slider_inr_sml">
-                                    <a href="#">
-                                        <div className="card_slider_inr_sml_img">
-                                            <img src="./../../images/small_card_img06.jpg" alt="small_card_img06" className="img-fluid" />
-                                        </div>
-                                        <h4>
-                                            Malaysia & Borneo
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                        </h4>
-                                    </a>
-                                </div>
-
-                                <div className="card_slider_inr card_slider_inr_sml">
-                                    <a href="#">
-                                        <div className="card_slider_inr_sml_img">
-                                            <img src="./../../images/small_card_img07.jpg" alt="small_card_img07" className="img-fluid" />
-                                        </div>
-                                        <h4>Burma
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                        </h4>
-                                    </a>
-                                </div>
-
-                                <div className="card_slider_inr card_slider_inr_sml">
-                                    <a href="#">
-                                        <div className="card_slider_inr_sml_img">
-                                            <img src="./../../images/small_card_img08.jpg" alt="small_card_img08" className="img-fluid" />
-                                        </div>
-                                        <h4>Cambodia
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                        </h4>
-                                    </a>
-                                </div>
-
-                                <div className="card_slider_inr card_slider_inr_sml">
-                                    <a href="#">
-                                        <div className="card_slider_inr_sml_img">
-                                            <img src="./../../images/small_card_img09.jpg" alt="small_card_img09" className="img-fluid" />
-                                        </div>
-                                        <h4>Laos
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                        </h4>
-                                    </a>
-                                </div>
+                                {allCountries?.map((countries, i) => (
+                                    <div className="card_slider_inr card_slider_inr_sml" key={countries?.id}>
+                                        <a onClick={() => handleCountryClick(countries?.id)}>
+                                            <div className="card_slider_inr_sml_img">
+                                                <img src="./../../images/small_card_img01.jpg" alt="small_card_img01" className="img-fluid" />
+                                            </div>
+                                            <h4>
+                                                {countries.attributes.country_name}
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                            </h4>
+                                        </a>
+                                    </div>))}
                             </div>
                             <i id="right">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -207,7 +132,7 @@ function ContinentOverview() {
             </div>
 
             <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
-                <div className="container-md">
+                <div className="container">
                     <h3 className="title_cls">Favourite trip ideas</h3>
                     <div className="card_slider_row">
                         <div className="carousel00">
@@ -252,7 +177,7 @@ function ContinentOverview() {
             </section>
 
             <section className="card_blk_row dark_grey">
-                <div className="container-md">
+                <div className="container">
                     <div className="row">
                         <div className="col-sm-6">
                             <div className="card_blk_inr card_blk_overlay">
@@ -262,7 +187,7 @@ function ContinentOverview() {
                                         <div className="row align-items-center">
                                             <div className="col-11">
                                                 <div className="card_blk_txt">
-                                                    <h3>See all Itinerary Ideas in Asia</h3>
+                                                    <h3>See all Itinerary Ideas in {destinationName}</h3>
                                                 </div>
                                             </div>
                                             <div className="col-1 ps-0">
@@ -282,7 +207,7 @@ function ContinentOverview() {
                                         <div className="row align-items-center">
                                             <div className="col-11">
                                                 <div className="card_blk_txt">
-                                                    <h3>See all Places to Stay in Asia</h3>
+                                                    <h3>See all Places to Stay in {destinationName}</h3>
                                                 </div>
                                             </div>
                                             <div className="col-1 ps-0">
