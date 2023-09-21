@@ -120,12 +120,11 @@ function Index() {
     equalHeight(true);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         // destinationService.getAllItineraries().then(x => {
         //     setItineraries(x.data);
         // });
 
-        // let id = 1;
-        // console.log(router.query)
         destinationService.getDestinationDetails(destinationcode).then(x => {
             setDestinationDetails(x.data.attributes);
             const map_latitude = x.data.attributes?.map_latitude;
@@ -134,8 +133,8 @@ function Index() {
             // const map_latitude = "40.7128";
             // const map_longitude = "-74.0060";
 
-            const test = `https://www.google.com/maps/embed/v1/place?q=` + map_latitude + `,` + map_longitude + `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
-            setMapVariable(test);
+            const mapTemp = `https://www.google.com/maps/embed/v1/place?q=` + map_latitude + `,` + map_longitude + `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
+            setMapVariable(mapTemp);
 
             // const lines = x.data.attributes?.overview_text.split('\n');
             // const oldText = x.data.attributes?.overview_text;
@@ -147,7 +146,6 @@ function Index() {
                 if (element.attributes.image_type == 'banner') {
                     newBackgroundImages.push(element.attributes.image_path);
                 } else if (element.attributes.image_type == 'thumbnail') {
-
                 }
             });
             setBackgroundImage(newBackgroundImages);
@@ -174,8 +172,7 @@ function Index() {
         });
 
         window.addEventListener('resize', equalHeight(true));
-
-    }, []);
+    }, [destinationcode]);
 
     return (
         <>
@@ -274,7 +271,7 @@ function Index() {
                         <ContinentCountry />
                     </div>}
                     {activeTab === 'itineraries' && <div className={activeTab === 'itineraries' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-itineraries" role="tabpanel" aria-labelledby="pills-itineraries-tab" tabIndex="0">
-                        <ContinentItinararies />
+                        <ContinentItinararies dataProp={destinationcode}/>
                     </div>}
                     {activeTab === 'places-to-stay' && <div className={activeTab === 'places-to-stay' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-places-to-stay" role="tabpanel" aria-labelledby="pills-places-to-stay-tab" tabIndex="0">
                         <ContinentPlacesToStay />

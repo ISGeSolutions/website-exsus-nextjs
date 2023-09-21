@@ -93,7 +93,13 @@ function ContinentOverview() {
 
         window.addEventListener('resize', equalHeight(true));
 
-    }, []);
+        // Using window.onload to detect full page load
+        window.onload = () => {
+            const redirectUrl = regionWiseUrl + '/continent?destinationcode=' + destinationcode;
+            router.push(redirectUrl);
+        };
+
+    }, [destinationcode, router]);
 
     return (
         <>

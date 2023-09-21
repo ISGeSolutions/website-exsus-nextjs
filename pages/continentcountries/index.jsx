@@ -40,7 +40,13 @@ function ContinentCountry() {
             // setDestinationLandingDetails(x)
         });
 
-    }, []);
+        // Using window.onload to detect full page load
+        window.onload = () => {
+            const redirectUrl = regionWiseUrl + '/continent?destinationcode=' + destinationcode;
+            router.push(redirectUrl);
+        };
+
+    }, [destinationcode, router]);
 
     return (
         <>

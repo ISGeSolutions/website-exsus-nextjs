@@ -84,6 +84,16 @@ const InputOption = ({
 };
 
 function ContinentItinararies() {
+
+    // const router = useRouter();
+    let regionWiseUrl = '/uk';
+    if (typeof window !== 'undefined') {
+        if (window && window.site_region) {
+            regionWiseUrl = '/' + window.site_region;
+            // setMyVariable(window.site_region);
+        }
+    }
+
     const [isClearable, setIsClearable] = useState(true);
     const [isSearchable, setIsSearchable] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
@@ -339,14 +349,6 @@ function ContinentItinararies() {
         }
     };
 
-    let regionWiseUrl = '/uk';
-    if (typeof window !== 'undefined') {
-        if (window && window.site_region) {
-            regionWiseUrl = '/' + window.site_region;
-            // setMyVariable(window.site_region);
-        }
-    }
-
     const generateDynamicLink = (item) => {
         // console.log('item', item);
         return regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`;
@@ -380,7 +382,6 @@ function ContinentItinararies() {
     equalHeight(true);
 
     useEffect(() => {
-        console.log('refresh');
         setSelectedOptionCountry();
         setSelectedOptionRegion();
         setSelectedOptionMonth();
@@ -389,12 +390,7 @@ function ContinentItinararies() {
             setItineraries(x.data);
         });
 
-
         destinationService.getDestinationDetails(destinationcode).then((x) => {
-            // const lines = x.data.attributes?.overview_text.split('\n');
-            // const oldText = x.data.attributes?.overview_text;
-            // var newValueWithBr = oldText?.replace(/\\n/g, "");
-            // setnewValueWithBr(newValueWithBr);
             setAllCountries(
                 x.data?.attributes?.countries?.data.map((item) => ({
                     id: item.id,
@@ -403,12 +399,17 @@ function ContinentItinararies() {
                     label: item?.attributes?.country_name,
                 }))
             );
-
-            // setDestinationLandingDetails(x)
         });
 
         window.addEventListener('resize', equalHeight(true));
-    }, []);
+        
+        // Using window.onload to detect full page load
+        window.onload = () => {
+            const redirectUrl = regionWiseUrl + '/continent?destinationcode=' + destinationcode;
+            router.push(redirectUrl);
+        };
+
+    }, [destinationcode, router]);
 
     return (
         <>
