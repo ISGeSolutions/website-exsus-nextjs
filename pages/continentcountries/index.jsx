@@ -15,6 +15,8 @@ function ContinentCountry() {
     const { destinationcode } = router.query;
     const [allCountries, setAllCountries] = useState([]);
     const [destinationName, setdestinationName] = useState("");
+
+
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
         if (window && window.site_region) {
@@ -22,6 +24,8 @@ function ContinentCountry() {
             // setMyVariable(window.site_region);
         }
     }
+
+
 
     const handleCountryClick = (id) => {
         if (id) {
@@ -39,6 +43,7 @@ function ContinentCountry() {
             setAllCountries(x.data?.attributes?.countries?.data);
             // setDestinationLandingDetails(x)
         });
+
 
     }, []);
 
@@ -65,7 +70,8 @@ function ContinentCountry() {
                             <div className="col-sm-6 col-lg-4 col-xxl-3" key={countries?.id}>
                                 <div className="card_blk_inr">
                                     <a onClick={() => handleCountryClick(countries?.id)} target="_blank">
-                                        <img src="./../../images/destination_countries01.jpg" alt="destination countries01" className="img-fluid" />
+                                        <img src={countries?.attributes?.country_images?.data.filter(res => res.attributes.image_type == "thumbnail")[0].attributes?.image_path} alt={countries?.attributes?.country_images?.data.filter(res => res.attributes?.image_type == "thumbnail")[0]?.attributes?.image_alt_text} className="img-fluid" />
+                                        {/* <img src="./../../images/destination_countries01.jpg" alt="destination countries01" className="img-fluid" /> */}
                                         <div className="card_blk_cntnt card_blk_sml_arw">
                                             <div className="row align-items-center">
                                                 <div className="col-11">

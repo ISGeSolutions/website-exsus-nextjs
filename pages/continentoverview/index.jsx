@@ -74,6 +74,7 @@ function ContinentOverview() {
     useEffect(() => {
 
         destinationService.getDestinationDetails(destinationcode).then(x => {
+
             // const lines = x.data.attributes?.overview_text.split('\n');
             const oldText = x.data.attributes?.overview_text;
             var newValueWithBr = oldText?.replace(/\\n/g, "");
@@ -114,7 +115,7 @@ function ContinentOverview() {
                                     <div className="card_slider_inr card_slider_inr_sml" key={countries?.id}>
                                         <a onClick={() => handleCountryClick(countries?.id)}>
                                             <div className="card_slider_inr_sml_img">
-                                                <img src="./../../images/small_card_img01.jpg" alt="small_card_img01" className="img-fluid" />
+                                                <img src={countries?.attributes?.country_images?.data.filter(res => res.attributes.image_type == "thumbnail")[0].attributes?.image_path} alt={countries?.attributes?.country_images?.data.filter(res => res.attributes?.image_type == "thumbnail")[0]?.attributes?.image_alt_text} className="img-fluid" />
                                             </div>
                                             <h4>
                                                 {countries.attributes.country_name}

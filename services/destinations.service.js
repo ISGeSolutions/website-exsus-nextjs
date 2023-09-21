@@ -47,7 +47,8 @@ export const destinationService = {
     getDestinationLandingList,
     getDestinationDetails,
     getAllItineraries,
-    getItineraryDetails
+    getItineraryDetails,
+    getItinerariesByDestination
 };
 
 function getAllDropdown() {
@@ -78,7 +79,16 @@ function getDestinationLandingList() {
 
 function getDestinationDetails(id) {
     // console.log('baseUrl_dropdown', baseUrl_dropdown);
-    const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/destinations/` + id + `?populate[0]=destination_images&populate[1]=countries`;
+    const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/destinations/` + id + `?populate=destination_images,countries.country_images`;
+    return fetchWrapper.get(destinationDetailsUrl);
+}
+
+function getItinerariesByDestination(id, page) {
+    // console.log('baseUrl_dropdown', baseUrl_dropdown);
+    const destinationDetailsUrl =
+        `${publicRuntimeConfig.apiUrl}/api/destinations/` +
+        id +
+        `?populate[0]=itineraries.itinerary_images&pagination[page]=${page}&pagination[pageSize]=9`;
     return fetchWrapper.get(destinationDetailsUrl);
 }
 
