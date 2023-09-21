@@ -107,6 +107,9 @@ function ContinentItinararies() {
     const [visiblePagination, setVisiblePagination] = useState(true);
     const itemsPerPage = 9; // Number of items to load per page
     const [visibleItems, setVisibleItems] = useState(itemsPerPage);
+    const [page, setPage] = useState(0); // Current page
+    const [metaData, setMetaData] = useState([]);
+
 
     const router = useRouter();
     const { destinationcode } = router.query;
@@ -114,6 +117,28 @@ function ContinentItinararies() {
     const handleLoadMore = () => {
         // console.log('handleLoadMore')
         setVisibleItems(prevVisibleItems => prevVisibleItems + itemsPerPage);
+    };
+
+
+    const loadMoreData = () => {
+        destinationService.getItinerariesByDestination(destinationcode, page + 1)
+            .then((response) => {
+                setMetaData(response.meta.pagination);
+                const newItineraries = response.data.attributes.itineraries.data;
+                if (newItineraries.length > 0) {
+                    setItineraries(newItineraries);
+                    //   setItineraries((prevItineraries) =>
+                    //     [...prevItineraries, ...newItineraries].reduce(
+                    //       (accumulator, current) =>
+                    //         accumulator.some((item) => item.id === current.id)
+                    //           ? accumulator
+                    //           : [...accumulator, current],
+                    //       []
+                    //     )
+                    // );
+                    setPage(page + 1);
+                }
+            });
     };
 
     // const countryOptions = [
@@ -401,6 +426,8 @@ function ContinentItinararies() {
             );
         });
 
+        loadMoreData();
+
         window.addEventListener('resize', equalHeight(true));
         
         // Using window.onload to detect full page load
@@ -538,14 +565,14 @@ function ContinentItinararies() {
                                     </div>
                                 </div>
 
-                                {itineraries?.map((item) => (
-                                    <div className="col-sm-6 col-lg-4" key={item.id}>
+                                {itineraries?.slice(0, 9).map((item) => (
+                                    <div className="col-sm-6 col-lg-4 col-xxl-3" key={item.id}>
                                         <div className="card_slider_inr">
                                             <div className="card_slider">
                                                 <NavLink href={generateDynamicLink(item)} className="card_slider_img">
                                                     {item?.attributes?.itinerary_images?.data.map((element, index) => (
                                                         element.attributes.image_type == 'thumbnail' ? (
-                                                            <img key={index} src={element.attributes.image_path} alt="destination card01" className="img-fluid" />
+                                                            <img key={index} src={element.attributes.image_path} alt={element.attributes.image_alt_text} className="img-fluid" />
                                                         ) : (
                                                             ''
                                                         )

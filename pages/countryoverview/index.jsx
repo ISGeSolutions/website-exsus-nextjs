@@ -5,11 +5,14 @@ import { NavLink } from 'components';
 export default CountryOverview;
 
 function CountryOverview(props) {
+    console.log(props)
+
     const [itineraries, setItineraries] = useState(null);
     const itemsPerPage = 9; // Number of items to load per page
     const [visibleItems, setVisibleItems] = useState(itemsPerPage)
 
     const { overview_text } = props?.data || {};
+    const country_name = props?.data?.country_name || "";
 
     const handleLoadMore = () => {
         // console.log('handleLoadMore')
@@ -61,6 +64,7 @@ function CountryOverview(props) {
             setItineraries(x.data);
         });
 
+        console.log(props?.data?.country_name)
         window.addEventListener('resize', equalHeight(true));
     }, []);
 
@@ -70,7 +74,7 @@ function CountryOverview(props) {
                 <section className="destination_para">
                     <p dangerouslySetInnerHTML={{ __html: overview_text }} />
                 </section>
-                <section className="favrites_blk_row favrites_blk_small_card_row">
+                {/* <section className="favrites_blk_row favrites_blk_small_card_row">
                     <div className="container">
                         <h3 className="title_cls">Popular countries in Asia</h3>
                         <div className="card_slider_row">
@@ -186,16 +190,187 @@ function CountryOverview(props) {
                             </i>
                         </div>
                     </div>
-                </section>
+                </section> */}
+                {/* <section class="country_highlight_row">
+                    <div class="country_highlight_inr">
+                        <h3>HIGHLIGHTS OF China</h3>
+                        <p>Climbing the Great Wall of China – Scale the giant structure and have a whale of a time tobogganing your way down afterwards.</p>
+                        <p>The Forbidden City – Explore China’s largest collection of ancient structures, once home to 24 emperors across the Ming and Qing dynasties.</p>
+                        <div class="country_hightlight_expnded" style="display: none;">
+                            <p>Rice terraces – Meander along the verdant ridges of Yunnan, with soaring mountains and dense jungles which make you feel completely at one with nature.</p>
+                            <p>The Zhangjiajie Mountains – if you’ve stared wistfully at Avatar’s gorgeous craggy landscape, don’t despair – the ‘Hallelujah Mountains’ are inspired by Zhangjiajie.</p>
+                            <p>Terracotta warriors – See thousands of life-size clay soldiers in Xi’an which stand guard by the tomb of China’s first emperor.</p>
+                            <p>The Silk Road – Discover the network used by merchants and traders to trade silk and other goods. This was far more significant than exchanging material goods however, as through this passage, intellectual and cultural exchanges also took place (including scientific, artistic and literary one)</p>
+                            <p>Amazing food – Relish in delicious local food, from Peking duck in Beijing to Dim Sum in Hong Kong.</p>
+                        </div>
+                        <button class="btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" class="up_arrow" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 266.77"><path fill-rule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
+                            <span>Read more</span>
+                            <span class="read_less">Read less</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 266.77"><path fill-rule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
+                        </button>
+
+                    </div>
+                </section> */}
             </div>
-            <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
+            <section class="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
+                <div class="container-md">
+                    <h3 class="title_cls pt-5">Holidays in {country_name} Handpicked by Exsus</h3>
+                    <div class="card_slider_row">
+                        <div class="carousel00">
+                            <div class="row">
+                                <div class="col-sm-6 col-lg-4 col-xxl-3">
+                                    <div class="card_slider_inr">
+                                        <div class="card_slider">
+                                            <a class="card_slider_img">
+                                                <img src="images/country_card01.jpg" alt="country card01" class="img-fluid" />
+                                            </a>
+                                            <div class="card_slider_cnt">
+                                                <h4><a href="#">China Like an Emperor</a></h4>
+                                                <ul>
+                                                    <li>China in Ultimate Style</li>
+                                                    <li>China</li>
+                                                    <li>From £11,250 per person</li>
+                                                    <li>Travel to:<span>Beijing & Northern China, Shanghai, Hangzhou & Eastern China, Yunnan</span></li>
+                                                </ul>
+                                            </div>
+                                            <button class="btn card_slider_btn">
+                                                <span>12 nights</span>
+                                                <span class="view_itnry_link" onclick="window.location.href='itinerary_detail.html'">View this itinerary<em class="fa-solid fa-chevron-right"></em></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-lg-4 col-xxl-3">
+                                    <div class="card_slider_inr">
+                                        <div class="card_slider">
+                                            <div class="card_slider_img">
+                                                <img src="images/country_card02.jpg" alt="country card02" class="img-fluid" />
+                                            </div>
+                                            <div class="card_slider_cnt">
+                                                <h4><a href="#">In Search of Pandas</a></h4>
+                                                <ul>
+                                                    <li>Family Adventure to China</li>
+                                                    <li>China</li>
+                                                    <li>From £6,750 per person</li>
+                                                    <li>Travel to:<span>Beijing & Northern China, Hong Kong & Macau, Southern China, Xi'an, Sichuan & Central China</span></li>
+                                                </ul>
+                                            </div>
+                                            <button class="btn card_slider_btn">
+                                                <span>13 nights</span>
+                                                <span class="view_itnry_link" onclick="window.location.href='itinerary_detail.html'">View this itinerary<em class="fa-solid fa-chevron-right"></em></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-lg-4 col-xxl-3">
+                                    <div class="card_slider_inr">
+                                        <div class="card_slider">
+                                            <div class="card_slider_img">
+                                                <img src="images/country_card03.jpg" alt="country card03" class="img-fluid" />
+                                            </div>
+                                            <div class="card_slider_cnt">
+                                                <h4><a href="#">STYLISH HONEYMOON TO CHINA</a></h4>
+                                                <ul>
+                                                    <li>A Chinese Romance</li>
+                                                    <li>China</li>
+                                                    <li>From £5,450 per person</li>
+                                                    <li>Travel to:<span>Beijing & Northern China, Hong Kong & Macau, Southern China</span></li>
+                                                </ul>
+                                            </div>
+                                            <button class="btn card_slider_btn">
+                                                <span>12 nights</span>
+                                                <span class="view_itnry_link" onclick="window.location.href='itinerary_detail.html'">View itinerary<em class="fa-solid fa-chevron-right"></em></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="favrites_blk_row favrites_blk_no_slider_row light_grey">
+                <div class="container-md">
+                    <h3 class="title_cls pt-5">PLACES TO STAY IN {country_name} HANDPICKED BY EXSUS</h3>
+                    <div class="card_slider_row">
+                        <div class="carousel00">
+                            <div class="row">
+                                <div class="col-sm-6 col-lg-4 col-xxl-3">
+                                    <div class="card_slider_inr">
+                                        <div class="card_slider">
+                                            <a class="card_slider_img">
+                                                <img src="images/country_hotel01.jpg" alt="country_hotel01" class="img-fluid" />
+                                            </a>
+                                            <div class="card_slider_cnt">
+                                                <h4><a href="#">Capella Shanghai</a></h4>
+                                                <ul>
+                                                    <li>Location: Shanghai, Hangzhou & Eastern China | China</li>
+                                                    <li>Price guide:<span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
+                                                    <li>Travel to:<span>Boutique Hotel, History & Heritage, Cultural Immersion, Food & Wine</span></li>
+                                                </ul>
+                                            </div>
+                                            <button class="btn card_slider_btn justify-content-end light_grey_btn_bg">
+                                                <span class="view_itnry_link" onclick="window.location.href='accomodation_detail.html'">View hotel<em class="fa-solid fa-chevron-right"></em></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-lg-4 col-xxl-3">
+                                    <div class="card_slider_inr">
+                                        <div class="card_slider">
+                                            <div class="card_slider_img">
+                                                <img src="images/country_hotel02.jpg" alt="country_hotel02" class="img-fluid" />
+                                            </div>
+                                            <div class="card_slider_cnt">
+                                                <h4><a href="#">Six Senses Qing Cheng Mountain</a></h4>
+                                                <ul>
+                                                    <li>Location: Xi'an, Sichuan & Central China | China</li>
+                                                    <li>Price guide:<span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
+                                                    <li>Travel to:<span>Wildlife & Nature, Walking & Trekking, Setting & Views, Landscapes & Scenery</span></li>
+                                                </ul>
+                                            </div>
+                                            <button class="btn card_slider_btn justify-content-end light_grey_btn_bg">
+                                                <span class="view_itnry_link" onclick="window.location.href='accomodation_detail.html'">View hotel<em class="fa-solid fa-chevron-right"></em></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-lg-4 col-xxl-3">
+                                    <div class="card_slider_inr">
+                                        <div class="card_slider">
+                                            <div class="card_slider_img">
+                                                <img src="images/country_hotel03.jpg" alt="country_hotel03" class="img-fluid" />
+                                            </div>
+                                            <div class="card_slider_cnt">
+                                                <h4><a href="#">Alila Yangshuo</a></h4>
+                                                <ul>
+                                                    <li>Location: Southern China | China</li>
+                                                    <li>Price guide:<span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
+                                                    <li>Travel to:<span>Couples, First-timers, Landscapes & Scenery, Setting & Views</span></li>
+                                                </ul>
+                                            </div>
+                                            <button class="btn card_slider_btn justify-content-end light_grey_btn_bg">
+                                                <span class="view_itnry_link" onclick="window.location.href='accomodation_detail.html'">View hotel<em class="fa-solid fa-chevron-right"></em></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            {/* <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
                 <div className="container">
                     <h3 className="title_cls">Favourite trip ideas</h3>
                     <div className="card_slider_row">
                         <div className="carousel00">
                             <div className="row">
                                 {itineraries?.map((item) => (
-                                    <div className="col-sm-6 col-lg-4" key={item.id}>
+                                    <div className="col-sm-6 col-lg-4 col-xxl-3" key={item.id}>
                                         <div className="card_slider_inr">
                                             <div className="card_slider">
                                                 <NavLink href={generateDynamicLink(item)} className="card_slider_img">
@@ -237,7 +412,7 @@ function CountryOverview(props) {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
             <section className="card_blk_row dark_grey">
                 <div className="container">
                     <div className="row">
@@ -249,7 +424,7 @@ function CountryOverview(props) {
                                         <div className="row align-items-center">
                                             <div className="col-11">
                                                 <div className="card_blk_txt">
-                                                    <h3>See all Itinerary Ideas in Africa</h3>
+                                                    <h3>See all Itinerary Ideas in {country_name}</h3>
                                                 </div>
                                             </div>
                                             <div className="col-1 ps-0">
@@ -269,7 +444,7 @@ function CountryOverview(props) {
                                         <div className="row align-items-center">
                                             <div className="col-11">
                                                 <div className="card_blk_txt">
-                                                    <h3>See all Places to Stay in Asia</h3>
+                                                    <h3>See all Places to Stay in {country_name}</h3>
                                                 </div>
                                             </div>
                                             <div className="col-1 ps-0">

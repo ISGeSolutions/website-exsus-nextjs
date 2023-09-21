@@ -37,7 +37,7 @@ function Layout({ children }) {
     }
 
     const handleChange = (selectedOption) => {
-        // debugger;
+        // 
         // Do something
         setMyVariable(selectedOption.value);
         setSelected(selectedOption);

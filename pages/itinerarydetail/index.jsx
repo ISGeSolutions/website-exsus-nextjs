@@ -55,7 +55,7 @@ function Index() {
         });
 
         destinationService.getItineraryDetails().then(x => {
-            // debugger;
+            // 
             // console.log('x.data', x.data);
             const bannerImages = [];
             const imageCheck = x.data[0].attributes?.itinerary_details.data;
