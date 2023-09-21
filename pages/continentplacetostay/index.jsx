@@ -360,7 +360,14 @@ function ContinentPlacesToStay() {
         destinationService.getDestinationDetails(destinationcode).then((x) => {
             setdestinationName(x.data.attributes.destination_name);
         });
-    }, []);
+
+        // Using window.onload to detect full page load
+        window.onload = () => {
+            const redirectUrl = regionWiseUrl + '/continent?destinationcode=' + destinationcode;
+            router.push(redirectUrl);
+        };
+
+    }, [destinationcode, router]);
 
 
     return (
