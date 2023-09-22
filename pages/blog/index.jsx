@@ -88,7 +88,7 @@ function Index() {
                             <div className="country_highlight_row mb-0">
                                 <div className="country_highlight_inr text-center">
                                     <p>SIGN UP TO RECEIVE OUR NEWSLETTER</p>
-                                    <button className="btn prmry_btn blog_sign_up_btn">Sign up
+                                    <button className="btn prmry_btn blog_sign_up_btn" data-bs-toggle="modal" data-bs-target="#blogModal">Sign up
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path></svg>
                                     </button>
                                 </div>
@@ -363,6 +363,61 @@ function Index() {
                     </form> */}
                 </div>
             </section>
+            <div class="modal fade blog_modal_parnt" id="blogModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <img src="images/banner-logo.png" alt="banner-logo" class="img-fluid" />
+                            <h5>Inspire Me</h5>
+                            <p>Looking for inspiration? When you sign up to our free newsletter you’ll get the latest exciting ideas and luxury travel offers from our specialists straight to your inbox</p>
+                            <div class="contact_form_row">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="select_drpdwn">
+                                                <select class="form-select" aria-label="Title">
+                                                    <option selected="">Title *</option>
+                                                    <option value="Mr">Mr</option>
+                                                    <option value="Mrs">Mrs</option>
+                                                    <option value="Ms">Ms</option>
+                                                    <option value="Miss">Miss</option>
+                                                    <option value="Dr">Dr</option>
+                                                    <option value="Professor">Professor</option>
+                                                    <option value="Lord">Lord</option>
+                                                    <option value="Lady">Lady</option>
+                                                    <option value="Sir">Sir</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-input validatn_cls">
+                                                <input type="text" class="form-control" aria-label="First name *" placeholder="First name *" />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-input">
+                                                <input type="text" class="form-control" aria-label="Surname *" placeholder="Surname *" />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-input">
+                                                <input type="email" class="form-control" aria-label="Email *" placeholder="Email *" />
+                                            </div>
+                                        </div>
+                                        <button class="btn prmry_btn mx-auto">Subscribe<svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 267 512.43"><path fill-rule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path></svg>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <p>* Required form fields</p>
+                            <p>Occasionally we may use the above information to send you relevant news, updates and offers. You can opt out at any time and we will not share your information at any time.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </Layout>
     );
 }
