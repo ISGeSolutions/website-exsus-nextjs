@@ -7,9 +7,84 @@ import { useRouter } from 'next/router';
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import React from 'react';
+import Select, { components } from 'react-select';
+import CustomMultiValue from "./CustomMultiValue";
 
 export default Index;
+const width = "250px";
+const styles = {
+    control: (provided) => ({
+        ...provided,
+        width
+    }),
+    menu: (provided) => ({
+        ...provided,
+        width
+    }),
+    valueContainer: (provided, state) => ({
+        whiteSpace: "nowrap",
+        // textOverflow: "ellipsis",
+        overflow: "hidden",
+        flex: "1 1 0%",
+        position: "relative"
+    }),
+    input: (provided, state) => ({
+        ...provided,
+        display: "inline"
+    })
+};
 
+const InputOption = ({
+    getStyles,
+    Icon,
+    isDisabled,
+    isFocused,
+    isSelected,
+    children,
+    innerProps,
+    ...rest
+}) => {
+    const [isActive, setIsActive] = useState(false);
+    const onMouseDown = () => setIsActive(true);
+    const onMouseUp = () => setIsActive(false);
+    const onMouseLeave = () => setIsActive(false);
+
+    // styles
+    let bg = "transparent";
+    if (isFocused) bg = "#eee";
+    if (isActive) bg = "#B2D4FF";
+
+    const style = {
+        alignItems: "center",
+        backgroundColor: bg,
+        color: "inherit",
+        display: "flex "
+    };
+
+    // prop assignment
+    const props = {
+        ...innerProps,
+        onMouseDown,
+        onMouseUp,
+        onMouseLeave,
+        style
+    };
+
+    return (
+        <components.Option
+            {...rest}
+            isDisabled={isDisabled}
+            isFocused={isFocused}
+            isSelected={isSelected}
+            getStyles={getStyles}
+            innerProps={props}
+        >
+            <input type="checkbox" checked={isSelected} readOnly />
+            {children}
+        </components.Option>
+    );
+};
 function Index() {
     // const [users, setUsers] = useState(null);
     // useEffect(() => {
@@ -17,6 +92,12 @@ function Index() {
     // }, []);
 
     const router = useRouter();
+    const [isClearable, setIsClearable] = useState(true);
+    const [isSearchable, setIsSearchable] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isRtl, setIsRtl] = useState(false);
+    const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
 
     // form validation rules 
     const validationSchema = Yup.object().shape({
@@ -57,6 +138,20 @@ function Index() {
     });
 
     const formOptions = { resolver: yupResolver(validationSchema) };
+    const handleOptionRegionChange = (selectedOption) => {
+        selectedOption = selectedOption.filter((i) => i.value !== '' && typeof i.value !== 'undefined');
+        setSelectedOptionRegion(selectedOption);
+    };
+    const countinentOptions = [
+        { value: "Europe", label: "Europe" },
+        { value: "North Africa", label: "North Africa" },
+        { value: "Africa", label: "Africa" },
+        { value: "Asia", label: "Asia" },
+        { value: "Indian subcontinent", label: "Indian subcontinent" },
+        { value: "Australasia", label: "Australasia" },
+        { value: "USA and Canada", label: "USA and Canada" },
+        { value: "Latin America", label: "Latin America" },
+    ];
 
     // get functions to build form with useForm() hook
     const { register, handleSubmit, formState } = useForm(formOptions);
@@ -83,11 +178,11 @@ function Index() {
                     <p>Below, please specify how many brochures you would like up to the quantity of four, if you require a digital version only please select this option. A digital version will also be sent out to all agents who request brochures in the post.</p>
                 </div>
             </header>
-            <main className="contact_form_row">
+            <main className="contact_form_row brochure_form_row">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="container">
                         <div className="row pt-4">
-                            {/* <div className="col-sm-6 col-md-4">
+                            {/* <div className="col-md-4">
                                 <div className="select_drpdwn">
                                     <select aria-label="Title" name="title" {...register('title')} className={`form-select ${errors.title ? 'is-invalid' : ''}`}>
                                         <option value="">Title *</option>
@@ -104,19 +199,19 @@ function Index() {
                                     <div className="invalid-feedback mb-1">{errors.title?.message}</div>
                                 </div>
                             </div> */}
-                            <div className="col-sm-6 col-md-4">
+                            <div className="col-md-4">
                                 <div className="form-input">
                                     <input type="text" name="first_name" {...register('first_name')} className={`form-control ${errors.first_name ? 'is-invalid' : ''}`} aria-label="First name *" placeholder="First name *" />
                                     <div className="invalid-feedback mb-1">{errors.first_name?.message}</div>
                                 </div>
                             </div>
-                            <div className="col-sm-6 col-md-4">
+                            <div className="col-md-4">
                                 <div className="form-input">
                                     <input type="text" name="title" {...register('last_name')} className={`form-control ${errors.last_name ? 'is-invalid' : ''}`} aria-label="Last name *" placeholder="Last name *" />
                                     <div className="invalid-feedback mb-1">{errors.last_name?.message}</div>
                                 </div>
                             </div>
-                            <div className="col-sm-6 col-md-4">
+                            <div className="col-md-4">
                                 <div className="form-input">
                                     <input type="email" name="email_id" {...register('email_id')} className={`form-control ${errors.email_id ? 'is-invalid' : ''}`} aria-label="Email *" placeholder="Email *" />
                                     <div className="invalid-feedback mb-1">{errors.email_id?.message}</div>
@@ -124,46 +219,54 @@ function Index() {
                             </div>
                         </div>
                         <div className="row pt-4">
-                            <div class="col-sm-6 col-md-4">
+                            <div class="col-md-4">
                                 <div class="form-input">
                                     <input type="number" class="form-control" aria-label="Phone number *" placeholder="Phone number *"  {...register('phone_no')} className={`form-control ${errors.phone_no ? 'is-invalid' : ''}`} />
                                 </div>
                             </div>
-                            {/* <div className="col-sm-6 col-md-4">
+                            {/* <div className="col-md-4">
                                 <div className="form-input">
                                     <input type="number" name="abtanumber" {...register('abtanumber')} className={`form-control ${errors.abtanumber ? 'is-invalid' : ''}`} aria-label="ABTA number *" placeholder="ABTA number *" />
                                     <div className="invalid-feedback mb-1">{errors.abtanumber?.message}</div>
                                 </div>
                             </div>
-                            <div className="col-sm-6 col-md-4">
+                            <div className="col-md-4">
                                 <div className="form-input">
                                     <input type="text" name="travelagentname" {...register('travelagentname')} className={`form-control ${errors.travelagentname ? 'is-invalid' : ''}`} aria-label="Travel agent name *" placeholder="Travel agent name *" />
                                     <div className="invalid-feedback mb-1">{errors.travelagentname?.message}</div>
                                 </div>
                             </div> */}
-                            <div class="col-sm-6 col-md-4">
+                            <div class="col-md-4">
                                 <div class="brochure_select_dropdown">
                                     <div class="banner_dropdwn_blk">
                                         <div class="select_drpdwn">
-                                            <select class="selectpicker" multiple aria-label="Filter by country" data-live-search="true" {...register('region')} className={`form-control ${errors.region ? 'is-invalid' : ''}`}>
-                                                <option selected="">Which regions are you intrested in?</option>
-                                                <option value="Europe">Europe</option>
-                                                <option value="North Africa">North Africa</option>
-                                                <option value="Africa">Africa</option>
-                                                <option value="Asia">Asia</option>
-                                                <option value="Indian subcontinent">Indian subcontinent</option>
-                                                <option value="Australasia">Australasia</option>
-                                                <option value="USA and Canada">USA and Canada</option>
-                                                <option value="Latin America">Latin America</option>
-                                                <option value="Caribbean">Caribbean</option>
-                                                <option value="Indian Ocean">Indian Ocean</option>
-                                                <option value="Antarctica">Antarctica</option>
-                                            </select>
+                                            <Select
+                                                id="long-value-select"
+                                                instanceId="long-value-select"
+                                                className='select_container_country'
+                                                classNamePrefix="select_country"
+                                                placeholder={"Filter by continent"}
+                                                styles={styles}
+                                                isMulti
+                                                isDisabled={isDisabled}
+                                                isLoading={isLoading}
+                                                isClearable={isClearable}
+                                                isRtl={isRtl}
+                                                isSearchable={isSearchable}
+                                                value={selectedOptionRegion}
+                                                onChange={handleOptionRegionChange}
+                                                closeMenuOnSelect={false}
+                                                hideSelectedOptions={false}
+                                                options={countinentOptions}
+                                                components={{
+                                                    Option: InputOption, MultiValue: CustomMultiValue
+                                                }}
+                                            />
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-md-4">
+                            <div class="col-md-4">
                                 <div class="form-input">
                                     <input type="text" class="form-control" aria-label="Where would you like to go?"  {...register('destination')} placeholder="Where would you like to go? (Optional)" />
                                 </div>
@@ -171,7 +274,7 @@ function Index() {
 
                         </div>
                         {/* <div className="row pt-4">
-                            <div className="col-sm-6 col-md-4">
+                            <div className="col-md-4">
                                 <div className="select_drpdwn">
                                     <select name="digitalbrochureonly" {...register('digitalbrochureonly')} className={`form-select select_drpdwn ${errors.digitalbrochureonly ? 'is-invalid' : ''}`} aria-label="How many brochures would you like?">
                                         <option value="">Digital brochures only</option>
@@ -183,32 +286,32 @@ function Index() {
                                     <div className="invalid-feedback mb-1">{errors.digitalbrochureonly?.message}</div>
                                 </div>
                             </div>
-                            <div className="col-sm-6 col-md-4">
+                            <div className="col-md-4">
                                 <div className="form-input">
                                     <input type="text" name="addressline1" {...register('addressline1')} className={`form-control ${errors.addressline1 ? 'is-invalid' : ''}`} aria-label="Address line 1" placeholder="Address line 1" />
                                     <div className="invalid-feedback mb-1">{errors.addressline1?.message}</div>
                                 </div>
                             </div>
-                            <div className="col-sm-6 col-md-4">
+                            <div className="col-md-4">
                                 <div className="form-input">
                                     <input type="text" name="addressline2" {...register('addressline2')} className={`form-control ${errors.addressline2 ? 'is-invalid' : ''}`} aria-label="Address line 2" placeholder="Address line 2" />
                                     <div className="invalid-feedback mb-1">{errors.addressline2?.message}</div>
                                 </div>
                             </div>
                             <div className="row pt-4">
-                                <div className="col-sm-6 col-md-4">
+                                <div className="col-md-4">
                                     <div className="form-input">
                                         <input type="text" name="city" {...register('city')} className={`form-control ${errors.city ? 'is-invalid' : ''}`} aria-label="City" placeholder="City" />
                                         <div className="invalid-feedback mb-1">{errors.city?.message}</div>
                                     </div>
                                 </div>
-                                <div className="col-sm-6 col-md-4">
+                                <div className="col-md-4">
                                     <div className="form-input">
                                         <input type="text" name="state" {...register('state')} className={`form-control ${errors.state ? 'is-invalid' : ''}`} aria-label="State/Prov/Region" placeholder="State/Prov/Region" />
                                         <div className="invalid-feedback mb-1">{errors.state?.message}</div>
                                     </div>
                                 </div>
-                                <div className="col-sm-6 col-md-4">
+                                <div className="col-md-4">
                                     <div className="form-input">
                                         <input type="text" name="zip" {...register('zip')} className={`form-control ${errors.zip ? 'is-invalid' : ''}`} aria-label="Postal/Zip" placeholder="Postal/Zip" />
                                         <div className="invalid-feedback mb-1">{errors.zip?.message}</div>
@@ -216,7 +319,7 @@ function Index() {
                                 </div>
                             </div>
                             <div className="row pt-4 mb-5">
-                                <div className="col-sm-6 col-md-4">
+                                <div className="col-md-4">
                                     <div className="select_drpdwn">
                                         <select aria-label="Country" name="country" {...register('country')} className={`form-select select_drpdwn ${errors.country ? 'is-invalid' : ''}`}>
                                             <option value="">Country</option>

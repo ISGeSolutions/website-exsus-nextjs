@@ -2014,7 +2014,6 @@
   background: #434142;
 }
 
-/* line 4, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_contact-us.scss */
 .contact_form_row h2 {
   font: 2.5rem/2.5rem "Slabo 27px", serif;
   color: #8aad56;
@@ -2022,12 +2021,6 @@
   text-align: center;
 }
 
-/* line 10, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_contact-us.scss */
-.contact_form_row form {
-  margin-bottom: 50px;
-}
-
-/* line 12, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_contact-us.scss */
 .contact_form_row form input {
   background: #c8c7c8;
   font: 400 0.875rem/1rem "Roboto", sans-serif;
@@ -2037,17 +2030,14 @@
   margin-bottom: 10px;
 }
 
-/* line 22, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_contact-us.scss */
 .contact_form_row form input::placeholder {
   color: #231f20;
 }
 
-/* line 25, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_contact-us.scss */
 .contact_form_row form input:focus {
   background: #c8c7c8;
 }
 
-/* line 29, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_contact-us.scss */
 .contact_form_row form textarea {
   background: #c8c7c8;
   font: 400 0.875rem/1rem "Roboto", sans-serif;
@@ -2056,23 +2046,19 @@
   margin-bottom: 10px;
 }
 
-/* line 35, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_contact-us.scss */
 .contact_form_row form textarea::placeholder {
   color: #231f20;
 }
 
-/* line 38, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_contact-us.scss */
 .contact_form_row form textarea:focus {
   background: #c8c7c8;
 }
 
-/* line 42, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_contact-us.scss */
 .contact_form_row form .form_input_info {
   font: 400 0.625rem/0.625rem "Roboto", sans-serif;
   color: #ffffff;
 }
 
-/* line 46, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_contact-us.scss */
 .contact_form_row form .select_drpdwn {
   background: #c8c7c8;
   border-radius: 0;
@@ -2081,7 +2067,6 @@
   margin-bottom: 10px;
 }
 
-/* line 52, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_contact-us.scss */
 .contact_form_row form .select_drpdwn .form-select {
   background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' fill='black' width='20' viewBox='0 0 512 266.77'%3e%3cpath fill-rule='nonzero' d='M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z'/%3e%3c/svg%3e") !important;
   background-position-x: 97% !important;
@@ -2091,50 +2076,47 @@
   border-radius: 0;
 }
 
-/* line 61, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_contact-us.scss */
 .contact_form_row form button {
   width: 100%;
   border: 1px solid #ffffff;
 }
 
-/* line 66, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_contact-us.scss */
 .contact_form_row .contact_form_cntnt {
   color: #ffffff;
+  padding-top: 50px;
 }
 
-/* line 69, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_contact-us.scss */
 .contact_form_row .contact_form_cntnt .contact_form_cntnt_left h3 {
   font: 1.5rem/1.5rem "Slabo 27px", serif;
   margin-bottom: 15px;
 }
 
-/* line 73, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_contact-us.scss */
 .contact_form_row .contact_form_cntnt .contact_form_cntnt_left p {
   font: 300 0.75rem/1.125rem "Roboto", sans-serif;
   margin-bottom: 15px;
 }
 
-/* line 76, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_contact-us.scss */
 .contact_form_row .contact_form_cntnt .contact_form_cntnt_left p a {
   color: #ffffff;
 }
 
-/* line 81, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_contact-us.scss */
+.contact_form_row .contact_form_cntnt .contact_form_cntnt_left input[type="checkbox"] {
+  background-color: transparent;
+  height: 17px;
+}
+
 .contact_form_row .contact_form_cntnt img {
   max-height: 63px;
 }
 
-/* line 85, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_contact-us.scss */
 .contact_form_row .contact_form_cntnt .contact_form_cntnt_right p {
   font: 300 1.375rem/1.75rem "Roboto", sans-serif;
 }
 
-/* line 87, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_contact-us.scss */
 .contact_form_row .contact_form_cntnt .contact_form_cntnt_right p span {
   font-weight: 400;
 }
 
-/* line 90, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_contact-us.scss */
 .contact_form_row .contact_form_cntnt .contact_form_cntnt_right p a {
   color: #ffffff;
 }
@@ -2217,6 +2199,10 @@
 .brochure_body_cls {
   background: #434142;
   padding: 0;
+}
+
+.contact_form_row.brochure_form_row .contact_form_cntnt button {
+  width: auto;
 }
 
 /* line 5, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_brochure-request.scss */

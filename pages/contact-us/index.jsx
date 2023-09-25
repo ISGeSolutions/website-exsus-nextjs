@@ -152,6 +152,25 @@ function Index() {
                                     <span className="form_input_info">* Required form fields</span>
                                 </div>
                             </div>
+                            <div className="contact_form_cntnt">
+                                <div className="row">
+                                    <div className="col-lg-7">
+                                        <div className="contact_form_cntnt_left">
+                                            <h3>Sign Up To Receive Our Newsletters & Brochure</h3>
+                                            <p>We’d love to contact you by newsletter from time to time, including holiday inspiration and special offers. Please tick the box below if you'd like to hear from us. If you wish to unsubscribe, you can do so at any time. We will not share your details at any point.</p>
+                                            <div className="form-check">
+                                                <input type="checkbox" className="form-check-input" id="exampleCheck1" />
+                                                <label className="form-check-label" htmlFor="exampleCheck1">YES, I'd like to receive the latest news, offers and brochure by email.</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-5">
+                                        <div className="contact_form_cntnt_right mt-3 mt-lg-0">
+                                            <p>Alternatively, call <span>020 7337 9010</span> or email <a href="#">escape@exsus.com</a> to speak to one of our travel experts</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div className="col-sm-6 col-md-5">
                                 <button disabled={formState.isSubmitting} type="submit" className="btn btn-primary prmry_btn">
                                     {formState.isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}Send Enquiry
@@ -160,7 +179,7 @@ function Index() {
                             </div>
                         </div>
                     </form>
-                    <div className="contact_form_cntnt">
+                    {/* <div className="contact_form_cntnt">
                         <div className="row">
                             <div className="col-lg-7">
                                 <div className="contact_form_cntnt_left">
@@ -178,7 +197,7 @@ function Index() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </section>
 
