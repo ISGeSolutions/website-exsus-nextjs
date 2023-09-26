@@ -160,11 +160,27 @@ const nextConfig = {
             // : 'http://localhost:4000' // production api
             // ? 'https://mock.apidog.com/m1/379394-0-default' // development api
             // : 'https://mock.apidog.com/m1/379394-0-default' // production api
-            // ? 'http://13.233.122.205:1337' // development api 
+
+            // ? 'http://13.233.122.205:1337' // development api
             // : 'http://13.233.122.205:1337' // production api
             ? 'https://api.excelleresolutions.com' // development api
             : 'https://api.excelleresolutions.com' // production api
-    }
+    },
+    async headers() {
+        return [
+          {
+            // matching all API routes
+            source: "/api/(.*)",
+            headers: [
+              { key: "Access-Control-Allow-Credentials", value: "true" },
+              { key: "Access-Control-Allow-Origin", value: "*" },
+              { key: "Access-Control-Allow-Methods", value: "GET,OPTIONS,PATCH,DELETE,POST,PUT" },
+              { key: "Access-Control-Allow-Headers", value: "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version" },
+            ]
+          }
+        ]
+      }
 }
 
 module.exports = nextConfig
+
