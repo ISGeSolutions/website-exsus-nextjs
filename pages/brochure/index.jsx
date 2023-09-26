@@ -245,7 +245,7 @@ function Index() {
                                                 instanceId="long-value-select"
                                                 className='select_container_country'
                                                 classNamePrefix="select_country"
-                                                placeholder={"Filter by continent"}
+                                                placeholder={"Filter by regions"}
                                                 styles={styles}
                                                 isMulti
                                                 isDisabled={isDisabled}

@@ -1,0 +1,435 @@
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+
+import { Link, Spinner, Signup } from 'components';
+import { Layout } from 'components/users';
+import { userService } from 'services';
+import Head from 'next/head';
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+var Carousel = require('react-responsive-carousel').Carousel;
+
+export default Index;
+
+function Index() {
+    const [users, setUsers] = useState(null);
+
+    const equalHeight = (resize) => {
+        var elements = document.getElementsByClassName("card_slider_cnt"),
+            allHeights = [],
+            i = 0;
+        if (resize === true) {
+            for (i = 0; i < elements.length; i++) {
+                elements[i].style.height = 'auto';
+            }
+        }
+        for (i = 0; i < elements.length; i++) {
+            var elementHeight = elements[i].clientHeight;
+            allHeights.push(elementHeight);
+        }
+        for (i = 0; i < elements.length; i++) {
+            elements[i].style.height = Math.max.apply(Math, allHeights) + 'px';
+            if (resize === false) {
+                elements[i].className = elements[i].className + " show";
+            }
+        }
+    }
+
+    const EnquiryButton = () => {
+        const router = useRouter();
+
+        const handleEnquiryClick = () => {
+            router.push(`/contact-us`); // Navigate to the /enquiry page
+        };
+
+        return (
+            <button className="btn prmry_btn make_enqury_btn" onClick={handleEnquiryClick}> Make an enquiry
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+            </button>
+        );
+    };
+
+    equalHeight(true);
+
+    useEffect(() => {
+        // userService.getAll().then(x => setUsers(x));
+
+        // const carousel = document.querySelector('#carouselExampleInterval');
+        // new bootstrap.Carousel(carousel);
+
+        const carousel1 = document.querySelector('#Testimonials');
+        new bootstrap.Carousel(carousel1);
+
+        window.addEventListener('resize', equalHeight(true));
+        const slider = document.querySelector(".items");
+        const slides = document.querySelectorAll(".item");
+        const button = document.querySelectorAll(".button");
+
+        let current = 0;
+        let prev = 2;
+        let next = 1;
+
+        for (let i = 0; i < button.length; i++) {
+            button[i].addEventListener("click", () => i == 0 ? gotoPrev() : gotoNext());
+        }
+
+        const gotoPrev = () => current > 0 ? gotoNum(current - 1) : gotoNum(slides.length - 1);
+
+        const gotoNext = () => current < 2 ? gotoNum(current + 1) : gotoNum(0);
+
+        const gotoNum = number => {
+            current = number;
+            prev = current - 1;
+            next = current + 1;
+
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove("active");
+                slides[i].classList.remove("prev");
+                slides[i].classList.remove("next");
+            }
+
+            if (next == 3) {
+                next = 0;
+            }
+
+            if (prev == -1) {
+                prev = 2;
+            }
+
+            slides[current].classList.add("active");
+            slides[prev].classList.add("prev");
+            slides[next].classList.add("next");
+        }
+
+    }, []);
+
+    return (
+        <Layout>
+            <Head>
+                <script src="assets/javascripts/experts-equal-height.js"></script>
+            </Head>
+            < section className="our_exprts_detls_row" >
+                <div className="container">
+                    <div className="bookmark_row">
+                        <ul>
+                            <li><a href="homepage.html">Home</a></li>
+                            <li><a href="why_us.html">Why us</a></li>
+                            <li><a href="our_people.html">Our Team</a></li>
+                            <li>Tom Cloherty</li>
+                        </ul>
+                    </div>
+                    <div className="exprts_cntnt_blk">
+                        <div className="row">
+                            <div className="col-md-4 col-lg-3 col-xl-2">
+                                <div className="our_exprts_inr">
+                                    <img src="images/expert01.jpg" alt="expert01" className="img-fluid" />
+                                    <ul>
+                                        <li>
+                                            <a href="#"><em className="material-symbols-outlined">call</em>+44 1603 937743</a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><em className="material-symbols-outlined">mail</em>Email</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className="col-md-8 col-lg-9 col-xl-10">
+                                <h2>Tom Cloherty</h2>
+                                <h3>Senior Account Manager - Worldwide</h3>
+                                <p>Tom has been indulging his love of travel from a young age, since family holidays first fuelled his wanderlust - which shows no signs of abating. Since then, he has worked as a travel agent, as a cabin crew member, and with leading luxury tour operators. Tom's far-flung adventures have taken him from the Caribbean to New York, via relaxing on the beaches of the Maldives and seeing the orangutans in Borneo - as a wildlife fan, this has been a definite highlight.</p>
+                                <p>Tom has many years of experience in crafting the very best bespoke tailor-made holidays. Everyone's vision of their perfect luxury holiday is different, and he has a passion for creating personalised holidays that are not only luxurious but offer standout, memorable experiences, whether that's relaxing on the beach on honeymoon on a Caribbean island, exploring off the beaten track and indulging in adrenaline-fuelled adventures in Costa Rica, discovering the gems of Indonesia, or enjoying an iconic road trip on California's Pacific Coast Highway.</p>
+                                <p>Whatever destinations are on your wish list, he will turn your dreams into reality and will create a trip of a lifetime for you.</p>
+                                <p>Tom works at our Exsus Travel Norwich office.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section >
+            <section className="our_exprts_slider">
+                <div className="container">
+                    <h3>My Top Tips</h3>
+                    <div id="carouselExampleAutoplaying" className="carousel slide " data-bs-ride="carousel">
+                        <div className="carousel-inner">
+                            <div className="carousel-item active">
+                                <div className="our_exprts_slider_grp">
+                                    <div className="row">
+                                        <div className="col-md-6 m-auto">
+                                            <p className="mb-3 mb-md-0">Many VIP and Hollywood stars stayed at the Hotel Nacional de Cuba in its heyday in the 1950s and 60s. Head to the hotel by 4pm to grab top seats for the best mojitos in Havana as you watch the sun set over the Malecon.</p>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <img src="assets/images/our_exprts_slider01.jpg" className="" alt="our_exprts_slider01" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="carousel-item">
+                                <div className="our_exprts_slider_grp">
+                                    <div className="row">
+                                        <div className="col-md-6 m-auto">
+                                            <p className="mb-3 mb-md-0">On Barbados, sail aboard the Silver Moon luxury catamaran along the Platinum Coast. Stop to snorkel around reefs and shipwrecks, swim with turtles and stingrays and see a plethora of exotic fish.</p>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <img src="assets/images/our_exprts_slider02.jpg" className="" alt="our_exprts_slider02" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="carousel-item">
+                                <div className="our_exprts_slider_grp">
+                                    <div className="row">
+                                        <div className="col-md-6 m-auto">
+                                            <p className="mb-3 mb-md-0">Stay at the first-class Huvafen Fushi, and enjoy treatments at their fabulous spa - be sure to book their exclusive underwater treatment room, and you'll be rewarded with your very own private underwater reef.</p>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <img src="assets/images/our_exprts_slider03.jpg" className="" alt="our_exprts_slider03" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="carousel-item">
+                                <div className="our_exprts_slider_grp">
+                                    <div className="row">
+                                        <div className="col-md-6 m-auto">
+                                            <p className="mb-3 mb-md-0">Visit Volcanoes National Park on Hawaii Island, known as Big Island. See the crater rim of Kilauea's Halema'uma'u Crater, take a unique night-time tour, or enjoy dinner overlooking the lava. </p>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <img src="assets/images/our_exprts_slider04.jpg" className="" alt="our_exprts_slider04" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="carousel-item">
+                                <div className="our_exprts_slider_grp">
+                                    <div className="row">
+                                        <div className="col-md-6 m-auto">
+                                            <p className="mb-3 mb-md-0">Enjoy Santa Barbara on a wine walking tour. I also highly recommend eating at one of the city's hottest restaurants, Barbareno, which has a farm-to-table concept, with food such as dandelion root soup and hyacinth ice cream.</p>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <img src="assets/images/our_exprts_slider05.jpg" className="" alt="our_exprts_slider05" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span className="visually-hidden">Previous</span>
+                        </button>
+                        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span className="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <section className="our_exprts_img_txt card_blk_row">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-sm-6 col-lg-4 col-xxl-3">
+                            <div className="card_blk_inr">
+                                <a href="#" target="_blank">
+                                    <img src="assets/images/our_exprts_card01.jpg" alt="Card image 01" className="img-fluid" />
+                                    <div className="card_blk_cntnt">
+                                        <div className="row align-items-center">
+                                            <div className="col-11">
+                                                <div className="card_blk_txt">
+                                                    <h3>Stay on a private island in the Caribbean</h3>
+                                                </div>
+                                            </div>
+                                            <div className="col-1 ps-0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 267 512.43"><path fill-rule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path></svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <p className="card_extra_para">Jumby Bay is holiday heaven! From its secluded private island location just off of Antigua’s coast, to the luxurious suites and villas, first-class amenities and gorgeous beaches, it is perfect for a special celebration.</p>
+                            </div>
+                        </div>
+                        <div className="col-sm-6 col-lg-4 col-xxl-3">
+                            <div className="card_blk_inr">
+                                <a href="#" target="_blank">
+                                    <img src="assets/images/our_exprts_card02.jpg" alt="Card image 02" className="img-fluid" />
+                                    <div className="card_blk_cntnt">
+                                        <div className="row align-items-center">
+                                            <div className="col-11">
+                                                <div className="card_blk_txt">
+                                                    <h3>Take in the highlights of Cuba</h3>
+                                                </div>
+                                            </div>
+                                            <div className="col-1 ps-0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 267 512.43"><path fill-rule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path></svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <p className="card_extra_para">I love Cuba. This highlights holiday offers a fantastic combination of the cities of Havana and Trinidad and the 'Garden of Cuba' at Vinales and Las Terrazas, and you can unwind on the beach in the stunning Cayo Santa Maria.</p>
+                            </div>
+                        </div>
+                        <div className="col-sm-6 col-lg-4 col-xxl-3">
+                            <div className="card_blk_inr">
+                                <a href="#" target="_blank">
+                                    <img src="assets/images/our_exprts_card03.jpg" alt="Card image 03" className="img-fluid" />
+                                    <div className="card_blk_cntnt">
+                                        <div className="row align-items-center">
+                                            <div className="col-11">
+                                                <div className="card_blk_txt">
+                                                    <h3>Unusual places to stay around the world</h3>
+                                                </div>
+                                            </div>
+                                            <div className="col-1 ps-0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 267 512.43"><path fill-rule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path></svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <p className="card_extra_para">I'm a fan of the unusual. Come home from a holiday with stories to tell, after staying at some of these amazing and enchanting places around the world, from a luxury train to a four-poster bed beneath starry skies and a candlelit cave.</p>
+                            </div>
+                        </div>
+                        <div className="col-sm-6 col-lg-4 col-xxl-3">
+                            <div className="card_blk_inr">
+                                <a href="#" target="_blank">
+                                    <img src="assets/images/our_exprts_card04.jpg" alt="Card image 04" className="img-fluid" />
+                                    <div className="card_blk_cntnt">
+                                        <div className="row align-items-center">
+                                            <div className="col-11">
+                                                <div className="card_blk_txt">
+                                                    <h3>Find paradise in the Seychelles</h3>
+                                                </div>
+                                            </div>
+                                            <div className="col-1 ps-0">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 267 512.43"><path fill-rule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path></svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <p className="card_extra_para">One of my most memorable experiences has been on the island of Desroches in the Seychelles. I was surprised with cocktails on the runway at night time under the stars and had a wonderful meal courtesy of the Four Seasons.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section className="favourite_pic_row">
+                <div className="container">
+                    <h3>My Top Tips</h3>
+                    <div className="items">
+                        <div className="item active">
+                            <img src="assets/images/expert_favourite_pic01.jpg" alt="expert_favourite_pic01" className="img-fluid" />
+                            <p>At Palm Island in the Grenadines</p>
+                        </div>
+                        <div className=" item next">
+                            <img src="assets/images/expert_favourite_pic02.jpg" alt="expert_favourite_pic02" className="img-fluid" />
+                            <p>At Four Seasons Resort Oahu at Ko Alina, Hawaii</p>
+                        </div>
+                        <div className="item prev">
+                            <img src="assets/images/expert_favourite_pic03.jpg" alt="expert_favourite_pic03" className="img-fluid" />
+                            <p>Horse riding at Mustang Monument Ranch, Nevada, USA</p>
+                        </div>
+                        <div className="button-container">
+                            <div className="button">
+                                <svg xmlns='http://www.w3.org/2000/svg' fill='#fff' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' viewBox='0 0 267 512.43'><path fill-rule='nonzero' d='M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z'></path></svg>
+                            </div>
+                            <div className="button">
+                                <svg xmlns='http://www.w3.org/2000/svg' fill='#fff' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' viewBox='0 0 267 512.43'><path fill-rule='nonzero' d='M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z'></path></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section aria-label="Client Testimonials" className="testimonials_blk_row">
+                <div className="container">
+                    <div id="Testimonials" className="carousel slide" data-bs-ride="carousel">
+                        <div className="carousel-indicators">
+                            <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                            <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                            <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                            <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="6" aria-label="Slide 7"></button>
+                            <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="7" aria-label="Slide 8"></button>
+                        </div>
+                        <div className="carousel-inner">
+                            <div className="carousel-item active" data-bs-interval="5000">
+                                <div className="carousel-caption">
+                                    <p>All the personal details and touches were amazing and much appreciated. Too many highlights to say! So much history, lovely spots to stay, the people, the curries, the fruit...</p>
+                                    <span>Suzie & Henry travelled to Sri Lanka, March 2022</span>
+                                </div>
+                            </div>
+                            <div className="carousel-item" data-bs-interval="5000">
+                                <div className="carousel-caption">
+                                    <p>Charlotte was excellent as always - friendly and approachable, with lots of ideas when discussing itineraries, and the mix of city and sea worked well.</p>
+                                    <span>Filippo E travelled to Portugal, February 2022</span>
+                                </div>
+                            </div>
+                            <div className="carousel-item" data-bs-interval="5000">
+                                <div className="carousel-caption">
+                                    <p>We loved Costa Rica. Ashleigh was great at organising our trip, and when coronavirus changed everything, she comforted us and reassured us that we were able to get home.</p>
+                                    <span>Suzie & Henry travelled to Costa Rica, March 2020</span>
+                                </div>
+                            </div>
+                            <div className="carousel-item" data-bs-interval="5000">
+                                <div className="carousel-caption">
+                                    <p>Katie was a very good communicator and was quick to research our specific requests. We loved everything about our trip, especially seeing penguins and giraffes!</p>
+                                    <span>Exsus travellers who travelled to South Africa in December 2019/January 2020</span>
+                                </div>
+                            </div>
+                            <div className="carousel-item" data-bs-interval="5000">
+                                <div className="carousel-caption">
+                                    <p>Our holiday in Africa was excellent. Mark went out of his way to organise this trip for us. We loved it - OMG it was the most magical place.</p>
+                                    <span>Ms J. Tighe travelled to South Africa, Botswana and Zimbabwe, September 2019</span>
+                                </div>
+                            </div>
+                            <div className="carousel-item" data-bs-interval="5000">
+                                <div className="carousel-caption">
+                                    <p>Ashleigh was amazing. She listened to all our preferences and interests and put together the most perfect itinerary for us.</p>
+                                    <span>Exsus travellers who travelled to Peru, September 2019</span>
+                                </div>
+                            </div>
+                            <div className="carousel-item" data-bs-interval="5000">
+                                <div className="carousel-caption">
+                                    <p>Our holiday was honestly awesome. Gina tailored the trip extremely well to our needs, and everything was brilliant. We had a fantastic time.</p>
+                                    <span>The Tonge family travelled to Norway, August 2019</span>
+                                </div>
+                            </div>
+                            <div className="carousel-item" data-bs-interval="5000">
+                                <div className="carousel-caption">
+                                    <p>From beginning to end, our holiday was like a fairytale. We would not change a thing.</p>
+                                    <span>Mike & Debbie Edwards travelled to Italy, July/August 2019</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <section className="make_enqury_row">
+                <div className="container">
+                    <h3>YOUR JOURNEY STARTS HERE</h3>
+                    <p>call us on 020 7337 9010 to start planning your perfect trip</p>
+                    <EnquiryButton />
+                </div>
+            </section>
+
+            <section aria-label="Sign up for newsletter" className="newslettr_row">
+                <div className="container">
+                    <h4>Sign up for our newsletter</h4>
+                    <h5>Receive our latest news and special offers</h5>
+                    <Signup />
+                    {/* <form className="newslettr_form d-block d-sm-flex">
+                        <div className="newlettr_inpt">
+                            <input type="text" className="form-control" placeholder="Full name and title" />
+                        </div>
+                        <div className="newlettr_inpt ps-0 ps-sm-2">
+                            <input type="email" className="form-control" placeholder="Your email address" />
+                        </div>
+                        <div className="newlettr_btn ps-0 ps-sm-2">
+                            <button type="submit" className="btn btn-primary prmry_btn">Sign up
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                            </button>
+                        </div>
+                    </form> */}
+                </div>
+            </section>
+        </Layout>
+    );
+}
