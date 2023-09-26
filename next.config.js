@@ -160,7 +160,7 @@ const nextConfig = {
             // : 'http://localhost:4000' // production api
             // ? 'https://mock.apidog.com/m1/379394-0-default' // development api
             // : 'https://mock.apidog.com/m1/379394-0-default' // production api
-            // ? 'http://13.233.122.205:1337' // development api
+            // ? 'http://13.233.122.205:1337' // development api 
             // : 'http://13.233.122.205:1337' // production api
             ? 'https://api.excelleresolutions.com' // development api
             : 'https://api.excelleresolutions.com' // production api
