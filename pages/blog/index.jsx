@@ -2,15 +2,31 @@ import { useState, useEffect } from 'react';
 
 import { Link, Spinner, Signup } from 'components';
 import { Layout } from 'components/users';
-import { userService } from 'services';
+import { useForm } from 'react-hook-form';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 var Carousel = require('react-responsive-carousel').Carousel;
+import { destinationService, holidaytypesService, userService, homeService, alertService } from 'services';
+
 
 export default Index;
 
 function Index() {
     const [users, setUsers] = useState(null);
+    const [destinationLandingList, setDestinationLandingList] = useState();
+    const [holidaytypesLandingList, setHolidaytypesLandingList] = useState();
+    const validationSchema = Yup.object().shape({
+        destination: Yup.string(),
+        holidaytype: Yup.string()
+    });
+
+    const formOptions = { resolver: yupResolver(validationSchema) };
+    const { register, handleSubmit, formState } = useForm(formOptions);
+    const { errors } = formState;
+
 
     const equalHeight = (resize) => {
         var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -37,6 +53,16 @@ function Index() {
 
     useEffect(() => {
         // userService.getAll().then(x => setUsers(x));
+        destinationService.getDestinationLandingList().then(x => {
+            // console.log('getDestinationLandingList', x);
+            setDestinationLandingList(x.data);
+            // setDestinationLandingDetails(x)
+        });
+
+        holidaytypesService.getHolidaytypesLandingList().then(x => {
+            setHolidaytypesLandingList(x.data);
+        });
+
         const carousel = document.querySelector('#carouselExampleInterval');
         new bootstrap.Carousel(carousel);
 
@@ -108,85 +134,24 @@ function Index() {
                                     <div className="destination_dropdwn_row d-block d-md-flex">
                                         <div className="banner_dropdwn_blk">
                                             <div className="select_drpdwn">
-                                                <select className="selectpicker" multiple aria-label="Filter by country" data-live-search="true">
-                                                    <option defaultValue>Filter by country</option>
-                                                    <option value="Asia">Asia</option>
-                                                    <option value="Hong Kong & Macau">Hong Kong & Macau</option>
-                                                    <option value="Malaysia & Borneo">Malaysia & Borneo</option>
-                                                    <option value="Singapore">Singapore</option>
-                                                    <option value="Indonesia">Indonesia</option>
-                                                    <option value="Japan">Japan</option>
-                                                    <option value="Cambodia">Cambodia</option>
-                                                    <option value="Vietnam">Vietnam</option>
-                                                    <option value="China">China</option>
-                                                    <option value="Thailand">Thailand</option>
-                                                    <option value="Burma">Burma</option>
-                                                    <option value="Laos">Laos</option>
+                                                <select aria-label="Choose a destination" name="destination" {...register('destination')} className={`form-select ${errors.destination ? 'is-invalid' : ''}`}>
+                                                    <option value="">Choose a destination</option>
+                                                    {destinationLandingList?.map((element, i) => (
+                                                        <option key={element?.id} value={element?.attributes?.destination_code}>{element?.attributes?.destination_name}</option>
+                                                    ))}
                                                 </select>
+                                                <div className="invalid-feedback mb-1">{errors.destination?.message}</div>
                                             </div>
                                         </div>
                                         <div className="banner_dropdwn_blk ps-0 ps-md-2">
                                             <div className="select_drpdwn">
-                                                <select className="selectpicker" multiple aria-label="Filter by property type" data-live-search="true">
-                                                    <option defaultValue>Filter by property type</option>
-                                                    <option value="Everything">Everything</option>
-                                                    <option value="Barefoot">Barefoot</option>
-                                                    <option value="Beach">Beach</option>
-                                                    <option value="Boutique hotel">Boutique hotel</option>
-                                                    <option value="Chic design">Chic design</option>
-                                                    <option value="Cultural Immersion">Cultural Immersion</option>
-                                                    <option value="Eco tourism">Eco tourism</option>
-                                                    <option value="Family-Friendly">Family-Friendly</option>
-                                                    <option value="Food & Wine">Food & Wine</option>
-                                                    <option value="Guiding">Guiding</option>
-                                                    <option value="Hideaway">Hideaway</option>
-                                                    <option value="Honeymoon">Honeymoon</option>
-                                                    <option value="Lodge">Lodge</option>
-                                                    <option value="Luxury hotel">Luxury Hotel</option>
-                                                    <option value="Off the beaten track">Off the beaten track</option>
-                                                    <option value="Owner run">Owner run</option>
-                                                    <option value="Peace & quiet">Peace & quiet</option>
-                                                    <option value="Private groups">Private groups</option>
-                                                    <option value="Romantic">Romantic</option>
-                                                    <option value="Rustic">Rustic</option>
-                                                    <option value="Seriously special">Seriously special</option>
-                                                    <option value="Service & Hospitality">Service & Hospitality</option>
-                                                    <option value="Setting & Views">Setting & Views</option>
-                                                    <option value="Snorkelling & Driving">Snorkelling & Driving</option>
-                                                    <option value="Spa & Wellness">Spa & Wellness</option>
-                                                    <option value="Unusal">Unusal</option>
-                                                    <option value="Village life">Village life</option>
-                                                    <option value="Walking & trekking">Walking & trekking</option>
-                                                    <option value="Water activities">Water activities</option>
-                                                    <option value="Wildlife & Nature">Wildlife & Nature</option>
-                                                    <option value="Adventure">Adventure</option>
-                                                    <option value="Couples">Couples</option>
-                                                    <option value="Educational">Educational</option>
-                                                    <option value="Multi-activity">Multi-activity</option>
-                                                    <option value="Teenagers">Teenagers</option>
-                                                    <option value="Landscapes & Scenery">Landscapes & Scenery</option>
-                                                    <option value="City hotel">City hotel</option>
+                                                <select aria-label="Choose a reason" name="reason" {...register('reason')} className={`form-select ${errors.reason ? 'is-invalid' : ''}`}>
+                                                    <option value="">Choose a category</option>
+                                                    {holidaytypesLandingList?.map((element, i) => (
+                                                        <option key={element?.id} value={element?.attributes?.holiday_type_group_code}>{element?.attributes?.holiday_type_group_name}</option>
+                                                    ))}
                                                 </select>
-                                            </div>
-                                        </div>
-                                        <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                                            <div className="select_drpdwn">
-                                                <select className="selectpicker" multiple aria-label="Filter by month" data-live-search="true">
-                                                    <option defaultValue>Filter by month</option>
-                                                    <option value="All months">All months</option>
-                                                    <option value="January">January</option>
-                                                    <option value="February">February</option>
-                                                    <option value="March">March</option>
-                                                    <option value="April">April</option>
-                                                    <option value="May">May</option>
-                                                    <option value="June">June</option>
-                                                    <option value="July">July</option>
-                                                    <option value="August">August</option>
-                                                    <option value="September">September</option>
-                                                    <option value="October">October</option>
-                                                    <option value="November">November</option>
-                                                    <option value="December">December</option>
-                                                </select>
+                                                <div className="invalid-feedback mb-1">{errors.reason?.message}</div>
                                             </div>
                                         </div>
                                         <div className="banner_inspire_btn ps-0 ps-md-2">

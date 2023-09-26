@@ -161,8 +161,8 @@ const nextConfig = {
             // ? 'https://mock.apidog.com/m1/379394-0-default' // development api
             // : 'https://mock.apidog.com/m1/379394-0-default' // production api
 
-            ? 'http://3.110.223.197:1337' // development api
-            : 'http://3.110.223.197:1337' // production api
+            ? 'http://13.233.122.205:1337' // development api
+            : 'http://13.233.122.205:1337' // production api
     }
 }
 
