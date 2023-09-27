@@ -37,6 +37,8 @@ const baseUrl = `${publicRuntimeConfig.apiUrl}/destinations`;
 // console.log('publicRuntimeConfig.apiUrl', publicRuntimeConfig);
 const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('user')));
 
+import axios from 'axios';
+
 export const destinationService = {
     user: userSubject.asObservable(),
     get userValue() { return userSubject.value },
@@ -75,6 +77,15 @@ function getDestinationLandingList() {
     // console.log('baseUrl_dropdown', baseUrl_dropdown);
     const destinationLandingListUrl = `${publicRuntimeConfig.apiUrl}/api/destinations?fields[0]=destination_code&fields[1]=destination_name&populate[destination_images][fields][2]=image_path&populate[destination_images][fields][3]=image_type&populate[countries][fields][4]=country_code&populate[countries][fields][5]=country_name`;
     return fetchWrapper.get(destinationLandingListUrl);
+
+    // const destinationLandingListUrl = 'https://my.baileyrobinson.com/mydhruvapi/api/v1/mydhruv/Authentication/gettoken/BRGMDA2023';
+    // console.log('destinationLandingListUrl', destinationLandingListUrl);
+
+    // const obj = {
+    //     emailid: "shivam@isgesolutions.com",
+    //     password: "test"
+    // }
+    // return fetchWrapper.post(destinationLandingListUrl, obj);
 }
 
 function getDestinationDetails(id) {

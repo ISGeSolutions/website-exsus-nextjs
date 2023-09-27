@@ -8,6 +8,7 @@
         "start": "next start",
         "lint": "next lint"
     },
+    "proxy": "http://localhost:3000",
     "dependencies": {
         "@hookform/resolvers": "^3.1.0",
         "@vercel/analytics": "^1.0.1",
@@ -37,9 +38,11 @@
     },
     "devDependencies": {
         "@builder.io/partytown": "^0.8.0",
+        "@types/http-proxy-middleware": "^1.0.0",
         "cross-env": "^7.0.3",
         "eslint": "7.32.0",
         "eslint-config-next": "11.1.0",
+        "http-proxy-middleware": "^2.0.6",
         "intercept-stdout": "^0.1.2",
         "sass": "^1.62.0",
         "typescript": "5.2.2"
