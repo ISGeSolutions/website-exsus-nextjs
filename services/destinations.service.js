@@ -37,8 +37,6 @@ const baseUrl = `${publicRuntimeConfig.apiUrl}/destinations`;
 // console.log('publicRuntimeConfig.apiUrl', publicRuntimeConfig);
 const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('user')));
 
-import axios from 'axios';
-
 export const destinationService = {
     user: userSubject.asObservable(),
     get userValue() { return userSubject.value },
