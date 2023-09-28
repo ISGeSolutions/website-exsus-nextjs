@@ -7,7 +7,9 @@ import { NavLink } from 'components';
 import { useRouter } from 'next/router';
 import generateDynamicLink from 'components/utils/generateLink';
 import Image from "next/image";
-import Select from 'react-select';
+import Select, { components } from "react-select";
+import CustomMultiValue from "../continentitineraries/CustomMultiValue";
+
 
 export default CountryPlacesToStay;
 
@@ -24,6 +26,80 @@ function CountryPlacesToStay() {
     const [itineraries, setItineraries] = useState(null);
 
     const router = useRouter();
+
+    const width = "250px";
+    const styles = {
+        control: (provided) => ({
+            ...provided,
+            width,
+        }),
+        menu: (provided) => ({
+            ...provided,
+            width,
+        }),
+        valueContainer: (provided, state) => ({
+            whiteSpace: "nowrap",
+            // textOverflow: "ellipsis",
+            overflow: "hidden",
+            flex: "1 1 0%",
+            position: "relative",
+        }),
+        input: (provided, state) => ({
+            ...provided,
+            display: "inline",
+        }),
+    };
+
+    const InputOption = ({
+        getStyles,
+        Icon,
+        isDisabled,
+        isFocused,
+        isSelected,
+        children,
+        innerProps,
+        ...rest
+    }) => {
+        const [isActive, setIsActive] = useState(false);
+        const onMouseDown = () => setIsActive(true);
+        const onMouseUp = () => setIsActive(false);
+        const onMouseLeave = () => setIsActive(false);
+
+        // styles
+        let bg = "transparent";
+        if (isFocused) bg = "#eee";
+        if (isActive) bg = "#B2D4FF";
+
+        const style = {
+            alignItems: "center",
+            backgroundColor: bg,
+            color: "inherit",
+            display: "flex ",
+        };
+
+        // prop assignment
+        const props = {
+            ...innerProps,
+            onMouseDown,
+            onMouseUp,
+            onMouseLeave,
+            style,
+        };
+
+        return (
+            <components.Option
+                {...rest}
+                isDisabled={isDisabled}
+                isFocused={isFocused}
+                isSelected={isSelected}
+                getStyles={getStyles}
+                innerProps={props}
+            >
+                <input type="checkbox" checked={isSelected} readOnly />
+                {children}
+            </components.Option>
+        );
+    };
 
     const countryOptions = [
         { value: "Asia", label: "Asia" },
@@ -302,50 +378,77 @@ function CountryPlacesToStay() {
                                         <div className="dropdown_grp_blk">
                                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                                                 <Select
+                                                    id="long-value-select"
+                                                    instanceId="long-value-select"
+                                                    className="select_container_country"
+                                                    classNamePrefix="select_country"
                                                     placeholder="Filter by country"
-                                                    // defaultValue={countryOptions[0]}
+                                                    styles={styles}
+                                                    isMulti
                                                     isDisabled={isDisabled}
                                                     isLoading={isLoading}
                                                     isClearable={isClearable}
                                                     isRtl={isRtl}
                                                     isSearchable={isSearchable}
-                                                    name="color"
-                                                    options={countryOptions}
-                                                    isMulti
-                                                    // value={selectedOptionCountry}
+                                                    value={selectedOptionCountry}
                                                     onChange={handleOptionCountryChange}
+                                                    closeMenuOnSelect={false}
+                                                    hideSelectedOptions={false}
+                                                    options={countryOptions}
+                                                    components={{
+                                                        Option: InputOption,
+                                                        MultiValue: CustomMultiValue,
+                                                    }}
                                                 />
                                             </div>
                                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                                                 <Select
                                                     placeholder="Filter by region"
                                                     // defaultValue={regionOptions[0]}
+                                                    className="select_container_country"
+                                                    classNamePrefix="select_country"
                                                     isDisabled={isDisabled}
                                                     isLoading={isLoading}
                                                     isClearable={isClearable}
                                                     isRtl={isRtl}
+                                                    hideSelectedOptions={false}
+                                                    styles={styles}
+                                                    closeMenuOnSelect={false}
                                                     isSearchable={isSearchable}
                                                     name="color"
                                                     options={regionOptions}
                                                     isMulti
                                                     // value={selectedOptionRegion}
                                                     onChange={handleOptionRegionChange}
+                                                    components={{
+                                                        Option: InputOption,
+                                                        MultiValue: CustomMultiValue,
+                                                    }}
                                                 />
                                             </div>
                                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                                                 <Select
                                                     placeholder="Filter by month"
+                                                    className="select_container_country"
+                                                    classNamePrefix="select_country"
                                                     // defaultValue={monthOptions[0]}
                                                     isDisabled={isDisabled}
                                                     isLoading={isLoading}
                                                     isClearable={isClearable}
+                                                    styles={styles}
                                                     isRtl={isRtl}
                                                     isSearchable={isSearchable}
                                                     name="color"
+                                                    closeMenuOnSelect={false}
                                                     options={monthOptions}
+                                                    hideSelectedOptions={false}
                                                     isMulti
                                                     // value={selectedOptionMonth}
                                                     onChange={handleOptionMonthChange}
+                                                    components={{
+                                                        Option: InputOption,
+                                                        MultiValue: CustomMultiValue,
+                                                    }}
                                                 />
                                             </div>
                                         </div>

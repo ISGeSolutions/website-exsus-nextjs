@@ -6,12 +6,14 @@ import { Layout } from 'components/users';
 import { userService } from 'services';
 import Head from 'next/head';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { whyusService } from '../../services';
 var Carousel = require('react-responsive-carousel').Carousel;
 
 export default Index;
 
 function Index() {
     const [users, setUsers] = useState(null);
+    const [allExecutives, setAllExecutives] = useState([]);
 
     const equalHeight = (resize) => {
         var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -52,6 +54,11 @@ function Index() {
 
     useEffect(() => {
         // userService.getAll().then(x => setUsers(x));
+
+        whyusService.getAllExecutives().then(x => {
+            setAllExecutives(x.data);
+            console.log(x.data);
+        })
 
         const carousel = document.querySelector('#carouselExampleInterval');
         new bootstrap.Carousel(carousel);
@@ -159,134 +166,18 @@ function Index() {
                         </ul>
                     </div>
                     <div className="row">
-                        <div className="col-sm-6 col-lg-3">
-                            <div className="our_exprts_inr">
-                                <img src="images/expert01.jpg" alt="expert01" className="img-fluid" />
-                                <div className="expert_info">
-                                    <h2>Tom Cloherty</h2>
-                                    <h3>Senior Account Manager - Worldwide</h3>
-                                    <p>Tom has been indulging his love of travel from a young age, since family holidays first fuelled his wanderlust - which...</p>
+                        {allExecutives?.map(res => (
+                            <div className="col-sm-6 col-lg-4 col-xxl-3" key={res.id}>
+                                <div className="our_exprts_inr">
+                                    <img src={res?.executive_image_path} alt="expert01" className="img-fluid" />
+                                    <div className="expert_info">
+                                        <h2>{res?.executive_name}</h2>
+                                        <h3>{res?.executive_role}</h3>
+                                        <div dangerouslySetInnerHTML={{ __html: res?.intro_text }} />                                    </div>
+                                    <ExpertDetail />
                                 </div>
-                                <ExpertDetail />
                             </div>
-                        </div>
-                        <div className="col-sm-6 col-lg-3">
-                            <div className="our_exprts_inr">
-                                <img src="images/expert02.jpg" alt="expert02" className="img-fluid" />
-                                <div className="expert_info">
-                                    <h2>Danielle Walker</h2>
-                                    <h3>Senior Account Manager - Worldwide</h3>
-                                    <p>Danielle has worked in travel for over 20 years, 15 of them with leading luxury tour operators, and brings a wealth of...</p>
-                                </div>
-                                <button className="btn prmry_btn make_enqury_btn">Read more
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="col-sm-6 col-lg-3">
-                            <div className="our_exprts_inr">
-                                <img src="images/expert03.jpg" alt="expert03" className="img-fluid" />
-                                <div className="expert_info">
-                                    <h2>Sabastian Gittany</h2>
-                                    <h3>Senior Account Manager - Worldwide</h3>
-                                    <p>Having worked in travel for almost 20 years, between airlines, airports and tour operators, Sabastian has an extensive...</p>
-                                </div>
-                                <button className="btn prmry_btn make_enqury_btn">Read more
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="col-sm-6 col-lg-3">
-                            <div className="our_exprts_inr">
-                                <img src="images/expert04.jpg" alt="expert04" className="img-fluid" />
-                                <div className="expert_info">
-                                    <h2>Neil Sutton</h2>
-                                    <h3>Senior Account Manager - Europe</h3>
-                                    <p>Neil has always taken every opportunity to travel, from studying in Spain and living and working in travel in New York...</p>
-                                </div>
-                                <button className="btn prmry_btn make_enqury_btn">Read more
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="col-sm-6 col-lg-3">
-                            <div className="our_exprts_inr">
-                                <img src="images/expert05.jpg" alt="expert05" className="img-fluid" />
-                                <div className="expert_info">
-                                    <h2>Ricardo Beeny</h2>
-                                    <h3>Senior Account Manager</h3>
-                                    <p>Ricardo has worked in travel for almost 20 years and has a passion for Latin America, having travelled extensively arou...</p>
-                                </div>
-                                <button className="btn prmry_btn make_enqury_btn">Read more
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="col-sm-6 col-lg-3">
-                            <div className="our_exprts_inr">
-                                <img src="images/expert06.jpg" alt="expert06" className="img-fluid" />
-                                <div className="expert_info">
-                                    <h2>Steve Johnson</h2>
-                                    <h3>Worldwide Travel Expert</h3>
-                                    <p>Steve has a wealth of experience at leading tour operators, and has travelled extensively worldwide, with a particular...</p>
-                                </div>
-                                <button className="btn prmry_btn make_enqury_btn">Read more
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="col-sm-6 col-lg-3">
-                            <div className="our_exprts_inr">
-                                <img src="images/expert07.jpg" alt="expert07" className="img-fluid" />
-                                <div className="expert_info">
-                                    <h2>David Sutcliffe</h2>
-                                    <h3>Worldwide Travel Expert</h3>
-                                    <p>David has 20 years of experience in luxury travel, and has travelled across the globe, including living and working abr...</p>
-                                </div>
-                                <button className="btn prmry_btn make_enqury_btn">Read more
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="col-sm-6 col-lg-3">
-                            <div className="our_exprts_inr">
-                                <img src="images/expert08.jpg" alt="expert08" className="img-fluid" />
-                                <div className="expert_info">
-                                    <h2>Spencer Thomas</h2>
-                                    <h3>Worldwide Travel Expert</h3>
-                                    <p>Spencer has worked in travel for nearly 20 years, and his love of exploring the world and sharing his passion continues...</p>
-                                </div>
-                                <button className="btn prmry_btn make_enqury_btn">Read more
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="col-sm-6 col-lg-3">
-                            <div className="our_exprts_inr">
-                                <img src="images/expert09.jpg" alt="expert09" className="img-fluid" />
-                                <div className="expert_info">
-                                    <h2>Laura Robertson</h2>
-                                    <h3>Worldwide Travel Expert</h3>
-                                    <p>Laura has worked in travel for more than 16 years, nearly 10 of them in luxury travel. She has travelled all over the w...</p>
-                                </div>
-                                <button className="btn prmry_btn make_enqury_btn">Read more
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="col-sm-6 col-lg-3">
-                            <div className="our_exprts_inr">
-                                <img src="images/expert10.jpg" alt="expert10" className="img-fluid" />
-                                <div className="expert_info">
-                                    <h2>Satyan Bhalla</h2>
-                                    <h3>Indian Subcontinent Travel Expert</h3>
-                                    <p>Satyan caught the travel bug as a child, thanks to a father who thought nothing of travelling hundreds of miles in sear...</p>
-                                </div>
-                                <button className="btn prmry_btn make_enqury_btn">Read more
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                </button>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </section>

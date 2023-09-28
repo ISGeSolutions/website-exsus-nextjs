@@ -48,7 +48,7 @@ export const destinationService = {
     getDestinationDetails,
     getAllItineraries,
     getItineraryDetails,
-    getItinerariesByDestination
+    getItinerariesByDestination,
 };
 
 function getAllDropdown() {
@@ -91,6 +91,7 @@ function getDestinationDetails(id) {
     const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/destinations/` + id + `?populate=destination_images,countries.country_images`;
     return fetchWrapper.get(destinationDetailsUrl);
 }
+
 
 function getItinerariesByDestination(id, page) {
     // console.log('baseUrl_dropdown', baseUrl_dropdown);

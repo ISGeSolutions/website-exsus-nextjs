@@ -8,7 +8,9 @@ const { publicRuntimeConfig } = getConfig();
 export const whyusService = {
     getAll,
     getById,
-    getWhyusPage
+    getWhyusPage,
+    getAllExecutives,
+    getExecutivesById,
 };
 
 function getAllDropdown() {
@@ -29,4 +31,16 @@ function getWhyusPage() {
     // console.log('baseUrl_dropdown', baseUrl_dropdown);
     const whyusPageUrl = `${publicRuntimeConfig.apiUrl}/api/custom-pages/3?filters[page_code][$eq]=Why-us&populate[0]=custom_page_images`;
     return fetchWrapper.get(whyusPageUrl);
+}
+
+function getExecutivesById() {
+    const whyusPageUrl = `${publicRuntimeConfig.apiUrl}/api/travel-executives/1?populate[0]=travel_executive_contents&populate[1]=travel_reviews`;
+    return fetchWrapper.get(whyusPageUrl);
+}
+
+
+function getAllExecutives() {
+    // console.log('baseUrl_dropdown', baseUrl_dropdown);
+    const allExecutivesUrl = `${publicRuntimeConfig.apiUrl}/api/travel-executives?populate[0]=travel_executive_contents&populate[1]=travel_reviews`;
+    return fetchWrapper.get(allExecutivesUrl);
 }
