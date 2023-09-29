@@ -4,6 +4,8 @@ export default function CustomMultiValue(props) {
   const { getValue, data } = props;
 
   const selectedOptions = getValue();
+  //   
+  console.log
   const currentOptionIdx = selectedOptions.findIndex(
     (option) => option.value === data.value
   );

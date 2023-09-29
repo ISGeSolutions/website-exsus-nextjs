@@ -6,12 +6,14 @@ import { Layout } from 'components/users';
 import { userService } from 'services';
 import Head from 'next/head';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { whyusService } from '../../services';
 var Carousel = require('react-responsive-carousel').Carousel;
 
 export default Index;
 
 function Index() {
     const [users, setUsers] = useState(null);
+    const [executiveData, setExecutiveData] = useState({});
 
     const equalHeight = (resize) => {
         var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -55,6 +57,11 @@ function Index() {
 
         // const carousel = document.querySelector('#carouselExampleInterval');
         // new bootstrap.Carousel(carousel);
+
+
+        whyusService.getExecutivesById().then(x => {
+            setExecutiveData(x.data);
+        })
 
         const carousel1 = document.querySelector('#Testimonials');
         new bootstrap.Carousel(carousel1);
@@ -121,10 +128,10 @@ function Index() {
                         <div className="row">
                             <div className="col-md-4 col-lg-3 col-xl-2">
                                 <div className="our_exprts_inr">
-                                    <img src="images/expert01.jpg" alt="expert01" className="img-fluid" />
+                                    <img src={executiveData?.attributes?.executive_image_path} alt="expert01" className="img-fluid" />
                                     <ul>
                                         <li>
-                                            <a href="#"><em className="material-symbols-outlined">call</em>+44 1603 937743</a>
+                                            <a href="#"><em className="material-symbols-outlined">call</em>{executiveData?.attributes?.contact_no}</a>
                                         </li>
                                         <li>
                                             <a href="#"><em className="material-symbols-outlined">mail</em>Email</a>
@@ -133,12 +140,9 @@ function Index() {
                                 </div>
                             </div>
                             <div className="col-md-8 col-lg-9 col-xl-10">
-                                <h2>Tom Cloherty</h2>
-                                <h3>Senior Account Manager - Worldwide</h3>
-                                <p>Tom has been indulging his love of travel from a young age, since family holidays first fuelled his wanderlust - which shows no signs of abating. Since then, he has worked as a travel agent, as a cabin crew member, and with leading luxury tour operators. Tom's far-flung adventures have taken him from the Caribbean to New York, via relaxing on the beaches of the Maldives and seeing the orangutans in Borneo - as a wildlife fan, this has been a definite highlight.</p>
-                                <p>Tom has many years of experience in crafting the very best bespoke tailor-made holidays. Everyone's vision of their perfect luxury holiday is different, and he has a passion for creating personalised holidays that are not only luxurious but offer standout, memorable experiences, whether that's relaxing on the beach on honeymoon on a Caribbean island, exploring off the beaten track and indulging in adrenaline-fuelled adventures in Costa Rica, discovering the gems of Indonesia, or enjoying an iconic road trip on California's Pacific Coast Highway.</p>
-                                <p>Whatever destinations are on your wish list, he will turn your dreams into reality and will create a trip of a lifetime for you.</p>
-                                <p>Tom works at our Exsus Travel Norwich office.</p>
+                                <h2>{executiveData?.attributes?.executive_name}</h2>
+                                <h3>{executiveData?.attributes?.executive_role}</h3>
+                                <div dangerouslySetInnerHTML={{ __html: executiveData?.attributes?.intro_text }} />
                             </div>
                         </div>
                     </div>
@@ -149,66 +153,20 @@ function Index() {
                     <h3>My Top Tips</h3>
                     <div id="carouselExampleAutoplaying" className="carousel slide " data-bs-ride="carousel">
                         <div className="carousel-inner">
-                            <div className="carousel-item active">
-                                <div className="our_exprts_slider_grp">
-                                    <div className="row">
-                                        <div className="col-md-6 m-auto">
-                                            <p className="mb-3 mb-md-0">Many VIP and Hollywood stars stayed at the Hotel Nacional de Cuba in its heyday in the 1950s and 60s. Head to the hotel by 4pm to grab top seats for the best mojitos in Havana as you watch the sun set over the Malecon.</p>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <img src="assets/images/our_exprts_slider01.jpg" className="" alt="our_exprts_slider01" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="carousel-item">
-                                <div className="our_exprts_slider_grp">
-                                    <div className="row">
-                                        <div className="col-md-6 m-auto">
-                                            <p className="mb-3 mb-md-0">On Barbados, sail aboard the Silver Moon luxury catamaran along the Platinum Coast. Stop to snorkel around reefs and shipwrecks, swim with turtles and stingrays and see a plethora of exotic fish.</p>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <img src="assets/images/our_exprts_slider02.jpg" className="" alt="our_exprts_slider02" />
+                            {executiveData?.attributes?.travel_executive_contents?.data?.filter(res => res.attributes.content_type == "Top_tip")?.map(res1 => (
+                                <div className="carousel-item active" key={res1.id}>
+                                    <div className="our_exprts_slider_grp">
+                                        <div className="row">
+                                            <div className="col-md-6 m-auto">
+                                                <div dangerouslySetInnerHTML={{ __html: res1?.intro_text }} />
+                                            </div>
+                                            <div className="col-md-6">
+                                                <img src={res1?.image_path} className="" alt="our_exprts_slider01" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="carousel-item">
-                                <div className="our_exprts_slider_grp">
-                                    <div className="row">
-                                        <div className="col-md-6 m-auto">
-                                            <p className="mb-3 mb-md-0">Stay at the first-class Huvafen Fushi, and enjoy treatments at their fabulous spa - be sure to book their exclusive underwater treatment room, and you'll be rewarded with your very own private underwater reef.</p>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <img src="assets/images/our_exprts_slider03.jpg" className="" alt="our_exprts_slider03" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="carousel-item">
-                                <div className="our_exprts_slider_grp">
-                                    <div className="row">
-                                        <div className="col-md-6 m-auto">
-                                            <p className="mb-3 mb-md-0">Visit Volcanoes National Park on Hawaii Island, known as Big Island. See the crater rim of Kilauea's Halema'uma'u Crater, take a unique night-time tour, or enjoy dinner overlooking the lava. </p>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <img src="assets/images/our_exprts_slider04.jpg" className="" alt="our_exprts_slider04" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="carousel-item">
-                                <div className="our_exprts_slider_grp">
-                                    <div className="row">
-                                        <div className="col-md-6 m-auto">
-                                            <p className="mb-3 mb-md-0">Enjoy Santa Barbara on a wine walking tour. I also highly recommend eating at one of the city's hottest restaurants, Barbareno, which has a farm-to-table concept, with food such as dandelion root soup and hyacinth ice cream.</p>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <img src="assets/images/our_exprts_slider05.jpg" className="" alt="our_exprts_slider05" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            ))}
                         </div>
                         <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
                             <span className="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -309,20 +267,14 @@ function Index() {
             </section>
             <section className="favourite_pic_row">
                 <div className="container">
-                    <h3>My Top Tips</h3>
+                    <h3>My favourite pictures</h3>
                     <div className="items">
-                        <div className="item active">
-                            <img src="assets/images/expert_favourite_pic01.jpg" alt="expert_favourite_pic01" className="img-fluid" />
-                            <p>At Palm Island in the Grenadines</p>
-                        </div>
-                        <div className=" item next">
-                            <img src="assets/images/expert_favourite_pic02.jpg" alt="expert_favourite_pic02" className="img-fluid" />
-                            <p>At Four Seasons Resort Oahu at Ko Alina, Hawaii</p>
-                        </div>
-                        <div className="item prev">
-                            <img src="assets/images/expert_favourite_pic03.jpg" alt="expert_favourite_pic03" className="img-fluid" />
-                            <p>Horse riding at Mustang Monument Ranch, Nevada, USA</p>
-                        </div>
+                        {executiveData?.attributes?.travel_executive_contents?.data?.filter(res => res.attributes.content_type == "Picture")?.map(res1 => (
+                            <div className="item active">
+                                <img src={res1?.image_path} alt="expert_favourite_pic01" className="img-fluid" />
+                                <p>{res1?.image_text}</p>
+                            </div>
+                        ))}
                         <div className="button-container">
                             <div className="button">
                                 <svg xmlns='http://www.w3.org/2000/svg' fill='#fff' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' viewBox='0 0 267 512.43'><path fill-rule='nonzero' d='M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z'></path></svg>
@@ -331,6 +283,7 @@ function Index() {
                                 <svg xmlns='http://www.w3.org/2000/svg' fill='#fff' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' viewBox='0 0 267 512.43'><path fill-rule='nonzero' d='M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z'></path></svg>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </section>
