@@ -13,6 +13,7 @@ export default CountryRegions;
 function CountryRegions() {
 
     const router = useRouter();
+    const { countrycode } = router.query;
 
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
@@ -26,7 +27,17 @@ function CountryRegions() {
         // const newUrl = regionWiseUrl + `/destinations/africa/africa-countries`;
         // window.history.pushState(null, null, newUrl);
 
-    }, []);
+        // Using window.onload to detect full page load
+        window.onload = () => {
+            setTimeout(() => {
+                const redirectUrl = regionWiseUrl + '/country?countrycode=' + countrycode;
+                // debugger;
+                if (redirectUrl) {
+                    router.push(redirectUrl);
+                }
+            }, 0);
+        };
+    }, [countrycode]);
 
     return (
         <>

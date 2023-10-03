@@ -12,7 +12,7 @@ var Carousel = require('react-responsive-carousel').Carousel;
 
 import CountryRegions from '../countryregions/index'; // Adjust the path accordingly
 import CountrytItinararies from '../countryitineraries/index'; // Adjust the path accordingly
-import CountryPlacesToStay from '../countryplacetostay/index'; // Adjust the path accordingly
+import CountryPlaceToStay from '../countryplacetostay/index'; // Adjust the path accordingly
 import CountryWhentogo from '../countrywhentogo/index'; // Adjust the path accordingly
 import CountryOverview from '../countryoverview/index'; // Adjust the path accordingly
 
@@ -393,7 +393,7 @@ function Country() {
                         <CountrytItinararies data={countryData?.attributes} />
                     </div>}
                     {activeTab === 'places-to-stay' && <div className={activeTab === 'places-to-stay' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-places-to-stay" role="tabpanel" aria-labelledby="pills-places-to-stay-tab" tabIndex="0">
-                        <CountryPlacesToStay data={countryData?.attributes} />
+                        <CountryPlaceToStay data={countryData?.attributes} />
                     </div>}
                     {activeTab === 'when-to-go' && <div className={activeTab === 'when-to-go' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-when-to-go" role="tabpanel" aria-labelledby="pills-when-to-go-tab" tabIndex="0">
                         <CountryWhentogo data={countryData?.attributes} />

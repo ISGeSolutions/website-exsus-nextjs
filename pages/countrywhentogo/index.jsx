@@ -1,11 +1,38 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 export default CountryWhentogo;
 
 function CountryWhentogo() {
 
+    const router = useRouter();
+    const { countrycode } = router.query;
+
+    let regionWiseUrl = '/uk';
+    let region = 'uk';
+    if (typeof window !== 'undefined') {
+        if (window && window.site_region) {
+            regionWiseUrl = '/' + window.site_region;
+            region = window.site_region;
+
+            // setMyVariable(window.site_region);
+        }
+    }
+    
     useEffect(() => {
-    }, []);
+
+        // Using window.onload to detect full page load
+        window.onload = () => {
+            setTimeout(() => {
+                const redirectUrl = regionWiseUrl + '/country?countrycode=' + countrycode;
+                // debugger;
+                if (redirectUrl) {
+                    router.push(redirectUrl);
+                }
+            }, 0);
+        };
+
+    }, [countrycode]);
 
     return (
         <>
