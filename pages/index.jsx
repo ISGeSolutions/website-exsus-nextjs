@@ -134,6 +134,7 @@ function Index() {
     useEffect(() => {
         const thumbnailImageArr = [];
         holidaytypesService.getHolidaytypesLandingList().then(x => {
+            // debugger;
             const imageCheckType = x.data;
             imageCheckType.forEach(elementMain => {
                 if (elementMain.attributes.holiday_type_group_images.data) {

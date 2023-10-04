@@ -66,9 +66,17 @@ function Index() {
         });
 
         blogsService.getAllBlogs().then(x => {
-            // console.log(x);
-            setAllBlogsData(x.data);
-
+            const response = [...x.data].sort((a, b) => a.attributes.serial_number - b.attributes.serial_number);
+            response.forEach((element, index) => {
+                const str = element?.attributes?.blog_image_path;
+                const substringToCheck = 'https://www.exsus.com/';
+                const containsSubstring = str.includes(substringToCheck);
+                if (!containsSubstring) {
+                    const newStr = substringToCheck + '' + element?.attributes?.blog_image_path;
+                    response[index].attributes.blog_image_path = newStr;
+                }
+            });
+            setAllBlogsData(response);
         })
 
         const carousel = document.querySelector('#carouselExampleInterval');
@@ -185,7 +193,9 @@ function Index() {
                                     <div className="col-sm-6 col-lg-4 col-xxl-3" key={res.id}>
                                         <div className="blog_cnt_inr">
                                             <a href="blogs/blog-details">
-                                                <img src={res?.attributes?.blog_image_path} alt="blog01" className="img-fluid" />
+                                                {res?.attributes?.blog_image_path &&
+                                                    <img src={res?.attributes?.blog_image_path} alt="blog01" className="img-fluid" />
+                                                }
                                                 <h4>{res?.attributes?.blog_header_text}</h4>
                                                 <span className="btn-primary prmry_btn">Read more
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path></svg>
@@ -236,23 +246,23 @@ function Index() {
                     </form> */}
                 </div>
             </section>
-            <div class="modal fade blog_modal_parnt" id="blogModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div className="modal fade blog_modal_parnt" id="blogModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-lg modal-dialog-centered">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                            <img src="images/banner-logo.png" alt="banner-logo" class="img-fluid" />
+                        <div className="modal-body">
+                            <img src="images/banner-logo.png" alt="banner-logo" className="img-fluid" />
                             <h5>Inspire Me</h5>
                             <p>Looking for inspiration? When you sign up to our free newsletter you’ll get the latest exciting ideas and luxury travel offers from our specialists straight to your inbox</p>
-                            <div class="contact_form_row">
+                            <div className="contact_form_row">
                                 <form>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="select_drpdwn">
-                                                <select class="form-select" aria-label="Title">
-                                                    <option selected="">Title *</option>
+                                    <div className="row">
+                                        <div className="col-lg-6">
+                                            <div className="select_drpdwn">
+                                                <select className="form-select" aria-label="Title">
+                                                    <option defaultValue=''>Title *</option>
                                                     <option value="Mr">Mr</option>
                                                     <option value="Mrs">Mrs</option>
                                                     <option value="Ms">Ms</option>
@@ -265,22 +275,22 @@ function Index() {
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-input validatn_cls">
-                                                <input type="text" class="form-control" aria-label="First name *" placeholder="First name *" />
+                                        <div className="col-lg-6">
+                                            <div className="form-input validatn_cls">
+                                                <input type="text" className="form-control" aria-label="First name *" placeholder="First name *" />
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-input">
-                                                <input type="text" class="form-control" aria-label="Surname *" placeholder="Surname *" />
+                                        <div className="col-lg-6">
+                                            <div className="form-input">
+                                                <input type="text" className="form-control" aria-label="Surname *" placeholder="Surname *" />
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-input">
-                                                <input type="email" class="form-control" aria-label="Email *" placeholder="Email *" />
+                                        <div className="col-lg-6">
+                                            <div className="form-input">
+                                                <input type="email" className="form-control" aria-label="Email *" placeholder="Email *" />
                                             </div>
                                         </div>
-                                        <button class="btn prmry_btn mx-auto">Subscribe<svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 267 512.43"><path fill-rule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path></svg>
+                                        <button className="btn prmry_btn mx-auto">Subscribe<svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path></svg>
                                         </button>
                                     </div>
                                 </form>
@@ -294,11 +304,3 @@ function Index() {
         </Layout>
     );
 }
-
-
-
-
-
-
-
-
