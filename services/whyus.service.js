@@ -11,7 +11,8 @@ export const whyusService = {
     getWhyusPage,
     getAllExecutives,
     getExecutivesById,
-    getAllTravelReviews
+    getAllTravelReviews,
+    getExsusReviews
 };
 
 function getAllDropdown() {
@@ -32,6 +33,11 @@ function getWhyusPage() {
     // console.log('baseUrl_dropdown', baseUrl_dropdown);
     const whyusPageUrl = `${publicRuntimeConfig.apiUrl}/api/custom-pages/3?filters[page_code][$eq]=Why-us&populate[0]=custom_page_images`;
     return fetchWrapper.get(whyusPageUrl);
+}
+
+function getExsusReviews() {
+    const exsusReviewsUrl = `${publicRuntimeConfig.apiUrl}/api/travel-reviews?populate[0]=travel_executive`;
+    return fetchWrapper.get(exsusReviewsUrl);
 }
 
 function getExecutivesById() {
