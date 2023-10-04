@@ -49,6 +49,8 @@ export const destinationService = {
     getAllItineraries,
     getItineraryDetails,
     getItinerariesByDestination,
+    getAllHotels,
+    getAllItinerariesHomePage
 };
 
 function getAllDropdown() {
@@ -93,21 +95,30 @@ function getDestinationDetails(id) {
 }
 
 
-function getItinerariesByDestination(id, page) {
-    // console.log('baseUrl_dropdown', baseUrl_dropdown);
-    const destinationDetailsUrl =
-        `${publicRuntimeConfig.apiUrl}/api/destinations/` +
-        id +
-        `?populate[0]=itineraries.itinerary_images&pagination[page]=${page}&pagination[pageSize]=9`;
-    return fetchWrapper.get(destinationDetailsUrl);
-}
 
 function getAllItineraries(page) {
     const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&pagination[page]=${page}&pagination[pageSize]=9`;
     return fetchWrapper.get(itinerariesDetailsUrl);
 }
+
+function getAllItinerariesHomePage() {
+    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&pagination[page]=1&pagination[pageSize]=5`;
+    return fetchWrapper.get(itinerariesDetailsUrl);
+}
+
 function getItineraryDetails() {
     const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries/1?populate[0]=itinerary_details&filters[itin_code]=0000000348`;
+    return fetchWrapper.get(itinerariesDetailsUrl);
+}
+
+function getItinerariesByDestination(dcode, page) {
+    // console.log('baseUrl_dropdown', baseUrl_dropdown);
+    const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?[filters][destination][destination_code][$eq]=${dcode}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=9`;
+    return fetchWrapper.get(destinationDetailsUrl);
+}
+
+function getAllHotels(page) {
+    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/hotels?populate[0]=hotel_images&populate[1]=hotel_travel_times&pagination[page]=${page}&pagination[pageSize]=9`;
     return fetchWrapper.get(itinerariesDetailsUrl);
 }
 

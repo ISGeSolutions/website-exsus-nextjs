@@ -24,8 +24,15 @@ function ContinentPlacesToStay() {
     const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
     const [itineraries, setItineraries] = useState(null);
     const router = useRouter();
-    const { destinationcode } = router.query;
     const [destinationName, setdestinationName] = useState("");
+    const itemsPerPage = 9; // Number of items to load per page
+    const [visibleItems, setVisibleItems] = useState(itemsPerPage);
+    const [page, setPage] = useState(0); // Current page
+    const [metaData, setMetaData] = useState([]);
+    const [dcode, setdcode] = useState();
+    const { destinationcode } = router.query;
+    const [allHotels, setAllHotels] = useState([]);
+
 
 
     const countryOptions = [
@@ -172,6 +179,18 @@ function ContinentPlacesToStay() {
                 {children}
             </components.Option>
         );
+    };
+
+    const loadMoreData = () => {
+        destinationService.getAllHotels(page + 1).then((response) => {
+            console.log(response);
+            setMetaData(response.meta.pagination);
+            const newItineraries = response.data;
+            if (newItineraries.length > 0) {
+                setAllHotels((prevItineraries) => [...prevItineraries, ...newItineraries].reduce((accumulator, current) => accumulator.some(item => item.id === current.id) ? accumulator : [...accumulator, current], []));
+                setPage(page + 1);
+            }
+        });
     };
 
     const handleOptionCountryChange = (selectedOption) => {
@@ -361,6 +380,8 @@ function ContinentPlacesToStay() {
             setdestinationName(x.data.attributes.destination_name);
         });
 
+        loadMoreData();
+
         // Using window.onload to detect full page load
         window.onload = () => {
             setTimeout(() => {
@@ -475,7 +496,7 @@ function ContinentPlacesToStay() {
                                 </div>
                                 <div className="col-12">
                                     <div className="destination_filter_result d-block d-lg-flex">
-                                        <p>We've found 358 hotels in Asia for you
+                                        <p>We've found {metaData?.total} hotels in {destinationName} for you
                                             <button type="button" className="btn btn-primary modal_link_btn" data-bs-toggle="modal" data-bs-target="#placesToStayModal">See all accomodations on Map</button>
                                         </p>
                                         <div className="destination_contries_filter d-inline-block d-lg-flex">
@@ -487,209 +508,72 @@ function ContinentPlacesToStay() {
                                         </div>
                                     </div>
                                 </div>
-
-                                <div className="col-sm-6 col-lg-4 col-xxl-3">
-                                    <div className="card_slider_inr">
-                                        <div className="card_slider">
-                                            <a className="card_slider_img">
-                                                <img src="./../../images/destination_hotel01.jpg" alt="destination_hotel01" className="img-fluid" />
-                                            </a>
-                                            <div className="card_slider_cnt places_to_stay_cnt">
-                                                <h4><a href="#">CAPELLA UBUD</a></h4>
-                                                <ul>
-                                                    <li>Location: Bali | Indonesia</li>
-                                                    <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
-                                                    <li>Located in the heart of the Keliki rainforest in Bali, Capella Ubud is the perfect hotel for getting back to nature and disconnecting from the outside world. Designed by renowned architect Bill Bensley, as well as adding a touch of luxury and signature Bensley style, not a single tree was destroyed in its construction, guaranteeing an unspoilt experience of the lush green forests it sits in.</li>
-                                                    <li>Best for:<span>Setting & Views, Eco-tourism, Wildlife & Nature, Peace & Quiet</span></li>
-                                                </ul>
+                                {allHotels?.slice(0, allHotels.length).map((item) => (
+                                    <div className="col-sm-6 col-lg-4 col-xxl-3" key={item.id}>
+                                        <div className="card_slider_inr">
+                                            <div className="card_slider">
+                                                <a className="card_slider_img">
+                                                    {item?.attributes?.hotel_images?.data.map(
+                                                        (element, index) =>
+                                                            element.attributes.image_type == "thumbnail" ? (
+                                                                <img
+                                                                    key={index}
+                                                                    src={element.attributes.image_path}
+                                                                    alt={element.attributes.image_alt_text}
+                                                                    className="img-fluid"
+                                                                />
+                                                            ) : (
+                                                                ""
+                                                            )
+                                                    )}
+                                                    <img src="" alt="destination_hotel01" className="img-fluid" />
+                                                </a>
+                                                <div className="card_slider_cnt places_to_stay_cnt">
+                                                    <h4><a href="#">{item?.attributes?.hotel_name}</a></h4>
+                                                    <ul>
+                                                        <li>Location: {item?.attributes?.location}</li>
+                                                        <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night"><label>{item?.attributes?.price_guide_text}</label></span></li>
+                                                        <li>{item?.attributes?.intro_text}</li>
+                                                        <li>Best for:<span>{item?.attributes?.recommended_for_text}</span></li>
+                                                    </ul>
+                                                </div>
+                                                <button className="btn card_slider_btn justify-content-end">
+                                                    <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
+                                                </button>
                                             </div>
-                                            <button className="btn card_slider_btn justify-content-end">
-                                                <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
-                                            </button>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div className="col-sm-6 col-lg-4 col-xxl-3">
-                                    <div className="card_slider_inr">
-                                        <div className="card_slider">
-                                            <a className="card_slider_img">
-                                                <img src="./../../images/destination_hotel02.jpg" alt="destination_hotel02" className="img-fluid" />
-                                            </a>
-                                            <div className="card_slider_cnt places_to_stay_cnt">
-                                                <h4><a href="#">Four Seasons Hong Kong</a></h4>
-                                                <ul>
-                                                    <li>Location: Hong Kong & Macau</li>
-                                                    <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
-                                                    <li>Four Seasons Hong Kong offers an enticing destination within a destination. As part of the prestigious International Finance Centre, it offers unrivalled links to Hong Kong Station, with the famed Star Ferry steps away.</li>
-                                                    <li>Best for:<span>City Hotel, Owner-run, Spa & Wellness, Cultural Immersion</span></li>
-                                                </ul>
-                                            </div>
-                                            <button className="btn card_slider_btn justify-content-end">
-                                                <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-sm-6 col-lg-4 col-xxl-3">
-                                    <div className="card_slider_inr">
-                                        <div className="card_slider">
-                                            <a className="card_slider_img">
-                                                <img src="./../../images/destination_hotel03.jpg" alt="destination_hotel03" className="img-fluid" />
-                                            </a>
-                                            <div className="card_slider_cnt places_to_stay_cnt">
-                                                <h4><a href="#">JW Marriott Phu Quoc, Vietnam</a></h4>
-                                                <ul>
-                                                    <li>Location: Southern Beaches & Islands | Vietnam</li>
-                                                    <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
-                                                    <li>Set on a private beach on a sweeping bay, the luxurious JW Marriott Phu Quoc Emerald Bay Resort & Spa has a stunning setting, and thanks to being designed by inimitable architect Bill Bensley, this hotel is unique and quirky to say the least. Taking inspiration from its former alleged incarnation as a university, on arrival you will be greeted by the university mascots before entering a fantastical and brightly-coloured world.</li>
-                                                    <li>Best for:<span>Chic Design, Luxury Hotel, Beach, Unusual</span></li>
-                                                </ul>
-                                            </div>
-                                            <button className="btn card_slider_btn justify-content-end">
-                                                <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-sm-6 col-lg-4 col-xxl-3">
-                                    <div className="card_slider_inr">
-                                        <div className="card_slider">
-                                            <a className="card_slider_img">
-                                                <img src="./../../images/destination_hotel04.jpg" alt="destination_hotel04" className="img-fluid" />
-                                            </a>
-                                            <div className="card_slider_cnt places_to_stay_cnt">
-                                                <h4><a href="#">Kanamean Nishitomiya</a></h4>
-                                                <ul>
-                                                    <li>Location: Kyoto, Southern Honshu & Kyushu | Japan</li>
-                                                    <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
-                                                    <li>Kanamean Nishitomiya is a traditional Japanese ryokan inn with a history dating back to the 19th century. With its tatami floors, sliding screens, slippers and kimonos, it offers a quintessential ryokan experience - alongside a Michelin-starred restaurant serving up magnificent multi-course kaiseki cuisine.</li>
-                                                    <li>Best for:<span>History & Heritage, Cultural Immersion, Setting & Views, Food & Wine</span></li>
-                                                </ul>
-                                            </div>
-                                            <button className="btn card_slider_btn justify-content-end">
-                                                <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-sm-6 col-lg-4 col-xxl-3">
-                                    <div className="card_slider_inr">
-                                        <div className="card_slider">
-                                            <a className="card_slider_img">
-                                                <img src="./../../images/destination_hotel05.jpg" alt="destination_hotel05" className="img-fluid" />
-                                            </a>
-                                            <div className="card_slider_cnt places_to_stay_cnt">
-                                                <h4><a href="#">Kata Rocks</a></h4>
-                                                <ul>
-                                                    <li>Location: Phuket & Western Thailand | Thailand</li>
-                                                    <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
-                                                    <li>Set on a headland between the beaches of Kata and Kata Noi on Phuket’s vibrant southwest coast, Kata Rocks is a cool and contemporary all-villa resort offering signature Thai hospitality, gorgeous infinity pools, five-star facilities and dazzling views of the Andaman Sea.</li>
-                                                    <li>Best for:<span>Private Villa, Chic Design, Honeymoon, Family-friendly</span></li>
-                                                </ul>
-                                            </div>
-                                            <button className="btn card_slider_btn justify-content-end">
-                                                <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-sm-6 col-lg-4 col-xxl-3">
-                                    <div className="card_slider_inr">
-                                        <div className="card_slider">
-                                            <a className="card_slider_img">
-                                                <img src="./../../images/destination_hotel06.jpg" alt="destination_hotel06" className="img-fluid" />
-                                            </a>
-                                            <div className="card_slider_cnt places_to_stay_cnt">
-                                                <h4><a href="#">L'Alyana Ninh Van Bay</a></h4>
-                                                <ul>
-                                                    <li>Location: Southern Beaches & Islands | Vietnam</li>
-                                                    <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
-                                                    <li>If you're looking for a luxury hideaway but don't want to miss out on an immersive Vietnamese experience, L'Alyana Ninh Van Bay is the perfect place. This tropical paradise, overlooking the bay and the South Vietnam highlands beyond, practices three core values to ensure that guests have an unforgettable stay: space and privacy, quality service, and expertise.</li>
-                                                    <li>Best for:<span>Luxury Hotel, Setting & Views, Beach, Multi-activity</span></li>
-                                                </ul>
-                                            </div>
-                                            <button className="btn card_slider_btn justify-content-end">
-                                                <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-sm-6 col-lg-4 col-xxl-3">
-                                    <div className="card_slider_inr">
-                                        <div className="card_slider">
-                                            <a className="card_slider_img">
-                                                <img src="./../../images/destination_hotel07.jpg" alt="destination_hotel07" className="img-fluid" />
-                                            </a>
-                                            <div className="card_slider_cnt places_to_stay_cnt">
-                                                <h4><a href="#">Plataran Menjangan</a></h4>
-                                                <ul>
-                                                    <li><p>Location: Bali | Indonesia</p></li>
-                                                    <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
-                                                    <li>Plataran Menjangan is a luxurious haven in West Bali National Park. This nature reserve is home to countless endemic species who live across mangroves, jungles and coast, and the hotel’s luxurious villas are dotted across similarly diverse environments, providing stunning views over the untouched wilderness.</li>
-                                                    <li>Best for:<span>Wildlife & Nature, Beach, Multi-activity, Setting & Views</span></li>
-                                                </ul>
-                                            </div>
-                                            <button className="btn card_slider_btn justify-content-end">
-                                                <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-sm-6 col-lg-4 col-xxl-3">
-                                    <div className="card_slider_inr">
-                                        <div className="card_slider">
-                                            <a className="card_slider_img">
-                                                <img src="./../../images/destination_hotel08.jpg" alt="destination_hotel08" className="img-fluid" />
-                                            </a>
-                                            <div className="card_slider_cnt places_to_stay_cnt">
-                                                <h4><a href="#">Raya Heritage</a></h4>
-                                                <ul>
-                                                    <li><p>Location: Northern Thailand | Thailand</p></li>
-                                                    <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
-                                                    <li>The elegant Raya Heritage has a serene setting in lush gardens on the banks of the Ping River. This beautiful hotel takes inspiration from Lanna culture, and combines a sleek, contemporary style with traditional Thai design, alongside local touches from authentic gourmet cuisine to gorgeous suites showcasing the expert work of local craftspeople, such as handwoven baskets and pots.</li>
-                                                    <li>Best for:<span>History & Heritage, Cultural Immersion, Chic Design, Luxury Hotel</span></li>
-                                                </ul>
-                                            </div>
-                                            <button className="btn card_slider_btn justify-content-end">
-                                                <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-sm-6 col-lg-4 col-xxl-3">
-                                    <div className="card_slider_inr">
-                                        <div className="card_slider">
-                                            <a className="card_slider_img">
-                                                <img src="./../../images/destination_hotel09.jpg" alt="destination_hotel09" className="img-fluid" />
-                                            </a>
-                                            <div className="card_slider_cnt places_to_stay_cnt">
-                                                <h4><a href="#">The Bale Phnom Penh</a></h4>
-                                                <ul>
-                                                    <li><p>Location: Phnom Penh | Cambodia</p></li>
-                                                    <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
-                                                    <li>The Balé Phnom Penh stands regally on the banks of the majestic Mekong River, set around tropical gardens of frangipani trees, black-bottomed infinity ponds and serene Buddhas. It is a tranquil haven, set away from the bustle of the city centre. Designed for complete relaxation, the Balé showcases modern Asian architecture, giving an attractive Zen-like feel to this luxury hotel.</li>
-                                                    <li>Best for:<span>Luxury Hotel, Setting & Views, Service & Hospitality, Chic Design</span></li>
-                                                </ul>
-                                            </div>
-                                            <button className="btn card_slider_btn justify-content-end">
-                                                <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                                ))}
 
                                 <div className="col-12">
-                                    <button className="btn prmry_btn make_enqury_btn mx-auto text-uppercase">Show 9 more places to stay
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
-                                    </button>
+                                    {metaData.total > page * itemsPerPage && (
+                                        <button
+                                            onClick={loadMoreData}
+                                            className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
+                                            fdprocessedid="r5vpm6s"
+                                        >
+                                            Show{" "}
+                                            {metaData.total - page * itemsPerPage > 9
+                                                ? 9
+                                                : metaData.total - page * itemsPerPage > 9}{" "}
+                                            more items
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="#ffffff"
+                                                shapeRendering="geometricPrecision"
+                                                textRendering="geometricPrecision"
+                                                imageRendering="optimizeQuality"
+                                                fillRule="evenodd"
+                                                clipRule="evenodd"
+                                                viewBox="0 0 512 266.77"
+                                            >
+                                                <path
+                                                    fillRule="nonzero"
+                                                    d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"
+                                                ></path>
+                                            </svg>
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         </div>

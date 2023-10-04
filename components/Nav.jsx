@@ -584,7 +584,7 @@ function Nav() {
                                                             <li className="header_country_label active"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/about-us">About us</NavLink></li>
                                                             <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/brochure">Request a brochure</NavLink></li>
                                                             <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/creating-your-trip">Creating your trip</NavLink></li>
-                                                            <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/meet-the-exsus-team">Meet the Exsus Team</NavLink></li>
+                                                            <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/meet-our-travel-experts">Meet the Exsus Team</NavLink></li>
                                                             <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/client-reviews">Client reviews</NavLink></li>
                                                             <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/honeymoon-gift-list">Honeymoon Gift List</NavLink></li>
                                                             <li className="header_country_label"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/contact-us">Contact Us</NavLink></li>

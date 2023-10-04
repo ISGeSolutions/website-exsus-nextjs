@@ -79,6 +79,7 @@ function Index() {
 
         destinationService.getDestinationLandingList().then(x => {
             setDestinationLandingList(x.data);
+            console.log(x.data);
             // setDestinationLandingDetails(x)
         });
 
@@ -161,7 +162,7 @@ function Index() {
                             <div className="col-sm-6" key={destinationItem?.id}>
                                 <div className="card_blk_inr">
                                     <NavLink href={dynamicLink(destinationItem?.attributes?.destination_code, destinationItem?.id)}>
-                                        <img src={dynamicImage(destinationItem?.attributes?.destination_images?.data[1]?.attributes.image_path)} alt="destination01" className="img-fluid" />
+                                        <img src={dynamicImage(destinationItem?.attributes?.destination_images?.data.filter(res => res?.attributes.image_type == "thumbnail")[0]?.attributes.image_path)} alt="destination01" className="img-fluid" />
                                         {/* <img src="./../images/destination01.jpg" alt="destination01" className="img-fluid" /> */}
                                         <div className="card_blk_cntnt card_blk_sml_arw">
                                             <div className="row align-items-center">
