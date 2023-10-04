@@ -160,8 +160,8 @@ function Index() {
                 <div className="container">
                     <div className="bookmark_row">
                         <ul>
-                            <li><a href="homepage.html">Home</a></li>
-                            <li><a href="about_us.html">Why us</a></li>
+                            <li><a >Home</a></li>
+                            <li><a >Why us</a></li>
                             <li>Our people</li>
                         </ul>
                     </div>
@@ -169,11 +169,12 @@ function Index() {
                         {allExecutives?.map(res => (
                             <div className="col-sm-6 col-lg-4 col-xxl-3" key={res.id}>
                                 <div className="our_exprts_inr">
-                                    <img src={res?.executive_image_path} alt="expert01" className="img-fluid" />
+                                    <img src={res?.attributes?.executive_image_path} alt="expert01" className="img-fluid" />
                                     <div className="expert_info">
-                                        <h2>{res?.executive_name}</h2>
-                                        <h3>{res?.executive_role}</h3>
-                                        <div dangerouslySetInnerHTML={{ __html: res?.intro_text }} />                                    </div>
+                                        <h2>{res?.attributes?.executive_name}</h2>
+                                        <h3>{res?.attributes?.executive_role}</h3>
+                                        <div dangerouslySetInnerHTML={{ __html: res?.attributes?.intro_text }} />
+                                    </div>
                                     <ExpertDetail />
                                 </div>
                             </div>

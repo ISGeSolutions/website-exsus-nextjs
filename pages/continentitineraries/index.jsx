@@ -102,43 +102,34 @@ function ContinentItinararies() {
     const [selectedOptionCountry, setSelectedOptionCountry] = useState(null);
     const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
     const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
-    const [itineraries, setItineraries] = useState(null);
+    const [itineraries, setItineraries] = useState([]);
     const [visible, setVisible] = useState(3);
     const [visiblePagination, setVisiblePagination] = useState(true);
     const itemsPerPage = 9; // Number of items to load per page
     const [visibleItems, setVisibleItems] = useState(itemsPerPage);
     const [page, setPage] = useState(0); // Current page
     const [metaData, setMetaData] = useState([]);
-
-
     const router = useRouter();
+    const [dcode, setdcode] = useState();
     const { destinationcode } = router.query;
     const [countryOptions, setAllCountries] = useState([])
+    const [destinationName, setdestinationName] = useState("");
+
+
     const handleLoadMore = () => {
         // console.log('handleLoadMore')
         setVisibleItems(prevVisibleItems => prevVisibleItems + itemsPerPage);
     };
 
-
     const loadMoreData = () => {
-        destinationService.getItinerariesByDestination(destinationcode, page + 1)
-            .then((response) => {
-                setMetaData(response.meta.pagination);
-                const newItineraries = response.data.attributes.itineraries.data;
-                if (newItineraries.length > 0) {
-                    setItineraries(newItineraries);
-                    //   setItineraries((prevItineraries) =>
-                    //     [...prevItineraries, ...newItineraries].reduce(
-                    //       (accumulator, current) =>
-                    //         accumulator.some((item) => item.id === current.id)
-                    //           ? accumulator
-                    //           : [...accumulator, current],
-                    //       []
-                    //     )
-                    // );
-                    setPage(page + 1);
-                }
-            });
+        destinationService.getItinerariesByDestination(dcode, page + 1).then((response) => {
+            setMetaData(response.meta.pagination);
+            const newItineraries = response.data;
+            if (newItineraries.length > 0) {
+                setItineraries((prevItineraries) => [...prevItineraries, ...newItineraries].reduce((accumulator, current) => accumulator.some(item => item.id === current.id) ? accumulator : [...accumulator, current], []));
+                setPage(page + 1);
+            }
+        });
     };
 
     // const countryOptions = [
@@ -410,12 +401,10 @@ function ContinentItinararies() {
         setSelectedOptionCountry();
         setSelectedOptionRegion();
         setSelectedOptionMonth();
-
-        destinationService.getAllItineraries().then(x => {
-            setItineraries(x.data);
-        });
-
         destinationService.getDestinationDetails(destinationcode).then((x) => {
+            setdestinationName(x.data.attributes.destination_name);
+            setdcode(x.data.attributes.destination_code);
+            loadMoreData();
             setAllCountries(
                 x.data?.attributes?.countries?.data.map((item) => ({
                     id: item.id,
@@ -426,17 +415,15 @@ function ContinentItinararies() {
             );
         });
 
-        loadMoreData();
-
-        window.addEventListener('resize', equalHeight(true));
+        window.addEventListener("resize", equalHeight(true));
 
         // Using window.onload to detect full page load
         window.onload = () => {
-            const redirectUrl = regionWiseUrl + '/continent?destinationcode=' + destinationcode;
+            const redirectUrl =
+                regionWiseUrl + "/continent?destinationcode=" + destinationcode;
             router.push(redirectUrl);
         };
-
-    }, [destinationcode, router]);
+    }, [destinationcode, router, dcode]);
 
     return (
         <>
@@ -448,7 +435,7 @@ function ContinentItinararies() {
             </div>
             <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
                 <div className="container">
-                    <h3 className="title_cls">All Luxury Holiday Ideas in Asia</h3>
+                    <h3 className="title_cls">All Luxury Holiday Ideas in {destinationName}</h3>
                     <div className="card_slider_row">
                         <div className="carousel00">
                             <div className="row">
@@ -552,7 +539,7 @@ function ContinentItinararies() {
                                 </div>
                                 <div className="col-12">
                                     <div className="destination_filter_result d-block d-lg-flex">
-                                        <p>We've found 77 holiday ideas in Asia for you</p>
+                                        <p>We've found 77 holiday ideas in {destinationName} for you</p>
                                         <div className="destination_contries_filter d-inline-block d-lg-flex">
                                             <label className="pt-2 pt-lg-0">Arrange by:</label>
                                             <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
@@ -565,45 +552,94 @@ function ContinentItinararies() {
                                     </div>
                                 </div>
 
-                                {itineraries?.slice(0, 9).map((item) => (
+                                {itineraries?.slice(0, itineraries.length).map((item) => (
                                     <div className="col-sm-6 col-lg-4 col-xxl-3" key={item.id}>
                                         <div className="card_slider_inr">
                                             <div className="card_slider">
-                                                <NavLink href={generateDynamicLink(item)} className="card_slider_img">
-                                                    {item?.attributes?.itinerary_images?.data.map((element, index) => (
-                                                        element.attributes.image_type == 'thumbnail' ? (
-                                                            <img key={index} src={element.attributes.image_path} alt={element.attributes.image_alt_text} className="img-fluid" />
-                                                        ) : (
-                                                            ''
-                                                        )
-                                                    ))}
+                                                <NavLink
+                                                    href={generateDynamicLink(item)}
+                                                    className="card_slider_img"
+                                                >
+                                                    {item?.attributes?.itinerary_images?.data.map(
+                                                        (element, index) =>
+                                                            element.attributes.image_type == "thumbnail" ? (
+                                                                <img
+                                                                    key={index}
+                                                                    src={element.attributes.image_path}
+                                                                    alt={element.attributes.image_alt_text}
+                                                                    className="img-fluid"
+                                                                />
+                                                            ) : (
+                                                                ""
+                                                            )
+                                                    )}
                                                 </NavLink>
                                                 <div className="card_slider_cnt">
-                                                    <h4><a href="#">{item?.attributes?.itin_name}</a></h4>
+                                                    <h4>
+                                                        <a href="#">{item?.attributes?.itin_name}</a>
+                                                    </h4>
                                                     <ul>
                                                         <li>{item?.attributes?.header_text}</li>
-                                                        <li>Indonesia</li>
-                                                        <li>{item?.attributes?.itinerary_country_contents?.data[0]?.attributes?.guideline_price_notes_index}</li>
-                                                        <li>Travel to:<span>{item?.attributes?.sub_header_text}</span></li>
+                                                        < li >
+                                                            {
+                                                                item?.attributes?.itinerary_country_contents
+                                                                    ?.data[0]?.attributes
+                                                                    ?.guideline_price_notes_index
+                                                            }
+                                                        </li>
+                                                        <li>
+                                                            Travel to:
+                                                            <span>{item?.attributes?.sub_header_text}</span>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                                 <button className="btn card_slider_btn">
                                                     <span>{item?.attributes?.no_of_nites_notes}</span>
-                                                    <span className="view_itnry_link" onClick={handleRedirect}>View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                                    <span
+                                                        className="view_itnry_link"
+                                                        onClick={handleRedirect}
+                                                    >
+                                                        View this itinerary
+                                                        <em className="fa-solid fa-chevron-right"></em>
+                                                    </span>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-                                )
-                                )}
+                                ))}
 
                                 <div className="col-12">
-                                    {visibleItems < itineraries?.length && (
-                                        <button className="btn prmry_btn make_enqury_btn mx-auto text-uppercase" onClick={handleLoadMore}>Show 9 more holiday ideas
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
+                                    {metaData.total > page * itemsPerPage && (
+                                        <button
+                                            onClick={loadMoreData}
+                                            className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
+                                            fdprocessedid="r5vpm6s"
+                                        >
+                                            Show{" "}
+                                            {metaData.total - page * itemsPerPage > 9
+                                                ? 9
+                                                : metaData.total - page * itemsPerPage > 9}{" "}
+                                            more items
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="#ffffff"
+                                                shapeRendering="geometricPrecision"
+                                                textRendering="geometricPrecision"
+                                                imageRendering="optimizeQuality"
+                                                fillRule="evenodd"
+                                                clipRule="evenodd"
+                                                viewBox="0 0 512 266.77"
+                                            >
+                                                <path
+                                                    fillRule="nonzero"
+                                                    d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"
+                                                ></path>
+                                            </svg>
                                         </button>
                                     )}
                                 </div>
+
+
                             </div>
                         </div>
 

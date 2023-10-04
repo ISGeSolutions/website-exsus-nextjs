@@ -11,6 +11,7 @@ export const whyusService = {
     getWhyusPage,
     getAllExecutives,
     getExecutivesById,
+    getAllTravelReviews
 };
 
 function getAllDropdown() {
@@ -43,4 +44,9 @@ function getAllExecutives() {
     // console.log('baseUrl_dropdown', baseUrl_dropdown);
     const allExecutivesUrl = `${publicRuntimeConfig.apiUrl}/api/travel-executives?populate[0]=travel_executive_contents&populate[1]=travel_reviews`;
     return fetchWrapper.get(allExecutivesUrl);
+}
+
+function getAllTravelReviews() {
+    const allReviews = `${publicRuntimeConfig.apiUrl}/api/travel-reviews?populate[0]=travel_executive`;
+    return fetchWrapper.get(allReviews);
 }
