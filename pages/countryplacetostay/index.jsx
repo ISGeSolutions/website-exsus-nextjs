@@ -10,10 +10,9 @@ import Image from "next/image";
 import Select, { components } from "react-select";
 import CustomMultiValue from "../continentitineraries/CustomMultiValue";
 
+export default CountryPlaceToStay;
 
-export default CountryPlacesToStay;
-
-function CountryPlacesToStay() {
+function CountryPlaceToStay() {
 
     const [isClearable, setIsClearable] = useState(true);
     const [isSearchable, setIsSearchable] = useState(true);
@@ -34,6 +33,7 @@ function CountryPlacesToStay() {
 
 
 
+    const { countrycode } = router.query;
 
     const width = "250px";
     const styles = {
@@ -379,7 +379,18 @@ function CountryPlacesToStay() {
 
         loadMoreData();
 
-    }, []);
+        // Using window.onload to detect full page load
+        window.onload = () => {
+            setTimeout(() => {
+                const redirectUrl = regionWiseUrl + '/country?countrycode=' + countrycode;
+                debugger;
+                if (redirectUrl) {
+                    router.push(redirectUrl);
+                }
+            }, 0);
+        };
+
+    }, [countrycode]);
 
 
     return (

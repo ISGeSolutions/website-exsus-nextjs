@@ -419,9 +419,14 @@ function ContinentItinararies() {
 
         // Using window.onload to detect full page load
         window.onload = () => {
-            const redirectUrl =
-                regionWiseUrl + "/continent?destinationcode=" + destinationcode;
-            router.push(redirectUrl);
+
+            setTimeout(() => {
+                const redirectUrl = regionWiseUrl + '/continent?destinationcode=' + destinationcode;
+                // debugger;
+                if (redirectUrl) {
+                    router.push(redirectUrl);
+                }
+            }, 0);
         };
     }, [destinationcode, router, dcode]);
 

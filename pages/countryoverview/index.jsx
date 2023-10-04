@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { destinationService } from 'services';
 import { NavLink } from 'components';
+import { useRouter } from 'next/router';
 
 export default CountryOverview;
 
@@ -13,6 +14,9 @@ function CountryOverview(props) {
 
     const { overview_text } = props?.data || {};
     const country_name = props?.data?.country_name || "";
+
+    const router = useRouter();
+    const { countrycode } = router.query;
 
     const handleLoadMore = () => {
         // console.log('handleLoadMore')
@@ -66,7 +70,19 @@ function CountryOverview(props) {
 
         console.log(props?.data?.country_name)
         window.addEventListener('resize', equalHeight(true));
-    }, []);
+
+        // Using window.onload to detect full page load
+        window.onload = () => {
+            setTimeout(() => {
+                const redirectUrl = regionWiseUrl + '/country?countrycode=' + countrycode;
+                // debugger;
+                if (redirectUrl) {
+                    router.push(redirectUrl);
+                }
+            }, 0);
+        };
+
+    }, [countrycode]);
 
     return (
         <>

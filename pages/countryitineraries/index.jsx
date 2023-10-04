@@ -27,7 +27,7 @@ function CountryItinararies() {
     const [metaData, setMetaData] = useState([]);
 
     const router = useRouter();
-
+    const { countrycode } = router.query;
 
     const width = "250px";
     const styles = {
@@ -266,7 +266,19 @@ function CountryItinararies() {
         loadMoreData();
 
         window.addEventListener('resize', equalHeight(true));
-    }, []);
+
+        // Using window.onload to detect full page load
+        window.onload = () => {
+            setTimeout(() => {
+                const redirectUrl = regionWiseUrl + '/country?countrycode=' + countrycode;
+                // debugger;
+                if (redirectUrl) {
+                    router.push(redirectUrl);
+                }
+            }, 0);
+        };
+
+    }, [countrycode]);
 
     return (
         <>
