@@ -121,7 +121,7 @@ function Index() {
     // }
 
     // const handleLoadMore = () => {
-    //     // console.log('handleLoadMore')
+        // console.log('handleLoadMore')
     //     setVisibleItems(prevVisibleItems => prevVisibleItems + itemsPerPage);
     // };
 

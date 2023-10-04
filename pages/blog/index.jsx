@@ -66,7 +66,7 @@ function Index() {
         });
 
         blogsService.getAllBlogs().then(x => {
-            console.log(x);
+            // console.log(x);
             setAllBlogsData(x.data);
 
         })

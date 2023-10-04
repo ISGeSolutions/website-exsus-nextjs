@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 export default CountryOverview;
 
 function CountryOverview(props) {
-    console.log(props)
+    // console.log(props)
 
     const [itineraries, setItineraries] = useState(null);
     const itemsPerPage = 9; // Number of items to load per page
@@ -68,7 +68,7 @@ function CountryOverview(props) {
             setItineraries(x.data);
         });
 
-        console.log(props?.data?.country_name)
+        // console.log(props?.data?.country_name)
         window.addEventListener('resize', equalHeight(true));
 
         // Using window.onload to detect full page load

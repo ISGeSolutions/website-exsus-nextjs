@@ -171,7 +171,7 @@ function Index() {
 
         whyusService.getAllTravelReviews().then(x => {
             setTestimonials(x.data);
-            console.log(x.data);
+            // console.log(x.data);
         })
 
         // console.log('region', window.site_region);

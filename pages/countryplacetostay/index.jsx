@@ -183,7 +183,7 @@ function CountryPlaceToStay() {
 
     const loadMoreData = () => {
         destinationService.getAllHotels(page + 1).then((response) => {
-            console.log(response);
+            // console.log(response);
             setMetaData(response.meta.pagination);
             const newItineraries = response.data;
             if (newItineraries.length > 0) {

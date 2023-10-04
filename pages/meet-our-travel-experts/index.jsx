@@ -57,7 +57,7 @@ function Index() {
 
         whyusService.getAllExecutives().then(x => {
             setAllExecutives(x.data);
-            console.log(x.data);
+            // console.log(x.data);
         })
 
         const carousel = document.querySelector('#carouselExampleInterval');

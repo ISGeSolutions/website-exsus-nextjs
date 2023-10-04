@@ -249,7 +249,7 @@ function Country() {
         // console.log('countrycode', countrycode);
         if (countrycode) {
             countriesService.getCountryDetails(countrycode).then(x => {
-                console.log('x229', x.data);
+                // console.log('x229', x.data);
                 setCountryData(x.data);
             });
         }

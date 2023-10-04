@@ -79,7 +79,7 @@ function Index() {
 
         destinationService.getDestinationLandingList().then(x => {
             setDestinationLandingList(x.data);
-            console.log(x.data);
+            // console.log(x.data);
             // setDestinationLandingDetails(x)
         });
 
