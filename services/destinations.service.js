@@ -50,7 +50,8 @@ export const destinationService = {
     getItineraryDetails,
     getItinerariesByDestination,
     getAllHotels,
-    getAllItinerariesHomePage
+    getAllItinerariesHomePage,
+    getCustomPagesData
 };
 
 function getAllDropdown() {
@@ -97,12 +98,18 @@ function getDestinationDetails(id) {
 
 
 function getAllItineraries(page) {
-    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&pagination[page]=${page}&pagination[pageSize]=9`;
+    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&pagination[page]=${page}&pagination[pageSize]=12`;
     return fetchWrapper.get(itinerariesDetailsUrl);
 }
 
 function getAllItinerariesHomePage() {
-    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&pagination[page]=1&pagination[pageSize]=5`;
+    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&pagination[page]=1&pagination[pageSize]=6`;
+    return fetchWrapper.get(itinerariesDetailsUrl);
+}
+
+
+function getFavIti() {
+    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&pagination[page]=1&pagination[pageSize]=6`;
     return fetchWrapper.get(itinerariesDetailsUrl);
 }
 
@@ -113,7 +120,7 @@ function getItineraryDetails() {
 
 function getItinerariesByDestination(dcode, page) {
     // console.log('baseUrl_dropdown', baseUrl_dropdown);
-    const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?[filters][destination][destination_code][$eq]=${dcode}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=9`;
+    const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?[filters][destination][destination_code][$eq]=${dcode}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12`;
     return fetchWrapper.get(destinationDetailsUrl);
 }
 
@@ -122,6 +129,11 @@ function getAllHotels(page) {
     return fetchWrapper.get(itinerariesDetailsUrl);
 }
 
+
+function getCustomPagesData(pageName) {
+    const customPage = `${publicRuntimeConfig.apiUrl}/api/custom-pages?filters[page_code][$eq]=${pageName}&[populate][0]=custom_page_images`;
+    return fetchWrapper.get(customPage);
+}
 
 
 

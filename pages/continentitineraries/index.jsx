@@ -105,7 +105,7 @@ function ContinentItinararies() {
     const [itineraries, setItineraries] = useState([]);
     const [visible, setVisible] = useState(3);
     const [visiblePagination, setVisiblePagination] = useState(true);
-    const itemsPerPage = 9; // Number of items to load per page
+    const itemsPerPage = 12; // Number of items to load per page
     const [visibleItems, setVisibleItems] = useState(itemsPerPage);
     const [page, setPage] = useState(0); // Current page
     const [metaData, setMetaData] = useState([]);
@@ -224,146 +224,9 @@ function ContinentItinararies() {
         setSelectedOptionMonth(selectedOption);
     };
 
-    const freshProds = [
-        {
-            id: "1",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "2",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "3",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "4",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "5",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "6",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "7",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "8",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "9",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "10",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-    ];
 
-    let length = freshProds.length;
-    const showMoreItems = () => {
-        setVisible((prevValue) => prevValue + 3);
-        if ((visible + 3) >= (length)) {
-            setVisiblePagination(false);
-        }
-    };
+
+
 
     const generateDynamicLink = (item) => {
         // console.log('item', item);
@@ -470,21 +333,6 @@ function ContinentItinararies() {
                                                         Option: InputOption, MultiValue: CustomMultiValue
                                                     }}
                                                 />
-                                                {/* <pre>{JSON.stringify({ selected: selectedOptions }, null, 2)}</pre> */}
-                                                {/* <Select
-                                                    placeholder="Filter by country"
-                                                    // defaultValue={countryOptions[0]}
-                                                    isDisabled={isDisabled}
-                                                    isLoading={isLoading}
-                                                    isClearable={isClearable}
-                                                    isRtl={isRtl}
-                                                    isSearchable={isSearchable}
-                                                    name="color"
-                                                    options={countryOptions}
-                                                    isMulti
-                                                    // value={selectedOptionCountry}
-                                                    onChange={handleOptionCountryChange}
-                                                /> */}
                                             </div>
                                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                                                 <Select
@@ -544,7 +392,7 @@ function ContinentItinararies() {
                                 </div>
                                 <div className="col-12">
                                     <div className="destination_filter_result d-block d-lg-flex">
-                                        <p>We've found 77 holiday ideas in {destinationName} for you</p>
+                                        <p>We've found {metaData.total} holiday ideas in {destinationName} for you</p>
                                         <div className="destination_contries_filter d-inline-block d-lg-flex">
                                             <label className="pt-2 pt-lg-0">Arrange by:</label>
                                             <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
@@ -621,9 +469,9 @@ function ContinentItinararies() {
                                             fdprocessedid="r5vpm6s"
                                         >
                                             Show{" "}
-                                            {metaData.total - page * itemsPerPage > 9
-                                                ? 9
-                                                : metaData.total - page * itemsPerPage > 9}{" "}
+                                            {metaData.total - page * itemsPerPage > 12
+                                                ? 12
+                                                : metaData.total - page * itemsPerPage > 12}{" "}
                                             more items
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"

@@ -12,7 +12,8 @@ export const whyusService = {
     getAllExecutives,
     getExecutivesById,
     getAllTravelReviews,
-    getExsusReviews
+    getExsusReviews,
+    getAllReviews
 };
 
 function getAllDropdown() {
@@ -55,4 +56,9 @@ function getAllExecutives() {
 function getAllTravelReviews() {
     const allReviews = `${publicRuntimeConfig.apiUrl}/api/travel-reviews?populate[0]=travel_executive`;
     return fetchWrapper.get(allReviews);
+}
+
+function getAllReviews() {
+    const reviewsUrl = `${publicRuntimeConfig.apiUrl}/api/travel-reviews?populate[0]=travel_executive`;
+    return fetchWrapper.get(reviewsUrl);
 }

@@ -19,11 +19,22 @@ function Index() {
     const [destinationLandingList, setDestinationLandingList] = useState();
     const [holidaytypesLandingList, setHolidaytypesLandingList] = useState();
     const [allBlogsData, setAllBlogsData] = useState([]);
+    const [firstName, setFirstName] = useState();
+    const [lastName, setLastName] = useState();
+    const [email, setEmail] = useState();
 
     const validationSchema = Yup.object().shape({
         destination: Yup.string(),
         holidaytype: Yup.string()
     });
+
+
+
+    const onSubmit = (e) => {
+        console.log("First Name ", firstName);
+        console.log("Last Name ", lastName);
+        console.log("Email", email);
+    };
 
     const formOptions = { resolver: yupResolver(validationSchema) };
     const { register, handleSubmit, formState } = useForm(formOptions);
@@ -257,12 +268,13 @@ function Index() {
                             <h5>Inspire Me</h5>
                             <p>Looking for inspiration? When you sign up to our free newsletter you’ll get the latest exciting ideas and luxury travel offers from our specialists straight to your inbox</p>
                             <div className="contact_form_row">
-                                <form>
-                                    <div className="row">
-                                        <div className="col-lg-6">
-                                            <div className="select_drpdwn">
-                                                <select className="form-select" aria-label="Title">
-                                                    <option defaultValue=''>Title *</option>
+
+                                <form onSubmit={handleSubmit(onSubmit)}>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="select_drpdwn">
+                                                <select class="form-select" aria-label="Title">
+                                                    <option selected="">Title *</option>
                                                     <option value="Mr">Mr</option>
                                                     <option value="Mrs">Mrs</option>
                                                     <option value="Ms">Ms</option>
@@ -275,22 +287,77 @@ function Index() {
                                                 </select>
                                             </div>
                                         </div>
-                                        <div className="col-lg-6">
-                                            <div className="form-input validatn_cls">
-                                                <input type="text" className="form-control" aria-label="First name *" placeholder="First name *" />
+                                        <div class="col-lg-6">
+                                            <div class="form-input validatn_cls">
+                                                <input
+                                                    type="text"
+                                                    name="first_name"
+                                                    {...register("first_name")}
+                                                    className={`form-control ${errors.first_name ? "is-invalid" : ""
+                                                        }`}
+                                                    aria-label="First name *"
+                                                    placeholder="First name *"
+                                                    value={firstName}
+                                                    onChange={(e) => setFirstName(e.target.value)}
+                                                />
+                                                <div className="invalid-feedback mb-1">
+                                                    {errors.first_name?.message}
+                                                </div>
                                             </div>
                                         </div>
-                                        <div className="col-lg-6">
-                                            <div className="form-input">
-                                                <input type="text" className="form-control" aria-label="Surname *" placeholder="Surname *" />
+                                        <div class="col-lg-6">
+                                            <div class="form-input">
+                                                <input
+                                                    type="text"
+                                                    name="title"
+                                                    {...register("last_name")}
+                                                    className={`form-control ${errors.last_name ? "is-invalid" : ""
+                                                        }`}
+                                                    aria-label="Last name *"
+                                                    placeholder="Last name *"
+                                                    value={lastName}
+                                                    onChange={(e) => setLastName(e.target.value)}
+                                                />
+                                                <div className="invalid-feedback mb-1">
+                                                    {errors.last_name?.message}
+                                                </div>
                                             </div>
                                         </div>
-                                        <div className="col-lg-6">
-                                            <div className="form-input">
-                                                <input type="email" className="form-control" aria-label="Email *" placeholder="Email *" />
+                                        <div class="col-lg-6">
+                                            <div class="form-input">
+                                                <input
+                                                    type="email"
+                                                    name="email_id"
+                                                    {...register("email_id")}
+                                                    className={`form-control ${errors.email_id ? "is-invalid" : ""
+                                                        }`}
+                                                    aria-label="Email *"
+                                                    placeholder="Email *"
+                                                    value={email}
+                                                    onChange={(e) => setEmail(e.target.value)}
+                                                />
+                                                <div className="invalid-feedback mb-1">
+                                                    {errors.email_id?.message}
+                                                </div>
                                             </div>
                                         </div>
-                                        <button className="btn prmry_btn mx-auto">Subscribe<svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path></svg>
+                                        <button class="btn prmry_btn mx-auto">
+                                            Subscribe
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="#ffffff"
+                                                shape-rendering="geometricPrecision"
+                                                text-rendering="geometricPrecision"
+                                                image-rendering="optimizeQuality"
+                                                fill-rule="evenodd"
+                                                clip-rule="evenodd"
+                                                viewBox="0 0 267 512.43"
+                                            >
+                                                <path
+                                                    fill-rule="nonzero"
+                                                    d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                                                ></path>
+                                            </svg>
                                         </button>
                                     </div>
                                 </form>

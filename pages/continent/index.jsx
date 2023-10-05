@@ -3,6 +3,7 @@ import { destinationService } from 'services';
 import Iframe from 'react-iframe';
 import Head from 'next/head';
 import React from 'react';
+import { useRef } from 'react';
 import { useRouter } from 'next/router';
 
 import Country from '../country/index'; // Adjust the path accordingly
@@ -16,12 +17,20 @@ export default Index;
 function Index() {
     const [destinationDetails, setDestinationDetails] = useState();
     const [backgroundImage, setBackgroundImage] = useState([]);
-    const [headingText, setHeadingText] = useState('LUXURY SAFARI HOLIDAYS IN AFRICA');
+    const [headingText, setHeadingText] = useState('');
     const [mapVariable, setMapVariable] = useState(null);
     const [activeTab, setActiveTab] = useState('overview'); // State to track the active tab
     const router = useRouter();
     const { destinationcode } = router.query;
     const [destinationName, setdestinationName] = useState("");
+    const [metaTitle, setMetaTitle] = useState('');
+    const [parentData, setParentData] = useState('');
+    const tabContentRefs = {
+        "overview": useRef(null),
+        "countries": useRef(null),
+        "itineraries": useRef(null),
+        'places-to-stay': useRef(null),
+    };
 
 
     let regionWiseUrl = '/uk';
@@ -68,12 +77,22 @@ function Index() {
     </button>
 
 
+    const handleDataFromChild = (data) => {
+        // console.log(data);
+        // Update the parent component's state with data received from the child
+        toggleTab(data);
+    };
+
+
+
+
     const toggleTab = (itemId) => {
-        var text = `LUXURY SAFARI HOLIDAYS IN ${destinationName}`;
+        debugger;
+        var text = metaTitle;
         if (itemId == 'overview') {
             const redirectUrl = regionWiseUrl + '/continent?destinationcode=' + destinationcode;
             window.history.pushState(null, null, redirectUrl);
-            text = `LUXURY SAFARI HOLIDAYS IN ${destinationName}`;
+            text = metaTitle;
         } else if (itemId == 'countries') {
             const redirectUrl = regionWiseUrl + '/continentcountries?destinationcode=' + destinationcode;
             window.history.pushState(null, null, redirectUrl);
@@ -93,6 +112,9 @@ function Index() {
         if (activeTab !== itemId) {
             setActiveTab(itemId);
             // window.history.pushState(null, null, redirectUrl); // Update the URL
+        }
+        if (tabContentRefs[itemId].current) {
+            tabContentRefs[itemId].current.scrollIntoView({ behavior: 'smooth' });
         }
     };
 
@@ -127,6 +149,9 @@ function Index() {
 
         destinationService.getDestinationDetails(destinationcode).then(x => {
             setDestinationDetails(x.data.attributes);
+            console.log(x.data)
+            setMetaTitle(x.data.attributes.page_meta_title);
+            setHeadingText(x.data.attributes.page_meta_title);
             const map_latitude = x.data.attributes?.map_latitude;
             const map_longitude = x.data.attributes?.map_longitude;
             setdestinationName(x.data.attributes.destination_name);
@@ -264,16 +289,16 @@ function Index() {
                     {/* {activeTab === 'home' && <div>Home Content</div>}
                 {activeTab === 'about' && <div>About Content</div>}
                 {activeTab === 'contact' && <div>Contact Content</div>} */}
-                    {activeTab === 'overview' && <div className={activeTab === 'overview' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-overview" role="tabpanel" aria-labelledby="pills-overview-tab" tabIndex="0">
-                        <ContinentOverview />
+                    {activeTab === 'overview' && <div className={activeTab === 'overview' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-overview" role="tabpanel" aria-labelledby="pills-overview-tab" tabIndex="0" ref={tabContentRefs['overview']}>
+                        <ContinentOverview sendDataToParent={handleDataFromChild} />
                     </div>}
-                    {activeTab === 'countries' && <div className={activeTab === 'countries' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-countries" role="tabpanel" aria-labelledby="pills-countries-tab" tabIndex="0">
-                        <ContinentCountry />
+                    {activeTab === 'countries' && <div className={activeTab === 'countries' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-countries" role="tabpanel" aria-labelledby="pills-countries-tab" tabIndex="0" ref={tabContentRefs['countries']}>
+                        <ContinentCountry sendDataToParent={handleDataFromChild} />
                     </div>}
-                    {activeTab === 'itineraries' && <div className={activeTab === 'itineraries' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-itineraries" role="tabpanel" aria-labelledby="pills-itineraries-tab" tabIndex="0">
-                        <ContinentItinararies dataProp={destinationcode}/>
+                    {activeTab === 'itineraries' && <div className={activeTab === 'itineraries' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-itineraries" role="tabpanel" aria-labelledby="pills-itineraries-tab" tabIndex="0" ref={tabContentRefs['itinararies']}>
+                        <ContinentItinararies dataProp={destinationcode} />
                     </div>}
-                    {activeTab === 'places-to-stay' && <div className={activeTab === 'places-to-stay' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-places-to-stay" role="tabpanel" aria-labelledby="pills-places-to-stay-tab" tabIndex="0">
+                    {activeTab === 'places-to-stay' && <div className={activeTab === 'places-to-stay' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-places-to-stay" role="tabpanel" aria-labelledby="pills-places-to-stay-tab" tabIndex="0" ref={tabContentRefs['places-to-stay']}>
                         <ContinentPlacesToStay />
                     </div>}
                 </div>
