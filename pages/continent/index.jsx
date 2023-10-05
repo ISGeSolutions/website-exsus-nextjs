@@ -87,7 +87,6 @@ function Index() {
 
 
     const toggleTab = (itemId) => {
-        debugger;
         var text = metaTitle;
         if (itemId == 'overview') {
             const redirectUrl = regionWiseUrl + '/continent?destinationcode=' + destinationcode;
@@ -149,7 +148,7 @@ function Index() {
 
         destinationService.getDestinationDetails(destinationcode).then(x => {
             setDestinationDetails(x.data.attributes);
-            console.log(x.data)
+            // console.log(x.data)
             setMetaTitle(x.data.attributes.page_meta_title);
             setHeadingText(x.data.attributes.page_meta_title);
             const map_latitude = x.data.attributes?.map_latitude;

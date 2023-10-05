@@ -103,10 +103,8 @@ function CountryItinararies(country) {
         );
     };
 
-
-
     const countryOptions = [
-        { value: "", label: "Filter by country" },
+        { value: "", label: "Filter by region" },
         { value: "Asia", label: "Asia" },
         { value: "Hong Kong & Macau", label: "Hong Kong & Macau" },
         { value: "Malaysia & Borneo", label: "Malaysia & Borneo" },
@@ -304,7 +302,7 @@ function CountryItinararies(country) {
                                                     instanceId="long-value-select"
                                                     className="select_container_country"
                                                     classNamePrefix="select_country"
-                                                    placeholder="Filter by country"
+                                                    placeholder="Filter by region"
                                                     styles={styles}
                                                     isMulti
                                                     isDisabled={isDisabled}
@@ -325,7 +323,7 @@ function CountryItinararies(country) {
                                             </div>
                                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                                                 <Select
-                                                    placeholder="Filter by region"
+                                                    placeholder="Filter by reason"
                                                     // defaultValue={regionOptions[0]}
                                                     className="select_container_country"
                                                     classNamePrefix="select_country"
