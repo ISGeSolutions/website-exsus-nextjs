@@ -38,7 +38,7 @@ function CountryWhentogo() {
         <>
             <div className="container">
                 <section className="destination_para">
-                    <p>As the world’s second largest state by land area and with a host of diverse terrains and latitudes, the climate changes radically. With too-hot-to-handle summers and bone-chillingly cold winters, the best time to visit is in spring (April-May in the north and March-April in the south) and autumn (October-November in the north and September-October in the south), when temperatures are mild – unless experiencing extreme weather climates is your thing.</p>
+                    <p dangerouslySetInnerHTML={{ __html: country?.data?.whentogo_intro_text }} />
                 </section>
             </div>
 

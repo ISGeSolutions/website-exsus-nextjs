@@ -10,7 +10,7 @@ import Image from "next/image";
 
 export default CountryRegions;
 
-function CountryRegions() {
+function CountryRegions(country) {
 
     const router = useRouter();
     const { countrycode } = router.query;
@@ -43,8 +43,8 @@ function CountryRegions() {
         <>
             <div className="container">
                 <section className="destination_para">
-                    {/* <p dangerouslySetInnerHTML={{ __html: country }} /> */}
-                    <p>Whether it’s a rickshaw ride through hectic Hanoi in Vietnam, a fascinating adventure amidst the ancient Angkor temples in Cambodia, or diving and snorkelling in some of the warmest, clearest seas on the planet, Asia is jam-packed with culture, adventure - and variety.</p>
+                    <p dangerouslySetInnerHTML={{ __html: country?.data?.regions_intro_text }} />
+                    {/* <p>Whether it’s a rickshaw ride through hectic Hanoi in Vietnam, a fascinating adventure amidst the ancient Angkor temples in Cambodia, or diving and snorkelling in some of the warmest, clearest seas on the planet, Asia is jam-packed with culture, adventure - and variety.</p> */}
                 </section>
             </div>
 
