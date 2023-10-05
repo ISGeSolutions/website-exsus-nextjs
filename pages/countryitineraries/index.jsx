@@ -217,8 +217,9 @@ function CountryItinararies() {
 
     const loadMoreData = () => {
         destinationService.getAllItineraries(page + 1).then((response) => {
-            setMetaData(response.meta.pagination);
-            const newItineraries = response.data;
+            setMetaData(response.meta.pagination);            
+            const responseTemp = [...response.data].sort((a, b) => a.attributes.serial_number - b.attributes.serial_number);
+            const newItineraries = responseTemp;
             if (newItineraries.length > 0) {
                 setItineraries((prevItineraries) => [...prevItineraries, ...newItineraries].reduce((accumulator, current) => accumulator.some(item => item.id === current.id) ? accumulator : [...accumulator, current], []));
                 setPage(page + 1);

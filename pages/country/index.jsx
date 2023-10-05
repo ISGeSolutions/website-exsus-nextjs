@@ -33,6 +33,7 @@ function Country() {
     const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
     const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
     const [countryData, setCountryData] = useState(null);
+    const [mapVariable, setMapVariable] = useState(null);
 
     const countryOptions = [
         { value: "", label: "Filter by country" },
@@ -249,10 +250,30 @@ function Country() {
         // console.log('countrycode', countrycode);
         if (countrycode) {
             countriesService.getCountryDetails(countrycode).then(x => {
+                // debugger;
                 // console.log('x229', x.data);
                 setCountryData(x.data);
+                const map_latitude = x.data.attributes?.map_latitude;
+                const map_longitude = x.data.attributes?.map_longitude;
+                // const map_latitude = "40.7128";
+                // const map_longitude = "-74.0060";
+                const mapTemp = `https://www.google.com/maps/embed/v1/place?q=` + map_latitude + `,` + map_longitude + `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
+                setMapVariable(mapTemp);
             });
         }
+
+        $('.banner_map_tab').click(function () {
+            $('.banner_map_blk').addClass('banner_map_active')
+        });
+        $('.banner_img_tab').click(function () {
+            $('.banner_map_blk').removeClass('banner_map_active')
+        });
+
+        $('.banner_tab_blk button').click(function () {
+            $('.banner_tab_blk button').removeClass("banner_tab_active");
+            $(this).addClass('banner_tab_active');
+        });
+
         window.addEventListener('resize', equalHeight(true));
 
     }, [countrycode]);
@@ -329,17 +350,27 @@ function Country() {
                     </div>
                 </div>
                 <div className="banner_tab_blk">
-                    <button className="btn banner_map_tab">Map</button>
+                <button className="btn banner_map_tab">Map</button>
                     <button className="btn banner_img_tab banner_tab_active">Images</button>
+                    {/* <button className="btn banner_map_tab">Map</button>
+                    <button className="btn banner_img_tab banner_tab_active">Images</button> */}
                 </div>
                 <div className="banner_map_blk">
-                    <Iframe url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin"
+                <Iframe width="640px"
+                        height="320px"
+                        id=""
+                        className=""
+                        display="block"
+                        src={mapVariable}
+                        position="relative" style="border:0;" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"
+                    />
+                    {/* <Iframe url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin"
                         width="640px"
                         height="320px"
                         id=""
                         className=""
                         display="block"
-                        position="relative" />
+                        position="relative" /> */}
                     {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" style="border:0;" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe> */}
                 </div>
             </section>
