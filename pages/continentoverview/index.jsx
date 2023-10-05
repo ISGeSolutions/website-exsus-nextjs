@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 
 export default ContinentOverview;
 
-function ContinentOverview() {
+function ContinentOverview({ sendDataToParent }) {
 
     const router = useRouter();
     const [itineraries, setItineraries] = useState(null);
@@ -24,6 +24,13 @@ function ContinentOverview() {
         // console.log('handleLoadMore')
         setVisibleItems(prevVisibleItems => prevVisibleItems + itemsPerPage);
     };
+
+
+
+    const handleClick = (e) => {
+        // Call the callback function to send data to the parent
+        sendDataToParent(e);
+    }
 
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
@@ -193,7 +200,7 @@ function ContinentOverview() {
                     <div className="row">
                         <div className="col-sm-6">
                             <div className="card_blk_inr card_blk_overlay">
-                                <a href="#" target="_blank">
+                                <a target="_blank" onClick={() => handleClick("itineraries")}>
                                     <img src="./../../images/destination_overview01.jpg" alt="Card image 07" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_cntnt_top">
                                         <div className="row align-items-center">
@@ -213,7 +220,7 @@ function ContinentOverview() {
 
                         <div className="col-sm-6">
                             <div className="card_blk_inr card_blk_overlay">
-                                <a href="#">
+                                <a onClick={() => handleClick("places-to-stay")}>
                                     <img src="./../../images/destination_overview02.jpg" alt="Card image 08" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_cntnt_top">
                                         <div className="row align-items-center">

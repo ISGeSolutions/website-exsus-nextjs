@@ -129,6 +129,9 @@ const nextConfig = {
             { source: '/asia/contact-us', destination: '/contact-us' },
             { source: '/in/contact-us', destination: '/advance-search' },
 
+
+            // client-reviews
+            { source: '/why-us/client-reviews', destination: '/client-reviews' },
             // Add more custom routes as needed
         ];
     },

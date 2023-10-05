@@ -23,8 +23,9 @@ function Index() {
     const [headingText, setHeadingText] = useState('LUXURY SAFARI HOLIDAYS IN AFRICA');
     const [itineraries, setItineraries] = useState([]);
     const [page, setPage] = useState(0); // Current page
-    const itemsPerPage = 9; // Number of items to load per page
+    const itemsPerPage = 12; // Number of items to load per page
     const [metaData, setMetaData] = useState([]);
+    const [holidayName, setHolidayName] = useState("");
     // const [visibleItems, setVisibleItems] = useState(itemsPerPage)
 
     const width = '250px'
@@ -121,7 +122,7 @@ function Index() {
     // }
 
     // const handleLoadMore = () => {
-        // console.log('handleLoadMore')
+    // console.log('handleLoadMore')
     //     setVisibleItems(prevVisibleItems => prevVisibleItems + itemsPerPage);
     // };
 
@@ -284,6 +285,10 @@ function Index() {
 
         loadMoreData();
 
+        holidaytypesService.getHolidaytypeDetails(hcode).then((x) => {
+            setHolidayName(x.data.attributes.holiday_type_group_name);
+        });
+
         window.addEventListener('resize', equalHeight(true));
 
     }, []);
@@ -365,7 +370,7 @@ function Index() {
 
             <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
                 <div className="container">
-                    <h3 className="title_cls">TOP DESTINATIONS FOR ULTIMATE JOURNEYS</h3>
+                    <h3 className="title_cls">TOP DESTINATIONS FOR {holidayName}</h3>
                     <div className="card_slider_row">
                         <div className="carousel00 region_carousel00">
                             <div className="row">
@@ -406,7 +411,7 @@ function Index() {
                                 </div>
                                 <div className="col-12">
                                     <div className="destination_filter_result d-block d-lg-flex">
-                                        <p>We've found {metaData?.total} destinations for Ultimate journeys</p>
+                                        <p>We've found {metaData?.total} destinations for {holidayName}</p>
                                         <div className="destination_contries_filter d-inline-block d-lg-flex">
                                             <label className="pt-2 pt-lg-0">Arrange by:</label>
                                             <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
@@ -450,7 +455,7 @@ function Index() {
 
                                 <div className="col-12">
                                     {metaData.total > page * itemsPerPage && (
-                                        <button onClick={loadMoreData} className="btn prmry_btn make_enqury_btn mx-auto text-uppercase" fdprocessedid="r5vpm6s">Show {(metaData.total - page * itemsPerPage) > 9 ? 9 : (metaData.total - page * itemsPerPage) > 9} more items
+                                        <button onClick={loadMoreData} className="btn prmry_btn make_enqury_btn mx-auto text-uppercase" fdprocessedid="r5vpm6s">Show {(metaData.total - page * itemsPerPage) > 12 ? 12 : (metaData.total - page * itemsPerPage) > 12} more items
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"></path></svg>
                                         </button>
                                     )}

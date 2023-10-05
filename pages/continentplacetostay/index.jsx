@@ -32,23 +32,12 @@ function ContinentPlacesToStay() {
     const [dcode, setdcode] = useState();
     const { destinationcode } = router.query;
     const [allHotels, setAllHotels] = useState([]);
+    const [countryOptions, setAllCountries] = useState([])
 
 
 
-    const countryOptions = [
-        { value: "Asia", label: "Asia" },
-        { value: "Hong Kong & Macau", label: "Hong Kong & Macau" },
-        { value: "Malaysia & Borneo", label: "Malaysia & Borneo" },
-        { value: "Singapore", label: "Singapore" },
-        { value: "Indonesia", label: "Indonesia" },
-        { value: "Japan", label: "Japan" },
-        { value: "Cambodia", label: "Cambodia" },
-        { value: "Vietnam", label: "Vietnam" },
-        { value: "China", label: "China" },
-        { value: "Thailand", label: "Thailand" },
-        { value: "Burma", label: "Burma" },
-        { value: "Laos", label: "Laos" }
-    ];
+
+
 
     const regionOptions = [
         { value: "Everything", label: "Everything" },
@@ -210,146 +199,6 @@ function ContinentPlacesToStay() {
         setSelectedOptionMonth(selectedOption);
     };
 
-    const freshProds = [
-        {
-            id: "1",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "2",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "3",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "4",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "5",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "6",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "7",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "8",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "9",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-        {
-            id: "10",
-            src: "./../../images/destination_card09.jpg",
-            title: "ORANGUTANS & DRAGONS",
-            list: [
-                "Wildlife Adventure to Indonesia",
-                "Indonesia",
-                "From £4,650 per person",
-                "Travel to:<span>Bali, Eastern Indonesia, Java, Kalimantan</span>"
-            ],
-            nights: "13 nights",
-            itinerariesLink: ""
-        },
-    ];
-
-    let length = freshProds.length;
-    const showMoreItems = () => {
-        setVisible((prevValue) => prevValue + 3);
-        if ((visible + 3) >= (length)) {
-            setVisiblePagination(false);
-        }
-    };
 
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
@@ -378,6 +227,14 @@ function ContinentPlacesToStay() {
         });
         destinationService.getDestinationDetails(destinationcode).then((x) => {
             setdestinationName(x.data.attributes.destination_name);
+            setAllCountries(
+                x.data?.attributes?.countries?.data.map((item) => ({
+                    id: item.id,
+                    country_code: item?.attributes?.country_code,
+                    value: item?.attributes?.country_name,
+                    label: item?.attributes?.country_name,
+                }))
+            );
         });
 
         loadMoreData();
@@ -415,23 +272,23 @@ function ContinentPlacesToStay() {
                                         <div className="dropdown_grp_blk">
                                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                                                 <Select
-                                                    placeholder="Filter by country"
-                                                    // defaultValue={countryOptions[0]}
+                                                    id="long-value-select"
+                                                    instanceId="long-value-select"
+                                                    className='select_container_country'
+                                                    classNamePrefix="select_country"
+                                                    placeholder={"Filter by country"}
+                                                    styles={styles}
+                                                    isMulti
                                                     isDisabled={isDisabled}
                                                     isLoading={isLoading}
                                                     isClearable={isClearable}
                                                     isRtl={isRtl}
                                                     isSearchable={isSearchable}
-                                                    name="color"
-                                                    options={countryOptions}
-                                                    isMulti
-                                                    // value={selectedOptionCountry}
+                                                    value={selectedOptionCountry}
                                                     onChange={handleOptionCountryChange}
                                                     closeMenuOnSelect={false}
                                                     hideSelectedOptions={false}
-                                                    className='select_container_country'
-                                                    classNamePrefix="select_country"
-                                                    styles={styles}
+                                                    options={countryOptions}
                                                     components={{
                                                         Option: InputOption, MultiValue: CustomMultiValue
                                                     }}
@@ -441,21 +298,21 @@ function ContinentPlacesToStay() {
                                                 <Select
                                                     placeholder="Filter by region"
                                                     // defaultValue={regionOptions[0]}
+                                                    className='select_container_country'
+                                                    classNamePrefix="select_country"
                                                     isDisabled={isDisabled}
                                                     isLoading={isLoading}
                                                     isClearable={isClearable}
                                                     isRtl={isRtl}
+                                                    hideSelectedOptions={false}
+                                                    styles={styles}
+                                                    closeMenuOnSelect={false}
                                                     isSearchable={isSearchable}
                                                     name="color"
                                                     options={regionOptions}
                                                     isMulti
                                                     // value={selectedOptionRegion}
                                                     onChange={handleOptionRegionChange}
-                                                    closeMenuOnSelect={false}
-                                                    hideSelectedOptions={false}
-                                                    className='select_container_country'
-                                                    classNamePrefix="select_country"
-                                                    styles={styles}
                                                     components={{
                                                         Option: InputOption, MultiValue: CustomMultiValue
                                                     }}
@@ -464,22 +321,22 @@ function ContinentPlacesToStay() {
                                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                                                 <Select
                                                     placeholder="Filter by month"
+                                                    className='select_container_country'
+                                                    classNamePrefix="select_country"
                                                     // defaultValue={monthOptions[0]}
                                                     isDisabled={isDisabled}
                                                     isLoading={isLoading}
                                                     isClearable={isClearable}
+                                                    styles={styles}
                                                     isRtl={isRtl}
                                                     isSearchable={isSearchable}
                                                     name="color"
+                                                    closeMenuOnSelect={false}
                                                     options={monthOptions}
+                                                    hideSelectedOptions={false}
                                                     isMulti
                                                     // value={selectedOptionMonth}
                                                     onChange={handleOptionMonthChange}
-                                                    closeMenuOnSelect={false}
-                                                    hideSelectedOptions={false}
-                                                    className='select_container_country'
-                                                    classNamePrefix="select_country"
-                                                    styles={styles}
                                                     components={{
                                                         Option: InputOption, MultiValue: CustomMultiValue
                                                     }}

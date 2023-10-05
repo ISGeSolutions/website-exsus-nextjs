@@ -10,7 +10,7 @@ import Image from "next/image";
 
 export default ContinentCountry;
 
-function ContinentCountry() {
+function ContinentCountry({ sendDataToParent }) {
     const router = useRouter();
     const { destinationcode } = router.query;
     const [allCountries, setAllCountries] = useState([]);
@@ -31,6 +31,11 @@ function ContinentCountry() {
         if (id) {
             router.push(regionWiseUrl + `/country?countrycode=` + id);
         }
+    }
+
+    const handleClick = (e) => {
+        // Call the callback function to send data to the parent
+        sendDataToParent(e);
     }
 
     useEffect(() => {
@@ -108,7 +113,7 @@ function ContinentCountry() {
                     <div className="row">
                         <div className="col-sm-6">
                             <div className="card_blk_inr card_blk_overlay">
-                                <a href="#" target="_blank">
+                                <a target="_blank" onClick={() => handleClick("itineraries")}>
                                     <img src="./../../images/destination_overview01.jpg" alt="Card image 07" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_cntnt_top">
                                         <div className="row align-items-center">
@@ -128,7 +133,7 @@ function ContinentCountry() {
 
                         <div className="col-sm-6">
                             <div className="card_blk_inr card_blk_overlay">
-                                <a href="#">
+                                <a onClick={() => handleClick("places-to-stay")}>
                                     <img src="./../../images/destination_overview02.jpg" alt="Card image 08" className="img-fluid" />
                                     <div className="card_blk_cntnt card_blk_cntnt_top">
                                         <div className="row align-items-center">

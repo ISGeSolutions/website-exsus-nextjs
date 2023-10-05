@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import { Link, Spinner, Signup } from 'components';
-import { destinationService, alertService, userService } from 'services';
+import { destinationService, alertService, userService, whyusService } from 'services';
 import { Inspireme } from 'components';
 import Head from 'next/head';
 import { NavLink } from 'components';
@@ -19,9 +19,11 @@ function Index() {
     // const [destinationLandingDetails, setDestinationLandingDetails] = useState();
     const [destinationLandingList, setDestinationLandingList] = useState();
     const [backgroundImage, setBackgroundImage] = useState([]);
-    const [backgroundImgWhentogo, setBackgroundImgWhentogo] = useState('');
+    const [backgroundImgWhentogo, setBackgroundImgWhentogo] = useState({});
     const [visible, setVisible] = useState(2);
     const [visiblePagination, setVisiblePagination] = useState(true);
+    const [testimonials, setTestimonials] = useState([]);
+
 
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
@@ -35,6 +37,20 @@ function Index() {
     const dynamicImage = (itemId) => {
         return itemId;
     }
+
+    const EnquiryButton = () => {
+        const router = useRouter();
+
+        const handleEnquiryClick = () => {
+            router.push('/contact-us'); // Navigate to the /enquiry page
+        };
+
+        return (
+            <button className="btn prmry_btn make_enqury_btn" onClick={handleEnquiryClick}> Make an enquiry
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+            </button>
+        );
+    };
 
     const dynamicLink = (itemId, id) => {
         if (itemId) {
@@ -61,27 +77,37 @@ function Index() {
         //     setDestinations(x)
         // });
 
-        destinationService.getDestinationLandingPage().then(x => {
-            setDestinations(x.data[0]);
-            // setDestinationLandingDetails(x)
-            const imageCheck = x.data[0].attributes.custom_page_images.data;
-            const newBackgroundImages = [];
-            imageCheck.forEach(element => {
-                if (element.attributes.image_type == 'center') {
-                    setBackgroundImgWhentogo(element.attributes.image_path);
-                } else if (element.attributes.image_type == 'banner') {
-                    newBackgroundImages.push(element.attributes.image_path);
-                    // setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/mc" + element.attributes.image_path);
-                }
-            });
-            setBackgroundImage(newBackgroundImages);
-        });
+        // destinationService.getDestinationLandingPage().then(x => {
+
+        //     // setDestinationLandingDetails(x)
+
+        // });
 
         destinationService.getDestinationLandingList().then(x => {
             setDestinationLandingList(x.data);
             // console.log(x.data);
             // setDestinationLandingDetails(x)
         });
+
+        whyusService.getAllTravelReviews().then(x => {
+            setTestimonials(x.data);
+            // console.log(x.data);
+        })
+
+
+        destinationService.getCustomPagesData("destinations").then(x => {
+            setDestinations(x.data[0]);
+            const imageCheck = x.data[0].attributes.custom_page_images.data;
+            const newBackgroundImages = [];
+            imageCheck.forEach(element => {
+                if (element.attributes.image_type == 'center') {
+                    setBackgroundImgWhentogo(element.attributes);
+                } else if (element.attributes.image_type == 'banner') {
+                    newBackgroundImages.push(element.attributes.image_path);
+                }
+            });
+            setBackgroundImage(newBackgroundImages);
+        })
 
         const carousel1 = document.querySelector('#carouselExampleInterval');
         new bootstrap.Carousel(carousel1);
@@ -184,11 +210,11 @@ function Index() {
                 </div>
             </section>
 
-            <section className="destination_text_overlay_row" style={{ backgroundImage: `url(${backgroundImgWhentogo})` }}>
+            <section className="destination_text_overlay_row" style={{ backgroundImage: `url(${backgroundImgWhentogo.image_path})` }}>
                 <div className="container">
                     <div className="destination_text_overlay_inr">
-                        <h4>When to go where</h4>
-                        <h5>Find out the best time to travel</h5>
+                        <h4>{backgroundImgWhentogo.image_header_text_1}</h4>
+                        <h5>{backgroundImgWhentogo.image_header_text_2}</h5>
                         {/* style={{ backgroundImage: `url(${backgroundImage})` }} */}
                         <button className="btn prmry_btn make_enqury_btn">View travel calender
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -201,64 +227,28 @@ function Index() {
                 <div className="container">
                     <div id="Testimonials" className="carousel slide" data-bs-ride="carousel">
                         <div className="carousel-indicators">
-                            <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                            <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                            <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="4" aria-label="Slide 5"></button>
-                            <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="5" aria-label="Slide 6"></button>
-                            <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="6" aria-label="Slide 7"></button>
-                            <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="7" aria-label="Slide 8"></button>
+                            {testimonials.map((_, index) => (
+                                <button
+                                    key={index}
+                                    type="button"
+                                    data-bs-target="#Testimonials"
+                                    data-bs-slide-to={index}
+                                    className={index === 0 ? 'active' : ''}
+                                    aria-current={index === 0 ? 'true' : 'false'}
+                                    aria-label={`Slide ${index + 1}`}
+                                ></button>
+                            ))}
                         </div>
                         <div className="carousel-inner">
-                            <div className="carousel-item active" data-bs-interval="5000">
-                                <div className="carousel-caption">
-                                    <p>All the personal details and touches were amazing and much appreciated. Too many highlights to say! So much history, lovely spots to stay, the people, the curries, the fruit...</p>
-                                    <span>Suzie & Henry travelled to Sri Lanka, March 2022</span>
+                            {testimonials.map((text, index) => (
+                                <div key={index} target="_blank" className={`carousel-item ${index === 0 ? 'active' : ''}`} data-bs-interval="5000">
+                                    <div className="carousel-caption">
+                                        <p>{text?.attributes.review_short_text}</p>
+                                        <span>{text?.attributes.client_name}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="carousel-item" data-bs-interval="5000">
-                                <div className="carousel-caption">
-                                    <p>Charlotte was excellent as always - friendly and approachable, with lots of ideas when discussing itineraries, and the mix of city and sea worked well.</p>
-                                    <span>Filippo E travelled to Portugal, February 2022</span>
-                                </div>
-                            </div>
-                            <div className="carousel-item" data-bs-interval="5000">
-                                <div className="carousel-caption">
-                                    <p>We loved Costa Rica. Ashleigh was great at organising our trip, and when coronavirus changed everything, she comforted us and reassured us that we were able to get home.</p>
-                                    <span>Suzie & Henry travelled to Costa Rica, March 2020</span>
-                                </div>
-                            </div>
-                            <div className="carousel-item" data-bs-interval="5000">
-                                <div className="carousel-caption">
-                                    <p>Katie was a very good communicator and was quick to research our specific requests. We loved everything about our trip, especially seeing penguins and giraffes!</p>
-                                    <span>Exsus travellers who travelled to South Africa in December 2019/January 2020</span>
-                                </div>
-                            </div>
-                            <div className="carousel-item" data-bs-interval="5000">
-                                <div className="carousel-caption">
-                                    <p>Our holiday in Africa was excellent. Mark went out of his way to organise this trip for us. We loved it - OMG it was the most magical place.</p>
-                                    <span>Ms J. Tighe travelled to South Africa, Botswana and Zimbabwe, September 2019</span>
-                                </div>
-                            </div>
-                            <div className="carousel-item" data-bs-interval="5000">
-                                <div className="carousel-caption">
-                                    <p>Ashleigh was amazing. She listened to all our preferences and interests and put together the most perfect itinerary for us.</p>
-                                    <span>Exsus travellers who travelled to Peru, September 2019</span>
-                                </div>
-                            </div>
-                            <div className="carousel-item" data-bs-interval="5000">
-                                <div className="carousel-caption">
-                                    <p>Our holiday was honestly awesome. Gina tailored the trip extremely well to our needs, and everything was brilliant. We had a fantastic time.</p>
-                                    <span>The Tonge family travelled to Norway, August 2019</span>
-                                </div>
-                            </div>
-                            <div className="carousel-item" data-bs-interval="5000">
-                                <div className="carousel-caption">
-                                    <p>From beginning to end, our holiday was like a fairytale. We would not change a thing.</p>
-                                    <span>Mike & Debbie Edwards travelled to Italy, July/August 2019</span>
-                                </div>
-                            </div>
+                            ))}
+
                         </div>
                     </div>
                 </div>
@@ -268,9 +258,7 @@ function Index() {
                 <div className="container">
                     <h3>{destinations?.attributes?.page_content_3}</h3>
                     <p>{destinations?.attributes?.page_content_4}</p>
-                    <button className="btn prmry_btn make_enqury_btn">Make an enquiry
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                    </button>
+                    <EnquiryButton />
                 </div>
             </section>
 

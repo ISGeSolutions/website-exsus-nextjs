@@ -1342,13 +1342,17 @@
 
 .our_exprts_row .our_exprts_inr p {
   font: 300 0.875rem/1.375rem "Roboto", sans-serif;
-  margin-bottom: 15px;
-  padding: 0 30px 10px;
+  padding: 0 30px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
 }
 
 .our_exprts_row .our_exprts_inr button {
   border: 1px solid #fff;
   margin-left: 30px;
+  margin-top: 15px;
 }
 
 .our_exprts_detls_row {
@@ -2997,12 +3001,22 @@
   width: 100%;
 }
 
+.select_country__input-container {
+  position: absolute;
+  top: 0;
+}
+
+.select_country__input-container input {
+  cursor: pointer;
+}
+
 .select_country__control {
   width: 100% !important;
   background-color: transparent !important;
   border-radius: 0 !important;
   height: 100%;
   border-color: #fff !important;
+  cursor: pointer !important;
 }
 
 .select_country__value-container {
@@ -3018,7 +3032,7 @@
 }
 
 .select_country__placeholder+input {
-  display: none;
+  position: absolute;
 }
 
 .select_country__dropdown-indicator {
