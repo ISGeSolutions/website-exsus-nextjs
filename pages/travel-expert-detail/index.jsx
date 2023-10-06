@@ -14,6 +14,8 @@ export default Index;
 function Index() {
     const [users, setUsers] = useState(null);
     const [executiveData, setExecutiveData] = useState({});
+    const [testimonials, setTestimonials] = useState([]);
+    const { prefixOfImage } = useState("https://www.exsus.com/");
 
     const equalHeight = (resize) => {
         var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -60,7 +62,18 @@ function Index() {
 
 
         whyusService.getExecutivesById().then(x => {
-            setExecutiveData(x.data);
+            const response = x.data;
+            const str = response?.attributes?.executive_image_path;
+            const substringToCheck = 'https://www.exsus.com/';
+            const containsSubstring = str.includes(substringToCheck);
+            if (!containsSubstring) {
+                const newStr = substringToCheck + '' + response?.attributes?.executive_image_path;
+                response.attributes.executive_image_path = newStr;
+            }
+            setExecutiveData(response);
+            debugger;
+            console.log(response);
+            setTestimonials(response.attributes.travel_reviews.data);
         })
 
         const carousel1 = document.querySelector('#Testimonials');
@@ -101,7 +114,6 @@ function Index() {
             if (prev == -1) {
                 prev = 2;
             }
-
             slides[current].classList.add("active");
             slides[prev].classList.add("prev");
             slides[next].classList.add("next");
@@ -158,10 +170,10 @@ function Index() {
                                     <div className="our_exprts_slider_grp">
                                         <div className="row">
                                             <div className="col-md-6 m-auto">
-                                                <div dangerouslySetInnerHTML={{ __html: res1?.intro_text }} />
+                                                <div dangerouslySetInnerHTML={{ __html: res1?.attributes?.intro_text }} />
                                             </div>
                                             <div className="col-md-6">
-                                                <img src={res1?.image_path} className="" alt="our_exprts_slider01" />
+                                                <img src={res1.attributes?.image_path.startsWith("https://www.exsus.com/") ? res1?.attributes?.image_path : "https://www.exsus.com/" + res1?.attributes?.image_path} className="" alt="our_exprts_slider01" />
                                             </div>
                                         </div>
                                     </div>
@@ -271,8 +283,8 @@ function Index() {
                     <div className="items">
                         {executiveData?.attributes?.travel_executive_contents?.data?.filter(res => res.attributes.content_type == "Picture")?.map(res1 => (
                             <div className="item active">
-                                <img src={res1?.image_path} alt="expert_favourite_pic01" className="img-fluid" />
-                                <p>{res1?.image_text}</p>
+                                <img src={res1.attributes?.image_path.startsWith("https://www.exsus.com/") ? res1?.attributes?.image_path : "https://www.exsus.com/" + res1?.attributes?.image_path} alt="expert_favourite_pic01" className="img-fluid" />
+                                <p>{res1?.attributes?.image_text}</p>
                             </div>
                         ))}
                         <div className="button-container">
@@ -291,64 +303,28 @@ function Index() {
                 <div className="container">
                     <div id="Testimonials" className="carousel slide" data-bs-ride="carousel">
                         <div className="carousel-indicators">
-                            <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                            <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                            <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="4" aria-label="Slide 5"></button>
-                            <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="5" aria-label="Slide 6"></button>
-                            <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="6" aria-label="Slide 7"></button>
-                            <button type="button" data-bs-target="#Testimonials" data-bs-slide-to="7" aria-label="Slide 8"></button>
+                            {testimonials.map((_, index) => (
+                                <button
+                                    key={index}
+                                    type="button"
+                                    data-bs-target="#Testimonials"
+                                    data-bs-slide-to={index}
+                                    className={index === 0 ? 'active' : ''}
+                                    aria-current={index === 0 ? 'true' : 'false'}
+                                    aria-label={`Slide ${index + 1}`}
+                                ></button>
+                            ))}
                         </div>
                         <div className="carousel-inner">
-                            <div className="carousel-item active" data-bs-interval="5000">
-                                <div className="carousel-caption">
-                                    <p>All the personal details and touches were amazing and much appreciated. Too many highlights to say! So much history, lovely spots to stay, the people, the curries, the fruit...</p>
-                                    <span>Suzie & Henry travelled to Sri Lanka, March 2022</span>
+                            {testimonials.map((text, index) => (
+                                <div key={index} target="_blank" className={`carousel-item ${index === 0 ? 'active' : ''}`} data-bs-interval="5000">
+                                    <div className="carousel-caption">
+                                        <p>{text?.attributes.review_short_text}</p>
+                                        <span>{text?.attributes.client_name}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="carousel-item" data-bs-interval="5000">
-                                <div className="carousel-caption">
-                                    <p>Charlotte was excellent as always - friendly and approachable, with lots of ideas when discussing itineraries, and the mix of city and sea worked well.</p>
-                                    <span>Filippo E travelled to Portugal, February 2022</span>
-                                </div>
-                            </div>
-                            <div className="carousel-item" data-bs-interval="5000">
-                                <div className="carousel-caption">
-                                    <p>We loved Costa Rica. Ashleigh was great at organising our trip, and when coronavirus changed everything, she comforted us and reassured us that we were able to get home.</p>
-                                    <span>Suzie & Henry travelled to Costa Rica, March 2020</span>
-                                </div>
-                            </div>
-                            <div className="carousel-item" data-bs-interval="5000">
-                                <div className="carousel-caption">
-                                    <p>Katie was a very good communicator and was quick to research our specific requests. We loved everything about our trip, especially seeing penguins and giraffes!</p>
-                                    <span>Exsus travellers who travelled to South Africa in December 2019/January 2020</span>
-                                </div>
-                            </div>
-                            <div className="carousel-item" data-bs-interval="5000">
-                                <div className="carousel-caption">
-                                    <p>Our holiday in Africa was excellent. Mark went out of his way to organise this trip for us. We loved it - OMG it was the most magical place.</p>
-                                    <span>Ms J. Tighe travelled to South Africa, Botswana and Zimbabwe, September 2019</span>
-                                </div>
-                            </div>
-                            <div className="carousel-item" data-bs-interval="5000">
-                                <div className="carousel-caption">
-                                    <p>Ashleigh was amazing. She listened to all our preferences and interests and put together the most perfect itinerary for us.</p>
-                                    <span>Exsus travellers who travelled to Peru, September 2019</span>
-                                </div>
-                            </div>
-                            <div className="carousel-item" data-bs-interval="5000">
-                                <div className="carousel-caption">
-                                    <p>Our holiday was honestly awesome. Gina tailored the trip extremely well to our needs, and everything was brilliant. We had a fantastic time.</p>
-                                    <span>The Tonge family travelled to Norway, August 2019</span>
-                                </div>
-                            </div>
-                            <div className="carousel-item" data-bs-interval="5000">
-                                <div className="carousel-caption">
-                                    <p>From beginning to end, our holiday was like a fairytale. We would not change a thing.</p>
-                                    <span>Mike & Debbie Edwards travelled to Italy, July/August 2019</span>
-                                </div>
-                            </div>
+                            ))}
+
                         </div>
                     </div>
                 </div>

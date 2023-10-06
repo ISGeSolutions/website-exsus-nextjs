@@ -10,4 +10,6 @@ export * from './hotels.service';
 export * from './whyus.service';
 export * from './aboutus.service';
 export * from './blogs.service';
+export * from './specialoffers.service';
+
 

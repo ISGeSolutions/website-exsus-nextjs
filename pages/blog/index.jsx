@@ -5,6 +5,7 @@ import { Layout } from 'components/users';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useRouter } from 'next/router';
 
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -16,12 +17,16 @@ export default Index;
 
 function Index() {
     const [users, setUsers] = useState(null);
+    const router = useRouter();
     const [destinationLandingList, setDestinationLandingList] = useState();
     const [holidaytypesLandingList, setHolidaytypesLandingList] = useState();
     const [allBlogsData, setAllBlogsData] = useState([]);
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
     const [email, setEmail] = useState();
+    const itemsPerPage = 12; // Number of items to load per page
+    const [page, setPage] = useState(0); // Current page
+    const [metaData, setMetaData] = useState([]);
 
     const validationSchema = Yup.object().shape({
         destination: Yup.string(),
@@ -39,7 +44,37 @@ function Index() {
     const formOptions = { resolver: yupResolver(validationSchema) };
     const { register, handleSubmit, formState } = useForm(formOptions);
     const { errors } = formState;
-
+    const loadMoreData = () => {
+        blogsService.getAllBlogs(page + 1).then((x) => {
+            setMetaData(x.meta.pagination);
+            const response = [...x.data].sort(
+                (a, b) => a.attributes.serial_number - b.attributes.serial_number
+            );
+            response.forEach((element, index) => {
+                const str = element?.attributes?.blog_image_path;
+                const substringToCheck = "https://www.exsus.com/";
+                const containsSubstring = str.includes(substringToCheck);
+                if (!containsSubstring) {
+                    const newStr =
+                        substringToCheck + "" + element?.attributes?.blog_image_path;
+                    response[index].attributes.blog_image_path = newStr;
+                }
+            });
+            const newItineraries = response;
+            if (newItineraries.length > 0) {
+                setAllBlogsData((prevItineraries) =>
+                    [...prevItineraries, ...newItineraries].reduce(
+                        (accumulator, current) =>
+                            accumulator.some((item) => item.id === current.id)
+                                ? accumulator
+                                : [...accumulator, current],
+                        []
+                    )
+                );
+                setPage(page + 1);
+            }
+        });
+    };
 
     const equalHeight = (resize) => {
         var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -76,19 +111,20 @@ function Index() {
             setHolidaytypesLandingList(x.data);
         });
 
-        blogsService.getAllBlogs().then(x => {
-            const response = [...x.data].sort((a, b) => a.attributes.serial_number - b.attributes.serial_number);
-            response.forEach((element, index) => {
-                const str = element?.attributes?.blog_image_path;
-                const substringToCheck = 'https://www.exsus.com/';
-                const containsSubstring = str.includes(substringToCheck);
-                if (!containsSubstring) {
-                    const newStr = substringToCheck + '' + element?.attributes?.blog_image_path;
-                    response[index].attributes.blog_image_path = newStr;
-                }
-            });
-            setAllBlogsData(response);
-        })
+        // blogsService.getAllBlogs().then(x => {
+        //     const response = [...x.data].sort((a, b) => a.attributes.serial_number - b.attributes.serial_number);
+        //     response.forEach((element, index) => {
+        //         const str = element?.attributes?.blog_image_path;
+        //         const substringToCheck = 'https://www.exsus.com/';
+        //         const containsSubstring = str.includes(substringToCheck);
+        //         if (!containsSubstring) {
+        //             const newStr = substringToCheck + '' + element?.attributes?.blog_image_path;
+        //             response[index].attributes.blog_image_path = newStr;
+        //         }
+        //     });
+        //     setAllBlogsData(response);
+        // })
+        loadMoreData();
 
         const carousel = document.querySelector('#carouselExampleInterval');
         new bootstrap.Carousel(carousel);
@@ -200,27 +236,77 @@ function Index() {
                                         </div>
                                     </div>
                                 </div>
-                                {allBlogsData.map(res => (
+                                {allBlogsData?.slice(0, allBlogsData.length).map((res) => (
                                     <div className="col-sm-6 col-lg-4 col-xxl-3" key={res.id}>
                                         <div className="blog_cnt_inr">
                                             <a href="blogs/blog-details">
-                                                {res?.attributes?.blog_image_path &&
-                                                    <img src={res?.attributes?.blog_image_path} alt="blog01" className="img-fluid" />
-                                                }
+                                                {/* <div className="card_slider">
+                          <NavLink
+                            //href={generateDynamicLink(item)}
+                            className="card_slider_img"
+                          ></NavLink>
+                        </div> */}
+                                                {res?.attributes?.blog_image_path && (
+                                                    <img
+                                                        src={res?.attributes?.blog_image_path}
+                                                        alt="blog01"
+                                                        className="img-fluid"
+                                                    />
+                                                )}
                                                 <h4>{res?.attributes?.blog_header_text}</h4>
-                                                <span className="btn-primary prmry_btn">Read more
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path></svg>
+                                                <span className="btn-primary prmry_btn">
+                                                    Read more
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="#ffffff"
+                                                        shapeRendering="geometricPrecision"
+                                                        textRendering="geometricPrecision"
+                                                        imageRendering="optimizeQuality"
+                                                        fillRule="evenodd"
+                                                        clipRule="evenodd"
+                                                        viewBox="0 0 267 512.43"
+                                                    >
+                                                        <path
+                                                            fillRule="nonzero"
+                                                            d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                                                        ></path>
+                                                    </svg>
                                                 </span>
                                             </a>
                                         </div>
                                     </div>
                                 ))}
-
                                 <div className="col-12">
-                                    <button className="btn prmry_btn make_enqury_btn mx-auto text-uppercase">Load more
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"></path></svg>
-                                    </button>
+                                    {metaData.total > page * itemsPerPage && (
+                                        <button
+                                            onClick={loadMoreData}
+                                            className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
+                                            fdprocessedid="r5vpm6s"
+                                        >
+                                            Show{" "}
+                                            {metaData.total - page * itemsPerPage > 12
+                                                ? 12
+                                                : metaData.total - page * itemsPerPage > 12}{" "}
+                                            more items
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="#ffffff"
+                                                shapeRendering="geometricPrecision"
+                                                textRendering="geometricPrecision"
+                                                imageRendering="optimizeQuality"
+                                                fillRule="evenodd"
+                                                clipRule="evenodd"
+                                                viewBox="0 0 512 266.77"
+                                            >
+                                                <path
+                                                    fillRule="nonzero"
+                                                    d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"
+                                                ></path>
+                                            </svg>
+                                        </button>
+                                    )}
                                 </div>
+
                             </div>
                         </div>
                     </div>

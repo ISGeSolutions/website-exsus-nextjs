@@ -51,7 +51,8 @@ export const destinationService = {
     getItinerariesByDestination,
     getAllHotels,
     getAllItinerariesHomePage,
-    getCustomPagesData
+    getCustomPagesData,
+    getRegions
 };
 
 function getAllDropdown() {
@@ -133,6 +134,11 @@ function getAllHotels(page) {
 function getCustomPagesData(pageName) {
     const customPage = `${publicRuntimeConfig.apiUrl}/api/custom-pages?filters[page_code][$eq]=${pageName}&[populate][0]=custom_page_images`;
     return fetchWrapper.get(customPage);
+}
+
+function getRegions(id) {
+    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/countries/${id}?populate[0]=destination&populate[1]=regions`;
+    return fetchWrapper.get(itinerariesDetailsUrl);
 }
 
 
