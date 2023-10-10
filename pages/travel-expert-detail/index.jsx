@@ -71,7 +71,6 @@ function Index() {
                 response.attributes.executive_image_path = newStr;
             }
             setExecutiveData(response);
-            debugger;
             console.log(response);
             setTestimonials(response.attributes.travel_reviews.data);
         })
@@ -114,9 +113,20 @@ function Index() {
             if (prev == -1) {
                 prev = 2;
             }
-            slides[current].classList.add("active");
-            slides[prev].classList.add("prev");
-            slides[next].classList.add("next");
+
+            if (slides[current] != undefined) {
+                console.log(slides[current])
+                slides[current].classList.add("active");
+
+            }
+            if (slides[prev] != undefined) {
+                slides[prev].classList.add("prev");
+
+            }
+            if (slides[next] != undefined) {
+                slides[next].classList.add("next");
+
+            }
         }
 
     }, []);

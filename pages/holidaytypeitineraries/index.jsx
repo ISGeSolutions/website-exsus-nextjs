@@ -173,7 +173,7 @@ function Index() {
     const [isLoading, setIsLoading] = useState(false);
     const [isRtl, setIsRtl] = useState(false);
     const [selectedOptionMonth, selectedOptionData] = useState(null);
-
+    const [title, setTitle] = useState("");
     let regionWiseUrl = '/uk';
     let region = 'uk';
     if (typeof window !== 'undefined') {
@@ -277,6 +277,9 @@ function Index() {
             });
             setBackgroundImage(newBackgroundImages);
         });
+        holidaytypesService.getHolidaytypeDetails(hcode).then((x) => {
+            setTitle(x.data.attributes.page_meta_title);
+        });
 
         // destinationService.getAllItineraries().then(x => {
         //     setItineraries(x.data);
@@ -299,6 +302,7 @@ function Index() {
     return (
         <>
             <Head>
+                <title>{title}</title>
                 {/* <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script> */}
             </Head>
             <section className="banner_blk_row">

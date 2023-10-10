@@ -19,7 +19,6 @@ function Index() {
         new bootstrap.Carousel(carousel);
 
         whyusService.getAllReviews().then((x) => {
-            debugger;
             console.log(x);
             setClientReviews(x.data);
         });

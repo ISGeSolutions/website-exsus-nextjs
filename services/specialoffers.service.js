@@ -17,12 +17,12 @@ const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStora
 export const specialoffersService = {
     user: userSubject.asObservable(),
     get userValue() { return userSubject.value },
-    getAllBlogs
+    getAllOffers
 };
 
 
 
-function getAllBlogs() {
+function getAllOffers() {
     const specialoffersUrl = `${publicRuntimeConfig.apiUrl}/api/special-offers`;
     return fetchWrapper.get(specialoffersUrl);
 }

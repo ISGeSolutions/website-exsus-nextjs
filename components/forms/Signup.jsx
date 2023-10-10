@@ -31,11 +31,21 @@ function Signup() {
 
     // get functions to build form with useForm() hook
     function onSignup(data) {
-        // console.log('onSignup', data);
-        return homeService.signUp(data)
+        let signupData = {
+            "data":
+            {
+                "client_name": `${data.fullnameAndTitle}`,
+                "email_id": `${data.email}`,
+                "source_of_origin": "newsletter",
+                "source_of_origin_reference": "",
+                "opt_in_ind": true
+            }
+        }
+
+        return homeService.signUp(signupData)
             .then(() => {
                 alertService.success('Sign up successfull', { keepAfterRouteChange: true });
-                router.push('home');
+                // router.push('home');
             })
             .catch(alertService.error);
     }

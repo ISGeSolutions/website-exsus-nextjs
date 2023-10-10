@@ -17,13 +17,20 @@ const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStora
 export const blogsService = {
     user: userSubject.asObservable(),
     get userValue() { return userSubject.value },
-    getAllBlogs
+    getAllBlogs,
+    getAllBlogsHomePage
 };
 
 
 
 function getAllBlogs(page) {
     const blogsUrl = `${publicRuntimeConfig.apiUrl}/api/blogs?pagination[page]=${page}&pagination[pageSize]=12`;
+    return fetchWrapper.get(blogsUrl);
+}
+
+
+function getAllBlogsHomePage() {
+    const blogsUrl = `${publicRuntimeConfig.apiUrl}/api/blogs`;
     return fetchWrapper.get(blogsUrl);
 }
 

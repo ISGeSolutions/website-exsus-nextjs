@@ -120,6 +120,9 @@ function Index() {
     return (
         <>
             <Head>
+                <title>
+                    Luxury Holiday Destination | Tailor made Trips | Exsus Travel
+                </title>
                 <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
                 <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script>
             </Head>

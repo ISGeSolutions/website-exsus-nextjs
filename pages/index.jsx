@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import Head from 'next/head';
-import { holidaytypesService, destinationService } from 'services';
+import { holidaytypesService, destinationService, blogsService } from 'services';
 import { NavLink } from 'components';
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -19,6 +19,7 @@ function Index() {
     const [thumbnailImage, setThumbnailImageArr] = useState([]);
     const [itineraries, setItineraries] = useState(null);
     const [testimonials, setTestimonials] = useState([]);
+    const [sortedData, setSortedData] = useState([]);
 
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
@@ -133,20 +134,27 @@ function Index() {
 
     useEffect(() => {
         const thumbnailImageArr = [];
-        holidaytypesService.getHolidaytypesLandingList().then(x => {
+        holidaytypesService.getHolidaytypesLandingListHomePage().then((x) => {
             // debugger;
-            const imageCheckType = x.data;
-            imageCheckType.forEach(elementMain => {
+            const imageCheckType = x.data.sort(
+                (a, b) =>
+                    a.attributes.home_page_serial_number -
+                    b.attributes.home_page_serial_number
+            );
+            imageCheckType.forEach((elementMain) => {
                 if (elementMain.attributes.holiday_type_group_images.data) {
-                    const dataInner = elementMain.attributes.holiday_type_group_images.data;
-                    dataInner.forEach(element => {
-                        if (element.attributes.image_type == 'thumbnail') {
+                    const dataInner =
+                        elementMain.attributes.holiday_type_group_images.data;
+                    dataInner.forEach((element) => {
+                        if (element.attributes.image_type == "thumbnail") {
                             const objThumbnail = {
-                                "id": elementMain?.id,
-                                "holiday_type_code": elementMain?.attributes?.holiday_type_group_code,
-                                "holiday_type_name": elementMain?.attributes?.holiday_type_group_name,
-                                "image_path": element.attributes.image_path
-                            }
+                                id: elementMain?.id,
+                                holiday_type_code:
+                                    elementMain?.attributes?.holiday_type_group_code,
+                                holiday_type_name:
+                                    elementMain?.attributes?.holiday_type_group_name,
+                                image_path: element.attributes.image_path,
+                            };
                             thumbnailImageArr.push(objThumbnail);
                         }
                     });
@@ -155,6 +163,33 @@ function Index() {
             // console.log('thumbnailImageArr', thumbnailImageArr);
             setThumbnailImageArr(thumbnailImageArr);
         });
+
+
+        blogsService.getAllBlogsHomePage().then((x) => {
+            const blogdata = x.data;
+            const filteredData = blogdata.filter(
+                (entry) => entry.attributes.home_page_ind
+            );
+            if (filteredData) {
+                const sortedData = filteredData.sort(
+                    (a, b) =>
+                        a.attributes.home_page_serial_number -
+                        b.attributes.home_page_serial_number
+                );
+                sortedData.forEach((element, index) => {
+                    const str = element?.attributes?.blog_image_path;
+                    const substringToCheck = "https://www.exsus.com/";
+                    const containsSubstring = str.includes(substringToCheck);
+                    if (!containsSubstring) {
+                        const newStr =
+                            substringToCheck + "" + element?.attributes?.blog_image_path;
+                        sortedData[index].attributes.blog_image_path = newStr;
+                    }
+                });
+                setSortedData(sortedData);
+            }
+        });
+
 
         destinationService.getDestinationLandingList().then(x => {
             // console.log('getDestinationLandingList', x);
@@ -192,6 +227,7 @@ function Index() {
     return (
         <>
             <Head>
+                <title>Home</title>
                 <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
                 <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script>
             </Head>
@@ -406,47 +442,51 @@ function Index() {
             <section className="card_blk_row">
                 <div className="container">
                     <div className="row">
-                        <div className="col-sm-6 col-md-6 col-lg-4">
-                            <div className="card_blk_inr">
-                                <a href="#" target="_blank">
-                                    <img src="images/card_img07.jpg" alt="Card image 07" className="img-fluid" />
-                                    <div className="card_blk_cntnt">
-                                        <div className="row align-items-center">
-                                            <div className="col-11">
-                                                <div className="card_blk_txt">
-                                                    <h3>Luxury Family Safaris in Africa - Favourite</h3>
-                                                    <p>July 04 2022</p>
+                        {sortedData?.map((res) => (
+                            <div
+                                className="col-xs-12 col-sm-4 col-md-4 col-lg-3"
+                                key={res.id}
+                            >
+                                <div className="card_blk_inr">
+                                    <a>
+                                        {res?.attributes?.blog_image_path && (
+                                            <img
+                                                src={res?.attributes?.blog_image_path}
+                                                alt="Card image 07"
+                                                className="img-fluid"
+                                            />
+                                        )}
+                                        <div className="card_blk_cntnt">
+                                            <div className="row align-items-center">
+                                                <div className="col-11">
+                                                    <div className="card_blk_txt">
+                                                        <h3>{res?.attributes?.blog_header_text}</h3>
+                                                        <p>{res?.attributes?.blog_date}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="col-1 ps-0">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="#ffffff"
+                                                        shapeRendering="geometricPrecision"
+                                                        textRendering="geometricPrecision"
+                                                        imageRendering="optimizeQuality"
+                                                        fillRule="evenodd"
+                                                        clipRule="evenodd"
+                                                        viewBox="0 0 267 512.43"
+                                                    >
+                                                        <path
+                                                            fillRule="nonzero"
+                                                            d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                                                        />
+                                                    </svg>
                                                 </div>
                                             </div>
-                                            <div className="col-1 ps-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                            </div>
                                         </div>
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-
-                        <div className="col-sm-6 col-md-6 col-lg-4">
-                            <div className="card_blk_inr">
-                                <a href="#">
-                                    <img src="images/card_img08.jpg" alt="Card image 08" className="img-fluid" />
-                                    <div className="card_blk_cntnt">
-                                        <div className="row align-items-center">
-                                            <div className="col-11">
-                                                <div className="card_blk_txt">
-                                                    <h3>Luxury Family Holidays in the Galapagos</h3>
-                                                    <p>July 04 2022</p>
-                                                </div>
-                                            </div>
-                                            <div className="col-1 ps-0">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </section>

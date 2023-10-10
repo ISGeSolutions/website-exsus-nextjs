@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 
 import { Link, Spinner, Signup } from 'components';
 import { Layout } from 'components/users';
-import { userService } from 'services';
-
+import { userService, specialoffersService } from 'services';
+import { NavLink } from 'components';
+import Head from "next/head";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 var Carousel = require('react-responsive-carousel').Carousel;
 
@@ -11,6 +12,7 @@ export default Index;
 
 function Index() {
     const [users, setUsers] = useState(null);
+    const [allOffers, setAllOffers] = useState([]);
 
     const equalHeight = (resize) => {
         var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -35,8 +37,26 @@ function Index() {
 
     equalHeight(true);
 
+    let regionWiseUrl = '/uk';
+    if (typeof window !== 'undefined') {
+        if (window && window.site_region) {
+            // console.log('window.site_region', window.site_region);
+            regionWiseUrl = '/' + window.site_region;
+            // setMyVariable(window.site_region);
+        }
+    }
+
+    const generateDynamicLink = (item) => {
+        // console.log('item', item);
+        return regionWiseUrl + `/hotel-detail`;
+    };
+
     useEffect(() => {
         // userService.getAll().then(x => setUsers(x));
+
+        specialoffersService.getAllOffers().then(x => {
+            setAllOffers(x.data);
+        })
         const carousel = document.querySelector('#carouselExampleInterval');
         new bootstrap.Carousel(carousel);
 
@@ -45,6 +65,9 @@ function Index() {
 
     return (
         <>
+            <Head>
+                <title>Special Offers | Luxury Hotel and Holiday Offers</title>
+            </Head>
             <section className="banner_blk_row">
                 {/* <Carousel showArrows={false} autoPlay={true} infiniteLoop={true} showIndicators={false} showThumbs={false}>
                     <div>
@@ -145,120 +168,36 @@ function Index() {
                     <div className="card_slider_row">
                         <div className="carousel00 width_100">
                             <div className="row">
-                                <div className="col-sm-6 col-lg-4 col-xxl-3">
-                                    <div className="card_slider_inr">
-                                        <div className="card_slider">
-                                            <a className="card_slider_img">
-                                                <img src="./../images/offer_card01.png" alt="offer_card01" className="img-fluid" />
-                                                <span className="img_specl_offer">Special offer</span>
-                                            </a>
-                                            <div className="card_slider_cnt">
-                                                <h4><a href="#">ROSEWOOD MAYAKOBA</a></h4>
-                                                <ul>
-                                                    <li>Location: Riviera Maya | Mexico</li>
-                                                    <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
-                                                    <li className="pink_text">Special offer: Stay 7 nights for the price of 6 plus enjoy a complimentary room upgrade.</li>
-                                                    <li>Best for:<span>Luxury Hotel, Setting & Views, Beach, Family-friendly</span></li>
-                                                </ul>
+                                {allOffers?.map(res => (
+                                    <NavLink
+                                        href={generateDynamicLink(res.id)}
+                                    >
+                                        <div className="col-sm-6 col-lg-4 col-xxl-3" key={res.id}>
+                                            <div className="card_slider_inr">
+                                                <div className="card_slider">
+                                                    <a className="card_slider_img">
+                                                        <img src={res.attributes.thumbnail_image_path} alt="offer_card01" className="img-fluid" />
+                                                        <span className="img_specl_offer">Special offer</span>
+                                                    </a>
+                                                    <div className="card_slider_cnt">
+                                                        <h4><a>{res.attributes.offer_text}</a></h4>
+                                                        <ul>
+                                                            <li>Location: {res.attributes.subtitle_text}</li>
+                                                            <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
+                                                            <li className="pink_text">Special offer: {res.attributes.title_text}</li>
+                                                            <li>Best for:<span>Luxury Hotel, Setting & Views, Beach, Family-friendly</span></li>
+                                                        </ul>
+                                                    </div>
+                                                    <button className="btn card_slider_btn justify-content-end">
+                                                        <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <button className="btn card_slider_btn justify-content-end">
-                                                <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
-                                            </button>
                                         </div>
-                                    </div>
-                                </div>
+                                    </NavLink>
 
-                                <div className="col-sm-6 col-lg-4 col-xxl-3">
-                                    <div className="card_slider_inr">
-                                        <div className="card_slider">
-                                            <a className="card_slider_img">
-                                                <img src="./../images/offer_card02.jpg" alt="offer_card02" className="img-fluid" />
-                                                <span className="img_specl_offer">Special offer</span>
-                                            </a>
-                                            <div className="card_slider_cnt">
-                                                <h4><a href="#">SUGAR BEACH, A VICEROY RESORT</a></h4>
-                                                <ul>
-                                                    <li>Location: St Lucia</li>
-                                                    <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
-                                                    <li className="pink_text">Special offer: Save up to 25% on rooms and more!</li>
-                                                    <li>Best for:<span>Beach, Setting & Views, Snorkelling & Diving, Family-friendly</span></li>
-                                                </ul>
-                                            </div>
-                                            <button className="btn card_slider_btn justify-content-end">
-                                                <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                                ))}
 
-                                <div className="col-sm-6 col-lg-4 col-xxl-3">
-                                    <div className="card_slider_inr">
-                                        <div className="card_slider">
-                                            <a className="card_slider_img">
-                                                <img src="./../images/offer_card03.jpg" alt="offer_card03" className="img-fluid" />
-                                                <span className="img_specl_offer">Special offer</span>
-                                            </a>
-                                            <div className="card_slider_cnt">
-                                                <h4><a href="#">CALABASH</a></h4>
-                                                <ul>
-                                                    <li>Location: Grenada</li>
-                                                    <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
-                                                    <li className="pink_text">Special offer: Enjoy a complimentary half-board upgrade</li>
-                                                    <li>Best for:<span>Beach, Eco-tourism, Service & Hospitality, Snorkelling & Diving</span></li>
-                                                </ul>
-                                            </div>
-                                            <button className="btn card_slider_btn justify-content-end">
-                                                <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-sm-6 col-lg-4 col-xxl-3">
-                                    <div className="card_slider_inr">
-                                        <div className="card_slider">
-                                            <a className="card_slider_img">
-                                                <img src="./../images/offer_card04.jpg" alt="offer_card04" className="img-fluid" />
-                                                <span className="img_specl_offer">Special offer</span>
-                                            </a>
-                                            <div className="card_slider_cnt">
-                                                <h4><a href="#">RAFFLES SEYCHELLES</a></h4>
-                                                <ul>
-                                                    <li>Location: Seychelles</li>
-                                                    <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
-                                                    <li className="pink_text">Special offer: Enjoy complimentary half-board.</li>
-                                                    <li>Best for:<span>Beach, Family-friendly, Food & Wine, Honeymoon</span></li>
-                                                </ul>
-                                            </div>
-                                            <button className="btn card_slider_btn justify-content-end">
-                                                <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="col-sm-6 col-lg-4 col-xxl-3">
-                                    <div className="card_slider_inr">
-                                        <div className="card_slider">
-                                            <a className="card_slider_img">
-                                                <img src="./../images/offer_card05.jpg" alt="offer_card05" className="img-fluid" />
-                                                <span className="img_specl_offer">Special offer</span>
-                                            </a>
-                                            <div className="card_slider_cnt">
-                                                <h4><a href="#">AMILLA MALDIVES RESORT & RESIDENCES</a></h4>
-                                                <ul>
-                                                    <li>Location: Maldives</li>
-                                                    <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
-                                                    <li className="pink_text">Special offer: Save up to 30% on rooms plus complimentary half-board and discounted transfers!</li>
-                                                    <li>Best for:<span> Beach, Chic Design, Family-friendly, Food & Wine</span></li>
-                                                </ul>
-                                            </div>
-                                            <button className="btn card_slider_btn justify-content-end">
-                                                <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
 
                             </div>
                         </div>
