@@ -11,7 +11,7 @@ import { Email, Item, A } from 'react-html-email';
 //     </Item>
 //   </Email>
 // }
-
+ 
 const MyEmailTemplate = () => (
   <Email title="My Email Template">
     <Item>
