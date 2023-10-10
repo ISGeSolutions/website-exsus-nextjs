@@ -14,26 +14,18 @@ const { publicRuntimeConfig } = getConfig();
 
 const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('user')));
 
-export const blogsService = {
+export const specialoffersService = {
     user: userSubject.asObservable(),
     get userValue() { return userSubject.value },
-    getAllBlogs,
-    getAllBlogsHomePage
+    getAllOffers
 };
 
 
 
-function getAllBlogs(page) {
-    const blogsUrl = `${publicRuntimeConfig.apiUrl}/api/blogs?pagination[page]=${page}&pagination[pageSize]=12`;
-    return fetchWrapper.get(blogsUrl);
+function getAllOffers() {
+    const specialoffersUrl = `${publicRuntimeConfig.apiUrl}/api/special-offers`;
+    return fetchWrapper.get(specialoffersUrl);
 }
-
-
-function getAllBlogsHomePage() {
-    const blogsUrl = `${publicRuntimeConfig.apiUrl}/api/blogs`;
-    return fetchWrapper.get(blogsUrl);
-}
-
 
 
 

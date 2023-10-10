@@ -132,6 +132,12 @@ function Country() {
         // );
     };
 
+    const handleDataFromChild = (data) => {
+        // console.log(data);
+        // Update the parent component's state with data received from the child
+        toggleTab(data);
+    };
+
     const handleOptionRegionChange = (selectedOption) => {
         selectedOption = selectedOption.filter((i) => i.value !== '' && typeof i.value !== 'undefined');
         setSelectedOptionRegion(selectedOption);
@@ -350,13 +356,13 @@ function Country() {
                     </div>
                 </div>
                 <div className="banner_tab_blk">
-                <button className="btn banner_map_tab">Map</button>
+                    <button className="btn banner_map_tab">Map</button>
                     <button className="btn banner_img_tab banner_tab_active">Images</button>
                     {/* <button className="btn banner_map_tab">Map</button>
                     <button className="btn banner_img_tab banner_tab_active">Images</button> */}
                 </div>
                 <div className="banner_map_blk">
-                <Iframe width="640px"
+                    <Iframe width="640px"
                         height="320px"
                         id=""
                         className=""
@@ -415,19 +421,19 @@ function Country() {
 
                 <div className="tab-content" id="pills-tabContent">
                     {activeTab === 'overview' && <div className={activeTab === 'overview' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-overview" role="tabpanel" aria-labelledby="pills-overview-tab" tabIndex="0">
-                        <CountryOverview data={countryData?.attributes} />
+                        <CountryOverview data={countryData?.attributes} sendDataToParent={handleDataFromChild} />
                     </div>}
                     {activeTab === 'regions' && <div className={activeTab === 'regions' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-countries" role="tabpanel" aria-labelledby="pills-countries-tab" tabIndex="0">
-                        <CountryRegions data={countryData?.attributes} />
+                        <CountryRegions data={countryData?.attributes} sendDataToParent={handleDataFromChild} />
                     </div>}
                     {activeTab === 'itineraries' && <div className={activeTab === 'itineraries' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-itineraries" role="tabpanel" aria-labelledby="pills-itineraries-tab" tabIndex="0">
-                        <CountrytItinararies data={countryData?.attributes} />
+                        <CountrytItinararies data={countryData?.attributes} sendDataToParent={handleDataFromChild} />
                     </div>}
                     {activeTab === 'places-to-stay' && <div className={activeTab === 'places-to-stay' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-places-to-stay" role="tabpanel" aria-labelledby="pills-places-to-stay-tab" tabIndex="0">
-                        <CountryPlaceToStay data={countryData?.attributes} />
+                        <CountryPlaceToStay data={countryData?.attributes} sendDataToParent={handleDataFromChild} />
                     </div>}
                     {activeTab === 'when-to-go' && <div className={activeTab === 'when-to-go' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-when-to-go" role="tabpanel" aria-labelledby="pills-when-to-go-tab" tabIndex="0">
-                        <CountryWhentogo data={countryData?.attributes} />
+                        <CountryWhentogo data={countryData?.attributes} sendDataToParent={handleDataFromChild} />
                     </div>}
                 </div>
             </section>

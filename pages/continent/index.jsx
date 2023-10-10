@@ -25,6 +25,7 @@ function Index() {
     const [destinationName, setdestinationName] = useState("");
     const [metaTitle, setMetaTitle] = useState('');
     const [parentData, setParentData] = useState('');
+    const [title, setTitle] = useState("");
     const tabContentRefs = {
         "overview": useRef(null),
         "countries": useRef(null),
@@ -146,6 +147,11 @@ function Index() {
         //     setItineraries(x.data);
         // });
 
+        destinationService.getDestinationDetails(destinationcode).then((x) => {
+            console.log(x);
+            setTitle(x.data.attributes.page_meta_title);
+        });
+
         destinationService.getDestinationDetails(destinationcode).then(x => {
             setDestinationDetails(x.data.attributes);
             // console.log(x.data)
@@ -201,6 +207,7 @@ function Index() {
     return (
         <>
             <Head>
+                <title>{title}</title>
                 <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
                 <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script>
             </Head>

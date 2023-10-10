@@ -36,11 +36,10 @@ function Index() {
         }
     }
 
-    const ExpertDetail = () => {
+    const ExpertDetail = ({ data }) => {
         const router = useRouter();
-
         const handleButtonClick = () => {
-            router.push('/travel-expert-detail'); // Navigate to the /travel-expert-detail page
+            router.push(`/travel-expert-detail`); // Navigate to the /travel-expert-detail page
         };
 
         return (
@@ -57,7 +56,7 @@ function Index() {
 
         whyusService.getAllExecutives().then(x => {
             setAllExecutives(x.data);
-            // console.log(x.data);
+            console.log(x.data);
         })
 
         const carousel = document.querySelector('#carouselExampleInterval');
@@ -175,7 +174,7 @@ function Index() {
                                         <h3>{res?.attributes?.executive_role}</h3>
                                         <div dangerouslySetInnerHTML={{ __html: res?.attributes?.intro_text }} />
                                     </div>
-                                    <ExpertDetail />
+                                    <ExpertDetail dataProp={res.id} />
                                 </div>
                             </div>
                         ))}

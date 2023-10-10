@@ -383,7 +383,6 @@ function CountryPlaceToStay(country) {
         window.onload = () => {
             setTimeout(() => {
                 const redirectUrl = regionWiseUrl + '/country?countrycode=' + countrycode;
-                debugger;
                 if (redirectUrl) {
                     router.push(redirectUrl);
                 }

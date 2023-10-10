@@ -25,7 +25,7 @@ function ContinentPlacesToStay() {
     const [itineraries, setItineraries] = useState(null);
     const router = useRouter();
     const [destinationName, setdestinationName] = useState("");
-    const itemsPerPage = 9; // Number of items to load per page
+    const itemsPerPage = 12; // Number of items to load per page
     const [visibleItems, setVisibleItems] = useState(itemsPerPage);
     const [page, setPage] = useState(0); // Current page
     const [metaData, setMetaData] = useState([]);
@@ -210,12 +210,12 @@ function ContinentPlacesToStay() {
 
     const generateDynamicLink = (item) => {
         // console.log('item', item);
-        return regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`;
+        return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
     };
 
-    const handleRedirect = () => {
-        router.push(regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`);
-    };
+    // const handleRedirect = () => {
+    //     router.push(regionWiseUrl + `/itinerarydetail?itinerarycode=vi`);
+    // };
 
     useEffect(() => {
         setSelectedOptionCountry(countryOptions[0]);
@@ -369,7 +369,8 @@ function ContinentPlacesToStay() {
                                     <div className="col-sm-6 col-lg-4 col-xxl-3" key={item.id}>
                                         <div className="card_slider_inr">
                                             <div className="card_slider">
-                                                <a className="card_slider_img">
+                                                <NavLink href={generateDynamicLink(item.id)} className="card_slider_img">
+
                                                     {item?.attributes?.hotel_images?.data.map(
                                                         (element, index) =>
                                                             element.attributes.image_type == "thumbnail" ? (
@@ -384,7 +385,7 @@ function ContinentPlacesToStay() {
                                                             )
                                                     )}
                                                     <img src="" alt="destination_hotel01" className="img-fluid" />
-                                                </a>
+                                                </NavLink>
                                                 <div className="card_slider_cnt places_to_stay_cnt">
                                                     <h4><a href="#">{item?.attributes?.hotel_name}</a></h4>
                                                     <ul>
@@ -394,9 +395,11 @@ function ContinentPlacesToStay() {
                                                         <li>Best for:<span>{item?.attributes?.recommended_for_text}</span></li>
                                                     </ul>
                                                 </div>
-                                                <button className="btn card_slider_btn justify-content-end">
-                                                    <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
-                                                </button>
+                                                <NavLink href={generateDynamicLink(item.id)}>
+                                                    <button className="btn card_slider_btn justify-content-end" >
+                                                        <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
+                                                    </button>
+                                                </NavLink>
                                             </div>
                                         </div>
                                     </div>
@@ -410,9 +413,9 @@ function ContinentPlacesToStay() {
                                             fdprocessedid="r5vpm6s"
                                         >
                                             Show{" "}
-                                            {metaData.total - page * itemsPerPage > 9
-                                                ? 9
-                                                : metaData.total - page * itemsPerPage > 9}{" "}
+                                            {metaData.total - page * itemsPerPage > 12
+                                                ? 12
+                                                : metaData.total - page * itemsPerPage > 12}{" "}
                                             more items
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"

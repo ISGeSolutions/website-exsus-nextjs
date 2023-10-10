@@ -7,6 +7,7 @@ import { Inspireme } from 'components';
 import generateDynamicLink from 'components/utils/generateLink';
 import { NavLink } from 'components';
 import { useRouter } from 'next/router';
+import Head from "next/head";
 
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -152,6 +153,9 @@ function Index() {
 
     return (
         <>
+            <Head>
+                <title>Holiday Type & Luxury Experience | Exsus Travel</title>
+            </Head>
             <section className="banner_blk_row">
                 {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
                     <div>

@@ -132,6 +132,16 @@ const nextConfig = {
 
             // client-reviews
             { source: '/why-us/client-reviews', destination: '/client-reviews' },
+
+            // special-offers
+
+            // hotel-detail
+            { source: '/uk/hotel-detail', destination: '/hotel-detail' },
+            { source: '/us/hotel-detail', destination: '/hotel-detail' },
+            { source: '/asia/hotel-detail', destination: '/hotel-detail' },
+            { source: '/asia/hotel-detail', destination: '/hotel-detail' },
+
+
             // Add more custom routes as needed
         ];
     },
@@ -165,10 +175,12 @@ const nextConfig = {
             // : 'https://mock.apidog.com/m1/379394-0-default' // production api
             //     ? 'http://13.233.122.205:1337' // development api
             //     : 'http://13.233.122.205:1337' // production api
-            // ? 'https://api.excelleresolutions.com' // development api
-            // : 'https://api.excelleresolutions.com' // production api
+
             ? 'https://cms-api.excelleresolutions.com' // development api
-            : 'https://cms-api.excelleresolutions.com' // production api
+            : 'https://cms-api.excelleresolutions.com', // production api
+        apiUrl1: process.env.NODE_ENV === 'development'
+            ? 'http://3.110.223.197:1337' // client data development api
+            : 'http://3.110.223.197:1337' // client data production api
     },
     async headers() {
         return [
