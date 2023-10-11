@@ -12,8 +12,8 @@ export async function sendMail(subject, toEmail, otpText) {
     var transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-            user: "spchobhe@gmail.com",
-            pass: "avuhoxxdmvszzzpg",
+            user: "",
+            pass: "",
         },
         // host: "smtp.office365.com",
         // auth: {
