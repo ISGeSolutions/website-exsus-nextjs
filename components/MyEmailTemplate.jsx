@@ -12,7 +12,7 @@ import { Email, Item, A } from 'react-html-email';
 //   </Email>
 // }
  
-const MyEmailTemplate = () => (
+const MyEmailTemplate = (props) => (
   <Email title="My Email Template">
     <Item>
       <h1>Hello, World!</h1>

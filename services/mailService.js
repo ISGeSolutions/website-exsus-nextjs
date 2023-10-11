@@ -38,25 +38,25 @@ export async function sendMail(subject, toEmail, otpText) {
     //     </EmailTemplate>
     //   );
 
-    // const emailHtml = renderEmail(
-    //     <Email title="My Email Template">
-    //         <Item>
-    //             <h1>Hello, World!</h1>
-    //             <p>This is a sample email template.</p>
-    //             <p>{otpText}</p>
-    //             <A href="https://example.com">Visit Example.com</A>
-    //         </Item>
-    //     </Email>
-    // );
+    const emailHtml = renderEmail(
+        <Email title="My Email Template">
+            <Item>
+                <h1>Hello, World!</h1>
+                <p>This is a sample email template.</p>
+                <p>{otpText}</p>
+                <A href="https://example.com">Visit Example.com</A>
+            </Item>
+        </Email>
+    );
 
-    const emailHtml = renderEmail(<MyEmailTemplate url="https://example.com" />);
+    // const emailHtml = renderEmail(<MyEmailTemplate url="https://example.com" />);
 
     var mailOptions = {
-        from: process.env.NODEMAILER_EMAIL,
+        // from: process.env.NODEMAILER_EMAIL,
         to: toEmail,
         subject: subject,
         text: otpText,
-        html: emailHtml,
+        // html: emailHtml,
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
