@@ -3,9 +3,9 @@ var nodemailer = require("nodemailer");
 // import { EmailTemplate } from '../components/MyEmailTemplate';
 // import { renderEmail } from '@react-email/html';
 // const { render } = require('@react-email/html');
-import { renderEmail } from 'react-html-email';
-import MyEmailTemplate from './../components/MyEmailTemplate';
-import { Email, Item, A } from 'react-html-email';
+// import { renderEmail } from 'react-html-email';
+// import MyEmailTemplate from './../components/MyEmailTemplate';
+// import { Email, Item, A } from 'react-html-email';
 
 //-----------------------------------------------------------------------------
 export async function sendMail(subject, toEmail, otpText) {
