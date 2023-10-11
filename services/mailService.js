@@ -27,6 +27,7 @@ export async function sendMail(subject, toEmail, otpText) {
         },
         port: "587",
         enableSsl: "true",
+        secure: true,
         tls: {
             ciphers: "SSLv3",
         },
