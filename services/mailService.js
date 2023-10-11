@@ -12,8 +12,8 @@ export async function sendMail(subject, toEmail, otpText) {
     var transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-            user: "spchobhe@gmail.com",
-            pass: "avuhoxxdmvszzzpg",
+            user: "",
+            pass: "",
         },
         // host: "smtp.office365.com",
         // auth: {
@@ -38,18 +38,18 @@ export async function sendMail(subject, toEmail, otpText) {
     //     </EmailTemplate>
     //   );
 
-    const emailHtml = renderEmail(
-        <Email title="My Email Template">
-            <Item>
-                <h1>Hello, World!</h1>
-                <p>This is a sample email template.</p>
-                <p>{otpText}</p>
-                <A href="https://example.com">Visit Example.com</A>
-            </Item>
-        </Email>
-    );
+    // const emailHtml = renderEmail(
+    //     <Email title="My Email Template">
+    //         <Item>
+    //             <h1>Hello, World!</h1>
+    //             <p>This is a sample email template.</p>
+    //             <p>{otpText}</p>
+    //             <A href="https://example.com">Visit Example.com</A>
+    //         </Item>
+    //     </Email>
+    // );
 
-    // const emailHtml = renderEmail(<MyEmailTemplate url="https://example.com" />);
+    const emailHtml = renderEmail(<MyEmailTemplate url="https://example.com" />);
 
     var mailOptions = {
         from: process.env.NODEMAILER_EMAIL,
