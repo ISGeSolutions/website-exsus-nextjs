@@ -8,11 +8,11 @@ export function MyEmailTemplate(props) {
   return (
     <Html lang="en">
       {/* <Button href={url}>Click me</Button> */}
-      <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+      <table align="center" border="0" cellPadding="0" cellSpacing="0" width="100%">
         <tbody>
           <tr>
             <td>
-              <table class="content" bgcolor="#fff" align="center" style={{ border: `1px solid #666666`, margin: `15px auto` }} cellpadding="0" cellspacing="0" width="600px">
+              <table className="content" bgcolor="#fff" align="center" style={{ border: `1px solid #666666`, margin: `15px auto` }} cellPadding="0" cellSpacing="0" width="600px">
                 <tr>
                   <td align="center" bgcolor="#252525" style={{ padding: `15px` }}>
                     <img src="@hosturlimages/images/logo.png" alt="emailer_logo" width="120" height="36" align="center" />
@@ -20,7 +20,7 @@ export function MyEmailTemplate(props) {
                 </tr>
                 <tr>
                   <td bgcolor="#FFFFFF">
-                    <table border="0" cellpadding="0" cellspacing="0" width="95%" align="center" style={{ padding: `0 0 20px` }}>
+                    <table border="0" cellPadding="0" cellSpacing="0" width="95%" align="center" style={{ padding: `0 0 20px` }}>
                       <tr>
                         <td bgcolor="#fff" height="20px" style={{ padding: `15px 5px 0`, fontWeight: `bold`, textTransform: `uppercase` }}>
                           <font face="Verdana" color="#5d5d5d" size="2"> CONTACT US REQUEST </font>

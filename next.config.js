@@ -146,10 +146,6 @@ const nextConfig = {
         ];
     },
     reactStrictMode: true,
-    experimental: {
-        newNextLinkBehavior: false,
-        nextScriptWorkers: true
-    },
     eslint: {
         // Warning: This allows production builds to successfully complete even if
         // your project has ESLint errors.
@@ -195,12 +191,6 @@ const nextConfig = {
                 ]
             }
         ]
-    },
-    settings: {
-        cors: {
-            enabled: true,
-            origin: ['*']
-        },
     },
 }
 
