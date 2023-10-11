@@ -6,7 +6,7 @@ const handler = async (req, res) => {
             case "POST": {
                 //Do some thing
                 await sendMail(
-                    "TEST",
+                    "Exsus Website: Email Integration Testing",
                     "spchobhe@gmail.com",
                     "THI IS A TEST FOR MY MEDIUM USERS"
                 );
