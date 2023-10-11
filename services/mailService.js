@@ -61,7 +61,7 @@ export async function sendMail(subject, toEmail, otpText) {
         text: otpText,
         html: emailHtml,
     };
-
+ 
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
             throw new Error(error);
