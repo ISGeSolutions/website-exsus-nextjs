@@ -11,6 +11,7 @@
     "dependencies": {
         "@hookform/resolvers": "^3.1.0",
         "@react-email/button": "*",
+        "@react-email/head": "^0.0.5",
         "@react-email/html": "^0.0.4",
         "@react-email/render": "^0.0.7",
         "@vercel/analytics": "^1.0.1",
@@ -28,7 +29,7 @@
         "nodemailer": "^6.9.6",
         "prop-types": "^15.8.1",
         "react": "18.2.0",
-        "react-bootstrap-select": "^0.14.0", 
+        "react-bootstrap-select": "^0.14.0",
         "react-dom": "18.2.0",
         "react-hook-form": "^7.43.9",
         "react-html-email": "^3.0.0",
