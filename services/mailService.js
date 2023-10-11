@@ -10,24 +10,27 @@ var nodemailer = require("nodemailer");
 //-----------------------------------------------------------------------------
 export async function sendMail(subject, toEmail, otpText) {
     var transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            user: "",
-            pass: "",
-        },
-        // host: "smtp.office365.com",
+        // service: "gmail",
         // auth: {
-        //     user: "noreply@exsus.com",
-        //     pass: "wF9AHt3A7xXf1",
+        //     user: "spchobhe@gmail.com",
+        //     pass: "avuhoxxdmvszzzpg",
         // },
-        // port: "587",
-        // enableSsl: "true",
-        // secure: false,
-        // secureConnection: false,
-        // tls: {
-        //     ciphers: 'SSLv3'
-        // },
-        // requireTLS: true
+
+        service: "Outlook365",
+        host: "smtp.office365.com",
+        auth: {
+            user: "noreply@exsus.com",
+            pass: "wF9AHt3A7xXf1",
+        },
+        port: "587",
+        enableSsl: "true",
+        secure: false,
+        tls: {
+            ciphers: "SSLv3",
+        },
+        requireTLS: true,
+        // debug: true,
+        // logger:true
     });
 
     // const emailHtml = renderEmail(<EmailTemplate url="https://example.com" />);
@@ -38,21 +41,21 @@ export async function sendMail(subject, toEmail, otpText) {
     //     </EmailTemplate>
     //   );
 
-    const emailHtml = renderEmail(
-        <Email title="My Email Template">
-            <Item>
-                <h1>Hello, World!</h1>
-                <p>This is a sample email template.</p>
-                <p>{otpText}</p>
-                <A href="https://example.com">Visit Example.com</A>
-            </Item>
-        </Email>
-    );
+    // const emailHtml = renderEmail(
+    //     <Email title="My Email Template">
+    //         <Item>
+    //             <h1>Hello, World!</h1>
+    //             <p>This is a sample email template.</p>
+    //             <p>{otpText}</p>
+    //             <A href="https://example.com">Visit Example.com</A>
+    //         </Item>
+    //     </Email>
+    // );
 
     // const emailHtml = renderEmail(<MyEmailTemplate url="https://example.com" />);
 
     var mailOptions = {
-        // from: process.env.NODEMAILER_EMAIL,
+        from: 'noreply@exsus.com',
         to: toEmail,
         subject: subject,
         text: otpText,
