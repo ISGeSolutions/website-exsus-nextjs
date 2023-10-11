@@ -41,9 +41,14 @@ function Inspireme() {
 
     useEffect(() => {
 
-        destinationService.getDestinationLandingList().then(x => {
+        destinationService.getDestinationInspireMe().then(x => {
             // console.log('getDestinationLandingList', x);
-            setDestinationLandingList(x.data);
+            const sortedData = x.data.sort(
+                (a, b) =>
+                    a.attributes.main_page_serial_number -
+                    b.attributes.main_page_serial_number
+            );
+            setDestinationLandingList(sortedData);
             // setDestinationLandingDetails(x)
         });
 

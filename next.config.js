@@ -141,7 +141,11 @@ const nextConfig = {
             { source: '/asia/hotel-detail', destination: '/hotel-detail' },
             { source: '/asia/hotel-detail', destination: '/hotel-detail' },
 
-
+            // blog-detail
+            { source: "/uk/blog/blog-detail", destination: "/blog-detail" },
+            { source: "/us/blog/blog-detail", destination: "/blog-detail" },
+            { source: "/asia/blog/blog-detail", destination: "/blog-detail" },
+            { source: "/in/blog/blog-detail", destination: "/blog-detail" },
             // Add more custom routes as needed
         ];
     },

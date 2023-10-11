@@ -3,6 +3,8 @@ import { Link, Spinner, Signup } from 'components';
 import { Layout } from 'components/users';
 import { hotelService, destinationService } from 'services';
 import Iframe from 'react-iframe'
+import { useRouter } from 'next/router';
+
 import Head from 'next/head';
 import { NavLink } from 'components';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -11,9 +13,21 @@ var Carousel = require('react-responsive-carousel').Carousel;
 export default Index;
 
 function Index() {
-
+    const router = useRouter();
     const [itineraries, setItineraries] = useState(null);
     const [bannerImages, setBannerImages] = useState(null);
+    const itin_id = router.query.itineraryid;
+    const itin_code = router.query.itinerarycode;
+    const [title, setTitle] = useState('');
+
+    let regionWiseUrl = '/uk';
+    if (typeof window !== 'undefined') {
+        if (window && window.site_region) {
+            // console.log('window.site_region', window.site_region);
+            regionWiseUrl = '/' + window.site_region;
+            // setMyVariable(window.site_region);
+        }
+    }
 
     const equalHeight = (resize) => {
         var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -36,6 +50,20 @@ function Index() {
         }
     }
 
+    const EnquiryButton = () => {
+        const router = useRouter();
+
+        const handleEnquiryClick = () => {
+            router.push(`/contact-us`); // Navigate to the /enquiry page
+        };
+
+        return (
+            <button className="btn prmry_btn make_enqury_btn" onClick={handleEnquiryClick}> Make an enquiry
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+            </button>
+        );
+    };
+
     equalHeight(true);
 
     const overTextFun = (text) => {
@@ -54,11 +82,11 @@ function Index() {
             });
         });
 
-        destinationService.getItineraryDetails().then(x => {
+        destinationService.getItineraryDetails(itin_id, itin_code).then(x => {
             // 
-            // console.log('x.data', x.data);
             const bannerImages = [];
-            const imageCheck = x.data[0].attributes?.itinerary_details.data;
+            const imageCheck = x.data?.attributes?.itinerary_details.data;
+            setTitle(x.data.attributes.meta_title)
             imageCheck.forEach((banner, index) => {
                 bannerImages.push(banner?.attributes?.image_path);
                 // if (banner?.attributes?.image_type == 'banner') {
@@ -68,7 +96,7 @@ function Index() {
 
             // console.log('bannerImages', bannerImages);
             setBannerImages(bannerImages);
-            setItineraries(x.data[0]);
+            setItineraries(x.data);
 
             // const carousel = document.querySelector('#Testimonials');
             // new bootstrap.Carousel(carousel);
@@ -77,11 +105,12 @@ function Index() {
             window.addEventListener('resize', equalHeight(true));
         });
 
-    }, []);
+    }, [itin_id, itin_code]);
 
     return (
         <>
             <Head>
+                <title>{title}</title>
                 <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
                 <script type="text/javascript" src="/assets/javascripts/card-slider02.js"></script>
                 <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script>
@@ -183,11 +212,9 @@ function Index() {
                         <h3 className="trvl_title_sub">{itineraries?.attributes?.sub_header_text}</h3>
                         <p className="mb-4"><span>Duration: </span>{itineraries?.attributes?.no_of_nites_notes}</p>
                         <p className="mb-4"><span>Price: </span>
-                            {itineraries?.attributes?.itinerary_country_contents?.data[0]?.attributes?.guideline_price_notes}
-                            {/* From £11,250 per person in low season based on two adults travelling together and including international flights in business className, accommodation, some meals, internal flights, experiences as stated, train transportation, private transfers and taxes</p>
-                            <p className="mb-4">Explore China in ultimate style on this exclusive holiday, and enjoy private guided tours of landmarks such as the Summer Palace, the Forbidden City, the Great Wall, and beautiful historic towns, villages and temples. During this memorable trip, you’ll also get to explore markets, dine in handpicked restaurants, join a local tai chi session, walk in the mountains and enjoy cocktails in stunning rooftop bars. Along the way, you’ll stay in idyllic Aman hotels which not only take luxury to a whole new level, but have incredible locations including a former guests’ residence in the grounds of the Summer Palace. We've also included extras such as signature Aman massages and reflexology treatments at each hotel - the ideal way to unwind after all that sightseeing. */}
-                        </p>
-                        <p>{itineraries?.attributes?.overview_text}</p>
+                            {itineraries?.attributes?.itinerary_country_contents?.data[0]?.attributes?.guideline_price_notes}</p>
+                        <div className="mb-4" dangerouslySetInnerHTML={{ __html: itineraries?.attributes?.overview_text }} />
+
                     </div>
 
                     <section className="country_highlight_row itinery_hightlight_row mb-0">
@@ -219,9 +246,10 @@ function Index() {
                             <p>All itineraries on our website are designed as a starting point. Tell us your budget/wishlist/preferred length of stay and we'll help you select the best hotels and experiences, so your holiday is totally personalised.</p>
                             <div className="btn_grp">
                                 Call 020 7337 9010 or
-                                <button className="btn prmry_btn make_enqury_btn ml-2" style={{ marginLeft: '10px' }}>Make an enquiry
+                                {/* <button className="btn prmry_btn make_enqury_btn ml-2" style={{ marginLeft: '10px' }}>Make an enquiry
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                </button>
+                                </button> */}
+                                <EnquiryButton />
                             </div>
                         </div>
                     </section>
@@ -240,19 +268,19 @@ function Index() {
                                     <div className="itinery_detls_para">
                                         {/* <h3><span>3 nights</span>BEIJING</h3> */}
                                         <div dangerouslySetInnerHTML={{ __html: overTextFun(element?.attributes?.overview_text) }} />
-                                        {/* <div className="itinery_detls_expnded">
-                                        <p>from the East Gate. You’ll enjoy a private guided tour of the palace, which was the summer retreat of the royals of the Qing dynasty, walking along its pretty waterfront paths and around landscaped gardens.</p>
+                                        <div className="itinery_detls_expnded">
+                                            {/* <p>from the East Gate. You’ll enjoy a private guided tour of the palace, which was the summer retreat of the royals of the Qing dynasty, walking along its pretty waterfront paths and around landscaped gardens.</p>
                                         <p>During your stay here you’ll also be expertly guided around many of Beijing’s other landmarks, including Tiananmen Square, the unmissable Forbidden City, an impressive complex dating back to the Ming and Qing dynasties, and the Temple of Heaven, where you can join in a local tai chi session. In the evening, visit a bustling night market and feast on Peking duck at one of the city’s best restaurants.</p>
-                                        <p>You’ll also spend a day visiting the iconic Great Wall, including a tour of the Tibetan-Buddhist Lama Temple on the way. Get under the wall’s skin with a guided tour of Mutianyu, one of the best-preserved sections of the wall.</p>
-                                    </div>
-                                    <button className="btn itinery_btn">
+                                        <p>You’ll also spend a day visiting the iconic Great Wall, including a tour of the Tibetan-Buddhist Lama Temple on the way. Get under the wall’s skin with a guided tour of Mutianyu, one of the best-preserved sections of the wall.</p> */}
+                                        </div>
+                                        {/* <button className="btn itinery_btn">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" className="up_arrow" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
                                     </button> */}
                                     </div>
                                 </div>
                                 <div className="col-sm-5 ps-sm-0">
                                     <div className="itinery_detls_img">
-                                        <img src={element?.attributes?.image_path} alt="itinery_cntnt01" className="img-fluid" />
+                                        <img src={element?.attributes?.image_path} alt={element?.attributes?.image_text} className="img-fluid" />
                                     </div>
                                 </div>
                             </div>
@@ -595,9 +623,10 @@ function Index() {
                 <div className="container">
                     <h3>YOUR JOURNEY STARTS HERE</h3>
                     <p>call us on 020 7337 9010 to start planning your perfect trip</p>
-                    <button className="btn prmry_btn make_enqury_btn">Make an enquiry
+                    {/* <button className="btn prmry_btn make_enqury_btn">Make an enquiry
                         <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                    </button>
+                    </button> */}
+                    <EnquiryButton />
                 </div>
             </section>
 

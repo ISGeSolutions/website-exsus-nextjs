@@ -2,18 +2,22 @@ import { useState, useEffect } from 'react';
 
 import { Link, Spinner, Signup } from 'components';
 import { Layout } from 'components/users';
-import { userService } from 'services';
+import { userService, blogsService } from 'services';
+import { useRouter } from 'next/router';
 
 export default Index;
 
 function Index() {
     const [users, setUsers] = useState(null);
+    const router = useRouter();
+    const { blogid } = router.query;
+    const [blogDetail, setblogdetail] = useState({});
 
     useEffect(() => {
-        // userService.getAll().then(x => setUsers(x));
-        // const carousel = document.querySelector('#carouselExampleInterval');
-        // new bootstrap.Carousel(carousel);
-    }, []);
+        blogsService.getBlogDetails(blogid).then((x) => {
+            setblogdetail(x.data.attributes);
+        });
+    }, [blogid]);
 
     return (
         <Layout>
@@ -23,21 +27,22 @@ function Index() {
                         <ul>
                             <li><a href="homepage.html">Home</a></li>
                             <li><a href="blog.html">Blog</a></li>
-                            <li>Luxury Family Safaris in Africa - Favourite</li>
+                            <li>{blogDetail.blog_header_text}</li>
                         </ul>
                     </div>
                     <div className="destinations_cntnt_blk">
-                        <h2>LUXURY FAMILY SAFARIS IN AFRICA - FAVOURITE</h2>
-                        <h3>By Exsus Travel - Jul 04, 2022</h3>
+                        <h2>{blogDetail.blog_header_text}</h2>
+                        <h3>By Exsus Travel - {blogDetail.blog_date}</h3>
                         <a className="blog_detl_link" target="_blank" href="https://twitter.com/Exsustravel/"><em className="fa fa-twitter"></em>Follow us @Exsus
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path></svg>
                         </a>
                         <div className="row">
                             <div className="col-lg-8 col-xl-9">
-                                <p>Voted Top Ten Specialist Tour Operator by Conde Nast Traveller, Exsus has over 14 years' experience in creating luxury holidays to <a href="#">Africa, Europe, the Caribbean, Indian Ocean, South America, Central America, the USA and Canada, Australasia, Dubai and Oman and South East Asia.</a></p>
-                                <p>Taking your family on safari can be one of life's most magical experiences. Whether you are travelling with younger children or teenagers, Exsus tailor-makes <a href="#">family-friendly safaris</a> - hand-picking the best places to visit to maximise the fun, educational and adventurous elements of your holiday! Non-malarial <a href="#">South Africa</a> is fabulous for young families, Kenya and <a href="#">Tanzania</a> have countless child-friendly lodges and offers great options for soft adventure, while <a href="#">Zambia</a> is particularly good for larger family groups and active teenagers.</p>
-                                <p>For answers to some frequently asked questions about family safaris <a href="#">visit our Q&A page here.</a></p>
-                                <p>Here are a few of our favourite family safari ideas; they are just a starting point and Africa offers a multitude of amazing family friendly holiday options. To create your own bespoke trip, click on the Enquire Now button or call TelephoneNumber.</p>
+                                <div
+                                    dangerouslySetInnerHTML={{
+                                        __html: blogDetail.blog_text,
+                                    }}
+                                />
                             </div>
                             <div className="col-lg-4 col-xl-3">
                                 <div className="article_blk"><i className="bi bi-pencil-square"></i>

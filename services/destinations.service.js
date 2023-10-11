@@ -54,7 +54,8 @@ export const destinationService = {
     getCustomPagesData,
     getRegions,
     getHotelById,
-    getItinerariesInAdvanceSearch
+    getItinerariesInAdvanceSearch,
+    getDestinationInspireMe
 };
 
 function getAllDropdown() {
@@ -78,18 +79,13 @@ function getDestinationLandingPage() {
 }
 
 function getDestinationLandingList() {
-    // console.log('baseUrl_dropdown', baseUrl_dropdown);
-    const destinationLandingListUrl = `${publicRuntimeConfig.apiUrl}/api/destinations?fields[0]=destination_code&fields[1]=destination_name&populate[destination_images][fields][2]=image_path&populate[destination_images][fields][3]=image_type&populate[countries][fields][4]=country_code&populate[countries][fields][5]=country_name`;
+    const destinationLandingListUrl = `${publicRuntimeConfig.apiUrl}/api/destinations?filters[main_page_ind][$eq]=true&fields[0]=destination_code&fields[1]=destination_name&populate[destination_images][fields][2]=image_path&populate[destination_images][fields][3]=image_type&populate[countries][fields][4]=country_code&populate[countries][fields][5]=country_name`;
     return fetchWrapper.get(destinationLandingListUrl);
+}
 
-    // const destinationLandingListUrl = 'https://my.baileyrobinson.com/mydhruvapi/api/v1/mydhruv/Authentication/gettoken/BRGMDA2023';
-    // console.log('destinationLandingListUrl', destinationLandingListUrl);
-
-    // const obj = {
-    //     emailid: "shivam@isgesolutions.com",
-    //     password: "test"
-    // }
-    // return fetchWrapper.post(destinationLandingListUrl, obj);
+function getDestinationInspireMe() {
+    const destinationLandingListUrl = `${publicRuntimeConfig.apiUrl}/api/destinations?filters[main_page_ind][$eq]=true&fields[0]=destination_code&fields[1]=destination_name&populate[destination_images][fields][2]=image_path&populate[destination_images][fields][3]=image_type&populate[countries][fields][4]=country_code&populate[countries][fields][5]=country_name&fields[6]=main_page_ind&fields[7]=main_page_serial_number`;
+    return fetchWrapper.get(destinationLandingListUrl);
 }
 
 function getDestinationDetails(id) {
@@ -116,8 +112,8 @@ function getFavIti() {
     return fetchWrapper.get(itinerariesDetailsUrl);
 }
 
-function getItineraryDetails() {
-    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries/1?populate[0]=itinerary_details&filters[itin_code]=0000000348`;
+function getItineraryDetails(id, code) {
+    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries/${id}?populate[0]=itinerary_details&filters[itin_code]=${code}`;
     return fetchWrapper.get(itinerariesDetailsUrl);
 }
 

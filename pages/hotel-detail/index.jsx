@@ -27,7 +27,6 @@ function Index() {
     useEffect(() => {
         const carousel = document.querySelector('#carouselExampleInterval');
         new bootstrap.Carousel(carousel);
-        console.log(hotelId);
         destinationService.getHotelById(hotelId).then(x => {
             // console.log('x1', x);
             // setWhyusDetails(x.data.attributes);

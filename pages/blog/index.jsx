@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
 import Head from "next/head";
+import { NavLink } from "components";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 var Carousel = require('react-responsive-carousel').Carousel;
@@ -33,12 +34,24 @@ function Index() {
         holidaytype: Yup.string()
     });
 
-
+    let regionWiseUrl = "/uk";
+    if (typeof window !== "undefined") {
+        if (window && window.site_region) {
+            regionWiseUrl = "/" + window.site_region;
+            // setMyVariable(window.site_region);
+        }
+    }
 
     const onSubmit = (e) => {
         console.log("First Name ", firstName);
         console.log("Last Name ", lastName);
         console.log("Email", email);
+    };
+
+
+    const generateDynamicLink = (item) => {
+        // console.log('item', item);
+        return regionWiseUrl + `/blog/blog-detail?blogid=${item}`;
     };
 
     const formOptions = { resolver: yupResolver(validationSchema) };
@@ -243,13 +256,7 @@ function Index() {
                                     {allBlogsData?.slice(0, allBlogsData.length).map((res) => (
                                         <div className="col-sm-6 col-lg-4 col-xxl-3" key={res.id}>
                                             <div className="blog_cnt_inr">
-                                                <a href="blogs/blog-details">
-                                                    {/* <div className="card_slider">
-                          <NavLink
-                            //href={generateDynamicLink(item)}
-                            className="card_slider_img"
-                          ></NavLink>
-                        </div> */}
+                                                <NavLink href={generateDynamicLink(res.id)}>
                                                     {res?.attributes?.blog_image_path && (
                                                         <img
                                                             src={res?.attributes?.blog_image_path}
@@ -276,7 +283,7 @@ function Index() {
                                                             ></path>
                                                         </svg>
                                                     </span>
-                                                </a>
+                                                </NavLink>
                                             </div>
                                         </div>
                                     ))}

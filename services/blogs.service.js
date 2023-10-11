@@ -18,7 +18,8 @@ export const blogsService = {
     user: userSubject.asObservable(),
     get userValue() { return userSubject.value },
     getAllBlogs,
-    getAllBlogsHomePage
+    getAllBlogsHomePage,
+    getBlogDetails
 };
 
 
@@ -31,6 +32,12 @@ function getAllBlogs(page) {
 
 function getAllBlogsHomePage() {
     const blogsUrl = `${publicRuntimeConfig.apiUrl}/api/blogs`;
+    return fetchWrapper.get(blogsUrl);
+}
+
+
+function getBlogDetails(id) {
+    const blogsUrl = `${publicRuntimeConfig.apiUrl}/api/blogs/${id}`;
     return fetchWrapper.get(blogsUrl);
 }
 

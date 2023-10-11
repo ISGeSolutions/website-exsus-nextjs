@@ -41,8 +41,8 @@ function getExsusReviews() {
     return fetchWrapper.get(exsusReviewsUrl);
 }
 
-function getExecutivesById() {
-    const whyusPageUrl = `${publicRuntimeConfig.apiUrl}/api/travel-executives/1?populate[0]=travel_executive_contents&populate[1]=travel_reviews`;
+function getExecutivesById(id) {
+    const whyusPageUrl = `${publicRuntimeConfig.apiUrl}/api/travel-executives/${id}?populate[0]=travel_executive_contents&populate[1]=travel_reviews`;
     return fetchWrapper.get(whyusPageUrl);
 }
 

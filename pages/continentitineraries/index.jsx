@@ -231,11 +231,11 @@ function ContinentItinararies() {
 
     const generateDynamicLink = (item) => {
         // console.log('item', item);
-        return regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`;
+        return regionWiseUrl + `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`;
     };
 
-    const handleRedirect = () => {
-        router.push(regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`);
+    const handleRedirect = (item) => {
+        router.push(regionWiseUrl + `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`);
     };
 
     const equalHeight = (resize) => {
@@ -447,11 +447,11 @@ function ContinentItinararies() {
                                                         </li>
                                                     </ul>
                                                 </div>
-                                                <button className="btn card_slider_btn">
+                                                <button className="btn card_slider_btn" onClick={() => handleRedirect(item)}>
                                                     <span>{item?.attributes?.no_of_nites_notes}</span>
                                                     <span
                                                         className="view_itnry_link"
-                                                        onClick={handleRedirect}
+
                                                     >
                                                         View this itinerary
                                                         <em className="fa-solid fa-chevron-right"></em>
