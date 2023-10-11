@@ -3,9 +3,9 @@ var nodemailer = require("nodemailer");
 // import { EmailTemplate } from '../components/MyEmailTemplate';
 // import { renderEmail } from '@react-email/html';
 // const { render } = require('@react-email/html');
-// import { renderEmail } from 'react-html-email';
-// import MyEmailTemplate from './../components/MyEmailTemplate';
-// import { Email, Item, A } from 'react-html-email';
+import { renderEmail } from 'react-html-email';
+import MyEmailTemplate from './../components/MyEmailTemplate';
+import { Email, Item, A } from 'react-html-email';
 
 //-----------------------------------------------------------------------------
 export async function sendMail(subject, toEmail, otpText) {
@@ -41,16 +41,16 @@ export async function sendMail(subject, toEmail, otpText) {
     //     </EmailTemplate>
     //   );
 
-    // const emailHtml = renderEmail(
-    //     <Email title="My Email Template">
-    //         <Item>
-    //             <h1>Hello, World!</h1>
-    //             <p>This is a sample email template.</p>
-    //             <p>{otpText}</p>
-    //             <A href="https://example.com">Visit Example.com</A>
-    //         </Item>
-    //     </Email>
-    // );
+    const emailHtml = renderEmail(
+        <Email title="My Email Template">
+            <Item>
+                <h1>Hello, World!</h1>
+                <p>This is a sample email template.</p>
+                <p>{otpText}</p>
+                <A href="https://example.com">Visit Example.com</A>
+            </Item>
+        </Email>
+    );
 
     // const emailHtml = renderEmail(<MyEmailTemplate url="https://example.com" />);
 
@@ -59,7 +59,7 @@ export async function sendMail(subject, toEmail, otpText) {
         to: toEmail,
         subject: subject,
         text: otpText,
-        // html: emailHtml,
+        html: emailHtml,
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
