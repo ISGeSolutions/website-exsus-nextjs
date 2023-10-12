@@ -9,7 +9,7 @@ const handler = async (req, res) => {
             case "POST": {
                 //Do some thing
                 await sendMail(
-                    "Exsus Website Email Integration Testing",
+                    "Exsus Website: Email Integration Testing",
                     email_id,
                     "Test Email",
                     data,
