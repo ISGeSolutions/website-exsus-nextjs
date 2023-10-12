@@ -11,53 +11,57 @@ import { MyEmailTemplate } from './../components/MyEmailTemplate';
 //-----------------------------------------------------------------------------
 export async function sendMail(subject, toEmail, otpText) {
 
-    var transporter = nodemailer.createTransport({
-        // service: "gmail",
-        // auth: {
-        //     user: "spchobhe@gmail.com",
-        //     pass: "",
-        // },
+    return new Promise((resolve, reject) => {
+        var transporter = nodemailer.createTransport({
+            // service: "gmail",
+            // auth: {
+            //     user: "spchobhe@gmail.com",
+            //     pass: "",
+            // },
 
-        service: "Outlook365",
-        host: "smtp.office365.com",
-        auth: {
-            user: "noreply@exsus.com",
-            pass: "wF9AHt3A7xXf1",
-            // user: "spchobhe@live.com",
-            // pass: "",
-        },
-        port: "587",
-        enableSsl: "true",
-        secure: true,
-        tls: {
-            ciphers: "SSLv3",
-        },
-        requireTLS: true,
-        // debug: true,
-        // logger:true
-    });
+            service: "Outlook365",
+            host: "smtp.office365.com",
+            auth: {
+                user: "noreply@exsus.com",
+                pass: "wF9AHt3A7xXf1",
+                // user: "spchobhe@live.com",
+                // pass: "",
+            },
+            port: "587",
+            enableSsl: "true",
+            secure: true,
+            tls: {
+                ciphers: "SSLv3",
+            },
+            requireTLS: true,
+            // debug: true,
+            // logger:true
+        });
 
-    // const emailHtml = renderEmail(<MyEmailTemplate url="https://example.com" />);
+        // const emailHtml = renderEmail(<MyEmailTemplate url="https://example.com" />);
 
-    const emailHtml = render(<MyEmailTemplate />);
+        const emailHtml = render(<MyEmailTemplate />);
 
 
-    var mailOptions = {
-        from: 'noreply@exsus.com',
-        // from: 'spchobhe@live.com',
-        to: toEmail,
-        subject: subject,
-        text: otpText,
-        html: emailHtml,
-    };
+        var mailOptions = {
+            from: 'noreply@exsus.com',
+            // from: 'spchobhe@live.com',
+            to: toEmail,
+            subject: subject,
+            text: otpText,
+            html: emailHtml,
+        };
 
-    transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            console.log('error', error);
-            throw new Error(error);
-        } else {
-            console.log("Email Sent");
-            return true;
-        }
-    });
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log('error', error);
+                resolve(false);
+                // throw new Error(error);
+            } else {
+                console.log("Email Sent");
+                // return true;
+                resolve(true);
+            }
+        });
+    })
 }
