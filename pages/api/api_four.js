@@ -2,13 +2,17 @@ import { sendMail } from "./../../services/mailService";
 const handler = async (req, res) => {
     try {
         const { method } = req;
+        const { data } = req.body;
+        const { email_id, first_name, note } = req.body.data;
+
         switch (method) {
             case "POST": {
                 //Do some thing
                 await sendMail(
-                    "Exsus Website: Email Integration Testing",
-                    "spchobhe@gmail.com",
-                    "THI IS A TEST FOR MY MEDIUM USERS"
+                    first_name,
+                    email_id,
+                    note,
+                    data
                 );
                 res.status(200).send("Success");
                 break;

@@ -1,9 +1,27 @@
-import * as React from 'react';
+// import * as React from 'react';
 import { Html, style } from '@react-email/html';
 import { Button } from '@react-email/button';
+import React, { useState, useEffect } from 'react';
 
 export function MyEmailTemplate(props) {
-  const { url } = props;
+
+  const { emailDetails } = props;
+  const [currentDate, setCurrentDate] = useState(new Date());
+
+  useEffect(() => {
+    // Update the current date every second
+    const intervalId = setInterval(() => {
+      setCurrentDate(new Date());
+    }, 1000);
+
+    // Clean up the interval when the component unmounts
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
+  // Format the current date as a string
+  const formattedDate = currentDate.toLocaleString();
 
   return (
     <Html lang="en">
@@ -38,47 +56,47 @@ export function MyEmailTemplate(props) {
                       </tr>
                       <tr>
                         <td bgcolor="#fff" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                          <font face="Verdana" color="#5d5d5d" size="2"><strong>First Name: </strong> @FirstName</font>
+                          <font face="Verdana" color="#5d5d5d" size="2"><strong>First Name: </strong> {emailDetails?.first_name}</font>
                         </td>
                       </tr>
                       <tr>
                         <td bgcolor="#fff" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                          <font face="Verdana" color="#5d5d5d" size="2"><strong>Last Name: </strong> @LastName</font>
+                          <font face="Verdana" color="#5d5d5d" size="2"><strong>Last Name: </strong> {emailDetails?.last_name}</font>
                         </td>
                       </tr>
                       <tr>
                         <td bgcolor="#fff" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                          <font face="Verdana" color="#5d5d5d" size="2"><strong>Email: </strong> @Email</font>
+                          <font face="Verdana" color="#5d5d5d" size="2"><strong>Email: </strong> {emailDetails?.email_id}</font>
                         </td>
                       </tr>
                       <tr>
                         <td bgcolor="#fff" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                          <font face="Verdana" color="#5d5d5d" size="2"><strong>Telephone: </strong> @Telephone</font>
+                          <font face="Verdana" color="#5d5d5d" size="2"><strong>Telephone: </strong> {emailDetails?.telephone_no}</font>
                         </td>
                       </tr>
                       <tr>
                         <td bgcolor="#fff" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                          <font face="Verdana" color="#5d5d5d" size="2"><strong>Note: </strong> @Note</font>
+                          <font face="Verdana" color="#5d5d5d" size="2"><strong>Note: </strong> {emailDetails?.note}</font>
                         </td>
                       </tr>
                       <tr>
                         <td bgcolor="#fff" width="580" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                          <font face="Verdana" color="#5d5d5d" size="2"><strong>Page Url: </strong> @PageUrl</font>
+                          <font face="Verdana" color="#5d5d5d" size="2"><strong>Page Url: </strong> {emailDetails?.source_of_marketing}</font>
                         </td>
                       </tr>
                       <tr>
                         <td bgcolor="#fff" width="580" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                          <font face="Verdana" color="#5d5d5d" size="2"><strong>Enquiry reference number: </strong> @EnqRefNo</font>
+                          <font face="Verdana" color="#5d5d5d" size="2"><strong>Enquiry reference number: </strong> </font>
                         </td>
                       </tr>
                       <tr>
                         <td bgcolor="#fff" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                          <font face="Verdana" color="#5d5d5d" size="2"><strong>US Site?: </strong> @IsUS</font>
+                          <font face="Verdana" color="#5d5d5d" size="2"><strong>US Site?: </strong> {emailDetails?.preferred_place_time}</font>
                         </td>
                       </tr>
                       <tr>
                         <td bgcolor="#fff" width="580" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                          <font face="Verdana" color="#5d5d5d" size="2"><strong>Submitted at: </strong> @CreatedDate</font>
+                          <font face="Verdana" color="#5d5d5d" size="2"><strong>Submitted at: </strong> {formattedDate}</font>
                         </td>
                       </tr>
                       {/* <tr>

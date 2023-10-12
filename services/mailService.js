@@ -9,7 +9,7 @@ import { render } from '@react-email/render';
 import { MyEmailTemplate } from './../components/MyEmailTemplate';
 
 //-----------------------------------------------------------------------------
-export async function sendMail(subject, toEmail, otpText) {
+export async function sendMail(subject, toEmail, otpText, data) {
 
     return new Promise((resolve, reject) => {
         var transporter = nodemailer.createTransport({
@@ -39,7 +39,7 @@ export async function sendMail(subject, toEmail, otpText) {
 
         // const emailHtml = renderEmail(<MyEmailTemplate url="https://example.com" />);
 
-        const emailHtml = render(<MyEmailTemplate />);
+        const emailHtml = render(<MyEmailTemplate emailDetails={data} />);
 
         var mailOptions = {
             from: 'noreply@exsus.com',
