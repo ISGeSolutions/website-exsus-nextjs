@@ -10,6 +10,7 @@ import { MyEmailTemplate } from './../components/MyEmailTemplate';
 
 //-----------------------------------------------------------------------------
 export async function sendMail(subject, toEmail, otpText) {
+
     var transporter = nodemailer.createTransport({
         // service: "gmail",
         // auth: {
@@ -52,6 +53,7 @@ export async function sendMail(subject, toEmail, otpText) {
 
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
+            console.log('error', error);
             throw new Error(error);
         } else {
             console.log("Email Sent");
