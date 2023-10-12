@@ -47,9 +47,9 @@ export async function sendMail(subject, toEmail, otpText, data, emailpage) {
         var mailOptions = {
             from: 'noreply@exsus.com',
             // from: 'spchobhe@live.com',
-            to: data.email_id,
-            subject: data.first_name,
-            // text: data.note,
+            to: toEmail,
+            subject: subject,
+            text: otpText,
             html: emailHtml,
         };
 
