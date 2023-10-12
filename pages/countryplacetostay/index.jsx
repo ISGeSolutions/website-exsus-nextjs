@@ -24,7 +24,7 @@ function CountryPlaceToStay(country) {
     const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
     const [itineraries, setItineraries] = useState(null);
     const router = useRouter();
-    const itemsPerPage = 9; // Number of items to load per page
+    const itemsPerPage = 12; // Number of items to load per page
     const [page, setPage] = useState(0); // Current page
     const [metaData, setMetaData] = useState([]);
     const [dcode, setdcode] = useState();
@@ -191,6 +191,10 @@ function CountryPlaceToStay(country) {
                 setPage(page + 1);
             }
         });
+    };
+
+    const handleRedirect = (item) => {
+        return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
     };
 
     const handleOptionCountryChange = (selectedOption) => {
@@ -361,12 +365,10 @@ function CountryPlaceToStay(country) {
 
     const generateDynamicLink = (item) => {
         // console.log('item', item);
-        return regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`;
+        return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
     };
 
-    const handleRedirect = () => {
-        router.push(regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`);
-    };
+
 
     useEffect(() => {
         setSelectedOptionCountry(countryOptions[0]);
@@ -508,35 +510,14 @@ function CountryPlaceToStay(country) {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-sm-6 col-lg-4">
-                                    <div className="card_slider_inr">
-                                        <div className="card_slider">
-                                            <a className="card_slider_img">
-                                                <img src="./../../../images/destination_hotel01.jpg" alt="destination_hotel01" className="img-fluid" />
-                                            </a>
-                                            <div className="card_slider_cnt places_to_stay_cnt">
-                                                <h4><a href="#">CAPELLA UBUD</a></h4>
-                                                <ul>
-                                                    <li>Location: Bali | Indonesia</li>
-                                                    <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
-                                                    <li>Located in the heart of the Keliki rainforest in Bali, Capella Ubud is the perfect hotel for getting back to nature and disconnecting from the outside world. Designed by renowned architect Bill Bensley, as well as adding a touch of luxury and signature Bensley style, not a single tree was destroyed in its construction, guaranteeing an unspoilt experience of the lush green forests it sits in.</li>
-                                                    <li>Best for:<span>Setting & Views, Eco-tourism, Wildlife & Nature, Peace & Quiet</span></li>
-                                                </ul>
-                                            </div>
-                                            <button className="btn card_slider_btn justify-content-end">
-                                                <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 {allHotels?.slice(0, allHotels.length).map((item) => (
-                                    <div className="col-sm-6 col-lg-4">
+                                    <div className="col-sm-6 col-lg-4 col-xxl-3">
                                         <div className="card_slider_inr">
                                             <div className="card_slider">
-                                                <a className="card_slider_img">
+                                                <NavLink className="card_slider_img" href={generateDynamicLink(item.id)}>
                                                     <img src="./../../../images/destination_hotel02.jpg" alt="destination_hotel02" className="img-fluid" />
-                                                </a>
+                                                </NavLink>
                                                 <div className="card_slider_cnt places_to_stay_cnt">
                                                     <h4><a href="#">{item?.attributes?.hotel_name}</a></h4>
                                                     <ul>
@@ -546,7 +527,7 @@ function CountryPlaceToStay(country) {
                                                         <li>Best for:<span>{item?.attributes?.recommended_for_text}</span></li>
                                                     </ul>
                                                 </div>
-                                                <button className="btn card_slider_btn justify-content-end">
+                                                <button className="btn card_slider_btn justify-content-end" onClick={() => handleRedirect(item.id)}>
                                                     <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
                                                 </button>
                                             </div>
@@ -555,9 +536,33 @@ function CountryPlaceToStay(country) {
                                 ))}
 
                                 <div className="col-12">
-                                    <button className="btn prmry_btn make_enqury_btn mx-auto text-uppercase">Show 9 more places to stay
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
-                                    </button>
+                                    {metaData.total > page * itemsPerPage && (
+                                        <button
+                                            className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
+                                            onClick={loadMoreData}
+                                        >
+                                            Show{" "}
+                                            {metaData.total - page * itemsPerPage > 12
+                                                ? 12
+                                                : metaData.total - page * itemsPerPage > 12}{" "}
+                                            more holiday
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="#ffffff"
+                                                shapeRendering="geometricPrecision"
+                                                textRendering="geometricPrecision"
+                                                imageRendering="optimizeQuality"
+                                                fillRule="evenodd"
+                                                clipRule="evenodd"
+                                                viewBox="0 0 512 266.77"
+                                            >
+                                                <path
+                                                    fillRule="nonzero"
+                                                    d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"
+                                                />
+                                            </svg>
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         </div>

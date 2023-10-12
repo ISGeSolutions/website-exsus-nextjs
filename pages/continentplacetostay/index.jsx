@@ -182,6 +182,10 @@ function ContinentPlacesToStay() {
         });
     };
 
+    const handleRedirect = (item) => {
+        return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
+    };
+
     const handleOptionCountryChange = (selectedOption) => {
         selectedOption = selectedOption.filter((i) => i.value !== '' && typeof i.value !== 'undefined');
         setSelectedOptionCountry(selectedOption);
@@ -395,11 +399,9 @@ function ContinentPlacesToStay() {
                                                         <li>Best for:<span>{item?.attributes?.recommended_for_text}</span></li>
                                                     </ul>
                                                 </div>
-                                                <NavLink href={generateDynamicLink(item.id)}>
-                                                    <button className="btn card_slider_btn justify-content-end" >
-                                                        <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
-                                                    </button>
-                                                </NavLink>
+                                                <button className="btn card_slider_btn justify-content-end" onClick={() => handleRedirect(item.id)}>
+                                                    <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
