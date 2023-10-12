@@ -14,9 +14,11 @@ export const contactusService = {
 
 function makeanenquiry(contactusData) {
     const currentUrl = window?.location?.origin + '/api/api_four';
-    return fetchWrapper.post(`${currentUrl}`);
+    return fetchWrapper.post(`${currentUrl}`, contactusData);
 }
 
 function brochureRequest(brochureData) {
     return fetchWrapper.post(`${baseUrlBrochure}`, brochureData);
 }
+
+

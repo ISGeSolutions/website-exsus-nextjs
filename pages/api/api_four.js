@@ -2,7 +2,6 @@ import { sendMail } from "./../../services/mailService";
 const handler = async (req, res) => {
     try {
         const { method } = req;
-        console.log('req', req);
         switch (method) {
             case "POST": {
                 //Do some thing
