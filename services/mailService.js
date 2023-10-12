@@ -18,7 +18,6 @@ export async function sendMail(subject, toEmail, otpText) {
             //     user: "spchobhe@gmail.com",
             //     pass: "",
             // },
-
             service: "Outlook365",
             host: "smtp.office365.com",
             auth: {
@@ -42,7 +41,6 @@ export async function sendMail(subject, toEmail, otpText) {
 
         const emailHtml = render(<MyEmailTemplate />);
 
-
         var mailOptions = {
             from: 'noreply@exsus.com',
             // from: 'spchobhe@live.com',
@@ -54,11 +52,11 @@ export async function sendMail(subject, toEmail, otpText) {
 
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
-                console.log('error', error);
+                // console.log('error', error);
                 resolve(false);
                 // throw new Error(error);
             } else {
-                console.log("Email Sent");
+                // console.log("Email Sent");
                 // return true;
                 resolve(true);
             }
