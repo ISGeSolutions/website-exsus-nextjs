@@ -3,7 +3,7 @@ import { Html, style } from '@react-email/html';
 import { Button } from '@react-email/button';
 import React, { useState, useEffect } from 'react';
 
-export function MyEmailTemplate(props) {
+export function ContactUsEmailTemplate(props) {
 
   const { emailDetails } = props;
   const [currentDate, setCurrentDate] = useState(new Date());

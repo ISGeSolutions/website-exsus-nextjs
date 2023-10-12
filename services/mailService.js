@@ -6,7 +6,7 @@ import { renderEmail } from 'react-html-email';
 
 import { render } from '@react-email/render';
 // import nodemailer from 'nodemailer';
-import { MyEmailTemplate } from './../components/MyEmailTemplate';
+import { ContactUsEmailTemplate } from '../components/ContactUsEmailTemplate';
 
 //-----------------------------------------------------------------------------
 export async function sendMail(subject, toEmail, otpText, data, emailpage) {
@@ -41,7 +41,7 @@ export async function sendMail(subject, toEmail, otpText, data, emailpage) {
 
         let emailHtml = '';
         if (emailpage == 'contactus') {
-            emailHtml = render(<MyEmailTemplate emailDetails={data} />);
+            emailHtml = render(<ContactUsEmailTemplate emailDetails={data} />);
         }
 
         var mailOptions = {
