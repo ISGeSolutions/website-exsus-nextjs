@@ -40,16 +40,16 @@ export async function sendMail(subject, toEmail, otpText, data, emailpage) {
         // const emailHtml = renderEmail(<MyEmailTemplate url="https://example.com" />);
 
         let emailHtml = '';
-        if(emailpage == 'contactus') {
+        if (emailpage == 'contactus') {
             emailHtml = render(<MyEmailTemplate emailDetails={data} />);
         }
 
         var mailOptions = {
             from: 'noreply@exsus.com',
             // from: 'spchobhe@live.com',
-            to: toEmail,
-            subject: subject,
-            text: otpText,
+            to: data.email_id,
+            subject: data.first_name,
+            // text: data.note,
             html: emailHtml,
         };
 

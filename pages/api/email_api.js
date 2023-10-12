@@ -4,15 +4,12 @@ const handler = async (req, res) => {
         const { method } = req;
         const { data, emailpage } = req.body;
         const { email_id, first_name, note } = req.body.data;
-       
+
         switch (method) {
             case "POST": {
                 //Do some thing
                 await sendMail(
-                    first_name,
-                    email_id,
-                    note,
-                    data, 
+                    data,
                     emailpage
                 );
                 res.status(200).send("Success");
