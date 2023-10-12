@@ -24,6 +24,8 @@ function CountryItinararies(country) {
     const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
     const [itineraries, setItineraries] = useState([]);
     const [page, setPage] = useState(0); // Current page
+    const itemsPerPage = 12; // Number of items to load per page
+
     const [metaData, setMetaData] = useState([]);
 
     const router = useRouter();
@@ -177,7 +179,6 @@ function CountryItinararies(country) {
         { value: "December", label: "December" }
     ];
 
-    const itemsPerPage = 9; // Number of items to load per page
     const [visibleItems, setVisibleItems] = useState(itemsPerPage)
 
     // const handleLoadMore = () => {
@@ -227,11 +228,11 @@ function CountryItinararies(country) {
 
     const generateDynamicLink = (item) => {
         // console.log('item', item);
-        return regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=${region}`;
+        return regionWiseUrl + `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`;
     };
 
-    const handleRedirect = () => {
-        router.push(regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=${region}`);
+    const handleRedirect = (item) => {
+        router.push(regionWiseUrl + `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`);
     };
 
     const equalHeight = (resize) => {
@@ -394,7 +395,7 @@ function CountryItinararies(country) {
                                     </div>
                                 </div>
                                 {itineraries?.slice(0, itineraries.length).map((item) => (
-                                    <div className="col-sm-6 col-lg-4" key={item.id}>
+                                    <div className="col-sm-6 col-lg-4 col-xxl-3" key={item.id}>
                                         <div className="card_slider_inr">
                                             <div className="card_slider">
                                                 <NavLink href={generateDynamicLink(item)} className="card_slider_img">
@@ -411,14 +412,14 @@ function CountryItinararies(country) {
                                                     <h4><a href="#">{item?.attributes?.itin_name}</a></h4>
                                                     <ul>
                                                         <li>{item?.attributes?.header_text}</li>
-                                                        <li>Indonesia</li>
+                                                        {/* <li>Indonesia</li> */}
                                                         <li>{item?.attributes?.itinerary_country_contents?.data[0]?.attributes?.guideline_price_notes_index}</li>
                                                         <li>Travel to:<span>{item?.attributes?.sub_header_text}</span></li>
                                                     </ul>
                                                 </div>
-                                                <button className="btn card_slider_btn">
+                                                <button className="btn card_slider_btn" onClick={() => handleRedirect(item)}>
                                                     <span>{item?.attributes?.no_of_nites_notes}</span>
-                                                    <span className="view_itnry_link" onClick={handleRedirect}>View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                                    <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
                                                 </button>
                                             </div>
                                         </div>
@@ -428,8 +429,30 @@ function CountryItinararies(country) {
 
                                 <div className="col-12">
                                     {metaData.total > page * itemsPerPage && (
-                                        <button className="btn prmry_btn make_enqury_btn mx-auto text-uppercase" onClick={loadMoreData}>Show {(metaData.total - page * itemsPerPage) > 9 ? 9 : (metaData.total - page * itemsPerPage) > 9} more holiday
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
+                                        <button
+                                            className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
+                                            onClick={loadMoreData}
+                                        >
+                                            Show{" "}
+                                            {metaData.total - page * itemsPerPage > 12
+                                                ? 12
+                                                : metaData.total - page * itemsPerPage > 12}{" "}
+                                            more holiday
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="#ffffff"
+                                                shapeRendering="geometricPrecision"
+                                                textRendering="geometricPrecision"
+                                                imageRendering="optimizeQuality"
+                                                fillRule="evenodd"
+                                                clipRule="evenodd"
+                                                viewBox="0 0 512 266.77"
+                                            >
+                                                <path
+                                                    fillRule="nonzero"
+                                                    d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"
+                                                />
+                                            </svg>
                                         </button>
                                     )}
                                 </div>
