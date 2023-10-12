@@ -5,16 +5,16 @@ const { publicRuntimeConfig } = getConfig();
 const baseUrlEnquiries = `${publicRuntimeConfig.apiUrl}/api/enquiries`;
 const baseUrlBrochure = `${publicRuntimeConfig.apiUrl}/api/brochure-requests`;;
 
-const contactusEmailUrl = `${publicRuntimeConfig.apiUrl}/api/api_four`;
-
 export const contactusService = {
     makeanenquiry,
     brochureRequest
 };
 
 function makeanenquiry(contactusData) {
-    const currentUrl = window?.location?.origin + '/api/api_four';
-    return fetchWrapper.post(`${currentUrl}`, contactusData);
+    let postdata = contactusData;
+    postdata.emailpage = 'contactus';
+    const currentUrl = window?.location?.origin + '/api/email_api';
+    return fetchWrapper.post(`${currentUrl}`, postdata);
 }
 
 function brochureRequest(brochureData) {

@@ -46,7 +46,7 @@ export function MyEmailTemplate(props) {
                       </tr>
                       <tr>
                         <td bgcolor="#fff" height="25px" style={{ padding: `15px 5px` }}>
-                          <font face="Verdana" color="#5d5d5d" size="2">The following request was recieved at <a href="#" style={{ textDecoration: `none`, color: `#8aad56`, fontWeight: `bold` }}>exsus.com on </a> @CreatedDate</font>
+                          <font face="Verdana" color="#5d5d5d" size="2">The following request was recieved at <a href="#" style={{ textDecoration: `none`, color: `#8aad56`, fontWeight: `bold` }}>exsus.com on </a> { formattedDate }</font>
                         </td>
                       </tr>
                       <tr>

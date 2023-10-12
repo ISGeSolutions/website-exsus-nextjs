@@ -1,10 +1,10 @@
-import { sendMail } from "./../../services/mailService";
+import { sendMail } from "../../services/mailService";
 const handler = async (req, res) => {
     try {
         const { method } = req;
-        const { data } = req.body;
+        const { data, emailpage } = req.body;
         const { email_id, first_name, note } = req.body.data;
-
+       
         switch (method) {
             case "POST": {
                 //Do some thing
@@ -12,7 +12,8 @@ const handler = async (req, res) => {
                     first_name,
                     email_id,
                     note,
-                    data
+                    data, 
+                    emailpage
                 );
                 res.status(200).send("Success");
                 break;
