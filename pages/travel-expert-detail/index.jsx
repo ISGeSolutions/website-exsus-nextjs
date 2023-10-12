@@ -12,10 +12,12 @@ var Carousel = require('react-responsive-carousel').Carousel;
 export default Index;
 
 function Index() {
+    const router = useRouter();
     const [users, setUsers] = useState(null);
     const [executiveData, setExecutiveData] = useState({});
     const [testimonials, setTestimonials] = useState([]);
     const { prefixOfImage } = useState("https://www.exsus.com/");
+    const expertId = router.query.expertid;
 
     const equalHeight = (resize) => {
         var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -61,7 +63,7 @@ function Index() {
         // new bootstrap.Carousel(carousel);
 
 
-        whyusService.getExecutivesById().then(x => {
+        whyusService.getExecutivesById(expertId).then(x => {
             const response = x.data;
             const str = response?.attributes?.executive_image_path;
             const substringToCheck = 'https://www.exsus.com/';
@@ -129,7 +131,7 @@ function Index() {
             }
         }
 
-    }, []);
+    }, [expertId]);
 
     return (
         <Layout>

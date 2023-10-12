@@ -297,12 +297,18 @@ function Nav() {
 
         destinationService.getDestinationLandingList().then(x => {
             // console.log('x.data', x.data);
+
             setDestinationLandingList(x.data);
         });
 
         holidaytypesService.getHolidaytypesLandingList().then(x => {
             // console.log('x.data - holiday types', x.data);
-            setHolidaytypesList(x.data);
+            const sortedData = x.data.sort(
+                (a, b) =>
+                    a.attributes.main_page_serial_number -
+                    b.attributes.main_page_serial_number
+            );
+            setHolidaytypesList(sortedData);
         });
 
         setActiveIndex(0);

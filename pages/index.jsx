@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import { Inspireme } from '../components';
 import Head from 'next/head';
 import { holidaytypesService, destinationService, blogsService } from 'services';
 import { NavLink } from 'components';
@@ -33,6 +34,11 @@ function Index() {
     const generateDynamicLink = (item) => {
         // console.log('item', item);
         return regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`;
+    };
+
+    const generateDynamicLinkBlog = (item) => {
+        // console.log('item', item);
+        return regionWiseUrl + `/blog/blog-detail?blogid=${item}`;
     };
 
     const handleRedirect = () => {
@@ -274,62 +280,8 @@ function Index() {
                         </a>
                     </div>
                 </div>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="banner_dropdwn_row">
-                        <div className="container">
-                            <div className="banner_dropdwn_inr d-block d-md-flex">
-                                <div className="banner_dropdwn_blk">
-                                    <div className="select_drpdwn">
-                                        <select aria-label="Choose a destination" name="destination" {...register('destination')} className={`form-select ${errors.destination ? 'is-invalid' : ''}`}>
-                                            <option value="">Choose a destination</option>
-                                            {destinationLandingList?.map((element, i) => (
-                                                <option key={element?.id} value={element?.attributes?.destination_code}>{element?.attributes?.destination_name}</option>
-                                            ))}
-                                        </select>
-                                        <div className="invalid-feedback mb-1">{errors.destination?.message}</div>
-                                    </div>
-                                </div>
-                                <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                                    <div className="select_drpdwn">
-                                        <select aria-label="Choose a reason" name="reason" {...register('reason')} className={`form-select ${errors.reason ? 'is-invalid' : ''}`}>
-                                            <option value="">Choose a reason</option>
-                                            {holidaytypesLandingList?.map((element, i) => (
-                                                <option key={element?.id} value={element?.attributes?.holiday_type_group_code}>{element?.attributes?.holiday_type_group_name}</option>
-                                            ))}
-                                        </select>
-                                        <div className="invalid-feedback mb-1">{errors.reason?.message}</div>
-                                    </div>
-                                </div>
-                                <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                                    <div className="select_drpdwn">
-                                        <select aria-label="Choose a month" name="month" {...register('month')} className={`form-select ${errors.month ? 'is-invalid' : ''}`}>
-                                            <option value="">Choose a month</option>
-                                            <option value="January">January</option>
-                                            <option value="February">February</option>
-                                            <option value="March">March</option>
-                                            <option value="April">April</option>
-                                            <option value="May">May</option>
-                                            <option value="June">June</option>
-                                            <option value="July">July</option>
-                                            <option value="August">August</option>
-                                            <option value="September">September</option>
-                                            <option value="October">October</option>
-                                            <option value="November">November</option>
-                                            <option value="December">December</option>
-                                        </select>
-                                        <div className="invalid-feedback mb-1">{errors.month?.message}</div>
-                                    </div>
-                                </div>
-                                <div className="banner_inspire_btn ps-0 ps-md-2">
-                                    <button type="submit" className="btn btn-primary prmry_btn">Inspire me
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                {/* <Inspireme /> */}
+
+                <Inspireme />
             </section>
 
             <section className="card_blk_row">
@@ -448,7 +400,7 @@ function Index() {
                                 key={res.id}
                             >
                                 <div className="card_blk_inr">
-                                    <a>
+                                    <NavLink href={generateDynamicLinkBlog(res.id)}>
                                         {res?.attributes?.blog_image_path && (
                                             <img
                                                 src={res?.attributes?.blog_image_path}
@@ -483,7 +435,7 @@ function Index() {
                                                 </div>
                                             </div>
                                         </div>
-                                    </a>
+                                    </NavLink>
                                 </div>
                             </div>
                         ))}
