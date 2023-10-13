@@ -23,8 +23,6 @@ export async function sendMail(subject, toEmail, otpText, data, emailpage) {
             auth: {
                 user: "noreply@exsus.com",
                 pass: "wF9AHt3A7xXf1",
-                // user: "spchobhe@live.com",
-                // pass: "",
             },
             port: "587",
             enableSsl: "true",
