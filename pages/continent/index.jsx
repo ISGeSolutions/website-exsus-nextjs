@@ -1,11 +1,8 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { destinationService } from 'services';
 import Iframe from 'react-iframe';
 import Head from 'next/head';
-import React from 'react';
-import { useRef } from 'react';
 import { useRouter } from 'next/router';
-
 import Country from '../country/index'; // Adjust the path accordingly
 import ContinentCountry from '../continentcountries/index'; // Adjust the path accordingly
 import ContinentItinararies from '../continentitineraries/index'; // Adjust the path accordingly
@@ -33,6 +30,7 @@ function Index() {
         'places-to-stay': useRef(null),
     };
 
+    const divRef = useRef();
 
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
@@ -41,7 +39,6 @@ function Index() {
             // setMyVariable(window.site_region);
         }
     }
-
 
     const EnquiryButton = () => {
         const router = useRouter();
@@ -56,7 +53,6 @@ function Index() {
             </button>
         );
     };
-
 
     <button className="btn header_nav_btn">
         MEET OUR EXPERTS
@@ -77,15 +73,11 @@ function Index() {
         </svg>
     </button>
 
-
     const handleDataFromChild = (data) => {
         // console.log(data);
         // Update the parent component's state with data received from the child
         toggleTab(data);
     };
-
-
-
 
     const toggleTab = (itemId) => {
         var text = metaTitle;
@@ -254,7 +246,7 @@ function Index() {
                 {/* <p>{mapVariable}</p> */}
             </section>
 
-            <section className="destination_tab_row light_grey pb-0">
+            <section className="destination_tab_row light_grey" ref={divRef}>
                 <div className="container">
                     <div className="bookmark_row">
                         <p style={{ color: `white` }}>{destinationDetails?.attributes?.page_friendly_url}</p>
@@ -302,10 +294,10 @@ function Index() {
                         <ContinentCountry sendDataToParent={handleDataFromChild} />
                     </div>}
                     {activeTab === 'itineraries' && <div className={activeTab === 'itineraries' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-itineraries" role="tabpanel" aria-labelledby="pills-itineraries-tab" tabIndex="0" ref={tabContentRefs['itinararies']}>
-                        <ContinentItinararies dataProp={destinationcode} />
+                        <ContinentItinararies dataProp={destinationcode} divRef={divRef} />
                     </div>}
                     {activeTab === 'places-to-stay' && <div className={activeTab === 'places-to-stay' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-places-to-stay" role="tabpanel" aria-labelledby="pills-places-to-stay-tab" tabIndex="0" ref={tabContentRefs['places-to-stay']}>
-                        <ContinentPlacesToStay />
+                        <ContinentPlacesToStay  divRef={divRef}/>
                     </div>}
                 </div>
             </section>
