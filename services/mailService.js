@@ -13,11 +13,6 @@ export async function sendMail(subject, toEmail, otpText, data, emailpage) {
 
     return new Promise((resolve, reject) => {
         var transporter = nodemailer.createTransport({
-            // service: "gmail",
-            // auth: {
-            //     user: "spchobhe@gmail.com",
-            //     pass: "",
-            // },
             service: "Outlook365",
             host: "smtp.office365.com",
             auth: {
@@ -44,7 +39,6 @@ export async function sendMail(subject, toEmail, otpText, data, emailpage) {
 
         var mailOptions = {
             from: 'noreply@exsus.com',
-            // from: 'spchobhe@live.com',
             to: toEmail,
             subject: subject,
             text: otpText,
