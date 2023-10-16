@@ -7,6 +7,7 @@ import { renderEmail } from 'react-html-email';
 import { render } from '@react-email/render';
 // import nodemailer from 'nodemailer';
 import { ContactUsEmailTemplate } from '../components/ContactUsEmailTemplate';
+import { NewsLetterEmailTemplate } from '../components/NewsLetterEmailTemplate';
 
 //-----------------------------------------------------------------------------
 export async function sendMail(subject, toEmail, otpText, data, emailpage) {
@@ -35,6 +36,8 @@ export async function sendMail(subject, toEmail, otpText, data, emailpage) {
         let emailHtml = '';
         if (emailpage == 'contactus') {
             emailHtml = render(<ContactUsEmailTemplate emailDetails={data} />);
+        } else if (emailpage == 'newsletter') {
+            emailHtml = render(<NewsLetterEmailTemplate emailDetails={data} />);
         }
 
         var mailOptions = {

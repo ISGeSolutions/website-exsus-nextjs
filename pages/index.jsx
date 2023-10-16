@@ -380,8 +380,17 @@ function Index() {
                             {testimonials.map((text, index) => (
                                 <div key={index} target="_blank" className={`carousel-item ${index === 0 ? 'active' : ''}`} data-bs-interval="5000">
                                     <div className="carousel-caption">
-                                        <p>{text?.attributes.review_short_text}</p>
-                                        <span>{text?.attributes.client_name}</span>
+                                        <p
+                                            dangerouslySetInnerHTML={{
+                                                __html: text?.attributes.review_short_text,
+                                            }}
+                                        />
+                                        <span
+                                            dangerouslySetInnerHTML={{
+                                                __html: text?.attributes.client_name,
+                                            }} />
+                                        {/* <p>{text?.attributes.review_short_text}</p>
+                                        <span>{text?.attributes.client_name}</span> */}
                                     </div>
                                 </div>
                             ))}
@@ -396,7 +405,7 @@ function Index() {
                     <div className="row">
                         {sortedData?.map((res) => (
                             <div
-                                className="col-xs-12 col-sm-4 col-md-4 col-lg-3"
+                                className="col-sm-6 col-md-6 col-lg-4"
                                 key={res.id}
                             >
                                 <div className="card_blk_inr">

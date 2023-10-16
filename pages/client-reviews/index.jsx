@@ -79,7 +79,7 @@ function Index() {
                         <a href="https://www.feefo.com/en-GB/reviews/exsus-travel?withMedia=false&timeFrame=ALL&displayFeedbackType=SERVICE" />
                         <img
                             class="img-fluid"
-                            src="images/feefo_platinum_service.png"
+                            src="/images/feefo_platinum_service.png"
                             alt="feefo_platinum_service"
                         />
                     </div>
@@ -89,7 +89,7 @@ function Index() {
                             <h2 className="text-capitalize">
                                 {element?.attributes?.review_header}
                             </h2>
-                            <div dangerouslySetInnerHTML={{ __html: element?.attributes?.review_text }} />
+                            <p dangerouslySetInnerHTML={{ __html: element?.attributes?.review_text }} />
                             {/* <p className="mb-4">{element?.attributes?.review_text}</p> */}
                         </div>
                     ))}

@@ -84,7 +84,7 @@ function Index() {
                     </div>
                     <div className="trvl_info_cntnt">
                         <h2 className="trvl_title">{whyusDetails?.page_header_text}</h2>
-                        <p dangerouslySetInnerHTML={{ __html: whyusDetails?.page_content_1 }} />
+                        <div dangerouslySetInnerHTML={{ __html: whyusDetails?.page_content_1 }} />
                         {/* <p className="mb-4">With over 20 years of experience putting together incredible journeys all around the world, we know the ingredients that go into the perfect luxury holiday. With each itinerary tailor-made from scratch from beginning to end, our well-travelled experts will draw on their first-hand experience to make sure that your next trip, whatever the destination, goes above and beyond.</p>
                         <p>In 1998 we launched our first incredible journeys to South America to debut a new way of travelling. Today, we tailor-make luxury bespoke holidays, honeymoons, family adventures and unique holidays to celebrate special occasions in over 80 countries on all seven continents.</p> */}
                     </div>

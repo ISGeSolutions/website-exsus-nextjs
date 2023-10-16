@@ -55,7 +55,8 @@ export const destinationService = {
     getRegions,
     getHotelById,
     getItinerariesInAdvanceSearch,
-    getDestinationInspireMe
+    getDestinationInspireMe,
+    getRegionById
 };
 
 function getAllDropdown() {
@@ -148,6 +149,11 @@ function getItinerariesInAdvanceSearch(dcode, page) {
     // console.log('baseUrl_dropdown', baseUrl_dropdown);
     const destinationadvanceSearchUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?[filters][destination][destination_code][$eq]=${dcode}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12`;
     return fetchWrapper.get(destinationadvanceSearchUrl);
+}
+
+function getRegionById(id) {
+    const regionsURL = `${publicRuntimeConfig.apiUrl}/api/regions/${id}?populate[0]=region_images&populate[1]=country`;
+    return fetchWrapper.get(regionsURL);
 }
 
 

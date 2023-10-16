@@ -92,19 +92,21 @@ body {
 }
 
 /* line 71, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
-.form-select {
-  background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' fill='white' width='20' viewBox='0 0 512 266.77'%3e%3cpath fill-rule='nonzero' d='M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z'/%3e%3c/svg%3e") no-repeat right !important;
-  background-position-x: 97% !important;
+.select_drpdwn .form-select {
+  background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' fill='white' width='20' viewBox='0 0 512 266.77'%3e%3cpath fill-rule='nonzero' d='M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position-x: 97%;
+  background-position-y: center;
 }
 
-/* line 75, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 77, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .bootstrap-select>.dropdown-toggle:after {
   width: 25px;
   background-size: 20px !important;
   top: 15px;
 }
 
-/* line 81, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 83, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .bootstrap-select>.dropdown-toggle.bs-placeholder,
 .bootstrap-select>.dropdown-toggle.bs-placeholder:active,
 .bootstrap-select>.dropdown-toggle.bs-placeholder:focus,
@@ -115,30 +117,30 @@ body {
   background-color: transparent !important;
 }
 
-/* line 86, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 88, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .dropdown-item:active {
   background-color: #8aad56 !important;
 }
 
-/* line 90, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 92, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .bootstrap-select .dropdown-menu {
   z-index: 2;
 }
 
-/* line 93, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 95, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .bootstrap-select .dropdown-toggle:focus,
 .bootstrap-select>select.mobile-device:focus+.dropdown-toggle {
   outline: 0 !important;
   outline-offset: 0 !important;
 }
 
-/* line 98, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 100, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
   flex: 1;
   max-width: 100%;
 }
 
-/* line 103, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 105, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .bootstrap-select .dropdown-toggle .filter-option {
   line-height: 40px;
   position: absolute;
@@ -150,13 +152,13 @@ body {
   padding: 0 10px;
 }
 
-/* line 114, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 116, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
   padding: 0;
   width: 100%;
 }
 
-/* line 118, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 120, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .bootstrap-select>.dropdown-toggle {
   background: transparent;
   border-radius: 0;
@@ -167,18 +169,18 @@ body {
   z-index: 0;
 }
 
-/* line 128, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 130, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .bootstrap-select.show-tick .dropdown-menu li a span.text {
   text-transform: capitalize;
 }
 
-/* line 132, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 134, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .bootstrap-select>.dropdown-toggle.bs-placeholder {
   color: #ffffff;
   font: 400 0.875rem/1rem "Roboto", sans-serif;
 }
 
-/* line 137, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 139, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .bootstrap-select .bs-ok-default:after {
   content: "\f00c";
   font-family: FontAwesome;
@@ -188,44 +190,44 @@ body {
   line-height: 30px;
 }
 
-/* line 146, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 148, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .bootstrap-select .dropdown-menu.inner {
   padding: 5px;
 }
 
-/* line 150, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 152, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .bootstrap-select .dropdown-menu li {
   border-bottom: 1px solid #efefef;
 }
 
-/* line 152, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 154, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .bootstrap-select .dropdown-menu li:last-child {
   border-bottom: none;
 }
 
-/* line 157, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 159, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .bootstrap-select .dropdown-menu li a {
   padding: 10px 5px;
 }
 
-/* line 161, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 163, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .white_text_colr {
   font: 400 1rem/1.5rem "Roboto", sans-serif;
   color: #ffffff;
 }
 
-/* line 165, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 167, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .pink_text {
   color: #f95e89;
 }
 
-/* line 169, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 171, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .btn_with_extra_padg {
   padding-left: 40px;
   padding-right: 40px;
 }
 
-/* line 173, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 175, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .img_specl_offer {
   background: #ab2147;
   display: inline-block;
@@ -239,12 +241,12 @@ body {
   padding: 10px;
 }
 
-/* line 185, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 187, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .width_100 {
   width: 100%;
 }
 
-/* line 189, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 191, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .form-check input {
   width: 15px;
   height: 17px;
@@ -252,60 +254,60 @@ body {
   background: transparent;
 }
 
-/* line 194, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 196, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .form-check input.form-check-input:checked {
   border-color: #ffffff;
   background: transparent url("data:image/svg+xml;charset=UTF-8,%3c?xml version='1.0' ?%3e%3csvg fill='white' height='17' viewBox='0 0 15 15' width='14' xmlns='http://www.w3.org/2000/svg'%3e%3cpath clip-rule='evenodd' d='M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z' fill='white' fill-rule='evenodd'/%3e%3c/svg%3e");
 }
 
-/* line 200, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 202, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .form-check label {
   font: 300 0.75rem/1.125rem "Roboto", sans-serif;
 }
 
-/* line 205, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 207, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* line 211, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
-input[type=number] {
+/* line 213, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* input[type=number] {
   -moz-appearance: textfield;
-}
+} */
 
-/* line 215, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 217, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .select2-container {
   min-width: 95px;
   width: auto !important;
   vertical-align: top;
 }
 
-/* line 220, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 222, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .select2-search--dropdown {
   display: none;
 }
 
-/* line 223, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 225, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .select2-results__option {
   padding: 0;
 }
 
-/* line 225, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 227, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .select2-results__option div {
   display: flex;
   align-items: center;
 }
 
-/* line 228, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 230, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .select2-results__option div img {
   width: 18px;
   height: 18px;
   margin-right: 5px;
 }
 
-/* line 233, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 235, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .select2-results__option div p {
   font: 0.75rem/0.75rem "Slabo 27px", serif;
   text-transform: uppercase;
@@ -313,13 +315,13 @@ input[type=number] {
   letter-spacing: 1px;
 }
 
-/* line 241, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 243, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .select2-results {
   background: #101010;
   border-radius: 0 0 4px 4px;
 }
 
-/* line 245, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 247, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .select2-container--open .select2-dropdown--below {
   min-width: 160px;
   width: auto;
@@ -329,12 +331,12 @@ input[type=number] {
   top: 3px;
 }
 
-/* line 253, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 255, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .select2-container .select2-selection--single .select2-selection__rendered {
   padding: 0 20px 0px 5px;
 }
 
-/* line 256, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 258, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .select2-container--default .select2-selection--single .select2-selection__arrow {
   height: 10px;
   position: absolute;
@@ -343,7 +345,7 @@ input[type=number] {
   width: 16px;
 }
 
-/* line 263, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 265, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .select2-container--default .select2-selection--single .select2-selection__arrow b {
   background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' fill='white' width='20' viewBox='0 0 512 266.77'%3e%3cpath fill-rule='nonzero' d='M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z'/%3e%3c/svg%3e") no-repeat !important;
   border: none;
@@ -355,28 +357,28 @@ input[type=number] {
   background-size: 16px !important;
 }
 
-/* line 273, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 275, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .select2-results__option {
   padding: 5px;
 }
 
-/* line 275, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 277, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .select2-results__option:first-child {
   border-radius: 4px 4px 0 0;
 }
 
-/* line 278, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 280, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .select2-results__option:last-child {
   border-radius: 0 0 4px 4px;
 }
 
-/* line 282, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 284, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .select2-container--default .select2-results__option--highlighted[aria-selected],
 .select2-container--default .select2-results__option[aria-selected=true] {
   background-color: #8aad56;
 }
 
-/* line 285, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 287, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_blk_row {
   background: #101010;
   position: fixed;
@@ -386,26 +388,26 @@ input[type=number] {
   z-index: 4;
 }
 
-/* line 293, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 295, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_blk_row .header_blk_inr {
   display: flex;
   align-items: center;
   padding: 10px 0 7px;
 }
 
-/* line 297, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 299, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_blk_row .header_blk_inr section {
   color: #ffffff;
   flex: 1;
 }
 
-/* line 335, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 337, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_blk_row .header_blk_inr section.header_item_left .header_drpdown {
   display: inline-block;
   min-width: 95px;
 }
 
-/* line 338, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 340, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_blk_row .header_blk_inr section.header_item_left .header_drpdown a {
   display: flex;
   align-items: center;
@@ -420,36 +422,36 @@ input[type=number] {
   border-radius: 0;
 }
 
-/* line 351, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 353, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_blk_row .header_blk_inr section.header_item_left .header_drpdown img {
   width: 18px;
   height: 18px;
   margin-right: 5px;
 }
 
-/* line 356, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 358, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_blk_row .header_blk_inr section.header_item_left .header_drpdown .dropdown-toggle::after {
   top: 5px;
 }
 
-/* line 359, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 361, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_blk_row .header_blk_inr section.header_item_left .header_drpdown .dropdown-menu {
   background: #101010;
 }
 
-/* line 362, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 364, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_blk_row .header_blk_inr section.header_item_left .header_drpdown .dropdown-menu li:last-child .dropdown-item {
   padding-bottom: 0;
 }
 
-/* line 366, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 368, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_blk_row .header_blk_inr section.header_item_left .header_drpdown .dropdown-menu .dropdown-item {
   padding: 0 0 8px 5px;
   display: flex;
   align-items: center;
 }
 
-/* line 373, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 375, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_blk_row .header_blk_inr section.header_item_left .srch_site_box {
   border: 1px solid #bfbfbf;
   margin-top: 2px;
@@ -457,7 +459,7 @@ input[type=number] {
   max-width: 250px;
 }
 
-/* line 378, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 380, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_blk_row .header_blk_inr section.header_item_left .srch_site_box input {
   border: none;
   background: transparent;
@@ -467,12 +469,12 @@ input[type=number] {
   border-radius: 0;
 }
 
-/* line 385, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 387, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_blk_row .header_blk_inr section.header_item_left .srch_site_box input::placeholder {
   color: #6c757d;
 }
 
-/* line 389, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 391, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_blk_row .header_blk_inr section.header_item_left .srch_site_box button {
   border: none;
   background: transparent;
@@ -481,17 +483,17 @@ input[type=number] {
   border-radius: 0;
 }
 
-/* line 398, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 400, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_blk_row .header_blk_inr section.header_item_center {
   text-align: center;
 }
 
-/* line 401, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 403, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_blk_row .header_blk_inr section.header_item_right {
   text-align: right;
 }
 
-/* line 403, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 405, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_blk_row .header_blk_inr section.header_item_right a {
   display: flex;
   align-items: center;
@@ -503,42 +505,42 @@ input[type=number] {
   transition: all ease 0.3s;
 }
 
-/* line 412, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 414, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_blk_row .header_blk_inr section.header_item_right a:hover,
 .header_blk_row .header_blk_inr section.header_item_right a:focus {
   color: #8aad56;
 }
 
-/* line 415, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 417, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_blk_row .header_blk_inr section.header_item_right a label {
   line-height: 19px;
   cursor: pointer;
 }
 
-/* line 420, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 422, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_blk_row .header_blk_inr section.header_item_right em {
   margin-right: 5px;
   font-size: 19px;
 }
 
-/* line 424, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 426, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_blk_row .header_blk_inr section.header_item_right>div {
   padding-left: 10px;
 }
 
-/* line 428, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 430, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_blk_row .header_blk_inr section.header_item_right>div:last-child em {
   margin-right: 0;
 }
 
-/* line 439, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 441, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 h1 {
   display: flex;
   justify-content: space-around;
   margin: 0;
 }
 
-/* line 443, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 445, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 h1 a {
   font: 2.1875rem/2.1865rem "Slabo 27px", serif;
   color: #ffffff;
@@ -547,43 +549,43 @@ h1 a {
   text-decoration: none;
 }
 
-/* line 450, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 452, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 h1 a span {
   font: 300 0.75rem/0.75rem "Roboto", sans-serif;
   display: block;
 }
 
-/* line 457, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 459, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .dark_grey {
   background: #252525 !important;
 }
 
-/* line 460, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 462, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .light_dark_grey {
   background: #333132;
 }
 
-/* line 463, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 465, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .light_grey {
   background: #434142 !important;
 }
 
-/* line 465, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 467, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .light_grey.favrites_blk_row .card_slider_row i {
   background: #636162 !important;
 }
 
-/* line 469, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 471, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .light_grey_btn_bg {
   background: #636162 !important;
 }
 
-/* line 473, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 475, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .side_menu_hdr {
   display: none;
 }
 
-/* line 477, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 479, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .dropdown-toggle::after {
   background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' fill='white' width='20' viewBox='0 0 512 266.77'%3e%3cpath fill-rule='nonzero' d='M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z'/%3e%3c/svg%3e") no-repeat !important;
   border: none;
@@ -597,28 +599,28 @@ h1 a span {
   border-left: none !important;
 }
 
-/* line 489, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 491, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row {
   height: 520px;
   position: relative;
 }
 
-/* line 492, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 494, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel {
   height: 100%;
 }
 
-/* line 495, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 497, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner {
   height: 100%;
 }
 
-/* line 497, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 499, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item {
   height: 100%;
 }
 
-/* line 499, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 501, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls {
   height: 100%;
   background-size: cover;
@@ -626,474 +628,504 @@ h1 a span {
   background-repeat: no-repeat;
 }
 
-/* line 504, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 506, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.banner_img_custom01 {
   background-image: url(../../images/banner01.png);
 }
 
-/* line 507, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 509, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.banner_img_custom02 {
   background-image: url(../../images/banner02.png);
 }
 
-/* line 510, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 512, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.banner_img_custom03 {
   background-image: url(../../images/banner03.png);
 }
 
-/* line 513, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 515, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.about_us_banner01 {
   background-image: url(../../images/about_us_banner01.jpg);
 }
 
-/* line 516, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 518, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.about_us_banner02 {
   background-image: url(../../images/about_us_banner02.jpg);
 }
 
-/* line 519, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 521, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.about_us_banner03 {
   background-image: url(../../images/about_us_banner03.jpg);
 }
 
-/* line 522, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 524, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.about_us_banner04 {
   background-image: url(../../images/about_us_banner04.jpg);
 }
 
-/* line 525, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 527, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.about_us_banner05 {
   background-image: url(../../images/about_us_banner05.jpg);
 }
 
-/* line 528, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 530, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.our_experts_banner01 {
   background-image: url(../../images/our_experts_banner01.jpg);
 }
 
-/* line 531, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 533, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.destination_banner {
   background-image: url(../../images/destination_banner.jpg);
 }
 
-/* line 534, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 536, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.destination_overvw_banner01 {
   background-image: url(../../images/destination_banner01.jpg);
 }
 
-/* line 537, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 539, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.destination_overvw_banner02 {
   background-image: url(../../images/destination_banner02.jpg);
 }
 
-/* line 540, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 542, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.destination_overvw_banner03 {
   background-image: url(../../images/destination_banner03.jpg);
 }
 
-/* line 543, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 545, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.destination_overvw_banner04 {
   background-image: url(../../images/destination_banner04.jpg);
 }
 
-/* line 546, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 548, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.destination_overvw_banner05 {
   background-image: url(../../images/destination_banner05.jpg);
 }
 
-/* line 549, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 551, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.destination_overvw_banner06 {
   background-image: url(../../images/destination_banner06.jpg);
 }
 
-/* line 552, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 554, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.destination_overvw_banner07 {
   background-image: url(../../images/destination_banner07.jpg);
 }
 
-/* line 555, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 557, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.destination_overvw_banner08 {
   background-image: url(../../images/destination_banner08.jpg);
 }
 
-/* line 558, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 560, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.destination_overvw_banner09 {
   background-image: url(../../images/destination_banner09.jpg);
 }
 
-/* line 561, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 563, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.destination_overvw_banner10 {
   background-image: url(../../images/destination_banner10.jpg);
 }
 
-/* line 564, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 566, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.destination_overvw_banner11 {
   background-image: url(../../images/destination_banner11.jpg);
 }
 
-/* line 567, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 569, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.destination_overvw_banner12 {
   background-image: url(../../images/destination_banner12.jpg);
 }
 
-/* line 570, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 572, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.destination_overvw_banner13 {
   background-image: url(../../images/destination_banner13.jpg);
 }
 
-/* line 573, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 575, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.country_overvw_banner01 {
   background-image: url(../../images/country_banner01.jpg);
 }
 
-/* line 576, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 578, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.country_overvw_banner02 {
   background-image: url(../../images/country_banner02.jpg);
 }
 
-/* line 579, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 581, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.country_overvw_banner03 {
   background-image: url(../../images/country_banner03.jpg);
 }
 
-/* line 582, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 584, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.country_overvw_banner04 {
   background-image: url(../../images/country_banner04.jpg);
 }
 
-/* line 585, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 587, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.country_overvw_banner05 {
   background-image: url(../../images/country_banner05.jpg);
 }
 
-/* line 588, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 590, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.country_overvw_banner06 {
   background-image: url(../../images/country_banner06.jpg);
 }
 
-/* line 591, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 593, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.country_overvw_banner02 {
   background-image: url(../../images/country_banner02.jpg);
 }
 
-/* line 594, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 596, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.country_overvw_banner07 {
   background-image: url(../../images/country_banner07.jpg);
 }
 
-/* line 597, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 599, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.country_overvw_banner08 {
   background-image: url(../../images/country_banner08.jpg);
 }
 
-/* line 600, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 602, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.country_overvw_banner09 {
   background-image: url(../../images/country_banner09.jpg);
 }
 
-/* line 603, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 605, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.country_overvw_banner10 {
   background-image: url(../../images/country_banner10.jpg);
 }
 
-/* line 606, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 608, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.country_overvw_banner11 {
   background-image: url(../../images/country_banner11.jpg);
 }
 
-/* line 609, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 611, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.country_overvw_banner12 {
   background-image: url(../../images/country_banner12.jpg);
 }
 
-/* line 612, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 614, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.region_overvw_banner01 {
   background-image: url(../../images/region_banner01.jpg);
 }
 
-/* line 615, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 617, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.region_overvw_banner02 {
   background-image: url(../../images/country_banner06.jpg);
 }
 
-/* line 618, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 620, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.region_overvw_banner03 {
   background-image: url(../../images/region_banner02.jpg);
 }
 
-/* line 621, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 623, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.region_overvw_banner04 {
   background-image: url(../../images/country_banner01.jpg);
 }
 
-/* line 624, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 626, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.region_overvw_banner05 {
   background-image: url(../../images/region_banner03.jpg);
 }
 
-/* line 627, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 629, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.region_overvw_banner06 {
   background-image: url(../../images/region_banner04.jpg);
 }
 
-/* line 630, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 632, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.region_overvw_banner07 {
   background-image: url(../../images/region_banner05.jpg);
 }
 
-/* line 633, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 635, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.region_overvw_banner08 {
   background-image: url(../../images/region_banner06.jpg);
 }
 
-/* line 636, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 638, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.region_overvw_banner09 {
   background-image: url(../../images/region_banner07.jpg);
 }
 
-/* line 639, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 641, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.itinery_overvw_banner01 {
   background-image: url(../../images/itinery_banner01.jpg);
 }
 
-/* line 642, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 644, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.itinery_overvw_banner02 {
   background-image: url(../../images/itinery_banner02.jpg);
 }
 
-/* line 645, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 647, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.itinery_overvw_banner03 {
   background-image: url(../../images/itinery_banner03.jpg);
 }
 
-/* line 648, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 650, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.itinery_overvw_banner04 {
   background-image: url(../../images/itinery_banner04.jpg);
 }
 
-/* line 651, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 653, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.itinery_overvw_banner05 {
   background-image: url(../../images/itinery_banner05.jpg);
 }
 
-/* line 654, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 656, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.itinery_overvw_banner06 {
   background-image: url(../../images/itinery_banner06.jpg);
 }
 
-/* line 657, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 659, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.itinery_overvw_banner07 {
   background-image: url(../../images/itinery_banner07.jpg);
 }
 
-/* line 660, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 662, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.itinery_overvw_banner08 {
   background-image: url(../../images/itinery_banner08.jpg);
 }
 
-/* line 663, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 665, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.accomodtn_overvw_banner01 {
   background-image: url(../../images/accomodtn_banner01.jpg);
 }
 
-/* line 666, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 668, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.accomodtn_overvw_banner02 {
   background-image: url(../../images/accomodtn_banner02.jpg);
 }
 
-/* line 669, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 671, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.accomodtn_overvw_banner03 {
   background-image: url(../../images/accomodtn_banner03.jpg);
 }
 
-/* line 672, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 674, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.accomodtn_overvw_banner04 {
   background-image: url(../../images/accomodtn_banner04.jpg);
 }
 
-/* line 675, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 677, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.accomodtn_overvw_banner05 {
   background-image: url(../../images/accomodtn_banner05.jpg);
 }
 
-/* line 678, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 680, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.accomodtn_overvw_banner06 {
   background-image: url(../../images/accomodtn_banner06.jpg);
 }
 
-/* line 681, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 683, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.accomodtn_overvw_banner07 {
   background-image: url(../../images/accomodtn_banner07.jpg);
 }
 
-/* line 684, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 686, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.accomodtn_overvw_banner08 {
   background-image: url(../../images/accomodtn_banner08.jpg);
 }
 
-/* line 687, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 689, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.holiday_types_banner {
   background-image: url(../../images/holiday_types_banner.jpg);
 }
 
-/* line 690, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 692, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.holiday_types_detls_banner {
   background-image: url(../../images/holiday_types_detls_banner.jpg);
 }
 
-/* line 693, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 695, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.holiday_types_detls_banner02 {
   background-image: url(../../images/holiday_types_detls_banner02.jpg);
 }
 
-/* line 696, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 698, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.offer_banner01 {
   background-image: url(../../images/offer_banner01.jpg);
 }
 
-/* line 699, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 701, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.offer_banner02 {
   background-image: url(../../images/offer_banner02.jpg);
 }
 
-/* line 702, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 704, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.offer_banner03 {
   background-image: url(../../images/offer_banner03.jpg);
 }
 
-/* line 705, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 707, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.offer_banner04 {
   background-image: url(../../images/offer_banner04.jpg);
 }
 
-/* line 708, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 710, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.offer_banner05 {
   background-image: url(../../images/offer_banner05.jpeg);
 }
 
-/* line 711, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 713, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.offer_banner06 {
   background-image: url(../../images/offer_banner06.jpg);
 }
 
-/* line 714, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 716, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.offer_banner07 {
   background-image: url(../../images/offer_banner07.jpg);
 }
 
-/* line 717, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 719, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.blog_banner01 {
   background-image: url(../../images/blog_banner01.jpg);
 }
 
-/* line 720, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 722, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.blog_banner02 {
   background-image: url(../../images/blog_banner02.jpg);
 }
 
-/* line 723, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 725, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.blog_banner03 {
   background-image: url(../../images/blog_banner03.jpg);
 }
 
-/* line 726, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 728, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.tour_landing_banner {
   background-image: url(../../images/tour_landing_banner.jpg);
 }
 
-/* line 729, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 731, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.tour_detail_banner {
   background-image: url(../../images/tour_detail_banner.jpg);
 }
 
-/* line 732, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 734, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.creating_your_trip_banner {
   background-image: url(../../images/creating_your_trip_banner.jpg);
 }
 
-/* line 735, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 737, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.exsus_reviews_banner {
   background-image: url(../../images/exsus_reviews_banner.jpg);
 }
 
-/* line 738, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 740, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.gift_list_banner01 {
   background-image: url(../../images/gift_list_banner01.jpg);
 }
 
-/* line 741, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 743, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.gift_list_banner02 {
   background-image: url(../../images/gift_list_banner02.jpg);
 }
 
-/* line 744, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 746, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.gift_list_banner03 {
   background-image: url(../../images/gift_list_banner03.jpg);
 }
 
-/* line 747, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 749, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.gift_list_banner04 {
   background-image: url(../../images/gift_list_banner04.jpg);
 }
 
-/* line 750, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 752, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.gift_list_banner05 {
   background-image: url(../../images/gift_list_banner05.jpg);
 }
 
-/* line 753, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 755, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.gift_list_form_banner01 {
   background-image: url(../../images/gift_list_form_banner01.jpg);
 }
 
-/* line 756, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 758, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.gift_list_form_banner02 {
   background-image: url(../../images/gift_list_form_banner02.jpg);
 }
 
-/* line 759, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 761, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.gift_list_form_banner03 {
   background-image: url(../../images/gift_list_form_banner03.jpg);
 }
 
-/* line 762, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 764, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.gift_list_form_banner04 {
   background-image: url(../../images/gift_list_form_banner04.jpg);
 }
 
-/* line 765, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 767, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.gift_list_form_banner05 {
   background-image: url(../../images/gift_list_form_banner05.jpg);
 }
 
-/* line 768, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 770, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.gift_list_form_banner06 {
   background-image: url(../../images/gift_list_form_banner06.jpg);
 }
 
-/* line 771, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 773, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.gift_list_form_banner07 {
   background-image: url(../../images/gift_list_form_banner07.jpg);
 }
 
-/* line 774, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 776, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.gift_list_form_banner08 {
   background-image: url(../../images/gift_list_form_banner08.jpg);
 }
 
-/* line 778, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 779, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+.banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.when_to_go_banner01 {
+  background-image: url(../../images/when_to_go_banner01.jpg);
+}
+
+/* line 782, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+.banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.when_to_go_banner02 {
+  background-image: url(../../images/when_to_go_banner02.jpg);
+}
+
+/* line 785, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+.banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.when_to_go_banner03 {
+  background-image: url(../../images/when_to_go_banner03.jpg);
+}
+
+/* line 788, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+.banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.when_to_go_banner04 {
+  background-image: url(../../images/when_to_go_banner04.jpg);
+}
+
+/* line 791, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+.banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.when_to_go_banner05 {
+  background-image: url(../../images/when_to_go_banner05.jpg);
+}
+
+/* line 794, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+.banner_blk_row .carousel-inner .carousel-item .banner_commn_cls.when_to_go_banner06 {
+  background-image: url(../../images/when_to_go_banner06.jpg);
+}
+
+/* line 798, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .carousel-caption {
   bottom: 110px;
   z-index: 3;
 }
 
-/* line 781, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 801, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .carousel-caption img {
   width: 100px;
   margin-bottom: 10px;
 }
 
-/* line 785, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 805, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-inner .carousel-item .carousel-caption h2 {
   font: 400 1.875rem/1.875rem "Roboto", sans-serif;
   text-shadow: -1px 2px 1px #000;
@@ -1101,12 +1133,12 @@ h1 a span {
   text-transform: uppercase;
 }
 
-/* line 794, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 814, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-indicators {
   bottom: 70px;
 }
 
-/* line 796, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 816, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-indicators button {
   width: 12px;
   height: 12px;
@@ -1114,17 +1146,17 @@ h1 a span {
   border-width: 0;
 }
 
-/* line 802, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 822, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-indicators [data-bs-target] {
   opacity: 1;
 }
 
-/* line 805, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 825, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .carousel-indicators .active {
   background-color: #8aad56;
 }
 
-/* line 809, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 829, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .banner_dropdwn_row {
   background: rgba(0, 0, 0, 0.7);
   position: absolute;
@@ -1134,15 +1166,14 @@ h1 a span {
   padding: 15px 0 0;
 }
 
-/* line 817, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 837, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .banner_dropdwn_row .banner_dropdwn_inr .banner_dropdwn_blk {
   flex: 2;
   padding-bottom: 15px;
 }
 
-/* line 820, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 840, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .banner_dropdwn_row .banner_dropdwn_inr .banner_dropdwn_blk select {
-  background: transparent;
   border-radius: 0;
   border-color: #fff;
   color: #ffffff;
@@ -1152,25 +1183,30 @@ h1 a span {
   text-overflow: ellipsis;
 }
 
-/* line 829, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 849, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .banner_dropdwn_row .banner_dropdwn_inr .banner_dropdwn_blk select option {
   padding: 10px;
   color: #231f20;
   height: 40px;
 }
 
-/* line 834, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 854, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .banner_dropdwn_row .banner_dropdwn_inr .banner_dropdwn_blk select option:hover {
   background: #8aad56;
 }
 
-/* line 839, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 858, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+.banner_blk_row .banner_dropdwn_row .banner_dropdwn_inr .banner_dropdwn_blk .invalid-tooltip {
+  top: calc(100% - 15px);
+}
+
+/* line 862, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .banner_dropdwn_row .banner_dropdwn_inr .banner_inspire_btn {
   min-width: 160px;
   padding-bottom: 15px;
 }
 
-/* line 842, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 865, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .banner_dropdwn_row .banner_dropdwn_inr .banner_inspire_btn button {
   width: 100%;
   border: 1px solid #ffffff;
@@ -1178,13 +1214,13 @@ h1 a span {
   text-align: left;
 }
 
-/* line 847, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 870, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_blk_row .banner_dropdwn_row .banner_dropdwn_inr .banner_inspire_btn button svg {
   width: 20px;
   height: 20px;
 }
 
-/* line 856, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 879, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_tab_blk {
   position: absolute;
   right: 10px;
@@ -1194,7 +1230,7 @@ h1 a span {
   z-index: 3;
 }
 
-/* line 863, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 886, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_tab_blk button {
   color: #ffffff;
   font: 0.75rem/0.75rem "Slabo 27px", serif;
@@ -1206,7 +1242,7 @@ h1 a span {
   position: relative;
 }
 
-/* line 872, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 895, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_tab_blk button::after {
   position: absolute;
   content: "";
@@ -1219,22 +1255,22 @@ h1 a span {
   margin: auto;
 }
 
-/* line 883, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 906, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_tab_blk button:last-child {
   border-right: none;
 }
 
-/* line 885, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 908, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_tab_blk button:last-child::after {
   display: none;
 }
 
-/* line 889, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 912, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_tab_blk button.banner_tab_active {
   pointer-events: none;
 }
 
-/* line 892, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 915, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_tab_blk button:hover,
 .banner_tab_blk button.banner_tab_active,
 .banner_tab_blk button:focus,
@@ -1244,7 +1280,7 @@ h1 a span {
   border-color: #ffffff;
 }
 
-/* line 898, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 921, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_map_blk {
   position: absolute;
   width: 100%;
@@ -1254,56 +1290,56 @@ h1 a span {
   display: none;
 }
 
-/* line 905, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 928, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_map_blk iframe {
   width: 100%;
   height: 100%;
 }
 
-/* line 909, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 932, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .banner_map_blk.banner_map_active {
   display: block;
 }
 
-/* line 914, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 937, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 footer {
   background-color: #231f20;
   padding: 30px 0;
 }
 
-/* line 919, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 942, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .footer_img_row {
   justify-content: space-between;
   align-items: center;
 }
 
-/* line 922, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 945, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .footer_img_row .atol_logo_blk {
   padding-bottom: 30px;
 }
 
-/* line 924, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 947, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .footer_img_row .atol_logo_blk img {
   max-height: 40px;
   margin-right: 5px;
 }
 
-/* line 929, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 952, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .footer_img_row .social_icons_blk {
   padding-bottom: 30px;
 }
 
-/* line 931, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 954, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .footer_img_row .social_icons_blk ul {
   display: flex;
 }
 
-/* line 933, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 956, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .footer_img_row .social_icons_blk ul li {
   padding-left: 5px;
 }
 
-/* line 935, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 958, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .footer_img_row .social_icons_blk ul li a {
   width: 28px;
   height: 28px;
@@ -1314,35 +1350,35 @@ footer {
   transition: all ease 0.3s;
 }
 
-/* line 943, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 966, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .footer_img_row .social_icons_blk ul li a:hover,
 .footer_img_row .social_icons_blk ul li a:focus {
   background-color: #779e3e;
 }
 
-/* line 947, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 970, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .footer_img_row .social_icons_blk ul li em {
   font-size: 0.875rem;
   line-height: 1.75rem;
   color: #231f20;
 }
 
-/* line 952, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 975, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .footer_img_row .social_icons_blk ul li:first-child {
   padding-left: 0;
 }
 
-/* line 960, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 983, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .quick_links_row {
   padding: 15px 0 0;
 }
 
-/* line 962, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 985, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .quick_links_row .quick_links_parnt {
   padding-bottom: 30px;
 }
 
-/* line 964, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 987, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .quick_links_row .quick_links_parnt h6 {
   font: 0.9375rem/0.9375rem "Slabo 27px", serif;
   color: #ffffff;
@@ -1351,12 +1387,12 @@ footer {
   margin-bottom: 10px;
 }
 
-/* line 972, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 995, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .quick_links_row .quick_links_parnt ul li {
   margin-bottom: 5px;
 }
 
-/* line 974, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 997, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .quick_links_row .quick_links_parnt ul li a {
   text-decoration: none;
   font: 300 0.75rem "Roboto", sans-serif;
@@ -1364,43 +1400,43 @@ footer {
   text-transform: capitalize;
 }
 
-/* line 979, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1002, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .quick_links_row .quick_links_parnt ul li a:hover,
 .quick_links_row .quick_links_parnt ul li a:focus {
   color: #8aad56;
 }
 
-/* line 988, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1011, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .copyright_info_row {
   justify-content: space-between;
   align-items: center;
 }
 
-/* line 991, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1014, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .copyright_info_row .copyright_text {
   font: 300 0.75rem/1.125rem "Roboto", sans-serif;
   color: #ffffff;
   padding-bottom: 15px;
 }
 
-/* line 996, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1019, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .copyright_info_row .prvcy_polcy_list {
   padding-bottom: 15px;
 }
 
-/* line 998, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1021, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .copyright_info_row .prvcy_polcy_list ul {
   display: flex;
 }
 
-/* line 1000, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1023, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .copyright_info_row .prvcy_polcy_list ul li {
   border-left: 1px solid #666;
   padding: 0 10px;
   line-height: 0;
 }
 
-/* line 1004, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1027, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .copyright_info_row .prvcy_polcy_list ul li a {
   text-decoration: none;
   font: 300 0.75rem "Roboto", sans-serif;
@@ -1408,36 +1444,36 @@ footer {
   text-transform: capitalize;
 }
 
-/* line 1009, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1032, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .copyright_info_row .prvcy_polcy_list ul li a:hover,
 .copyright_info_row .prvcy_polcy_list ul li a:focus {
   color: #8aad56;
 }
 
-/* line 1013, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1036, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .copyright_info_row .prvcy_polcy_list ul li:first-child {
   border-left: none;
   padding-left: 0;
 }
 
-/* line 1017, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1040, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .copyright_info_row .prvcy_polcy_list ul li:last-child {
   padding-right: 0;
 }
 
-/* line 1025, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1048, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .address_blk_row {
   font: 300 0.75rem/1.125rem "Roboto", sans-serif;
   color: #ffffff;
   padding: 0 0 30px;
 }
 
-/* line 1030, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1053, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .book_with_confidnce_row {
   padding: 15px 0 0;
 }
 
-/* line 1032, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1055, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .book_with_confidnce_row h6 {
   font: 0.9375rem/0.9375rem "Slabo 27px", serif;
   color: #ffffff;
@@ -1447,19 +1483,19 @@ footer {
   text-align: center;
 }
 
-/* line 1040, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1063, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .book_with_confidnce_row p {
   font: 300 0.75rem/1.25rem "Roboto", sans-serif;
   color: #ffffff;
   margin-bottom: 20px;
 }
 
-/* line 1044, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1067, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .book_with_confidnce_row p:last-child {
   margin-bottom: 0;
 }
 
-/* line 1047, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1070, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .book_with_confidnce_row p strong {
   font: 0.9375rem/0.9375rem "Slabo 27px", serif;
   letter-spacing: 0.8px;
@@ -1468,24 +1504,24 @@ footer {
   display: block;
 }
 
-/* line 1054, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1077, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .book_with_confidnce_row p a {
   color: #ffffff;
 }
 
-/* line 1056, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1079, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .book_with_confidnce_row p a:hover,
 .book_with_confidnce_row p a:focus {
   color: #779e3e;
 }
 
-/* line 1064, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1087, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 nav .menu {
   display: flex;
   justify-content: space-between;
 }
 
-/* line 1067, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1090, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 nav .menu .make_enqury_btn {
   text-transform: uppercase;
   font: 0.9375rem/0.9375rem "Slabo 27px", serif;
@@ -1497,12 +1533,12 @@ nav .menu .make_enqury_btn {
   border: none;
 }
 
-/* line 1076, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1099, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 nav .menu .make_enqury_btn svg {
   margin-left: 20px;
 }
 
-/* line 1080, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1103, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 nav .menu .menu-main {
   display: flex;
   justify-content: space-between;
@@ -1510,18 +1546,18 @@ nav .menu .menu-main {
   flex: 1;
 }
 
-/* line 1085, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1108, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 nav .menu .menu-main .header_country_list {
   position: relative;
 }
 
-/* line 1088, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1111, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 nav .menu .menu-main .header_country_list>ul .header_country_label {
   border-bottom: 1px solid #8aad56;
   padding-bottom: 2px;
 }
 
-/* line 1091, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1114, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 nav .menu .menu-main .header_country_list>ul .header_country_label>a {
   font: 400 0.75rem/0.75rem "Roboto", sans-serif;
   color: #231f20;
@@ -1532,7 +1568,7 @@ nav .menu .menu-main .header_country_list>ul .header_country_label>a {
   transition: all ease 0.3s;
 }
 
-/* line 1099, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1122, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 nav .menu .menu-main .header_country_list>ul .header_country_label>a svg {
   width: 50px;
   height: 15px;
@@ -1540,13 +1576,13 @@ nav .menu .menu-main .header_country_list>ul .header_country_label>a svg {
   display: none;
 }
 
-/* line 1106, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1129, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 nav .menu .menu-main .header_country_list>ul .header_country_label.active>a {
   background-color: #8aad56;
   color: #ffffff;
 }
 
-/* line 1112, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1135, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 nav .menu .menu-main .header_country_list .header_country_list_inr {
   position: absolute;
   width: 100%;
@@ -1557,18 +1593,18 @@ nav .menu .menu-main .header_country_list .header_country_list_inr {
   padding: 0 0 0 20px;
 }
 
-/* line 1120, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1143, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 nav .menu .menu-main .header_country_list .header_country_list_inr ul {
   margin-bottom: 10px;
 }
 
-/* line 1122, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1145, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 nav .menu .menu-main .header_country_list .header_country_list_inr ul li {
   border-bottom: 1px solid #8aad56;
   padding-bottom: 2px;
 }
 
-/* line 1125, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1148, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 nav .menu .menu-main .header_country_list .header_country_list_inr ul li a {
   font: 400 0.75rem/0.75rem "Roboto", sans-serif;
   color: #231f20;
@@ -1579,13 +1615,13 @@ nav .menu .menu-main .header_country_list .header_country_list_inr ul li a {
   transition: all ease 0.3s;
 }
 
-/* line 1134, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1157, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 nav .menu .menu-main .header_country_list .header_country_list_inr ul li:hover a {
   background-color: #8aad56;
   color: #ffffff;
 }
 
-/* line 1143, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1166, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 nav .menu .menu-main .header_nav_cnt h4 {
   font: 400 0.75rem/0.75rem "Roboto", sans-serif;
   letter-spacing: 0.4px;
@@ -1594,14 +1630,14 @@ nav .menu .menu-main .header_nav_cnt h4 {
   margin-bottom: 10px;
 }
 
-/* line 1150, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1173, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 nav .menu .menu-main .header_nav_cnt p {
   font: 400 0.75rem/1.25rem "Roboto", sans-serif;
   color: #231f20;
   margin-bottom: 10px;
 }
 
-/* line 1160, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1183, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_nav_btn {
   border: 1px solid #8aad56;
   border-radius: 0;
@@ -1619,7 +1655,7 @@ nav .menu .menu-main .header_nav_cnt p {
   text-align: left;
 }
 
-/* line 1175, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1198, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_nav_btn svg {
   width: 12px;
   height: 12px;
@@ -1627,29 +1663,29 @@ nav .menu .menu-main .header_nav_cnt p {
   margin-left: 5px;
 }
 
-/* line 1181, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1204, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_nav_btn:hover {
   background: #8aad56;
   color: #ffffff;
 }
 
-/* line 1184, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1207, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_nav_btn:hover svg {
   fill: #ffffff;
 }
 
-/* line 1189, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1212, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_inr {
   opacity: 1;
   visibility: visible;
 }
 
-/* line 1193, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1216, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header .menu>ul>li {
   display: inline-block;
 }
 
-/* line 1196, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1219, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header .menu>ul>li>a {
   font: 0.9375rem "Slabo 27px", serif;
   line-height: 35px;
@@ -1661,7 +1697,7 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   text-decoration: none;
 }
 
-/* line 1206, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1229, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header .menu .mobile-menu-head .current-menu-title {
   font: 0.9375rem "Slabo 27px", serif;
   color: #fff;
@@ -1669,13 +1705,13 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   letter-spacing: 1.5px;
 }
 
-/* line 1212, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1235, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header .menu>ul>li>a i,
 .header .menu>ul>li>a svg {
   display: none;
 }
 
-/* line 1215, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1238, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header .menu>ul>li .sub-menu {
   position: absolute;
   z-index: 500;
@@ -1687,18 +1723,18 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   display: none !important;
 }
 
-/* line 1228, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1251, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header .menu>ul>li.menu-item-has-children:hover .sub-menu {
   display: block !important;
   opacity: 1;
 }
 
-/* line 1234, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1257, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header .menu>ul>li .sub-menu>ul>li {
   line-height: 1;
 }
 
-/* line 1237, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1260, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header .menu>ul>li .sub-menu>ul>li>a {
   display: inline-block;
   padding: 10px 0;
@@ -1709,13 +1745,13 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   text-transform: capitalize;
 }
 
-/* line 1247, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1270, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header .menu>ul>li .sub-menu.mega-menu>.list-item>ul>li {
   line-height: 1;
   display: block;
 }
 
-/* line 1251, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1274, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header .menu>ul>li .sub-menu.mega-menu>.list-item>ul>li>a {
   padding: 10px 0;
   display: inline-block;
@@ -1724,13 +1760,13 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   transition: color 0.3s ease;
 }
 
-/* line 1258, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1281, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header .menu>ul>li .sub-menu.mega-menu {
   left: 50%;
   transform: translateX(-50%);
 }
 
-/* line 1263, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1286, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header .menu>ul>li .sub-menu.mega-menu-column-4 {
   max-width: 976px;
   width: 100%;
@@ -1739,13 +1775,13 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   padding: 20px 15px;
 }
 
-/* line 1270, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1293, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header .menu>ul>li .sub-menu.mega-menu-column-4>.list-item {
   flex: 0 0 25%;
   padding: 0 15px;
 }
 
-/* line 1274, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1297, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header .menu>ul>li .sub-menu.mega-menu-column-4>.list-item .title {
   font-size: 16px;
   color: #8aad56;
@@ -1754,12 +1790,12 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   padding: 10px 0;
 }
 
-/* line 1281, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1304, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header .menu>ul>li .sub-menu.mega-menu-column-4>.list-item.text-center .title {
   text-align: center;
 }
 
-/* line 1284, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1307, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header .menu>ul>li .sub-menu.mega-menu>.list-item>ul>li>a:hover,
 .header .menu>ul>li .sub-menu>ul>li>a:hover,
 .header .item-right a:hover,
@@ -1767,12 +1803,12 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   color: #8aad56;
 }
 
-/* line 1290, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1313, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header .menu>ul>li:hover>a svg {
   fill: #8aad56;
 }
 
-/* line 1293, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1316, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .mobile-menu-head,
 .mobile-menu-trigger {
   display: none;
@@ -1802,13 +1838,13 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   }
 }
 
-/* line 1319, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1342, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .tooltip-inner {
   background-color: #8aad56;
   opacity: 1 !important;
 }
 
-/* line 1325, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1348, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .validatn_cls input.form-control,
 .contact_form_row form .select_drpdwn.validatn_cls input.form-control {
   border-color: #dc3545;
@@ -1819,7 +1855,7 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   box-shadow: 0 0 2px 2px rgba(220, 53, 69, 0.7);
 }
 
-/* line 1333, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1356, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .validatn_cls .form-select,
 .contact_form_row form .select_drpdwn.validatn_cls .form-select {
   padding-right: 4.125rem;
@@ -1830,7 +1866,13 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   box-shadow: 0 0 2px 2px rgba(220, 53, 69, 0.7);
 }
 
-/* line 1344, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1366, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+.contact_form_row .form-input,
+.contact_form_row .select_drpdwn {
+  position: relative;
+}
+
+/* line 1370, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .modal_link_btn {
   background: transparent;
   border: none;
@@ -1841,7 +1883,7 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   padding: 0 10px;
 }
 
-/* line 1352, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1378, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .modal_link_btn:hover,
 .modal_link_btn:focus,
 .modal_link_btn .btn:first-child:active {
@@ -1850,40 +1892,40 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   border-color: #ffffff;
 }
 
-/* line 1359, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1385, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .modal-title {
   font: 2.5rem/2.5rem "Slabo 27px", serif;
   color: #8aad56;
 }
 
-/* line 1364, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1390, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .modal_map_blk {
   position: relative;
   height: 500px;
 }
 
-/* line 1367, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1393, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .modal_map_blk iframe {
   width: 100%;
   height: 100%;
 }
 
-/* line 1376, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1401, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .full_loader_parnt_blk {
   position: absolute;
   top: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.7);
-  z-index: 5;
+  z-index: 3;
 }
 
-/* line 1384, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1409, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .full_loader_parnt_blk.loader_parnt_blk .loader-circle-2 {
   position: absolute;
 }
 
-/* line 1390, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1415, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .loader-circle-2 {
   position: fixed;
   width: 70px;
@@ -1895,7 +1937,7 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   left: 0;
 }
 
-/* line 1400, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1425, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .loader-circle-2:before,
 .loader-circle-2:after {
   content: "";
@@ -1906,7 +1948,7 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   border-radius: 50%;
 }
 
-/* line 1409, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1434, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .loader-circle-2:before {
   width: 70px;
   height: 70px;
@@ -1917,7 +1959,7 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   animation: loader-circle-2-animation-2 1s linear infinite;
 }
 
-/* line 1418, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1443, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .loader-circle-2:after {
   width: 40px;
   height: 40px;
@@ -1950,7 +1992,7 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   }
 }
 
-/* line 1448, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1473, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .cookies_parnt_blk {
   background: #252525;
   position: fixed;
@@ -1966,7 +2008,7 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   padding: 30px;
 }
 
-/* line 1463, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1488, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .cookies_parnt_blk h6 {
   font: 1.125rem/1.5rem "Slabo 27px", serif;
   color: #8aad56;
@@ -1974,54 +2016,54 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   align-items: center;
 }
 
-/* line 1468, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1493, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .cookies_parnt_blk h6 em {
   margin-right: 5px;
 }
 
-/* line 1471, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1496, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .cookies_parnt_blk h6 .cookies_close_btn {
   color: #666;
   padding: 0;
   margin-left: auto;
 }
 
-/* line 1475, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1500, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .cookies_parnt_blk h6 .cookies_close_btn em {
   margin-right: 0;
   line-height: 30px;
 }
 
-/* line 1481, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1506, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .cookies_parnt_blk p {
   font: 300 0.875rem/1.5rem "Roboto", sans-serif;
   margin-bottom: 15px;
 }
 
-/* line 1485, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1510, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .cookies_parnt_blk button {
   font: 0.9375rem/0.9375rem "Slabo 27px", serif;
   text-transform: uppercase;
 }
 
-/* line 1493, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1518, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_blk_row .header_blk_inr section.header_item_left .header_drpdown.dropdown {
   max-height: 18px;
 }
 
-/* line 1496, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1521, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .react-select__control {
   min-height: auto !important;
   background: transparent !important;
   border: none !important;
 }
 
-/* line 1502, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1527, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .react-select__indicator-separator {
   display: none;
 }
 
-/* line 1505, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1530, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .country-option {
   display: inline-block;
   padding-right: 20px;
@@ -2031,7 +2073,7 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   top: 0;
 }
 
-/* line 1513, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1538, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .country-option::after {
   background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' fill='white' width='20' viewBox='0 0 512 266.77'%3e%3cpath fill-rule='nonzero' d='M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z'/%3e%3c/svg%3e") no-repeat !important;
   border: none;
@@ -2046,7 +2088,7 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   content: "";
 }
 
-/* line 1526, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1551, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .country-option img {
   width: 18px;
   height: 18px;
@@ -2054,7 +2096,7 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   float: left;
 }
 
-/* line 1533, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1558, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .country-option span {
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -2063,19 +2105,19 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   font: 0.75rem/1.125rem "Slabo 27px", serif !important;
 }
 
-/* line 1543, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1568, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .react-select__value-container {
   padding: 0 !important;
 }
 
-/* line 1546, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1571, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .react-select__input-container {
   padding-top: 1px !important;
   padding-bottom: 1px !important;
   line-height: 11px;
 }
 
-/* line 1551, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1576, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .react-select__input-container input {
   caret-color: transparent;
   min-width: 110px !important;
@@ -2083,24 +2125,24 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   max-height: 18px;
 }
 
-/* line 1557, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1582, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .react-select__dropdown-indicator {
   padding: 0;
 }
 
-/* line 1561, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1586, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .react-select__indicators {
   display: none;
 }
 
-/* line 1564, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1589, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .react-select__single-value {
   margin: 0 !important;
   display: flex !important;
   align-items: center !important;
 }
 
-/* line 1570, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1595, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .react-select__menu {
   width: 100%;
   position: absolute;
@@ -2108,36 +2150,36 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   margin-top: 5px !important;
 }
 
-/* line 1576, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1601, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .react-select__menu-list {
   padding: 0;
   background: #101010;
   border-radius: 0;
 }
 
-/* line 1581, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1606, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .react-select__menu-list>div {
   padding: 0;
   background-color: transparent;
 }
 
-/* line 1585, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1610, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .react-select__option--is-selected {
   background-color: #8aad56;
 }
 
-/* line 1588, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1613, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .react-select__option:hover,
 .react-select__option:active {
   background-color: #8aad56 !important;
 }
 
-/* line 1591, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1616, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .react-select__menu .country-option::after {
   display: none;
 }
 
-/* line 1595, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1620, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .react-select__menu .country-option {
   display: flex;
   align-items: center;
@@ -2145,15 +2187,142 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   top: 0;
 }
 
-/* line 1601, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1626, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .react-select-container {
   display: flex;
   align-items: center;
 }
 
-/* line 1608, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+/* line 1633, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header .menu.menu_new>ul>li>a {
   line-height: 35px !important;
+}
+
+/* line 1637, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+.succs_msg_parnt {
+  margin: 0 0 15px;
+  width: auto;
+  display: inline-block;
+}
+
+/* line 1642, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+.succs_msg_parnt h5 {
+  background: #252525;
+  padding: 15px 50px 15px 35px;
+  color: #ffffff;
+  position: relative;
+  box-shadow: 0px 0 3px 1px rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+  border-left: 5px solid #0ED05F;
+  margin-bottom: 0;
+  font: 300 1rem/1.25rem "Roboto", sans-serif;
+}
+
+/* line 1654, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+.succs_msg_parnt h5:after {
+  position: absolute;
+  content: "\f00c";
+  font-size: 19px;
+  font-family: FontAwesome;
+  color: #0ED05F;
+  left: 10px;
+  top: 16px;
+  display: block;
+}
+
+/* line 1665, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+.succs_msg_parnt h5 .cls_icn {
+  display: inline-block;
+  position: absolute;
+  top: 15px;
+  right: 0;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+/* line 1673, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+.succs_msg_parnt h5 .cls_icn:after {
+  position: absolute;
+  content: "\f057";
+  font-size: 15px;
+  font-family: FontAwesome;
+  color: #bbbbbb;
+  left: -10px;
+  top: 0;
+  display: block;
+}
+
+/* line 1684, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+.succs_msg_parnt h5 .cls_icn:before {
+  position: absolute;
+  content: "";
+  width: 1px;
+  height: 18px;
+  background: #bbbbbb;
+  left: -20px;
+  top: 0;
+  display: block;
+}
+
+/* line 1697, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+.succs_msg_parnt ul {
+  list-style-type: none;
+  padding: 5px 0 0;
+}
+
+/* line 1701, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+.succs_msg_parnt ul li {
+  display: block;
+  font: 300 0.875rem/1.0625rem "Roboto", sans-serif;
+  padding: 5px 0 0;
+  color: #231f20;
+}
+
+/* line 1713, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+.error_msg_parnt {
+  margin: 0 0 15px;
+  width: auto;
+  display: inline-block;
+}
+
+/* line 1717, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+.error_msg_parnt h5 {
+  background: #252525;
+  padding: 15px 15px 15px 30px;
+  font: 300 1rem/1.25rem "Roboto", sans-serif;
+  color: #ffffff;
+  position: relative;
+  box-shadow: 0px 2px 2px 0 rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+  border-left: 5px solid #fca604;
+  margin-bottom: 0;
+}
+
+/* line 1728, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+.error_msg_parnt h5:after {
+  position: absolute;
+  content: "\f12a";
+  font-size: 19px;
+  font-family: FontAwesome;
+  color: #fca604;
+  left: 15px;
+  top: 15px;
+  display: block;
+}
+
+/* line 1740, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+.error_msg_parnt ul {
+  list-style-type: none;
+  padding: 5px 0 0;
+}
+
+/* line 1744, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
+.error_msg_parnt ul li {
+  display: block;
+  font: 300 0.875rem/1.0625rem "Roboto", sans-serif;
+  padding: 5px 0 0;
+  color: #ffffff;
 }
 
 /*# sourceMappingURL=master.css.map */
