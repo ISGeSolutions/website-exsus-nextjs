@@ -299,31 +299,6 @@ function CountryItinararies(country) {
                                         <div className="dropdown_grp_blk">
                                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                                                 <Select
-                                                    id="long-value-select"
-                                                    instanceId="long-value-select"
-                                                    className="select_container_country"
-                                                    classNamePrefix="select_country"
-                                                    placeholder="Filter by region"
-                                                    styles={styles}
-                                                    isMulti
-                                                    isDisabled={isDisabled}
-                                                    isLoading={isLoading}
-                                                    isClearable={isClearable}
-                                                    isRtl={isRtl}
-                                                    isSearchable={isSearchable}
-                                                    value={selectedOptionCountry}
-                                                    onChange={handleOptionCountryChange}
-                                                    closeMenuOnSelect={false}
-                                                    hideSelectedOptions={false}
-                                                    options={countryOptions}
-                                                    components={{
-                                                        Option: InputOption,
-                                                        MultiValue: CustomMultiValue,
-                                                    }}
-                                                />
-                                            </div>
-                                            <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                                                <Select
                                                     placeholder="Filter by reason"
                                                     // defaultValue={regionOptions[0]}
                                                     className="select_container_country"

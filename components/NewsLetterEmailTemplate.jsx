@@ -57,7 +57,8 @@ export function NewsLetterEmailTemplate(props) {
                                             </tr>
                                             <tr>
                                                 <td bgcolor="#fff" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                                                    <font face="Verdana" color="#5d5d5d" size="2"><strong>Full Name: </strong> {emailDetails?.full_name}</font>
+                                                    <font face="Verdana" color="#5d5d5d" size="2"><strong>Full Name: </strong> {emailDetails?.client_name
+                                                    }</font>
                                                 </td>
                                             </tr>
                                             <tr>

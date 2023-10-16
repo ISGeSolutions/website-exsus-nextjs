@@ -133,7 +133,7 @@ function ContinentOverview({ sendDataToParent }) {
                                     <div className="card_slider_inr card_slider_inr_sml" key={countries?.id}>
                                         <a onClick={() => handleCountryClick(countries?.id)}>
                                             <div className="card_slider_inr_sml_img">
-                                                <img src={countries?.attributes?.country_images?.data.filter(res => res.attributes.image_type == "thumbnail")[0].attributes?.image_path} alt={countries?.attributes?.country_images?.data.filter(res => res.attributes?.image_type == "thumbnail")[0]?.attributes?.image_alt_text} className="img-fluid" />
+                                                <img src={countries?.attributes?.country_images?.data.filter(res => res.attributes.image_type == "thumbnail")[0]?.attributes?.image_path} alt={countries?.attributes?.country_images?.data.filter(res => res.attributes?.image_type == "thumbnail")[0]?.attributes?.image_alt_text} className="img-fluid" />
                                             </div>
                                             <h4>
                                                 {countries.attributes.country_name}

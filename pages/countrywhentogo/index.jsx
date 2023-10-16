@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 
 export default CountryWhentogo;
 
-function CountryWhentogo() {
+function CountryWhentogo(country) {
+    console.log('country', country);
 
     const router = useRouter();
     const { countrycode } = router.query;
@@ -18,7 +19,7 @@ function CountryWhentogo() {
             // setMyVariable(window.site_region);
         }
     }
-    
+
     useEffect(() => {
 
         // Using window.onload to detect full page load
