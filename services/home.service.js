@@ -14,5 +14,9 @@ export const homeService = {
 // }
 
 function signUp(signUpData) {
-    return fetchWrapper.post(`${baseUrl}`, signUpData);
+    let postdata = signUpData;
+    postdata.emailpage = 'newsletter';
+    const currentUrl = window?.location?.origin + '/api/email_api';
+    return fetchWrapper.post(`${currentUrl}`, postdata);
+    // return fetchWrapper.post(`${baseUrl}`, signUpData);
 }

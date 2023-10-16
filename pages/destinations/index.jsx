@@ -246,8 +246,17 @@ function Index() {
                             {testimonials.map((text, index) => (
                                 <div key={index} target="_blank" className={`carousel-item ${index === 0 ? 'active' : ''}`} data-bs-interval="5000">
                                     <div className="carousel-caption">
-                                        <p>{text?.attributes.review_short_text}</p>
-                                        <span>{text?.attributes.client_name}</span>
+                                        <p
+                                            dangerouslySetInnerHTML={{
+                                                __html: text?.attributes.review_short_text,
+                                            }}
+                                        />
+                                        <span
+                                            dangerouslySetInnerHTML={{
+                                                __html: text?.attributes.client_name,
+                                            }} />
+                                        {/* <p>{text?.attributes.review_short_text}</p>
+                                        <span>{text?.attributes.client_name}</span> */}
                                     </div>
                                 </div>
                             ))}

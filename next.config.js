@@ -146,6 +146,12 @@ const nextConfig = {
             { source: "/us/blog/blog-detail", destination: "/blog-detail" },
             { source: "/asia/blog/blog-detail", destination: "/blog-detail" },
             { source: "/in/blog/blog-detail", destination: "/blog-detail" },
+
+            // regions-detail
+            { source: "/uk/regions", destination: "/regions" },
+            { source: "/us/regions", destination: "/regions" },
+            { source: "/asia/regions", destination: "/regions" },
+            { source: "/in/regions", destination: "/regions" },
             // Add more custom routes as needed
         ];
     },

@@ -30,6 +30,11 @@ function CountryRegions({ country, sendDataToParent }) {
         sendDataToParent(e);
     }
 
+    const generateDynamicLink = (item) => {
+        // console.log('item', item);
+        return regionWiseUrl + `/regions?regionid=${item.id}`;
+    };
+
     useEffect(() => {
         // const newUrl = regionWiseUrl + `/destinations/africa/africa-countries`;
         // window.history.pushState(null, null, newUrl);
@@ -75,7 +80,7 @@ function CountryRegions({ country, sendDataToParent }) {
                         {allRegions?.slice(0, allRegions.length).map((item) => (
                             <div className="col-sm-6 col-lg-4 col-xxl-3">
                                 <div className="card_blk_inr flex-column">
-                                    <a target="_blank">
+                                    <NavLink href={generateDynamicLink(item)}>
                                         <img src="./../../../images/destination_countries01.jpg" alt="destination countries01" className="img-fluid" />
                                         <div className="card_blk_cntnt card_blk_sml_arw">
                                             <div className="row align-items-center">
@@ -89,7 +94,7 @@ function CountryRegions({ country, sendDataToParent }) {
                                                 </div>
                                             </div>
                                         </div>
-                                    </a>
+                                    </NavLink>
                                     <p>{item?.attributes?.intro_text}</p>
                                 </div>
                             </div>

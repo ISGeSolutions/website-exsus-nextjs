@@ -89,7 +89,7 @@ function Index() {
                             <h2 className="text-capitalize">
                                 {element?.attributes?.review_header}
                             </h2>
-                            <div dangerouslySetInnerHTML={{ __html: element?.attributes?.review_text }} />
+                            <p dangerouslySetInnerHTML={{ __html: element?.attributes?.review_text }} />
                             {/* <p className="mb-4">{element?.attributes?.review_text}</p> */}
                         </div>
                     ))}
