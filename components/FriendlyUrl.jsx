@@ -19,10 +19,11 @@ export function FriendlyUrl(props) {
     }
 
     const dynamicFriendlyLink = (element, index) => {
+        const link = element.trim().replace(/\s+/g, '-').toLowerCase();
         if (index == 0) {
             return `/`;
         } else if (index == 1) {
-            return regionWiseUrl + `/` + element.toLowerCase();
+            return regionWiseUrl + `/` + link;
         } else if (index == 2) {
             // return regionWiseUrl + `/continent?destinationcode=` + ;
         } else {
