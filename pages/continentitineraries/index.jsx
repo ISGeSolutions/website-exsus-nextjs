@@ -1,19 +1,15 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { destinationService, alertService, userService, blogsService } from 'services';
 import { NavLink } from 'components';
 import { useRouter } from 'next/router';
 // import stylesCon from './ContinentItenararies.module.css';
-import React from 'react';
 import Select, { components } from 'react-select';
 import CustomMultiValue from "./CustomMultiValue";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
-
 export default ContinentItinararies;
-
-
 
 const width = "250px";
 const styles = {
@@ -89,7 +85,10 @@ const InputOption = ({
     );
 };
 
-function ContinentItinararies() {
+function ContinentItinararies(props) {
+
+    const { divRef } = props;
+    // const divRef = divRefData;
 
     // const router = useRouter();
     let regionWiseUrl = '/uk';
@@ -120,7 +119,6 @@ function ContinentItinararies() {
     const { destinationcode } = router.query;
     const [countryOptions, setAllCountries] = useState([])
     const [destinationName, setdestinationName] = useState("");
-
 
     const handleLoadMore = () => {
         // console.log('handleLoadMore')
@@ -237,10 +235,6 @@ function ContinentItinararies() {
         console.log('Selected Months:', selectedOptionMonth);
     }
 
-
-
-
-
     const generateDynamicLink = (item) => {
         // console.log('item', item);
         return regionWiseUrl + `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`;
@@ -304,6 +298,9 @@ function ContinentItinararies() {
                 }
             }, 0);
         };
+
+        divRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
     }, [destinationcode, router, dcode]);
 
     return (

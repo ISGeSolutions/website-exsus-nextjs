@@ -12,7 +12,7 @@ import CustomMultiValue from "./CustomMultiValue";
 
 export default ContinentPlacesToStay;
 
-function ContinentPlacesToStay() {
+function ContinentPlacesToStay(props) {
 
     const [isClearable, setIsClearable] = useState(true);
     const [isSearchable, setIsSearchable] = useState(true);
@@ -34,10 +34,7 @@ function ContinentPlacesToStay() {
     const [allHotels, setAllHotels] = useState([]);
     const [countryOptions, setAllCountries] = useState([])
 
-
-
-
-
+    const { divRef } = props;
 
     const regionOptions = [
         { value: "Everything", label: "Everything" },
@@ -253,6 +250,8 @@ function ContinentPlacesToStay() {
                 }
             }, 0);
         };
+
+        divRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
     }, [destinationcode, router]);
 
