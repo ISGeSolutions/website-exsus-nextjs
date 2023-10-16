@@ -15,51 +15,11 @@ function Index() {
 
     return (
         <Layout>
-            <section class="banner_blk_row">
-                <div
-                    id="carouselExampleInterval"
-                    class="carousel slide"
-                    data-bs-ride="carousel"
-                >
-                    <div class="carousel-indicators">
-                        <button
-                            type="button"
-                            data-bs-target="#carouselExampleInterval"
-                            data-bs-slide-to="0"
-                            class="active"
-                            aria-current="true"
-                            aria-label="Slide 1"
-                        ></button>
-                        <button
-                            type="button"
-                            data-bs-target="#carouselExampleInterval"
-                            data-bs-slide-to="1"
-                            aria-label="Slide 2"
-                        ></button>
-                        <button
-                            type="button"
-                            data-bs-target="#carouselExampleInterval"
-                            data-bs-slide-to="2"
-                            aria-label="Slide 3"
-                        ></button>
-                        <button
-                            type="button"
-                            data-bs-target="#carouselExampleInterval"
-                            data-bs-slide-to="3"
-                            aria-label="Slide 4"
-                        ></button>
-                        <button
-                            type="button"
-                            data-bs-target="#carouselExampleInterval"
-                            data-bs-slide-to="4"
-                            aria-label="Slide 5"
-                        ></button>
-                        <button
-                            type="button"
-                            data-bs-target="#carouselExampleInterval"
-                            data-bs-slide-to="5"
-                            aria-label="Slide 6"
-                        ></button>
+            {/* <h4 className='mt-2'>This is destination page</h4> */}
+            <section className="card_blk_row">
+                <div className="container">
+                    <div className="bookmark_row">
+                        <p className='font-weight-normal display-7 text-light'>This is where to go page</p>
                     </div>
                     <div class="carousel-inner">
                         <a
