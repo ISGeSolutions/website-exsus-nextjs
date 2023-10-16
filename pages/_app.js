@@ -27,6 +27,12 @@ function App({ Component, pageProps }) {
     const [user, setUser] = useState(null);
     const [authorized, setAuthorized] = useState(false);
 
+    const pathname = router.pathname;
+
+    // Define an array of paths where you want to exclude the layout
+    const pathsWithoutLayout = ['/brochure'];
+    const shouldRenderLayout = !pathsWithoutLayout.includes(pathname);
+
     useEffect(() => {
 
         // on initial load - run auth check 
@@ -73,44 +79,49 @@ function App({ Component, pageProps }) {
     }
 
     return (
-        <Layout>
-            <Head>
-                {/* eslint-disable-next-line @next/next/no-css-tags */}
-                <meta charSet="UTF-8" />
-                <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <title>Luxury Holiday Destinations</title>
-                <link rel="icon" type="images/png" href="/images/fav-icon.png" />
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" />
-                {/* <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
-                <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script> */}
-                {/* <link href="//netdna.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
-                <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
-                <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-                <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> */}
-            </Head>
 
-            {authorized &&
-                <Component {...pageProps} />
-            }
+        shouldRenderLayout ? (
+            <Layout>
+                <Head>
+                    {/* eslint-disable-next-line @next/next/no-css-tags */}
+                    <meta charSet="UTF-8" />
+                    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                    <title>Luxury Holiday Destinations</title>
+                    <link rel="icon" type="images/png" href="/images/fav-icon.png" />
+                    <link rel="preconnect" href="https://fonts.googleapis.com" />
+                    <link rel="preconnect" href="https://fonts.gstatic.com" />
+                    {/* <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
+                    <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script> */}
+                        {/* <link href="//netdna.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+                    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
+                    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+                    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> */}
+                </Head>
 
-            <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&family=Slabo+27px&display=swap" rel="stylesheet" />
-            <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css' />
+                {authorized &&
+                    <Component {...pageProps} />
+                }
 
-            <Script id="card-slider" type="text/javascript" src="/assets/javascripts/card-slider.js"></Script>
-            <Script id="card-slider-height" type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></Script>
-            {/* <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script> */}
-            {/* <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script> */}
-            <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+                <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&family=Slabo+27px&display=swap" rel="stylesheet" />
+                <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css' />
 
-            <script type="text/javascript" src="/assets/javascripts/popper.min.js"></script>
-            <script type="text/javascript" src="/assets/javascripts/bootstrap.min.js"></script>
-            <script type="text/javascript" src="/assets/javascripts/bootstrap-select.min.js"></script>
-            {/* <script type="text/javascript" src="/assets/javascripts/navigation.js"></script> */}
+                <Script id="card-slider" type="text/javascript" src="/assets/javascripts/card-slider.js"></Script>
+                <Script id="card-slider-height" type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></Script>
+                {/* <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script> */}
+                {/* <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script> */}
+                <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
-            {/* credits */}
+                <script type="text/javascript" src="/assets/javascripts/popper.min.js"></script>
+                <script type="text/javascript" src="/assets/javascripts/bootstrap.min.js"></script>
+                <script type="text/javascript" src="/assets/javascripts/bootstrap-select.min.js"></script>
+                {/* <script type="text/javascript" src="/assets/javascripts/navigation.js"></script> */}
 
-        </Layout>
+                {/* credits */}
+
+            </Layout>
+        ) : (
+            <Component {...pageProps} />
+        )
     );
 }
