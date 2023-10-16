@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Link, Spinner, Signup } from 'components';
+import { Link, Spinner, Signup, FriendlyUrl } from 'components';
 import { Layout } from 'components/users';
 import { userService, holidaytypesService } from 'services';
 import { Inspireme } from 'components';
@@ -208,7 +208,8 @@ function Index() {
             <section className="card_blk_row destinations_blk_row light_grey">
                 <div className="container">
                     <div className="bookmark_row">
-                        <p style={{ color: `white` }}>{holidaytypes?.attributes?.page_friendly_url}</p>
+                        {/* <p style={{ color: `white` }}>{holidaytypes?.attributes?.page_friendly_url}</p> */}
+                        <FriendlyUrl data={holidaytypes?.attributes?.page_friendly_url}></FriendlyUrl>                        
                         {/* <ul>
                             <li><a href="homepage.html">Home</a></li>
                             <li>Holiday types</li>

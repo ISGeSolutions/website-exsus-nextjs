@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Link, Spinner, Signup } from 'components';
+import { Link, Spinner, Signup, FriendlyUrl } from 'components';
 import { destinationService, alertService, userService, whyusService } from 'services';
 import { Inspireme } from 'components';
 import Head from 'next/head';
@@ -16,7 +16,6 @@ function Index() {
     const router = useRouter();
 
     const [destinations, setDestinations] = useState();
-    const [friendlyUrlArr, setFriendlyUrlArr] = useState();
 
     // const [destinationLandingDetails, setDestinationLandingDetails] = useState();
     const [destinationLandingList, setDestinationLandingList] = useState();
@@ -25,7 +24,6 @@ function Index() {
     const [visible, setVisible] = useState(2);
     const [visiblePagination, setVisiblePagination] = useState(true);
     const [testimonials, setTestimonials] = useState([]);
-
 
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
@@ -53,18 +51,6 @@ function Index() {
             </button>
         );
     };
-
-    const dynamicFriendlyLink = (element, index) => {
-        if (index == 0) {
-            return `/`;
-        } else if (index == 1) {
-            return regionWiseUrl + `/` + element.toLowerCase();
-        } else if (index == 2) {
-            // return regionWiseUrl + `/continent?destinationcode=` + ;
-        } else {
-            // return regionWiseUrl + `/continent?destinationcode=` + id;
-        }
-    }
 
     const dynamicLink = (itemId, id) => {
         if (itemId) {
@@ -112,12 +98,7 @@ function Index() {
             // console.log(x.data);
         })
 
-
         destinationService.getCustomPagesData("destinations").then(x => {
-
-            const urlArray = x.data[0]?.attributes?.page_friendly_url.split("/");
-            setFriendlyUrlArr(urlArray);
-
             setDestinations(x.data[0]);
             const imageCheck = x.data[0].attributes.custom_page_images.data;
             const newBackgroundImages = [];
@@ -188,11 +169,7 @@ function Index() {
                 <div className="container">
                     <div className="bookmark_row">
                         {/* <p style={{ color: `white` }}>{destinations?.attributes?.page_friendly_url}</p> */}
-                        <ul>
-                            {friendlyUrlArr?.map((friendlyUrl, i) => (
-                                <li><NavLink href={dynamicFriendlyLink(friendlyUrl, i)}>{friendlyUrl}</NavLink></li>
-                            ))}
-                        </ul>
+                        <FriendlyUrl data={destinations?.attributes?.page_friendly_url}></FriendlyUrl>                        
                     </div>
                     <div className="row">
                         <div className="destinations_cntnt_blk">

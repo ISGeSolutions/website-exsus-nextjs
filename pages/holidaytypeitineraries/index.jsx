@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Iframe from 'react-iframe'
-import { Layout } from 'components/users';
+import { Layout, FriendlyUrl } from 'components';
 import { userService, holidaytypesService, destinationService } from 'services';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -9,8 +9,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 var Carousel = require('react-responsive-carousel').Carousel;
 import CustomMultiValue from "./CustomMultiValue";
 import Select, { components } from 'react-select';
-
-
 
 export default Index;
 
@@ -351,7 +349,8 @@ function Index() {
             <section className="destination_tab_row light_grey">
                 <div className="container">
                     <div className="bookmark_row">
-                        <p style={{ color: `white` }}>{holidaytypesDetails?.friendly_url}</p>
+                        <p style={{ color: `white` }}>=={holidaytypesDetails?.friendly_url}==</p>
+                        <FriendlyUrl data={holidaytypesDetails?.friendly_url}></FriendlyUrl>
                         {/* <ul>
                             <li><a href="homepage.html">Home</a></li>
                             <li><a href="holiday_types_landing.html">Holiday Types</a></li>

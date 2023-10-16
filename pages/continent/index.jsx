@@ -297,7 +297,7 @@ function Index() {
                         <ContinentItinararies dataProp={destinationcode} divRef={divRef} />
                     </div>}
                     {activeTab === 'places-to-stay' && <div className={activeTab === 'places-to-stay' ? 'active show tab-pane fade' : 'tab-pane fade'} id="pills-places-to-stay" role="tabpanel" aria-labelledby="pills-places-to-stay-tab" tabIndex="0" ref={tabContentRefs['places-to-stay']}>
-                        <ContinentPlacesToStay  divRef={divRef}/>
+                        <ContinentPlacesToStay divRef={divRef} />
                     </div>}
                 </div>
             </section>
