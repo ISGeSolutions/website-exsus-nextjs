@@ -140,7 +140,7 @@ function Index() {
         // });
 
         destinationService.getDestinationDetails(destinationcode).then((x) => {
-            console.log(x);
+            // console.log(x);
             setTitle(x.data.attributes.page_meta_title);
         });
 
