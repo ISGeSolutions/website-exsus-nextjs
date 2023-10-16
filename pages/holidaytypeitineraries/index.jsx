@@ -349,7 +349,7 @@ function Index() {
             <section className="destination_tab_row light_grey">
                 <div className="container">
                     <div className="bookmark_row">
-                        <p style={{ color: `white` }}>=={holidaytypesDetails?.friendly_url}==</p>
+                        {/* <p style={{ color: `white` }}>{holidaytypesDetails?.friendly_url}</p> */}
                         <FriendlyUrl data={holidaytypesDetails?.friendly_url}></FriendlyUrl>
                         {/* <ul>
                             <li><a href="homepage.html">Home</a></li>
