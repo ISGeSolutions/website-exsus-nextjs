@@ -86,7 +86,7 @@ function ContinentCountry({ sendDataToParent }) {
                             <div className="col-sm-6 col-lg-4 col-xxl-3" key={countries?.id}>
                                 <div className="card_blk_inr">
                                     <a onClick={() => handleCountryClick(countries?.id)} target="_blank">
-                                        <img src={countries?.attributes?.country_images?.data.filter(res => res.attributes.image_type == "thumbnail")[0].attributes?.image_path} alt={countries?.attributes?.country_images?.data.filter(res => res.attributes?.image_type == "thumbnail")[0]?.attributes?.image_alt_text} className="img-fluid" />
+                                        <img src={countries?.attributes?.country_images?.data.filter(res => res.attributes.image_type == "thumbnail")[0]?.attributes?.image_path} alt={countries?.attributes?.country_images?.data.filter(res => res.attributes?.image_type == "thumbnail")[0]?.attributes?.image_alt_text} className="img-fluid" />
                                         {/* <img src="./../../images/destination_countries01.jpg" alt="destination countries01" className="img-fluid" /> */}
                                         <div className="card_blk_cntnt card_blk_sml_arw">
                                             <div className="row align-items-center">

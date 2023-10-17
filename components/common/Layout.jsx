@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { userService } from 'services';
 import { NavLink } from './../NavLink';
-import { Nav, Alert } from 'components';
+import { Nav, Alert, LoaderHtml } from 'components';
 import { Analytics } from '@vercel/analytics/react';
 import React from "react";
 import Select from "react-select";
@@ -322,6 +322,7 @@ function Layout({ children }) {
                 </div>
 
             </footer>
+            {/* <LoaderHtml /> */}
         </div>
     );
 }

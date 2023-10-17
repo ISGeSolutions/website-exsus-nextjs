@@ -471,8 +471,303 @@ function ContinentItinararies(props) {
                                             </div>
                                         </div>
                                     </div>
+
                                 ))}
 
+                                {/* <div className="col-sm-6 col-lg-4 col-xxl-3">
+                                    <div className="card_slider_inr">
+                                        <div className="card_slider">
+                                            <a className="card_slider_img">
+                                                <img src="images/destination_card01.jpg" alt="destination card01" className="img-fluid" />
+                                            </a>
+                                            <div className="card_slider_cnt">
+                                                <h4><a href="#">THE SCENT OF CLOVES</a></h4>
+                                                <ul>
+                                                    <li>Indonesia in Idyllic Style</li>
+                                                    <li>Indonesia</li>
+                                                    <li>From £3,950 per person</li>
+                                                    <li>Travel to:<span>Bali, Java, Kalimantan, Lombok</span></li>
+                                                </ul>
+                                            </div>
+                                            <button className="btn card_slider_btn">
+                                                <span>14 nights</span>
+                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
+                                    <div className="card_slider_inr">
+                                        <div className="card_slider">
+                                            <div className="card_slider_img">
+                                                <img src="images/destination_card05.jpg" alt="destination card05" className="img-fluid" />
+                                            </div>
+                                            <div className="card_slider_cnt">
+                                                <h4><a href="#">CALL OF THE GIBBON</a></h4>
+                                                <ul>
+                                                    <li>Wildlife Adventure to Thailand</li>
+                                                    <li>Thailand</li>
+                                                    <li>From £5,350 per person</li>
+                                                    <li>Travel to:<span>Bangkok & Central Thailand, Koh Samui & Gulf of Thailand, Northern Thailand, Phuket & Western Thailand</span></li>
+                                                </ul>
+                                            </div>
+                                            <button className="btn card_slider_btn">
+                                                <span>11 nights</span>
+                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
+                                    <div className="card_slider_inr">
+                                        <div className="card_slider">
+                                            <div className="card_slider_img">
+                                                <img src="images/destination_card03.jpg" alt="destination card03" className="img-fluid" />
+                                            </div>
+                                            <div className="card_slider_cnt">
+                                                <h4><a href="#">Ultimate Grand Tour of Indochina</a></h4>
+                                                <ul>
+                                                    <li>Spirit of the Water Dragon</li>
+                                                    <li>Vietnam, Cambodia, Laos & Thailand</li>
+                                                    <li>From £8,7500 per person</li>
+                                                    <li>Travel to:<span>Hanoi, Halong Bay & Northern Vietnam, Koh Kood & Koh Chang, Luang Prabang, Saigon & Mekong Delta</span></li>
+                                                </ul>
+                                            </div>
+                                            <button className="btn card_slider_btn">
+                                                <span>18 nights</span>
+                                                <span className="view_itnry_link">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
+                                    <div className="card_slider_inr">
+                                        <div className="card_slider">
+                                            <div className="card_slider_img">
+                                                <img src="images/destination_card02.jpg" alt="destination card02" className="img-fluid" />
+                                            </div>
+                                            <div className="card_slider_cnt">
+                                                <h4><a href="#">LAND OF THE RISING SUN</a></h4>
+                                                <ul>
+                                                    <li>Japan in Classic Style</li>
+                                                    <li>Japan</li>
+                                                    <li>From £4,600 per person</li>
+                                                    <li>Travel to:<span>Japanese Alps & Northern Honshu, Kyoto, Southern Honshu & Kyushu, Tokyo & Around</span></li>
+                                                </ul>
+                                            </div>
+                                            <button className="btn card_slider_btn">
+                                                <span>10 nights</span>
+                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
+                                    <div className="card_slider_inr">
+                                        <div className="card_slider">
+                                            <div className="card_slider_img">
+                                                <img src="images/destination_card06.jpg" alt="destination card06" className="img-fluid" />
+                                            </div>
+                                            <div className="card_slider_cnt">
+                                                <h4><a href="#">Stupas, Sanctuaries & the Andaman Sea</a></h4>
+                                                <ul>
+                                                    <li>Perfect Honeymoon to Burma</li>
+                                                    <li>Burma (Myanmar), Thailand</li>
+                                                    <li>From £3,150 per person</li>
+                                                    <li>Travel to: <span>Bagan, Phuket & Western Thailand, The Irrawaddy, Yangon</span></li>
+                                                </ul>
+                                            </div>
+                                            <button className="btn card_slider_btn">
+                                                <span>12 nights</span>
+                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
+                                    <div className="card_slider_inr">
+                                        <div className="card_slider">
+                                            <div className="card_slider_img">
+                                                <img src="images/destination_card04.jpg" alt="destination card04" className="img-fluid" />
+                                            </div>
+                                            <div className="card_slider_cnt">
+                                                <h4><a href="#">FROGS' LEGS & PHO</a></h4>
+                                                <ul>
+                                                    <li>Vietnam Culinary Adventure</li>
+                                                    <li>Vietnam</li>
+                                                    <li>From £3,950 per person</li>
+                                                    <li>Travel to:<span>Central Vietnam, Hanoi, Halong Bay & Northern Vietnam, Saigon & Mekong Delta</span></li>
+                                                </ul>
+                                            </div>
+                                            <button className="btn card_slider_btn">
+                                                <span>11 nights</span>
+                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
+                                    <div className="card_slider_inr">
+                                        <div className="card_slider">
+                                            <div className="card_slider_img">
+                                                <img src="images/destination_card07.jpg" alt="destination card07" className="img-fluid" />
+                                            </div>
+                                            <div className="card_slider_cnt">
+                                                <h4><a href="#">FLAGSHIP JAPAN</a></h4>
+                                                <ul>
+                                                    <li>Japan in Exsus Signature Style</li>
+                                                    <li>Japan</li>
+                                                    <li>From £12,200 per person</li>
+                                                    <li>Travel to:<span>Japanese Alps & Northern Honshu, Kyoto, Southern Honshu & Kyushu, Tokyo & Around</span></li>
+                                                </ul>
+                                            </div>
+                                            <button className="btn card_slider_btn">
+                                                <span>13 nights</span>
+                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
+                                    <div className="card_slider_inr">
+                                        <div className="card_slider">
+                                            <div className="card_slider_img">
+                                                <img src="images/destination_card08.jpg" alt="destination card08" className="img-fluid" />
+                                            </div>
+                                            <div className="card_slider_cnt">
+                                                <h4><a href="#">Headhunters & Beyond</a></h4>
+                                                <ul>
+                                                    <li>Borneo Holiday in Sabah & Sarawak</li>
+                                                    <li>Borneo</li>
+                                                    <li>From £3,450 per person</li>
+                                                    <li>Travel to:<span>Borneo, Gunung Mulu National Park, Kota Kinabalu & Surrounds, Kuching & Surrounds</span></li>
+                                                </ul>
+                                            </div>
+                                            <button className="btn card_slider_btn">
+                                                <span>16 nights</span>
+                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
+                                    <div className="card_slider_inr">
+                                        <div className="card_slider">
+                                            <div className="card_slider_img">
+                                                <img src="images/destination_card08.jpg" alt="destination card08" className="img-fluid" />
+                                            </div>
+                                            <div className="card_slider_cnt">
+                                                <h4><a href="#">Headhunters & Beyond</a></h4>
+                                                <ul>
+                                                    <li>Borneo Holiday in Sabah & Sarawak</li>
+                                                    <li>Borneo</li>
+                                                    <li>From £3,450 per person</li>
+                                                    <li>Travel to:<span>Borneo, Gunung Mulu National Park, Kota Kinabalu & Surrounds, Kuching & Surrounds</span></li>
+                                                </ul>
+                                            </div>
+                                            <button className="btn card_slider_btn">
+                                                <span>16 nights</span>
+                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
+                                    <div className="card_slider_inr">
+                                        <div className="card_slider">
+                                            <div className="card_slider_img">
+                                                <img src="images/destination_card08.jpg" alt="destination card08" className="img-fluid" />
+                                            </div>
+                                            <div className="card_slider_cnt">
+                                                <h4><a href="#">Headhunters & Beyond</a></h4>
+                                                <ul>
+                                                    <li>Borneo Holiday in Sabah & Sarawak</li>
+                                                    <li>Borneo</li>
+                                                    <li>From £3,450 per person</li>
+                                                    <li>Travel to:<span>Borneo, Gunung Mulu National Park, Kota Kinabalu & Surrounds, Kuching & Surrounds</span></li>
+                                                </ul>
+                                            </div>
+                                            <button className="btn card_slider_btn">
+                                                <span>16 nights</span>
+                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
+                                    <div className="card_slider_inr">
+                                        <div className="card_slider">
+                                            <div className="card_slider_img">
+                                                <img src="images/destination_card08.jpg" alt="destination card08" className="img-fluid" />
+                                            </div>
+                                            <div className="card_slider_cnt">
+                                                <h4><a href="#">Headhunters & Beyond</a></h4>
+                                                <ul>
+                                                    <li>Borneo Holiday in Sabah & Sarawak</li>
+                                                    <li>Borneo</li>
+                                                    <li>From £3,450 per person</li>
+                                                    <li>Travel to:<span>Borneo, Gunung Mulu National Park, Kota Kinabalu & Surrounds, Kuching & Surrounds</span></li>
+                                                </ul>
+                                            </div>
+                                            <button className="btn card_slider_btn">
+                                                <span>16 nights</span>
+                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
+                                    <div className="card_slider_inr">
+                                        <div className="card_slider">
+                                            <div className="card_slider_img">
+                                                <img src="images/destination_card08.jpg" alt="destination card08" className="img-fluid" />
+                                            </div>
+                                            <div className="card_slider_cnt">
+                                                <h4><a href="#">Headhunters & Beyond</a></h4>
+                                                <ul>
+                                                    <li>Borneo Holiday in Sabah & Sarawak</li>
+                                                    <li>Borneo</li>
+                                                    <li>From £3,450 per person</li>
+                                                    <li>Travel to:<span>Borneo, Gunung Mulu National Park, Kota Kinabalu & Surrounds, Kuching & Surrounds</span></li>
+                                                </ul>
+                                            </div>
+                                            <button className="btn card_slider_btn">
+                                                <span>16 nights</span>
+                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-sm-6 col-lg-4 col-xxl-3">
+                                    <div className="card_slider_inr">
+                                        <div className="card_slider">
+                                            <div className="card_slider_img">
+                                                <img src="images/destination_card08.jpg" alt="destination card08" className="img-fluid" />
+                                            </div>
+                                            <div className="card_slider_cnt">
+                                                <h4><a href="#">Headhunters & Beyond</a></h4>
+                                                <ul>
+                                                    <li>Borneo Holiday in Sabah & Sarawak</li>
+                                                    <li>Borneo</li>
+                                                    <li>From £3,450 per person</li>
+                                                    <li>Travel to:<span>Borneo, Gunung Mulu National Park, Kota Kinabalu & Surrounds, Kuching & Surrounds</span></li>
+                                                </ul>
+                                            </div>
+                                            <button className="btn card_slider_btn">
+                                                <span>16 nights</span>
+                                                <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div> */}
                                 <div className="col-12">
                                     {metaData.total > page * itemsPerPage && (
                                         <button
