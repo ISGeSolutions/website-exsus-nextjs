@@ -50,7 +50,6 @@ function Index() {
             </Head>
 
             <Layout>
-
                 {isLoading ? (
                     // <MyLoader />
                     <div className="full_loader_parnt_blk loader_parnt_blk" style={{ display: `block !important` }}>
@@ -59,8 +58,6 @@ function Index() {
                     </div>
                 ) : (
                     <div>
-
-
                         <section className="banner_blk_row">
                             <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                                 <div className="carousel-indicators">
