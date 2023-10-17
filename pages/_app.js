@@ -93,11 +93,12 @@ function App({ Component, pageProps }) {
                     <link rel="preconnect" href="https://fonts.gstatic.com" />
                     {/* <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
                     <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script> */}
-                        {/* <link href="//netdna.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+                    {/* <link href="//netdna.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
                     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
                     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
                     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> */}
                 </Head>
+                {/* <div class="full_loader_parnt_blk loader_parnt_blk" style={{ display: 'block' }}><div class="loader-circle-2"></div></div> */}
 
                 {authorized &&
                     <Component {...pageProps} />

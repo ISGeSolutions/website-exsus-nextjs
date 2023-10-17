@@ -75,6 +75,10 @@ function Index() {
         router.push('/where-to-go'); // Redirect to '/new-route'
     };
 
+    const handleWhenToGoClick = () => {
+        router.push("/when-to-go");
+    };
+
     useEffect(() => {
         // destinationService.getAll().then(x => {
         //     console.log('x', x);
@@ -169,7 +173,7 @@ function Index() {
                 <div className="container">
                     <div className="bookmark_row">
                         {/* <p style={{ color: `white` }}>{destinations?.attributes?.page_friendly_url}</p> */}
-                        <FriendlyUrl data={destinations?.attributes?.page_friendly_url}></FriendlyUrl>                        
+                        <FriendlyUrl data={destinations?.attributes?.page_friendly_url}></FriendlyUrl>
                     </div>
                     <div className="row">
                         <div className="destinations_cntnt_blk">
@@ -219,7 +223,7 @@ function Index() {
                         <h4>{backgroundImgWhentogo.image_header_text_1}</h4>
                         <h5>{backgroundImgWhentogo.image_header_text_2}</h5>
                         {/* style={{ backgroundImage: `url(${backgroundImage})` }} */}
-                        <button className="btn prmry_btn make_enqury_btn" onClick={wheretogoRedirect}>View travel calender
+                        <button className="btn prmry_btn make_enqury_btn" onClick={handleWhenToGoClick}>View travel calender
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                         </button>
                     </div>

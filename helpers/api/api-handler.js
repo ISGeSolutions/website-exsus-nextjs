@@ -3,6 +3,7 @@ import { errorHandler, jwtMiddleware } from 'helpers/api';
 export { apiHandler };
 
 function apiHandler(handler) {
+    debugger;
     return async (req, res) => {
         const method = req.method.toLowerCase();
 
