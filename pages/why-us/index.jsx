@@ -34,8 +34,11 @@ function Index() {
         // const carousel = document.querySelector('#carouselExampleInterval');
         // new bootstrap.Carousel(carousel);
         whyusService.getWhyusPage().then(x => {
-            // console.log('x1', x);
             setWhyusDetails(x?.data?.attributes);
+            setIsLoading(false);
+        }).catch(error => {
+            // Handle any errors here
+            // console.error(error);
             setIsLoading(false);
         });
     }, []);
