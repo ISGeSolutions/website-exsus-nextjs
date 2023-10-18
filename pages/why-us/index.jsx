@@ -8,12 +8,14 @@ import { NavLink } from 'components';
 import { useRouter } from 'next/router';
 import Head from "next/head";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { useTranslation } from 'react-i18next';
 
 export default Index;
 
 function Index() {
     const [whyusDetails, setWhyusDetails] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const { t } = useTranslation();
 
     const EnquiryButton = () => {
         const router = useRouter();
@@ -111,6 +113,10 @@ function Index() {
 
                             <div className="container">
                                 <div className="bookmark_row">
+                                    {/* <div>
+                                        <h1>{t('appTitle')}</h1>
+                                        <p>{t('welcomeMessage')}</p>
+                                    </div> */}
                                     {/* {/ <p style={{ color: `white` }}>{destinations?.attributes?.page_friendly_url}</p > /} */}
                                     < FriendlyUrl
                                         data={whyusDetails?.page_friendly_url}

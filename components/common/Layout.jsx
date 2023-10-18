@@ -8,6 +8,8 @@ import React from "react";
 import Select from "react-select";
 import Head from 'next/head';
 // import plusSlides from "public/assets/javascripts/navigation.js";
+import { useTranslation } from 'react-i18next';
+import i18n from 'i18next';
 
 export { Layout };
 
@@ -26,6 +28,7 @@ function Layout({ children }) {
         { value: 'in', label: 'INDIA SITE', image: '/../../images/india-flag-round-circle-icon.svg' }
     ];
     const [selected, setSelected] = useState();
+    // const { i18n } = useTranslation();
 
     const isObjectEmpty = (obj) => {
         for (const key in obj) {
@@ -37,10 +40,11 @@ function Layout({ children }) {
     }
 
     const handleChange = (selectedOption) => {
-        // 
+
         // Do something
         setMyVariable(selectedOption.value);
         setSelected(selectedOption);
+        i18n.changeLanguage(selectedOption.value);
 
         localStorage.setItem('site_region', selectedOption.value);
         window.site_region = selectedOption.value;

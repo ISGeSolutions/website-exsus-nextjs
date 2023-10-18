@@ -9,6 +9,7 @@ import ContinentCountry from '../continentcountries/index'; // Adjust the path a
 import ContinentItinararies from '../continentitineraries/index'; // Adjust the path accordingly
 import ContinentPlacesToStay from '../continentplacetostay/index'; // Adjust the path accordingly
 import ContinentOverview from '../continentoverview/index'; // Adjust the path accordingly
+import { useTranslation } from 'react-i18next';
 
 export default Index;
 
@@ -32,6 +33,7 @@ function Index() {
     };
 
     const divRef = useRef();
+    const { t } = useTranslation();
 
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {

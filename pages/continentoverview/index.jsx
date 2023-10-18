@@ -5,6 +5,7 @@ import { Inspireme } from 'components';
 import Head from 'next/head';
 import { NavLink } from 'components';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'react-i18next';
 
 export default ContinentOverview;
 
@@ -19,6 +20,8 @@ function ContinentOverview({ sendDataToParent }) {
     const [allCountries, setAllCountries] = useState([]);
     const [destinationName, setdestinationName] = useState("");
 
+    const { t } = useTranslation();
+    const [holidayTitle, setHolidayTitle] = useState(t('holidayTitle'));
 
     const handleLoadMore = () => {
         // console.log('handleLoadMore')
@@ -83,10 +86,17 @@ function ContinentOverview({ sendDataToParent }) {
         destinationService.getDestinationDetails(destinationcode).then(x => {
 
             // const lines = x.data.attributes?.overview_text.split('\n');
-            const oldText = x.data.attributes?.overview_text;
-            var newValueWithBr = oldText?.replace(/\\n/g, "");
             setdestinationName(x.data.attributes.destination_name);
+
+            const oldText = x.data.attributes?.overview_text;
+            var valueWithBr = oldText?.replace(/\\n/g, "");
+            const wordToReplace = '${holiday}';
+            const replacement = holidayTitle;
+
+            // Use JavaScript string interpolation to replace the variable
+            const newValueWithBr = valueWithBr.replace(/\${holiday}/g, replacement);
             setnewValueWithBr(newValueWithBr);
+
             setAllCountries(x.data?.attributes?.countries?.data);
             // setDestinationLandingDetails(x)
         });
@@ -112,7 +122,7 @@ function ContinentOverview({ sendDataToParent }) {
             }, 0);
         };
 
-    }, [destinationcode, router]);
+    }, [destinationcode, router, holidayTitle]);
 
     return (
         <>

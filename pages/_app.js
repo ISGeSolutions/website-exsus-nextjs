@@ -17,8 +17,39 @@ import 'public/assets/stylesheets/css/master.css';
 import 'public/assets/stylesheets/css/style.css';
 import 'public/assets/stylesheets/css/responsive.css';
 import Script from 'next/script';
-
 import { userService } from 'services';
+
+import { I18nextProvider } from 'react-i18next';
+import i18n from 'i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
+import ukTranslation from './i18n/uk.json';
+import usTranslation from './i18n/us.json';
+import asiaTranslation from './i18n/asia.json';
+import inTranslation from './i18n/in.json';
+
+i18n
+    .use(LanguageDetector)
+    .init({
+        resources: {
+            uk: {
+                translation: ukTranslation,
+            },
+            us: {
+                translation: usTranslation,
+            },
+            asia: {
+                translation: asiaTranslation,
+            },
+            in: {
+                translation: inTranslation,
+            },
+        },
+        fallbackLng: 'uk',
+        debug: true,
+        interpolation: {
+            escapeValue: false,
+        },
+    });
 
 export default App;
 
@@ -79,7 +110,6 @@ function App({ Component, pageProps }) {
     }
 
     return (
-
         shouldRenderLayout ? (
             <Layout>
                 <Head>
@@ -100,9 +130,17 @@ function App({ Component, pageProps }) {
                 </Head>
                 {/* <div class="full_loader_parnt_blk loader_parnt_blk" style={{ display: 'block' }}><div class="loader-circle-2"></div></div> */}
 
-                {authorized &&
-                    <Component {...pageProps} />
-                }
+                {/* ReactDOM.render( */}
+                <I18nextProvider i18n={i18n}>
+                    {/* <App /> */}
+                    {authorized &&
+                        <Component {...pageProps} />
+                    }
+                </I18nextProvider>,
+                {/* document.getElementById('root')
+                ); */}
+
+
 
                 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&family=Slabo+27px&display=swap" rel="stylesheet" />
                 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css' />
