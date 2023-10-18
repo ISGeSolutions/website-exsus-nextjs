@@ -228,11 +228,11 @@ function CountryItinararies(country) {
 
     const generateDynamicLink = (item) => {
         // console.log('item', item);
-        return regionWiseUrl + `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`;
+        return regionWiseUrl + `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}&countrycode=${countrycode}`;
     };
 
     const handleRedirect = (item) => {
-        router.push(regionWiseUrl + `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`);
+        router.push(regionWiseUrl + `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}&countrycode=${countrycode}`);
     };
 
     const equalHeight = (resize) => {

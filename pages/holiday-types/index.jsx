@@ -22,9 +22,10 @@ function Index() {
     const [holidaytypesLandingList, setHolidaytypesLandingList] = useState();
     // const [backgroundImage, setBackgroundImage] = useState('');
     const [backgroundImage, setBackgroundImage] = useState([]);
-    const [backgroundImgWhentogo, setBackgroundImgWhentogo] = useState('');
+    const [backgroundImgWhentogo, setBackgroundImgWhentogo] = useState({});
     const [bannerImageArr, setBannerImageArr] = useState([]);
     const [thumbnailImageArr, setThumbnailImageArr] = useState([]);
+
 
 
     const EnquiryButton = () => {
@@ -110,9 +111,11 @@ function Index() {
             // setDestinationLandingDetails(x);
             const imageCheck = x?.data[0]?.attributes?.custom_page_images?.data;
             const newBackgroundImages = [];
+            debugger;
             imageCheck?.forEach(element => {
                 if (element.attributes.image_type == 'center') {
-                    setBackgroundImgWhentogo(x.data[0].attributes.custom_page_images.data[1].attributes.image_path);
+                    console.log(element.attributes);
+                    setBackgroundImgWhentogo(element.attributes);
                 } else if (element.attributes.image_type == 'banner') {
                     newBackgroundImages.push(element.attributes.image_path);
                     // setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data[0].attributes.custom_page_images.data[0].attributes.image_path);
@@ -122,7 +125,11 @@ function Index() {
         });
 
         holidaytypesService.getHolidaytypesLandingList().then(x => {
-            const imageCheckType = x.data;
+            const imageCheckType = x.data.sort(
+                (a, b) =>
+                    a.attributes.main_page_serial_number -
+                    b.attributes.main_page_serial_number
+            );
             const thumbnailImageArr = [];
             imageCheckType.forEach(elementMain => {
                 if (elementMain.attributes.holiday_type_group_images.data) {
@@ -208,12 +215,9 @@ function Index() {
             <section className="card_blk_row destinations_blk_row light_grey">
                 <div className="container">
                     <div className="bookmark_row">
-                        {/* <p style={{ color: `white` }}>{holidaytypes?.attributes?.page_friendly_url}</p> */}
-                        <FriendlyUrl data={holidaytypes?.attributes?.page_friendly_url}></FriendlyUrl>                        
-                        {/* <ul>
-                            <li><a href="homepage.html">Home</a></li>
-                            <li>Holiday types</li>
-                        </ul> */}
+                        <FriendlyUrl
+                            data={holidaytypes?.attributes?.page_friendly_url}
+                        ></FriendlyUrl>
                     </div>
                     <div className="row">
                         <div className="destinations_cntnt_blk">
@@ -267,11 +271,11 @@ function Index() {
                 </div>
             </section>
 
-            <section className="destination_text_overlay_row" style={{ backgroundImage: `url(${backgroundImgWhentogo})` }}>
+            <section className="destination_text_overlay_row" style={{ backgroundImage: `url(${backgroundImgWhentogo?.image_path})` }}>
                 <div className="container">
                     <div className="destination_text_overlay_inr">
-                        <h4>When to go where</h4>
-                        <h5>Find out the best time to travel</h5>
+                        <h4>{backgroundImgWhentogo?.image_header_text_1}</h4>
+                        <h5>{backgroundImgWhentogo?.image_header_text_2}</h5>
                         <button className="btn prmry_btn make_enqury_btn">View travel calender
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                         </button>

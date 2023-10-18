@@ -76,7 +76,7 @@ function Index() {
     };
 
     const handleWhenToGoClick = () => {
-        router.push("/when-to-go");
+        router.push("/where-to-go");
     };
 
     useEffect(() => {

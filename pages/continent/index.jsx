@@ -3,6 +3,7 @@ import { destinationService } from 'services';
 import Iframe from 'react-iframe';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { FriendlyUrl } from '../../components';
 import Country from '../country/index'; // Adjust the path accordingly
 import ContinentCountry from '../continentcountries/index'; // Adjust the path accordingly
 import ContinentItinararies from '../continentitineraries/index'; // Adjust the path accordingly
@@ -249,12 +250,9 @@ function Index() {
             <section className="destination_tab_row light_grey" ref={divRef}>
                 <div className="container">
                     <div className="bookmark_row">
-                        <p style={{ color: `white` }}>{destinationDetails?.attributes?.page_friendly_url}</p>
-                        {/* <ul>
-                            <li><a href="homepage.html">Home</a></li>
-                            <li><a href="destinations.html">Destinations</a></li>
-                            <li>Asia</li>
-                        </ul> */}
+                        < FriendlyUrl
+                            data={destinationDetails?.friendly_url}
+                        ></FriendlyUrl>
                     </div>
                     <div className="destination_tab_inr">
                         <h2 className="tab_tilte">

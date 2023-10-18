@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Signup } from 'components';
+import { Signup, FriendlyUrl } from 'components';
 import { MyLoader } from './../../components/MyLoader';
 // import { Link, Spinner } from 'components';
 import { Layout } from 'components/users';
@@ -108,13 +108,13 @@ function Index() {
                         </section>
 
                         <section className="trvl_info_row">
+
                             <div className="container">
                                 <div className="bookmark_row">
-                                    <p style={{ color: `white` }} dangerouslySetInnerHTML={{ __html: whyusDetails?.page_friendly_url }} />
-                                    {/* <ul>
-                            <li><a href="homepage.html">Home</a></li>
-                            <li>Why us</li>
-                        </ul> */}
+                                    {/* {/ <p style={{ color: `white` }}>{destinations?.attributes?.page_friendly_url}</p > /} */}
+                                    < FriendlyUrl
+                                        data={whyusDetails?.page_friendly_url}
+                                    ></FriendlyUrl>
                                 </div>
                                 <div className="trvl_info_cntnt">
                                     <h2 className="trvl_title">{whyusDetails?.page_header_text}</h2>

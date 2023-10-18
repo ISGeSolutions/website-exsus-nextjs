@@ -95,7 +95,7 @@ function CountryRegions({ country, sendDataToParent }) {
                                             </div>
                                         </div>
                                     </NavLink>
-                                    <p>{item?.attributes?.intro_text}</p>
+                                    <p dangerouslySetInnerHTML={{ __html: item?.attributes?.intro_text }} />
                                 </div>
                             </div>
                         ))}

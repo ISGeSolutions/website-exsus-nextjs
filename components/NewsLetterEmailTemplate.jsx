@@ -10,7 +10,6 @@ export function NewsLetterEmailTemplate(props) {
 
     useEffect(() => {
         // Update the current date every second
-        console.log("emaildetails", emailDetails)
         const intervalId = setInterval(() => {
             setCurrentDate(new Date());
         }, 1000);
