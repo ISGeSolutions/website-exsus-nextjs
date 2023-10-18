@@ -22,10 +22,10 @@ import { userService } from 'services';
 import { I18nextProvider } from 'react-i18next';
 import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import ukTranslation from './i18n/uk.json';
-import usTranslation from './i18n/us.json';
-import asiaTranslation from './i18n/asia.json';
-import inTranslation from './i18n/in.json';
+import ukTranslation from './../data/i18n/uk.json';
+import usTranslation from './../data/i18n/us.json';
+import asiaTranslation from './../data/i18n/asia.json';
+import inTranslation from './../data/i18n/in.json';
 
 i18n
     .use(LanguageDetector)
