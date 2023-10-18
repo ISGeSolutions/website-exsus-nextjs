@@ -30,7 +30,7 @@ export function NewsLetterEmailTemplate(props) {
                 <tbody>
                     <tr>
                         <td>
-                            <table class="content" bgcolor="#fff" align="center" style={{ border: `1px solid #666666`, margin: `15px auto` }} cellpadding="0" cellspacing="0" width="600px">
+                            <table className="content" bgcolor="#fff" align="center" style={{ border: `1px solid #666666`, margin: `15px auto` }} cellpadding="0" cellspacing="0" width="600px">
                                 <tr>
                                     <td align="center" bgcolor="#252525" style={{ padding: `15px` }}>
                                         <img src="@hosturlimages/images/logo.png" alt="emailer_logo" width="120" height="36" align="center" />

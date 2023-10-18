@@ -373,10 +373,10 @@ function Index() {
                                 <div className="contact_form_row">
 
                                     <form onSubmit={handleSubmit(onSubmit)}>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="select_drpdwn">
-                                                    <select class="form-select" aria-label="Title">
+                                        <div className="row">
+                                            <div className="col-lg-6">
+                                                <div className="select_drpdwn">
+                                                    <select className="form-select" aria-label="Title">
                                                         <option selected="">Title *</option>
                                                         <option value="Mr">Mr</option>
                                                         <option value="Mrs">Mrs</option>
@@ -390,8 +390,8 @@ function Index() {
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-input validatn_cls">
+                                            <div className="col-lg-6">
+                                                <div className="form-input validatn_cls">
                                                     <input
                                                         type="text"
                                                         name="first_name"
@@ -408,8 +408,8 @@ function Index() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-input">
+                                            <div className="col-lg-6">
+                                                <div className="form-input">
                                                     <input
                                                         type="text"
                                                         name="title"
@@ -426,8 +426,8 @@ function Index() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-input">
+                                            <div className="col-lg-6">
+                                                <div className="form-input">
                                                     <input
                                                         type="email"
                                                         name="email_id"
@@ -444,7 +444,7 @@ function Index() {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button class="btn prmry_btn mx-auto">
+                                            <button className="btn prmry_btn mx-auto">
                                                 Subscribe
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"

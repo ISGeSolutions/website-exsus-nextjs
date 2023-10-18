@@ -128,7 +128,7 @@ function App({ Component, pageProps }) {
                     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
                     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> */}
                 </Head>
-                {/* <div class="full_loader_parnt_blk loader_parnt_blk" style={{ display: 'block' }}><div class="loader-circle-2"></div></div> */}
+                {/* <div className="full_loader_parnt_blk loader_parnt_blk" style={{ display: 'block' }}><div className="loader-circle-2"></div></div> */}
 
                 {/* ReactDOM.render( */}
                 <I18nextProvider i18n={i18n}>

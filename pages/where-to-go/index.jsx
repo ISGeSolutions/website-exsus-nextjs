@@ -33,18 +33,18 @@ function Index() {
 
     return (
         <Layout>
-            <section class="banner_blk_row">
+            <section className="banner_blk_row">
                 <div
                     id="carouselExampleInterval"
-                    class="carousel slide"
+                    className="carousel slide"
                     data-bs-ride="carousel"
                 >
-                    <div class="carousel-indicators">
+                    <div className="carousel-indicators">
                         <button
                             type="button"
                             data-bs-target="#carouselExampleInterval"
                             data-bs-slide-to="0"
-                            class="active"
+                            className="active"
                             aria-current="true"
                             aria-label="Slide 1"
                         ></button>
@@ -79,62 +79,62 @@ function Index() {
                             aria-label="Slide 6"
                         ></button>
                     </div>
-                    <div class="carousel-inner">
+                    <div className="carousel-inner">
                         <a
                             href="#"
                             target="_blank"
-                            class="carousel-item active"
+                            className="carousel-item active"
                             data-bs-interval="5000"
                         >
-                            <div class="banner_commn_cls when_to_go_banner01"></div>
+                            <div className="banner_commn_cls when_to_go_banner01"></div>
                         </a>
                         <a
                             href="#"
                             target="_blank"
-                            class="carousel-item"
+                            className="carousel-item"
                             data-bs-interval="5000"
                         >
-                            <div class="banner_commn_cls when_to_go_banner02"></div>
+                            <div className="banner_commn_cls when_to_go_banner02"></div>
                         </a>
                         <a
                             href="#"
                             target="_blank"
-                            class="carousel-item"
+                            className="carousel-item"
                             data-bs-interval="5000"
                         >
-                            <div class="banner_commn_cls when_to_go_banner03"></div>
+                            <div className="banner_commn_cls when_to_go_banner03"></div>
                         </a>
                         <a
                             href="#"
                             target="_blank"
-                            class="carousel-item"
+                            className="carousel-item"
                             data-bs-interval="5000"
                         >
-                            <div class="banner_commn_cls when_to_go_banner04"></div>
+                            <div className="banner_commn_cls when_to_go_banner04"></div>
                         </a>
                         <a
                             href="#"
                             target="_blank"
-                            class="carousel-item"
+                            className="carousel-item"
                             data-bs-interval="5000"
                         >
-                            <div class="banner_commn_cls when_to_go_banner05"></div>
+                            <div className="banner_commn_cls when_to_go_banner05"></div>
                         </a>
                         <a
                             href="#"
                             target="_blank"
-                            class="carousel-item"
+                            className="carousel-item"
                             data-bs-interval="5000"
                         >
-                            <div class="banner_commn_cls when_to_go_banner06"></div>
+                            <div className="banner_commn_cls when_to_go_banner06"></div>
                         </a>
                     </div>
                 </div>
             </section>
 
-            <section class="trvl_info_row">
-                <div class="container">
-                    <div class="bookmark_row">
+            <section className="trvl_info_row">
+                <div className="container">
+                    <div className="bookmark_row">
                         <ul>
                             <li>
                                 <a href="homepage.html">Home</a>
@@ -143,13 +143,13 @@ function Index() {
                         </ul>
                     </div>
 
-                    <div class="trvl_info_cntnt">
-                        <h2 class="trvl_title">WHERE TO GO ON A LUXURY HOLIDAY</h2>
-                        <p class="when_to_go_para">
+                    <div className="trvl_info_cntnt">
+                        <h2 className="trvl_title">WHERE TO GO ON A LUXURY HOLIDAY</h2>
+                        <p className="when_to_go_para">
                             Our guide to the best holiday destinations for every month of the
                             year
                         </p>
-                        <p class="mb-4">
+                        <p className="mb-4">
                             Wherever you want to go and whatever you want to see, our guide
                             will help you navigate your way around the world. Simply click on
                             a month you'd like to be away and see where we recommend as being
@@ -159,18 +159,18 @@ function Index() {
                         </p>
                     </div>
 
-                    <section class="month_wise_row">
-                        <h3 class="title_cls">Month-by month holiday calendar</h3>
-                        <div class="row">
+                    <section className="month_wise_row">
+                        <h3 className="title_cls">Month-by month holiday calendar</h3>
+                        <div className="row">
                             <NavLink href={generateDynamicLink()}>
-                                <div class="col-lg-6">
-                                    <div class="month_wise_cnt_blk">
+                                <div className="col-lg-6">
+                                    <div className="month_wise_cnt_blk">
                                         <h4>Where to go on holiday in January</h4>
                                         <a href="when_to_go_detail.html">
                                             <img
                                                 src="images/jan_month.jpg"
                                                 alt="jan-month"
-                                                class="img-fluid"
+                                                className="img-fluid"
                                             />
                                         </a>
                                         <p>
@@ -184,14 +184,14 @@ function Index() {
                                     </div>
                                 </div>
                             </NavLink>
-                            <div class="col-lg-6">
-                                <div class="month_wise_cnt_blk">
+                            <div className="col-lg-6">
+                                <div className="month_wise_cnt_blk">
                                     <h4>Where to go on holiday in February</h4>
                                     <a href="when_to_go_detail.html">
                                         <img
                                             src="images/feb_month.jpg"
                                             alt="feb-month"
-                                            class="img-fluid"
+                                            className="img-fluid"
                                         />
                                     </a>
                                     <p>
@@ -204,14 +204,14 @@ function Index() {
                                     </p>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="month_wise_cnt_blk">
+                            <div className="col-lg-6">
+                                <div className="month_wise_cnt_blk">
                                     <h4>Where to go on holiday in March</h4>
                                     <a href="when_to_go_detail.html">
                                         <img
                                             src="images/march_month.jpg"
                                             alt="march-month"
-                                            class="img-fluid"
+                                            className="img-fluid"
                                         />
                                     </a>
                                     <p>
@@ -224,14 +224,14 @@ function Index() {
                                     </p>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="month_wise_cnt_blk">
+                            <div className="col-lg-6">
+                                <div className="month_wise_cnt_blk">
                                     <h4>Where to go on holiday in April</h4>
                                     <a href="when_to_go_detail.html">
                                         <img
                                             src="images/april_month.jpg"
                                             alt="april-month"
-                                            class="img-fluid"
+                                            className="img-fluid"
                                         />
                                     </a>
                                     <p>
@@ -244,14 +244,14 @@ function Index() {
                                     </p>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="month_wise_cnt_blk">
+                            <div className="col-lg-6">
+                                <div className="month_wise_cnt_blk">
                                     <h4>Where to go on holiday in May</h4>
                                     <a href="when_to_go_detail.html">
                                         <img
                                             src="images/may_month.jpg"
                                             alt="may-month"
-                                            class="img-fluid"
+                                            className="img-fluid"
                                         />
                                     </a>
                                     <p>
@@ -263,14 +263,14 @@ function Index() {
                                     </p>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="month_wise_cnt_blk">
+                            <div className="col-lg-6">
+                                <div className="month_wise_cnt_blk">
                                     <h4>Where to go on holiday in June</h4>
                                     <a href="when_to_go_detail.html">
                                         <img
                                             src="images/june_month.jpg"
                                             alt="june-month"
-                                            class="img-fluid"
+                                            className="img-fluid"
                                         />
                                     </a>
                                     <p>
@@ -283,14 +283,14 @@ function Index() {
                                     </p>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="month_wise_cnt_blk">
+                            <div className="col-lg-6">
+                                <div className="month_wise_cnt_blk">
                                     <h4>Where to go on holiday in July</h4>
                                     <a href="when_to_go_detail.html">
                                         <img
                                             src="images/july_month.jpg"
                                             alt="july-month"
-                                            class="img-fluid"
+                                            className="img-fluid"
                                         />
                                     </a>
                                     <p>
@@ -303,14 +303,14 @@ function Index() {
                                     </p>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="month_wise_cnt_blk">
+                            <div className="col-lg-6">
+                                <div className="month_wise_cnt_blk">
                                     <h4>Where to go on holiday in August</h4>
                                     <a href="when_to_go_detail.html">
                                         <img
                                             src="images/aug_month.jpg"
                                             alt="august-month"
-                                            class="img-fluid"
+                                            className="img-fluid"
                                         />
                                     </a>
                                     <p>
@@ -323,14 +323,14 @@ function Index() {
                                     </p>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="month_wise_cnt_blk">
+                            <div className="col-lg-6">
+                                <div className="month_wise_cnt_blk">
                                     <h4>Where to go on holiday in September</h4>
                                     <a href="when_to_go_detail.html">
                                         <img
                                             src="images/sep_month.jpg"
                                             alt="sep-month"
-                                            class="img-fluid"
+                                            className="img-fluid"
                                         />
                                     </a>
                                     <p>
@@ -343,14 +343,14 @@ function Index() {
                                     </p>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="month_wise_cnt_blk">
+                            <div className="col-lg-6">
+                                <div className="month_wise_cnt_blk">
                                     <h4>Where to go on holiday in October</h4>
                                     <a href="when_to_go_detail.html">
                                         <img
                                             src="images/oct_month.jpg"
                                             alt="oct-month"
-                                            class="img-fluid"
+                                            className="img-fluid"
                                         />
                                     </a>
                                     <p>
@@ -363,14 +363,14 @@ function Index() {
                                     </p>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="month_wise_cnt_blk">
+                            <div className="col-lg-6">
+                                <div className="month_wise_cnt_blk">
                                     <h4>Where to go on holiday in November</h4>
                                     <a href="when_to_go_detail.html">
                                         <img
                                             src="images/nov_month.jpg"
                                             alt="nov-month"
-                                            class="img-fluid"
+                                            className="img-fluid"
                                         />
                                     </a>
                                     <p>
@@ -384,14 +384,14 @@ function Index() {
                                     </p>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="month_wise_cnt_blk">
+                            <div className="col-lg-6">
+                                <div className="month_wise_cnt_blk">
                                     <h4>Where to go on holiday in December</h4>
                                     <a href="when_to_go_detail.html">
                                         <img
                                             src="images/dec_month.jpg"
                                             alt="dec-month"
-                                            class="img-fluid"
+                                            className="img-fluid"
                                         />
                                     </a>
                                     <p>
@@ -410,12 +410,12 @@ function Index() {
                 </div>
             </section>
 
-            <section class="card_blk_row dark_grey py-5">
-                <div class="container">
-                    <div class="book_wth_confdnce">
+            <section className="card_blk_row dark_grey py-5">
+                <div className="container">
+                    <div className="book_wth_confdnce">
                         <h2>THREE REASONS TO BOOK WITH CONFIDENCE</h2>
-                        <div class="row">
-                            <div class="col-lg-4">
+                        <div className="row">
+                            <div className="col-lg-4">
                                 <h3>Specialist Expertise</h3>
                                 <p>
                                     With over 20 years’ experience of creating incredible journeys
@@ -426,7 +426,7 @@ function Index() {
                                     you personally.
                                 </p>
                             </div>
-                            <div class="col-lg-4">
+                            <div className="col-lg-4">
                                 <h3>Tailor-made trips</h3>
                                 <p>
                                     All trips put together through us are designed to suit
@@ -437,7 +437,7 @@ function Index() {
                                     lifetime.
                                 </p>
                             </div>
-                            <div class="col-lg-4">
+                            <div className="col-lg-4">
                                 <h3>Fully protected</h3>
                                 <p>
                                     From the moment you start planning your trip, you will have a
@@ -450,23 +450,23 @@ function Index() {
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card_blk_inr card_blk_overlay start_planng_holdy_blk">
+                    <div className="row">
+                        <div className="col-md-6">
+                            <div className="card_blk_inr card_blk_overlay start_planng_holdy_blk">
                                 <a href="#" target="_blank">
                                     <img
                                         src="images/start_planng_holdy.jpg"
                                         alt="start_planng_holdy"
-                                        class="img-fluid"
+                                        className="img-fluid"
                                     />
-                                    <div class="card_blk_cntnt card_blk_cntnt_top">
-                                        <div class="row align-items-center">
-                                            <div class="col-11">
-                                                <div class="card_blk_txt">
+                                    <div className="card_blk_cntnt card_blk_cntnt_top">
+                                        <div className="row align-items-center">
+                                            <div className="col-11">
+                                                <div className="card_blk_txt">
                                                     <h3>Start planning your next holiday</h3>
                                                 </div>
                                             </div>
-                                            <div class="col-1 ps-0">
+                                            <div className="col-1 ps-0">
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     fill="#ffffff"
@@ -483,9 +483,9 @@ function Index() {
                                                     />
                                                 </svg>
                                             </div>
-                                            <div class="col-12">
+                                            <div className="col-12">
                                                 <button
-                                                    class="btn prmry_btn strt_planng_btn"
+                                                    className="btn prmry_btn strt_planng_btn"
                                                     onclick="window.open('contact_us.html')"
                                                 >
                                                     Make an enquiry
@@ -512,22 +512,22 @@ function Index() {
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="card_blk_inr card_blk_overlay mt-3 mt-md-0">
+                        <div className="col-md-6">
+                            <div className="card_blk_inr card_blk_overlay mt-3 mt-md-0">
                                 <a href="#" target="_blank">
                                     <img
                                         src="images/about_us_card01.jpg"
                                         alt="Card image 07"
-                                        class="img-fluid"
+                                        className="img-fluid"
                                     />
-                                    <div class="card_blk_cntnt card_blk_cntnt_top">
-                                        <div class="row align-items-center">
-                                            <div class="col-11">
-                                                <div class="card_blk_txt">
+                                    <div className="card_blk_cntnt card_blk_cntnt_top">
+                                        <div className="row align-items-center">
+                                            <div className="col-11">
+                                                <div className="card_blk_txt">
                                                     <h3>Explore our destinations</h3>
                                                 </div>
                                             </div>
-                                            <div class="col-1 ps-0">
+                                            <div className="col-1 ps-0">
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     fill="#ffffff"
@@ -548,21 +548,21 @@ function Index() {
                                     </div>
                                 </a>
                             </div>
-                            <div class="card_blk_inr card_blk_overlay mb-0">
+                            <div className="card_blk_inr card_blk_overlay mb-0">
                                 <a href="#">
                                     <img
                                         src="images/about_us_card02.jpg"
                                         alt="Card image 08"
-                                        class="img-fluid"
+                                        className="img-fluid"
                                     />
-                                    <div class="card_blk_cntnt card_blk_cntnt_top">
-                                        <div class="row align-items-center">
-                                            <div class="col-11">
-                                                <div class="card_blk_txt">
+                                    <div className="card_blk_cntnt card_blk_cntnt_top">
+                                        <div className="row align-items-center">
+                                            <div className="col-11">
+                                                <div className="card_blk_txt">
                                                     <h3>Explore our Holiday types</h3>
                                                 </div>
                                             </div>
-                                            <div class="col-1 ps-0">
+                                            <div className="col-1 ps-0">
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     fill="#ffffff"
@@ -588,12 +588,12 @@ function Index() {
                 </div>
             </section>
 
-            <section class="make_enqury_row">
-                <div class="container">
+            <section className="make_enqury_row">
+                <div className="container">
                     <h3>YOUR JOURNEY STARTS HERE</h3>
                     <p>call us on 020 7337 9010 to start planning your perfect trip</p>
                     <button
-                        class="btn prmry_btn make_enqury_btn"
+                        className="btn prmry_btn make_enqury_btn"
                         onclick="window.open('contact_us.html')"
                     >
                         Make an enquiry
@@ -616,27 +616,27 @@ function Index() {
                 </div>
             </section>
 
-            <section aria-label="Sign up for newsletter" class="newslettr_row">
-                <div class="container">
+            <section aria-label="Sign up for newsletter" className="newslettr_row">
+                <div className="container">
                     <h4>Sign up for our newsletter</h4>
                     <h5>Receive our latest news and special offers</h5>
-                    <form class="newslettr_form d-block d-sm-flex">
-                        <div class="newlettr_inpt">
+                    <form className="newslettr_form d-block d-sm-flex">
+                        <div className="newlettr_inpt">
                             <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="Full name and title"
                             />
                         </div>
-                        <div class="newlettr_inpt ps-0 ps-sm-2">
+                        <div className="newlettr_inpt ps-0 ps-sm-2">
                             <input
                                 type="email"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="Your email address"
                             />
                         </div>
-                        <div class="newlettr_btn ps-0 ps-sm-2">
-                            <button type="submit" class="btn btn-primary prmry_btn">
+                        <div className="newlettr_btn ps-0 ps-sm-2">
+                            <button type="submit" className="btn btn-primary prmry_btn">
                                 Sign up
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"

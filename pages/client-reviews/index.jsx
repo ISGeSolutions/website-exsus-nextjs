@@ -58,9 +58,9 @@ function Index() {
                         </ul>
                     </div>
 
-                    <div class="trvl_info_cntnt">
-                        <h2 class="trvl_title">EXSUS TRAVEL REVIEWS</h2>
-                        <p class="mb-4">
+                    <div className="trvl_info_cntnt">
+                        <h2 className="trvl_title">EXSUS TRAVEL REVIEWS</h2>
+                        <p className="mb-4">
                             Exsus Travel has more than 20 years' experience of creating luxury
                             tailor-made holidays all around the world. Over the years, we've
                             received countless testimonials from people who have travelled
@@ -69,7 +69,7 @@ function Index() {
                             their tailor-made travel. Below is a selection of reviews from
                             clients who've returned from a holiday with us recently.
                         </p>
-                        <p class="mb-4">
+                        <p className="mb-4">
                             We're delighted to have won the 2021 Feefo Platinum Trusted
                             Service Award, an independent seal of excellence that has
                             recognised Exsus Travel for delivering exceptional customer
@@ -78,7 +78,7 @@ function Index() {
                         </p>
                         <a href="https://www.feefo.com/en-GB/reviews/exsus-travel?withMedia=false&timeFrame=ALL&displayFeedbackType=SERVICE" />
                         <img
-                            class="img-fluid"
+                            className="img-fluid"
                             src="/images/feefo_platinum_service.png"
                             alt="feefo_platinum_service"
                         />

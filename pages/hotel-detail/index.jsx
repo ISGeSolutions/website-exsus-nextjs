@@ -121,7 +121,7 @@ function Index() {
                         <h2 className="trvl_title mb-3">{hotelData.hotel_name}</h2>
                         <h3 className="trvl_title_sub_white mb-3">Location: {hotelData.location}</h3>
                         <p className="mb-4">Price guide:<span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">{hotelData.price_guide_text}</span></p>
-                        {/* <p className="mb-4">The Rosewood is a sanctuary of peace and comfort in the heart of one of the world’s most exciting cities: Beijing. The hotel combines a fantastic location with a world-class hotel experience, including five international restaurants, sleek, luxurious accommodation and personalised spa treatments. It sits in the glitzy neighbourhood of Chaoyang, which is famed for its shops and bars.</p> */}
+                        {/* <p className="mb-4">The Rosewood is a sanctuary of peace and comfort in the heart of one of the world’s most exciting cities: Beijing. The hotel combines a fantastic location with a world-className hotel experience, including five international restaurants, sleek, luxurious accommodation and personalised spa treatments. It sits in the glitzy neighbourhood of Chaoyang, which is famed for its shops and bars.</p> */}
                         <p
                             className="mb-4"
                             dangerouslySetInnerHTML={{ __html: hotelData?.video_url }}

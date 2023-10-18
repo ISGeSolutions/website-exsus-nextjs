@@ -223,7 +223,7 @@ function Index() {
                                         </div>
                                     </div>
                                 </a>
-                                <p className="card_extra_para">Jumby Bay is holiday heaven! From its secluded private island location just off of Antigua’s coast, to the luxurious suites and villas, first-class amenities and gorgeous beaches, it is perfect for a special celebration.</p>
+                                <p className="card_extra_para">Jumby Bay is holiday heaven! From its secluded private island location just off of Antigua’s coast, to the luxurious suites and villas, first-className amenities and gorgeous beaches, it is perfect for a special celebration.</p>
                             </div>
                         </div>
                         <div className="col-sm-6 col-lg-4 col-xxl-3">

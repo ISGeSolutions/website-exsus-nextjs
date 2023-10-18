@@ -91,19 +91,19 @@ function CountryOverview(props) {
                     <p dangerouslySetInnerHTML={{ __html: overview_text }} />
                 </section>                
             </div>
-            <section class="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
-                <div class="container-md">
-                    <h3 class="title_cls pt-5">Holidays in {country_name} Handpicked by Exsus</h3>
-                    <div class="card_slider_row">
-                        <div class="carousel00">
-                            <div class="row">
-                                <div class="col-sm-6 col-lg-3 col-xxl-3">
-                                    <div class="card_slider_inr">
-                                        <div class="card_slider">
-                                            <a class="card_slider_img">
-                                                <img src="images/country_card01.jpg" alt="country card01" class="img-fluid" />
+            <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
+                <div className="container-md">
+                    <h3 className="title_cls pt-5">Holidays in {country_name} Handpicked by Exsus</h3>
+                    <div className="card_slider_row">
+                        <div className="carousel00">
+                            <div className="row">
+                                <div className="col-sm-6 col-lg-3 col-xxl-3">
+                                    <div className="card_slider_inr">
+                                        <div className="card_slider">
+                                            <a className="card_slider_img">
+                                                <img src="images/country_card01.jpg" alt="country card01" className="img-fluid" />
                                             </a>
-                                            <div class="card_slider_cnt">
+                                            <div className="card_slider_cnt">
                                                 <h4><a href="#">China Like an Emperor</a></h4>
                                                 <ul>
                                                     <li>China in Ultimate Style</li>
@@ -112,20 +112,20 @@ function CountryOverview(props) {
                                                     <li>Travel to:<span>Beijing & Northern China, Shanghai, Hangzhou & Eastern China, Yunnan</span></li>
                                                 </ul>
                                             </div>
-                                            <button class="btn card_slider_btn">
+                                            <button className="btn card_slider_btn">
                                                 <span>12 nights</span>
-                                                <span class="view_itnry_link" onclick="window.location.href='itinerary_detail.html'">View this itinerary<em class="fa-solid fa-chevron-right"></em></span>
+                                                <span className="view_itnry_link" onclick="window.location.href='itinerary_detail.html'">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-lg-3 col-xxl-3">
-                                    <div class="card_slider_inr">
-                                        <div class="card_slider">
-                                            <div class="card_slider_img">
-                                                <img src="images/country_card02.jpg" alt="country card02" class="img-fluid" />
+                                <div className="col-sm-6 col-lg-3 col-xxl-3">
+                                    <div className="card_slider_inr">
+                                        <div className="card_slider">
+                                            <div className="card_slider_img">
+                                                <img src="images/country_card02.jpg" alt="country card02" className="img-fluid" />
                                             </div>
-                                            <div class="card_slider_cnt">
+                                            <div className="card_slider_cnt">
                                                 <h4><a href="#">In Search of Pandas</a></h4>
                                                 <ul>
                                                     <li>Family Adventure to China</li>
@@ -134,20 +134,20 @@ function CountryOverview(props) {
                                                     <li>Travel to:<span>Beijing & Northern China, Hong Kong & Macau, Southern China, Xi'an, Sichuan & Central China</span></li>
                                                 </ul>
                                             </div>
-                                            <button class="btn card_slider_btn">
+                                            <button className="btn card_slider_btn">
                                                 <span>13 nights</span>
-                                                <span class="view_itnry_link" onclick="window.location.href='itinerary_detail.html'">View this itinerary<em class="fa-solid fa-chevron-right"></em></span>
+                                                <span className="view_itnry_link" onclick="window.location.href='itinerary_detail.html'">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-lg-3 col-xxl-3">
-                                    <div class="card_slider_inr">
-                                        <div class="card_slider">
-                                            <div class="card_slider_img">
-                                                <img src="images/country_card03.jpg" alt="country card03" class="img-fluid" />
+                                <div className="col-sm-6 col-lg-3 col-xxl-3">
+                                    <div className="card_slider_inr">
+                                        <div className="card_slider">
+                                            <div className="card_slider_img">
+                                                <img src="images/country_card03.jpg" alt="country card03" className="img-fluid" />
                                             </div>
-                                            <div class="card_slider_cnt">
+                                            <div className="card_slider_cnt">
                                                 <h4><a href="#">STYLISH HONEYMOON TO CHINA</a></h4>
                                                 <ul>
                                                     <li>A Chinese Romance</li>
@@ -156,9 +156,9 @@ function CountryOverview(props) {
                                                     <li>Travel to:<span>Beijing & Northern China, Hong Kong & Macau, Southern China</span></li>
                                                 </ul>
                                             </div>
-                                            <button class="btn card_slider_btn">
+                                            <button className="btn card_slider_btn">
                                                 <span>12 nights</span>
-                                                <span class="view_itnry_link" onclick="window.location.href='itinerary_detail.html'">View itinerary<em class="fa-solid fa-chevron-right"></em></span>
+                                                <span className="view_itnry_link" onclick="window.location.href='itinerary_detail.html'">View itinerary<em className="fa-solid fa-chevron-right"></em></span>
                                             </button>
                                         </div>
                                     </div>
@@ -168,19 +168,19 @@ function CountryOverview(props) {
                     </div>
                 </div>
             </section>
-            <section class="favrites_blk_row favrites_blk_no_slider_row light_grey">
-                <div class="container-md">
-                    <h3 class="title_cls pt-5">PLACES TO STAY IN {country_name} HANDPICKED BY EXSUS</h3>
-                    <div class="card_slider_row">
-                        <div class="carousel00">
-                            <div class="row">
-                                <div class="col-sm-6 col-lg-3 col-xxl-3">
-                                    <div class="card_slider_inr">
-                                        <div class="card_slider">
-                                            <a class="card_slider_img">
-                                                <img src="images/country_hotel01.jpg" alt="country_hotel01" class="img-fluid" />
+            <section className="favrites_blk_row favrites_blk_no_slider_row light_grey">
+                <div className="container-md">
+                    <h3 className="title_cls pt-5">PLACES TO STAY IN {country_name} HANDPICKED BY EXSUS</h3>
+                    <div className="card_slider_row">
+                        <div className="carousel00">
+                            <div className="row">
+                                <div className="col-sm-6 col-lg-3 col-xxl-3">
+                                    <div className="card_slider_inr">
+                                        <div className="card_slider">
+                                            <a className="card_slider_img">
+                                                <img src="images/country_hotel01.jpg" alt="country_hotel01" className="img-fluid" />
                                             </a>
-                                            <div class="card_slider_cnt">
+                                            <div className="card_slider_cnt">
                                                 <h4><a href="#">Capella Shanghai</a></h4>
                                                 <ul>
                                                     <li>Location: Shanghai, Hangzhou & Eastern China | China</li>
@@ -188,19 +188,19 @@ function CountryOverview(props) {
                                                     <li>Travel to:<span>Boutique Hotel, History & Heritage, Cultural Immersion, Food & Wine</span></li>
                                                 </ul>
                                             </div>
-                                            <button class="btn card_slider_btn justify-content-end light_grey_btn_bg">
-                                                <span class="view_itnry_link" onclick="window.location.href='accomodation_detail.html'">View hotel<em class="fa-solid fa-chevron-right"></em></span>
+                                            <button className="btn card_slider_btn justify-content-end light_grey_btn_bg">
+                                                <span className="view_itnry_link" onclick="window.location.href='accomodation_detail.html'">View hotel<em className="fa-solid fa-chevron-right"></em></span>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-lg-3 col-xxl-3">
-                                    <div class="card_slider_inr">
-                                        <div class="card_slider">
-                                            <div class="card_slider_img">
-                                                <img src="images/country_hotel02.jpg" alt="country_hotel02" class="img-fluid" />
+                                <div className="col-sm-6 col-lg-3 col-xxl-3">
+                                    <div className="card_slider_inr">
+                                        <div className="card_slider">
+                                            <div className="card_slider_img">
+                                                <img src="images/country_hotel02.jpg" alt="country_hotel02" className="img-fluid" />
                                             </div>
-                                            <div class="card_slider_cnt">
+                                            <div className="card_slider_cnt">
                                                 <h4><a href="#">Six Senses Qing Cheng Mountain</a></h4>
                                                 <ul>
                                                     <li>Location: Xi'an, Sichuan & Central China | China</li>
@@ -208,19 +208,19 @@ function CountryOverview(props) {
                                                     <li>Travel to:<span>Wildlife & Nature, Walking & Trekking, Setting & Views, Landscapes & Scenery</span></li>
                                                 </ul>
                                             </div>
-                                            <button class="btn card_slider_btn justify-content-end light_grey_btn_bg">
-                                                <span class="view_itnry_link" onclick="window.location.href='accomodation_detail.html'">View hotel<em class="fa-solid fa-chevron-right"></em></span>
+                                            <button className="btn card_slider_btn justify-content-end light_grey_btn_bg">
+                                                <span className="view_itnry_link" onclick="window.location.href='accomodation_detail.html'">View hotel<em className="fa-solid fa-chevron-right"></em></span>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-lg-3 col-xxl-3">
-                                    <div class="card_slider_inr">
-                                        <div class="card_slider">
-                                            <div class="card_slider_img">
-                                                <img src="images/country_hotel03.jpg" alt="country_hotel03" class="img-fluid" />
+                                <div className="col-sm-6 col-lg-3 col-xxl-3">
+                                    <div className="card_slider_inr">
+                                        <div className="card_slider">
+                                            <div className="card_slider_img">
+                                                <img src="images/country_hotel03.jpg" alt="country_hotel03" className="img-fluid" />
                                             </div>
-                                            <div class="card_slider_cnt">
+                                            <div className="card_slider_cnt">
                                                 <h4><a href="#">Alila Yangshuo</a></h4>
                                                 <ul>
                                                     <li>Location: Southern China | China</li>
@@ -228,8 +228,8 @@ function CountryOverview(props) {
                                                     <li>Travel to:<span>Couples, First-timers, Landscapes & Scenery, Setting & Views</span></li>
                                                 </ul>
                                             </div>
-                                            <button class="btn card_slider_btn justify-content-end light_grey_btn_bg">
-                                                <span class="view_itnry_link" onclick="window.location.href='accomodation_detail.html'">View hotel<em class="fa-solid fa-chevron-right"></em></span>
+                                            <button className="btn card_slider_btn justify-content-end light_grey_btn_bg">
+                                                <span className="view_itnry_link" onclick="window.location.href='accomodation_detail.html'">View hotel<em className="fa-solid fa-chevron-right"></em></span>
                                             </button>
                                         </div>
                                     </div>

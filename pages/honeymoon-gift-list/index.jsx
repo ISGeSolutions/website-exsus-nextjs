@@ -25,18 +25,18 @@ function Index() {
 
     return (
         <Layout>
-            <section class="banner_blk_row">
+            <section className="banner_blk_row">
                 <div
                     id="carouselExampleInterval"
-                    class="carousel slide"
+                    className="carousel slide"
                     data-bs-ride="carousel"
                 >
-                    <div class="carousel-indicators">
+                    <div className="carousel-indicators">
                         <button
                             type="button"
                             data-bs-target="#carouselExampleInterval"
                             data-bs-slide-to="0"
-                            class="active"
+                            className="active"
                             aria-current="true"
                             aria-label="Slide 1"
                         ></button>
@@ -65,53 +65,53 @@ function Index() {
                             aria-label="Slide 5"
                         ></button>
                     </div>
-                    <div class="carousel-inner">
+                    <div className="carousel-inner">
                         <a
                             href="#"
                             target="_blank"
-                            class="carousel-item active"
+                            className="carousel-item active"
                             data-bs-interval="5000"
                         >
-                            <div class="banner_commn_cls gift_list_banner01"></div>
+                            <div className="banner_commn_cls gift_list_banner01"></div>
                         </a>
                         <a
                             href="#"
                             target="_blank"
-                            class="carousel-item"
+                            className="carousel-item"
                             data-bs-interval="5000"
                         >
-                            <div class="banner_commn_cls gift_list_banner02"></div>
+                            <div className="banner_commn_cls gift_list_banner02"></div>
                         </a>
                         <a
                             href="#"
                             target="_blank"
-                            class="carousel-item"
+                            className="carousel-item"
                             data-bs-interval="5000"
                         >
-                            <div class="banner_commn_cls gift_list_banner03"></div>
+                            <div className="banner_commn_cls gift_list_banner03"></div>
                         </a>
                         <a
                             href="#"
                             target="_blank"
-                            class="carousel-item"
+                            className="carousel-item"
                             data-bs-interval="5000"
                         >
-                            <div class="banner_commn_cls gift_list_banner04"></div>
+                            <div className="banner_commn_cls gift_list_banner04"></div>
                         </a>
                         <a
                             href="#"
                             target="_blank"
-                            class="carousel-item"
+                            className="carousel-item"
                             data-bs-interval="5000"
                         >
-                            <div class="banner_commn_cls gift_list_banner05"></div>
+                            <div className="banner_commn_cls gift_list_banner05"></div>
                         </a>
                     </div>
                 </div>
             </section>
-            <section class="trvl_info_row">
-                <div class="container">
-                    <div class="bookmark_row">
+            <section className="trvl_info_row">
+                <div className="container">
+                    <div className="bookmark_row">
                         <ul>
                             <li>
                                 <a href="homepage.html">Home</a>
@@ -120,9 +120,9 @@ function Index() {
                         </ul>
                     </div>
 
-                    <div class="trvl_info_cntnt">
-                        <h2 class="trvl_title">EXSUS HONEYMOON GIFT LIST</h2>
-                        <p class="mb-4">
+                    <div className="trvl_info_cntnt">
+                        <h2 className="trvl_title">EXSUS HONEYMOON GIFT LIST</h2>
+                        <p className="mb-4">
                             Welcome to the Exsus Gift List. Here you won’t find toasters, Le
                             Creuset dishes or Champagne flutes - rather, by inviting friends
                             and family to make cash contributions, the Exsus Gift List allows
@@ -133,7 +133,7 @@ function Index() {
                             present in the world.
                         </p>
                         <button
-                            class="btn prmry_btn mx-auto mb-5"
+                            className="btn prmry_btn mx-auto mb-5"
                             onclick="window.open('gift_list_form.html', '_self')"
                         >
                             Login to your Gift List
@@ -153,15 +153,15 @@ function Index() {
                                 ></path>
                             </svg>
                         </button>
-                        <div class="gift_list_parnt">
-                            <h2 class="text-capitalize">How to set up a Gift List</h2>
-                            <p class="mb-4">
+                        <div className="gift_list_parnt">
+                            <h2 className="text-capitalize">How to set up a Gift List</h2>
+                            <p className="mb-4">
                                 Always wanted to explore Angkor Wat? Dreamed of romantic dinners
                                 under a starry sky? The Exsus Gift List allows your friends and
                                 family to purchase these special experiences by making cash
                                 contributions towards your holiday.
                             </p>
-                            <ul class="gift_list_blk">
+                            <ul className="gift_list_blk">
                                 <li>
                                     To personalise your gift list, you can provide us with a photo
                                     of your choice and a welcome message to your friends and
@@ -188,9 +188,9 @@ function Index() {
                                 our team on <a href="#">020 3613 5556</a>
                             </p>
                         </div>
-                        <div class="gift_list_parnt">
-                            <h2 class="text-capitalize">How to buy a gift</h2>
-                            <ul class="gift_list_blk">
+                        <div className="gift_list_parnt">
+                            <h2 className="text-capitalize">How to buy a gift</h2>
+                            <ul className="gift_list_blk">
                                 <li>
                                     Buying a gift is simple. Once you have logged in using the
                                     reference number given to you, a Gift List created by the
@@ -204,12 +204,12 @@ function Index() {
                                     also receive a confirmation email after your purchase.
                                 </li>
                             </ul>
-                            <p class="mb-4">
+                            <p className="mb-4">
                                 If you have any queries, please contact our team on{" "}
                                 <a href="#">020 3613 5556</a>
                             </p>
                             <button
-                                class="btn prmry_btn mx-auto"
+                                className="btn prmry_btn mx-auto"
                                 onclick="window.open('gift_list_form.html', '_self')"
                             >
                                 Contribute to a Gift List

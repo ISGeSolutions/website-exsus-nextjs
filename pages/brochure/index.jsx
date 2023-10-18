@@ -224,9 +224,9 @@ function Index() {
                                 </div>
                             </div>
                             <div className="row pt-4">
-                                <div class="col-md-4">
-                                    <div class="form-input">
-                                        <input type="number" class="form-control" aria-label="Phone number *" placeholder="Phone number *"  {...register('phone_no')} className={`form-control ${errors.phone_no ? 'is-invalid' : ''}`} />
+                                <div className="col-md-4">
+                                    <div className="form-input">
+                                        <input type="number" className="form-control" aria-label="Phone number *" placeholder="Phone number *"  {...register('phone_no')} className={`form-control ${errors.phone_no ? 'is-invalid' : ''}`} />
                                     </div>
                                 </div>
                                 {/* <div className="col-md-4">
@@ -241,10 +241,10 @@ function Index() {
                                     <div className="invalid-feedback mb-1">{errors.travelagentname?.message}</div>
                                 </div>
                             </div> */}
-                                <div class="col-md-4">
-                                    <div class="brochure_select_dropdown">
-                                        <div class="banner_dropdwn_blk">
-                                            <div class="select_drpdwn">
+                                <div className="col-md-4">
+                                    <div className="brochure_select_dropdown">
+                                        <div className="banner_dropdwn_blk">
+                                            <div className="select_drpdwn">
                                                 <Select
                                                     id="long-value-select"
                                                     instanceId="long-value-select"
@@ -271,9 +271,9 @@ function Index() {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-input">
-                                        <input type="text" class="form-control" aria-label="Where would you like to go?"  {...register('destination')} placeholder="Where would you like to go? (Optional)" />
+                                <div className="col-md-4">
+                                    <div className="form-input">
+                                        <input type="text" className="form-control" aria-label="Where would you like to go?"  {...register('destination')} placeholder="Where would you like to go? (Optional)" />
                                     </div>
                                 </div>
 
