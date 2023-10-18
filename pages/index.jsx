@@ -21,6 +21,7 @@ function Index() {
     const [itineraries, setItineraries] = useState(null);
     const [testimonials, setTestimonials] = useState([]);
     const [sortedData, setSortedData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
@@ -168,6 +169,10 @@ function Index() {
             });
             // console.log('thumbnailImageArr', thumbnailImageArr);
             setThumbnailImageArr(thumbnailImageArr);
+            setIsLoading(false);
+        }).catch(error => {
+            // Handle any errors here
+            setIsLoading(false);
         });
 
 
@@ -194,6 +199,10 @@ function Index() {
                 });
                 setSortedData(sortedData);
             }
+            setIsLoading(false);
+        }).catch(error => {
+            // Handle any errors here
+            setIsLoading(false);
         });
 
 
@@ -201,29 +210,48 @@ function Index() {
             // console.log('getDestinationLandingList', x);
             setDestinationLandingList(x.data);
             // setDestinationLandingDetails(x)
+            setIsLoading(false);
+        }).catch(error => {
+            // Handle any errors here
+            setIsLoading(false);
         });
 
         holidaytypesService.getHolidaytypesLandingList().then(x => {
             setHolidaytypesLandingList(x.data);
+            setIsLoading(false);
+        }).catch(error => {
+            // Handle any errors here
+            setIsLoading(false);
         });
 
         destinationService.getAllItinerariesHomePage().then(x => {
             setItineraries(x.data);
+            setIsLoading(false);
+        }).catch(error => {
+            // Handle any errors here
+            setIsLoading(false);
         });
 
         whyusService.getAllTravelReviews().then(x => {
             setTestimonials(x.data);
-            // console.log(x.data);
-        })
+            setIsLoading(false);
+        }).catch(error => {
+            // Handle any errors here
+            setIsLoading(false);
+        });
 
         // console.log('region', window.site_region);
         var site_region = localStorage.getItem('site_region');
 
         const carouselMain = document.querySelector('#carouselExampleIntervalMain');
-        new bootstrap.Carousel(carouselMain);
+        if (carouselMain) {
+            new bootstrap.Carousel(carouselMain);
+        }
 
         const carousel = document.querySelector('#Testimonials');
-        new bootstrap.Carousel(carousel);
+        if (carousel) {
+            new bootstrap.Carousel(carousel);
+        }
 
         window.addEventListener('resize', equalHeight(true));
     }, []);
@@ -238,8 +266,16 @@ function Index() {
                 <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script>
             </Head>
 
-            <section className="banner_blk_row">
-                {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
+            {isLoading ? (
+                // <MyLoader />
+                <div className="full_loader_parnt_blk loader_parnt_blk" style={{ display: `block !important` }}>
+                    <div class="loader-circle-2">
+                    </div>
+                </div>
+            ) : (
+                <div>
+                    <section className="banner_blk_row">
+                        {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
                     <div>
                         <img src="/assets/images/banner01.png" />
                     </div>
@@ -250,216 +286,218 @@ function Index() {
                         <img src="/assets/images/banner03.png" />
                     </div>
                 </Carousel> */}
-                <div id="carouselExampleIntervalMain" className="carousel slide" data-bs-ride="carousel">
-                    <div className="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleIntervalMain" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleIntervalMain" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleIntervalMain" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div>
-                    <div className="carousel-inner">
-                        <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
-                            <div className="banner_img_custom01 banner_commn_cls"></div>
-                            <div className="carousel-caption">
-                                <img src="images/banner-logo.png" alt="banner-logo" className="img-fluid" />
-                                <h2>Discover the Seychelles</h2>
+                        <div id="carouselExampleIntervalMain" className="carousel slide" data-bs-ride="carousel">
+                            <div className="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselExampleIntervalMain" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carouselExampleIntervalMain" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#carouselExampleIntervalMain" data-bs-slide-to="2" aria-label="Slide 3"></button>
                             </div>
-                        </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                            <div className="banner_img_custom02 banner_commn_cls"></div>
-                            <div className="carousel-caption">
-                                <img src="images/banner-logo.png" alt="banner-logo" className="img-fluid" />
-                                <h2>Perfect for romance</h2>
-                            </div>
-                        </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                            <div className="banner_img_custom03 banner_commn_cls"></div>
-                            <div className="carousel-caption">
-                                <img src="images/banner-logo.png" alt="banner-logo" className="img-fluid" />
-                                <h2>Explore new adventure</h2>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <Inspireme />
-            </section>
-
-            <section className="card_blk_row">
-                <div className="container">
-                    <div className="row">
-                        {thumbnailImage?.slice(0, 6).map((holidaytypesItem, i) => (
-                            <div className="col-sm-6 col-md-6 col-lg-4" key={i}>
-                                <div className="card_blk_inr">
-                                    <NavLink target="_blank" href={dynamicLink(holidaytypesItem?.holiday_type_code, holidaytypesItem?.id)} as={dynamicLinkHolidayas(holidaytypesItem?.attributes?.holiday_type_group_code, holidaytypesItem?.id)}>
-                                        <img src={dynamicThumbnailImage(holidaytypesItem.image_path)} alt="Card image 01" className="img-fluid" />
-                                        <div className="card_blk_cntnt">
-                                            <div className="row align-items-center">
-                                                <div className="col-11">
-                                                    <div className="card_blk_txt">
-                                                        <h3>{holidaytypesItem?.holiday_type_name}</h3>
-                                                        {/* <p>The ultimate romantic escapes</p> */}
-                                                    </div>
-                                                </div>
-                                                <div className="col-1 ps-0">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </NavLink>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            <section className="favrites_blk_row">
-                <div className="container">
-                    <h3 className="title_cls">Favourite trip ideas</h3>
-                    <div className="card_slider_row">
-                        <i id="left">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z" /></svg>
-                        </i>
-                        <div className="carousel00">
-                            {itineraries?.map((item) => (
-                                <div className="card_slider_inr" key={item.id}>
-                                    <div className="card_slider">
-                                        <NavLink href={generateDynamicLink(item)} className="card_slider_img">
-                                            {item?.attributes?.itinerary_images?.data.map((element, index) => (
-                                                element.attributes.image_type == 'thumbnail' ? (
-                                                    <img key={index} src={element.attributes.image_path} alt="destination card01" className="img-fluid" />
-                                                ) : (
-                                                    ''
-                                                )
-                                            ))}
-                                            {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
-                                        </NavLink>
-                                        <div className="card_slider_cnt">
-                                            <h4><a href="#">{item?.attributes?.itin_name}</a></h4>
-                                            <ul>
-                                                <li>{item?.attributes?.header_text}</li>
-                                                <li>Indonesia</li>
-                                                <li>{item?.attributes?.itinerary_country_contents?.data[0]?.attributes?.guideline_price_notes_index}</li>
-                                                <li>Travel to:<span>{item?.attributes?.sub_header_text}</span></li>
-                                            </ul>
-                                        </div>
-                                        <button className="btn card_slider_btn" onClick={() => handleRedirect(item)}>
-                                            <span>{item?.attributes?.no_of_nites_notes}</span>
-                                            <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                        </button>
-                                    </div>
-                                </div>
-                            )
-                            )}
-                        </div>
-                        <i id="right">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                        </i>
-                    </div>
-                </div>
-                {/* <div className="full_loader_parnt_blk loader_parnt_blk" style="display: block;"><div className="loader-circle-2"></div></div> */}
-            </section>
-
-
-            <section aria-label="Client Testimonials" className="testimonials_blk_row">
-                <div className="container">
-                    <div id="Testimonials" className="carousel slide" data-bs-ride="carousel">
-                        <div className="carousel-indicators">
-                            {testimonials.map((_, index) => (
-                                <button
-                                    key={index}
-                                    type="button"
-                                    data-bs-target="#Testimonials"
-                                    data-bs-slide-to={index}
-                                    className={index === 0 ? 'active' : ''}
-                                    aria-current={index === 0 ? 'true' : 'false'}
-                                    aria-label={`Slide ${index + 1}`}
-                                ></button>
-                            ))}
-                        </div>
-                        <div className="carousel-inner">
-                            {testimonials.map((text, index) => (
-                                <div key={index} target="_blank" className={`carousel-item ${index === 0 ? 'active' : ''}`} data-bs-interval="5000">
+                            <div className="carousel-inner">
+                                <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
+                                    <div className="banner_img_custom01 banner_commn_cls"></div>
                                     <div className="carousel-caption">
-                                        <p
-                                            dangerouslySetInnerHTML={{
-                                                __html: text?.attributes.review_short_text,
-                                            }}
-                                        />
-                                        <span
-                                            dangerouslySetInnerHTML={{
-                                                __html: text?.attributes.client_name,
-                                            }} />
-                                        {/* <p>{text?.attributes.review_short_text}</p>
-                                        <span>{text?.attributes.client_name}</span> */}
+                                        <img src="images/banner-logo.png" alt="banner-logo" className="img-fluid" />
+                                        <h2>Discover the Seychelles</h2>
                                     </div>
-                                </div>
-                            ))}
-
+                                </a>
+                                <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                                    <div className="banner_img_custom02 banner_commn_cls"></div>
+                                    <div className="carousel-caption">
+                                        <img src="images/banner-logo.png" alt="banner-logo" className="img-fluid" />
+                                        <h2>Perfect for romance</h2>
+                                    </div>
+                                </a>
+                                <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                                    <div className="banner_img_custom03 banner_commn_cls"></div>
+                                    <div className="carousel-caption">
+                                        <img src="images/banner-logo.png" alt="banner-logo" className="img-fluid" />
+                                        <h2>Explore new adventure</h2>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </section>
 
-            <section className="card_blk_row">
-                <div className="container">
-                    <div className="row">
-                        {sortedData?.map((res) => (
-                            <div
-                                className="col-sm-6 col-md-6 col-lg-4"
-                                key={res.id}
-                            >
-                                <div className="card_blk_inr">
-                                    <NavLink href={generateDynamicLinkBlog(res.id)}>
-                                        {res?.attributes?.blog_image_path && (
-                                            <img
-                                                src={res?.attributes?.blog_image_path}
-                                                alt="Card image 07"
-                                                className="img-fluid"
-                                            />
-                                        )}
-                                        <div className="card_blk_cntnt">
-                                            <div className="row align-items-center">
-                                                <div className="col-11">
-                                                    <div className="card_blk_txt">
-                                                        <h3>{res?.attributes?.blog_header_text}</h3>
-                                                        <p>{res?.attributes?.blog_date}</p>
+                        <Inspireme />
+                    </section>
+
+                    <section className="card_blk_row">
+                        <div className="container">
+                            <div className="row">
+                                {thumbnailImage?.slice(0, 6).map((holidaytypesItem, i) => (
+                                    <div className="col-sm-6 col-md-6 col-lg-4" key={i}>
+                                        <div className="card_blk_inr">
+                                            <NavLink target="_blank" href={dynamicLink(holidaytypesItem?.holiday_type_code, holidaytypesItem?.id)} as={dynamicLinkHolidayas(holidaytypesItem?.attributes?.holiday_type_group_code, holidaytypesItem?.id)}>
+                                                <img src={dynamicThumbnailImage(holidaytypesItem.image_path)} alt="Card image 01" className="img-fluid" />
+                                                <div className="card_blk_cntnt">
+                                                    <div className="row align-items-center">
+                                                        <div className="col-11">
+                                                            <div className="card_blk_txt">
+                                                                <h3>{holidaytypesItem?.holiday_type_name}</h3>
+                                                                {/* <p>The ultimate romantic escapes</p> */}
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-1 ps-0">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div className="col-1 ps-0">
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        fill="#ffffff"
-                                                        shapeRendering="geometricPrecision"
-                                                        textRendering="geometricPrecision"
-                                                        imageRendering="optimizeQuality"
-                                                        fillRule="evenodd"
-                                                        clipRule="evenodd"
-                                                        viewBox="0 0 267 512.43"
-                                                    >
-                                                        <path
-                                                            fillRule="nonzero"
-                                                            d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                                                        />
-                                                    </svg>
+                                            </NavLink>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    <section className="favrites_blk_row">
+                        <div className="container">
+                            <h3 className="title_cls">Favourite trip ideas</h3>
+                            <div className="card_slider_row">
+                                <i id="left">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z" /></svg>
+                                </i>
+                                <div className="carousel00">
+                                    {itineraries?.map((item) => (
+                                        <div className="card_slider_inr" key={item.id}>
+                                            <div className="card_slider">
+                                                <NavLink href={generateDynamicLink(item)} className="card_slider_img">
+                                                    {item?.attributes?.itinerary_images?.data.map((element, index) => (
+                                                        element.attributes.image_type == 'thumbnail' ? (
+                                                            <img key={index} src={element.attributes.image_path} alt="destination card01" className="img-fluid" />
+                                                        ) : (
+                                                            ''
+                                                        )
+                                                    ))}
+                                                    {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
+                                                </NavLink>
+                                                <div className="card_slider_cnt">
+                                                    <h4><a href="#">{item?.attributes?.itin_name}</a></h4>
+                                                    <ul>
+                                                        <li>{item?.attributes?.header_text}</li>
+                                                        <li>Indonesia</li>
+                                                        <li>{item?.attributes?.itinerary_country_contents?.data[0]?.attributes?.guideline_price_notes_index}</li>
+                                                        <li>Travel to:<span>{item?.attributes?.sub_header_text}</span></li>
+                                                    </ul>
                                                 </div>
+                                                <button className="btn card_slider_btn" onClick={() => handleRedirect(item)}>
+                                                    <span>{item?.attributes?.no_of_nites_notes}</span>
+                                                    <span className="view_itnry_link">View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
+                                                </button>
                                             </div>
                                         </div>
-                                    </NavLink>
+                                    )
+                                    )}
+                                </div>
+                                <i id="right">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                </i>
+                            </div>
+                        </div>
+                        {/* <div className="full_loader_parnt_blk loader_parnt_blk" style="display: block;"><div className="loader-circle-2"></div></div> */}
+                    </section>
+
+
+                    <section aria-label="Client Testimonials" className="testimonials_blk_row">
+                        <div className="container">
+                            <div id="Testimonials" className="carousel slide" data-bs-ride="carousel">
+                                <div className="carousel-indicators">
+                                    {testimonials.map((_, index) => (
+                                        <button
+                                            key={index}
+                                            type="button"
+                                            data-bs-target="#Testimonials"
+                                            data-bs-slide-to={index}
+                                            className={index === 0 ? 'active' : ''}
+                                            aria-current={index === 0 ? 'true' : 'false'}
+                                            aria-label={`Slide ${index + 1}`}
+                                        ></button>
+                                    ))}
+                                </div>
+                                <div className="carousel-inner">
+                                    {testimonials.map((text, index) => (
+                                        <div key={index} target="_blank" className={`carousel-item ${index === 0 ? 'active' : ''}`} data-bs-interval="5000">
+                                            <div className="carousel-caption">
+                                                <p
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: text?.attributes.review_short_text,
+                                                    }}
+                                                />
+                                                <span
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: text?.attributes.client_name,
+                                                    }} />
+                                                {/* <p>{text?.attributes.review_short_text}</p>
+                                        <span>{text?.attributes.client_name}</span> */}
+                                            </div>
+                                        </div>
+                                    ))}
+
                                 </div>
                             </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+                        </div>
+                    </section>
 
-            <section aria-label="Sign up for newsletter" className="newslettr_row">
-                <div className="container">
-                    <h4>Sign up for our newsletter</h4>
-                    <h5>Receive our latest news and special offers</h5>
-                    <Signup />
+                    <section className="card_blk_row">
+                        <div className="container">
+                            <div className="row">
+                                {sortedData?.map((res) => (
+                                    <div
+                                        className="col-sm-6 col-md-6 col-lg-4"
+                                        key={res.id}
+                                    >
+                                        <div className="card_blk_inr">
+                                            <NavLink href={generateDynamicLinkBlog(res.id)}>
+                                                {res?.attributes?.blog_image_path && (
+                                                    <img
+                                                        src={res?.attributes?.blog_image_path}
+                                                        alt="Card image 07"
+                                                        className="img-fluid"
+                                                    />
+                                                )}
+                                                <div className="card_blk_cntnt">
+                                                    <div className="row align-items-center">
+                                                        <div className="col-11">
+                                                            <div className="card_blk_txt">
+                                                                <h3>{res?.attributes?.blog_header_text}</h3>
+                                                                <p>{res?.attributes?.blog_date}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-1 ps-0">
+                                                            <svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                fill="#ffffff"
+                                                                shapeRendering="geometricPrecision"
+                                                                textRendering="geometricPrecision"
+                                                                imageRendering="optimizeQuality"
+                                                                fillRule="evenodd"
+                                                                clipRule="evenodd"
+                                                                viewBox="0 0 267 512.43"
+                                                            >
+                                                                <path
+                                                                    fillRule="nonzero"
+                                                                    d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                                                                />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </NavLink>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    <section aria-label="Sign up for newsletter" className="newslettr_row">
+                        <div className="container">
+                            <h4>Sign up for our newsletter</h4>
+                            <h5>Receive our latest news and special offers</h5>
+                            <Signup />
+                        </div>
+                    </section>
                 </div>
-            </section>
+            )}
         </>
     );
 }
