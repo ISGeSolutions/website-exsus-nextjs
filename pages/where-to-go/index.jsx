@@ -3,11 +3,29 @@ import { useState, useEffect } from "react";
 import { Link, Spinner } from "components";
 import { Layout } from "components/users";
 import { userService } from "services";
+import { useRouter } from 'next/router';
+import { NavLink } from 'components';
+
+
 
 export default Index;
 
 function Index() {
+    const router = useRouter();
     const [users, setUsers] = useState(null);
+    let regionWiseUrl = '/uk';
+    let region = 'uk';
+    if (typeof window !== 'undefined') {
+        if (window && window.site_region) {
+            regionWiseUrl = '/' + window.site_region;
+            region = window.site_region;
+            // setMyVariable(window.site_region);
+        }
+    }
+    const generateDynamicLink = () => {
+        // console.log('item', item);
+        return regionWiseUrl + `/where-to-go-detail`;
+    };
 
     useEffect(() => {
         // userService.getAll().then(x => setUsers(x));
@@ -144,26 +162,28 @@ function Index() {
                     <section class="month_wise_row">
                         <h3 class="title_cls">Month-by month holiday calendar</h3>
                         <div class="row">
-                            <div class="col-lg-6">
-                                <div class="month_wise_cnt_blk">
-                                    <h4>Where to go on holiday in January</h4>
-                                    <a href="when_to_go_detail.html">
-                                        <img
-                                            src="images/jan_month.jpg"
-                                            alt="jan-month"
-                                            class="img-fluid"
-                                        />
-                                    </a>
-                                    <p>
-                                        Kick off the New Year somewhere amazing and uplifting,
-                                        whether you go in search of winter sun or embrace the snow
-                                        for a season of activity and adventure.{" "}
+                            <NavLink href={generateDynamicLink()}>
+                                <div class="col-lg-6">
+                                    <div class="month_wise_cnt_blk">
+                                        <h4>Where to go on holiday in January</h4>
                                         <a href="when_to_go_detail.html">
-                                            See where we'd recommend in January &gt;
+                                            <img
+                                                src="images/jan_month.jpg"
+                                                alt="jan-month"
+                                                class="img-fluid"
+                                            />
                                         </a>
-                                    </p>
+                                        <p>
+                                            Kick off the New Year somewhere amazing and uplifting,
+                                            whether you go in search of winter sun or embrace the snow
+                                            for a season of activity and adventure.{" "}
+                                            <a href="when_to_go_detail.html">
+                                                See where we'd recommend in January &gt;
+                                            </a>
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
+                            </NavLink>
                             <div class="col-lg-6">
                                 <div class="month_wise_cnt_blk">
                                     <h4>Where to go on holiday in February</h4>

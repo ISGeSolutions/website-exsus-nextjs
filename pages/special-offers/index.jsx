@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Link, Spinner, Signup } from 'components';
+import { Link, Spinner, Signup, FriendlyUrl } from 'components';
 import { Layout } from 'components/users';
 import { userService, specialoffersService } from 'services';
 import { NavLink } from 'components';
@@ -13,7 +13,7 @@ export default Index;
 function Index() {
     const [users, setUsers] = useState(null);
     const [allOffers, setAllOffers] = useState([]);
-
+    const [destinations, setDestinations] = useState();
     const equalHeight = (resize) => {
         var elements = document.getElementsByClassName("card_slider_cnt"),
             allHeights = [],
@@ -133,6 +133,12 @@ function Index() {
             <section className="card_blk_row destinations_blk_row light_grey">
                 <div className="container">
                     <div className="bookmark_row">
+                        {/* {/ <p style={{ color: `white` }}>{destinations?.attributes?.page_friendly_url}</p > /} */}
+                        < FriendlyUrl
+                        // data={destinations?.attributes?.page_friendly_url}
+                        ></FriendlyUrl>
+                    </div>
+                    <div className="bookmark_row">
                         <ul>
                             <li><a href="homepage.html">Home</a></li>
                             <li>Special offers</li>
@@ -145,7 +151,7 @@ function Index() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
 
             <section className="card_blk_row destinations_blk_row pb-0">
                 <div className="container">

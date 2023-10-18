@@ -147,7 +147,6 @@ function Index() {
         // });
 
         destinationService.getRegionById(regionid).then((x) => {
-            console.log(x.data);
             setRegionData(x.data);
             const imageCheck = x.data.attributes.region_images.data;
             const newBackgroundImages = [];

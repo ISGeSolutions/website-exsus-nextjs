@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Signup } from 'components';
+import { Signup, FriendlyUrl } from 'components';
 import { Link, Spinner } from 'components';
 import { Layout } from 'components/users';
 import { aboutusService } from 'services';
@@ -76,12 +76,10 @@ function Index() {
             <section className="trvl_info_row">
                 <div className="container">
                     <div className="bookmark_row">
-                        <p style={{ color: `white` }} dangerouslySetInnerHTML={{ __html: whyusDetails?.page_friendly_url }} />
-                        {/* <ul>
-                            <li><a href="homepage.html">Home</a></li>
-                            <li>Why us</li>
-                        </ul> */}
+
+                        <FriendlyUrl data={whyusDetails?.page_friendly_url}></FriendlyUrl>
                     </div>
+
                     <div className="trvl_info_cntnt">
                         <h2 className="trvl_title">{whyusDetails?.page_header_text}</h2>
                         <div dangerouslySetInnerHTML={{ __html: whyusDetails?.page_content_1 }} />

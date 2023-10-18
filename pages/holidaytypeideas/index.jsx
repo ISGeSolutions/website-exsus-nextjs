@@ -5,8 +5,10 @@ import { Layout } from 'components/users';
 import { userService, holidaytypesService, destinationService } from 'services';
 import { Inspireme } from 'components';
 import { useRouter } from 'next/router';
-import Select from 'react-select';
 import { NavLink } from 'components';
+import CustomMultiValue from "./CustomMultiValue";
+import Select, { components } from 'react-select';
+
 
 export default Index;
 
@@ -67,7 +69,83 @@ function Index() {
     const [isRtl, setIsRtl] = useState(false);
     const [selectedOptionMonth, selectedOptionData] = useState(null);
     const itemsPerPage = 9; // Number of items to load per page
-    const [visibleItems, setVisibleItems] = useState(itemsPerPage)
+    const [visibleItems, setVisibleItems] = useState(itemsPerPage);
+
+
+    const width = '250px'
+    const styles = {
+        control: (provided) => ({
+            ...provided,
+            width
+        }),
+        menu: (provided) => ({
+            ...provided,
+            width
+        }),
+        valueContainer: (provided, state) => ({
+            whiteSpace: "nowrap",
+            // textOverflow: "ellipsis",
+            overflow: "hidden",
+            flex: "1 1 0%",
+            position: "relative"
+        }),
+        input: (provided, state) => ({
+            ...provided,
+            display: "inline"
+        })
+    };
+
+
+    const InputOption = ({
+        getStyles,
+        Icon,
+        isDisabled,
+        isFocused,
+        isSelected,
+        children,
+        innerProps,
+        ...rest
+    }) => {
+        const [isActive, setIsActive] = useState(false);
+        const onMouseDown = () => setIsActive(true);
+        const onMouseUp = () => setIsActive(false);
+        const onMouseLeave = () => setIsActive(false);
+
+        // styles
+        let bg = "transparent";
+        if (isFocused) bg = "#eee";
+        if (isActive) bg = "#B2D4FF";
+
+        const style = {
+            alignItems: "center",
+            backgroundColor: bg,
+            color: "inherit",
+            display: "flex "
+        };
+
+        // prop assignment
+        const props = {
+            ...innerProps,
+            onMouseDown,
+            onMouseUp,
+            onMouseLeave,
+            style
+        };
+
+        return (
+            <components.Option
+                {...rest}
+                isDisabled={isDisabled}
+                isFocused={isFocused}
+                isSelected={isSelected}
+                getStyles={getStyles}
+                innerProps={props}
+            >
+                <input type="checkbox" checked={isSelected} readOnly />
+                {children}
+            </components.Option>
+        );
+    };
 
     const LoadMorePagination = ({ data }) => {
         const [visibleItems, setVisibleItems] = useState(itemsPerPage);
@@ -163,7 +241,6 @@ function Index() {
 
         // let id = 1;
         // console.log('hcode', hcode);
-        debugger;
         holidaytypesService.getHolidaytypeDetailsById(hcode).then(x => {
             // console.log('getHolidaytypesDetails', x);
             setHolidaytypesDetails(x.data.attributes);
@@ -260,22 +337,27 @@ function Index() {
                             <div className="row">
                                 <div className="col-12">
                                     <div className="destination_dropdwn_row d-block d-md-flex">
-                                        {/* <div className="">
+                                        <div className="banner_dropdwn_blk">
                                             <div className="select_drpdwn">
                                                 <Select
-                                                    placeholder="Filter by month"
-                                                    className="basic-single"
-                                                    classNamePrefix="select"
+                                                    placeholder="Filter by destinations"
+                                                    className='select_container_country'
+                                                    classNamePrefix="select_country"
                                                     isDisabled={isDisabled}
                                                     isLoading={isLoading}
                                                     isClearable={isClearable}
                                                     isRtl={isRtl}
+                                                    styles={styles}
                                                     isSearchable={isSearchable}
                                                     name="color"
                                                     options={optionsData}
                                                     isMulti
+                                                    hideSelectedOptions={false}
                                                     onChange={handleOptionChange}
                                                     value={selectedOptionMonth}
+                                                    components={{
+                                                        Option: InputOption, MultiValue: CustomMultiValue
+                                                    }}
                                                 />
                                             </div>
                                         </div>
@@ -283,8 +365,9 @@ function Index() {
                                             <button type="button" className="btn btn-primary prmry_btn">Inspire me
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path></svg>
                                             </button>
-                                        </div> */}
+                                        </div>
                                     </div>
+
                                 </div>
                                 <div className="col-12">
                                     <div className="destination_filter_result d-block d-lg-flex">
