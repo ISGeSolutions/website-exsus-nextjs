@@ -18,6 +18,7 @@ import 'public/assets/stylesheets/css/style.css';
 import 'public/assets/stylesheets/css/responsive.css';
 import Script from 'next/script';
 import { userService } from 'services';
+import CookieBanner from './../components/CookieBanner';
 
 import { I18nextProvider } from 'react-i18next';
 import i18n from 'i18next';
@@ -131,6 +132,7 @@ function App({ Component, pageProps }) {
                 {/* <div className="full_loader_parnt_blk loader_parnt_blk" style={{ display: 'block' }}><div className="loader-circle-2"></div></div> */}
 
                 {/* ReactDOM.render( */}
+                <CookieBanner />
                 <I18nextProvider i18n={i18n}>
                     {/* <App /> */}
                     {authorized &&
