@@ -18,7 +18,7 @@ function Layout({ children }) {
     const router = useRouter();
     const currentUrl = router.asPath;
     // const regionWiseUrl = '/uk';
-    const [regionWiseUrl, setMyVariable] = useState('');
+    const [regionWiseUrl, setMyVariable] = useState('uk');
     const [selectedRegion, setVariable] = useState('');
     const { ver } = router.query;
     const countries = [
@@ -37,6 +37,13 @@ function Layout({ children }) {
             }
         }
         return true;
+    }
+
+    let region = 'uk';
+    if (typeof window !== 'undefined') {
+        if (window && window.site_region) {
+            region = window.site_region;
+        }
     }
 
     const handleChange = (selectedOption) => {
@@ -101,7 +108,9 @@ function Layout({ children }) {
             }
         }
 
-    }, [ver]);
+        i18n.changeLanguage(region);
+
+    }, [ver, region]);
 
     return (
         <div>
