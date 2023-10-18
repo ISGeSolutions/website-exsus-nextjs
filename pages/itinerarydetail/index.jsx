@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, Spinner, Signup } from 'components';
 import { Layout } from 'components/users';
-import { hotelService, destinationService } from 'services';
+import { hotelService, destinationService, countriesService } from 'services';
 import Iframe from 'react-iframe'
 import { useRouter } from 'next/router';
 
@@ -19,6 +19,9 @@ function Index() {
     const itin_id = router.query.itineraryid;
     const itin_code = router.query.itinerarycode;
     const [title, setTitle] = useState('');
+    const countrycode = router.query.countrycode;
+    const destinationcode = router.query.destinationcode;
+    const [countries, setCountries] = useState([]);
 
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
@@ -82,6 +85,20 @@ function Index() {
             });
         });
 
+        if (countrycode) {
+            countriesService.getCountryDetails(countrycode).then((x) => {
+                console.log(x);
+                setCountries(x.data?.attributes?.country_name);
+            });
+        } else if (destinationcode) {
+            destinationService.getDestinationDetails(destinationcode).then((x) => {
+                console.log(x.data);
+                setCountries(
+                    x.data?.attributes?.countries?.data[0]?.attributes?.country_name
+                );
+            });
+        }
+
         destinationService.getItineraryDetails(itin_id, itin_code).then(x => {
             // 
             const bannerImages = [];
@@ -105,7 +122,7 @@ function Index() {
             window.addEventListener('resize', equalHeight(true));
         });
 
-    }, [itin_id, itin_code]);
+    }, [itin_id, itin_code, countrycode, destinationcode]);
 
     return (
         <>
@@ -520,7 +537,7 @@ function Index() {
 
             <section className="favrites_blk_row light_grey">
                 <div className="container">
-                    <h3 className="title_cls">More itineraries in China</h3>
+                    <h3 className="title_cls">More itineraries in {countries}</h3>
                     <div className="card_slider_row01">
                         <i id="leftt">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z" /></svg>

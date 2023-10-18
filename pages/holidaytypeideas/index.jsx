@@ -163,6 +163,7 @@ function Index() {
 
         // let id = 1;
         // console.log('hcode', hcode);
+        debugger;
         holidaytypesService.getHolidaytypeDetailsById(hcode).then(x => {
             // console.log('getHolidaytypesDetails', x);
             setHolidaytypesDetails(x.data.attributes);
@@ -253,7 +254,7 @@ function Index() {
 
             <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
                 <div className="container">
-                    <h3 className="title_cls">TOP DESTINATIONS FOR ULTIMATE JOURNEYS</h3>
+                    <h3 className="title_cls">TOP DESTINATIONS FOR {holidaytypesDetails?.header_text}</h3>
                     <div className="card_slider_row">
                         <div className="carousel00 region_carousel00">
                             <div className="row">
@@ -287,7 +288,7 @@ function Index() {
                                 </div>
                                 <div className="col-12">
                                     <div className="destination_filter_result d-block d-lg-flex">
-                                        <p>We've found 25 destinations for Ultimate journeys</p>
+                                        <p>We've found 25 destinations for {holidaytypesDetails?.header_text}</p>
                                         <div className="destination_contries_filter d-inline-block d-lg-flex">
                                             <label className="pt-2 pt-lg-0">Arrange by:</label>
                                             <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
@@ -358,7 +359,8 @@ function Index() {
                 <div className="container">
                     <h4>Sign up for our newsletter</h4>
                     <h5>Receive our latest news and special offers</h5>
-                    <form className="newslettr_form d-block d-sm-flex">
+                    <Signup />
+                    {/* <form className="newslettr_form d-block d-sm-flex">
                         <div className="newlettr_inpt">
                             <input type="text" className="form-control" placeholder="Full name and title" />
                         </div>
@@ -370,7 +372,7 @@ function Index() {
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                             </button>
                         </div>
-                    </form>
+                    </form> */}
                 </div>
             </section>
 

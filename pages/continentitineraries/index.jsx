@@ -237,11 +237,11 @@ function ContinentItinararies(props) {
 
     const generateDynamicLink = (item) => {
         // console.log('item', item);
-        return regionWiseUrl + `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`;
+        return regionWiseUrl + `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}&destinationcode=${destinationcode}`;
     };
 
     const handleRedirect = (item) => {
-        router.push(regionWiseUrl + `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`);
+        router.push(regionWiseUrl + `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}&destinationcode=${destinationcode}`);
     };
 
     const equalHeight = (resize) => {
