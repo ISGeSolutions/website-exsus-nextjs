@@ -27,6 +27,7 @@ import ukTranslation from './../data/i18n/uk.json';
 import usTranslation from './../data/i18n/us.json';
 import asiaTranslation from './../data/i18n/asia.json';
 import inTranslation from './../data/i18n/in.json';
+import { Helmet } from 'react-helmet';
 
 i18n
     .use(LanguageDetector)
@@ -138,10 +139,13 @@ function App({ Component, pageProps }) {
                     {authorized &&
                         <Component {...pageProps} />
                     }
-                </I18nextProvider>,
+                </I18nextProvider>
                 {/* document.getElementById('root')
                 ); */}
 
+                <Helmet>
+                    <link rel="canonical" href="https://website-exsus-nextjs.vercel.app" />
+                </Helmet>
 
 
                 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&family=Slabo+27px&display=swap" rel="stylesheet" />
