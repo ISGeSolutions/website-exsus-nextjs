@@ -1922,7 +1922,7 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
 
 /* line 1409, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .full_loader_parnt_blk.loader_parnt_blk .loader-circle-2 {
-  position: absolute;
+  /* position: relative; */
 }
 
 /* line 1415, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */

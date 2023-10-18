@@ -3464,7 +3464,7 @@
 }
 
 .full_loader_parnt_blk.loader_parnt_blk .loader-circle-2 {
-  position: absolute;
+  /* position: relative; */
 }
 
 .loader-circle-2 {

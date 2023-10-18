@@ -6,3 +6,4 @@ export * from './Spinner';
 export * from './forms/Signup';
 export * from './forms/Inspireme';
 export * from './FriendlyUrl';
+export * from './MyLoader';
