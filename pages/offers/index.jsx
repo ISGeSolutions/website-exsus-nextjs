@@ -8,7 +8,7 @@ export default Index;
 
 function Index() {
     const [users, setUsers] = useState(null);
-
+    const [isLoading, setIsLoading] = useState(true);
     const equalHeight = (resize) => {
         var elements = document.getElementsByClassName("card_slider_cnt"),
             allHeights = [],

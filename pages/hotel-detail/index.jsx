@@ -23,6 +23,7 @@ function Index() {
     const [hotelData, setHotelData] = useState([]);
     const [backgroundImage, setBackgroundImage] = useState([]);
     const [travelTimes, setTraveltimes] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const carousel = document.querySelector('#carouselExampleInterval');
@@ -44,7 +45,6 @@ function Index() {
                 }
                 bestTimeTravelData.push(res);
             })
-            console.log(bestTimeTravelData);
             setTraveltimes(bestTimeTravelData);
             const imageCheck = x.data.attributes.hotel_images.data;
             const newBackgroundImages = [];
@@ -55,59 +55,73 @@ function Index() {
                 }
             });
             setBackgroundImage(newBackgroundImages);
+            setIsLoading(false);
+        }).catch((error) => {
+            // Handle any errors here
+            // console.error(error);
+            setIsLoading(false);
         });
 
     }, [hotelId]);
 
     return (
         <Layout>
-            <section className="banner_blk_row">
-                <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
-                    <div className="carousel-indicators">
-                        {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
-                        {backgroundImage.map((_, index) => (
-                            <button
-                                key={index}
-                                type="button"
-                                data-bs-target="#carouselExampleInterval"
-                                data-bs-slide-to={index}
-                                className={index === 0 ? 'active' : ''}
-                                aria-current={index === 0 ? 'true' : 'false'}
-                                aria-label={`Slide ${index + 1}`}
-                            ></button>
-                        ))}
+            {isLoading ? (
+                // <MyLoader />
+                <div
+                    className="full_loader_parnt_blk loader_parnt_blk"
+                    style={{ display: `block !important` }}
+                >
+                    <div class="loader-circle-2"></div>
+                </div>
+            ) : (<div>
+                <section className="banner_blk_row">
+                    <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
+                        <div className="carousel-indicators">
+                            {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
+                            {backgroundImage.map((_, index) => (
+                                <button
+                                    key={index}
+                                    type="button"
+                                    data-bs-target="#carouselExampleInterval"
+                                    data-bs-slide-to={index}
+                                    className={index === 0 ? 'active' : ''}
+                                    aria-current={index === 0 ? 'true' : 'false'}
+                                    aria-label={`Slide ${index + 1}`}
+                                ></button>
+                            ))}
+                        </div>
+                        <div className="carousel-inner">
+                            {backgroundImage.map((imagePath, index) => (
+                                <a key={index} target="_blank" className={`carousel-item ${index === 0 ? 'active' : ''}`} data-bs-interval="5000">
+                                    <div className="banner_commn_cls" style={{ backgroundImage: `url(${imagePath})` }}></div>
+                                </a>
+                            ))}
+                        </div>
                     </div>
-                    <div className="carousel-inner">
-                        {backgroundImage.map((imagePath, index) => (
-                            <a key={index} target="_blank" className={`carousel-item ${index === 0 ? 'active' : ''}`} data-bs-interval="5000">
-                                <div className="banner_commn_cls" style={{ backgroundImage: `url(${imagePath})` }}></div>
-                            </a>
-                        ))}
+                    <div className="banner_tab_blk">
+                        <button className="btn banner_map_tab">Map</button>
+                        <button className="btn banner_img_tab banner_tab_active">Images</button>
                     </div>
-                </div>
-                <div className="banner_tab_blk">
-                    <button className="btn banner_map_tab">Map</button>
-                    <button className="btn banner_img_tab banner_tab_active">Images</button>
-                </div>
-                <div className="banner_map_blk">
-                    <Iframe width="640px"
-                        height="320px"
-                        id=""
-                        className=""
-                        display="block"
-                        src={mapVariable}
-                        position="relative" style="border:0;" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"
-                    />
+                    <div className="banner_map_blk">
+                        <Iframe width="640px"
+                            height="320px"
+                            id=""
+                            className=""
+                            display="block"
+                            src={mapVariable}
+                            position="relative" style="border:0;" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"
+                        />
 
-                    {/* src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" */}
-                </div>
-                {/* <p>{mapVariable}</p> */}
-            </section>
+                        {/* src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" */}
+                    </div>
+                    {/* <p>{mapVariable}</p> */}
+                </section>
 
-            <section className="trvl_info_row">
-                <div className="container">
-                    <div className="bookmark_row">
-                        {/* <ul>
+                <section className="trvl_info_row">
+                    <div className="container">
+                        <div className="bookmark_row">
+                            {/* <ul>
                             <li><a href="homepage.html">Home</a></li>
                             <li><a href="destinations.html">Destinations</a></li>
                             <li><a href="destination_detail.html">Asia</a></li>
@@ -115,126 +129,126 @@ function Index() {
                             <li><a href="region_detail.html">Beijing & Northern China</a></li>
                             <li>Rosewood Beijing</li>
                         </ul> */}
-                    </div>
+                        </div>
 
-                    <div className="trvl_info_cntnt">
-                        <h2 className="trvl_title mb-3">{hotelData.hotel_name}</h2>
-                        <h3 className="trvl_title_sub_white mb-3">Location: {hotelData.location}</h3>
-                        <p className="mb-4">Price guide:<span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">{hotelData.price_guide_text}</span></p>
-                        {/* <p className="mb-4">The Rosewood is a sanctuary of peace and comfort in the heart of one of the world’s most exciting cities: Beijing. The hotel combines a fantastic location with a world-className hotel experience, including five international restaurants, sleek, luxurious accommodation and personalised spa treatments. It sits in the glitzy neighbourhood of Chaoyang, which is famed for its shops and bars.</p> */}
-                        <p
-                            className="mb-4"
-                            dangerouslySetInnerHTML={{ __html: hotelData?.video_url }}
-                        />
-                    </div>
+                        <div className="trvl_info_cntnt">
+                            <h2 className="trvl_title mb-3">{hotelData.hotel_name}</h2>
+                            <h3 className="trvl_title_sub_white mb-3">Location: {hotelData.location}</h3>
+                            <p className="mb-4">Price guide:<span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">{hotelData.price_guide_text}</span></p>
+                            {/* <p className="mb-4">The Rosewood is a sanctuary of peace and comfort in the heart of one of the world’s most exciting cities: Beijing. The hotel combines a fantastic location with a world-className hotel experience, including five international restaurants, sleek, luxurious accommodation and personalised spa treatments. It sits in the glitzy neighbourhood of Chaoyang, which is famed for its shops and bars.</p> */}
+                            <p
+                                className="mb-4"
+                                dangerouslySetInnerHTML={{ __html: hotelData?.video_url }}
+                            />
+                        </div>
 
-                    <section className="country_highlight_row itinery_hightlight_row mb-0">
-                        <div className="row">
-                            <div className="col-sm-9">
-                                <div className="country_highlight_inr">
-                                    <p><span>Perfect for</span><div dangerouslySetInnerHTML={{ __html: hotelData?.perfect_for_text }} />
-                                    </p>
-                                    <p><span>In the know</span><div dangerouslySetInnerHTML={{ __html: hotelData?.in_the_know_text }} /></p>
+                        <section className="country_highlight_row itinery_hightlight_row mb-0">
+                            <div className="row">
+                                <div className="col-sm-9">
+                                    <div className="country_highlight_inr">
+                                        <p><span>Perfect for</span><div dangerouslySetInnerHTML={{ __html: hotelData?.perfect_for_text }} />
+                                        </p>
+                                        <p><span>In the know</span><div dangerouslySetInnerHTML={{ __html: hotelData?.in_the_know_text }} /></p>
+                                    </div>
+                                </div>
+                                <div className="col-sm-3">
+                                    <div className="itinery_highlight_inr">
+                                        <ul>
+                                            <li>RECOMMENDED FOR...</li>
+                                            <div dangerouslySetInnerHTML={{ __html: hotelData?.recommended_for_text }} />
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="col-sm-3">
-                                <div className="itinery_highlight_inr">
-                                    <ul>
-                                        <li>RECOMMENDED FOR...</li>
-                                        <div dangerouslySetInnerHTML={{ __html: hotelData?.recommended_for_text }} />
+
+
+                        </section>
+
+                    </div>
+                </section>
+
+                <section className="itinery_detls_row">
+                    <div className="container">
+                        <div dangerouslySetInnerHTML={{ __html: hotelData?.overview_text }} />
+                    </div>
+                </section>
+
+                <section className="best_time_blk_row">
+                    <div className="container">
+                        <section className="best_time_blk_inr">
+                            <h3>BEST TIME TO GO</h3>
+                            <div className="row">
+                                <div className="col-lg-4">
+                                    <ul className="best_time_blk_left">
+                                        <li><span className="shade01"></span>Best time to travel</li>
+                                        <li><span className="shade02"></span>Good time to travel (but some limitations)</li>
+                                        <li><span className="shade03"></span>Travel is possible (but it’s not the best time)</li>
+                                        <li><span className="shade04"></span>Travel is not recommended</li>
+                                    </ul>
+                                </div>
+                                <div className="col-lg-8">
+                                    <ul className="best_time_blk_right">
+                                        <li className="mt-3 mt-lg-0" value="1">Jan<span className={travelTimes?.filter(res => res?.attributes?.travel_time_month == "1")[0]?.attributes.class_name}></span></li>
+                                        <li className="mt-3 mt-lg-0" value="2">Feb<span className={travelTimes?.filter(res => res?.attributes?.travel_time_month == "2")[0]?.attributes.class_name}></span></li>
+                                        <li className="mt-3 mt-lg-0" value="3">Mar<span className={travelTimes?.filter(res => res?.attributes?.travel_time_month == "3")[0]?.attributes.class_name}></span></li>
+                                        <li className="mt-3 mt-lg-0" value="4">Apr<span className={travelTimes?.filter(res => res?.attributes?.travel_time_month == "4")[0]?.attributes.class_name}></span></li>
+                                        <li className="mt-3 mt-lg-0" value="5">May<span className={travelTimes?.filter(res => res?.attributes?.travel_time_month == "5")[0]?.attributes.class_name}></span></li>
+                                        <li className="mt-3 mt-lg-0" value="6">June<span className={travelTimes?.filter(res => res?.attributes?.travel_time_month == "6")[0]?.attributes.class_name}></span></li>
+                                        <li className="mt-3 mt-lg-0" value="7">July<span className={travelTimes?.filter(res => res?.attributes?.travel_time_month == "7")[0]?.attributes.class_name}></span></li>
+                                        <li className="mt-3 mt-lg-0" value="8">Aug<span className={travelTimes?.filter(res => res?.attributes?.travel_time_month == "8")[0]?.attributes.class_name}></span></li>
+                                        <li className="mt-3 mt-lg-0" value="9">Sep<span className={travelTimes?.filter(res => res?.attributes?.travel_time_month == "9")[0]?.attributes.class_name}></span></li>
+                                        <li className="mt-3 mt-lg-0" value="10">Oct<span className={travelTimes?.filter(res => res?.attributes?.travel_time_month == "10")[0]?.attributes.class_name}></span></li>
+                                        <li className="mt-3 mt-lg-0" value="11">Nov<span className={travelTimes?.filter(res => res?.attributes?.travel_time_month == "11")[0]?.attributes.class_name}></span></li>
+                                        <li className="mt-3 mt-lg-0" value="12">Dec<span className={travelTimes?.filter(res => res?.attributes?.travel_time_month == "12")[0]?.attributes.class_name}></span></li>
                                     </ul>
                                 </div>
                             </div>
-                        </div>
-
-
-                    </section>
-
-                </div>
-            </section>
-
-            <section className="itinery_detls_row">
-                <div className="container">
-                    <div dangerouslySetInnerHTML={{ __html: hotelData?.overview_text }} />
-                </div>
-            </section>
-
-            <section className="best_time_blk_row">
-                <div className="container">
-                    <section className="best_time_blk_inr">
-                        <h3>BEST TIME TO GO</h3>
-                        <div className="row">
-                            <div className="col-lg-4">
-                                <ul className="best_time_blk_left">
-                                    <li><span className="shade01"></span>Best time to travel</li>
-                                    <li><span className="shade02"></span>Good time to travel (but some limitations)</li>
-                                    <li><span className="shade03"></span>Travel is possible (but it’s not the best time)</li>
-                                    <li><span className="shade04"></span>Travel is not recommended</li>
-                                </ul>
-                            </div>
-                            <div className="col-lg-8">
-                                <ul className="best_time_blk_right">
-                                    <li className="mt-3 mt-lg-0" value="1">Jan<span className={travelTimes?.filter(res => res?.attributes?.travel_time_month == "1")[0]?.attributes.class_name}></span></li>
-                                    <li className="mt-3 mt-lg-0" value="2">Feb<span className={travelTimes?.filter(res => res?.attributes?.travel_time_month == "2")[0]?.attributes.class_name}></span></li>
-                                    <li className="mt-3 mt-lg-0" value="3">Mar<span className={travelTimes?.filter(res => res?.attributes?.travel_time_month == "3")[0]?.attributes.class_name}></span></li>
-                                    <li className="mt-3 mt-lg-0" value="4">Apr<span className={travelTimes?.filter(res => res?.attributes?.travel_time_month == "4")[0]?.attributes.class_name}></span></li>
-                                    <li className="mt-3 mt-lg-0" value="5">May<span className={travelTimes?.filter(res => res?.attributes?.travel_time_month == "5")[0]?.attributes.class_name}></span></li>
-                                    <li className="mt-3 mt-lg-0" value="6">June<span className={travelTimes?.filter(res => res?.attributes?.travel_time_month == "6")[0]?.attributes.class_name}></span></li>
-                                    <li className="mt-3 mt-lg-0" value="7">July<span className={travelTimes?.filter(res => res?.attributes?.travel_time_month == "7")[0]?.attributes.class_name}></span></li>
-                                    <li className="mt-3 mt-lg-0" value="8">Aug<span className={travelTimes?.filter(res => res?.attributes?.travel_time_month == "8")[0]?.attributes.class_name}></span></li>
-                                    <li className="mt-3 mt-lg-0" value="9">Sep<span className={travelTimes?.filter(res => res?.attributes?.travel_time_month == "9")[0]?.attributes.class_name}></span></li>
-                                    <li className="mt-3 mt-lg-0" value="10">Oct<span className={travelTimes?.filter(res => res?.attributes?.travel_time_month == "10")[0]?.attributes.class_name}></span></li>
-                                    <li className="mt-3 mt-lg-0" value="11">Nov<span className={travelTimes?.filter(res => res?.attributes?.travel_time_month == "11")[0]?.attributes.class_name}></span></li>
-                                    <li className="mt-3 mt-lg-0" value="12">Dec<span className={travelTimes?.filter(res => res?.attributes?.travel_time_month == "12")[0]?.attributes.class_name}></span></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </section>
-                    {/* // <section className="map_blk_row">
+                        </section>
+                        {/* // <section className="map_blk_row">
                     //     <h3 className="pb-2">Hotel location</h3>
                     //     <p>The Rosewood is just half an hour’s drive from Beijing Capital International Airport.</p>
                     //     <div className="map_blk_inr">
                     //         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     //     </div>
                     // </section> */}
-                </div>
-            </section>
+                    </div>
+                </section>
 
-            <section className="favrites_blk_row favrites_blk_no_slider_row">
-                <div className="container">
-                    <h3 className="title_cls">Stay at Rosewood Beijing on these trips</h3>
-                    <div className="card_slider_row">
-                        <div className="width_100">
-                            <div className="row">
-                                <div className="col-sm-6 col-lg-4 col-xxl-3">
-                                    <div className="card_slider_inr">
-                                        <div className="card_slider">
-                                            <a className="card_slider_img">
-                                                <img src="images/country_card06.jpg" alt="country_card06" className="img-fluid" />
-                                            </a>
-                                            <div className="card_slider_cnt">
-                                                <h4>Down the Golden River</h4>
-                                                <ul>
-                                                    <li>China & Yangtze in Serious Style</li>
-                                                    <li>China</li>
-                                                    <li>From £5,850 per person</li>
-                                                    <li>Travel to:<span>Beijing & Northern China, Shanghai, Hangzhou & Eastern China, Xi'an, Sichuan & Central China</span></li>
-                                                </ul>
+                <section className="favrites_blk_row favrites_blk_no_slider_row">
+                    <div className="container">
+                        <h3 className="title_cls">Stay at Rosewood Beijing on these trips</h3>
+                        <div className="card_slider_row">
+                            <div className="width_100">
+                                <div className="row">
+                                    <div className="col-sm-6 col-lg-4 col-xxl-3">
+                                        <div className="card_slider_inr">
+                                            <div className="card_slider">
+                                                <a className="card_slider_img">
+                                                    <img src="images/country_card06.jpg" alt="country_card06" className="img-fluid" />
+                                                </a>
+                                                <div className="card_slider_cnt">
+                                                    <h4>Down the Golden River</h4>
+                                                    <ul>
+                                                        <li>China & Yangtze in Serious Style</li>
+                                                        <li>China</li>
+                                                        <li>From £5,850 per person</li>
+                                                        <li>Travel to:<span>Beijing & Northern China, Shanghai, Hangzhou & Eastern China, Xi'an, Sichuan & Central China</span></li>
+                                                    </ul>
+                                                </div>
+                                                <button className="btn card_slider_btn">
+                                                    <span>11 nights</span>
+                                                    <span className="view_itnry_link">VIEW ITINERARY<em className="fa-solid fa-chevron-right"></em></span>
+                                                </button>
                                             </div>
-                                            <button className="btn card_slider_btn">
-                                                <span>11 nights</span>
-                                                <span className="view_itnry_link">VIEW ITINERARY<em className="fa-solid fa-chevron-right"></em></span>
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            {/* <section className="favrites_blk_row light_grey">
+                {/* <section className="favrites_blk_row light_grey">
                 <div className="container">
                     <h3 className="title_cls">More places to stay in Beijing & Northern China</h3>
                     <div className="card_slider_row">
@@ -327,13 +341,14 @@ function Index() {
                 <div className="full_loader_parnt_blk loader_parnt_blk" style="display: none;"><div className="loader-circle-2"></div></div>
             </section> */}
 
-            <section aria-label="Sign up for newsletter" className="newslettr_row">
-                <div className="container">
-                    <h4>Sign up for our newsletter</h4>
-                    <h5>Receive our latest news and special offers</h5>
-                    <Signup />
-                </div>
-            </section>
+                <section aria-label="Sign up for newsletter" className="newslettr_row">
+                    <div className="container">
+                        <h4>Sign up for our newsletter</h4>
+                        <h5>Receive our latest news and special offers</h5>
+                        <Signup />
+                    </div>
+                </section>
+            </div>)}
         </Layout>
     );
 }

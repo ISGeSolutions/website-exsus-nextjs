@@ -118,10 +118,26 @@ function getItineraryDetails(id, code) {
     return fetchWrapper.get(itinerariesDetailsUrl);
 }
 
-function getItinerariesByDestination(dcode, page) {
+function getItinerariesByDestination(dcode, page, item) {
+    debugger;
+    if (item == "price") {
+        const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?[filters][destination][destination_code][$eq]=${dcode}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12`;
+        return fetchWrapper.get(destinationDetailsUrl);
+
+    } else if (item == "recommended") {
+        const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?[filters][destination][destination_code][$eq]=${dcode}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12`;
+        return fetchWrapper.get(destinationDetailsUrl);
+
+    } else if (item == "duration") {
+        const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?[filters][destination][destination_code][$eq]=${dcode}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=no_of_nites_notes:asc`;
+        return fetchWrapper.get(destinationDetailsUrl);
+
+    } else if (item == "alphabetical") {
+        const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?[filters][destination][destination_code][$eq]=${dcode}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=itin_name:asc`;
+        return fetchWrapper.get(destinationDetailsUrl);
+    }
+
     // console.log('baseUrl_dropdown', baseUrl_dropdown);
-    const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?[filters][destination][destination_code][$eq]=${dcode}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12`;
-    return fetchWrapper.get(destinationDetailsUrl);
 }
 
 function getAllHotels(page) {
