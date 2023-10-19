@@ -8,3 +8,5 @@ export * from './forms/Inspireme';
 export * from './FriendlyUrl';
 export * from './MyLoader';
 export * from './CookieBanner';
+export * from './ga';
+export * from './facebookPixel';
