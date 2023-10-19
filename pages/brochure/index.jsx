@@ -226,7 +226,7 @@ function Index() {
                             <div className="row pt-4">
                                 <div className="col-md-4">
                                     <div className="form-input">
-                                        <input type="number" className="form-control" aria-label="Phone number *" placeholder="Phone number *"  {...register('phone_no')} className={`form-control ${errors.phone_no ? 'is-invalid' : ''}`} />
+                                        <input type="number" aria-label="Phone number *" placeholder="Phone number *"  {...register('phone_no')} className={`form-control ${errors.phone_no ? 'is-invalid' : ''}`} />
                                     </div>
                                 </div>
                                 {/* <div className="col-md-4">

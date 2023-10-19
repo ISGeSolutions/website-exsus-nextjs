@@ -24,6 +24,7 @@ function Index() {
     const [visible, setVisible] = useState(2);
     const [visiblePagination, setVisiblePagination] = useState(true);
     const [testimonials, setTestimonials] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
@@ -93,14 +94,26 @@ function Index() {
 
         destinationService.getDestinationLandingList().then(x => {
             setDestinationLandingList(x.data);
+            setIsLoading(false);
             // console.log(x.data);
             // setDestinationLandingDetails(x)
+        }).catch((error) => {
+            // Handle any errors here
+            // console.error(error);
+            setIsLoading(false);
         });
+        ;
 
         whyusService.getAllTravelReviews().then(x => {
             setTestimonials(x.data);
+            setIsLoading(false);
             // console.log(x.data);
-        })
+        }).catch((error) => {
+            // Handle any errors here
+            // console.error(error);
+            setIsLoading(false);
+        });
+
 
         destinationService.getCustomPagesData("destinations").then(x => {
             setDestinations(x.data[0]);
@@ -114,13 +127,23 @@ function Index() {
                 }
             });
             setBackgroundImage(newBackgroundImages);
-        })
+            setIsLoading(false);
+        }).catch((error) => {
+            // Handle any errors here
+            // console.error(error);
+            setIsLoading(false);
+        });
+
 
         const carousel1 = document.querySelector('#carouselExampleInterval');
-        new bootstrap.Carousel(carousel1);
+        if (carousel1) {
+            new bootstrap.Carousel(carousel1);
+        }
 
         const carousel = document.querySelector('#Testimonials');
-        new bootstrap.Carousel(carousel);
+        if (carousel) {
+            new bootstrap.Carousel(carousel);
+        }
 
     }, []);
 
@@ -133,157 +156,164 @@ function Index() {
                 <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
                 <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script>
             </Head>
-            {/* <h4 className='mt-2'>This is destination page</h4> */}
-            <section className="banner_blk_row">
-                {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
+            {isLoading ? (
+                // <MyLoader />
+                <div className="full_loader_parnt_blk loader_parnt_blk" style={{ display: `block !important` }}>
+                    <div className="loader-circle-2">
+                    </div>
+                </div>
+            ) : (
+                <div>
+                    <section className="banner_blk_row">
+                        {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
                     <div>
                         <img src="/assets/./../images//destination_banner.jpg" />
                     </div>
                 </Carousel> */}
-                <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
-                    <div className="carousel-indicators">
-                        {backgroundImage.map((_, index) => (
-                            <button
-                                key={index}
-                                type="button"
-                                data-bs-target="#carouselExampleInterval"
-                                data-bs-slide-to={index}
-                                className={index === 0 ? 'active' : ''}
-                                aria-current={index === 0 ? 'true' : 'false'}
-                                aria-label={`Slide ${index + 1}`}
-                            ></button>
-                        ))}
-                        {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
-                    </div>
-                    <div className="carousel-inner">
-                        {backgroundImage.map((imagePath, index) => (
-                            <NavLink href="#" className={`carousel-item ${index === 0 ? 'active' : ''}`} data-bs-interval="5000">
-                                <div className="banner_commn_cls" style={{ backgroundImage: `url(${imagePath})` }}></div>
-                            </NavLink>
-                        ))}
-                        {/* <NavLink href="#" className="carousel-item active" data-bs-interval="5000">
+                        <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
+                            <div className="carousel-indicators">
+                                {backgroundImage.map((_, index) => (
+                                    <button
+                                        key={index}
+                                        type="button"
+                                        data-bs-target="#carouselExampleInterval"
+                                        data-bs-slide-to={index}
+                                        className={index === 0 ? 'active' : ''}
+                                        aria-current={index === 0 ? 'true' : 'false'}
+                                        aria-label={`Slide ${index + 1}`}
+                                    ></button>
+                                ))}
+                                {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
+                            </div>
+                            <div className="carousel-inner">
+                                {backgroundImage.map((imagePath, index) => (
+                                    <NavLink href="#" className={`carousel-item ${index === 0 ? 'active' : ''}`} data-bs-interval="5000">
+                                        <div className="banner_commn_cls" style={{ backgroundImage: `url(${imagePath})` }}></div>
+                                    </NavLink>
+                                ))}
+                                {/* <NavLink href="#" className="carousel-item active" data-bs-interval="5000">
                             <div className="banner_commn_cls" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
                         </NavLink> */}
-                    </div>
-                </div>
-                <Inspireme />
-            </section>
-
-            <section className="card_blk_row destinations_blk_row light_grey">
-                <div className="container">
-                    <div className="bookmark_row">
-                        {/* <p style={{ color: `white` }}>{destinations?.attributes?.page_friendly_url}</p> */}
-                        <FriendlyUrl data={destinations?.attributes?.page_friendly_url}></FriendlyUrl>
-                    </div>
-                    <div className="row">
-                        <div className="destinations_cntnt_blk">
-                            <h2>
-                                {destinations?.attributes?.page_header_text}
-                            </h2>
-                            <p>
-                                {destinations?.attributes?.page_content_1}
-                            </p>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </section>
+                        <Inspireme />
+                    </section>
 
-            <section className="card_blk_row destinations_blk_row">
-                <div className="container">
-                    <div className="row">
-                        {destinationLandingList?.map((destinationItem, i) => (
-                            <div className="col-sm-6" key={destinationItem?.id}>
-                                <div className="card_blk_inr">
-                                    <NavLink href={dynamicLink(destinationItem?.attributes?.destination_code, destinationItem?.id)}>
-                                        <img src={dynamicImage(destinationItem?.attributes?.destination_images?.data.filter(res => res?.attributes.image_type == "thumbnail")[0]?.attributes.image_path)} alt="destination01" className="img-fluid" />
-                                        {/* <img src="./../images/destination01.jpg" alt="destination01" className="img-fluid" /> */}
-                                        <div className="card_blk_cntnt card_blk_sml_arw">
-                                            <div className="row align-items-center">
-                                                <div className="col-11">
-                                                    <div className="card_blk_txt">
-                                                        <h3 className="mb-0">{destinationItem?.attributes?.destination_name}</h3>
-                                                    </div>
-                                                </div>
-                                                <div className="col-1 ps-0">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </NavLink>
+                    <section className="card_blk_row destinations_blk_row light_grey">
+                        <div className="container">
+                            <div className="bookmark_row">
+                                {/* <p style={{ color: `white` }}>{destinations?.attributes?.page_friendly_url}</p> */}
+                                <FriendlyUrl data={destinations?.attributes?.page_friendly_url}></FriendlyUrl>
+                            </div>
+                            <div className="row">
+                                <div className="destinations_cntnt_blk">
+                                    <h2>
+                                        {destinations?.attributes?.page_header_text}
+                                    </h2>
+                                    <p>
+                                        {destinations?.attributes?.page_content_1}
+                                    </p>
                                 </div>
                             </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            <section className="destination_text_overlay_row" style={{ backgroundImage: `url(${backgroundImgWhentogo.image_path})` }}>
-                <div className="container">
-                    <div className="destination_text_overlay_inr">
-                        <h4>{backgroundImgWhentogo.image_header_text_1}</h4>
-                        <h5>{backgroundImgWhentogo.image_header_text_2}</h5>
-                        {/* style={{ backgroundImage: `url(${backgroundImage})` }} */}
-                        <button className="btn prmry_btn make_enqury_btn" onClick={handleWhenToGoClick}>View travel calender
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                        </button>
-                    </div>
-                </div>
-            </section>
-
-            <section aria-label="Client Testimonials" className="testimonials_blk_row">
-                <div className="container">
-                    <div id="Testimonials" className="carousel slide" data-bs-ride="carousel">
-                        <div className="carousel-indicators">
-                            {testimonials.map((_, index) => (
-                                <button
-                                    key={index}
-                                    type="button"
-                                    data-bs-target="#Testimonials"
-                                    data-bs-slide-to={index}
-                                    className={index === 0 ? 'active' : ''}
-                                    aria-current={index === 0 ? 'true' : 'false'}
-                                    aria-label={`Slide ${index + 1}`}
-                                ></button>
-                            ))}
                         </div>
-                        <div className="carousel-inner">
-                            {testimonials.map((text, index) => (
-                                <div key={index} target="_blank" className={`carousel-item ${index === 0 ? 'active' : ''}`} data-bs-interval="5000">
-                                    <div className="carousel-caption">
-                                        <p
-                                            dangerouslySetInnerHTML={{
-                                                __html: text?.attributes.review_short_text,
-                                            }}
-                                        />
-                                        <span
-                                            dangerouslySetInnerHTML={{
-                                                __html: text?.attributes.client_name,
-                                            }} />
-                                        {/* <p>{text?.attributes.review_short_text}</p>
-                                        <span>{text?.attributes.client_name}</span> */}
+                    </section>
+
+                    <section className="card_blk_row destinations_blk_row">
+                        <div className="container">
+                            <div className="row">
+                                {destinationLandingList?.map((destinationItem, i) => (
+                                    <div className="col-sm-6" key={destinationItem?.id}>
+                                        <div className="card_blk_inr">
+                                            <NavLink href={dynamicLink(destinationItem?.attributes?.destination_code, destinationItem?.id)}>
+                                                <img src={dynamicImage(destinationItem?.attributes?.destination_images?.data.filter(res => res?.attributes.image_type == "thumbnail")[0]?.attributes.image_path)} alt="destination01" className="img-fluid" />
+                                                {/* <img src="./../images/destination01.jpg" alt="destination01" className="img-fluid" /> */}
+                                                <div className="card_blk_cntnt card_blk_sml_arw">
+                                                    <div className="row align-items-center">
+                                                        <div className="col-11">
+                                                            <div className="card_blk_txt">
+                                                                <h3 className="mb-0">{destinationItem?.attributes?.destination_name}</h3>
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-1 ps-0">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </NavLink>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
-
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </section>
+                    </section>
 
-            <section className="make_enqury_row">
-                <div className="container">
-                    <h3>{destinations?.attributes?.page_content_3}</h3>
-                    <p>{destinations?.attributes?.page_content_4}</p>
-                    <EnquiryButton />
-                </div>
-            </section>
+                    <section className="destination_text_overlay_row" style={{ backgroundImage: `url(${backgroundImgWhentogo.image_path})` }}>
+                        <div className="container">
+                            <div className="destination_text_overlay_inr">
+                                <h4>{backgroundImgWhentogo.image_header_text_1}</h4>
+                                <h5>{backgroundImgWhentogo.image_header_text_2}</h5>
+                                {/* style={{ backgroundImage: `url(${backgroundImage})` }} */}
+                                <button className="btn prmry_btn make_enqury_btn" onClick={handleWhenToGoClick}>View travel calender
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </section>
 
-            <section aria-label="Sign up for newsletter" className="newslettr_row">
-                <div className="container">
-                    <h4>Sign up for our newsletter</h4>
-                    <h5>Receive our latest news and special offers</h5>
-                    <Signup />
-                    {/* <form className="newslettr_form d-block d-sm-flex">
+                    <section aria-label="Client Testimonials" className="testimonials_blk_row">
+                        <div className="container">
+                            <div id="Testimonials" className="carousel slide" data-bs-ride="carousel">
+                                <div className="carousel-indicators">
+                                    {testimonials.map((_, index) => (
+                                        <button
+                                            key={index}
+                                            type="button"
+                                            data-bs-target="#Testimonials"
+                                            data-bs-slide-to={index}
+                                            className={index === 0 ? 'active' : ''}
+                                            aria-current={index === 0 ? 'true' : 'false'}
+                                            aria-label={`Slide ${index + 1}`}
+                                        ></button>
+                                    ))}
+                                </div>
+                                <div className="carousel-inner">
+                                    {testimonials.map((text, index) => (
+                                        <div key={index} target="_blank" className={`carousel-item ${index === 0 ? 'active' : ''}`} data-bs-interval="5000">
+                                            <div className="carousel-caption">
+                                                <p
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: text?.attributes.review_short_text,
+                                                    }}
+                                                />
+                                                <span
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: text?.attributes.client_name,
+                                                    }} />
+                                                {/* <p>{text?.attributes.review_short_text}</p>
+                                        <span>{text?.attributes.client_name}</span> */}
+                                            </div>
+                                        </div>
+                                    ))}
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section className="make_enqury_row">
+                        <div className="container">
+                            <h3>{destinations?.attributes?.page_content_3}</h3>
+                            <p>{destinations?.attributes?.page_content_4}</p>
+                            <EnquiryButton />
+                        </div>
+                    </section>
+
+                    <section aria-label="Sign up for newsletter" className="newslettr_row">
+                        <div className="container">
+                            <h4>Sign up for our newsletter</h4>
+                            <h5>Receive our latest news and special offers</h5>
+                            <Signup />
+                            {/* <form className="newslettr_form d-block d-sm-flex">
                         <div className="newlettr_inpt">
                             <input type="text" className="form-control" placeholder="Full name and title" />
                         </div>
@@ -296,8 +326,9 @@ function Index() {
                             </button>
                         </div>
                     </form> */}
-                </div>
-            </section>
+                        </div>
+                    </section>
+                </div>)}
         </>
     );
 }

@@ -115,7 +115,6 @@
   position: relative;
 }
 
-/* line 93, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .title_cls {
   font: 2.5rem/2.875rem "Slabo 27px", serif;
   color: #8aad56;
@@ -124,19 +123,16 @@
   text-transform: uppercase;
 }
 
-/* line 100, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_small_card_row {
   padding: 10px 0;
   background-color: #333132;
   margin-bottom: 30px;
 }
 
-/* line 104, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_small_card_row .title_cls {
   font: 1.75rem/1.75rem "Slabo 27px", serif;
 }
 
-/* line 109, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr,
@@ -152,7 +148,6 @@
   flex: 0 0 20%;
 }
 
-/* line 112, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml a,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card a,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml a,
@@ -181,7 +176,6 @@
   display: inline-block;
 }
 
-/* line 115, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml a:hover img,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card a:hover img,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml a:hover img,
@@ -209,7 +203,6 @@
   transform: scale(1.2);
 }
 
-/* line 118, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml a:hover h4,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card a:hover h4,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml a:hover h4,
@@ -237,7 +230,6 @@
   color: #8aad56;
 }
 
-/* line 121, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml a:hover svg,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card a:hover svg,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml a:hover svg,
@@ -265,7 +257,6 @@
   fill: #8aad56;
 }
 
-/* line 125, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img,
@@ -293,7 +284,6 @@
   overflow: hidden;
 }
 
-/* line 127, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img img,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img img,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img img,
@@ -321,7 +311,6 @@
   transition: all ease 0.3s;
 }
 
-/* line 131, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml h4,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card h4,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml h4,
@@ -356,7 +345,6 @@
   white-space: initial;
 }
 
-/* line 140, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml h4 svg,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card h4 svg,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml h4 svg,
@@ -386,7 +374,6 @@
   margin-left: 10px;
 }
 
-/* line 150, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider .card_slider_img,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider .card_slider_img,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider .card_slider_img,
@@ -396,18 +383,15 @@
   height: auto;
 }
 
-/* line 185, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_no_slider_row {
   padding-bottom: 30px;
 }
 
-/* line 187, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row,
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 {
   padding: 0;
 }
 
-/* line 189, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel00,
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel01,
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .width_100,
@@ -418,7 +402,6 @@
   overflow: unset;
 }
 
-/* line 192, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel00.dragging,
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel01.dragging,
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .width_100.dragging,
@@ -429,7 +412,6 @@
   scroll-behavior: auto;
 }
 
-/* line 196, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel00 .card_slider_inr,
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel00 .card_slider_inr01,
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel01 .card_slider_inr,
@@ -442,18 +424,16 @@
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .carousel01 .card_slider_inr01,
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .width_100 .card_slider_inr,
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .width_100 .card_slider_inr01 {
-  padding: 0;
-  margin-bottom: 20px;
+  padding: 0 0 20px;
+  height: 100%;
 }
 
-/* line 203, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row,
 .favrites_blk_row .card_slider_row01 {
   position: relative;
   padding: 0 40px;
 }
 
-/* line 206, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row i,
 .favrites_blk_row .card_slider_row01 i {
   top: 50%;
@@ -469,7 +449,6 @@
   background: rgba(71, 69, 69, 0.7);
 }
 
-/* line 218, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row i svg,
 .favrites_blk_row .card_slider_row01 i svg {
   width: 15px;
@@ -478,50 +457,43 @@
   fill: #ffffff;
 }
 
-/* line 224, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row i:active,
 .favrites_blk_row .card_slider_row01 i:active {
   transform: translateY(-50%) scale(0.9);
 }
 
-/* line 228, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row i:hover svg,
 .favrites_blk_row .card_slider_row01 i:hover svg {
   fill: #8aad56;
 }
 
-/* line 232, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row i:first-child,
 .favrites_blk_row .card_slider_row01 i:first-child {
   left: 0;
   display: none;
 }
 
-/* line 236, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row i:last-child,
 .favrites_blk_row .card_slider_row01 i:last-child {
   right: 0;
 }
 
-/* line 240, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00,
 .favrites_blk_row .card_slider_row .carousel01,
 .favrites_blk_row .card_slider_row .width_100,
 .favrites_blk_row .card_slider_row01 .carousel00,
 .favrites_blk_row .card_slider_row01 .carousel01,
 .favrites_blk_row .card_slider_row01 .width_100 {
-  /* font-size: 0px; */
+  font-size: 0px;
   cursor: pointer;
   overflow: hidden;
   white-space: nowrap;
   scroll-behavior: smooth;
   display: flex;
-  align-items: flex-start;
   position: relative;
   padding-bottom: 10px;
 }
 
-/* line 251, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00.region_carousel00 .card_slider_cnt,
 .favrites_blk_row .card_slider_row .carousel01.region_carousel00 .card_slider_cnt,
 .favrites_blk_row .card_slider_row .width_100.region_carousel00 .card_slider_cnt,
@@ -531,17 +503,6 @@
   min-height: 180px;
 }
 
-/* line 253, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00.region_carousel00 .card_slider_cnt.places_to_stay_cnt,
-.favrites_blk_row .card_slider_row .carousel01.region_carousel00 .card_slider_cnt.places_to_stay_cnt,
-.favrites_blk_row .card_slider_row .width_100.region_carousel00 .card_slider_cnt.places_to_stay_cnt,
-.favrites_blk_row .card_slider_row01 .carousel00.region_carousel00 .card_slider_cnt.places_to_stay_cnt,
-.favrites_blk_row .card_slider_row01 .carousel01.region_carousel00 .card_slider_cnt.places_to_stay_cnt,
-.favrites_blk_row .card_slider_row01 .width_100.region_carousel00 .card_slider_cnt.places_to_stay_cnt {
-  min-height: 280px;
-}
-
-/* line 258, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00.dragging,
 .favrites_blk_row .card_slider_row .carousel01.dragging,
 .favrites_blk_row .card_slider_row .width_100.dragging,
@@ -552,7 +513,6 @@
   scroll-behavior: auto;
 }
 
-/* line 262, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider_inr,
 .favrites_blk_row .card_slider_row .carousel00 .card_slider_inr01,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider_inr,
@@ -570,7 +530,6 @@
   flex: 0 0 33.3%;
 }
 
-/* line 266, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider_inr.card_slider_optn02,
 .favrites_blk_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_optn02,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider_inr.card_slider_optn02,
@@ -586,7 +545,6 @@
   flex: 0 0 25%;
 }
 
-/* line 270, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider,
 .favrites_blk_row .card_slider_row .width_100 .card_slider,
@@ -596,10 +554,11 @@
   width: 100%;
   text-decoration: none;
   color: #ffffff;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 
-/* line 275, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider:hover img,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider:hover img,
 .favrites_blk_row .card_slider_row .width_100 .card_slider:hover img,
@@ -609,7 +568,6 @@
   transform: scale(1.2);
 }
 
-/* line 278, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_img,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_img,
 .favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_img,
@@ -623,7 +581,6 @@
   display: inline-block;
 }
 
-/* line 284, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_img img,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_img img,
 .favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_img img,
@@ -635,7 +592,6 @@
   height: 100%;
 }
 
-/* line 290, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt,
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt,
@@ -649,9 +605,10 @@
 .favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_cnt,
 .favrites_blk_row .card_slider_row01 .width_100 .card_slider .places_to_stay_cnt {
   cursor: default;
+  flex: 1;
 }
 
-/* line 293, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
+
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt h4,
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt h4,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt h4,
@@ -670,7 +627,6 @@
   text-transform: uppercase;
 }
 
-/* line 298, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt h4 a,
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt h4 a,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt h4 a,
@@ -689,7 +645,6 @@
   color: #ffffff;
 }
 
-/* line 303, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt h4 a:hover,
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt h4 a:hover,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt h4 a:hover,
@@ -705,7 +660,6 @@
   color: #8aad56;
 }
 
-/* line 307, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt h4:hover,
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt h4:hover,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt h4:hover,
@@ -721,7 +675,6 @@
   color: #8aad56;
 }
 
-/* line 311, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt ul,
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt ul,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt ul,
@@ -737,7 +690,6 @@
   padding-bottom: 20px;
 }
 
-/* line 313, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt ul li,
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt ul li,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt ul li,
@@ -754,7 +706,6 @@
   white-space: pre-wrap;
 }
 
-/* line 316, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt ul li:last-child,
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt ul li:last-child,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt ul li:last-child,
@@ -770,7 +721,6 @@
   margin-bottom: 0;
 }
 
-/* line 319, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt ul li span,
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt ul li span,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt ul li span,
@@ -787,7 +737,6 @@
   margin-left: 2px;
 }
 
-/* line 322, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt ul li span label,
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt ul li span label,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt ul li span label,
@@ -803,7 +752,6 @@
   color: #ffffff;
 }
 
-/* line 330, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider_btn,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider_btn,
 .favrites_blk_row .card_slider_row .width_100 .card_slider_btn,
@@ -822,7 +770,6 @@
   color: #ffffff;
 }
 
-/* line 341, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider_btn:hover,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider_btn:hover,
 .favrites_blk_row .card_slider_row .width_100 .card_slider_btn:hover,
@@ -832,7 +779,6 @@
   background: #363636;
 }
 
-/* line 343, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider_btn:hover .view_itnry_link,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider_btn:hover .view_itnry_link,
 .favrites_blk_row .card_slider_row .width_100 .card_slider_btn:hover .view_itnry_link,
@@ -842,7 +788,6 @@
   color: #8aad56;
 }
 
-/* line 347, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider_btn span,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider_btn span,
 .favrites_blk_row .card_slider_row .width_100 .card_slider_btn span,
@@ -853,7 +798,6 @@
   cursor: default;
 }
 
-/* line 351, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider_btn .view_itnry_link,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider_btn .view_itnry_link,
 .favrites_blk_row .card_slider_row .width_100 .card_slider_btn .view_itnry_link,
@@ -866,7 +810,6 @@
   cursor: pointer;
 }
 
-/* line 356, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider_btn .view_itnry_link em,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider_btn .view_itnry_link em,
 .favrites_blk_row .card_slider_row .width_100 .card_slider_btn .view_itnry_link em,
@@ -1901,9 +1844,7 @@
 }
 
 /* line 956, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
-.places_to_stay_cnt {
-  min-height: 320px;
-}
+
 
 /* line 964, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .holiday_types_card {
@@ -3463,9 +3404,7 @@
   z-index: 3;
 }
 
-.full_loader_parnt_blk.loader_parnt_blk .loader-circle-2 {
-  /* position: relative; */
-}
+
 
 .loader-circle-2 {
   position: fixed;
