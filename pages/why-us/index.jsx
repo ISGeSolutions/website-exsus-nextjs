@@ -33,6 +33,16 @@ function Index() {
     const { t } = useTranslation();
 
     const EnquiryButton = () => {
+
+        ReactGA.event({
+            category: "Enquiry category",
+            action: "Enquiry action",
+            label: "Enquiry label", // optional
+            value: 99, // optional, must be a number
+            nonInteraction: true, // optional, true/false
+            transport: "xhr", // optional, beacon/xhr/image
+        });
+
         const router = useRouter();
 
         const handleEnquiryClick = () => {
@@ -49,8 +59,16 @@ function Index() {
     };
 
     useEffect(() => {
-        
+
         ReactGA.send({ hitType: "pageview", page: "/why-us", title: "Custom Title" });
+        ReactGA.event({
+            category: "test category",
+            action: "Test action",
+            label: "Test label", // optional
+            value: 99, // optional, must be a number
+            nonInteraction: true, // optional, true/false
+            transport: "xhr", // optional, beacon/xhr/image
+        });
 
         // const carousel = document.querySelector('#carouselExampleInterval');
         // new bootstrap.Carousel(carousel);

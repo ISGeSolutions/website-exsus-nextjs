@@ -78,8 +78,6 @@ export default App;
 
 function App({ Component, pageProps }) {
 
-
-
     const router = useRouter();
     const [user, setUser] = useState(null);
     const [authorized, setAuthorized] = useState(false);
@@ -103,7 +101,6 @@ function App({ Component, pageProps }) {
             nonInteraction: true, // optional, true/false
             transport: "xhr", // optional, beacon/xhr/image
         });
-
 
         // on initial load - run auth check 
         authCheck(router.asPath);
