@@ -63,8 +63,11 @@ function Index() {
             // console.error(error);
             setIsLoading(false);
         });
+
         const carousel = document.querySelector('#carouselExampleInterval');
-        new bootstrap.Carousel(carousel);
+        if (carousel) {
+            new bootstrap.Carousel(carousel);
+        }
 
         window.addEventListener('resize', equalHeight(true));
     }, []);
