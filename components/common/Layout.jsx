@@ -208,7 +208,7 @@ function Layout({ children }) {
                         </section>
                         <section className="header_item_right d-flex d-lg-inline-block justify-content-end align-items-center">
                             <div className="header_call_icn">
-                                <NavLink href="#"><em className="material-symbols-outlined">call</em><span className="d-none d-lg-block">020 7337 9010</span></NavLink></div>
+                                <NavLink href="tel:020 7337 9010"><em className="material-symbols-outlined">call</em><span className="d-none d-lg-block">020 7337 9010</span></NavLink></div>
                             <div className="mobile_trigger_btn mobile-menu-trigger d-block d-lg-none">
                                 <a href="#" onClick={() => {
                                     const menuLayout = document.querySelector(".menu"); //Nav tag
