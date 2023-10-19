@@ -30,8 +30,13 @@ import inTranslation from './../data/i18n/in.json';
 
 import ReactGA from 'react-ga';
 import { initGA } from './../components/ga';
-import ReactPixel from 'react-facebook-pixel';
+// import ReactPixel from 'react-facebook-pixel';
 import { Helmet } from 'react-helmet';
+// import dynamic from 'next/dynamic';
+// const FacebookPixelComponent = dynamic(() =>
+//   import('react-facebook-pixel').then((module) => module.default)
+// );
+
 
 i18n
     .use(LanguageDetector)
@@ -79,10 +84,10 @@ function App({ Component, pageProps }) {
         authCheck(router.asPath);
 
         // Initialize Facebook Pixel with your Pixel ID
-        ReactPixel.init('YOUR-PIXEL-ID');
+        // ReactPixel.init('YOUR-PIXEL-ID');
 
         // Track a page view
-        ReactPixel.pageView();
+        // ReactPixel.pageView();
 
         // Specify additional initialization and configuration options here
 

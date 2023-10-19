@@ -11,14 +11,14 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { useTranslation } from 'react-i18next';
 import ReactGA from 'react-ga';
 // import ReactPixel from 'react-facebook-pixel';
-import ReactPixel from '../../components/facebookPixel'; // Import your Facebook Pixel configuration
+// import ReactPixel from '../../components/facebookPixel'; // Import your Facebook Pixel configuration
 
 export default Index;
 
 function Index() {
 
-    ReactGA.pageview('/why-us'); // Specify the URL or route for the page
-    ReactPixel.pageView(); // Track a page view event
+    // ReactGA.pageview('/why-us'); // Specify the URL or route for the page
+    // ReactPixel.pageView(); // Track a page view event
 
     const [whyusDetails, setWhyusDetails] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
