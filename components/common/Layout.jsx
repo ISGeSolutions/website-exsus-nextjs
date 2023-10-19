@@ -221,7 +221,7 @@ function Layout({ children }) {
                     <Alert />
                 </div>
             </header>
-            <main>{children}</main>
+            <main id="root">{children}</main>
             <Analytics />
             <footer>
                 <div className="container">

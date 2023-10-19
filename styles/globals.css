@@ -899,3 +899,137 @@ input .react-select__input-container:hover {
 .destination_dropdwn_row .dropdown_grp_blk+.banner_inspire_btn {
     min-width: 170px;
 }
+
+
+/* CustomModal.css */
+.custom-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.custom-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+
+.succs_msg_parnt {
+    text-align: center;
+}
+
+.succs_msg_parnt .modal-header {
+    border: none;
+    padding-bottom: 5px;
+}
+
+.succs_msg_parnt .modal-header .succs_msg_tick {
+    background-color: #8aad56;
+    width: 60px;
+    height: 60px;
+    line-height: 55px;
+    border-radius: 50%;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: -30px;
+    box-shadow: 0 0 0 5px #fff;
+}
+
+.succs_msg_parnt .modal-header .succs_msg_tick svg {
+    width: 35px;
+    height: 35px;
+    fill: #fff;
+}
+
+.succs_msg_parnt .modal-body h5 {
+    font: 1.75rem/2.25rem "Slabo 27px", serif;
+    text-transform: uppercase;
+    color: #8aad56;
+    margin-bottom: 10px;
+}
+
+.succs_msg_parnt .modal-body p {
+    font: 400 0.875rem/1.25rem "Roboto", sans-serif;
+    color: #231f20;
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+.error_msg_parnt {
+    text-align: center;
+}
+
+.error_msg_parnt .modal-header {
+    border: none;
+    padding-bottom: 0;
+}
+
+.error_msg_parnt .modal-header .error_msg_cross {
+    background-color: #e44043;
+    width: 60px;
+    height: 60px;
+    line-height: 55px;
+    border-radius: 50%;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: -30px;
+    box-shadow: 0 0 0 5px #fff;
+}
+
+.error_msg_parnt .modal-header .error_msg_cross svg {
+    width: 35px;
+    height: 35px;
+    fill: #fff;
+}
+
+.error_msg_parnt .modal-body h5 {
+    font: 1.75rem/2.25rem "Slabo 27px", serif;
+    text-transform: uppercase;
+    color: #e44043;
+    margin-bottom: 10px;
+}
+
+.error_msg_parnt .modal-body p {
+    font: 400 0.875rem/1.25rem "Roboto", sans-serif;
+    color: #231f20;
+    padding: 0;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.error_msg_parnt .modal-body ul li {
+    text-align: left;
+    font: 400 0.875rem/0.875rem "Roboto", sans-serif;
+    color: #231f20;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.error_msg_parnt .modal-body ul li svg {
+    width: 16px;
+    height: 12px;
+    fill: #e44043;
+    margin-right: 5px;
+}

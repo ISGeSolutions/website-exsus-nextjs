@@ -407,7 +407,7 @@ function Index() {
                                                     <div className="col-lg-6">
                                                         <div className="select_drpdwn">
                                                             <select className="form-select" aria-label="Title">
-                                                                <option selected="">Title *</option>
+                                                                <option defaultValue>Title *</option>
                                                                 <option value="Mr">Mr</option>
                                                                 <option value="Mrs">Mrs</option>
                                                                 <option value="Ms">Ms</option>

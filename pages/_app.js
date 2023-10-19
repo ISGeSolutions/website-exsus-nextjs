@@ -6,7 +6,8 @@ import { Router, useRouter } from 'next/router';
 // import { NavLink } from './../components/NavLink';
 import { Layout } from './../components/common';
 
-import 'styles/globals.css';
+// import 'styles/globals.css';
+import './../components/CustomModal.css'; // Import your custom styles
 import 'public/assets/stylesheets/css/bootstrap.css';
 import 'public/assets/stylesheets/css/bootstrap-select.min.css';
 
@@ -36,6 +37,7 @@ import CookieComponent from './../components/CookieComponent';
 import { Helmet } from 'react-helmet';
 import ReactGA from "react-ga4";
 ReactGA.initialize("G-2H6GP9JWWY");
+// import './../../CustomModal_css.css'; // Import your custom styles
 
 i18n
     .use(LanguageDetector)

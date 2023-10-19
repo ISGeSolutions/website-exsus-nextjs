@@ -10,3 +10,4 @@ export * from './MyLoader';
 export * from './CookieComponent';
 export * from './ga';
 export * from './facebookPixel';
+export * from './CustomModal';

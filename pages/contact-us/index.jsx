@@ -7,10 +7,26 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+// import Modal from './../../components/Modal';
+// import 'react-modal/lib/components/Modal/';
+import MyModal from './../../components/Modal'; // Adjust the path as needed
+import CustomModal from './../../components/CustomModal';
+// import './../../styles/globals.css'; // Import the modal styles
 
 export default Index;
 
 function Index() {
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
     // const [users, setUsers] = useState(null);
     // useEffect(() => {
     //     userService.getAll().then(x => setUsers(x));
@@ -45,15 +61,19 @@ function Index() {
     const { errors } = formState;
 
     function onSubmit(data) {
+
+        // If the response is successful, open the modal
+        // openModal();
+
         // console.log('onSubmit', data);
         return contactusService.makeanenquiry({ data })
             .then(() => {
-                alertService.success('Make an enquiry successful', { keepAfterRouteChange: true });
+                // this.openModal();
+                // alertService.success('Make an enquiry successful', { keepAfterRouteChange: true });
                 router.push('contact-us');
             })
             .catch(alertService.error);
     }
-
 
     return (
         <Layout>
@@ -236,6 +256,9 @@ function Index() {
                     </form>*/}
                 </div>
             </section>
+
+            <CustomModal isOpen={isModalOpen} onClose={closeModal} />
+
         </Layout>
     );
 }
