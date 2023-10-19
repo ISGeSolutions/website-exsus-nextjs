@@ -148,7 +148,6 @@ function App({ Component, pageProps }) {
         shouldRenderLayout ? (
             <Layout>
                 <Head>
-                    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2H6GP9JWWY"></script>                    
                     {/* eslint-disable-next-line @next/next/no-css-tags */}
                     <meta charSet="UTF-8" />
                     <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -163,11 +162,7 @@ function App({ Component, pageProps }) {
                     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
                     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
                     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> */}
-
                 </Head>
-
-
-
                 {/* <div className="full_loader_parnt_blk loader_parnt_blk" style={{ display: 'block' }}><div className="loader-circle-2"></div></div> */}
 
                 {/* ReactDOM.render( */}

@@ -22,7 +22,7 @@ function Index() {
 
     // ReactPixel.pageView();
 
-    // ReactGA.pageview('/why-us'); // Specify the URL or route for the page
+    ReactGA.pageview('/why-us'); // Specify the URL or route for the page
     // ReactPixel.pageView(); // Track a page view event
 
     const [whyusDetails, setWhyusDetails] = useState(null);
