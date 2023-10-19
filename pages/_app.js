@@ -29,9 +29,11 @@ import asiaTranslation from './../data/i18n/asia.json';
 import inTranslation from './../data/i18n/in.json';
 
 // import ReactGA from 'react-ga';
-import { initGA } from './../components/ga';
+// import { initGA } from './../components/ga';
 // import ReactPixel from 'react-facebook-pixel';
 import { Helmet } from 'react-helmet';
+import ReactGA from "react-ga4";
+ReactGA.initialize("G-2H6GP9JWWY");
 
 i18n
     .use(LanguageDetector)
@@ -90,7 +92,9 @@ function App({ Component, pageProps }) {
 
     useEffect(() => {
 
-        initGA();
+        // initGA();
+        ReactGA.initialize("G-2H6GP9JWWY");
+        ReactGA.send({ hitType: "pageview", page: "/why-us", title: "Custom Title" });
 
         // on initial load - run auth check 
         authCheck(router.asPath);
@@ -162,6 +166,7 @@ function App({ Component, pageProps }) {
                     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
                     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
                     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> */}
+                    
                 </Head>
                 {/* <div className="full_loader_parnt_blk loader_parnt_blk" style={{ display: 'block' }}><div className="loader-circle-2"></div></div> */}
 

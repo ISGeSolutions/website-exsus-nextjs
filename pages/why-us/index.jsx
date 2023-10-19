@@ -15,8 +15,8 @@ import { useTranslation } from 'react-i18next';
 // import ReactPixel from 'react-facebook-pixel';
 
 
-import ReactGA from 'react-ga';
-ReactGA.initialize('G-2H6GP9JWWY');
+import ReactGA from "react-ga4";
+// ReactGA.initialize('G-2H6GP9JWWY');
 
 export default Index;
 
@@ -24,7 +24,7 @@ function Index() {
 
     // ReactPixel.pageView();
 
-    ReactGA.pageview(window.location.pathname + window.location.search);
+    // ReactGA.pageview(window.location.pathname + window.location.search);
     // ReactGA.pageview('/why-us'); // Specify the URL or route for the page
     // ReactPixel.pageView(); // Track a page view event
 
@@ -49,6 +49,9 @@ function Index() {
     };
 
     useEffect(() => {
+        
+        ReactGA.send({ hitType: "pageview", page: "/why-us", title: "Custom Title" });
+
         // const carousel = document.querySelector('#carouselExampleInterval');
         // new bootstrap.Carousel(carousel);
         whyusService.getWhyusPage().then(x => {
