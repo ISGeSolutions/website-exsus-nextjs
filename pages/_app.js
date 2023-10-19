@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import React, { useState, useEffect } from 'react';
+import { Router, useRouter } from 'next/router';
 // import React from 'react';
 
 // import { NavLink } from './../components/NavLink';
@@ -28,15 +28,10 @@ import usTranslation from './../data/i18n/us.json';
 import asiaTranslation from './../data/i18n/asia.json';
 import inTranslation from './../data/i18n/in.json';
 
-import ReactGA from 'react-ga';
+// import ReactGA from 'react-ga';
 import { initGA } from './../components/ga';
 // import ReactPixel from 'react-facebook-pixel';
 import { Helmet } from 'react-helmet';
-// import dynamic from 'next/dynamic';
-// const FacebookPixelComponent = dynamic(() =>
-//   import('react-facebook-pixel').then((module) => module.default)
-// );
-
 
 i18n
     .use(LanguageDetector)
@@ -62,9 +57,26 @@ i18n
         },
     });
 
+function FacebookPixel() {
+    React.useEffect(() => {
+        import("react-facebook-pixel")
+            .then((x) => x.default)
+            .then((ReactPixel) => {
+                ReactPixel.init('YOUR_PIXEL_ID');
+                ReactPixel.pageView();
+                Router.events.on("routeChangeComplete", () => {
+                    ReactPixel.pageView();
+                });
+            });
+    });
+    return null;
+}
+
 export default App;
 
 function App({ Component, pageProps }) {
+
+
 
     const router = useRouter();
     const [user, setUser] = useState(null);
@@ -155,6 +167,7 @@ function App({ Component, pageProps }) {
 
                 {/* ReactDOM.render( */}
                 <CookieBanner />
+                <FacebookPixel />
                 <I18nextProvider i18n={i18n}>
                     {/* <App /> */}
                     {authorized &&
