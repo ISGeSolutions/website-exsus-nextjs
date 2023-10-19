@@ -18,7 +18,6 @@ import 'public/assets/stylesheets/css/style.css';
 import 'public/assets/stylesheets/css/responsive.css';
 import Script from 'next/script';
 import { userService } from 'services';
-import CookieBanner from './../components/CookieBanner';
 
 import { I18nextProvider } from 'react-i18next';
 import i18n from 'i18next';
@@ -27,6 +26,9 @@ import ukTranslation from './../data/i18n/uk.json';
 import usTranslation from './../data/i18n/us.json';
 import asiaTranslation from './../data/i18n/asia.json';
 import inTranslation from './../data/i18n/in.json';
+
+// import CookieBanner from './../components/CookieBanner';
+import CookieComponent from './../components/CookieComponent';
 
 // import ReactGA from 'react-ga';
 // import { initGA } from './../components/ga';
@@ -177,7 +179,7 @@ function App({ Component, pageProps }) {
                 {/* <div className="full_loader_parnt_blk loader_parnt_blk" style={{ display: 'block' }}><div className="loader-circle-2"></div></div> */}
 
                 {/* ReactDOM.render( */}
-                <CookieBanner />
+                {/* <CookieBanner /> */}
                 <FacebookPixel />
                 <I18nextProvider i18n={i18n}>
                     {/* <App /> */}
@@ -191,6 +193,7 @@ function App({ Component, pageProps }) {
                 <Helmet>
                     <link rel="canonical" href="https://website-exsus-nextjs.vercel.app" />
                 </Helmet>
+                <CookieComponent />
 
 
                 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&family=Slabo+27px&display=swap" rel="stylesheet" />
