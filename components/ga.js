@@ -2,5 +2,5 @@
 import ReactGA from 'react-ga';
 
 export const initGA = () => {
-    ReactGA.initialize('YOUR_TRACKING_ID');
+    ReactGA.initialize('G-2H6GP9JWWY');
 };

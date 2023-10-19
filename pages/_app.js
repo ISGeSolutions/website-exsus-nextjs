@@ -163,6 +163,15 @@ function App({ Component, pageProps }) {
                     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
                     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> */}
                 </Head>
+                <script async src="https://www.googletagmanager.com/gtag/js?id=G-2H6GP9JWWY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2H6GP9JWWY');
+</script>
+
                 {/* <div className="full_loader_parnt_blk loader_parnt_blk" style={{ display: 'block' }}><div className="loader-circle-2"></div></div> */}
 
                 {/* ReactDOM.render( */}

@@ -90,12 +90,21 @@ function ContinentOverview({ sendDataToParent }) {
 
             const oldText = x.data.attributes?.overview_text;
             var valueWithBr = oldText?.replace(/\\n/g, "");
-            const wordToReplace = '${holiday}';
             const replacement = holidayTitle;
 
             // Use JavaScript string interpolation to replace the variable
             const newValueWithBr = valueWithBr.replace(/\${holiday}/g, replacement);
             setnewValueWithBr(newValueWithBr);
+
+            // Define a regular expression pattern to match words starting with special characters
+            // const pattern = /[\W\d]+[\w]+/g;
+            // const pattern = "/[$][\w]+/g";
+
+            // Use the match() method to find matches in the text
+            // const matches = valueWithBr.match(pattern);
+            // console.log('matches22', matches);
+
+
 
             setAllCountries(x.data?.attributes?.countries?.data);
             // setDestinationLandingDetails(x)
