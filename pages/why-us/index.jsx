@@ -9,12 +9,14 @@ import { useRouter } from 'next/router';
 import Head from "next/head";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { useTranslation } from 'react-i18next';
-import ReactGA from 'react-ga';
+// import ReactGA from 'react-ga';
 // import ReactPixel from 'react-facebook-pixel';
 // import ReactPixel from '../../components/facebookPixel'; // Import your Facebook Pixel configuration
 // import ReactPixel from 'react-facebook-pixel';
 
 
+import ReactGA from 'react-ga';
+ReactGA.initialize('G-2H6GP9JWWY');
 
 export default Index;
 
@@ -22,7 +24,8 @@ function Index() {
 
     // ReactPixel.pageView();
 
-    ReactGA.pageview('/why-us'); // Specify the URL or route for the page
+    ReactGA.pageview(window.location.pathname + window.location.search);
+    // ReactGA.pageview('/why-us'); // Specify the URL or route for the page
     // ReactPixel.pageView(); // Track a page view event
 
     const [whyusDetails, setWhyusDetails] = useState(null);
