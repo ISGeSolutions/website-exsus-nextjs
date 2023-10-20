@@ -1,10 +1,10 @@
-import { BehaviorSubject } from 'rxjs';
-import getConfig from 'next/config';
-import Router from 'next/router';
+import { BehaviorSubject } from "rxjs";
+import getConfig from "next/config";
+import Router from "next/router";
 
-import { fetchWrapper } from 'helpers';
-let region = 'uk';
-if (typeof window !== 'undefined') {
+import { fetchWrapper } from "helpers";
+let region = "uk";
+if (typeof window !== "undefined") {
     if (window && window.site_region) {
         region = window.site_region;
         // setMyVariable(window.site_region);
@@ -20,7 +20,6 @@ const destinationLandingListUrl = `${publicRuntimeConfig.apiUrl}/api/destination
 // const destinationLandingListUrl = `${publicRuntimeConfig.apiUrl}/destination_landing_list`;
 // const destinationLandingListUrl = `${publicRuntimeConfig.apiUrl}/destination_list_with_images`;
 
-
 // const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/destinations/1?populate[0]=destination_images`;
 // const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/destination_details`;
 
@@ -34,12 +33,15 @@ const baseUrl = `${publicRuntimeConfig.apiUrl}/destinations`;
 //     return fetchWrapper.get(`${baseUrl}`);
 // }
 
-// console.log('publicRuntimeConfig.apiUrl', publicRuntimeConfig);
-const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('user')));
+const userSubject = new BehaviorSubject(
+    process.browser && JSON.parse(localStorage.getItem("user"))
+);
 
 export const destinationService = {
     user: userSubject.asObservable(),
-    get userValue() { return userSubject.value },
+    get userValue() {
+        return userSubject.value;
+    },
     getAll,
     getById,
     getAllDropdown,
@@ -56,7 +58,7 @@ export const destinationService = {
     getHotelById,
     getItinerariesInAdvanceSearch,
     getDestinationInspireMe,
-    getRegionById
+    getRegionById,
 };
 
 function getAllDropdown() {
@@ -74,7 +76,6 @@ function getById(id) {
 }
 
 function getDestinationLandingPage() {
-    // console.log('baseUrl_dropdown', baseUrl_dropdown);
     const destinationLandingPageUrl = `${publicRuntimeConfig.apiUrl}/api/custom-pages-destinations`;
     return fetchWrapper.get(destinationLandingPageUrl);
 }
@@ -91,11 +92,12 @@ function getDestinationInspireMe() {
 
 function getDestinationDetails(id) {
     // console.log('baseUrl_dropdown', baseUrl_dropdown);
-    const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/destinations/` + id + `?populate=destination_images,countries.country_images`;
+    const destinationDetailsUrl =
+        `${publicRuntimeConfig.apiUrl}/api/destinations/` +
+        id +
+        `?populate=destination_images,countries.country_images`;
     return fetchWrapper.get(destinationDetailsUrl);
 }
-
-
 
 function getAllItineraries(page) {
     const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&pagination[page]=${page}&pagination[pageSize]=12`;
@@ -106,7 +108,6 @@ function getAllItinerariesHomePage() {
     const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?filters[home_page_ind][$eq]=true&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&pagination[page]=1&pagination[pageSize]=6`;
     return fetchWrapper.get(itinerariesDetailsUrl);
 }
-
 
 function getFavIti() {
     const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&pagination[page]=1&pagination[pageSize]=6`;
@@ -150,7 +151,6 @@ function getAllHotels(page, item) {
 
 }
 
-
 function getCustomPagesData(pageName) {
     const customPage = `${publicRuntimeConfig.apiUrl}/api/custom-pages?filters[page_code][$eq]=${pageName}&[populate][0]=custom_page_images`;
     return fetchWrapper.get(customPage);
@@ -167,7 +167,6 @@ function getHotelById(id) {
 }
 
 function getItinerariesInAdvanceSearch(dcode, page) {
-    // console.log('baseUrl_dropdown', baseUrl_dropdown);
     const destinationadvanceSearchUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?[filters][destination][destination_code][$eq]=${dcode}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12`;
     return fetchWrapper.get(destinationadvanceSearchUrl);
 }
@@ -176,7 +175,3 @@ function getRegionById(id) {
     const regionsURL = `${publicRuntimeConfig.apiUrl}/api/regions/${id}?populate[0]=region_images&populate[1]=country`;
     return fetchWrapper.get(regionsURL);
 }
-
-
-
-

@@ -23,7 +23,7 @@ function Index() {
         }
     }
     const generateDynamicLink = () => {
-        // console.log('item', item);
+    
         return regionWiseUrl + `/where-to-go-detail`;
     };
 
