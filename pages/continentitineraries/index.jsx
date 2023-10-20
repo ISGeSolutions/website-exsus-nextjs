@@ -256,7 +256,6 @@ function ContinentItinararies(props) {
         page = 0
         setItineraries([]);
         setActiveItem(item);
-        console.log(page)
 
         loadMoreData(item);
     }
@@ -306,7 +305,7 @@ function ContinentItinararies(props) {
             // Handle any errors here
             // console.error(error);
             setIsLoading(false);
-        });;
+        });
 
         window.addEventListener("resize", equalHeight(true));
 

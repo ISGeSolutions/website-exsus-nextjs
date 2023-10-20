@@ -119,7 +119,6 @@ function getItineraryDetails(id, code) {
 }
 
 function getItinerariesByDestination(dcode, page, item) {
-    debugger;
     if (item == "price") {
         const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?[filters][destination][destination_code][$eq]=${dcode}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12`;
         return fetchWrapper.get(destinationDetailsUrl);
@@ -140,9 +139,15 @@ function getItinerariesByDestination(dcode, page, item) {
     // console.log('baseUrl_dropdown', baseUrl_dropdown);
 }
 
-function getAllHotels(page) {
-    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/hotels?populate[0]=hotel_images&populate[1]=hotel_travel_times&pagination[page]=${page}&pagination[pageSize]=12`;
-    return fetchWrapper.get(itinerariesDetailsUrl);
+function getAllHotels(page, item) {
+    if (item == "recommended") {
+        const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/hotels?populate[0]=hotel_images&populate[1]=hotel_travel_times&pagination[page]=${page}&pagination[pageSize]=12`;
+        return fetchWrapper.get(itinerariesDetailsUrl);
+    } else if (item == "alphabetical") {
+        const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/hotels?populate[0]=hotel_images&populate[1]=hotel_travel_times&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=hotel_name:asc`;
+        return fetchWrapper.get(itinerariesDetailsUrl);
+    }
+
 }
 
 

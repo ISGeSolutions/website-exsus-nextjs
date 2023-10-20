@@ -31,6 +31,8 @@ function CountryPlaceToStay(country) {
     const { destinationcode } = router.query;
     const [allHotels, setAllHotels] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [activeItem, setActiveItem] = useState('recommended');
+
 
 
 
@@ -183,8 +185,8 @@ function CountryPlaceToStay(country) {
     ];
 
 
-    const loadMoreData = () => {
-        destinationService.getAllHotels(page + 1).then((response) => {
+    const loadMoreData = (item) => {
+        destinationService.getAllHotels(page + 1, item).then((response) => {
             // console.log(response);
             setMetaData(response.meta.pagination);
             const newItineraries = response.data;
@@ -210,6 +212,14 @@ function CountryPlaceToStay(country) {
         // this.setState({ selectedOption }, () =>
         // );
     };
+
+
+    const handleFilterClick = (item) => {
+        page = 0
+        setAllHotels([]);
+        setActiveItem(item);
+        loadMoreData(item);
+    }
 
     const handleOptionRegionChange = (selectedOption) => {
         selectedOption = selectedOption.filter((i) => i.value !== '' && typeof i.value !== 'undefined');
@@ -259,7 +269,7 @@ function CountryPlaceToStay(country) {
             setIsLoading(false);
         });
 
-        loadMoreData();
+        loadMoreData(activeItem);
 
         // Using window.onload to detect full page load
         window.onload = () => {
@@ -393,8 +403,8 @@ function CountryPlaceToStay(country) {
                                             <div className="destination_contries_filter d-inline-block d-lg-flex">
                                                 <label className="pt-2 pt-lg-0">Arrange by:</label>
                                                 <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
-                                                    <li><a href="#" className="active">Recommended</a></li>
-                                                    <li><a href="#">Alphabetical</a></li>
+                                                    <li><a className={activeItem === 'recommended' ? 'active' : ''} onClick={() => handleFilterClick('recommended')}>Recommended</a></li>
+                                                    <li><a className={activeItem === 'alphabetical' ? 'active' : ''} onClick={() => handleFilterClick('alphabetical')}>Alphabetical</a></li>
                                                 </ul>
                                             </div>
                                         </div>

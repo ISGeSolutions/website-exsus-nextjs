@@ -16,12 +16,23 @@ function CountryRegions({ country, sendDataToParent }) {
     const { countrycode } = router.query;
     const [allRegions, setAllRegions] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [activeItem, setActiveItem] = useState('recommended');
+
 
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
         if (window && window.site_region) {
             regionWiseUrl = '/' + window.site_region;
             // setMyVariable(window.site_region);
+        }
+    }
+
+    const handleFilterClick = (item) => {
+        setActiveItem(item)
+        if (item == "alphabetical") {
+            setAllRegions(allRegions.sort((a, b) => a.attributes.region_name.localeCompare(b.attributes.region_name)));
+        } else if (item == "recommended") {
+            setAllRegions(allRegions.sort((a, b) => a.id - b.id));
         }
     }
 
@@ -85,8 +96,8 @@ function CountryRegions({ country, sendDataToParent }) {
                             <div className="col-12">
                                 <div className="destination_contries_filter d-block d-md-flex">
                                     <ul>
-                                        <li><a href="#" className="active">Exsus recommends</a></li>
-                                        <li><a href="#">Alphabetical</a></li>
+                                        <li><a className={activeItem === 'recommended' ? 'active' : ''} onClick={() => handleFilterClick('recommended')}>Exsus recommends</a></li>
+                                        <li><a className={activeItem === 'alphabetical' ? 'active' : ''} onClick={() => handleFilterClick('alphabetical')}>Alphabetical</a></li>
                                     </ul>
                                 </div>
                             </div>

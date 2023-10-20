@@ -16,6 +16,8 @@ function ContinentCountry({ sendDataToParent }) {
     const [allCountries, setAllCountries] = useState([]);
     const [destinationName, setdestinationName] = useState("");
     const [isLoading, setIsLoading] = useState(true);
+    const [activeItem, setActiveItem] = useState('recommended');
+
 
 
 
@@ -28,11 +30,14 @@ function ContinentCountry({ sendDataToParent }) {
     }
 
     const handleFilterClick = (item) => {
-        page = 0
-        setItineraries([]);
-        setActiveItem(item);
-        console.log(page)
-        loadMoreData(item);
+        setActiveItem(item)
+        if (item == "alphabetical") {
+            setAllCountries(allCountries.sort((a, b) => a.attributes.country_name.localeCompare(b.attributes.country_name)));
+            console.log(allCountries);
+        } else if (item == "recommended") {
+            setAllCountries(allCountries.sort((a, b) => a.id - b.id));
+            console.log(allCountries);
+        }
     }
 
 

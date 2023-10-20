@@ -29,6 +29,7 @@ const handler = async (req, res) => {
                 break;
         }
     } catch (err) {
+
         res.status(400).json({
             error_code: "api_one",
             message: err.message,
