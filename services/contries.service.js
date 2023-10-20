@@ -1,12 +1,12 @@
-import { BehaviorSubject } from 'rxjs';
-import getConfig from 'next/config';
-import Router from 'next/router';
+import { BehaviorSubject } from "rxjs";
+import getConfig from "next/config";
+import Router from "next/router";
 
-import { fetchWrapper } from 'helpers';
+import { fetchWrapper } from "helpers";
 
 const { publicRuntimeConfig } = getConfig();
 
-const baseUrl = `${publicRuntimeConfig.apiUrl}/countries`;;
+const baseUrl = `${publicRuntimeConfig.apiUrl}/countries`;
 
 // export const destiantionsService = {
 //     getDestinationsList
@@ -16,22 +16,27 @@ const baseUrl = `${publicRuntimeConfig.apiUrl}/countries`;;
 //     return fetchWrapper.get(`${baseUrl}`);
 // }
 
-// console.log('publicRuntimeConfig.apiUrl', publicRuntimeConfig);
-const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('user')));
+const userSubject = new BehaviorSubject(
+  process.browser && JSON.parse(localStorage.getItem("user"))
+);
 
 export const countriesService = {
-    user: userSubject.asObservable(),
-    get userValue() { return userSubject.value },
-    getAll,
-    getCountryDetails,
+  user: userSubject.asObservable(),
+  get userValue() {
+    return userSubject.value;
+  },
+  getAll,
+  getCountryDetails,
 };
 
 function getAll() {
-    // console.log('baseUrl', baseUrl);
-    return fetchWrapper.get(baseUrl);
+  return fetchWrapper.get(baseUrl);
 }
 
 function getCountryDetails(id) {
-    const countryPageUrl = `${publicRuntimeConfig.apiUrl}/api/countries/` + id + `?populate[0]=country_images`;
-    return fetchWrapper.get(countryPageUrl);
+  const countryPageUrl =
+    `${publicRuntimeConfig.apiUrl}/api/countries/` +
+    id +
+    `?populate[0]=country_images`;
+  return fetchWrapper.get(countryPageUrl);
 }

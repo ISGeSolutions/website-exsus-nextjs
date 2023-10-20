@@ -216,7 +216,7 @@ function ContinentPlacesToStay(props) {
     }
 
     const generateDynamicLink = (item) => {
-        // console.log('item', item);
+        
         return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
     };
 
@@ -233,8 +233,7 @@ function ContinentPlacesToStay(props) {
             setItineraries(x.data);
             setIsLoading(false);
         }).catch((error) => {
-            // Handle any errors here
-            // console.error(error);
+            
             setIsLoading(false);
         });
         destinationService.getDestinationDetails(destinationcode).then((x) => {
@@ -249,8 +248,7 @@ function ContinentPlacesToStay(props) {
             );
             setIsLoading(false);
         }).catch((error) => {
-            // Handle any errors here
-            // console.error(error);
+            
             setIsLoading(false);
         });
 
@@ -260,7 +258,7 @@ function ContinentPlacesToStay(props) {
         window.onload = () => {
             setTimeout(() => {
                 const redirectUrl = regionWiseUrl + '/continent?destinationcode=' + destinationcode;
-                // debugger;
+               
                 if (redirectUrl) {
                     router.push(redirectUrl);
                 }

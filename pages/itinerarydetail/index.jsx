@@ -27,7 +27,7 @@ function Index() {
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
         if (window && window.site_region) {
-            // console.log('window.site_region', window.site_region);
+            
             regionWiseUrl = '/' + window.site_region;
             // setMyVariable(window.site_region);
         }
@@ -120,7 +120,6 @@ function Index() {
                 // }
             });
 
-            // console.log('bannerImages', bannerImages);
             setBannerImages(bannerImages);
             setItineraries(x.data);
 
@@ -131,8 +130,7 @@ function Index() {
             window.addEventListener('resize', equalHeight(true));
             setIsLoading(false);
         }).catch((error) => {
-            // Handle any errors here
-            // console.error(error);
+           
             setIsLoading(false);
         });
 
