@@ -63,7 +63,7 @@ function Index() {
     const { errors } = formState;
 
     function onSubmit(data) {
-        // console.log('onSubmit2', data);
+        
         return contactusService.brochureRequest({ data })
             .then(() => {
                 alertService.success('Brochure request is sent successfully', { keepAfterRouteChange: true });

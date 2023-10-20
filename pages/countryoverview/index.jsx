@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 export default CountryOverview;
 
 function CountryOverview(props) {
-    // console.log(props)
+   
 
     const [itineraries, setItineraries] = useState(null);
     const itemsPerPage = 9; // Number of items to load per page
@@ -20,7 +20,7 @@ function CountryOverview(props) {
     const [isLoading, setIsLoading] = useState(true);
 
     const handleLoadMore = () => {
-        // console.log('handleLoadMore')
+   
         setVisibleItems(prevVisibleItems => prevVisibleItems + itemsPerPage);
     };
 
@@ -37,7 +37,7 @@ function CountryOverview(props) {
     };
 
     const generateDynamicLink = (item) => {
-        // console.log('item', item);
+      
         return regionWiseUrl + `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`;
     };
 
@@ -70,19 +70,18 @@ function CountryOverview(props) {
             setIsLoading(false);
 
         }).catch((error) => {
-            // Handle any errors here
-            // console.error(error);
+           
             setIsLoading(false);
         });
 
-        // console.log(props?.data?.country_name)
+    
         window.addEventListener('resize', equalHeight(true));
 
         // Using window.onload to detect full page load
         window.onload = () => {
             setTimeout(() => {
                 const redirectUrl = regionWiseUrl + '/country?countrycode=' + countrycode;
-                // debugger;
+                
                 if (redirectUrl) {
                     router.push(redirectUrl);
                 }

@@ -168,7 +168,7 @@ function ContinentPlacesToStay() {
 
     const loadMoreData = () => {
         destinationService.getAllHotels(page + 1).then((response) => {
-            // console.log(response);
+        
             setMetaData(response.meta.pagination);
             const newItineraries = response.data;
             if (newItineraries.length > 0) {
@@ -177,8 +177,7 @@ function ContinentPlacesToStay() {
             }
             setIsLoading(false);
         }).catch((error) => {
-            // Handle any errors here
-            // console.error(error);
+           
             setIsLoading(false);
         });
     };
@@ -214,7 +213,7 @@ function ContinentPlacesToStay() {
     }
 
     const generateDynamicLink = (item) => {
-        // console.log('item', item);
+   
         return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
     };
 

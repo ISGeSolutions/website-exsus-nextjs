@@ -89,7 +89,7 @@ function Nav() {
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
         if (window && window.site_region) {
-            // console.log('window.site_region', window.site_region);
+           
             regionWiseUrl = '/' + window.site_region;
             // setMyVariable(window.site_region);
         }
@@ -296,13 +296,13 @@ function Nav() {
         document.body.appendChild(script);
 
         destinationService.getDestinationLandingList().then(x => {
-            // console.log('x.data', x.data);
+            
 
             setDestinationLandingList(x.data);
         });
 
         holidaytypesService.getHolidaytypesLandingList().then(x => {
-            // console.log('x.data - holiday types', x.data);
+            
             const sortedData = x.data.sort(
                 (a, b) =>
                     a.attributes.main_page_serial_number -
@@ -321,8 +321,7 @@ function Nav() {
     }, []);
 
     const makeAnEnquiry = () => {
-        // console.log('makeAnEnquiry');
-        // Do something
+        
         router.push('/contact-us');
     }
 
