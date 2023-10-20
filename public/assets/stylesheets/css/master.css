@@ -1921,9 +1921,7 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
 }
 
 /* line 1409, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
-.full_loader_parnt_blk.loader_parnt_blk .loader-circle-2 {
-  /* position: relative; */
-}
+
 
 /* line 1415, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .loader-circle-2 {
@@ -2198,131 +2196,105 @@ nav .menu .menu-main .header_country_list ul li.active a+.header_country_list_in
   line-height: 35px !important;
 }
 
-/* line 1637, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .succs_msg_parnt {
-  margin: 0 0 15px;
-  width: auto;
-  display: inline-block;
+  text-align: center;
 }
 
-/* line 1642, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
-.succs_msg_parnt h5 {
-  background: #252525;
-  padding: 15px 50px 15px 35px;
-  color: #ffffff;
-  position: relative;
-  box-shadow: 0px 0 3px 1px rgba(0, 0, 0, 0.5);
-  border-radius: 2px;
-  border-left: 5px solid #0ED05F;
-  margin-bottom: 0;
-  font: 300 1rem/1.25rem "Roboto", sans-serif;
+.succs_msg_parnt .modal-header {
+  border: none;
+  padding-bottom: 5px;
 }
 
-/* line 1654, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
-.succs_msg_parnt h5:after {
+.succs_msg_parnt .modal-header .succs_msg_tick {
+  background-color: #8aad56;
+  width: 60px;
+  height: 60px;
+  line-height: 55px;
+  border-radius: 50%;
   position: absolute;
-  content: "\f00c";
-  font-size: 19px;
-  font-family: FontAwesome;
-  color: #0ED05F;
-  left: 10px;
-  top: 16px;
-  display: block;
-}
-
-/* line 1665, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
-.succs_msg_parnt h5 .cls_icn {
-  display: inline-block;
-  position: absolute;
-  top: 15px;
+  margin: auto;
+  left: 0;
   right: 0;
-  width: 15px;
-  height: 15px;
-  cursor: pointer;
+  top: -30px;
+  box-shadow: 0 0 0 5px #fff;
 }
 
-/* line 1673, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
-.succs_msg_parnt h5 .cls_icn:after {
-  position: absolute;
-  content: "\f057";
-  font-size: 15px;
-  font-family: FontAwesome;
-  color: #bbbbbb;
-  left: -10px;
-  top: 0;
-  display: block;
+.succs_msg_parnt .modal-header .succs_msg_tick svg {
+  width: 35px;
+  height: 35px;
+  fill: #fff;
 }
 
-/* line 1684, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
-.succs_msg_parnt h5 .cls_icn:before {
-  position: absolute;
-  content: "";
-  width: 1px;
-  height: 18px;
-  background: #bbbbbb;
-  left: -20px;
-  top: 0;
-  display: block;
+.succs_msg_parnt .modal-body h5 {
+  font: 1.75rem/2.25rem "Slabo 27px", serif;
+  text-transform: uppercase;
+  color: #8aad56;
+  margin-bottom: 10px;
 }
 
-/* line 1697, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
-.succs_msg_parnt ul {
-  list-style-type: none;
-  padding: 5px 0 0;
-}
-
-/* line 1701, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
-.succs_msg_parnt ul li {
-  display: block;
-  font: 300 0.875rem/1.0625rem "Roboto", sans-serif;
-  padding: 5px 0 0;
+.succs_msg_parnt .modal-body p {
+  font: 400 0.875rem/1.25rem "Roboto", sans-serif;
   color: #231f20;
+  padding: 0 20px;
+  margin-bottom: 20px;
 }
 
-/* line 1713, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .error_msg_parnt {
-  margin: 0 0 15px;
-  width: auto;
-  display: inline-block;
+  text-align: center;
 }
 
-/* line 1717, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
-.error_msg_parnt h5 {
-  background: #252525;
-  padding: 15px 15px 15px 30px;
-  font: 300 1rem/1.25rem "Roboto", sans-serif;
-  color: #ffffff;
-  position: relative;
-  box-shadow: 0px 2px 2px 0 rgba(0, 0, 0, 0.5);
-  border-radius: 2px;
-  border-left: 5px solid #fca604;
-  margin-bottom: 0;
+.error_msg_parnt .modal-header {
+  border: none;
+  padding-bottom: 0;
 }
 
-/* line 1728, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
-.error_msg_parnt h5:after {
+.error_msg_parnt .modal-header .error_msg_cross {
+  background-color: #e44043;
+  width: 60px;
+  height: 60px;
+  line-height: 55px;
+  border-radius: 50%;
   position: absolute;
-  content: "\f12a";
-  font-size: 19px;
-  font-family: FontAwesome;
-  color: #fca604;
-  left: 15px;
-  top: 15px;
-  display: block;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: -30px;
+  box-shadow: 0 0 0 5px #fff;
 }
 
-/* line 1740, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
-.error_msg_parnt ul {
-  list-style-type: none;
-  padding: 5px 0 0;
+.error_msg_parnt .modal-header .error_msg_cross svg {
+  width: 35px;
+  height: 35px;
+  fill: #fff;
 }
 
-/* line 1744, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
-.error_msg_parnt ul li {
-  display: block;
-  font: 300 0.875rem/1.0625rem "Roboto", sans-serif;
-  padding: 5px 0 0;
-  color: #ffffff;
+.error_msg_parnt .modal-body h5 {
+  font: 1.75rem/2.25rem "Slabo 27px", serif;
+  text-transform: uppercase;
+  color: #e44043;
+  margin-bottom: 10px;
 }
 
-/*# sourceMappingURL=master.css.map */
+.error_msg_parnt .modal-body p {
+  font: 400 0.875rem/1.25rem "Roboto", sans-serif;
+  color: #231f20;
+  padding: 0;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.error_msg_parnt .modal-body ul li {
+  text-align: left;
+  font: 400 0.875rem/0.875rem "Roboto", sans-serif;
+  color: #231f20;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.error_msg_parnt .modal-body ul li svg {
+  width: 16px;
+  height: 12px;
+  fill: #e44043;
+  margin-right: 5px;
+}

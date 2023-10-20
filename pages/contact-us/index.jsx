@@ -65,7 +65,7 @@ function Index() {
         return contactusService.makeanenquiry({ data })
             .then(() => {
                 // this.openModal();
-                // alertService.success('Make an enquiry successful', { keepAfterRouteChange: true });
+                alertService.success('Make an enquiry successful', { keepAfterRouteChange: true });
                 router.push('contact-us');
             })
             .catch(alertService.error);

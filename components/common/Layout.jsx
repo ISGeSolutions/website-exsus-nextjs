@@ -7,6 +7,11 @@ import { Analytics } from "@vercel/analytics/react";
 import React from "react";
 import Select from "react-select";
 import Head from "next/head";
+import { useForm } from 'react-hook-form';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+
 // import plusSlides from "public/assets/javascripts/navigation.js";
 import { useTranslation } from "react-i18next";
 import i18n from "i18next";
@@ -21,6 +26,14 @@ function Layout({ children }) {
   const [regionWiseUrl, setMyVariable] = useState("uk");
   const [selectedRegion, setVariable] = useState("");
   const { ver } = router.query;
+
+  // form validation rules 
+  const validationSchema = Yup.object().shape({
+    searchText: Yup.string()
+      .required()
+  });
+
+  const formOptions = { resolver: yupResolver(validationSchema) };
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors } = formState;
   const countries = [
@@ -64,10 +77,9 @@ function Layout({ children }) {
     }
   }
 
-  // const handleSearch = () => {
-  //   e.preventDefault();
-  //   router.push("/search");
-  // };
+  const handleSearch = () => {
+    router.push("/search");
+  };
 
   const handleChange = (selectedOption) => {
     // Do something
@@ -231,7 +243,7 @@ function Layout({ children }) {
                                         <li><NavLink className="dropdown-item" value="in" href="#"><img src="./../../images/india-flag-round-circle-icon.svg" alt="india-flag-round-circle-icon" />India site</NavLink></li>
                                     </ul> */}
                 </div>
-                <form>
+                <form onSubmit={handleSubmit(handleSearch)}>
                   <div className="input-group srch_site_box">
                     <input
                       name="searchText"
