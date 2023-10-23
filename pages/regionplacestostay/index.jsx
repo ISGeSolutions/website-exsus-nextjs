@@ -10,14 +10,14 @@ import Image from "next/image";
 import Select, { components } from 'react-select';
 import CustomMultiValue from "./CustomMultiValue";
 
-export default ContinentPlacesToStay;
+export default RegionPlacesToStay;
 
-function ContinentPlacesToStay() {
+function RegionPlacesToStay() {
 
     const [isClearable, setIsClearable] = useState(true);
     const [isSearchable, setIsSearchable] = useState(true);
     const [isDisabled, setIsDisabled] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoader, setIsisLoader] = useState(false);
     const [isRtl, setIsRtl] = useState(false);
     const [selectedOptionCountry, setSelectedOptionCountry] = useState(null);
     const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
@@ -33,7 +33,7 @@ function ContinentPlacesToStay() {
     const { destinationcode } = router.query;
     const [allHotels, setAllHotels] = useState([]);
     const [countryOptions, setAllCountries] = useState([])
-    // const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
 
     const regionOptions = [
         { value: "Everything", label: "Everything" },
@@ -168,7 +168,7 @@ function ContinentPlacesToStay() {
 
     const loadMoreData = () => {
         destinationService.getAllHotels(page + 1).then((response) => {
-        
+
             setMetaData(response.meta.pagination);
             const newItineraries = response.data;
             if (newItineraries.length > 0) {
@@ -177,7 +177,7 @@ function ContinentPlacesToStay() {
             }
             setIsLoading(false);
         }).catch((error) => {
-           
+
             setIsLoading(false);
         });
     };
@@ -213,7 +213,7 @@ function ContinentPlacesToStay() {
     }
 
     const generateDynamicLink = (item) => {
-   
+
         return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
     };
 
@@ -222,18 +222,20 @@ function ContinentPlacesToStay() {
     // };
 
     useEffect(() => {
+        setIsLoading(false);
+
         setSelectedOptionCountry(countryOptions[0]);
         setSelectedOptionRegion(regionOptions[0]);
         setSelectedOptionMonth(monthOptions[0]);
 
-        destinationService.getAllItineraries().then(x => {
-            setItineraries(x.data);
-            setIsLoading(false);
-        }).catch((error) => {
-            // Handle any errors here
-            // console.error(error);
-            setIsLoading(false);
-        });
+        // destinationService.getAllItineraries().then(x => {
+        //     setItineraries(x.data);
+        //     setIsLoading(false);
+        // }).catch((error) => {
+        //     // Handle any errors here
+        //     // console.error(error);
+        //     setIsLoading(false);
+        // });
         destinationService.getDestinationDetails(destinationcode).then((x) => {
             setdestinationName(x.data.attributes.destination_name);
             setAllCountries(
@@ -251,7 +253,7 @@ function ContinentPlacesToStay() {
             setIsLoading(false);
         });
 
-        loadMoreData();
+        // loadMoreData();
 
         // Using window.onload to detect full page load
         window.onload = () => {

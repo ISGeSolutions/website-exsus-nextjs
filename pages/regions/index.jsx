@@ -102,21 +102,19 @@ function Index() {
     var text = metaTitle;
     if (itemId == "overview") {
       const redirectUrl =
-        regionWiseUrl + "/continent?destinationcode=" + destinationcode;
+        regionWiseUrl + "/region";
       window.history.pushState(null, null, redirectUrl);
       text = metaTitle;
     } else if (itemId == "itineraries") {
       const redirectUrl =
         regionWiseUrl +
-        "/continentitineraries?destinationcode=" +
-        destinationcode;
+        "/regionitineraries";
       window.history.pushState(null, null, redirectUrl);
       text = `TAILOR-MADE ${destinationName} HOLIDAY ITINERARIES`;
     } else if (itemId == "places-to-stay") {
       const redirectUrl =
         regionWiseUrl +
-        "/continentplacetostay?destinationcode=" +
-        destinationcode;
+        "/regionplacetostay";
       window.history.pushState(null, null, redirectUrl);
       text = `PLACES TO STAY IN ${destinationName}`;
     } else {
@@ -441,7 +439,7 @@ function Index() {
                   tabIndex="0"
                   ref={tabContentRefs["itinararies"]}
                 >
-                  <RegionitIneraries dataProp={destinationcode} />
+                  <RegionitIneraries />
                 </div>
               )}
               {activeTab === "places-to-stay" && (
@@ -469,7 +467,7 @@ function Index() {
               <p>
                 call us on 020 7337 9010 to start planning your perfect trip
               </p>
-           
+
               <EnquiryButton />
             </div>
           </section>
