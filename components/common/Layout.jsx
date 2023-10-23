@@ -7,10 +7,9 @@ import { Analytics } from "@vercel/analytics/react";
 import React from "react";
 import Select from "react-select";
 import Head from "next/head";
-import { useForm } from 'react-hook-form';
-import * as Yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-
+import { useForm } from "react-hook-form";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 // import plusSlides from "public/assets/javascripts/navigation.js";
 import { useTranslation } from "react-i18next";
@@ -27,10 +26,9 @@ function Layout({ children }) {
   const [selectedRegion, setVariable] = useState("");
   const { ver } = router.query;
 
-  // form validation rules 
+  // form validation rules
   const validationSchema = Yup.object().shape({
-    searchText: Yup.string()
-      .required()
+    searchText: Yup.string().required(),
   });
 
   const formOptions = { resolver: yupResolver(validationSchema) };
@@ -415,7 +413,7 @@ function Layout({ children }) {
                       <NavLink href="/blog">Blog</NavLink>
                     </li>
                     <li>
-                      <NavLink href="/when-to-go">When to go</NavLink>
+                      <NavLink href="/where-to-go">When to go</NavLink>
                     </li>
                   </ul>
                 </div>
