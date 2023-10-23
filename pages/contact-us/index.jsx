@@ -17,25 +17,13 @@ export default Index;
 
 function Index() {
 
-    const formOptions = ({ resolver: yupResolver(validationSchema) });
-
-    // get functions to build form with useForm() hook
-    const { register, handleSubmit, reset, formState } = useForm(formOptions);
-    const { errors } = formState;
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [alert, setAlert] = useState(null);
     // const [formOptions, setFormOptions] = useState(null);
-    const [validationSchema, setValidationSchema] = useState(validationSchemaVar);
     const router = useRouter();
 
-    const [formData, setFormData] = useState({
-        title: '',
-        first_name: '',
-        // Add more form fields as needed
-    });
-
     // form validation rules 
-    const validationSchemaVar = Yup.object().shape({
+    const validationSchema = Yup.object().shape({
         title: Yup.string()
             .required('Please select title'),
         first_name: Yup.string()
@@ -54,6 +42,12 @@ function Index() {
         source_of_marketing_other_text: Yup.string('test source_of_marketing_other_text'),
         marketing_mail_ind: Yup.boolean(false),
     });
+
+    const formOptions = ({ resolver: yupResolver(validationSchema) });
+
+    // get functions to build form with useForm() hook
+    const { register, handleSubmit, reset, formState } = useForm(formOptions);
+    const { errors } = formState;
 
     const showAlert = (message, type) => {
         setAlert({ message, type });
