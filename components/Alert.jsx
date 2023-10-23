@@ -41,7 +41,7 @@ function Alert({ message, type, onClose }) {
                         <button type="button" onClick={onCloseFun} className="btn-close" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
-                        <h5>Successfully Submitted</h5>
+                        {/* <h5>Successfully Submitted</h5> */}
                         <p>{message}</p>
                     </div>
                 </div>
