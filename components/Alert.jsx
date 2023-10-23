@@ -6,14 +6,21 @@ import React from 'react';
 
 function Alert({ message, type, onClose }) {
 
+    const [isInitialLoad, setIsInitialLoad] = useState(true);
+
     const onCloseFun = () => {
         $(".succss_msg_parnt").hide();
     };
 
     useEffect(() => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        $(".succss_msg_parnt").hide();
-    }, [message, type]);
+        // $(".succss_msg_parnt").hide();
+
+        if (!message && !type) {
+            $(".succss_msg_parnt").hide();
+        }
+
+    }, [message, type, isInitialLoad]);
 
     return (
         // <div className={`alert alert-${type}`}>
