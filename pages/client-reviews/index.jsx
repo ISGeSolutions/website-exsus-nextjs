@@ -17,7 +17,9 @@ function Index() {
 
   useEffect(() => {
     const carousel = document.querySelector("#carouselExampleInterval");
-    new bootstrap.Carousel(carousel);
+    if (carousel) {
+      new bootstrap.Carousel(carousel);
+    }
 
     whyusService
       .getAllReviews()
