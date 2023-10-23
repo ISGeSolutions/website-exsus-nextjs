@@ -92,7 +92,7 @@ function Index() {
                     <h2>Escape the obvious - tailor-make your trip today</h2>
                     {/* <button onClick={() => showAlert('Operation succeeded', 'success')}>Show Success Alert</button>
                     <button onClick={() => showAlert('Operation failed', 'error')}>Show Error Alert</button> */}
-                    {alert && <Alert message={alert.message} type={alert.type} onClose={closeAlert} />}
+                    {alert && alert.message && alert.type && <Alert message={alert.message} type={alert.type} onClose={closeAlert} />}
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="row pt-4">
                             <div className="col-sm-6 col-md-4">

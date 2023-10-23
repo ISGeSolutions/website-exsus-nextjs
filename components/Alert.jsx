@@ -27,7 +27,7 @@ function Alert({ message, type, onClose }) {
         //     <span>{message}</span>
         //     <button onClick={onClose}>&times;</button>
         // </div>
-        <div className="succss_msg_parnt">
+        <div className={message && type ? 'succss_msg_parnt' : ''}>
             <div className="succss_msg_cnt">
                 <div className="succss_msg_inr">
                     <div className="modal-header">
