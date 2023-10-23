@@ -3468,3 +3468,168 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+.succss_msg_parnt {
+  width: 100%;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  background: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  z-index: 9;
+  padding: 0 10px;
+}
+
+.succss_msg_parnt .succss_msg_cnt {
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  height: 100%;
+}
+
+.succss_msg_parnt .succss_msg_cnt .succss_msg_inr {
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.succss_msg_parnt .succss_msg_cnt .succss_msg_inr .modal-header {
+  position: relative;
+}
+
+.succss_msg_parnt .succss_msg_cnt .succss_msg_inr .modal-header .succss_msg_cross {
+  background-color: #8aad56;
+  width: 60px;
+  height: 60px;
+  line-height: 55px;
+  border-radius: 50%;
+  position: relative;
+  margin: auto;
+  top: -30px;
+  box-shadow: 0 0 0 5px #fff;
+}
+
+.succss_msg_parnt .succss_msg_cnt .succss_msg_inr .modal-header .succss_msg_cross svg {
+  width: 35px;
+  height: 35px;
+  fill: #fff;
+}
+
+.succss_msg_parnt .succss_msg_cnt .succss_msg_inr .modal-header button {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.succss_msg_parnt .succss_msg_cnt .modal-body {
+  padding: 0 15px 15px;
+}
+
+.succss_msg_parnt .succss_msg_cnt .modal-body h5 {
+  font: 1.75rem/2.25rem "Slabo 27px", serif;
+  text-transform: uppercase;
+  color: #8aad56;
+  margin-bottom: 10px;
+}
+
+.succss_msg_parnt .succss_msg_cnt .modal-body p {
+  font: 400 0.875rem/1.25rem "Roboto", sans-serif;
+  color: #231f20;
+  padding: 0;
+  margin-bottom: 15px;
+}
+
+.error_msg_parnt {
+  width: 100%;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  background: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  z-index: 9;
+  padding: 0 10px;
+}
+
+.error_msg_parnt .error_msg_cnt {
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  height: 100%;
+}
+
+.error_msg_parnt .error_msg_cnt .error_msg_inr {
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.error_msg_parnt .error_msg_cnt .error_msg_inr .modal-header {
+  position: relative;
+}
+
+.error_msg_parnt .error_msg_cnt .error_msg_inr .modal-header .error_msg_cross {
+  background-color: #e44043;
+  width: 60px;
+  height: 60px;
+  line-height: 55px;
+  border-radius: 50%;
+  position: relative;
+  margin: auto;
+  top: -30px;
+  box-shadow: 0 0 0 5px #fff;
+}
+
+.error_msg_parnt .error_msg_cnt .error_msg_inr .modal-header .error_msg_cross svg {
+  width: 35px;
+  height: 35px;
+  fill: #fff;
+}
+
+.error_msg_parnt .error_msg_cnt .error_msg_inr .modal-header button {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.error_msg_parnt .error_msg_cnt .modal-body {
+  padding: 0 15px 15px;
+}
+
+.error_msg_parnt .error_msg_cnt .modal-body h5 {
+  font: 1.75rem/2.25rem "Slabo 27px", serif;
+  text-transform: uppercase;
+  color: #e44043;
+  margin-bottom: 10px;
+}
+
+.error_msg_parnt .error_msg_cnt .modal-body p {
+  font: 400 0.875rem/1.25rem "Roboto", sans-serif;
+  color: #231f20;
+  padding: 0;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.error_msg_parnt .error_msg_cnt .modal-body ul li {
+  text-align: left;
+  font: 400 0.875rem/0.875rem "Roboto", sans-serif;
+  color: #231f20;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.error_msg_parnt .error_msg_cnt .modal-body ul li svg {
+  width: 16px;
+  height: 12px;
+  fill: #e44043;
+  margin-right: 5px;
+}

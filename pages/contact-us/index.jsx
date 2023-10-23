@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, Spinner, Signup } from 'components';
+import { Link, Spinner, Alert, Signup } from 'components';
 import { Layout } from 'components/users';
 import { contactusService, alertService } from 'services';
 
@@ -17,24 +17,25 @@ export default Index;
 
 function Index() {
 
+    const formOptions = ({ resolver: yupResolver(validationSchema) });
+
+    // get functions to build form with useForm() hook
+    const { register, handleSubmit, reset, formState } = useForm(formOptions);
+    const { errors } = formState;
     const [isModalOpen, setIsModalOpen] = useState(false);
-
-    const openModal = () => {
-        setIsModalOpen(true);
-    };
-
-    const closeModal = () => {
-        setIsModalOpen(false);
-    };
-
-    // const [users, setUsers] = useState(null);
-    // useEffect(() => {
-    //     userService.getAll().then(x => setUsers(x));
-    // }, []);
+    const [alert, setAlert] = useState(null);
+    // const [formOptions, setFormOptions] = useState(null);
+    const [validationSchema, setValidationSchema] = useState(validationSchemaVar);
     const router = useRouter();
 
+    const [formData, setFormData] = useState({
+        title: '',
+        first_name: '',
+        // Add more form fields as needed
+    });
+
     // form validation rules 
-    const validationSchema = Yup.object().shape({
+    const validationSchemaVar = Yup.object().shape({
         title: Yup.string()
             .required('Please select title'),
         first_name: Yup.string()
@@ -54,22 +55,40 @@ function Index() {
         marketing_mail_ind: Yup.boolean(false),
     });
 
-    const formOptions = { resolver: yupResolver(validationSchema) };
+    const showAlert = (message, type) => {
+        setAlert({ message, type });
+    };
 
-    // get functions to build form with useForm() hook
-    const { register, handleSubmit, formState } = useForm(formOptions);
-    const { errors } = formState;
+    const closeAlert = () => {
+        console.log('closeAlert');
+        setAlert(null);
+    };
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
 
     function onSubmit(data) {
-       
         return contactusService.makeanenquiry({ data })
             .then(() => {
-                // this.openModal();
-                alertService.success('Make an enquiry successful', { keepAfterRouteChange: true });
-                router.push('contact-us');
+                // this.openModal()
+                // alertService.success('Make an enquiry successful', { keepAfterRouteChange: true });
+                showAlert('Operation succeeded', 'success');
+                reset(); // This will reset the form to its initial state
+                // router.push('contact-us');
             })
-            .catch(alertService.error);
+            .catch((error) => {
+                showAlert('Operation failed', 'error');
+            });
     }
+
+    useEffect(() => {
+
+    }, []);
 
     return (
         <Layout>
@@ -77,6 +96,9 @@ function Index() {
             <section className="contact_form_row">
                 <div className="container">
                     <h2>Escape the obvious - tailor-make your trip today</h2>
+                    {/* <button onClick={() => showAlert('Operation succeeded', 'success')}>Show Success Alert</button>
+                    <button onClick={() => showAlert('Operation failed', 'error')}>Show Error Alert</button> */}
+                    {alert && <Alert message={alert.message} type={alert.type} onClose={closeAlert} />}
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="row pt-4">
                             <div className="col-sm-6 col-md-4">
@@ -237,7 +259,7 @@ function Index() {
                     <h4>Sign up htmlFor our newsletter</h4>
                     <h5>Receive our latest news and special offers</h5>
                     <Signup />
-                    
+
                 </div>
             </section>
 

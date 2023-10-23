@@ -6,8 +6,9 @@ import { Router, useRouter } from 'next/router';
 // import { NavLink } from './../components/NavLink';
 import { Layout } from './../components/common';
 
-// import 'styles/globals.css';
-import './../components/CustomModal.css'; // Import your custom styles
+import 'styles/globals.css';
+import 'styles/Alert.module.css';
+// import './CustomModal.css'; // Import your custom styles
 import 'public/assets/stylesheets/css/bootstrap.css';
 import 'public/assets/stylesheets/css/bootstrap-select.min.css';
 

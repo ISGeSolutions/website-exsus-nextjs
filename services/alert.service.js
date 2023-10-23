@@ -28,12 +28,12 @@ function onAlert(id = defaultId) {
 
 // convenience methods
 function success(message, options) {
-    debugger;
+    // debugger;
     alert({ ...options, type: AlertType.Success, message });
 }
 
 function error(message, options) {
-    debugger;
+    // debugger;
     alert({ ...options, type: AlertType.Error, message });
 }
 
