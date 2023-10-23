@@ -17,7 +17,7 @@ function Alert({ message, type, onClose }) {
         // $(".succss_msg_parnt").hide();
 
         if (!message && !type) {
-            // $(".succss_msg_parnt").hide();
+            $(".succss_msg_parnt").hide();
         }
 
     }, [message, type, isInitialLoad]);
