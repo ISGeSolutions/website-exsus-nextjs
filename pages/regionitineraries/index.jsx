@@ -260,7 +260,7 @@ function CountryItinararies(country) {
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`
+      `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`
     );
   };
 
@@ -288,11 +288,12 @@ function CountryItinararies(country) {
   equalHeight(true);
 
   useEffect(() => {
+    setIsLoading(false);
     setSelectedOptionCountry(countryOptions[0]);
     setSelectedOptionRegion(regionOptions[0]);
     setSelectedOptionMonth(monthOptions[0]);
 
-    loadMoreData();
+    // loadMoreData();
 
     window.addEventListener("resize", equalHeight(true));
 
@@ -459,7 +460,7 @@ function CountryItinararies(country) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
