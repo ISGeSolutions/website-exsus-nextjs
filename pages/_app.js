@@ -94,7 +94,7 @@ function App({ Component, pageProps }) {
     const shouldRenderLayout = !pathsWithoutLayout.includes(pathname);
 
     useEffect(() => {
-
+        $(".succss_msg_parnt").hide();        
         // initGA();
         ReactGA.initialize("G-2H6GP9JWWY");
         ReactGA.send({ hitType: "pageview", page: "/why-us", title: "Custom Title" });

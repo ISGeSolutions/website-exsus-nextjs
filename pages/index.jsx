@@ -175,6 +175,7 @@ function Index() {
   }
 
   useEffect(() => {
+    $(".succss_msg_parnt").hide();        
     const thumbnailImageArr = [];
     holidaytypesService
       .getHolidaytypesLandingListHomePage()
