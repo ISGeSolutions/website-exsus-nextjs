@@ -31,13 +31,13 @@
 }
 
 /* line 22, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
-.card_blk_row .card_blk_inr a>img {
+.card_blk_row .card_blk_inr a > img {
   transition: all 0.4s linear;
   width: 100%;
 }
 
 /* line 26, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
-.card_blk_row .card_blk_inr a:hover>img {
+.card_blk_row .card_blk_inr a:hover > img {
   transform: scale(1.2);
 }
 
@@ -64,7 +64,11 @@
 }
 
 /* line 48, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
-.card_blk_row .card_blk_inr .card_blk_cntnt.card_blk_cntnt_top .card_blk_txt h3 {
+.card_blk_row
+  .card_blk_inr
+  .card_blk_cntnt.card_blk_cntnt_top
+  .card_blk_txt
+  h3 {
   font: 300 1.875rem/1.875rem "Roboto", sans-serif;
   margin-bottom: 0;
 }
@@ -133,208 +137,1096 @@
   font: 1.75rem/1.75rem "Slabo 27px", serif;
 }
 
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01 {
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01 {
   flex: 0 0 20%;
 }
 
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml a,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card a,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml a,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01 .holiday_types_card a,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr.card_slider_inr_sml a,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr .holiday_types_card a,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01.card_slider_inr_sml a,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01 .holiday_types_card a,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr.card_slider_inr_sml a,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr .holiday_types_card a,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01.card_slider_inr_sml a,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01 .holiday_types_card a,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr.card_slider_inr_sml a,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr .holiday_types_card a,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01.card_slider_inr_sml a,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01 .holiday_types_card a,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr.card_slider_inr_sml a,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr .holiday_types_card a,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01.card_slider_inr_sml a,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01 .holiday_types_card a,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr.card_slider_inr_sml a,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr .holiday_types_card a,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01.card_slider_inr_sml a,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01 .holiday_types_card a {
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  a {
   text-decoration: none;
   display: inline-block;
 }
 
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml a:hover img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card a:hover img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml a:hover img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01 .holiday_types_card a:hover img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr.card_slider_inr_sml a:hover img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr .holiday_types_card a:hover img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01.card_slider_inr_sml a:hover img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01 .holiday_types_card a:hover img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr.card_slider_inr_sml a:hover img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr .holiday_types_card a:hover img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01.card_slider_inr_sml a:hover img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01 .holiday_types_card a:hover img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr.card_slider_inr_sml a:hover img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr .holiday_types_card a:hover img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01.card_slider_inr_sml a:hover img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01 .holiday_types_card a:hover img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr.card_slider_inr_sml a:hover img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr .holiday_types_card a:hover img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01.card_slider_inr_sml a:hover img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01 .holiday_types_card a:hover img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr.card_slider_inr_sml a:hover img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr .holiday_types_card a:hover img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01.card_slider_inr_sml a:hover img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01 .holiday_types_card a:hover img {
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  img {
   transform: scale(1.2);
 }
 
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml a:hover h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card a:hover h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml a:hover h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01 .holiday_types_card a:hover h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr.card_slider_inr_sml a:hover h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr .holiday_types_card a:hover h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01.card_slider_inr_sml a:hover h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01 .holiday_types_card a:hover h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr.card_slider_inr_sml a:hover h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr .holiday_types_card a:hover h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01.card_slider_inr_sml a:hover h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01 .holiday_types_card a:hover h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr.card_slider_inr_sml a:hover h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr .holiday_types_card a:hover h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01.card_slider_inr_sml a:hover h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01 .holiday_types_card a:hover h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr.card_slider_inr_sml a:hover h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr .holiday_types_card a:hover h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01.card_slider_inr_sml a:hover h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01 .holiday_types_card a:hover h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr.card_slider_inr_sml a:hover h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr .holiday_types_card a:hover h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01.card_slider_inr_sml a:hover h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01 .holiday_types_card a:hover h4 {
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  h4 {
   color: #8aad56;
 }
 
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml a:hover svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card a:hover svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml a:hover svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01 .holiday_types_card a:hover svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr.card_slider_inr_sml a:hover svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr .holiday_types_card a:hover svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01.card_slider_inr_sml a:hover svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01 .holiday_types_card a:hover svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr.card_slider_inr_sml a:hover svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr .holiday_types_card a:hover svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01.card_slider_inr_sml a:hover svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01 .holiday_types_card a:hover svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr.card_slider_inr_sml a:hover svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr .holiday_types_card a:hover svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01.card_slider_inr_sml a:hover svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01 .holiday_types_card a:hover svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr.card_slider_inr_sml a:hover svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr .holiday_types_card a:hover svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01.card_slider_inr_sml a:hover svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01 .holiday_types_card a:hover svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr.card_slider_inr_sml a:hover svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr .holiday_types_card a:hover svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01.card_slider_inr_sml a:hover svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01 .holiday_types_card a:hover svg {
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  svg {
   fill: #8aad56;
 }
 
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01 .holiday_types_card .card_slider_inr_sml_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01 .holiday_types_card .card_slider_inr_sml_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01 .holiday_types_card .card_slider_inr_sml_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01 .holiday_types_card .card_slider_inr_sml_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01 .holiday_types_card .card_slider_inr_sml_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01 .holiday_types_card .card_slider_inr_sml_img {
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  .card_slider_inr_sml_img {
   overflow: hidden;
 }
 
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01 .holiday_types_card .card_slider_inr_sml_img img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01 .holiday_types_card .card_slider_inr_sml_img img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01 .holiday_types_card .card_slider_inr_sml_img img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01 .holiday_types_card .card_slider_inr_sml_img img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01 .holiday_types_card .card_slider_inr_sml_img img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01 .holiday_types_card .card_slider_inr_sml_img img {
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  .card_slider_inr_sml_img
+  img {
   transition: all ease 0.3s;
 }
 
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01 .holiday_types_card h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr.card_slider_inr_sml h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr .holiday_types_card h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01.card_slider_inr_sml h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01 .holiday_types_card h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr.card_slider_inr_sml h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr .holiday_types_card h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01.card_slider_inr_sml h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01 .holiday_types_card h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr.card_slider_inr_sml h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr .holiday_types_card h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01.card_slider_inr_sml h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01 .holiday_types_card h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr.card_slider_inr_sml h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr .holiday_types_card h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01.card_slider_inr_sml h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01 .holiday_types_card h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr.card_slider_inr_sml h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr .holiday_types_card h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01.card_slider_inr_sml h4,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01 .holiday_types_card h4 {
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  h4 {
   display: flex;
   justify-content: space-between;
   font: 0.9375rem/1.25rem "Slabo 27px", serif;
@@ -345,41 +1237,197 @@
   white-space: initial;
 }
 
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml h4 svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card h4 svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml h4 svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01 .holiday_types_card h4 svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr.card_slider_inr_sml h4 svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr .holiday_types_card h4 svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01.card_slider_inr_sml h4 svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01 .holiday_types_card h4 svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr.card_slider_inr_sml h4 svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr .holiday_types_card h4 svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01.card_slider_inr_sml h4 svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01 .holiday_types_card h4 svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr.card_slider_inr_sml h4 svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr .holiday_types_card h4 svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01.card_slider_inr_sml h4 svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01 .holiday_types_card h4 svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr.card_slider_inr_sml h4 svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr .holiday_types_card h4 svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01.card_slider_inr_sml h4 svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01 .holiday_types_card h4 svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr.card_slider_inr_sml h4 svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr .holiday_types_card h4 svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01.card_slider_inr_sml h4 svg,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01 .holiday_types_card h4 svg {
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  h4
+  svg {
   width: 15px;
   height: 15px;
   margin-left: 10px;
 }
 
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider .card_slider_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider .card_slider_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider .card_slider_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider .card_slider_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider .card_slider_img,
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider .card_slider_img {
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .card_slider_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .card_slider_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .card_slider_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .card_slider_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .card_slider_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .card_slider_img {
   height: auto;
 }
 
@@ -402,28 +1450,76 @@
   overflow: unset;
 }
 
-.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel00.dragging,
-.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel01.dragging,
-.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .width_100.dragging,
-.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .carousel00.dragging,
-.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .carousel01.dragging,
-.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .width_100.dragging {
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row
+  .carousel00.dragging,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row
+  .carousel01.dragging,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row
+  .width_100.dragging,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row01
+  .carousel00.dragging,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row01
+  .carousel01.dragging,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row01
+  .width_100.dragging {
   cursor: pointer;
   scroll-behavior: auto;
 }
 
-.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel00 .card_slider_inr,
-.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel00 .card_slider_inr01,
-.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel01 .card_slider_inr,
-.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel01 .card_slider_inr01,
-.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .width_100 .card_slider_inr,
-.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .width_100 .card_slider_inr01,
-.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .carousel00 .card_slider_inr,
-.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .carousel00 .card_slider_inr01,
-.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .carousel01 .card_slider_inr,
-.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .carousel01 .card_slider_inr01,
-.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .width_100 .card_slider_inr,
-.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .width_100 .card_slider_inr01 {
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01 {
   padding: 0 0 20px;
   height: 100%;
 }
@@ -494,12 +1590,30 @@
   padding-bottom: 10px;
 }
 
-.favrites_blk_row .card_slider_row .carousel00.region_carousel00 .card_slider_cnt,
-.favrites_blk_row .card_slider_row .carousel01.region_carousel00 .card_slider_cnt,
-.favrites_blk_row .card_slider_row .width_100.region_carousel00 .card_slider_cnt,
-.favrites_blk_row .card_slider_row01 .carousel00.region_carousel00 .card_slider_cnt,
-.favrites_blk_row .card_slider_row01 .carousel01.region_carousel00 .card_slider_cnt,
-.favrites_blk_row .card_slider_row01 .width_100.region_carousel00 .card_slider_cnt {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00.region_carousel00
+  .card_slider_cnt,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01.region_carousel00
+  .card_slider_cnt,
+.favrites_blk_row
+  .card_slider_row
+  .width_100.region_carousel00
+  .card_slider_cnt,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00.region_carousel00
+  .card_slider_cnt,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01.region_carousel00
+  .card_slider_cnt,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100.region_carousel00
+  .card_slider_cnt {
   min-height: 180px;
 }
 
@@ -530,18 +1644,54 @@
   flex: 0 0 33.3%;
 }
 
-.favrites_blk_row .card_slider_row .carousel00 .card_slider_inr.card_slider_optn02,
-.favrites_blk_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_optn02,
-.favrites_blk_row .card_slider_row .carousel01 .card_slider_inr.card_slider_optn02,
-.favrites_blk_row .card_slider_row .carousel01 .card_slider_inr01.card_slider_optn02,
-.favrites_blk_row .card_slider_row .width_100 .card_slider_inr.card_slider_optn02,
-.favrites_blk_row .card_slider_row .width_100 .card_slider_inr01.card_slider_optn02,
-.favrites_blk_row .card_slider_row01 .carousel00 .card_slider_inr.card_slider_optn02,
-.favrites_blk_row .card_slider_row01 .carousel00 .card_slider_inr01.card_slider_optn02,
-.favrites_blk_row .card_slider_row01 .carousel01 .card_slider_inr.card_slider_optn02,
-.favrites_blk_row .card_slider_row01 .carousel01 .card_slider_inr01.card_slider_optn02,
-.favrites_blk_row .card_slider_row01 .width_100 .card_slider_inr.card_slider_optn02,
-.favrites_blk_row .card_slider_row01 .width_100 .card_slider_inr01.card_slider_optn02 {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr.card_slider_optn02,
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01.card_slider_optn02,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr.card_slider_optn02,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01.card_slider_optn02,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr.card_slider_optn02,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01.card_slider_optn02,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr.card_slider_optn02,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01.card_slider_optn02,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr.card_slider_optn02,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01.card_slider_optn02,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr.card_slider_optn02,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01.card_slider_optn02 {
   flex: 0 0 25%;
 }
 
@@ -581,12 +1731,37 @@
   display: inline-block;
 }
 
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_img img,
-.favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_img img,
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .card_slider_img
+  img,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .card_slider_img
+  img,
 .favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_img img,
-.favrites_blk_row .card_slider_row01 .carousel00 .card_slider .card_slider_img img,
-.favrites_blk_row .card_slider_row01 .carousel01 .card_slider .card_slider_img img,
-.favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_img img {
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .card_slider_img
+  img,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .card_slider_img
+  img,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .card_slider_img
+  img {
   width: 100%;
   transition: all ease 0.3s;
   height: 100%;
@@ -599,156 +1774,785 @@
 .favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_cnt,
 .favrites_blk_row .card_slider_row .width_100 .card_slider .places_to_stay_cnt,
 .favrites_blk_row .card_slider_row01 .carousel00 .card_slider .card_slider_cnt,
-.favrites_blk_row .card_slider_row01 .carousel00 .card_slider .places_to_stay_cnt,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt,
 .favrites_blk_row .card_slider_row01 .carousel01 .card_slider .card_slider_cnt,
-.favrites_blk_row .card_slider_row01 .carousel01 .card_slider .places_to_stay_cnt,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt,
 .favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_cnt,
-.favrites_blk_row .card_slider_row01 .width_100 .card_slider .places_to_stay_cnt {
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .places_to_stay_cnt {
   cursor: default;
   flex: 1;
 }
 
-
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt h4,
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt h4,
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  h4,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt h4,
-.favrites_blk_row .card_slider_row .carousel01 .card_slider .places_to_stay_cnt h4,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  h4,
 .favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_cnt h4,
-.favrites_blk_row .card_slider_row .width_100 .card_slider .places_to_stay_cnt h4,
-.favrites_blk_row .card_slider_row01 .carousel00 .card_slider .card_slider_cnt h4,
-.favrites_blk_row .card_slider_row01 .carousel00 .card_slider .places_to_stay_cnt h4,
-.favrites_blk_row .card_slider_row01 .carousel01 .card_slider .card_slider_cnt h4,
-.favrites_blk_row .card_slider_row01 .carousel01 .card_slider .places_to_stay_cnt h4,
-.favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_cnt h4,
-.favrites_blk_row .card_slider_row01 .width_100 .card_slider .places_to_stay_cnt h4 {
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  h4,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  h4,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  h4,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  h4,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  h4,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  h4,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  h4 {
   margin-bottom: 15px;
   white-space: pre-wrap;
   font: 1.0625rem/1.375rem "Slabo 27px", serif;
   text-transform: uppercase;
 }
 
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt h4 a,
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt h4 a,
-.favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt h4 a,
-.favrites_blk_row .card_slider_row .carousel01 .card_slider .places_to_stay_cnt h4 a,
-.favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_cnt h4 a,
-.favrites_blk_row .card_slider_row .width_100 .card_slider .places_to_stay_cnt h4 a,
-.favrites_blk_row .card_slider_row01 .carousel00 .card_slider .card_slider_cnt h4 a,
-.favrites_blk_row .card_slider_row01 .carousel00 .card_slider .places_to_stay_cnt h4 a,
-.favrites_blk_row .card_slider_row01 .carousel01 .card_slider .card_slider_cnt h4 a,
-.favrites_blk_row .card_slider_row01 .carousel01 .card_slider .places_to_stay_cnt h4 a,
-.favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_cnt h4 a,
-.favrites_blk_row .card_slider_row01 .width_100 .card_slider .places_to_stay_cnt h4 a {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  h4
+  a,
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  h4
+  a,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  h4
+  a,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  h4
+  a,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  h4
+  a,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  h4
+  a,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  h4
+  a,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  h4
+  a,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  h4
+  a,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  h4
+  a,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  h4
+  a,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  h4
+  a {
   font: 1.0625rem/1.375rem "Slabo 27px", serif;
   text-transform: uppercase;
   text-decoration: none;
   color: #ffffff;
 }
 
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt h4 a:hover,
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt h4 a:hover,
-.favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt h4 a:hover,
-.favrites_blk_row .card_slider_row .carousel01 .card_slider .places_to_stay_cnt h4 a:hover,
-.favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_cnt h4 a:hover,
-.favrites_blk_row .card_slider_row .width_100 .card_slider .places_to_stay_cnt h4 a:hover,
-.favrites_blk_row .card_slider_row01 .carousel00 .card_slider .card_slider_cnt h4 a:hover,
-.favrites_blk_row .card_slider_row01 .carousel00 .card_slider .places_to_stay_cnt h4 a:hover,
-.favrites_blk_row .card_slider_row01 .carousel01 .card_slider .card_slider_cnt h4 a:hover,
-.favrites_blk_row .card_slider_row01 .carousel01 .card_slider .places_to_stay_cnt h4 a:hover,
-.favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_cnt h4 a:hover,
-.favrites_blk_row .card_slider_row01 .width_100 .card_slider .places_to_stay_cnt h4 a:hover {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  h4
+  a:hover,
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  h4
+  a:hover,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  h4
+  a:hover,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  h4
+  a:hover,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  h4
+  a:hover,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  h4
+  a:hover,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  h4
+  a:hover,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  h4
+  a:hover,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  h4
+  a:hover,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  h4
+  a:hover,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  h4
+  a:hover,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  h4
+  a:hover {
   color: #8aad56;
 }
 
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt h4:hover,
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt h4:hover,
-.favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt h4:hover,
-.favrites_blk_row .card_slider_row .carousel01 .card_slider .places_to_stay_cnt h4:hover,
-.favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_cnt h4:hover,
-.favrites_blk_row .card_slider_row .width_100 .card_slider .places_to_stay_cnt h4:hover,
-.favrites_blk_row .card_slider_row01 .carousel00 .card_slider .card_slider_cnt h4:hover,
-.favrites_blk_row .card_slider_row01 .carousel00 .card_slider .places_to_stay_cnt h4:hover,
-.favrites_blk_row .card_slider_row01 .carousel01 .card_slider .card_slider_cnt h4:hover,
-.favrites_blk_row .card_slider_row01 .carousel01 .card_slider .places_to_stay_cnt h4:hover,
-.favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_cnt h4:hover,
-.favrites_blk_row .card_slider_row01 .width_100 .card_slider .places_to_stay_cnt h4:hover {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  h4:hover,
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  h4:hover,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  h4:hover,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  h4:hover,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  h4:hover,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  h4:hover,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  h4:hover,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  h4:hover,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  h4:hover,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  h4:hover,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  h4:hover,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  h4:hover {
   color: #8aad56;
 }
 
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt ul,
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt ul,
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  ul,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt ul,
-.favrites_blk_row .card_slider_row .carousel01 .card_slider .places_to_stay_cnt ul,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  ul,
 .favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_cnt ul,
-.favrites_blk_row .card_slider_row .width_100 .card_slider .places_to_stay_cnt ul,
-.favrites_blk_row .card_slider_row01 .carousel00 .card_slider .card_slider_cnt ul,
-.favrites_blk_row .card_slider_row01 .carousel00 .card_slider .places_to_stay_cnt ul,
-.favrites_blk_row .card_slider_row01 .carousel01 .card_slider .card_slider_cnt ul,
-.favrites_blk_row .card_slider_row01 .carousel01 .card_slider .places_to_stay_cnt ul,
-.favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_cnt ul,
-.favrites_blk_row .card_slider_row01 .width_100 .card_slider .places_to_stay_cnt ul {
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  ul,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  ul,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  ul,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  ul,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  ul,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  ul,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  ul {
   padding-bottom: 20px;
 }
 
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt ul li,
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt ul li,
-.favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt ul li,
-.favrites_blk_row .card_slider_row .carousel01 .card_slider .places_to_stay_cnt ul li,
-.favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_cnt ul li,
-.favrites_blk_row .card_slider_row .width_100 .card_slider .places_to_stay_cnt ul li,
-.favrites_blk_row .card_slider_row01 .carousel00 .card_slider .card_slider_cnt ul li,
-.favrites_blk_row .card_slider_row01 .carousel00 .card_slider .places_to_stay_cnt ul li,
-.favrites_blk_row .card_slider_row01 .carousel01 .card_slider .card_slider_cnt ul li,
-.favrites_blk_row .card_slider_row01 .carousel01 .card_slider .places_to_stay_cnt ul li,
-.favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_cnt ul li,
-.favrites_blk_row .card_slider_row01 .width_100 .card_slider .places_to_stay_cnt ul li {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  ul
+  li,
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  ul
+  li,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  ul
+  li,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  ul
+  li,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  ul
+  li,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  ul
+  li,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li {
   font: 300 0.875rem/1.25rem "Roboto", sans-serif;
   white-space: pre-wrap;
 }
 
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt ul li:last-child,
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt ul li:last-child,
-.favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt ul li:last-child,
-.favrites_blk_row .card_slider_row .carousel01 .card_slider .places_to_stay_cnt ul li:last-child,
-.favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_cnt ul li:last-child,
-.favrites_blk_row .card_slider_row .width_100 .card_slider .places_to_stay_cnt ul li:last-child,
-.favrites_blk_row .card_slider_row01 .carousel00 .card_slider .card_slider_cnt ul li:last-child,
-.favrites_blk_row .card_slider_row01 .carousel00 .card_slider .places_to_stay_cnt ul li:last-child,
-.favrites_blk_row .card_slider_row01 .carousel01 .card_slider .card_slider_cnt ul li:last-child,
-.favrites_blk_row .card_slider_row01 .carousel01 .card_slider .places_to_stay_cnt ul li:last-child,
-.favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_cnt ul li:last-child,
-.favrites_blk_row .card_slider_row01 .width_100 .card_slider .places_to_stay_cnt ul li:last-child {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  ul
+  li:last-child,
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li:last-child,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  ul
+  li:last-child,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li:last-child,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  ul
+  li:last-child,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li:last-child,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  ul
+  li:last-child,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li:last-child,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  ul
+  li:last-child,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li:last-child,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  ul
+  li:last-child,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li:last-child {
   margin-bottom: 0;
 }
 
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt ul li span,
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt ul li span,
-.favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt ul li span,
-.favrites_blk_row .card_slider_row .carousel01 .card_slider .places_to_stay_cnt ul li span,
-.favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_cnt ul li span,
-.favrites_blk_row .card_slider_row .width_100 .card_slider .places_to_stay_cnt ul li span,
-.favrites_blk_row .card_slider_row01 .carousel00 .card_slider .card_slider_cnt ul li span,
-.favrites_blk_row .card_slider_row01 .carousel00 .card_slider .places_to_stay_cnt ul li span,
-.favrites_blk_row .card_slider_row01 .carousel01 .card_slider .card_slider_cnt ul li span,
-.favrites_blk_row .card_slider_row01 .carousel01 .card_slider .places_to_stay_cnt ul li span,
-.favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_cnt ul li span,
-.favrites_blk_row .card_slider_row01 .width_100 .card_slider .places_to_stay_cnt ul li span {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  span,
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li
+  span,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  span,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li
+  span,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  span,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li
+  span,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  span,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li
+  span,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  span,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li
+  span,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  span,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li
+  span {
   color: #8aad56;
   margin-left: 2px;
 }
 
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt ul li span label,
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt ul li span label,
-.favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt ul li span label,
-.favrites_blk_row .card_slider_row .carousel01 .card_slider .places_to_stay_cnt ul li span label,
-.favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_cnt ul li span label,
-.favrites_blk_row .card_slider_row .width_100 .card_slider .places_to_stay_cnt ul li span label,
-.favrites_blk_row .card_slider_row01 .carousel00 .card_slider .card_slider_cnt ul li span label,
-.favrites_blk_row .card_slider_row01 .carousel00 .card_slider .places_to_stay_cnt ul li span label,
-.favrites_blk_row .card_slider_row01 .carousel01 .card_slider .card_slider_cnt ul li span label,
-.favrites_blk_row .card_slider_row01 .carousel01 .card_slider .places_to_stay_cnt ul li span label,
-.favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_cnt ul li span label,
-.favrites_blk_row .card_slider_row01 .width_100 .card_slider .places_to_stay_cnt ul li span label {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  span
+  label,
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li
+  span
+  label,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  span
+  label,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li
+  span
+  label,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  span
+  label,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li
+  span
+  label,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  span
+  label,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li
+  span
+  label,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  span
+  label,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li
+  span
+  label,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  span
+  label,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li
+  span
+  label {
   color: #ffffff;
 }
 
@@ -779,12 +2583,36 @@
   background: #363636;
 }
 
-.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn:hover .view_itnry_link,
-.favrites_blk_row .card_slider_row .carousel01 .card_slider_btn:hover .view_itnry_link,
-.favrites_blk_row .card_slider_row .width_100 .card_slider_btn:hover .view_itnry_link,
-.favrites_blk_row .card_slider_row01 .carousel00 .card_slider_btn:hover .view_itnry_link,
-.favrites_blk_row .card_slider_row01 .carousel01 .card_slider_btn:hover .view_itnry_link,
-.favrites_blk_row .card_slider_row01 .width_100 .card_slider_btn:hover .view_itnry_link {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider_btn:hover
+  .view_itnry_link,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider_btn:hover
+  .view_itnry_link,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider_btn:hover
+  .view_itnry_link,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_btn:hover
+  .view_itnry_link,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_btn:hover
+  .view_itnry_link,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider_btn:hover
+  .view_itnry_link {
   color: #8aad56;
 }
 
@@ -798,24 +2626,74 @@
   cursor: default;
 }
 
-.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn .view_itnry_link,
-.favrites_blk_row .card_slider_row .carousel01 .card_slider_btn .view_itnry_link,
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider_btn
+  .view_itnry_link,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider_btn
+  .view_itnry_link,
 .favrites_blk_row .card_slider_row .width_100 .card_slider_btn .view_itnry_link,
-.favrites_blk_row .card_slider_row01 .carousel00 .card_slider_btn .view_itnry_link,
-.favrites_blk_row .card_slider_row01 .carousel01 .card_slider_btn .view_itnry_link,
-.favrites_blk_row .card_slider_row01 .width_100 .card_slider_btn .view_itnry_link {
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_btn
+  .view_itnry_link,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_btn
+  .view_itnry_link,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider_btn
+  .view_itnry_link {
   text-transform: uppercase;
   letter-spacing: 0.8px;
   font: 400 0.75rem/0.75rem "Roboto", sans-serif;
   cursor: pointer;
 }
 
-.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn .view_itnry_link em,
-.favrites_blk_row .card_slider_row .carousel01 .card_slider_btn .view_itnry_link em,
-.favrites_blk_row .card_slider_row .width_100 .card_slider_btn .view_itnry_link em,
-.favrites_blk_row .card_slider_row01 .carousel00 .card_slider_btn .view_itnry_link em,
-.favrites_blk_row .card_slider_row01 .carousel01 .card_slider_btn .view_itnry_link em,
-.favrites_blk_row .card_slider_row01 .width_100 .card_slider_btn .view_itnry_link em {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider_btn
+  .view_itnry_link
+  em,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider_btn
+  .view_itnry_link
+  em,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider_btn
+  .view_itnry_link
+  em,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_btn
+  .view_itnry_link
+  em,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_btn
+  .view_itnry_link
+  em,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider_btn
+  .view_itnry_link
+  em {
   margin-left: 10px;
 }
 
@@ -1064,13 +2942,13 @@
 }
 
 /* line 533, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
-.book_wth_confdnce .row>div {
+.book_wth_confdnce .row > div {
   border-right: 4px solid #333132;
   margin: 15px 0;
 }
 
 /* line 536, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
-.book_wth_confdnce .row>div:last-child {
+.book_wth_confdnce .row > div:last-child {
   border-right: none;
 }
 
@@ -1173,7 +3051,12 @@
   text-transform: none;
 }
 
-.trvl_info_row .trvl_info_cntnt>div .para01 p:last-of-type+.gn_videoblkv201 {
+.trvl_info_row
+  .trvl_info_cntnt
+  > div
+  .para01
+  p:last-of-type
+  + .gn_videoblkv201 {
   margin-top: 35px;
 }
 
@@ -1311,7 +3194,7 @@
   overflow: hidden;
 }
 
-.our_exprts_row .our_exprts_inr p:nth-child(n+2) {
+.our_exprts_row .our_exprts_inr p:nth-child(n + 2) {
   display: none;
 }
 
@@ -1361,15 +3244,26 @@
   margin-right: 5px;
 }
 
-.favrites_blk_row.our_exprts_slider .card_slider_row .carousel00 .card_slider_inr {
+.favrites_blk_row.our_exprts_slider
+  .card_slider_row
+  .carousel00
+  .card_slider_inr {
   flex: 0 0 100%;
 }
 
-.favrites_blk_row.our_exprts_slider .card_slider_row .carousel00 .card_slider .card_slider_img {
+.favrites_blk_row.our_exprts_slider
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .card_slider_img {
   width: 50%;
 }
 
-.favrites_blk_row.our_exprts_slider .card_slider_row .carousel00 .card_slider .card_slider_cnt {
+.favrites_blk_row.our_exprts_slider
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .card_slider_cnt {
   width: 50%;
   float: left;
 }
@@ -1418,7 +3312,11 @@
   flex-direction: column;
 }
 
-.our_exprts_img_txt.card_blk_row .card_blk_inr .card_blk_cntnt .card_blk_txt h3 {
+.our_exprts_img_txt.card_blk_row
+  .card_blk_inr
+  .card_blk_cntnt
+  .card_blk_txt
+  h3 {
   text-transform: capitalize;
   font: 300 1rem/1.25rem "Roboto", sans-serif;
   margin-bottom: 0;
@@ -1550,8 +3448,8 @@
 }
 
 /* line 727, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
-.destination_tab_row .tab-content>.active:focus-visible,
-.destination_tab_row .tab-content>.active:focus {
+.destination_tab_row .tab-content > .active:focus-visible,
+.destination_tab_row .tab-content > .active:focus {
   box-shadow: none;
 }
 
@@ -1610,7 +3508,7 @@
 }
 
 /* line 774, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
-.destination_tab_row+.card_blk_row {
+.destination_tab_row + .card_blk_row {
   padding: 40px 0 20px;
 }
 
@@ -1844,7 +3742,6 @@
 }
 
 /* line 956, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
-
 
 /* line 964, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .holiday_types_card {
@@ -2179,11 +4076,11 @@
   margin-bottom: 48px;
 }
 
-.trvl_info_row .trvl_info_cntnt+.contact_form_row {
+.trvl_info_row .trvl_info_cntnt + .contact_form_row {
   padding: 0;
 }
 
-.trvl_info_row .trvl_info_cntnt+.contact_form_row form {
+.trvl_info_row .trvl_info_cntnt + .contact_form_row form {
   margin-bottom: 0;
 }
 
@@ -2279,7 +4176,10 @@
   color: #ffffff;
 }
 
-.contact_form_row .contact_form_cntnt .contact_form_cntnt_left input[type="checkbox"] {
+.contact_form_row
+  .contact_form_cntnt
+  .contact_form_cntnt_left
+  input[type="checkbox"] {
   background-color: transparent;
   height: 17px;
 }
@@ -2472,7 +4372,10 @@
 }
 
 /* line 18, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_itinerary.scss */
-.country_highlight_row.itinery_hightlight_row .itinery_highlight_inr ul li:first-child {
+.country_highlight_row.itinery_hightlight_row
+  .itinery_highlight_inr
+  ul
+  li:first-child {
   text-transform: uppercase;
   color: #8aad56;
   margin-bottom: 5px;
@@ -2795,7 +4698,9 @@
 }
 
 /* line 267, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_itinerary.scss */
-.select__multi-value:nth-child(1) .select__multi-value__label+.select__multi-value__remove {
+.select__multi-value:nth-child(1)
+  .select__multi-value__label
+  + .select__multi-value__remove {
   display: none;
 }
 
@@ -2910,7 +4815,9 @@
 }
 
 /* line 354, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_itinerary.scss */
-.destination_dropdwn_row .dropdown_grp_blk .banner_dropdwn_blk:nth-child(n + 2) {
+.destination_dropdwn_row
+  .dropdown_grp_blk
+  .banner_dropdwn_blk:nth-child(n + 2) {
   padding-left: 10px;
 }
 
@@ -2923,13 +4830,14 @@
 }
 
 /* line 363, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_itinerary.scss */
-.select__dropdown-indicator>svg {
+.select__dropdown-indicator > svg {
   display: none;
 }
 
 /* line 366, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_itinerary.scss */
 .select__dropdown-indicator::after {
-  background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' fill='white' width='20' viewBox='0 0 512 266.77'%3e%3cpath fill-rule='nonzero' d='M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z'/%3e%3c/svg%3e") no-repeat !important;
+  background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' fill='white' width='20' viewBox='0 0 512 266.77'%3e%3cpath fill-rule='nonzero' d='M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z'/%3e%3c/svg%3e")
+    no-repeat !important;
   border: none;
   right: 0;
   top: 0;
@@ -2946,7 +4854,7 @@
 }
 
 /* line 382, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_itinerary.scss */
-.destination_dropdwn_row .dropdown_grp_blk+.banner_inspire_btn {
+.destination_dropdwn_row .dropdown_grp_blk + .banner_inspire_btn {
   min-width: 170px;
 }
 
@@ -2989,7 +4897,7 @@
   color: #fff !important;
 }
 
-.select_country__placeholder+input {
+.select_country__placeholder + input {
   position: absolute;
 }
 
@@ -3006,7 +4914,8 @@
 }
 
 .select_country__dropdown-indicator::after {
-  background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' fill='white' width='20' viewBox='0 0 512 266.77'%3e%3cpath fill-rule='nonzero' d='M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z'/%3e%3c/svg%3e") no-repeat !important;
+  background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' fill='white' width='20' viewBox='0 0 512 266.77'%3e%3cpath fill-rule='nonzero' d='M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z'/%3e%3c/svg%3e")
+    no-repeat !important;
   border: none;
   right: 0;
   top: 0;
@@ -3040,13 +4949,13 @@
   background-color: #8aad56 !important;
 }
 
-.select_country__option input[type=checkbox] {
+.select_country__option input[type="checkbox"] {
   margin-right: 10px;
   accent-color: #8aad56;
   margin-bottom: 0;
 }
 
-.select_country__value-container--has-value>span {
+.select_country__value-container--has-value > span {
   line-height: 38px;
 }
 
@@ -3062,7 +4971,9 @@
   font-weight: 400;
 }
 
-.contact_form_row.brochure_form_row .select_country__value-container--has-value>span {
+.contact_form_row.brochure_form_row
+  .select_country__value-container--has-value
+  > span {
   color: #231f20 !important;
 }
 
@@ -3078,7 +4989,8 @@
 }
 
 .contact_form_row.brochure_form_row .select_country__dropdown-indicator::after {
-  background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' fill='black' width='20' viewBox='0 0 512 266.77'%3e%3cpath fill-rule='nonzero' d='M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z'/%3e%3c/svg%3e") no-repeat !important;
+  background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' fill='black' width='20' viewBox='0 0 512 266.77'%3e%3cpath fill-rule='nonzero' d='M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z'/%3e%3c/svg%3e")
+    no-repeat !important;
 }
 
 /*# sourceMappingURL=style.css.map */
@@ -3189,7 +5101,11 @@
   margin-top: 15px;
 }
 
-.card_blk_row .card_blk_inr .card_blk_cntnt.card_blk_cntnt_top .strt_planng_btn svg {
+.card_blk_row
+  .card_blk_inr
+  .card_blk_cntnt.card_blk_cntnt_top
+  .strt_planng_btn
+  svg {
   width: 20px;
   height: 20px;
 }
@@ -3240,6 +5156,126 @@
   margin: 0 0 10px;
   padding: 0;
   border-right: none;
+}
+
+.search_result_list_parnt ul li {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #555;
+}
+
+.search_result_list_parnt ul li:last-child {
+  border-bottom: none;
+}
+
+.search_result_list_parnt ul li .search_result_img_blk {
+  margin-right: 15px;
+  margin-bottom: 0;
+  min-width: 100px;
+  max-width: 100px;
+  overflow: hidden;
+  max-height: 100px;
+  align-self: center;
+  display: inline-block;
+}
+
+.search_result_list_parnt ul li .search_result_img_blk img {
+  width: 100%;
+}
+
+.search_result_list_parnt ul li .search_result_inr_cnt h3 {
+  font: 1.125rem/1.5rem "Slabo 27px", serif;
+}
+
+.search_result_list_parnt ul li .search_result_inr_cnt h3 a {
+  font: 1.125rem/1.5rem "Slabo 27px", serif;
+  color: #8aad56;
+  margin-bottom: 0;
+}
+
+.search_result_list_parnt ul li .search_result_inr_cnt a {
+  font: 400 0.875rem/1.125rem "Roboto", sans-serif;
+  color: #eeeeee;
+  margin-bottom: 8px;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.search_result_list_parnt ul li .search_result_inr_cnt p {
+  font: 400 0.875rem/1.125rem "Roboto", sans-serif;
+  color: #b8b8b8;
+}
+
+.search_result_input {
+  margin: 20px 0;
+}
+
+.search_result_input input {
+  background: transparent;
+  border-radius: 0;
+  color: #ffffff;
+  font: 400 0.875rem/1rem "Roboto", sans-serif;
+  height: 40px;
+}
+
+.search_result_input input:focus {
+  background-color: transparent;
+  color: #ffffff;
+}
+
+.search_result_input input::placeholder {
+  color: #ffffff;
+}
+
+.search_result_input .banner_inspire_btn button {
+  width: 100%;
+}
+
+.search_result_pagination {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 40px;
+}
+
+.search_result_pagination .search_result_pagination_inr {
+  margin-bottom: 20px;
+}
+
+.search_result_pagination .search_result_pagination_inr ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.search_result_pagination .search_result_pagination_inr ul li {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.search_result_pagination .search_result_pagination_inr ul li a {
+  text-decoration: none;
+  font: 400 1rem/2.5rem "Roboto", sans-serif;
+  color: #231f20;
+  display: inline-block;
+  background-color: #c8c7c8;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  border-radius: 50%;
+  transition: all ease 0.3s;
+}
+
+.search_result_pagination .search_result_pagination_inr ul li a:hover,
+.search_result_pagination .search_result_pagination_inr ul li a:focus {
+  background-color: #8aad56;
+  color: #ffffff;
+}
+
+.search_result_pagination .search_result_pagination_inr ul li.active a {
+  background-color: #8aad56;
+  color: #ffffff;
 }
 
 .tour_landing_parnt {
@@ -3297,22 +5333,46 @@
   text-transform: none;
 }
 
-.tour_detail_parnt.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn {
+.tour_detail_parnt.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider_btn {
   justify-content: space-around;
   background-color: #8aad56;
   border: 1px solid #ffffff;
 }
 
-.tour_detail_parnt.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn:hover,
-.tour_detail_parnt.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn:focus,
-.tour_detail_parnt.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn:active {
+.tour_detail_parnt.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider_btn:hover,
+.tour_detail_parnt.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider_btn:focus,
+.tour_detail_parnt.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider_btn:active {
   background-color: #779e3e !important;
   color: #231f20;
 }
 
-.tour_detail_parnt.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn:hover span,
-.tour_detail_parnt.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn:focus span,
-.tour_detail_parnt.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn:active span {
+.tour_detail_parnt.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider_btn:hover
+  span,
+.tour_detail_parnt.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider_btn:focus
+  span,
+.tour_detail_parnt.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider_btn:active
+  span {
   color: #231f20;
 }
 
@@ -3404,8 +5464,6 @@
   z-index: 3;
 }
 
-
-
 .loader-circle-2 {
   position: fixed;
   width: 70px;
@@ -3469,8 +5527,6 @@
   }
 }
 
-
-
 .succss_msg_parnt {
   width: 100%;
   text-align: center;
@@ -3502,7 +5558,11 @@
   position: relative;
 }
 
-.succss_msg_parnt .succss_msg_cnt .succss_msg_inr .modal-header .succss_msg_cross {
+.succss_msg_parnt
+  .succss_msg_cnt
+  .succss_msg_inr
+  .modal-header
+  .succss_msg_cross {
   background-color: #8aad56;
   width: 60px;
   height: 60px;
@@ -3514,7 +5574,12 @@
   box-shadow: 0 0 0 5px #fff;
 }
 
-.succss_msg_parnt .succss_msg_cnt .succss_msg_inr .modal-header .succss_msg_cross svg {
+.succss_msg_parnt
+  .succss_msg_cnt
+  .succss_msg_inr
+  .modal-header
+  .succss_msg_cross
+  svg {
   width: 35px;
   height: 35px;
   fill: #fff;
@@ -3587,7 +5652,12 @@
   box-shadow: 0 0 0 5px #fff;
 }
 
-.error_msg_parnt .error_msg_cnt .error_msg_inr .modal-header .error_msg_cross svg {
+.error_msg_parnt
+  .error_msg_cnt
+  .error_msg_inr
+  .modal-header
+  .error_msg_cross
+  svg {
   width: 35px;
   height: 35px;
   fill: #fff;
