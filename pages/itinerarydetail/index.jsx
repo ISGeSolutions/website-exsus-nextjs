@@ -142,7 +142,7 @@ function Index() {
                 <title>{title}</title>
                 <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script>
                 <script type="text/javascript" src="/assets/javascripts/card-slider02.js"></script>
-                <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script>
+                {/* <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script> */}
             </Head>
             {isLoading ? (
                 // <MyLoader />
