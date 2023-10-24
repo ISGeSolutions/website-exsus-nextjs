@@ -6,6 +6,10 @@ import { Router, useRouter } from "next/router";
 // import { NavLink } from './../components/NavLink';
 import { Layout } from "./../components/common";
 
+// import 'styles/globals.css';
+import "./../components/CustomModal.css"; // Import your custom styles
+import "public/assets/stylesheets/css/bootstrap.css";
+import "public/assets/stylesheets/css/bootstrap-select.min.css";
 import "styles/globals.css";
 // import 'styles/Alert.module.css';
 // import './CustomModal.css'; // Import your custom styles
@@ -17,7 +21,6 @@ import "public/assets/google-icon-fonts/MaterialSymbolsOutlined/MaterialSymbolsO
 
 import "public/assets/stylesheets/css/master.css";
 import "public/assets/stylesheets/css/style.css";
-
 import "public/assets/stylesheets/css/responsive.css";
 import Script from "next/script";
 import { userService } from "services";
@@ -88,7 +91,7 @@ function App({ Component, pageProps }) {
   const pathname = router.pathname;
 
   // Define an array of paths where you want to exclude the layout
-  const pathsWithoutLayout = ["/brochure"];
+  const pathsWithoutLayout = ["/brochure", "/travel-agent-brochures"];
   const shouldRenderLayout = !pathsWithoutLayout.includes(pathname);
 
   useEffect(() => {
