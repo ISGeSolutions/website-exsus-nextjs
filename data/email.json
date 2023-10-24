@@ -1,0 +1,13 @@
+{
+    "email_records": [
+        {
+            "client_name": "Ganesh Devkar",
+            "email_id": "deokarg201920@gmail.com",
+            "source_of_origin": "newsletter",
+            "source_of_origin_reference": "",
+            "opt_in_ind": true,
+            "email_flag": true,
+            "id": 1
+        }
+    ]
+}

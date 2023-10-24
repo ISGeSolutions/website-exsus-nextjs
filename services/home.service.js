@@ -6,12 +6,26 @@ const baseUrl = `${publicRuntimeConfig.apiUrl1}/api/marketing-clients`;
 
 export const homeService = {
     // inspireMe,
-    signUp
+    signUp,
+    saveDataToDB
 };
 
 // function inspireMe(inspiremeData) {
 //     return fetchWrapper.post(`${baseUrl}`, inspiremeData);
 // }
+
+function saveDataToDB(signUpData) {
+    if (signUpData.id) {
+        signUpData.data["email_flag"] = true;
+        let saveEmailUrl = `http://localhost:4000/email_records/${signUpData.id}`;
+        return fetchWrapper.put(`${saveEmailUrl}`, signUpData);
+    } else {
+        let saveEmailUrl = `http://localhost:4000/email_records`;
+        return fetchWrapper.post(`${saveEmailUrl}`, signUpData.data);
+    }
+
+}
+
 
 function signUp(signUpData) {
     let postdata = signUpData;
