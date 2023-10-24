@@ -15,7 +15,9 @@ const handler = async (req, res) => {
                     data,
                     emailpage
                 );
-                res.status(200).send("Success");
+                res.status(200).send({
+                    "message": "Success"
+                  });
                 break;
             }
             case "GET": {

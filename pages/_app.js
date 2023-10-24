@@ -10,6 +10,11 @@ import { Layout } from "./../components/common";
 import "./../components/CustomModal.css"; // Import your custom styles
 import "public/assets/stylesheets/css/bootstrap.css";
 import "public/assets/stylesheets/css/bootstrap-select.min.css";
+import 'styles/globals.css';
+// import 'styles/Alert.module.css';
+// import './CustomModal.css'; // Import your custom styles
+import 'public/assets/stylesheets/css/bootstrap.css';
+import 'public/assets/stylesheets/css/bootstrap-select.min.css';
 
 import "public/assets/font-awesome/fontawesome.css";
 import "public/assets/google-icon-fonts/MaterialSymbolsOutlined/MaterialSymbolsOutlined.css";
@@ -90,6 +95,7 @@ function App({ Component, pageProps }) {
   const shouldRenderLayout = !pathsWithoutLayout.includes(pathname);
 
   useEffect(() => {
+    $(".succss_msg_parnt").hide();
     // initGA();
     ReactGA.initialize("G-2H6GP9JWWY");
     ReactGA.send({
