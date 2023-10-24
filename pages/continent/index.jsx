@@ -251,10 +251,10 @@ function Index() {
           type="text/javascript"
           src="/assets/javascripts/card-slider.js"
         ></script>
-        <script
+        {/* <script
           type="text/javascript"
           src="/assets/javascripts/card-slider-equal-height.js"
-        ></script>
+        ></script> */}
       </Head>
       {isLoading ? (
         // <MyLoader />

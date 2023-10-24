@@ -10,11 +10,11 @@ import { Layout } from "./../components/common";
 import "./../components/CustomModal.css"; // Import your custom styles
 import "public/assets/stylesheets/css/bootstrap.css";
 import "public/assets/stylesheets/css/bootstrap-select.min.css";
-import 'styles/globals.css';
+import "styles/globals.css";
 // import 'styles/Alert.module.css';
 // import './CustomModal.css'; // Import your custom styles
-import 'public/assets/stylesheets/css/bootstrap.css';
-import 'public/assets/stylesheets/css/bootstrap-select.min.css';
+import "public/assets/stylesheets/css/bootstrap.css";
+import "public/assets/stylesheets/css/bootstrap-select.min.css";
 
 import "public/assets/font-awesome/fontawesome.css";
 import "public/assets/google-icon-fonts/MaterialSymbolsOutlined/MaterialSymbolsOutlined.css";
@@ -212,11 +212,7 @@ function App({ Component, pageProps }) {
         type="text/javascript"
         src="/assets/javascripts/card-slider.js"
       ></Script>
-      <Script
-        id="card-slider-height"
-        type="text/javascript"
-        src="/assets/javascripts/card-slider-equal-height.js"
-      ></Script>
+      {/* <Script id="card-slider-height" type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></Script> */}
       {/* <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script> */}
       {/* <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script> */}
       <script

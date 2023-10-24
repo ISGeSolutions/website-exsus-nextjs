@@ -101,20 +101,15 @@ function Index() {
   const toggleTab = (itemId) => {
     var text = metaTitle;
     if (itemId == "overview") {
-      const redirectUrl =
-        regionWiseUrl + "/region";
+      const redirectUrl = regionWiseUrl + "/region";
       window.history.pushState(null, null, redirectUrl);
       text = metaTitle;
     } else if (itemId == "itineraries") {
-      const redirectUrl =
-        regionWiseUrl +
-        "/regionitineraries";
+      const redirectUrl = regionWiseUrl + "/regionitineraries";
       window.history.pushState(null, null, redirectUrl);
       text = `TAILOR-MADE ${destinationName} HOLIDAY ITINERARIES`;
     } else if (itemId == "places-to-stay") {
-      const redirectUrl =
-        regionWiseUrl +
-        "/regionplacetostay";
+      const redirectUrl = regionWiseUrl + "/regionplacetostay";
       window.history.pushState(null, null, redirectUrl);
       text = `PLACES TO STAY IN ${destinationName}`;
     } else {
@@ -244,10 +239,10 @@ function Index() {
           type="text/javascript"
           src="/assets/javascripts/card-slider.js"
         ></script>
-        <script
+        {/* <script
           type="text/javascript"
           src="/assets/javascripts/card-slider-equal-height.js"
-        ></script>
+        ></script> */}
       </Head>
       {isLoading ? (
         // <MyLoader />
