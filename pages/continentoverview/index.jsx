@@ -15,10 +15,8 @@ function ContinentOverview({ sendDataToParent }) {
   const [valueWithBr, setnewValueWithBr] = useState("");
   const { destinationcode } = router.query;
   const itemsPerPage = 9; // Number of items to load per page
-  const [visibleItems, setVisibleItems] = useState(itemsPerPage);
   const [allCountries, setAllCountries] = useState([]);
   const [destinationName, setdestinationName] = useState("");
-  const [matchesArrFinal, setMatches] = useState("");
 
   const { t } = useTranslation();
   const [holidayTitle, setHolidayTitle] = useState(t("holidayTitle"));
@@ -94,15 +92,6 @@ function ContinentOverview({ sendDataToParent }) {
         setdestinationName(x.data.attributes.destination_name);
 
         const oldText = x.data.attributes?.overview_text;
-        var valueWithBr = oldText?.replace(/\\n/g, "");
-
-        // Use JavaScript string interpolation to replace the variable
-        // const newValueWithBr = valueWithBr.replace(/\${holiday}/g, replacement);
-        setnewValueWithBr(valueWithBr);
-
-        setAllCountries(x.data?.attributes?.countries?.data);
-        setIsLoading(false);
-
         const regex = /{[a-zA-Z0-9-]+}/g;
 
         // Find and store matches in an array
@@ -110,11 +99,7 @@ function ContinentOverview({ sendDataToParent }) {
 
         // Display the matched words
         if (matches) {
-          console.log("Matched words starting with special characters:");
-          var valueWithBr1 = oldText?.replace(/\\n/g, "");
-
           matches.forEach((match, index) => {
-            console.log('index', index);
             // Use JavaScript string interpolation to replace the variable
             const matchStr = match.replace(/{|}/g, '');
             destinationService
@@ -123,25 +108,15 @@ function ContinentOverview({ sendDataToParent }) {
                 const replacement = responseObj?.data[0]?.attributes?.website_country_contents?.data[0]?.attributes?.content_translation_text;
                 const checkStr = '${' + matchStr + '}';
                 if (index === 0) {
-                  // Use JavaScript string interpolation to replace the variable
-                  const internalVariable = oldText.replace(checkStr, replacement);
-                  checkStrArray.push(internalVariable);
+                  checkStrArray.push(oldText.replace(checkStr, replacement));
                 } else {
-                  // Use JavaScript string interpolation to replace the variable
-                  const lastElement = checkStrArray[checkStrArray.length - 1];
-                  if (lastElement) {
-                    const internalVariable2 = lastElement.replace(checkStr, replacement);
-                    checkStrArray.push(internalVariable2);
+                  if (checkStrArray[checkStrArray.length - 1]) {
+                    checkStrArray.push(lastElement.replace(checkStr, replacement));
                   }
                 }
                 setnewValueWithBr(checkStrArray[checkStrArray.length - 1]);
               })
-            // const internalVariable1 = getDictionary(oldText, matchStr, region, index);
-            // setnewValueWithBr(internalVariable1);
           });
-
-        } else {
-          console.log("No matches found.");
         }
       })
       .catch((error) => {
@@ -161,6 +136,11 @@ function ContinentOverview({ sendDataToParent }) {
     // destinationService.getAllCountries().then(x => {
     //     setAllCountries(x.data);
     // })
+
+    setnewValueWithBr(valueWithBr);
+
+    setAllCountries(x.data?.attributes?.countries?.data);
+    setIsLoading(false);
 
     window.addEventListener("resize", equalHeight(true));
 
