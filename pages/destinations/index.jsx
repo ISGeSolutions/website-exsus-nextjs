@@ -216,6 +216,7 @@ function Index() {
               <div className="carousel-inner">
                 {backgroundImage.map((imagePath, index) => (
                   <NavLink
+                    key={index}
                     href="#"
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                     data-bs-interval="5000"
@@ -250,7 +251,7 @@ function Index() {
           <section className="card_blk_row destinations_blk_row">
             <div className="container">
               <div className="row">
-                {destinationLandingList?.map((destinationItem, i) => (
+                {destinationLandingList?.map((destinationItem, id) => (
                   <div className="col-sm-6" key={destinationItem?.id}>
                     <div className="card_blk_inr">
                       <NavLink

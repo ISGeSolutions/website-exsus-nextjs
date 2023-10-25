@@ -126,10 +126,7 @@ function Index() {
               <p>
                 call us on 020 7337 9010 to start planning your perfect trip
               </p>
-              <button
-                className="btn prmry_btn make_enqury_btn"
-                onclick="window.open('contact_us.html')"
-              >
+              <button className="btn prmry_btn make_enqury_btn">
                 Make an enquiry
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
