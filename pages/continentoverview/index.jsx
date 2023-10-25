@@ -118,6 +118,10 @@ function ContinentOverview({ sendDataToParent }) {
               })
           });
         }
+
+        setnewValueWithBr(valueWithBr);
+        setAllCountries(x.data?.attributes?.countries?.data);
+        setIsLoading(false);
       })
       .catch((error) => {
         setIsLoading(false);
@@ -136,11 +140,6 @@ function ContinentOverview({ sendDataToParent }) {
     // destinationService.getAllCountries().then(x => {
     //     setAllCountries(x.data);
     // })
-
-    setnewValueWithBr(valueWithBr);
-
-    setAllCountries(x.data?.attributes?.countries?.data);
-    setIsLoading(false);
 
     window.addEventListener("resize", equalHeight(true));
 
