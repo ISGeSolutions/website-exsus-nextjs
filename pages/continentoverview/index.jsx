@@ -112,15 +112,15 @@ function ContinentOverview({ sendDataToParent }) {
         setIsLoading(false);
       });
 
-    destinationService
-      .getAllItineraries()
-      .then((x) => {
-        setItineraries(x.data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-      });
+    // destinationService
+    //   .getAllItineraries()
+    //   .then((x) => {
+    //     setItineraries(x.data);
+    //     setIsLoading(false);
+    //   })
+    //   .catch((error) => {
+    //     setIsLoading(false);
+    //   });
 
     // destinationService.getAllCountries().then(x => {
     //     setAllCountries(x.data);
