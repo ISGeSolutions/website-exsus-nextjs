@@ -66,23 +66,23 @@ function Signup() {
             }
         }
 
-        // return homeService.saveDataToDB(signupData)
-        //     .then((res) => {
-        return homeService.signUp(signupData)
-            .then(() => {
-                showAlert('Operation succeeded', 'success');
-                reset();
-                // return homeService.saveDataToDB(res)
-                //     .then(() => {
-                //         reset();
-                //     })
-            })
-            .catch((error) => {
+        return homeService.saveDataToDB(signupData)
+            .then((res) => {
+                return homeService.signUp(signupData)
+                    .then(() => {
+                        showAlert('Operation succeeded', 'success');
+                        reset();
+                        return homeService.saveDataToDB(res)
+                            .then(() => {
+                                reset();
+                            })
+                    })
+                    .catch((error) => {
+                        showAlert('Operation failed', 'error');
+                    });
+            }).catch((error) => {
                 showAlert('Operation failed', 'error');
             });
-        // }).catch((error) => {
-        //     showAlert('Operation failed', 'error');
-        // });
 
     }
 

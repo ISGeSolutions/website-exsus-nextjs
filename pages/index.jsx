@@ -48,7 +48,7 @@ function Index() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`
+      `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`
     );
   };
 
@@ -165,11 +165,11 @@ function Index() {
     } else {
       router.push(
         `advance-search?where=` +
-          data?.destination +
-          `&what=` +
-          data?.reason +
-          `&when=` +
-          data?.month
+        data?.destination +
+        `&what=` +
+        data?.reason +
+        `&when=` +
+        data?.month
       );
     }
   }

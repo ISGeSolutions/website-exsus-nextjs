@@ -244,7 +244,7 @@ function Index() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=${region}`
+      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=${region}`
     );
   };
 
@@ -533,7 +533,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                      "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}

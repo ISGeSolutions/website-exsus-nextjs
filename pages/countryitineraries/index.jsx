@@ -255,7 +255,7 @@ function CountryItinararies(country) {
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}&countrycode=${countrycode}`
+      `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}&countrycode=${countrycode}`
     );
   };
 
@@ -479,7 +479,7 @@ function CountryItinararies(country) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}

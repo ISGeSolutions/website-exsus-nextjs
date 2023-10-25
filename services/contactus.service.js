@@ -22,7 +22,7 @@ function makeanenquiry(brochureData) {
         brouchereData["email_flag"] = true;
         return fetchWrapper.put(`${baseUrlEnquiries}`, brochureData);
     } else {
-        brochureData["email_flag"] = false;
+        brochureData.data["email_flag"] = false;
         return fetchWrapper.post(`${baseUrlEnquiries}`, brochureData);
     }
 }

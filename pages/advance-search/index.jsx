@@ -66,7 +66,7 @@ function Index() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/destinations/africa/africa-itineraries/vietnam-in-classic-style`
+      `/destinations/africa/africa-itineraries/vietnam-in-classic-style`
     );
   };
 
@@ -189,7 +189,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                      "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}

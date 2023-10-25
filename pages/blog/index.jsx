@@ -317,9 +317,8 @@ function Index() {
                                 aria-label="Choose a destination"
                                 name="destination"
                                 {...register("destination")}
-                                className={`form-select ${
-                                  errors.destination ? "is-invalid" : ""
-                                }`}
+                                className={`form-select ${errors.destination ? "is-invalid" : ""
+                                  }`}
                               >
                                 <option value="">Choose a destination</option>
                                 {destinationLandingList?.map((element, i) => (
@@ -344,9 +343,8 @@ function Index() {
                                 aria-label="Choose a reason"
                                 name="reason"
                                 {...register("reason")}
-                                className={`form-select ${
-                                  errors.reason ? "is-invalid" : ""
-                                }`}
+                                className={`form-select ${errors.reason ? "is-invalid" : ""
+                                  }`}
                               >
                                 <option value="">Choose a category</option>
                                 {holidaytypesLandingList?.map((element, i) => (
@@ -584,9 +582,8 @@ function Index() {
                                 type="text"
                                 name="first_name"
                                 {...register("first_name")}
-                                className={`form-control ${
-                                  errors.first_name ? "is-invalid" : ""
-                                }`}
+                                className={`form-control ${errors.first_name ? "is-invalid" : ""
+                                  }`}
                                 aria-label="First name *"
                                 placeholder="First name *"
                                 value={firstName}
@@ -603,9 +600,8 @@ function Index() {
                                 type="text"
                                 name="title"
                                 {...register("last_name")}
-                                className={`form-control ${
-                                  errors.last_name ? "is-invalid" : ""
-                                }`}
+                                className={`form-control ${errors.last_name ? "is-invalid" : ""
+                                  }`}
                                 aria-label="Last name *"
                                 placeholder="Last name *"
                                 value={lastName}
@@ -622,9 +618,8 @@ function Index() {
                                 type="email"
                                 name="email_id"
                                 {...register("email_id")}
-                                className={`form-control ${
-                                  errors.email_id ? "is-invalid" : ""
-                                }`}
+                                className={`form-control ${errors.email_id ? "is-invalid" : ""
+                                  }`}
                                 aria-label="Email *"
                                 placeholder="Email *"
                                 value={email}
@@ -643,12 +638,12 @@ function Index() {
                               shapeRendering="geometricPrecision"
                               textRendering="geometricPrecision"
                               imageRendering="optimizeQuality"
-                              fillrule="evenodd"
+                              fillRule="evenodd"
                               clipRule="evenodd"
                               viewBox="0 0 267 512.43"
                             >
                               <path
-                                fillrule="nonzero"
+                                fillRule="nonzero"
                                 d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
                               ></path>
                             </svg>

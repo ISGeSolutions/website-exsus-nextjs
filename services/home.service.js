@@ -17,11 +17,9 @@ export const homeService = {
 function saveDataToDB(signUpData) {
     if (signUpData.id) {
         signUpData.data["email_flag"] = true;
-        let saveEmailUrl = `http://localhost:4000/email_records/${signUpData.id}`;
-        return fetchWrapper.put(`${saveEmailUrl}`, signUpData);
+        return fetchWrapper.put(`${baseUrl}`, signUpData);
     } else {
-        let saveEmailUrl = `http://localhost:4000/email_records`;
-        return fetchWrapper.post(`${saveEmailUrl}`, signUpData.data);
+        return fetchWrapper.post(`${baseUrl}`, signUpData.data);
     }
 
 }

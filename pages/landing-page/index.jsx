@@ -22,7 +22,7 @@ function Index() {
 
     function setCountFun() {
         setCount(e.target.value);
-        
+
     }
 
     const router = useRouter();
@@ -44,7 +44,7 @@ function Index() {
     const { errors } = formState;
 
     function onSubmit(data) {
-  
+
         return homeService.inspireMe(data)
             .then(() => {
                 alertService.success('Make an enquiry successful', { keepAfterRouteChange: true });
