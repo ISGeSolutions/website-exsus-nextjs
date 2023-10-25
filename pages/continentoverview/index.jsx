@@ -111,7 +111,7 @@ function ContinentOverview({ sendDataToParent }) {
                   checkStrArray.push(oldText.replace(checkStr, replacement));
                 } else {
                   if (checkStrArray[checkStrArray.length - 1]) {
-                    checkStrArray.push(lastElement.replace(checkStr, replacement));
+                    checkStrArray.push(checkStrArray[checkStrArray.length - 1].replace(checkStr, replacement));
                   }
                 }
                 setnewValueWithBr(checkStrArray[checkStrArray.length - 1]);
