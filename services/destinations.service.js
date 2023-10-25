@@ -59,6 +59,7 @@ export const destinationService = {
     getItinerariesInAdvanceSearch,
     getDestinationInspireMe,
     getRegionById,
+    getDictionaryDetails
 };
 
 function getAllDropdown() {
@@ -174,4 +175,9 @@ function getItinerariesInAdvanceSearch(dcode, page) {
 function getRegionById(id) {
     const regionsURL = `${publicRuntimeConfig.apiUrl}/api/regions/${id}?populate[0]=region_images&populate[1]=country`;
     return fetchWrapper.get(regionsURL);
+}
+
+function getDictionaryDetails(string, regionWiseUrl) {
+    const dictionaryUrl = `${publicRuntimeConfig.apiUrl}/api/website-countries?[filters][code][$eq]=${regionWiseUrl}&populate[0]=website_country_contents&populate[website_country_contents][filters][content_word][$eq]=${string}`;
+    return fetchWrapper.get(dictionaryUrl);
 }

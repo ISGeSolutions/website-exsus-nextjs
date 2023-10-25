@@ -18,6 +18,7 @@ function ContinentOverview({ sendDataToParent }) {
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
   const [allCountries, setAllCountries] = useState([]);
   const [destinationName, setdestinationName] = useState("");
+  const [matchesArrFinal, setMatches] = useState("");
 
   const { t } = useTranslation();
   const [holidayTitle, setHolidayTitle] = useState(t("holidayTitle"));
@@ -31,10 +32,12 @@ function ContinentOverview({ sendDataToParent }) {
     sendDataToParent(e);
   };
 
+  let region = 'uk'
   let regionWiseUrl = "/uk";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
       regionWiseUrl = "/" + window.site_region;
+      region = window.site_region;
       // setMyVariable(window.site_region);
     }
   }
@@ -48,7 +51,7 @@ function ContinentOverview({ sendDataToParent }) {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`
+      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`
     );
   };
 
@@ -82,6 +85,7 @@ function ContinentOverview({ sendDataToParent }) {
 
   equalHeight(true);
 
+  const checkStrArray = [];
   useEffect(() => {
     destinationService
       .getDestinationDetails(destinationcode)
@@ -91,22 +95,54 @@ function ContinentOverview({ sendDataToParent }) {
 
         const oldText = x.data.attributes?.overview_text;
         var valueWithBr = oldText?.replace(/\\n/g, "");
-        const replacement = holidayTitle;
 
         // Use JavaScript string interpolation to replace the variable
-        const newValueWithBr = valueWithBr.replace(/\${holiday}/g, replacement);
-        setnewValueWithBr(newValueWithBr);
-
-        // Define a regular expression pattern to match words starting with special characters
-        // const pattern = /[\W\d]+[\w]+/g;
-        // const pattern = "/[$][\w]+/g";
-
-        // Use the match() method to find matches in the text
-        // const matches = valueWithBr.match(pattern);
-        // console.log('matches22', matches);
+        // const newValueWithBr = valueWithBr.replace(/\${holiday}/g, replacement);
+        setnewValueWithBr(valueWithBr);
 
         setAllCountries(x.data?.attributes?.countries?.data);
         setIsLoading(false);
+
+        const regex = /{[a-zA-Z0-9-]+}/g;
+
+        // Find and store matches in an array
+        const matches = [...new Set(oldText.match(regex))];
+
+        // Display the matched words
+        if (matches) {
+          console.log("Matched words starting with special characters:");
+          var valueWithBr1 = oldText?.replace(/\\n/g, "");
+
+          matches.forEach((match, index) => {
+            console.log('index', index);
+            // Use JavaScript string interpolation to replace the variable
+            const matchStr = match.replace(/{|}/g, '');
+            destinationService
+              .getDictionaryDetails(matchStr, region)
+              .then((responseObj) => {
+                const replacement = responseObj?.data[0]?.attributes?.website_country_contents?.data[0]?.attributes?.content_translation_text;
+                const checkStr = '${' + matchStr + '}';
+                if (index === 0) {
+                  // Use JavaScript string interpolation to replace the variable
+                  const internalVariable = oldText.replace(checkStr, replacement);
+                  checkStrArray.push(internalVariable);
+                } else {
+                  // Use JavaScript string interpolation to replace the variable
+                  const lastElement = checkStrArray[checkStrArray.length - 1];
+                  if (lastElement) {
+                    const internalVariable2 = lastElement.replace(checkStr, replacement);
+                    checkStrArray.push(internalVariable2);
+                  }
+                }
+                setnewValueWithBr(checkStrArray[checkStrArray.length - 1]);
+              })
+            // const internalVariable1 = getDictionary(oldText, matchStr, region, index);
+            // setnewValueWithBr(internalVariable1);
+          });
+
+        } else {
+          console.log("No matches found.");
+        }
       })
       .catch((error) => {
         setIsLoading(false);
@@ -266,7 +302,7 @@ function ContinentOverview({ sendDataToParent }) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
