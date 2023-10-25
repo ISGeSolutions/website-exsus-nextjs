@@ -260,15 +260,15 @@ function Country() {
     //     setItinerary(desiredItinerary);
     // });
 
-    destinationService
-      .getAllItineraries()
-      .then((x) => {
-        setItineraries(x.data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-      });
+    // destinationService
+    //   .getAllItineraries()
+    //   .then((x) => {
+    //     setItineraries(x.data);
+    //     setIsLoading(false);
+    //   })
+    //   .catch((error) => {
+    //     setIsLoading(false);
+    //   });
 
     // hotelService.getAll().then(desiredHotel => {
     //     // const desiredKey = 1; // The desired key to access
