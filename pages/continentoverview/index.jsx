@@ -117,34 +117,39 @@ function ContinentOverview({ sendDataToParent }) {
         const regex = /{[a-zA-Z0-9-]+}/g;
         const matches = [...new Set(modifiedString.match(regex))];
 
-        if (localStorage.getItem('websitecontent') !== null) {
-          // The item with 'yourKey' exists in local storage
-          // You can access it using localStorage.getItem('yourKey')
+        let storedDataString = '';
+        let storedData = '';
 
-          const storedDataString = localStorage.getItem('websitecontent');
-          const storedData = JSON.parse(storedDataString);
+        if (region == 'uk') {
+          storedDataString = localStorage.getItem('websitecontent_uk');
+          storedData = JSON.parse(storedDataString);
+        } else if (region == 'us') {
+          storedDataString = localStorage.getItem('websitecontent_us');
+          storedData = JSON.parse(storedDataString);
+        } else if (region == 'asia') {
+          storedDataString = localStorage.getItem('websitecontent_asia');
+          storedData = JSON.parse(storedDataString);
+        } else if (region == 'in') {
+          storedDataString = localStorage.getItem('websitecontent_india');
+          storedData = JSON.parse(storedDataString);
+        }
 
-          // debugger;
+        if (storedData !== null) {
+          // You can access it using localStorage.getItem('yourKey')          
           if (matches) {
             let replacement = '';
             try {
               matches.forEach((match, index, matches) => {
                 const matchString = match.replace(/{|}/g, '');
-
-                const upperStr = region.toUpperCase();
-                if (storedData['code'] === upperStr) {
-                  if (!storedData[matchString]) {
-                    websiteContentCheck(matches, region, modifiedString);
-                    throw new Error("Loop break");
-                  } else {
-                    replacement = storedData[matchString];
-                  }
-                  const checkStr = new RegExp(`\\$\\{${matchString}\\}`, 'g');
-                  if (checkStr && replacement) {
-                    modifiedString = modifiedString.replace(checkStr, replacement);
-                  }
+                if (!storedData[matchString]) {
+                  websiteContentCheck(matches, region, modifiedString);
+                  throw new Error("Loop break");
                 } else {
-                  throw new Error("Region not found");
+                  replacement = storedData[matchString];
+                }
+                const checkStr = new RegExp(`\\$\\{${matchString}\\}`, 'g');
+                if (checkStr && replacement) {
+                  modifiedString = modifiedString.replace(checkStr, replacement);
                 }
               })
               // Set the modified string in state
