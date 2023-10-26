@@ -16,16 +16,16 @@ const nextConfig = {
             { source: '/in/destinations', destination: '/destinations' },
 
             // continent
-            { source: '/uk/continent', destination: '/continent' },
-            { source: '/us/continent', destination: '/continent' },
-            { source: '/asia/continent', destination: '/continent' },
-            { source: '/in/continent', destination: '/continent' },
+            { source: '/uk/destinations/:continent', destination: '/continent' },
+            { source: '/us/destinations/:continent', destination: '/continent' },
+            { source: '/asia/destinations/:continent', destination: '/continent' },
+            { source: '/in/destinations/:continent', destination: '/continent' },
 
             // continentcountries
-            { source: '/uk/continentcountries', destination: '/continentcountries' },
-            { source: '/us/continentcountries', destination: '/continentcountries' },
-            { source: '/asia/continentcountries', destination: '/continentcountries' },
-            { source: '/in/continentcountries', destination: '/continentcountries' },
+            { source: '/uk/destinations/:continent', destination: '/continentcountries' },
+            { source: '/us/destinations/:continent', destination: '/continentcountries' },
+            { source: '/asia/destinations/:continent', destination: '/continentcountries' },
+            { source: '/in/destinations/:continent', destination: '/continentcountries' },
 
             // continentexperiences
             { source: '/uk/continentexperiences', destination: '/continentexperiences' },
@@ -34,52 +34,52 @@ const nextConfig = {
             { source: '/in/continentexperiences', destination: '/continentexperiences' },
 
             // continentitineraries
-            { source: '/uk/continentitineraries', destination: '/continentitineraries' },
-            { source: '/us/continentitineraries', destination: '/continentitineraries' },
-            { source: '/asia/continentitineraries', destination: '/continentitineraries' },
-            { source: '/in/continentitineraries', destination: '/continentitineraries' },
+            { source: '/uk/destinations/:continent', destination: '/continentitineraries' },
+            { source: '/us/destinations/:continent', destination: '/continentitineraries' },
+            { source: '/asia/destinations/:continent', destination: '/continentitineraries' },
+            { source: '/in/destinations/:continent', destination: '/continentitineraries' },
 
             // continentplacetostay
-            { source: '/uk/continentplacetostay', destination: '/continentplacetostay' },
-            { source: '/us/continentplacetostay', destination: '/continentplacetostay' },
-            { source: '/asia/continentplacetostay', destination: '/continentplacetostay' },
-            { source: '/in/continentplacetostay', destination: '/continentplacetostay' },
+            { source: '/uk/destinations/:continent', destination: '/continentplacetostay' },
+            { source: '/us/destinations/:continent', destination: '/continentplacetostay' },
+            { source: '/asia/destinations/:continent', destination: '/continentplacetostay' },
+            { source: '/in/destinations/:continent', destination: '/continentplacetostay' },
 
             // country
-            { source: '/uk/country', destination: '/country' },
-            { source: '/us/country', destination: '/country' },
-            { source: '/asia/country', destination: '/country' },
-            { source: '/in/country', destination: '/country' },
+            { source: '/uk/destinations/:continent/:country', destination: '/country' },
+            { source: '/us/destinations/:continent/:country', destination: '/country' },
+            { source: '/asia/destinations/:continent/:country', destination: '/country' },
+            { source: '/in/destinations/:continent/:country', destination: '/country' },
 
             // countryregions
-            { source: '/uk/countryregions', destination: '/countryregions' },
-            { source: '/us/countryregions', destination: '/countryregions' },
-            { source: '/asia/countryregions', destination: '/countryregions' },
-            { source: '/in/countryregions', destination: '/countryregions' },
+            { source: '/uk/destinations/:continent/:country/countryregions', destination: '/countryregions' },
+            { source: '/us/destinations/:continent/:country/countryregions', destination: '/countryregions' },
+            { source: '/asia/destinations/:continent/:country/countryregions', destination: '/countryregions' },
+            { source: '/in/destinations/:continent/:country/countryregions', destination: '/countryregions' },
 
             // countryitineraries
-            { source: '/uk/countryitineraries', destination: '/countryitineraries' },
-            { source: '/us/countryitineraries', destination: '/countryitineraries' },
-            { source: '/asia/countryitineraries', destination: '/countryitineraries' },
-            { source: '/in/countryitineraries', destination: '/countryitineraries' },
+            { source: '/uk/destinations/:continent/:country/countryitineraries', destination: '/countryitineraries' },
+            { source: '/us/destinations/:continent/:country/countryitineraries', destination: '/countryitineraries' },
+            { source: '/asia/destinations/:continent/:country/countryitineraries', destination: '/countryitineraries' },
+            { source: '/in/destinations/:continent/:country/countryitineraries', destination: '/countryitineraries' },
 
             // countrywhentogo
-            { source: '/uk/countrywhentogo', destination: '/countrywhentogo' },
-            { source: '/us/countrywhentogo', destination: '/countrywhentogo' },
-            { source: '/asia/countrywhentogo', destination: '/countrywhentogo' },
-            { source: '/in/countrywhentogo', destination: '/countrywhentogo' },
+            { source: '/uk/destinations/:continent/:country/countrywhentogo', destination: '/countrywhentogo' },
+            { source: '/us/destinations/:continent/:country/countrywhentogo', destination: '/countrywhentogo' },
+            { source: '/asia/destinations/:continent/:country/countrywhentogo', destination: '/countrywhentogo' },
+            { source: '/in/destinations/:continent/:country/countrywhentogo', destination: '/countrywhentogo' },
 
             // countryplacestostay
-            { source: '/uk/countryplacestostay', destination: '/countryplacestostay' },
-            { source: '/us/countryplacestostay', destination: '/countryplacestostay' },
-            { source: '/asia/countryplacestostay', destination: '/countryplacestostay' },
-            { source: '/in/countryplacestostay', destination: '/countryplacestostay' },
+            { source: '/uk/destinations/:continent/:country/countryplacestostay', destination: '/countryplacestostay' },
+            { source: '/us/destinations/:continent/:country/countryplacestostay', destination: '/countryplacestostay' },
+            { source: '/asia/destinations/:continent/:country/countryplacestostay', destination: '/countryplacestostay' },
+            { source: '/in/destinations/:continent/:country/countryplacestostay', destination: '/countryplacestostay' },
 
             // country_details
-            { source: '/uk/country_details', destination: '/country_details' },
-            { source: '/us/country_details', destination: '/country_details' },
-            { source: '/asia/country_details', destination: '/country_details' },
-            { source: '/in/country_details', destination: '/country_details' },
+            { source: '/uk/destinations/:continent/:country', destination: '/country_details' },
+            { source: '/us/destinations/:continent/:country', destination: '/country_details' },
+            { source: '/asia/destinations/:continent/:country', destination: '/country_details' },
+            { source: '/in/destinations/:continent/:country', destination: '/country_details' },
 
             // holiday-types
             { source: '/uk/holiday-types', destination: '/holiday-types' },

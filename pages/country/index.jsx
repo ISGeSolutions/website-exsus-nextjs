@@ -21,6 +21,8 @@ import CountrytItinararies from "../countryitineraries/index"; // Adjust the pat
 import CountryPlaceToStay from "../countryplacetostay/index"; // Adjust the path accordingly
 import CountryWhentogo from "../countrywhentogo/index"; // Adjust the path accordingly
 import CountryOverview from "../countryoverview/index"; // Adjust the path accordingly
+import { FriendlyUrl } from "../../components";
+
 
 import Head from "next/head";
 
@@ -33,13 +35,16 @@ function Country() {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isLoader, setIsLoader] = useState(false);
   const [isRtl, setIsRtl] = useState(false);
-  const { countrycode } = router.query;
+  const destinationcode = router.query?.continent?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
+  const countrycode = router.query?.country?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
+  console.log(destinationcode, countrycode);
   const [selectedOptionCountry, setSelectedOptionCountry] = useState(null);
   const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
   const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
   const [countryData, setCountryData] = useState(null);
   const [mapVariable, setMapVariable] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [friendlyUrl, setFriendlyUrl] = useState("");
 
   const countryOptions = [
     { value: "", label: "Filter by country" },
@@ -169,7 +174,7 @@ function Country() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
+      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
     );
   };
 
@@ -205,28 +210,33 @@ function Country() {
   const toggleTab = (itemId) => {
     var text = "LUXURY SAFARI HOLIDAYS IN " + countrycode.toUpperCase();
     if (itemId == "overview") {
-      const redirectUrl = regionWiseUrl + "/country?countrycode=" + countrycode;
+      const redirectUrl = regionWiseUrl + `/destinations/${destinationcode}/${countryData.attributes.friendly_url}`;
       window.history.pushState(null, null, redirectUrl);
+      setFriendlyUrl(`Home/Destinations/${destinationcode}/${countryData.attributes.friendly_url}`);
       text = "LUXURY HOLIDAYS IN " + countrycode.toUpperCase();
     } else if (itemId == "regions") {
       const redirectUrl =
-        regionWiseUrl + "/countryregions?countrycode=" + countrycode;
+        regionWiseUrl + `/destinations/${destinationcode}/${countryData.attributes.friendly_url}`;
       window.history.pushState(null, null, redirectUrl);
+      setFriendlyUrl(`estinations/${destinationcode}/${countryData.attributes.friendly_url}/${countryData.attributes.friendly_url} Regions`);
       text = "REGIONS IN " + countrycode.toUpperCase(); // action="/countryregions?countrycode=south-africa"
     } else if (itemId == "itineraries") {
       const redirectUrl =
-        regionWiseUrl + "/countryitineraries?countrycode=" + countrycode;
+        regionWiseUrl + `/destinations/${destinationcode}/${countryData.attributes.friendly_url}`;
       window.history.pushState(null, null, redirectUrl);
+      setFriendlyUrl(`Home/Destinations/${destinationcode}/${countryData.attributes.friendly_url}/${countryData.attributes.friendly_url} itineraries`);
       text = countrycode.toUpperCase() + " ITINERARIES"; // action="/countryitineraries?countrycode=south-africa"
     } else if (itemId == "places-to-stay") {
       const redirectUrl =
-        regionWiseUrl + "/countryplacetostay?countrycode=" + countrycode;
+        regionWiseUrl + `/destinations/${destinationcode}/${countryData.attributes.friendly_url}`;
       window.history.pushState(null, null, redirectUrl);
+      setFriendlyUrl(`Home/Destinations/${destinationcode}/${countryData.attributes.friendly_url}/places to stay ${countryData.attributes.friendly_url}`);
       text = "LUXURY HOTELS, CAMPS & LODGES IN " + countrycode.toUpperCase(); // action="/countryplacetostay?countrycode=south-africa"
     } else if (itemId == "when-to-go") {
       const redirectUrl =
-        regionWiseUrl + "/countrywhentogo?countrycode=" + countrycode;
+        regionWiseUrl + `/destinations/${destinationcode}/${countryData.attributes.friendly_url}`
       window.history.pushState(null, null, redirectUrl);
+      setFriendlyUrl(`Home/Destinations/${destinationcode}/${countryData.attributes.friendly_url}/when to go to ${countryData.attributes.friendly_url}`);
       text = "WHEN TO GO TO " + countrycode.toUpperCase(); // action="/countryplacetostay?countrycode=south-africa"
     } else {
       text = "LUXURY SAFARI HOLIDAYS IN " + countrycode.toUpperCase();
@@ -287,9 +297,10 @@ function Country() {
       countriesService
         .getCountryDetails(countrycode)
         .then((x) => {
-          setCountryData(x.data);
-          const map_latitude = x.data.attributes?.map_latitude;
-          const map_longitude = x.data.attributes?.map_longitude;
+          setCountryData(x.data[0]);
+          setFriendlyUrl(`Home/Destinations/${destinationcode}/${countrycode}`)
+          const map_latitude = x.data[0].attributes?.map_latitude;
+          const map_longitude = x.data[0].attributes?.map_longitude;
           // const map_latitude = "40.7128";
           // const map_longitude = "-74.0060";
           const mapTemp =
@@ -411,9 +422,9 @@ function Country() {
           <section className="destination_tab_row light_grey pb-0">
             <div className="container">
               <div className="bookmark_row">
-                <p style={{ color: `white` }}>
-                  {countryData?.attributes?.friendly_url}
-                </p>
+                <FriendlyUrl
+                  data={friendlyUrl}
+                ></FriendlyUrl>
               </div>
               <div className="destination_tab_inr">
                 <h2 className="tab_tilte">

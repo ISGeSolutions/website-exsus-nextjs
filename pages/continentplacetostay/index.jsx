@@ -29,7 +29,7 @@ function ContinentPlacesToStay(props) {
   const [page, setPage] = useState(0); // Current page
   const [metaData, setMetaData] = useState([]);
   const [dcode, setdcode] = useState();
-  const { destinationcode } = router.query;
+  const destinationcode = router.query.continent.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();;
   const [allHotels, setAllHotels] = useState([]);
   const [countryOptions, setAllCountries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -260,9 +260,9 @@ function ContinentPlacesToStay(props) {
     destinationService
       .getDestinationDetails(destinationcode)
       .then((x) => {
-        setdestinationName(x.data.attributes.destination_name);
+        setdestinationName(x.data[0].attributes.destination_name);
         setAllCountries(
-          x.data?.attributes?.countries?.data.map((item) => ({
+          x.data[0]?.attributes?.countries?.data.map((item) => ({
             id: item.id,
             country_code: item?.attributes?.country_code,
             value: item?.attributes?.country_name,
@@ -486,7 +486,7 @@ function ContinentPlacesToStay(props) {
                               {item?.attributes?.hotel_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}

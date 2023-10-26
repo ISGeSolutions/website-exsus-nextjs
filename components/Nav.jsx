@@ -49,6 +49,14 @@ function Nav() {
         setOverlayVisible(true);
     };
 
+    const generateDynamicLinkCountries = (countryName, destinationcode) => {
+        const modifieddestinaitonName = destinationcode.replace(/ /g, '-').replace(/&/g, 'and').toLowerCase();
+        const modifiedcountryName = countryName.replace(/ /g, '-').replace(/&/g, 'and').toLowerCase();
+        if (countryName) {
+            return regionWiseUrl + `/destinations/${modifieddestinaitonName}/${modifiedcountryName}`;
+        }
+    };
+
     const redirectToAllLink = (id) => {
         const lowercasecountry = id.replace(/ /g, '-').toLowerCase();
         router.push('/continentcountries?destinationcode=' + lowercasecountry);
@@ -89,16 +97,16 @@ function Nav() {
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
         if (window && window.site_region) {
-           
+
             regionWiseUrl = '/' + window.site_region;
             // setMyVariable(window.site_region);
         }
     }
 
-    const dynamicLink = (itemId, id) => {
-        // {regionWiseUrl + '/destinations/africa/south-africa'}
-        if (itemId) {
-            return regionWiseUrl + `/continent?destinationcode=` + id;
+    const dynamicLink = (itemName, id) => {
+        const modifieditem = itemName.replace(/ /g, '-').replace(/&/g, 'and').toLowerCase();
+        if (itemName) {
+            return regionWiseUrl + `/destinations/${modifieditem}`;
         } else if (itemId && itemId == 'AS') {
             return regionWiseUrl + `/continent?destinationcode=` + id;
         } else if (itemId && itemId == 'AU') {
@@ -296,13 +304,13 @@ function Nav() {
         document.body.appendChild(script);
 
         destinationService.getDestinationLandingList().then(x => {
-            
+
 
             setDestinationLandingList(x.data);
         });
 
         holidaytypesService.getHolidaytypesLandingList().then(x => {
-            
+
             const sortedData = x.data.sort(
                 (a, b) =>
                     a.attributes.main_page_serial_number -
@@ -321,7 +329,7 @@ function Nav() {
     }, []);
 
     const makeAnEnquiry = () => {
-        
+
         router.push('/contact-us');
     }
 
@@ -441,7 +449,7 @@ function Nav() {
                                                                     className={`header_country_label ${activeIndex === i ? 'active' : ''}`}
                                                                     onMouseEnter={() => handleMouseEnter(i)}
                                                                     onMouseLeave={handleMouseLeave}>
-                                                                    <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={dynamicLink(destinationItem?.attributes?.destination_code, destinationItem?.id)} as={dynamicLinkas(destinationItem?.attributes?.destination_code, destinationItem?.id)}>
+                                                                    <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={dynamicLink(destinationItem?.attributes?.destination_name, destinationItem?.id)} as={dynamicLinkas(destinationItem?.attributes?.destination_code, destinationItem?.id)}>
                                                                         {destinationItem?.attributes?.destination_name}
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                     </NavLink>
@@ -450,7 +458,7 @@ function Nav() {
                                                                             {destinationItem?.attributes?.countries?.data.map((destinationCountry, i) => (
                                                                                 (i <= 7) ? (
                                                                                     <li key={i}>
-                                                                                        <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={dynamicLinkCountry(destinationItem?.attributes?.destination_code, destinationCountry?.attributes?.country_code, destinationCountry?.id)}>
+                                                                                        <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={generateDynamicLinkCountries(destinationCountry?.attributes?.country_name, destinationItem?.attributes?.destination_name)}>
                                                                                             {destinationCountry?.attributes?.country_name}
                                                                                         </NavLink>
                                                                                     </li>

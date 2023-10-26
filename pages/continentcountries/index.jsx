@@ -12,7 +12,7 @@ export default ContinentCountry;
 
 function ContinentCountry({ sendDataToParent }) {
     const router = useRouter();
-    const { destinationcode } = router.query;
+    const destinationcode = router.query.continent.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
     const [allCountries, setAllCountries] = useState([]);
     const [destinationName, setdestinationName] = useState("");
     const [isLoading, setIsLoading] = useState(true);
@@ -46,8 +46,8 @@ function ContinentCountry({ sendDataToParent }) {
                 // const oldText = x.data.attributes?.overview_text;
                 // var newValueWithBr = oldText?.replace(/\\n/g, "");
                 // setnewValueWithBr(newValueWithBr);
-                setdestinationName(x.data.attributes.destination_name);
-                setAllCountries(x.data?.attributes?.countries?.data);
+                setdestinationName(x.data[0].attributes.destination_name);
+                setAllCountries(x.data[0].attributes?.countries?.data);
                 setIsLoading(false);
             })
             .catch((error) => {

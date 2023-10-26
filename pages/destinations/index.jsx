@@ -75,9 +75,10 @@ function Index() {
     );
   };
 
-  const dynamicLink = (itemId, id) => {
-    if (itemId) {
-      return regionWiseUrl + `/continent?destinationcode=` + id;
+  const dynamicLink = (itemName, id) => {
+    const modifieditem = itemName.replace(/ /g, '-').replace(/&/g, 'and').toLowerCase();
+    if (itemName) {
+      return regionWiseUrl + `/destinations/${modifieditem}`;
     } else if (itemId && itemId == "AS") {
       return regionWiseUrl + `/continent?destinationcode=` + id;
     } else if (itemId && itemId == "AU") {
@@ -256,7 +257,7 @@ function Index() {
                     <div className="card_blk_inr">
                       <NavLink
                         href={dynamicLink(
-                          destinationItem?.attributes?.destination_code,
+                          destinationItem?.attributes?.destination_name,
                           destinationItem?.id
                         )}
                       >
