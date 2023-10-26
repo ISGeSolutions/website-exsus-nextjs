@@ -175,7 +175,23 @@ function getRegionById(id) {
     return fetchWrapper.get(regionsURL);
 }
 
-function getDictionaryDetails(string, regionWiseUrl) {
-    const dictionaryUrl = `${publicRuntimeConfig.apiUrl}/api/website-countries?[filters][code][$eq]=${regionWiseUrl}&populate[0]=website_country_contents&populate[website_country_contents][filters][content_word][$eq]=${string}`;
-    return fetchWrapper.get(dictionaryUrl);
+function getDictionaryDetails(matches, region) {
+
+    // https://cms-api.excelleresolutions.com/api/website-country-contents?populate[0]=website_country&filters[content_word][$in][1]=holiday&filters[content_word][$in][2]=Holiday&filters[website_country][code][$eq]=US
+    var tempUrl = `${publicRuntimeConfig.apiUrl}/api/website-country-contents?populate[0]=website_country`;
+
+    matches.forEach((match, index, matches) => {
+        // Use JavaScript string interpolation to replace the variable
+        const inc = (index + 1);
+        const matchStr = match.replace(/{|}/g, '');
+        if (index === matches.length - 1) {
+            tempUrl = tempUrl + "&filters[content_word][$in][" + inc + "]=" + matchStr + "&filters[website_country][code][$eq]=" + region;
+        } else {
+            tempUrl = tempUrl + "&filters[content_word][$in][" + inc + "]=" + matchStr;
+        }
+    });
+
+    if (tempUrl) {
+        return fetchWrapper.get(tempUrl);
+    }
 }
