@@ -10,6 +10,7 @@ import {
   holidaytypesService,
   destinationService,
   blogsService,
+  homeService
 } from "services";
 import { NavLink } from "components";
 
@@ -25,6 +26,7 @@ function Index() {
   const [testimonials, setTestimonials] = useState([]);
   const [sortedData, setSortedData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [websiteContent, setWebsiteContent] = useState(null);
 
   let regionWiseUrl = "/uk";
   if (typeof window !== "undefined") {
@@ -48,7 +50,7 @@ function Index() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`
+      `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`
     );
   };
 
@@ -165,11 +167,11 @@ function Index() {
     } else {
       router.push(
         `advance-search?where=` +
-          data?.destination +
-          `&what=` +
-          data?.reason +
-          `&when=` +
-          data?.month
+        data?.destination +
+        `&what=` +
+        data?.reason +
+        `&when=` +
+        data?.month
       );
     }
   }
@@ -287,6 +289,35 @@ function Index() {
         // Handle any errors here
         setIsLoading(false);
       });
+
+    homeService
+      .getAllWebsiteContent()
+      .then((x) => {
+        // debugger;
+        const response = x?.data;
+
+        // Calculate the expiration time (1 day from the current time)
+        const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000;
+
+        const dynamicObject = {};
+        response.forEach((element, index) => {
+          // Create an object with the data and expiration time
+          dynamicObject[element?.attributes?.content_word] = element?.attributes?.content_translation_text;
+          dynamicObject['code'] = element?.attributes?.website_country?.data?.attributes?.code;
+          dynamicObject['expiration'] = expirationTime;
+
+          // Store the data in local storage
+          localStorage.setItem("websitecontent", JSON.stringify(dynamicObject));
+        });
+
+        setWebsiteContent(x.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        // Handle any errors here
+        setIsLoading(false);
+      });
+
 
     var site_region = localStorage.getItem("site_region");
 

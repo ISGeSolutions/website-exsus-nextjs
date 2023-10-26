@@ -17,7 +17,6 @@ function ContinentOverview({ sendDataToParent }) {
   const itemsPerPage = 9; // Number of items to load per page
   const [allCountries, setAllCountries] = useState([]);
   const [destinationName, setdestinationName] = useState("");
-
   const { t } = useTranslation();
   const [holidayTitle, setHolidayTitle] = useState(t("holidayTitle"));
   const [isLoading, setIsLoading] = useState(true);
@@ -84,7 +83,27 @@ function ContinentOverview({ sendDataToParent }) {
 
   equalHeight(true);
 
-  var checkStrArray = [];
+  const websiteContentCheck = (matches, region, modifiedString) => {
+    destinationService
+      .getDictionaryDetails(matches, region)
+      .then((responseObj) => {
+        if (responseObj) {
+          const res = responseObj?.data;
+          res.forEach((element, index) => {
+            const replacement = element?.attributes?.content_translation_text;
+            const matchString = element?.attributes?.content_word
+            const checkStr = new RegExp(`\\$\\{${matchString}\\}`, 'g');
+            if (checkStr && replacement) {
+              modifiedString = modifiedString.replace(checkStr, replacement);
+            }
+          });
+
+          // Set the modified string in state
+          setnewValueWithBr(modifiedString);
+        }
+      })
+  };
+
   useEffect(() => {
     destinationService
       .getDestinationDetails(destinationcode)
@@ -98,28 +117,45 @@ function ContinentOverview({ sendDataToParent }) {
         const regex = /{[a-zA-Z0-9-]+}/g;
         const matches = [...new Set(modifiedString.match(regex))];
 
-        // Display the matched words
-        if (matches) {
-          destinationService
-            .getDictionaryDetails(matches, region)
-            .then((responseObj) => {
-              if (responseObj) {
-                const res = responseObj?.data;
+        if (localStorage.getItem('websitecontent') !== null) {
+          // The item with 'yourKey' exists in local storage
+          // You can access it using localStorage.getItem('yourKey')
 
-                res.forEach((element, index) => {
-                  const replacement = element?.attributes?.content_translation_text;
-                  const matchString = element?.attributes?.content_word
-                  const checkStr = new RegExp(`\\$\\{${matchString}\\}`, 'g');
+          const storedDataString = localStorage.getItem('websitecontent');
+          const storedData = JSON.parse(storedDataString);
 
-                  if (checkStr && replacement) {
-                    modifiedString = modifiedString.replace(checkStr, replacement);
-                  }
-                });
-
-                // Set the modified string in state
-                setnewValueWithBr(modifiedString);
+          // debugger;
+          if (matches) {
+            let replacement = '';
+            try {
+              matches.forEach((match, index, matches) => {
+                const matchString = match.replace(/{|}/g, '');
+                if (!storedData[matchString]) {
+                  websiteContentCheck(matches, region, modifiedString);
+                  throw new Error("Loop break");
+                } else {
+                  replacement = storedData[matchString];
+                }
+                const checkStr = new RegExp(`\\$\\{${matchString}\\}`, 'g');
+                if (checkStr && replacement) {
+                  modifiedString = modifiedString.replace(checkStr, replacement);
+                }
+              })
+              // Set the modified string in state
+              setnewValueWithBr(modifiedString);
+            } catch (error) {
+              if (error.message === "Loop break") {
+                // Handle the loop break here
+                // console.log("Loop has been stopped.");
               }
-            })
+            }
+          }
+        } else {
+          // The item with 'yourKey' does not exist in local storage
+          // Display the matched words
+          if (matches) {
+            websiteContentCheck(matches, region, modifiedString);
+          }
         }
 
         // setnewValueWithBr(valueWithBr);
