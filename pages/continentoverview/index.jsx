@@ -83,7 +83,7 @@ function ContinentOverview({ sendDataToParent }) {
 
   equalHeight(true);
 
-  const checkStrArray = [];
+  var checkStrArray = [];
   useEffect(() => {
     destinationService
       .getDestinationDetails(destinationcode)
@@ -91,35 +91,37 @@ function ContinentOverview({ sendDataToParent }) {
         // const lines = x.data.attributes?.overview_text.split('\n');
         setdestinationName(x.data.attributes.destination_name);
 
-        const oldText = x.data.attributes?.overview_text;
-        const regex = /{[a-zA-Z0-9-]+}/g;
+        let modifiedString = x.data.attributes?.overview_text;
 
         // Find and store matches in an array
-        const matches = [...new Set(oldText.match(regex))];
+        const regex = /{[a-zA-Z0-9-]+}/g;
+        const matches = [...new Set(modifiedString.match(regex))];
 
         // Display the matched words
         if (matches) {
-          matches.forEach((match, index) => {
-            // Use JavaScript string interpolation to replace the variable
-            const matchStr = match.replace(/{|}/g, '');
-            destinationService
-              .getDictionaryDetails(matchStr, region)
-              .then((responseObj) => {
-                const replacement = responseObj?.data[0]?.attributes?.website_country_contents?.data[0]?.attributes?.content_translation_text;
-                const checkStr = '${' + matchStr + '}';
-                if (index === 0) {
-                  checkStrArray.push(oldText.replace(checkStr, replacement));
-                } else {
-                  if (checkStrArray[checkStrArray.length - 1]) {
-                    checkStrArray.push(checkStrArray[checkStrArray.length - 1].replace(checkStr, replacement));
+          destinationService
+            .getDictionaryDetails(matches, region)
+            .then((responseObj) => {
+              if (responseObj) {
+                const res = responseObj?.data;
+
+                res.forEach((element, index) => {
+                  const replacement = element?.attributes?.content_translation_text;
+                  const matchString = element?.attributes?.content_word
+                  const checkStr = new RegExp(`\\$\\{${matchString}\\}`, 'g');
+
+                  if (checkStr && replacement) {
+                    modifiedString = modifiedString.replace(checkStr, replacement);
                   }
-                }
-                setnewValueWithBr(checkStrArray[checkStrArray.length - 1]);
-              })
-          });
+                });
+
+                // Set the modified string in state
+                setnewValueWithBr(modifiedString);
+              }
+            })
         }
 
-        setnewValueWithBr(valueWithBr);
+        // setnewValueWithBr(valueWithBr);
         setAllCountries(x.data?.attributes?.countries?.data);
         setIsLoading(false);
       })
@@ -154,7 +156,7 @@ function ContinentOverview({ sendDataToParent }) {
         }
       }, 0);
     };
-  }, [destinationcode, router, holidayTitle]);
+  }, [destinationcode, router, holidayTitle, valueWithBr]);
 
   return (
     <>
