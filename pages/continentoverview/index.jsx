@@ -130,15 +130,21 @@ function ContinentOverview({ sendDataToParent }) {
             try {
               matches.forEach((match, index, matches) => {
                 const matchString = match.replace(/{|}/g, '');
-                if (!storedData[matchString]) {
-                  websiteContentCheck(matches, region, modifiedString);
-                  throw new Error("Loop break");
+
+                const upperStr = region.toUpperCase();
+                if (storedData['code'] === upperStr) {
+                  if (!storedData[matchString]) {
+                    websiteContentCheck(matches, region, modifiedString);
+                    throw new Error("Loop break");
+                  } else {
+                    replacement = storedData[matchString];
+                  }
+                  const checkStr = new RegExp(`\\$\\{${matchString}\\}`, 'g');
+                  if (checkStr && replacement) {
+                    modifiedString = modifiedString.replace(checkStr, replacement);
+                  }
                 } else {
-                  replacement = storedData[matchString];
-                }
-                const checkStr = new RegExp(`\\$\\{${matchString}\\}`, 'g');
-                if (checkStr && replacement) {
-                  modifiedString = modifiedString.replace(checkStr, replacement);
+                  throw new Error("Region not found");
                 }
               })
               // Set the modified string in state
@@ -147,6 +153,10 @@ function ContinentOverview({ sendDataToParent }) {
               if (error.message === "Loop break") {
                 // Handle the loop break here
                 // console.log("Loop has been stopped.");
+              } else if (error.message === "Region not found") {
+                // Handle the loop break here
+                // console.log("Loop has been stopped.");
+                setnewValueWithBr(modifiedString);
               }
             }
           }
