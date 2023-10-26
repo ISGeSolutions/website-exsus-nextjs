@@ -91,12 +91,10 @@ function getDestinationInspireMe() {
     return fetchWrapper.get(destinationLandingListUrl);
 }
 
-function getDestinationDetails(id) {
+function getDestinationDetails(name) {
     // console.log('baseUrl_dropdown', baseUrl_dropdown);
     const destinationDetailsUrl =
-        `${publicRuntimeConfig.apiUrl}/api/destinations/` +
-        id +
-        `?populate=destination_images,countries.country_images`;
+        `${publicRuntimeConfig.apiUrl}/api/destinations?filters[destination_name]=${name}&populate=destination_images,countries.country_images`;
     return fetchWrapper.get(destinationDetailsUrl);
 }
 
@@ -157,8 +155,8 @@ function getCustomPagesData(pageName) {
     return fetchWrapper.get(customPage);
 }
 
-function getRegions(id) {
-    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/countries/${id}?populate[0]=destination&populate[1]=regions`;
+function getRegions(countryName) {
+    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/countries?filters[country_name][$eq]=${countryName}&populate[0]=destination&populate[1]=regions`;
     return fetchWrapper.get(itinerariesDetailsUrl);
 }
 

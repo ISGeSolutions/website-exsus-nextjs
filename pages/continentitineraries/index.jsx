@@ -120,7 +120,7 @@ function ContinentItinararies(props) {
   const [metaData, setMetaData] = useState([]);
   const router = useRouter();
   const [dcode, setdcode] = useState();
-  const { destinationcode } = router.query;
+  const destinationcode = router.query.continent.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();;
   const [countryOptions, setAllCountries] = useState([]);
   const [destinationName, setdestinationName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -269,7 +269,7 @@ function ContinentItinararies(props) {
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}&destinationcode=${destinationcode}`
+      `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}&destinationcode=${destinationcode}`
     );
   };
 
@@ -312,11 +312,11 @@ function ContinentItinararies(props) {
     destinationService
       .getDestinationDetails(destinationcode)
       .then((x) => {
-        setdestinationName(x.data.attributes.destination_name);
-        setdcode(x.data.attributes.destination_code);
+        setdestinationName(x.data[0].attributes.destination_name);
+        setdcode(x.data[0].attributes.destination_code);
         loadMoreData(activeItem);
         setAllCountries(
-          x.data?.attributes?.countries?.data.map((item) => ({
+          x.data[0]?.attributes?.countries?.data.map((item) => ({
             id: item.id,
             country_code: item?.attributes?.country_code,
             value: item?.attributes?.country_name,
@@ -551,7 +551,7 @@ function ContinentItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}

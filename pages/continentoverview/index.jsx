@@ -13,7 +13,7 @@ function ContinentOverview({ sendDataToParent }) {
   const router = useRouter();
   const [itineraries, setItineraries] = useState(null);
   const [valueWithBr, setnewValueWithBr] = useState("");
-  const { destinationcode } = router.query;
+  const destinationcode = router.query.continent.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();;
   const itemsPerPage = 9; // Number of items to load per page
   const [allCountries, setAllCountries] = useState([]);
   const [destinationName, setdestinationName] = useState("");
@@ -40,9 +40,10 @@ function ContinentOverview({ sendDataToParent }) {
     }
   }
 
-  const handleCountryClick = (id) => {
-    if (id) {
-      router.push(regionWiseUrl + `/country?countrycode=` + id);
+  const generateDynamicLinkCountries = (countryName) => {
+    const modifieditem = countryName.replace(/ /g, '-').replace(/&/g, 'and').toLowerCase();
+    if (countryName) {
+      return regionWiseUrl + `/destinations/${destinationcode}/${modifieditem}`;
     }
   };
 
@@ -89,9 +90,9 @@ function ContinentOverview({ sendDataToParent }) {
       .getDestinationDetails(destinationcode)
       .then((x) => {
         // const lines = x.data.attributes?.overview_text.split('\n');
-        setdestinationName(x.data.attributes.destination_name);
+        setdestinationName(x.data[0].attributes.destination_name);
 
-        let modifiedString = x.data.attributes?.overview_text;
+        let modifiedString = x.data[0].attributes?.overview_text;
 
         // Find and store matches in an array
         const regex = /{[a-zA-Z0-9-]+}/g;
@@ -122,7 +123,9 @@ function ContinentOverview({ sendDataToParent }) {
         }
 
         // setnewValueWithBr(valueWithBr);
-        setAllCountries(x.data?.attributes?.countries?.data);
+        setAllCountries(x.data[0]?.attributes?.countries?.data);
+        // setnewValueWithBr(valueWithBr);
+        // setAllCountries(x.data?.attributes?.countries?.data);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -204,7 +207,7 @@ function ContinentOverview({ sendDataToParent }) {
                         className="card_slider_inr card_slider_inr_sml"
                         key={countries?.id}
                       >
-                        <a onClick={() => handleCountryClick(countries?.id)}>
+                        <NavLink href={generateDynamicLinkCountries(countries?.attributes.country_name)}>
                           <div className="card_slider_inr_sml_img">
                             <img
                               src={
@@ -240,7 +243,7 @@ function ContinentOverview({ sendDataToParent }) {
                               />
                             </svg>
                           </h4>
-                        </a>
+                        </NavLink>
                       </div>
                     ))}
                   </div>

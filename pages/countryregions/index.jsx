@@ -52,7 +52,7 @@ function CountryRegions({ country, sendDataToParent }) {
         // window.history.pushState(null, null, newUrl);
 
         destinationService.getRegions(countrycode).then(x => {
-            setAllRegions(x.data?.attributes?.regions?.data);
+            setAllRegions(x.data[0]?.attributes?.regions?.data);
             setIsLoading(false);
         }).catch((error) => {
             // Handle any errors here

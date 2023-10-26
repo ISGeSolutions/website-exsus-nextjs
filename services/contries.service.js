@@ -33,10 +33,8 @@ function getAll() {
   return fetchWrapper.get(baseUrl);
 }
 
-function getCountryDetails(id) {
+function getCountryDetails(country_name) {
   const countryPageUrl =
-    `${publicRuntimeConfig.apiUrl}/api/countries/` +
-    id +
-    `?populate[0]=country_images`;
+    `${publicRuntimeConfig.apiUrl}/api/countries?filters[country_name][$eq]=${country_name}&populate[0]=country_images`;
   return fetchWrapper.get(countryPageUrl);
 }
