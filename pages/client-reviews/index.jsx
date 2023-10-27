@@ -14,6 +14,36 @@ export default Index;
 function Index() {
   const [clientReviews, setClientReviews] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [valueWithBr, setnewValueWithBr] = useState("");
+
+  let regionWiseUrl = "/uk";
+  let region = "uk";
+  if (typeof window !== "undefined") {
+    if (window && window.site_region) {
+      regionWiseUrl = "/" + window.site_region;
+      region = window.site_region;
+      // setMyVariable(window.site_region);
+    }
+  }
+
+  const websiteContentCheck = (matches, region, modifiedString) => {
+    whyusService.getDictionaryDetails(matches, region).then((responseObj) => {
+      if (responseObj) {
+        const res = responseObj?.data;
+        res.forEach((element, index) => {
+          const replacement = element?.attributes?.content_translation_text;
+          const matchString = element?.attributes?.content_word;
+          const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+          if (checkStr && replacement) {
+            modifiedString = modifiedString.replace(checkStr, replacement);
+          }
+        });
+
+        // Set the modified string in state
+        setnewValueWithBr(modifiedString);
+      }
+    });
+  };
 
   useEffect(() => {
     const carousel = document.querySelector("#carouselExampleInterval");
@@ -25,6 +55,74 @@ function Index() {
       .getAllReviews()
       .then((x) => {
         setClientReviews(x.data);
+
+        let modifiedString = x.data.attributes?.review_text;
+        console.log("console.log ", modifiedString);
+
+        // Find and store matches in an array
+        const regex = /{[a-zA-Z0-9-]+}/g;
+        const matches = [...new Set(modifiedString.match(regex))];
+
+        let storedDataString = "";
+        let storedData = "";
+
+        if (region == "uk") {
+          storedDataString = localStorage.getItem("websitecontent_uk");
+          storedData = JSON.parse(storedDataString);
+        } else if (region == "us") {
+          storedDataString = localStorage.getItem("websitecontent_us");
+          storedData = JSON.parse(storedDataString);
+        } else if (region == "asia") {
+          storedDataString = localStorage.getItem("websitecontent_asia");
+          storedData = JSON.parse(storedDataString);
+        } else if (region == "in") {
+          storedDataString = localStorage.getItem("websitecontent_india");
+          storedData = JSON.parse(storedDataString);
+        }
+
+        if (storedData !== null) {
+          // You can access it using localStorage.getItem('yourKey')
+          if (matches) {
+            let replacement = "";
+            try {
+              matches.forEach((match, index, matches) => {
+                const matchString = match.replace(/{|}/g, "");
+                if (!storedData[matchString]) {
+                  websiteContentCheck(matches, region, modifiedString);
+                  throw new Error("Loop break");
+                } else {
+                  replacement = storedData[matchString];
+                }
+                const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+                if (checkStr && replacement) {
+                  modifiedString = modifiedString.replace(
+                    checkStr,
+                    replacement
+                  );
+                }
+              });
+
+              // Set the modified string in state
+              setnewValueWithBr(modifiedString);
+              console.log(modifiedString);
+            } catch (error) {
+              if (error.message === "Loop break") {
+                // Handle the loop break here
+                console.log("Loop has been stopped.");
+              } else if (error.message === "Region not found") {
+                // Handle the loop break here
+                console.log("Loop has been stopped.");
+                setnewValueWithBr(modifiedString);
+              }
+            }
+          }
+        } else {
+          // The item with 'yourKey' does not exist in local storage
+          // Display the matched words
+          if (matches) {
+            websiteContentCheck(matches, region, modifiedString);
+          }
+        }
         setIsLoading(false);
       })
       .catch((error) => {
@@ -110,6 +208,7 @@ function Index() {
                   <h2 className="text-capitalize">
                     {element?.attributes?.review_header}
                   </h2>
+                  {/* <div dangerouslySetInnerHTML={{ __html: valueWithBr }} /> */}
                   <p
                     dangerouslySetInnerHTML={{
                       __html: element?.attributes?.review_text,

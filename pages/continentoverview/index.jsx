@@ -13,13 +13,17 @@ function ContinentOverview({ sendDataToParent }) {
   const router = useRouter();
   const [itineraries, setItineraries] = useState(null);
   const [valueWithBr, setnewValueWithBr] = useState("");
-  const destinationcode = router.query.continent.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();;
+  const destinationcode = router.query.continent
+    .replace(/-/g, " ")
+    .replace(/and/g, "&")
+    .toLowerCase();
   const itemsPerPage = 9; // Number of items to load per page
   const [allCountries, setAllCountries] = useState([]);
   const [destinationName, setdestinationName] = useState("");
   const { t } = useTranslation();
   const [holidayTitle, setHolidayTitle] = useState(t("holidayTitle"));
   const [isLoading, setIsLoading] = useState(true);
+
   const handleLoadMore = () => {
     setVisibleItems((prevVisibleItems) => prevVisibleItems + itemsPerPage);
   };
@@ -29,7 +33,7 @@ function ContinentOverview({ sendDataToParent }) {
     sendDataToParent(e);
   };
 
-  let region = 'uk'
+  let region = "uk";
   let regionWiseUrl = "/uk";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
@@ -40,7 +44,10 @@ function ContinentOverview({ sendDataToParent }) {
   }
 
   const generateDynamicLinkCountries = (countryName) => {
-    const modifieditem = countryName.replace(/ /g, '-').replace(/&/g, 'and').toLowerCase();
+    const modifieditem = countryName
+      .replace(/ /g, "-")
+      .replace(/&/g, "and")
+      .toLowerCase();
     if (countryName) {
       return regionWiseUrl + `/destinations/${destinationcode}/${modifieditem}`;
     }
@@ -49,7 +56,7 @@ function ContinentOverview({ sendDataToParent }) {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`
+        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`
     );
   };
 
@@ -91,8 +98,8 @@ function ContinentOverview({ sendDataToParent }) {
           const res = responseObj?.data;
           res.forEach((element, index) => {
             const replacement = element?.attributes?.content_translation_text;
-            const matchString = element?.attributes?.content_word
-            const checkStr = new RegExp(`\\$\\{${matchString}\\}`, 'g');
+            const matchString = element?.attributes?.content_word;
+            const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
             if (checkStr && replacement) {
               modifiedString = modifiedString.replace(checkStr, replacement);
             }
@@ -101,7 +108,7 @@ function ContinentOverview({ sendDataToParent }) {
           // Set the modified string in state
           setnewValueWithBr(modifiedString);
         }
-      })
+      });
   };
 
   useEffect(() => {
@@ -117,41 +124,44 @@ function ContinentOverview({ sendDataToParent }) {
         const regex = /{[a-zA-Z0-9-]+}/g;
         const matches = [...new Set(modifiedString.match(regex))];
 
-        let storedDataString = '';
-        let storedData = '';
+        let storedDataString = "";
+        let storedData = "";
 
-        if (region == 'uk') {
-          storedDataString = localStorage.getItem('websitecontent_uk');
+        if (region == "uk") {
+          storedDataString = localStorage.getItem("websitecontent_uk");
           storedData = JSON.parse(storedDataString);
-        } else if (region == 'us') {
-          storedDataString = localStorage.getItem('websitecontent_us');
+        } else if (region == "us") {
+          storedDataString = localStorage.getItem("websitecontent_us");
           storedData = JSON.parse(storedDataString);
-        } else if (region == 'asia') {
-          storedDataString = localStorage.getItem('websitecontent_asia');
+        } else if (region == "asia") {
+          storedDataString = localStorage.getItem("websitecontent_asia");
           storedData = JSON.parse(storedDataString);
-        } else if (region == 'in') {
-          storedDataString = localStorage.getItem('websitecontent_india');
+        } else if (region == "in") {
+          storedDataString = localStorage.getItem("websitecontent_india");
           storedData = JSON.parse(storedDataString);
         }
 
         if (storedData !== null) {
-          // You can access it using localStorage.getItem('yourKey')          
+          // You can access it using localStorage.getItem('yourKey')
           if (matches) {
-            let replacement = '';
+            let replacement = "";
             try {
               matches.forEach((match, index, matches) => {
-                const matchString = match.replace(/{|}/g, '');
+                const matchString = match.replace(/{|}/g, "");
                 if (!storedData[matchString]) {
                   websiteContentCheck(matches, region, modifiedString);
                   throw new Error("Loop break");
                 } else {
                   replacement = storedData[matchString];
                 }
-                const checkStr = new RegExp(`\\$\\{${matchString}\\}`, 'g');
+                const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
                 if (checkStr && replacement) {
-                  modifiedString = modifiedString.replace(checkStr, replacement);
+                  modifiedString = modifiedString.replace(
+                    checkStr,
+                    replacement
+                  );
                 }
-              })
+              });
               // Set the modified string in state
               setnewValueWithBr(modifiedString);
             } catch (error) {
@@ -258,7 +268,11 @@ function ContinentOverview({ sendDataToParent }) {
                         className="card_slider_inr card_slider_inr_sml"
                         key={countries?.id}
                       >
-                        <NavLink href={generateDynamicLinkCountries(countries?.attributes.country_name)}>
+                        <NavLink
+                          href={generateDynamicLinkCountries(
+                            countries?.attributes.country_name
+                          )}
+                        >
                           <div className="card_slider_inr_sml_img">
                             <img
                               src={
@@ -337,7 +351,7 @@ function ContinentOverview({ sendDataToParent }) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
