@@ -27,6 +27,16 @@ function Index() {
   const [holidayName, setHolidayName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   // const [visibleItems, setVisibleItems] = useState(itemsPerPage)
+  const router = useRouter();
+  const { id } = router.query;
+  const { hcode } = router.query;
+  const [isClearable, setIsClearable] = useState(true);
+  const [isSearchable, setIsSearchable] = useState(true);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [isLoader, setIsLoader] = useState(false);
+  const [isRtl, setIsRtl] = useState(false);
+  const [selectedOptionMonth, selectedOptionData] = useState(null);
+  const [title, setTitle] = useState("");
 
   const width = "250px";
   const styles = {
@@ -185,13 +195,6 @@ function Index() {
     { value: "City hotel", label: "City hotel" },
   ];
 
-  const [isClearable, setIsClearable] = useState(true);
-  const [isSearchable, setIsSearchable] = useState(true);
-  const [isDisabled, setIsDisabled] = useState(false);
-  const [isLoader, setIsLoader] = useState(false);
-  const [isRtl, setIsRtl] = useState(false);
-  const [selectedOptionMonth, selectedOptionData] = useState(null);
-  const [title, setTitle] = useState("");
   let regionWiseUrl = "/uk";
   let region = "uk";
   if (typeof window !== "undefined") {
@@ -264,10 +267,6 @@ function Index() {
     setHeadingText(text);
   };
 
-  const router = useRouter();
-  const { id } = router.query;
-  const { hcode } = router.query;
-
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName("card_slider_cnt"),
       allHeights = [],
@@ -291,15 +290,102 @@ function Index() {
 
   equalHeight(true);
 
+  const websiteContentCheck = (matches, region, modifiedString) => {
+    holidaytypesService
+      .getDictionaryDetails(matches, region)
+      .then((responseObj) => {
+        if (responseObj) {
+          const res = responseObj?.data;
+          res.forEach((element, index) => {
+            const replacement = element?.attributes?.content_translation_text;
+            const matchString = element?.attributes?.content_word;
+            const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+            if (checkStr && replacement) {
+              modifiedString = modifiedString.replace(checkStr, replacement);
+            }
+          });
+
+          // Set the modified string in state
+          setnewValueWithBr(modifiedString);
+        }
+      });
+  };
+
   useEffect(() => {
     selectedOptionData(optionsData[0]);
     holidaytypesService
       .getHolidaytypeDetails(hcode)
       .then((x) => {
         setHolidaytypesDetails(x.data.attributes);
-        const oldText = x.data.attributes?.overview_text;
-        var newValueWithBr = oldText?.replace(/\\n/g, "");
-        setnewValueWithBr(newValueWithBr);
+
+        // const oldText = x.data.attributes?.overview_text;
+        // var newValueWithBr = oldText?.replace(/\\n/g, "");
+        // setnewValueWithBr(newValueWithBr);
+
+        let modifiedString = x.data.attributes?.overview_text;
+
+        // Find and store matches in an array
+        const regex = /{[a-zA-Z0-9-]+}/g;
+        const matches = [...new Set(modifiedString.match(regex))];
+
+        let storedDataString = "";
+        let storedData = "";
+
+        if (region == "uk") {
+          storedDataString = localStorage.getItem("websitecontent_uk");
+          storedData = JSON.parse(storedDataString);
+        } else if (region == "us") {
+          storedDataString = localStorage.getItem("websitecontent_us");
+          storedData = JSON.parse(storedDataString);
+        } else if (region == "asia") {
+          storedDataString = localStorage.getItem("websitecontent_asia");
+          storedData = JSON.parse(storedDataString);
+        } else if (region == "in") {
+          storedDataString = localStorage.getItem("websitecontent_india");
+          storedData = JSON.parse(storedDataString);
+        }
+
+        if (storedData !== null) {
+          // You can access it using localStorage.getItem('yourKey')
+          if (matches) {
+            let replacement = "";
+            try {
+              matches.forEach((match, index, matches) => {
+                const matchString = match.replace(/{|}/g, "");
+                if (!storedData[matchString]) {
+                  websiteContentCheck(matches, region, modifiedString);
+                  throw new Error("Loop break");
+                } else {
+                  replacement = storedData[matchString];
+                }
+                const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+                if (checkStr && replacement) {
+                  modifiedString = modifiedString.replace(
+                    checkStr,
+                    replacement
+                  );
+                }
+              });
+              // Set the modified string in state
+              setnewValueWithBr(modifiedString);
+            } catch (error) {
+              if (error.message === "Loop break") {
+                // Handle the loop break here
+                // console.log("Loop has been stopped.");
+              } else if (error.message === "Region not found") {
+                // Handle the loop break here
+                // console.log("Loop has been stopped.");
+                setnewValueWithBr(modifiedString);
+              }
+            }
+          }
+        } else {
+          // The item with 'yourKey' does not exist in local storage
+          // Display the matched words
+          if (matches) {
+            websiteContentCheck(matches, region, modifiedString);
+          }
+        }
 
         const imageCheck = x.data.attributes.holiday_type_group_images.data;
         const newBackgroundImages = [];
@@ -315,6 +401,7 @@ function Index() {
       .catch((error) => {
         setIsLoading(false);
       });
+
     holidaytypesService
       .getHolidaytypeDetails(hcode)
       .then((x) => {
@@ -337,7 +424,7 @@ function Index() {
     });
 
     window.addEventListener("resize", equalHeight(true));
-  }, []);
+  }, [router, valueWithBr]);
 
   return (
     <>
@@ -393,18 +480,6 @@ function Index() {
                 ))}
               </div>
             </div>
-            <div className="banner_map_blk">
-              {/* <Iframe url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin"
-                        width="640px"
-                        height="320px"
-                        id=""
-                        className=""
-                        display="block"
-                        position="relative" /> */}
-
-              {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" style="border:0;" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe> */}
-              {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" style="border:0;" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe> */}
-            </div>
           </section>
 
           <section className="destination_tab_row light_grey">
@@ -425,7 +500,7 @@ function Index() {
                   {holidaytypesDetails?.header_text}
                 </h2>
                 <div className="destinations_cntnt_blk destination_para pt-0">
-                  <div dangerouslySetInnerHTML={{ __html: valueWithBr }} />
+                  <p dangerouslySetInnerHTML={{ __html: valueWithBr }} />
                   {/* <p>Everyone’s definition of a dream trip is different.</p>
                             <p>Whether you are after the big one, the holiday that you have always dreamed of but never went on, or want an adventure that leaves nothing out, we are ready to help - how about dinner with a geisha in Japan, an oceanfront lodge only reached by boat in Costa Rica, a helicopter ride over New Zealand’s stunning scenery or a luxurious cross country train journey with unparalleled views of South Africa.</p>
                             <p>Whatever a 'once-in-a-lifetime' holiday or honeymoon means to you, our experts can create a totally tailor-made luxury experience that perfectly satisfies your wishlist.</p>
