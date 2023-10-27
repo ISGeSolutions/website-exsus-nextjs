@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { NavLink } from '.';
-import { userService, destinationService, holidaytypesService } from 'services';
-import Head from 'next/head';
-import * as React from 'react';
-import { store, useGlobalState } from 'state-pool';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { NavLink } from ".";
+import { userService, destinationService, holidaytypesService } from "services";
+import Head from "next/head";
+import * as React from "react";
+import { store, useGlobalState } from "state-pool";
 
 export { Nav };
 
@@ -61,10 +61,19 @@ function Nav() {
     };
 
     const generateDynamicLinkCountries = (countryName, destinationcode) => {
-        const modifieddestinaitonName = destinationcode.replace(/ /g, '-').replace(/&/g, 'and').toLowerCase();
-        const modifiedcountryName = countryName.replace(/ /g, '-').replace(/&/g, 'and').toLowerCase();
+        const modifieddestinaitonName = destinationcode
+            .replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase();
+        const modifiedcountryName = countryName
+            .replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase();
         if (countryName) {
-            return regionWiseUrl + `/destinations/${modifieddestinaitonName}/${modifiedcountryName}`;
+            return (
+                regionWiseUrl +
+                `/destinations/${modifieddestinaitonName}/${modifiedcountryName}`
+            );
         }
     };
 
@@ -74,6 +83,10 @@ function Nav() {
         setOverlayVisible(false);
     };
 
+    const makeAnEnquiry = () => {
+        router.push('/contact-us');
+    }
+
     const router = useRouter();
 
     const ExpertsButton = () => {
@@ -82,28 +95,7 @@ function Nav() {
         const handleClick = () => {
             router.push(`/meet-our-travel-experts`); // Navigate to the /enquiry page
         };
-
-        return (
-            <button className="btn header_nav_btn" onClick={handleClick}>
-                MEET OUR EXPERTS
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="#000"
-                    shapeRendering="geometricPrecision"
-                    textRendering="geometricPrecision"
-                    imageRendering="optimizeQuality"
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    viewBox="0 0 267 512.43"
-                >
-                    <path
-                        fillRule="nonzero"
-                        d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                    />
-                </svg>
-            </button>
-        );
-    };
+    }
 
 
 
@@ -298,10 +290,7 @@ function Nav() {
         }
     }, []);
 
-    const makeAnEnquiry = () => {
 
-        router.push('/contact-us');
-    }
 
     // const [value, setValue] = React.useState('fruit');
 
@@ -374,34 +363,74 @@ function Nav() {
     // only show nav when logged in
     // if (!user) return null;
 
+
+    // only show nav when logged in
+    // if (!user) return null;
+
     return (
         <>
             <nav>
                 <Head>
                     {/* <script type="text/javascript" src="/assets/javascripts/navigation.js"></script> */}
                 </Head>
-                <div className="menu-overlay">
-                </div>
+                <div className="menu-overlay"></div>
 
                 <div className="menu menu_new overlay">
                     <div className="mobile-menu-head">
                         <div className="go-back">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z" /></svg>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="#fff"
+                                shapeRendering="geometricPrecision"
+                                textRendering="geometricPrecision"
+                                imageRendering="optimizeQuality"
+                                fillRule="evenodd"
+                                clipRule="evenodd"
+                                viewBox="0 0 267 512.43"
+                            >
+                                <path
+                                    fillRule="nonzero"
+                                    d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z"
+                                />
+                            </svg>
                         </div>
                         <div className="current-menu-title"></div>
-                        <button className="btn fa-solid fa-xmark mobile-menu-close" onClick={() => {
-                            const menuNav = document.querySelector(".menu"); //Nav tag
-                            menuNav.classList.toggle("active");
-                            document.querySelector(".menu-overlay").classList.toggle("active");
-                        }}></button>
+                        <button
+                            className="btn fa-solid fa-xmark mobile-menu-close"
+                            onClick={() => {
+                                const menuNav = document.querySelector(".menu"); //Nav tag
+                                menuNav.classList.toggle("active");
+                                document
+                                    .querySelector(".menu-overlay")
+                                    .classList.toggle("active");
+                            }}
+                        ></button>
                     </div>
 
                     <ul className="menu-main overlay">
                         <li className="menu-item-has-children">
-                            <NavLink onMouseEnter={showOverlay} onClick={hideOverlay}
-                                href={regionWiseUrl + '/destinations'} className="nav-item nav-link">
+                            <NavLink
+                                onMouseEnter={showOverlay}
+                                onClick={hideOverlay}
+                                href={regionWiseUrl + "/destinations"}
+                                className="nav-item nav-link"
+                            >
                                 Destinations
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="#ffffff"
+                                    shapeRendering="geometricPrecision"
+                                    textRendering="geometricPrecision"
+                                    imageRendering="optimizeQuality"
+                                    fillRule="evenodd"
+                                    clipRule="evenodd"
+                                    viewBox="0 0 267 512.43"
+                                >
+                                    <path
+                                        fillRule="nonzero"
+                                        d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                                    />
+                                </svg>
                             </NavLink>
                             {/* <NavLink href="#">Destinations
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -414,36 +443,111 @@ function Nav() {
                                                 <div className="col-lg-6">
                                                     <div className="header_country_list">
                                                         <ul>
-                                                            {destinationLandingList?.map((destinationItem, i) => (
-                                                                <li key={i}
-                                                                    className={`header_country_label ${activeIndex === i ? 'active' : ''}`}
-                                                                    onMouseEnter={() => handleMouseEnter(i)}
-                                                                    onMouseLeave={handleMouseLeave}>
-                                                                    <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={dynamicLink(destinationItem?.attributes?.destination_name, destinationItem?.id)} as={dynamicLinkas(destinationItem?.attributes?.destination_code, destinationItem?.id)}>
-                                                                        {destinationItem?.attributes?.destination_name}
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                                                    </NavLink>
-                                                                    <div className="header_country_list_inr">
-                                                                        <ul>
-                                                                            {destinationItem?.attributes?.countries?.data.map((destinationCountry, i) => (
-                                                                                (i <= 7) ? (
-                                                                                    <li key={i}>
-                                                                                        <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={generateDynamicLinkCountries(destinationCountry?.attributes?.country_name, destinationItem?.attributes?.destination_name)}>
-                                                                                            {destinationCountry?.attributes?.country_name}
-                                                                                        </NavLink>
-                                                                                    </li>
-                                                                                ) : (
-                                                                                    ''
-                                                                                )
-                                                                            ))
+                                                            {destinationLandingList?.map(
+                                                                (destinationItem, i) => (
+                                                                    <li
+                                                                        key={i}
+                                                                        className={`header_country_label ${activeIndex === i ? "active" : ""
+                                                                            }`}
+                                                                        onMouseEnter={() => handleMouseEnter(i)}
+                                                                        onMouseLeave={handleMouseLeave}
+                                                                    >
+                                                                        <NavLink
+                                                                            onMouseEnter={showOverlay}
+                                                                            onClick={hideOverlay}
+                                                                            href={dynamicLink(
+                                                                                destinationItem?.attributes
+                                                                                    ?.destination_name,
+                                                                                destinationItem?.id
+                                                                            )}
+                                                                            as={dynamicLinkas(
+                                                                                destinationItem?.attributes
+                                                                                    ?.destination_code,
+                                                                                destinationItem?.id
+                                                                            )}
+                                                                        >
+                                                                            {
+                                                                                destinationItem?.attributes
+                                                                                    ?.destination_name
                                                                             }
-                                                                        </ul>
-                                                                        <button className="btn header_nav_btn" onClick={() => redirectToAllLink(destinationItem?.attributes?.destination_name)}>See all {destinationItem?.attributes?.destination_name}
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                                                        </button>
-                                                                    </div>
-                                                                </li>
-                                                            ))}
+                                                                            <svg
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                fill="#ffffff"
+                                                                                shapeRendering="geometricPrecision"
+                                                                                textRendering="geometricPrecision"
+                                                                                imageRendering="optimizeQuality"
+                                                                                fillRule="evenodd"
+                                                                                clipRule="evenodd"
+                                                                                viewBox="0 0 267 512.43"
+                                                                            >
+                                                                                <path
+                                                                                    fillRule="nonzero"
+                                                                                    d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                                                                                />
+                                                                            </svg>
+                                                                        </NavLink>
+                                                                        <div className="header_country_list_inr">
+                                                                            <ul>
+                                                                                {destinationItem?.attributes?.countries?.data.map(
+                                                                                    (destinationCountry, i) =>
+                                                                                        i <= 7 ? (
+                                                                                            <li key={i}>
+                                                                                                <NavLink
+                                                                                                    onMouseEnter={showOverlay}
+                                                                                                    onClick={hideOverlay}
+                                                                                                    href={generateDynamicLinkCountries(
+                                                                                                        destinationCountry
+                                                                                                            ?.attributes
+                                                                                                            ?.country_name,
+                                                                                                        destinationItem?.attributes
+                                                                                                            ?.destination_name
+                                                                                                    )}
+                                                                                                >
+                                                                                                    {
+                                                                                                        destinationCountry
+                                                                                                            ?.attributes?.country_name
+                                                                                                    }
+                                                                                                </NavLink>
+                                                                                            </li>
+                                                                                        ) : (
+                                                                                            ""
+                                                                                        )
+                                                                                )}
+                                                                            </ul>
+                                                                            <button
+                                                                                className="btn header_nav_btn"
+                                                                                onClick={() =>
+                                                                                    redirectToAllLink(
+                                                                                        destinationItem?.attributes
+                                                                                            ?.destination_name
+                                                                                    )
+                                                                                }
+                                                                            >
+                                                                                See all{" "}
+                                                                                {
+                                                                                    destinationItem?.attributes
+                                                                                        ?.destination_name
+                                                                                }
+                                                                                <svg
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    fill="#000"
+                                                                                    shapeRendering="geometricPrecision"
+                                                                                    textRendering="geometricPrecision"
+                                                                                    imageRendering="optimizeQuality"
+                                                                                    fillRule="evenodd"
+                                                                                    clipRule="evenodd"
+                                                                                    viewBox="0 0 267 512.43"
+                                                                                >
+                                                                                    <path
+                                                                                        fillRule="nonzero"
+                                                                                        d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                                                                                    />
+                                                                                </svg>
+                                                                            </button>
+                                                                        </div>
+                                                                    </li>
+                                                                )
+                                                            )}
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -454,18 +558,66 @@ function Nav() {
                                                 <div className="col-md-6">
                                                     <div className="header_nav_cnt">
                                                         <h4>Socially-Distanced holidays</h4>
-                                                        <p>Get away from it all, in Exsus style. We're championing the art of socially-distanced luxury holidays, from private islands and exceptional villas to awesome adventures and unique glamping experiences. Escape, explore and relax in beautiful destinations all over the world. Get away from the crowds and enjoy a memorable off-the-beaten-track holiday like no other.</p>
-                                                        <button className="btn header_nav_btn">Discover more
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                                        <p>
+                                                            Get away from it all, in Exsus style. We're
+                                                            championing the art of socially-distanced luxury
+                                                            holidays, from private islands and exceptional
+                                                            villas to awesome adventures and unique glamping
+                                                            experiences. Escape, explore and relax in
+                                                            beautiful destinations all over the world. Get
+                                                            away from the crowds and enjoy a memorable
+                                                            off-the-beaten-track holiday like no other.
+                                                        </p>
+                                                        <button className="btn header_nav_btn">
+                                                            Discover more
+                                                            <svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                fill="#000"
+                                                                shapeRendering="geometricPrecision"
+                                                                textRendering="geometricPrecision"
+                                                                imageRendering="optimizeQuality"
+                                                                fillRule="evenodd"
+                                                                clipRule="evenodd"
+                                                                viewBox="0 0 267 512.43"
+                                                            >
+                                                                <path
+                                                                    fillRule="nonzero"
+                                                                    d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                                                                />
+                                                            </svg>
                                                         </button>
                                                     </div>
                                                 </div>
                                                 <div className="col-md-6">
                                                     <div className="header_nav_cnt">
                                                         <h4>Special occasions</h4>
-                                                        <p>Discover some of our favourite ways to celebrate a special occasion, whether that's an anniversary, a birthday, a proposal, or just because... From proposing in a secluded spot by Iguazu Falls to enjoying exclusive use of your very own private island in the Maldives, get some inspiration for your own celebration and give yourself something to look forward to!</p>
-                                                        <button className="btn header_nav_btn">Discover more
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                                                        <p>
+                                                            Discover some of our favourite ways to celebrate a
+                                                            special occasion, whether that's an anniversary, a
+                                                            birthday, a proposal, or just because... From
+                                                            proposing in a secluded spot by Iguazu Falls to
+                                                            enjoying exclusive use of your very own private
+                                                            island in the Maldives, get some inspiration for
+                                                            your own celebration and give yourself something
+                                                            to look forward to!
+                                                        </p>
+                                                        <button className="btn header_nav_btn">
+                                                            Discover more
+                                                            <svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                fill="#000"
+                                                                shapeRendering="geometricPrecision"
+                                                                textRendering="geometricPrecision"
+                                                                imageRendering="optimizeQuality"
+                                                                fillRule="evenodd"
+                                                                clipRule="evenodd"
+                                                                viewBox="0 0 267 512.43"
+                                                            >
+                                                                <path
+                                                                    fillRule="nonzero"
+                                                                    d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                                                                />
+                                                            </svg>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -474,7 +626,6 @@ function Nav() {
                                     </div>
                                 </div>
                             )}
-
                         </li>
                         <li className="menu-item-has-children overlay">
                             <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/holiday-types'}>Holiday types
@@ -612,7 +763,6 @@ function Nav() {
                             </NavLink>
                         </button> */}
                 </div>
-
             </nav>
         </>
     );

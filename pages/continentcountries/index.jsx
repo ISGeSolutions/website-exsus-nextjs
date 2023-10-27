@@ -12,12 +12,14 @@ export default ContinentCountry;
 
 function ContinentCountry({ sendDataToParent }) {
     const router = useRouter();
-    const destinationcode = router.query.continent.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
+    const destinationcode = router.query.continent
+        .replace(/-/g, " ")
+        .replace(/and/g, "&")
+        .toLowerCase();
     const [allCountries, setAllCountries] = useState([]);
     const [destinationName, setdestinationName] = useState("");
     const [isLoading, setIsLoading] = useState(true);
-    const [activeItem, setActiveItem] = useState('recommended');
-
+    const [activeItem, setActiveItem] = useState("recommended");
 
     let regionWiseUrl = "/uk";
     if (typeof window !== "undefined") {
@@ -76,6 +78,39 @@ function ContinentCountry({ sendDataToParent }) {
             console.log(allCountries);
         }
     }
+
+
+
+
+    useEffect(() => {
+        destinationService
+            .getDestinationDetails(destinationcode)
+            .then((x) => {
+                // const lines = x.data.attributes?.overview_text.split('\n');
+                // const oldText = x.data.attributes?.overview_text;
+                // var newValueWithBr = oldText?.replace(/\\n/g, "");
+                // setnewValueWithBr(newValueWithBr);
+                setdestinationName(x.data[0].attributes.destination_name);
+                setAllCountries(x.data[0].attributes?.countries?.data);
+                setIsLoading(false);
+            })
+            .catch((error) => {
+                setIsLoading(false);
+            });
+
+        // Using window.onload to detect full page load
+        window.onload = () => {
+            setTimeout(() => {
+                const redirectUrl =
+                    regionWiseUrl + "/continent?destinationcode=" + destinationcode;
+                if (redirectUrl) {
+                    router.push(redirectUrl);
+                }
+            }, 0);
+        }
+    }, [destinationcode, router]);
+
+
     return (
         <>
             {isLoading ? (
@@ -90,13 +125,13 @@ function ContinentCountry({ sendDataToParent }) {
                 <div>
                     <div className="container">
                         <section className="destination_para">
-                            <p>
+                            {/* <p>
                                 Whether it’s a rickshaw ride through hectic Hanoi in Vietnam, a
                                 fascinating adventure amidst the ancient Angkor temples in
                                 Cambodia, or diving and snorkelling in some of the warmest,
                                 clearest seas on the planet, Asia is jam-packed with culture,
                                 adventure - and variety.
-                            </p>
+                            </p> */}
                         </section>
                     </div>
 
