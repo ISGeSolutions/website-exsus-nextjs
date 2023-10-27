@@ -26,10 +26,10 @@ function Index() {
   const [metaData, setMetaData] = useState([]);
   const [holidayName, setHolidayName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [friendlyUrl, setFriendlyUrl] = useState("");
+
   // const [visibleItems, setVisibleItems] = useState(itemsPerPage)
   const router = useRouter();
-  const { id } = router.query;
-  const { hcode } = router.query;
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(true);
   const [isDisabled, setIsDisabled] = useState(false);
@@ -247,7 +247,7 @@ function Index() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=${region}`
+      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=${region}`
     );
   };
 
@@ -266,6 +266,9 @@ function Index() {
     }
     setHeadingText(text);
   };
+
+
+  const hcode = router.query?.holidaytypeitineraries?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -316,6 +319,14 @@ function Index() {
     holidaytypesService
       .getHolidaytypeDetails(hcode)
       .then((x) => {
+        setHolidaytypesDetails(x.data[0].attributes);
+        setFriendlyUrl(`home/holiday types/${x.data[0].attributes.friendly_url}`)
+        setHolidayName(x.data[0].attributes.holiday_type_group_name);
+        setTitle(x.data[0].attributes.page_meta_title);
+        const oldText = x.data[0].attributes?.overview_text;
+        var newValueWithBr = oldText?.replace(/\\n/g, "");
+        setnewValueWithBr(newValueWithBr);
+        const imageCheck = x.data[0].attributes.holiday_type_group_images.data;
         setHolidaytypesDetails(x.data.attributes);
 
         // const oldText = x.data.attributes?.overview_text;
@@ -387,7 +398,6 @@ function Index() {
           }
         }
 
-        const imageCheck = x.data.attributes.holiday_type_group_images.data;
         const newBackgroundImages = [];
         imageCheck.forEach((element) => {
           if (element.attributes.image_type == "banner") {
@@ -419,12 +429,10 @@ function Index() {
 
     loadMoreData();
 
-    holidaytypesService.getHolidaytypeDetails(hcode).then((x) => {
-      setHolidayName(x.data.attributes.holiday_type_group_name);
-    });
+
 
     window.addEventListener("resize", equalHeight(true));
-  }, [router, valueWithBr]);
+  }, [router, valueWithBr, hcode]);
 
   return (
     <>
@@ -486,7 +494,7 @@ function Index() {
             <div className="container">
               <div className="bookmark_row">
                 <FriendlyUrl
-                  data={holidaytypesDetails?.friendly_url}
+                  data={friendlyUrl}
                 ></FriendlyUrl>
                 {/* <ul>
                             <li><a href="homepage.html">Home</a></li>
@@ -608,7 +616,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                      "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}

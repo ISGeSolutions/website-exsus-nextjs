@@ -13,6 +13,7 @@ import CustomMultiValue from "../continentitineraries/CustomMultiValue";
 export default CountryPlaceToStay;
 
 function CountryPlaceToStay(country) {
+  const router = useRouter();
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(true);
   const [isDisabled, setIsDisabled] = useState(false);
@@ -22,17 +23,17 @@ function CountryPlaceToStay(country) {
   const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
   const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
   const [itineraries, setItineraries] = useState(null);
-  const router = useRouter();
   const itemsPerPage = 12; // Number of items to load per page
   const [page, setPage] = useState(0); // Current page
   const [metaData, setMetaData] = useState([]);
+  const destinationcode = router.query?.continent?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
+  const countrycode = router.query?.country?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
+
   const [dcode, setdcode] = useState();
-  const { destinationcode } = router.query;
   const [allHotels, setAllHotels] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeItem, setActiveItem] = useState("recommended");
 
-  const { countrycode } = router.query;
 
   const width = "250px";
   const styles = {
@@ -281,7 +282,7 @@ function CountryPlaceToStay(country) {
     window.onload = () => {
       setTimeout(() => {
         const redirectUrl =
-          regionWiseUrl + "/country?countrycode=" + countrycode;
+          regionWiseUrl + `/destinations/${destinationcode}/${countrycode}`;
         if (redirectUrl) {
           router.push(redirectUrl);
         }

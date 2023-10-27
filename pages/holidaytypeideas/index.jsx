@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import { Link, Spinner, Signup } from "components";
 import { Layout } from "components/users";
+import { FriendlyUrl } from "../../components";
 import { userService, holidaytypesService, destinationService } from "services";
 import { Inspireme } from "components";
 import { useRouter } from "next/router";
@@ -22,6 +23,8 @@ function Index() {
   );
   const [itineraries, setItineraries] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [friendlyUrl, setFriendlyUrl] = useState('');
+
 
   const optionsData = [
     { value: "", label: "Filter by destination" },
@@ -72,7 +75,10 @@ function Index() {
   const [selectedOptionMonth, selectedOptionData] = useState(null);
   const itemsPerPage = 9; // Number of items to load per page
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
-
+  const router = useRouter();
+  const { id } = router.query;
+  const holidaytypename = router.query?.holidaytypeideas?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
+  const holidayGrpName = router.query?.holidaytypeitineraries?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
   const width = "250px";
   const styles = {
     control: (provided) => ({
@@ -178,7 +184,7 @@ function Index() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`
+      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`
     );
   };
 
@@ -198,9 +204,7 @@ function Index() {
     setHeadingText(text);
   };
 
-  const router = useRouter();
-  const { id } = router.query;
-  const { hcode } = router.query;
+
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -245,15 +249,15 @@ function Index() {
       });
 
     holidaytypesService
-      .getHolidaytypeDetailsById(hcode)
+      .getHolidaytypeDetailsById(holidaytypename)
       .then((x) => {
-        setHolidaytypesDetails(x.data.attributes);
-
-        const oldText = x.data.attributes?.overview_text;
+        setHolidaytypesDetails(x.data[0].attributes);
+        setFriendlyUrl(`home/holiday-types/${holidayGrpName}/${holidaytypename}`);
+        console.log()
+        const oldText = x.data[0].attributes?.overview_text;
         var newValueWithBr = oldText?.replace(/\\n/g, "");
         setnewValueWithBr(newValueWithBr);
-
-        const imageCheck = x.data.attributes.holiday_type_images.data;
+        const imageCheck = x.data[0].attributes.holiday_type_images.data;
         const newBackgroundImages = [];
         imageCheck.forEach((element) => {
           if (element.attributes.image_type == "banner") {
@@ -270,7 +274,7 @@ function Index() {
         setIsLoading(false);
       });
     window.addEventListener("resize", equalHeight(true));
-  }, []);
+  }, [holidaytypename]);
 
   return (
     <>
@@ -324,15 +328,9 @@ function Index() {
           <section className="destination_tab_row light_grey pb-0">
             <div className="container">
               <div className="bookmark_row">
-                <p style={{ color: `white` }}>
-                  {holidaytypesDetails?.friendly_url}
-                </p>
-                {/* <ul>
-                            <li><a href="homepage.html">Home</a></li>
-                            <li><a href="holiday_types_landing.html">Holiday Types</a></li>
-                            <li><a href="holiday_types_type.html">Once In A Lifetime Holidays</a></li>
-                            <li>{headingText}</li>
-                        </ul> */}
+                <FriendlyUrl
+                  data={friendlyUrl}
+                ></FriendlyUrl>
               </div>
 
               <div className="destination_tab_inr">
@@ -443,7 +441,7 @@ function Index() {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}

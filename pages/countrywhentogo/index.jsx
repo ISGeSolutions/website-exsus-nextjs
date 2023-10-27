@@ -7,8 +7,9 @@ function CountryWhentogo(country) {
   console.log("country", country);
 
   const router = useRouter();
-  const { countrycode } = router.query;
+  const countrycode = router.query?.country?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
   const [isLoading, setIsLoading] = useState(true);
+  const destinationcode = router.query?.continent?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
 
   let regionWiseUrl = "/uk";
   let region = "uk";
@@ -26,8 +27,7 @@ function CountryWhentogo(country) {
     window.onload = () => {
       setTimeout(() => {
         const redirectUrl =
-          regionWiseUrl + "/country?countrycode=" + countrycode;
-
+          regionWiseUrl + `/destinations/${destinationcode}/${countrycode}`;
         if (redirectUrl) {
           router.push(redirectUrl);
         }

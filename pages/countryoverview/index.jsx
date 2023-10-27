@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 export default CountryOverview;
 
 function CountryOverview(props) {
+  const router = useRouter();
   const [itineraries, setItineraries] = useState(null);
   const itemsPerPage = 9; // Number of items to load per page
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
@@ -13,10 +14,9 @@ function CountryOverview(props) {
   const { overview_text } = props?.data || {};
   const country_name = props?.data?.country_name || "";
 
-  const router = useRouter();
-  const { countrycode } = router.query;
+  const countrycode = router.query?.country?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
   const [isLoading, setIsLoading] = useState(false);
-
+  const destinationcode = router.query?.continent?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
   const handleLoadMore = () => {
     setVisibleItems((prevVisibleItems) => prevVisibleItems + itemsPerPage);
   };
@@ -83,8 +83,7 @@ function CountryOverview(props) {
     window.onload = () => {
       setTimeout(() => {
         const redirectUrl =
-          regionWiseUrl + "/country?countrycode=" + countrycode;
-
+          regionWiseUrl + `/destinations/${destinationcode}/${countrycode}`;
         if (redirectUrl) {
           router.push(redirectUrl);
         }

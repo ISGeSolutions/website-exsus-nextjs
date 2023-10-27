@@ -36,8 +36,8 @@ function getAllBlogsHomePage() {
 }
 
 
-function getBlogDetails(id) {
-    const blogsUrl = `${publicRuntimeConfig.apiUrl}/api/blogs/${id}`;
+function getBlogDetails(blogName) {
+    const blogsUrl = `${publicRuntimeConfig.apiUrl}/api/blogs?filters[blog_header_text][$eq]=${blogName}`;
     return fetchWrapper.get(blogsUrl);
 }
 

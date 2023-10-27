@@ -15,6 +15,8 @@ function Index() {
   const [allOffers, setAllOffers] = useState([]);
   const [destinations, setDestinations] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [friendlyUrl, setFriendlyUrl] = useState('');
+
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName("card_slider_cnt"),
       allHeights = [],
@@ -58,6 +60,7 @@ function Index() {
       .then((x) => {
         setAllOffers(x.data);
         setIsLoading(false);
+        setFriendlyUrl(`home/special offers`);
       })
       .catch((error) => {
         // Handle any errors here
@@ -227,19 +230,11 @@ function Index() {
 
           <section className="card_blk_row destinations_blk_row light_grey">
             <div className="container">
-              {/* <div className="bookmark_row"> */}
-              {/* {/ <p style={{ color: `white` }}>{destinations?.attributes?.page_friendly_url}</p > /} */}
-              {/* <FriendlyUrl
-                // data={destinations?.attributes?.page_friendly_url}
-                ></FriendlyUrl> */}
-              {/* </div> */}
               <div className="bookmark_row">
-                <ul>
-                  <li>
-                    <a href="homepage.html">Home</a>
-                  </li>
-                  <li>Special offers</li>
-                </ul>
+                {/* {/ <p style={{ color: `white` }}>{destinations?.attributes?.page_friendly_url}</p > /} */}
+                <FriendlyUrl
+                  data={friendlyUrl}
+                ></FriendlyUrl>
               </div>
               <div className="row">
                 <div className="destinations_cntnt_blk">

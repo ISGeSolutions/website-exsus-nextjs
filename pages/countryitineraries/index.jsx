@@ -13,6 +13,7 @@ import Select, { components } from "react-select";
 export default CountryItinararies;
 
 function CountryItinararies(country) {
+  const router = useRouter();
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(true);
   const [isDisabled, setIsDisabled] = useState(false);
@@ -25,11 +26,12 @@ function CountryItinararies(country) {
   const [page, setPage] = useState(0); // Current page
   const itemsPerPage = 12; // Number of items to load per page
   const [isLoading, setIsLoading] = useState(true);
+  const destinationcode = router.query?.continent?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
+
 
   const [metaData, setMetaData] = useState([]);
 
-  const router = useRouter();
-  const { countrycode } = router.query;
+  const countrycode = router.query?.country?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
 
   const width = "250px";
   const styles = {
@@ -255,7 +257,7 @@ function CountryItinararies(country) {
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}&countrycode=${countrycode}`
+      `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}&countrycode=${countrycode}`
     );
   };
 
@@ -295,7 +297,7 @@ function CountryItinararies(country) {
     window.onload = () => {
       setTimeout(() => {
         const redirectUrl =
-          regionWiseUrl + "/country?countrycode=" + countrycode;
+          regionWiseUrl + `/destinations/${destinationcode}/${countrycode}`;
 
         if (redirectUrl) {
           router.push(redirectUrl);
@@ -479,7 +481,7 @@ function CountryItinararies(country) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
