@@ -13,12 +13,11 @@ export default CountryRegions;
 function CountryRegions({ country, sendDataToParent }) {
 
     const router = useRouter();
-    const { countrycode } = router.query;
     const [allRegions, setAllRegions] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [activeItem, setActiveItem] = useState('recommended');
-
-
+    const destinationcode = router?.query?.continent?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
+    const countrycode = router.query?.country?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
     let regionWiseUrl = '/uk';
     if (typeof window !== 'undefined') {
         if (window && window.site_region) {
@@ -63,7 +62,7 @@ function CountryRegions({ country, sendDataToParent }) {
         // Using window.onload to detect full page load
         window.onload = () => {
             setTimeout(() => {
-                const redirectUrl = regionWiseUrl + '/country?countrycode=' + countrycode;
+                regionWiseUrl + `/destinations/${destinationcode}/${countrycode}`;
                 // debugger;
                 if (redirectUrl) {
                     router.push(redirectUrl);

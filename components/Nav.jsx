@@ -23,6 +23,17 @@ function Nav() {
     const [closeMenu, setcloseMenu] = useState(null);
     const [overlayVisible, setOverlayVisible] = useState(true);
 
+
+    let region = 'uk'
+    let regionWiseUrl = "/uk";
+    if (typeof window !== "undefined") {
+        if (window && window.site_region) {
+            regionWiseUrl = "/" + window.site_region;
+            region = window.site_region;
+            // setMyVariable(window.site_region);
+        }
+    }
+
     const handleMouseEnter = (index) => {
         setActiveIndex(index);
     };
@@ -59,7 +70,7 @@ function Nav() {
 
     const redirectToAllLink = (id) => {
         const lowercasecountry = id.replace(/ /g, '-').toLowerCase();
-        router.push('/continentcountries?destinationcode=' + lowercasecountry);
+        router.push(`${regionWiseUrl}/destinations/${lowercasecountry}`);
         setOverlayVisible(false);
     };
 
@@ -94,14 +105,7 @@ function Nav() {
         );
     };
 
-    let regionWiseUrl = '/uk';
-    if (typeof window !== 'undefined') {
-        if (window && window.site_region) {
 
-            regionWiseUrl = '/' + window.site_region;
-            // setMyVariable(window.site_region);
-        }
-    }
 
     const dynamicLink = (itemName, id) => {
         const modifieditem = itemName.replace(/ /g, '-').replace(/&/g, 'and').toLowerCase();
@@ -183,21 +187,10 @@ function Nav() {
         // }
     };
 
-    const dynamicLinkHoliday = (itemId, id) => {
-        if (itemId) {
-            return regionWiseUrl + `/holidaytypeitineraries?hcode=` + id;
-        } else if (itemId && itemId == 'HG5') {
-            return regionWiseUrl + `/holidaytypeitineraries?hcode=` + id;
-        } else if (itemId && itemId == 'HG4') {
-            return regionWiseUrl + `/holidaytypeitineraries?hcode=` + id;
-        } else if (itemId && itemId == 'ADHL') {
-            return regionWiseUrl + `/holidaytypeitineraries?hcode=` + id;
-        } else if (itemId && itemId == 'LBHG') {
-            return regionWiseUrl + `/holidaytypeitineraries?hcode=` + id;
-        } else if (itemId && itemId == 'HG3') {
-            return regionWiseUrl + `/holidaytypeitineraries?hcode=` + id;
-        } else {
-            return "#";
+    const dynamicLinkHoliday = (itemName, id) => {
+        const modifieditem = itemName.replace(/ /g, '-').replace(/&/g, 'and').toLowerCase();
+        if (itemName) {
+            return regionWiseUrl + `/holiday-types/${modifieditem}`
         }
     };
 
@@ -222,37 +215,14 @@ function Nav() {
         }
     }
 
-    const dynamicLinkCountryHoliday = (itemId, itemIdCountry, id) => {
-        if (itemId) {
-            if (itemIdCountry) {
-                return regionWiseUrl + `/holidaytypeideas?hcode=` + id;
+    const dynamicLinkCountryHoliday = (grpName, typeName, id) => {
+        const modifiedGrpName = grpName.replace(/ /g, '-').replace(/&/g, 'and').toLowerCase();
+        const modifiedtypeName = typeName.replace(/ /g, '-').replace(/&/g, 'and').toLowerCase();
+
+        if (grpName) {
+            if (typeName) {
+                return regionWiseUrl + `/holiday-types/${modifiedGrpName}/${modifiedtypeName}`;
             }
-        } else if (itemId && itemId == 'HG5') {
-            if (itemIdCountry == 'ADHN') {
-                return regionWiseUrl + `/holidaytypeideas?hcode=` + id; // Adventure Honeymoons
-            } else if (itemIdCountry == 'BEHN') {
-                return regionWiseUrl + `/holidaytypeideas?hcode=` + id; // Beach Honeymoons
-            }
-        } else if (itemId && itemId == 'HG4') {
-            return regionWiseUrl + `/holidaytypeideas?hcode=` + id;
-        } else if (itemId && itemId == 'ADHL') {
-            if (itemIdCountry == 'ULAD') {
-                return regionWiseUrl + `/holidaytypeideas?hcode=` + id; // Ultimate Adventures
-            } else if (itemIdCountry == 'ACBA') {
-                return regionWiseUrl + `/holidaytypeideas?hcode=` + id; // Active Adventures
-            } else if (itemIdCountry == 'ADVE') {
-                return regionWiseUrl + `/holidaytypeideas?hcode=` + id; // 4x4 Adventures
-            }
-        } else if (itemId && itemId == 'LBHG') {
-            if (itemIdCountry == 'ABH') {
-                return regionWiseUrl + `/holidaytypeideas?hcode=` + id; // Alternative Beach Holidays
-            } else if (itemIdCountry == 'BCH') {
-                return regionWiseUrl + `/holidaytypeideas?hcode=` + id; // Beach & Culture Holidays
-            }
-        } else if (itemId && itemId == 'HG3') {
-            return regionWiseUrl + `/holidaytypeideas?hcode=` + id;
-        } else {
-            return "#";
         }
     };
 
@@ -523,7 +493,7 @@ function Nav() {
                                                                     className={`header_country_label ${activeIndexHoliday === i ? 'active' : ''}`}
                                                                     onMouseEnter={() => handleMouseEnterHoliday(i)}
                                                                     onMouseLeave={handleMouseLeaveHoliday}>
-                                                                    <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={dynamicLinkHoliday(holidaystypesItem?.attributes?.holiday_type_group_code, holidaystypesItem?.id)} as={dynamicLinkHolidayas(holidaystypesItem?.attributes?.holiday_type_group_code, holidaystypesItem?.id)}>
+                                                                    <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={dynamicLinkHoliday(holidaystypesItem?.attributes?.holiday_type_group_name, holidaystypesItem?.id)} as={dynamicLinkHolidayas(holidaystypesItem?.attributes?.holiday_type_group_code, holidaystypesItem?.id)}>
                                                                         {holidaystypesItem?.attributes?.holiday_type_group_name}
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                     </NavLink>
@@ -532,7 +502,7 @@ function Nav() {
                                                                             {holidaystypesItem?.attributes?.holiday_types?.data.map((holidaytypesCountry, i) => (
                                                                                 (i <= 7) ? (
                                                                                     <li key={holidaytypesCountry?.id}>
-                                                                                        <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={dynamicLinkCountryHoliday(holidaystypesItem?.attributes?.holiday_type_group_code, holidaytypesCountry?.attributes?.holiday_type_code, holidaytypesCountry?.id)}>
+                                                                                        <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={dynamicLinkCountryHoliday(holidaystypesItem?.attributes?.holiday_type_group_name, holidaytypesCountry?.attributes?.holiday_type_name, holidaytypesCountry?.id)}>
                                                                                             {holidaytypesCountry?.attributes?.holiday_type_name}
                                                                                         </NavLink>
                                                                                     </li>
@@ -581,7 +551,7 @@ function Nav() {
                             )}
                         </li>
                         <li className="menu-item-has-children"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/special-offers'}>Special offers</NavLink></li>
-                        <li className="menu-item-has-children"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/blog">Blog</NavLink></li>
+                        <li className="menu-item-has-children"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/blog'}>Blog</NavLink></li>
                         <li className="menu-item-has-children">
                             <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/why-us">Why us
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>

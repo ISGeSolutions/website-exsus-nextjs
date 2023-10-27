@@ -281,7 +281,7 @@ function ContinentPlacesToStay(props) {
     window.onload = () => {
       setTimeout(() => {
         const redirectUrl =
-          regionWiseUrl + "/continent?destinationcode=" + destinationcode;
+          regionWiseUrl + "/destinations/" + destinationcode;
 
         if (redirectUrl) {
           router.push(redirectUrl);

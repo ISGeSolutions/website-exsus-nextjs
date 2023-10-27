@@ -53,14 +53,14 @@ function getHolidaytypesLandingList() {
 
 }
 
-function getHolidaytypeDetails(id) {
+function getHolidaytypeDetails(groupName) {
     // let id1 = 1;
     // https://mock.apidog.com/m1/379394-0-default/api/holiday-type-groups/1?populate[0]=holiday_type_group_images
-    const holidaytypesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/holiday-type-groups/` + id + `?populate[0]=holiday_type_group_images`;
+    const holidaytypesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/holiday-type-groups?filters[holiday_type_group_name][$eq]=${groupName}&populate[0]=holiday_type_group_images`;
     return fetchWrapper.get(holidaytypesDetailsUrl);
 }
 
-function getHolidaytypeDetailsById(id) {
-    const holidaytypesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/holiday-types/` + id + `?populate[0]=holiday_type_images`;
+function getHolidaytypeDetailsById(typeName) {
+    const holidaytypesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/holiday-types?filters[holiday_type_name][$eq]=${typeName}&populate[0]=holiday_type_images`;
     return fetchWrapper.get(holidaytypesDetailsUrl);
 }

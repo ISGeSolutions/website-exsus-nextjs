@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import { Link, Spinner, Signup } from "components";
 import { Layout } from "components/users";
+import { FriendlyUrl } from "../../components";
 import { userService, blogsService } from "services";
 import { useRouter } from "next/router";
 
@@ -10,21 +11,23 @@ export default Index;
 function Index() {
   const [users, setUsers] = useState(null);
   const router = useRouter();
-  const { blogid } = router.query;
+  const blogName = router.query?.blogdetail?.replace(/-/g, ' ').replace(/and/g, '&').replace(/ ( ) /g, ' - ').toLowerCase();
   const [blogDetail, setblogdetail] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [friendlyUrl, setFriendlyUrl] = useState('');
 
   useEffect(() => {
     blogsService
-      .getBlogDetails(blogid)
+      .getBlogDetails(blogName)
       .then((x) => {
-        setblogdetail(x.data.attributes);
+        setblogdetail(x.data[0].attributes);
+        setFriendlyUrl(`home/blog/${x.data[0].attributes.blog_header_text}`)
         setIsLoading(false);
       })
       .catch((error) => {
         setIsLoading(false);
       });
-  }, [blogid]);
+  }, [blogName]);
 
   return (
     <Layout>
@@ -41,7 +44,10 @@ function Index() {
           <section className="card_blk_row destinations_blk_row blog_detail_row">
             <div className="container">
               <div className="bookmark_row">
-                <ul>
+                <FriendlyUrl data={friendlyUrl}>
+
+                </FriendlyUrl>
+                {/* <ul>
                   <li>
                     <a href="homepage.html">Home</a>
                   </li>
@@ -49,7 +55,7 @@ function Index() {
                     <a href="blog.html">Blog</a>
                   </li>
                   <li>{blogDetail.blog_header_text}</li>
-                </ul>
+                </ul> */}
               </div>
               <div className="destinations_cntnt_blk">
                 <h2>{blogDetail.blog_header_text}</h2>
