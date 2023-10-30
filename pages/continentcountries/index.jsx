@@ -16,6 +16,7 @@ function ContinentCountry({ sendDataToParent }) {
     .replace(/-/g, " ")
     .replace(/and/g, "&")
     .toLowerCase();
+  const query = router.query;
   const [allCountries, setAllCountries] = useState([]);
   const [destinationName, setdestinationName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -64,7 +65,7 @@ function ContinentCountry({ sendDataToParent }) {
         }
       }, 0);
     };
-  }, [destinationcode, router]);
+  }, [destinationcode, router, query]);
 
   const handleFilterClick = (item) => {
     setActiveItem(item);
@@ -81,33 +82,33 @@ function ContinentCountry({ sendDataToParent }) {
     }
   };
 
-  useEffect(() => {
-    destinationService
-      .getDestinationDetails(destinationcode)
-      .then((x) => {
-        // const lines = x.data.attributes?.overview_text.split('\n');
-        // const oldText = x.data.attributes?.overview_text;
-        // var newValueWithBr = oldText?.replace(/\\n/g, "");
-        // setnewValueWithBr(newValueWithBr);
-        setdestinationName(x.data[0].attributes.destination_name);
-        setAllCountries(x.data[0].attributes?.countries?.data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-      });
+  // useEffect(() => {
+  //   destinationService
+  //     .getDestinationDetails(destinationcode)
+  //     .then((x) => {
+  //       // const lines = x.data.attributes?.overview_text.split('\n');
+  //       // const oldText = x.data.attributes?.overview_text;
+  //       // var newValueWithBr = oldText?.replace(/\\n/g, "");
+  //       // setnewValueWithBr(newValueWithBr);
+  //       setdestinationName(x.data[0].attributes.destination_name);
+  //       setAllCountries(x.data[0].attributes?.countries?.data);
+  //       setIsLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       setIsLoading(false);
+  //     });
 
-    // Using window.onload to detect full page load
-    window.onload = () => {
-      setTimeout(() => {
-        const redirectUrl =
-          regionWiseUrl + "/continent?destinationcode=" + destinationcode;
-        if (redirectUrl) {
-          router.push(redirectUrl);
-        }
-      }, 0);
-    };
-  }, [destinationcode, router]);
+  //   // Using window.onload to detect full page load
+  //   window.onload = () => {
+  //     setTimeout(() => {
+  //       const redirectUrl =
+  //         regionWiseUrl + "/continent?destinationcode=" + destinationcode;
+  //       if (redirectUrl) {
+  //         router.push(redirectUrl);
+  //       }
+  //     }, 0);
+  //   };
+  // }, [destinationcode, router]);
 
   return (
     <>

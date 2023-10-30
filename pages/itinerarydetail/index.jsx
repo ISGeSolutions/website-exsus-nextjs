@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, Spinner, Signup } from "components";
 import { Layout } from "components/users";
+import { FriendlyUrl } from "../../components";
 import { hotelService, destinationService, countriesService } from "services";
 import Iframe from "react-iframe";
 import { useRouter } from "next/router";
@@ -16,13 +17,18 @@ function Index() {
   const router = useRouter();
   const [itineraries, setItineraries] = useState(null);
   const [bannerImages, setBannerImages] = useState(null);
-  const itin_id = router.query.itineraryid;
+  const itin_name = router.query?.itinerary_name ? router.query?.itinerary_name?.replace(/-/g, " ")
+    .replace(/and/g, "&")
+    .toLowerCase() : router.query?.itineraries?.replace(/-/g, " ")
+      .replace(/and/g, "&")
+      .toLowerCase();
   const itin_code = router.query.itinerarycode;
   const [title, setTitle] = useState("");
   const countrycode = router.query.countrycode;
   const destinationcode = router.query.destinationcode;
   const [countries, setCountries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [friendlyUrl, setFriendlyUrl] = useState('');
 
   let regionWiseUrl = "/uk";
   if (typeof window !== "undefined") {
@@ -137,12 +143,13 @@ function Index() {
     }
 
     destinationService
-      .getItineraryDetails(itin_id, itin_code)
+      .getItineraryDetails(itin_name)
       .then((x) => {
         //
         const bannerImages = [];
-        const imageCheck = x.data?.attributes?.itinerary_details.data;
-        setTitle(x.data.attributes.meta_title);
+        const imageCheck = x.data[0]?.attributes?.itinerary_details.data;
+        setFriendlyUrl(`home/destinations/${router.query?.continent}/${router.query?.country}/${router.query?.itinerary_name ? router.query?.itineraries + '/' + x.data[0].attributes.friendly_url : x.data[0].attributes.friendly_url}`);
+        setTitle(x.data[0].attributes.meta_title);
         imageCheck.forEach((banner, index) => {
           bannerImages.push(banner?.attributes?.image_path);
           // if (banner?.attributes?.image_type == 'banner') {
@@ -151,7 +158,7 @@ function Index() {
         });
 
         setBannerImages(bannerImages);
-        setItineraries(x.data);
+        setItineraries(x.data[0]);
 
         // const carousel = document.querySelector('#Testimonials');
         // new bootstrap.Carousel(carousel);
@@ -162,7 +169,7 @@ function Index() {
       .catch((error) => {
         setIsLoading(false);
       });
-  }, [itin_id, itin_code, countrycode, destinationcode]);
+  }, [itin_name, itin_code, countrycode, destinationcode]);
 
   return (
     <>
@@ -278,9 +285,10 @@ function Index() {
           <section className="trvl_info_row">
             <div className="container">
               <div className="bookmark_row">
-                <p style={{ color: `white` }}>
+                {/* <p style={{ color: `white` }}>
                   {itineraries?.attributes?.friendly_url}
-                </p>
+                </p> */}
+                <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
                 {/* <ul>
                             <li><a href="homepage.html">Home</a></li>
                             <li><a href="destinations.html">Destinations</a></li>

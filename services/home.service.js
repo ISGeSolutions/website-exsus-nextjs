@@ -8,7 +8,8 @@ export const homeService = {
     // inspireMe,
     signUp,
     saveDataToDB,
-    getAllWebsiteContent
+    getAllWebsiteContent,
+    getCustomPagesData
 };
 
 // function inspireMe(inspiremeData) {
@@ -39,4 +40,9 @@ function getAllWebsiteContent() {
     const websitecontentUrl = `${publicRuntimeConfig.apiUrl}/api/website-country-contents?populate[0]=website_country&pagination[pageSize]=1000`;
 
     return fetchWrapper.get(websitecontentUrl);
+}
+
+function getCustomPagesData(pageName) {
+    const customPage = `${publicRuntimeConfig.apiUrl}/api/custom-pages?filters[page_code][$eq]=${pageName}&[populate][0]=custom_page_images&populate[1]=custom_page_contents`;
+    return fetchWrapper.get(customPage);
 }

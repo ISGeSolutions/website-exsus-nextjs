@@ -263,16 +263,18 @@ function ContinentItinararies(props) {
   }
 
   const generateDynamicLink = (item) => {
+    const modifiedName = item.replace(/ /g, '-').toLowerCase();
     return (
       regionWiseUrl +
-      `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}&destinationcode=${destinationcode}`
+      `/destinations/${destinationcode}/${destinationcode}-iteneraries/${modifiedName}`
     );
   };
 
   const handleRedirect = (item) => {
+    const modifiedName = item.replace(/ /g, '-').toLowerCase();
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}&destinationcode=${destinationcode}`
+      `/destinations/${destinationcode}/${destinationcode}-iteneraries/${modifiedName}`
     );
   };
 
@@ -550,13 +552,13 @@ function ContinentItinararies(props) {
                         <div className="card_slider_inr">
                           <div className="card_slider">
                             <NavLink
-                              href={generateDynamicLink(item)}
+                              href={generateDynamicLink(item?.attributes?.itin_name)}
                               className="card_slider_img"
                             >
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -569,9 +571,13 @@ function ContinentItinararies(props) {
                               )}
                             </NavLink>
                             <div className="card_slider_cnt">
-                              <h4>
-                                <a>{item?.attributes?.itin_name}</a>
-                              </h4>
+                              <NavLink
+                                href={generateDynamicLink(item?.attributes?.itin_name)}
+                              >
+                                <h4>
+                                  <a>{item?.attributes?.itin_name}</a>
+                                </h4>
+                              </NavLink>
                               <ul>
                                 <li>{item?.attributes?.header_text}</li>
                                 <li>
@@ -592,7 +598,7 @@ function ContinentItinararies(props) {
                             </div>
                             <button
                               className="btn card_slider_btn"
-                              onClick={() => handleRedirect(item)}
+                              onClick={() => handleRedirect(item?.attributes?.itin_name)}
                             >
                               <span>{item?.attributes?.no_of_nites_notes}</span>
                               <span className="view_itnry_link">

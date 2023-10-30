@@ -378,7 +378,7 @@ function Layout({ children }) {
                       <NavLink href="/contact-us">Contact us</NavLink>
                     </li>
                     <li>
-                      <NavLink href="/online-enquiry">Online Enquiry</NavLink>
+                      <NavLink href="/contact-us">Online Enquiry</NavLink>
                     </li>
                     <li>
                       <NavLink href="/travel_information">
@@ -404,16 +404,16 @@ function Layout({ children }) {
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink href="/holiday-types">Holiday Types</NavLink>
+                      <NavLink href={region + "/holiday-types"}>Holiday Types</NavLink>
                     </li>
                     <li>
-                      <NavLink href="/offers">Offers</NavLink>
+                      <NavLink href={region + "/offers"}>Offers</NavLink>
                     </li>
                     <li>
-                      <NavLink href="/blog">Blog</NavLink>
+                      <NavLink href={region + "/blog"}>Blog</NavLink>
                     </li>
                     <li>
-                      <NavLink href="/where-to-go">When to go</NavLink>
+                      <NavLink href={region + "/where-to-go"}>When to go</NavLink>
                     </li>
                   </ul>
                 </div>
@@ -452,20 +452,20 @@ function Layout({ children }) {
                   <h6>About Exsus</h6>
                   <ul>
                     <li>
-                      <NavLink href="/about-us">About us</NavLink>
+                      <NavLink href={region + "/about-us"}>About us</NavLink>
                     </li>
                     <li>
-                      <NavLink href="/meet-our-travel-experts">
+                      <NavLink href={region + "/meet-our-travel-experts"}>
                         Meet our travel experts
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink href="/career-at-exsus">
+                      <NavLink href={region + "/career-at-exsus"}>
                         Careers at Exsus
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink href="/exsus-referral-scheme">
+                      <NavLink href={region + "/exsus-referral-scheme"}>
                         Exsus referral scheme
                       </NavLink>
                     </li>

@@ -220,10 +220,10 @@ const nextConfig = {
             { source: '/in//holiday-types/:holidaytypeitineraries/:holidaytypeideas', destination: '/holidaytypeideas' },
 
             // itinerarydetail
-            { source: "/uk/itinerarydetail", destination: "/itinerarydetail" },
-            { source: "/us/itinerarydetail", destination: "/itinerarydetail" },
-            { source: "/asia/itinerarydetail", destination: "/itinerarydetail" },
-            { source: "/in/itinerarydetail", destination: "/itinerarydetail" },
+            // { source: "/uk/itinerarydetail", destination: "/itinerarydetail" },
+            // { source: "/us/itinerarydetail", destination: "/itinerarydetail" },
+            // { source: "/asia/itinerarydetail", destination: "/itinerarydetail" },
+            // { source: "/in/itinerarydetail", destination: "/itinerarydetail" },
 
             // special-offers
             { source: "/uk/special-offers", destination: "/special-offers" },
@@ -231,13 +231,14 @@ const nextConfig = {
             { source: "/asia/special-offers", destination: "/special-offers" },
             { source: "/in/special-offers", destination: "/special-offers" },
 
-            // itineraries
-            { source: "/uk/itinerarydetail", destination: "/itinerarydetail" },
-            { source: "/us/itinerarydetail", destination: "/itinerarydetail" },
-            { source: "/asia/itinerarydetail", destination: "/itinerarydetail" },
-            { source: "/in/itinerarydetail", destination: "/itinerarydetail" },
+            // itinerarydetail
+            { source: "/uk/destinations/:continent/:country/:itineraries/:itineraryName?", destination: "/itinerarydetail" },
+            { source: "/us/destinations/:continent/:country/:itineraries/:itineraryName?", destination: "/itinerarydetail" },
+            { source: "/asia/destinations/:continent/:country/:itineraries/:itineraryName?", destination: "/itinerarydetail" },
+            { source: "/in/destinations/:continent/:country/:itineraries/:itineraryName?", destination: "/itinerarydetail" },
 
-            // itineraries
+
+            // advance search
             { source: "/uk/advance-search", destination: "/advance-search" },
             { source: "/us/advance-search", destination: "/advance-search" },
             { source: "/asia/advance-search", destination: "/advance-search" },
