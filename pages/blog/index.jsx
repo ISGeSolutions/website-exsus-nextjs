@@ -38,8 +38,7 @@ function Index() {
   const formOptions = { resolver: yupResolver(validationSchema) };
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors } = formState;
-  const [friendlyUrl, setFriendlyUrl] = useState('');
-
+  const [friendlyUrl, setFriendlyUrl] = useState("");
 
   const validationSchema = Yup.object().shape({
     destination: Yup.string(),
@@ -61,7 +60,10 @@ function Index() {
   };
 
   const generateDynamicLink = (item) => {
-    const modifiedGrpName = item.replace(/ /g, '-').replace(/&/g, 'and').toLowerCase();
+    const modifiedGrpName = item
+      .replace(/ /g, "-")
+      .replace(/&/g, "and")
+      .toLowerCase();
     return regionWiseUrl + `/blog/${modifiedGrpName}`;
   };
 
@@ -70,7 +72,7 @@ function Index() {
       .getAllBlogs(page + 1)
       .then((x) => {
         setMetaData(x.meta.pagination);
-        setFriendlyUrl(`home/blog`)
+        setFriendlyUrl(`home/blog`);
         const response = [...x.data].sort(
           (a, b) => a.attributes.serial_number - b.attributes.serial_number
         );
@@ -252,9 +254,7 @@ function Index() {
             <section className="card_blk_row destinations_blk_row light_grey">
               <div className="container">
                 <div className="bookmark_row">
-                  <FriendlyUrl
-                    data={friendlyUrl}
-                  ></FriendlyUrl>
+                  <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
                 </div>
                 <div className="destinations_cntnt_blk">
                   <h2>OUR TRAVEL BLOG</h2>
@@ -299,6 +299,7 @@ function Index() {
               </div>
             </section>
 
+            {/* Search our blog */}
             <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
               <div className="container">
                 <h3 className="title_cls">Search our blog</h3>
@@ -313,8 +314,9 @@ function Index() {
                                 aria-label="Choose a destination"
                                 name="destination"
                                 {...register("destination")}
-                                className={`form-select ${errors.destination ? "is-invalid" : ""
-                                  }`}
+                                className={`form-select ${
+                                  errors.destination ? "is-invalid" : ""
+                                }`}
                               >
                                 <option value="">Choose a destination</option>
                                 {destinationLandingList?.map((element, i) => (
@@ -339,8 +341,9 @@ function Index() {
                                 aria-label="Choose a reason"
                                 name="reason"
                                 {...register("reason")}
-                                className={`form-select ${errors.reason ? "is-invalid" : ""
-                                  }`}
+                                className={`form-select ${
+                                  errors.reason ? "is-invalid" : ""
+                                }`}
                               >
                                 <option value="">Choose a category</option>
                                 {holidaytypesLandingList?.map((element, i) => (
@@ -407,6 +410,7 @@ function Index() {
                         </div>
                       </div>
 
+                      {/* Blogs Data */}
                       {allBlogsData
                         ?.slice(0, allBlogsData.length)
                         .map((res) => (
@@ -415,7 +419,11 @@ function Index() {
                             key={res.id}
                           >
                             <div className="blog_cnt_inr">
-                              <NavLink href={generateDynamicLink(res.attributes.blog_header_text)}>
+                              <NavLink
+                                href={generateDynamicLink(
+                                  res.attributes.blog_header_text
+                                )}
+                              >
                                 {res?.attributes?.blog_image_path && (
                                   <img
                                     src={res?.attributes?.blog_image_path}
@@ -447,6 +455,7 @@ function Index() {
                           </div>
                         ))}
 
+                      {/* Pagination */}
                       <div className="col-12">
                         {metaData.total > page * itemsPerPage && (
                           <button
@@ -578,8 +587,9 @@ function Index() {
                                 type="text"
                                 name="first_name"
                                 {...register("first_name")}
-                                className={`form-control ${errors.first_name ? "is-invalid" : ""
-                                  }`}
+                                className={`form-control ${
+                                  errors.first_name ? "is-invalid" : ""
+                                }`}
                                 aria-label="First name *"
                                 placeholder="First name *"
                                 value={firstName}
@@ -596,8 +606,9 @@ function Index() {
                                 type="text"
                                 name="title"
                                 {...register("last_name")}
-                                className={`form-control ${errors.last_name ? "is-invalid" : ""
-                                  }`}
+                                className={`form-control ${
+                                  errors.last_name ? "is-invalid" : ""
+                                }`}
                                 aria-label="Last name *"
                                 placeholder="Last name *"
                                 value={lastName}
@@ -614,8 +625,9 @@ function Index() {
                                 type="email"
                                 name="email_id"
                                 {...register("email_id")}
-                                className={`form-control ${errors.email_id ? "is-invalid" : ""
-                                  }`}
+                                className={`form-control ${
+                                  errors.email_id ? "is-invalid" : ""
+                                }`}
                                 aria-label="Email *"
                                 placeholder="Email *"
                                 value={email}

@@ -29,7 +29,10 @@ function ContinentPlacesToStay(props) {
   const [page, setPage] = useState(0); // Current page
   const [metaData, setMetaData] = useState([]);
   const [dcode, setdcode] = useState();
-  const destinationcode = router.query.continent.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();;
+  const destinationcode = router.query.continent
+    .replace(/-/g, " ")
+    .replace(/and/g, "&")
+    .toLowerCase();
   const [allHotels, setAllHotels] = useState([]);
   const [countryOptions, setAllCountries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -280,8 +283,7 @@ function ContinentPlacesToStay(props) {
     // Using window.onload to detect full page load
     window.onload = () => {
       setTimeout(() => {
-        const redirectUrl =
-          regionWiseUrl + "/destinations/" + destinationcode;
+        const redirectUrl = regionWiseUrl + "/destinations/" + destinationcode;
 
         if (redirectUrl) {
           router.push(redirectUrl);
@@ -322,6 +324,8 @@ function ContinentPlacesToStay(props) {
               <h3 className="title_cls">
                 All recommended hotels in {destinationName}
               </h3>
+
+              {/* Inspire Me */}
               <div className="card_slider_row">
                 <div className="carousel00">
                   <div className="row">
@@ -472,6 +476,8 @@ function ContinentPlacesToStay(props) {
                         </div>
                       </div>
                     </div>
+
+                    {/* Continent place to stay Hotels */}
                     {allHotels?.slice(0, allHotels.length).map((item) => (
                       <div
                         className="col-sm-6 col-lg-4 col-xxl-3"
@@ -486,7 +492,7 @@ function ContinentPlacesToStay(props) {
                               {item?.attributes?.hotel_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -545,6 +551,7 @@ function ContinentPlacesToStay(props) {
                       </div>
                     ))}
 
+                    {/* Pagination */}
                     <div className="col-12">
                       {metaData.total > page * itemsPerPage && (
                         <button

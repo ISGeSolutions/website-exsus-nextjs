@@ -241,6 +241,7 @@ function Index() {
             </div>
           </section>
 
+          {/* Meet our experts call */}
           <section className="our_exprts_row">
             <div className="container">
               <div className="bookmark_row">
@@ -300,6 +301,7 @@ function Index() {
             </div>
           </section>
 
+          {/* Client Testimonials */}
           <section
             aria-label="Client Testimonials"
             className="testimonials_blk_row"
@@ -468,6 +470,7 @@ function Index() {
             </div>
           </section>
 
+          {/* Enqury */}
           <section className="make_enqury_row">
             <div className="container">
               <h3>YOUR JOURNEY STARTS HERE</h3>
@@ -495,6 +498,7 @@ function Index() {
             </div>
           </section>
 
+          {/* NewsLetter */}
           <section
             aria-label="Sign up for newsletter"
             className="newslettr_row"

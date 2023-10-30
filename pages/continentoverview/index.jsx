@@ -212,8 +212,7 @@ function ContinentOverview({ sendDataToParent }) {
     // Using window.onload to detect full page load
     window.onload = () => {
       setTimeout(() => {
-        const redirectUrl =
-          regionWiseUrl + "/destinations/" + destinationcode;
+        const redirectUrl = regionWiseUrl + "/destinations/" + destinationcode;
 
         if (redirectUrl) {
           router.push(redirectUrl);
@@ -262,6 +261,8 @@ function ContinentOverview({ sendDataToParent }) {
                       />
                     </svg>
                   </i>
+
+                  {/* Continent Overview Countries */}
                   <div className="carousel00">
                     {allCountries?.map((countries, i) => (
                       <div
@@ -334,6 +335,7 @@ function ContinentOverview({ sendDataToParent }) {
             </section>
           </div>
 
+          {/* Favourite trip ideas */}
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
             <div className="container">
               <h3 className="title_cls">Favourite trip ideas</h3>
@@ -405,6 +407,7 @@ function ContinentOverview({ sendDataToParent }) {
             </div>
           </section>
 
+          {/* Card */}
           <section className="card_blk_row dark_grey">
             <div className="container">
               <div className="row">

@@ -7,9 +7,15 @@ function CountryWhentogo(country) {
   console.log("country", country);
 
   const router = useRouter();
-  const countrycode = router.query?.country?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
+  const countrycode = router.query?.country
+    ?.replace(/-/g, " ")
+    .replace(/and/g, "&")
+    .toLowerCase();
   const [isLoading, setIsLoading] = useState(true);
-  const destinationcode = router.query?.continent?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
+  const destinationcode = router.query?.continent
+    ?.replace(/-/g, " ")
+    .replace(/and/g, "&")
+    .toLowerCase();
 
   let regionWiseUrl = "/uk";
   let region = "uk";
@@ -52,6 +58,7 @@ function CountryWhentogo(country) {
         </section>
       </div>
 
+      {/* Card */}
       <section className="card_blk_row dark_grey">
         <div className="container">
           <div className="row">

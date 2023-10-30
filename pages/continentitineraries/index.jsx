@@ -120,7 +120,10 @@ function ContinentItinararies(props) {
   const [metaData, setMetaData] = useState([]);
   const router = useRouter();
   const [dcode, setdcode] = useState();
-  const destinationcode = router.query.continent.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();;
+  const destinationcode = router.query.continent
+    .replace(/-/g, " ")
+    .replace(/and/g, "&")
+    .toLowerCase();
   const [countryOptions, setAllCountries] = useState([]);
   const [destinationName, setdestinationName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -260,16 +263,18 @@ function ContinentItinararies(props) {
   }
 
   const generateDynamicLink = (item) => {
+    const modifiedName = item.replace(/ /g, '-').toLowerCase();
     return (
       regionWiseUrl +
-      `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}&destinationcode=${destinationcode}`
+      `/destinations/${destinationcode}/${destinationcode}-iteneraries/${modifiedName}`
     );
   };
 
   const handleRedirect = (item) => {
+    const modifiedName = item.replace(/ /g, '-').toLowerCase();
     router.push(
       regionWiseUrl +
-      `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}&destinationcode=${destinationcode}`
+      `/destinations/${destinationcode}/${destinationcode}-iteneraries/${modifiedName}`
     );
   };
 
@@ -334,8 +339,7 @@ function ContinentItinararies(props) {
     // Using window.onload to detect full page load
     window.onload = () => {
       setTimeout(() => {
-        const redirectUrl =
-          regionWiseUrl + "/destinations/" + destinationcode;
+        const redirectUrl = regionWiseUrl + "/destinations/" + destinationcode;
 
         if (redirectUrl) {
           router.push(redirectUrl);
@@ -383,6 +387,8 @@ function ContinentItinararies(props) {
               <h3 className="title_cls">
                 All Luxury Holiday Ideas in {destinationName}
               </h3>
+
+              {/* Inspire Me */}
               <div className="card_slider_row">
                 <div className="carousel00">
                   <div className="row">
@@ -537,6 +543,7 @@ function ContinentItinararies(props) {
                       </div>
                     </div>
 
+                    {/* Continent Itineraries */}
                     {itineraries?.slice(0, itineraries.length).map((item) => (
                       <div
                         className="col-sm-6 col-lg-4 col-xxl-3"
@@ -545,7 +552,7 @@ function ContinentItinararies(props) {
                         <div className="card_slider_inr">
                           <div className="card_slider">
                             <NavLink
-                              href={generateDynamicLink(item)}
+                              href={generateDynamicLink(item?.attributes?.itin_name)}
                               className="card_slider_img"
                             >
                               {item?.attributes?.itinerary_images?.data.map(
@@ -564,9 +571,13 @@ function ContinentItinararies(props) {
                               )}
                             </NavLink>
                             <div className="card_slider_cnt">
-                              <h4>
-                                <a>{item?.attributes?.itin_name}</a>
-                              </h4>
+                              <NavLink
+                                href={generateDynamicLink(item?.attributes?.itin_name)}
+                              >
+                                <h4>
+                                  <a>{item?.attributes?.itin_name}</a>
+                                </h4>
+                              </NavLink>
                               <ul>
                                 <li>{item?.attributes?.header_text}</li>
                                 <li>
@@ -587,7 +598,7 @@ function ContinentItinararies(props) {
                             </div>
                             <button
                               className="btn card_slider_btn"
-                              onClick={() => handleRedirect(item)}
+                              onClick={() => handleRedirect(item?.attributes?.itin_name)}
                             >
                               <span>{item?.attributes?.no_of_nites_notes}</span>
                               <span className="view_itnry_link">
@@ -600,6 +611,7 @@ function ContinentItinararies(props) {
                       </div>
                     ))}
 
+                    {/* Pagination */}
                     <div className="col-12">
                       {metaData.total > page * itemsPerPage && (
                         <button

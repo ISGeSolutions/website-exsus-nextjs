@@ -113,8 +113,8 @@ function getFavIti() {
     return fetchWrapper.get(itinerariesDetailsUrl);
 }
 
-function getItineraryDetails(id, code) {
-    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries/${id}?populate[0]=itinerary_details&filters[itin_code]=${code}`;
+function getItineraryDetails(name) {
+    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?populate[0]=itinerary_details&filters[itin_name]=${name}`;
     return fetchWrapper.get(itinerariesDetailsUrl);
 }
 
@@ -151,7 +151,7 @@ function getAllHotels(page, item) {
 }
 
 function getCustomPagesData(pageName) {
-    const customPage = `${publicRuntimeConfig.apiUrl}/api/custom-pages?filters[page_code][$eq]=${pageName}&[populate][0]=custom_page_images`;
+    const customPage = `${publicRuntimeConfig.apiUrl}/api/custom-pages?filters[page_code][$eq]=${pageName}&[populate][0]=custom_page_images&populate[1]=custom_page_contents`;
     return fetchWrapper.get(customPage);
 }
 

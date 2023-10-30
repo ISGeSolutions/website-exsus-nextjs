@@ -297,6 +297,8 @@ function Index() {
                 Images
               </button>
             </div>
+
+            {/* Map */}
             <div className="banner_map_blk">
               <Iframe
                 width="640px"
@@ -329,6 +331,8 @@ function Index() {
                             <li>Asia</li>
                         </ul> */}
               </div>
+
+              {/* Regions sub tabs */}
               <div className="destination_tab_inr">
                 <h2 className="tab_tilte">
                   {/* {destinationDetails?.header_text} */}
@@ -456,6 +460,7 @@ function Index() {
             </div>
           </section>
 
+          {/* enqury */}
           <section className="make_enqury_row">
             <div className="container">
               <h3>YOUR JOURNEY STARTS HERE</h3>
@@ -467,6 +472,7 @@ function Index() {
             </div>
           </section>
 
+          {/* newsletter */}
           <section
             aria-label="Sign up for newsletter"
             className="newslettr_row"

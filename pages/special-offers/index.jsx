@@ -74,8 +74,6 @@ function Index() {
         setFriendlyUrl(`home/special offers`);
       })
       .catch((error) => {
-        // Handle any errors here
-        // console.error(error);
         setIsLoading(false);
       });
 
@@ -287,6 +285,7 @@ function Index() {
             </div>
           </section>
 
+          {/* Special Offer on Hotels */}
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
             <div className="container">
               <div className="card_slider_row">
@@ -347,7 +346,7 @@ function Index() {
                               <button className="btn card_slider_btn justify-content-end">
                                 <span
                                   className="view_itnry_link"
-                                  //onClick={handleRedirect}
+                                //onClick={handleRedirect}
                                 >
                                   View this hotel
                                   <em className="fa-solid fa-chevron-right"></em>
@@ -364,6 +363,7 @@ function Index() {
             </div>
           </section>
 
+          {/* Enqury */}
           <section className="make_enqury_row">
             <div className="container">
               <h3>YOUR JOURNEY STARTS HERE</h3>
@@ -391,6 +391,7 @@ function Index() {
             </div>
           </section>
 
+          {/* NewsLetter */}
           <section
             aria-label="Sign up for newsletter"
             className="newslettr_row"
