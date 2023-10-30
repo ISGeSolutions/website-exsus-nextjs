@@ -115,7 +115,6 @@
   position: relative;
 }
 
-/* line 93, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .title_cls {
   font: 2.5rem/2.875rem "Slabo 27px", serif;
   color: #8aad56;
@@ -124,19 +123,16 @@
   text-transform: uppercase;
 }
 
-/* line 100, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_small_card_row {
   padding: 10px 0;
   background-color: #333132;
   margin-bottom: 30px;
 }
 
-/* line 104, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_small_card_row .title_cls {
   font: 1.75rem/1.75rem "Slabo 27px", serif;
 }
 
-/* line 109, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr,
@@ -152,7 +148,6 @@
   flex: 0 0 20%;
 }
 
-/* line 112, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml a,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card a,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml a,
@@ -181,7 +176,6 @@
   display: inline-block;
 }
 
-/* line 115, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml a:hover img,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card a:hover img,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml a:hover img,
@@ -209,7 +203,6 @@
   transform: scale(1.2);
 }
 
-/* line 118, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml a:hover h4,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card a:hover h4,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml a:hover h4,
@@ -237,7 +230,6 @@
   color: #8aad56;
 }
 
-/* line 121, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml a:hover svg,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card a:hover svg,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml a:hover svg,
@@ -265,7 +257,6 @@
   fill: #8aad56;
 }
 
-/* line 125, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img,
@@ -293,7 +284,6 @@
   overflow: hidden;
 }
 
-/* line 127, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img img,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img img,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img img,
@@ -321,7 +311,6 @@
   transition: all ease 0.3s;
 }
 
-/* line 131, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml h4,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card h4,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml h4,
@@ -356,7 +345,6 @@
   white-space: initial;
 }
 
-/* line 140, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml h4 svg,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card h4 svg,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml h4 svg,
@@ -386,7 +374,6 @@
   margin-left: 10px;
 }
 
-/* line 150, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider .card_slider_img,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider .card_slider_img,
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider .card_slider_img,
@@ -396,18 +383,15 @@
   height: auto;
 }
 
-/* line 185, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_no_slider_row {
   padding-bottom: 30px;
 }
 
-/* line 187, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row,
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 {
   padding: 0;
 }
 
-/* line 189, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel00,
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel01,
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .width_100,
@@ -418,7 +402,6 @@
   overflow: unset;
 }
 
-/* line 192, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel00.dragging,
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel01.dragging,
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .width_100.dragging,
@@ -429,7 +412,6 @@
   scroll-behavior: auto;
 }
 
-/* line 196, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel00 .card_slider_inr,
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel00 .card_slider_inr01,
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel01 .card_slider_inr,
@@ -442,18 +424,16 @@
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .carousel01 .card_slider_inr01,
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .width_100 .card_slider_inr,
 .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .width_100 .card_slider_inr01 {
-  padding: 0;
-  margin-bottom: 20px;
+  padding: 0 0 20px;
+  height: 100%;
 }
 
-/* line 203, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row,
 .favrites_blk_row .card_slider_row01 {
   position: relative;
   padding: 0 40px;
 }
 
-/* line 206, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row i,
 .favrites_blk_row .card_slider_row01 i {
   top: 50%;
@@ -469,7 +449,6 @@
   background: rgba(71, 69, 69, 0.7);
 }
 
-/* line 218, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row i svg,
 .favrites_blk_row .card_slider_row01 i svg {
   width: 15px;
@@ -478,50 +457,43 @@
   fill: #ffffff;
 }
 
-/* line 224, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row i:active,
 .favrites_blk_row .card_slider_row01 i:active {
   transform: translateY(-50%) scale(0.9);
 }
 
-/* line 228, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row i:hover svg,
 .favrites_blk_row .card_slider_row01 i:hover svg {
   fill: #8aad56;
 }
 
-/* line 232, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row i:first-child,
 .favrites_blk_row .card_slider_row01 i:first-child {
   left: 0;
   display: none;
 }
 
-/* line 236, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row i:last-child,
 .favrites_blk_row .card_slider_row01 i:last-child {
   right: 0;
 }
 
-/* line 240, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00,
 .favrites_blk_row .card_slider_row .carousel01,
 .favrites_blk_row .card_slider_row .width_100,
 .favrites_blk_row .card_slider_row01 .carousel00,
 .favrites_blk_row .card_slider_row01 .carousel01,
 .favrites_blk_row .card_slider_row01 .width_100 {
-  /* font-size: 0px; */
+  font-size: 0px;
   cursor: pointer;
   overflow: hidden;
   white-space: nowrap;
   scroll-behavior: smooth;
   display: flex;
-  align-items: flex-start;
   position: relative;
   padding-bottom: 10px;
 }
 
-/* line 251, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00.region_carousel00 .card_slider_cnt,
 .favrites_blk_row .card_slider_row .carousel01.region_carousel00 .card_slider_cnt,
 .favrites_blk_row .card_slider_row .width_100.region_carousel00 .card_slider_cnt,
@@ -531,17 +503,6 @@
   min-height: 180px;
 }
 
-/* line 253, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00.region_carousel00 .card_slider_cnt.places_to_stay_cnt,
-.favrites_blk_row .card_slider_row .carousel01.region_carousel00 .card_slider_cnt.places_to_stay_cnt,
-.favrites_blk_row .card_slider_row .width_100.region_carousel00 .card_slider_cnt.places_to_stay_cnt,
-.favrites_blk_row .card_slider_row01 .carousel00.region_carousel00 .card_slider_cnt.places_to_stay_cnt,
-.favrites_blk_row .card_slider_row01 .carousel01.region_carousel00 .card_slider_cnt.places_to_stay_cnt,
-.favrites_blk_row .card_slider_row01 .width_100.region_carousel00 .card_slider_cnt.places_to_stay_cnt {
-  min-height: 280px;
-}
-
-/* line 258, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00.dragging,
 .favrites_blk_row .card_slider_row .carousel01.dragging,
 .favrites_blk_row .card_slider_row .width_100.dragging,
@@ -552,7 +513,6 @@
   scroll-behavior: auto;
 }
 
-/* line 262, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider_inr,
 .favrites_blk_row .card_slider_row .carousel00 .card_slider_inr01,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider_inr,
@@ -570,7 +530,6 @@
   flex: 0 0 33.3%;
 }
 
-/* line 266, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider_inr.card_slider_optn02,
 .favrites_blk_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_optn02,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider_inr.card_slider_optn02,
@@ -586,7 +545,6 @@
   flex: 0 0 25%;
 }
 
-/* line 270, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider,
 .favrites_blk_row .card_slider_row .width_100 .card_slider,
@@ -596,10 +554,11 @@
   width: 100%;
   text-decoration: none;
   color: #ffffff;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 
-/* line 275, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider:hover img,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider:hover img,
 .favrites_blk_row .card_slider_row .width_100 .card_slider:hover img,
@@ -609,7 +568,6 @@
   transform: scale(1.2);
 }
 
-/* line 278, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_img,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_img,
 .favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_img,
@@ -623,7 +581,6 @@
   display: inline-block;
 }
 
-/* line 284, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_img img,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_img img,
 .favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_img img,
@@ -635,7 +592,6 @@
   height: 100%;
 }
 
-/* line 290, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt,
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt,
@@ -649,9 +605,9 @@
 .favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_cnt,
 .favrites_blk_row .card_slider_row01 .width_100 .card_slider .places_to_stay_cnt {
   cursor: default;
+  flex: 1;
 }
 
-/* line 293, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt h4,
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt h4,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt h4,
@@ -670,7 +626,6 @@
   text-transform: uppercase;
 }
 
-/* line 298, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt h4 a,
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt h4 a,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt h4 a,
@@ -689,7 +644,6 @@
   color: #ffffff;
 }
 
-/* line 303, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt h4 a:hover,
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt h4 a:hover,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt h4 a:hover,
@@ -705,7 +659,6 @@
   color: #8aad56;
 }
 
-/* line 307, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt h4:hover,
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt h4:hover,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt h4:hover,
@@ -721,7 +674,6 @@
   color: #8aad56;
 }
 
-/* line 311, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt ul,
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt ul,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt ul,
@@ -737,7 +689,6 @@
   padding-bottom: 20px;
 }
 
-/* line 313, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt ul li,
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt ul li,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt ul li,
@@ -754,7 +705,6 @@
   white-space: pre-wrap;
 }
 
-/* line 316, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt ul li:last-child,
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt ul li:last-child,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt ul li:last-child,
@@ -770,7 +720,6 @@
   margin-bottom: 0;
 }
 
-/* line 319, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt ul li span,
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt ul li span,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt ul li span,
@@ -787,7 +736,6 @@
   margin-left: 2px;
 }
 
-/* line 322, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt ul li span label,
 .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt ul li span label,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt ul li span label,
@@ -803,7 +751,6 @@
   color: #ffffff;
 }
 
-/* line 330, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider_btn,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider_btn,
 .favrites_blk_row .card_slider_row .width_100 .card_slider_btn,
@@ -822,7 +769,6 @@
   color: #ffffff;
 }
 
-/* line 341, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider_btn:hover,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider_btn:hover,
 .favrites_blk_row .card_slider_row .width_100 .card_slider_btn:hover,
@@ -832,7 +778,6 @@
   background: #363636;
 }
 
-/* line 343, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider_btn:hover .view_itnry_link,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider_btn:hover .view_itnry_link,
 .favrites_blk_row .card_slider_row .width_100 .card_slider_btn:hover .view_itnry_link,
@@ -842,7 +787,6 @@
   color: #8aad56;
 }
 
-/* line 347, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider_btn span,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider_btn span,
 .favrites_blk_row .card_slider_row .width_100 .card_slider_btn span,
@@ -853,7 +797,6 @@
   cursor: default;
 }
 
-/* line 351, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider_btn .view_itnry_link,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider_btn .view_itnry_link,
 .favrites_blk_row .card_slider_row .width_100 .card_slider_btn .view_itnry_link,
@@ -866,7 +809,6 @@
   cursor: pointer;
 }
 
-/* line 356, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row .card_slider_row .carousel00 .card_slider_btn .view_itnry_link em,
 .favrites_blk_row .card_slider_row .carousel01 .card_slider_btn .view_itnry_link em,
 .favrites_blk_row .card_slider_row .width_100 .card_slider_btn .view_itnry_link em,
@@ -1368,7 +1310,7 @@
   overflow: hidden;
 }
 
-.our_exprts_row .our_exprts_inr p:nth-child(n+2) {
+.our_exprts_row .our_exprts_inr p:nth-child(n + 2) {
   display: none;
 }
 
@@ -1901,9 +1843,6 @@
 }
 
 /* line 956, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
-.places_to_stay_cnt {
-  min-height: 320px;
-}
 
 /* line 964, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_homepage.scss */
 .holiday_types_card {
@@ -2474,6 +2413,7 @@
 .brochure_testimonial_row {
   text-align: center;
   padding: 0 0 60px;
+  background: #434142;
 }
 
 /* line 27, ../../Users/ISGUSER27/Desktop/work/exsus_website/assets/stylesheets/scss/_brochure-request.scss */
@@ -3099,7 +3039,7 @@
   background-color: #8aad56 !important;
 }
 
-.select_country__option input[type=checkbox] {
+.select_country__option input[type="checkbox"] {
   margin-right: 10px;
   accent-color: #8aad56;
   margin-bottom: 0;
@@ -3138,6 +3078,10 @@
 
 .contact_form_row.brochure_form_row .select_country__dropdown-indicator::after {
   background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' fill='black' width='20' viewBox='0 0 512 266.77'%3e%3cpath fill-rule='nonzero' d='M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z'/%3e%3c/svg%3e") no-repeat !important;
+}
+
+.contact_form_row form.brochure_form_row .select_drpdwn .form-select {
+  background-repeat: no-repeat;
 }
 
 /*# sourceMappingURL=style.css.map */
@@ -3301,6 +3245,126 @@
   border-right: none;
 }
 
+.search_result_list_parnt ul li {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #555;
+}
+
+.search_result_list_parnt ul li:last-child {
+  border-bottom: none;
+}
+
+.search_result_list_parnt ul li .search_result_img_blk {
+  margin-right: 15px;
+  margin-bottom: 0;
+  min-width: 100px;
+  max-width: 100px;
+  overflow: hidden;
+  max-height: 100px;
+  align-self: center;
+  display: inline-block;
+}
+
+.search_result_list_parnt ul li .search_result_img_blk img {
+  width: 100%;
+}
+
+.search_result_list_parnt ul li .search_result_inr_cnt h3 {
+  font: 1.125rem/1.5rem "Slabo 27px", serif;
+}
+
+.search_result_list_parnt ul li .search_result_inr_cnt h3 a {
+  font: 1.125rem/1.5rem "Slabo 27px", serif;
+  color: #8aad56;
+  margin-bottom: 0;
+}
+
+.search_result_list_parnt ul li .search_result_inr_cnt a {
+  font: 400 0.875rem/1.125rem "Roboto", sans-serif;
+  color: #eeeeee;
+  margin-bottom: 8px;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.search_result_list_parnt ul li .search_result_inr_cnt p {
+  font: 400 0.875rem/1.125rem "Roboto", sans-serif;
+  color: #b8b8b8;
+}
+
+.search_result_input {
+  margin: 20px 0;
+}
+
+.search_result_input input {
+  background: transparent;
+  border-radius: 0;
+  color: #ffffff;
+  font: 400 0.875rem/1rem "Roboto", sans-serif;
+  height: 40px;
+}
+
+.search_result_input input:focus {
+  background-color: transparent;
+  color: #ffffff;
+}
+
+.search_result_input input::placeholder {
+  color: #ffffff;
+}
+
+.search_result_input .banner_inspire_btn button {
+  width: 100%;
+}
+
+.search_result_pagination {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 40px;
+}
+
+.search_result_pagination .search_result_pagination_inr {
+  margin-bottom: 20px;
+}
+
+.search_result_pagination .search_result_pagination_inr ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.search_result_pagination .search_result_pagination_inr ul li {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.search_result_pagination .search_result_pagination_inr ul li a {
+  text-decoration: none;
+  font: 400 1rem/2.5rem "Roboto", sans-serif;
+  color: #231f20;
+  display: inline-block;
+  background-color: #c8c7c8;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  border-radius: 50%;
+  transition: all ease 0.3s;
+}
+
+.search_result_pagination .search_result_pagination_inr ul li a:hover,
+.search_result_pagination .search_result_pagination_inr ul li a:focus {
+  background-color: #8aad56;
+  color: #ffffff;
+}
+
+.search_result_pagination .search_result_pagination_inr ul li.active a {
+  background-color: #8aad56;
+  color: #ffffff;
+}
+
 .tour_landing_parnt {
   padding: 30px 0;
   background: #434142;
@@ -3452,4 +3516,76 @@
 
 .dates_grey_parnt_blk .date_list_parnt .date_list_inr {
   justify-content: space-evenly;
+}
+
+.full_loader_parnt_blk {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 3;
+}
+
+.loader-circle-2 {
+  position: fixed;
+  width: 70px;
+  height: 70px;
+  right: 0;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.loader-circle-2:before,
+.loader-circle-2:after {
+  content: "";
+  display: block;
+  position: absolute;
+  border-width: 5px;
+  border-style: solid;
+  border-radius: 50%;
+}
+
+.loader-circle-2:before {
+  width: 70px;
+  height: 70px;
+  border-bottom-color: #8aad56;
+  border-right-color: #8aad56;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  animation: loader-circle-2-animation-2 1s linear infinite;
+}
+
+.loader-circle-2:after {
+  width: 40px;
+  height: 40px;
+  border-bottom-color: #e0ffb2;
+  border-right-color: #e0ffb2;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  top: 22%;
+  left: 22%;
+  animation: loader-circle-2-animation 0.85s linear infinite;
+}
+
+@keyframes loader-circle-2-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes loader-circle-2-animation-2 {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
