@@ -23,7 +23,6 @@ import CountryWhentogo from "../countrywhentogo/index"; // Adjust the path accor
 import CountryOverview from "../countryoverview/index"; // Adjust the path accordingly
 import { FriendlyUrl } from "../../components";
 
-
 import Head from "next/head";
 
 export default Country;
@@ -35,8 +34,14 @@ function Country() {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isLoader, setIsLoader] = useState(false);
   const [isRtl, setIsRtl] = useState(false);
-  const destinationcode = router.query?.continent?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
-  const countrycode = router.query?.country?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
+  const destinationcode = router.query?.continent
+    ?.replace(/-/g, " ")
+    .replace(/and/g, "&")
+    .toLowerCase();
+  const countrycode = router.query?.country
+    ?.replace(/-/g, " ")
+    .replace(/and/g, "&")
+    .toLowerCase();
   console.log(destinationcode, countrycode);
   const [selectedOptionCountry, setSelectedOptionCountry] = useState(null);
   const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
@@ -174,7 +179,7 @@ function Country() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
+        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
     );
   };
 
@@ -210,33 +215,49 @@ function Country() {
   const toggleTab = (itemId) => {
     var text = "LUXURY SAFARI HOLIDAYS IN " + countrycode.toUpperCase();
     if (itemId == "overview") {
-      const redirectUrl = regionWiseUrl + `/destinations/${destinationcode}/${countryData.attributes.friendly_url}`;
+      const redirectUrl =
+        regionWiseUrl +
+        `/destinations/${destinationcode}/${countryData.attributes.friendly_url}`;
       window.history.pushState(null, null, redirectUrl);
-      setFriendlyUrl(`Home/Destinations/${destinationcode}/${countryData.attributes.friendly_url}`);
+      setFriendlyUrl(
+        `Home/Destinations/${destinationcode}/${countryData.attributes.friendly_url}`
+      );
       text = "LUXURY HOLIDAYS IN " + countrycode.toUpperCase();
     } else if (itemId == "regions") {
       const redirectUrl =
-        regionWiseUrl + `/destinations/${destinationcode}/${countryData.attributes.friendly_url}`;
+        regionWiseUrl +
+        `/destinations/${destinationcode}/${countryData.attributes.friendly_url}`;
       window.history.pushState(null, null, redirectUrl);
-      setFriendlyUrl(`estinations/${destinationcode}/${countryData.attributes.friendly_url}/${countryData.attributes.friendly_url} Regions`);
+      setFriendlyUrl(
+        `estinations/${destinationcode}/${countryData.attributes.friendly_url}/${countryData.attributes.friendly_url} Regions`
+      );
       text = "REGIONS IN " + countrycode.toUpperCase(); // action="/countryregions?countrycode=south-africa"
     } else if (itemId == "itineraries") {
       const redirectUrl =
-        regionWiseUrl + `/destinations/${destinationcode}/${countryData.attributes.friendly_url}`;
+        regionWiseUrl +
+        `/destinations/${destinationcode}/${countryData.attributes.friendly_url}`;
       window.history.pushState(null, null, redirectUrl);
-      setFriendlyUrl(`Home/Destinations/${destinationcode}/${countryData.attributes.friendly_url}/${countryData.attributes.friendly_url} itineraries`);
+      setFriendlyUrl(
+        `Home/Destinations/${destinationcode}/${countryData.attributes.friendly_url}/${countryData.attributes.friendly_url} itineraries`
+      );
       text = countrycode.toUpperCase() + " ITINERARIES"; // action="/countryitineraries?countrycode=south-africa"
     } else if (itemId == "places-to-stay") {
       const redirectUrl =
-        regionWiseUrl + `/destinations/${destinationcode}/${countryData.attributes.friendly_url}`;
+        regionWiseUrl +
+        `/destinations/${destinationcode}/${countryData.attributes.friendly_url}`;
       window.history.pushState(null, null, redirectUrl);
-      setFriendlyUrl(`Home/Destinations/${destinationcode}/${countryData.attributes.friendly_url}/places to stay ${countryData.attributes.friendly_url}`);
+      setFriendlyUrl(
+        `Home/Destinations/${destinationcode}/${countryData.attributes.friendly_url}/places to stay ${countryData.attributes.friendly_url}`
+      );
       text = "LUXURY HOTELS, CAMPS & LODGES IN " + countrycode.toUpperCase(); // action="/countryplacetostay?countrycode=south-africa"
     } else if (itemId == "when-to-go") {
       const redirectUrl =
-        regionWiseUrl + `/destinations/${destinationcode}/${countryData.attributes.friendly_url}`
+        regionWiseUrl +
+        `/destinations/${destinationcode}/${countryData.attributes.friendly_url}`;
       window.history.pushState(null, null, redirectUrl);
-      setFriendlyUrl(`Home/Destinations/${destinationcode}/${countryData.attributes.friendly_url}/when to go to ${countryData.attributes.friendly_url}`);
+      setFriendlyUrl(
+        `Home/Destinations/${destinationcode}/${countryData.attributes.friendly_url}/when to go to ${countryData.attributes.friendly_url}`
+      );
       text = "WHEN TO GO TO " + countrycode.toUpperCase(); // action="/countryplacetostay?countrycode=south-africa"
     } else {
       text = "LUXURY SAFARI HOLIDAYS IN " + countrycode.toUpperCase();
@@ -298,7 +319,7 @@ function Country() {
         .getCountryDetails(countrycode)
         .then((x) => {
           setCountryData(x.data[0]);
-          setFriendlyUrl(`Home/Destinations/${destinationcode}/${countrycode}`)
+          setFriendlyUrl(`Home/Destinations/${destinationcode}/${countrycode}`);
           const map_latitude = x.data[0].attributes?.map_latitude;
           const map_longitude = x.data[0].attributes?.map_longitude;
           // const map_latitude = "40.7128";
@@ -419,12 +440,11 @@ function Country() {
             </div>
           </section>
 
+          {/* Country sub tabs */}
           <section className="destination_tab_row light_grey pb-0">
             <div className="container">
               <div className="bookmark_row">
-                <FriendlyUrl
-                  data={friendlyUrl}
-                ></FriendlyUrl>
+                <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
               </div>
               <div className="destination_tab_inr">
                 <h2 className="tab_tilte">
@@ -626,6 +646,7 @@ function Country() {
             </div>
           </section>
 
+          {/* enqury */}
           <section className="make_enqury_row">
             <div className="container">
               <h3>YOUR JOURNEY STARTS HERE</h3>
@@ -653,6 +674,7 @@ function Country() {
             </div>
           </section>
 
+          {/* newsletter */}
           <section
             aria-label="Sign up for newsletter"
             className="newslettr_row"

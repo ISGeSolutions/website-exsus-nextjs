@@ -20,7 +20,10 @@ function Index() {
   const [mapVariable, setMapVariable] = useState(null);
   const [activeTab, setActiveTab] = useState("overview"); // State to track the active tab
   const router = useRouter();
-  const destinationcode = router?.query?.continent?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
+  const destinationcode = router?.query?.continent
+    ?.replace(/-/g, " ")
+    .replace(/and/g, "&")
+    .toLowerCase();
   const [friendlyUrl, setFriendlyUrl] = useState("");
   const [destinationName, setdestinationName] = useState("");
   const [metaTitle, setMetaTitle] = useState("");
@@ -112,24 +115,27 @@ function Index() {
       text = metaTitle;
     } else if (itemId == "countries") {
       const redirectUrl =
-        regionWiseUrl +
-        `/destinations/${destinationDetails.friendly_url}`;
+        regionWiseUrl + `/destinations/${destinationDetails.friendly_url}`;
       window.history.pushState(null, null, redirectUrl);
-      setFriendlyUrl(`Home/Destinations/${destinationDetails.friendly_url}/${destinationDetails.friendly_url} countries`);
+      setFriendlyUrl(
+        `Home/Destinations/${destinationDetails.friendly_url}/${destinationDetails.friendly_url} countries`
+      );
       text = `COUNTRIES IN ${destinationName}`;
     } else if (itemId == "itineraries") {
       const redirectUrl =
-        regionWiseUrl +
-        `/destinations/${destinationDetails.friendly_url}`;
+        regionWiseUrl + `/destinations/${destinationDetails.friendly_url}`;
       window.history.pushState(null, null, redirectUrl);
-      setFriendlyUrl(`Home/Destinations/${destinationDetails.friendly_url}/${destinationDetails.friendly_url} Itineraries`);
+      setFriendlyUrl(
+        `Home/Destinations/${destinationDetails.friendly_url}/${destinationDetails.friendly_url} Itineraries`
+      );
       text = `TAILOR-MADE ${destinationName} HOLIDAY ITINERARIES`;
     } else if (itemId == "places-to-stay") {
       const redirectUrl =
-        regionWiseUrl +
-        `/destinations/${destinationDetails.friendly_url}`;
+        regionWiseUrl + `/destinations/${destinationDetails.friendly_url}`;
       window.history.pushState(null, null, redirectUrl);
-      setFriendlyUrl(`Home/Destinations/${destinationDetails.friendly_url}/Places to stay in ${destinationDetails.friendly_url}`)
+      setFriendlyUrl(
+        `Home/Destinations/${destinationDetails.friendly_url}/Places to stay in ${destinationDetails.friendly_url}`
+      );
       text = `PLACES TO STAY IN ${destinationName}`;
     } else {
       text = `LUXURY SAFARI HOLIDAYS IN ${destinationName}`;
@@ -187,7 +193,9 @@ function Index() {
         .getDestinationDetails(destinationcode)
         .then((x) => {
           setDestinationDetails(x.data[0].attributes);
-          setFriendlyUrl(`Home/Destinations/${x.data[0].attributes.friendly_url}`)
+          setFriendlyUrl(
+            `Home/Destinations/${x.data[0].attributes.friendly_url}`
+          );
           setMetaTitle(x.data[0].attributes.page_meta_title);
           setHeadingText(x.data[0].attributes.page_meta_title);
           const map_latitude = x.data[0].attributes?.map_latitude;
@@ -327,12 +335,11 @@ function Index() {
             {/* <p>{mapVariable}</p> */}
           </section>
 
+          {/* Continent Sub tabs */}
           <section className="destination_tab_row light_grey" ref={divRef}>
             <div className="container">
               <div className="bookmark_row">
-                <FriendlyUrl
-                  data={friendlyUrl}
-                ></FriendlyUrl>
+                <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
               </div>
               <div className="destination_tab_inr">
                 <h2 className="tab_tilte">
@@ -498,6 +505,7 @@ function Index() {
             </div>
           </section>
 
+          {/* Enqury */}
           <section className="make_enqury_row">
             <div className="container">
               <h3>YOUR JOURNEY STARTS HERE</h3>
@@ -508,6 +516,7 @@ function Index() {
             </div>
           </section>
 
+          {/* NewsLetter */}
           <section
             aria-label="Sign up for newsletter"
             className="newslettr_row"

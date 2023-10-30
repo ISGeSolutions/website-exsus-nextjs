@@ -15,7 +15,7 @@ function Index() {
   const [allOffers, setAllOffers] = useState([]);
   const [destinations, setDestinations] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const [friendlyUrl, setFriendlyUrl] = useState('');
+  const [friendlyUrl, setFriendlyUrl] = useState("");
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -63,8 +63,6 @@ function Index() {
         setFriendlyUrl(`home/special offers`);
       })
       .catch((error) => {
-        // Handle any errors here
-        // console.error(error);
         setIsLoading(false);
       });
 
@@ -232,9 +230,7 @@ function Index() {
             <div className="container">
               <div className="bookmark_row">
                 {/* {/ <p style={{ color: `white` }}>{destinations?.attributes?.page_friendly_url}</p > /} */}
-                <FriendlyUrl
-                  data={friendlyUrl}
-                ></FriendlyUrl>
+                <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
               </div>
               <div className="row">
                 <div className="destinations_cntnt_blk">
@@ -274,6 +270,7 @@ function Index() {
             </div>
           </section>
 
+          {/* Special Offer on Hotels */}
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
             <div className="container">
               <div className="card_slider_row">
@@ -345,6 +342,7 @@ function Index() {
             </div>
           </section>
 
+          {/* Enqury */}
           <section className="make_enqury_row">
             <div className="container">
               <h3>YOUR JOURNEY STARTS HERE</h3>
@@ -372,6 +370,7 @@ function Index() {
             </div>
           </section>
 
+          {/* NewsLetter */}
           <section
             aria-label="Sign up for newsletter"
             className="newslettr_row"

@@ -26,14 +26,19 @@ function CountryPlaceToStay(country) {
   const itemsPerPage = 12; // Number of items to load per page
   const [page, setPage] = useState(0); // Current page
   const [metaData, setMetaData] = useState([]);
-  const destinationcode = router.query?.continent?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
-  const countrycode = router.query?.country?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
+  const destinationcode = router.query?.continent
+    ?.replace(/-/g, " ")
+    .replace(/and/g, "&")
+    .toLowerCase();
+  const countrycode = router.query?.country
+    ?.replace(/-/g, " ")
+    .replace(/and/g, "&")
+    .toLowerCase();
 
   const [dcode, setdcode] = useState();
   const [allHotels, setAllHotels] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeItem, setActiveItem] = useState("recommended");
-
 
   const width = "250px";
   const styles = {
@@ -324,6 +329,8 @@ function CountryPlaceToStay(country) {
               <h3 className="title_cls">
                 All recommended hotels in {country?.data?.country_name}
               </h3>
+
+              {/* Inspire Me */}
               <div className="card_slider_row">
                 <div className="carousel00">
                   <div className="row">
@@ -474,6 +481,7 @@ function CountryPlaceToStay(country) {
                       </div>
                     </div>
 
+                    {/* Country Place to stay hotels */}
                     {allHotels?.slice(0, allHotels.length).map((item) => (
                       <div className="col-sm-6 col-lg-4 col-xxl-3">
                         <div className="card_slider_inr">
@@ -530,6 +538,7 @@ function CountryPlaceToStay(country) {
                       </div>
                     ))}
 
+                    {/* Pagination  */}
                     <div className="col-12">
                       {metaData.total > page * itemsPerPage && (
                         <button

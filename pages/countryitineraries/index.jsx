@@ -26,12 +26,17 @@ function CountryItinararies(country) {
   const [page, setPage] = useState(0); // Current page
   const itemsPerPage = 12; // Number of items to load per page
   const [isLoading, setIsLoading] = useState(true);
-  const destinationcode = router.query?.continent?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
-
+  const destinationcode = router.query?.continent
+    ?.replace(/-/g, " ")
+    .replace(/and/g, "&")
+    .toLowerCase();
 
   const [metaData, setMetaData] = useState([]);
 
-  const countrycode = router.query?.country?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
+  const countrycode = router.query?.country
+    ?.replace(/-/g, " ")
+    .replace(/and/g, "&")
+    .toLowerCase();
 
   const width = "250px";
   const styles = {
@@ -257,7 +262,7 @@ function CountryItinararies(country) {
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-      `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}&countrycode=${countrycode}`
+        `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}&countrycode=${countrycode}`
     );
   };
 
@@ -333,6 +338,8 @@ function CountryItinararies(country) {
               <h3 className="title_cls">
                 All Luxury Holiday Ideas in {country?.data?.country_name}
               </h3>
+
+              {/* Inspire Me */}
               <div className="card_slider_row">
                 <div className="carousel00">
                   <div className="row">
@@ -467,6 +474,8 @@ function CountryItinararies(country) {
                         </div>
                       </div>
                     </div>
+
+                    {/* Country Itineraries */}
                     {itineraries?.slice(0, itineraries.length).map((item) => (
                       <div
                         className="col-sm-6 col-lg-4 col-xxl-3"
@@ -481,7 +490,7 @@ function CountryItinararies(country) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -531,6 +540,7 @@ function CountryItinararies(country) {
                       </div>
                     ))}
 
+                    {/* Pagination */}
                     <div className="col-12">
                       {metaData.total > page * itemsPerPage && (
                         <button

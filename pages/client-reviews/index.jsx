@@ -56,9 +56,8 @@ function Index() {
       .then((x) => {
         setClientReviews(x.data);
 
+        // Dictionary
         let modifiedString = x.data.attributes?.review_text;
-        console.log("console.log ", modifiedString);
-
         // Find and store matches in an array
         const regex = /{[a-zA-Z0-9-]+}/g;
         const matches = [...new Set(modifiedString.match(regex))];
@@ -126,8 +125,6 @@ function Index() {
         setIsLoading(false);
       })
       .catch((error) => {
-        // Handle any errors here
-        // console.error(error);
         setIsLoading(false);
       });
   }, []);
@@ -203,6 +200,7 @@ function Index() {
                 />
               </div>
 
+              {/* Client Reviews */}
               {clientReviews?.map((element) => (
                 <div className="trvl_info_cntnt">
                   <h2 className="text-capitalize">
@@ -219,6 +217,7 @@ function Index() {
             </div>
           </section>
 
+          {/* Enqury */}
           <section className="make_enqury_row">
             <div className="container">
               <h3>YOUR JOURNEY STARTS HERE</h3>
@@ -246,6 +245,7 @@ function Index() {
             </div>
           </section>
 
+          {/* NewsLetter */}
           <section
             aria-label="Sign up for newsletter"
             className="newslettr_row"

@@ -226,8 +226,6 @@ function Index() {
         setIsLoading(false);
       })
       .catch((error) => {
-        // Handle any errors here
-        // console.error(error);
         setIsLoading(false);
       });
   };
@@ -247,7 +245,7 @@ function Index() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=${region}`
+        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=${region}`
     );
   };
 
@@ -267,8 +265,10 @@ function Index() {
     setHeadingText(text);
   };
 
-
-  const hcode = router.query?.holidaytypeitineraries?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
+  const hcode = router.query?.holidaytypeitineraries
+    ?.replace(/-/g, " ")
+    .replace(/and/g, "&")
+    .toLowerCase();
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -320,20 +320,20 @@ function Index() {
       .getHolidaytypeDetails(hcode)
       .then((x) => {
         setHolidaytypesDetails(x.data[0].attributes);
-        setFriendlyUrl(`home/holiday types/${x.data[0].attributes.friendly_url}`)
+        setFriendlyUrl(
+          `home/holiday types/${x.data[0].attributes.friendly_url}`
+        );
         setHolidayName(x.data[0].attributes.holiday_type_group_name);
         setTitle(x.data[0].attributes.page_meta_title);
-        const oldText = x.data[0].attributes?.overview_text;
-        var newValueWithBr = oldText?.replace(/\\n/g, "");
-        setnewValueWithBr(newValueWithBr);
+
         const imageCheck = x.data[0].attributes.holiday_type_group_images.data;
-        setHolidaytypesDetails(x.data.attributes);
+        setHolidaytypesDetails(x.data[0].attributes);
 
         // const oldText = x.data.attributes?.overview_text;
         // var newValueWithBr = oldText?.replace(/\\n/g, "");
         // setnewValueWithBr(newValueWithBr);
 
-        let modifiedString = x.data.attributes?.overview_text;
+        let modifiedString = x.data[0].attributes?.overview_text;
 
         // Find and store matches in an array
         const regex = /{[a-zA-Z0-9-]+}/g;
@@ -429,8 +429,6 @@ function Index() {
 
     loadMoreData();
 
-
-
     window.addEventListener("resize", equalHeight(true));
   }, [router, valueWithBr, hcode]);
 
@@ -493,14 +491,7 @@ function Index() {
           <section className="destination_tab_row light_grey">
             <div className="container">
               <div className="bookmark_row">
-                <FriendlyUrl
-                  data={friendlyUrl}
-                ></FriendlyUrl>
-                {/* <ul>
-                            <li><a href="homepage.html">Home</a></li>
-                            <li><a href="holiday_types_landing.html">Holiday Types</a></li>
-                            <li>{headingText}</li>
-                        </ul> */}
+                <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
               </div>
 
               <div className="destination_tab_inr">
@@ -509,10 +500,6 @@ function Index() {
                 </h2>
                 <div className="destinations_cntnt_blk destination_para pt-0">
                   <p dangerouslySetInnerHTML={{ __html: valueWithBr }} />
-                  {/* <p>Everyone’s definition of a dream trip is different.</p>
-                            <p>Whether you are after the big one, the holiday that you have always dreamed of but never went on, or want an adventure that leaves nothing out, we are ready to help - how about dinner with a geisha in Japan, an oceanfront lodge only reached by boat in Costa Rica, a helicopter ride over New Zealand’s stunning scenery or a luxurious cross country train journey with unparalleled views of South Africa.</p>
-                            <p>Whatever a 'once-in-a-lifetime' holiday or honeymoon means to you, our experts can create a totally tailor-made luxury experience that perfectly satisfies your wishlist.</p>
-                            <p>All our itineraries are designed as inspiration. Tell us what you're after on your trip and we'll help you select the best hotels and experiences.</p> */}
                 </div>
               </div>
             </div>
@@ -521,6 +508,7 @@ function Index() {
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
             <div className="container">
               <h3 className="title_cls">TOP DESTINATIONS FOR {holidayName}</h3>
+
               <div className="card_slider_row">
                 <div className="carousel00 region_carousel00">
                   <div className="row">
@@ -600,6 +588,7 @@ function Index() {
                       </div>
                     </div>
 
+                    {/* HolidayType Itineraries */}
                     {itineraries
                       ?.slice(0, itineraries.length)
                       .map((item, index) => (
@@ -616,7 +605,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                      "thumbnail" ? (
+                                    "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}
@@ -634,7 +623,6 @@ function Index() {
                                 </h4>
                                 <ul>
                                   <li>{item?.attributes?.header_text}</li>
-                                  {/* <li>Indonesia</li> */}
                                   <li>
                                     {
                                       item?.attributes
@@ -668,6 +656,7 @@ function Index() {
                         </div>
                       ))}
 
+                    {/* Pagination */}
                     <div className="col-12">
                       {metaData.total > page * itemsPerPage && (
                         <button
@@ -704,6 +693,7 @@ function Index() {
             </div>
           </section>
 
+          {/* Enqury */}
           <section className="make_enqury_row">
             <div className="container">
               <h3>YOUR JOURNEY STARTS HERE</h3>
@@ -714,6 +704,7 @@ function Index() {
             </div>
           </section>
 
+          {/* NewsLetter */}
           <section
             aria-label="Sign up for newsletter"
             className="newslettr_row"
