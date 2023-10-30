@@ -231,6 +231,7 @@ function App({ Component, pageProps }) {
         type="text/javascript"
         src="/assets/javascripts/bootstrap-select.min.js"
       ></script>
+
       {/* <script type="text/javascript" src="/assets/javascripts/navigation.js"></script> */}
 
       {/* credits */}
@@ -250,7 +251,6 @@ function App({ Component, pageProps }) {
         fbq('track', 'PageView'); */}
       </script>
       {/* Facebook Pixel Code */}
-
     </Layout>
   ) : (
     <Component {...pageProps} />
