@@ -27,7 +27,10 @@ function Index() {
 
   useEffect(() => {
     const carousel = document.querySelector("#carouselExampleInterval");
-    new bootstrap.Carousel(carousel);
+    const carouselMain = document.querySelector("#carouselExampleIntervalMain");
+    if (carouselMain) {
+      new bootstrap.Carousel(carouselMain);
+    }
     destinationService
       .getHotelById(hotelId)
       .then((x) => {

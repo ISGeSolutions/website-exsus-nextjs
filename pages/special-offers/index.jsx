@@ -6,6 +6,7 @@ import { userService, specialoffersService } from "services";
 import { NavLink } from "components";
 import Head from "next/head";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+
 var Carousel = require("react-responsive-carousel").Carousel;
 
 export default Index;
@@ -16,6 +17,10 @@ function Index() {
   const [destinations, setDestinations] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [friendlyUrl, setFriendlyUrl] = useState("");
+
+  const handleRedirect = () => {
+    router.push(regionWiseUrl + `/hotel-detail`);
+  };
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -54,6 +59,12 @@ function Index() {
 
   useEffect(() => {
     // userService.getAll().then(x => setUsers(x));
+    const tooltipTriggerList = document.querySelectorAll(
+      '[data-bs-toggle="tooltip"]'
+    );
+    const tooltipList = [...tooltipTriggerList].map(
+      (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+    );
 
     specialoffersService
       .getAllOffers()
@@ -78,6 +89,10 @@ function Index() {
     <>
       <Head>
         <title>Special Offers | Luxury Hotel and Holiday Offers</title>
+        <script
+          type="text/javascript"
+          src="/assets/javascripts/bootstrap.min.js"
+        ></script>
       </Head>
       {isLoading ? (
         // <MyLoader />
@@ -303,15 +318,18 @@ function Index() {
                                     Location: {res.attributes.subtitle_text}
                                   </li>
                                   <li>
-                                    Price guide:
-                                    <span
-                                      tabIndex="0"
-                                      data-bs-toggle="tooltip"
-                                      data-bs-placement="right"
-                                      data-bs-title="£200-£350 per person per night"
-                                    >
-                                      £££<label>££</label>
-                                    </span>
+                                    <p>
+                                      Price guide:
+                                      <span
+                                        tabIndex="0"
+                                        data-bs-toggle="tooltip"
+                                        data-bs-placement="right"
+                                        data-bs-title="£200-£350 per person per night"
+                                        data-bs-trigger="hover"
+                                      >
+                                        £££<label>££</label>
+                                      </span>
+                                    </p>
                                   </li>
                                   <li className="pink_text">
                                     Special offer: {res.attributes.title_text}
@@ -326,7 +344,10 @@ function Index() {
                                 </ul>
                               </div>
                               <button className="btn card_slider_btn justify-content-end">
-                                <span className="view_itnry_link">
+                                <span
+                                  className="view_itnry_link"
+                                //onClick={handleRedirect}
+                                >
                                   View this hotel
                                   <em className="fa-solid fa-chevron-right"></em>
                                 </span>

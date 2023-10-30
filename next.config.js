@@ -208,16 +208,41 @@ const nextConfig = {
             { source: "/in/holiday-types", destination: "/holiday-types" },
 
             // holidaytypeitineraries
-            { source: '/uk/holiday-types/:holidaytypeitineraries', destination: '/holidaytypeitineraries' },
-            { source: '/us/holiday-types/:holidaytypeitineraries', destination: '/holidaytypeitineraries' },
-            { source: '/asia/holiday-types/:holidaytypeitineraries', destination: '/holidaytypeitineraries' },
-            { source: '/in/holiday-types/:holidaytypeitineraries', destination: '/holidaytypeitineraries' },
+            {
+                source: "/uk/holiday-types/:holidaytypeitineraries",
+                destination: "/holidaytypeitineraries",
+            },
+            {
+                source: "/us/holiday-types/:holidaytypeitineraries",
+                destination: "/holidaytypeitineraries",
+            },
+            {
+                source: "/asia/holiday-types/:holidaytypeitineraries",
+                destination: "/holidaytypeitineraries",
+            },
+            {
+                source: "/in/holiday-types/:holidaytypeitineraries",
+                destination: "/holidaytypeitineraries",
+            },
 
             // holidaytypeideas
-            { source: '/uk/holiday-types/:holidaytypeitineraries/:holidaytypeideas', destination: '/holidaytypeideas' },
-            { source: '/us//holiday-types/:holidaytypeitineraries/:holidaytypeideas', destination: '/holidaytypeideas' },
-            { source: '/asia//holiday-types/:holidaytypeitineraries/:holidaytypeideas', destination: '/holidaytypeideas' },
-            { source: '/in//holiday-types/:holidaytypeitineraries/:holidaytypeideas', destination: '/holidaytypeideas' },
+            {
+                source: "/uk/holiday-types/:holidaytypeitineraries/:holidaytypeideas",
+                destination: "/holidaytypeideas",
+            },
+            {
+                source: "/us//holiday-types/:holidaytypeitineraries/:holidaytypeideas",
+                destination: "/holidaytypeideas",
+            },
+            {
+                source:
+                    "/asia//holiday-types/:holidaytypeitineraries/:holidaytypeideas",
+                destination: "/holidaytypeideas",
+            },
+            {
+                source: "/in//holiday-types/:holidaytypeitineraries/:holidaytypeideas",
+                destination: "/holidaytypeideas",
+            },
 
             // itinerarydetail
             // { source: "/uk/itinerarydetail", destination: "/itinerarydetail" },
@@ -261,18 +286,11 @@ const nextConfig = {
             { source: "/asia/hotel-detail", destination: "/hotel-detail" },
             { source: "/asia/hotel-detail", destination: "/hotel-detail" },
 
-            // blog-detail
-            { source: "/uk/blog/blog-detail", destination: "/blog-detail" },
-            { source: "/us/blog/blog-detail", destination: "/blog-detail" },
-            { source: "/asia/blog/blog-detail", destination: "/blog-detail" },
-            { source: "/in/blog/blog-detail", destination: "/blog-detail" },
-
             // Blog
             { source: "/uk/blog", destination: "/blog" },
             { source: "/us/blog", destination: "/blog" },
             { source: "/asia/blog", destination: "/blog" },
             { source: "/in/blog", destination: "/blog" },
-
 
             // blog-detail
             { source: "/uk/blog/:blogdetail", destination: "/blog-detail" },
