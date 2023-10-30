@@ -41,7 +41,6 @@ import CookieComponent from "./../components/CookieComponent";
 // import ReactPixel from 'react-facebook-pixel';
 import { Helmet } from "react-helmet";
 import ReactGA from "react-ga4";
-import Script from 'next/script';
 
 ReactGA.initialize("G-2H6GP9JWWY");
 // import './../../CustomModal_css.css'; // Import your custom styles
