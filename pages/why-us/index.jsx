@@ -16,11 +16,14 @@ import { useTranslation } from "react-i18next";
 
 import ReactGA from "react-ga4";
 // ReactGA.initialize('G-2H6GP9JWWY');
+import { trackPageView } from 'react-facebook-pixel';
 
 export default Index;
 
 function Index() {
   // ReactPixel.pageView();
+  // Call trackPageView to track a page view
+  trackPageView();
 
   // ReactGA.pageview(window.location.pathname + window.location.search);
   // ReactGA.pageview('/why-us'); // Specify the URL or route for the page

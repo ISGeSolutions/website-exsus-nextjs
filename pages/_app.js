@@ -2,7 +2,7 @@ import Head from "next/head";
 import React, { useState, useEffect } from "react";
 import { Router, useRouter } from "next/router";
 // import React from 'react';
-
+import { initPixel } from 'react-facebook-pixel';
 // import { NavLink } from './../components/NavLink';
 import { Layout } from "./../components/common";
 
@@ -66,20 +66,20 @@ i18n.use(LanguageDetector).init({
   },
 });
 
-function FacebookPixel() {
-  React.useEffect(() => {
-    import("react-facebook-pixel")
-      .then((x) => x.default)
-      .then((ReactPixel) => {
-        ReactPixel.init("YOUR_PIXEL_ID"); // 1613634385322868
-        ReactPixel.pageView();
-        Router.events.on("routeChangeComplete", () => {
-          ReactPixel.pageView();
-        });
-      });
-  });
-  return null;
-}
+// function FacebookPixel() {
+//   React.useEffect(() => {
+//     import("react-facebook-pixel")
+//       .then((x) => x.default)
+//       .then((ReactPixel) => {
+//         ReactPixel.init("YOUR_PIXEL_ID"); // 1613634385322868
+//         ReactPixel.pageView();
+//         Router.events.on("routeChangeComplete", () => {
+//           ReactPixel.pageView();
+//         });
+//       });
+//   });
+//   return null;
+// }
 
 export default App;
 
@@ -137,6 +137,9 @@ function App({ Component, pageProps }) {
     //     console.log('x', x);
     // });
 
+    // Initialize the Facebook Pixel with your Pixel ID
+    initPixel('G-2H6GP9JWWY');
+
     // unsubscribe from events in useEffect return function
     return () => {
       router.events.off("routeChangeStart", hideContent);
@@ -144,6 +147,9 @@ function App({ Component, pageProps }) {
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
+
+
+
   }, []);
 
   function authCheck(url) {
