@@ -313,7 +313,7 @@ function Index() {
               <div className="container">
                 <h3 className="title_cls">Search our blog</h3>
                 <div className="card_slider_row">
-                  <div className="carousel00">
+                  <div className="carousel00 region_carousel00">
                     <div className="row">
                       <div className="col-12">
                         <div className="destination_dropdwn_row d-block d-md-flex">

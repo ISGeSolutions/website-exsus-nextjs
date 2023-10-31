@@ -558,7 +558,7 @@ function Index() {
                     />
                   </svg>
                 </i>
-                <div className="carousel00">
+                <div className="carousel00 region_carousel00">
                   {itineraries?.map((item) => (
                     <div className="card_slider_inr" key={item.id}>
                       <div className="card_slider">

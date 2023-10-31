@@ -628,7 +628,7 @@ function Index() {
                     />
                   </svg>
                 </i>
-                <div className="carousel00">
+                <div className="carousel00 region_carousel00">
                   <div className="card_slider_inr">
                     <div className="card_slider">
                       <a className="card_slider_img">

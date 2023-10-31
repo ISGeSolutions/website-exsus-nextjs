@@ -177,7 +177,7 @@ function Index() {
                             <div className="container">
                                 <h3 className="title_cls pt-5">Holidays in China Handpicked by Exsus</h3>
                                 <div className="card_slider_row">
-                                    <div className="carousel00">
+                                    <div className="carousel00 region_carousel00">
                                         <div className="row">
                                             <div className="col-sm-6 col-lg-4">
                                                 <div className="card_slider_inr">
@@ -255,7 +255,7 @@ function Index() {
                             <div className="container">
                                 <h3 className="title_cls pt-5">PLACES TO STAY IN CHINA HANDPICKED BY EXSUS</h3>
                                 <div className="card_slider_row">
-                                    <div className="carousel00">
+                                    <div className="carousel00 region_carousel00">
                                         <div className="row">
                                             <div className="col-sm-6 col-lg-4">
                                                 <div className="card_slider_inr">
@@ -605,7 +605,7 @@ function Index() {
                             <div className="container">
                                 <h3 className="title_cls">All Luxury Holiday Ideas in China</h3>
                                 <div className="card_slider_row">
-                                    <div className="carousel00">
+                                    <div className="carousel00 region_carousel00">
                                         <div className="row">
                                             <div className="col-12">
                                                 <div className="destination_dropdwn_row d-block d-md-flex">
@@ -893,7 +893,7 @@ function Index() {
                             <div className="container">
                                 <h3 className="title_cls">All recommended hotels in China</h3>
                                 <div className="card_slider_row">
-                                    <div className="carousel00">
+                                    <div className="carousel00 region_carousel00">
                                         <div className="row">
                                             <div className="col-12">
                                                 <div className="destination_dropdwn_row d-block d-md-flex">

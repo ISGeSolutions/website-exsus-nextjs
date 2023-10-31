@@ -262,7 +262,7 @@ function ContinentOverview({ sendDataToParent }) {
                   </i>
 
                   {/* Continent Overview Countries */}
-                  <div className="carousel00">
+                  <div className="carousel00 region_carousel00">
                     {allCountries?.map((countries, i) => (
                       <div
                         className="card_slider_inr card_slider_inr_sml"
@@ -339,7 +339,7 @@ function ContinentOverview({ sendDataToParent }) {
             <div className="container">
               <h3 className="title_cls">Favourite trip ideas</h3>
               <div className="card_slider_row">
-                <div className="carousel00">
+                <div className="carousel00 region_carousel00">
                   <div className="row">
                     {itineraries?.map((item) => (
                       <div className="col-sm-6 col-lg-4" key={item.id}>

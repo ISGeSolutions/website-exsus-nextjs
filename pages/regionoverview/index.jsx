@@ -118,7 +118,7 @@ function CountryOverview(props) {
                 <div className="container">
                     <h3 className="title_cls">Favourite trip ideas</h3>
                     <div className="card_slider_row">
-                        <div className="carousel00">
+                        <div className="carousel00 region_carousel00">
                             <div className="row">
                                 {itineraries?.map((item) => (
                                     <div className="col-sm-6 col-lg-3 col-xxl-3" key={item.id}>

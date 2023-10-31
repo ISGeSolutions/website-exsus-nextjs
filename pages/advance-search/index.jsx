@@ -138,7 +138,7 @@ function Index() {
                 Find and plan your perfect tailor-made holiday worldwide
               </h3>
               <div className="card_slider_row">
-                <div className="carousel00">
+                <div className="carousel00 region_carousel00">
                   <div className="row">
                     <div className="col-12">
                       <div className="destination_dropdwn_row d-block d-md-flex">

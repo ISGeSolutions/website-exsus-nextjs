@@ -389,7 +389,7 @@ function ContinentItinararies(props) {
 
               {/* Inspire Me */}
               <div className="card_slider_row">
-                <div className="carousel00">
+                <div className="carousel00 region_carousel00">
                   <div className="row">
                     <form onSubmit={onSubmit}>
                       <div className="col-12">
