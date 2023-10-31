@@ -404,16 +404,22 @@ function Layout({ children }) {
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink href={region + "/holiday-types"}>Holiday Types</NavLink>
+                      <NavLink href={region + "/holiday-types"}>
+                        Holiday Types
+                      </NavLink>
                     </li>
                     <li>
-                      <NavLink href={region + "/offers"}>Offers</NavLink>
+                      <NavLink href={region + "/special-offers"}>
+                        Offers
+                      </NavLink>
                     </li>
                     <li>
                       <NavLink href={region + "/blog"}>Blog</NavLink>
                     </li>
                     <li>
-                      <NavLink href={region + "/where-to-go"}>When to go</NavLink>
+                      <NavLink href={region + "/where-to-go"}>
+                        When to go
+                      </NavLink>
                     </li>
                   </ul>
                 </div>
@@ -497,7 +503,10 @@ function Layout({ children }) {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink href="/booking-terms-and-conditions">
+                  <NavLink
+                    href="https://www.exsus.com/pdf/bookingforms/ExsusTravelUKBookingForm.pdf"
+                    target="_blank"
+                  >
                     Booking terms & conditions
                   </NavLink>
                 </li>

@@ -257,11 +257,26 @@ const nextConfig = {
             { source: "/in/special-offers", destination: "/special-offers" },
 
             // itinerarydetail
-            { source: "/uk/destinations/:continent/:country/:itineraries/:itineraryName?", destination: "/itinerarydetail" },
-            { source: "/us/destinations/:continent/:country/:itineraries/:itineraryName?", destination: "/itinerarydetail" },
-            { source: "/asia/destinations/:continent/:country/:itineraries/:itineraryName?", destination: "/itinerarydetail" },
-            { source: "/in/destinations/:continent/:country/:itineraries/:itineraryName?", destination: "/itinerarydetail" },
-
+            {
+                source:
+                    "/uk/destinations/:continent/:country/:itineraries/:itineraryName?",
+                destination: "/itinerarydetail",
+            },
+            {
+                source:
+                    "/us/destinations/:continent/:country/:itineraries/:itineraryName?",
+                destination: "/itinerarydetail",
+            },
+            {
+                source:
+                    "/asia/destinations/:continent/:country/:itineraries/:itineraryName?",
+                destination: "/itinerarydetail",
+            },
+            {
+                source:
+                    "/in/destinations/:continent/:country/:itineraries/:itineraryName?",
+                destination: "/itinerarydetail",
+            },
 
             // advance search
             { source: "/uk/advance-search", destination: "/advance-search" },
@@ -291,6 +306,12 @@ const nextConfig = {
             { source: "/us/blog", destination: "/blog" },
             { source: "/asia/blog", destination: "/blog" },
             { source: "/in/blog", destination: "/blog" },
+
+            // blog-detail
+            { source: "/uk/blog/:blogdetail", destination: "/blog-detail" },
+            { source: "/us/blog/:blogdetail", destination: "/blog-detail" },
+            { source: "/asia/blog/:blogdetail", destination: "/blog-detail" },
+            { source: "/in/blog/:blogdetail", destination: "/blog-detail" },
 
 
 
@@ -335,6 +356,13 @@ const nextConfig = {
             { source: "/us/about-us", destination: "/about-us" },
             { source: "/asia/about-us", destination: "/about-us" },
             { source: "/in/about-us", destination: "/about-us" },
+
+
+            // where-to-go
+            { source: "/uk/where-to-go", destination: "/where-to-go" },
+            { source: "/us/where-to-go", destination: "/where-to-go" },
+            { source: "/asia/where-to-go", destination: "/where-to-go" },
+            { source: "/in/where-to-go", destination: "/where-to-go" },
             // Add more custom routes as needed
         ];
     },
@@ -395,6 +423,15 @@ const nextConfig = {
             },
         ];
     },
+    // Define a custom error page for 404 errors
+    // async rewrites() {
+    //   return [
+    //     {
+    //       source: '/:path*',
+    //       destination: '/404',
+    //     },
+    //   ];
+    // }
 };
 
 module.exports = nextConfig;

@@ -34,6 +34,13 @@ function Nav() {
     }
   }
 
+  const discovermore = () => {
+    router.push("uk/holiday-types/special-occasions");
+  };
+
+  const wildlifeholiday = () => {
+    router.push("/uk/holiday-types/wildlife-and-safari-holidays");
+  };
   const handleMouseEnter = (index) => {
     setActiveIndex(index);
   };
@@ -97,34 +104,28 @@ function Nav() {
     const router = useRouter();
 
     const handleClick = () => {
-      router.push(region + `/why-us/our-people`); // Navigate to the /enquiry page
+      router.push(`/meet-our-travel-experts`); // Navigate to the /enquiry page
     };
-
-    return (
-      <button class="btn header_nav_btn" onClick={handleClick}
-      >MEET OUR EXPERTS
-        <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 267 512.43"><path fill-rule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-      </button>
-    )
-  }
-
-
+  };
 
   const dynamicLink = (itemName, id) => {
-    const modifieditem = itemName.replace(/ /g, '-').replace(/&/g, 'and').toLowerCase();
+    const modifieditem = itemName
+      .replace(/ /g, "-")
+      .replace(/&/g, "and")
+      .toLowerCase();
     if (itemName) {
       return regionWiseUrl + `/destinations/${modifieditem}`;
-    } else if (itemId && itemId == 'AS') {
+    } else if (itemId && itemId == "AS") {
       return regionWiseUrl + `/continent?destinationcode=` + id;
-    } else if (itemId && itemId == 'AU') {
+    } else if (itemId && itemId == "AU") {
       return regionWiseUrl + `/continent?destinationcode=` + id;
-    } else if (itemId && itemId == 'CA') {
+    } else if (itemId && itemId == "CA") {
       return regionWiseUrl + `/continent?destinationcode=` + id;
-    } else if (itemId && itemId == 'EU') {
+    } else if (itemId && itemId == "EU") {
       return regionWiseUrl + `/continent?destinationcode=` + id;
-    } else if (itemId && itemId == 'IO') {
+    } else if (itemId && itemId == "IO") {
       return regionWiseUrl + `/continent?destinationcode=` + id;
-    } else if (itemId && itemId == 'IS') {
+    } else if (itemId && itemId == "IS") {
       return regionWiseUrl + `/continent?destinationcode=` + id;
     } else {
       return "#";
@@ -137,22 +138,22 @@ function Nav() {
     // }
     if (itemId) {
       return regionWiseUrl + `/continent/` + id;
-    } else if (itemId && itemId == 'AS') {
+    } else if (itemId && itemId == "AS") {
       return regionWiseUrl + `/continent/` + id;
-    } else if (itemId && itemId == 'AU') {
+    } else if (itemId && itemId == "AU") {
       return regionWiseUrl + `/continent/` + id;
-    } else if (itemId && itemId == 'CA') {
+    } else if (itemId && itemId == "CA") {
       return regionWiseUrl + `/continent/` + id;
-    } else if (itemId && itemId == 'EU') {
+    } else if (itemId && itemId == "EU") {
       return regionWiseUrl + `/continent/` + id;
-    } else if (itemId && itemId == 'IO') {
+    } else if (itemId && itemId == "IO") {
       return regionWiseUrl + `/continent/` + id;
-    } else if (itemId && itemId == 'IS') {
+    } else if (itemId && itemId == "IS") {
       return regionWiseUrl + `/continent/` + id;
     } else {
       return "#";
     }
-  }
+  };
 
   const dynamicLinkCountry = (itemId, itemIdCountry, id) => {
     if (itemId) {
@@ -191,9 +192,12 @@ function Nav() {
   };
 
   const dynamicLinkHoliday = (itemName, id) => {
-    const modifieditem = itemName.replace(/ /g, '-').replace(/&/g, 'and').toLowerCase();
+    const modifieditem = itemName
+      .replace(/ /g, "-")
+      .replace(/&/g, "and")
+      .toLowerCase();
     if (itemName) {
-      return regionWiseUrl + `/holiday-types/${modifieditem}`
+      return regionWiseUrl + `/holiday-types/${modifieditem}`;
     }
   };
 
@@ -203,34 +207,42 @@ function Nav() {
     // }
     if (itemId) {
       return regionWiseUrl + `/holidaytypeitineraries/id`;
-    } else if (itemId && itemId == 'HG5') {
+    } else if (itemId && itemId == "HG5") {
       return regionWiseUrl + `/holidaytypeitineraries/id`;
-    } else if (itemId && itemId == 'HG4') {
+    } else if (itemId && itemId == "HG4") {
       return regionWiseUrl + `/holidaytypeitineraries/id`;
-    } else if (itemId && itemId == 'ADHL') {
+    } else if (itemId && itemId == "ADHL") {
       return regionWiseUrl + `/holidaytypeitineraries/id`;
-    } else if (itemId && itemId == 'LBHG') {
+    } else if (itemId && itemId == "LBHG") {
       return regionWiseUrl + `/holidaytypeitineraries/id`;
-    } else if (itemId && itemId == 'HG3') {
+    } else if (itemId && itemId == "HG3") {
       return regionWiseUrl + `/holidaytypeitineraries/id`;
     } else {
       return "#";
     }
-  }
+  };
 
   const dynamicLinkCountryHoliday = (grpName, typeName, id) => {
-    const modifiedGrpName = grpName.replace(/ /g, '-').replace(/&/g, 'and').toLowerCase();
-    const modifiedtypeName = typeName.replace(/ /g, '-').replace(/&/g, 'and').toLowerCase();
+    const modifiedGrpName = grpName
+      .replace(/ /g, "-")
+      .replace(/&/g, "and")
+      .toLowerCase();
+    const modifiedtypeName = typeName
+      .replace(/ /g, "-")
+      .replace(/&/g, "and")
+      .toLowerCase();
 
     if (grpName) {
       if (typeName) {
-        return regionWiseUrl + `/holiday-types/${modifiedGrpName}/${modifiedtypeName}`;
+        return (
+          regionWiseUrl +
+          `/holiday-types/${modifiedGrpName}/${modifiedtypeName}`
+        );
       }
     }
   };
 
   useEffect(() => {
-
     const menu = document.querySelector(".menu"); //Nav tag
     setmenu(menu);
 
@@ -251,39 +263,40 @@ function Nav() {
         if (menu.classList.contains("active")) {
           toggleMenu();
         }
-
       }
-    }
+    };
 
-    $(".header_country_list > ul .header_country_label").on('mouseenter', function (event) {
-      $('.header_country_list > ul .header_country_label').removeClass("active");
-      $(this).addClass("active");
-    });
+    $(".header_country_list > ul .header_country_label").on(
+      "mouseenter",
+      function (event) {
+        $(".header_country_list > ul .header_country_label").removeClass(
+          "active"
+        );
+        $(this).addClass("active");
+      }
+    );
 
-    $('.header_country_label').click(function () {
-      $('.header_country_label').removeClass("responsive_drpdwn_cls");
-      $(this).addClass('responsive_drpdwn_cls');
+    $(".header_country_label").click(function () {
+      $(".header_country_label").removeClass("responsive_drpdwn_cls");
+      $(this).addClass("responsive_drpdwn_cls");
     });
 
     document.querySelector(".menu-overlay").addEventListener("click", () => {
       toggleMenu();
-    })
+    });
 
-    const script = document.createElement('script');
+    const script = document.createElement("script");
 
     script.src = "https://use.typekit.net/foobar.js";
     script.async = true;
 
     document.body.appendChild(script);
 
-    destinationService.getDestinationLandingList().then(x => {
-
-
+    destinationService.getDestinationLandingList().then((x) => {
       setDestinationLandingList(x.data);
     });
 
-    holidaytypesService.getHolidaytypesLandingList().then(x => {
-
+    holidaytypesService.getHolidaytypesLandingList().then((x) => {
       const sortedData = x.data.sort(
         (a, b) =>
           a.attributes.main_page_serial_number -
@@ -295,13 +308,11 @@ function Nav() {
     setActiveIndex(0);
     setActiveIndexHoliday(0);
 
-    const subscription = userService.user.subscribe(x => setUser(x));
+    const subscription = userService.user.subscribe((x) => setUser(x));
     return () => {
       subscription.unsubscribe();
-    }
+    };
   }, []);
-
-
 
   // const [value, setValue] = React.useState('fruit');
 
@@ -327,18 +338,16 @@ function Nav() {
       const hasChildren = e.target.closest(".menu-item-has-children");
       showSubMenu(hasChildren);
     }
-
   });
   goBack?.addEventListener("click", () => {
     hideSubMenu();
-  })
+  });
   menuTrigger?.addEventListener("click", () => {
     toggleMenu();
-  })
+  });
   closeMenu?.addEventListener("click", () => {
     toggleMenu();
-  })
-
+  });
 
   function toggleMenu() {
     menu.classList.toggle("active");
@@ -349,7 +358,8 @@ function Nav() {
     subMenu = hasChildren.querySelector(".sub-menu");
     subMenu.classList.add("active");
     subMenu.style.animation = "slideLeft 0.5s ease forwards";
-    const menuTitle = hasChildren.querySelector("svg").parentNode.childNodes[0].textContent;
+    const menuTitle =
+      hasChildren.querySelector("svg").parentNode.childNodes[0].textContent;
     menu.querySelector(".current-menu-title").innerHTML = menuTitle;
     menu.querySelector(".mobile-menu-head").classList.add("active");
   }
@@ -364,16 +374,15 @@ function Nav() {
   }
 
   function closeLeftNav() {
-    document.getElementById('sideMenuLeft').style.width = "0";
+    document.getElementById("sideMenuLeft").style.width = "0";
   }
 
   function openLeftNav() {
-    document.getElementById('sideMenuLeft').style.width = "100%";
+    document.getElementById("sideMenuLeft").style.width = "100%";
   }
 
   // only show nav when logged in
   // if (!user) return null;
-
 
   // only show nav when logged in
   // if (!user) return null;
@@ -612,7 +621,10 @@ function Nav() {
                               your own celebration and give yourself something
                               to look forward to!
                             </p>
-                            <button className="btn header_nav_btn">
+                            <button
+                              className="btn header_nav_btn"
+                              onClick={discovermore}
+                            >
                               Discover more
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -681,7 +693,6 @@ function Nav() {
                                 </li>
                               ))}
                             </ul>
-
                           </div>
                         </div>
                       </div>
@@ -700,9 +711,34 @@ function Nav() {
                         <div className="col-md-6">
                           <div className="header_nav_cnt">
                             <h4>WILDLIFE HOLIDAYS</h4>
-                            <p>Come face to face with the world's most iconic animals on an epic luxury wildlife holiday. Go on safari with the Big Five in South Africa, explore the wildlife-rich Galapagos, meet orangutans in Borneo, and see polar bears in Canada or penguins in Antarctica. The options are endless...</p>
-                            <button className="btn header_nav_btn">Discover more
-                              <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+                            <p>
+                              Come face to face with the world's most iconic
+                              animals on an epic luxury wildlife holiday. Go on
+                              safari with the Big Five in South Africa, explore
+                              the wildlife-rich Galapagos, meet orangutans in
+                              Borneo, and see polar bears in Canada or penguins
+                              in Antarctica. The options are endless...
+                            </p>
+                            <button
+                              className="btn header_nav_btn"
+                              onClick={wildlifeholiday}
+                            >
+                              Discover more
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="#000"
+                                shapeRendering="geometricPrecision"
+                                textRendering="geometricPrecision"
+                                imageRendering="optimizeQuality"
+                                fillRule="evenodd"
+                                clipRule="evenodd"
+                                viewBox="0 0 267 512.43"
+                              >
+                                <path
+                                  fillRule="nonzero"
+                                  d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                                />
+                              </svg>
                             </button>
                           </div>
                         </div>
@@ -712,11 +748,46 @@ function Nav() {
                 </div>
               )}
             </li>
-            <li className="menu-item-has-children"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/special-offers'}>Special offers</NavLink></li>
-            <li className="menu-item-has-children"><NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href={regionWiseUrl + '/blog'}>Blog</NavLink></li>
             <li className="menu-item-has-children">
-              <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} href="/why-us">Why us
-                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
+              <NavLink
+                onMouseEnter={showOverlay}
+                onClick={hideOverlay}
+                href={regionWiseUrl + "/special-offers"}
+              >
+                Special offers
+              </NavLink>
+            </li>
+            <li className="menu-item-has-children">
+              <NavLink
+                onMouseEnter={showOverlay}
+                onClick={hideOverlay}
+                href={regionWiseUrl + "/blog"}
+              >
+                Blog
+              </NavLink>
+            </li>
+            <li className="menu-item-has-children">
+              <NavLink
+                onMouseEnter={showOverlay}
+                onClick={hideOverlay}
+                href="/why-us"
+              >
+                Why us
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="#ffffff"
+                  shapeRendering="geometricPrecision"
+                  textRendering="geometricPrecision"
+                  imageRendering="optimizeQuality"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  viewBox="0 0 267 512.43"
+                >
+                  <path
+                    fillRule="nonzero"
+                    d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                  />
+                </svg>
               </NavLink>
               {overlayVisible && (
                 <div className="sub-menu mega-menu mega-menu-column-4">
