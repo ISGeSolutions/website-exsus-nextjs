@@ -24,9 +24,16 @@ export const blogsService = {
 
 
 
-function getAllBlogs(page) {
-    const blogsUrl = `${publicRuntimeConfig.apiUrl}/api/blogs?pagination[page]=${page}&pagination[pageSize]=12`;
-    return fetchWrapper.get(blogsUrl);
+function getAllBlogs(page, item) {
+    if (item == "date") {
+        const blogsUrl = `${publicRuntimeConfig.apiUrl}/api/blogs?pagination[page]=${page}&pagination[pageSize]=12?sort[0]=blog_date:asc`;
+        return fetchWrapper.get(blogsUrl);
+    } else {
+        const blogsUrl = `${publicRuntimeConfig.apiUrl}/api/blogs?pagination[page]=${page}&pagination[pageSize]=12`;
+        return fetchWrapper.get(blogsUrl);
+    }
+
+
 }
 
 

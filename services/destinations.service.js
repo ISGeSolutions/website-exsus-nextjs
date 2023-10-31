@@ -94,7 +94,7 @@ function getDestinationInspireMe() {
 function getDestinationDetails(name) {
     // console.log('baseUrl_dropdown', baseUrl_dropdown);
     const destinationDetailsUrl =
-        `${publicRuntimeConfig.apiUrl}/api/destinations?filters[destination_name]=${name}&populate=destination_images,countries.country_images`;
+        `${publicRuntimeConfig.apiUrl}/api/destinations?filters[destination_name][$eq]=${name}&populate=destination_images,countries.country_images`;
     return fetchWrapper.get(destinationDetailsUrl);
 }
 

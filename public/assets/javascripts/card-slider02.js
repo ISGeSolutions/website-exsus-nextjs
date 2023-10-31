@@ -8,8 +8,8 @@ setTimeout(() => {
     let showHideIcons1 = () => {
         let scrollWidth = carousel01.scrollWidth - carousel01.clientWidth;
         if (arrowIcons[0] || arrowIcons[1]) {
-            arrowIcons1[0].style.display = carousel01.scrollLeft == 0 ? "none" : "block";
-            arrowIcons1[1].style.display = carousel01.scrollLeft == scrollWidth ? "none" : "block";
+            arrowIcons[0].style.display = carousel.scrollLeft == 0 ? "none" : "block";
+            arrowIcons[1].style.display = carousel.scrollLeft == scrollWidth ? "none" : "block";
         }
 
     }

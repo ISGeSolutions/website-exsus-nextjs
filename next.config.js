@@ -292,11 +292,34 @@ const nextConfig = {
             { source: "/asia/blog", destination: "/blog" },
             { source: "/in/blog", destination: "/blog" },
 
+
+
+
             // blog-detail
             { source: "/uk/blog/:blogdetail", destination: "/blog-detail" },
             { source: "/us/blog/:blogdetail", destination: "/blog-detail" },
             { source: "/asia/blog/:blogdetail", destination: "/blog-detail" },
             { source: "/in/blog/:blogdetail", destination: "/blog-detail" },
+
+            // why-us
+            { source: "/uk/why-us", destination: "/why-us" },
+            { source: "/us/why-us", destination: "/why-us" },
+            { source: "/asia/why-us", destination: "/why-us" },
+            { source: "/in/why-us", destination: "/why-us" },
+
+            // our people
+            { source: "/uk/why-us/our-people", destination: "/our-people" },
+            { source: "/us/why-us/our-people", destination: "/our-people" },
+            { source: "/asia/why-us/our-people", destination: "/our-people" },
+            { source: "/in/why-us/our-people", destination: "/our-people" },
+
+
+            // our people detail
+            { source: "/uk/why-us/our-people/:executiveName", destination: "/travel-expert-detail" },
+            { source: "/us/why-us/our-people/:executiveName", destination: "/travel-expert-detail" },
+            { source: "/asia/why-us/our-people/:executiveName", destination: "/travel-expert-detail" },
+            { source: "/in/why-us/our-people/:executiveName", destination: "/travel-expert-detail" },
+
 
             // where-to-go-detail
             { source: "/uk/where-to-go-detail", destination: "/where-to-go-detail" },
