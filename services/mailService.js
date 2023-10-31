@@ -3,6 +3,7 @@ var nodemailer = require("nodemailer");
 // import { EmailTemplate } from '../components/MyEmailTemplate';
 // import { renderEmail } from '@react-email/html';
 import { renderEmail } from "react-html-email";
+import { consultant_records } from "./../data/consultants_list.json";
 
 import { render } from "@react-email/render";
 // import nodemailer from 'nodemailer';
@@ -53,6 +54,24 @@ export async function sendMail(subject, toEmail, otpText, data, emailpage) {
         // throw new Error(error);
       } else {
         // return true;
+        if (consultant_records?.length > 0) {
+          consultant_records.forEach(element => {
+            var mailOptions_consultant = {
+              from: "noreply@exsus.com",
+              to: element.email_id,
+              subject: subject,
+              text: otpText,
+              html: emailHtml,
+            };
+            transporter.sendMail(mailOptions_consultant, function (error, info) {
+              if (error) {
+                resolve(false);
+              } else {
+                resolve(true);
+              }
+            });
+          });
+        }
         resolve(true);
       }
     });

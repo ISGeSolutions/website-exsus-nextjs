@@ -1,0 +1,20 @@
+{
+    "consultant_records": [
+        {
+            "name": "Shashikant Chobhe",
+            "email_id": "spchobhe@gmail.com"
+        },
+        {
+            "name": "Shashi Chobhe",
+            "email_id": "spchobhe@live.com"
+        },
+        {
+            "name": "Mayur Chobhe",
+            "email_id": "spchobhe@outlook.com"
+        },
+        {
+            "name": "Ganesh Devkar",
+            "email_id": "deokarg201920@gmail.com"
+        }
+    ]
+}
