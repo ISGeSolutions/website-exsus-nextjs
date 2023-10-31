@@ -4,6 +4,8 @@ import { Link, Spinner } from "components";
 import { Layout } from "components/users";
 import { whyusService } from "../../services/whyus.service";
 import { NavLink } from "components";
+import { FriendlyUrl } from "../../components";
+
 
 var React = require("react");
 
@@ -15,6 +17,8 @@ function Index() {
   const [clientReviews, setClientReviews] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [valueWithBr, setnewValueWithBr] = useState("");
+  const [friendlyUrl, setFriendlyUrl] = useState('');
+
 
   let regionWiseUrl = "/uk";
   let region = "uk";
@@ -50,7 +54,7 @@ function Index() {
     if (carousel) {
       new bootstrap.Carousel(carousel);
     }
-
+    setFriendlyUrl(`home/Why us/Exsus Reviews`)
     whyusService
       .getAllReviews()
       .then((x) => {
@@ -162,15 +166,7 @@ function Index() {
           <section className="trvl_info_row">
             <div className="container">
               <div className="bookmark_row">
-                <ul>
-                  <li>
-                    <a href="homepage.html">Home</a>
-                  </li>
-                  <li>
-                    <a href="why_us.html">Why us</a>
-                  </li>
-                  <li>Exsus Reviews</li>
-                </ul>
+                <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
               </div>
 
               <div className="trvl_info_cntnt">

@@ -52,10 +52,10 @@ export function FriendlyUrl(props) {
         {friendlyUrlArr?.map((friendlyUrl, i) => (
           <li key={i}>
             {i === friendlyUrlArr.length - 1 ? (
-              <span>{friendlyUrl.trim().replace(/\b\w/g, char => char.toUpperCase())}</span>
+              <span>{friendlyUrl?.replace(/-/g, " ").trim().replace(/\b\w/g, char => char.toUpperCase())}</span>
             ) : (
               <NavLink href={dynamicFriendlyLink(friendlyUrl, i)}>
-                {friendlyUrl.replace(/\b\w/g, char => char.toUpperCase())}
+                {friendlyUrl?.replace(/-/g, " ").replace(/\b\w/g, char => char.toUpperCase())}
               </NavLink>
             )}
           </li>

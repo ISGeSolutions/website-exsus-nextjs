@@ -461,7 +461,7 @@ function Layout({ children }) {
                       <NavLink href={region + "/about-us"}>About us</NavLink>
                     </li>
                     <li>
-                      <NavLink href={region + "/meet-our-travel-experts"}>
+                      <NavLink href={region + "/our-people"}>
                         Meet our travel experts
                       </NavLink>
                     </li>

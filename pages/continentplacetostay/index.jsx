@@ -30,8 +30,7 @@ function ContinentPlacesToStay(props) {
   const [metaData, setMetaData] = useState([]);
   const [dcode, setdcode] = useState();
   const destinationcode = router.query.continent
-    .replace(/-/g, " ")
-    .replace(/and/g, "&")
+    .replace(/-and-/g, " & ").replace(/-/g, " ")
     .toLowerCase();
   const [allHotels, setAllHotels] = useState([]);
   const [countryOptions, setAllCountries] = useState([]);
@@ -492,7 +491,7 @@ function ContinentPlacesToStay(props) {
                               {item?.attributes?.hotel_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}

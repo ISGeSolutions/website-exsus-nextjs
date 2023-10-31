@@ -8,6 +8,7 @@ import Head from "next/head";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { whyusService } from "../../services";
 var Carousel = require("react-responsive-carousel").Carousel;
+import { FriendlyUrl } from "../../components";
 
 export default Index;
 
@@ -17,8 +18,9 @@ function Index() {
   const [executiveData, setExecutiveData] = useState({});
   const [testimonials, setTestimonials] = useState([]);
   const { prefixOfImage } = useState("https://www.exsus.com/");
-  const expertId = router.query.expertid;
+  const expertName = router.query?.executiveName.replace(/-/g, " ");
   const [isLoading, setIsLoading] = useState(true);
+  const [friendlyUrl, setFriendlyUrl] = useState('');
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -81,11 +83,11 @@ function Index() {
 
     // const carousel = document.querySelector('#carouselExampleInterval');
     // new bootstrap.Carousel(carousel);
-
+    setFriendlyUrl(`home/why us/our people/${expertName}`)
     whyusService
-      .getExecutivesById(expertId)
+      .getExecutivesById(expertName)
       .then((x) => {
-        const response = x.data;
+        const response = x.data[0];
         const str = response?.attributes?.executive_image_path;
         const substringToCheck = "https://www.exsus.com/";
         const containsSubstring = str.includes(substringToCheck);
@@ -106,7 +108,9 @@ function Index() {
       });
 
     const carousel1 = document.querySelector("#Testimonials");
-    new bootstrap.Carousel(carousel1);
+    if (carousel1) {
+      new bootstrap.Carousel(carousel1);
+    }
 
     window.addEventListener("resize", equalHeight(true));
     const slider = document.querySelector(".items");
@@ -158,7 +162,7 @@ function Index() {
         slides[next].classList.add("next");
       }
     };
-  }, [expertId]);
+  }, [expertName]);
 
   return (
     <Layout>
@@ -178,18 +182,7 @@ function Index() {
           <section className="our_exprts_detls_row">
             <div className="container">
               <div className="bookmark_row">
-                <ul>
-                  <li>
-                    <a href="homepage.html">Home</a>
-                  </li>
-                  <li>
-                    <a href="why_us.html">Why us</a>
-                  </li>
-                  <li>
-                    <a href="our_people.html">Our Team</a>
-                  </li>
-                  <li>Tom Cloherty</li>
-                </ul>
+                <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
               </div>
               <div className="exprts_cntnt_blk">
                 <div className="row">
@@ -259,7 +252,7 @@ function Index() {
                                   )
                                     ? res1?.attributes?.image_path
                                     : "https://www.exsus.com/" +
-                                      res1?.attributes?.image_path
+                                    res1?.attributes?.image_path
                                 }
                                 className=""
                                 alt="our_exprts_slider01"
@@ -491,7 +484,7 @@ function Index() {
                           )
                             ? res1?.attributes?.image_path
                             : "https://www.exsus.com/" +
-                              res1?.attributes?.image_path
+                            res1?.attributes?.image_path
                         }
                         alt="expert_favourite_pic01"
                         className="img-fluid"

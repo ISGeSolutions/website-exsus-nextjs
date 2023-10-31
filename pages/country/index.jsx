@@ -35,12 +35,10 @@ function Country() {
   const [isLoader, setIsLoader] = useState(false);
   const [isRtl, setIsRtl] = useState(false);
   const destinationcode = router.query?.continent
-    ?.replace(/-/g, " ")
-    .replace(/and/g, "&")
+    ?.replace(/-and-/g, " & ").replace(/-/g, " ")
     .toLowerCase();
   const countrycode = router.query?.country
-    ?.replace(/-/g, " ")
-    .replace(/and/g, "&")
+    ?.replace(/-and-/g, " & ").replace(/-/g, " ")
     .toLowerCase();
   console.log(destinationcode, countrycode);
   const [selectedOptionCountry, setSelectedOptionCountry] = useState(null);
@@ -179,7 +177,7 @@ function Country() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
+      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
     );
   };
 
@@ -217,46 +215,46 @@ function Country() {
     if (itemId == "overview") {
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode}/${countryData.attributes.friendly_url}`;
+        `/destinations/${destinationcode}/${countryData.attributes?.friendly_url}`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `Home/Destinations/${destinationcode}/${countryData.attributes.friendly_url}`
+        `Home/Destinations/${destinationcode}/${countryData.attributes?.friendly_url}`
       );
       text = "LUXURY HOLIDAYS IN " + countrycode.toUpperCase();
     } else if (itemId == "regions") {
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode}/${countryData.attributes.friendly_url}`;
+        `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `estinations/${destinationcode}/${countryData.attributes.friendly_url}/${countryData.attributes.friendly_url} Regions`
+        `estinations/${destinationcode}/${countryData.attributes?.friendly_url}/${countryData.attributes?.friendly_url} Regions`
       );
       text = "REGIONS IN " + countrycode.toUpperCase(); // action="/countryregions?countrycode=south-africa"
     } else if (itemId == "itineraries") {
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode}/${countryData.attributes.friendly_url}`;
+        `/destinations/${destinationcode}/${countryData.attributes?.friendly_url}`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `Home/Destinations/${destinationcode}/${countryData.attributes.friendly_url}/${countryData.attributes.friendly_url} itineraries`
+        `Home/Destinations/${destinationcode}/${countryData.attributes?.friendly_url}/${countryData.attributes?.friendly_url} itineraries`
       );
       text = countrycode.toUpperCase() + " ITINERARIES"; // action="/countryitineraries?countrycode=south-africa"
     } else if (itemId == "places-to-stay") {
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode}/${countryData.attributes.friendly_url}`;
+        `/destinations/${destinationcode}/${countryData.attributes?.friendly_url}`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `Home/Destinations/${destinationcode}/${countryData.attributes.friendly_url}/places to stay ${countryData.attributes.friendly_url}`
+        `Home/Destinations/${destinationcode}/${countryData.attributes?.friendly_url}/places to stay ${countryData.attributes?.friendly_url}`
       );
       text = "LUXURY HOTELS, CAMPS & LODGES IN " + countrycode.toUpperCase(); // action="/countryplacetostay?countrycode=south-africa"
     } else if (itemId == "when-to-go") {
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode}/${countryData.attributes.friendly_url}`;
+        `/destinations/${destinationcode}/${countryData.attributes?.friendly_url}`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `Home/Destinations/${destinationcode}/${countryData.attributes.friendly_url}/when to go to ${countryData.attributes.friendly_url}`
+        `Home/Destinations/${destinationcode}/${countryData.attributes?.friendly_url}/when to go to ${countryData.attributes?.friendly_url}`
       );
       text = "WHEN TO GO TO " + countrycode.toUpperCase(); // action="/countryplacetostay?countrycode=south-africa"
     } else {

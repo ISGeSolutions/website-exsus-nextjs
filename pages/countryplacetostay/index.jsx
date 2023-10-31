@@ -27,12 +27,10 @@ function CountryPlaceToStay(country) {
   const [page, setPage] = useState(0); // Current page
   const [metaData, setMetaData] = useState([]);
   const destinationcode = router.query?.continent
-    ?.replace(/-/g, " ")
-    .replace(/and/g, "&")
+    ?.replace(/-and-/g, " & ").replace(/-/g, " ")
     .toLowerCase();
   const countrycode = router.query?.country
-    ?.replace(/-/g, " ")
-    .replace(/and/g, "&")
+    ?.replace(/-and-/g, " & ").replace(/-/g, " ")
     .toLowerCase();
 
   const [dcode, setdcode] = useState();
