@@ -315,6 +315,7 @@ const nextConfig = {
 
 
 
+<<<<<<< Updated upstream
 
             // blog-detail
             { source: "/uk/blog/:blogdetail", destination: "/blog-detail" },
@@ -365,6 +366,34 @@ const nextConfig = {
             { source: "/in/where-to-go", destination: "/where-to-go" },
             // Add more custom routes as needed
         ];
+=======
+      // where-to-go
+      { source: "/uk/where-to-go", destination: "/where-to-go" },
+      { source: "/us/where-to-go", destination: "/where-to-go" },
+      { source: "/asia/where-to-go", destination: "/where-to-go" },
+      { source: "/in/where-to-go", destination: "/where-to-go" },
+      // Add more custom routes as needed
+
+      {
+        source: '/:path*',
+        destination: '/404',
+      },
+    ];
+  },
+  reactStrictMode: true,
+  eslint: {
+    // Warning: This allows production builds to successfully complete even if
+    // your project has ESLint errors.
+    ignoreDuringBuilds: true,
+  },
+  serverRuntimeConfig: {
+    dbConfig: {
+      host: "localhost",
+      port: 3306,
+      user: "root",
+      password: "2204", // @@@
+      database: "next-js-registration-login-example",
+>>>>>>> Stashed changes
     },
     reactStrictMode: true,
     eslint: {
