@@ -372,6 +372,15 @@ const nextConfig = {
             },
         ];
     },
+    // Define a custom error page for 404 errors
+    async rewrites() {
+        return [
+            {
+                source: '/:path*',
+                destination: '/404',
+            },
+        ];
+    }
 };
 
 module.exports = nextConfig;
