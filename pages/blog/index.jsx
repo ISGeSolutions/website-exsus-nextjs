@@ -39,6 +39,7 @@ function Index() {
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors } = formState;
   const [friendlyUrl, setFriendlyUrl] = useState("");
+  const [activeItem, setActiveItem] = useState("recommended");
 
   const validationSchema = Yup.object().shape({
     destination: Yup.string(),
@@ -67,9 +68,17 @@ function Index() {
     return regionWiseUrl + `/blog/${modifiedGrpName}`;
   };
 
-  const loadMoreData = () => {
+
+  const handleFilterClick = (item) => {
+    page = 0;
+    setAllBlogsData([]);
+    setActiveItem(item);
+    loadMoreData(item);
+  };
+
+  const loadMoreData = (item) => {
     blogsService
-      .getAllBlogs(page + 1)
+      .getAllBlogs(page + 1, item)
       .then((x) => {
         setMetaData(x.meta.pagination);
         setFriendlyUrl(`home/blog`);
@@ -163,7 +172,7 @@ function Index() {
     //     });
     //     setAllBlogsData(response);
     // })
-    loadMoreData();
+    loadMoreData(activeItem);
 
     const carousel = document.querySelector("#carouselExampleInterval");
     if (carousel) {
@@ -314,9 +323,8 @@ function Index() {
                                 aria-label="Choose a destination"
                                 name="destination"
                                 {...register("destination")}
-                                className={`form-select ${
-                                  errors.destination ? "is-invalid" : ""
-                                }`}
+                                className={`form-select ${errors.destination ? "is-invalid" : ""
+                                  }`}
                               >
                                 <option value="">Choose a destination</option>
                                 {destinationLandingList?.map((element, i) => (
@@ -341,9 +349,8 @@ function Index() {
                                 aria-label="Choose a reason"
                                 name="reason"
                                 {...register("reason")}
-                                className={`form-select ${
-                                  errors.reason ? "is-invalid" : ""
-                                }`}
+                                className={`form-select ${errors.reason ? "is-invalid" : ""
+                                  }`}
                               >
                                 <option value="">Choose a category</option>
                                 {holidaytypesLandingList?.map((element, i) => (
@@ -398,12 +405,24 @@ function Index() {
                             <label className="pt-2 pt-lg-0">Arrange by:</label>
                             <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
                               <li>
-                                <a href="#" className="active">
-                                  Recommended
+                                <a
+                                  className={
+                                    activeItem === "recommended" ? "active" : ""
+                                  }
+                                  onClick={() => handleFilterClick("recommended")}
+                                >
+                                  Exsus Recommends
                                 </a>
                               </li>
                               <li>
-                                <a href="#">By date</a>
+                                <a
+                                  className={
+                                    activeItem === "date" ? "active" : ""
+                                  }
+                                  onClick={() => handleFilterClick("date")}
+                                >
+                                  By date
+                                </a>
                               </li>
                             </ul>
                           </div>
@@ -587,9 +606,8 @@ function Index() {
                                 type="text"
                                 name="first_name"
                                 {...register("first_name")}
-                                className={`form-control ${
-                                  errors.first_name ? "is-invalid" : ""
-                                }`}
+                                className={`form-control ${errors.first_name ? "is-invalid" : ""
+                                  }`}
                                 aria-label="First name *"
                                 placeholder="First name *"
                                 value={firstName}
@@ -606,9 +624,8 @@ function Index() {
                                 type="text"
                                 name="title"
                                 {...register("last_name")}
-                                className={`form-control ${
-                                  errors.last_name ? "is-invalid" : ""
-                                }`}
+                                className={`form-control ${errors.last_name ? "is-invalid" : ""
+                                  }`}
                                 aria-label="Last name *"
                                 placeholder="Last name *"
                                 value={lastName}
@@ -625,9 +642,8 @@ function Index() {
                                 type="email"
                                 name="email_id"
                                 {...register("email_id")}
-                                className={`form-control ${
-                                  errors.email_id ? "is-invalid" : ""
-                                }`}
+                                className={`form-control ${errors.email_id ? "is-invalid" : ""
+                                  }`}
                                 aria-label="Email *"
                                 placeholder="Email *"
                                 value={email}

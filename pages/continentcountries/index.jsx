@@ -13,8 +13,7 @@ export default ContinentCountry;
 function ContinentCountry({ sendDataToParent }) {
   const router = useRouter();
   const destinationcode = router.query.continent
-    .replace(/-/g, " ")
-    .replace(/and/g, "&")
+    .replace(/-and-/g, " & ").replace(/-/g, " ")
     .toLowerCase();
   const query = router.query;
   const [allCountries, setAllCountries] = useState([]);
@@ -30,14 +29,19 @@ function ContinentCountry({ sendDataToParent }) {
     }
   }
 
-  const handleCountryClick = (id) => {
-    if (id) {
-      router.push(regionWiseUrl + `/country?countrycode=` + id);
-    }
-  };
 
   const handleClick = (e) => {
     sendDataToParent(e);
+  };
+
+  const generateDynamicLinkCountries = (countryName) => {
+    const modifieditem = countryName
+      .replace(/ /g, "-")
+      .replace(/&/g, "and")
+      .toLowerCase();
+    if (countryName) {
+      return regionWiseUrl + `/destinations/${destinationcode}/${modifieditem}`;
+    }
   };
 
   useEffect(() => {
@@ -171,10 +175,12 @@ function ContinentCountry({ sendDataToParent }) {
                     key={countries?.id}
                   >
                     <div className="card_blk_inr">
-                      <a
-                        onClick={() => handleCountryClick(countries?.id)}
-                        target="_blank"
+                      <NavLink
+                        href={generateDynamicLinkCountries(
+                          countries?.attributes.country_name
+                        )}
                       >
+
                         <img
                           src={
                             countries?.attributes?.country_images?.data.filter(
@@ -216,7 +222,7 @@ function ContinentCountry({ sendDataToParent }) {
                             </div>
                           </div>
                         </div>
-                      </a>
+                      </NavLink>
                     </div>
                   </div>
                 ))}

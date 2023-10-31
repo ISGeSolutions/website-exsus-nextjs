@@ -92,7 +92,7 @@ function Index() {
     whyusService
       .getWhyusPage()
       .then((x) => {
-        setWhyusDetails(x?.data?.attributes);
+        setWhyusDetails(x?.data[0]?.attributes);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -106,8 +106,7 @@ function Index() {
     <>
       <Head>
         <title>
-          About Exsus Travel | Why travel with Exsus? | Specialist Luxury
-          Tour...
+          {whyusDetails?.custom_page_contents.data?.filter(res => res.content_name == "Title")[0]?.content_value}
         </title>
       </Head>
 
@@ -197,7 +196,7 @@ function Index() {
                 </div>
                 <div className="trvl_info_cntnt">
                   <h2 className="trvl_title">
-                    {whyusDetails?.page_header_text}
+                    {whyusDetails?.custom_page_contents.data.page_header_text}
                   </h2>
                   <p
                     dangerouslySetInnerHTML={{

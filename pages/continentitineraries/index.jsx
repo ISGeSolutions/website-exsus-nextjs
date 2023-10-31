@@ -121,8 +121,7 @@ function ContinentItinararies(props) {
   const router = useRouter();
   const [dcode, setdcode] = useState();
   const destinationcode = router.query.continent
-    .replace(/-/g, " ")
-    .replace(/and/g, "&")
+    .replace(/-and-/g, " & ").replace(/-/g, " ")
     .toLowerCase();
   const [countryOptions, setAllCountries] = useState([]);
   const [destinationName, setdestinationName] = useState("");

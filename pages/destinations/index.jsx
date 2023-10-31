@@ -137,6 +137,7 @@ function Index() {
       .getCustomPagesData("destinations")
       .then((x) => {
         setDestinations(x.data[0]);
+        console.log(x.data[0]);
         const imageCheck = x.data[0].attributes.custom_page_images.data;
         const newBackgroundImages = [];
         imageCheck.forEach((element) => {
@@ -168,7 +169,7 @@ function Index() {
     <>
       <Head>
         <title>
-          Luxury Holiday Destination | Tailor made Trips | Exsus Travel
+          {destinations?.attributes?.custom_page_contents?.data?.filter(res => res.attributes?.content_name == "Title")[0]?.attributes?.content_value}
         </title>
         <script
           type="text/javascript"
@@ -242,8 +243,8 @@ function Index() {
               </div>
               <div className="row">
                 <div className="destinations_cntnt_blk">
-                  <h2>{destinations?.attributes?.page_header_text}</h2>
-                  <p>{destinations?.attributes?.page_content_1}</p>
+                  <h2>{destinations?.attributes?.custom_page_contents?.data?.filter(res => res.attributes?.content_name == "LuxuryHolidaysHeader")[0].attributes?.content_value}</h2>
+                  <p>{destinations?.attributes?.custom_page_contents?.data?.filter(res => res.attributes?.content_name == "LuxuryHolidaysText")[0].attributes?.content_value}</p>
                 </div>
               </div>
             </div>
@@ -313,13 +314,13 @@ function Index() {
           <section
             className="destination_text_overlay_row"
             style={{
-              backgroundImage: `url(${backgroundImgWhentogo.image_path})`,
+              backgroundImage: `url(${destinations?.attributes?.custom_page_contents?.data?.filter(res => res.attributes?.content_name == "WhenToGoWhereImagePath")[0]?.attributes?.content_value})`,
             }}
           >
             <div className="container">
               <div className="destination_text_overlay_inr">
-                <h4>{backgroundImgWhentogo.image_header_text_1}</h4>
-                <h5>{backgroundImgWhentogo.image_header_text_2}</h5>
+                <h4>{destinations?.attributes?.custom_page_contents?.data?.filter(res => res.attributes?.content_name == "BestTimeHeader")[0]?.attributes?.content_value}</h4>
+                <h5>{destinations?.attributes?.custom_page_contents?.data?.filter(res => res.attributes?.content_name == "BestTimeText")[0]?.attributes?.content_value}</h5>
                 {/* style={{ backgroundImage: `url(${backgroundImage})` }} */}
                 <button
                   className="btn prmry_btn make_enqury_btn"

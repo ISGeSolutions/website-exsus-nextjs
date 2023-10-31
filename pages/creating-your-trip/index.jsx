@@ -4,6 +4,7 @@ import { Link, Spinner } from 'components';
 import { Layout } from 'components/users';
 import { aboutusService } from 'services';
 import { NavLink } from 'components';
+import { FriendlyUrl } from '../../components';
 
 var React = require('react');
 
@@ -13,13 +14,13 @@ export default Index;
 
 function Index() {
     const [whyusDetails, setWhyusDetails] = useState(null);
+    const [friendlyUrl, setFriendlyUrl] = useState('');
 
     useEffect(() => {
         const carousel = document.querySelector('#carouselExampleInterval');
         new bootstrap.Carousel(carousel);
-
+        setFriendlyUrl(`Home/About us/Creating your Trip`)
         aboutusService.getAboutusPage().then(x => {
-           
             setWhyusDetails(x.data.attributes);
         });
 
@@ -40,10 +41,7 @@ function Index() {
             <section className="trvl_info_row">
                 <div className="container">
                     <div className="bookmark_row">
-                        <ul>
-                            <li><a href="homepage.html">Home</a></li>
-                            <li>Creating your trip</li>
-                        </ul>
+                        <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
                     </div>
                     <div className="trvl_info_cntnt">
                         <h2 className="trvl_title">CREATING YOUR TRIP THE EXSUS WAY</h2>

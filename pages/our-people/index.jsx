@@ -8,6 +8,8 @@ import Head from "next/head";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { whyusService } from "../../services";
 var Carousel = require("react-responsive-carousel").Carousel;
+import { FriendlyUrl } from '../../components';
+
 
 export default Index;
 
@@ -16,6 +18,7 @@ function Index() {
   const [allExecutives, setAllExecutives] = useState([]);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
+  const [friendlyUrl, setFriendlyUrl] = useState('');
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -38,8 +41,20 @@ function Index() {
     }
   };
 
+  let regionWiseUrl = "/uk";
+  let region = "uk";
+  if (typeof window !== "undefined") {
+    if (window && window.site_region) {
+      regionWiseUrl = "/" + window.site_region;
+      region = window.site_region;
+
+      // setMyVariable(window.site_region);
+    }
+  }
+
   const handleRedirect = (item) => {
-    router.push(`/travel-expert-detail?expertid=${item}`);
+    const modifiedName = item.replace(/ /g, '-').toLowerCase();
+    router.push(region + `/why-us/our-people/${modifiedName}`);
   };
 
   // const ExpertDetail = ({ data }) => {
@@ -59,7 +74,7 @@ function Index() {
 
   useEffect(() => {
     // userService.getAll().then(x => setUsers(x));
-
+    setFriendlyUrl(`Home/Why us/Our people`)
     whyusService
       .getAllExecutives()
       .then((x) => {
@@ -245,15 +260,7 @@ function Index() {
           <section className="our_exprts_row">
             <div className="container">
               <div className="bookmark_row">
-                <ul>
-                  <li>
-                    <a>Home</a>
-                  </li>
-                  <li>
-                    <a>Why us</a>
-                  </li>
-                  <li>Our people</li>
-                </ul>
+                <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
               </div>
               <div className="row">
                 {allExecutives?.map((res) => (
@@ -275,7 +282,7 @@ function Index() {
                       </div>
                       <button
                         className="btn prmry_btn make_enqury_btn"
-                        onClick={() => handleRedirect(res.id)}
+                        onClick={() => handleRedirect(res?.attributes?.executive_name)}
                       >
                         Read more
                         <svg

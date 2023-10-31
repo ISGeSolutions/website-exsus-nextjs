@@ -27,6 +27,8 @@ function Index() {
   const [sortedData, setSortedData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [websiteContent, setWebsiteContent] = useState(null);
+  const [backgroundImage, setBackgroundImage] = useState([]);
+
 
   let regionWiseUrl = "/uk";
   if (typeof window !== "undefined") {
@@ -178,6 +180,27 @@ function Index() {
 
   useEffect(() => {
     $(".succss_msg_parnt").hide();
+
+    destinationService
+      .getCustomPagesData("home")
+      .then((x) => {
+        setHomePageData(x.data[0].attributes);
+        const imageCheck = x.data[0]?.attributes?.custom_page_images.data;
+        const newBackgroundImages = [];
+        imageCheck.forEach((element) => {
+          if (element.attributes.image_type == "center") {
+            setBackgroundImgWhentogo(element.attributes);
+          } else if (element.attributes.image_type == "banner") {
+            newBackgroundImages.push(element.attributes.image_path);
+          }
+        });
+        setBackgroundImage(newBackgroundImages);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+      });
+
     const thumbnailImageArr = [];
     holidaytypesService
       .getHolidaytypesLandingListHomePage()
@@ -244,6 +267,8 @@ function Index() {
       .catch((error) => {
         setIsLoading(false);
       });
+
+
 
     destinationService
       .getDestinationLandingList()
@@ -349,11 +374,17 @@ function Index() {
     if (carouselMain) {
       new bootstrap.Carousel(carouselMain);
     }
+    // setTimeout(() => {
+    // }, 100);
+
 
     const carousel = document.querySelector("#Testimonials");
     if (carousel) {
       new bootstrap.Carousel(carousel);
     }
+    // setTimeout(() => {
+    // }, 100);
+
 
     window.addEventListener("resize", equalHeight(true));
   }, []);
@@ -440,43 +471,13 @@ function Index() {
                     <h2>Discover the Seychelles</h2>
                   </div>
                 </a>
-                <a
-                  href="#"
-                  target="_blank"
-                  className="carousel-item"
-                  data-bs-interval="5000"
-                >
-                  <div className="banner_img_custom02 banner_commn_cls"></div>
-                  <div className="carousel-caption">
-                    <img
-                      src="images/banner-logo.png"
-                      alt="banner-logo"
-                      className="img-fluid"
-                    />
-                    <h2>Perfect for romance</h2>
-                  </div>
-                </a>
-                <a
-                  href="#"
-                  target="_blank"
-                  className="carousel-item"
-                  data-bs-interval="5000"
-                >
-                  <div className="banner_img_custom03 banner_commn_cls"></div>
-                  <div className="carousel-caption">
-                    <img
-                      src="images/banner-logo.png"
-                      alt="banner-logo"
-                      className="img-fluid"
-                    />
-                    <h2>Explore new adventure</h2>
-                  </div>
-                </a>
               </div>
             </div>
 
             <Inspireme />
           </section>
+
+
 
           <section className="card_blk_row">
             <div className="container">

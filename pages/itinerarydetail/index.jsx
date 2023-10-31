@@ -17,10 +17,8 @@ function Index() {
   const router = useRouter();
   const [itineraries, setItineraries] = useState(null);
   const [bannerImages, setBannerImages] = useState(null);
-  const itin_name = router.query?.itinerary_name ? router.query?.itinerary_name?.replace(/-/g, " ")
-    .replace(/and/g, "&")
+  const itin_name = router.query?.itineraryName ? router.query?.itineraryName?.replace(/-/g, " ")
     .toLowerCase() : router.query?.itineraries?.replace(/-/g, " ")
-      .replace(/and/g, "&")
       .toLowerCase();
   const itin_code = router.query.itinerarycode;
   const [title, setTitle] = useState("");
@@ -99,6 +97,8 @@ function Index() {
   };
 
   useEffect(() => {
+    console.log(itin_name)
+    console.log(router.query);
     const tooltipTriggerList = document.querySelectorAll(
       '[data-bs-toggle="tooltip"]'
     );
@@ -148,7 +148,7 @@ function Index() {
         //
         const bannerImages = [];
         const imageCheck = x.data[0]?.attributes?.itinerary_details.data;
-        setFriendlyUrl(`home/destinations/${router.query?.continent}/${router.query?.country}/${router.query?.itinerary_name ? router.query?.itineraries + '/' + x.data[0].attributes.friendly_url : x.data[0].attributes.friendly_url}`);
+        setFriendlyUrl(`home/destinations/${router.query?.continent}/${router.query?.country}/${router.query?.itineraryName ? router.query?.itineraries + '/' + x.data[0].attributes.friendly_url : x.data[0].attributes.friendly_url}`);
         setTitle(x.data[0].attributes.meta_title);
         imageCheck.forEach((banner, index) => {
           bannerImages.push(banner?.attributes?.image_path);

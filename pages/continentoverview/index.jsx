@@ -14,8 +14,7 @@ function ContinentOverview({ sendDataToParent }) {
   const [itineraries, setItineraries] = useState(null);
   const [valueWithBr, setnewValueWithBr] = useState("");
   const destinationcode = router.query.continent
-    .replace(/-/g, " ")
-    .replace(/and/g, "&")
+    .replace(/-and-/g, " & ").replace(/-/g, " ")
     .toLowerCase();
   const itemsPerPage = 9; // Number of items to load per page
   const [allCountries, setAllCountries] = useState([]);
@@ -56,7 +55,7 @@ function ContinentOverview({ sendDataToParent }) {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`
+      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`
     );
   };
 
@@ -353,7 +352,7 @@ function ContinentOverview({ sendDataToParent }) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}

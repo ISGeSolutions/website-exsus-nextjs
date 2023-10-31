@@ -8,13 +8,11 @@ function CountryWhentogo(country) {
 
   const router = useRouter();
   const countrycode = router.query?.country
-    ?.replace(/-/g, " ")
-    .replace(/and/g, "&")
+    ?.replace(/-and-/g, " & ").replace(/-/g, " ")
     .toLowerCase();
   const [isLoading, setIsLoading] = useState(true);
   const destinationcode = router.query?.continent
-    ?.replace(/-/g, " ")
-    .replace(/and/g, "&")
+    ?.replace(/-and-/g, " & ").replace(/-/g, " ")
     .toLowerCase();
 
   let regionWiseUrl = "/uk";
