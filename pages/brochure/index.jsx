@@ -119,6 +119,7 @@ function Index() {
   });
 
   const formOptions = { resolver: yupResolver(validationSchema) };
+
   const handleOptionRegionChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"

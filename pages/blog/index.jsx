@@ -28,23 +28,40 @@ function Index() {
   const [destinationLandingList, setDestinationLandingList] = useState();
   const [holidaytypesLandingList, setHolidaytypesLandingList] = useState();
   const [allBlogsData, setAllBlogsData] = useState([]);
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
-  const [email, setEmail] = useState();
   const itemsPerPage = 12; // Number of items to load per page
   const [page, setPage] = useState(0); // Current page
   const [metaData, setMetaData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const formOptions = { resolver: yupResolver(validationSchema) };
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors } = formState;
   const [friendlyUrl, setFriendlyUrl] = useState("");
   const [activeItem, setActiveItem] = useState("recommended");
+  const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
+    email_id: "",
+  });
+  const formOptions = { resolver: yupResolver(validationSchema) };
 
   const validationSchema = Yup.object().shape({
-    destination: Yup.string(),
-    holidaytype: Yup.string(),
+    //title: Yup.string().required("Title is required"),
+    first_name: Yup.string().required("First Name is required"),
+    last_name: Yup.string().required("Last Name is required"),
+    email_id: Yup.string().required("Email id is required"),
   });
+
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value,
+  //   });
+  // };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log(formData); // Display the form data in the console
+  // };
 
   let regionWiseUrl = "/uk";
   if (typeof window !== "undefined") {
@@ -55,9 +72,12 @@ function Index() {
   }
 
   const onSubmit = (e) => {
-    console.log("First Name ", firstName);
-    console.log("Last Name ", lastName);
-    console.log("Email", email);
+    // console.log("First Name ", first_name);
+    // console.log("Last Name ", las_name);
+    // console.log("Email", email_id);
+
+    //console.log(formData);
+    console.log(e);
   };
 
   const generateDynamicLink = (item) => {
@@ -67,7 +87,6 @@ function Index() {
       .toLowerCase();
     return regionWiseUrl + `/blog/${modifiedGrpName}`;
   };
-
 
   const handleFilterClick = (item) => {
     page = 0;
@@ -323,8 +342,9 @@ function Index() {
                                 aria-label="Choose a destination"
                                 name="destination"
                                 {...register("destination")}
-                                className={`form-select ${errors.destination ? "is-invalid" : ""
-                                  }`}
+                                className={`form-select ${
+                                  errors.destination ? "is-invalid" : ""
+                                }`}
                               >
                                 <option value="">Choose a destination</option>
                                 {destinationLandingList?.map((element, i) => (
@@ -349,8 +369,9 @@ function Index() {
                                 aria-label="Choose a reason"
                                 name="reason"
                                 {...register("reason")}
-                                className={`form-select ${errors.reason ? "is-invalid" : ""
-                                  }`}
+                                className={`form-select ${
+                                  errors.reason ? "is-invalid" : ""
+                                }`}
                               >
                                 <option value="">Choose a category</option>
                                 {holidaytypesLandingList?.map((element, i) => (
@@ -409,7 +430,9 @@ function Index() {
                                   className={
                                     activeItem === "recommended" ? "active" : ""
                                   }
-                                  onClick={() => handleFilterClick("recommended")}
+                                  onClick={() =>
+                                    handleFilterClick("recommended")
+                                  }
                                 >
                                   Exsus Recommends
                                 </a>
@@ -568,7 +591,7 @@ function Index() {
                   </div>
                   <div className="modal-body">
                     <img
-                      src="images/banner-logo.png"
+                      src="/images/banner-logo.png"
                       alt="banner-logo"
                       className="img-fluid"
                     />
@@ -580,98 +603,136 @@ function Index() {
                     </p>
                     <div className="contact_form_row">
                       <form onSubmit={handleSubmit(onSubmit)}>
-                        <div className="row">
-                          <div className="col-lg-6">
-                            <div className="select_drpdwn">
-                              <select
-                                className="form-select"
-                                aria-label="Title"
-                              >
-                                <option defaultValue>Title *</option>
-                                <option value="Mr">Mr</option>
-                                <option value="Mrs">Mrs</option>
-                                <option value="Ms">Ms</option>
-                                <option value="Miss">Miss</option>
-                                <option value="Dr">Dr</option>
-                                <option value="Professor">Professor</option>
-                                <option value="Lord">Lord</option>
-                                <option value="Lady">Lady</option>
-                                <option value="Sir">Sir</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div className="col-lg-6">
-                            <div className="form-input validatn_cls">
-                              <input
-                                type="text"
-                                name="first_name"
-                                {...register("first_name")}
-                                className={`form-control ${errors.first_name ? "is-invalid" : ""
-                                  }`}
-                                aria-label="First name *"
-                                placeholder="First name *"
-                                value={firstName}
-                                onChange={(e) => setFirstName(e.target.value)}
-                              />
-                              <div className="invalid-feedback mb-1">
-                                {errors.first_name?.message}
+                        <div className="container">
+                          <div className="row">
+                            <div className="col-lg-6">
+                              <div className="select_drpdwn">
+                                <select
+                                  className="form-select"
+                                  aria-label="Title"
+                                >
+                                  <option defaultValue>Title *</option>
+                                  <option value="Mr">Mr</option>
+                                  <option value="Mrs">Mrs</option>
+                                  <option value="Ms">Ms</option>
+                                  <option value="Miss">Miss</option>
+                                  <option value="Dr">Dr</option>
+                                  <option value="Professor">Professor</option>
+                                  <option value="Lord">Lord</option>
+                                  <option value="Lady">Lady</option>
+                                  <option value="Sir">Sir</option>
+                                </select>
                               </div>
                             </div>
-                          </div>
-                          <div className="col-lg-6">
-                            <div className="form-input">
-                              <input
-                                type="text"
-                                name="title"
-                                {...register("last_name")}
-                                className={`form-control ${errors.last_name ? "is-invalid" : ""
+                            <div className="col-lg-6">
+                              <div className="form-input">
+                                {/* <input
+                                  type="text"
+                                  name="first_name"
+                                  {...register("first_name")}
+                                  className={`form-control ${
+                                    errors.first_name ? "is-invalid" : ""
                                   }`}
-                                aria-label="Last name *"
-                                placeholder="Last name *"
-                                value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
-                              />
-                              <div className="invalid-feedback mb-1">
-                                {errors.last_name?.message}
+                                  aria-label="First name *"
+                                  placeholder="First name *"
+                                  // value={formData.first_name}
+                                  // onChange={handleChange}
+                                /> */}
+                                <input
+                                  type="text"
+                                  name="first_name"
+                                  {...register("first_name")}
+                                  className={`form-control ${
+                                    errors.first_name ? "is-invalid" : ""
+                                  }`}
+                                  aria-label="First name *"
+                                  placeholder="First name *"
+                                />
+                                <div className="invalid-feedback mb-1">
+                                  {errors.first_name?.message}
+                                </div>
                               </div>
                             </div>
-                          </div>
-                          <div className="col-lg-6">
-                            <div className="form-input">
-                              <input
-                                type="email"
-                                name="email_id"
-                                {...register("email_id")}
-                                className={`form-control ${errors.email_id ? "is-invalid" : ""
+                            <div className="col-lg-6">
+                              <div className="form-input">
+                                {/* <input
+                                  type="text"
+                                  name="last_name"
+                                  {...register("last_name")}
+                                  className={`form-control ${
+                                    errors.last_name ? "is-invalid" : ""
                                   }`}
-                                aria-label="Email *"
-                                placeholder="Email *"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                              />
-                              <div className="invalid-feedback mb-1">
-                                {errors.email_id?.message}
+                                  aria-label="Last name *"
+                                  placeholder="Last name *"
+                                  // value={formData.last_name}
+                                  // onChange={handleChange}
+                                /> */}
+                                <input
+                                  type="text"
+                                  name="title"
+                                  {...register("last_name")}
+                                  className={`form-control ${
+                                    errors.last_name ? "is-invalid" : ""
+                                  }`}
+                                  aria-label="Last name *"
+                                  placeholder="Last name *"
+                                />
+                                <div className="invalid-feedback mb-1">
+                                  {errors.last_name?.message}
+                                </div>
                               </div>
                             </div>
-                          </div>
-                          <button className="btn prmry_btn mx-auto">
-                            Subscribe
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="#ffffff"
-                              shapeRendering="geometricPrecision"
-                              textRendering="geometricPrecision"
-                              imageRendering="optimizeQuality"
-                              fillrule="evenodd"
-                              clipRule="evenodd"
-                              viewBox="0 0 267 512.43"
+                            <div className="col-lg-6">
+                              <div className="form-input">
+                                {/* <input
+                                  type="email"
+                                  name="email_id"
+                                  {...register("email_id")}
+                                  className={`form-control ${
+                                    errors.email_id ? "is-invalid" : ""
+                                  }`}
+                                  aria-label="Email *"
+                                  placeholder="Email *"
+                                  // value={formData.email_id}
+                                  // onChange={handleChange}
+                                /> */}
+                                <input
+                                  type="email"
+                                  name="email_id"
+                                  {...register("email_id")}
+                                  className={`form-control ${
+                                    errors.email_id ? "is-invalid" : ""
+                                  }`}
+                                  aria-label="Email *"
+                                  placeholder="Email *"
+                                />
+                                <div className="invalid-feedback mb-1">
+                                  {errors.email_id?.message}
+                                </div>
+                              </div>
+                            </div>
+                            <button
+                              className="btn prmry_btn mx-auto"
+                              type="submit"
                             >
-                              <path
-                                fillrule="nonzero"
-                                d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                              ></path>
-                            </svg>
-                          </button>
+                              Subscribe
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="#ffffff"
+                                shapeRendering="geometricPrecision"
+                                textRendering="geometricPrecision"
+                                imageRendering="optimizeQuality"
+                                fillrule="evenodd"
+                                clipRule="evenodd"
+                                viewBox="0 0 267 512.43"
+                              >
+                                <path
+                                  fillrule="nonzero"
+                                  d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                                ></path>
+                              </svg>
+                            </button>
+                          </div>
                         </div>
                       </form>
                     </div>
