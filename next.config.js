@@ -366,6 +366,12 @@ const nextConfig = {
       { source: "/about-us/careers", destination: "/careers" },
       { source: "/about-us/careers", destination: "/careers" },
 
+      // creating-your-trip
+      { source: "/about-us/creating-your-trip", destination: "/creating-your-trip" },
+      { source: "/about-us/creating-your-trip", destination: "/creating-your-trip" },
+      { source: "/about-us/creating-your-trip", destination: "/creating-your-trip" },
+      { source: "/about-us/creating-your-trip", destination: "/creating-your-trip" },
+
       // career-at-exsus
       // { source: "/uk/career-at-exsus", destination: "/career-at-exsus" },
       // { source: "/us/career-at-exsus", destination: "/career-at-exsus" },

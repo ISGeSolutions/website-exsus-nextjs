@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { Signup } from 'components';
 import { Link, Spinner } from 'components';
 import { Layout } from 'components/users';
-import { aboutusService } from 'services';
+import { aboutusService, creatintripsService } from 'services';
 import { NavLink } from 'components';
-import { FriendlyUrl } from '../../components';
+import { FriendlyUrl } from '../../../components';
+import Head from "next/head";
 
 var React = require('react');
 
@@ -15,6 +16,14 @@ export default Index;
 function Index() {
     const [whyusDetails, setWhyusDetails] = useState(null);
     const [friendlyUrl, setFriendlyUrl] = useState('');
+    const [creatingTripsData, setCreatingTripsData] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
+    const [headingTag, setHeadingTag] = useState(null);
+    const [title, setTitle] = useState(null);
+    const [metaDescription, setMetaDescription] = useState(null);
+    const [longText, setLongText] = useState(null);
+    const [rightHeader, setRightHeader] = useState(null);
+    const [rightCorner, setRightContent] = useState(null);
 
     useEffect(() => {
         const carousel = document.querySelector('#carouselExampleInterval');
@@ -24,10 +33,44 @@ function Index() {
             setWhyusDetails(x.data.attributes);
         });
 
+        creatintripsService
+            .getCreatingTripPage()
+            .then((x) => {
+                debugger;
+                setCreatingTripsData(x.data[0]);
+                const data = x.data[0]?.attributes?.custom_page_contents?.data;
+                if (data) {
+                    data.forEach((element, index) => {
+                        if (element?.attributes?.content_name == 'HeadingTag') {
+                            setHeadingTag(element?.attributes?.content_value);
+                        } else if (element?.attributes?.content_name == 'Title') {
+                            setTitle(element?.attributes?.content_value);
+                        } else if (element?.attributes?.content_name == 'MetaDescription') {
+                            setMetaDescription(element?.attributes?.content_value);
+                        } else if (element?.attributes?.content_name == 'Long_Text') {
+                            setLongText(element?.attributes?.content_value);
+                        } else if (element?.attributes?.content_name == 'Right_Header') {
+                            setRightHeader(element?.attributes?.content_value);
+                        } else if (element?.attributes?.content_name == 'Right_Corner') {
+                            setRightCorner(element?.attributes?.content_value);
+                        }
+                    });
+                }
+                setIsLoading(false);
+            })
+            .catch((error) => {
+                // Handle any errors here
+                setIsLoading(false);
+            });
+
     }, []);
 
     return (
         <Layout>
+            <Head>
+                <title>{title}</title>
+                <meta name="description" content={metaDescription}></meta>
+            </Head>
             <section className="banner_blk_row">
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-inner">
@@ -41,12 +84,16 @@ function Index() {
             <section className="trvl_info_row">
                 <div className="container">
                     <div className="bookmark_row">
-                        <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
+                        <FriendlyUrl
+                            data={'Home / ' + creatingTripsData?.attributes?.page_friendly_url}
+                        ></FriendlyUrl>
                     </div>
+                
                     <div className="trvl_info_cntnt">
-                        <h2 className="trvl_title">CREATING YOUR TRIP THE EXSUS WAY</h2>
-                        <p className="mb-4">Everyone’s idea of a perfect trip is as individual as you are, which is why we tailor-make our luxury holidays, bespoke honeymoons and family adventure holidays to fit your own personal requirements.</p>
-                        <p>The aim is to plan your holiday perfectly and to organise it flawlessly. Your dedicated travel expert will look after your trip from the very first call to the moment you return and is always on hand to provide advice and support. Here’s a five step guide to how it works:</p>
+                        <h2 className="trvl_title">{headingTag}</h2>
+                        <p className="mb-4" dangerouslySetInnerHTML={{ __html: longText }} />
+                        {/* <p className="mb-4">Everyone’s idea of a perfect trip is as individual as you are, which is why we tailor-make our luxury holidays, bespoke honeymoons and family adventure holidays to fit your own personal requirements.</p>
+                        <p>The aim is to plan your holiday perfectly and to organise it flawlessly. Your dedicated travel expert will look after your trip from the very first call to the moment you return and is always on hand to provide advice and support. Here’s a five step guide to how it works:</p> */}
                     </div>
                     <div className="trvl_info_cntnt">
                         <h2 className="text-capitalize">1. Speak to a travel expert about your tailor-made holiday</h2>

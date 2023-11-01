@@ -77,7 +77,7 @@ function Index() {
           </div>
           <div className="trvl_info_cntnt">
             <h2 className="trvl_title">
-              {title}
+              {headingTag}
             </h2>
             <p className="mb-4" dangerouslySetInnerHTML={{ __html: longText }} />
           </div>
