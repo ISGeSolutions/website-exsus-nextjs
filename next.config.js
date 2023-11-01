@@ -361,6 +361,12 @@ const nextConfig = {
       { source: "/asia/where-to-go", destination: "/where-to-go" },
       { source: "/in/where-to-go", destination: "/where-to-go" },
 
+      // career-at-exsus
+      { source: "/uk/career-at-exsus", destination: "/career-at-exsus" },
+      { source: "/us/career-at-exsus", destination: "/career-at-exsus" },
+      { source: "/asia/career-at-exsus", destination: "/career-at-exsus" },
+      { source: "/in/career-at-exsus", destination: "/career-at-exsus" },
+
       // Define a custom error page for 404 errors
       {
         source: '/:path*',
