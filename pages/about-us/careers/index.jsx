@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, Spinner, Signup } from "components";
+import { Link, Spinner, Signup, FriendlyUrl } from "components";
 import { Layout } from "components/users";
 import { careeratexsusService } from "services";
 import Head from "next/head";
@@ -62,7 +62,10 @@ function Index() {
       <section className="trvl_info_row">
         <div className="container">
           <div className="bookmark_row">
-            <ul>
+            <FriendlyUrl
+              data={'Home / ' + careerData?.attributes?.page_friendly_url}
+            ></FriendlyUrl>
+            {/* <ul>
               <li>
                 <a href="homepage.html">Home</a>
               </li>
@@ -70,7 +73,7 @@ function Index() {
                 <a href="about_us.html">About us</a>
               </li>
               <li>Careers</li>
-            </ul>
+            </ul> */}
           </div>
           <div className="trvl_info_cntnt">
             <h2 className="trvl_title">
