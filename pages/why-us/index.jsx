@@ -344,7 +344,7 @@ function Index() {
             >
               <div className="container">
                 <h4>
-                  ==<p>isLoading: {isLoading ? "True" : "False"}</p>==Sign up
+                  Sign up
                   for our newsletter
                 </h4>
                 <h5>Receive our latest news and special offers</h5>
