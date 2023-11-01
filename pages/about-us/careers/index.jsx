@@ -1,20 +1,64 @@
 import { useState, useEffect } from "react";
-
 import { Link, Spinner, Signup } from "components";
 import { Layout } from "components/users";
-import { userService } from "services";
+import { careeratexsusService } from "services";
+import Head from "next/head";
 
 export default Index;
 
 function Index() {
   const [users, setUsers] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [careerData, setCareerData] = useState(null);
+  const [headingTag, setHeadingTag] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [metaDescription, setMetaDescription] = useState(null);
+  const [longText, setLongText] = useState(null);
+  const [rightHeader, setRightHeader] = useState(null);
+  const [rightCorner, setRightContent] = useState(null);
 
   useEffect(() => {
     // userService.getAll().then(x => setUsers(x));
+
+    careeratexsusService
+      .getCareerPage()
+      .then((x) => {
+        // debugger;
+        setCareerData(x.data[0]);
+        const data = x.data[0]?.attributes?.custom_page_contents?.data;
+        if (data) {
+          data.forEach((element, index) => {
+            if (element?.attributes?.content_name == 'HeadingTag') {
+              setHeadingTag(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == 'Title') {
+              setTitle(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == 'MetaDescription') {
+              setMetaDescription(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == 'Long_Text') {
+              setLongText(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == 'Right_Header') {
+              setRightHeader(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == 'Right_Corner') {
+              setRightCorner(element?.attributes?.content_value);
+            }
+          });
+        }
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        // Handle any errors here
+        setIsLoading(false);
+      });
+
+
   }, []);
 
   return (
     <Layout>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={metaDescription}></meta>
+      </Head>
       <section className="trvl_info_row">
         <div className="container">
           <div className="bookmark_row">
@@ -28,29 +72,11 @@ function Index() {
               <li>Careers</li>
             </ul>
           </div>
-
           <div className="trvl_info_cntnt">
             <h2 className="trvl_title">
-              JOBS IN TRAVEL | CAREERS AT EXSUS TRAVEL
+              {title}
             </h2>
-            <p className="mb-4">
-              Exsus Travel has been creating luxury tailor-made holidays and
-              bespoke honeymoons for over 20 years - our success stems from our
-              staff, the experts responsible for crafting and personalising the
-              itineraries and the exceptional luxury holidays that we offer.
-              They are chosen because of their matchless destination knowledge
-              and because they absolutely understand that it's the little
-              touches and intangible extras that really make a client's time
-              away special and that much more individual.
-            </p>
-            <p>
-              Working for Exsus Travel is exciting and varied. There are lots of
-              opportunities for development and progression, allowing people to
-              achieve their personal goals. So, share your passion for travel
-              with the people who continuously offer exceptional service and
-              start on a career with one of the leading luxury travel tour
-              operators.
-            </p>
+            <p className="mb-4" dangerouslySetInnerHTML={{ __html: longText }} />
           </div>
           <div className="trvl_info_cntnt">
             <h2 className="trvl_title_white">

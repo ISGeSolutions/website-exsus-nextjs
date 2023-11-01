@@ -12,5 +12,6 @@ export * from './aboutus.service';
 export * from './blogs.service';
 export * from './specialoffers.service';
 export * from './brochures.service';
+export * from './career.service';
 
 
