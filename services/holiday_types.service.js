@@ -7,7 +7,7 @@ import { fetchWrapper } from "helpers";
 const { publicRuntimeConfig } = getConfig();
 
 const baseUrl = `${publicRuntimeConfig.apiUrl}/holiday_types`;
-const holidaytypesLandingPageUrl = `${publicRuntimeConfig.apiUrl}/api/custom-pages?filters[page_code][$eq]=holiday_types&populate[0]=custom_page_images`;
+const holidaytypesLandingPageUrl = `${publicRuntimeConfig.apiUrl}/api/custom-pages?populate[0]=custom_page_images&populate[1]=custom_page_contents&filters[page_code][$eq]=holiday-types`;
 // const holidaytypesLandingPageUrl = `${publicRuntimeConfig.apiUrl}/holiday_types_landing_page`;
 
 // const holidaytypesLandingListUrl = `${publicRuntimeConfig.apiUrl}/api/holiday-types?fields[0]=holiday_type_code&fields[1]=holiday_type_name&populate[holiday_type_images][fields][2]=image_path&populate[holiday_type_images][fields][3]=image_type`;

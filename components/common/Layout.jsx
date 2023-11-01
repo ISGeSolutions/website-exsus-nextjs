@@ -461,17 +461,17 @@ function Layout({ children }) {
                       <NavLink href={region + "/about-us"}>About us</NavLink>
                     </li>
                     <li>
-                      <NavLink href={region + "/our-people"}>
+                      <NavLink href={region + "/why-us/our-people"}>
                         Meet our travel experts
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink href={region + "/career-at-exsus"}>
+                      <NavLink href={"/about-us/careers"}>
                         Careers at Exsus
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink href={region + "/exsus-referral-scheme"}>
+                      <NavLink href={"/exsus-referral-scheme"}>
                         Exsus referral scheme
                       </NavLink>
                     </li>

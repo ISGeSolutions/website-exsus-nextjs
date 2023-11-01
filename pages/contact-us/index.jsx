@@ -65,20 +65,7 @@ function Index() {
 
   function onSubmit(data) {
     const data1 = {
-      data: {
-        title: "Ms",
-        first_name: "Riya",
-        last_name: "Khanna",
-        email_id: "riya@gmail.com",
-        telephone_no: "9876543210",
-        best_time_to_call: "No Preference",
-        preferred_place_time: "India Dec 2023",
-        note: "more about plans...",
-        source_of_marketing: "Other",
-        source_of_marketing_other_text: "test source_of_marketing_other_text",
-        marketing_mail_ind: false,
-        email_flag: false,
-      },
+      data: data
     };
 
     return contactusService.makeanenquiry(data1).then((res) => {

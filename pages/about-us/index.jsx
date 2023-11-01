@@ -4,6 +4,7 @@ import { Link, Spinner } from "components";
 import { Layout } from "components/users";
 import { aboutusService } from "services";
 import { NavLink } from "components";
+import Head from "next/head";
 
 var React = require("react");
 
@@ -17,6 +18,8 @@ function Index() {
   const [whyusDetails, setWhyusDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [valueWithBr, setnewValueWithBr] = useState("");
+  const [customPageContent, setCustomPage] = useState([]);
+
 
   let regionWiseUrl = "/uk";
   let region = "uk";
@@ -57,6 +60,7 @@ function Index() {
       .getAboutusPage()
       .then((x) => {
         setWhyusDetails(x.data[0].attributes);
+        setCustomPage(x.data[0].attributes?.custom_page_contents)
 
         let modifiedString = x.data.attributes?.page_content_1;
         console.log("console.log ", modifiedString);
@@ -204,8 +208,8 @@ function Index() {
                 </div>
 
                 <div className="trvl_info_cntnt">
-                  <h2 className="trvl_title">{whyusDetails?.page_header_text}</h2>
-                  <div dangerouslySetInnerHTML={{ __html: valueWithBr }} />
+                  <h2 className="trvl_title">{customPageContent?.data?.filter(res => res.attributes?.content_name == "HeadingTag")[0]?.attributes?.content_value}</h2>
+                  <div dangerouslySetInnerHTML={{ __html: customPageContent?.data?.filter(res => res.attributes?.content_name == "Long_Text")[0]?.attributes?.content_value }} />
                   {/* <div
                   dangerouslySetInnerHTML={{
                     __html: whyusDetails?.page_content_1,
@@ -260,7 +264,7 @@ function Index() {
                 <div className="row">
                   <div className="col-sm-6">
                     <div className="card_blk_inr">
-                      <a href="#" target="_blank">
+                      <NavLink href={region + `/destinations`}>
                         <img
                           src="images/about_us_card01.jpg"
                           alt="Card image 07"
@@ -292,13 +296,13 @@ function Index() {
                             </div>
                           </div>
                         </div>
-                      </a>
+                      </NavLink>
                     </div>
                   </div>
 
                   <div className="col-sm-6">
                     <div className="card_blk_inr">
-                      <a href="#">
+                      <NavLink href={region + `/holiday-types`}>
                         <img
                           src="images/about_us_card02.jpg"
                           alt="Card image 08"
@@ -330,7 +334,7 @@ function Index() {
                             </div>
                           </div>
                         </div>
-                      </a>
+                      </NavLink>
                     </div>
                   </div>
                 </div>

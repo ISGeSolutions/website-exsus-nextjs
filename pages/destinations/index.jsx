@@ -137,7 +137,6 @@ function Index() {
       .getCustomPagesData("destinations")
       .then((x) => {
         setDestinations(x.data[0]);
-        console.log(x.data[0]);
         const imageCheck = x.data[0].attributes.custom_page_images.data;
         const newBackgroundImages = [];
         imageCheck.forEach((element) => {
@@ -147,6 +146,8 @@ function Index() {
             newBackgroundImages.push(element.attributes.image_path);
           }
         });
+        const whenToGoImage = destinations?.attributes?.custom_page_contents?.data?.filter(res => res.attributes?.content_name == "WhenToGoWhereImagePath")[0]?.attributes?.content_value;
+        setBackgroundImgWhentogo(whenToGoImage?.includes("https") ? whenToGoImage : "https://online.exsus.com/" + whenToGoImage);
         setBackgroundImage(newBackgroundImages);
         setIsLoading(false);
       })
@@ -314,7 +315,7 @@ function Index() {
           <section
             className="destination_text_overlay_row"
             style={{
-              backgroundImage: `url(${destinations?.attributes?.custom_page_contents?.data?.filter(res => res.attributes?.content_name == "WhenToGoWhereImagePath")[0]?.attributes?.content_value})`,
+              backgroundImage: `url(${backgroundImgWhentogo})`
             }}
           >
             <div className="container">

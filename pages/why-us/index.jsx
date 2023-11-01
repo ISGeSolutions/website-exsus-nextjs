@@ -29,6 +29,7 @@ function Index() {
   const [whyusDetails, setWhyusDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const { t } = useTranslation();
+  const [customPageData, setCustomData] = useState([]);
 
   const EnquiryButton = () => {
     ReactGA.event({
@@ -93,6 +94,8 @@ function Index() {
       .getWhyusPage()
       .then((x) => {
         setWhyusDetails(x?.data[0]?.attributes);
+        console.log(x.data[0]?.attributes);
+        setCustomData(x.data[0]?.attributes?.custom_page_contents);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -106,7 +109,7 @@ function Index() {
     <>
       <Head>
         <title>
-          {whyusDetails?.custom_page_contents.data?.filter(res => res.content_name == "Title")[0]?.content_value}
+          {whyusDetails?.page_friendly_url}
         </title>
       </Head>
 
@@ -196,11 +199,11 @@ function Index() {
                 </div>
                 <div className="trvl_info_cntnt">
                   <h2 className="trvl_title">
-                    {whyusDetails?.custom_page_contents.data.page_header_text}
+                    {customPageData?.data?.filter(res => res.attributes?.content_name == "HeadingTag")[0]?.attributes?.content_value}
                   </h2>
                   <p
                     dangerouslySetInnerHTML={{
-                      __html: whyusDetails?.page_content_1,
+                      __html: customPageData?.data?.filter(res => res.attributes?.content_name == "Long_Text")[0]?.attributes?.content_value
                     }}
                   />
                 </div>
@@ -210,7 +213,7 @@ function Index() {
             <section className="card_blk_row dark_grey py-5">
               <div className="container">
                 <div className="book_wth_confdnce">
-                  <h2>{whyusDetails?.page_content_2}</h2>
+                  {/* <h3 dangerouslySetInnerHTML={{ _html: customPageData?.data?.filter(res => res.attributes?.content_name == "Short_Text")[0]?.attributes?.content_value }}></h3> */}
                   <div className="row">
                     <div className="col-lg-4">
                       <p

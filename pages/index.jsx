@@ -31,9 +31,11 @@ function Index() {
 
 
   let regionWiseUrl = "/uk";
+  let region = 'uk'
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
       regionWiseUrl = "/" + window.site_region;
+      region = window.site_region;
       // setMyVariable(window.site_region);
     }
   }
@@ -46,7 +48,11 @@ function Index() {
   };
 
   const generateDynamicLinkBlog = (item) => {
-    return regionWiseUrl + `/blog/blog-detail?blogid=${item}`;
+    const modifiedGrpName = item
+      .replace(/ /g, "-")
+      .replace(/&/g, "and")
+      .toLowerCase();
+    return regionWiseUrl + `/blog/${modifiedGrpName}`;
   };
 
   const handleRedirect = () => {
@@ -99,43 +105,13 @@ function Index() {
 
   equalHeight(true);
 
-  const dynamicLink = (itemId, id) => {
-    if (itemId && itemId == "HG6") {
-      return (
-        regionWiseUrl +
-        `/holidaytypeitineraries?hcode=incredible-journeys&id=` +
-        id
-      );
-    } else if (itemId && itemId == "HG5") {
-      return (
-        regionWiseUrl +
-        `/holidaytypeitineraries?hcode=luxury-honeymoons&id=` +
-        id
-      );
-    } else if (itemId && itemId == "HG4") {
-      return (
-        regionWiseUrl + `/holidaytypeitineraries?hcode=family-holidays&id=` + id
-      );
-    } else if (itemId && itemId == "ADHL") {
-      return (
-        regionWiseUrl +
-        `/holidaytypeitineraries?hcode=adventure-holidays&id=` +
-        id
-      );
-    } else if (itemId && itemId == "LBHG") {
-      return (
-        regionWiseUrl +
-        `/holidaytypeitineraries?hcode=luxury-beach-holidays&id=` +
-        id
-      );
-    } else if (itemId && itemId == "HG3") {
-      return (
-        regionWiseUrl +
-        `/holidaytypeitineraries?hcode=culture-holidays&id=` +
-        id
-      );
-    } else {
-      return "#";
+  const dynamicLink = (itemName, id) => {
+    const modifieditem = itemName
+      .replace(/ /g, "-")
+      .replace(/&/g, "and")
+      .toLowerCase();
+    if (itemName) {
+      return regionWiseUrl + `/holiday-types/${modifieditem}`;
     }
   };
 
@@ -269,7 +245,6 @@ function Index() {
       });
 
 
-
     destinationService
       .getDestinationLandingList()
       .then((x) => {
@@ -294,9 +269,14 @@ function Index() {
       });
 
     destinationService
-      .getAllItinerariesHomePage()
+      .getAllItinerariesHomePage(region)
       .then((x) => {
-        setItineraries(x.data);
+        const response = x.data.sort(
+          (a, b) =>
+            a.attributes.home_page_serial_number -
+            b.attributes.home_page_serial_number
+        );
+        setItineraries(response);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -305,7 +285,7 @@ function Index() {
       });
 
     whyusService
-      .getAllTravelReviews()
+      .getAllHomeTravelReviews()
       .then((x) => {
         setTestimonials(x.data);
         setIsLoading(false);
@@ -473,11 +453,8 @@ function Index() {
                 </a>
               </div>
             </div>
-
             <Inspireme />
           </section>
-
-
 
           <section className="card_blk_row">
             <div className="container">
@@ -486,13 +463,12 @@ function Index() {
                   <div className="col-sm-6 col-md-6 col-lg-4" key={i}>
                     <div className="card_blk_inr">
                       <NavLink
-                        target="_blank"
                         href={dynamicLink(
-                          holidaytypesItem?.holiday_type_code,
+                          holidaytypesItem?.holiday_type_name,
                           holidaytypesItem?.id
                         )}
                         as={dynamicLinkHolidayas(
-                          holidaytypesItem?.attributes?.holiday_type_group_code,
+                          holidaytypesItem?.holiday_type_name,
                           holidaytypesItem?.id
                         )}
                       >
@@ -693,7 +669,7 @@ function Index() {
                 {sortedData?.map((res) => (
                   <div className="col-sm-6 col-md-6 col-lg-4" key={res.id}>
                     <div className="card_blk_inr">
-                      <NavLink href={generateDynamicLinkBlog(res.id)}>
+                      <NavLink href={generateDynamicLinkBlog(res.attributes?.blog_header_text)}>
                         {res?.attributes?.blog_image_path && (
                           <img
                             src={res?.attributes?.blog_image_path}
