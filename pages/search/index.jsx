@@ -39,12 +39,12 @@ function Index() {
                   shape-rendering="geometricPrecision"
                   text-rendering="geometricPrecision"
                   image-rendering="optimizeQuality"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   clip-rule="evenodd"
                   viewBox="0 0 267 512.43"
                 >
                   <path
-                    fill-rule="nonzero"
+                    fillRule="nonzero"
                     d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
                   ></path>
                 </svg>
@@ -158,7 +158,7 @@ function Index() {
                       viewBox="0 0 16 16"
                     >
                       <path
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
                       />
                     </svg>
@@ -193,7 +193,7 @@ function Index() {
                       viewBox="0 0 16 16"
                     >
                       <path
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
                       />
                     </svg>
@@ -220,12 +220,12 @@ function Index() {
               shape-rendering="geometricPrecision"
               text-rendering="geometricPrecision"
               image-rendering="optimizeQuality"
-              fill-rule="evenodd"
+              fillRule="evenodd"
               clip-rule="evenodd"
               viewBox="0 0 267 512.43"
             >
               <path
-                fill-rule="nonzero"
+                fillRule="nonzero"
                 d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
               />
             </svg>
@@ -261,12 +261,12 @@ function Index() {
                   shape-rendering="geometricPrecision"
                   text-rendering="geometricPrecision"
                   image-rendering="optimizeQuality"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   clip-rule="evenodd"
                   viewBox="0 0 267 512.43"
                 >
                   <path
-                    fill-rule="nonzero"
+                    fillRule="nonzero"
                     d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
                   />
                 </svg>

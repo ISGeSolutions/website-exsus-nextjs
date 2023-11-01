@@ -22,10 +22,8 @@ function Index() {
   const [blogDetail, setblogdetail] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [friendlyUrl, setFriendlyUrl] = useState("");
-  const { register, handleSubmit, formState } = useForm(formOptions);
-  const { errors } = formState;
 
-  const formOptions = { resolver: yupResolver(validationSchema) };
+
 
   const validationSchema = Yup.object().shape({
     //title: Yup.string().required("Title is required"),
@@ -33,7 +31,9 @@ function Index() {
     last_name: Yup.string().required("Last Name is required"),
     email_id: Yup.string().required("Email id is required"),
   });
-
+  const formOptions = { resolver: yupResolver(validationSchema) };
+  const { register, handleSubmit, formState } = useForm(formOptions);
+  const { errors } = formState;
   const onSubmit = (e) => {
     // console.log("First Name ", first_name);
     // console.log("Last Name ", las_name);
@@ -401,9 +401,8 @@ function Index() {
                                 type="text"
                                 name="first_name"
                                 {...register("first_name")}
-                                className={`form-control ${
-                                  errors.first_name ? "is-invalid" : ""
-                                }`}
+                                className={`form-control ${errors.first_name ? "is-invalid" : ""
+                                  }`}
                                 aria-label="First name *"
                                 placeholder="First name *"
                               />
@@ -430,9 +429,8 @@ function Index() {
                                 type="text"
                                 name="title"
                                 {...register("last_name")}
-                                className={`form-control ${
-                                  errors.last_name ? "is-invalid" : ""
-                                }`}
+                                className={`form-control ${errors.last_name ? "is-invalid" : ""
+                                  }`}
                                 aria-label="Last name *"
                                 placeholder="Last name *"
                               />
@@ -459,9 +457,8 @@ function Index() {
                                 type="email"
                                 name="email_id"
                                 {...register("email_id")}
-                                className={`form-control ${
-                                  errors.email_id ? "is-invalid" : ""
-                                }`}
+                                className={`form-control ${errors.email_id ? "is-invalid" : ""
+                                  }`}
                                 aria-label="Email *"
                                 placeholder="Email *"
                               />
@@ -473,6 +470,7 @@ function Index() {
                           <button
                             className="btn prmry_btn mx-auto"
                             type="submit"
+                            data-bs-dismiss="modal"
                           >
                             Subscribe
                             <svg
