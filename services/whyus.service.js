@@ -13,7 +13,8 @@ export const whyusService = {
     getExecutivesById,
     getAllTravelReviews,
     getExsusReviews,
-    getAllReviews
+    getAllReviews,
+    getAllHomeTravelReviews
 };
 
 function getAllDropdown() {
@@ -32,7 +33,7 @@ function getById(id) {
 
 function getWhyusPage() {
     // console.log('baseUrl_dropdown', baseUrl_dropdown);
-    const whyusPageUrl = `${publicRuntimeConfig.apiUrl}/api/custom-pages/3?filters[page_code][$eq]=Why-us&populate[0]=custom_page_images`;
+    const whyusPageUrl = `${publicRuntimeConfig.apiUrl}/api/custom-pages?filters[page_code][$eq]=Why-us&populate[0]=custom_page_images&populate[1]=custom_page_contents`;
     return fetchWrapper.get(whyusPageUrl);
 }
 
@@ -55,6 +56,11 @@ function getAllExecutives() {
 
 function getAllTravelReviews() {
     const allReviews = `${publicRuntimeConfig.apiUrl}/api/travel-reviews?populate[0]=travel_executive`;
+    return fetchWrapper.get(allReviews);
+}
+
+function getAllHomeTravelReviews() {
+    const allReviews = `${publicRuntimeConfig.apiUrl}/api/travel-reviews?populate[0]=travel_executive&filters[home_page_ind][$eq]=true&sort[0]=home_page_serial_number:asc`;
     return fetchWrapper.get(allReviews);
 }
 

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import { Link, Spinner } from "components";
 import { Layout } from "components/users";
-import { userService, contactusService, alertService } from "services";
+import { userService, contactusService, alertService, brochureService } from "services";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
@@ -142,8 +142,8 @@ function Index() {
   const { errors } = formState;
 
   function onSubmit(data) {
-    return contactusService
-      .brochureRequest({ data })
+    return brochureService
+      .sendEnquiryMail({ data })
       .then(() => {
         alertService.success("Brochure request is sent successfully", {
           keepAfterRouteChange: true,
@@ -191,9 +191,8 @@ function Index() {
                       type="text"
                       name="first_name"
                       {...register("first_name")}
-                      className={`form-control ${
-                        errors.first_name ? "is-invalid" : ""
-                      }`}
+                      className={`form-control ${errors.first_name ? "is-invalid" : ""
+                        }`}
                       aria-label="First name *"
                       placeholder="First name *"
                     />
@@ -208,9 +207,8 @@ function Index() {
                       type="text"
                       name="title"
                       {...register("last_name")}
-                      className={`form-control ${
-                        errors.last_name ? "is-invalid" : ""
-                      }`}
+                      className={`form-control ${errors.last_name ? "is-invalid" : ""
+                        }`}
                       aria-label="Last name *"
                       placeholder="Last name *"
                     />
@@ -225,9 +223,8 @@ function Index() {
                       type="email"
                       name="email_id"
                       {...register("email_id")}
-                      className={`form-control ${
-                        errors.email_id ? "is-invalid" : ""
-                      }`}
+                      className={`form-control ${errors.email_id ? "is-invalid" : ""
+                        }`}
                       aria-label="Email *"
                       placeholder="Email *"
                     />
@@ -245,9 +242,8 @@ function Index() {
                       aria-label="Phone number *"
                       placeholder="Phone number *"
                       {...register("phone_no")}
-                      className={`form-control ${
-                        errors.phone_no ? "is-invalid" : ""
-                      }`}
+                      className={`form-control ${errors.phone_no ? "is-invalid" : ""
+                        }`}
                     />
                   </div>
                 </div>
@@ -382,9 +378,8 @@ function Index() {
                           type="checkbox"
                           name="newsletter_mail_ind"
                           {...register("newsletter_mail_ind")}
-                          className={`form-check-input ${
-                            errors.newsletter_mail_ind ? "is-invalid" : ""
-                          }`}
+                          className={`form-check-input ${errors.newsletter_mail_ind ? "is-invalid" : ""
+                            }`}
                           id="exampleCheck1"
                         />
                         <label

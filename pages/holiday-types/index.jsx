@@ -25,6 +25,9 @@ function Index() {
   const [bannerImageArr, setBannerImageArr] = useState([]);
   const [thumbnailImageArr, setThumbnailImageArr] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeItem, setActiveItem] = useState("recommended");
+  const [customPageContent, setCustomPage] = useState([]);
+
 
   const EnquiryButton = () => {
     const router = useRouter();
@@ -70,66 +73,31 @@ function Index() {
     return itemId;
   };
 
-  const dynamicLink = (itemId, id) => {
-    if (itemId && itemId == "HG6") {
-      return (
-        regionWiseUrl +
-        `/holidaytypeitineraries?hcode=incredible-journeys&id=` +
-        id
-      );
-    } else if (itemId && itemId == "HG5") {
-      return (
-        regionWiseUrl +
-        `/holidaytypeitineraries?hcode=luxury-honeymoons&id=` +
-        id
-      );
-    } else if (itemId && itemId == "HG4") {
-      return (
-        regionWiseUrl + `/holidaytypeitineraries?hcode=family-holidays&id=` + id
-      );
-    } else if (itemId && itemId == "ADHL") {
-      return (
-        regionWiseUrl +
-        `/holidaytypeitineraries?hcode=adventure-holidays&id=` +
-        id
-      );
-    } else if (itemId && itemId == "LBHG") {
-      return (
-        regionWiseUrl +
-        `/holidaytypeitineraries?hcode=luxury-beach-holidays&id=` +
-        id
-      );
-    } else if (itemId && itemId == "HG3") {
-      return (
-        regionWiseUrl +
-        `/holidaytypeitineraries?hcode=culture-holidays&id=` +
-        id
-      );
-    } else {
-      return "#";
+  const dynamicLink = (itemName, id) => {
+    const modifieditem = itemName
+      .replace(/ /g, "-")
+      .replace(/&/g, "and")
+      .toLowerCase();
+    if (itemName) {
+      return regionWiseUrl + `/holiday-types/${modifieditem}`;
     }
   };
 
-  const dynamicLinkHolidayas = (itemId, id) => {
-    // if (itemId && itemId == 'AF') {
-    //     return regionWiseUrl + `/destinations/africa/` + id;
-    // }
-    if (itemId && itemId == "HG6") {
-      return regionWiseUrl + `/holidaytypeitineraries/incredible-journeys/id`;
-    } else if (itemId && itemId == "HG5") {
-      return regionWiseUrl + `/holidaytypeitineraries/luxury-honeymoons/id`;
-    } else if (itemId && itemId == "HG4") {
-      return regionWiseUrl + `/holidaytypeitineraries/family-holidays/id`;
-    } else if (itemId && itemId == "ADHL") {
-      return regionWiseUrl + `/holidaytypeitineraries/adventure-holidays/id`;
-    } else if (itemId && itemId == "LBHG") {
-      return regionWiseUrl + `/holidaytypeitineraries/luxury-beach-holidays/id`;
-    } else if (itemId && itemId == "HG3") {
-      return regionWiseUrl + `/holidaytypeitineraries/culture-holidays/id`;
-    } else {
-      return "#";
+  const handleFilterClick = (item) => {
+    setActiveItem(item);
+    console.log(thumbnailImageArr);
+    if (item == "alphabetical") {
+      setThumbnailImageArr(
+        thumbnailImageArr.sort((a, b) =>
+          a?.holiday_type_name.localeCompare(b?.holiday_type_name)
+        )
+      );
+    } else if (item == "recommended") {
+      setThumbnailImageArr(thumbnailImageArr.sort((a, b) => a.id - b.id));
     }
   };
+
+
 
   const dynamicBannerImage = (item) => {
     return item;
@@ -145,6 +113,8 @@ function Index() {
       .getHolidaytypesLandingPage()
       .then((x) => {
         setHolidayTypes(x.data[0]);
+        setCustomPage(x.data[0]?.attributes?.custom_page_contents)
+        console.log(x.data[0]);
         // setDestinationLandingDetails(x);
         const imageCheck = x?.data[0]?.attributes?.custom_page_images?.data;
         const newBackgroundImages = [];
@@ -188,6 +158,7 @@ function Index() {
                     elementMain?.attributes?.holiday_type_group_name,
                   image_path: element.attributes.image_path,
                 };
+
                 thumbnailImageArr.push(objThumbnail);
               }
             });
@@ -195,8 +166,8 @@ function Index() {
         });
 
         setBannerImageArr(bannerImageArr);
-        setThumbnailImageArr(thumbnailImageArr);
-        setHolidaytypesLandingList(x.data);
+        setThumbnailImageArr(thumbnailImageArr.sort((a, b) => a.id - b.id));
+        setHolidaytypesLandingList(x.data[0]);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -280,8 +251,8 @@ function Index() {
               </div>
               <div className="row">
                 <div className="destinations_cntnt_blk">
-                  <h2>{holidaytypes?.attributes?.page_header_text}</h2>
-                  <p>{holidaytypes?.attributes?.page_content_1}</p>
+                  <h2>{customPageContent?.data?.filter(res => res.attributes?.content_name == "LuxuryHolidaysHeader")[0]?.attributes?.content_value}</h2>
+                  <p dangerouslySetInnerHTML={{ __html: customPageContent?.data?.filter(res => res.attributes?.content_name == "LuxuryHolidaysText")[0]?.attributes?.content_value }}></p>
                 </div>
               </div>
             </div>
@@ -297,12 +268,16 @@ function Index() {
                   <div className="destination_contries_filter d-flex justify-content-around">
                     <ul>
                       <li>
-                        <a href="#" className="active">
+                        <a className={
+                          activeItem === "recommended" ? "active" : ""
+                        } onClick={() => handleFilterClick("recommended")}>
                           Exsus recommends
                         </a>
                       </li>
                       <li>
-                        <a href="#">Alphabetical</a>
+                        <a className={
+                          activeItem === "alphabetical" ? "active" : ""
+                        } onClick={() => handleFilterClick("alphabetical")}>Alphabetical</a>
                       </li>
                     </ul>
                   </div>
@@ -312,11 +287,7 @@ function Index() {
                     <div className="card_blk_inr">
                       <NavLink
                         href={dynamicLink(
-                          holidaytypesItem?.holiday_type_code,
-                          holidaytypesItem?.id
-                        )}
-                        as={dynamicLinkHolidayas(
-                          holidaytypesItem?.attributes?.holiday_type_group_code,
+                          holidaytypesItem?.holiday_type_name,
                           holidaytypesItem?.id
                         )}
                       >
@@ -371,6 +342,9 @@ function Index() {
           >
             <div className="container">
               <div className="destination_text_overlay_inr">
+                <h4>{customPageContent?.data?.filter(res => res.attributes?.content_name == "BestTimeHeader")[0]?.attributes?.content_value}</h4>
+                <h5>{customPageContent?.data?.filter(res => res.attributes?.content_name == "BestTimeText")[0]?.attributes?.content_value}</h5>
+
                 <h4>{backgroundImgWhentogo?.image_header_text_1}</h4>
                 <h5>{backgroundImgWhentogo?.image_header_text_2}</h5>
                 <button className="btn prmry_btn make_enqury_btn">
