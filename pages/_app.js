@@ -235,8 +235,10 @@ function App({ Component, pageProps }) {
       {/* <script type="text/javascript" src="/assets/javascripts/navigation.js"></script> */}
       {/* credits */}
 
-      <Script src="/assets/javascripts/facebook-pixel.js" strategy="beforeInteractive" />
-
+      <Script
+        src="/assets/javascripts/facebook-pixel.js"
+        strategy="beforeInteractive"
+      />
     </Layout>
   ) : (
     <Component {...pageProps} />
