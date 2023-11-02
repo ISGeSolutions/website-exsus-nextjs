@@ -23,22 +23,21 @@ function Index() {
     careeratexsusService
       .getCareerPage()
       .then((x) => {
-        // debugger;
         setCareerData(x.data[0]);
         const data = x.data[0]?.attributes?.custom_page_contents?.data;
         if (data) {
           data.forEach((element, index) => {
-            if (element?.attributes?.content_name == 'HeadingTag') {
+            if (element?.attributes?.content_name == "HeadingTag") {
               setHeadingTag(element?.attributes?.content_value);
-            } else if (element?.attributes?.content_name == 'Title') {
+            } else if (element?.attributes?.content_name == "Title") {
               setTitle(element?.attributes?.content_value);
-            } else if (element?.attributes?.content_name == 'MetaDescription') {
+            } else if (element?.attributes?.content_name == "MetaDescription") {
               setMetaDescription(element?.attributes?.content_value);
-            } else if (element?.attributes?.content_name == 'Long_Text') {
+            } else if (element?.attributes?.content_name == "Long_Text") {
               setLongText(element?.attributes?.content_value);
-            } else if (element?.attributes?.content_name == 'Right_Header') {
+            } else if (element?.attributes?.content_name == "Right_Header") {
               setRightHeader(element?.attributes?.content_value);
-            } else if (element?.attributes?.content_name == 'Right_Corner') {
+            } else if (element?.attributes?.content_name == "Right_Corner") {
               setRightCorner(element?.attributes?.content_value);
             }
           });
@@ -49,8 +48,6 @@ function Index() {
         // Handle any errors here
         setIsLoading(false);
       });
-
-
   }, []);
 
   return (
@@ -63,7 +60,7 @@ function Index() {
         <div className="container">
           <div className="bookmark_row">
             <FriendlyUrl
-              data={'Home / ' + careerData?.attributes?.page_friendly_url}
+              data={"Home / " + careerData?.attributes?.page_friendly_url}
             ></FriendlyUrl>
             {/* <ul>
               <li>
@@ -76,10 +73,11 @@ function Index() {
             </ul> */}
           </div>
           <div className="trvl_info_cntnt">
-            <h2 className="trvl_title">
-              {headingTag}
-            </h2>
-            <p className="mb-4" dangerouslySetInnerHTML={{ __html: longText }} />
+            <h2 className="trvl_title">{headingTag}</h2>
+            <p
+              className="mb-4"
+              dangerouslySetInnerHTML={{ __html: longText }}
+            />
           </div>
           <div className="trvl_info_cntnt">
             <h2 className="trvl_title_white">
