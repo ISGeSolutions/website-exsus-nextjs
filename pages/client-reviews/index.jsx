@@ -6,7 +6,6 @@ import { whyusService } from "../../services/whyus.service";
 import { NavLink } from "components";
 import { FriendlyUrl } from "../../components";
 
-
 var React = require("react");
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -17,8 +16,12 @@ function Index() {
   const [clientReviews, setClientReviews] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [valueWithBr, setnewValueWithBr] = useState("");
-  const [friendlyUrl, setFriendlyUrl] = useState('');
-
+  const [friendlyUrl, setFriendlyUrl] = useState("");
+  const [careerData, setCareerData] = useState(null);
+  const [headingTag, setHeadingTag] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [metaDescription, setMetaDescription] = useState(null);
+  const [longText, setLongText] = useState(null);
 
   let regionWiseUrl = "/uk";
   let region = "uk";
@@ -54,7 +57,7 @@ function Index() {
     if (carousel) {
       new bootstrap.Carousel(carousel);
     }
-    setFriendlyUrl(`home/Why us/Exsus Reviews`)
+    setFriendlyUrl(`home/Why us/Exsus Reviews`);
     whyusService
       .getAllReviews()
       .then((x) => {
@@ -131,6 +134,38 @@ function Index() {
       .catch((error) => {
         setIsLoading(false);
       });
+
+    whyusService
+      .getReviewsCustomePage()
+      .then((x) => {
+        setCareerData(x.data[0]);
+        const data = x.data[0]?.attributes?.custom_page_contents?.data;
+        console.log("consolelog", data);
+        if (data) {
+          data.forEach((element, index) => {
+            if (element?.attributes?.content_name == "HeadingTag") {
+              setHeadingTag(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == "Title") {
+              setTitle(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == "MetaDescription") {
+              setMetaDescription(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == "Long_Text") {
+              setLongText(
+                element?.attributes?.content_value.replace(/h4/g, "h2")
+              );
+            } else if (element?.attributes?.content_name == "Right_Header") {
+              setRightHeader(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == "Right_Corner") {
+              setRightCorner(element?.attributes?.content_value);
+            }
+          });
+        }
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        // Handle any errors here
+        setIsLoading(false);
+      });
   }, []);
 
   return (
@@ -170,46 +205,14 @@ function Index() {
               </div>
 
               <div className="trvl_info_cntnt">
-                <h2 className="trvl_title">EXSUS TRAVEL REVIEWS</h2>
-                <p className="mb-4">
-                  Exsus Travel has more than 20 years' experience of creating
-                  luxury tailor-made holidays all around the world. Over the
-                  years, we've received countless testimonials from people who
-                  have travelled with us on a luxury holiday, bespoke honeymoon
-                  or family adventure. Many of these clients come back time and
-                  again for their tailor-made travel. Below is a selection of
-                  reviews from clients who've returned from a holiday with us
-                  recently.
-                </p>
-                <p className="mb-4">
-                  We're delighted to have won the 2021 Feefo Platinum Trusted
-                  Service Award, an independent seal of excellence that has
-                  recognised Exsus Travel for delivering exceptional customer
-                  service for two years in a row, as rated by those who have
-                  travelled with us.
-                </p>
-                <a href="https://www.feefo.com/en-GB/reviews/exsus-travel?withMedia=false&timeFrame=ALL&displayFeedbackType=SERVICE" />
-                <img
-                  className="img-fluid"
-                  src="/images/feefo_platinum_service.png"
-                  alt="feefo_platinum_service"
-                />
+                <h2 className="trvl_title">{headingTag}</h2>
+                <p
+                  className="mb-4"
+                  dangerouslySetInnerHTML={{
+                    __html: longText,
+                  }}
+                ></p>
               </div>
-
-              {/* Client Reviews */}
-              {clientReviews?.map((element) => (
-                <div className="trvl_info_cntnt">
-                  <h2 className="text-capitalize">
-                    {element?.attributes?.review_header}
-                  </h2>
-                  {/* <div dangerouslySetInnerHTML={{ __html: valueWithBr }} /> */}
-                  <p
-                    dangerouslySetInnerHTML={{
-                      __html: element?.attributes?.review_text,
-                    }}
-                  />
-                </div>
-              ))}
             </div>
           </section>
 

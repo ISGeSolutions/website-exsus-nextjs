@@ -6,7 +6,7 @@ import { whyusService } from "../../../services/whyus.service";
 import { NavLink } from "components";
 import { giftListService } from "../../../services";
 import { FriendlyUrl } from "../../../components";
-import { Head } from "next/head"
+import Head from "next/head";
 
 var React = require("react");
 
@@ -27,6 +27,17 @@ function Index() {
     const [backgroundImage, setBackgroundImage] = useState([]);
 
 
+    let regionWiseUrl = "/uk";
+    let region = "uk";
+    if (typeof window !== "undefined") {
+        if (window && window.site_region) {
+            regionWiseUrl = "/" + window.site_region;
+            region = window.site_region;
+
+            // setMyVariable(window.site_region);
+        }
+    }
+
     const websiteContentCheck = (matches, region, modifiedString) => {
         whyusService.getDictionaryDetails(matches, region).then((responseObj) => {
             if (responseObj) {
@@ -41,7 +52,7 @@ function Index() {
                 });
 
                 // Set the modified string in state
-                setnewValueWithBr(modifiedString);
+                setLongText(modifiedString);
             }
         });
     };
@@ -124,13 +135,9 @@ function Index() {
                         } catch (error) {
                             if (error.message === "Loop break") {
                                 // Handle the loop break here
-                                // console.log("Loop has been stopped.");
                             } else if (error.message === "Region not found") {
                                 // Handle the loop break here
-                                // console.log("Loop has been stopped.");
                                 setLongText(modifiedString);
-                                console.log(modifiedString)
-
                             }
                         }
                     }
@@ -144,7 +151,12 @@ function Index() {
 
     return (
         <>
-            {/* <Head><title>{title}</title></Head> */}
+            <Head>
+                <title>
+                    {title}
+                </title>
+                <meta name="description" content={metaDescription}></meta>
+            </Head>
             <Layout>
 
                 {isLoading ? (
@@ -305,8 +317,7 @@ function Index() {
                                     </button>
                                 </div> */}
                             </div>
-                            <div className="mb-4" dangerouslySetInnerHTML={{ _html: longText }}>
-                            </div>
+                            <div dangerouslySetInnerHTML={{ __html: longText }} />
                         </div>
                     </section>
 

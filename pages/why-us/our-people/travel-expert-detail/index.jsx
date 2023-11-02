@@ -97,7 +97,6 @@ function Index() {
           response.attributes.executive_image_path = newStr;
         }
         setExecutiveData(response);
-        console.log(response);
         setTestimonials(response.attributes.travel_reviews.data);
         setIsLoading(false);
       })
@@ -154,7 +153,6 @@ function Index() {
       }
 
       if (slides[current] != undefined) {
-        console.log(slides[current]);
         slides[current].classList.add("active");
       }
       if (slides[prev] != undefined) {

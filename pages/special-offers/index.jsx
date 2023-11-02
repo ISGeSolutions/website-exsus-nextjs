@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 
 import { Link, Spinner, Signup, FriendlyUrl } from "components";
 import { Layout } from "components/users";
-import { userService, specialoffersService } from "services";
+import {
+  userService,
+  specialoffersService,
+  destinationService,
+} from "services";
 import { NavLink } from "components";
 import Head from "next/head";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -17,6 +21,11 @@ function Index() {
   const [destinations, setDestinations] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [friendlyUrl, setFriendlyUrl] = useState("");
+  const [headingTag, setHeadingTag] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [metaDescription, setMetaDescription] = useState(null);
+  const [longText, setLongText] = useState(null);
+  const [careerData, setCareerData] = useState(null);
 
   const handleRedirect = () => {
     router.push(regionWiseUrl + `/hotel-detail`);
@@ -57,6 +66,27 @@ function Index() {
     return regionWiseUrl + `/hotel-detail`;
   };
 
+  const websiteContentCheck = (matches, region, modifiedString) => {
+    destinationService
+      .getDictionaryDetails(matches, region)
+      .then((responseObj) => {
+        if (responseObj) {
+          const res = responseObj?.data;
+          res.forEach((element, index) => {
+            const replacement = element?.attributes?.content_translation_text;
+            const matchString = element?.attributes?.content_word;
+            const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+            if (checkStr && replacement) {
+              modifiedString = modifiedString.replace(checkStr, replacement);
+            }
+          });
+
+          // Set the modified string in state
+          setnewValueWithBr(modifiedString);
+        }
+      });
+  };
+
   useEffect(() => {
     // userService.getAll().then(x => setUsers(x));
     const tooltipTriggerList = document.querySelectorAll(
@@ -77,6 +107,93 @@ function Index() {
         setIsLoading(false);
       });
 
+    specialoffersService.getOffersCustomePage().then((x) => {
+      setCareerData(x.data[0]);
+      const data = x.data[0]?.attributes?.custom_page_contents?.data;
+      //let modifiedString = "";
+      console.log("consolelog", data);
+      if (data) {
+        data.forEach((element, index) => {
+          if (element?.attributes?.content_name == "HeadingTag") {
+            setHeadingTag(element?.attributes?.content_value.toUpperCase());
+          } else if (element?.attributes?.content_name == "Title") {
+            setTitle(element?.attributes?.content_value);
+          } else if (element?.attributes?.content_name == "MetaDescription") {
+            setMetaDescription(element?.attributes?.content_value);
+          } else if (element?.attributes?.content_name == "Long_Text") {
+            //modifiedString = element?.attributes?.content_value;
+            setLongText(element?.attributes?.content_value);
+          } else if (element?.attributes?.content_name == "Right_Header") {
+            setRightHeader(element?.attributes?.content_value);
+          } else if (element?.attributes?.content_name == "Right_Corner") {
+            setRightCorner(element?.attributes?.content_value);
+          }
+        });
+      }
+      //console.log(modifiedString);
+      //   const regex = /{[a-zA-Z0-9-]+}/g;
+      //   const matches = [...new Set(modifiedString.match(regex))];
+
+      //   let storedDataString = "";
+      //   let storedData = "";
+      //   if (region == "uk") {
+      //     storedDataString = localStorage.getItem("websitecontent_uk");
+      //     storedData = JSON.parse(storedDataString);
+      //   } else if (region == "us") {
+      //     storedDataString = localStorage.getItem("websitecontent_us");
+      //     storedData = JSON.parse(storedDataString);
+      //   } else if (region == "asia") {
+      //     storedDataString = localStorage.getItem("websitecontent_asia");
+      //     storedData = JSON.parse(storedDataString);
+      //   } else if (region == "in") {
+      //     storedDataString = localStorage.getItem("websitecontent_india");
+      //     storedData = JSON.parse(storedDataString);
+      //   }
+      //   console.log(storedData);
+      //   console.log(modifiedString);
+      //   if (storedData !== null) {
+      //     // You can access it using localStorage.getItem('yourKey')
+      //     if (matches) {
+      //       let replacement = "";
+      //       try {
+      //         matches.forEach((match, index, matches) => {
+      //           const matchString = match.replace(/{|}/g, "");
+      //           if (!storedData[matchString]) {
+      //             websiteContentCheck(matches, region, modifiedString);
+      //             throw new Error("Loop break");
+      //           } else {
+      //             replacement = storedData[matchString];
+      //           }
+      //           const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+      //           if (checkStr && replacement) {
+      //             modifiedString = modifiedString.replace(
+      //               checkStr,
+      //               replacement
+      //             );
+      //           }
+      //         });
+      //         // Set the modified string in state
+      //         console.log(modifiedString);
+      //         setLongText(modifiedString);
+
+      //         setIsLoading(false);
+      //       } catch (error) {
+      //         if (error.message === "Loop break") {
+      //           // Handle the loop break here
+      //           // console.log("Loop has been stopped.");
+      //         } else if (error.message === "Region not found") {
+      //           // Handle the loop break here
+      //           // console.log("Loop has been stopped.");
+      //           setLongText(modifiedString);
+      //         }
+      //       }
+      //     }
+      //   }
+      // })
+      // .catch((error) => {
+      //   setIsLoading(false);
+      // });
+    });
     const carousel = document.querySelector("#carouselExampleInterval");
     if (carousel) {
       new bootstrap.Carousel(carousel);
@@ -89,10 +206,10 @@ function Index() {
     <>
       <Head>
         <title>Special Offers | Luxury Hotel and Holiday Offers</title>
-        <script
+        {/* <script
           type="text/javascript"
           src="/assets/javascripts/bootstrap.min.js"
-        ></script>
+        ></script> */}
       </Head>
       {isLoading ? (
         // <MyLoader />
@@ -249,12 +366,15 @@ function Index() {
               </div>
               <div className="row">
                 <div className="destinations_cntnt_blk">
-                  <h2>LUXURY HOLIDAY OFFERS</h2>
-                  <p>
-                    These are just a few of our favourite offers, all over the
+                  <h2>{headingTag}</h2>
+                  <p
+                    className="mb-4"
+                    dangerouslySetInnerHTML={{ __html: longText }}
+                  >
+                    {/* These are just a few of our favourite offers, all over the
                     world, including luxury short breaks, perfect beach
                     holidays, exceptional wildlife and safari holidays and
-                    memorable family adventures. Contact us to find out more.{" "}
+                    memorable family adventures. Contact us to find out more.{" "} */}
                   </p>
                 </div>
               </div>

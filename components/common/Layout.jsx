@@ -493,7 +493,7 @@ function Layout({ children }) {
             <div className="prvcy_polcy_list">
               <ul>
                 <li>
-                  <NavLink href="/privacy-policy-and-cookies">
+                  <NavLink href="/privacy-policy">
                     Privacy policy & cookies
                   </NavLink>
                 </li>

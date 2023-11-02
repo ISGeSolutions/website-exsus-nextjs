@@ -13,6 +13,7 @@ import CustomMultiValue from "./CustomMultiValue";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { Alert } from "../../components";
 
 export default ContinentItinararies;
 
@@ -121,15 +122,30 @@ function ContinentItinararies(props) {
   const router = useRouter();
   const [dcode, setdcode] = useState();
   const destinationcode = router.query.continent
-    .replace(/-and-/g, " & ").replace(/-/g, " ")
+    .replace(/-and-/g, " & ")
+    .replace(/-/g, " ")
     .toLowerCase();
   const [countryOptions, setAllCountries] = useState([]);
   const [destinationName, setdestinationName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [activeItem, setActiveItem] = useState("recommended");
+  const [alert, setAlert] = useState(null);
 
   const handleLoadMore = () => {
     setVisibleItems((prevVisibleItems) => prevVisibleItems + itemsPerPage);
+  };
+
+  const showAlert = (message, type) => {
+    setAlert({ message, type });
+  };
+
+  const closeAlert = () => {
+    console.log("closeAlert");
+    setAlert(null);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   const loadMoreData = (item) => {
@@ -254,15 +270,27 @@ function ContinentItinararies(props) {
     setSelectedOptionMonth(selectedOption);
   };
 
-  function onSubmit(e) {
-    e.preventDefault();
+  function onSubmit(data) {
     console.log("Selected Countries:", selectedOptionCountry);
     console.log("Selected Regions:", selectedOptionRegion);
     console.log("Selected Months:", selectedOptionMonth);
+
+    if (!data.destination && !data.reason && !data.month) {
+      showAlert("Please select atleast one option", "error");
+    } else {
+      router.push(
+        `advance-search?where=` +
+          data?.destination +
+          `&what=` +
+          data?.reason +
+          `&when=` +
+          data?.month
+      );
+    }
   }
 
   const generateDynamicLink = (item) => {
-    const modifiedName = item.replace(/ /g, '-').toLowerCase();
+    const modifiedName = item.replace(/ /g, "-").toLowerCase();
     return (
       regionWiseUrl +
       `/destinations/${destinationcode}/${destinationcode}-iteneraries/${modifiedName}`
@@ -270,10 +298,10 @@ function ContinentItinararies(props) {
   };
 
   const handleRedirect = (item) => {
-    const modifiedName = item.replace(/ /g, '-').toLowerCase();
+    const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${destinationcode}/${destinationcode}-iteneraries/${modifiedName}`
+        `/destinations/${destinationcode}/${destinationcode}-iteneraries/${modifiedName}`
     );
   };
 
@@ -351,6 +379,9 @@ function ContinentItinararies(props) {
 
   return (
     <>
+      {alert && alert.message && alert.type && (
+        <Alert message={alert.message} type={alert.type} onClose={closeAlert} />
+      )}
       {isLoading ? (
         // <MyLoader />
         <div
@@ -551,13 +582,15 @@ function ContinentItinararies(props) {
                         <div className="card_slider_inr">
                           <div className="card_slider">
                             <NavLink
-                              href={generateDynamicLink(item?.attributes?.itin_name)}
+                              href={generateDynamicLink(
+                                item?.attributes?.itin_name
+                              )}
                               className="card_slider_img"
                             >
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -571,7 +604,9 @@ function ContinentItinararies(props) {
                             </NavLink>
                             <div className="card_slider_cnt">
                               <NavLink
-                                href={generateDynamicLink(item?.attributes?.itin_name)}
+                                href={generateDynamicLink(
+                                  item?.attributes?.itin_name
+                                )}
                               >
                                 <h4>
                                   <a>{item?.attributes?.itin_name}</a>
@@ -597,7 +632,9 @@ function ContinentItinararies(props) {
                             </div>
                             <button
                               className="btn card_slider_btn"
-                              onClick={() => handleRedirect(item?.attributes?.itin_name)}
+                              onClick={() =>
+                                handleRedirect(item?.attributes?.itin_name)
+                              }
                             >
                               <span>{item?.attributes?.no_of_nites_notes}</span>
                               <span className="view_itnry_link">
