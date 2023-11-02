@@ -95,7 +95,7 @@ function Nav() {
   }
 
   const makeAnEnquiry = () => {
-    router.push('/contact-us');
+    router.push('/make-an-enquiry');
   }
 
   const router = useRouter();
