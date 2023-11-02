@@ -2749,3 +2749,87 @@ nav
   fill: #e44043;
   margin-right: 5px;
 }
+
+.page_not_found_parnt {
+  text-align: center;
+  height: 565px;
+  display: flex;
+  align-items: center;
+}
+
+.page_not_found_parnt .page_not_found_cnt {
+  max-width: 540px;
+  width: 100%;
+  margin: auto;
+  padding: 0 10px;
+}
+
+.page_not_found_parnt .page_not_found_cnt .page_not_found_cnt_inr {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 0 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 15px 0;
+  height: 400px;
+}
+
+.page_not_found_parnt .page_not_found_cnt ul {
+  background: #3b4d63;
+  border-radius: 15px 15px 0 0;
+  padding: 15px;
+  width: 100%;
+  display: flex;
+}
+
+.page_not_found_parnt .page_not_found_cnt ul li {
+  width: 25px;
+  height: 25px;
+  background: #ee3241;
+  border-radius: 50%;
+  float: left;
+  margin-right: 10px;
+}
+
+.page_not_found_parnt .page_not_found_cnt ul li.web_page_yellow_dot {
+  background: #ffc700;
+}
+
+.page_not_found_parnt .page_not_found_cnt ul li.web_page_green_dot {
+  background: #37b746;
+}
+
+.page_not_found_parnt .page_not_found_cnt h2 {
+  font: 7.5rem/7.5rem "Slabo 27px", serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+  margin: 0;
+}
+
+.page_not_found_parnt .page_not_found_cnt h2 span {
+  display: block;
+  background: red;
+  color: #ffffff;
+  text-transform: uppercase;
+  font: 400 1.75rem/1.75rem "Roboto", sans-serif;
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.page_not_found_parnt .page_not_found_cnt p {
+  font: 400 1rem/1.5rem "Roboto", sans-serif;
+  padding: 0 20px;
+}
+
+.page_not_found_parnt .page_not_found_cnt button {
+  margin: auto;
+  background: transparent;
+  border-radius: 0;
+  margin-top: 20px;
+  color: #231f20;
+  border: 1px solid #3b4d63;
+}
