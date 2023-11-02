@@ -6,9 +6,9 @@ import { Layout } from "components/users";
 import { userService } from "services";
 import Head from "next/head";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { whyusService } from "../../services";
+import { whyusService } from "../../../services";
 var Carousel = require("react-responsive-carousel").Carousel;
-import { FriendlyUrl } from '../../components';
+import { FriendlyUrl } from '../../../components';
 
 
 export default Index;
@@ -17,8 +17,15 @@ function Index() {
   const [users, setUsers] = useState(null);
   const [allExecutives, setAllExecutives] = useState([]);
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
   const [friendlyUrl, setFriendlyUrl] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [customData, setCustomData] = useState(null);
+  const [headingTag, setHeadingTag] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [metaDescription, setMetaDescription] = useState(null);
+  const [longText, setLongText] = useState(null);
+  const [rightHeader, setRightHeader] = useState(null);
+  const [rightCorner, setRightContent] = useState(null);
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -54,7 +61,7 @@ function Index() {
 
   const handleRedirect = (item) => {
     const modifiedName = item.replace(/ /g, '-').toLowerCase();
-    router.push(region + `/why-us/our-people/${modifiedName}`);
+    router.push(regionWiseUrl + `/why-us/our-people/${modifiedName}`);
   };
 
   // const ExpertDetail = ({ data }) => {
@@ -85,6 +92,37 @@ function Index() {
         setIsLoading(false);
       });
 
+    whyusService
+      .getExpertsPage()
+      .then((x) => {
+        // debugger;
+        setCustomData(x.data[0]);
+        const data = x.data[0]?.attributes?.custom_page_contents?.data;
+        if (data) {
+          data.forEach((element, index) => {
+            if (element?.attributes?.content_name == 'HeadingTag') {
+              setHeadingTag(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == 'Title') {
+              setTitle(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == 'MetaDescription') {
+              setMetaDescription(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == 'Long_Text') {
+              setLongText(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == 'Right_Header') {
+              setRightHeader(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == 'Right_Corner') {
+              setRightContent(element?.attributes?.content_value);
+            }
+          });
+        }
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        // Handle any errors here
+        setIsLoading(false);
+      });
+
+
     const carousel = document.querySelector("#carouselExampleInterval");
     if (carousel) {
       new bootstrap.Carousel(carousel);
@@ -102,6 +140,7 @@ function Index() {
     <Layout>
       <Head>
         <script src="assets/javascripts/experts-equal-height.js"></script>
+        <title>{title}</title>
       </Head>
       {isLoading ? (
         // <MyLoader />

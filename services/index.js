@@ -14,5 +14,7 @@ export * from './specialoffers.service';
 export * from './brochures.service';
 export * from './career.service';
 export * from './creatingtrips.service';
-
+export * from './privacy_policy.service';
+export * from './referral_scheme.service';
+export * from './gift_list.service';
 

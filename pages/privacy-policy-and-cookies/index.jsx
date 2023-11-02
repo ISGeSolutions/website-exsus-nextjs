@@ -3,13 +3,55 @@ import { useState, useEffect } from 'react';
 import { Link, Spinner } from 'components';
 import { Layout } from 'components/users';
 import { userService } from 'services';
+import { FriendlyUrl } from '../../components';
+import { privacypolicyService } from '../../services';
 
 export default Index;
 
 function Index() {
     const [users, setUsers] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [privacyPolicyData, setprivacyPolicyData] = useState(null);
+    const [headingTag, setHeadingTag] = useState(null);
+    const [title, setTitle] = useState(null);
+    const [metaDescription, setMetaDescription] = useState(null);
+    const [longText, setLongText] = useState(null);
+    const [rightHeader, setRightHeader] = useState(null);
+    const [rightCorner, setRightContent] = useState(null);
+    const [customData, setCustomData] = useState([]);
 
     useEffect(() => {
+
+        privacypolicyService
+            .getPrivacyPolicyPage()
+            .then((x) => {
+                // debugger;
+                setprivacyPolicyData(x.data[0]);
+                const data = x.data[0]?.attributes?.custom_page_contents?.data;
+                setCustomData(data);
+                if (data) {
+                    data.forEach((element, index) => {
+                        if (element?.attributes?.content_name == 'HeadingTag') {
+                            setHeadingTag(element?.attributes?.content_value);
+                        } else if (element?.attributes?.content_name == 'Title') {
+                            setTitle(element?.attributes?.content_value);
+                        } else if (element?.attributes?.content_name == 'MetaDescription') {
+                            setMetaDescription(element?.attributes?.content_value);
+                        } else if (element?.attributes?.content_name == 'Long_Text') {
+                            setLongText(element?.attributes?.content_value.replace(/class/g, "className").replace(/h3/g, "h2"));
+                        } else if (element?.attributes?.content_name == 'Right_Header') {
+                            setRightHeader(element?.attributes?.content_value);
+                        } else if (element?.attributes?.content_name == 'Right_Corner') {
+                            setRightCorner(element?.attributes?.content_value);
+                        }
+                    });
+                }
+                setIsLoading(false);
+            })
+            .catch((error) => {
+                // Handle any errors here
+                setIsLoading(false);
+            });
         // userService.getAll().then(x => setUsers(x));
     }, []);
 
@@ -18,18 +60,16 @@ function Index() {
             <section className="trvl_info_row privacy_policy_row">
                 <div className="container">
                     <div className="bookmark_row">
-                        <ul>
-                            <li><a href="homepage.html">Home</a></li>
-                            <li>Privacy policy</li>
-                        </ul>
+                        <FriendlyUrl data={"home/" + privacyPolicyData?.attributes?.page_friendly_url}></FriendlyUrl>
                     </div>
                     <div className="trvl_info_cntnt">
-                        <h2 className="trvl_title">EXSUS TRAVEL’S PRIVACY POLICY</h2>
-                        <h2 className="transfrm_none">Your privacy is important to us</h2>
-                        <p className="mb-4 text-start">This Privacy Policy explains in detail the types of personal data we may collect about you when you interact with us. It also explains how we’ll store and handle that data, and keep it safe.</p>
-                        <p className="text-start">We know that there’s a lot of information here, but we want you to be fully informed about your rights, and how Exsus Travel Limited uses your data. We hope the following sections will answer any questions you have but if not, please do get in touch with us. We may change this policy from time to time. Please check back for updates so you are always fully aware of what information is collected and how it is used.</p>
+                        <h2 className="trvl_title">{headingTag}</h2>
+                        {/* <div dangerouslySetInnerHTML={{ _html: longText }}></div> */}
+
+                        {/* <p className="mb-4 text-start">This Privacy Policy explains in detail the types of personal data we may collect about you when you interact with us. It also explains how we’ll store and handle that data, and keep it safe.</p>
+                        <p className="text-start">We know that there’s a lot of information here, but we want you to be fully informed about your rights, and how Exsus Travel Limited uses your data. We hope the following sections will answer any questions you have but if not, please do get in touch with us. We may change this policy from time to time. Please check back for updates so you are always fully aware of what information is collected and how it is used.</p> */}
                     </div>
-                    <div className="trvl_info_cntnt text-start">
+                    {/* <div className="trvl_info_cntnt text-start">
                         <h2>1. Who We Are</h2>
                         <p className="mb-4">Exsus Travel Limited is a privately owned UK company specialising in luxury tailor-made holidays around the world.</p>
                         <p className="mb-4">Any personal information provided to or gathered by us is controlled by Exsus Travel Limited a company registered in England at 1 Burwood Place, London, W2 2UT. Company number: 03385363.</p>
@@ -150,15 +190,16 @@ function Index() {
                             <li>- By post: Communications Department, Exsus Travel, 1 Burwood Place, London, W2 2UT</li>
                         </ul>
                         <p className="mb-4">This policy is effective from 30th April 2018.</p>
-                    </div>
+                    </div> */}
                 </div>
             </section>
 
+
             <section className="make_enqury_row">
                 <div className="container">
-                    <h3>START PLANNING YOUR NEXT TRIP</h3>
-                    <p>Call our team on 020 7337 9010</p>
-                    <button className="btn prmry_btn make_enqury_btn" onClick="window.open('contact_us.html')">Make an enquiry
+                    <h3>{customData.filter(res => res.attributes?.content_name == "PrivacyPolicyNextTripHeader")[0]?.attributes?.content_value}</h3>
+                    <p>{customData.filter(res => res.attributes?.content_name == "PrivacyPolicyNextTripTelephoneText")[0]?.attributes?.content_value}</p>
+                    <button className="btn prmry_btn make_enqury_btn" onClick="window.open('contact_us.html')">{customData.filter(res => res.attributes?.content_name == "PrivacyPolicyNextTripEnqBtnText")[0]?.attributes?.content_value}
                         <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                     </button>
                 </div>

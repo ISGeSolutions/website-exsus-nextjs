@@ -119,7 +119,6 @@ function Index() {
   });
 
   const formOptions = { resolver: yupResolver(validationSchema) };
-
   const handleOptionRegionChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
@@ -143,7 +142,7 @@ function Index() {
 
   function onSubmit(data) {
     return brochureService
-      .sendEnquiryMail({ data })
+      .sendBrochurerMail({ data })
       .then(() => {
         alertService.success("Brochure request is sent successfully", {
           keepAfterRouteChange: true,

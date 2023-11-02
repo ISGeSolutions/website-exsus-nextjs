@@ -346,7 +346,7 @@ function Index() {
                               <button className="btn card_slider_btn justify-content-end">
                                 <span
                                   className="view_itnry_link"
-                                  //onClick={handleRedirect}
+                                //onClick={handleRedirect}
                                 >
                                   View this hotel
                                   <em className="fa-solid fa-chevron-right"></em>

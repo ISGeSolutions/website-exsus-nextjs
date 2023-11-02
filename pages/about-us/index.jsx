@@ -266,7 +266,7 @@ function Index() {
                     <div className="card_blk_inr">
                       <NavLink href={region + `/destinations`}>
                         <img
-                          src="images/about_us_card01.jpg"
+                          src="/images/about_us_card01.jpg"
                           alt="Card image 07"
                           className="img-fluid"
                         />
@@ -304,7 +304,7 @@ function Index() {
                     <div className="card_blk_inr">
                       <NavLink href={region + `/holiday-types`}>
                         <img
-                          src="images/about_us_card02.jpg"
+                          src="/images/about_us_card02.jpg"
                           alt="Card image 08"
                           className="img-fluid"
                         />
