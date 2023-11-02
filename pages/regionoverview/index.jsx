@@ -34,7 +34,7 @@ function CountryOverview(props) {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
+      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
     );
   };
 

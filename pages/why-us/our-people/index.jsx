@@ -4,11 +4,12 @@ import { useRouter } from "next/router";
 import { Link, Spinner, Signup } from "components";
 import { Layout } from "components/users";
 import { userService } from "services";
+import { NavLink } from "components";
 import Head from "next/head";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { whyusService } from "../../services";
+import { whyusService } from "../../../services";
 var Carousel = require("react-responsive-carousel").Carousel;
-import { FriendlyUrl } from '../../components';
+import { FriendlyUrl } from '../../../components';
 
 
 export default Index;
@@ -17,8 +18,17 @@ function Index() {
   const [users, setUsers] = useState(null);
   const [allExecutives, setAllExecutives] = useState([]);
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
   const [friendlyUrl, setFriendlyUrl] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [customData, setCustomData] = useState(null);
+  const [headingTag, setHeadingTag] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [metaDescription, setMetaDescription] = useState(null);
+  const [longText, setLongText] = useState(null);
+  const [rightHeader, setRightHeader] = useState(null);
+  const [rightCorner, setRightContent] = useState(null);
+  const [backgroundImage, setBackgroundImage] = useState([]);
+
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -54,7 +64,7 @@ function Index() {
 
   const handleRedirect = (item) => {
     const modifiedName = item.replace(/ /g, '-').toLowerCase();
-    router.push(region + `/why-us/our-people/${modifiedName}`);
+    router.push(regionWiseUrl + `/why-us/our-people/${modifiedName}`);
   };
 
   // const ExpertDetail = ({ data }) => {
@@ -85,6 +95,45 @@ function Index() {
         setIsLoading(false);
       });
 
+    whyusService
+      .getExpertsPage()
+      .then((x) => {
+        // debugger;
+        setCustomData(x.data[0]);
+        const imageCheck = x.data[0].attributes.custom_page_images.data;
+        const newBackgroundImages = [];
+        imageCheck.forEach((element) => {
+          if (element.attributes.image_type == "banner") {
+            newBackgroundImages.push(element.attributes.image_path);
+          }
+        });
+        setBackgroundImage(newBackgroundImages);
+        const data = x.data[0]?.attributes?.custom_page_contents?.data;
+        if (data) {
+          data.forEach((element, index) => {
+            if (element?.attributes?.content_name == 'HeadingTag') {
+              setHeadingTag(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == 'Title') {
+              setTitle(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == 'MetaDescription') {
+              setMetaDescription(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == 'Long_Text') {
+              setLongText(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == 'Right_Header') {
+              setRightHeader(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == 'Right_Corner') {
+              setRightContent(element?.attributes?.content_value);
+            }
+          });
+        }
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        // Handle any errors here
+        setIsLoading(false);
+      });
+
+
     const carousel = document.querySelector("#carouselExampleInterval");
     if (carousel) {
       new bootstrap.Carousel(carousel);
@@ -102,6 +151,7 @@ function Index() {
     <Layout>
       <Head>
         <script src="assets/javascripts/experts-equal-height.js"></script>
+        <title>{title}</title>
       </Head>
       {isLoading ? (
         // <MyLoader />
@@ -114,144 +164,44 @@ function Index() {
       ) : (
         <div>
           <section className="banner_blk_row">
+            {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
+                    <div>
+                        <img src="/assets/./../images//destination_banner.jpg" />
+                    </div>
+                </Carousel> */}
             <div
               id="carouselExampleInterval"
               className="carousel slide"
               data-bs-ride="carousel"
             >
               <div className="carousel-indicators">
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleInterval"
-                  data-bs-slide-to="0"
-                  className="active"
-                  aria-current="true"
-                  aria-label="Slide 1"
-                ></button>
+                {backgroundImage.map((_, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    data-bs-target="#carouselExampleInterval"
+                    data-bs-slide-to={index}
+                    className={index === 0 ? "active" : ""}
+                    aria-current={index === 0 ? "true" : "false"}
+                    aria-label={`Slide ${index + 1}`}
+                  ></button>
+                ))}
+                {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
               </div>
               <div className="carousel-inner">
-                <a
-                  href="#"
-                  target="_blank"
-                  className="carousel-item active"
-                  data-bs-interval="5000"
-                >
-                  <div className="banner_commn_cls our_experts_banner01"></div>
-                </a>
-              </div>
-            </div>
-            <div className="banner_dropdwn_row">
-              <div className="container">
-                <div className="banner_dropdwn_inr d-block d-md-flex">
-                  <div className="banner_dropdwn_blk">
-                    <div className="select_drpdwn">
-                      <select
-                        className="form-select"
-                        aria-label="Choose a destination"
-                      >
-                        <option selected>Choose a destination</option>
-                        <option value="Asia">Asia</option>
-                        <option value="Europe">Europe</option>
-                        <option value="South America">South America</option>
-                        <option value="Indian Subcontinent">
-                          Indian Subcontinent
-                        </option>
-                        <option value="North America & Caribbean">
-                          North America & Caribbean
-                        </option>
-                        <option value="Africa">Africa</option>
-                        <option value="Central America">Central America</option>
-                        <option value="Australasia & South Pacific">
-                          Australasia & South Pacific
-                        </option>
-                        <option value="Middle East & North Africa">
-                          Middle East & North Africa
-                        </option>
-                        <option value="Indian ocean">Indian ocean</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                    <div className="select_drpdwn">
-                      <select
-                        className="form-select"
-                        aria-label="Choose a reason"
-                      >
-                        <option selected>Choose a reason</option>
-                        <option value="Adventure Holidays">
-                          Adventure Holidays
-                        </option>
-                        <option value="Classic Journeys">
-                          Classic Journeys
-                        </option>
-                        <option value="Trains, Planes, Cars & Cruises">
-                          Trains, Planes, Cars & Cruises
-                        </option>
-                        <option value="Food & Culture Holidays">
-                          Food & Culture Holidays
-                        </option>
-                        <option value="Family Holidays">Family Holidays</option>
-                        <option value="Once in a lifetime holidays">
-                          Once in a lifetime holidays
-                        </option>
-                        <option value="Short breaks & Escapes">
-                          Short breaks & Escapes
-                        </option>
-                        <option value="Wildlife & Safari Holidays">
-                          Wildlife & Safari Holidays
-                        </option>
-                        <option value="Luxury Beach holidays">
-                          Luxury Beach holidays
-                        </option>
-                        <option value="Special occasions">
-                          Special occasions
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                    <div className="select_drpdwn">
-                      <select
-                        className="form-select"
-                        aria-label="Choose a month"
-                      >
-                        <option selected>Choose a month</option>
-                        <option value="January">January</option>
-                        <option value="February">February</option>
-                        <option value="March">March</option>
-                        <option value="April">April</option>
-                        <option value="May">May</option>
-                        <option value="June">June</option>
-                        <option value="July">July</option>
-                        <option value="August">August</option>
-                        <option value="September">September</option>
-                        <option value="October">October</option>
-                        <option value="November">November</option>
-                        <option value="December">December</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="banner_inspire_btn ps-0 ps-md-2">
-                    <button type="button" className="btn btn-primary prmry_btn">
-                      Inspire me
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="#ffffff"
-                        shapeRendering="geometricPrecision"
-                        textRendering="geometricPrecision"
-                        imageRendering="optimizeQuality"
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        viewBox="0 0 267 512.43"
-                      >
-                        <path
-                          fillRule="nonzero"
-                          d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
+                {backgroundImage.map((imagePath, index) => (
+                  <NavLink
+                    key={index}
+                    href="#"
+                    className={`carousel-item ${index === 0 ? "active" : ""}`}
+                    data-bs-interval="5000"
+                  >
+                    <div
+                      className="banner_commn_cls"
+                      style={{ backgroundImage: `url(${imagePath})` }}
+                    ></div>
+                  </NavLink>
+                ))}
               </div>
             </div>
           </section>

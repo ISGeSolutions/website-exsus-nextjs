@@ -15,7 +15,8 @@ export const whyusService = {
   getExsusReviews,
   getAllReviews,
   getAllHomeTravelReviews,
-  getReviewsCustomePage,
+  getExpertsPage,
+  getReviewsCustomePage
 };
 
 function getAllDropdown() {
@@ -67,6 +68,11 @@ function getAllHomeTravelReviews() {
 function getAllReviews() {
   const reviewsUrl = `${publicRuntimeConfig.apiUrl}/api/travel-reviews?populate[0]=travel_executive`;
   return fetchWrapper.get(reviewsUrl);
+}
+
+function getExpertsPage() {
+  const privacyPageUrl = `${publicRuntimeConfig.apiUrl}/api/custom-pages?populate[0]=custom_page_images&populate[1]=custom_page_contents&filters[page_code][$eq]=our-people`;
+  return fetchWrapper.get(privacyPageUrl);
 }
 
 function getReviewsCustomePage() {

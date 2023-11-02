@@ -471,7 +471,7 @@ function Layout({ children }) {
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink href={"/exsus-referral-scheme"}>
+                      <NavLink href={regionWiseUrl + "/about-us/friend-referral-offer"}>
                         Exsus referral scheme
                       </NavLink>
                     </li>
@@ -493,7 +493,7 @@ function Layout({ children }) {
             <div className="prvcy_polcy_list">
               <ul>
                 <li>
-                  <NavLink href="/privacy-policy-and-cookies">
+                  <NavLink href="/privacy-policy">
                     Privacy policy & cookies
                   </NavLink>
                 </li>

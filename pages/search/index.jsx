@@ -36,11 +36,11 @@ function Index() {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="#ffffff"
-                  shape-rendering="geometricPrecision"
-                  text-rendering="geometricPrecision"
-                  image-rendering="optimizeQuality"
+                  shapeRendering="geometricPrecision"
+                  textRendering="geometricPrecision"
+                  imageRendering="optimizeQuality"
                   fillRule="evenodd"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                   viewBox="0 0 267 512.43"
                 >
                   <path
@@ -217,11 +217,11 @@ function Index() {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="#ffffff"
-              shape-rendering="geometricPrecision"
-              text-rendering="geometricPrecision"
-              image-rendering="optimizeQuality"
+              shapeRendering="geometricPrecision"
+              textRendering="geometricPrecision"
+              imageRendering="optimizeQuality"
               fillRule="evenodd"
-              clip-rule="evenodd"
+              clipRule="evenodd"
               viewBox="0 0 267 512.43"
             >
               <path
@@ -258,11 +258,11 @@ function Index() {
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="#ffffff"
-                  shape-rendering="geometricPrecision"
-                  text-rendering="geometricPrecision"
-                  image-rendering="optimizeQuality"
+                  shapeRendering="geometricPrecision"
+                  textRendering="geometricPrecision"
+                  imageRendering="optimizeQuality"
                   fillRule="evenodd"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                   viewBox="0 0 267 512.43"
                 >
                   <path
