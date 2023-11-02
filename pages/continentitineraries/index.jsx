@@ -140,7 +140,7 @@ function ContinentItinararies(props) {
   };
 
   const closeAlert = () => {
-    console.log("closeAlert");
+    // console.log("closeAlert");
     setAlert(null);
   };
 
@@ -149,7 +149,7 @@ function ContinentItinararies(props) {
   };
 
   const loadMoreData = (item) => {
-    console.log(page);
+    // console.log(page);
     destinationService
       .getItinerariesByDestination(dcode, page + 1, item)
       .then((response) => {
@@ -271,9 +271,9 @@ function ContinentItinararies(props) {
   };
 
   function onSubmit(data) {
-    console.log("Selected Countries:", selectedOptionCountry);
-    console.log("Selected Regions:", selectedOptionRegion);
-    console.log("Selected Months:", selectedOptionMonth);
+    // console.log("Selected Countries:", selectedOptionCountry);
+    // console.log("Selected Regions:", selectedOptionRegion);
+    // console.log("Selected Months:", selectedOptionMonth);
 
     if (!data.destination && !data.reason && !data.month) {
       showAlert("Please select atleast one option", "error");

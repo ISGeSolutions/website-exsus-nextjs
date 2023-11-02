@@ -111,7 +111,7 @@ function Index() {
       setCareerData(x.data[0]);
       const data = x.data[0]?.attributes?.custom_page_contents?.data;
       //let modifiedString = "";
-      console.log("consolelog", data);
+      // console.log("consolelog", data);
       if (data) {
         data.forEach((element, index) => {
           if (element?.attributes?.content_name == "HeadingTag") {

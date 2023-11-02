@@ -10,20 +10,20 @@ const nextConfig = {
   async rewrites() {
     return [
       // destinations
-      { source: "/uk/destinations", destination: "/destinations" },
+      { source: "/destinations", destination: "/destinations" },
       { source: "/us/destinations", destination: "/destinations" },
       { source: "/asia/destinations", destination: "/destinations" },
       { source: "/in/destinations", destination: "/destinations" },
 
       // continent
-      { source: "/uk/destinations/:continent", destination: "/continent" },
+      { source: "/destinations/:continent", destination: "/continent" },
       { source: "/us/destinations/:continent", destination: "/continent" },
       { source: "/asia/destinations/:continent", destination: "/continent" },
       { source: "/in/destinations/:continent", destination: "/continent" },
 
       // continentcountries
       {
-        source: "/uk/destinations/:continent",
+        source: "/destinations/:continent",
         destination: "/continentcountries",
       },
       {
@@ -41,7 +41,7 @@ const nextConfig = {
 
       // continentexperiences
       {
-        source: "/uk/continentexperiences",
+        source: "/continentexperiences",
         destination: "/continentexperiences",
       },
       {
@@ -59,7 +59,7 @@ const nextConfig = {
 
       // continentitineraries
       {
-        source: "/uk/destinations/:continent",
+        source: "/destinations/:continent",
         destination: "/continentitineraries",
       },
       {
@@ -77,7 +77,7 @@ const nextConfig = {
 
       // continentplacetostay
       {
-        source: "/uk/destinations/:continent",
+        source: "/destinations/:continent",
         destination: "/continentplacetostay",
       },
       {
@@ -95,7 +95,7 @@ const nextConfig = {
 
       // country
       {
-        source: "/uk/destinations/:continent/:country",
+        source: "/destinations/:continent/:country",
         destination: "/country",
       },
       {
@@ -113,7 +113,7 @@ const nextConfig = {
 
       // countryregions
       {
-        source: "/uk/destinations/:continent/:country/countryregions",
+        source: "/destinations/:continent/:country/countryregions",
         destination: "/countryregions",
       },
       {
@@ -131,7 +131,7 @@ const nextConfig = {
 
       // countryitineraries
       {
-        source: "/uk/destinations/:continent/:country/countryitineraries",
+        source: "/destinations/:continent/:country/countryitineraries",
         destination: "/countryitineraries",
       },
       {
@@ -149,7 +149,7 @@ const nextConfig = {
 
       // countrywhentogo
       {
-        source: "/uk/destinations/:continent/:country/countrywhentogo",
+        source: "/destinations/:continent/:country/countrywhentogo",
         destination: "/countrywhentogo",
       },
       {
@@ -167,7 +167,7 @@ const nextConfig = {
 
       // countryplacestostay
       {
-        source: "/uk/destinations/:continent/:country/countryplacestostay",
+        source: "/destinations/:continent/:country/countryplacestostay",
         destination: "/countryplacestostay",
       },
       {
@@ -185,7 +185,7 @@ const nextConfig = {
 
       // country_details
       {
-        source: "/uk/destinations/:continent/:country",
+        source: "/destinations/:continent/:country",
         destination: "/country_details",
       },
       {
@@ -202,14 +202,14 @@ const nextConfig = {
       },
 
       // holiday-types
-      { source: "/uk/holiday-types", destination: "/holiday-types" },
+      { source: "/holiday-types", destination: "/holiday-types" },
       { source: "/us/holiday-types", destination: "/holiday-types" },
       { source: "/asia/holiday-types", destination: "/holiday-types" },
       { source: "/in/holiday-types", destination: "/holiday-types" },
 
       // holidaytypeitineraries
       {
-        source: "/uk/holiday-types/:holidaytypeitineraries",
+        source: "/holiday-types/:holidaytypeitineraries",
         destination: "/holidaytypeitineraries",
       },
       {
@@ -227,31 +227,31 @@ const nextConfig = {
 
       // holidaytypeideas
       {
-        source: "/uk/holiday-types/:holidaytypeitineraries/:holidaytypeideas",
+        source: "/holiday-types/:holidaytypeitineraries/:holidaytypeideas",
         destination: "/holidaytypeideas",
       },
       {
-        source: "/us//holiday-types/:holidaytypeitineraries/:holidaytypeideas",
+        source: "/us/holiday-types/:holidaytypeitineraries/:holidaytypeideas",
         destination: "/holidaytypeideas",
       },
       {
         source:
-          "/asia//holiday-types/:holidaytypeitineraries/:holidaytypeideas",
+          "/asia/holiday-types/:holidaytypeitineraries/:holidaytypeideas",
         destination: "/holidaytypeideas",
       },
       {
-        source: "/in//holiday-types/:holidaytypeitineraries/:holidaytypeideas",
+        source: "/in/holiday-types/:holidaytypeitineraries/:holidaytypeideas",
         destination: "/holidaytypeideas",
       },
 
       // itinerarydetail
-      // { source: "/uk/itinerarydetail", destination: "/itinerarydetail" },
+      // { source: "/itinerarydetail", destination: "/itinerarydetail" },
       // { source: "/us/itinerarydetail", destination: "/itinerarydetail" },
       // { source: "/asia/itinerarydetail", destination: "/itinerarydetail" },
       // { source: "/in/itinerarydetail", destination: "/itinerarydetail" },
 
       // special-offers
-      { source: "/uk/special-offers", destination: "/special-offers" },
+      { source: "/special-offers", destination: "/special-offers" },
       { source: "/us/special-offers", destination: "/special-offers" },
       { source: "/asia/special-offers", destination: "/special-offers" },
       { source: "/in/special-offers", destination: "/special-offers" },
@@ -259,7 +259,7 @@ const nextConfig = {
       // itinerarydetail
       {
         source:
-          "/uk/destinations/:continent/:country/:itineraries/:itineraryName?",
+          "/destinations/:continent/:country/:itineraries/:itineraryName?",
         destination: "/itinerarydetail",
       },
       {
@@ -279,19 +279,19 @@ const nextConfig = {
       },
 
       // advance search
-      { source: "/uk/advance-search", destination: "/advance-search" },
+      { source: "/advance-search", destination: "/advance-search" },
       { source: "/us/advance-search", destination: "/advance-search" },
       { source: "/asia/advance-search", destination: "/advance-search" },
       { source: "/in/advance-search", destination: "/advance-search" },
 
       // contact-us
-      { source: "/uk/contact-us", destination: "/contact-us" },
+      { source: "/contact-us", destination: "/contact-us" },
       { source: "/us/contact-us", destination: "/contact-us" },
       { source: "/asia/contact-us", destination: "/contact-us" },
       { source: "/in/contact-us", destination: "/contact-us" },
 
       // make-an-enquiry
-      { source: "/uk/make-an-enquiry", destination: "/make-an-enquiry" },
+      { source: "/make-an-enquiry", destination: "/make-an-enquiry" },
       { source: "/us/make-an-enquiry", destination: "/make-an-enquiry" },
       { source: "/asia/make-an-enquiry", destination: "/make-an-enquiry" },
       { source: "/in/make-an-enquiry", destination: "/contact-us" },
@@ -302,51 +302,51 @@ const nextConfig = {
       // special-offers
 
       // hotel-detail
-      { source: "/uk/hotel-detail", destination: "/hotel-detail" },
+      { source: "/hotel-detail", destination: "/hotel-detail" },
       { source: "/us/hotel-detail", destination: "/hotel-detail" },
       { source: "/asia/hotel-detail", destination: "/hotel-detail" },
       { source: "/asia/hotel-detail", destination: "/hotel-detail" },
 
       // Blog
-      { source: "/uk/blog", destination: "/blog" },
+      { source: "/blog", destination: "/blog" },
       { source: "/us/blog", destination: "/blog" },
       { source: "/asia/blog", destination: "/blog" },
       { source: "/in/blog", destination: "/blog" },
 
       // blog-detail
-      { source: "/uk/blog/:blogdetail", destination: "/blog-detail" },
+      { source: "/blog/:blogdetail", destination: "/blog-detail" },
       { source: "/us/blog/:blogdetail", destination: "/blog-detail" },
       { source: "/asia/blog/:blogdetail", destination: "/blog-detail" },
       { source: "/in/blog/:blogdetail", destination: "/blog-detail" },
 
       // blog-detail
-      { source: "/uk/blog/:blogdetail", destination: "/blog-detail" },
+      { source: "/blog/:blogdetail", destination: "/blog-detail" },
       { source: "/us/blog/:blogdetail", destination: "/blog-detail" },
       { source: "/asia/blog/:blogdetail", destination: "/blog-detail" },
       { source: "/in/blog/:blogdetail", destination: "/blog-detail" },
 
       // why-us
-      { source: "/uk/why-us", destination: "/why-us" },
+      { source: "/why-us", destination: "/why-us" },
       { source: "/us/why-us", destination: "/why-us" },
       { source: "/asia/why-us", destination: "/why-us" },
       { source: "/in/why-us", destination: "/why-us" },
 
       // our people
-      { source: "/uk/why-us/our-people", destination: "/why-us/our-people" },
+      { source: "/why-us/our-people", destination: "/why-us/our-people" },
       { source: "/us/why-us/our-people", destination: "/why-us/our-people" },
       { source: "/asia/why-us/our-people", destination: "/why-us/our-people" },
       { source: "/in/why-us/our-people", destination: "/why-us/our-people" },
 
 
       // our people detail
-      { source: "/uk/why-us/our-people/:executiveName", destination: "/why-us/our-people/travel-expert-detail" },
+      { source: "/why-us/our-people/:executiveName", destination: "/why-us/our-people/travel-expert-detail" },
       { source: "/us/why-us/our-people/:executiveName", destination: "/why-us/our-people/travel-expert-detail" },
       { source: "/asia/why-us/our-people/:executiveName", destination: "/why-us/our-people/travel-expert-detail" },
       { source: "/in/why-us/our-people/:executiveName", destination: "/why-us/our-people/travel-expert-detail" },
 
 
       // where-to-go-detail
-      { source: "/uk/where-to-go-detail", destination: "/where-to-go-detail" },
+      { source: "/where-to-go-detail", destination: "/where-to-go-detail" },
       { source: "/us/where-to-go-detail", destination: "/where-to-go-detail" },
       {
         source: "/asia/where-to-go-detail",
@@ -355,13 +355,13 @@ const nextConfig = {
       { source: "/in/where-to-go-detail", destination: "/where-to-go-detail" },
 
       // about-us
-      { source: "/uk/about-us", destination: "/about-us" },
+      { source: "/about-us", destination: "/about-us" },
       { source: "/us/about-us", destination: "/about-us" },
       { source: "/asia/about-us", destination: "/about-us" },
       { source: "/in/about-us", destination: "/about-us" },
 
       // where-to-go
-      { source: "/uk/where-to-go", destination: "/where-to-go" },
+      { source: "/where-to-go", destination: "/where-to-go" },
       { source: "/us/where-to-go", destination: "/where-to-go" },
       { source: "/asia/where-to-go", destination: "/where-to-go" },
       { source: "/in/where-to-go", destination: "/where-to-go" },
@@ -385,7 +385,7 @@ const nextConfig = {
       { source: "/about-us/about-gift-list", destination: "/about-us/about-gift-list" },
 
       // referral
-      { source: "/uk/about-us/friend-referral-offer", destination: "/about-us/friend-referral-offer" },
+      { source: "/about-us/friend-referral-offer", destination: "/about-us/friend-referral-offer" },
       { source: "/us/about-us/friend-referral-offer", destination: "/about-us/friend-referral-offer" },
       { source: "/asia/about-us/friend-referral-offer", destination: "/about-us/friend-referral-offer" },
       { source: "/in/about-us/friend-referral-offer", destination: "/about-us/friend-referral-offer" },

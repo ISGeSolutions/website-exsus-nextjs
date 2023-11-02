@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 export default CountryWhentogo;
 
 function CountryWhentogo(country) {
-  console.log("country", country);
+  // console.log("country", country);
 
   const router = useRouter();
   const countrycode = router.query?.country

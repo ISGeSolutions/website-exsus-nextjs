@@ -40,7 +40,7 @@ function Index() {
     // console.log("Email", email_id);
 
     //console.log(formData);
-    console.log(e);
+    // console.log(e);
   };
 
   useEffect(() => {

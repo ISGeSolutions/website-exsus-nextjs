@@ -25,10 +25,12 @@ function Nav() {
 
 
   let region = 'uk'
-  let regionWiseUrl = "/uk";
+  let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      regionWiseUrl = "/" + window.site_region;
+      if (window.site_region !== 'uk') {
+        regionWiseUrl = "/" + window.site_region;
+      }
       region = window.site_region;
       // setMyVariable(window.site_region);
     }

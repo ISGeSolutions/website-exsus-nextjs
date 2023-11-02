@@ -97,8 +97,8 @@ function Index() {
   };
 
   useEffect(() => {
-    console.log(itin_name)
-    console.log(router.query);
+    // console.log(itin_name)
+    // console.log(router.query);
     const tooltipTriggerList = document.querySelectorAll(
       '[data-bs-toggle="tooltip"]'
     );

@@ -174,7 +174,7 @@ function Index() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    console.log(destinationcode);
+    // console.log(destinationcode);
     // destinationService.getAllItineraries().then(x => {
     //     setItineraries(x.data);
     // });

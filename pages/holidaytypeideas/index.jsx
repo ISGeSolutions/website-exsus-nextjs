@@ -253,7 +253,7 @@ function Index() {
       .then((x) => {
         setHolidaytypesDetails(x.data[0].attributes);
         setFriendlyUrl(`home/holiday-types/${holidayGrpName}/${holidaytypename}`);
-        console.log()
+        // console.log()
         const oldText = x.data[0].attributes?.overview_text;
         var newValueWithBr = oldText?.replace(/\\n/g, "");
         setnewValueWithBr(newValueWithBr);

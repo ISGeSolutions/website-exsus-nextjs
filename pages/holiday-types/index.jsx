@@ -85,7 +85,7 @@ function Index() {
 
   const handleFilterClick = (item) => {
     setActiveItem(item);
-    console.log(thumbnailImageArr);
+    // console.log(thumbnailImageArr);
     if (item == "alphabetical") {
       setThumbnailImageArr(
         thumbnailImageArr.sort((a, b) =>
@@ -114,7 +114,7 @@ function Index() {
       .then((x) => {
         setHolidayTypes(x.data[0]);
         setCustomPage(x.data[0]?.attributes?.custom_page_contents)
-        console.log(x.data[0]);
+        // console.log(x.data[0]);
         // setDestinationLandingDetails(x);
         const imageCheck = x?.data[0]?.attributes?.custom_page_images?.data;
         const newBackgroundImages = [];

@@ -120,7 +120,7 @@ function Index() {
                                 });
                                 // Set the modified string in state
                                 setLongText(modifiedString);
-                                console.log(modifiedString);
+                                // console.log(modifiedString);
                                 setIsLoading(false);
                             } catch (error) {
                                 if (error.message === "Loop break") {

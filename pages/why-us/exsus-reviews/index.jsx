@@ -15,7 +15,7 @@ function Index() {
 
     useEffect(() => {
         whyusService.getExsusReviews().then(x => {
-            console.log('x1', x);
+            // console.log('x1', x);
             setExsusReviewDetails(x?.data);
         });
     }, []);

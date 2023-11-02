@@ -79,10 +79,10 @@ function ContinentCountry({ sendDataToParent }) {
           a.attributes.country_name.localeCompare(b.attributes.country_name)
         )
       );
-      console.log(allCountries);
+      // console.log(allCountries);
     } else if (item == "recommended") {
       setAllCountries(allCountries.sort((a, b) => a.id - b.id));
-      console.log(allCountries);
+      // console.log(allCountries);
     }
   };
 

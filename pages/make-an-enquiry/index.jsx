@@ -51,7 +51,7 @@ function Index() {
   };
 
   const closeAlert = () => {
-    console.log("closeAlert");
+    // console.log("closeAlert");
     setAlert(null);
   };
 

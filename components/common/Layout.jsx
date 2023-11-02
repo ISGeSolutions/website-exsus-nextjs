@@ -68,16 +68,28 @@ function Layout({ children }) {
     return true;
   };
 
-  let region = "uk";
+  let region = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      region = window.site_region;
+      if (window.site_region !== 'uk')
+        region = window.site_region;
     }
   }
 
   const handleSearch = () => {
     router.push("/search");
   };
+
+  // Function to check if any string in the array is present in the sentence
+  const isAnyStringInSentence = (strings, sentence) => {
+    for (let i = 0; i < strings.length; i++) {
+      if (sentence.includes(strings[i] + '/')) {
+        return true; // Return true if any string is found
+      }
+    }
+    return false; // Return false if none of the strings are found
+  }
+
 
   const handleChange = (selectedOption) => {
     // Do something
@@ -87,9 +99,20 @@ function Layout({ children }) {
 
     localStorage.setItem("site_region", selectedOption.value);
     window.site_region = selectedOption.value;
-
     const pathRouter = router.asPath;
-    const myArray = pathRouter.split("/");
+    let myArray = [];
+
+    // debugger;
+    const regionArr = ['uk', 'us', 'asia', 'in']
+    if (isAnyStringInSentence(regionArr, router.asPath)) {
+      // console.log("At least one string is found in the sentence.");
+      myArray = pathRouter.split("/");
+    } else {
+      // console.log("None of the strings are found in the sentence.");
+      myArray[0] = '';
+      myArray[1] = 'uk';
+      myArray = myArray.concat(pathRouter.split("/").slice(1));;
+    }
 
     var newPath = "";
     myArray.forEach((element, index) => {
@@ -98,7 +121,11 @@ function Layout({ children }) {
       } else if (index == 1) {
         if (myArray.length > 2) {
           if (element) {
-            newPath = newPath + "/" + selectedOption.value;
+            if (selectedOption.value == 'uk') {
+              newPath = newPath + "/";
+            } else {
+              newPath = newPath + "/" + selectedOption.value;
+            }
           }
         }
       } else if (index > 1) {

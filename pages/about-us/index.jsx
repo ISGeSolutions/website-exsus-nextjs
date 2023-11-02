@@ -63,7 +63,7 @@ function Index() {
         setCustomPage(x.data[0].attributes?.custom_page_contents)
 
         let modifiedString = x.data.attributes?.page_content_1;
-        console.log("console.log ", modifiedString);
+        // console.log("console.log ", modifiedString);
 
         // Find and store matches in an array
         const regex = /{[a-zA-Z0-9-]+}/g;
@@ -110,14 +110,14 @@ function Index() {
 
               // Set the modified string in state
               setnewValueWithBr(modifiedString);
-              console.log(modifiedString);
+              // console.log(modifiedString);
             } catch (error) {
               if (error.message === "Loop break") {
                 // Handle the loop break here
-                console.log("Loop has been stopped.");
+                // console.log("Loop has been stopped.");
               } else if (error.message === "Region not found") {
                 // Handle the loop break here
-                console.log("Loop has been stopped.");
+                // console.log("Loop has been stopped.");
                 setnewValueWithBr(modifiedString);
               }
             }

@@ -110,14 +110,14 @@ function Index() {
 
               // Set the modified string in state
               setnewValueWithBr(modifiedString);
-              console.log(modifiedString);
+              // console.log(modifiedString);
             } catch (error) {
               if (error.message === "Loop break") {
                 // Handle the loop break here
-                console.log("Loop has been stopped.");
+                // console.log("Loop has been stopped.");
               } else if (error.message === "Region not found") {
                 // Handle the loop break here
-                console.log("Loop has been stopped.");
+                // console.log("Loop has been stopped.");
                 setnewValueWithBr(modifiedString);
               }
             }
@@ -140,7 +140,7 @@ function Index() {
       .then((x) => {
         setCareerData(x.data[0]);
         const data = x.data[0]?.attributes?.custom_page_contents?.data;
-        console.log("consolelog", data);
+        // console.log("consolelog", data);
         if (data) {
           data.forEach((element, index) => {
             if (element?.attributes?.content_name == "HeadingTag") {

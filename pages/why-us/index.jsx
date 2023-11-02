@@ -94,7 +94,7 @@ function Index() {
       .getWhyusPage()
       .then((x) => {
         setWhyusDetails(x?.data[0]?.attributes);
-        console.log(x.data[0]?.attributes);
+        // console.log(x.data[0]?.attributes);
         setCustomData(x.data[0]?.attributes?.custom_page_contents);
         setIsLoading(false);
       })
