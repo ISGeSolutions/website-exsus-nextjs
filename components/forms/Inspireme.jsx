@@ -14,13 +14,15 @@ import {
 } from "services";
 import CustomModal from "../CustomModal";
 import { Alert } from "../Alert";
+import { useParams } from 'react-router-dom';
 
 export { Inspireme };
 
-function Inspireme() {
+function Inspireme(props) {
   const [destinationLandingList, setDestinationLandingList] = useState();
   const [holidaytypesLandingList, setHolidaytypesLandingList] = useState();
-
+  const [queryParameters, setQueryParameters] = useState();
+  const { divRef } = props;
   const router = useRouter();
 
   // form validation rules
@@ -42,7 +44,6 @@ function Inspireme() {
   };
 
   const closeAlert = () => {
-    console.log("closeAlert");
     setAlert(null);
   };
 
@@ -51,17 +52,16 @@ function Inspireme() {
   };
 
   function onSubmit(data) {
-    console.log(data);
     if (!data.destination && !data.reason && !data.month) {
       showAlert("Please select atleast one option", "error");
     } else {
       router.push(
         `advance-search?where=` +
-          data?.destination +
-          `&what=` +
-          data?.reason +
-          `&when=` +
-          data?.month
+        data?.destination +
+        `&what=` +
+        data?.reason +
+        `&when=` +
+        data?.month
       );
     }
   }
@@ -73,6 +73,16 @@ function Inspireme() {
           a.attributes.main_page_serial_number -
           b.attributes.main_page_serial_number
       );
+
+      // debugger;
+      // if(sortedData) {
+      //   const arrTemp = [];
+      //   sortedData.map(element => {          
+      //     arrTemp[element?.attributes?.destination_code] = element?.attributes?.destination_name;
+      //     return arrTemp;
+      //   });
+      // }
+
       setDestinationLandingList(sortedData);
       // setDestinationLandingDetails(x)
     });
@@ -80,7 +90,9 @@ function Inspireme() {
     holidaytypesService.getHolidaytypesLandingList().then((x) => {
       setHolidaytypesLandingList(x.data);
     });
-  }, []);
+
+    setQueryParameters(router.query);
+  }, [divRef, router.query]);
 
   return (
     <>
@@ -97,15 +109,15 @@ function Inspireme() {
                     aria-label="Choose a destination"
                     name="destination"
                     {...register("destination")}
-                    className={`form-select ${
-                      errors.destination ? "is-invalid" : ""
-                    }`}
+                    className={`form-select ${errors.destination ? "is-invalid" : ""
+                      }`}
                   >
                     <option value="">Choose a destination</option>
                     {destinationLandingList?.map((element, i) => (
                       <option
                         key={element?.id}
                         value={element?.attributes?.destination_code}
+                      // defaultValue={queryParameters?.where}
                       >
                         {element?.attributes?.destination_name}
                       </option>
@@ -132,9 +144,8 @@ function Inspireme() {
                     aria-label="Choose a reason"
                     name="reason"
                     {...register("reason")}
-                    className={`form-select ${
-                      errors.reason ? "is-invalid" : ""
-                    }`}
+                    className={`form-select ${errors.reason ? "is-invalid" : ""
+                      }`}
                   >
                     <option value="">Choose a reason</option>
                     {holidaytypesLandingList?.map((element, i) => (
@@ -167,9 +178,8 @@ function Inspireme() {
                     aria-label="Choose a month"
                     name="month"
                     {...register("month")}
-                    className={`form-select ${
-                      errors.month ? "is-invalid" : ""
-                    }`}
+                    className={`form-select ${errors.month ? "is-invalid" : ""
+                      }`}
                   >
                     <option value="">Choose a month</option>
                     <option value="January">January</option>
