@@ -9,6 +9,7 @@ import generateDynamicLink from "components/utils/generateLink";
 import Image from "next/image";
 import Select, { components } from "react-select";
 import CustomMultiValue from "./CustomMultiValue";
+import { Alert } from "../../components";
 
 export default ContinentPlacesToStay;
 
@@ -30,12 +31,14 @@ function ContinentPlacesToStay(props) {
   const [metaData, setMetaData] = useState([]);
   const [dcode, setdcode] = useState();
   const destinationcode = router.query.continent
-    .replace(/-and-/g, " & ").replace(/-/g, " ")
+    .replace(/-and-/g, " & ")
+    .replace(/-/g, " ")
     .toLowerCase();
   const [allHotels, setAllHotels] = useState([]);
   const [countryOptions, setAllCountries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeItem, setActiveItem] = useState("recommended");
+  const [alert, setAlert] = useState(null);
 
   const { divRef } = props;
 
@@ -197,6 +200,34 @@ function ContinentPlacesToStay(props) {
       });
   };
 
+  const showAlert = (message, type) => {
+    setAlert({ message, type });
+  };
+
+  const closeAlert = () => {
+    // console.log("closeAlert");
+    setAlert(null);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  function onSubmit(data) {
+    if (!data.destination && !data.reason && !data.month) {
+      showAlert("Please select atleast one option", "error");
+    } else {
+      router.push(
+        `advance-search?where=` +
+          data?.destination +
+          `&what=` +
+          data?.reason +
+          `&when=` +
+          data?.month
+      );
+    }
+  }
+
   const handleFilterClick = (item) => {
     page = 0;
     setAllHotels([]);
@@ -231,21 +262,23 @@ function ContinentPlacesToStay(props) {
     setSelectedOptionMonth(selectedOption);
   };
 
-  let regionWiseUrl = "/uk";
+  // let regionWiseUrl = "/uk";
+  // if (typeof window !== "undefined") {
+  //   if (window && window.site_region) {
+  //     regionWiseUrl = "/" + window.site_region;
+  //     // setMyVariable(window.site_region);
+  //   }
+  // }
+  let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      regionWiseUrl = "/" + window.site_region;
-      // setMyVariable(window.site_region);
+      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
     }
   }
 
   const generateDynamicLink = (item) => {
     return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
   };
-
-  // const handleRedirect = () => {
-  //     router.push(regionWiseUrl + `/itinerarydetail?itinerarycode=vi`);
-  // };
 
   useEffect(() => {
     setSelectedOptionCountry(countryOptions[0]);
@@ -295,6 +328,9 @@ function ContinentPlacesToStay(props) {
 
   return (
     <>
+      {alert && alert.message && alert.type && (
+        <Alert message={alert.message} type={alert.type} onClose={closeAlert} />
+      )}
       {isLoading ? (
         // <MyLoader />
         <div
@@ -328,110 +364,112 @@ function ContinentPlacesToStay(props) {
               <div className="card_slider_row">
                 <div className="carousel00 region_carousel00">
                   <div className="row">
-                    <div className="col-12">
-                      <div className="destination_dropdwn_row d-block d-md-flex">
-                        <div className="dropdown_grp_blk">
-                          <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                            <Select
-                              id="long-value-select"
-                              instanceId="long-value-select"
-                              className="select_container_country"
-                              classNamePrefix="select_country"
-                              placeholder={"Filter by country"}
-                              styles={styles}
-                              isMulti
-                              isDisabled={isDisabled}
-                              isLoading={isLoading}
-                              isClearable={isClearable}
-                              isRtl={isRtl}
-                              isSearchable={isSearchable}
-                              value={selectedOptionCountry}
-                              onChange={handleOptionCountryChange}
-                              closeMenuOnSelect={false}
-                              hideSelectedOptions={false}
-                              options={countryOptions}
-                              components={{
-                                Option: InputOption,
-                                MultiValue: CustomMultiValue,
-                              }}
-                            />
+                    <form onSubmit={onSubmit}>
+                      <div className="col-12">
+                        <div className="destination_dropdwn_row d-block d-md-flex">
+                          <div className="dropdown_grp_blk">
+                            <div className="banner_dropdwn_blk ps-0 ps-md-2">
+                              <Select
+                                id="long-value-select"
+                                instanceId="long-value-select"
+                                className="select_container_country"
+                                classNamePrefix="select_country"
+                                placeholder={"Filter by country"}
+                                styles={styles}
+                                isMulti
+                                isDisabled={isDisabled}
+                                isLoading={isLoading}
+                                isClearable={isClearable}
+                                isRtl={isRtl}
+                                isSearchable={isSearchable}
+                                value={selectedOptionCountry}
+                                onChange={handleOptionCountryChange}
+                                closeMenuOnSelect={false}
+                                hideSelectedOptions={false}
+                                options={countryOptions}
+                                components={{
+                                  Option: InputOption,
+                                  MultiValue: CustomMultiValue,
+                                }}
+                              />
+                            </div>
+                            <div className="banner_dropdwn_blk ps-0 ps-md-2">
+                              <Select
+                                placeholder="Filter by region"
+                                // defaultValue={regionOptions[0]}
+                                className="select_container_country"
+                                classNamePrefix="select_country"
+                                isDisabled={isDisabled}
+                                isLoading={isLoader}
+                                isClearable={isClearable}
+                                isRtl={isRtl}
+                                hideSelectedOptions={false}
+                                styles={styles}
+                                closeMenuOnSelect={false}
+                                isSearchable={isSearchable}
+                                name="color"
+                                options={regionOptions}
+                                isMulti
+                                // value={selectedOptionRegion}
+                                onChange={handleOptionRegionChange}
+                                components={{
+                                  Option: InputOption,
+                                  MultiValue: CustomMultiValue,
+                                }}
+                              />
+                            </div>
+                            <div className="banner_dropdwn_blk ps-0 ps-md-2">
+                              <Select
+                                placeholder="Filter by month"
+                                className="select_container_country"
+                                classNamePrefix="select_country"
+                                // defaultValue={monthOptions[0]}
+                                isDisabled={isDisabled}
+                                isLoading={isLoader}
+                                isClearable={isClearable}
+                                styles={styles}
+                                isRtl={isRtl}
+                                isSearchable={isSearchable}
+                                name="color"
+                                closeMenuOnSelect={false}
+                                options={monthOptions}
+                                hideSelectedOptions={false}
+                                isMulti
+                                // value={selectedOptionMonth}
+                                onChange={handleOptionMonthChange}
+                                components={{
+                                  Option: InputOption,
+                                  MultiValue: CustomMultiValue,
+                                }}
+                              />
+                            </div>
                           </div>
-                          <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                            <Select
-                              placeholder="Filter by region"
-                              // defaultValue={regionOptions[0]}
-                              className="select_container_country"
-                              classNamePrefix="select_country"
-                              isDisabled={isDisabled}
-                              isLoading={isLoader}
-                              isClearable={isClearable}
-                              isRtl={isRtl}
-                              hideSelectedOptions={false}
-                              styles={styles}
-                              closeMenuOnSelect={false}
-                              isSearchable={isSearchable}
-                              name="color"
-                              options={regionOptions}
-                              isMulti
-                              // value={selectedOptionRegion}
-                              onChange={handleOptionRegionChange}
-                              components={{
-                                Option: InputOption,
-                                MultiValue: CustomMultiValue,
-                              }}
-                            />
-                          </div>
-                          <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                            <Select
-                              placeholder="Filter by month"
-                              className="select_container_country"
-                              classNamePrefix="select_country"
-                              // defaultValue={monthOptions[0]}
-                              isDisabled={isDisabled}
-                              isLoading={isLoader}
-                              isClearable={isClearable}
-                              styles={styles}
-                              isRtl={isRtl}
-                              isSearchable={isSearchable}
-                              name="color"
-                              closeMenuOnSelect={false}
-                              options={monthOptions}
-                              hideSelectedOptions={false}
-                              isMulti
-                              // value={selectedOptionMonth}
-                              onChange={handleOptionMonthChange}
-                              components={{
-                                Option: InputOption,
-                                MultiValue: CustomMultiValue,
-                              }}
-                            />
-                          </div>
-                        </div>
-                        <div className="banner_inspire_btn ps-0 ps-md-2">
-                          <button
-                            type="button"
-                            className="btn btn-primary prmry_btn"
-                          >
-                            Inspire me
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="#ffffff"
-                              shapeRendering="geometricPrecision"
-                              textRendering="geometricPrecision"
-                              imageRendering="optimizeQuality"
-                              fillRule="evenodd"
-                              clipRule="evenodd"
-                              viewBox="0 0 267 512.43"
+                          <div className="banner_inspire_btn ps-0 ps-md-2">
+                            <button
+                              type="submit"
+                              className="btn btn-primary prmry_btn"
                             >
-                              <path
-                                fillRule="nonzero"
-                                d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                              ></path>
-                            </svg>
-                          </button>
+                              Inspire me
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="#ffffff"
+                                shapeRendering="geometricPrecision"
+                                textRendering="geometricPrecision"
+                                imageRendering="optimizeQuality"
+                                fillRule="evenodd"
+                                clipRule="evenodd"
+                                viewBox="0 0 267 512.43"
+                              >
+                                <path
+                                  fillRule="nonzero"
+                                  d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                                ></path>
+                              </svg>
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </form>
                     <div className="col-12">
                       <div className="destination_filter_result d-block d-lg-flex">
                         <p>
@@ -491,7 +529,7 @@ function ContinentPlacesToStay(props) {
                               {item?.attributes?.hotel_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}

@@ -53,7 +53,7 @@ function Index() {
   };
 
   equalHeight(true);
-
+  let region = "uk";
   let regionWiseUrl = "/uk";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
@@ -107,93 +107,96 @@ function Index() {
         setIsLoading(false);
       });
 
-    specialoffersService.getOffersCustomePage().then((x) => {
-      setCareerData(x.data[0]);
-      const data = x.data[0]?.attributes?.custom_page_contents?.data;
-      //let modifiedString = "";
-      // console.log("consolelog", data);
-      if (data) {
-        data.forEach((element, index) => {
-          if (element?.attributes?.content_name == "HeadingTag") {
-            setHeadingTag(element?.attributes?.content_value.toUpperCase());
-          } else if (element?.attributes?.content_name == "Title") {
-            setTitle(element?.attributes?.content_value);
-          } else if (element?.attributes?.content_name == "MetaDescription") {
-            setMetaDescription(element?.attributes?.content_value);
-          } else if (element?.attributes?.content_name == "Long_Text") {
-            //modifiedString = element?.attributes?.content_value;
-            setLongText(element?.attributes?.content_value);
-          } else if (element?.attributes?.content_name == "Right_Header") {
-            setRightHeader(element?.attributes?.content_value);
-          } else if (element?.attributes?.content_name == "Right_Corner") {
-            setRightCorner(element?.attributes?.content_value);
+    specialoffersService
+      .getOffersCustomePage()
+      .then((x) => {
+        setCareerData(x.data[0]);
+        const data = x.data[0]?.attributes?.custom_page_contents?.data;
+        let modifiedString = "";
+        //console.log("consolelog", data);
+        if (data) {
+          data.forEach((element, index) => {
+            if (element?.attributes?.content_name == "HeadingTag") {
+              setHeadingTag(element?.attributes?.content_value.toUpperCase());
+            } else if (element?.attributes?.content_name == "Title") {
+              setTitle(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == "MetaDescription") {
+              setMetaDescription(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == "Long_Text") {
+              modifiedString = element?.attributes?.content_value;
+              //setLongText(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == "Right_Header") {
+              setRightHeader(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == "Right_Corner") {
+              setRightCorner(element?.attributes?.content_value);
+            }
+          });
+        }
+        //console.log(modifiedString);
+        const regex = /{[a-zA-Z0-9-]+}/g;
+        const matches = [...new Set(modifiedString.match(regex))];
+
+        let storedDataString = "";
+        let storedData = "";
+        if (region == "uk") {
+          storedDataString = localStorage.getItem("websitecontent_uk");
+          storedData = JSON.parse(storedDataString);
+        } else if (region == "us") {
+          storedDataString = localStorage.getItem("websitecontent_us");
+          storedData = JSON.parse(storedDataString);
+        } else if (region == "asia") {
+          storedDataString = localStorage.getItem("websitecontent_asia");
+          storedData = JSON.parse(storedDataString);
+        } else if (region == "in") {
+          storedDataString = localStorage.getItem("websitecontent_india");
+          storedData = JSON.parse(storedDataString);
+        }
+        debugger;
+        console.log(storedData);
+        console.log(modifiedString);
+        if (storedData !== null) {
+          // You can access it using localStorage.getItem('yourKey')
+          if (matches) {
+            let replacement = "";
+            try {
+              matches.forEach((match, index, matches) => {
+                const matchString = match.replace(/{|}/g, "");
+                if (!storedData[matchString]) {
+                  websiteContentCheck(matches, region, modifiedString);
+                  throw new Error("Loop break");
+                } else {
+                  replacement = storedData[matchString];
+                }
+                const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+                if (checkStr && replacement) {
+                  modifiedString = modifiedString.replace(
+                    checkStr,
+                    replacement
+                  );
+                }
+              });
+              // Set the modified string in state
+              console.log(modifiedString);
+              setLongText(modifiedString);
+
+              setIsLoading(false);
+            } catch (error) {
+              if (error.message === "Loop break") {
+                // Handle the loop break here
+                // console.log("Loop has been stopped.");
+              } else if (error.message === "Region not found") {
+                // Handle the loop break here
+                // console.log("Loop has been stopped.");
+                setLongText(modifiedString);
+              }
+            }
           }
-        });
-      }
-      //console.log(modifiedString);
-      //   const regex = /{[a-zA-Z0-9-]+}/g;
-      //   const matches = [...new Set(modifiedString.match(regex))];
+        }
+      })
+      .catch((error) => {
+        setIsLoading(false);
+      });
 
-      //   let storedDataString = "";
-      //   let storedData = "";
-      //   if (region == "uk") {
-      //     storedDataString = localStorage.getItem("websitecontent_uk");
-      //     storedData = JSON.parse(storedDataString);
-      //   } else if (region == "us") {
-      //     storedDataString = localStorage.getItem("websitecontent_us");
-      //     storedData = JSON.parse(storedDataString);
-      //   } else if (region == "asia") {
-      //     storedDataString = localStorage.getItem("websitecontent_asia");
-      //     storedData = JSON.parse(storedDataString);
-      //   } else if (region == "in") {
-      //     storedDataString = localStorage.getItem("websitecontent_india");
-      //     storedData = JSON.parse(storedDataString);
-      //   }
-      //   console.log(storedData);
-      //   console.log(modifiedString);
-      //   if (storedData !== null) {
-      //     // You can access it using localStorage.getItem('yourKey')
-      //     if (matches) {
-      //       let replacement = "";
-      //       try {
-      //         matches.forEach((match, index, matches) => {
-      //           const matchString = match.replace(/{|}/g, "");
-      //           if (!storedData[matchString]) {
-      //             websiteContentCheck(matches, region, modifiedString);
-      //             throw new Error("Loop break");
-      //           } else {
-      //             replacement = storedData[matchString];
-      //           }
-      //           const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
-      //           if (checkStr && replacement) {
-      //             modifiedString = modifiedString.replace(
-      //               checkStr,
-      //               replacement
-      //             );
-      //           }
-      //         });
-      //         // Set the modified string in state
-      //         console.log(modifiedString);
-      //         setLongText(modifiedString);
-
-      //         setIsLoading(false);
-      //       } catch (error) {
-      //         if (error.message === "Loop break") {
-      //           // Handle the loop break here
-      //           // console.log("Loop has been stopped.");
-      //         } else if (error.message === "Region not found") {
-      //           // Handle the loop break here
-      //           // console.log("Loop has been stopped.");
-      //           setLongText(modifiedString);
-      //         }
-      //       }
-      //     }
-      //   }
-      // })
-      // .catch((error) => {
-      //   setIsLoading(false);
-      // });
-    });
     const carousel = document.querySelector("#carouselExampleInterval");
     if (carousel) {
       new bootstrap.Carousel(carousel);
@@ -466,7 +469,7 @@ function Index() {
                               <button className="btn card_slider_btn justify-content-end">
                                 <span
                                   className="view_itnry_link"
-                                //onClick={handleRedirect}
+                                  //onClick={handleRedirect}
                                 >
                                   View this hotel
                                   <em className="fa-solid fa-chevron-right"></em>
