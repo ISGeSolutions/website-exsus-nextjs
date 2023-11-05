@@ -32,6 +32,7 @@ function Index() {
         }
     }
 
+
     const websiteContentCheck = (matches, region, modifiedString) => {
         whyusService.getDictionaryDetails(matches, region).then((responseObj) => {
             if (responseObj) {

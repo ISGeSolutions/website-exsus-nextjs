@@ -520,12 +520,12 @@ function Layout({ children }) {
             <div className="prvcy_polcy_list">
               <ul>
                 <li>
-                  <NavLink href="/privacy-policy">
+                  <NavLink href={region + "/privacy-policy"}>
                     Privacy policy & cookies
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink href="/website-terms-of-use">
+                  <NavLink href={region + "/terms-and-conditions"}>
                     Website terms of use
                   </NavLink>
                 </li>

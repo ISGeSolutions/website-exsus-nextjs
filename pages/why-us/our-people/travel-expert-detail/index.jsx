@@ -18,7 +18,7 @@ function Index() {
   const [executiveData, setExecutiveData] = useState({});
   const [testimonials, setTestimonials] = useState([]);
   const { prefixOfImage } = useState("https://www.exsus.com/");
-  const expertName = router.query?.executiveName.replace(/-/g, " ");
+  const expertName = router.query?.executiveName?.replace(/-/g, " ");
   const [isLoading, setIsLoading] = useState(true);
   const [friendlyUrl, setFriendlyUrl] = useState('');
 
@@ -97,7 +97,7 @@ function Index() {
           response.attributes.executive_image_path = newStr;
         }
         setExecutiveData(response);
-        setTestimonials(response.attributes.travel_reviews.data);
+        setTestimonials(response?.attributes?.travel_reviews.data);
         setIsLoading(false);
       })
       .catch((error) => {

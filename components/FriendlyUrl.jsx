@@ -4,6 +4,7 @@ import { Button } from "@react-email/button";
 import React, { useState, useEffect } from "react";
 import { NavLink } from "components";
 
+
 export function FriendlyUrl(props) {
 
   const friendlyUrlArr = props?.data?.split("/");
@@ -12,7 +13,10 @@ export function FriendlyUrl(props) {
   let regionWiseUrl = "/uk";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      regionWiseUrl = "/" + window.site_region;
+      if (window.site_region !== 'uk') {
+        region = window.site_region;
+        regionWiseUrl = "/" + window.site_region;
+      };
       // setMyVariable(window.site_region);
     }
   }

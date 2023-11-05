@@ -18,5 +18,6 @@ export * from './privacy_policy.service';
 export * from './referral_scheme.service';
 export * from './gift_list.service';
 export * from './thankyou.service';
+export * from './terms_and_condition.service'
 
 

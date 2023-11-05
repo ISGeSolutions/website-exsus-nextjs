@@ -294,7 +294,7 @@ const nextConfig = {
       { source: "/make-an-enquiry", destination: "/make-an-enquiry" },
       { source: "/us/make-an-enquiry", destination: "/make-an-enquiry" },
       { source: "/asia/make-an-enquiry", destination: "/make-an-enquiry" },
-      { source: "/in/make-an-enquiry", destination: "/contact-us" },
+      { source: "/in/make-an-enquiry", destination: "/make-an-enquiry" },
 
       // client-reviews
       { source: "/why-us/client-reviews", destination: "/client-reviews" },
@@ -346,13 +346,13 @@ const nextConfig = {
 
 
       // where-to-go-detail
-      { source: "/where-to-go-detail", destination: "/where-to-go-detail" },
-      { source: "/us/where-to-go-detail", destination: "/where-to-go-detail" },
+      { source: "/where-to-go/:where-to-go-detail", destination: "/where-to-go/where-to-go-detail" },
+      { source: "/us/where-to-go/:where-to-go-detail", destination: "/where-to-go/where-to-go-detail" },
       {
-        source: "/asia/where-to-go-detail",
-        destination: "/where-to-go-detail",
+        source: "/asia/where-to-go/:where-to-go-detail",
+        destination: "/where-to-go/where-to-go-detail",
       },
-      { source: "/in/where-to-go-detail", destination: "/where-to-go-detail" },
+      { source: "/in/where-to-go/:where-to-go-detail", destination: "/where-to-go/where-to-go-detail" },
 
       // about-us
       { source: "/about-us", destination: "/about-us" },
@@ -389,6 +389,18 @@ const nextConfig = {
       { source: "/us/about-us/friend-referral-offer", destination: "/about-us/friend-referral-offer" },
       { source: "/asia/about-us/friend-referral-offer", destination: "/about-us/friend-referral-offer" },
       { source: "/in/about-us/friend-referral-offer", destination: "/about-us/friend-referral-offer" },
+
+      // privacy-policy
+      { source: "/privacy-policy", destination: "/privacy-policy" },
+      { source: "/us/privacy-policy", destination: "/privacy-policy" },
+      { source: "/asia/privacy-policy", destination: "/privacy-policy" },
+      { source: "/in/privacy-policy", destination: "/privacy-policy" },
+
+      // terms-and-condition
+      { source: "/terms-and-conditions", destination: "/terms-and-conditions" },
+      { source: "/us/terms-and-conditions", destination: "/terms-and-conditions" },
+      { source: "/asia/terms-and-conditions", destination: "/terms-and-conditions" },
+      { source: "/in/terms-and-conditions", destination: "/terms-and-conditions" },
 
       // Define a custom error page for 404 errors
       {
