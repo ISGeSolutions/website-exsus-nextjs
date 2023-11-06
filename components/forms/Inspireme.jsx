@@ -76,19 +76,19 @@ function Inspireme(props) {
 
     if (data?.destination) {
       destination = data?.destination;
-    } else {
+    } else if(queryParameters?.where) {
       destination = queryParameters?.where;
     }
 
     if (data?.reason) {
       reason = data?.reason;
-    } else {
+    } else if(queryParameters?.what) {
       reason = queryParameters?.what;
     }
 
     if (data?.month) {
       month = data?.month;
-    } else {
+    } else if(queryParameters?.when) {
       month = queryParameters?.when;
     }
 
