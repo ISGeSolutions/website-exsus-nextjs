@@ -395,9 +395,6 @@ function Index() {
         </div>
       ) : (
         <div>
-
-
-
           <section className="banner_blk_row">
             <div
               id="carouselExampleInterval"

@@ -299,6 +299,7 @@ function Nav() {
     document.body.appendChild(script);
 
     destinationService.getDestinationLandingList().then((x) => {
+      console.log(x.data);
       setDestinationLandingList(x.data);
     });
 

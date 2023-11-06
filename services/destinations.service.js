@@ -82,7 +82,7 @@ function getDestinationLandingPage() {
 }
 
 function getDestinationLandingList() {
-    const destinationLandingListUrl = `${publicRuntimeConfig.apiUrl}/api/destinations?filters[main_page_ind][$eq]=true&fields[0]=destination_code&fields[1]=destination_name&populate[destination_images][fields][2]=image_path&populate[destination_images][fields][3]=image_type&populate[countries][fields][4]=country_code&populate[countries][fields][5]=country_name`;
+    const destinationLandingListUrl = `${publicRuntimeConfig.apiUrl}/api/destinations?filters[main_page_ind][$eq]=true&fields[0]=destination_code&fields[1]=destination_name&populate[destination_images][fields][2]=image_path&populate[destination_images][fields][3]=image_type&populate[countries][fields][4]=country_code&populate[countries][fields][5]=country_name&populate[countries][fields][6]=serial_number&populate[countries][sort][0]=serial_number&populate[countries][filters][serial_number][$gt]=0`;
     return fetchWrapper.get(destinationLandingListUrl);
 }
 
@@ -94,7 +94,7 @@ function getDestinationInspireMe() {
 function getDestinationDetails(name) {
     // console.log('baseUrl_dropdown', baseUrl_dropdown);
     const destinationDetailsUrl =
-        `${publicRuntimeConfig.apiUrl}/api/destinations?filters[destination_name][$eq]=${name.replace(/&/g, "%26")}&populate=destination_images,countries.country_images`;
+        `${publicRuntimeConfig.apiUrl}/api/destinations?filters[destination_name][$eq]=${name.replace(/&/g, "%26")}&populate[countries][filters][popular_ind][$eq]=true&populate[countries][sort][0]=popular_serial_no&populate[countries][fields][3]=country_name&populate[countries][populate][4]=country_images&populate[countries][populate][country_images][filters][image_type][$eq]=thumbnail`;
     return fetchWrapper.get(destinationDetailsUrl);
 }
 

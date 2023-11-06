@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import { useRef } from "react";
 import { Link, Spinner, Signup, FriendlyUrl } from "components";
 import { Layout } from "components/users";
 import {
@@ -26,6 +26,7 @@ function Index() {
   const [metaDescription, setMetaDescription] = useState(null);
   const [longText, setLongText] = useState(null);
   const [careerData, setCareerData] = useState(null);
+  const [content, setContent] = useState('Initial content');
 
   const handleRedirect = () => {
     router.push(regionWiseUrl + `/hotel-detail`);
@@ -89,13 +90,8 @@ function Index() {
 
   useEffect(() => {
     // userService.getAll().then(x => setUsers(x));
-    const tooltipTriggerList = document.querySelectorAll(
-      '[data-bs-toggle="tooltip"]'
-    );
-    const tooltipList = [...tooltipTriggerList].map(
-      (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
-    );
-
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
     specialoffersService
       .getAllOffers()
       .then((x) => {
@@ -203,6 +199,11 @@ function Index() {
     }
 
     window.addEventListener("resize", equalHeight(true));
+    // return () => {
+    //   // Cleanup code (if needed) when the component unmounts
+    //   tooltipList.forEach(tooltip => tooltip.dispose());
+    // };
+
   }, []);
 
   return (
@@ -469,7 +470,7 @@ function Index() {
                               <button className="btn card_slider_btn justify-content-end">
                                 <span
                                   className="view_itnry_link"
-                                  //onClick={handleRedirect}
+                                //onClick={handleRedirect}
                                 >
                                   View this hotel
                                   <em className="fa-solid fa-chevron-right"></em>
