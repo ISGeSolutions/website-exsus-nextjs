@@ -57,6 +57,7 @@ function Inspireme(props) {
   };
 
   function onSubmit(data) {
+    debugger;
     // const { pathname, query } = router;
 
     // // Clone the existing query object and remove the specific query parameter
@@ -69,16 +70,38 @@ function Inspireme(props) {
     //   query: newQuery,
     // });
 
+    let destination = '';
+    let reason = '';
+    let month = '';
+
+    if (data?.destination) {
+      destination = data?.destination;
+    } else {
+      destination = queryParameters?.where;
+    }
+
+    if (data?.reason) {
+      reason = data?.reason;
+    } else {
+      reason = queryParameters?.what;
+    }
+
+    if (data?.month) {
+      month = data?.month;
+    } else {
+      month = queryParameters?.when;
+    }
+
     if (!data.destination && !data.reason && !data.month) {
       showAlert("Please select atleast one option", "error");
     } else {
       router.push(
         `advance-search?where=` +
-        data?.destination +
+        destination +
         `&what=` +
-        data?.reason +
+        reason +
         `&when=` +
-        data?.month
+        month
       );
     }
   }
