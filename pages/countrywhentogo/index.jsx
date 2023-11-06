@@ -8,21 +8,31 @@ function CountryWhentogo(country) {
 
   const router = useRouter();
   const countrycode = router.query?.country
-    ?.replace(/-and-/g, " & ").replace(/-/g, " ")
+    ?.replace(/-and-/g, " & ")
+    .replace(/-/g, " ")
     .toLowerCase();
   const [isLoading, setIsLoading] = useState(true);
   const destinationcode = router.query?.continent
-    ?.replace(/-and-/g, " & ").replace(/-/g, " ")
+    ?.replace(/-and-/g, " & ")
+    .replace(/-/g, " ")
     .toLowerCase();
 
-  let regionWiseUrl = "/uk";
+  // let regionWiseUrl = "/uk";
+  // let region = "uk";
+  // if (typeof window !== "undefined") {
+  //   if (window && window.site_region) {
+  //     regionWiseUrl = "/" + window.site_region;
+  //     region = window.site_region;
+
+  //     // setMyVariable(window.site_region);
+  //   }
+  // }
+
   let region = "uk";
+  let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      regionWiseUrl = "/" + window.site_region;
-      region = window.site_region;
-
-      // setMyVariable(window.site_region);
+      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
     }
   }
 

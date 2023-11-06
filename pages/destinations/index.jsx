@@ -30,11 +30,19 @@ function Index() {
   const [testimonials, setTestimonials] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  let regionWiseUrl = "/uk";
+  // let regionWiseUrl = "/uk";
+  // if (typeof window !== "undefined") {
+  //   if (window && window.site_region) {
+  //     regionWiseUrl = "/" + window.site_region;
+  //     // setMyVariable(window.site_region);
+  //   }
+  // }
+
+  let region = "uk";
+  let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      regionWiseUrl = "/" + window.site_region;
-      // setMyVariable(window.site_region);
+      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
     }
   }
 
@@ -76,7 +84,10 @@ function Index() {
   };
 
   const dynamicLink = (itemName, id) => {
-    const modifieditem = itemName.replace(/ /g, '-').replace(/&/g, 'and').toLowerCase();
+    const modifieditem = itemName
+      .replace(/ /g, "-")
+      .replace(/&/g, "and")
+      .toLowerCase();
     if (itemName) {
       return regionWiseUrl + `/destinations/${modifieditem}`;
     } else if (itemId && itemId == "AS") {
@@ -146,8 +157,15 @@ function Index() {
             newBackgroundImages.push(element.attributes.image_path);
           }
         });
-        const whenToGoImage = destinations?.attributes?.custom_page_contents?.data?.filter(res => res.attributes?.content_name == "WhenToGoWhereImagePath")[0]?.attributes?.content_value;
-        setBackgroundImgWhentogo(whenToGoImage?.includes("https") ? whenToGoImage : "https://online.exsus.com/" + whenToGoImage);
+        const whenToGoImage =
+          destinations?.attributes?.custom_page_contents?.data?.filter(
+            (res) => res.attributes?.content_name == "WhenToGoWhereImagePath"
+          )[0]?.attributes?.content_value;
+        setBackgroundImgWhentogo(
+          whenToGoImage?.includes("https")
+            ? whenToGoImage
+            : "https://online.exsus.com/" + whenToGoImage
+        );
         setBackgroundImage(newBackgroundImages);
         setIsLoading(false);
       })
@@ -170,7 +188,11 @@ function Index() {
     <>
       <Head>
         <title>
-          {destinations?.attributes?.custom_page_contents?.data?.filter(res => res.attributes?.content_name == "Title")[0]?.attributes?.content_value}
+          {
+            destinations?.attributes?.custom_page_contents?.data?.filter(
+              (res) => res.attributes?.content_name == "Title"
+            )[0]?.attributes?.content_value
+          }
         </title>
         <script
           type="text/javascript"
@@ -239,8 +261,22 @@ function Index() {
               </div>
               <div className="row">
                 <div className="destinations_cntnt_blk">
-                  <h2>{destinations?.attributes?.custom_page_contents?.data?.filter(res => res.attributes?.content_name == "LuxuryHolidaysHeader")[0].attributes?.content_value}</h2>
-                  <p>{destinations?.attributes?.custom_page_contents?.data?.filter(res => res.attributes?.content_name == "LuxuryHolidaysText")[0].attributes?.content_value}</p>
+                  <h2>
+                    {
+                      destinations?.attributes?.custom_page_contents?.data?.filter(
+                        (res) =>
+                          res.attributes?.content_name == "LuxuryHolidaysHeader"
+                      )[0].attributes?.content_value
+                    }
+                  </h2>
+                  <p>
+                    {
+                      destinations?.attributes?.custom_page_contents?.data?.filter(
+                        (res) =>
+                          res.attributes?.content_name == "LuxuryHolidaysText"
+                      )[0].attributes?.content_value
+                    }
+                  </p>
                 </div>
               </div>
             </div>
@@ -310,13 +346,25 @@ function Index() {
           <section
             className="destination_text_overlay_row"
             style={{
-              backgroundImage: `url(${backgroundImgWhentogo})`
+              backgroundImage: `url(${backgroundImgWhentogo})`,
             }}
           >
             <div className="container">
               <div className="destination_text_overlay_inr">
-                <h4>{destinations?.attributes?.custom_page_contents?.data?.filter(res => res.attributes?.content_name == "BestTimeHeader")[0]?.attributes?.content_value}</h4>
-                <h5>{destinations?.attributes?.custom_page_contents?.data?.filter(res => res.attributes?.content_name == "BestTimeText")[0]?.attributes?.content_value}</h5>
+                <h4>
+                  {
+                    destinations?.attributes?.custom_page_contents?.data?.filter(
+                      (res) => res.attributes?.content_name == "BestTimeHeader"
+                    )[0]?.attributes?.content_value
+                  }
+                </h4>
+                <h5>
+                  {
+                    destinations?.attributes?.custom_page_contents?.data?.filter(
+                      (res) => res.attributes?.content_name == "BestTimeText"
+                    )[0]?.attributes?.content_value
+                  }
+                </h5>
                 {/* style={{ backgroundImage: `url(${backgroundImage})` }} */}
                 <button
                   className="btn prmry_btn make_enqury_btn"

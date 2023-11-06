@@ -30,10 +30,12 @@ function CountryPlaceToStay(country) {
   const [metaData, setMetaData] = useState([]);
   const [alert, setAlert] = useState(null);
   const destinationcode = router.query?.continent
-    ?.replace(/-and-/g, " & ").replace(/-/g, " ")
+    ?.replace(/-and-/g, " & ")
+    .replace(/-/g, " ")
     .toLowerCase();
   const countrycode = router.query?.country
-    ?.replace(/-and-/g, " & ").replace(/-/g, " ")
+    ?.replace(/-and-/g, " & ")
+    .replace(/-/g, " ")
     .toLowerCase();
 
   const [dcode, setdcode] = useState();
@@ -284,11 +286,19 @@ function CountryPlaceToStay(country) {
     }
   };
 
-  let regionWiseUrl = "/uk";
+  // let regionWiseUrl = "/uk";
+  // if (typeof window !== "undefined") {
+  //   if (window && window.site_region) {
+  //     regionWiseUrl = "/" + window.site_region;
+  //     // setMyVariable(window.site_region);
+  //   }
+  // }
+
+  let region = "uk";
+  let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      regionWiseUrl = "/" + window.site_region;
-      // setMyVariable(window.site_region);
+      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
     }
   }
 

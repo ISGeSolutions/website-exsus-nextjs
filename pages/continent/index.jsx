@@ -21,7 +21,8 @@ function Index() {
   const [activeTab, setActiveTab] = useState("overview"); // State to track the active tab
   const router = useRouter();
   const destinationcode = router?.query?.continent
-    ?.replace(/-and-/g, " & ").replace(/-/g, " ")
+    ?.replace(/-and-/g, " & ")
+    .replace(/-/g, " ")
     .toLowerCase();
   const [friendlyUrl, setFriendlyUrl] = useState("");
   const [destinationName, setdestinationName] = useState("");
@@ -39,11 +40,10 @@ function Index() {
   const divRef = useRef();
   const { t } = useTranslation();
 
-  let regionWiseUrl = "/uk";
+  let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      regionWiseUrl = "/" + window.site_region;
-      // setMyVariable(window.site_region);
+      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
     }
   }
 

@@ -20,7 +20,7 @@ function Index() {
   const { prefixOfImage } = useState("https://www.exsus.com/");
   const expertName = router.query?.executiveName?.replace(/-/g, " ");
   const [isLoading, setIsLoading] = useState(true);
-  const [friendlyUrl, setFriendlyUrl] = useState('');
+  const [friendlyUrl, setFriendlyUrl] = useState("");
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -83,7 +83,7 @@ function Index() {
 
     // const carousel = document.querySelector('#carouselExampleInterval');
     // new bootstrap.Carousel(carousel);
-    setFriendlyUrl(`home/why us/our people/${expertName}`)
+    setFriendlyUrl(`home/why us/our people/${expertName}`);
     whyusService
       .getExecutivesById(expertName)
       .then((x) => {
@@ -105,8 +105,6 @@ function Index() {
         // console.error(error);
         setIsLoading(false);
       });
-
-
 
     const carousel1 = document.querySelector("#Testimonials");
     if (carousel1) {
@@ -252,7 +250,7 @@ function Index() {
                                   )
                                     ? res1?.attributes?.image_path
                                     : "https://www.exsus.com/" +
-                                    res1?.attributes?.image_path
+                                      res1?.attributes?.image_path
                                 }
                                 className=""
                                 alt="our_exprts_slider01"
@@ -484,7 +482,7 @@ function Index() {
                           )
                             ? res1?.attributes?.image_path
                             : "https://www.exsus.com/" +
-                            res1?.attributes?.image_path
+                              res1?.attributes?.image_path
                         }
                         alt="expert_favourite_pic01"
                         className="img-fluid"

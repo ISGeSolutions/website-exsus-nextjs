@@ -235,8 +235,7 @@ const nextConfig = {
         destination: "/holidaytypeideas",
       },
       {
-        source:
-          "/asia/holiday-types/:holidaytypeitineraries/:holidaytypeideas",
+        source: "/asia/holiday-types/:holidaytypeitineraries/:holidaytypeideas",
         destination: "/holidaytypeideas",
       },
       {
@@ -337,13 +336,23 @@ const nextConfig = {
       { source: "/asia/why-us/our-people", destination: "/why-us/our-people" },
       { source: "/in/why-us/our-people", destination: "/why-us/our-people" },
 
-
       // our people detail
-      { source: "/why-us/our-people/:executiveName", destination: "/why-us/our-people/travel-expert-detail" },
-      { source: "/us/why-us/our-people/:executiveName", destination: "/why-us/our-people/travel-expert-detail" },
-      { source: "/asia/why-us/our-people/:executiveName", destination: "/why-us/our-people/travel-expert-detail" },
-      { source: "/in/why-us/our-people/:executiveName", destination: "/why-us/our-people/travel-expert-detail" },
-
+      {
+        source: "/why-us/our-people/:executiveName",
+        destination: "/why-us/our-people/travel-expert-detail",
+      },
+      {
+        source: "/us/why-us/our-people/:executiveName",
+        destination: "/why-us/our-people/travel-expert-detail",
+      },
+      {
+        source: "/asia/why-us/our-people/:executiveName",
+        destination: "/why-us/our-people/travel-expert-detail",
+      },
+      {
+        source: "/in/why-us/our-people/:executiveName",
+        destination: "/why-us/our-people/travel-expert-detail",
+      },
 
       // where-to-go-detail
       { source: "/where-to-go/:where-to-go-detail", destination: "/where-to-go/where-to-go-detail" },
@@ -368,27 +377,63 @@ const nextConfig = {
 
       // careers
       { source: "/about-us/careers", destination: "/careers" },
-      { source: "/about-us/careers", destination: "/careers" },
-      { source: "/about-us/careers", destination: "/careers" },
-      { source: "/about-us/careers", destination: "/careers" },
+      { source: "/us/about-us/careers", destination: "/careers" },
+      { source: "/asia/about-us/careers", destination: "/careers" },
+      { source: "/in/about-us/careers", destination: "/careers" },
 
       // creating-your-trip
-      { source: "/about-us/creating-your-trip", destination: "/creating-your-trip" },
-      { source: "/about-us/creating-your-trip", destination: "/creating-your-trip" },
-      { source: "/about-us/creating-your-trip", destination: "/creating-your-trip" },
-      { source: "/about-us/creating-your-trip", destination: "/creating-your-trip" },
+      {
+        source: "/about-us/creating-your-trip",
+        destination: "/creating-your-trip",
+      },
+      {
+        source: "/us/about-us/creating-your-trip",
+        destination: "/creating-your-trip",
+      },
+      {
+        source: "/asia/about-us/creating-your-trip",
+        destination: "/creating-your-trip",
+      },
+      {
+        source: "/in/about-us/creating-your-trip",
+        destination: "/creating-your-trip",
+      },
 
       // gift-list
-      { source: "/about-us/about-gift-list", destination: "/about-us/about-gift-list" },
-      { source: "/about-us/about-gift-list", destination: "/about-us/about-gift-list" },
-      { source: "/about-us/about-gift-list", destination: "/about-us/about-gift-list" },
-      { source: "/about-us/about-gift-list", destination: "/about-us/about-gift-list" },
+      {
+        source: "/about-us/about-gift-list",
+        destination: "/about-us/about-gift-list",
+      },
+      {
+        source: "/us/about-us/about-gift-list",
+        destination: "/about-us/about-gift-list",
+      },
+      {
+        source: "/asia/about-us/about-gift-list",
+        destination: "/about-us/about-gift-list",
+      },
+      {
+        source: "/in/about-us/about-gift-list",
+        destination: "/about-us/about-gift-list",
+      },
 
       // referral
-      { source: "/about-us/friend-referral-offer", destination: "/about-us/friend-referral-offer" },
-      { source: "/us/about-us/friend-referral-offer", destination: "/about-us/friend-referral-offer" },
-      { source: "/asia/about-us/friend-referral-offer", destination: "/about-us/friend-referral-offer" },
-      { source: "/in/about-us/friend-referral-offer", destination: "/about-us/friend-referral-offer" },
+      {
+        source: "/about-us/friend-referral-offer",
+        destination: "/about-us/friend-referral-offer",
+      },
+      {
+        source: "/us/about-us/friend-referral-offer",
+        destination: "/about-us/friend-referral-offer",
+      },
+      {
+        source: "/asia/about-us/friend-referral-offer",
+        destination: "/about-us/friend-referral-offer",
+      },
+      {
+        source: "/in/about-us/friend-referral-offer",
+        destination: "/about-us/friend-referral-offer",
+      },
 
       // privacy-policy
       { source: "/privacy-policy", destination: "/privacy-policy" },
@@ -404,8 +449,8 @@ const nextConfig = {
 
       // Define a custom error page for 404 errors
       {
-        source: '/:path*',
-        destination: '/404',
+        source: "/:path*",
+        destination: "/404",
       },
 
       // Add more custom routes as needed
@@ -432,15 +477,15 @@ const nextConfig = {
     apiUrl:
       process.env.NODE_ENV === "development"
         ? // ? 'https://e922710a-cb11-401b-ae5b-ef73740e1501.mock.pstmn.io' // development api
-        // : 'https://e922710a-cb11-401b-ae5b-ef73740e1501.mock.pstmn.io' // production api
-        // ? 'http://localhost:4000' // development api
-        // : 'http://localhost:4000' // production api
-        // ? 'https://mock.apidog.com/m1/379394-0-default' // development api
-        // : 'https://mock.apidog.com/m1/379394-0-default' // production api
-        //     ? 'http://13.233.122.205:1337' // development api
-        //     : 'http://13.233.122.205:1337' // production api
+          // : 'https://e922710a-cb11-401b-ae5b-ef73740e1501.mock.pstmn.io' // production api
+          // ? 'http://localhost:4000' // development api
+          // : 'http://localhost:4000' // production api
+          // ? 'https://mock.apidog.com/m1/379394-0-default' // development api
+          // : 'https://mock.apidog.com/m1/379394-0-default' // production api
+          //     ? 'http://13.233.122.205:1337' // development api
+          //     : 'http://13.233.122.205:1337' // production api
 
-        "https://cms-api.excelleresolutions.com" // development api
+          "https://cms-api.excelleresolutions.com" // development api
         : "https://cms-api.excelleresolutions.com", // production api
     apiUrl1:
       process.env.NODE_ENV === "development"

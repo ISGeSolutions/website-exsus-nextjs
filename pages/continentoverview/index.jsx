@@ -14,7 +14,8 @@ function ContinentOverview({ sendDataToParent }) {
   const [itineraries, setItineraries] = useState(null);
   const [valueWithBr, setnewValueWithBr] = useState("");
   const destinationcode = router.query.continent
-    .replace(/-and-/g, " & ").replace(/-/g, " ")
+    .replace(/-and-/g, " & ")
+    .replace(/-/g, " ")
     .toLowerCase();
   const itemsPerPage = 9; // Number of items to load per page
   const [allCountries, setAllCountries] = useState([]);
@@ -32,16 +33,23 @@ function ContinentOverview({ sendDataToParent }) {
     sendDataToParent(e);
   };
 
+  // let region = "uk";
+  // let regionWiseUrl = "/uk";
+  // if (typeof window !== "undefined") {
+  //   if (window && window.site_region) {
+  //     regionWiseUrl = "/" + window.site_region;
+  //     region = window.site_region;
+  //     // setMyVariable(window.site_region);
+  //   }
+  // }
+
   let region = "uk";
-  let regionWiseUrl = "/uk";
+  let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      regionWiseUrl = "/" + window.site_region;
-      region = window.site_region;
-      // setMyVariable(window.site_region);
+      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
     }
   }
-
   const generateDynamicLinkCountries = (countryName) => {
     const modifieditem = countryName
       .replace(/ /g, "-")
@@ -55,7 +63,7 @@ function ContinentOverview({ sendDataToParent }) {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`
+        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`
     );
   };
 
@@ -352,7 +360,7 @@ function ContinentOverview({ sendDataToParent }) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}

@@ -59,7 +59,7 @@ export const destinationService = {
     getItinerariesInAdvanceSearch,
     getDestinationInspireMe,
     getRegionById,
-    getDictionaryDetails
+    getDictionaryDetails,
 };
 
 function getAllDropdown() {
@@ -104,35 +104,60 @@ function getAllItineraries(page) {
 }
 
 function getAllItinerariesHomePage(region) {
-    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?filters[home_page_ind][$eq]=true&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region.replace(/&/g, "%26")}`;
+    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl
+        }/api/itineraries?filters[home_page_ind][$eq]=true&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region.replace(
+            /&/g,
+            "%26"
+        )}`;
     return fetchWrapper.get(itinerariesDetailsUrl);
 }
 
 function getFavIti() {
-    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region.replace(/&/g, "%26")}&pagination[page]=1&pagination[pageSize]=6`;
+    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl
+        }/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region.replace(
+            /&/g,
+            "%26"
+        )}&pagination[page]=1&pagination[pageSize]=6`;
     return fetchWrapper.get(itinerariesDetailsUrl);
 }
 
 function getItineraryDetails(name) {
-    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?populate[0]=itinerary_details&filters[itin_name]=${name.replace(/&/g, "%26")}`;
+    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl
+        }/api/itineraries?populate[0]=itinerary_details&filters[itin_name]=${name?.replace(
+            /&/g,
+            "%26"
+        )}`;
     return fetchWrapper.get(itinerariesDetailsUrl);
 }
 
 function getItinerariesByDestination(dcode, page, item) {
     if (item == "price") {
-        const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?[filters][destination][destination_code][$eq]=${dcode.replace(/&/g, "%26")}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12`;
+        const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl
+            }/api/itineraries?[filters][destination][destination_code][$eq]=${dcode.replace(
+                /&/g,
+                "%26"
+            )}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12`;
         return fetchWrapper.get(destinationDetailsUrl);
-
     } else if (item == "recommended") {
-        const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?[filters][destination][destination_code][$eq]=${dcode.replace(/&/g, "%26")}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12`;
+        const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl
+            }/api/itineraries?[filters][destination][destination_code][$eq]=${dcode.replace(
+                /&/g,
+                "%26"
+            )}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12`;
         return fetchWrapper.get(destinationDetailsUrl);
-
     } else if (item == "duration") {
-        const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?[filters][destination][destination_code][$eq]=${dcode.replace(/&/g, "%26")}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=no_of_nites_notes:asc`;
+        const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl
+            }/api/itineraries?[filters][destination][destination_code][$eq]=${dcode.replace(
+                /&/g,
+                "%26"
+            )}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=no_of_nites_notes:asc`;
         return fetchWrapper.get(destinationDetailsUrl);
-
     } else if (item == "alphabetical") {
-        const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?[filters][destination][destination_code][$eq]=${dcode.replace(/&/g, "%26")}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=itin_name:asc`;
+        const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl
+            }/api/itineraries?[filters][destination][destination_code][$eq]=${dcode.replace(
+                /&/g,
+                "%26"
+            )}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=itin_name:asc`;
         return fetchWrapper.get(destinationDetailsUrl);
     }
 
@@ -147,16 +172,23 @@ function getAllHotels(page, item) {
         const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/hotels?populate[0]=hotel_images&populate[1]=hotel_travel_times&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=hotel_name:asc`;
         return fetchWrapper.get(itinerariesDetailsUrl);
     }
-
 }
 
 function getCustomPagesData(pageName) {
-    const customPage = `${publicRuntimeConfig.apiUrl}/api/custom-pages?filters[page_code][$eq]=${pageName.replace(/&/g, "%26")}&[populate][0]=custom_page_images&populate[1]=custom_page_contents`;
+    const customPage = `${publicRuntimeConfig.apiUrl
+        }/api/custom-pages?filters[page_code][$eq]=${pageName.replace(
+            /&/g,
+            "%26"
+        )}&[populate][0]=custom_page_images&populate[1]=custom_page_contents`;
     return fetchWrapper.get(customPage);
 }
 
 function getRegions(countryName) {
-    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/countries?filters[country_name][$eq]=${countryName.replace(/&/g, "%26")}&populate[0]=destination&populate[1]=regions`;
+    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl
+        }/api/countries?filters[country_name][$eq]=${countryName.replace(
+            /&/g,
+            "%26"
+        )}&populate[0]=destination&populate[1]=regions`;
     return fetchWrapper.get(itinerariesDetailsUrl);
 }
 
@@ -166,28 +198,42 @@ function getHotelById(id) {
 }
 
 function getItinerariesInAdvanceSearch(dcode, page) {
-    const destinationadvanceSearchUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?[filters][destination][destination_code][$eq]=${dcode.replace(/&/g, "%26")}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12`;
+    const destinationadvanceSearchUrl = `${publicRuntimeConfig.apiUrl
+        }/api/itineraries?[filters][destination][destination_code][$eq]=${dcode.replace(
+            /&/g,
+            "%26"
+        )}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12`;
     return fetchWrapper.get(destinationadvanceSearchUrl);
 }
 
 function getRegionById(id) {
-    const regionsURL = `${publicRuntimeConfig.apiUrl}/api/regions/${id.replace(/&/g, "%26")}?populate[0]=region_images&populate[1]=country`;
+    const regionsURL = `${publicRuntimeConfig.apiUrl}/api/regions/${id.replace(
+        /&/g,
+        "%26"
+    )}?populate[0]=region_images&populate[1]=country`;
     return fetchWrapper.get(regionsURL);
 }
 
 function getDictionaryDetails(matches, region) {
-
     // https://cms-api.excelleresolutions.com/api/website-country-contents?populate[0]=website_country&filters[content_word][$in][1]=holiday&filters[content_word][$in][2]=Holiday&filters[website_country][code][$eq]=US
     var tempUrl = `${publicRuntimeConfig.apiUrl}/api/website-country-contents?populate[0]=website_country`;
 
     matches.forEach((match, index, matches) => {
         // Use JavaScript string interpolation to replace the variable
-        const inc = (index + 1);
-        const matchStr = match.replace(/{|}/g, '');
+        const inc = index + 1;
+        const matchStr = match.replace(/{|}/g, "");
         if (index === matches.length - 1) {
-            tempUrl = tempUrl + "&filters[content_word][$in][" + inc + "]=" + matchStr + "&filters[website_country][code][$eq]=" + region;
+            tempUrl =
+                tempUrl +
+                "&filters[content_word][$in][" +
+                inc +
+                "]=" +
+                matchStr +
+                "&filters[website_country][code][$eq]=" +
+                region;
         } else {
-            tempUrl = tempUrl + "&filters[content_word][$in][" + inc + "]=" + matchStr;
+            tempUrl =
+                tempUrl + "&filters[content_word][$in][" + inc + "]=" + matchStr;
         }
     });
 

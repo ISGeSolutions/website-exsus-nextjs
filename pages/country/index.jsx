@@ -133,11 +133,18 @@ function Country() {
   const [hotel, setHotel] = useState(null);
   const [itineraries, setItineraries] = useState(null);
 
-  let regionWiseUrl = "/uk";
+  // let regionWiseUrl = "/uk";
+  // if (typeof window !== "undefined") {
+  //   if (window && window.site_region) {
+  //     regionWiseUrl = "/" + window.site_region;
+  //     // setMyVariable(window.site_region);
+  //   }
+  // }
+  let region = "uk";
+  let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      regionWiseUrl = "/" + window.site_region;
-      // setMyVariable(window.site_region);
+      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
     }
   }
 
