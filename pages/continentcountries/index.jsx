@@ -13,7 +13,8 @@ export default ContinentCountry;
 function ContinentCountry({ sendDataToParent }) {
   const router = useRouter();
   const destinationcode = router.query.continent
-    .replace(/-and-/g, " & ").replace(/-/g, " ")
+    .replace(/-and-/g, " & ")
+    .replace(/-/g, " ")
     .toLowerCase();
   const query = router.query;
   const [allCountries, setAllCountries] = useState([]);
@@ -21,15 +22,20 @@ function ContinentCountry({ sendDataToParent }) {
   const [isLoading, setIsLoading] = useState(true);
   const [activeItem, setActiveItem] = useState("recommended");
 
-  let regionWiseUrl = "/uk";
+  // let regionWiseUrl = "/uk";
+  // if (typeof window !== "undefined") {
+  //   if (window && window.site_region) {
+  //     regionWiseUrl = "/" + window.site_region;
+  //     // setMyVariable(window.site_region);
+  //   }
+  // }
+
+  let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      regionWiseUrl = "/" + window.site_region;
-      // setMyVariable(window.site_region);
+      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
     }
   }
-
-
   const handleClick = (e) => {
     sendDataToParent(e);
   };
@@ -180,7 +186,6 @@ function ContinentCountry({ sendDataToParent }) {
                           countries?.attributes.country_name
                         )}
                       >
-
                         <img
                           src={
                             countries?.attributes?.country_images?.data.filter(

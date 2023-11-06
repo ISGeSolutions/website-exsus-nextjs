@@ -26,6 +26,7 @@ function Index() {
   const [metaDescription, setMetaDescription] = useState(null);
   const [longText, setLongText] = useState(null);
   const [careerData, setCareerData] = useState(null);
+  const [subTitle, setSubTitle] = useState(null);
 
   const handleRedirect = () => {
     router.push(regionWiseUrl + `/hotel-detail`);
@@ -53,12 +54,20 @@ function Index() {
   };
 
   equalHeight(true);
+  //let region = "uk";
+  // let regionWiseUrl = "/uk";
+  // if (typeof window !== "undefined") {
+  //   if (window && window.site_region) {
+  //     regionWiseUrl = "/" + window.site_region;
+  //     // setMyVariable(window.site_region);
+  //   }
+  // }
+
   let region = "uk";
-  let regionWiseUrl = "/uk";
+  let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      regionWiseUrl = "/" + window.site_region;
-      // setMyVariable(window.site_region);
+      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
     }
   }
 
@@ -113,7 +122,7 @@ function Index() {
         setCareerData(x.data[0]);
         const data = x.data[0]?.attributes?.custom_page_contents?.data;
         let modifiedString = "";
-        //console.log("consolelog", data);
+
         if (data) {
           data.forEach((element, index) => {
             if (element?.attributes?.content_name == "HeadingTag") {
@@ -124,15 +133,16 @@ function Index() {
               setMetaDescription(element?.attributes?.content_value);
             } else if (element?.attributes?.content_name == "Long_Text") {
               modifiedString = element?.attributes?.content_value;
-              //setLongText(element?.attributes?.content_value);
             } else if (element?.attributes?.content_name == "Right_Header") {
               setRightHeader(element?.attributes?.content_value);
             } else if (element?.attributes?.content_name == "Right_Corner") {
               setRightCorner(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == "Sub_Title") {
+              setSubTitle(element?.attributes?.content_value);
             }
           });
         }
-        //console.log(modifiedString);
+
         const regex = /{[a-zA-Z0-9-]+}/g;
         const matches = [...new Set(modifiedString.match(regex))];
 
@@ -151,9 +161,7 @@ function Index() {
           storedDataString = localStorage.getItem("websitecontent_india");
           storedData = JSON.parse(storedDataString);
         }
-        debugger;
-        console.log(storedData);
-        console.log(modifiedString);
+
         if (storedData !== null) {
           // You can access it using localStorage.getItem('yourKey')
           if (matches) {
@@ -176,9 +184,6 @@ function Index() {
                 }
               });
               // Set the modified string in state
-              console.log(modifiedString);
-              setLongText(modifiedString);
-
               setIsLoading(false);
             } catch (error) {
               if (error.message === "Loop break") {
@@ -373,12 +378,7 @@ function Index() {
                   <p
                     className="mb-4"
                     dangerouslySetInnerHTML={{ __html: longText }}
-                  >
-                    {/* These are just a few of our favourite offers, all over the
-                    world, including luxury short breaks, perfect beach
-                    holidays, exceptional wildlife and safari holidays and
-                    memorable family adventures. Contact us to find out more.{" "} */}
-                  </p>
+                  ></p>
                 </div>
               </div>
             </div>
@@ -388,9 +388,7 @@ function Index() {
             <div className="container">
               <div className="row">
                 <div className="col-12 favrites_blk_row pb-0">
-                  <h3 className="title_cls pb-0">
-                    Our favourite special offers on luxury holidays
-                  </h3>
+                  <h3 className="title_cls pb-0">{subTitle}</h3>
                   <div className="destination_contries_filter d-flex justify-content-around">
                     <ul>
                       <li>
@@ -469,7 +467,7 @@ function Index() {
                               <button className="btn card_slider_btn justify-content-end">
                                 <span
                                   className="view_itnry_link"
-                                  //onClick={handleRedirect}
+                                  onClick={handleRedirect}
                                 >
                                   View this hotel
                                   <em className="fa-solid fa-chevron-right"></em>

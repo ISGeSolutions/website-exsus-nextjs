@@ -27,13 +27,15 @@ function CountryItinararies(country) {
   const itemsPerPage = 12; // Number of items to load per page
   const [isLoading, setIsLoading] = useState(true);
   const destinationcode = router.query?.continent
-    ?.replace(/-and-/g, " & ").replace(/-/g, " ")
+    ?.replace(/-and-/g, " & ")
+    .replace(/-/g, " ")
     .toLowerCase();
 
   const [metaData, setMetaData] = useState([]);
 
   const countrycode = router.query?.country
-    ?.replace(/-and-/g, " & ").replace(/-/g, " ")
+    ?.replace(/-and-/g, " & ")
+    .replace(/-/g, " ")
     .toLowerCase();
 
   const width = "250px";
@@ -211,14 +213,22 @@ function CountryItinararies(country) {
     setSelectedOptionMonth(selectedOption);
   };
 
-  let regionWiseUrl = "/uk";
+  // let regionWiseUrl = "/uk";
+  // let region = "uk";
+  // if (typeof window !== "undefined") {
+  //   if (window && window.site_region) {
+  //     regionWiseUrl = "/" + window.site_region;
+  //     region = window.site_region;
+
+  //     // setMyVariable(window.site_region);
+  //   }
+  // }
+
   let region = "uk";
+  let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      regionWiseUrl = "/" + window.site_region;
-      region = window.site_region;
-
-      // setMyVariable(window.site_region);
+      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
     }
   }
 
@@ -251,18 +261,24 @@ function CountryItinararies(country) {
   };
 
   const generateDynamicLink = (item) => {
-    const modifiedName = item.replace(/ /g, '-').toLowerCase();
+    const modifiedName = item.replace(/ /g, "-").toLowerCase();
     return (
       regionWiseUrl +
-      `/destinations/${destinationcode}/${countrycode?.replace(/ /g, "-")}/${destinationcode}-iteneraries/${modifiedName}`
+      `/destinations/${destinationcode}/${countrycode?.replace(
+        / /g,
+        "-"
+      )}/${destinationcode}-iteneraries/${modifiedName}`
     );
   };
 
   const handleRedirect = (item) => {
-    const modifiedName = item.replace(/ /g, '-').toLowerCase();
+    const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${destinationcode}/${countrycode?.replace(/ /g, "-")}/${destinationcode}-iteneraries/${modifiedName}`
+        `/destinations/${destinationcode}/${countrycode?.replace(
+          / /g,
+          "-"
+        )}/${destinationcode}-iteneraries/${modifiedName}`
     );
   };
 
@@ -484,13 +500,15 @@ function CountryItinararies(country) {
                         <div className="card_slider_inr">
                           <div className="card_slider">
                             <NavLink
-                              href={generateDynamicLink(item?.attributes?.itin_name)}
+                              href={generateDynamicLink(
+                                item?.attributes?.itin_name
+                              )}
                               className="card_slider_img"
                             >
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -527,7 +545,9 @@ function CountryItinararies(country) {
                             </div>
                             <button
                               className="btn card_slider_btn"
-                              onClick={() => handleRedirect(item?.attributes?.itin_name)}
+                              onClick={() =>
+                                handleRedirect(item?.attributes?.itin_name)
+                              }
                             >
                               <span>{item?.attributes?.no_of_nites_notes}</span>
                               <span className="view_itnry_link">

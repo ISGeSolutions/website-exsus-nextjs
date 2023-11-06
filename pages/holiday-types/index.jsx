@@ -28,7 +28,6 @@ function Index() {
   const [activeItem, setActiveItem] = useState("recommended");
   const [customPageContent, setCustomPage] = useState([]);
 
-
   const EnquiryButton = () => {
     const router = useRouter();
 
@@ -61,11 +60,19 @@ function Index() {
     );
   };
 
-  let regionWiseUrl = "/uk";
+  // let regionWiseUrl = "/uk";
+  // if (typeof window !== "undefined") {
+  //   if (window && window.site_region) {
+  //     regionWiseUrl = "/" + window.site_region;
+  //     // setMyVariable(window.site_region);
+  //   }
+  // }
+
+  let region = "uk";
+  let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      regionWiseUrl = "/" + window.site_region;
-      // setMyVariable(window.site_region);
+      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
     }
   }
 
@@ -97,8 +104,6 @@ function Index() {
     }
   };
 
-
-
   const dynamicBannerImage = (item) => {
     return item;
   };
@@ -113,7 +118,7 @@ function Index() {
       .getHolidaytypesLandingPage()
       .then((x) => {
         setHolidayTypes(x.data[0]);
-        setCustomPage(x.data[0]?.attributes?.custom_page_contents)
+        setCustomPage(x.data[0]?.attributes?.custom_page_contents);
         // console.log(x.data[0]);
         // setDestinationLandingDetails(x);
         const imageCheck = x?.data[0]?.attributes?.custom_page_images?.data;
@@ -251,8 +256,22 @@ function Index() {
               </div>
               <div className="row">
                 <div className="destinations_cntnt_blk">
-                  <h2>{customPageContent?.data?.filter(res => res.attributes?.content_name == "LuxuryHolidaysHeader")[0]?.attributes?.content_value}</h2>
-                  <p dangerouslySetInnerHTML={{ __html: customPageContent?.data?.filter(res => res.attributes?.content_name == "LuxuryHolidaysText")[0]?.attributes?.content_value }}></p>
+                  <h2>
+                    {
+                      customPageContent?.data?.filter(
+                        (res) =>
+                          res.attributes?.content_name == "LuxuryHolidaysHeader"
+                      )[0]?.attributes?.content_value
+                    }
+                  </h2>
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: customPageContent?.data?.filter(
+                        (res) =>
+                          res.attributes?.content_name == "LuxuryHolidaysText"
+                      )[0]?.attributes?.content_value,
+                    }}
+                  ></p>
                 </div>
               </div>
             </div>
@@ -268,16 +287,24 @@ function Index() {
                   <div className="destination_contries_filter d-flex justify-content-around">
                     <ul>
                       <li>
-                        <a className={
-                          activeItem === "recommended" ? "active" : ""
-                        } onClick={() => handleFilterClick("recommended")}>
+                        <a
+                          className={
+                            activeItem === "recommended" ? "active" : ""
+                          }
+                          onClick={() => handleFilterClick("recommended")}
+                        >
                           Exsus recommends
                         </a>
                       </li>
                       <li>
-                        <a className={
-                          activeItem === "alphabetical" ? "active" : ""
-                        } onClick={() => handleFilterClick("alphabetical")}>Alphabetical</a>
+                        <a
+                          className={
+                            activeItem === "alphabetical" ? "active" : ""
+                          }
+                          onClick={() => handleFilterClick("alphabetical")}
+                        >
+                          Alphabetical
+                        </a>
                       </li>
                     </ul>
                   </div>
@@ -342,8 +369,20 @@ function Index() {
           >
             <div className="container">
               <div className="destination_text_overlay_inr">
-                <h4>{customPageContent?.data?.filter(res => res.attributes?.content_name == "BestTimeHeader")[0]?.attributes?.content_value}</h4>
-                <h5>{customPageContent?.data?.filter(res => res.attributes?.content_name == "BestTimeText")[0]?.attributes?.content_value}</h5>
+                <h4>
+                  {
+                    customPageContent?.data?.filter(
+                      (res) => res.attributes?.content_name == "BestTimeHeader"
+                    )[0]?.attributes?.content_value
+                  }
+                </h4>
+                <h5>
+                  {
+                    customPageContent?.data?.filter(
+                      (res) => res.attributes?.content_name == "BestTimeText"
+                    )[0]?.attributes?.content_value
+                  }
+                </h5>
 
                 <h4>{backgroundImgWhentogo?.image_header_text_1}</h4>
                 <h5>{backgroundImgWhentogo?.image_header_text_2}</h5>
