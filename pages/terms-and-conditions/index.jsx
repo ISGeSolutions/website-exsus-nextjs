@@ -231,9 +231,7 @@ function Index() {
                                 </div> */}
                             </div>
                         </section>
-                        {/* <section dangerouslySetInnerHTML={{ _html: longText }}>
-                        </section> */}
-
+                        <div dangerouslySetInnerHTML={{ __html: longText }} />
 
                         <section className="make_enqury_row">
                             <div className="container">
