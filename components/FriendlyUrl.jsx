@@ -26,8 +26,8 @@ export function FriendlyUrl(props) {
   const dynamicFriendlyLink = (element, index) => {
     const link = element
       .trim()
-      .replace(/\s+/g, "-")
-      .replace(/ /g, "-")
+      ?.replace(/\s+/g, "-")
+      ?.replace(/ /g, "-")
       .toLowerCase();
     if (index == 0) {
       return `/`;
@@ -76,13 +76,13 @@ export function FriendlyUrl(props) {
                 {friendlyUrl
                   ?.replace(/-/g, " ")
                   .trim()
-                  .replace(/\b\w/g, (char) => char.toUpperCase())}
+                  ?.replace(/\b\w/g, (char) => char.toUpperCase())}
               </span>
             ) : (
               <NavLink href={dynamicFriendlyLink(friendlyUrl, i)}>
                 {friendlyUrl
                   ?.replace(/-/g, " ")
-                  .replace(/\b\w/g, (char) => char.toUpperCase())}
+                  ?.replace(/\b\w/g, (char) => char.toUpperCase())}
               </NavLink>
             )}
           </li>

@@ -133,7 +133,7 @@ function Layout({ children }) {
       }
     });
     router.push(newPath);
-    // router.replace('/uk/continent?destinationcode=africa&id=1');
+    // router?.replace('/uk/continent?destinationcode=africa&id=1');
   };
 
   const handleChange1 = (selectedOption) => {

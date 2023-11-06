@@ -199,7 +199,7 @@ function getHotelById(id) {
 
 function getItinerariesInAdvanceSearch(dcode, page) {
     const destinationadvanceSearchUrl = `${publicRuntimeConfig.apiUrl
-        }/api/itineraries?[filters][destination][destination_code][$eq]=${dcode.replace(
+        }/api/itineraries?[filters][destination][destination_code][$eq]=${dcode?.replace(
             /&/g,
             "%26"
         )}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12`;

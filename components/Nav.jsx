@@ -70,12 +70,12 @@ function Nav() {
 
   const generateDynamicLinkCountries = (countryName, destinationcode) => {
     const modifieddestinaitonName = destinationcode
-      .replace(/ /g, "-")
-      .replace(/&/g, "and")
+      ?.replace(/ /g, "-")
+      ?.replace(/&/g, "and")
       .toLowerCase();
     const modifiedcountryName = countryName
-      .replace(/ /g, "-")
-      .replace(/&/g, "and")
+      ?.replace(/ /g, "-")
+      ?.replace(/&/g, "and")
       .toLowerCase();
     if (countryName) {
       return (
@@ -86,7 +86,7 @@ function Nav() {
   };
 
   const redirectToAllLink = (id) => {
-    const lowercasecountry = id.replace(/ /g, "-").toLowerCase();
+    const lowercasecountry = id?.replace(/ /g, "-").toLowerCase();
     router.push(`${regionWiseUrl}/destinations/${lowercasecountry}`);
     setOverlayVisible(false);
   };
@@ -132,8 +132,8 @@ function Nav() {
 
   const dynamicLink = (itemName, id) => {
     const modifieditem = itemName
-      .replace(/ /g, "-")
-      .replace(/&/g, "and")
+      ?.replace(/ /g, "-")
+      ?.replace(/&/g, "and")
       .toLowerCase();
     if (itemName) {
       return regionWiseUrl + `/destinations/${modifieditem}`;
@@ -215,8 +215,8 @@ function Nav() {
 
   const dynamicLinkHoliday = (itemName, id) => {
     const modifieditem = itemName
-      .replace(/ /g, "-")
-      .replace(/&/g, "and")
+      ?.replace(/ /g, "-")
+      ?.replace(/&/g, "and")
       .toLowerCase();
     if (itemName) {
       return regionWiseUrl + `/holiday-types/${modifieditem}`;
@@ -246,12 +246,12 @@ function Nav() {
 
   const dynamicLinkCountryHoliday = (grpName, typeName, id) => {
     const modifiedGrpName = grpName
-      .replace(/ /g, "-")
-      .replace(/&/g, "and")
+      ?.replace(/ /g, "-")
+      ?.replace(/&/g, "and")
       .toLowerCase();
     const modifiedtypeName = typeName
-      .replace(/ /g, "-")
-      .replace(/&/g, "and")
+      ?.replace(/ /g, "-")
+      ?.replace(/&/g, "and")
       .toLowerCase();
 
     if (grpName) {
