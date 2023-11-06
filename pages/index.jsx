@@ -160,17 +160,17 @@ function Index() {
     destinationService
       .getCustomPagesData("home")
       .then((x) => {
-        setHomePageData(x.data[0].attributes);
+        debugger;
         const imageCheck = x.data[0]?.attributes?.custom_page_images.data;
         const newBackgroundImages = [];
         imageCheck.forEach((element) => {
-          if (element.attributes.image_type == "center") {
-            setBackgroundImgWhentogo(element.attributes);
-          } else if (element.attributes.image_type == "banner") {
-            newBackgroundImages.push(element.attributes.image_path);
+          if (element.attributes.image_type == "banner") {
+            newBackgroundImages.push(element?.attributes);
           }
         });
         setBackgroundImage(newBackgroundImages);
+        console.log(newBackgroundImages)
+        setHomePageData(x.data[0].attributes?.custom_page_contents);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -396,61 +396,46 @@ function Index() {
       ) : (
         <div>
           <section className="banner_blk_row">
-            {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
-                    <div>
-                        <img src="/assets/images/banner01.png" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/banner02.png" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/banner03.png" />
-                    </div>
-                </Carousel> */}
             <div
-              id="carouselExampleIntervalMain"
+              id="carouselExampleInterval"
               className="carousel slide"
               data-bs-ride="carousel"
             >
               <div className="carousel-indicators">
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleIntervalMain"
-                  data-bs-slide-to="0"
-                  className="active"
-                  aria-current="true"
-                  aria-label="Slide 1"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleIntervalMain"
-                  data-bs-slide-to="1"
-                  aria-label="Slide 2"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleIntervalMain"
-                  data-bs-slide-to="2"
-                  aria-label="Slide 3"
-                ></button>
+                {backgroundImage.map((_, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    data-bs-target="#carouselExampleInterval"
+                    data-bs-slide-to={index}
+                    className={index === 0 ? "active" : ""}
+                    aria-current={index === 0 ? "true" : "false"}
+                    aria-label={`Slide ${index + 1}`}
+                  ></button>
+                ))}
+                {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
               </div>
               <div className="carousel-inner">
-                <a
-                  href="#"
-                  target="_blank"
-                  className="carousel-item active"
-                  data-bs-interval="5000"
-                >
-                  <div className="banner_img_custom01 banner_commn_cls"></div>
-                  <div className="carousel-caption">
-                    <img
-                      src="images/banner-logo.png"
-                      alt="banner-logo"
-                      className="img-fluid"
-                    />
-                    <h2>Discover the Seychelles</h2>
-                  </div>
-                </a>
+                {backgroundImage.map((imagePath, index) => (
+                  <NavLink
+                    key={index}
+                    href="#"
+                    className={`carousel-item ${index === 0 ? "active" : ""}`}
+                    data-bs-interval="5000"
+                  >
+                    <div
+                      className="banner_commn_cls"
+                      style={{ backgroundImage: `url(${imagePath.image_path})` }}
+                    >                  <div className="carousel-caption">
+                        <img
+                          src="images/banner-logo.png"
+                          alt="banner-logo"
+                          className="img-fluid"
+                        />
+                        <h2>{imagePath.image_alt_text}</h2>
+                      </div></div>
+                  </NavLink>
+                ))}
               </div>
             </div>
             <Inspireme />

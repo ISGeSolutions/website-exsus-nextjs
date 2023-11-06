@@ -4,6 +4,7 @@ import { Button } from "@react-email/button";
 import React, { useState, useEffect } from "react";
 import { NavLink } from "components";
 
+
 export function FriendlyUrl(props) {
   const friendlyUrlArr = props?.data?.split("/");
   // console.log(friendlyUrlArr);

@@ -214,11 +214,6 @@ function Index() {
       ) : (
         <div>
           <section className="banner_blk_row">
-            {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
-                    <div>
-                        <img src="/assets/./../images//destination_banner.jpg" />
-                    </div>
-                </Carousel> */}
             <div
               id="carouselExampleInterval"
               className="carousel slide"

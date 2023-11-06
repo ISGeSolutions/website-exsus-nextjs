@@ -9,6 +9,8 @@ import generateDynamicLink from "components/utils/generateLink";
 import Image from "next/image";
 import Select, { components } from "react-select";
 import CustomMultiValue from "../continentitineraries/CustomMultiValue";
+import { Alert } from "../../components";
+
 
 export default CountryPlaceToStay;
 
@@ -26,6 +28,7 @@ function CountryPlaceToStay(country) {
   const itemsPerPage = 12; // Number of items to load per page
   const [page, setPage] = useState(0); // Current page
   const [metaData, setMetaData] = useState([]);
+  const [alert, setAlert] = useState(null);
   const destinationcode = router.query?.continent
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
@@ -213,6 +216,35 @@ function CountryPlaceToStay(country) {
       });
   };
 
+  const showAlert = (message, type) => {
+    setAlert({ message, type });
+  };
+
+  const closeAlert = () => {
+    // console.log("closeAlert");
+    setAlert(null);
+  };
+
+
+
+
+  function onSubmit(e) {
+    e.preventDefault();
+    console.log(e);
+    if (!e.destination && !e.reason && !e.month) {
+      showAlert("Please select atleast one option", "error");
+    } else {
+      router.push(
+        `advance-search?where=` +
+        e?.destination +
+        `&what=` +
+        e?.reason +
+        `&when=` +
+        e?.month
+      );
+    }
+  }
+
   const handleRedirect = (item) => {
     return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
   };
@@ -305,6 +337,9 @@ function CountryPlaceToStay(country) {
 
   return (
     <>
+      {alert && alert.message && alert.type && (
+        <Alert message={alert.message} type={alert.type} onClose={closeAlert} />
+      )}
       {isLoading ? (
         // <MyLoader />
         <div
@@ -342,91 +377,223 @@ function CountryPlaceToStay(country) {
               <div className="card_slider_row">
                 <div className="carousel00 region_carousel00">
                   <div className="row">
-                    <div className="col-12">
-                      <div className="destination_dropdwn_row d-block d-md-flex">
-                        <div className="dropdown_grp_blk">
-                          <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                            <Select
-                              id="long-value-select"
-                              instanceId="long-value-select"
-                              className="select_container_country"
-                              classNamePrefix="select_country"
-                              placeholder="Filter by country"
-                              styles={styles}
-                              isMulti
-                              isDisabled={isDisabled}
-                              isLoading={isLoader}
-                              isClearable={isClearable}
-                              isRtl={isRtl}
-                              isSearchable={isSearchable}
-                              value={selectedOptionCountry}
-                              onChange={handleOptionCountryChange}
-                              closeMenuOnSelect={false}
-                              hideSelectedOptions={false}
-                              options={countryOptions}
-                              components={{
-                                Option: InputOption,
-                                MultiValue: CustomMultiValue,
-                              }}
-                            />
+                    <form onSubmit={onSubmit}>
+                      <div className="col-12">
+                        <div className="destination_dropdwn_row d-block d-md-flex">
+                          <div className="dropdown_grp_blk">
+                            <div className="banner_dropdwn_blk ps-0 ps-md-2">
+                              <Select
+                                id="long-value-select"
+                                instanceId="long-value-select"
+                                className="select_container_country"
+                                classNamePrefix="select_country"
+                                placeholder="Filter by country"
+                                styles={styles}
+                                isMulti
+                                isDisabled={isDisabled}
+                                isLoading={isLoader}
+                                isClearable={isClearable}
+                                isRtl={isRtl}
+                                isSearchable={isSearchable}
+                                value={selectedOptionCountry}
+                                onChange={handleOptionCountryChange}
+                                closeMenuOnSelect={false}
+                                hideSelectedOptions={false}
+                                options={countryOptions}
+                                components={{
+                                  Option: InputOption,
+                                  MultiValue: CustomMultiValue,
+                                }}
+                              />
+                            </div>
+                            <div className="banner_dropdwn_blk ps-0 ps-md-2">
+                              <Select
+                                placeholder="Filter by region"
+                                // defaultValue={regionOptions[0]}
+                                className="select_container_country"
+                                classNamePrefix="select_country"
+                                isDisabled={isDisabled}
+                                isLoading={isLoader}
+                                isClearable={isClearable}
+                                isRtl={isRtl}
+                                hideSelectedOptions={false}
+                                styles={styles}
+                                closeMenuOnSelect={false}
+                                isSearchable={isSearchable}
+                                name="color"
+                                options={regionOptions}
+                                isMulti
+                                // value={selectedOptionRegion}
+                                onChange={handleOptionRegionChange}
+                                components={{
+                                  Option: InputOption,
+                                  MultiValue: CustomMultiValue,
+                                }}
+                              />
+                            </div>
+                            <div className="banner_dropdwn_blk ps-0 ps-md-2">
+                              <Select
+                                placeholder="Filter by month"
+                                className="select_container_country"
+                                classNamePrefix="select_country"
+                                // defaultValue={monthOptions[0]}
+                                isDisabled={isDisabled}
+                                isLoading={isLoader}
+                                isClearable={isClearable}
+                                styles={styles}
+                                isRtl={isRtl}
+                                isSearchable={isSearchable}
+                                name="color"
+                                closeMenuOnSelect={false}
+                                options={monthOptions}
+                                hideSelectedOptions={false}
+                                isMulti
+                                // value={selectedOptionMonth}
+                                onChange={handleOptionMonthChange}
+                                components={{
+                                  Option: InputOption,
+                                  MultiValue: CustomMultiValue,
+                                }}
+                              />
+                            </div>
                           </div>
-                          <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                            <Select
-                              placeholder="Filter by region"
-                              // defaultValue={regionOptions[0]}
-                              className="select_container_country"
-                              classNamePrefix="select_country"
-                              isDisabled={isDisabled}
-                              isLoading={isLoader}
-                              isClearable={isClearable}
-                              isRtl={isRtl}
-                              hideSelectedOptions={false}
-                              styles={styles}
-                              closeMenuOnSelect={false}
-                              isSearchable={isSearchable}
-                              name="color"
-                              options={regionOptions}
-                              isMulti
-                              // value={selectedOptionRegion}
-                              onChange={handleOptionRegionChange}
-                              components={{
-                                Option: InputOption,
-                                MultiValue: CustomMultiValue,
-                              }}
-                            />
-                          </div>
-                          <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                            <Select
-                              placeholder="Filter by month"
-                              className="select_container_country"
-                              classNamePrefix="select_country"
-                              // defaultValue={monthOptions[0]}
-                              isDisabled={isDisabled}
-                              isLoading={isLoader}
-                              isClearable={isClearable}
-                              styles={styles}
-                              isRtl={isRtl}
-                              isSearchable={isSearchable}
-                              name="color"
-                              closeMenuOnSelect={false}
-                              options={monthOptions}
-                              hideSelectedOptions={false}
-                              isMulti
-                              // value={selectedOptionMonth}
-                              onChange={handleOptionMonthChange}
-                              components={{
-                                Option: InputOption,
-                                MultiValue: CustomMultiValue,
-                              }}
-                            />
+                          <div className="banner_inspire_btn ps-0 ps-md-2">
+                            <button
+                              type="submit"
+                              className="btn btn-primary prmry_btn"
+                            >
+                              Inspire me
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="#ffffff"
+                                shapeRendering="geometricPrecision"
+                                textRendering="geometricPrecision"
+                                imageRendering="optimizeQuality"
+                                fillRule="evenodd"
+                                clipRule="evenodd"
+                                viewBox="0 0 267 512.43"
+                              >
+                                <path
+                                  fillRule="nonzero"
+                                  d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                                ></path>
+                              </svg>
+                            </button>
                           </div>
                         </div>
-                        <div className="banner_inspire_btn ps-0 ps-md-2">
+                      </div>
+                      <div className="col-12">
+                        <div className="destination_filter_result d-block d-lg-flex">
+                          <p>
+                            We've found 358 hotels in Asia for you
+                            <button
+                              type="button"
+                              className="btn btn-primary modal_link_btn"
+                              data-bs-toggle="modal"
+                              data-bs-target="#placesToStayModal"
+                            >
+                              See all accomodations on Map
+                            </button>
+                          </p>
+                          <div className="destination_contries_filter d-inline-block d-lg-flex">
+                            <label className="pt-2 pt-lg-0">Arrange by:</label>
+                            <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
+                              <li>
+                                <a
+                                  className={
+                                    activeItem === "recommended" ? "active" : ""
+                                  }
+                                  onClick={() => handleFilterClick("recommended")}
+                                >
+                                  Recommended
+                                </a>
+                              </li>
+                              <li>
+                                <a
+                                  className={
+                                    activeItem === "alphabetical" ? "active" : ""
+                                  }
+                                  onClick={() =>
+                                    handleFilterClick("alphabetical")
+                                  }
+                                >
+                                  Alphabetical
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Country Place to stay hotels */}
+                      {allHotels?.slice(0, allHotels.length).map((item) => (
+                        <div className="col-sm-6 col-lg-4 col-xxl-3">
+                          <div className="card_slider_inr">
+                            <div className="card_slider">
+                              <NavLink
+                                className="card_slider_img"
+                                href={generateDynamicLink(item.id)}
+                              >
+                                <img
+                                  src="./../../../images/destination_hotel02.jpg"
+                                  alt="destination_hotel02"
+                                  className="img-fluid"
+                                />
+                              </NavLink>
+                              <div className="card_slider_cnt places_to_stay_cnt">
+                                <h4>
+                                  <a href="#">{item?.attributes?.hotel_name}</a>
+                                </h4>
+                                <ul>
+                                  <li>Location: {item?.attributes?.location}</li>
+                                  <li>
+                                    Price guide:
+                                    <span
+                                      tabIndex="0"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-placement="right"
+                                      data-bs-title="£200-£350 per person per night"
+                                    >
+                                      <label>
+                                        {item?.attributes?.price_guide_text}
+                                      </label>
+                                    </span>
+                                  </li>
+                                  <li>{item?.attributes?.intro_text}</li>
+                                  <li>
+                                    Best for:
+                                    <span>
+                                      {item?.attributes?.recommended_for_text}
+                                    </span>
+                                  </li>
+                                </ul>
+                              </div>
+                              <button
+                                className="btn card_slider_btn justify-content-end"
+                                onClick={() => handleRedirect(item.id)}
+                              >
+                                <span className="view_itnry_link">
+                                  View this hotel
+                                  <em className="fa-solid fa-chevron-right"></em>
+                                </span>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+
+                      {/* Pagination  */}
+                      <div className="col-12">
+                        {metaData.total > page * itemsPerPage && (
                           <button
-                            type="button"
-                            className="btn btn-primary prmry_btn"
+                            className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
+                            onClick={loadMoreData}
                           >
-                            Inspire me
+                            Show{" "}
+                            {metaData.total - page * itemsPerPage > 12
+                              ? 12
+                              : metaData.total - page * itemsPerPage > 12}{" "}
+                            more holiday
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               fill="#ffffff"
@@ -435,147 +602,17 @@ function CountryPlaceToStay(country) {
                               imageRendering="optimizeQuality"
                               fillRule="evenodd"
                               clipRule="evenodd"
-                              viewBox="0 0 267 512.43"
+                              viewBox="0 0 512 266.77"
                             >
                               <path
                                 fillRule="nonzero"
-                                d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                              ></path>
+                                d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"
+                              />
                             </svg>
                           </button>
-                        </div>
+                        )}
                       </div>
-                    </div>
-                    <div className="col-12">
-                      <div className="destination_filter_result d-block d-lg-flex">
-                        <p>
-                          We've found 358 hotels in Asia for you
-                          <button
-                            type="button"
-                            className="btn btn-primary modal_link_btn"
-                            data-bs-toggle="modal"
-                            data-bs-target="#placesToStayModal"
-                          >
-                            See all accomodations on Map
-                          </button>
-                        </p>
-                        <div className="destination_contries_filter d-inline-block d-lg-flex">
-                          <label className="pt-2 pt-lg-0">Arrange by:</label>
-                          <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
-                            <li>
-                              <a
-                                className={
-                                  activeItem === "recommended" ? "active" : ""
-                                }
-                                onClick={() => handleFilterClick("recommended")}
-                              >
-                                Recommended
-                              </a>
-                            </li>
-                            <li>
-                              <a
-                                className={
-                                  activeItem === "alphabetical" ? "active" : ""
-                                }
-                                onClick={() =>
-                                  handleFilterClick("alphabetical")
-                                }
-                              >
-                                Alphabetical
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Country Place to stay hotels */}
-                    {allHotels?.slice(0, allHotels.length).map((item) => (
-                      <div className="col-sm-6 col-lg-4 col-xxl-3">
-                        <div className="card_slider_inr">
-                          <div className="card_slider">
-                            <NavLink
-                              className="card_slider_img"
-                              href={generateDynamicLink(item.id)}
-                            >
-                              <img
-                                src="./../../../images/destination_hotel02.jpg"
-                                alt="destination_hotel02"
-                                className="img-fluid"
-                              />
-                            </NavLink>
-                            <div className="card_slider_cnt places_to_stay_cnt">
-                              <h4>
-                                <a href="#">{item?.attributes?.hotel_name}</a>
-                              </h4>
-                              <ul>
-                                <li>Location: {item?.attributes?.location}</li>
-                                <li>
-                                  Price guide:
-                                  <span
-                                    tabIndex="0"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="right"
-                                    data-bs-title="£200-£350 per person per night"
-                                  >
-                                    <label>
-                                      {item?.attributes?.price_guide_text}
-                                    </label>
-                                  </span>
-                                </li>
-                                <li>{item?.attributes?.intro_text}</li>
-                                <li>
-                                  Best for:
-                                  <span>
-                                    {item?.attributes?.recommended_for_text}
-                                  </span>
-                                </li>
-                              </ul>
-                            </div>
-                            <button
-                              className="btn card_slider_btn justify-content-end"
-                              onClick={() => handleRedirect(item.id)}
-                            >
-                              <span className="view_itnry_link">
-                                View this hotel
-                                <em className="fa-solid fa-chevron-right"></em>
-                              </span>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-
-                    {/* Pagination  */}
-                    <div className="col-12">
-                      {metaData.total > page * itemsPerPage && (
-                        <button
-                          className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
-                          onClick={loadMoreData}
-                        >
-                          Show{" "}
-                          {metaData.total - page * itemsPerPage > 12
-                            ? 12
-                            : metaData.total - page * itemsPerPage > 12}{" "}
-                          more holiday
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="#ffffff"
-                            shapeRendering="geometricPrecision"
-                            textRendering="geometricPrecision"
-                            imageRendering="optimizeQuality"
-                            fillRule="evenodd"
-                            clipRule="evenodd"
-                            viewBox="0 0 512 266.77"
-                          >
-                            <path
-                              fillRule="nonzero"
-                              d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"
-                            />
-                          </svg>
-                        </button>
-                      )}
-                    </div>
+                    </form>
                   </div>
                 </div>
               </div>

@@ -97,7 +97,7 @@ function Index() {
           response.attributes.executive_image_path = newStr;
         }
         setExecutiveData(response);
-        setTestimonials(response.attributes.travel_reviews.data);
+        setTestimonials(response?.attributes?.travel_reviews.data);
         setIsLoading(false);
       })
       .catch((error) => {

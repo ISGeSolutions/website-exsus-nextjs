@@ -15,7 +15,7 @@ function Index() {
   const [metaDescription, setMetaDescription] = useState(null);
   const [longText, setLongText] = useState(null);
   const [rightHeader, setRightHeader] = useState(null);
-  const [rightCorner, setRightContent] = useState(null);
+  const [rightCornet, setRightContent] = useState(null);
 
   useEffect(() => {
     // userService.getAll().then(x => setUsers(x));
@@ -34,11 +34,12 @@ function Index() {
             } else if (element?.attributes?.content_name == "MetaDescription") {
               setMetaDescription(element?.attributes?.content_value);
             } else if (element?.attributes?.content_name == "Long_Text") {
+              console.log(element?.attributes?.content_value);
               setLongText(element?.attributes?.content_value);
             } else if (element?.attributes?.content_name == "Right_Header") {
               setRightHeader(element?.attributes?.content_value);
             } else if (element?.attributes?.content_name == "Right_Corner") {
-              setRightCorner(element?.attributes?.content_value);
+              setRightContent(element?.attributes?.content_value);
             }
           });
         }

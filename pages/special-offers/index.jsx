@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import { useRef } from "react";
 import { Link, Spinner, Signup, FriendlyUrl } from "components";
 import { Layout } from "components/users";
 import {
@@ -98,13 +98,8 @@ function Index() {
 
   useEffect(() => {
     // userService.getAll().then(x => setUsers(x));
-    const tooltipTriggerList = document.querySelectorAll(
-      '[data-bs-toggle="tooltip"]'
-    );
-    const tooltipList = [...tooltipTriggerList].map(
-      (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
-    );
-
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
     specialoffersService
       .getAllOffers()
       .then((x) => {
@@ -208,6 +203,11 @@ function Index() {
     }
 
     window.addEventListener("resize", equalHeight(true));
+    // return () => {
+    //   // Cleanup code (if needed) when the component unmounts
+    //   tooltipList.forEach(tooltip => tooltip.dispose());
+    // };
+
   }, []);
 
   return (
