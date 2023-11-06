@@ -67,7 +67,7 @@ function Index() {
         whereToGoService
             .getWhereToGoPage()
             .then((x) => {
-                debugger;
+                // debugger;
                 setCustomData(x.data[0]?.attributes?.custom_page_images);
                 SetFriendlyUrl(x.data[0].attributes?.page_friendly_url)
                 const imageCheck = x.data[0].attributes.custom_page_images.data;
@@ -81,7 +81,7 @@ function Index() {
                 console.log(newBackgroundImages);
                 const data = x.data[0]?.attributes?.custom_page_contents?.data;
                 let modifiedString = "";
-                debugger;
+                // debugger;
 
                 if (data) {
                     data.forEach((element, index) => {
@@ -96,7 +96,7 @@ function Index() {
                         } else if (element?.attributes?.content_name == 'Right_Corner') {
                             setRightCorner(element?.attributes?.content_value);
                         } else if (element?.attributes?.content_name == 'Long_Text') {
-                            debugger;
+                            // debugger;
                             console.log(element?.attributes?.content_value);
                             setLongText(element?.attributes?.content_value);
                         }

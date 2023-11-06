@@ -160,7 +160,7 @@ function Index() {
     destinationService
       .getCustomPagesData("home")
       .then((x) => {
-        debugger;
+        // debugger;
         const imageCheck = x.data[0]?.attributes?.custom_page_images.data;
         const newBackgroundImages = [];
         imageCheck.forEach((element) => {

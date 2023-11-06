@@ -14,16 +14,15 @@ import {
 } from "services";
 import CustomModal from "../CustomModal";
 import { Alert } from "../Alert";
-import { useParams } from 'react-router-dom';
 
 export { Inspireme };
 
 function Inspireme(props) {
+  const { divRef } = props;
+  const router = useRouter();
   const [destinationLandingList, setDestinationLandingList] = useState();
   const [holidaytypesLandingList, setHolidaytypesLandingList] = useState();
   const [queryParameters, setQueryParameters] = useState();
-  const { divRef } = props;
-  const router = useRouter();
 
   // form validation rules
   const validationSchema = Yup.object().shape({
@@ -51,7 +50,25 @@ function Inspireme(props) {
     setIsModalOpen(false);
   };
 
+  // Function to handle the onChange event
+  const handleSelectChange = (event) => {
+    debugger;
+    setSelectedValue(event.target.value); // Update the selected value in state
+  };
+
   function onSubmit(data) {
+    // const { pathname, query } = router;
+
+    // // Clone the existing query object and remove the specific query parameter
+    // const newQuery = { ...query };
+    // delete newQuery.myQueryParam; // Replace 'myQueryParam' with your query parameter name
+
+    // // Use the push method to navigate to the same page with the updated query
+    // router.push({
+    //   pathname,
+    //   query: newQuery,
+    // });
+
     if (!data.destination && !data.reason && !data.month) {
       showAlert("Please select atleast one option", "error");
     } else {
@@ -73,18 +90,7 @@ function Inspireme(props) {
           a.attributes.main_page_serial_number -
           b.attributes.main_page_serial_number
       );
-
-      // debugger;
-      // if(sortedData) {
-      //   const arrTemp = [];
-      //   sortedData.map(element => {          
-      //     arrTemp[element?.attributes?.destination_code] = element?.attributes?.destination_name;
-      //     return arrTemp;
-      //   });
-      // }
-
       setDestinationLandingList(sortedData);
-      // setDestinationLandingDetails(x)
     });
 
     holidaytypesService.getHolidaytypesLandingList().then((x) => {
@@ -92,6 +98,7 @@ function Inspireme(props) {
     });
 
     setQueryParameters(router.query);
+
   }, [divRef, router.query]);
 
   return (
@@ -106,6 +113,7 @@ function Inspireme(props) {
               <div className="banner_dropdwn_blk">
                 <div className="select_drpdwn">
                   <select
+                    onChange={handleSelectChange}
                     aria-label="Choose a destination"
                     name="destination"
                     {...register("destination")}
@@ -114,24 +122,13 @@ function Inspireme(props) {
                   >
                     <option value="">Choose a destination</option>
                     {destinationLandingList?.map((element, i) => (
-                      <option
+                      <option selected={element?.attributes?.destination_code === queryParameters?.where}
                         key={element?.id}
                         value={element?.attributes?.destination_code}
-                      // defaultValue={queryParameters?.where}
                       >
                         {element?.attributes?.destination_name}
                       </option>
                     ))}
-                    {/* <option value="Asia">Asia</option>
-                                    <option value="Europe">Europe</option>
-                                    <option value="South America">South America</option>
-                                    <option value="Indian Subcontinent">Indian Subcontinent</option>
-                                    <option value="North America & Caribbean">North America & Caribbean</option>
-                                    <option value="Africa">Africa</option>
-                                    <option value="Central America">Central America</option>
-                                    <option value="Australasia & South Pacific">Australasia & South Pacific</option>
-                                    <option value="Middle East & North Africa">Middle East & North Africa</option>
-                                    <option value="Indian ocean">Indian ocean</option> */}
                   </select>
                   <div className="invalid-feedback mb-1">
                     {errors.destination?.message}
@@ -152,20 +149,11 @@ function Inspireme(props) {
                       <option
                         key={element?.id}
                         value={element?.attributes?.holiday_type_group_code}
+                        selected={element?.attributes?.holiday_type_group_code === queryParameters?.what}
                       >
                         {element?.attributes?.holiday_type_group_name}
                       </option>
                     ))}
-                    {/* <option value="Adventure Holidays">Adventure Holidays</option>
-                                    <option value="Classic Journeys">Classic Journeys</option>
-                                    <option value="Trains, Planes, Cars & Cruises">Trains, Planes, Cars & Cruises</option>
-                                    <option value="Food & Culture Holidays">Food & Culture Holidays</option>
-                                    <option value="Family Holidays">Family Holidays</option>
-                                    <option value="Once in a lifetime holidays">Once in a lifetime holidays</option>
-                                    <option value="Short breaks & Escapes">Short breaks & Escapes</option>
-                                    <option value="Wildlife & Safari Holidays">Wildlife & Safari Holidays</option>
-                                    <option value="Luxury Beach holidays">Luxury Beach holidays</option>
-                                    <option value="Special occasions">Special occasions</option> */}
                   </select>
                   <div className="invalid-feedback mb-1">
                     {errors.reason?.message}
@@ -182,18 +170,18 @@ function Inspireme(props) {
                       }`}
                   >
                     <option value="">Choose a month</option>
-                    <option value="January">January</option>
-                    <option value="February">February</option>
-                    <option value="March">March</option>
-                    <option value="April">April</option>
-                    <option value="May">May</option>
-                    <option value="June">June</option>
-                    <option value="July">July</option>
-                    <option value="August">August</option>
-                    <option value="September">September</option>
-                    <option value="October">October</option>
-                    <option value="November">November</option>
-                    <option value="December">December</option>
+                    <option value="January" selected={'January' === queryParameters?.when}>January</option>
+                    <option value="February" selected={'February' === queryParameters?.when}>February</option>
+                    <option value="March" selected={'March' === queryParameters?.when}>March</option>
+                    <option value="April" selected={'April' === queryParameters?.when}>April</option>
+                    <option value="May" selected={'May' === queryParameters?.when}>May</option>
+                    <option value="June" selected={'June' === queryParameters?.when}>June</option>
+                    <option value="July" selected={'July' === queryParameters?.when}>July</option>
+                    <option value="August" selected={'August' === queryParameters?.when}>August</option>
+                    <option value="September" selected={'September' === queryParameters?.when}>September</option>
+                    <option value="October" selected={'October' === queryParameters?.when}>October</option>
+                    <option value="November" selected={'November' === queryParameters?.when}>November</option>
+                    <option value="December" selected={'December' === queryParameters?.when}>December</option>
                   </select>
                   <div className="invalid-feedback mb-1">
                     {errors.month?.message}
