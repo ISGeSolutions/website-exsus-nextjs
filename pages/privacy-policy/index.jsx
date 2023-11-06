@@ -166,7 +166,8 @@ function Index() {
                                 </div>
                                 <div className="trvl_info_cntnt">
                                     <h2 className="trvl_title">{headingTag}</h2>
-                                    {/* <div dangerouslySetInnerHTML={{ _html: longText }} /> */}
+                                    {/* {longText} */}
+                                    <span dangerouslySetInnerHTML={{ __html: longText }} />
 
                                     {/* <p className="mb-4 text-start">This Privacy Policy explains in detail the types of personal data we may collect about you when you interact with us. It also explains how we’ll store and handle that data, and keep it safe.</p>
                         <p className="text-start">We know that there’s a lot of information here, but we want you to be fully informed about your rights, and how Exsus Travel Limited uses your data. We hope the following sections will answer any questions you have but if not, please do get in touch with us. We may change this policy from time to time. Please check back for updates so you are always fully aware of what information is collected and how it is used.</p> */}
