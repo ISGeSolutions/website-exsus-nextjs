@@ -14,25 +14,39 @@ function CountryOverview(props) {
   const { overview_text } = props?.data || {};
   const country_name = props?.data?.country_name || "";
 
-  const countrycode = router.query?.country?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
+  const countrycode = router.query?.country
+    ?.replace(/-/g, " ")
+    .replace(/and/g, "&")
+    .toLowerCase();
   const [isLoading, setIsLoading] = useState(false);
-  const destinationcode = router.query?.continent?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
+  const destinationcode = router.query?.continent
+    ?.replace(/-/g, " ")
+    .replace(/and/g, "&")
+    .toLowerCase();
   const handleLoadMore = () => {
     setVisibleItems((prevVisibleItems) => prevVisibleItems + itemsPerPage);
   };
 
-  let regionWiseUrl = "/uk";
+  // let regionWiseUrl = "/uk";
+  // if (typeof window !== "undefined") {
+  //   if (window && window.site_region) {
+  //     regionWiseUrl = "/" + window.site_region;
+  //     // setMyVariable(window.site_region);
+  //   }
+  // }
+
+  let region = "uk";
+  let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      regionWiseUrl = "/" + window.site_region;
-      // setMyVariable(window.site_region);
+      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
     }
   }
 
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
+        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
     );
   };
 

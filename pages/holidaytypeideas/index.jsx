@@ -23,8 +23,7 @@ function Index() {
   );
   const [itineraries, setItineraries] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [friendlyUrl, setFriendlyUrl] = useState('');
-
+  const [friendlyUrl, setFriendlyUrl] = useState("");
 
   const optionsData = [
     { value: "", label: "Filter by destination" },
@@ -77,8 +76,14 @@ function Index() {
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
   const router = useRouter();
   const { id } = router.query;
-  const holidaytypename = router.query?.holidaytypeideas?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
-  const holidayGrpName = router.query?.holidaytypeitineraries?.replace(/-/g, ' ').replace(/and/g, '&').toLowerCase();
+  const holidaytypename = router.query?.holidaytypeideas
+    ?.replace(/-/g, " ")
+    .replace(/and/g, "&")
+    .toLowerCase();
+  const holidayGrpName = router.query?.holidaytypeitineraries
+    ?.replace(/-/g, " ")
+    .replace(/and/g, "&")
+    .toLowerCase();
   const width = "250px";
   const styles = {
     control: (provided) => ({
@@ -166,11 +171,19 @@ function Index() {
     selectedOptionData(selectedOption);
   };
 
-  let regionWiseUrl = "/uk";
+  // let regionWiseUrl = "/uk";
+  // if (typeof window !== "undefined") {
+  //   if (window && window.site_region) {
+  //     regionWiseUrl = "/" + window.site_region;
+  //     // setMyVariable(window.site_region);
+  //   }
+  // }
+
+  let region = "uk";
+  let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      regionWiseUrl = "/" + window.site_region;
-      // setMyVariable(window.site_region);
+      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
     }
   }
 
@@ -184,7 +197,7 @@ function Index() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`
+        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`
     );
   };
 
@@ -203,8 +216,6 @@ function Index() {
     }
     setHeadingText(text);
   };
-
-
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -252,7 +263,9 @@ function Index() {
       .getHolidaytypeDetailsById(holidaytypename)
       .then((x) => {
         setHolidaytypesDetails(x.data[0].attributes);
-        setFriendlyUrl(`home/holiday-types/${holidayGrpName}/${holidaytypename}`);
+        setFriendlyUrl(
+          `home/holiday-types/${holidayGrpName}/${holidaytypename}`
+        );
         // console.log()
         const oldText = x.data[0].attributes?.overview_text;
         var newValueWithBr = oldText?.replace(/\\n/g, "");
@@ -328,9 +341,7 @@ function Index() {
           <section className="destination_tab_row light_grey pb-0">
             <div className="container">
               <div className="bookmark_row">
-                <FriendlyUrl
-                  data={friendlyUrl}
-                ></FriendlyUrl>
+                <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
               </div>
 
               <div className="destination_tab_inr">
@@ -441,7 +452,7 @@ function Index() {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
