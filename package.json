@@ -51,6 +51,7 @@
         "sequelize": "^6.31.0",
         "smoothscroll-polyfill": "^0.4.4",
         "state-pool": "^0.9.0",
+        "url-rewrite": "^0.4.2",
         "yup": "^1.1.1"
     },
     "devDependencies": {
