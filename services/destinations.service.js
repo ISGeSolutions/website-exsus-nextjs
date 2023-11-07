@@ -94,7 +94,7 @@ function getDestinationInspireMe() {
 function getDestinationDetails(name) {
     // console.log('baseUrl_dropdown', baseUrl_dropdown);
     const destinationDetailsUrl =
-        `${publicRuntimeConfig.apiUrl}/api/destinations?filters[destination_name][$eq]=${name.replace(/&/g, "%26")}&populate[countries][filters][popular_ind][$eq]=true&populate[countries][sort][0]=popular_serial_no&populate[countries][fields][3]=country_name&populate[countries][populate][4]=country_images&populate[countries][populate][country_images][filters][image_type][$eq]=thumbnail`;
+        `${publicRuntimeConfig.apiUrl}/api/destinations?filters[destination_name][$eq]=${name.replace(/&/g, "%26")}&&populate[destination_images][fields][2]=image_path&populate[destination_images][fields][3]=image_type&populate[countries][filters][popular_ind][$eq]=true&populate[countries][sort][0]=popular_serial_no&populate[countries][fields][3]=country_name&populate[countries][populate][4]=country_images&populate[countries][populate][country_images][filters][image_type][$eq]=thumbnail`;
     return fetchWrapper.get(destinationDetailsUrl);
 }
 
@@ -166,11 +166,11 @@ function getItinerariesByDestination(dcode, page, item) {
 
 function getAllHotels(page, item) {
     if (item == "recommended") {
-        const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/hotels?populate[0]=hotel_images&populate[1]=hotel_travel_times&pagination[page]=${page}&pagination[pageSize]=12`;
-        return fetchWrapper.get(itinerariesDetailsUrl);
+        const hotelsDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/hotels?populate[0]=hotel_images&populate[1]=hotel_travel_times&pagination[page]=${page}&pagination[pageSize]=12`;
+        return fetchWrapper.get(hotelsDetailsUrl);
     } else if (item == "alphabetical") {
-        const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/hotels?populate[0]=hotel_images&populate[1]=hotel_travel_times&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=hotel_name:asc`;
-        return fetchWrapper.get(itinerariesDetailsUrl);
+        const hotelsDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/hotels?populate[0]=hotel_images&populate[1]=hotel_travel_times&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=hotel_name:asc`;
+        return fetchWrapper.get(hotelsDetailsUrl);
     }
 }
 

@@ -52,12 +52,12 @@ function Inspireme(props) {
 
   // Function to handle the onChange event
   const handleSelectChange = (event) => {
-    debugger;
+
     setSelectedValue(event.target.value); // Update the selected value in state
   };
 
   function onSubmit(data) {
-    debugger;
+
     // const { pathname, query } = router;
 
     // // Clone the existing query object and remove the specific query parameter
@@ -76,19 +76,19 @@ function Inspireme(props) {
 
     if (data?.destination) {
       destination = data?.destination;
-    } else if(queryParameters?.where) {
+    } else if (queryParameters?.where) {
       destination = queryParameters?.where;
     }
 
     if (data?.reason) {
       reason = data?.reason;
-    } else if(queryParameters?.what) {
+    } else if (queryParameters?.what) {
       reason = queryParameters?.what;
     }
 
     if (data?.month) {
       month = data?.month;
-    } else if(queryParameters?.when) {
+    } else if (queryParameters?.when) {
       month = queryParameters?.when;
     }
 

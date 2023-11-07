@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRef } from "react";
 import { Link, Spinner, Signup, FriendlyUrl } from "components";
+import Iframe from "react-iframe";
 import { Layout } from "components/users";
 import {
   userService,
@@ -26,7 +27,10 @@ function Index() {
   const [metaDescription, setMetaDescription] = useState(null);
   const [longText, setLongText] = useState(null);
   const [careerData, setCareerData] = useState(null);
+  const [mapVariable, setMapVariable] = useState(null);
   const [subTitle, setSubTitle] = useState(null);
+  const [backgroundImage, setBackgroundImage] = useState([]);
+
 
   const handleRedirect = () => {
     router.push(regionWiseUrl + `/hotel-detail`);
@@ -116,6 +120,14 @@ function Index() {
       .then((x) => {
         setCareerData(x.data[0]);
         const data = x.data[0]?.attributes?.custom_page_contents?.data;
+        const imageCheck = x.data[0].attributes?.custom_page_images?.data;
+        const newBackgroundImages = [];
+        imageCheck.forEach((element) => {
+          if (element?.attributes?.image_type == "banner") {
+            newBackgroundImages.push(element?.attributes?.image_path);
+          }
+        });
+        setBackgroundImage(newBackgroundImages);
         let modifiedString = "";
 
         if (data) {
@@ -178,7 +190,7 @@ function Index() {
                   );
                 }
               });
-              // Set the modified string in state
+              setLongText(modifiedString);
               setIsLoading(false);
             } catch (error) {
               if (error.message === "Loop break") {
@@ -213,7 +225,8 @@ function Index() {
   return (
     <>
       <Head>
-        <title>Special Offers | Luxury Hotel and Holiday Offers</title>
+        <title>{title}</title>
+        <meta content={metaDescription}></meta>
         {/* <script
           type="text/javascript"
           src="/assets/javascripts/bootstrap.min.js"
@@ -230,140 +243,66 @@ function Index() {
       ) : (
         <div>
           <section className="banner_blk_row">
-            {/* <Carousel showArrows={false} autoPlay={true} infiniteLoop={true} showIndicators={false} showThumbs={false}>
-                    <div>
-                        <img src="/assets/images/offer_banner01.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/offer_banner02.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/offer_banner03.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/offer_banner04.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/offer_banner05.jpeg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/offer_banner06.jpg" />
-                    </div>
-                    <div>
-                        <img src="/assets/images/offer_banner07.jpg" />
-                    </div>
-                </Carousel> */}
-
             <div
               id="carouselExampleInterval"
               className="carousel slide"
               data-bs-ride="carousel"
             >
               <div className="carousel-indicators">
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleInterval"
-                  data-bs-slide-to="0"
-                  className="active"
-                  aria-current="true"
-                  aria-label="Slide 1"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleInterval"
-                  data-bs-slide-to="1"
-                  aria-label="Slide 2"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleInterval"
-                  data-bs-slide-to="2"
-                  aria-label="Slide 3"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleInterval"
-                  data-bs-slide-to="3"
-                  aria-label="Slide 4"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleInterval"
-                  data-bs-slide-to="4"
-                  aria-label="Slide 5"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleInterval"
-                  data-bs-slide-to="5"
-                  aria-label="Slide 6"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleInterval"
-                  data-bs-slide-to="6"
-                  aria-label="Slide 7"
-                ></button>
+                {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
+                {backgroundImage.map((_, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    data-bs-target="#carouselExampleInterval"
+                    data-bs-slide-to={index}
+                    className={index === 0 ? "active" : ""}
+                    aria-current={index === 0 ? "true" : "false"}
+                    aria-label={`Slide ${index + 1}`}
+                  ></button>
+                ))}
               </div>
               <div className="carousel-inner">
-                <a
-                  href="#"
-                  target="_blank"
-                  className="carousel-item active"
-                  data-bs-interval="5000"
-                >
-                  <div className="banner_commn_cls offer_banner01"></div>
-                </a>
-                <a
-                  href="#"
-                  target="_blank"
-                  className="carousel-item"
-                  data-bs-interval="5000"
-                >
-                  <div className="offer_banner02 banner_commn_cls"></div>
-                </a>
-                <a
-                  href="#"
-                  target="_blank"
-                  className="carousel-item"
-                  data-bs-interval="5000"
-                >
-                  <div className="offer_banner03 banner_commn_cls"></div>
-                </a>
-                <a
-                  href="#"
-                  target="_blank"
-                  className="carousel-item"
-                  data-bs-interval="5000"
-                >
-                  <div className="offer_banner04 banner_commn_cls"></div>
-                </a>
-                <a
-                  href="#"
-                  target="_blank"
-                  className="carousel-item"
-                  data-bs-interval="5000"
-                >
-                  <div className="offer_banner05 banner_commn_cls"></div>
-                </a>
-                <a
-                  href="#"
-                  target="_blank"
-                  className="carousel-item"
-                  data-bs-interval="5000"
-                >
-                  <div className="offer_banner06 banner_commn_cls"></div>
-                </a>
-                <a
-                  href="#"
-                  target="_blank"
-                  className="carousel-item"
-                  data-bs-interval="5000"
-                >
-                  <div className="offer_banner07 banner_commn_cls"></div>
-                </a>
+                {backgroundImage.map((imagePath, index) => (
+                  <a
+                    href="#"
+                    key={index}
+                    target="_blank"
+                    className={`carousel-item ${index === 0 ? "active" : ""}`}
+                    data-bs-interval="5000"
+                  >
+                    <div
+                      className="banner_commn_cls"
+                      style={{ backgroundImage: `url(${imagePath})` }}
+                    ></div>
+                  </a>
+                ))}
               </div>
             </div>
+            <div className="banner_tab_blk">
+              <button className="btn banner_map_tab">Map</button>
+              <button className="btn banner_img_tab banner_tab_active">
+                Images
+              </button>
+            </div>
+            <div className="banner_map_blk">
+              <Iframe
+                width="640px"
+                height="320px"
+                id=""
+                className=""
+                display="block"
+                src={mapVariable}
+                position="relative"
+                style="border:0;"
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+
+              {/* src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" */}
+            </div>
+            {/* <p>{mapVariable}</p> */}
           </section>
 
           <section className="card_blk_row destinations_blk_row light_grey">

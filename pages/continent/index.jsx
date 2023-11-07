@@ -211,12 +211,11 @@ function Index() {
             map_longitude +
             `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
           setMapVariable(mapTemp);
-          const imageCheck = x.data[0].attributes.destination_images.data;
+          const imageCheck = x.data[0].attributes?.destination_images?.data;
           const newBackgroundImages = [];
           imageCheck.forEach((element) => {
             if (element.attributes.image_type == "banner") {
               newBackgroundImages.push(element.attributes.image_path);
-            } else if (element.attributes.image_type == "thumbnail") {
             }
           });
           setBackgroundImage(newBackgroundImages);

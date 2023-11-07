@@ -50,6 +50,8 @@ function Country() {
   const [mapVariable, setMapVariable] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [friendlyUrl, setFriendlyUrl] = useState("");
+  const [backgroundImage, setBackgroundImage] = useState([]);
+
 
   const countryOptions = [
     { value: "", label: "Filter by country" },
@@ -186,7 +188,7 @@ function Country() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
+      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
     );
   };
 
@@ -338,6 +340,14 @@ function Country() {
             map_longitude +
             `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
           setMapVariable(mapTemp);
+          const imageCheck = x.data[0].attributes?.country_images?.data;
+          const newBackgroundImages = [];
+          imageCheck.forEach((element) => {
+            if (element?.attributes?.image_type == "banner") {
+              newBackgroundImages.push(element?.attributes?.image_path);
+            }
+          });
+          setBackgroundImage(newBackgroundImages);
           setIsLoading(false);
         })
         .catch((error) => {
@@ -389,39 +399,34 @@ function Country() {
               data-bs-ride="carousel"
             >
               <div className="carousel-indicators">
-                {countryData?.attributes?.country_images?.data?.map(
-                  (_, index) => (
-                    <button
-                      key={index}
-                      type="button"
-                      data-bs-target="#carouselExampleInterval"
-                      data-bs-slide-to={index}
-                      className={index === 0 ? "active" : ""}
-                      aria-current={index === 0 ? "true" : "false"}
-                      aria-label={`Slide ${index + 1}`}
-                    ></button>
-                  )
-                )}
+                {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
+                {backgroundImage.map((_, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    data-bs-target="#carouselExampleInterval"
+                    data-bs-slide-to={index}
+                    className={index === 0 ? "active" : ""}
+                    aria-current={index === 0 ? "true" : "false"}
+                    aria-label={`Slide ${index + 1}`}
+                  ></button>
+                ))}
               </div>
               <div className="carousel-inner">
-                {countryData?.attributes?.country_images?.data?.map(
-                  (element, index) =>
-                    element?.attributes?.image_type == "banner" && (
-                      <NavLink
-                        href="#"
-                        className="carousel-item active"
-                        data-bs-interval="5000"
-                        key={index}
-                      >
-                        <div
-                          className="banner_commn_cls"
-                          style={{
-                            backgroundImage: `url(${element?.attributes?.image_path})`,
-                          }}
-                        ></div>
-                      </NavLink>
-                    )
-                )}
+                {backgroundImage.map((imagePath, index) => (
+                  <a
+                    href="#"
+                    key={index}
+                    target="_blank"
+                    className={`carousel-item ${index === 0 ? "active" : ""}`}
+                    data-bs-interval="5000"
+                  >
+                    <div
+                      className="banner_commn_cls"
+                      style={{ backgroundImage: `url(${imagePath})` }}
+                    ></div>
+                  </a>
+                ))}
               </div>
             </div>
             <div className="banner_tab_blk">
@@ -444,7 +449,10 @@ function Country() {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
+
+              {/* src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" */}
             </div>
+            {/* <p>{mapVariable}</p> */}
           </section>
 
           {/* Country sub tabs */}
