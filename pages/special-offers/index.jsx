@@ -98,8 +98,12 @@ function Index() {
 
   useEffect(() => {
     // userService.getAll().then(x => setUsers(x));
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+    const tooltipTriggerList = document.querySelectorAll(
+      '[data-bs-toggle="tooltip"]'
+    );
+    const tooltipList = [...tooltipTriggerList].map(
+      (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+    );
     specialoffersService
       .getAllOffers()
       .then((x) => {
@@ -207,7 +211,6 @@ function Index() {
     //   // Cleanup code (if needed) when the component unmounts
     //   tooltipList.forEach(tooltip => tooltip.dispose());
     // };
-
   }, []);
 
   return (
