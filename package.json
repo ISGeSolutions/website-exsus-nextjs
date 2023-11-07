@@ -4,9 +4,8 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
-        "build": "CI=false next build",
-        "start": "next start",
-        "lint": "next lint"
+        "build": "next build",
+        "start": "node server.js"
     },
     "dependencies": {
         "@hookform/resolvers": "^3.1.0",
