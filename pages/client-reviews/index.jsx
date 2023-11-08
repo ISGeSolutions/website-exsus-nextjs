@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Signup } from "components";
 import { Link, Spinner } from "components";
 import { Layout } from "components/users";
-import { whyusService } from "../../services/whyus.service";
+import { whyusService, destinationService } from "../../services/whyus.service";
 import { NavLink } from "components";
 import { FriendlyUrl } from "../../components";
 
@@ -22,6 +22,8 @@ function Index() {
   const [title, setTitle] = useState(null);
   const [metaDescription, setMetaDescription] = useState(null);
   const [longText, setLongText] = useState(null);
+  const [rightHeader, setRightHeader] = useState(null);
+  const [rightCorner, setRightCorner] = useState(null);
 
   let regionWiseUrl = "/uk";
   let region = "uk";
@@ -34,7 +36,7 @@ function Index() {
   }
 
   const websiteContentCheck = (matches, region, modifiedString) => {
-    whyusService.getDictionaryDetails(matches, region).then((responseObj) => {
+    whyusService.destinationService(matches, region).then((responseObj) => {
       if (responseObj) {
         const res = responseObj?.data;
         res.forEach((element, index) => {
@@ -58,20 +60,117 @@ function Index() {
       new bootstrap.Carousel(carousel);
     }
     setFriendlyUrl(`home/Why us/Exsus Reviews`);
-    whyusService
-      .getAllReviews()
-      .then((x) => {
-        setClientReviews(x.data);
+    // whyusService
+    //   .getAllReviews()
+    //   .then((x) => {
+    //     setClientReviews(x.data);
 
-        // Dictionary
-        let modifiedString = x.data.attributes?.review_text;
-        // Find and store matches in an array
+    //     // Dictionary
+    //     debugger;
+    //     let modifiedString = x.data[0]?.attributes?.review_text;
+    //     console.log("modifiedString", modifiedString);
+    //     // Find and store matches in an array
+    //     const regex = /{[a-zA-Z0-9-]+}/g;
+    //     const matches = [...new Set(modifiedString.match(regex))];
+
+    //     let storedDataString = "";
+    //     let storedData = "";
+
+    //     if (region == "uk") {
+    //       storedDataString = localStorage.getItem("websitecontent_uk");
+    //       storedData = JSON.parse(storedDataString);
+    //     } else if (region == "us") {
+    //       storedDataString = localStorage.getItem("websitecontent_us");
+    //       storedData = JSON.parse(storedDataString);
+    //     } else if (region == "asia") {
+    //       storedDataString = localStorage.getItem("websitecontent_asia");
+    //       storedData = JSON.parse(storedDataString);
+    //     } else if (region == "in") {
+    //       storedDataString = localStorage.getItem("websitecontent_india");
+    //       storedData = JSON.parse(storedDataString);
+    //     }
+
+    //     if (storedData !== null) {
+    //       // You can access it using localStorage.getItem('yourKey')
+    //       if (matches) {
+    //         let replacement = "";
+    //         try {
+    //           matches.forEach((match, index, matches) => {
+    //             const matchString = match.replace(/{|}/g, "");
+    //             if (!storedData[matchString]) {
+    //               websiteContentCheck(matches, region, modifiedString);
+    //               throw new Error("Loop break");
+    //             } else {
+    //               replacement = storedData[matchString];
+    //             }
+    //             const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+    //             if (checkStr && replacement) {
+    //               modifiedString = modifiedString.replace(
+    //                 checkStr,
+    //                 replacement
+    //               );
+    //             }
+    //           });
+
+    //           // Set the modified string in state
+    //           setnewValueWithBr(modifiedString);
+    //           // console.log(modifiedString);
+    //         } catch (error) {
+    //           if (error.message === "Loop break") {
+    //             // Handle the loop break here
+    //             // console.log("Loop has been stopped.");
+    //           } else if (error.message === "Region not found") {
+    //             // Handle the loop break here
+    //             // console.log("Loop has been stopped.");
+    //             setnewValueWithBr(modifiedString);
+    //           }
+    //         }
+    //       }
+    //     } else {
+    //       // The item with 'yourKey' does not exist in local storage
+    //       // Display the matched words
+    //       if (matches) {
+    //         websiteContentCheck(matches, region, modifiedString);
+    //       }
+    //     }
+    //     setIsLoading(false);
+    //   })
+    //   .catch((error) => {
+    //     setIsLoading(false);
+    //   });
+
+    whyusService
+      .getReviewsCustomePage()
+      .then((x) => {
+        setCareerData(x.data[0]);
+        const data = x.data[0]?.attributes?.custom_page_contents?.data;
+
+        let modifiedString = "";
+        if (data) {
+          data.forEach((element, index) => {
+            if (element?.attributes?.content_name == "HeadingTag") {
+              setHeadingTag(element?.attributes?.content_value.toUpperCase());
+            } else if (element?.attributes?.content_name == "Title") {
+              setTitle(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == "MetaDescription") {
+              setMetaDescription(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == "Long_Text") {
+              modifiedString = element?.attributes?.content_value;
+              //setLongText(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == "Right_Header") {
+              setRightHeader(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == "Right_Corner") {
+              setRightCorner(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == "Sub_Title") {
+              setSubTitle(element?.attributes?.content_value);
+            }
+          });
+        }
+
         const regex = /{[a-zA-Z0-9-]+}/g;
         const matches = [...new Set(modifiedString.match(regex))];
-
         let storedDataString = "";
         let storedData = "";
-
         if (region == "uk") {
           storedDataString = localStorage.getItem("websitecontent_uk");
           storedData = JSON.parse(storedDataString);
@@ -108,9 +207,9 @@ function Index() {
                 }
               });
 
-              // Set the modified string in state
-              setnewValueWithBr(modifiedString);
-              // console.log(modifiedString);
+              setLongText(modifiedString);
+
+              setIsLoading(false);
             } catch (error) {
               if (error.message === "Loop break") {
                 // Handle the loop break here
@@ -118,47 +217,10 @@ function Index() {
               } else if (error.message === "Region not found") {
                 // Handle the loop break here
                 // console.log("Loop has been stopped.");
-                setnewValueWithBr(modifiedString);
+                setLongText(modifiedString);
               }
             }
           }
-        } else {
-          // The item with 'yourKey' does not exist in local storage
-          // Display the matched words
-          if (matches) {
-            websiteContentCheck(matches, region, modifiedString);
-          }
-        }
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-      });
-
-    whyusService
-      .getReviewsCustomePage()
-      .then((x) => {
-        setCareerData(x.data[0]);
-        const data = x.data[0]?.attributes?.custom_page_contents?.data;
-        // console.log("consolelog", data);
-        if (data) {
-          data.forEach((element, index) => {
-            if (element?.attributes?.content_name == "HeadingTag") {
-              setHeadingTag(element?.attributes?.content_value);
-            } else if (element?.attributes?.content_name == "Title") {
-              setTitle(element?.attributes?.content_value);
-            } else if (element?.attributes?.content_name == "MetaDescription") {
-              setMetaDescription(element?.attributes?.content_value);
-            } else if (element?.attributes?.content_name == "Long_Text") {
-              setLongText(
-                element?.attributes?.content_value.replace(/h4/g, "h2")
-              );
-            } else if (element?.attributes?.content_name == "Right_Header") {
-              setRightHeader(element?.attributes?.content_value);
-            } else if (element?.attributes?.content_name == "Right_Corner") {
-              setRightCorner(element?.attributes?.content_value);
-            }
-          });
         }
         setIsLoading(false);
       })
