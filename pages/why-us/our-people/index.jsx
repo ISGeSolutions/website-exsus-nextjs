@@ -19,7 +19,7 @@ function Index() {
   const [users, setUsers] = useState(null);
   const [allExecutives, setAllExecutives] = useState([]);
   const router = useRouter();
-  const [friendlyUrl, setFriendlyUrl] = useState('');
+  const [friendlyUrl, setFriendlyUrl] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [customData, setCustomData] = useState(null);
   const [headingTag, setHeadingTag] = useState(null);
@@ -29,7 +29,6 @@ function Index() {
   const [rightHeader, setRightHeader] = useState(null);
   const [rightCorner, setRightContent] = useState(null);
   const [backgroundImage, setBackgroundImage] = useState([]);
-
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -52,19 +51,27 @@ function Index() {
     }
   };
 
-  let regionWiseUrl = "/uk";
+  // let regionWiseUrl = "/uk";
+  // let region = "uk";
+  // if (typeof window !== "undefined") {
+  //   if (window && window.site_region) {
+  //     regionWiseUrl = "/" + window.site_region;
+  //     region = window.site_region;
+
+  //     // setMyVariable(window.site_region);
+  //   }
+  // }
+
   let region = "uk";
+  let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      regionWiseUrl = "/" + window.site_region;
-      region = window.site_region;
-
-      // setMyVariable(window.site_region);
+      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
     }
   }
 
   const handleRedirect = (item) => {
-    const modifiedName = item.replace(/ /g, '-').toLowerCase();
+    const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(regionWiseUrl + `/why-us/our-people/${modifiedName}`);
   };
 
@@ -85,7 +92,7 @@ function Index() {
 
   useEffect(() => {
     // userService.getAll().then(x => setUsers(x));
-    setFriendlyUrl(`Home/Why us/Our people`)
+    setFriendlyUrl(`Home/Why us/Our people`);
     whyusService
       .getAllExecutives()
       .then((x) => {
@@ -112,17 +119,17 @@ function Index() {
         const data = x.data[0]?.attributes?.custom_page_contents?.data;
         if (data) {
           data.forEach((element, index) => {
-            if (element?.attributes?.content_name == 'HeadingTag') {
+            if (element?.attributes?.content_name == "HeadingTag") {
               setHeadingTag(element?.attributes?.content_value);
-            } else if (element?.attributes?.content_name == 'Title') {
+            } else if (element?.attributes?.content_name == "Title") {
               setTitle(element?.attributes?.content_value);
-            } else if (element?.attributes?.content_name == 'MetaDescription') {
+            } else if (element?.attributes?.content_name == "MetaDescription") {
               setMetaDescription(element?.attributes?.content_value);
-            } else if (element?.attributes?.content_name == 'Long_Text') {
+            } else if (element?.attributes?.content_name == "Long_Text") {
               setLongText(element?.attributes?.content_value);
-            } else if (element?.attributes?.content_name == 'Right_Header') {
+            } else if (element?.attributes?.content_name == "Right_Header") {
               setRightHeader(element?.attributes?.content_value);
-            } else if (element?.attributes?.content_name == 'Right_Corner') {
+            } else if (element?.attributes?.content_name == "Right_Corner") {
               setRightContent(element?.attributes?.content_value);
             }
           });
@@ -133,7 +140,6 @@ function Index() {
         // Handle any errors here
         setIsLoading(false);
       });
-
 
     const carousel = document.querySelector("#carouselExampleInterval");
     if (carousel) {
@@ -233,7 +239,9 @@ function Index() {
                       </div>
                       <button
                         className="btn prmry_btn make_enqury_btn"
-                        onClick={() => handleRedirect(res?.attributes?.executive_name)}
+                        onClick={() =>
+                          handleRedirect(res?.attributes?.executive_name)
+                        }
                       >
                         Read more
                         <svg

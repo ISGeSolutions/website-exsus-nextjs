@@ -30,6 +30,14 @@ function Index() {
   const [visiblePagination, setVisiblePagination] = useState(true);
   const [testimonials, setTestimonials] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [headingTag, setHeadingTag] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [metaDescription, setMetaDescription] = useState(null);
+  const [longText, setLongText] = useState(null);
+  const [careerData, setCareerData] = useState(null);
+  const [subTitle, setSubTitle] = useState(null);
+  const [rightHeader, setRightHeader] = useState(null);
+  const [rightCorner, setRightCorner] = useState(null);
 
   // let regionWiseUrl = "/uk";
   // if (typeof window !== "undefined") {
@@ -114,18 +122,28 @@ function Index() {
     router.push("/where-to-go");
   };
 
+  const websiteContentCheck = (matches, region, modifiedString) => {
+    destinationService
+      .getDictionaryDetails(matches, region)
+      .then((responseObj) => {
+        if (responseObj) {
+          const res = responseObj?.data;
+          res.forEach((element, index) => {
+            const replacement = element?.attributes?.content_translation_text;
+            const matchString = element?.attributes?.content_word;
+            const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+            if (checkStr && replacement) {
+              modifiedString = modifiedString.replace(checkStr, replacement);
+            }
+          });
+
+          // Set the modified string in state
+          setLongText(modifiedString);
+        }
+      });
+  };
+
   useEffect(() => {
-    // destinationService.getAll().then(x => {
-    //     console.log('x', x);
-    //     setDestinations(x)
-    // });
-
-    // destinationService.getDestinationLandingPage().then(x => {
-
-    //     // setDestinationLandingDetails(x)
-
-    // });
-
     destinationService
       .getDestinationLandingList()
       .then((x) => {
@@ -135,6 +153,7 @@ function Index() {
       .catch((error) => {
         setIsLoading(false);
       });
+
     whyusService
       .getAllTravelReviews()
       .then((x) => {
@@ -168,7 +187,95 @@ function Index() {
             : `https://online.exsus.com/${whenToGoImage}`
         );
         setBackgroundImage(newBackgroundImages);
-        setIsLoading(false);
+
+        debugger;
+        const data = x.data[0]?.attributes?.custom_page_contents?.data;
+        const modifiedData = [];
+
+        if (data) {
+          let modifiedString = "";
+          data.forEach((element, index) => {
+            let content = {};
+
+            modifiedString = element?.attributes?.content_value;
+            const regex = /{[a-zA-Z0-9-]+}/g;
+            const matches = [...new Set(modifiedString.match(regex))];
+
+            let storedDataString = "";
+            let storedData = "";
+            if (region == "uk") {
+              storedDataString = localStorage.getItem("websitecontent_uk");
+              storedData = JSON.parse(storedDataString);
+            } else if (region == "us") {
+              storedDataString = localStorage.getItem("websitecontent_us");
+              storedData = JSON.parse(storedDataString);
+            } else if (region == "asia") {
+              storedDataString = localStorage.getItem("websitecontent_asia");
+              storedData = JSON.parse(storedDataString);
+            } else if (region == "in") {
+              storedDataString = localStorage.getItem("websitecontent_india");
+              storedData = JSON.parse(storedDataString);
+            }
+
+            if (storedData !== null) {
+              // You can access it using localStorage.getItem('yourKey')
+              if (matches) {
+                let replacement = "";
+                try {
+                  matches.forEach((match, index, matches) => {
+                    const matchString = match.replace(/{|}/g, "");
+                    if (!storedData[matchString]) {
+                      websiteContentCheck(matches, region, modifiedString);
+                      throw new Error("Loop break");
+                    } else {
+                      replacement = storedData[matchString];
+                    }
+                    const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+                    if (checkStr && replacement) {
+                      modifiedString = modifiedString.replace(
+                        checkStr,
+                        replacement
+                      );
+                    }
+                  });
+                  content = element.attributes;
+                  content["content_value"] = modifiedString;
+                  modifiedData.push(content);
+                  setIsLoading(false);
+                } catch (error) {
+                  if (error.message === "Loop break") {
+                    // Handle the loop break here
+                    // console.log("Loop has been stopped.");
+                  } else if (error.message === "Region not found") {
+                    // Handle the loop break here
+                    // console.log("Loop has been stopped.");
+                  }
+                }
+              }
+            }
+            setIsLoading(false);
+          });
+        }
+
+        console.log(modifiedData);
+        modifiedData.forEach((element) => {
+          if (element?.content_name == "HeadingTag") {
+            setHeadingTag(element?.content_value.toUpperCase());
+          } else if (element?.content_name == "Title") {
+            setTitle(element?.content_value);
+          } else if (element?.content_name == "MetaDescription") {
+            setMetaDescription(element?.content_value);
+          } else if (element?.content_name == "Long_Text") {
+            debugger;
+            setLongText(element?.content_value);
+          } else if (element?.content_name == "Right_Header") {
+            setRightHeader(element?.content_value);
+          } else if (element?.content_name == "Right_Corner") {
+            setRightCorner(element?.content_value);
+          } else if (element?.content_name == "Sub_Title") {
+            setSubTitle(element?.content_value);
+          }
+        });
       })
       .catch((error) => {
         setIsLoading(false);
@@ -262,22 +369,12 @@ function Index() {
               </div>
               <div className="row">
                 <div className="destinations_cntnt_blk">
-                  <h2>
-                    {
-                      destinations?.attributes?.custom_page_contents?.data?.filter(
-                        (res) =>
-                          res.attributes?.content_name == "LuxuryHolidaysHeader"
-                      )[0].attributes?.content_value
-                    }
-                  </h2>
-                  <p>
-                    {
-                      destinations?.attributes?.custom_page_contents?.data?.filter(
-                        (res) =>
-                          res.attributes?.content_name == "LuxuryHolidaysText"
-                      )[0].attributes?.content_value
-                    }
-                  </p>
+                  <h2>{headingTag}</h2>
+                  {longText}
+                  {/* <p
+                    className="mb-4"
+                    dangerouslySetInnerHTML={{ __html: longText }}
+                  ></p> */}
                 </div>
               </div>
             </div>

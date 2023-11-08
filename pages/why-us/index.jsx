@@ -156,7 +156,7 @@ function Index() {
             }
           });
         }
-        console.log(setLongText);
+
         const regex = /{[a-zA-Z0-9-]+}/g;
         const matches = [...new Set(modifiedString.match(regex))];
 
