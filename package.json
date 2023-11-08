@@ -28,6 +28,7 @@
         "jsonwebtoken": "^9.0.0",
         "mysql2": "^3.2.3",
         "next": "^12.3.4",
+        "next-images": "^1.8.5",
         "next-scripts": "^0.3.4",
         "nodemailer": "^6.9.6",
         "prop-types": "^15.8.1",

@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+const withImages = require('next-images');
 
 const nextConfig = {
   // async rewrites() {
@@ -477,15 +478,15 @@ const nextConfig = {
     apiUrl:
       process.env.NODE_ENV === "development"
         ? // ? 'https://e922710a-cb11-401b-ae5b-ef73740e1501.mock.pstmn.io' // development api
-          // : 'https://e922710a-cb11-401b-ae5b-ef73740e1501.mock.pstmn.io' // production api
-          // ? 'http://localhost:4000' // development api
-          // : 'http://localhost:4000' // production api
-          // ? 'https://mock.apidog.com/m1/379394-0-default' // development api
-          // : 'https://mock.apidog.com/m1/379394-0-default' // production api
-          //     ? 'http://13.233.122.205:1337' // development api
-          //     : 'http://13.233.122.205:1337' // production api
+        // : 'https://e922710a-cb11-401b-ae5b-ef73740e1501.mock.pstmn.io' // production api
+        // ? 'http://localhost:4000' // development api
+        // : 'http://localhost:4000' // production api
+        // ? 'https://mock.apidog.com/m1/379394-0-default' // development api
+        // : 'https://mock.apidog.com/m1/379394-0-default' // production api
+        //     ? 'http://13.233.122.205:1337' // development api
+        //     : 'http://13.233.122.205:1337' // production api
 
-          "https://cms-api.excelleresolutions.com" // development api
+        "https://cms-api.excelleresolutions.com" // development api
         : "https://cms-api.excelleresolutions.com", // production api
     apiUrl1:
       process.env.NODE_ENV === "development"
@@ -515,4 +516,11 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = nextConfig,
+  withImages({
+    // Configure the options for next-images
+    images: {
+      // Define the directory where your images are stored (default: 'public')
+      path: '/public',
+    },
+  });
