@@ -23,15 +23,23 @@ function Nav() {
   const [closeMenu, setcloseMenu] = useState(null);
   const [overlayVisible, setOverlayVisible] = useState(true);
 
-  let region = "uk";
+  // let region = "uk";
+  // let regionWiseUrl = "";
+  // if (typeof window !== "undefined") {
+  //   if (window && window.site_region) {
+  //     if (window.site_region !== "uk") {
+  //       regionWiseUrl = "/" + window.site_region;
+  //       region = window.site_region;
+  //     }
+  //     // setMyVariable(window.site_region);
+  //   }
+  // }
+
+  //let region = "uk";
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      if (window.site_region !== "uk") {
-        regionWiseUrl = "/" + window.site_region;
-        region = window.site_region;
-      }
-      // setMyVariable(window.site_region);
+      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
     }
   }
 
@@ -490,8 +498,9 @@ function Nav() {
                                 (destinationItem, i) => (
                                   <li
                                     key={i}
-                                    className={`header_country_label ${activeIndex === i ? "active" : ""
-                                      }`}
+                                    className={`header_country_label ${
+                                      activeIndex === i ? "active" : ""
+                                    }`}
                                     onMouseEnter={() => handleMouseEnter(i)}
                                     onMouseLeave={handleMouseLeave}
                                   >
@@ -707,8 +716,9 @@ function Nav() {
                               {holidaytypesList?.map((holidaystypesItem, i) => (
                                 <li
                                   key={holidaystypesItem?.id}
-                                  className={`header_country_label ${activeIndexHoliday === i ? "active" : ""
-                                    }`}
+                                  className={`header_country_label ${
+                                    activeIndexHoliday === i ? "active" : ""
+                                  }`}
                                   onMouseEnter={() =>
                                     handleMouseEnterHoliday(i)
                                   }
@@ -969,7 +979,8 @@ function Nav() {
                                 <NavLink
                                   onMouseEnter={showOverlay}
                                   onClick={hideOverlay}
-                                  href={region + "/why-us/our-people"}
+                                  // href={region + "/why-us/our-people"}
+                                  href="/why-us/our-people"
                                 >
                                   Meet the Exsus Team
                                 </NavLink>
