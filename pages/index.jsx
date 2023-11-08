@@ -548,7 +548,7 @@ function Index() {
                           </h4>
                           <ul>
                             <li>{item?.attributes?.header_text}</li>
-                            <li>Indonesia</li>
+                            {/* <li>Indonesia</li> */}
                             <li>
                               {
                                 item?.attributes?.itinerary_country_contents

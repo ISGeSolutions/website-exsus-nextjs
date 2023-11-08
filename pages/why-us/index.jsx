@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { useTranslation } from "react-i18next";
+import { EnquiryButton } from "../../components/common/EnquiryBtn";
 // import ReactGA from 'react-ga';
 // import ReactPixel from 'react-facebook-pixel';
 // import ReactPixel from '../../components/facebookPixel'; // Import your Facebook Pixel configuration
@@ -37,47 +38,48 @@ function Index() {
   const [careerData, setCareerData] = useState(null);
   const [subTitle, setSubTitle] = useState(null);
 
-  const EnquiryButton = () => {
-    ReactGA.event({
-      category: "Enquiry category",
-      action: "Enquiry action",
-      label: "Enquiry label", // optional
-      value: 99, // optional, must be a number
-      nonInteraction: true, // optional, true/false
-      transport: "xhr", // optional, beacon/xhr/image
-    });
 
-    const router = useRouter();
+  // const EnquiryButton = () => {
+  //   ReactGA.event({
+  //     category: "Enquiry category",
+  //     action: "Enquiry action",
+  //     label: "Enquiry label", // optional
+  //     value: 99, // optional, must be a number
+  //     nonInteraction: true, // optional, true/false
+  //     transport: "xhr", // optional, beacon/xhr/image
+  //   });
 
-    const handleEnquiryClick = () => {
-      // Perform other button click actions
-      router.push("/contact-us"); // Navigate to the /enquiry page
-    };
+  //   const router = useRouter();
 
-    return (
-      <button
-        className="btn prmry_btn make_enqury_btn"
-        onClick={handleEnquiryClick}
-      >
-        Make an enquiry
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="#ffffff"
-          shapeRendering="geometricPrecision"
-          textRendering="geometricPrecision"
-          imageRendering="optimizeQuality"
-          fillRule="evenodd"
-          clipRule="evenodd"
-          viewBox="0 0 267 512.43"
-        >
-          <path
-            fillRule="nonzero"
-            d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-          />
-        </svg>
-      </button>
-    );
-  };
+  //   const handleEnquiryClick = () => {
+  //     // Perform other button click actions
+  //     router.push("/contact-us"); // Navigate to the /enquiry page
+  //   };
+
+  //   return (
+  //     <button
+  //       className="btn prmry_btn make_enqury_btn"
+  //       onClick={handleEnquiryClick}
+  //     >
+  //       Make an enquiry
+  //       <svg
+  //         xmlns="http://www.w3.org/2000/svg"
+  //         fill="#ffffff"
+  //         shapeRendering="geometricPrecision"
+  //         textRendering="geometricPrecision"
+  //         imageRendering="optimizeQuality"
+  //         fillRule="evenodd"
+  //         clipRule="evenodd"
+  //         viewBox="0 0 267 512.43"
+  //       >
+  //         <path
+  //           fillRule="nonzero"
+  //           d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+  //         />
+  //       </svg>
+  //     </button>
+  //   );
+  // };
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -450,11 +452,6 @@ function Index() {
 
             <section className="make_enqury_row">
               <div className="container">
-                <h3>{whyusDetails?.page_content_3}</h3>
-                <p>{whyusDetails?.page_content_4}</p>
-                {/* <button className="btn prmry_btn make_enqury_btn">Make an enquiry
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                    </button> */}
                 <EnquiryButton />
               </div>
             </section>
