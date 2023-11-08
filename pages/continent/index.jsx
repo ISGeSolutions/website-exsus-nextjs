@@ -4,6 +4,7 @@ import Iframe from "react-iframe";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { FriendlyUrl } from "../../components";
+import { EnquiryButton } from "../../components/common/EnquiryBtn";
 import Country from "../country/index"; // Adjust the path accordingly
 import ContinentCountry from "../continentcountries/index"; // Adjust the path accordingly
 import ContinentItinararies from "../continentitineraries/index"; // Adjust the path accordingly
@@ -47,38 +48,38 @@ function Index() {
     }
   }
 
-  const EnquiryButton = () => {
-    const router = useRouter();
+  // const EnquiryButton = () => {
+  //   const router = useRouter();
 
-    const handleEnquiryClick = () => {
-      router.push(regionWiseUrl + `/contact-us`); // Navigate to the /enquiry page
-    };
+  //   const handleEnquiryClick = () => {
+  //     router.push(regionWiseUrl + `/contact-us`); // Navigate to the /enquiry page
+  //   };
 
-    return (
-      <button
-        className="btn prmry_btn make_enqury_btn"
-        onClick={handleEnquiryClick}
-      >
-        {" "}
-        Make an enquiry
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="#ffffff"
-          shapeRendering="geometricPrecision"
-          textRendering="geometricPrecision"
-          imageRendering="optimizeQuality"
-          fillRule="evenodd"
-          clipRule="evenodd"
-          viewBox="0 0 267 512.43"
-        >
-          <path
-            fillRule="nonzero"
-            d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-          />
-        </svg>
-      </button>
-    );
-  };
+  //   return (
+  //     <button
+  //       className="btn prmry_btn make_enqury_btn"
+  //       onClick={handleEnquiryClick}
+  //     >
+  //       {" "}
+  //       Make an enquiry
+  //       <svg
+  //         xmlns="http://www.w3.org/2000/svg"
+  //         fill="#ffffff"
+  //         shapeRendering="geometricPrecision"
+  //         textRendering="geometricPrecision"
+  //         imageRendering="optimizeQuality"
+  //         fillRule="evenodd"
+  //         clipRule="evenodd"
+  //         viewBox="0 0 267 512.43"
+  //       >
+  //         <path
+  //           fillRule="nonzero"
+  //           d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+  //         />
+  //       </svg>
+  //     </button>
+  //   );
+  // };
 
   <button className="btn header_nav_btn">
     MEET OUR EXPERTS
@@ -105,13 +106,13 @@ function Index() {
   };
 
   const toggleTab = (itemId) => {
-    var text = metaTitle;
+    var text = destinationDetails?.header_text;
     if (itemId == "overview") {
       const redirectUrl =
         regionWiseUrl + `/destination/${destinationDetails?.friendly_url}`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(`Home/Destinations/${destinationDetails?.friendly_url}`);
-      text = metaTitle;
+      text = destinationDetails?.header_text;
     } else if (itemId == "countries") {
       const redirectUrl =
         regionWiseUrl + `/destinations/${destinationDetails?.friendly_url}`;
@@ -504,16 +505,12 @@ function Index() {
             </div>
           </section>
 
-          {/* Enqury */}
           <section className="make_enqury_row">
             <div className="container">
-              <h3>YOUR JOURNEY STARTS HERE</h3>
-              <p>
-                call us on 020 7337 9010 to start planning your perfect trip
-              </p>
               <EnquiryButton />
             </div>
           </section>
+
 
           {/* NewsLetter */}
           <section

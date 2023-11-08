@@ -10,6 +10,7 @@ var Carousel = require("react-responsive-carousel").Carousel;
 import CustomMultiValue from "./CustomMultiValue";
 import Select, { components } from "react-select";
 import { Alert } from "../../components";
+import { EnquiryButton } from "../../components/common/EnquiryBtn";
 
 export default Index;
 
@@ -114,38 +115,38 @@ function Index() {
     );
   };
 
-  const EnquiryButton = () => {
-    const router = useRouter();
+  // const EnquiryButton = () => {
+  //   const router = useRouter();
 
-    const handleEnquiryClick = () => {
-      router.push(regionWiseUrl + "/contact-us"); // Navigate to the /enquiry page
-    };
+  //   const handleEnquiryClick = () => {
+  //     router.push(regionWiseUrl + "/contact-us"); // Navigate to the /enquiry page
+  //   };
 
-    return (
-      <button
-        className="btn prmry_btn make_enqury_btn"
-        onClick={handleEnquiryClick}
-      >
-        {" "}
-        Make an enquiry
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="#ffffff"
-          shapeRendering="geometricPrecision"
-          textRendering="geometricPrecision"
-          imageRendering="optimizeQuality"
-          fillRule="evenodd"
-          clipRule="evenodd"
-          viewBox="0 0 267 512.43"
-        >
-          <path
-            fillRule="nonzero"
-            d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-          />
-        </svg>
-      </button>
-    );
-  };
+  //   return (
+  //     <button
+  //       className="btn prmry_btn make_enqury_btn"
+  //       onClick={handleEnquiryClick}
+  //     >
+  //       {" "}
+  //       Make an enquiry
+  //       <svg
+  //         xmlns="http://www.w3.org/2000/svg"
+  //         fill="#ffffff"
+  //         shapeRendering="geometricPrecision"
+  //         textRendering="geometricPrecision"
+  //         imageRendering="optimizeQuality"
+  //         fillRule="evenodd"
+  //         clipRule="evenodd"
+  //         viewBox="0 0 267 512.43"
+  //       >
+  //         <path
+  //           fillRule="nonzero"
+  //           d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+  //         />
+  //       </svg>
+  //     </button>
+  //   );
+  // };
 
   // const LoadMorePagination = ({ data }) => {
   //     const [visibleItems, setVisibleItems] = useState(itemsPerPage);
@@ -247,11 +248,11 @@ function Index() {
     } else {
       router.push(
         `advance-search?where=` +
-          data?.destination +
-          `&what=` +
-          data?.reason +
-          `&when=` +
-          data?.month
+        data?.destination +
+        `&what=` +
+        data?.reason +
+        `&when=` +
+        data?.month
       );
     }
   }
@@ -284,7 +285,7 @@ function Index() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=${region}`
+      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=${region}`
     );
   };
 
@@ -649,7 +650,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                      "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}
@@ -740,10 +741,6 @@ function Index() {
           {/* Enqury */}
           <section className="make_enqury_row">
             <div className="container">
-              <h3>YOUR JOURNEY STARTS HERE</h3>
-              <p>
-                call us on 020 7337 9010 to start planning your perfect trip
-              </p>
               <EnquiryButton />
             </div>
           </section>

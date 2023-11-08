@@ -51,19 +51,21 @@ function ContinentOverview({ sendDataToParent }) {
     }
   }
   const generateDynamicLinkCountries = (countryName) => {
-    const modifieditem = countryName
-      .replace(/ /g, "-")
-      .replace(/&/g, "and")
-      .toLowerCase();
-    if (countryName) {
-      return regionWiseUrl + `/destinations/${destinationcode}/${modifieditem}`;
+    if (countryName != undefined && countryName) {
+      const modifieditem = countryName
+        .replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase();
+      if (countryName) {
+        return regionWiseUrl + `/destinations/${destinationcode}/${modifieditem}`;
+      }
     }
   };
 
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`
+      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`
     );
   };
 
@@ -360,7 +362,7 @@ function ContinentOverview({ sendDataToParent }) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}

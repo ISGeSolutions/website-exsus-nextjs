@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link, Spinner, Signup } from 'components';
 import { Layout } from 'components/users';
 import { userService } from 'services';
+import { EnquiryButton } from '../../components/common/EnquiryBtn';
 
 export default Index;
 
@@ -45,30 +46,13 @@ function Index() {
                 </div>
             </section>
 
-            <section className="tailor_made_holidys_row">
+            <section className="make_enqury_row">
                 <div className="container">
-                    <div className="tailor_made_holidys_inr">
-                        <h3>All Exsus Travel holidays are tailor-made</h3>
-                        <p>All itineraries on our website are designed as a starting point. Tell us your budget/wishlist/preferred length of stay and we'll help you select the best hotels and experiences, so your holiday is totally personalised.</p>
-                        <div className="btn_grp">
-                            Call 020 7337 9010 or
-                            <button className="m-2 btn prmry_btn make_enqury_btn">Make an enquiry
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                            </button>
-                        </div>
-                    </div>
+                    <EnquiryButton />
                 </div>
             </section>
 
-            <section className="make_enqury_row">
-                <div className="container">
-                    <h3>YOUR JOURNEY STARTS HERE</h3>
-                    <p>call us on 020 7337 9010 to start planning your perfect trip</p>
-                    <button className="btn prmry_btn make_enqury_btn">Make an enquiry
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                    </button>
-                </div>
-            </section>
+
 
             <section aria-label="Sign up for newsletter" className="newslettr_row">
                 <div className="container">
