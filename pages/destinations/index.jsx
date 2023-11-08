@@ -138,7 +138,7 @@ function Index() {
           });
 
           // Set the modified string in state
-          setLongText(modifiedString);
+          // setLongText(modifiedString);
         }
       });
   };
@@ -188,10 +188,10 @@ function Index() {
         );
         setBackgroundImage(newBackgroundImages);
 
-        debugger;
         const data = x.data[0]?.attributes?.custom_page_contents?.data;
         const modifiedData = [];
 
+        // debugger;
         if (data) {
           let modifiedString = "";
           data.forEach((element, index) => {
@@ -218,7 +218,10 @@ function Index() {
             }
 
             if (storedData !== null) {
+
+              // debugger;
               // You can access it using localStorage.getItem('yourKey')
+
               if (matches) {
                 let replacement = "";
                 try {
@@ -257,7 +260,6 @@ function Index() {
           });
         }
 
-        console.log(modifiedData);
         modifiedData.forEach((element) => {
           if (element?.content_name == "HeadingTag") {
             setHeadingTag(element?.content_value.toUpperCase());
@@ -266,7 +268,7 @@ function Index() {
           } else if (element?.content_name == "MetaDescription") {
             setMetaDescription(element?.content_value);
           } else if (element?.content_name == "Long_Text") {
-            debugger;
+            // debugger;
             setLongText(element?.content_value);
           } else if (element?.content_name == "Right_Header") {
             setRightHeader(element?.content_value);
@@ -370,11 +372,10 @@ function Index() {
               <div className="row">
                 <div className="destinations_cntnt_blk">
                   <h2>{headingTag}</h2>
-                  {longText}
-                  {/* <p
+                  <p
                     className="mb-4"
                     dangerouslySetInnerHTML={{ __html: longText }}
-                  ></p> */}
+                  ></p>
                 </div>
               </div>
             </div>
