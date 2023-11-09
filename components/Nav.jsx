@@ -113,7 +113,7 @@ function Nav() {
     const router = useRouter();
 
     const handleClick = () => {
-      router.push(region + `/why-us/our-people`); // Navigate to the /enquiry page
+      router.push(regionWiseUrl + `/why-us/our-people`); // Navigate to the /enquiry page
     };
 
     return (
@@ -921,7 +921,7 @@ function Nav() {
               <NavLink
                 onMouseEnter={showOverlay}
                 onClick={hideOverlay}
-                href="/why-us"
+                href={regionWiseUrl + "/why-us"}
               >
                 Why us
                 <svg
@@ -952,7 +952,7 @@ function Nav() {
                                 <NavLink
                                   onMouseEnter={showOverlay}
                                   onClick={hideOverlay}
-                                  href="/about-us"
+                                  href={regionWiseUrl + "/about-us"}
                                 >
                                   About us
                                 </NavLink>
@@ -970,7 +970,10 @@ function Nav() {
                                 <NavLink
                                   onMouseEnter={showOverlay}
                                   onClick={hideOverlay}
-                                  href="/about-us/creating-your-trip"
+                                  href={
+                                    regionWiseUrl +
+                                    "/about-us/creating-your-trip"
+                                  }
                                 >
                                   Creating your trip
                                 </NavLink>
@@ -980,7 +983,7 @@ function Nav() {
                                   onMouseEnter={showOverlay}
                                   onClick={hideOverlay}
                                   // href={region + "/why-us/our-people"}
-                                  href="/why-us/our-people"
+                                  href={regionWiseUrl + "/why-us/our-people"}
                                 >
                                   Meet the Exsus Team
                                 </NavLink>
@@ -989,7 +992,9 @@ function Nav() {
                                 <NavLink
                                   onMouseEnter={showOverlay}
                                   onClick={hideOverlay}
-                                  href="/why-us/client-reviews"
+                                  href={
+                                    regionWiseUrl + "/why-us/client-reviews"
+                                  }
                                 >
                                   Client reviews
                                 </NavLink>
@@ -998,7 +1003,9 @@ function Nav() {
                                 <NavLink
                                   onMouseEnter={showOverlay}
                                   onClick={hideOverlay}
-                                  href="/about-us/about-gift-list"
+                                  href={
+                                    regionWiseUrl + "/about-us/about-gift-list"
+                                  }
                                 >
                                   Honeymoon Gift List
                                 </NavLink>

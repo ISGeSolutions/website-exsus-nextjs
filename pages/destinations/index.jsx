@@ -51,7 +51,10 @@ function Index() {
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
+      if (window.site_region !== "uk") {
+        region = window.site_region;
+        regionWiseUrl = "/" + window.site_region;
+      }
     }
   }
 
@@ -191,7 +194,6 @@ function Index() {
         const data = x.data[0]?.attributes?.custom_page_contents?.data;
         const modifiedData = [];
 
-        // debugger;
         if (data) {
           let modifiedString = "";
           data.forEach((element, index) => {
@@ -218,8 +220,6 @@ function Index() {
             }
 
             if (storedData !== null) {
-
-              // debugger;
               // You can access it using localStorage.getItem('yourKey')
 
               if (matches) {
@@ -268,7 +268,6 @@ function Index() {
           } else if (element?.content_name == "MetaDescription") {
             setMetaDescription(element?.content_value);
           } else if (element?.content_name == "Long_Text") {
-            // debugger;
             setLongText(element?.content_value);
           } else if (element?.content_name == "Right_Header") {
             setRightHeader(element?.content_value);

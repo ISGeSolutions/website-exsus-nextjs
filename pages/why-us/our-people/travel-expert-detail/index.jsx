@@ -21,6 +21,8 @@ function Index() {
   const expertName = router.query?.executiveName?.replace(/-/g, " ");
   const [isLoading, setIsLoading] = useState(true);
   const [friendlyUrl, setFriendlyUrl] = useState("");
+  const [expertData, setExpertData] = useState();
+  const [travelContent, setTravelContent] = useState();
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -42,6 +44,14 @@ function Index() {
       }
     }
   };
+
+  let region = "uk";
+  let regionWiseUrl = "";
+  if (typeof window !== "undefined") {
+    if (window && window.site_region) {
+      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
+    }
+  }
 
   const EnquiryButton = () => {
     const router = useRouter();
@@ -88,16 +98,77 @@ function Index() {
       .getExecutivesById(expertName)
       .then((x) => {
         const response = x.data[0];
-        const str = response?.attributes?.executive_image_path;
-        const substringToCheck = "https://www.exsus.com/";
-        const containsSubstring = str.includes(substringToCheck);
-        if (!containsSubstring) {
-          const newStr =
-            substringToCheck + "" + response?.attributes?.executive_image_path;
-          response.attributes.executive_image_path = newStr;
-        }
-        setExecutiveData(response);
+        // const str = response?.attributes?.executive_image_path;
+        // const substringToCheck = "https://www.exsus.com/";
+        // const containsSubstring = str.includes(substringToCheck);
+        // if (!containsSubstring) {
+        //   const newStr =
+        //     substringToCheck + "" + response?.attributes?.executive_image_path;
+        //   response.attributes.executive_image_path = newStr;
+        // }
+
+        setExpertData(response);
+        //setTravelContent(response?.attributes?.travel_executive_contents.data);
+        setTravelContent(response);
         setTestimonials(response?.attributes?.travel_reviews.data);
+
+        const data = x.data[0];
+        let modifiedString = response?.attributes?.intro_text;
+
+        const regex = /{[a-zA-Z0-9-]+}/g;
+        const matches = [...new Set(modifiedString.match(regex))];
+
+        let storedDataString = "";
+        let storedData = "";
+        if (region == "uk") {
+          storedDataString = localStorage.getItem("websitecontent_uk");
+          storedData = JSON.parse(storedDataString);
+        } else if (region == "us") {
+          storedDataString = localStorage.getItem("websitecontent_us");
+          storedData = JSON.parse(storedDataString);
+        } else if (region == "asia") {
+          storedDataString = localStorage.getItem("websitecontent_asia");
+          storedData = JSON.parse(storedDataString);
+        } else if (region == "in") {
+          storedDataString = localStorage.getItem("websitecontent_india");
+          storedData = JSON.parse(storedDataString);
+        }
+
+        if (storedData !== null) {
+          // You can access it using localStorage.getItem('yourKey')
+          if (matches) {
+            let replacement = "";
+            try {
+              matches.forEach((match, index, matches) => {
+                const matchString = match.replace(/{|}/g, "");
+                if (!storedData[matchString]) {
+                  websiteContentCheck(matches, region, modifiedString);
+                  throw new Error("Loop break");
+                } else {
+                  replacement = storedData[matchString];
+                }
+                const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+                if (checkStr && replacement) {
+                  modifiedString = modifiedString.replace(
+                    checkStr,
+                    replacement
+                  );
+                }
+              });
+              setExecutiveData(modifiedString);
+              setIsLoading(false);
+            } catch (error) {
+              if (error.message === "Loop break") {
+                // Handle the loop break here
+                // console.log("Loop has been stopped.");
+              } else if (error.message === "Region not found") {
+                // Handle the loop break here
+                // console.log("Loop has been stopped.");
+                // setLongText(modifiedString);
+              }
+            }
+          }
+        }
         setIsLoading(false);
       })
       .catch((error) => {
@@ -187,7 +258,7 @@ function Index() {
                   <div className="col-md-4 col-lg-3 col-xl-2">
                     <div className="our_exprts_inr">
                       <img
-                        src={executiveData?.attributes?.executive_image_path}
+                        src={expertData?.attributes?.executive_image_path}
                         alt="expert01"
                         className="img-fluid"
                       />
@@ -195,7 +266,7 @@ function Index() {
                         <li>
                           <a href="#">
                             <em className="material-symbols-outlined">call</em>
-                            {executiveData?.attributes?.contact_no}
+                            {expertData?.attributes?.contact_no}
                           </a>
                         </li>
                         <li>
@@ -208,11 +279,11 @@ function Index() {
                     </div>
                   </div>
                   <div className="col-md-8 col-lg-9 col-xl-10">
-                    <h2>{executiveData?.attributes?.executive_name}</h2>
-                    <h3>{executiveData?.attributes?.executive_role}</h3>
+                    <h2>{expertData?.attributes?.executive_name}</h2>
+                    <h3>{expertData?.attributes?.executive_role}</h3>
                     <div
                       dangerouslySetInnerHTML={{
-                        __html: executiveData?.attributes?.intro_text,
+                        __html: executiveData,
                       }}
                     />
                   </div>
@@ -229,8 +300,8 @@ function Index() {
                 data-bs-ride="carousel"
               >
                 <div className="carousel-inner">
-                  {executiveData?.attributes?.travel_executive_contents?.data
-                    ?.filter((res) => res.attributes.content_type == "Top_tip")
+                  {travelContent?.attributes?.travel_executive_contents.data
+                    ?.filter((res) => res.attributes.content_type == "Top_tips")
                     ?.map((res1) => (
                       <div className="carousel-item active" key={res1.id}>
                         <div className="our_exprts_slider_grp">
@@ -244,14 +315,7 @@ function Index() {
                             </div>
                             <div className="col-md-6">
                               <img
-                                src={
-                                  res1.attributes?.image_path.startsWith(
-                                    "https://www.exsus.com/"
-                                  )
-                                    ? res1?.attributes?.image_path
-                                    : "https://www.exsus.com/" +
-                                      res1?.attributes?.image_path
-                                }
+                                src={res1.attributes?.image_path}
                                 className=""
                                 alt="our_exprts_slider01"
                               />
@@ -288,206 +352,82 @@ function Index() {
               </div>
             </div>
           </section>
+
           <section className="our_exprts_img_txt card_blk_row">
             <div className="container">
               <div className="row">
                 <div className="col-sm-6 col-lg-4 col-xxl-3">
                   <div className="card_blk_inr">
-                    <a href="#" target="_blank">
-                      <img
-                        src="assets/images/our_exprts_card01.jpg"
-                        alt="Card image 01"
-                        className="img-fluid"
-                      />
-                      <div className="card_blk_cntnt">
-                        <div className="row align-items-center">
-                          <div className="col-11">
-                            <div className="card_blk_txt">
-                              <h3>Stay on a private island in the Caribbean</h3>
+                    {travelContent?.attributes?.travel_executive_contents?.data
+                      ?.filter(
+                        (res) => res.attributes.content_type == "Favourites"
+                      )
+                      ?.map((res1) => (
+                        <div className="item active">
+                          <a>
+                            <img
+                              src={res1.attributes?.image_path}
+                              alt="expert_favourite_pic01"
+                              className="img-fluid"
+                            />
+
+                            <div className="card_blk_cntnt">
+                              <div className="row align-items-center">
+                                <div className="col-11">
+                                  <div className="card_blk_txt">
+                                    <h3>
+                                      {travelContent?.attributes?.image_text}
+                                    </h3>
+                                  </div>
+                                </div>
+                                <div className="col-1 ps-0">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="#ffffff"
+                                    shapeRendering="geometricPrecision"
+                                    textRendering="geometricPrecision"
+                                    imageRendering="optimizeQuality"
+                                    fillRule="evenodd"
+                                    clipRule="evenodd"
+                                    viewBox="0 0 267 512.43"
+                                  >
+                                    <path
+                                      fillRule="nonzero"
+                                      d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                                    ></path>
+                                  </svg>
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                          <div className="col-1 ps-0">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="#ffffff"
-                              shapeRendering="geometricPrecision"
-                              textRendering="geometricPrecision"
-                              imageRendering="optimizeQuality"
-                              fillRule="evenodd"
-                              clipRule="evenodd"
-                              viewBox="0 0 267 512.43"
-                            >
-                              <path
-                                fillRule="nonzero"
-                                d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                              ></path>
-                            </svg>
-                          </div>
+                          </a>
+                          <p className="card_extra_para">
+                            {res1?.attributes?.image_text}
+                          </p>
                         </div>
-                      </div>
-                    </a>
-                    <p className="card_extra_para">
-                      Jumby Bay is holiday heaven! From its secluded private
-                      island location just off of Antigua’s coast, to the
-                      luxurious suites and villas, first-className amenities and
-                      gorgeous beaches, it is perfect for a special celebration.
-                    </p>
-                  </div>
-                </div>
-                <div className="col-sm-6 col-lg-4 col-xxl-3">
-                  <div className="card_blk_inr">
-                    <a href="#" target="_blank">
-                      <img
-                        src="assets/images/our_exprts_card02.jpg"
-                        alt="Card image 02"
-                        className="img-fluid"
-                      />
-                      <div className="card_blk_cntnt">
-                        <div className="row align-items-center">
-                          <div className="col-11">
-                            <div className="card_blk_txt">
-                              <h3>Take in the highlights of Cuba</h3>
-                            </div>
-                          </div>
-                          <div className="col-1 ps-0">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="#ffffff"
-                              shapeRendering="geometricPrecision"
-                              textRendering="geometricPrecision"
-                              imageRendering="optimizeQuality"
-                              fillRule="evenodd"
-                              clipRule="evenodd"
-                              viewBox="0 0 267 512.43"
-                            >
-                              <path
-                                fillRule="nonzero"
-                                d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                              ></path>
-                            </svg>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                    <p className="card_extra_para">
-                      I love Cuba. This highlights holiday offers a fantastic
-                      combination of the cities of Havana and Trinidad and the
-                      'Garden of Cuba' at Vinales and Las Terrazas, and you can
-                      unwind on the beach in the stunning Cayo Santa Maria.
-                    </p>
-                  </div>
-                </div>
-                <div className="col-sm-6 col-lg-4 col-xxl-3">
-                  <div className="card_blk_inr">
-                    <a href="#" target="_blank">
-                      <img
-                        src="assets/images/our_exprts_card03.jpg"
-                        alt="Card image 03"
-                        className="img-fluid"
-                      />
-                      <div className="card_blk_cntnt">
-                        <div className="row align-items-center">
-                          <div className="col-11">
-                            <div className="card_blk_txt">
-                              <h3>Unusual places to stay around the world</h3>
-                            </div>
-                          </div>
-                          <div className="col-1 ps-0">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="#ffffff"
-                              shapeRendering="geometricPrecision"
-                              textRendering="geometricPrecision"
-                              imageRendering="optimizeQuality"
-                              fillRule="evenodd"
-                              clipRule="evenodd"
-                              viewBox="0 0 267 512.43"
-                            >
-                              <path
-                                fillRule="nonzero"
-                                d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                              ></path>
-                            </svg>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                    <p className="card_extra_para">
-                      I'm a fan of the unusual. Come home from a holiday with
-                      stories to tell, after staying at some of these amazing
-                      and enchanting places around the world, from a luxury
-                      train to a four-poster bed beneath starry skies and a
-                      candlelit cave.
-                    </p>
-                  </div>
-                </div>
-                <div className="col-sm-6 col-lg-4 col-xxl-3">
-                  <div className="card_blk_inr">
-                    <a href="#" target="_blank">
-                      <img
-                        src="assets/images/our_exprts_card04.jpg"
-                        alt="Card image 04"
-                        className="img-fluid"
-                      />
-                      <div className="card_blk_cntnt">
-                        <div className="row align-items-center">
-                          <div className="col-11">
-                            <div className="card_blk_txt">
-                              <h3>Find paradise in the Seychelles</h3>
-                            </div>
-                          </div>
-                          <div className="col-1 ps-0">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="#ffffff"
-                              shapeRendering="geometricPrecision"
-                              textRendering="geometricPrecision"
-                              imageRendering="optimizeQuality"
-                              fillRule="evenodd"
-                              clipRule="evenodd"
-                              viewBox="0 0 267 512.43"
-                            >
-                              <path
-                                fillRule="nonzero"
-                                d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                              ></path>
-                            </svg>
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-                    <p className="card_extra_para">
-                      One of my most memorable experiences has been on the
-                      island of Desroches in the Seychelles. I was surprised
-                      with cocktails on the runway at night time under the stars
-                      and had a wonderful meal courtesy of the Four Seasons.
-                    </p>
+                      ))}
                   </div>
                 </div>
               </div>
             </div>
           </section>
+
+          {/* My favourite pictures  */}
           <section className="favourite_pic_row">
             <div className="container">
               <h3>My favourite pictures</h3>
               <div className="items">
-                {executiveData?.attributes?.travel_executive_contents?.data
-                  ?.filter((res) => res.attributes.content_type == "Picture")
+                {travelContent?.attributes?.travel_executive_contents?.data
+                  ?.filter(
+                    (res) => res.attributes.content_type == "Client_images"
+                  )
                   ?.map((res1) => (
                     <div className="item active">
                       <img
-                        src={
-                          res1.attributes?.image_path.startsWith(
-                            "https://www.exsus.com/"
-                          )
-                            ? res1?.attributes?.image_path
-                            : "https://www.exsus.com/" +
-                              res1?.attributes?.image_path
-                        }
+                        src={res1.attributes?.image_url}
                         alt="expert_favourite_pic01"
                         className="img-fluid"
                       />
-                      <p>{res1?.attributes?.image_text}</p>
+                      <p>{res1?.attributes?.intro_text}</p>
                     </div>
                   ))}
                 <div className="button-container">
@@ -529,7 +469,7 @@ function Index() {
               </div>
             </div>
           </section>
-          <section
+          {/* <section
             aria-label="Client Testimonials"
             className="testimonials_blk_row"
           >
@@ -569,7 +509,7 @@ function Index() {
                 </div>
               </div>
             </div>
-          </section>
+          </section> */}
 
           <section className="make_enqury_row">
             <div className="container">
