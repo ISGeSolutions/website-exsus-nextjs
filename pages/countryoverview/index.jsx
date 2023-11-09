@@ -10,7 +10,7 @@ function CountryOverview(props) {
   const [itineraries, setItineraries] = useState(null);
   const itemsPerPage = 9; // Number of items to load per page
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
-  const [countryData, setOverviewText] = useState(props?.data);
+  const [countryData, setCountryData] = useState(props?.data);
   // const { overview_text } = props?.data || {};
   console.log(props?.data);
 
@@ -83,7 +83,6 @@ function CountryOverview(props) {
 
 
   const dictioneryFunction = (data) => {
-    debugger;
     let modifiedString = data;
     if (modifiedString) {
       const regex = /{[a-zA-Z0-9-]+}/g;

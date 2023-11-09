@@ -14,7 +14,7 @@ import { Alert } from "../../components";
 
 export default CountryItinararies;
 
-function CountryItinararies(country) {
+function CountryItinararies(props) {
   const router = useRouter();
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(true);
@@ -28,6 +28,7 @@ function CountryItinararies(country) {
   const [page, setPage] = useState(0); // Current page
   const itemsPerPage = 12; // Number of items to load per page
   const [isLoading, setIsLoading] = useState(true);
+  const [countryData, setCountryData] = useState(props?.data);
   const [alert, setAlert] = useState(null);
   const destinationcode = router.query?.continent
     ?.replace(/-and-/g, " & ")
@@ -114,6 +115,66 @@ function CountryItinararies(country) {
       </components.Option>
     );
   };
+
+  const dictioneryFunction = (data) => {
+    let modifiedString = data;
+    if (modifiedString) {
+      const regex = /{[a-zA-Z0-9-]+}/g;
+      const matches = [...new Set(modifiedString.match(regex))];
+
+      let storedDataString = "";
+      let storedData = "";
+      // debugger;
+      if (region == "uk") {
+        storedDataString = localStorage.getItem("websitecontent_uk");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "us") {
+        storedDataString = localStorage.getItem("websitecontent_us");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "asia") {
+        storedDataString = localStorage.getItem("websitecontent_asia");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "in") {
+        storedDataString = localStorage.getItem("websitecontent_india");
+        storedData = JSON.parse(storedDataString);
+      }
+      if (storedData !== null) {
+
+        // debugger;
+        // You can access it using localStorage.getItem('yourKey')
+
+        if (matches) {
+          let replacement = "";
+          try {
+            matches.forEach((match, index, matches) => {
+              const matchString = match.replace(/{|}/g, "");
+              if (!storedData[matchString]) {
+                websiteContentCheck(matches, region, modifiedString);
+                throw new Error("Loop break");
+              } else {
+                replacement = storedData[matchString];
+              }
+              const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+              if (checkStr && replacement) {
+                modifiedString = modifiedString.replace(
+                  checkStr,
+                  replacement
+                );
+              }
+            });
+            return modifiedString;
+          } catch (error) {
+            if (error.message === "Loop break") {
+
+            } else if (error.message === "Region not found") {
+
+            }
+          }
+        }
+      }
+    }
+  }
+
 
   const countryOptions = [
     { value: "", label: "Filter by region" },
@@ -249,7 +310,10 @@ function CountryItinararies(country) {
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
+      if (window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+        region = window.site_region;
+      }
     }
   }
 
@@ -365,18 +429,14 @@ function CountryItinararies(country) {
         <div>
           <div className="container">
             <section className="destination_para">
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: country?.data?.overview_text,
-                }}
-              />
+              <p dangerouslySetInnerHTML={{ __html: dictioneryFunction(countryData?.itineraries_intro_text) }} />
             </section>
           </div>
 
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
             <div className="container">
               <h3 className="title_cls">
-                All Luxury Holiday Ideas in {country?.data?.country_name}
+                All Luxury Holiday Ideas in {countryData?.country_name}
               </h3>
 
               {/* Inspire Me */}
