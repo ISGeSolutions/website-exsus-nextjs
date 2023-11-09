@@ -169,7 +169,6 @@ function Index() {
           }
         });
         setBackgroundImage(newBackgroundImages);
-        console.log(newBackgroundImages)
         setHomePageData(x.data[0].attributes?.custom_page_contents);
         setIsLoading(false);
       })
@@ -428,7 +427,7 @@ function Index() {
                       style={{ backgroundImage: `url(${imagePath.image_path})` }}
                     >                  <div className="carousel-caption">
                         <img
-                          src="images/banner-logo.png"
+                          src="/images/banner-logo.png"
                           alt="banner-logo"
                           className="img-fluid"
                         />

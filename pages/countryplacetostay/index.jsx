@@ -14,7 +14,7 @@ import { Alert } from "../../components";
 
 export default CountryPlaceToStay;
 
-function CountryPlaceToStay(country) {
+function CountryPlaceToStay(props) {
   const router = useRouter();
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(true);
@@ -27,6 +27,7 @@ function CountryPlaceToStay(country) {
   const [itineraries, setItineraries] = useState(null);
   const itemsPerPage = 12; // Number of items to load per page
   const [page, setPage] = useState(0); // Current page
+  const [countryData, setCountryData] = useState(props?.data);
   const [metaData, setMetaData] = useState([]);
   const [alert, setAlert] = useState(null);
   const destinationcode = router.query?.continent
@@ -286,19 +287,67 @@ function CountryPlaceToStay(country) {
     }
   };
 
-  // let regionWiseUrl = "/uk";
-  // if (typeof window !== "undefined") {
-  //   if (window && window.site_region) {
-  //     regionWiseUrl = "/" + window.site_region;
-  //     // setMyVariable(window.site_region);
-  //   }
-  // }
-
   let region = "uk";
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
+      if (window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+        region = window.site_region;
+      }
+    }
+  }
+
+
+  const dictioneryFunction = (data) => {
+    let modifiedString = data;
+    if (modifiedString) {
+      const regex = /{[a-zA-Z0-9-]+}/g;
+      const matches = [...new Set(modifiedString.match(regex))];
+
+      let storedDataString = "";
+      let storedData = "";
+      if (region == "uk") {
+        storedDataString = localStorage.getItem("websitecontent_uk");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "us") {
+        storedDataString = localStorage.getItem("websitecontent_us");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "asia") {
+        storedDataString = localStorage.getItem("websitecontent_asia");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "in") {
+        storedDataString = localStorage.getItem("websitecontent_india");
+        storedData = JSON.parse(storedDataString);
+      }
+      if (storedData !== null) {
+        if (matches) {
+          let replacement = "";
+          try {
+            matches.forEach((match, index, matches) => {
+              const matchString = match.replace(/{|}/g, "");
+              if (!storedData[matchString]) {
+                websiteContentCheck(matches, region, modifiedString);
+                throw new Error("Loop break");
+              } else {
+                replacement = storedData[matchString];
+              }
+              const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+              if (checkStr && replacement) {
+                modifiedString = modifiedString.replace(
+                  checkStr,
+                  replacement
+                );
+              }
+            });
+            return modifiedString;
+          } catch (error) {
+            if (error) {
+              return data;
+            }
+          }
+        }
+      }
     }
   }
 
@@ -352,25 +401,13 @@ function CountryPlaceToStay(country) {
         <div>
           <div className="container">
             <section className="destination_para">
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: country?.data?.placestostay_intro_text,
-                }}
-              />
-              <p>
-                Whether you’re after a luxury honeymoon in South-East Asia, a
-                family adventure holiday in Southern Asia or a cultural holiday
-                to the Far East, you can expect some of the most beautiful
-                beaches and most incredible luxury hotels in the world,
-                fast-paced cities, tranquil village life and mouthwatering food.
-                Asia has it all.
-              </p>
+              <p dangerouslySetInnerHTML={{ __html: dictioneryFunction(countryData?.placestostay_intro_text) }} />
             </section>
           </div>
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
             <div className="container">
               <h3 className="title_cls">
-                All recommended hotels in {country?.data?.country_name}
+                All recommended hotels in {countryData?.country_name}
               </h3>
 
               {/* Inspire Me */}

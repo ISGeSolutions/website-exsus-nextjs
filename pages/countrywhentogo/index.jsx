@@ -3,8 +3,9 @@ import { useRouter } from "next/router";
 
 export default CountryWhentogo;
 
-function CountryWhentogo(country) {
+function CountryWhentogo(props) {
   // console.log("country", country);
+  const [countryData, setCountryData] = useState(props?.data);
 
   const router = useRouter();
   const countrycode = router.query?.country
@@ -32,7 +33,62 @@ function CountryWhentogo(country) {
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
+      if (window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+        region = window.site_region;
+      }
+    }
+  }
+
+  const dictioneryFunction = (data) => {
+    let modifiedString = data;
+    if (modifiedString) {
+      const regex = /{[a-zA-Z0-9-]+}/g;
+      const matches = [...new Set(modifiedString.match(regex))];
+
+      let storedDataString = "";
+      let storedData = "";
+      if (region == "uk") {
+        storedDataString = localStorage.getItem("websitecontent_uk");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "us") {
+        storedDataString = localStorage.getItem("websitecontent_us");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "asia") {
+        storedDataString = localStorage.getItem("websitecontent_asia");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "in") {
+        storedDataString = localStorage.getItem("websitecontent_india");
+        storedData = JSON.parse(storedDataString);
+      }
+      if (storedData !== null) {
+        if (matches) {
+          let replacement = "";
+          try {
+            matches.forEach((match, index, matches) => {
+              const matchString = match.replace(/{|}/g, "");
+              if (!storedData[matchString]) {
+                websiteContentCheck(matches, region, modifiedString);
+                throw new Error("Loop break");
+              } else {
+                replacement = storedData[matchString];
+              }
+              const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+              if (checkStr && replacement) {
+                modifiedString = modifiedString.replace(
+                  checkStr,
+                  replacement
+                );
+              }
+            });
+            return modifiedString;
+          } catch (error) {
+            if (error) {
+              return data;
+            }
+          }
+        }
+      }
     }
   }
 
@@ -53,16 +109,7 @@ function CountryWhentogo(country) {
     <>
       <div className="container">
         <section className="destination_para">
-          {/* <p dangerouslySetInnerHTML={{ __html: country?.data?.whentogo_intro_text }} /> */}
-          <p>
-            As the world’s second largest state by land area and with a host of
-            diverse terrains and latitudes, the climate changes radically. With
-            too-hot-to-handle summers and bone-chillingly cold winters, the best
-            time to visit is in spring (April-May in the north and March-April
-            in the south) and autumn (October-November in the north and
-            September-October in the south), when temperatures are mild – unless
-            experiencing extreme weather climates is your thing.
-          </p>
+          <p dangerouslySetInnerHTML={{ __html: dictioneryFunction(countryData?.whentogo_intro_text) }} />
         </section>
       </div>
 

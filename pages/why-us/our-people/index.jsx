@@ -65,10 +65,12 @@ function Index() {
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
+      if (window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+        region = window.site_region;
+      }
     }
   }
-
   const handleRedirect = (item) => {
     const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(regionWiseUrl + `/why-us/our-people/${modifiedName}`);
@@ -95,7 +97,83 @@ function Index() {
     whyusService
       .getAllExecutives()
       .then((x) => {
-        setAllExecutives(x.data);
+        const modifiedData = [];
+        // setAllExecutives(x.data);
+        const data = x.data;
+        if (data) {
+          let modifiedString = "";
+          data.forEach((element, index) => {
+            debugger;
+            let content = {};
+            modifiedString = element?.attributes?.intro_text;
+            if (modifiedString) {
+              const regex = /{[a-zA-Z0-9-]+}/g;
+              const matches = [...new Set(modifiedString.match(regex))];
+
+              let storedDataString = "";
+              let storedData = "";
+              // debugger;
+              if (region == "uk") {
+                storedDataString = localStorage.getItem("websitecontent_uk");
+                storedData = JSON.parse(storedDataString);
+              } else if (region == "us") {
+                storedDataString = localStorage.getItem("websitecontent_us");
+                storedData = JSON.parse(storedDataString);
+              } else if (region == "asia") {
+                storedDataString = localStorage.getItem("websitecontent_asia");
+                storedData = JSON.parse(storedDataString);
+              } else if (region == "in") {
+                storedDataString = localStorage.getItem("websitecontent_india");
+                storedData = JSON.parse(storedDataString);
+              }
+              debugger;
+              if (storedData !== null) {
+
+                // debugger;
+                // You can access it using localStorage.getItem('yourKey')
+
+                if (matches) {
+                  let replacement = "";
+                  try {
+                    matches.forEach((match, index, matches) => {
+                      const matchString = match.replace(/{|}/g, "");
+                      if (!storedData[matchString]) {
+                        websiteContentCheck(matches, region, modifiedString);
+                        throw new Error("Loop break");
+                      } else {
+                        replacement = storedData[matchString];
+                      }
+                      const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+                      if (checkStr && replacement) {
+                        modifiedString = modifiedString.replace(
+                          checkStr,
+                          replacement
+                        );
+                      }
+                    });
+                    content = element.attributes;
+                    content["intro_text"] = modifiedString;
+                    modifiedData.push(content);
+                    setIsLoading(false);
+                  } catch (error) {
+                    if (error.message === "Loop break") {
+
+                    } else if (error.message === "Region not found") {
+
+                    }
+                  }
+                }
+              }
+            } else {
+              modifiedData.push(element.attributes);
+            }
+
+            setIsLoading(false);
+          });
+        }
+        console.log(modifiedData);
+        setAllExecutives(modifiedData)
+
         setIsLoading(false);
       })
       .catch((error) => {
@@ -222,23 +300,23 @@ function Index() {
                   <div className="col-sm-6 col-lg-4 col-xxl-3" key={res.id}>
                     <div className="our_exprts_inr">
                       <img
-                        src={res?.attributes?.executive_image_path}
+                        src={res?.executive_image_path}
                         alt="expert01"
                         className="img-fluid"
                       />
                       <div className="expert_info">
-                        <h2>{res?.attributes?.executive_name}</h2>
-                        <h3>{res?.attributes?.executive_role}</h3>
+                        <h2>{res?.executive_name}</h2>
+                        <h3>{res?.executive_role}</h3>
                         <div
                           dangerouslySetInnerHTML={{
-                            __html: res?.attributes?.intro_text,
+                            __html: res?.intro_text,
                           }}
                         />
                       </div>
                       <button
                         className="btn prmry_btn make_enqury_btn"
                         onClick={() =>
-                          handleRedirect(res?.attributes?.executive_name)
+                          handleRedirect(res?.executive_name)
                         }
                       >
                         Read more

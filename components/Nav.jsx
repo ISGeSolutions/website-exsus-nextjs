@@ -323,7 +323,6 @@ function Nav() {
     document.body.appendChild(script);
 
     destinationService.getDestinationLandingList().then((x) => {
-      console.log(x.data);
       setDestinationLandingList(x.data);
     });
 
@@ -498,9 +497,8 @@ function Nav() {
                                 (destinationItem, i) => (
                                   <li
                                     key={i}
-                                    className={`header_country_label ${
-                                      activeIndex === i ? "active" : ""
-                                    }`}
+                                    className={`header_country_label ${activeIndex === i ? "active" : ""
+                                      }`}
                                     onMouseEnter={() => handleMouseEnter(i)}
                                     onMouseLeave={handleMouseLeave}
                                   >
@@ -716,9 +714,8 @@ function Nav() {
                               {holidaytypesList?.map((holidaystypesItem, i) => (
                                 <li
                                   key={holidaystypesItem?.id}
-                                  className={`header_country_label ${
-                                    activeIndexHoliday === i ? "active" : ""
-                                  }`}
+                                  className={`header_country_label ${activeIndexHoliday === i ? "active" : ""
+                                    }`}
                                   onMouseEnter={() =>
                                     handleMouseEnterHoliday(i)
                                   }

@@ -10,11 +10,12 @@ import Image from "next/image";
 
 export default CountryRegions;
 
-function CountryRegions({ country, sendDataToParent }) {
+function CountryRegions({ props, sendDataToParent }) {
   const router = useRouter();
   const [allRegions, setAllRegions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeItem, setActiveItem] = useState("recommended");
+  const [countryData, setCountryData] = useState(props?.data);
   const destinationcode = router?.query?.continent
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
@@ -23,19 +24,69 @@ function CountryRegions({ country, sendDataToParent }) {
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
-  // let regionWiseUrl = "/uk";
-  // if (typeof window !== "undefined") {
-  //   if (window && window.site_region) {
-  //     regionWiseUrl = "/" + window.site_region;
-  //     // setMyVariable(window.site_region);
-  //   }
-  // }
+
 
   let region = "uk";
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
+      if (window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+        region = window.site_region;
+      }
+    }
+  }
+
+
+  const dictioneryFunction = (data) => {
+    let modifiedString = data;
+    if (modifiedString) {
+      const regex = /{[a-zA-Z0-9-]+}/g;
+      const matches = [...new Set(modifiedString.match(regex))];
+
+      let storedDataString = "";
+      let storedData = "";
+      if (region == "uk") {
+        storedDataString = localStorage.getItem("websitecontent_uk");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "us") {
+        storedDataString = localStorage.getItem("websitecontent_us");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "asia") {
+        storedDataString = localStorage.getItem("websitecontent_asia");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "in") {
+        storedDataString = localStorage.getItem("websitecontent_india");
+        storedData = JSON.parse(storedDataString);
+      }
+      if (storedData !== null) {
+        if (matches) {
+          let replacement = "";
+          try {
+            matches.forEach((match, index, matches) => {
+              const matchString = match.replace(/{|}/g, "");
+              if (!storedData[matchString]) {
+                websiteContentCheck(matches, region, modifiedString);
+                throw new Error("Loop break");
+              } else {
+                replacement = storedData[matchString];
+              }
+              const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+              if (checkStr && replacement) {
+                modifiedString = modifiedString.replace(
+                  checkStr,
+                  replacement
+                );
+              }
+            });
+            return modifiedString;
+          } catch (error) {
+            if (error) {
+              return data;
+            }
+          }
+        }
+      }
     }
   }
 
@@ -104,12 +155,7 @@ function CountryRegions({ country, sendDataToParent }) {
         <div>
           <div className="container">
             <section className="destination_para">
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: country?.data?.regions_intro_text,
-                }}
-              />
-              {/* <p>Whether it’s a rickshaw ride through hectic Hanoi in Vietnam, a fascinating adventure amidst the ancient Angkor temples in Cambodia, or diving and snorkelling in some of the warmest, clearest seas on the planet, Asia is jam-packed with culture, adventure - and variety.</p> */}
+              <p dangerouslySetInnerHTML={{ __html: dictioneryFunction(countryData?.regions_intro_text) }} />
             </section>
           </div>
 
