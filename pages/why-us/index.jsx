@@ -38,7 +38,6 @@ function Index() {
   const [careerData, setCareerData] = useState(null);
   const [subTitle, setSubTitle] = useState(null);
 
-
   // const EnquiryButton = () => {
   //   ReactGA.event({
   //     category: "Enquiry category",
@@ -126,11 +125,12 @@ function Index() {
 
     // const carousel = document.querySelector('#carouselExampleInterval');
     // new bootstrap.Carousel(carousel);
+    debugger;
     whyusService
       .getWhyusPage()
       .then((x) => {
         setWhyusDetails(x?.data[0]?.attributes);
-        // console.log(x.data[0]?.attributes);
+
         setCustomData(x.data[0]?.attributes?.custom_page_contents);
 
         const data = x.data[0]?.attributes?.custom_page_contents?.data;
