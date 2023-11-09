@@ -71,8 +71,7 @@ function Layout({ children }) {
   let region = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      if (window.site_region !== 'uk')
-        region = window.site_region;
+      if (window.site_region !== "uk") region = window.site_region;
     }
   }
 
@@ -83,13 +82,12 @@ function Layout({ children }) {
   // Function to check if any string in the array is present in the sentence
   const isAnyStringInSentence = (strings, sentence) => {
     for (let i = 0; i < strings.length; i++) {
-      if (sentence.includes(strings[i] + '/')) {
+      if (sentence.includes(strings[i] + "/")) {
         return true; // Return true if any string is found
       }
     }
     return false; // Return false if none of the strings are found
-  }
-
+  };
 
   const handleChange = (selectedOption) => {
     // Do something
@@ -103,15 +101,15 @@ function Layout({ children }) {
     let myArray = [];
 
     // debugger;
-    const regionArr = ['uk', 'us', 'asia', 'in']
+    const regionArr = ["uk", "us", "asia", "in"];
     if (isAnyStringInSentence(regionArr, router.asPath)) {
       // console.log("At least one string is found in the sentence.");
       myArray = pathRouter.split("/");
     } else {
       // console.log("None of the strings are found in the sentence.");
-      myArray[0] = '';
-      myArray[1] = 'uk';
-      myArray = myArray.concat(pathRouter.split("/").slice(1));;
+      myArray[0] = "";
+      myArray[1] = "uk";
+      myArray = myArray.concat(pathRouter.split("/").slice(1));
     }
 
     var newPath = "";
@@ -121,7 +119,7 @@ function Layout({ children }) {
       } else if (index == 1) {
         if (myArray.length > 2) {
           if (element) {
-            if (selectedOption.value == 'uk') {
+            if (selectedOption.value == "uk") {
               newPath = newPath + "/";
             } else {
               newPath = newPath + "/" + selectedOption.value;
@@ -402,10 +400,14 @@ function Layout({ children }) {
                       <NavLink href="/">Home</NavLink>
                     </li>
                     <li>
-                      <NavLink href="/contact-us">Contact us</NavLink>
+                      <NavLink href={region + "/contact-us"}>
+                        Contact us
+                      </NavLink>
                     </li>
                     <li>
-                      <NavLink href="/contact-us">Online Enquiry</NavLink>
+                      <NavLink href={region + "/contact-us"}>
+                        Online Enquiry
+                      </NavLink>
                     </li>
                     <li>
                       <NavLink href="/travel_information">
@@ -426,7 +428,7 @@ function Layout({ children }) {
                   <h6>More Exsus</h6>
                   <ul>
                     <li>
-                      <NavLink href={regionWiseUrl + "/destinations"}>
+                      <NavLink href={region + "/destinations"}>
                         Destinations
                       </NavLink>
                     </li>
@@ -498,7 +500,9 @@ function Layout({ children }) {
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink href={regionWiseUrl + "/about-us/friend-referral-offer"}>
+                      <NavLink
+                        href={region + "/about-us/friend-referral-offer"}
+                      >
                         Exsus referral scheme
                       </NavLink>
                     </li>

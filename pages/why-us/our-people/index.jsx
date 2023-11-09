@@ -9,9 +9,8 @@ import Head from "next/head";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { whyusService } from "../../../services";
 var Carousel = require("react-responsive-carousel").Carousel;
-import { FriendlyUrl } from '../../../components';
+import { FriendlyUrl } from "../../../components";
 import { EnquiryButton } from "../../../components/common/EnquiryBtn";
-
 
 export default Index;
 
@@ -184,7 +183,6 @@ function Index() {
     whyusService
       .getExpertsPage()
       .then((x) => {
-        // debugger;
         setCustomData(x.data[0]);
         const imageCheck = x.data[0].attributes.custom_page_images.data;
         const newBackgroundImages = [];
