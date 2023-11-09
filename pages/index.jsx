@@ -169,7 +169,6 @@ function Index() {
           }
         });
         setBackgroundImage(newBackgroundImages);
-        console.log(newBackgroundImages)
         setHomePageData(x.data[0].attributes?.custom_page_contents);
         setIsLoading(false);
       })

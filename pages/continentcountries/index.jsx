@@ -246,7 +246,7 @@ function ContinentCountry({ sendDataToParent }) {
                       onClick={() => handleClick("itineraries")}
                     >
                       <img
-                        src="/public/images/destination_overview01.jpg"
+                        src="images/destination_overview01.jpg"
                         alt="Card image 07"
                         className="img-fluid"
                       />
