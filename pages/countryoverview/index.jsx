@@ -10,9 +10,9 @@ function CountryOverview(props) {
   const [itineraries, setItineraries] = useState(null);
   const itemsPerPage = 9; // Number of items to load per page
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
-
-  const { overview_text } = props?.data || {};
-  const country_name = props?.data?.country_name || "";
+  const [countryData, setOverviewText] = useState(props?.data);
+  // const { overview_text } = props?.data || {};
+  console.log(props?.data);
 
   const countrycode = router.query?.country
     ?.replace(/-/g, " ")
@@ -39,14 +39,17 @@ function CountryOverview(props) {
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
+      if (window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+        region = window.site_region;
+      }
     }
   }
 
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
+      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
     );
   };
 
@@ -78,6 +81,69 @@ function CountryOverview(props) {
     }
   };
 
+
+  const dictioneryFunction = (data) => {
+    debugger;
+    let modifiedString = data;
+    if (modifiedString) {
+      const regex = /{[a-zA-Z0-9-]+}/g;
+      const matches = [...new Set(modifiedString.match(regex))];
+
+      let storedDataString = "";
+      let storedData = "";
+      // debugger;
+      if (region == "uk") {
+        storedDataString = localStorage.getItem("websitecontent_uk");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "us") {
+        storedDataString = localStorage.getItem("websitecontent_us");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "asia") {
+        storedDataString = localStorage.getItem("websitecontent_asia");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "in") {
+        storedDataString = localStorage.getItem("websitecontent_india");
+        storedData = JSON.parse(storedDataString);
+      }
+      if (storedData !== null) {
+
+        // debugger;
+        // You can access it using localStorage.getItem('yourKey')
+
+        if (matches) {
+          let replacement = "";
+          try {
+            matches.forEach((match, index, matches) => {
+              const matchString = match.replace(/{|}/g, "");
+              if (!storedData[matchString]) {
+                websiteContentCheck(matches, region, modifiedString);
+                throw new Error("Loop break");
+              } else {
+                replacement = storedData[matchString];
+              }
+              const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+              if (checkStr && replacement) {
+                modifiedString = modifiedString.replace(
+                  checkStr,
+                  replacement
+                );
+              }
+            });
+            return modifiedString;
+            setIsLoading(false);
+          } catch (error) {
+            if (error.message === "Loop break") {
+
+            } else if (error.message === "Region not found") {
+
+            }
+          }
+        }
+      }
+    } else {
+    }
+  }
+
   equalHeight(true);
 
   useEffect(() => {
@@ -91,6 +157,9 @@ function CountryOverview(props) {
     //     setIsLoading(false);
     //   });
 
+
+    // setAllExecutives(x.data);
+
     window.addEventListener("resize", equalHeight(true));
 
     // Using window.onload to detect full page load
@@ -103,7 +172,7 @@ function CountryOverview(props) {
         }
       }, 0);
     };
-  }, [countrycode]);
+  }, [countrycode, props]);
 
   return (
     <>
@@ -119,13 +188,17 @@ function CountryOverview(props) {
         <div>
           <div className="container">
             <section className="destination_para">
-              <p dangerouslySetInnerHTML={{ __html: overview_text }} />
+              <p dangerouslySetInnerHTML={{ __html: dictioneryFunction(countryData?.overview_text) }} />
             </section>
           </div>
+          <section class="country_highlight_row">
+            <div class="country_highlight_inr" dangerouslySetInnerHTML={{ __html: dictioneryFunction(countryData?.country_highlights) }}>
+            </div>
+          </section>
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
             <div className="container-md">
               <h3 className="title_cls pt-5">
-                Holidays in {country_name} Handpicked by Exsus
+                Holidays in {countryData?.country_name} Handpicked by Exsus
               </h3>
               <div className="card_slider_row">
                 {/* <div className="carousel00 region_carousel00">
@@ -255,7 +328,7 @@ function CountryOverview(props) {
           <section className="favrites_blk_row favrites_blk_no_slider_row light_grey">
             <div className="container-md">
               <h3 className="title_cls pt-5">
-                PLACES TO STAY IN {country_name} HANDPICKED BY EXSUS
+                PLACES TO STAY IN {countryData?.country_name} HANDPICKED BY EXSUS
               </h3>
               <div className="card_slider_row">
                 {/* <div className="carousel00 region_carousel00">
@@ -480,7 +553,7 @@ function CountryOverview(props) {
                         <div className="row align-items-center">
                           <div className="col-11">
                             <div className="card_blk_txt">
-                              <h3>See all Itinerary Ideas in {country_name}</h3>
+                              <h3>See all Itinerary Ideas in {countryData?.country_name}</h3>
                             </div>
                           </div>
                           <div className="col-1 ps-0">
@@ -518,7 +591,7 @@ function CountryOverview(props) {
                         <div className="row align-items-center">
                           <div className="col-11">
                             <div className="card_blk_txt">
-                              <h3>See all Places to Stay in {country_name}</h3>
+                              <h3>See all Places to Stay in {countryData?.country_name}</h3>
                             </div>
                           </div>
                           <div className="col-1 ps-0">
