@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-const withImages = require('next-images');
+const withImages = require("next-images");
 
 const nextConfig = {
   // async rewrites() {
@@ -356,13 +356,22 @@ const nextConfig = {
       },
 
       // where-to-go-detail
-      { source: "/where-to-go/:where-to-go-detail", destination: "/where-to-go/where-to-go-detail" },
-      { source: "/us/where-to-go/:where-to-go-detail", destination: "/where-to-go/where-to-go-detail" },
+      {
+        source: "/where-to-go/:where-to-go-detail",
+        destination: "/where-to-go/where-to-go-detail",
+      },
+      {
+        source: "/us/where-to-go/:where-to-go-detail",
+        destination: "/where-to-go/where-to-go-detail",
+      },
       {
         source: "/asia/where-to-go/:where-to-go-detail",
         destination: "/where-to-go/where-to-go-detail",
       },
-      { source: "/in/where-to-go/:where-to-go-detail", destination: "/where-to-go/where-to-go-detail" },
+      {
+        source: "/in/where-to-go/:where-to-go-detail",
+        destination: "/where-to-go/where-to-go-detail",
+      },
 
       // about-us
       { source: "/about-us", destination: "/about-us" },
@@ -385,19 +394,19 @@ const nextConfig = {
       // creating-your-trip
       {
         source: "/about-us/creating-your-trip",
-        destination: "/creating-your-trip",
+        destination: "/about-us/creating-your-trip",
       },
       {
         source: "/us/about-us/creating-your-trip",
-        destination: "/creating-your-trip",
+        destination: "/about-us/creating-your-trip",
       },
       {
         source: "/asia/about-us/creating-your-trip",
-        destination: "/creating-your-trip",
+        destination: "/about-us/creating-your-trip",
       },
       {
         source: "/in/about-us/creating-your-trip",
-        destination: "/creating-your-trip",
+        destination: "/about-us/creating-your-trip",
       },
 
       // gift-list
@@ -444,9 +453,18 @@ const nextConfig = {
 
       // terms-and-condition
       { source: "/terms-and-conditions", destination: "/terms-and-conditions" },
-      { source: "/us/terms-and-conditions", destination: "/terms-and-conditions" },
-      { source: "/asia/terms-and-conditions", destination: "/terms-and-conditions" },
-      { source: "/in/terms-and-conditions", destination: "/terms-and-conditions" },
+      {
+        source: "/us/terms-and-conditions",
+        destination: "/terms-and-conditions",
+      },
+      {
+        source: "/asia/terms-and-conditions",
+        destination: "/terms-and-conditions",
+      },
+      {
+        source: "/in/terms-and-conditions",
+        destination: "/terms-and-conditions",
+      },
 
       // Define a custom error page for 404 errors
       {
@@ -478,15 +496,15 @@ const nextConfig = {
     apiUrl:
       process.env.NODE_ENV === "development"
         ? // ? 'https://e922710a-cb11-401b-ae5b-ef73740e1501.mock.pstmn.io' // development api
-        // : 'https://e922710a-cb11-401b-ae5b-ef73740e1501.mock.pstmn.io' // production api
-        // ? 'http://localhost:4000' // development api
-        // : 'http://localhost:4000' // production api
-        // ? 'https://mock.apidog.com/m1/379394-0-default' // development api
-        // : 'https://mock.apidog.com/m1/379394-0-default' // production api
-        //     ? 'http://13.233.122.205:1337' // development api
-        //     : 'http://13.233.122.205:1337' // production api
+          // : 'https://e922710a-cb11-401b-ae5b-ef73740e1501.mock.pstmn.io' // production api
+          // ? 'http://localhost:4000' // development api
+          // : 'http://localhost:4000' // production api
+          // ? 'https://mock.apidog.com/m1/379394-0-default' // development api
+          // : 'https://mock.apidog.com/m1/379394-0-default' // production api
+          //     ? 'http://13.233.122.205:1337' // development api
+          //     : 'http://13.233.122.205:1337' // production api
 
-        "https://cms-api.excelleresolutions.com" // development api
+          "https://cms-api.excelleresolutions.com" // development api
         : "https://cms-api.excelleresolutions.com", // production api
     apiUrl1:
       process.env.NODE_ENV === "development"
@@ -516,11 +534,11 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig,
+(module.exports = nextConfig),
   withImages({
     // Configure the options for next-images
     images: {
       // Define the directory where your images are stored (default: 'public')
-      path: '/public',
+      path: "/public",
     },
   });

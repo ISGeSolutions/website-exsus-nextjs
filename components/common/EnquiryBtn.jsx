@@ -15,7 +15,10 @@ function EnquiryButton() {
     let regionWiseUrl = "";
     if (typeof window !== "undefined") {
         if (window && window.site_region) {
-            if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
+            if (window.site_region !== "uk") {
+                regionWiseUrl = "/" + window.site_region;
+                region = window.site_region;
+            }
         }
     }
 
@@ -54,7 +57,6 @@ function EnquiryButton() {
 
         let storedDataString = "";
         let storedData = "";
-
         if (region == "uk") {
             storedDataString = localStorage.getItem("websitecontent_uk");
             storedData = JSON.parse(storedDataString);
@@ -91,7 +93,7 @@ function EnquiryButton() {
                         }
                     });
                     // Set the modified string in state
-                    setnewValueWithBr(modifiedString);
+                    SetTelePhoneNumber(modifiedString);
                 } catch (error) {
                     if (error.message === "Loop break") {
                         // Handle the loop break here
@@ -108,13 +110,13 @@ function EnquiryButton() {
                 websiteContentCheck(matches, region, modifiedString);
             }
         }
-    }, [telePhoneNumber]);
+    }, []);
 
     return (
         <>
             <h3>YOUR JOURNEY STARTS HERE</h3>
             <p>
-                call us on {telePhoneNumber} to start planning your perfect trip
+                call us on <span dangerouslySetInnerHTML={{ __html: telePhoneNumber }} /> to start planning your perfect trip
             </p>
             <button
                 className="btn prmry_btn make_enqury_btn"

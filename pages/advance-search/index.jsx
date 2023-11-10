@@ -16,7 +16,9 @@ function Index() {
   const itemsPerPage = 12; // Number of items to load per page
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
   const [page, setPage] = useState(0); // Current page
-  const dcodestr = router.query.where;
+  const dcodestr = router?.query?.where;
+  const dcodeReason = router?.query?.what;
+  const dcodeMonth = router?.query?.when;
   const [metaData, setMetaData] = useState([]);
   const [itineraries, setItineraries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -96,7 +98,7 @@ function Index() {
 
   useEffect(() => {
     destinationService
-      .getAllItineraries()
+      .getItinerariesInspireMe(page, dcodestr ? dcodestr : "", dcodeReason ? dcodeReason : "", dcodeMonth ? dcodeMonth : "")
       .then((x) => {
         setItineraries(x.data);
         setIsLoading(false);
@@ -107,7 +109,7 @@ function Index() {
     loadMoreData();
 
     window.addEventListener("resize", equalHeight(true));
-  }, [dcodestr]);
+  }, [dcodestr, dcodeMonth, dcodeReason]);
 
   return (
     <>

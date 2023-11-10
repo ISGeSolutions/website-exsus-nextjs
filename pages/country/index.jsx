@@ -52,6 +52,8 @@ function Country() {
   const [isLoading, setIsLoading] = useState(true);
   const [friendlyUrl, setFriendlyUrl] = useState("");
   const [backgroundImage, setBackgroundImage] = useState([]);
+  const [headingText, setHeadingText] = useState("");
+
 
 
   const countryOptions = [
@@ -218,12 +220,9 @@ function Country() {
 
   const [redirectUrl, setRedirectUrl] = useState(null);
   const [activeTab, setActiveTab] = useState("overview"); // State to track the active tab
-  const [headingText, setHeadingText] = useState(
-    "LUXURY HOLIDAYS IN " + countrycode?.toUpperCase()
-  );
 
   const toggleTab = (itemId) => {
-    var text = "LUXURY SAFARI HOLIDAYS IN " + countrycode.toUpperCase();
+    var text = countryData?.attributes?.header_text;
     if (itemId == "overview") {
       const redirectUrl =
         regionWiseUrl +
@@ -329,6 +328,7 @@ function Country() {
         .getCountryDetails(countrycode)
         .then((x) => {
           setCountryData(x.data[0]);
+          setHeadingText(x.data[0]?.attributes?.header_text)
           setFriendlyUrl(`Home/Destinations/${destinationcode}/${countrycode}`);
           const map_latitude = x.data[0].attributes?.map_latitude;
           const map_longitude = x.data[0].attributes?.map_longitude;
@@ -464,7 +464,7 @@ function Country() {
               </div>
               <div className="destination_tab_inr">
                 <h2 className="tab_tilte">
-                  {countryData?.attributes?.header_text}
+                  {headingText}
                 </h2>
                 <ul
                   className="nav nav-pills justify-content-center"

@@ -106,6 +106,7 @@ function Index() {
   };
 
   const toggleTab = (itemId) => {
+    debugger;
     var text = destinationDetails?.header_text;
     if (itemId == "overview") {
       const redirectUrl =
@@ -189,6 +190,7 @@ function Index() {
     //   .catch((error) => {
     //     setIsLoading(false);
     //   });
+    debugger;
     if (destinationcode) {
       destinationService
         .getDestinationDetails(destinationcode)
