@@ -57,7 +57,6 @@ function EnquiryButton() {
 
         let storedDataString = "";
         let storedData = "";
-        debugger;
         if (region == "uk") {
             storedDataString = localStorage.getItem("websitecontent_uk");
             storedData = JSON.parse(storedDataString);

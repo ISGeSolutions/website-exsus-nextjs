@@ -57,10 +57,6 @@ function ContinentCountry({ sendDataToParent }) {
     destinationService
       .getDestinationDetails(destinationcode)
       .then((x) => {
-        // const lines = x.data.attributes?.overview_text.split('\n');
-        // const oldText = x.data.attributes?.overview_text;
-        // var newValueWithBr = oldText?.replace(/\\n/g, "");
-        // setnewValueWithBr(newValueWithBr);
         setdestinationName(x.data[0].attributes.destination_name);
         setAllCountries(x.data[0].attributes?.countries?.data);
         setIsLoading(false);

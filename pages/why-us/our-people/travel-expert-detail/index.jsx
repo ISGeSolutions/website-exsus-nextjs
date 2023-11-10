@@ -9,6 +9,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { whyusService } from "../../../../services";
 var Carousel = require("react-responsive-carousel").Carousel;
 import { FriendlyUrl } from "../../../../components";
+import { EnquiryButton } from "../../../../components/common/EnquiryBtn";
 
 export default Index;
 
@@ -49,42 +50,67 @@ function Index() {
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
+      if (window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+        region = window.site_region;
+      }
     }
   }
 
-  const EnquiryButton = () => {
-    const router = useRouter();
+  const dictioneryFunction = (data) => {
+    debugger;
+    let modifiedString = data;
+    if (modifiedString) {
+      const regex = /{[a-zA-Z0-9-]+}/g;
+      const matches = [...new Set(typeof modifiedString === "string" ? modifiedString?.match(regex) : "")];
 
-    const handleEnquiryClick = () => {
-      router.push(`/contact-us`); // Navigate to the /enquiry page
-    };
+      let storedDataString = "";
+      let storedData = "";
+      if (region == "uk") {
+        storedDataString = localStorage.getItem("websitecontent_uk");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "us") {
+        storedDataString = localStorage.getItem("websitecontent_us");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "asia") {
+        storedDataString = localStorage.getItem("websitecontent_asia");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "in") {
+        storedDataString = localStorage.getItem("websitecontent_india");
+        storedData = JSON.parse(storedDataString);
+      }
+      if (storedData !== null) {
+        if (matches) {
+          let replacement = "";
+          try {
+            matches.forEach((match, index, matches) => {
+              const matchString = match.replace(/{|}/g, "");
+              if (!storedData[matchString]) {
+                websiteContentCheck(matches, region, modifiedString);
+                throw new Error("Loop break");
+              } else {
+                replacement = storedData[matchString];
+              }
+              const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+              if (checkStr && replacement) {
+                modifiedString = modifiedString.replace(
+                  checkStr,
+                  replacement
+                );
+              }
+            });
+            return modifiedString;
+          } catch (error) {
+            if (error) {
+              return data;
+            }
+          }
+        }
+      }
+    }
+  }
 
-    return (
-      <button
-        className="btn prmry_btn make_enqury_btn"
-        onClick={handleEnquiryClick}
-      >
-        {" "}
-        Make an enquiry
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="#ffffff"
-          shapeRendering="geometricPrecision"
-          textRendering="geometricPrecision"
-          imageRendering="optimizeQuality"
-          fillRule="evenodd"
-          clipRule="evenodd"
-          viewBox="0 0 267 512.43"
-        >
-          <path
-            fillRule="nonzero"
-            d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-          />
-        </svg>
-      </button>
-    );
-  };
+
 
   equalHeight(true);
 
@@ -283,7 +309,7 @@ function Index() {
                     <h3>{expertData?.attributes?.executive_role}</h3>
                     <div
                       dangerouslySetInnerHTML={{
-                        __html: executiveData,
+                        __html: dictioneryFunction(executiveData),
                       }}
                     />
                   </div>
@@ -309,7 +335,7 @@ function Index() {
                             <div className="col-md-6 m-auto">
                               <div
                                 dangerouslySetInnerHTML={{
-                                  __html: res1?.attributes?.intro_text,
+                                  __html: dictioneryFunction(res1?.attributes?.intro_text),
                                 }}
                               />
                             </div>
@@ -402,7 +428,7 @@ function Index() {
                         </p> */}
                         <p
                           dangerouslySetInnerHTML={{
-                            __html: travelContent?.attributes?.intro_text,
+                            __html: dictioneryFunction(res1?.attributes?.intro_text),
                           }}
                         />
                       </div>
@@ -514,10 +540,6 @@ function Index() {
 
           <section className="make_enqury_row">
             <div className="container">
-              <h3>YOUR JOURNEY STARTS HERE</h3>
-              <p>
-                call us on 020 7337 9010 to start planning your perfect trip
-              </p>
               <EnquiryButton />
             </div>
           </section>

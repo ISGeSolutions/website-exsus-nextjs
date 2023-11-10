@@ -108,9 +108,27 @@ function getAllItineraries(page) {
   return fetchWrapper.get(itinerariesDetailsUrl);
 }
 
-function getItinerariesInspireMe(page, destination, reason, month) {
-  const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?[filters][destination][destination_code][$eq]=${destination}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=1&pagination[pageSize]=12&populate[holiday_type_groups][fields][2]=holiday_type_group_code&[filters][holiday_type_groups][holiday_type_group_code][$eq]=${reason}&[filters][itinerary_travel_times][travel_time_month][$eq]=${month}`;
-  // const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&pagination[page]=${page}&pagination[pageSize]=12`;
+function getItinerariesInspireMe(destination, reason, month) {
+
+  // Initialize an empty array to store the filters
+  const filters = [];
+
+  // Conditionally add filters based on UI parameters
+  if (destination) {
+    filters.push(`[filters][destination][destination_code][$eq]=${destination}`);
+  }
+
+  if (month) {
+    filters.push(`[filters][itinerary_travel_times][travel_time_month][$eq]=${month}`);
+  }
+
+  if (reason) {
+    filters.push(`[filters][holiday_type_groups][holiday_type_group_code][$eq]=${reason}`);
+  }
+
+  // Construct the final API call URL
+  const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/itineraries` + (filters.length > 0 ? "?" + filters.join("&") : "") +
+    `&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=1&pagination[pageSize]=12&populate[holiday_type_groups][fields][2]=holiday_type_group_code`;
   return fetchWrapper.get(itinerariesDetailsUrl);
 }
 

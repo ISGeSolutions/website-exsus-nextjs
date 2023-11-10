@@ -34,7 +34,7 @@ function Inspireme(props) {
   const formOptions = { resolver: yupResolver(validationSchema) };
 
   // get functions to build form with useForm() hook
-  const { register, handleSubmit, formState } = useForm(formOptions);
+  const { register, handleSubmit, formState, reset } = useForm(formOptions);
   const { errors } = formState;
   const [alert, setAlert] = useState(null);
 
@@ -91,9 +91,10 @@ function Inspireme(props) {
     } else if (queryParameters?.when) {
       month = queryParameters?.when;
     }
-
     if (!data.destination && !data.reason && !data.month) {
       showAlert("Please select atleast one option", "error");
+      setQueryParameters(null);
+      reset();
     } else {
       router.push(
         `advance-search?where=` +
@@ -103,6 +104,9 @@ function Inspireme(props) {
         `&when=` +
         month
       );
+      reset();
+      setQueryParameters(null);
+
     }
   }
 
