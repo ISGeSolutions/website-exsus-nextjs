@@ -356,13 +356,11 @@ function Index() {
           <section className="our_exprts_img_txt card_blk_row">
             <div className="container">
               <div className="row">
-                <div className="col-sm-6 col-lg-4 col-xxl-3">
-                  <div className="card_blk_inr">
-                    {travelContent?.attributes?.travel_executive_contents?.data
-                      ?.filter(
-                        (res) => res.attributes.content_type == "Favourites"
-                      )
-                      ?.map((res1) => (
+                {travelContent?.attributes?.travel_executive_contents?.data
+                  ?.filter((res) => res.attributes.content_type == "Favourites")
+                  ?.map((res1) => (
+                    <div className="col-sm-6 col-lg-4 col-xxl-3">
+                      <div className="card_blk_inr">
                         <div className="item active">
                           <a>
                             <img
@@ -375,9 +373,7 @@ function Index() {
                               <div className="row align-items-center">
                                 <div className="col-11">
                                   <div className="card_blk_txt">
-                                    <h3>
-                                      {travelContent?.attributes?.image_text}
-                                    </h3>
+                                    <h3>{res1?.attributes?.image_text}</h3>
                                   </div>
                                 </div>
                                 <div className="col-1 ps-0">
@@ -400,13 +396,18 @@ function Index() {
                               </div>
                             </div>
                           </a>
-                          <p className="card_extra_para">
-                            {res1?.attributes?.image_text}
-                          </p>
                         </div>
-                      ))}
-                  </div>
-                </div>
+                        {/* <p className="card_extra_para">
+                          {travelContent?.attributes?.intro_text}
+                        </p> */}
+                        <p
+                          dangerouslySetInnerHTML={{
+                            __html: travelContent?.attributes?.intro_text,
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ))}
               </div>
             </div>
           </section>
