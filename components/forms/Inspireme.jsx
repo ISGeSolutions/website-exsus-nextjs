@@ -193,18 +193,18 @@ function Inspireme(props) {
                       }`}
                   >
                     <option value="">Choose a month</option>
-                    <option value="January" selected={'January' === queryParameters?.when}>January</option>
-                    <option value="February" selected={'February' === queryParameters?.when}>February</option>
-                    <option value="March" selected={'March' === queryParameters?.when}>March</option>
-                    <option value="April" selected={'April' === queryParameters?.when}>April</option>
-                    <option value="May" selected={'May' === queryParameters?.when}>May</option>
-                    <option value="June" selected={'June' === queryParameters?.when}>June</option>
-                    <option value="July" selected={'July' === queryParameters?.when}>July</option>
-                    <option value="August" selected={'August' === queryParameters?.when}>August</option>
-                    <option value="September" selected={'September' === queryParameters?.when}>September</option>
-                    <option value="October" selected={'October' === queryParameters?.when}>October</option>
-                    <option value="November" selected={'November' === queryParameters?.when}>November</option>
-                    <option value="December" selected={'December' === queryParameters?.when}>December</option>
+                    <option value="1" selected={'January' === queryParameters?.when}>January</option>
+                    <option value="2" selected={'February' === queryParameters?.when}>February</option>
+                    <option value="3" selected={'March' === queryParameters?.when}>March</option>
+                    <option value="4" selected={'April' === queryParameters?.when}>April</option>
+                    <option value="5" selected={'May' === queryParameters?.when}>May</option>
+                    <option value="6" selected={'June' === queryParameters?.when}>June</option>
+                    <option value="7" selected={'July' === queryParameters?.when}>July</option>
+                    <option value="8" selected={'August' === queryParameters?.when}>August</option>
+                    <option value="9" selected={'September' === queryParameters?.when}>September</option>
+                    <option value="10" selected={'October' === queryParameters?.when}>October</option>
+                    <option value="11" selected={'November' === queryParameters?.when}>November</option>
+                    <option value="12" selected={'December' === queryParameters?.when}>December</option>
                   </select>
                   <div className="invalid-feedback mb-1">
                     {errors.month?.message}

@@ -46,7 +46,10 @@ function ContinentCountry({ sendDataToParent }) {
       .replace(/&/g, "and")
       .toLowerCase();
     if (countryName) {
-      return regionWiseUrl + `/destinations/${destinationcode}/${modifieditem}`;
+      return regionWiseUrl + `/destinations/${destinationcode.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()
+        }/${modifieditem}`;
     }
   };
 
