@@ -10,7 +10,7 @@ import {
   holidaytypesService,
   destinationService,
   blogsService,
-  homeService
+  homeService,
 } from "services";
 import { NavLink } from "components";
 
@@ -29,22 +29,18 @@ function Index() {
   const [websiteContent, setWebsiteContent] = useState(null);
   const [backgroundImage, setBackgroundImage] = useState([]);
 
-
-  let regionWiseUrl = "/uk";
-  let region = 'uk'
+  let regionWiseUrl = "";
+  let region = "uk";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      regionWiseUrl = "/" + window.site_region;
       region = window.site_region;
+      regionWiseUrl = "/" + window.site_region;
       // setMyVariable(window.site_region);
     }
   }
 
   const generateDynamicLink = (item) => {
-    return (
-      regionWiseUrl +
-      `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`
-    );
+    return `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`;
   };
 
   const generateDynamicLinkBlog = (item) => {
@@ -58,7 +54,7 @@ function Index() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-      `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`
+        `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`
     );
   };
 
@@ -145,11 +141,11 @@ function Index() {
     } else {
       router.push(
         `advance-search?where=` +
-        data?.destination +
-        `&what=` +
-        data?.reason +
-        `&when=` +
-        data?.month
+          data?.destination +
+          `&what=` +
+          data?.reason +
+          `&when=` +
+          data?.month
       );
     }
   }
@@ -243,7 +239,6 @@ function Index() {
         setIsLoading(false);
       });
 
-
     destinationService
       .getDestinationLandingList()
       .then((x) => {
@@ -311,31 +306,58 @@ function Index() {
 
         response.forEach((element, index) => {
           // Create an object with the data and expiration time
-          dynamicObject[element?.attributes?.content_word] = element?.attributes?.content_translation_text;
-          dynamicObject['code'] = element?.attributes?.website_country?.data?.attributes?.code;
-          dynamicObject['expiration'] = expirationTime;
+          dynamicObject[element?.attributes?.content_word] =
+            element?.attributes?.content_translation_text;
+          dynamicObject["code"] =
+            element?.attributes?.website_country?.data?.attributes?.code;
+          dynamicObject["expiration"] = expirationTime;
 
-          if (element?.attributes?.website_country?.data?.attributes?.code == 'UK') {
-            dynamicObjectUk[element?.attributes?.content_word] = element?.attributes?.content_translation_text;
-            dynamicObjectUk['expiration'] = expirationTime;
-            localStorage.setItem("websitecontent_uk", JSON.stringify(dynamicObjectUk));
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code == "UK"
+          ) {
+            dynamicObjectUk[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectUk["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_uk",
+              JSON.stringify(dynamicObjectUk)
+            );
           }
-          if (element?.attributes?.website_country?.data?.attributes?.code == 'US') {
-            dynamicObjectUs[element?.attributes?.content_word] = element?.attributes?.content_translation_text;
-            dynamicObjectUs['expiration'] = expirationTime;
-            localStorage.setItem("websitecontent_us", JSON.stringify(dynamicObjectUs));
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code == "US"
+          ) {
+            dynamicObjectUs[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectUs["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_us",
+              JSON.stringify(dynamicObjectUs)
+            );
           }
-          if (element?.attributes?.website_country?.data?.attributes?.code == 'ASIA') {
-            dynamicObjectAsia[element?.attributes?.content_word] = element?.attributes?.content_translation_text;
-            dynamicObjectAsia['expiration'] = expirationTime;
-            localStorage.setItem("websitecontent_asia", JSON.stringify(dynamicObjectAsia));
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code ==
+            "ASIA"
+          ) {
+            dynamicObjectAsia[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectAsia["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_asia",
+              JSON.stringify(dynamicObjectAsia)
+            );
           }
-          if (element?.attributes?.website_country?.data?.attributes?.code == 'INDIA') {
-            dynamicObjectIndia[element?.attributes?.content_word] = element?.attributes?.content_translation_text;
-            dynamicObjectIndia['expiration'] = expirationTime;
-            localStorage.setItem("websitecontent_india", JSON.stringify(dynamicObjectIndia));
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code ==
+            "INDIA"
+          ) {
+            dynamicObjectIndia[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectIndia["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_india",
+              JSON.stringify(dynamicObjectIndia)
+            );
           }
-
         });
 
         setWebsiteContent(x.data);
@@ -346,7 +368,6 @@ function Index() {
         setIsLoading(false);
       });
 
-
     var site_region = localStorage.getItem("site_region");
 
     const carouselMain = document.querySelector("#carouselExampleIntervalMain");
@@ -356,14 +377,12 @@ function Index() {
     // setTimeout(() => {
     // }, 100);
 
-
     const carousel = document.querySelector("#Testimonials");
     if (carousel) {
       new bootstrap.Carousel(carousel);
     }
     // setTimeout(() => {
     // }, 100);
-
 
     window.addEventListener("resize", equalHeight(true));
   }, []);
@@ -424,15 +443,20 @@ function Index() {
                   >
                     <div
                       className="banner_commn_cls"
-                      style={{ backgroundImage: `url(${imagePath.image_path})` }}
-                    >                  <div className="carousel-caption">
+                      style={{
+                        backgroundImage: `url(${imagePath.image_path})`,
+                      }}
+                    >
+                      {" "}
+                      <div className="carousel-caption">
                         <img
                           src="/images/banner-logo.png"
                           alt="banner-logo"
                           className="img-fluid"
                         />
                         <h2>{imagePath.image_alt_text}</h2>
-                      </div></div>
+                      </div>
+                    </div>
                   </NavLink>
                 ))}
               </div>
@@ -653,7 +677,11 @@ function Index() {
                 {sortedData?.map((res) => (
                   <div className="col-sm-6 col-md-6 col-lg-4" key={res.id}>
                     <div className="card_blk_inr">
-                      <NavLink href={generateDynamicLinkBlog(res.attributes?.blog_header_text)}>
+                      <NavLink
+                        href={generateDynamicLinkBlog(
+                          res.attributes?.blog_header_text
+                        )}
+                      >
                         {res?.attributes?.blog_image_path && (
                           <img
                             src={res?.attributes?.blog_image_path}
