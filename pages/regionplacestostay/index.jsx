@@ -409,7 +409,7 @@ function RegionPlacesToStay() {
                                                                     ""
                                                                 )
                                                         )}
-                                                        <img src="" alt="destination_hotel01" className="img-fluid" />
+                                                        {/* <img src="" alt="destination_hotel01" className="img-fluid" /> */}
                                                     </NavLink>
                                                     <div className="card_slider_cnt places_to_stay_cnt">
                                                         <h4><a href="#">{item?.attributes?.hotel_name}</a></h4>

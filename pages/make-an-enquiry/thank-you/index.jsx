@@ -75,7 +75,7 @@ function Index() {
             </p>
             <p class="mb-4">
               In the meantime, please feel free to call us on 020 7337 9010 or
-              contact us at <a href=""> escape@exsus.com.</a>
+              contact us at <a href="#"> escape@exsus.com.</a>
             </p>
             <p class="mb-4">Thank you once again for getting in touch.</p>
             <p class="mb-4">The Exsus team</p>

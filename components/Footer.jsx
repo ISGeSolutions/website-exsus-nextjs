@@ -121,9 +121,9 @@ function Footer() {
                     <p className="copyright_text">&copy; 2022 Exsus Travel. Experts in luxury tailor-made holidays.</p>
                     <div className="prvcy_polcy_list">
                         <ul>
-                            <li><a href="">Privacy policy & cookies</a></li>
-                            <li><a href="">Website terms of use</a></li>
-                            <li><a href="">Booking terms & conditions</a></li>
+                            <li><a href="#">Privacy policy & cookies</a></li>
+                            <li><a href="#">Website terms of use</a></li>
+                            <li><a href="#">Booking terms & conditions</a></li>
                         </ul>
                     </div>
                 </section>

@@ -7,19 +7,26 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
-    const server = express();
+  const server = express();
 
-    // Use compression middleware
-    server.use(compression());
+  // Use compression middleware
+  server.use(compression());
 
-    server.all('*', (req, res) => {
-        return handle(req, res);
-    });
+  // Add Expires headers middleware
+  server.use((req, res, next) => {
+    // Set Expires header to one year in the future (adjust as needed)
+    res.header('Expires', new Date(Date.now() + 31536000000).toUTCString());
+    next();
+  });
 
-    const PORT = process.env.PORT || 3000;
+  server.all('*', (req, res) => {
+    return handle(req, res);
+  });
 
-    server.listen(PORT, (err) => {
-        if (err) throw err;
-        console.log(`> Ready on http://localhost:${PORT}`);
-    });
+  const PORT = process.env.PORT || 3000;
+
+  server.listen(PORT, (err) => {
+    if (err) throw err;
+    console.log(`> Ready on http://localhost:${PORT}`);
+  });
 });

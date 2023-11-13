@@ -533,11 +533,11 @@ function ContinentPlacesToStay(props) {
                                     ""
                                   )
                               )}
-                              <img
+                              {/* <img
                                 src=""
                                 alt="destination_hotel01"
                                 className="img-fluid"
-                              />
+                              /> */}
                             </NavLink>
                             <div className="card_slider_cnt places_to_stay_cnt">
                               <h4>
