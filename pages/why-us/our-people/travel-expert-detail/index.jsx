@@ -62,7 +62,11 @@ function Index() {
     let modifiedString = data;
     if (modifiedString) {
       const regex = /{[a-zA-Z0-9-]+}/g;
-      const matches = [...new Set(typeof modifiedString === "string" ? modifiedString?.match(regex) : "")];
+      const matches = [
+        ...new Set(
+          typeof modifiedString === "string" ? modifiedString?.match(regex) : ""
+        ),
+      ];
 
       let storedDataString = "";
       let storedData = "";
@@ -93,10 +97,7 @@ function Index() {
               }
               const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
               if (checkStr && replacement) {
-                modifiedString = modifiedString.replace(
-                  checkStr,
-                  replacement
-                );
+                modifiedString = modifiedString.replace(checkStr, replacement);
               }
             });
             return modifiedString;
@@ -108,9 +109,7 @@ function Index() {
         }
       }
     }
-  }
-
-
+  };
 
   equalHeight(true);
 
@@ -335,7 +334,9 @@ function Index() {
                             <div className="col-md-6 m-auto">
                               <div
                                 dangerouslySetInnerHTML={{
-                                  __html: dictioneryFunction(res1?.attributes?.intro_text),
+                                  __html: dictioneryFunction(
+                                    res1?.attributes?.intro_text
+                                  ),
                                 }}
                               />
                             </div>
@@ -428,7 +429,9 @@ function Index() {
                         </p> */}
                         <p
                           dangerouslySetInnerHTML={{
-                            __html: dictioneryFunction(res1?.attributes?.intro_text),
+                            __html: dictioneryFunction(
+                              res1?.attributes?.intro_text
+                            ),
                           }}
                         />
                       </div>
