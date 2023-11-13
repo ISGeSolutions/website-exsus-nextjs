@@ -44,11 +44,11 @@ function Nav() {
   }
 
   const discovermore = () => {
-    router.push("uk/holiday-types/special-occasions");
+    router.push("/holiday-types/special-occasions");
   };
 
   const wildlifeholiday = () => {
-    router.push("/uk/holiday-types/wildlife-and-safari-holidays");
+    router.push("/holiday-types/wildlife-and-safari-holidays");
   };
   const handleMouseEnter = (index) => {
     setActiveIndex(index);
@@ -497,8 +497,9 @@ function Nav() {
                                 (destinationItem, i) => (
                                   <li
                                     key={i}
-                                    className={`header_country_label ${activeIndex === i ? "active" : ""
-                                      }`}
+                                    className={`header_country_label ${
+                                      activeIndex === i ? "active" : ""
+                                    }`}
                                     onMouseEnter={() => handleMouseEnter(i)}
                                     onMouseLeave={handleMouseLeave}
                                   >
@@ -714,8 +715,9 @@ function Nav() {
                               {holidaytypesList?.map((holidaystypesItem, i) => (
                                 <li
                                   key={holidaystypesItem?.id}
-                                  className={`header_country_label ${activeIndexHoliday === i ? "active" : ""
-                                    }`}
+                                  className={`header_country_label ${
+                                    activeIndexHoliday === i ? "active" : ""
+                                  }`}
                                   onMouseEnter={() =>
                                     handleMouseEnterHoliday(i)
                                   }

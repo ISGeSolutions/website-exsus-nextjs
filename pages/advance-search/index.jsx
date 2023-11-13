@@ -25,6 +25,7 @@ function Index() {
   const LoadMorePagination = ({ data }) => {
     const [visibleItems, setVisibleItems] = useState(itemsPerPage);
   };
+  const [activeItem, setActiveItem] = useState("recommended");
 
   const handleLoadMore = () => {
     setVisibleItems((prevVisibleItems) => prevVisibleItems + itemsPerPage);
@@ -69,7 +70,7 @@ function Index() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-      `/destinations/africa/africa-itineraries/vietnam-in-classic-style`
+        `/destinations/africa/africa-itineraries/vietnam-in-classic-style`
     );
   };
 
@@ -96,9 +97,23 @@ function Index() {
 
   equalHeight(true);
 
+  const handleFilterClick = (item) => {
+    page = 0;
+    setItineraries([]);
+    setActiveItem(item);
+    console.log(page);
+
+    loadMoreData(item);
+  };
+
   useEffect(() => {
     destinationService
-      .getItinerariesInspireMe(page, dcodestr ? dcodestr : "", dcodeReason ? dcodeReason : "", dcodeMonth ? dcodeMonth : "")
+      .getItinerariesInspireMe(
+        page,
+        dcodestr ? dcodestr : "",
+        dcodeReason ? dcodeReason : "",
+        dcodeMonth ? dcodeMonth : ""
+      )
       .then((x) => {
         setItineraries(x.data);
         setIsLoading(false);
@@ -106,7 +121,7 @@ function Index() {
       .catch((error) => {
         setIsLoading(false);
       });
-    loadMoreData();
+    loadMoreData(activeItem);
 
     window.addEventListener("resize", equalHeight(true));
   }, [dcodestr, dcodeMonth, dcodeReason]);
@@ -168,7 +183,14 @@ function Index() {
                               </a>
                             </li>
                             <li>
-                              <a href="#">By duration</a>
+                              <a
+                                className={
+                                  activeItem === "duration" ? "active" : ""
+                                }
+                                onClick={() => handleFilterClick("duration")}
+                              >
+                                By duration
+                              </a>
                             </li>
                           </ul>
                         </div>
@@ -192,7 +214,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                      "thumbnail" ? (
+                                    "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}
