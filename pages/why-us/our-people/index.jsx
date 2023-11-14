@@ -103,7 +103,7 @@ function Index() {
         if (data) {
           let modifiedString = "";
           data.forEach((element, index) => {
-            debugger;
+            // debugger;
             let content = {};
             modifiedString = element?.attributes?.intro_text;
             if (modifiedString) {
