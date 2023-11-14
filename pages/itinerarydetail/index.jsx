@@ -10,6 +10,7 @@ import { EnquiryButton } from "../../components/common/EnquiryBtn";
 import Head from "next/head";
 import { NavLink } from "components";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { element } from "prop-types";
 var Carousel = require("react-responsive-carousel").Carousel;
 
 export default Index;
@@ -18,22 +19,26 @@ function Index() {
   const router = useRouter();
   const [itineraries, setItineraries] = useState(null);
   const [bannerImages, setBannerImages] = useState(null);
-  const itin_name = router.query?.itineraryName ? router.query?.itineraryName?.replace(/-/g, " ")
-    .toLowerCase() : router.query?.itineraries?.replace(/-/g, " ")
-      .toLowerCase();
+  const itin_name = router.query?.itineraryName
+    ? router.query?.itineraryName?.replace(/-/g, " ").toLowerCase()
+    : router.query?.itineraries?.replace(/-/g, " ").toLowerCase();
   const itin_code = router.query.itinerarycode;
   const [title, setTitle] = useState("");
   const countrycode = router.query.countrycode;
   const destinationcode = router.query.destinationcode;
   const [countries, setCountries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [friendlyUrl, setFriendlyUrl] = useState('');
+  const [friendlyUrl, setFriendlyUrl] = useState("");
+  const [overViewText, setOverViewText] = useState(null);
 
-  let regionWiseUrl = "/uk";
+  let region = "uk";
+  let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      regionWiseUrl = "/" + window.site_region;
-      // setMyVariable(window.site_region);
+      if (window.site_region !== "uk") {
+        region = window.site_region;
+        regionWiseUrl = "/" + window.site_region;
+      }
     }
   }
 
@@ -97,6 +102,27 @@ function Index() {
     return text?.replace(/\\n/g, "");
   };
 
+  const websiteContentCheck = (matches, region, modifiedString) => {
+    destinationService
+      .getDictionaryDetails(matches, region)
+      .then((responseObj) => {
+        if (responseObj) {
+          const res = responseObj?.data;
+          res.forEach((element, index) => {
+            const replacement = element?.attributes?.content_translation_text;
+            const matchString = element?.attributes?.content_word;
+            const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+            if (checkStr && replacement) {
+              modifiedString = modifiedString.replace(checkStr, replacement);
+            }
+          });
+
+          // Set the modified string in state
+          // setLongText(modifiedString);
+        }
+      });
+  };
+
   useEffect(() => {
     // console.log(itin_name)
     // console.log(router.query);
@@ -149,7 +175,17 @@ function Index() {
         //
         const bannerImages = [];
         const imageCheck = x.data[0]?.attributes?.itinerary_details.data;
-        setFriendlyUrl(`home/destinations/${router.query?.continent}/${router.query?.country}/${router.query?.itineraryName ? router.query?.itineraries + '/' + x.data[0].attributes.friendly_url : x.data[0].attributes.friendly_url}`);
+        setFriendlyUrl(
+          `home/destinations/${router.query?.continent}/${
+            router.query?.country
+          }/${
+            router.query?.itineraryName
+              ? router.query?.itineraries +
+                "/" +
+                x.data[0].attributes.friendly_url
+              : x.data[0].attributes.friendly_url
+          }`
+        );
         setTitle(x.data[0].attributes.meta_title);
         imageCheck.forEach((banner, index) => {
           bannerImages.push(banner?.attributes?.image_path);
@@ -163,6 +199,83 @@ function Index() {
 
         // const carousel = document.querySelector('#Testimonials');
         // new bootstrap.Carousel(carousel);
+
+        const data = x.data[0]?.attributes?.itinerary_details.data;
+        console.log(data);
+        // const modifiedData = [];
+
+        if (data) {
+          let modifiedString = "";
+          data.forEach((element, index) => {
+            // let content = {};
+
+            modifiedString = element?.attributes?.overview_text;
+            const regex = /{[a-zA-Z0-9-]+}/g;
+            const matches = [...new Set(modifiedString.match(regex))];
+
+            let storedDataString = "";
+            let storedData = "";
+            if (region == "uk") {
+              storedDataString = localStorage.getItem("websitecontent_uk");
+              storedData = JSON.parse(storedDataString);
+            } else if (region == "us") {
+              storedDataString = localStorage.getItem("websitecontent_us");
+              storedData = JSON.parse(storedDataString);
+            } else if (region == "asia") {
+              storedDataString = localStorage.getItem("websitecontent_asia");
+              storedData = JSON.parse(storedDataString);
+            } else if (region == "in") {
+              storedDataString = localStorage.getItem("websitecontent_india");
+              storedData = JSON.parse(storedDataString);
+            }
+
+            if (storedData !== null) {
+              // You can access it using localStorage.getItem('yourKey')
+
+              if (matches) {
+                let replacement = "";
+                try {
+                  matches.forEach((match, index, matches) => {
+                    const matchString = match.replace(/{|}/g, "");
+                    if (!storedData[matchString]) {
+                      websiteContentCheck(matches, region, modifiedString);
+                      throw new Error("Loop break");
+                    } else {
+                      replacement = storedData[matchString];
+                    }
+                    const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+                    if (checkStr && replacement) {
+                      modifiedString = modifiedString.replace(
+                        checkStr,
+                        replacement
+                      );
+                    }
+                  });
+                  // content = element.attributes;
+                  // content["overview_text"] = modifiedString;
+                  // modifiedData.push(content);
+                  setOverViewText(modifiedString);
+                  setIsLoading(false);
+                } catch (error) {
+                  if (error.message === "Loop break") {
+                    // Handle the loop break here
+                    // console.log("Loop has been stopped.");
+                  } else if (error.message === "Region not found") {
+                    // Handle the loop break here
+                    // console.log("Loop has been stopped.");
+                  }
+                }
+              }
+            }
+            setIsLoading(false);
+          });
+        }
+        // debugger;
+        // modifiedData.forEach((element) => {
+        //   if (element?.attributes == "overview_text") {
+        //     setOverViewText(element?.attributes?.overview_text);
+        //   }
+        // });
 
         window.addEventListener("resize", equalHeight(true));
         setIsLoading(false);
@@ -325,7 +438,7 @@ function Index() {
                 <div
                   className="mb-4"
                   dangerouslySetInnerHTML={{
-                    __html: itineraries?.attributes?.overview_text,
+                    __html: overViewText,
                   }}
                 />
               </div>
@@ -334,10 +447,19 @@ function Index() {
                 <div className="row">
                   <div className="col-sm-9">
                     <div className="country_highlight_inr">
-                      <p>
-                        <span>Perfect for</span>
-                        {itineraries?.attributes?.perfect_for_text}
-                      </p>
+                      <span>Perfect for</span>
+                      <p
+                        dangerouslySetInnerHTML={{
+                          __html: itineraries?.attributes?.perfect_for_text,
+                        }}
+                      ></p>
+                      {/* <p>
+                        {/* dangerouslySetInnerHTML=
+                        {{
+                          __html: itineraries?.attributes?.perfect_for_text,
+                        // }} */}
+                      {/* {itineraries?.attributes?.perfect_for_text} */}
+                      {/* </p>  */}
                       <p>
                         <span>In the know</span>Combine your holiday in China
                         with a stopover in glamorous{" "}

@@ -619,7 +619,10 @@ function Nav() {
                               away from the crowds and enjoy a memorable
                               off-the-beaten-track holiday like no other.
                             </p>
-                            <button className="btn header_nav_btn">
+                            <button
+                              className="btn header_nav_btn"
+                              onClick={discovermore}
+                            >
                               Discover more
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
