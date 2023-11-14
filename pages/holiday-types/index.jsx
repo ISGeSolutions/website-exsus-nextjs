@@ -196,7 +196,7 @@ function Index() {
         </div>
       ) : (
         <div>
-          <section className="banner_blk_row">
+          {/* <section className="banner_blk_row">
             <div
               id="carouselExampleInterval"
               className="carousel slide"
@@ -214,7 +214,6 @@ function Index() {
                     aria-label={`Slide ${index + 1}`}
                   ></button>
                 ))}
-                {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
               </div>
               <div className="carousel-inner">
                 {backgroundImage.map((imagePath, index) => (
@@ -233,20 +232,6 @@ function Index() {
             </div>
             <Inspireme />
           </section>
-
-          {/* <section className="banner_blk_row">
-                <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}> */}
-          {/* {bannerImageArr?.map((bannerImage, i) => (
-                        <div key={i}>
-                            <img src={dynamicBannerImage(bannerImage)} alt="holiday_types_detls" className="img-fluid" />
-                        </div>
-                    ))} */}
-          {/* <img src={backgroundImage} alt="holiday_types_detls" className="img-fluid" /> */}
-          {/* /static/media/holiday_types_banner.1e97daba.jpg */}
-          {/* </Carousel> */}
-
-          {/* <Inspireme />
-            </section> */}
 
           <section className="card_blk_row destinations_blk_row light_grey">
             <div className="container">
@@ -276,9 +261,9 @@ function Index() {
                 </div>
               </div>
             </div>
-          </section>
+          </section> */}
 
-          <section className="card_blk_row destinations_blk_row">
+          {/* <section className="card_blk_row destinations_blk_row">
             <div className="container">
               <div className="row">
                 <div className="col-12 favrites_blk_row pb-0">
@@ -424,7 +409,7 @@ function Index() {
               <h5>Receive our latest news and special offers</h5>
               <Signup />
             </div>
-          </section>
+          </section> */}
         </div>
       )}
     </>

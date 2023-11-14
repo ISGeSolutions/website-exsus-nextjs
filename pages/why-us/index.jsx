@@ -125,7 +125,7 @@ function Index() {
 
     // const carousel = document.querySelector('#carouselExampleInterval');
     // new bootstrap.Carousel(carousel);
-    debugger;
+    // debugger;
     whyusService
       .getWhyusPage()
       .then((x) => {
