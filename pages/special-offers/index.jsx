@@ -245,14 +245,13 @@ function Index() {
         </div>
       ) : (
         <div>
-          <section className="banner_blk_row">
+          {/* <section className="banner_blk_row">
             <div
               id="carouselExampleInterval"
               className="carousel slide"
               data-bs-ride="carousel"
             >
               <div className="carousel-indicators">
-                {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
                 {backgroundImage.map((_, index) => (
                   <button
                     key={index}
@@ -287,7 +286,6 @@ function Index() {
           <section className="card_blk_row destinations_blk_row light_grey">
             <div className="container">
               <div className="bookmark_row">
-                {/* {/ <p style={{ color: `white` }}>{destinations?.attributes?.page_friendly_url}</p > /} */}
                 <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
               </div>
               <div className="row">
@@ -300,45 +298,21 @@ function Index() {
                 </div>
               </div>
             </div>
-          </section>
+          </section> */}
 
-          <section className="card_blk_row destinations_blk_row pb-0">
-            <div className="container">
-              <div className="row">
-                <div className="col-12 favrites_blk_row pb-0">
-                  <h3 className="title_cls pb-0">{subTitle}</h3>
-                  <div className="destination_contries_filter d-flex justify-content-around">
-                    <ul>
-                      <li>
-                        <a href="#" className="active">
-                          Exsus recommends
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">Alphabetical</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Special Offer on Hotels */}
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
             <div className="container">
               <div className="card_slider_row">
                 <div className="carousel00 width_100">
                   <div className="row">
                     {allOffers?.map((res) => (
-                      <NavLink href={generateDynamicLink(res.id)}>
+                      <a key={res?.id} href={generateDynamicLink(res?.id)}>
                         <div
-                          className="col-sm-6 col-lg-4 col-xxl-3"
-                          key={res.id}
-                        >
+                          className="col-sm-6 col-lg-4 col-xxl-3">
                           <div className="card_slider_inr">
                             <div className="card_slider">
-                              <a className="card_slider_img">
+                              {/* console.log error => Dont add anchor tag for the below element. you can use onclick fun. */}
+                              <span key={res?.id} href="#" className="card_slider_img">
                                 <img
                                   src={res.attributes.thumbnail_image_path}
                                   alt="offer_card01"
@@ -347,14 +321,15 @@ function Index() {
                                 <span className="img_specl_offer">
                                   Special offer
                                 </span>
-                              </a>
+                              </span>
                               <div className="card_slider_cnt">
                                 <h4>
-                                  <a>{res.attributes.offer_text}</a>
+                                  {/* console.log error => Dont add anchor tag for the below element. you can use onclick fun. */}
+                                  <span key={res?.id} href="#">{res?.attributes?.offer_text}</span>
                                 </h4>
                                 <ul>
                                   <li>
-                                    Location: {res.attributes.subtitle_text}
+                                    Location: {res?.attributes?.subtitle_text}
                                   </li>
                                   <li>
                                     <p>
@@ -371,7 +346,7 @@ function Index() {
                                     </p>
                                   </li>
                                   <li className="pink_text">
-                                    Special offer: {res.attributes.title_text}
+                                    Special offer: {res?.attributes?.title_text}
                                   </li>
                                   <li>
                                     Best for:
@@ -394,23 +369,22 @@ function Index() {
                             </div>
                           </div>
                         </div>
-                      </NavLink>
-                    ))}
+                      </a>
+                    )
+                    )}
                   </div>
                 </div>
               </div>
             </div>
           </section>
 
-          {/* Enqury */}
-          <section className="make_enqury_row">
+          {/* <section className="make_enqury_row">
             <div className="container">
               <EnquiryButton />
             </div>
-          </section>
+          </section> */}
 
-          {/* NewsLetter */}
-          <section
+          {/* <section
             aria-label="Sign up for newsletter"
             className="newslettr_row"
           >
@@ -419,7 +393,7 @@ function Index() {
               <h5>Receive our latest news and special offers</h5>
               <Signup />
             </div>
-          </section>
+          </section> */}
         </div>
       )}
     </>
