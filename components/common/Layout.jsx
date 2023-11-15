@@ -102,7 +102,10 @@ function Layout({ children }) {
 
     // debugger;
     const regionArr = ["uk", "us", "asia", "in"];
-    if (isAnyStringInSentence(regionArr, router.asPath)) {
+    if (router.asPath === '/' || router.asPath === '/uk' || router.asPath === '/us' || router.asPath === '/asia' || router.asPath === '/in') {
+      // console.log("At least one string is found in the sentence.");
+      myArray = pathRouter.split("/");
+    } else if (isAnyStringInSentence(regionArr, router.asPath)) {
       // console.log("At least one string is found in the sentence.");
       myArray = pathRouter.split("/");
     } else {

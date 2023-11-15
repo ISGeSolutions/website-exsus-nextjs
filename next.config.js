@@ -10,6 +10,13 @@ const nextConfig = {
 
   async rewrites() {
     return [
+
+      //index page 
+      { source: "/uk", destination: "/" },
+      { source: "/us", destination: "/" },
+      { source: "/asia", destination: "/" },
+      { source: "/in", destination: "/" },
+
       // destinations
       { source: "/destinations", destination: "/destinations" },
       { source: "/us/destinations", destination: "/destinations" },
