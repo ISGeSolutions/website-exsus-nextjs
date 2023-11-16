@@ -41,15 +41,17 @@ function ContinentCountry({ sendDataToParent }) {
   };
 
   const generateDynamicLinkCountries = (countryName) => {
-    const modifieditem = countryName
-      .replace(/ /g, "-")
-      .replace(/&/g, "and")
-      .toLowerCase();
     if (countryName) {
-      return regionWiseUrl + `/destinations/${destinationcode.replace(/ /g, "-")
+      const modifieditem = countryName
+        .replace(/ /g, "-")
         .replace(/&/g, "and")
-        .toLowerCase()
-        }/${modifieditem}`;
+        .toLowerCase();
+      if (countryName) {
+        return regionWiseUrl + `/destinations/${destinationcode.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()
+          }/${modifieditem}`;
+      }
     }
   };
 
@@ -175,61 +177,65 @@ function ContinentCountry({ sendDataToParent }) {
 
                 {/* Continent countries */}
                 {allCountries?.map((countries, i) => (
-                  <div
-                    className="col-sm-6 col-lg-4 col-xxl-3"
-                    key={countries?.id}
-                  >
-                    <div className="card_blk_inr">
-                      <NavLink
-                        href={generateDynamicLinkCountries(
-                          countries?.attributes.country_name
-                        )}
-                      >
-                        <img
-                          src={
-                            countries?.attributes?.country_images?.data.filter(
-                              (res) => res.attributes.image_type == "thumbnail"
-                            )[0]?.attributes?.image_path
-                          }
-                          alt={
-                            countries?.attributes?.country_images?.data.filter(
-                              (res) => res.attributes?.image_type == "thumbnail"
-                            )[0]?.attributes?.image_alt_text
-                          }
-                          className="img-fluid"
-                        />
-                        <div className="card_blk_cntnt card_blk_sml_arw">
-                          <div className="row align-items-center">
-                            <div className="col-11">
-                              <div className="card_blk_txt">
-                                <h3 className="mb-0">
-                                  {countries?.attributes?.country_name}
-                                </h3>
+                  // Add a condition to check if country_name is not null
+                  countries.attributes.country_name && (
+                    <div
+                      className="col-sm-6 col-lg-4 col-xxl-3"
+                      key={countries?.id}
+                    >
+                      <div className="card_blk_inr">
+                        <NavLink
+                          href={generateDynamicLinkCountries(
+                            countries?.attributes.country_name
+                          )}
+                        >
+                          <img
+                            src={
+                              countries?.attributes?.country_images?.data.filter(
+                                (res) => res.attributes.image_type === "thumbnail"
+                              )[0]?.attributes?.image_path
+                            }
+                            alt={
+                              countries?.attributes?.country_images?.data.filter(
+                                (res) => res.attributes?.image_type === "thumbnail"
+                              )[0]?.attributes?.image_alt_text
+                            }
+                            className="img-fluid"
+                          />
+                          <div className="card_blk_cntnt card_blk_sml_arw">
+                            <div className="row align-items-center">
+                              <div className="col-11">
+                                <div className="card_blk_txt">
+                                  <h3 className="mb-0">
+                                    {countries?.attributes?.country_name}
+                                  </h3>
+                                </div>
+                              </div>
+                              <div className="col-1 ps-0">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="#ffffff"
+                                  shapeRendering="geometricPrecision"
+                                  textRendering="geometricPrecision"
+                                  imageRendering="optimizeQuality"
+                                  fillRule="evenodd"
+                                  clipRule="evenodd"
+                                  viewBox="0 0 267 512.43"
+                                >
+                                  <path
+                                    fillRule="nonzero"
+                                    d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                                  />
+                                </svg>
                               </div>
                             </div>
-                            <div className="col-1 ps-0">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="#ffffff"
-                                shapeRendering="geometricPrecision"
-                                textRendering="geometricPrecision"
-                                imageRendering="optimizeQuality"
-                                fillRule="evenodd"
-                                clipRule="evenodd"
-                                viewBox="0 0 267 512.43"
-                              >
-                                <path
-                                  fillRule="nonzero"
-                                  d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                                />
-                              </svg>
-                            </div>
                           </div>
-                        </div>
-                      </NavLink>
+                        </NavLink>
+                      </div>
                     </div>
-                  </div>
+                  )
                 ))}
+
               </div>
             </div>
           </section>

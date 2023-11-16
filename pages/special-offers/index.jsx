@@ -245,7 +245,7 @@ function Index() {
         </div>
       ) : (
         <div>
-          {/* <section className="banner_blk_row">
+          <section className="banner_blk_row">
             <div
               id="carouselExampleInterval"
               className="carousel slide"
@@ -298,7 +298,23 @@ function Index() {
                 </div>
               </div>
             </div>
-          </section> */}
+          </section>
+
+          <section class="card_blk_row destinations_blk_row pb-0">
+            <div class="container">
+              <div class="row">
+                <div class="col-12 favrites_blk_row pb-0">
+                  <h3 class="title_cls pb-0">Our favourite special offers on luxury holidays</h3>
+                  <div class="destination_contries_filter d-flex justify-content-around">
+                    <ul>
+                      <li><a href="#" class="active">Exsus recommends</a></li>
+                      <li><a href="#">Alphabetical</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
 
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
             <div className="container">

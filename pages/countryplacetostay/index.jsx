@@ -413,8 +413,8 @@ function CountryPlaceToStay(props) {
               {/* Inspire Me */}
               <div className="card_slider_row">
                 <div className="carousel00 region_carousel00">
-                  <div className="row">
-                    <form onSubmit={onSubmit}>
+                  <form onSubmit={onSubmit}>
+                    <div className="row">
                       <div className="col-12">
                         <div className="destination_dropdwn_row d-block d-md-flex">
                           <div className="dropdown_grp_blk">
@@ -649,8 +649,8 @@ function CountryPlaceToStay(props) {
                           </button>
                         )}
                       </div>
-                    </form>
-                  </div>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>

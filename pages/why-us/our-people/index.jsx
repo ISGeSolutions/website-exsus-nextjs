@@ -126,7 +126,6 @@ function Index() {
                 storedDataString = localStorage.getItem("websitecontent_india");
                 storedData = JSON.parse(storedDataString);
               }
-              debugger;
               if (storedData !== null) {
 
                 // debugger;
