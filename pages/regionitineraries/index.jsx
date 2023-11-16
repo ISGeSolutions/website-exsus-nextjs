@@ -13,7 +13,7 @@ import Select, { components } from "react-select";
 export default CountryItinararies;
 
 function CountryItinararies(country) {
-  console.log("country", country);
+  // console.log("country", country);
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(true);
   const [isDisabled, setIsDisabled] = useState(false);
@@ -183,7 +183,7 @@ function CountryItinararies(country) {
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
 
   // const handleLoadMore = () => {
-  //     // console.log('handleLoadMore')
+  // console.log('handleLoadMore')
   //     setVisibleItems(prevVisibleItems => prevVisibleItems + itemsPerPage);
   // };
 

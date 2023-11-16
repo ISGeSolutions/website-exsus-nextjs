@@ -79,7 +79,7 @@ function Index() {
                     }
                 });
                 setBackgroundImage(newBackgroundImages);
-                console.log(newBackgroundImages);
+                // console.log(newBackgroundImages);
                 const data = x.data[0]?.attributes?.custom_page_contents?.data;
                 let modifiedString = "";
                 // debugger;
@@ -98,7 +98,7 @@ function Index() {
                             setRightCorner(element?.attributes?.content_value);
                         } else if (element?.attributes?.content_name == 'Long_Text') {
                             // debugger;
-                            console.log(element?.attributes?.content_value);
+                            // console.log(element?.attributes?.content_value);
                             setLongText(element?.attributes?.content_value);
                         }
                     });

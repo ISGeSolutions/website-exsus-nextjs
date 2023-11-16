@@ -170,7 +170,7 @@ function Index() {
             setIsLoading(false);
           });
         }
-        console.log(modifiedData);
+        // console.log(modifiedData);
         setAllExecutives(modifiedData)
 
         setIsLoading(false);
@@ -295,15 +295,15 @@ function Index() {
                 <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
               </div>
               <div className="row">
-                {allExecutives?.map((res) => (
+                {allExecutives?.map((res, index) => (
                   <div className="col-sm-6 col-lg-4 col-xxl-3" key={res.id}>
-                    <div className="our_exprts_inr">
-                      <img
+                    <div className="our_exprts_inr" key={res.id}>
+                      <img key={res.id}
                         src={res?.executive_image_path}
                         alt="expert01"
                         className="img-fluid"
                       />
-                      <div className="expert_info">
+                      <div className="expert_info" key={res.id}>
                         <h2>{res?.executive_name}</h2>
                         <h3>{res?.executive_role}</h3>
                         <div
@@ -312,7 +312,7 @@ function Index() {
                           }}
                         />
                       </div>
-                      <button
+                      <button key={res.id}
                         className="btn prmry_btn make_enqury_btn"
                         onClick={() =>
                           handleRedirect(res?.executive_name)
@@ -334,7 +334,8 @@ function Index() {
                             d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
                           />
                         </svg>
-                      </button>{" "}
+                      </button>
+                      {/* {" "} */}
                     </div>
                   </div>
                 ))}

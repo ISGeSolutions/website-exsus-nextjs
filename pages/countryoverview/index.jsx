@@ -12,7 +12,7 @@ function CountryOverview(props) {
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
   const [countryData, setCountryData] = useState(props?.data);
   // const { overview_text } = props?.data || {};
-  console.log(props?.data);
+  // console.log(props?.data);
 
   const countrycode = router.query?.country
     ?.replace(/-/g, " ")

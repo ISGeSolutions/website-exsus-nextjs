@@ -291,7 +291,7 @@ function CountryItinararies(props) {
     // console.log("Selected Countries:", selectedOptionCountry);
     // console.log("Selected Regions:", selectedOptionRegion);
     // console.log("Selected Months:", selectedOptionMonth);
-    console.log(e);
+    // console.log(e);
     if (!e.destination && !e.reason && !e.month) {
       showAlert("Please select atleast one option", "error");
     } else {

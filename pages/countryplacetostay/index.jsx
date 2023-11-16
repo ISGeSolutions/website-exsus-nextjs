@@ -231,7 +231,7 @@ function CountryPlaceToStay(props) {
 
   function onSubmit(e) {
     e.preventDefault();
-    console.log(e);
+    // console.log(e);
     if (!e.destination && !e.reason && !e.month) {
       showAlert("Please select atleast one option", "error");
     } else {

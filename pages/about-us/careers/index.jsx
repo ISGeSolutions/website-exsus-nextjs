@@ -35,7 +35,7 @@ function Index() {
             } else if (element?.attributes?.content_name == "MetaDescription") {
               setMetaDescription(element?.attributes?.content_value);
             } else if (element?.attributes?.content_name == "Long_Text") {
-              console.log(element?.attributes?.content_value);
+              // console.log(element?.attributes?.content_value);
               setLongText(element?.attributes?.content_value);
             } else if (element?.attributes?.content_name == "Right_Header") {
               setRightHeader(element?.attributes?.content_value);
