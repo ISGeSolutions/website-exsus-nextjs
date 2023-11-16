@@ -332,7 +332,7 @@ function Index() {
                         <div className="our_exprts_slider_grp">
                           <div className="row">
                             <div className="col-md-6 m-auto">
-                              <div
+                              <p
                                 dangerouslySetInnerHTML={{
                                   __html: dictioneryFunction(
                                     res1?.attributes?.intro_text

@@ -71,7 +71,10 @@ function Layout({ children }) {
   let region = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      if (window.site_region !== "uk") region = window.site_region;
+      if (window.site_region !== "uk") {
+        region = window.site_region;
+        console.log(region)
+      }
     }
   }
 
@@ -115,7 +118,7 @@ function Layout({ children }) {
       myArray = myArray.concat(pathRouter.split("/").slice(1));
     }
 
-    var newPath = "";
+    let newPath = "";
     myArray.forEach((element, index) => {
       if (index == 0) {
         newPath = element;
@@ -123,9 +126,13 @@ function Layout({ children }) {
         if (myArray.length > 2) {
           if (element) {
             if (selectedOption.value == "uk") {
-              newPath = newPath + "/";
-            } else {
+              if (!regionArr.includes(element)) {
+                newPath = newPath + "/" + element;
+              }
+            } else if (regionArr.includes(element)) {
               newPath = newPath + "/" + selectedOption.value;
+            } else {
+              newPath = newPath + "/" + selectedOption.value + "/" + element;
             }
           }
         }
@@ -133,6 +140,15 @@ function Layout({ children }) {
         newPath = newPath + "/" + element;
       }
     });
+    // myArray.forEach((element, index) => {
+    //   if (index === 0) {
+    //     if (selectedOption.value != "uk") {
+    //       newPath = "/" + selectedOption.value;
+    //     }
+    //   } else {
+    //     newPath = newPath + "/" + element;
+    //   }
+    // });
     router.push(newPath);
     // router?.replace('/uk/continent?destinationcode=africa&id=1');
   };
