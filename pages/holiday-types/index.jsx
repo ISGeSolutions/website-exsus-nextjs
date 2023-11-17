@@ -196,7 +196,7 @@ function Index() {
         </div>
       ) : (
         <div>
-          {/* <section className="banner_blk_row">
+          <section className="banner_blk_row">
             <div
               id="carouselExampleInterval"
               className="carousel slide"
@@ -261,9 +261,9 @@ function Index() {
                 </div>
               </div>
             </div>
-          </section> */}
+          </section>
 
-          {/* <section className="card_blk_row destinations_blk_row">
+          <section className="card_blk_row destinations_blk_row">
             <div className="container">
               <div className="row">
                 <div className="col-12 favrites_blk_row pb-0">
@@ -409,7 +409,7 @@ function Index() {
               <h5>Receive our latest news and special offers</h5>
               <Signup />
             </div>
-          </section> */}
+          </section>
         </div>
       )}
     </>

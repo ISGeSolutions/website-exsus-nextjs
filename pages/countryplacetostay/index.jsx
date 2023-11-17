@@ -564,7 +564,7 @@ function CountryPlaceToStay(props) {
 
                       {/* Country Place to stay hotels */}
                       {allHotels?.slice(0, allHotels.length).map((item) => (
-                        <div className="col-sm-6 col-lg-4 col-xxl-3">
+                        <div className="col-sm-6 col-lg-4 col-xxl-3" key={item.id}>
                           <div className="card_slider_inr">
                             <div className="card_slider">
                               <NavLink

@@ -190,8 +190,8 @@ function CountryOverview(props) {
               <p dangerouslySetInnerHTML={{ __html: dictioneryFunction(countryData?.overview_text) }} />
             </section>
           </div>
-          <section class="country_highlight_row">
-            <div class="country_highlight_inr" dangerouslySetInnerHTML={{ __html: dictioneryFunction(countryData?.country_highlights) }}>
+          <section className="country_highlight_row">
+            <div className="country_highlight_inr" dangerouslySetInnerHTML={{ __html: dictioneryFunction(countryData?.country_highlights) }}>
             </div>
           </section>
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
