@@ -519,11 +519,11 @@ function Index() {
                 {backgroundImage.map((imagePath, index) => (
                   // <img src={imagePath} alt="holiday_types_detls_card02" className="img-fluid" />
                   <NavLink
-                    href="#"
+                    href=""
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                     data-bs-interval="5000"
                   >
-                    <div
+                    <div key={index}
                       className="banner_commn_cls"
                       style={{ backgroundImage: `url(${imagePath})` }}
                     ></div>

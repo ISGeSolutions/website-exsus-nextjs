@@ -196,6 +196,7 @@ function Index() {
         .getDestinationDetails(destinationcode)
         .then((x) => {
           setDestinationDetails(x.data[0].attributes);
+          console.log(x.data[0].attributes);
           setFriendlyUrl(
             `Home/Destinations/${x.data[0].attributes.friendly_url}`
           );

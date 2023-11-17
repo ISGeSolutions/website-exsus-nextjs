@@ -116,6 +116,7 @@ function CountryRegions({ props, sendDataToParent }) {
       .getRegions(countrycode)
       .then((x) => {
         setAllRegions(x.data[0]?.attributes?.regions?.data);
+        console.log(x.data[0]?.attributes?.regions?.data);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -190,12 +191,12 @@ function CountryRegions({ props, sendDataToParent }) {
 
                 {/* Country regions */}
                 {allRegions?.slice(0, allRegions.length).map((item) => (
-                  <div className="col-sm-6 col-lg-4 col-xxl-3">
+                  <div className="col-sm-6 col-lg-4 col-xxl-3" key={item.id}>
                     <div className="card_blk_inr flex-column">
                       <NavLink href={generateDynamicLink(item)}>
                         <img
-                          src="./../../../images/destination_countries01.jpg"
-                          alt="destination countries01"
+                          src={item?.attributes?.region_images?.data?.filter(res => res.attributes.image_type == "thumbnail")[0]?.attributes.image_path}
+                          alt={item?.attributes?.region_images?.data?.filter(res => res.attributes.image_type == "thumbnail")[0]?.attributes.image_alt_text}
                           className="img-fluid"
                         />
                         <div className="card_blk_cntnt card_blk_sml_arw">

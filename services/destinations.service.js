@@ -99,7 +99,7 @@ function getDestinationDetails(name) {
     }/api/destinations?filters[destination_name][$eq]=${name?.replace(
       /&/g,
       "%26"
-    )}&populate[countries][filters][popular_ind][$eq]=true&populate[countries][sort][0]=popular_serial_no&populate[countries][fields][3]=country_name&populate[countries][populate][4]=country_images&populate[countries][populate][country_images][filters][image_type][$eq]=thumbnail`;
+    )}&populate[destination_images][filters][image_type][$eq]=banner&populate[countries][filters][popular_ind][$eq]=true&populate[countries][sort][0]=popular_serial_no&populate[countries][fields][3]=country_name&populate[countries][populate][4]=country_images&populate[countries][populate][country_images][filters][image_type][$eq]=thumbnail`;
   return fetchWrapper.get(destinationDetailsUrl);
 }
 
@@ -217,7 +217,7 @@ function getRegions(countryName) {
     }/api/countries?filters[country_name][$eq]=${countryName.replace(
       /&/g,
       "%26"
-    )}&populate[0]=destination&populate[1]=regions`;
+    )}&populate[0]=destination&populate[1]=regions.region_images`;
   return fetchWrapper.get(itinerariesDetailsUrl);
 }
 

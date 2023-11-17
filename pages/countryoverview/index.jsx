@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 export default CountryOverview;
 
-function CountryOverview({ props, sendDataToParent }) {
+function CountryOverview(props) {
   const router = useRouter();
   const [itineraries, setItineraries] = useState(null);
   const itemsPerPage = 9; // Number of items to load per page
@@ -27,13 +27,7 @@ function CountryOverview({ props, sendDataToParent }) {
     setVisibleItems((prevVisibleItems) => prevVisibleItems + itemsPerPage);
   };
 
-  // let regionWiseUrl = "/uk";
-  // if (typeof window !== "undefined") {
-  //   if (window && window.site_region) {
-  //     regionWiseUrl = "/" + window.site_region;
-  //     // setMyVariable(window.site_region);
-  //   }
-  // }
+
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -46,10 +40,15 @@ function CountryOverview({ props, sendDataToParent }) {
     }
   }
 
+  const handleClick = (e) => {
+    // Call the callback function to send data to the parent
+    sendDataToParent(e);
+  };
+
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
+      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
     );
   };
 
@@ -58,11 +57,6 @@ function CountryOverview({ props, sendDataToParent }) {
       regionWiseUrl +
       `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
     );
-  };
-
-  const handleClick = (e) => {
-    // Call the callback function to send data to the parent
-    sendDataToParent(e);
   };
 
   const equalHeight = (resize) => {
@@ -85,6 +79,7 @@ function CountryOverview({ props, sendDataToParent }) {
       }
     }
   };
+
 
   const dictioneryFunction = (data) => {
     let modifiedString = data;
@@ -109,6 +104,7 @@ function CountryOverview({ props, sendDataToParent }) {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
+
         // debugger;
         // You can access it using localStorage.getItem('yourKey')
 
@@ -125,21 +121,26 @@ function CountryOverview({ props, sendDataToParent }) {
               }
               const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
               if (checkStr && replacement) {
-                modifiedString = modifiedString.replace(checkStr, replacement);
+                modifiedString = modifiedString.replace(
+                  checkStr,
+                  replacement
+                );
               }
             });
             return modifiedString;
             setIsLoading(false);
           } catch (error) {
             if (error.message === "Loop break") {
+
             } else if (error.message === "Region not found") {
+
             }
           }
         }
       }
     } else {
     }
-  };
+  }
 
   equalHeight(true);
 
@@ -153,6 +154,7 @@ function CountryOverview({ props, sendDataToParent }) {
     //   .catch((error) => {
     //     setIsLoading(false);
     //   });
+
 
     // setAllExecutives(x.data);
 
@@ -184,20 +186,12 @@ function CountryOverview({ props, sendDataToParent }) {
         <div>
           <div className="container">
             <section className="destination_para">
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: dictioneryFunction(countryData?.overview_text),
-                }}
-              />
+              <p dangerouslySetInnerHTML={{ __html: dictioneryFunction(countryData?.overview_text) }} />
             </section>
           </div>
-          <section class="country_highlight_row">
-            <div
-              class="country_highlight_inr"
-              dangerouslySetInnerHTML={{
-                __html: dictioneryFunction(countryData?.country_highlights),
-              }}
-            ></div>
+          <section className="country_highlight_row">
+            <div className="country_highlight_inr" dangerouslySetInnerHTML={{ __html: dictioneryFunction(countryData?.country_highlights) }}>
+            </div>
           </section>
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
             <div className="container-md">
@@ -332,8 +326,7 @@ function CountryOverview({ props, sendDataToParent }) {
           <section className="favrites_blk_row favrites_blk_no_slider_row light_grey">
             <div className="container-md">
               <h3 className="title_cls pt-5">
-                PLACES TO STAY IN {countryData?.country_name} HANDPICKED BY
-                EXSUS
+                PLACES TO STAY IN {countryData?.country_name} HANDPICKED BY EXSUS
               </h3>
               <div className="card_slider_row">
                 {/* <div className="carousel00 region_carousel00">
@@ -561,10 +554,7 @@ function CountryOverview({ props, sendDataToParent }) {
                         <div className="row align-items-center">
                           <div className="col-11">
                             <div className="card_blk_txt">
-                              <h3>
-                                See all Itinerary Ideas in{" "}
-                                {countryData?.country_name}
-                              </h3>
+                              <h3>See all Itinerary Ideas in {countryData?.country_name}</h3>
                             </div>
                           </div>
                           <div className="col-1 ps-0">
@@ -602,10 +592,7 @@ function CountryOverview({ props, sendDataToParent }) {
                         <div className="row align-items-center">
                           <div className="col-11">
                             <div className="card_blk_txt">
-                              <h3>
-                                See all Places to Stay in{" "}
-                                {countryData?.country_name}
-                              </h3>
+                              <h3>See all Places to Stay in {countryData?.country_name}</h3>
                             </div>
                           </div>
                           <div className="col-1 ps-0">

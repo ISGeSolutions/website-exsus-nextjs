@@ -12,12 +12,14 @@ import { NavLink } from "components";
 import Head from "next/head";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
+import { useRouter } from "next/router";
 
 var Carousel = require("react-responsive-carousel").Carousel;
 
 export default Index;
 
 function Index() {
+  const router = useRouter();
   const [users, setUsers] = useState(null);
   const [allOffers, setAllOffers] = useState([]);
   const [destinations, setDestinations] = useState();
@@ -31,6 +33,15 @@ function Index() {
   const [mapVariable, setMapVariable] = useState(null);
   const [subTitle, setSubTitle] = useState(null);
   const [backgroundImage, setBackgroundImage] = useState([]);
+
+
+  let region = "uk";
+  let regionWiseUrl = "";
+  if (typeof window !== "undefined") {
+    if (window && window.site_region) {
+      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
+    }
+  }
 
   const handleRedirect = () => {
     router.push(regionWiseUrl + `/hotel-detail`);
@@ -67,13 +78,7 @@ function Index() {
   //   }
   // }
 
-  let region = "uk";
-  let regionWiseUrl = "";
-  if (typeof window !== "undefined") {
-    if (window && window.site_region) {
-      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
-    }
-  }
+
 
   const generateDynamicLink = (item) => {
     return regionWiseUrl + `/hotel-detail`;
@@ -322,11 +327,12 @@ function Index() {
                 <div className="carousel00 width_100">
                   <div className="row">
                     {allOffers?.map((res) => (
-                      <a key={res?.id} href={generateDynamicLink(res?.id)}>
-                        <div
-                          className="col-sm-6 col-lg-4 col-xxl-3">
-                          <div className="card_slider_inr">
-                            <div className="card_slider">
+
+                      <div
+                        className="col-sm-6 col-lg-4 col-xxl-3">
+                        <div className="card_slider_inr">
+                          <div className="card_slider">
+                            <NavLink key={res?.id} href={generateDynamicLink(res?.id)}>
                               {/* console.log error => Dont add anchor tag for the below element. you can use onclick fun. */}
                               <span key={res?.id} href="#" className="card_slider_img">
                                 <img
@@ -338,54 +344,56 @@ function Index() {
                                   Special offer
                                 </span>
                               </span>
-                              <div className="card_slider_cnt">
+                            </NavLink>
+                            <div className="card_slider_cnt">
+                              <NavLink key={res?.id} href={generateDynamicLink(res?.id)}>
                                 <h4>
                                   {/* console.log error => Dont add anchor tag for the below element. you can use onclick fun. */}
                                   <span key={res?.id} href="#">{res?.attributes?.offer_text}</span>
                                 </h4>
-                                <ul>
-                                  <li>
-                                    Location: {res?.attributes?.subtitle_text}
-                                  </li>
-                                  <li>
-                                    <p>
-                                      Price guide:
-                                      <span
-                                        tabIndex="0"
-                                        data-bs-toggle="tooltip"
-                                        data-bs-placement="right"
-                                        data-bs-title="£200-£350 per person per night"
-                                        data-bs-trigger="hover"
-                                      >
-                                        £££<label>££</label>
-                                      </span>
-                                    </p>
-                                  </li>
-                                  <li className="pink_text">
-                                    Special offer: {res?.attributes?.title_text}
-                                  </li>
-                                  <li>
-                                    Best for:
-                                    <span>
-                                      Luxury Hotel, Setting & Views, Beach,
-                                      Family-friendly
+                              </NavLink>
+                              <ul>
+                                <li>
+                                  Location: {res?.attributes?.subtitle_text}
+                                </li>
+                                <li>
+                                  <p>
+                                    Price guide:
+                                    <span
+                                      tabIndex="0"
+                                      data-bs-toggle="tooltip"
+                                      data-bs-placement="right"
+                                      data-bs-title="£200-£350 per person per night"
+                                      data-bs-trigger="hover"
+                                    >
+                                      £££<label>££</label>
                                     </span>
-                                  </li>
-                                </ul>
-                              </div>
-                              <button className="btn card_slider_btn justify-content-end">
-                                <span
-                                  className="view_itnry_link"
-                                  onClick={handleRedirect}
-                                >
-                                  View this hotel
-                                  <em className="fa-solid fa-chevron-right"></em>
-                                </span>
-                              </button>
+                                  </p>
+                                </li>
+                                <li className="pink_text">
+                                  Special offer: {res?.attributes?.title_text}
+                                </li>
+                                <li>
+                                  Best for:
+                                  <span>
+                                    Luxury Hotel, Setting & Views, Beach,
+                                    Family-friendly
+                                  </span>
+                                </li>
+                              </ul>
                             </div>
+                            <button className="btn card_slider_btn justify-content-end">
+                              <span
+                                className="view_itnry_link"
+                                onClick={handleRedirect}
+                              >
+                                View this hotel
+                                <em className="fa-solid fa-chevron-right"></em>
+                              </span>
+                            </button>
                           </div>
                         </div>
-                      </a>
+                      </div>
                     )
                     )}
                   </div>
