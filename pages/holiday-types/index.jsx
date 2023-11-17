@@ -16,6 +16,7 @@ var Carousel = require("react-responsive-carousel").Carousel;
 export default Index;
 
 function Index() {
+  const router = useRouter();
   const [users, setUsers] = useState(null);
   const [holidaytypes, setHolidayTypes] = useState();
   // const [destinationLandingDetails, setDestinationLandingDetails] = useState();
@@ -79,6 +80,10 @@ function Index() {
 
   const dynamicImage = (itemId) => {
     return itemId;
+  };
+
+  const handleWhenToGoClick = () => {
+    router.push("/where-to-go");
   };
 
   const dynamicLink = (itemName, id) => {
@@ -372,7 +377,10 @@ function Index() {
 
                 <h4>{backgroundImgWhentogo?.image_header_text_1}</h4>
                 <h5>{backgroundImgWhentogo?.image_header_text_2}</h5>
-                <button className="btn prmry_btn make_enqury_btn">
+                <button
+                  className="btn prmry_btn make_enqury_btn"
+                  onClick={handleWhenToGoClick}
+                >
                   View travel calender
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

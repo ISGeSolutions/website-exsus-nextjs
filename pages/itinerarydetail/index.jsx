@@ -96,12 +96,6 @@ function Index() {
     );
   };
 
-  equalHeight(true);
-
-  const overTextFun = (text) => {
-    return text?.replace(/\\n/g, "");
-  };
-
   const websiteContentCheck = (matches, region, modifiedString) => {
     destinationService
       .getDictionaryDetails(matches, region)
@@ -121,6 +115,66 @@ function Index() {
           // setLongText(modifiedString);
         }
       });
+  };
+
+  const dictioneryFunction = (data) => {
+    let modifiedString = data;
+    if (modifiedString) {
+      const regex = /{[a-zA-Z0-9-]+}/g;
+      const matches = [...new Set(modifiedString.match(regex))];
+
+      let storedDataString = "";
+      let storedData = "";
+
+      if (region == "uk") {
+        storedDataString = localStorage.getItem("websitecontent_uk");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "us") {
+        storedDataString = localStorage.getItem("websitecontent_us");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "asia") {
+        storedDataString = localStorage.getItem("websitecontent_asia");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "in") {
+        storedDataString = localStorage.getItem("websitecontent_india");
+        storedData = JSON.parse(storedDataString);
+      }
+      if (storedData !== null) {
+        // debugger;
+        // You can access it using localStorage.getItem('yourKey')
+
+        if (matches) {
+          let replacement = "";
+          try {
+            matches.forEach((match, index, matches) => {
+              const matchString = match.replace(/{|}/g, "");
+              if (!storedData[matchString]) {
+                websiteContentCheck(matches, region, modifiedString);
+                throw new Error("Loop break");
+              } else {
+                replacement = storedData[matchString];
+              }
+              const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+              if (checkStr && replacement) {
+                modifiedString = modifiedString.replace(checkStr, replacement);
+              }
+            });
+            return modifiedString;
+          } catch (error) {
+            if (error.message === "Loop break") {
+            } else if (error.message === "Region not found") {
+            }
+          }
+        }
+      }
+    } else {
+    }
+  };
+
+  equalHeight(true);
+
+  const overTextFun = (text) => {
+    return text?.replace(/\\n/g, "");
   };
 
   useEffect(() => {
@@ -200,83 +254,6 @@ function Index() {
         // const carousel = document.querySelector('#Testimonials');
         // new bootstrap.Carousel(carousel);
 
-        const data = x.data[0]?.attributes?.itinerary_details.data;
-        console.log(data);
-        // const modifiedData = [];
-
-        if (data) {
-          let modifiedString = "";
-          data.forEach((element, index) => {
-            // let content = {};
-
-            modifiedString = element?.attributes?.overview_text;
-            const regex = /{[a-zA-Z0-9-]+}/g;
-            const matches = [...new Set(modifiedString.match(regex))];
-
-            let storedDataString = "";
-            let storedData = "";
-            if (region == "uk") {
-              storedDataString = localStorage.getItem("websitecontent_uk");
-              storedData = JSON.parse(storedDataString);
-            } else if (region == "us") {
-              storedDataString = localStorage.getItem("websitecontent_us");
-              storedData = JSON.parse(storedDataString);
-            } else if (region == "asia") {
-              storedDataString = localStorage.getItem("websitecontent_asia");
-              storedData = JSON.parse(storedDataString);
-            } else if (region == "in") {
-              storedDataString = localStorage.getItem("websitecontent_india");
-              storedData = JSON.parse(storedDataString);
-            }
-
-            if (storedData !== null) {
-              // You can access it using localStorage.getItem('yourKey')
-
-              if (matches) {
-                let replacement = "";
-                try {
-                  matches.forEach((match, index, matches) => {
-                    const matchString = match.replace(/{|}/g, "");
-                    if (!storedData[matchString]) {
-                      websiteContentCheck(matches, region, modifiedString);
-                      throw new Error("Loop break");
-                    } else {
-                      replacement = storedData[matchString];
-                    }
-                    const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
-                    if (checkStr && replacement) {
-                      modifiedString = modifiedString.replace(
-                        checkStr,
-                        replacement
-                      );
-                    }
-                  });
-                  // content = element.attributes;
-                  // content["overview_text"] = modifiedString;
-                  // modifiedData.push(content);
-                  setOverViewText(modifiedString);
-                  setIsLoading(false);
-                } catch (error) {
-                  if (error.message === "Loop break") {
-                    // Handle the loop break here
-                    // console.log("Loop has been stopped.");
-                  } else if (error.message === "Region not found") {
-                    // Handle the loop break here
-                    // console.log("Loop has been stopped.");
-                  }
-                }
-              }
-            }
-            setIsLoading(false);
-          });
-        }
-        // debugger;
-        // modifiedData.forEach((element) => {
-        //   if (element?.attributes == "overview_text") {
-        //     setOverViewText(element?.attributes?.overview_text);
-        //   }
-        // });
-
         window.addEventListener("resize", equalHeight(true));
         setIsLoading(false);
       })
@@ -289,14 +266,14 @@ function Index() {
     <>
       <Head>
         <title>{title}</title>
-        <script
+        {/* <script
           type="text/javascript"
           src="/assets/javascripts/card-slider.js"
         ></script>
         <script
           type="text/javascript"
           src="/assets/javascripts/card-slider02.js"
-        ></script>
+        ></script> */}
         {/* <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script> */}
       </Head>
       {isLoading ? (
@@ -418,11 +395,11 @@ function Index() {
                 <h2 className="trvl_title">
                   {itineraries?.attributes?.itin_name}
                   <span className="mt-2 d-block white_text_colr">
-                    {itineraries?.attributes?.header_text}
+                    {dictioneryFunction(itineraries?.attributes?.header_text)}
                   </span>
                 </h2>
                 <h3 className="trvl_title_sub">
-                  {itineraries?.attributes?.sub_header_text}
+                  {dictioneryFunction(itineraries?.attributes?.sub_header_text)}
                 </h3>
                 <p className="mb-4">
                   <span>Duration: </span>
@@ -435,10 +412,11 @@ function Index() {
                       ?.attributes?.guideline_price_notes
                   }
                 </p>
-                <div
-                  className="mb-4"
+                <p
                   dangerouslySetInnerHTML={{
-                    __html: overViewText,
+                    __html: dictioneryFunction(
+                      itineraries?.attributes?.overview_text
+                    ),
                   }}
                 />
               </div>
@@ -1150,44 +1128,8 @@ function Index() {
             <div className="container">
               <h4>Sign up for our newsletter</h4>
               <h5>Receive our latest news and special offers</h5>
-              <form className="newslettr_form d-block d-sm-flex">
-                <div className="newlettr_inpt">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Full name and title"
-                  />
-                </div>
-                <div className="newlettr_inpt ps-0 ps-sm-2">
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder="Your email address"
-                  />
-                </div>
-                <div className="newlettr_btn ps-0 ps-sm-2">
-                  <button type="submit" className="btn btn-primary prmry_btn">
-                    Sign up
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="#ffffff"
-                      shapeRendering="geometricPrecision"
-                      textRendering="geometricPrecision"
-                      imageRendering="optimizeQuality"
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      viewBox="0 0 267 512.43"
-                    >
-                      <path
-                        fillRule="nonzero"
-                        d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </form>
+              <Signup />
             </div>
-            {/* <div className="full_loader_parnt_blk loader_parnt_blk" style="display: none;"><div className="loader-circle-2"></div></div> */}
           </section>
         </div>
       )}

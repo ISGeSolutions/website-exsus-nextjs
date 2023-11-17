@@ -248,11 +248,11 @@ function Index() {
     } else {
       router.push(
         `advance-search?where=` +
-        data?.destination +
-        `&what=` +
-        data?.reason +
-        `&when=` +
-        data?.month
+          data?.destination +
+          `&what=` +
+          data?.reason +
+          `&when=` +
+          data?.month
       );
     }
   }
@@ -271,7 +271,9 @@ function Index() {
   };
 
   const handleOptionChange = (selectedOption) => {
-    // selectedOption1 = selectedOption.filter((i) => i.value !== '' && typeof i.value !== 'undefined');
+    selectedOption = selectedOption.filter(
+      (i) => i.value !== "" && typeof i.value !== "undefined"
+    );
     selectedOptionData(selectedOption);
   };
 
@@ -285,7 +287,7 @@ function Index() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=${region}`
+        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=${region}`
     );
   };
 
@@ -558,11 +560,11 @@ function Index() {
                     <form onSubmit={onSubmit}>
                       <div className="col-12">
                         <div className="destination_dropdwn_row d-block d-md-flex">
-                          {/* <div className="text-center"> */}
                           <div className="banner_dropdwn_blk">
                             <div className="select_drpdwn">
                               <Select
-                                placeholder="Filter by destinations"
+                                id="long-value-select"
+                                placeholder={"Filter by destinations"}
                                 className="select_container_country"
                                 classNamePrefix="select_country"
                                 isDisabled={isDisabled}
@@ -575,6 +577,7 @@ function Index() {
                                 options={optionsData}
                                 isMulti
                                 hideSelectedOptions={false}
+                                closeMenuOnSelect={false}
                                 onChange={handleOptionChange}
                                 value={selectedOptionMonth}
                                 components={{
@@ -583,7 +586,6 @@ function Index() {
                                 }}
                               />
                             </div>
-                            {/* </div> */}
                           </div>
                           <div className="banner_inspire_btn ps-0 ps-md-2">
                             <button
@@ -650,7 +652,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                      "thumbnail" ? (
+                                    "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}

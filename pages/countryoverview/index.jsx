@@ -27,13 +27,7 @@ function CountryOverview(props) {
     setVisibleItems((prevVisibleItems) => prevVisibleItems + itemsPerPage);
   };
 
-  // let regionWiseUrl = "/uk";
-  // if (typeof window !== "undefined") {
-  //   if (window && window.site_region) {
-  //     regionWiseUrl = "/" + window.site_region;
-  //     // setMyVariable(window.site_region);
-  //   }
-  // }
+
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -45,6 +39,11 @@ function CountryOverview(props) {
       }
     }
   }
+
+  const handleClick = (e) => {
+    // Call the callback function to send data to the parent
+    sendDataToParent(e);
+  };
 
   const handleRedirect = () => {
     router.push(
@@ -542,7 +541,10 @@ function CountryOverview(props) {
               <div className="row">
                 <div className="col-sm-6">
                   <div className="card_blk_inr card_blk_overlay">
-                    <a href="#" target="_blank">
+                    <a
+                      target="_blank"
+                      onClick={() => handleClick("itineraries")}
+                    >
                       <img
                         src="./../../../images/destination_overview01.jpg"
                         alt="Card image 07"
@@ -580,7 +582,7 @@ function CountryOverview(props) {
 
                 <div className="col-sm-6">
                   <div className="card_blk_inr card_blk_overlay">
-                    <a href="#">
+                    <a onClick={() => handleClick("places-to-stay")}>
                       <img
                         src="./../../../images/destination_overview02.jpg"
                         alt="Card image 08"

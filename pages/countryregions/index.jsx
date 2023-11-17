@@ -25,7 +25,6 @@ function CountryRegions({ props, sendDataToParent }) {
     .replace(/-/g, " ")
     .toLowerCase();
 
-
   let region = "uk";
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
@@ -36,7 +35,6 @@ function CountryRegions({ props, sendDataToParent }) {
       }
     }
   }
-
 
   const dictioneryFunction = (data) => {
     let modifiedString = data;
@@ -73,10 +71,7 @@ function CountryRegions({ props, sendDataToParent }) {
               }
               const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
               if (checkStr && replacement) {
-                modifiedString = modifiedString.replace(
-                  checkStr,
-                  replacement
-                );
+                modifiedString = modifiedString.replace(checkStr, replacement);
               }
             });
             return modifiedString;
@@ -88,7 +83,7 @@ function CountryRegions({ props, sendDataToParent }) {
         }
       }
     }
-  }
+  };
 
   const handleFilterClick = (item) => {
     setActiveItem(item);
@@ -156,7 +151,11 @@ function CountryRegions({ props, sendDataToParent }) {
         <div>
           <div className="container">
             <section className="destination_para">
-              <p dangerouslySetInnerHTML={{ __html: dictioneryFunction(countryData?.regions_intro_text) }} />
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: dictioneryFunction(countryData?.regions_intro_text),
+                }}
+              />
             </section>
           </div>
 
