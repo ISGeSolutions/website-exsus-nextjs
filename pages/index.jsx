@@ -54,7 +54,7 @@ function Index() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`
+      `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`
     );
   };
 
@@ -141,11 +141,11 @@ function Index() {
     } else {
       router.push(
         `advance-search?where=` +
-          data?.destination +
-          `&what=` +
-          data?.reason +
-          `&when=` +
-          data?.month
+        data?.destination +
+        `&what=` +
+        data?.reason +
+        `&when=` +
+        data?.month
       );
     }
   }
@@ -194,6 +194,8 @@ function Index() {
                   holiday_type_name:
                     elementMain?.attributes?.holiday_type_group_name,
                   image_path: element.attributes.image_path,
+                  home_page_short_text: elementMain?.attributes?.home_page_short_text,
+                  home_page_title: elementMain?.attributes?.home_page_title,
                 };
                 thumbnailImageArr.push(objThumbnail);
               }
@@ -202,6 +204,7 @@ function Index() {
         });
 
         setThumbnailImageArr(thumbnailImageArr);
+        console.log(thumbnailImageArr);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -491,7 +494,8 @@ function Index() {
                           <div className="row align-items-center">
                             <div className="col-11">
                               <div className="card_blk_txt">
-                                <h3>{holidaytypesItem?.holiday_type_name}</h3>
+                                <h3>{holidaytypesItem?.home_page_title}</h3>
+                                <p>{holidaytypesItem?.home_page_short_text}</p>
                               </div>
                             </div>
                             <div className="col-1 ps-0">

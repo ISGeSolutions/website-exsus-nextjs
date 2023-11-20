@@ -7,7 +7,7 @@ import { userService } from "services";
 import { NavLink } from "components";
 import Head from "next/head";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { whyusService } from "../../../services";
+import { whyusService, destinationService } from "../../../services";
 var Carousel = require("react-responsive-carousel").Carousel;
 import { FriendlyUrl } from "../../../components";
 import { EnquiryButton } from "../../../components/common/EnquiryBtn";
@@ -74,6 +74,28 @@ function Index() {
   const handleRedirect = (item) => {
     const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(regionWiseUrl + `/why-us/our-people/${modifiedName}`);
+  };
+
+
+  const websiteContentCheck = (matches, region, modifiedString) => {
+    destinationService
+      .getDictionaryDetails(matches, region)
+      .then((responseObj) => {
+        if (responseObj) {
+          const res = responseObj?.data;
+          res.forEach((element, index) => {
+            const replacement = element?.attributes?.content_translation_text;
+            const matchString = element?.attributes?.content_word;
+            const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+            if (checkStr && replacement) {
+              modifiedString = modifiedString.replace(checkStr, replacement);
+            }
+          });
+
+          // Set the modified string in state
+          setnewValueWithBr(modifiedString);
+        }
+      });
   };
 
   // const ExpertDetail = ({ data }) => {

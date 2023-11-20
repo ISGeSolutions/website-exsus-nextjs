@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Signup, FriendlyUrl } from "components";
 import { Link, Spinner } from "components";
 import { Layout } from "components/users";
-import { aboutusService } from "services";
+import { aboutusService, destinationService } from "services";
 import { NavLink } from "components";
 import Head from "next/head";
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
@@ -33,7 +33,7 @@ function Index() {
   }
 
   const websiteContentCheck = (matches, region, modifiedString) => {
-    aboutusService.getDictionaryDetails(matches, region).then((responseObj) => {
+    destinationService.getDictionaryDetails(matches, region).then((responseObj) => {
       if (responseObj) {
         const res = responseObj?.data;
         res.forEach((element, index) => {

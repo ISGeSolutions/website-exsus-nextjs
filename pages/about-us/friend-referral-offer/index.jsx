@@ -6,6 +6,7 @@ import { userService } from 'services';
 import { FriendlyUrl } from '../../../components';
 import { referralSchmeService } from '../../../services';
 import { NavLink } from "components";
+import { destinationService } from '../../../services';
 import Head from "next/head";
 import { EnquiryButton } from '../../../components/common/EnquiryBtn';
 
@@ -39,7 +40,7 @@ function Index() {
     }
 
     const websiteContentCheck = (matches, region, modifiedString) => {
-        whyusService.getDictionaryDetails(matches, region).then((responseObj) => {
+        destinationService.getDictionaryDetails(matches, region).then((responseObj) => {
             if (responseObj) {
                 const res = responseObj?.data;
                 res.forEach((element, index) => {

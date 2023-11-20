@@ -5,6 +5,7 @@ import { Layout } from 'components/users';
 import { userService } from 'services';
 import { FriendlyUrl } from '../../components';
 import { privacypolicyService } from '../../services';
+import { destinationService } from '../../services';
 import Head from "next/head";
 
 export default Index;
@@ -34,7 +35,7 @@ function Index() {
 
 
     const websiteContentCheck = (matches, region, modifiedString) => {
-        whyusService.getDictionaryDetails(matches, region).then((responseObj) => {
+        destinationService.getDictionaryDetails(matches, region).then((responseObj) => {
             if (responseObj) {
                 const res = responseObj?.data;
                 res.forEach((element, index) => {
