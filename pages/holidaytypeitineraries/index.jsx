@@ -248,11 +248,11 @@ function Index() {
     } else {
       router.push(
         `advance-search?where=` +
-          data?.destination +
-          `&what=` +
-          data?.reason +
-          `&when=` +
-          data?.month
+        data?.destination +
+        `&what=` +
+        data?.reason +
+        `&when=` +
+        data?.month
       );
     }
   }
@@ -287,7 +287,7 @@ function Index() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=${region}`
+      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=${region}`
     );
   };
 
@@ -336,7 +336,7 @@ function Index() {
   equalHeight(true);
 
   const websiteContentCheck = (matches, region, modifiedString) => {
-    holidaytypesService
+    destinationService
       .getDictionaryDetails(matches, region)
       .then((responseObj) => {
         if (responseObj) {
@@ -652,7 +652,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                      "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}

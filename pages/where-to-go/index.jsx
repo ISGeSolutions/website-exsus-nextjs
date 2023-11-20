@@ -9,6 +9,7 @@ import { whereToGoService } from "../../services";
 import { FriendlyUrl } from "../../components";
 import Head from "next/head";
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
+import { destinationService } from "../../services";
 
 
 
@@ -45,7 +46,7 @@ function Index() {
     };
 
     const websiteContentCheck = (matches, region, modifiedString) => {
-        whyusService.getDictionaryDetails(matches, region).then((responseObj) => {
+        destinationService.getDictionaryDetails(matches, region).then((responseObj) => {
             if (responseObj) {
                 const res = responseObj?.data;
                 res.forEach((element, index) => {

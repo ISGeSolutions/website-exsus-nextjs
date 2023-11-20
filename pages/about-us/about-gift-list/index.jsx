@@ -4,6 +4,7 @@ import { Link, Spinner } from "components";
 import { Layout } from "components/users";
 import { whyusService } from "../../../services/whyus.service";
 import { NavLink } from "components";
+import { destinationService } from "../../../services";
 import { giftListService } from "../../../services";
 import { FriendlyUrl } from "../../../components";
 import Head from "next/head";
@@ -39,7 +40,7 @@ function Index() {
   }
 
   const websiteContentCheck = (matches, region, modifiedString) => {
-    whyusService.getDictionaryDetails(matches, region).then((responseObj) => {
+    destinationService.getDictionaryDetails(matches, region).then((responseObj) => {
       if (responseObj) {
         const res = responseObj?.data;
         res.forEach((element, index) => {
