@@ -161,7 +161,7 @@ function Index() {
                 <p className="mb-4">
                   Price guide:
                   <span
-                    tabindex="0"
+                    tabIndex="0"
                     data-bs-toggle="tooltip"
                     data-bs-placement="right"
                     data-bs-title="£200-£350 per person per night"
@@ -180,22 +180,22 @@ function Index() {
                 <div className="row">
                   <div className="col-sm-9">
                     <div className="country_highlight_inr">
-                      <p>
+                      <div>
                         <span>Perfect for</span>
-                        <div
+                        <p
                           dangerouslySetInnerHTML={{
                             __html: hotelData?.perfect_for_text,
                           }}
                         />
-                      </p>
-                      <p>
+                      </div>
+                      <div>
                         <span>In the know</span>
-                        <div
+                        <p
                           dangerouslySetInnerHTML={{
                             __html: hotelData?.in_the_know_text,
                           }}
                         />
-                      </p>
+                      </div>
                     </div>
                   </div>
                   <div className="col-sm-3">
@@ -452,7 +452,7 @@ function Index() {
                                         <h4><a >The Opposite House</a></h4>
                                         <ul>
                                             <li>Location: Beijing &amp; Northern China | China</li>
-                                            <li>Price guide:<span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
+                                            <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
                                             <li>Best for:<span>Chic Design, City Hotel, Boutique Hotel, History &amp; Heritage</span></li>
                                         </ul>
                                     </div>
@@ -471,7 +471,7 @@ function Index() {
                                         <h4><a >Aman Summer Palace</a></h4>
                                         <ul>
                                             <li>Location: Beijing &amp; Northern China | China</li>
-                                            <li>Price guide:<span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
+                                            <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
                                             <li>Best for:<span>Luxury Hotel, City Hotel, Chic Design, Setting &amp; Views</span></li>
                                         </ul>
                                     </div>
@@ -490,7 +490,7 @@ function Index() {
                                         <h4><a >Jing's Residence</a></h4>
                                         <ul>
                                             <li>Location: Beijing &amp; Northern China | China</li>
-                                            <li>Price guide:<span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
+                                            <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
                                             <li>Best for:<span>History &amp; Heritage, Cultural Immersion, Peace &amp; Quiet, Couples</span></li>
                                         </ul>
                                     </div>
@@ -509,7 +509,7 @@ function Index() {
                                         <h4><a >Four Seasons Beijing</a></h4>
                                         <ul>
                                             <li>Location: Beijing &amp; Northern China | China</li>
-                                            <li>Price guide:<span tabindex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
+                                            <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
                                             <li>Best for:<span>Luxury Hotel, City Hotel, Chic Design, Setting &amp; Views</span></li>
                                         </ul>
                                     </div>

@@ -523,7 +523,8 @@ function Index() {
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                     data-bs-interval="5000"
                   >
-                    <div key={index}
+                    <div
+                      key={index}
                       className="banner_commn_cls"
                       style={{ backgroundImage: `url(${imagePath})` }}
                     ></div>
@@ -563,6 +564,7 @@ function Index() {
                           <div className="banner_dropdwn_blk">
                             <div className="select_drpdwn">
                               <Select
+                                defaultValue="destination"
                                 id="long-value-select"
                                 placeholder={"Filter by destinations"}
                                 className="select_container_country"

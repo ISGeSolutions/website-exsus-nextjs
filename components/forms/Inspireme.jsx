@@ -24,7 +24,7 @@ function Inspireme(props) {
   const [holidaytypesLandingList, setHolidaytypesLandingList] = useState();
   const [queryParameters, setQueryParameters] = useState();
   const [month, setMonth] = useState();
-
+  let selectedOptionId = 0;
   // form validation rules
   const validationSchema = Yup.object().shape({
     destination: Yup.string(),
@@ -53,12 +53,10 @@ function Inspireme(props) {
 
   // Function to handle the onChange event
   const handleSelectChange = (event) => {
-
     setSelectedValue(event.target.value); // Update the selected value in state
   };
 
   function onSubmit(data) {
-
     // const { pathname, query } = router;
 
     // // Clone the existing query object and remove the specific query parameter
@@ -71,9 +69,9 @@ function Inspireme(props) {
     //   query: newQuery,
     // });
 
-    let destination = '';
-    let reason = '';
-    let month = '';
+    let destination = "";
+    let reason = "";
+    let month = "";
 
     if (data?.destination) {
       destination = data?.destination;
@@ -101,15 +99,14 @@ function Inspireme(props) {
     } else {
       router.push(
         `advance-search?where=` +
-        destination +
-        `&what=` +
-        reason +
-        `&when=` +
-        month
+          destination +
+          `&what=` +
+          reason +
+          `&when=` +
+          month
       );
       reset();
       setQueryParameters(null);
-
     }
   }
 
@@ -128,7 +125,6 @@ function Inspireme(props) {
     });
 
     setQueryParameters(router.query);
-
   }, [divRef, router.query]);
 
   return (
@@ -143,16 +139,22 @@ function Inspireme(props) {
               <div className="banner_dropdwn_blk">
                 <div className="select_drpdwn">
                   <select
+                    defaultValue={selectedOptionId}
                     onChange={handleSelectChange}
                     aria-label="Choose a destination"
                     name="destination"
                     {...register("destination")}
-                    className={`form-select ${errors.destination ? "is-invalid" : ""
-                      }`}
+                    className={`form-select ${
+                      errors.destination ? "is-invalid" : ""
+                    }`}
                   >
                     <option value="">Choose a destination</option>
                     {destinationLandingList?.map((element, i) => (
-                      <option selected={element?.attributes?.destination_code === queryParameters?.where}
+                      <option
+                        selected={
+                          element?.attributes?.destination_code ===
+                          queryParameters?.where
+                        }
                         key={element?.id}
                         value={element?.attributes?.destination_code}
                       >
@@ -168,18 +170,23 @@ function Inspireme(props) {
               <div className="banner_dropdwn_blk ps-0 ps-md-2">
                 <div className="select_drpdwn">
                   <select
+                    defaultValue={selectedOptionId}
                     aria-label="Choose a reason"
                     name="reason"
                     {...register("reason")}
-                    className={`form-select ${errors.reason ? "is-invalid" : ""
-                      }`}
+                    className={`form-select ${
+                      errors.reason ? "is-invalid" : ""
+                    }`}
                   >
                     <option value="">Choose a reason</option>
                     {holidaytypesLandingList?.map((element, i) => (
                       <option
                         key={element?.id}
                         value={element?.attributes?.holiday_type_group_code}
-                        selected={element?.attributes?.holiday_type_group_code === queryParameters?.what}
+                        selected={
+                          element?.attributes?.holiday_type_group_code ===
+                          queryParameters?.what
+                        }
                       >
                         {element?.attributes?.holiday_type_group_name}
                       </option>
@@ -193,25 +200,51 @@ function Inspireme(props) {
               <div className="banner_dropdwn_blk ps-0 ps-md-2">
                 <div className="select_drpdwn">
                   <select
+                    defaultValue={""}
                     aria-label="Choose a month"
                     name="month"
                     {...register("month")}
-                    className={`form-select ${errors.month ? "is-invalid" : ""
-                      }`}
+                    className={`form-select ${
+                      errors.month ? "is-invalid" : ""
+                    }`}
                   >
                     <option value="">Choose a month</option>
-                    <option value="1" selected={queryParameters?.when == 1}>January</option>
-                    <option value="2" selected={queryParameters?.when == 2}>February</option>
-                    <option value="3" selected={queryParameters?.when == 3}>March</option>
-                    <option value="4" selected={queryParameters?.when == 4}>April</option>
-                    <option value="5" selected={queryParameters?.when == 5}>May</option>
-                    <option value="6" selected={queryParameters?.when == 6}>June</option>
-                    <option value="7" selected={queryParameters?.when == 7}>July</option>
-                    <option value="8" selected={queryParameters?.when == 8}>August</option>
-                    <option value="9" selected={queryParameters?.when == 9}>September</option>
-                    <option value="10" selected={queryParameters?.when == 10}>October</option>
-                    <option value="11" selected={queryParameters?.when == 11}>November</option>
-                    <option value="12" selected={queryParameters?.when == 12}>December</option>
+                    <option value="1" selected={queryParameters?.when == 1}>
+                      January
+                    </option>
+                    <option value="2" selected={queryParameters?.when == 2}>
+                      February
+                    </option>
+                    <option value="3" selected={queryParameters?.when == 3}>
+                      March
+                    </option>
+                    <option value="4" selected={queryParameters?.when == 4}>
+                      April
+                    </option>
+                    <option value="5" selected={queryParameters?.when == 5}>
+                      May
+                    </option>
+                    <option value="6" selected={queryParameters?.when == 6}>
+                      June
+                    </option>
+                    <option value="7" selected={queryParameters?.when == 7}>
+                      July
+                    </option>
+                    <option value="8" selected={queryParameters?.when == 8}>
+                      August
+                    </option>
+                    <option value="9" selected={queryParameters?.when == 9}>
+                      September
+                    </option>
+                    <option value="10" selected={queryParameters?.when == 10}>
+                      October
+                    </option>
+                    <option value="11" selected={queryParameters?.when == 11}>
+                      November
+                    </option>
+                    <option value="12" selected={queryParameters?.when == 12}>
+                      December
+                    </option>
                   </select>
                   <div className="invalid-feedback mb-1">
                     {errors.month?.message}

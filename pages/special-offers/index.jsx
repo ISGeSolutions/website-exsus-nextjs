@@ -34,7 +34,6 @@ function Index() {
   const [subTitle, setSubTitle] = useState(null);
   const [backgroundImage, setBackgroundImage] = useState([]);
 
-
   let region = "uk";
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
@@ -77,8 +76,6 @@ function Index() {
   //     // setMyVariable(window.site_region);
   //   }
   // }
-
-
 
   const generateDynamicLink = (item) => {
     return regionWiseUrl + `/hotel-detail`;
@@ -309,11 +306,19 @@ function Index() {
             <div className="container">
               <div className="row">
                 <div className="col-12 favrites_blk_row pb-0">
-                  <h3 className="title_cls pb-0">Our favourite special offers on luxury holidays</h3>
+                  <h3 className="title_cls pb-0">
+                    Our favourite special offers on luxury holidays
+                  </h3>
                   <div className="destination_contries_filter d-flex justify-content-around">
                     <ul>
-                      <li><a href="#" className="active">Exsus recommends</a></li>
-                      <li><a href="#">Alphabetical</a></li>
+                      <li>
+                        <a href="#" className="active">
+                          Exsus recommends
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">Alphabetical</a>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -327,15 +332,21 @@ function Index() {
                 <div className="carousel00 width_100">
                   <div className="row">
                     {allOffers?.map((res) => (
-
-                      <div
-                        className="col-sm-6 col-lg-4 col-xxl-3">
+                      <div className="col-sm-6 col-lg-4 col-xxl-3">
                         <div className="card_slider_inr">
                           <div className="card_slider">
-                            <NavLink key={res?.id} href={generateDynamicLink(res?.id)}>
+                            <NavLink
+                              key={res?.id}
+                              href={generateDynamicLink(res?.id)}
+                            >
                               {/* console.log error => Dont add anchor tag for the below element. you can use onclick fun. */}
-                              <span key={res?.id} href="#" className="card_slider_img">
+                              <span
+                                key={res?.id}
+                                href="#"
+                                className="card_slider_img"
+                              >
                                 <img
+                                  key={res?.id}
                                   src={res.attributes.thumbnail_image_path}
                                   alt="offer_card01"
                                   className="img-fluid"
@@ -346,10 +357,15 @@ function Index() {
                               </span>
                             </NavLink>
                             <div className="card_slider_cnt">
-                              <NavLink key={res?.id} href={generateDynamicLink(res?.id)}>
+                              <NavLink
+                                key={res?.id}
+                                href={generateDynamicLink(res?.id)}
+                              >
                                 <h4>
                                   {/* console.log error => Dont add anchor tag for the below element. you can use onclick fun. */}
-                                  <span key={res?.id} href="#">{res?.attributes?.offer_text}</span>
+                                  <span key={res?.id} href="#">
+                                    {res?.attributes?.offer_text}
+                                  </span>
                                 </h4>
                               </NavLink>
                               <ul>
@@ -360,6 +376,7 @@ function Index() {
                                   <p>
                                     Price guide:
                                     <span
+                                      key={res?.id}
                                       tabIndex="0"
                                       data-bs-toggle="tooltip"
                                       data-bs-placement="right"
@@ -384,6 +401,7 @@ function Index() {
                             </div>
                             <button className="btn card_slider_btn justify-content-end">
                               <span
+                                key={res?.id}
                                 className="view_itnry_link"
                                 onClick={handleRedirect}
                               >
@@ -394,8 +412,7 @@ function Index() {
                           </div>
                         </div>
                       </div>
-                    )
-                    )}
+                    ))}
                   </div>
                 </div>
               </div>
