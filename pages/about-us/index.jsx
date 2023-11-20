@@ -51,6 +51,7 @@ function Index() {
     });
   };
 
+  
   useEffect(() => {
     const carousel = document.querySelector("#carouselExampleInterval");
     if (carousel) {
@@ -219,6 +220,7 @@ function Index() {
                 </div>
               </div>
             </section>
+
 
             <section className="card_blk_row dark_grey py-5">
               <div className="container">
