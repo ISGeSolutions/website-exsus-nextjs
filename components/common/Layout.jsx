@@ -158,6 +158,10 @@ function Layout({ children }) {
   };
 
   useEffect(() => {
+    
+    // Temporarily disable warnings in the development environment
+    console.warn = () => {};
+
     $(".header_country_list > ul .header_country_label").on(
       "mouseenter",
       function (event) {

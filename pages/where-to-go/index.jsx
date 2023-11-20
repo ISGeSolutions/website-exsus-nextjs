@@ -560,8 +560,7 @@ function Index() {
                                                 <div className="col-12">
                                                     <button
                                                         className="btn prmry_btn strt_planng_btn"
-                                                        onclick="window.open('contact_us.html')"
-                                                    >
+                                                    >{/* onClick="window.open('contact_us.html')" */}
                                                         Make an enquiry
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
