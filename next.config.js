@@ -209,6 +209,25 @@ const nextConfig = {
         destination: "/country_details",
       },
 
+
+      // country_details
+      {
+        source: "/destinations/:continent/:country/:region",
+        destination: "/regions",
+      },
+      {
+        source: "/us/destinations/:continent/:country/:region",
+        destination: "/regions",
+      },
+      {
+        source: "/asia/destinations/:continent/:country/:region",
+        destination: "/regions",
+      },
+      {
+        source: "/in/destinations/:continent/:country/:region",
+        destination: "/regions",
+      },
+
       // holiday-types
       { source: "/holiday-types", destination: "/holiday-types" },
       { source: "/us/holiday-types", destination: "/holiday-types" },

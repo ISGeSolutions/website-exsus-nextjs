@@ -16,21 +16,21 @@ function Index() {
 
   return (
     <Layout>
-      <section class="favrites_blk_row dark_grey pt-5">
-        <div class="container-md">
-          <h2 class="search_result_title">Search result for Asia site</h2>
-          <div class="search_result_input d-block d-md-flex">
+      <section className="favrites_blk_row dark_grey pt-5">
+        <div className="container-md">
+          <h2 className="search_result_title">Search result for Asia site</h2>
+          <div className="search_result_input d-block d-md-flex">
             <input
-              class="form-control search mb-3 mb-md-0"
+              className="form-control search mb-3 mb-md-0"
               id="search"
               type="search"
               placeholder="Search here"
               autocomplete="off"
             />
-            <div class="banner_inspire_btn ps-0 ps-md-2">
+            <div className="banner_inspire_btn ps-0 ps-md-2">
               <button
                 type="button"
-                class="btn btn-primary prmry_btn"
+                className="btn btn-primary prmry_btn"
                 fdprocessedid="i8b0e3"
               >
                 Search
@@ -53,13 +53,13 @@ function Index() {
             </div>
           </div>
 
-          <div class="destination_filter_result">
+          <div className="destination_filter_result">
             <p>We've found about 1191 results.</p>
           </div>
-          <div class="search_result_list_parnt">
+          <div className="search_result_list_parnt">
             <ul>
-              <li class="d-inline-block d-sm-flex">
-                <div class="search_result_inr_cnt">
+              <li className="d-inline-block d-sm-flex">
+                <div className="search_result_inr_cnt">
                   <h3>
                     <a href="#">Request a brochure</a>
                   </h3>
@@ -73,11 +73,11 @@ function Index() {
                   </p>
                 </div>
               </li>
-              <li class="d-inline-block d-sm-flex">
-                <a href="#" class="search_result_img_blk">
+              <li className="d-inline-block d-sm-flex">
+                <a href="#" className="search_result_img_blk">
                   <img src="images/search_result01.jpg" alt="search_result01" />
                 </a>
-                <div class="search_result_inr_cnt">
+                <div className="search_result_inr_cnt">
                   <h3>
                     <a href="#">
                       Asia Gardens Hotel & Thai Spa | Luxury Hotels in Spain |
@@ -94,11 +94,11 @@ function Index() {
                   </p>
                 </div>
               </li>
-              <li class="d-inline-block d-sm-flex">
-                <a href="#" class="search_result_img_blk">
+              <li className="d-inline-block d-sm-flex">
+                <a href="#" className="search_result_img_blk">
                   <img src="images/search_result02.jpg" alt="search_result02" />
                 </a>
-                <div class="search_result_inr_cnt">
+                <div className="search_result_inr_cnt">
                   <h3>
                     <a href="#">Articles on Asia | Luxury Travel | Exsus</a>
                   </h3>
@@ -108,11 +108,11 @@ function Index() {
                   <p>Blogs, articles and top tips on Asia</p>
                 </div>
               </li>
-              <li class="d-inline-block d-sm-flex">
-                <a href="#" class="search_result_img_blk">
+              <li className="d-inline-block d-sm-flex">
+                <a href="#" className="search_result_img_blk">
                   <img src="images/search_result03.jpg" alt="search_result03" />
                 </a>
-                <div class="search_result_inr_cnt">
+                <div className="search_result_inr_cnt">
                   <h3>
                     <a href="#">
                       Articles on Indonesia, Asia | Luxury Travel | Exsus
@@ -124,11 +124,11 @@ function Index() {
                   <p>Blogs, articles and top tips on Indonesia and Asia</p>
                 </div>
               </li>
-              <li class="d-inline-block d-sm-flex">
-                <a href="#" class="search_result_img_blk">
+              <li className="d-inline-block d-sm-flex">
+                <a href="#" className="search_result_img_blk">
                   <img src="images/search_result01.jpg" alt="search_result01" />
                 </a>
-                <div class="search_result_inr_cnt">
+                <div className="search_result_inr_cnt">
                   <h3>
                     <a href="#">
                       Luxury Holidays to Asia & Where to Stay | Exsus Travel
@@ -145,8 +145,8 @@ function Index() {
             </ul>
           </div>
 
-          <div class="search_result_pagination">
-            <div class="search_result_pagination_inr">
+          <div className="search_result_pagination">
+            <div className="search_result_pagination_inr">
               <ul>
                 <li>
                   <a href="#">
@@ -155,7 +155,7 @@ function Index() {
                       width="16"
                       height="16"
                       fill="currentColor"
-                      class="bi bi-chevron-left"
+                      className="bi bi-chevron-left"
                       viewBox="0 0 16 16"
                     >
                       <path
@@ -165,7 +165,7 @@ function Index() {
                     </svg>
                   </a>
                 </li>
-                <li class="active">
+                <li className="active">
                   <a href="#">1</a>
                 </li>
                 <li>
@@ -190,7 +190,7 @@ function Index() {
                       width="16"
                       height="16"
                       fill="currentColor"
-                      class="bi bi-chevron-right"
+                      className="bi bi-chevron-right"
                       viewBox="0 0 16 16"
                     >
                       <path
@@ -212,27 +212,27 @@ function Index() {
         </div>
       </section>
 
-      <section aria-label="Sign up for newsletter" class="newslettr_row">
-        <div class="container">
+      <section aria-label="Sign up for newsletter" className="newslettr_row">
+        <div className="container">
           <h4>Sign up for our newsletter</h4>
           <h5>Receive our latest news and special offers</h5>
-          <form class="newslettr_form d-block d-sm-flex">
-            <div class="newlettr_inpt">
+          <form className="newslettr_form d-block d-sm-flex">
+            <div className="newlettr_inpt">
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 placeholder="Full name and title"
               />
             </div>
-            <div class="newlettr_inpt ps-0 ps-sm-2">
+            <div className="newlettr_inpt ps-0 ps-sm-2">
               <input
                 type="email"
-                class="form-control"
+                className="form-control"
                 placeholder="Your email address"
               />
             </div>
-            <div class="newlettr_btn ps-0 ps-sm-2">
-              <button type="submit" class="btn btn-primary prmry_btn">
+            <div className="newlettr_btn ps-0 ps-sm-2">
+              <button type="submit" className="btn btn-primary prmry_btn">
                 Sign up
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

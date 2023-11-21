@@ -49,9 +49,9 @@ function Index() {
 
   return (
     <Layout>
-      <section class="trvl_info_row">
-        <div class="container">
-          <div class="bookmark_row">
+      <section className="trvl_info_row">
+        <div className="container">
+          <div className="bookmark_row">
             <ul>
               <li>
                 <a href="homepage.html">Home</a>
@@ -63,9 +63,9 @@ function Index() {
             </ul>
           </div>
 
-          <div class="trvl_info_cntnt">
-            <h2 class="trvl_title">Thank you for enquiring with us</h2>
-            <p class="mb-4">
+          <div className="trvl_info_cntnt">
+            <h2 className="trvl_title">Thank you for enquiring with us</h2>
+            <p className="mb-4">
               Exsus is a little different to other travel companies. All of our
               holidays are truly tailor-made, offering you complete choice and
               freedom. One of our experienced destination experts will get back
@@ -73,12 +73,12 @@ function Index() {
               your enquiry on a weekend or a public holiday, to start creating
               your perfect trip.
             </p>
-            <p class="mb-4">
+            <p className="mb-4">
               In the meantime, please feel free to call us on 020 7337 9010 or
               contact us at <a href="#"> escape@exsus.com.</a>
             </p>
-            <p class="mb-4">Thank you once again for getting in touch.</p>
-            <p class="mb-4">The Exsus team</p>
+            <p className="mb-4">Thank you once again for getting in touch.</p>
+            <p className="mb-4">The Exsus team</p>
             <p>
               Opening hours: Monday to Thursday 08:30am-6pm GMT and 9am-5pm GMT
               on Fridays
@@ -86,12 +86,12 @@ function Index() {
           </div>
         </div>
       </section>
-      {/* <div class="container mt-5">
-        <div class="row">
-          <div class="col-md-6 offset-md-3 text-center text-white">
-            <h1 class="display-4">Thank You!</h1>
-            <p class="lead mt-3">Your submission has been received.</p>
-            <a href="/" class="btn btn-success btn-md m-3">Back to Home</a>
+      {/* <div className="container mt-5">
+        <div className="row">
+          <div className="col-md-6 offset-md-3 text-center text-white">
+            <h1 className="display-4">Thank You!</h1>
+            <p className="lead mt-3">Your submission has been received.</p>
+            <a href="/" className="btn btn-success btn-md m-3">Back to Home</a>
           </div>
         </div>
       </div> */}

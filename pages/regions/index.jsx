@@ -9,6 +9,7 @@ import { EnquiryButton } from "../../components/common/EnquiryBtn";
 import RegionitIneraries from "../regionitineraries/index"; // Adjust the path accordingly
 import RegionOverview from "../regionoverview/index"; // Adjust the path accordingly
 import RegionPlacesToStay from "../regionplacestostay/index"; // Adjust the path accordingly
+import { FriendlyUrl } from "../../components";
 
 export default Index;
 
@@ -19,25 +20,39 @@ function Index() {
   const [mapVariable, setMapVariable] = useState(null);
   const [activeTab, setActiveTab] = useState("overview"); // State to track the active tab
   const router = useRouter();
-  const regionid = router.query.regionid;
-  const { destinationcode } = router.query;
+  const regionid = router.query.region;
   const [destinationName, setdestinationName] = useState("");
   const [metaTitle, setMetaTitle] = useState("");
   const [parentData, setParentData] = useState("");
-  const [title, setTitle] = useState("");
   const [regionData, setRegionData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [friendlyUrl, setFriendlyUrl] = useState("");
+  const destinationcode = router?.query?.continent
+    ?.replace(/-and-/g, " & ")
+    .replace(/-/g, " ")
+    .toLowerCase();
+  const countrycode = router.query?.country
+    ?.replace(/-and-/g, " & ")
+    .replace(/-/g, " ")
+    .toLowerCase();
+  const regionName = router.query?.region
+    ?.replace(/-and-/g, " & ")
+    .replace(/-/g, " ")
+    .toLowerCase();
   const tabContentRefs = {
     overview: useRef(null),
     itineraries: useRef(null),
     "places-to-stay": useRef(null),
   };
 
-  let regionWiseUrl = "/uk";
+  let region = "uk";
+  let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      regionWiseUrl = "/" + window.site_region;
-      // setMyVariable(window.site_region);
+      if (window.site_region !== "uk") {
+        region = window.site_region;
+        regionWiseUrl = "/" + window.site_region;
+      }
     }
   }
 
@@ -99,21 +114,21 @@ function Index() {
   };
 
   const toggleTab = (itemId) => {
-    var text = metaTitle;
+    var text = regionName;
     if (itemId == "overview") {
       const redirectUrl = regionWiseUrl + "/region";
       window.history.pushState(null, null, redirectUrl);
-      text = metaTitle;
+      text = regionName;
     } else if (itemId == "itineraries") {
       const redirectUrl = regionWiseUrl + "/regionitineraries";
       window.history.pushState(null, null, redirectUrl);
-      text = `TAILOR-MADE ${destinationName} HOLIDAY ITINERARIES`;
+      text = `TAILOR-MADE ${regionName} HOLIDAY ITINERARIES`;
     } else if (itemId == "places-to-stay") {
       const redirectUrl = regionWiseUrl + "/regionplacetostay";
       window.history.pushState(null, null, redirectUrl);
-      text = `PLACES TO STAY IN ${destinationName}`;
+      text = `PLACES TO STAY IN ${regionName}`;
     } else {
-      text = `LUXURY SAFARI HOLIDAYS IN ${destinationName}`;
+      text = `LUXURY SAFARI HOLIDAYS IN ${regionName}`;
     }
     setHeadingText(text);
     if (activeTab !== itemId) {
@@ -158,10 +173,12 @@ function Index() {
     //     setTitle(x.data.attributes.page_meta_title);
     // });
 
+    setFriendlyUrl(`home/destinations/${destinationcode}/${countrycode}/${regionName}`)
+
     destinationService
-      .getRegionById(regionid)
+      .getRegionByName(regionName)
       .then((x) => {
-        setRegionData(x.data);
+        setRegionData(x.data[0]);
         const imageCheck = x.data.attributes.region_images.data;
         const newBackgroundImages = [];
         imageCheck.forEach((element) => {
@@ -229,12 +246,13 @@ function Index() {
     });
 
     window.addEventListener("resize", equalHeight(true));
-  }, [regionid]);
+  }, [regionName, destinationcode, countrycode]);
 
   return (
     <>
       <Head>
-        <title>{title}</title>
+        <title>{regionData?.attributes?.page_meta_title}</title>
+        <meta content={regionData?.attributes?.page_meta_description}></meta>
         <script
           type="text/javascript"
           src="/assets/javascripts/card-slider.js"
@@ -322,14 +340,7 @@ function Index() {
           <section className="destination_tab_row light_grey pb-0">
             <div className="container">
               <div className="bookmark_row">
-                <p style={{ color: `white` }}>
-                  {regionData?.attributes?.page_friendly_url}
-                </p>
-                {/* <ul>
-                            <li><a href="homepage.html">Home</a></li>
-                            <li><a href="destinations.html">Destinations</a></li>
-                            <li>Asia</li>
-                        </ul> */}
+                <FriendlyUrl data={friendlyUrl} />
               </div>
 
               {/* Regions sub tabs */}
@@ -438,7 +449,7 @@ function Index() {
                   tabIndex="0"
                   ref={tabContentRefs["itinararies"]}
                 >
-                  <RegionitIneraries />
+                  <RegionitIneraries data={regionData?.attributes} />
                 </div>
               )}
               {activeTab === "places-to-stay" && (
@@ -454,7 +465,7 @@ function Index() {
                   tabIndex="0"
                   ref={tabContentRefs["places-to-stay"]}
                 >
-                  <RegionPlacesToStay />
+                  <RegionPlacesToStay data={regionData?.attributes} />
                 </div>
               )}
             </div>

@@ -114,11 +114,9 @@ function Index() {
       .getAllOffers()
       .then((x) => {
         setAllOffers(x.data);
-        setIsLoading(false);
         setFriendlyUrl(`home/special offers`);
       })
       .catch((error) => {
-        setIsLoading(false);
       });
 
     specialoffersService

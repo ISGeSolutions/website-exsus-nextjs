@@ -14,14 +14,14 @@ import { useRouter } from "next/router";
 export default Index;
 
 function Index() {
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   return (
     <>
       <Layout>
-        <section class="trvl_info_row">
-          <div class="container">
-            <div class="bookmark_row">
+        <section className="trvl_info_row">
+          <div className="container">
+            <div className="bookmark_row">
               <ul>
                 <li>
                   <a href="homepage.html">Home</a>
@@ -30,47 +30,47 @@ function Index() {
               </ul>
             </div>
 
-            <div class="trvl_info_cntnt">
-              <h2 class="trvl_title">HONEYMOON GIFT LIST</h2>
-              <div class="gift_list_parnt">
-                <h2 class="text-capitalize">Guest</h2>
-                <p class="mb-4">
+            <div className="trvl_info_cntnt">
+              <h2 className="trvl_title">HONEYMOON GIFT LIST</h2>
+              <div className="gift_list_parnt">
+                <h2 className="text-capitalize">Guest</h2>
+                <p className="mb-4">
                   Please log in using your reference number (you do not need a
                   password)
                 </p>
               </div>
-              <div class="gift_list_parnt">
-                <h2 class="text-capitalize">Travellers</h2>
-                <p class="mb-4">
+              <div className="gift_list_parnt">
+                <h2 className="text-capitalize">Travellers</h2>
+                <p className="mb-4">
                   Please log in using your reference number and password.
                 </p>
               </div>
             </div>
-            <div class="contact_form_row">
+            <div className="contact_form_row">
               <form>
-                <div class="row">
-                  <div class="col-sm-6 col-md-5">
-                    <div class="form-input">
+                <div className="row">
+                  <div className="col-sm-6 col-md-5">
+                    <div className="form-input">
                       <input
                         type="number"
-                        class="form-control"
+                        className="form-control"
                         aria-label="Reference number"
                         placeholder="Reference number"
                       />
                     </div>
                   </div>
-                  <div class="col-sm-6 col-md-5">
-                    <div class="form-input">
+                  <div className="col-sm-6 col-md-5">
+                    <div className="form-input">
                       <input
                         type="password"
-                        class="form-control"
+                        className="form-control"
                         aria-label="Password"
                         placeholder="Password"
                       />
                     </div>
                   </div>
-                  <div class="col-md-2">
-                    <button class="btn prmry_btn mx-auto mb-5">
+                  <div className="col-md-2">
+                    <button className="btn prmry_btn mx-auto mb-5">
                       Login
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

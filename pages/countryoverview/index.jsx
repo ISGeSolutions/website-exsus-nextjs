@@ -96,7 +96,7 @@ function CountryOverview(props) {
           });
 
           // Set the modified string in state
-          setnewValueWithBr(modifiedString);
+          return modifiedString;
         }
       });
   };
@@ -135,7 +135,7 @@ function CountryOverview(props) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                websiteContentCheck(matches, region, modifiedString);
+                modifiedString = websiteContentCheck(matches, region, modifiedString);
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];

@@ -132,23 +132,6 @@ function Index() {
     }
   };
 
-  function onSubmit(data) {
-    if (!data.destination && !data.reason && !data.month) {
-      alertService.success(
-        "Sorry, we could not filter your request. Please select atleast one option",
-        { keepAfterRouteChange: true }
-      );
-    } else {
-      router.push(
-        `advance-search?where=` +
-        data?.destination +
-        `&what=` +
-        data?.reason +
-        `&when=` +
-        data?.month
-      );
-    }
-  }
 
   useEffect(() => {
     $(".succss_msg_parnt").hide();
@@ -158,6 +141,7 @@ function Index() {
       .then((x) => {
         // debugger;
         const imageCheck = x.data[0]?.attributes?.custom_page_images.data;
+        console.log(imageCheck);
         const newBackgroundImages = [];
         imageCheck.forEach((element) => {
           if (element.attributes.image_type == "banner") {
@@ -384,8 +368,6 @@ function Index() {
     if (carousel) {
       new bootstrap.Carousel(carousel);
     }
-    // setTimeout(() => {
-    // }, 100);
 
     window.addEventListener("resize", equalHeight(true));
   }, []);

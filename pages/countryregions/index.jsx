@@ -125,14 +125,21 @@ function CountryRegions({ props, sendDataToParent }) {
   };
 
   const generateDynamicLink = (item) => {
-    // console.log('item', item);
-    return regionWiseUrl + `/regions?regionid=${item.id}`;
+    if (item) {
+      const modifiedName = item?.attributes?.region_name?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase();
+      return regionWiseUrl + "/destinations/" + destinationcode.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase() + "/" + countrycode.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase() + "/" + modifiedName;
+    }
   };
 
   useEffect(() => {
-    // const newUrl = regionWiseUrl + `/destinations/africa/africa-countries`;
+    // const newUrl = regionWiseUrl + `/ destinations / africa / africa - countries`;
     // window.history.pushState(null, null, newUrl);
-
     destinationService
       .getRegions(countrycode)
       .then((x) => {
@@ -149,14 +156,14 @@ function CountryRegions({ props, sendDataToParent }) {
     // Using window.onload to detect full page load
     window.onload = () => {
       setTimeout(() => {
-        regionWiseUrl + `/destinations/${destinationcode}/${countrycode}`;
+        regionWiseUrl + `/ destinations / ${destinationcode} /${countrycode}`;
         // debugger;
         if (redirectUrl) {
           router.push(redirectUrl);
         }
       }, 0);
     };
-  }, [countrycode]);
+  }, [countrycode, destinationcode]);
 
   return (
     <>
