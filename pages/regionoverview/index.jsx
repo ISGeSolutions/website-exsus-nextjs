@@ -86,7 +86,6 @@ function RegionOverview(props) {
     destinationService
       .getRegionByName(regionName)
       .then((x) => {
-        debugger
         setRegionData(x.data[0].attributes);
         console.log(x.data[0].attributes)
         setIsLoading(false);
