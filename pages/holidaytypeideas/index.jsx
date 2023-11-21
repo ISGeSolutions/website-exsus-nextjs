@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { NavLink } from "components";
 import CustomMultiValue from "./CustomMultiValue";
 import Select, { components } from "react-select";
+import { Alert } from "../../components";
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
 
 export default Index;
@@ -77,6 +78,7 @@ function Index() {
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
   const router = useRouter();
   const { id } = router.query;
+  const [alert, setAlert] = useState(null);
   const holidaytypename = router.query?.holidaytypeideas
     ?.replace(/-/g, " ")
     .replace(/and/g, "&")
@@ -168,7 +170,9 @@ function Index() {
   };
 
   const handleOptionChange = (selectedOption) => {
-    // selectedOption1 = selectedOption.filter((i) => i.value !== '' && typeof i.value !== 'undefined');
+    selectedOption = selectedOption.filter(
+      (i) => i.value !== "" && typeof i.value !== "undefined"
+    );
     selectedOptionData(selectedOption);
   };
 
@@ -216,6 +220,31 @@ function Index() {
       text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
     }
     setHeadingText(text);
+  };
+
+  function onSubmit(data) {
+    data.preventDefault();
+    if (!data.destination && !data.reason && !data.month) {
+      showAlert("Please select atleast one option", "error");
+    } else {
+      router.push(
+        `advance-search?where=` +
+          data?.destination +
+          `&what=` +
+          data?.reason +
+          `&when=` +
+          data?.month
+      );
+    }
+  }
+
+  const showAlert = (message, type) => {
+    setAlert({ message, type });
+  };
+
+  const closeAlert = () => {
+    // console.log("closeAlert");
+    setAlert(null);
   };
 
   const equalHeight = (resize) => {
@@ -292,6 +321,9 @@ function Index() {
 
   return (
     <>
+      {alert && alert.message && alert.type && (
+        <Alert message={alert.message} type={alert.type} onClose={closeAlert} />
+      )}
       {isLoading ? (
         // <MyLoader />
         <div
@@ -367,58 +399,63 @@ function Index() {
               <div className="card_slider_row">
                 <div className="carousel00 region_carousel00">
                   <div className="row">
-                    <div className="col-12">
-                      <div className="destination_dropdwn_row d-block d-md-flex">
-                        <div className="banner_dropdwn_blk">
-                          <div className="select_drpdwn">
-                            <Select
-                              placeholder="Filter by destinations"
-                              className="select_container_country"
-                              classNamePrefix="select_country"
-                              isDisabled={isDisabled}
-                              isLoading={isLoader}
-                              isClearable={isClearable}
-                              isRtl={isRtl}
-                              styles={styles}
-                              isSearchable={isSearchable}
-                              name="color"
-                              options={optionsData}
-                              isMulti
-                              hideSelectedOptions={false}
-                              onChange={handleOptionChange}
-                              value={selectedOptionMonth}
-                              components={{
-                                Option: InputOption,
-                                MultiValue: CustomMultiValue,
-                              }}
-                            />
+                    <form onSubmit={onSubmit}>
+                      <div className="col-12">
+                        <div className="destination_dropdwn_row d-block d-md-flex">
+                          <div className="banner_dropdwn_blk">
+                            <div className="select_drpdwn">
+                              <Select
+                                defaultValue="destination"
+                                id="long-value-select"
+                                placeholder={"Filter by destinations"}
+                                className="select_container_country"
+                                classNamePrefix="select_country"
+                                isDisabled={isDisabled}
+                                isLoading={isLoading}
+                                isClearable={isClearable}
+                                isRtl={isRtl}
+                                styles={styles}
+                                isSearchable={isSearchable}
+                                name="color"
+                                options={optionsData}
+                                isMulti
+                                hideSelectedOptions={false}
+                                closeMenuOnSelect={false}
+                                onChange={handleOptionChange}
+                                value={selectedOptionMonth}
+                                components={{
+                                  Option: InputOption,
+                                  MultiValue: CustomMultiValue,
+                                }}
+                              />
+                            </div>
+                          </div>
+                          <div className="banner_inspire_btn ps-0 ps-md-2">
+                            <button
+                              type="submit"
+                              className="btn btn-primary prmry_btn"
+                            >
+                              Inspire me
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="#ffffff"
+                                shapeRendering="geometricPrecision"
+                                textRendering="geometricPrecision"
+                                imageRendering="optimizeQuality"
+                                fillRule="evenodd"
+                                clipRule="evenodd"
+                                viewBox="0 0 267 512.43"
+                              >
+                                <path
+                                  fillRule="nonzero"
+                                  d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                                ></path>
+                              </svg>
+                            </button>
                           </div>
                         </div>
-                        <div className="banner_inspire_btn ps-0 ps-md-2">
-                          <button
-                            type="button"
-                            className="btn btn-primary prmry_btn"
-                          >
-                            Inspire me
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="#ffffff"
-                              shapeRendering="geometricPrecision"
-                              textRendering="geometricPrecision"
-                              imageRendering="optimizeQuality"
-                              fillRule="evenodd"
-                              clipRule="evenodd"
-                              viewBox="0 0 267 512.43"
-                            >
-                              <path
-                                fillRule="nonzero"
-                                d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                              ></path>
-                            </svg>
-                          </button>
-                        </div>
                       </div>
-                    </div>
+                    </form>
                     <div className="col-12">
                       <div className="destination_filter_result d-block d-lg-flex">
                         <p>

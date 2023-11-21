@@ -29,7 +29,7 @@ function ContinentPlacesToStay(props) {
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
   const [page, setPage] = useState(0); // Current page
   const [metaData, setMetaData] = useState([]);
-  const [dcode, setdcode] = useState();
+  const [decode, setdcode] = useState();
   const destinationcode = router.query.continent
     .replace(/-and-/g, " & ")
     .replace(/-/g, " ")
@@ -173,10 +173,11 @@ function ContinentPlacesToStay(props) {
   };
 
   const loadMoreData = (item) => {
+    debugger;
     destinationService
-      .getAllHotels(page + 1, item)
+      .getAllHotels(page + 1, item, decode)
       .then((response) => {
-        // console.log(response);
+        console.log("response", response);
         setMetaData(response.meta.pagination);
         const newItineraries = response.data;
         if (newItineraries.length > 0) {
@@ -289,6 +290,7 @@ function ContinentPlacesToStay(props) {
       .getDestinationDetails(destinationcode)
       .then((x) => {
         setdestinationName(x.data[0].attributes.destination_name);
+        setdcode(x.data[0].attributes.destination_code);
         setAllCountries(
           x.data[0]?.attributes?.countries?.data.map((item) => ({
             id: item.id,
@@ -317,7 +319,7 @@ function ContinentPlacesToStay(props) {
     };
 
     divRef?.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-  }, [destinationcode, router]);
+  }, [destinationcode, router, decode]);
 
   return (
     <>
@@ -558,7 +560,14 @@ function ContinentPlacesToStay(props) {
                                     </label>
                                   </span>
                                 </li>
-                                <li>{item?.attributes?.intro_text}</li>
+                                <li>
+                                  <p
+                                    dangerouslySetInnerHTML={{
+                                      __html: item?.attributes?.intro_text,
+                                    }}
+                                  />
+                                </li>
+                                {/* <li>{item?.attributes?.intro_text}</li> */}
                                 <li>
                                   Best for:
                                   <span>
@@ -585,7 +594,7 @@ function ContinentPlacesToStay(props) {
                     <div className="col-12">
                       {metaData.total > page * itemsPerPage && (
                         <button
-                          onClick={loadMoreData}
+                          onClick={() => loadMoreData(activeItem)}
                           className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
                           fdprocessedid="r5vpm6s"
                         >
