@@ -375,12 +375,14 @@ function Index() {
                                     Price guide:
                                     <span
                                       key={res?.id}
+                                      title="£200-£350 per person per night"
                                       tabIndex="0"
-                                      data-bs-toggle="tooltip"
+                                    >
+                                      {/* data-bs-toggle="tooltip"
                                       data-bs-placement="right"
                                       data-bs-title="£200-£350 per person per night"
-                                      data-bs-trigger="hover"
-                                    >
+                                      data-bs-trigger="hover" */}
+
                                       £££<label>££</label>
                                     </span>
                                   </p>
