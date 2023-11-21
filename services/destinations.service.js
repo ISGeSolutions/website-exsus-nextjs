@@ -44,6 +44,7 @@ export const destinationService = {
   },
   getAll,
   getById,
+  getRegionWiseHotels,
   getAllDropdown,
   getDestinationLandingPage,
   getDestinationLandingList,
@@ -58,7 +59,7 @@ export const destinationService = {
   getHotelById,
   getItinerariesInAdvanceSearch,
   getDestinationInspireMe,
-  getRegionById,
+  getRegionByName,
   getDictionaryDetails,
   getCustomeData,
   getItinerariesInspireMe
@@ -203,6 +204,23 @@ function getAllHotels(page, item) {
   }
 }
 
+
+function getRegionWiseHotels(page, name, filter) {
+  if (filter == "recommended") {
+    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/regions?filters[region_name]=${name?.replace(
+      /&/g,
+      "%26"
+    )}&populate[0]=hotels&pagination[page]=${page}&pagination[pageSize]=12`;
+    return fetchWrapper.get(itinerariesDetailsUrl);
+  } else if (filter == "alphabetical") {
+    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/regions?filters[region_name]=${name?.replace(
+      /&/g,
+      "%26"
+    )}&populate[0]=hotels&pagination[page]=${page}&pagination[pageSize]=12`;
+    return fetchWrapper.get(itinerariesDetailsUrl);
+  }
+}
+
 function getCustomPagesData(pageName) {
   const customPage = `${publicRuntimeConfig.apiUrl
     }/api/custom-pages?filters[page_code][$eq]=${pageName.replace(
@@ -235,11 +253,11 @@ function getItinerariesInAdvanceSearch(dcode, page) {
   return fetchWrapper.get(destinationadvanceSearchUrl);
 }
 
-function getRegionById(id) {
-  const regionsURL = `${publicRuntimeConfig.apiUrl}/api/regions/${id?.replace(
+function getRegionByName(name) {
+  const regionsURL = `${publicRuntimeConfig.apiUrl}/api/regions?filters[region_name][$eq]=${name?.replace(
     /&/g,
     "%26"
-  )}?populate[0]=region_images&populate[1]=country`;
+  )}&populate[0]=region_images&populate[1]=country`;
   return fetchWrapper.get(regionsURL);
 }
 

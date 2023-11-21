@@ -12,8 +12,8 @@ import CustomMultiValue from "./CustomMultiValue";
 
 export default RegionPlacesToStay;
 
-function RegionPlacesToStay() {
-
+function RegionPlacesToStay(props) {
+    console.log(props);
     const [isClearable, setIsClearable] = useState(true);
     const [isSearchable, setIsSearchable] = useState(true);
     const [isDisabled, setIsDisabled] = useState(false);
@@ -30,10 +30,24 @@ function RegionPlacesToStay() {
     const [page, setPage] = useState(0); // Current page
     const [metaData, setMetaData] = useState([]);
     const [dcode, setdcode] = useState();
-    const { destinationcode } = router.query;
     const [allHotels, setAllHotels] = useState([]);
     const [countryOptions, setAllCountries] = useState([])
     const [isLoading, setIsLoading] = useState(true);
+    const [activeItem, setActiveItem] = useState("recommended");
+    const destinationcode = router?.query?.continent
+        ?.replace(/-and-/g, " & ")
+        .replace(/-/g, " ")
+        .toLowerCase();
+    const countrycode = router.query?.country
+        ?.replace(/-and-/g, " & ")
+        .replace(/-/g, " ")
+        .toLowerCase();
+    const regionName = router.query?.region
+        ?.replace(/-and-/g, " & ")
+        .replace(/-/g, " ")
+        .toLowerCase();
+
+    const filter = useState("recommended");
 
     const regionOptions = [
         { value: "Everything", label: "Everything" },
@@ -167,19 +181,19 @@ function RegionPlacesToStay() {
     };
 
     const loadMoreData = () => {
-        destinationService.getAllHotels(page + 1).then((response) => {
-
-            setMetaData(response.meta.pagination);
-            const newItineraries = response.data;
-            if (newItineraries.length > 0) {
-                setAllHotels((prevItineraries) => [...prevItineraries, ...newItineraries].reduce((accumulator, current) => accumulator.some(item => item.id === current.id) ? accumulator : [...accumulator, current], []));
-                setPage(page + 1);
-            }
-            setIsLoading(false);
-        }).catch((error) => {
-
-            setIsLoading(false);
-        });
+        destinationService
+            .getRegionWiseHotels(page + 1, regionName, activeItem)
+            .then((response) => {
+                setMetaData(response.meta.pagination);
+                const newHotels = response?.data?.attributes?.hotels?.data;
+                if (newHotels.length > 0) {
+                    setAllHotels((prevItineraries) => [...prevItineraries, ...newHotels].reduce((accumulator, current) => accumulator.some(item => item.id === current.id) ? accumulator : [...accumulator, current], []));
+                    setPage(page + 1);
+                }
+                setIsLoading(false);
+            }).catch((error) => {
+                setIsLoading(false);
+            });
     };
 
     const handleRedirect = (item) => {
@@ -204,11 +218,14 @@ function RegionPlacesToStay() {
     };
 
 
-    let regionWiseUrl = '/uk';
-    if (typeof window !== 'undefined') {
+    let region = "uk";
+    let regionWiseUrl = "";
+    if (typeof window !== "undefined") {
         if (window && window.site_region) {
-            regionWiseUrl = '/' + window.site_region;
-            // setMyVariable(window.site_region);
+            if (window.site_region !== "uk") {
+                region = window.site_region;
+                regionWiseUrl = "/" + window.site_region;
+            }
         }
     }
 
@@ -253,12 +270,18 @@ function RegionPlacesToStay() {
             setIsLoading(false);
         });
 
-        // loadMoreData();
+        loadMoreData();
 
         // Using window.onload to detect full page load
         window.onload = () => {
             setTimeout(() => {
-                const redirectUrl = regionWiseUrl + '/continent?destinationcode=' + destinationcode;
+                const redirectUrl = regionWiseUrl + "/destinations/" + destinationcode?.replace(/ /g, "-")
+                    .replace(/&/g, "and")
+                    .toLowerCase() + "/" + countrycode.replace(/ /g, "-")
+                        .replace(/&/g, "and")
+                        .toLowerCase() + "/" + regionName?.attributes?.region_name?.replace(/ /g, "-")
+                            .replace(/&/g, "and")
+                            .toLowerCase();;
                 // debugger;
                 if (redirectUrl) {
                     router.push(redirectUrl);
@@ -266,7 +289,7 @@ function RegionPlacesToStay() {
             }, 0);
         };
 
-    }, [destinationcode, router]);
+    }, [destinationcode, countrycode, regionName]);
 
 
     return (
@@ -288,7 +311,7 @@ function RegionPlacesToStay() {
 
                 <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
                     <div className="container">
-                        <h3 className="title_cls">All recommended hotels in {destinationName}</h3>
+                        <h3 className="title_cls">All recommended hotels in {regionName}</h3>
                         <div className="card_slider_row">
                             <div className="carousel00 region_carousel00">
                                 <div className="row">

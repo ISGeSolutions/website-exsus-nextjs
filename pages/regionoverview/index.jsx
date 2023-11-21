@@ -3,31 +3,44 @@ import { destinationService } from "services";
 import { NavLink } from "components";
 import { useRouter } from "next/router";
 
-export default CountryOverview;
+export default RegionOverview;
 
-function CountryOverview(props) {
+function RegionOverview(props) {
   const router = useRouter();
   const [itineraries, setItineraries] = useState(null);
   const itemsPerPage = 9; // Number of items to load per page
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
   const [regionData, setRegionData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const regionid = router.query.regionid;
+  const destinationcode = router?.query?.continent
+    ?.replace(/-and-/g, " & ")
+    .replace(/-/g, " ")
+    .toLowerCase();
+  const countrycode = router.query?.country
+    ?.replace(/-and-/g, " & ")
+    .replace(/-/g, " ")
+    .toLowerCase();
+  const regionName = router.query?.region
+    ?.replace(/-and-/g, " & ")
+    .replace(/-/g, " ")
+    .toLowerCase();
 
   const { overview_text } = props?.data || {};
   const country_name = props?.data?.country_name || "";
 
-  const { countrycode } = router.query;
 
   const handleLoadMore = () => {
     setVisibleItems((prevVisibleItems) => prevVisibleItems + itemsPerPage);
   };
 
-  let regionWiseUrl = "/uk";
+  let region = "uk";
+  let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      regionWiseUrl = "/" + window.site_region;
-      // setMyVariable(window.site_region);
+      if (window.site_region !== "uk") {
+        region = window.site_region;
+        regionWiseUrl = "/" + window.site_region;
+      }
     }
   }
 
@@ -69,10 +82,13 @@ function CountryOverview(props) {
   equalHeight(true);
 
   useEffect(() => {
+
     destinationService
-      .getRegionById(regionid)
+      .getRegionByName(regionName)
       .then((x) => {
-        setRegionData(x.data.attributes);
+        debugger
+        setRegionData(x.data[0].attributes);
+        console.log(x.data[0].attributes)
         setIsLoading(false);
       })
       .catch((error) => {
@@ -84,15 +100,20 @@ function CountryOverview(props) {
     // Using window.onload to detect full page load
     window.onload = () => {
       setTimeout(() => {
-        const redirectUrl =
-          regionWiseUrl + "/country?countrycode=" + countrycode;
+        const redirectUrl = regionWiseUrl + "/destinations/" + destinationcode?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase() + "/" + countrycode.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase() + "/" + regionName?.attributes?.region_name?.replace(/ /g, "-")
+              .replace(/&/g, "and")
+              .toLowerCase();;
 
         if (redirectUrl) {
           router.push(redirectUrl);
         }
       }, 0);
     };
-  }, [regionid]);
+  }, [regionName, destinationcode, countrycode]);
 
   return (
     <>

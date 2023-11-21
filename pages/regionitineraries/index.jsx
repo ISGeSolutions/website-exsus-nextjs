@@ -10,10 +10,10 @@ import Image from "next/image";
 import CustomMultiValue from "../continentitineraries/CustomMultiValue";
 import Select, { components } from "react-select";
 
-export default CountryItinararies;
+export default RegionItinararies;
 
-function CountryItinararies(country) {
-  // console.log("country", country);
+function RegionItinararies(props) {
+  console.log(props);
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(true);
   const [isDisabled, setIsDisabled] = useState(false);
@@ -30,7 +30,19 @@ function CountryItinararies(country) {
   const [metaData, setMetaData] = useState([]);
 
   const router = useRouter();
-  const { countrycode } = router.query;
+  const destinationcode = router?.query?.continent
+    ?.replace(/-and-/g, " & ")
+    .replace(/-/g, " ")
+    .toLowerCase();
+  const countrycode = router.query?.country
+    ?.replace(/-and-/g, " & ")
+    .replace(/-/g, " ")
+    .toLowerCase();
+  const regionName = router.query?.region
+    ?.replace(/-and-/g, " & ")
+    .replace(/-/g, " ")
+    .toLowerCase();
+
 
   const width = "250px";
   const styles = {
@@ -210,14 +222,14 @@ function CountryItinararies(country) {
     setSelectedOptionMonth(selectedOption);
   };
 
-  let regionWiseUrl = "/uk";
   let region = "uk";
+  let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      regionWiseUrl = "/" + window.site_region;
-      region = window.site_region;
-
-      // setMyVariable(window.site_region);
+      if (window.site_region !== "uk") {
+        region = window.site_region;
+        regionWiseUrl = "/" + window.site_region;
+      }
     }
   }
 
@@ -300,15 +312,20 @@ function CountryItinararies(country) {
     // Using window.onload to detect full page load
     window.onload = () => {
       setTimeout(() => {
-        const redirectUrl =
-          regionWiseUrl + "/country?countrycode=" + countrycode;
+        const redirectUrl = regionWiseUrl + "/destinations/" + destinationcode?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase() + "/" + countrycode.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase() + "/" + regionName?.attributes?.region_name?.replace(/ /g, "-")
+              .replace(/&/g, "and")
+              .toLowerCase();;
         // debugger;
         if (redirectUrl) {
           router.push(redirectUrl);
         }
       }, 0);
     };
-  }, [countrycode]);
+  }, [countrycode, destinationcode, regionName]);
 
   return (
     <>
@@ -326,7 +343,7 @@ function CountryItinararies(country) {
             <section className="destination_para">
               <p
                 dangerouslySetInnerHTML={{
-                  __html: country?.data?.overview_text,
+                  __html: props?.data?.overview_text,
                 }}
               />
             </section>
@@ -335,7 +352,7 @@ function CountryItinararies(country) {
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
             <div className="container">
               <h3 className="title_cls">
-                All Luxury Holiday Ideas in {country?.data?.country_name}
+                All Luxury Holiday Ideas in {props?.data?.country_name}
               </h3>
               <div className="card_slider_row">
                 <div className="carousel00 region_carousel00">
