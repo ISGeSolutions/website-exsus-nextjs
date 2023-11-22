@@ -472,8 +472,8 @@ function Country() {
           </section>
 
           {/* Country sub tabs */}
-          <section className="destination_tab_row light_grey pb-0" id="targetDiv">
-            <div className="container">
+          <section className="destination_tab_row light_grey pb-0">
+            <div className="container" id="targetDiv">
               <div className="bookmark_row">
                 <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
               </div>
