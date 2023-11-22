@@ -11,7 +11,6 @@ import CustomMultiValue from "../continentitineraries/CustomMultiValue";
 import Select, { components } from "react-select";
 import { Alert } from "../../components";
 
-
 export default CountryItinararies;
 
 function CountryItinararies(props) {
@@ -36,6 +35,7 @@ function CountryItinararies(props) {
     .toLowerCase();
 
   const [metaData, setMetaData] = useState([]);
+  const [activeItem, setActiveItem] = useState("recommended");
 
   const countrycode = router.query?.country
     ?.replace(/-and-/g, " & ")
@@ -160,7 +160,6 @@ function CountryItinararies(props) {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-
         // debugger;
         // You can access it using localStorage.getItem('yourKey')
 
@@ -170,32 +169,30 @@ function CountryItinararies(props) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(matches, region, modifiedString);
+                modifiedString = websiteContentCheck(
+                  matches,
+                  region,
+                  modifiedString
+                );
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
               }
               const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
               if (checkStr && replacement) {
-                modifiedString = modifiedString.replace(
-                  checkStr,
-                  replacement
-                );
+                modifiedString = modifiedString.replace(checkStr, replacement);
               }
             });
             return modifiedString;
           } catch (error) {
             if (error.message === "Loop break") {
-
             } else if (error.message === "Region not found") {
-
             }
           }
         }
       }
     }
-  }
-
+  };
 
   const countryOptions = [
     { value: "", label: "Filter by region" },
@@ -293,6 +290,12 @@ function CountryItinararies(props) {
     setAlert(null);
   };
 
+  const handleFilterClick = (item) => {
+    page = 0;
+    setActiveItem(item);
+    loadMoreData(item);
+  };
+
   const handleOptionRegionChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
@@ -318,11 +321,11 @@ function CountryItinararies(props) {
     } else {
       router.push(
         `advance-search?where=` +
-        e?.destination +
-        `&what=` +
-        e?.reason +
-        `&when=` +
-        e?.month
+          e?.destination +
+          `&what=` +
+          e?.reason +
+          `&when=` +
+          e?.month
       );
     }
   }
@@ -337,16 +340,16 @@ function CountryItinararies(props) {
       }
     }
   }
-
-  const loadMoreData = () => {
+  const loadMoreData = (item) => {
     destinationService
-      .getAllItineraries(page + 1)
+      .getCountryWiseItinerary(countrycode, page + 1, item)
       .then((response) => {
         setMetaData(response.meta.pagination);
         const responseTemp = [...response.data].sort(
           (a, b) => a.attributes.serial_number - b.attributes.serial_number
         );
         const newItineraries = responseTemp;
+        //const newItineraries = response.data;
         if (newItineraries.length > 0) {
           setItineraries((prevItineraries) =>
             [...prevItineraries, ...newItineraries].reduce(
@@ -381,10 +384,10 @@ function CountryItinararies(props) {
     const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${destinationcode}/${countrycode?.replace(
-        / /g,
-        "-"
-      )}/${destinationcode}-iteneraries/${modifiedName}`
+        `/destinations/${destinationcode}/${countrycode?.replace(
+          / /g,
+          "-"
+        )}/${destinationcode}-iteneraries/${modifiedName}`
     );
   };
 
@@ -416,8 +419,9 @@ function CountryItinararies(props) {
     setSelectedOptionRegion(regionOptions[0]);
     setSelectedOptionMonth(monthOptions[0]);
 
-    loadMoreData();
-
+    loadMoreData(activeItem);
+    // destinationService.getDestinationDetails(destinationcode).then((x) => {
+    // });
     window.addEventListener("resize", equalHeight(true));
 
     // Using window.onload to detect full page load
@@ -431,7 +435,7 @@ function CountryItinararies(props) {
         }
       }, 0);
     };
-  }, [countrycode]);
+  }, [router, countrycode]);
 
   return (
     <>
@@ -450,7 +454,13 @@ function CountryItinararies(props) {
         <div>
           <div className="container">
             <section className="destination_para">
-              <p dangerouslySetInnerHTML={{ __html: dictioneryFunction(countryData?.itineraries_intro_text) }} />
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: dictioneryFunction(
+                    countryData?.itineraries_intro_text
+                  ),
+                }}
+              />
             </section>
           </div>
 
@@ -583,15 +593,36 @@ function CountryItinararies(props) {
                               <a href="#">By price</a>
                             </li>
                             <li>
-                              <a href="#" className="active">
+                              <a
+                                className={
+                                  activeItem === "recommended" ? "active" : ""
+                                }
+                                onClick={() => handleFilterClick("recommended")}
+                              >
                                 Recommended
                               </a>
                             </li>
                             <li>
-                              <a href="#">Alphabetical</a>
+                              <a
+                                className={
+                                  activeItem === "alphabetical" ? "active" : ""
+                                }
+                                onClick={() =>
+                                  handleFilterClick("alphabetical")
+                                }
+                              >
+                                Alphabetical
+                              </a>
                             </li>
                             <li>
-                              <a href="#">By duration</a>
+                              <a
+                                className={
+                                  activeItem === "duration" ? "active" : ""
+                                }
+                                onClick={() => handleFilterClick("duration")}
+                              >
+                                By duration
+                              </a>
                             </li>
                           </ul>
                         </div>
@@ -615,7 +646,7 @@ function CountryItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -629,9 +660,15 @@ function CountryItinararies(props) {
                               {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
                             </NavLink>
                             <div className="card_slider_cnt">
-                              <h4>
-                                <a href="#">{item?.attributes?.itin_name}</a>
-                              </h4>
+                              <NavLink
+                                href={generateDynamicLink(
+                                  item?.attributes?.itin_name
+                                )}
+                              >
+                                <h4>
+                                  <a>{item?.attributes?.itin_name}</a>
+                                </h4>
+                              </NavLink>
                               <ul>
                                 <li>{item?.attributes?.header_text}</li>
 
@@ -671,8 +708,9 @@ function CountryItinararies(props) {
                     <div className="col-12">
                       {metaData.total > page * itemsPerPage && (
                         <button
+                          onClick={() => loadMoreData(activeItem)}
                           className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
-                          onClick={loadMoreData}
+                          fdprocessedid="r5vpm6s"
                         >
                           Show{" "}
                           {metaData.total - page * itemsPerPage > 12
