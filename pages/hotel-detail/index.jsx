@@ -31,6 +31,7 @@ function Index() {
     if (carouselMain) {
       new bootstrap.Carousel(carouselMain);
     }
+
     destinationService
       .getHotelById(hotelId)
       .then((x) => {
@@ -58,7 +59,9 @@ function Index() {
           } else if (element.attributes.image_type == "thumbnail") {
           }
         });
+
         setBackgroundImage(newBackgroundImages);
+
         setIsLoading(false);
       })
       .catch((error) => {
@@ -134,7 +137,6 @@ function Index() {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
-
               {/* src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" */}
             </div>
             {/* <p>{mapVariable}</p> */}

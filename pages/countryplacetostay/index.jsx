@@ -11,7 +11,6 @@ import Select, { components } from "react-select";
 import CustomMultiValue from "../continentitineraries/CustomMultiValue";
 import { Alert } from "../../components";
 
-
 export default CountryPlaceToStay;
 
 function CountryPlaceToStay(props) {
@@ -118,6 +117,13 @@ function CountryPlaceToStay(props) {
     );
   };
 
+  const handleFilterClick = (item) => {
+    page = 0;
+    setAllHotels([]);
+    setActiveItem(item);
+    loadMoreData(item);
+  };
+
   const countryOptions = [
     { value: "Asia", label: "Asia" },
     { value: "Hong Kong & Macau", label: "Hong Kong & Macau" },
@@ -191,7 +197,7 @@ function CountryPlaceToStay(props) {
 
   const loadMoreData = (item) => {
     destinationService
-      .getAllHotels(page + 1, item)
+      .getAllCountryWiseHotels(page + 1, item, countrycode)
       .then((response) => {
         // console.log(response);
         setMetaData(response.meta.pagination);
@@ -226,9 +232,6 @@ function CountryPlaceToStay(props) {
     setAlert(null);
   };
 
-
-
-
   function onSubmit(e) {
     e.preventDefault();
     // console.log(e);
@@ -237,11 +240,11 @@ function CountryPlaceToStay(props) {
     } else {
       router.push(
         `advance-search?where=` +
-        e?.destination +
-        `&what=` +
-        e?.reason +
-        `&when=` +
-        e?.month
+          e?.destination +
+          `&what=` +
+          e?.reason +
+          `&when=` +
+          e?.month
       );
     }
   }
@@ -259,13 +262,6 @@ function CountryPlaceToStay(props) {
     // );
   };
 
-  const handleFilterClick = (item) => {
-    page = 0;
-    setAllHotels([]);
-    setActiveItem(item);
-    loadMoreData(item);
-  };
-
   const handleOptionRegionChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
@@ -280,12 +276,12 @@ function CountryPlaceToStay(props) {
     setSelectedOptionMonth(selectedOption);
   };
 
-  const showMoreItems = () => {
-    setVisible((prevValue) => prevValue + 3);
-    if (visible + 3 >= length) {
-      setVisiblePagination(false);
-    }
-  };
+  // const showMoreItems = () => {
+  //   setVisible((prevValue) => prevValue + 3);
+  //   if (visible + 3 >= length) {
+  //     setVisiblePagination(false);
+  //   }
+  // };
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -354,10 +350,7 @@ function CountryPlaceToStay(props) {
               }
               const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
               if (checkStr && replacement) {
-                modifiedString = modifiedString.replace(
-                  checkStr,
-                  replacement
-                );
+                modifiedString = modifiedString.replace(checkStr, replacement);
               }
             });
             return modifiedString;
@@ -369,7 +362,7 @@ function CountryPlaceToStay(props) {
         }
       }
     }
-  }
+  };
 
   const generateDynamicLink = (item) => {
     // console.log('item', item);
@@ -402,7 +395,7 @@ function CountryPlaceToStay(props) {
         }
       }, 0);
     };
-  }, [countrycode]);
+  }, [router, countrycode]);
 
   return (
     <>
@@ -421,7 +414,13 @@ function CountryPlaceToStay(props) {
         <div>
           <div className="container">
             <section className="destination_para">
-              <p dangerouslySetInnerHTML={{ __html: dictioneryFunction(countryData?.placestostay_intro_text) }} />
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: dictioneryFunction(
+                    countryData?.placestostay_intro_text
+                  ),
+                }}
+              />
             </section>
           </div>
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
@@ -444,7 +443,7 @@ function CountryPlaceToStay(props) {
                                 instanceId="long-value-select"
                                 className="select_container_country"
                                 classNamePrefix="select_country"
-                                placeholder="Filter by country"
+                                placeholder={"Filter by country"}
                                 styles={styles}
                                 isMulti
                                 isDisabled={isDisabled}
@@ -542,7 +541,7 @@ function CountryPlaceToStay(props) {
                       <div className="col-12">
                         <div className="destination_filter_result d-block d-lg-flex">
                           <p>
-                            We've found 358 hotels in Asia for you
+                            We've found {metaData?.total} hotels in asia for you
                             <button
                               type="button"
                               className="btn btn-primary modal_link_btn"
@@ -560,7 +559,9 @@ function CountryPlaceToStay(props) {
                                   className={
                                     activeItem === "recommended" ? "active" : ""
                                   }
-                                  onClick={() => handleFilterClick("recommended")}
+                                  onClick={() =>
+                                    handleFilterClick("recommended")
+                                  }
                                 >
                                   Recommended
                                 </a>
@@ -568,7 +569,9 @@ function CountryPlaceToStay(props) {
                               <li>
                                 <a
                                   className={
-                                    activeItem === "alphabetical" ? "active" : ""
+                                    activeItem === "alphabetical"
+                                      ? "active"
+                                      : ""
                                   }
                                   onClick={() =>
                                     handleFilterClick("alphabetical")
@@ -584,25 +587,39 @@ function CountryPlaceToStay(props) {
 
                       {/* Country Place to stay hotels */}
                       {allHotels?.slice(0, allHotels.length).map((item) => (
-                        <div className="col-sm-6 col-lg-4 col-xxl-3" key={item.id}>
+                        <div
+                          className="col-sm-6 col-lg-4 col-xxl-3"
+                          key={item.id}
+                        >
                           <div className="card_slider_inr">
                             <div className="card_slider">
                               <NavLink
                                 className="card_slider_img"
                                 href={generateDynamicLink(item.id)}
                               >
-                                <img
-                                  src="./../../../images/destination_hotel02.jpg"
-                                  alt="destination_hotel02"
-                                  className="img-fluid"
-                                />
+                                {item?.attributes?.hotel_images?.data.map(
+                                  (element, index) =>
+                                    element.attributes.image_type ==
+                                    "thumbnail" ? (
+                                      <img
+                                        key={index}
+                                        src={element.attributes.image_path}
+                                        alt={element.attributes.image_alt_text}
+                                        className="img-fluid"
+                                      />
+                                    ) : (
+                                      ""
+                                    )
+                                )}
                               </NavLink>
                               <div className="card_slider_cnt places_to_stay_cnt">
                                 <h4>
                                   <a href="#">{item?.attributes?.hotel_name}</a>
                                 </h4>
                                 <ul>
-                                  <li>Location: {item?.attributes?.location}</li>
+                                  <li>
+                                    Location: {item?.attributes?.location}
+                                  </li>
                                   <li>
                                     Price guide:
                                     <span
@@ -616,7 +633,13 @@ function CountryPlaceToStay(props) {
                                       </label>
                                     </span>
                                   </li>
-                                  <li>{item?.attributes?.intro_text}</li>
+                                  <li>
+                                    <p
+                                      dangerouslySetInnerHTML={{
+                                        __html: item?.attributes?.intro_text,
+                                      }}
+                                    />
+                                  </li>
                                   <li>
                                     Best for:
                                     <span>
@@ -643,8 +666,9 @@ function CountryPlaceToStay(props) {
                       <div className="col-12">
                         {metaData.total > page * itemsPerPage && (
                           <button
+                            onClick={() => loadMoreData(activeItem)}
                             className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
-                            onClick={loadMoreData}
+                            fdprocessedid="r5vpm6s"
                           >
                             Show{" "}
                             {metaData.total - page * itemsPerPage > 12
