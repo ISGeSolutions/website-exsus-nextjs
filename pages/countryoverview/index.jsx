@@ -2,15 +2,16 @@ import { useState, useEffect } from "react";
 import { destinationService } from "services";
 import { NavLink } from "components";
 import { useRouter } from "next/router";
+import { data } from "jquery";
 
 export default CountryOverview;
 
-function CountryOverview(props) {
+function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
   const router = useRouter();
   const [itineraries, setItineraries] = useState(null);
   const itemsPerPage = 9; // Number of items to load per page
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
-  const [countryData, setCountryData] = useState(props?.data);
+  const [countryData, setCountryData] = useState(dataToChild);
   // const { overview_text } = props?.data || {};
   // console.log(props?.data);
 
@@ -40,10 +41,22 @@ function CountryOverview(props) {
     }
   }
 
-  const handleClick = (e) => {
-    // Call the callback function to send data to the parent
-    sendDataToParent(e);
+  // Function to send data to the parent
+  const sendDataToParentHandler = (data) => {
+    // Send the data to the parent
+    onDataFromChild(data);
+    // You can perform other actions related to sending data to the parent
   };
+
+  // const handleClick = (e) => {
+  //   // Call the callback function to send data to the parent
+  //   const tempParentData = {
+  //     'data': data,
+  //     'sendDataToParent': e
+  //   }
+
+  //   sendDataToParent(tempParentData);
+  // };
 
   const handleRedirect = () => {
     router.push(
@@ -191,7 +204,7 @@ function CountryOverview(props) {
         }
       }, 0);
     };
-  }, [countrycode, props]);
+  }, [countrycode, dataToChild]);
 
   return (
     <>
@@ -564,7 +577,7 @@ function CountryOverview(props) {
                   <div className="card_blk_inr card_blk_overlay">
                     <a
                       target="_blank"
-                      onClick={() => handleClick("itineraries")}
+                      onClick={() => sendDataToParentHandler("itineraries")}
                     >
                       <img
                         src="./../../../images/destination_overview01.jpg"
@@ -603,7 +616,7 @@ function CountryOverview(props) {
 
                 <div className="col-sm-6">
                   <div className="card_blk_inr card_blk_overlay">
-                    <a onClick={() => handleClick("places-to-stay")}>
+                    <a onClick={() => sendDataToParentHandler("places-to-stay")}>
                       <img
                         src="./../../../images/destination_overview02.jpg"
                         alt="Card image 08"

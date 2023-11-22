@@ -160,8 +160,20 @@ function Country() {
     // );
   };
 
+  const [dataToSendToChild, setDataToSendToChild] = useState('Initial Data');
+  const [dataReceivedFromChild, setDataReceivedFromChild] = useState(null);
+
+  // Function to send data to the child
+  const sendDataToChild = () => {
+    // Send the data to the child
+    setDataToSendToChild(countryData?.attributes);
+
+    // You can perform other actions related to sending data
+  };
+
+  // Callback function to receive data from the child
   const handleDataFromChild = (data) => {
-    // Update the parent component's state with data received from the child
+    // Process or use the data received from the child
     toggleTab(data);
   };
 
@@ -189,7 +201,7 @@ function Country() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
+      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
     );
   };
 
@@ -274,6 +286,10 @@ function Country() {
       setActiveTab(itemId);
       // window.history.pushState(null, null, redirectUrl); // Update the URL
     }
+    const targetDiv = document.getElementById('targetDiv');
+    if (targetDiv) {
+      targetDiv.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   useEffect(() => {
@@ -326,6 +342,7 @@ function Country() {
         .getCountryDetails(countrycode)
         .then((x) => {
           setCountryData(x.data[0]);
+          setDataToSendToChild(x.data[0]?.attributes);
           setHeadingText(x.data[0]?.attributes?.header_text);
           setFriendlyUrl(`Home/Destinations/${destinationcode}/${countrycode}`);
           const map_latitude = x.data[0].attributes?.map_latitude;
@@ -455,7 +472,7 @@ function Country() {
           </section>
 
           {/* Country sub tabs */}
-          <section className="destination_tab_row light_grey pb-0">
+          <section className="destination_tab_row light_grey pb-0" id="targetDiv">
             <div className="container">
               <div className="bookmark_row">
                 <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
@@ -578,8 +595,12 @@ function Country() {
                   tabIndex="0"
                 >
                   <CountryOverview
-                    data={countryData?.attributes}
-                    sendDataToParent={handleDataFromChild}
+                    // data={countryData?.attributes}
+                    // sendDataToParent={handleDataFromChild}
+
+                    sendDataToChild={sendDataToChild}
+                    onDataFromChild={handleDataFromChild}
+                    dataToChild={dataToSendToChild}
                   />
                 </div>
               )}
