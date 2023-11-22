@@ -307,8 +307,6 @@ function ContinentItinararies(props) {
     page = 0;
     setItineraries([]);
     setActiveItem(item);
-    // console.log(page);
-
     loadMoreData(item);
   };
 

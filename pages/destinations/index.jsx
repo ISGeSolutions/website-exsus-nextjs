@@ -158,7 +158,7 @@ function Index() {
       });
 
     whyusService
-      .getAllTravelReviews()
+      .getAllDestinationTravelReviews()
       .then((x) => {
         setTestimonials(x.data);
         setIsLoading(false);
@@ -365,7 +365,7 @@ function Index() {
             <div className="container">
               <div className="bookmark_row">
                 <FriendlyUrl
-                  data={destinations?.attributes?.page_friendly_url}
+                  data={"home/" + destinations?.attributes?.page_friendly_url}
                 ></FriendlyUrl>
               </div>
               <div className="row">

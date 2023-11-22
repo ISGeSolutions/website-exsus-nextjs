@@ -307,7 +307,7 @@ function Index() {
                                     </div> */}
                   {/* {/ <p style={{ color: `white` }}>{destinations?.attributes?.page_friendly_url}</p > /} */}
                   <FriendlyUrl
-                    data={whyusDetails?.page_friendly_url}
+                    data={"home/" + whyusDetails?.page_friendly_url}
                   ></FriendlyUrl>
                 </div>
                 <div className="trvl_info_cntnt">

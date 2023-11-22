@@ -26,7 +26,7 @@ function RegionItinararies(props) {
   const [page, setPage] = useState(0); // Current page
   const itemsPerPage = 12; // Number of items to load per page
   const [isLoading, setIsLoading] = useState(true);
-
+  const [activeItem, setActiveItem] = useState("recommended");
   const [metaData, setMetaData] = useState([]);
 
   const router = useRouter();
@@ -42,8 +42,6 @@ function RegionItinararies(props) {
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
-
-
   const width = "250px";
   const styles = {
     control: (provided) => ({
@@ -116,6 +114,13 @@ function RegionItinararies(props) {
         {children}
       </components.Option>
     );
+  };
+
+  const handleFilterClick = (item) => {
+    page = 0;
+    setItineraries([]);
+    setActiveItem(item);
+    loadMoreData(item);
   };
 
   const countryOptions = [
@@ -233,9 +238,9 @@ function RegionItinararies(props) {
     }
   }
 
-  const loadMoreData = () => {
+  const loadMoreData = (item) => {
     destinationService
-      .getAllItineraries(page + 1)
+      .getAllRegionItineraries(page + 1, regionName, item, region)
       .then((response) => {
         setMetaData(response.meta.pagination);
         const responseTemp = [...response.data].sort(
@@ -305,7 +310,7 @@ function RegionItinararies(props) {
     setSelectedOptionRegion(regionOptions[0]);
     setSelectedOptionMonth(monthOptions[0]);
 
-    // loadMoreData();
+    loadMoreData(activeItem);
 
     window.addEventListener("resize", equalHeight(true));
 
@@ -445,19 +450,38 @@ function RegionItinararies(props) {
                         <div className="destination_contries_filter d-inline-block d-lg-flex">
                           <label className="pt-2 pt-lg-0">Arrange by:</label>
                           <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
+                            {/* <li><a className={activeItem === 'price' ? 'active' : ''} onClick={() => handleFilterClick('price')}>By price</a></li> */}
                             <li>
-                              <a href="#">By price</a>
-                            </li>
-                            <li>
-                              <a href="#" className="active">
+                              <a
+                                className={
+                                  activeItem === "recommended" ? "active" : ""
+                                }
+                                onClick={() => handleFilterClick("recommended")}
+                              >
                                 Recommended
                               </a>
                             </li>
                             <li>
-                              <a href="#">Alphabetical</a>
+                              <a
+                                className={
+                                  activeItem === "alphabetical" ? "active" : ""
+                                }
+                                onClick={() =>
+                                  handleFilterClick("alphabetical")
+                                }
+                              >
+                                Alphabetical
+                              </a>
                             </li>
                             <li>
-                              <a href="#">By duration</a>
+                              <a
+                                className={
+                                  activeItem === "duration" ? "active" : ""
+                                }
+                                onClick={() => handleFilterClick("duration")}
+                              >
+                                By duration
+                              </a>
                             </li>
                           </ul>
                         </div>
@@ -531,7 +555,7 @@ function RegionItinararies(props) {
                       {metaData.total > page * itemsPerPage && (
                         <button
                           className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
-                          onClick={loadMoreData}
+                          onClick={() => loadMoreData(activeItem)}
                         >
                           Show{" "}
                           {metaData.total - page * itemsPerPage > 12
