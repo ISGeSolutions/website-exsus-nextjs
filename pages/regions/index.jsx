@@ -115,16 +115,20 @@ function Index() {
 
   const toggleTab = (itemId) => {
     var text = regionName;
+    const redirectUrl = regionWiseUrl + "/destinations/" + destinationcode?.replace(/ /g, "-")
+      .replace(/&/g, "and")
+      .toLowerCase() + "/" + countrycode?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase() + "/" + regionName?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase();
     if (itemId == "overview") {
-      const redirectUrl = regionWiseUrl + "/region";
       window.history.pushState(null, null, redirectUrl);
       text = regionName;
     } else if (itemId == "itineraries") {
-      const redirectUrl = regionWiseUrl + "/regionitineraries";
       window.history.pushState(null, null, redirectUrl);
       text = `TAILOR-MADE ${regionName} HOLIDAY ITINERARIES`;
     } else if (itemId == "places-to-stay") {
-      const redirectUrl = regionWiseUrl + "/regionplacetostay";
       window.history.pushState(null, null, redirectUrl);
       text = `PLACES TO STAY IN ${regionName}`;
     } else {

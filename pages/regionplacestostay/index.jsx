@@ -47,7 +47,12 @@ function RegionPlacesToStay(props) {
         .replace(/-/g, " ")
         .toLowerCase();
 
-    const filter = useState("recommended");
+    const handleFilterClick = (item) => {
+        page = 0;
+        setAllHotels([]);
+        setActiveItem(item);
+        loadMoreData(item);
+    };
 
     const regionOptions = [
         { value: "Everything", label: "Everything" },
@@ -180,12 +185,12 @@ function RegionPlacesToStay(props) {
         );
     };
 
-    const loadMoreData = () => {
+    const loadMoreData = (item) => {
         destinationService
-            .getRegionWiseHotels(page + 1, regionName, activeItem)
+            .getRegionWiseHotels(page + 1, regionName, item)
             .then((response) => {
                 setMetaData(response.meta.pagination);
-                const newHotels = response?.data?.attributes?.hotels?.data;
+                const newHotels = response?.data;
                 if (newHotels.length > 0) {
                     setAllHotels((prevItineraries) => [...prevItineraries, ...newHotels].reduce((accumulator, current) => accumulator.some(item => item.id === current.id) ? accumulator : [...accumulator, current], []));
                     setPage(page + 1);
@@ -270,7 +275,7 @@ function RegionPlacesToStay(props) {
             setIsLoading(false);
         });
 
-        loadMoreData();
+        loadMoreData(activeItem);
 
         // Using window.onload to detect full page load
         window.onload = () => {
@@ -407,8 +412,28 @@ function RegionPlacesToStay(props) {
                                             <div className="destination_contries_filter d-inline-block d-lg-flex">
                                                 <label className="pt-2 pt-lg-0">Arrange by:</label>
                                                 <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
-                                                    <li><a href="#" className="active">Recommended</a></li>
-                                                    <li><a href="#">Alphabetical</a></li>
+                                                    <li>
+                                                        <a
+                                                            className={
+                                                                activeItem === "recommended" ? "active" : ""
+                                                            }
+                                                            onClick={() => handleFilterClick("recommended")}
+                                                        >
+                                                            Recommended
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a
+                                                            className={
+                                                                activeItem === "alphabetical" ? "active" : ""
+                                                            }
+                                                            onClick={() =>
+                                                                handleFilterClick("alphabetical")
+                                                            }
+                                                        >
+                                                            Alphabetical
+                                                        </a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -454,7 +479,7 @@ function RegionPlacesToStay(props) {
                                     <div className="col-12">
                                         {metaData.total > page * itemsPerPage && (
                                             <button
-                                                onClick={loadMoreData}
+                                                onClick={() => loadMoreData(activeItem)}
                                                 className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
                                                 fdprocessedid="r5vpm6s"
                                             >

@@ -12,6 +12,7 @@ export const whyusService = {
   getAllExecutives,
   getExecutivesById,
   getAllTravelReviews,
+  getAllDestinationTravelReviews,
   getExsusReviews,
   getAllReviews,
   getAllHomeTravelReviews,
@@ -57,6 +58,11 @@ function getAllExecutives() {
 
 function getAllTravelReviews() {
   const allReviews = `${publicRuntimeConfig.apiUrl}/api/travel-reviews?populate[0]=travel_executive`;
+  return fetchWrapper.get(allReviews);
+}
+
+function getAllDestinationTravelReviews() {
+  const allReviews = `${publicRuntimeConfig.apiUrl}/api/travel-reviews?filters[destination_page_ind][$eq]=true&sort[0]=destination_serial_number:asc`;
   return fetchWrapper.get(allReviews);
 }
 
