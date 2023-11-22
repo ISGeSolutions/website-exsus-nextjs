@@ -190,7 +190,7 @@ function Index() {
     //   .catch((error) => {
     //     setIsLoading(false);
     //   });
-    // debugger;
+
     if (destinationcode) {
       destinationService
         .getDestinationDetails(destinationcode)
@@ -202,11 +202,11 @@ function Index() {
           );
           setMetaTitle(x.data[0].attributes.page_meta_title);
           setHeadingText(x.data[0].attributes.page_meta_title);
-          const map_latitude = x.data[0].attributes?.map_latitude;
-          const map_longitude = x.data[0].attributes?.map_longitude;
+          // const map_latitude = x.data[0].attributes?.map_latitude;
+          // const map_longitude = x.data[0].attributes?.map_longitude;
           setdestinationName(x.data[0].attributes.destination_name);
-          // const map_latitude = "40.7128";
-          // const map_longitude = "-74.0060";
+          const map_latitude = "40.7128";
+          const map_longitude = "-74.0060";
 
           const mapTemp =
             `https://www.google.com/maps/embed/v1/place?q=` +
@@ -332,7 +332,6 @@ function Index() {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
-
               {/* src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" */}
             </div>
             {/* <p>{mapVariable}</p> */}

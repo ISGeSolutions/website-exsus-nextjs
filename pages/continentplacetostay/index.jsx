@@ -173,7 +173,6 @@ function ContinentPlacesToStay(props) {
   };
 
   const loadMoreData = (item) => {
-    debugger;
     destinationService
       .getAllHotels(page + 1, item, decode)
       .then((response) => {
