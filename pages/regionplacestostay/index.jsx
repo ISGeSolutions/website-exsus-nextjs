@@ -479,6 +479,7 @@ function RegionPlacesToStay(props) {
                                     <div className="col-12">
                                         {metaData.total > page * itemsPerPage && (
                                             <button
+                                                type="button"
                                                 onClick={() => loadMoreData(activeItem)}
                                                 className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
                                                 fdprocessedid="r5vpm6s"
@@ -486,8 +487,8 @@ function RegionPlacesToStay(props) {
                                                 Show{" "}
                                                 {metaData.total - page * itemsPerPage > 12
                                                     ? 12
-                                                    : metaData.total - page * itemsPerPage > 12}{" "}
-                                                more items
+                                                    : metaData.total - page * itemsPerPage}{" "}
+                                                more holiday
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     fill="#ffffff"
@@ -501,7 +502,7 @@ function RegionPlacesToStay(props) {
                                                     <path
                                                         fillRule="nonzero"
                                                         d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"
-                                                    ></path>
+                                                    />
                                                 </svg>
                                             </button>
                                         )}

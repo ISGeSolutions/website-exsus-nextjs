@@ -322,11 +322,11 @@ function CountryItinararies(props) {
     } else {
       router.push(
         `advance-search?where=` +
-          e?.destination +
-          `&what=` +
-          e?.reason +
-          `&when=` +
-          e?.month
+        e?.destination +
+        `&what=` +
+        e?.reason +
+        `&when=` +
+        e?.month
       );
     }
   }
@@ -385,10 +385,10 @@ function CountryItinararies(props) {
     const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${destinationcode}/${countrycode?.replace(
-          / /g,
-          "-"
-        )}/${destinationcode}-iteneraries/${modifiedName}`
+      `/destinations/${destinationcode}/${countrycode?.replace(
+        / /g,
+        "-"
+      )}/${destinationcode}-iteneraries/${modifiedName}`
     );
   };
 
@@ -647,7 +647,7 @@ function CountryItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -709,6 +709,7 @@ function CountryItinararies(props) {
                     <div className="col-12">
                       {metaData.total > page * itemsPerPage && (
                         <button
+                          type="button"
                           onClick={() => loadMoreData(activeItem)}
                           className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
                           fdprocessedid="r5vpm6s"
@@ -716,7 +717,7 @@ function CountryItinararies(props) {
                           Show{" "}
                           {metaData.total - page * itemsPerPage > 12
                             ? 12
-                            : metaData.total - page * itemsPerPage > 12}{" "}
+                            : metaData.total - page * itemsPerPage}{" "}
                           more holiday
                           <svg
                             xmlns="http://www.w3.org/2000/svg"

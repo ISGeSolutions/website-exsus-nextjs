@@ -576,7 +576,6 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                 <div className="col-sm-6">
                   <div className="card_blk_inr card_blk_overlay">
                     <a
-                      target="_blank"
                       onClick={() => sendDataToParentHandler("itineraries")}
                     >
                       <img

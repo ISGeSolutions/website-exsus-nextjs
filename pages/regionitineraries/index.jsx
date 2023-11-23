@@ -357,7 +357,7 @@ function RegionItinararies(props) {
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
             <div className="container">
               <h3 className="title_cls">
-                All Luxury Holiday Ideas in {props?.data?.country_name}
+                All Luxury Holiday Ideas in {regionName}
               </h3>
               <div className="card_slider_row">
                 <div className="carousel00 region_carousel00">
@@ -554,13 +554,15 @@ function RegionItinararies(props) {
                     <div className="col-12">
                       {metaData.total > page * itemsPerPage && (
                         <button
-                          className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
+                          type="button"
                           onClick={() => loadMoreData(activeItem)}
+                          className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
+                          fdprocessedid="r5vpm6s"
                         >
                           Show{" "}
                           {metaData.total - page * itemsPerPage > 12
                             ? 12
-                            : metaData.total - page * itemsPerPage > 12}{" "}
+                            : metaData.total - page * itemsPerPage}{" "}
                           more holiday
                           <svg
                             xmlns="http://www.w3.org/2000/svg"

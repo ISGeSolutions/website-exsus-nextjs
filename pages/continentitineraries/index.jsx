@@ -94,14 +94,6 @@ const InputOption = ({
 function ContinentItinararies(props) {
   const { divRef } = props;
   // const divRef = divRefData;
-
-  let regionWiseUrl = "";
-  if (typeof window !== "undefined") {
-    if (window && window.site_region) {
-      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
-    }
-  }
-
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
@@ -124,10 +116,18 @@ function ContinentItinararies(props) {
     .replace(/-/g, " ")
     .toLowerCase();
   const [countryOptions, setAllCountries] = useState([]);
-  const [destinationName, setdestinationName] = useState("");
+  const [destination, setdestination] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [activeItem, setActiveItem] = useState("recommended");
   const [alert, setAlert] = useState(null);
+
+  let region = "uk";
+  let regionWiseUrl = "";
+  if (typeof window !== "undefined") {
+    if (window && window.site_region) {
+      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
+    }
+  }
 
   const handleLoadMore = () => {
     setVisibleItems((prevVisibleItems) => prevVisibleItems + itemsPerPage);
@@ -331,6 +331,82 @@ function ContinentItinararies(props) {
     }
   };
 
+  const websiteContentCheck = (matches, region, modifiedString) => {
+    destinationService
+      .getDictionaryDetails(matches, region)
+      .then((responseObj) => {
+        if (responseObj) {
+          const res = responseObj?.data;
+          res.forEach((element, index) => {
+            const replacement = element?.attributes?.content_translation_text;
+            const matchString = element?.attributes?.content_word;
+            const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+            if (checkStr && replacement) {
+              modifiedString = modifiedString.replace(checkStr, replacement);
+            }
+          });
+
+          // Set the modified string in state
+          setnewValueWithBr(modifiedString);
+        }
+      });
+  };
+
+  const dictioneryFunction = (data) => {
+    let modifiedString = data;
+    if (modifiedString) {
+      const regex = /{[a-zA-Z0-9-]+}/g;
+      const matches = [...new Set(modifiedString.match(regex))];
+
+      let storedDataString = "";
+      let storedData = "";
+      // debugger;
+      if (region == "uk") {
+        storedDataString = localStorage.getItem("websitecontent_uk");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "us") {
+        storedDataString = localStorage.getItem("websitecontent_us");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "asia") {
+        storedDataString = localStorage.getItem("websitecontent_asia");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "in") {
+        storedDataString = localStorage.getItem("websitecontent_india");
+        storedData = JSON.parse(storedDataString);
+      }
+      if (storedData !== null) {
+
+        // debugger;
+        // You can access it using localStorage.getItem('yourKey')
+
+        if (matches) {
+          let replacement = "";
+          try {
+            matches.forEach((match, index, matches) => {
+              const matchString = match.replace(/{|}/g, "");
+              if (!storedData[matchString]) {
+                modifiedString = websiteContentCheck(matches, region, modifiedString);
+                throw new Error("Loop break");
+              } else {
+                replacement = storedData[matchString];
+              }
+              const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+              if (checkStr && replacement) {
+                modifiedString = modifiedString.replace(
+                  checkStr,
+                  replacement
+                );
+              }
+            });
+            return modifiedString;
+            setIsLoading(false);
+          } catch (error) {
+          }
+        }
+      }
+    }
+  }
+
   equalHeight(true);
 
   useEffect(() => {
@@ -340,7 +416,7 @@ function ContinentItinararies(props) {
     destinationService
       .getDestinationDetails(destinationcode)
       .then((x) => {
-        setdestinationName(x.data[0].attributes.destination_name);
+        setdestination(x.data[0].attributes);
         setdcode(x.data[0].attributes.destination_code);
         loadMoreData(activeItem);
         setAllCountries(
@@ -390,28 +466,13 @@ function ContinentItinararies(props) {
         <div>
           <div className="container">
             <section className="destination_para">
-              <p>
-                Tailor-made luxury holidays in Asia are highly addictive.
-                Jam-packed with culture, adventure, wildlife and some of the
-                most beautiful beaches in the world, Asia offers countless
-                options for creating bespoke holidays. If you’re looking for a
-                luxury honeymoon or family adventure holiday, travelling as a
-                couple, group or solo, Asia has limitless opportunities for an
-                unforgettable trip.
-              </p>
-              <p>
-                From the gems of South-East Asia, to the exotic Far East and
-                exquisite Southern Asia, we've put together the following Asia
-                holiday itineraries below to inspire you. Call 020 7337 9010 and
-                speak to one of our experts to create your perfect bespoke Asia
-                holiday.
-              </p>
+              <div dangerouslySetInnerHTML={{ __html: dictioneryFunction(destination.itineraries_intro_text) }} />
             </section>
           </div>
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
             <div className="container">
               <h3 className="title_cls">
-                All Luxury Holiday Ideas in {destinationName}
+                All Luxury Holiday Ideas in {destination.destination_name}
               </h3>
 
               {/* Inspire Me */}
@@ -526,7 +587,7 @@ function ContinentItinararies(props) {
                       <div className="destination_filter_result d-block d-lg-flex">
                         <p>
                           We've found {metaData.total} holiday ideas in{" "}
-                          {destinationName} for you
+                          {destination.destination_name} for you
                         </p>
                         <div className="destination_contries_filter d-inline-block d-lg-flex">
                           <label className="pt-2 pt-lg-0">Arrange by:</label>
@@ -647,6 +708,7 @@ function ContinentItinararies(props) {
                     <div className="col-12">
                       {metaData.total > page * itemsPerPage && (
                         <button
+                          type="button"
                           onClick={() => loadMoreData(activeItem)}
                           className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
                           fdprocessedid="r5vpm6s"
@@ -654,8 +716,8 @@ function ContinentItinararies(props) {
                           Show{" "}
                           {metaData.total - page * itemsPerPage > 12
                             ? 12
-                            : metaData.total - page * itemsPerPage > 12}{" "}
-                          more items
+                            : metaData.total - page * itemsPerPage}{" "}
+                          more holiday
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="#ffffff"
@@ -669,7 +731,7 @@ function ContinentItinararies(props) {
                             <path
                               fillRule="nonzero"
                               d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"
-                            ></path>
+                            />
                           </svg>
                         </button>
                       )}
