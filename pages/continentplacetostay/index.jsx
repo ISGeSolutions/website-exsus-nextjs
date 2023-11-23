@@ -24,7 +24,7 @@ function ContinentPlacesToStay(props) {
   const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
   const [itineraries, setItineraries] = useState(null);
   const router = useRouter();
-  const [destinationName, setdestinationName] = useState("");
+  const [destination, setdestination] = useState("");
   const itemsPerPage = 12; // Number of items to load per page
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
   const [page, setPage] = useState(0); // Current page
@@ -41,6 +41,14 @@ function ContinentPlacesToStay(props) {
   const [alert, setAlert] = useState(null);
 
   const { divRef } = props;
+
+  let region = "uk";
+  let regionWiseUrl = "";
+  if (typeof window !== "undefined") {
+    if (window && window.site_region) {
+      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
+    }
+  }
 
   const regionOptions = [
     { value: "Everything", label: "Everything" },
@@ -262,16 +270,85 @@ function ContinentPlacesToStay(props) {
     setSelectedOptionMonth(selectedOption);
   };
 
-  let regionWiseUrl = "";
-  if (typeof window !== "undefined") {
-    if (window && window.site_region) {
-      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
-    }
-  }
-
   const generateDynamicLink = (item) => {
     return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
   };
+
+  const websiteContentCheck = (matches, region, modifiedString) => {
+    destinationService
+      .getDictionaryDetails(matches, region)
+      .then((responseObj) => {
+        if (responseObj) {
+          const res = responseObj?.data;
+          res.forEach((element, index) => {
+            const replacement = element?.attributes?.content_translation_text;
+            const matchString = element?.attributes?.content_word;
+            const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+            if (checkStr && replacement) {
+              modifiedString = modifiedString.replace(checkStr, replacement);
+            }
+          });
+
+          // Set the modified string in state
+          setnewValueWithBr(modifiedString);
+        }
+      });
+  };
+
+  const dictioneryFunction = (data) => {
+    let modifiedString = data;
+    if (modifiedString) {
+      const regex = /{[a-zA-Z0-9-]+}/g;
+      const matches = [...new Set(modifiedString.match(regex))];
+
+      let storedDataString = "";
+      let storedData = "";
+      // debugger;
+      if (region == "uk") {
+        storedDataString = localStorage.getItem("websitecontent_uk");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "us") {
+        storedDataString = localStorage.getItem("websitecontent_us");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "asia") {
+        storedDataString = localStorage.getItem("websitecontent_asia");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "in") {
+        storedDataString = localStorage.getItem("websitecontent_india");
+        storedData = JSON.parse(storedDataString);
+      }
+      if (storedData !== null) {
+
+        // debugger;
+        // You can access it using localStorage.getItem('yourKey')
+
+        if (matches) {
+          let replacement = "";
+          try {
+            matches.forEach((match, index, matches) => {
+              const matchString = match.replace(/{|}/g, "");
+              if (!storedData[matchString]) {
+                modifiedString = websiteContentCheck(matches, region, modifiedString);
+                throw new Error("Loop break");
+              } else {
+                replacement = storedData[matchString];
+              }
+              const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+              if (checkStr && replacement) {
+                modifiedString = modifiedString.replace(
+                  checkStr,
+                  replacement
+                );
+              }
+            });
+            return modifiedString;
+            setIsLoading(false);
+          } catch (error) {
+          }
+        }
+      }
+    }
+  }
 
   useEffect(() => {
     setSelectedOptionCountry(countryOptions[0]);
@@ -288,7 +365,7 @@ function ContinentPlacesToStay(props) {
     destinationService
       .getDestinationDetails(destinationcode)
       .then((x) => {
-        setdestinationName(x.data[0].attributes.destination_name);
+        setdestination(x.data[0].attributes);
         setdcode(x.data[0].attributes.destination_code);
         setAllCountries(
           x.data[0]?.attributes?.countries?.data.map((item) => ({
@@ -337,21 +414,14 @@ function ContinentPlacesToStay(props) {
         <div>
           <div className="container">
             <section className="destination_para">
-              <p>
-                Whether you’re after a luxury honeymoon in South-East Asia, a
-                family adventure holiday in Southern Asia or a cultural holiday
-                to the Far East, you can expect some of the most beautiful
-                beaches and most incredible luxury hotels in the world,
-                fast-paced cities, tranquil village life and mouthwatering food.
-                Asia has it all.
-              </p>
+              <div dangerouslySetInnerHTML={{ __html: dictioneryFunction(destination.placestostay_intro_text) }} />
             </section>
           </div>
 
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
             <div className="container">
               <h3 className="title_cls">
-                All recommended hotels in {destinationName}
+                All recommended hotels in {destination.destination_name}
               </h3>
 
               {/* Inspire Me */}
@@ -468,7 +538,7 @@ function ContinentPlacesToStay(props) {
                       <div className="destination_filter_result d-block d-lg-flex">
                         <p>
                           We've found {metaData?.total} hotels in{" "}
-                          {destinationName} for you
+                          {destination?.destination_name} for you
                           <button
                             type="button"
                             className="btn btn-primary modal_link_btn"
@@ -593,6 +663,7 @@ function ContinentPlacesToStay(props) {
                     <div className="col-12">
                       {metaData.total > page * itemsPerPage && (
                         <button
+                          type="button"
                           onClick={() => loadMoreData(activeItem)}
                           className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
                           fdprocessedid="r5vpm6s"
@@ -600,8 +671,8 @@ function ContinentPlacesToStay(props) {
                           Show{" "}
                           {metaData.total - page * itemsPerPage > 12
                             ? 12
-                            : metaData.total - page * itemsPerPage > 12}{" "}
-                          more items
+                            : metaData.total - page * itemsPerPage}{" "}
+                          more holiday
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="#ffffff"
@@ -615,7 +686,7 @@ function ContinentPlacesToStay(props) {
                             <path
                               fillRule="nonzero"
                               d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"
-                            ></path>
+                            />
                           </svg>
                         </button>
                       )}

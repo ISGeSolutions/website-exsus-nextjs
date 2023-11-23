@@ -230,14 +230,8 @@ function Index() {
         const bannerImages = [];
         const imageCheck = x.data[0]?.attributes?.itinerary_details.data;
         setFriendlyUrl(
-          `home/destinations/${router.query?.continent}/${
-            router.query?.country
-          }/${
-            router.query?.itineraryName
-              ? router.query?.itineraries +
-                "/" +
-                x.data[0].attributes.friendly_url
-              : x.data[0].attributes.friendly_url
+          `home/destinations/${router.query?.continent}/${router.query?.country
+          }/${x.data[0].attributes.friendly_url
           }`
         );
         setTitle(x.data[0].attributes.meta_title);

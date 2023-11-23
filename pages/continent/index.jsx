@@ -29,7 +29,6 @@ function Index() {
   const [destinationName, setdestinationName] = useState("");
   const [metaTitle, setMetaTitle] = useState("");
   const [parentData, setParentData] = useState("");
-  const [title, setTitle] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const tabContentRefs = {
     overview: useRef(null),
@@ -41,10 +40,14 @@ function Index() {
   const divRef = useRef();
   const { t } = useTranslation();
 
+  let region = "uk";
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
+      if (window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+        region = window.site_region;
+      }
     }
   }
 
@@ -106,11 +109,10 @@ function Index() {
   };
 
   const toggleTab = (itemId) => {
-    // debugger;
-    var text = destinationDetails?.header_text;
+    var text;
     if (itemId == "overview") {
       const redirectUrl =
-        regionWiseUrl + `/destination/${destinationDetails?.friendly_url}`;
+        regionWiseUrl + `/destinations/${destinationDetails?.friendly_url}`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(`Home/Destinations/${destinationDetails?.friendly_url}`);
       text = destinationDetails?.header_text;
@@ -138,8 +140,6 @@ function Index() {
         `Home/Destinations/${destinationDetails?.friendly_url}/Places to stay in ${destinationDetails?.friendly_url}`
       );
       text = `PLACES TO STAY IN ${destinationName}`;
-    } else {
-      text = `LUXURY SAFARI HOLIDAYS IN ${destinationName}`;
     }
     setHeadingText(text);
     if (activeTab !== itemId) {
@@ -172,6 +172,84 @@ function Index() {
     }
   };
 
+
+  const websiteContentCheck = (matches, region, modifiedString) => {
+    destinationService
+      .getDictionaryDetails(matches, region)
+      .then((responseObj) => {
+        if (responseObj) {
+          const res = responseObj?.data;
+          res.forEach((element, index) => {
+            const replacement = element?.attributes?.content_translation_text;
+            const matchString = element?.attributes?.content_word;
+            const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+            if (checkStr && replacement) {
+              modifiedString = modifiedString.replace(checkStr, replacement);
+            }
+          });
+
+          // Set the modified string in state
+          setnewValueWithBr(modifiedString);
+        }
+      });
+  };
+
+  const dictioneryFunction = (data) => {
+    let modifiedString = data;
+    if (modifiedString) {
+      const regex = /{[a-zA-Z0-9-]+}/g;
+      const matches = [...new Set(modifiedString.match(regex))];
+
+      let storedDataString = "";
+      let storedData = "";
+      // debugger;
+      if (region == "uk") {
+        storedDataString = localStorage.getItem("websitecontent_uk");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "us") {
+        storedDataString = localStorage.getItem("websitecontent_us");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "asia") {
+        storedDataString = localStorage.getItem("websitecontent_asia");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "in") {
+        storedDataString = localStorage.getItem("websitecontent_india");
+        storedData = JSON.parse(storedDataString);
+      }
+      if (storedData !== null) {
+
+        // debugger;
+        // You can access it using localStorage.getItem('yourKey')
+
+        if (matches) {
+          let replacement = "";
+          try {
+            matches.forEach((match, index, matches) => {
+              const matchString = match.replace(/{|}/g, "");
+              if (!storedData[matchString]) {
+                modifiedString = websiteContentCheck(matches, region, modifiedString);
+                throw new Error("Loop break");
+              } else {
+                replacement = storedData[matchString];
+              }
+              const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+              if (checkStr && replacement) {
+                modifiedString = modifiedString.replace(
+                  checkStr,
+                  replacement
+                );
+              }
+            });
+            return modifiedString;
+            setIsLoading(false);
+          } catch (error) {
+
+          }
+        }
+      }
+    }
+  }
+
   equalHeight(true);
 
   useEffect(() => {
@@ -197,11 +275,11 @@ function Index() {
         .then((x) => {
           setDestinationDetails(x.data[0].attributes);
           console.log(x.data[0].attributes);
+          setHeadingText(x.data[0]?.attributes?.header_text)
           setFriendlyUrl(
             `Home/Destinations/${x.data[0].attributes.friendly_url}`
           );
           setMetaTitle(x.data[0].attributes.page_meta_title);
-          setHeadingText(x.data[0].attributes.page_meta_title);
           // const map_latitude = x.data[0].attributes?.map_latitude;
           // const map_longitude = x.data[0].attributes?.map_longitude;
           setdestinationName(x.data[0].attributes.destination_name);
@@ -255,11 +333,12 @@ function Index() {
   return (
     <>
       <Head>
-        <title>{title}</title>
+        <title>{dictioneryFunction(metaTitle)}</title>
         <script
           type="text/javascript"
           src="/assets/javascripts/card-slider.js"
         ></script>
+        <meta content={dictioneryFunction(destinationDetails?.page_meta_description)}></meta>
         {/* <script
           type="text/javascript"
           src="/assets/javascripts/card-slider-equal-height.js"
@@ -346,7 +425,7 @@ function Index() {
               <div className="destination_tab_inr">
                 <h2 className="tab_tilte">
                   {/* {destinationDetails?.header_text} */}
-                  {headingText}
+                  {dictioneryFunction(headingText)}
                 </h2>
                 <ul
                   className="nav nav-pills justify-content-center"

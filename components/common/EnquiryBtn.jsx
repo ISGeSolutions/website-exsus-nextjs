@@ -42,7 +42,7 @@ function EnquiryButton() {
                     });
 
                     // Set the modified string in state
-                    setnewValueWithBr(modifiedString);
+                    // setnewValueWithBr(modifiedString);
                 }
             });
     };

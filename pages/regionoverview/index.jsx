@@ -5,13 +5,14 @@ import { useRouter } from "next/router";
 
 export default RegionOverview;
 
-function RegionOverview(props) {
+function RegionOverview({ props, onDataFromChild }) {
   const router = useRouter();
   const [itineraries, setItineraries] = useState(null);
   const itemsPerPage = 9; // Number of items to load per page
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
   const [regionData, setRegionData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [allRegions, setAllRegions] = useState([]);
   const destinationcode = router?.query?.continent
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
@@ -43,6 +44,29 @@ function RegionOverview(props) {
       }
     }
   }
+
+  const generateDynamicLinkRegions = (regionName) => {
+    if (regionName != undefined && regionName) {
+      const modifieditem = regionName
+        .replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase();
+      if (regionName) {
+        return regionWiseUrl + `/destinations/${destinationcode.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${countrycode.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${modifieditem}`;
+      }
+    }
+  };
+
+  // Function to send data to the parent
+  const sendDataToParentHandler = (data) => {
+    // Send the data to the parent
+    onDataFromChild(data);
+    // You can perform other actions related to sending data to the parent
+  };
 
   const handleRedirect = () => {
     router.push(
@@ -82,7 +106,6 @@ function RegionOverview(props) {
   equalHeight(true);
 
   useEffect(() => {
-
     destinationService
       .getRegionByName(regionName)
       .then((x) => {
@@ -91,6 +114,20 @@ function RegionOverview(props) {
         setIsLoading(false);
       })
       .catch((error) => {
+        setIsLoading(false);
+      });
+
+
+    destinationService
+      .getRegions(countrycode)
+      .then((x) => {
+        setAllRegions(x.data[0]?.attributes?.regions?.data);
+        console.log(x.data[0]?.attributes?.regions?.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        // Handle any errors here
+        // console.error(error);
         setIsLoading(false);
       });
 
@@ -134,62 +171,109 @@ function RegionOverview(props) {
             </section>
           </div>
 
-          {/* <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
-                <div className="container">
-                    <h3 className="title_cls">Favourite trip ideas</h3>
-                    <div className="card_slider_row">
-                        <div className="carousel00 region_carousel00">
-                            <div className="row">
-                                {itineraries?.map((item) => (
-                                    <div className="col-sm-6 col-lg-3 col-xxl-3" key={item.id}>
-                                        <div className="card_slider_inr">
-                                            <div className="card_slider">
-                                                <NavLink href={generateDynamicLink(item)} className="card_slider_img">
-                                                    {item?.attributes?.itinerary_images?.data.map((element, index) => (
-                                                        element.attributes.image_type == 'thumbnail' ? (
-                                                            <img key={index} src={element.attributes.image_path} alt="destination card01" className="img-fluid" />
-                                                        ) : (
-                                                            ''
-                                                        )
-                                                    ))}
-                                                </NavLink>
-                                                <div className="card_slider_cnt">
-                                                    <h4><a href="#">{item?.attributes?.itin_name}</a></h4>
-                                                    <ul>
-                                                        <li>{item?.attributes?.header_text}</li>
-                                                        <li>Indonesia</li>
-                                                        <li>{item?.attributes?.itinerary_country_contents?.data[0]?.attributes?.guideline_price_notes_index}</li>
-                                                        <li>Travel to:<span>{item?.attributes?.sub_header_text}</span></li>
-                                                    </ul>
-                                                </div>
-                                                <button className="btn card_slider_btn">
-                                                    <span>{item?.attributes?.no_of_nites_notes}</span>
-                                                    <span className="view_itnry_link" onClick={handleRedirect}>View this itinerary<em className="fa-solid fa-chevron-right"></em></span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )
-                                )}
+          <section className="favrites_blk_row favrites_blk_small_card_row">
+            <div className="container">
+              <h3 className="title_cls">
+                Popular regions in {countrycode}
+              </h3>
+              <div className="card_slider_row">
+                <i id="left">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="#ffffff"
+                    shapeRendering="geometricPrecision"
+                    textRendering="geometricPrecision"
+                    imageRendering="optimizeQuality"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    viewBox="0 0 267 512.43"
+                  >
+                    <path
+                      fillRule="nonzero"
+                      d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z"
+                    />
+                  </svg>
+                </i>
 
-                                <div className="col-12">
-                                    {visibleItems < itineraries?.length && (
-                                        <button className="btn prmry_btn make_enqury_btn mx-auto text-uppercase" onClick={handleLoadMore}>Show 9 more holiday ideas
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
-                                        </button>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                {/* Continent Overview Countries */}
+                <div className="carousel00 region_carousel00">
+                  {allRegions?.map((regions, i) => (
+                    // Add a condition to check if country_name is not null
+                    regions.attributes.region_name && (
+                      <div
+                        className="card_slider_inr card_slider_inr_sml"
+                        key={regions?.id}
+                      >
+                        <NavLink
+                          href={generateDynamicLinkRegions(
+                            regions?.attributes.region_name
+                          )}
+                        >
+                          <div className="card_slider_inr_sml_img">
+                            <img
+                              src={
+                                regions?.attributes?.region_images?.data.filter(
+                                  (res) => res.attributes.image_type === "thumbnail"
+                                )[0]?.attributes?.image_path
+                              }
+                              alt={
+                                regions?.attributes?.region_images?.data.filter(
+                                  (res) => res.attributes?.image_type === "thumbnail"
+                                )[0]?.attributes?.image_alt_text
+                              }
+                              className="img-fluid"
+                            />
+                          </div>
+                          <h4>
+                            {regions.attributes.region_name}
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="#ffffff"
+                              shapeRendering="geometricPrecision"
+                              textRendering="geometricPrecision"
+                              imageRendering="optimizeQuality"
+                              fillRule="evenodd"
+                              clipRule="evenodd"
+                              viewBox="0 0 267 512.43"
+                            >
+                              <path
+                                fillRule="nonzero"
+                                d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                              />
+                            </svg>
+                          </h4>
+                        </NavLink>
+                      </div>
+                    )
+                  ))}
+
                 </div>
-            </section> */}
+                <i id="right">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="#ffffff"
+                    shapeRendering="geometricPrecision"
+                    textRendering="geometricPrecision"
+                    imageRendering="optimizeQuality"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    viewBox="0 0 267 512.43"
+                  >
+                    <path
+                      fillRule="nonzero"
+                      d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                    />
+                  </svg>
+                </i>
+              </div>
+            </div>
+          </section>
           <section className="card_blk_row dark_grey">
             <div className="container">
               <div className="row">
                 <div className="col-sm-6">
                   <div className="card_blk_inr card_blk_overlay">
-                    <a href="#" target="_blank">
+                    <a onClick={() => sendDataToParentHandler("itineraries")}>
                       <img
                         src="./../../../images/destination_overview01.jpg"
                         alt="Card image 07"
@@ -230,7 +314,7 @@ function RegionOverview(props) {
 
                 <div className="col-sm-6">
                   <div className="card_blk_inr card_blk_overlay">
-                    <a href="#">
+                    <a onClick={() => sendDataToParentHandler("places-to-stay")}>
                       <img
                         src="./../../../images/destination_overview02.jpg"
                         alt="Card image 08"

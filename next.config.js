@@ -210,7 +210,7 @@ const nextConfig = {
       },
 
 
-      // country_details
+      // region_details
       {
         source: "/destinations/:continent/:country/:region",
         destination: "/regions",

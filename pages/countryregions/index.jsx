@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, Spinner, Signup } from "components";
-import { destinationService, alertService, userService } from "services";
+import { destinationService, alertService, userService, countriesService } from "services";
 import { Inspireme } from "components";
 import Head from "next/head";
 import { NavLink } from "components";
@@ -15,7 +15,7 @@ function CountryRegions({ props, sendDataToParent }) {
   const [allRegions, setAllRegions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeItem, setActiveItem] = useState("recommended");
-  const [countryData, setCountryData] = useState(props?.data);
+  const [countryData, setCountryData] = useState();
   const destinationcode = router?.query?.continent
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
@@ -140,6 +140,18 @@ function CountryRegions({ props, sendDataToParent }) {
   useEffect(() => {
     // const newUrl = regionWiseUrl + `/ destinations / africa / africa - countries`;
     // window.history.pushState(null, null, newUrl);
+
+    countriesService
+      .getCountryDetails(countrycode)
+      .then((x) => {
+        setCountryData(x.data[0]);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+      });
+
+
     destinationService
       .getRegions(countrycode)
       .then((x) => {
@@ -181,7 +193,7 @@ function CountryRegions({ props, sendDataToParent }) {
             <section className="destination_para">
               <p
                 dangerouslySetInnerHTML={{
-                  __html: dictioneryFunction(countryData?.regions_intro_text),
+                  __html: dictioneryFunction(countryData?.attributes?.regions_intro_text),
                 }}
               />
             </section>
@@ -256,11 +268,7 @@ function CountryRegions({ props, sendDataToParent }) {
                           </div>
                         </div>
                       </NavLink>
-                      <p
-                        dangerouslySetInnerHTML={{
-                          __html: item?.attributes?.intro_text,
-                        }}
-                      />
+                      <div dangerouslySetInnerHTML={{ __html: dictioneryFunction(countryData?.attributes?.regions_intro_text) }} />
                     </div>
                   </div>
                 ))}

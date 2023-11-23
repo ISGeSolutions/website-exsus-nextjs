@@ -120,80 +120,136 @@ function ContinentOverview({ sendDataToParent }) {
       });
   };
 
+  const dictioneryFunction = (data) => {
+    let modifiedString = data;
+    if (modifiedString) {
+      const regex = /{[a-zA-Z0-9-]+}/g;
+      const matches = [...new Set(modifiedString.match(regex))];
+
+      let storedDataString = "";
+      let storedData = "";
+      // debugger;
+      if (region == "uk") {
+        storedDataString = localStorage.getItem("websitecontent_uk");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "us") {
+        storedDataString = localStorage.getItem("websitecontent_us");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "asia") {
+        storedDataString = localStorage.getItem("websitecontent_asia");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "in") {
+        storedDataString = localStorage.getItem("websitecontent_india");
+        storedData = JSON.parse(storedDataString);
+      }
+      if (storedData !== null) {
+
+        // debugger;
+        // You can access it using localStorage.getItem('yourKey')
+
+        if (matches) {
+          let replacement = "";
+          try {
+            matches.forEach((match, index, matches) => {
+              const matchString = match.replace(/{|}/g, "");
+              if (!storedData[matchString]) {
+                modifiedString = websiteContentCheck(matches, region, modifiedString);
+                throw new Error("Loop break");
+              } else {
+                replacement = storedData[matchString];
+              }
+              const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+              if (checkStr && replacement) {
+                modifiedString = modifiedString.replace(
+                  checkStr,
+                  replacement
+                );
+              }
+            });
+            return modifiedString;
+            setIsLoading(false);
+          } catch (error) {
+            if (error.message === "Loop break") {
+
+            } else if (error.message === "Region not found") {
+
+            }
+          }
+        }
+      }
+    } else {
+    }
+  }
+
   useEffect(() => {
     destinationService
       .getDestinationDetails(destinationcode)
       .then((x) => {
         // const lines = x.data.attributes?.overview_text.split('\n');
         setdestinationName(x.data[0].attributes.destination_name);
-
-        let modifiedString = x.data[0].attributes?.overview_text;
-
-        // Find and store matches in an array
-        const regex = /{[a-zA-Z0-9-]+}/g;
-        const matches = [...new Set(modifiedString.match(regex))];
-
-        let storedDataString = "";
-        let storedData = "";
-
-        if (region == "uk") {
-          storedDataString = localStorage.getItem("websitecontent_uk");
-          storedData = JSON.parse(storedDataString);
-        } else if (region == "us") {
-          storedDataString = localStorage.getItem("websitecontent_us");
-          storedData = JSON.parse(storedDataString);
-        } else if (region == "asia") {
-          storedDataString = localStorage.getItem("websitecontent_asia");
-          storedData = JSON.parse(storedDataString);
-        } else if (region == "in") {
-          storedDataString = localStorage.getItem("websitecontent_india");
-          storedData = JSON.parse(storedDataString);
-        }
-
-        if (storedData !== null) {
-          // You can access it using localStorage.getItem('yourKey')
-          if (matches) {
-            let replacement = "";
-            try {
-              matches.forEach((match, index, matches) => {
-                const matchString = match.replace(/{|}/g, "");
-                if (!storedData[matchString]) {
-                  websiteContentCheck(matches, region, modifiedString);
-                  throw new Error("Loop break");
-                } else {
-                  replacement = storedData[matchString];
-                }
-                const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
-                if (checkStr && replacement) {
-                  modifiedString = modifiedString.replace(
-                    checkStr,
-                    replacement
-                  );
-                }
-              });
-              // Set the modified string in state
-              setnewValueWithBr(modifiedString);
-            } catch (error) {
-              if (error.message === "Loop break") {
-                // Handle the loop break here
-                // console.log("Loop has been stopped.");
-              } else if (error.message === "Region not found") {
-                // Handle the loop break here
-                // console.log("Loop has been stopped.");
-                setnewValueWithBr(modifiedString);
-              }
-            }
-          }
-        } else {
-          // The item with 'yourKey' does not exist in local storage
-          // Display the matched words
-          if (matches) {
-            websiteContentCheck(matches, region, modifiedString);
-          }
-        }
+        setnewValueWithBr(x.data[0].attributes?.overview_text);
+        // // Find and store matches in an array
+        // const regex = /{[a-zA-Z0-9-]+}/g;
+        // const matches = [...new Set(modifiedString.match(regex))];
+        // let storedDataString = "";
+        // let storedData = "";
+        // if (region == "uk") {
+        //   storedDataString = localStorage.getItem("websitecontent_uk");
+        //   storedData = JSON.parse(storedDataString);
+        // } else if (region == "us") {
+        //   storedDataString = localStorage.getItem("websitecontent_us");
+        //   storedData = JSON.parse(storedDataString);
+        // } else if (region == "asia") {
+        //   storedDataString = localStorage.getItem("websitecontent_asia");
+        //   storedData = JSON.parse(storedDataString);
+        // } else if (region == "in") {
+        //   storedDataString = localStorage.getItem("websitecontent_india");
+        //   storedData = JSON.parse(storedDataString);
+        // }
+        // if (storedData !== null) {
+        //   // You can access it using localStorage.getItem('yourKey')
+        //   if (matches) {
+        //     let replacement = "";
+        //     try {
+        //       matches.forEach((match, index, matches) => {
+        //         const matchString = match.replace(/{|}/g, "");
+        //         if (!storedData[matchString]) {
+        //           websiteContentCheck(matches, region, modifiedString);
+        //           throw new Error("Loop break");
+        //         } else {
+        //           replacement = storedData[matchString];
+        //         }
+        //         const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+        //         if (checkStr && replacement) {
+        //           modifiedString = modifiedString.replace(
+        //             checkStr,
+        //             replacement
+        //           );
+        //         }
+        //       });
+        //       // Set the modified string in state
+        //       setnewValueWithBr(modifiedString);
+        //     } catch (error) {
+        //       if (error.message === "Loop break") {
+        //         // Handle the loop break here
+        //         // console.log("Loop has been stopped.");
+        //       } else if (error.message === "Region not found") {
+        //         // Handle the loop break here
+        //         // console.log("Loop has been stopped.");
+        //         setnewValueWithBr(modifiedString);
+        //       }
+        //     }
+        //   }
+        // } else {
+        //   // The item with 'yourKey' does not exist in local storage
+        //   // Display the matched words
+        //   if (matches) {
+        //     websiteContentCheck(matches, region, modifiedString);
+        //   }
+        // }
 
         // setnewValueWithBr(valueWithBr);
-        setAllCountries(x.data[0]?.attributes?.countries?.data);
+        // setAllCountries(x.data[0]?.attributes?.countries?.data);
         // setnewValueWithBr(valueWithBr);
         // setAllCountries(x.data?.attributes?.countries?.data);
         setIsLoading(false);
@@ -244,7 +300,7 @@ function ContinentOverview({ sendDataToParent }) {
         <div>
           <div className="container">
             <section className="destination_para">
-              <div dangerouslySetInnerHTML={{ __html: valueWithBr }} />
+              <div dangerouslySetInnerHTML={{ __html: dictioneryFunction(valueWithBr) }} />
             </section>
 
             <section className="favrites_blk_row favrites_blk_small_card_row">

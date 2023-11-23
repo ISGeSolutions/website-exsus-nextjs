@@ -139,8 +139,9 @@ function Index() {
       setActiveTab(itemId);
       // window.history.pushState(null, null, redirectUrl); // Update the URL
     }
-    if (tabContentRefs[itemId].current) {
-      tabContentRefs[itemId].current.scrollIntoView({ behavior: "smooth" });
+    const targetDiv = document.getElementById('targetDiv');
+    if (targetDiv) {
+      targetDiv.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -342,7 +343,7 @@ function Index() {
           </section>
 
           <section className="destination_tab_row light_grey pb-0">
-            <div className="container">
+            <div className="container" id="targetDiv">
               <div className="bookmark_row">
                 <FriendlyUrl data={friendlyUrl} />
               </div>
@@ -437,7 +438,7 @@ function Index() {
                   tabIndex="0"
                   ref={tabContentRefs["overview"]}
                 >
-                  <RegionOverview sendDataToParent={handleDataFromChild} />
+                  <RegionOverview onDataFromChild={handleDataFromChild} />
                 </div>
               )}
               {activeTab === "itineraries" && (
