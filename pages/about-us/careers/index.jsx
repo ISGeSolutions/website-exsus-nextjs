@@ -18,7 +18,7 @@ function Index() {
   const [rightHeader, setRightHeader] = useState(null);
   const [rightCornet, setRightContent] = useState(null);
 
-  useEffect(() => {
+  useEffect(() => { 
     // userService.getAll().then(x => setUsers(x));
 
     careeratexsusService
