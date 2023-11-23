@@ -438,12 +438,12 @@ function CountryPlaceToStay(props) {
                         <div className="destination_dropdwn_row d-block d-md-flex">
                           <div className="dropdown_grp_blk">
                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                              <Select
+                            <Select
                                 id="long-value-select"
                                 instanceId="long-value-select"
                                 className="select_container_country"
                                 classNamePrefix="select_country"
-                                placeholder={"Filter by country"}
+                                placeholder="Filter by region"
                                 styles={styles}
                                 isMulti
                                 isDisabled={isDisabled}
@@ -451,7 +451,7 @@ function CountryPlaceToStay(props) {
                                 isClearable={isClearable}
                                 isRtl={isRtl}
                                 isSearchable={isSearchable}
-                                value={selectedOptionCountry}
+                                //value={selectedOptionCountry}
                                 onChange={handleOptionCountryChange}
                                 closeMenuOnSelect={false}
                                 hideSelectedOptions={false}
@@ -464,7 +464,7 @@ function CountryPlaceToStay(props) {
                             </div>
                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                               <Select
-                                placeholder="Filter by region"
+                                placeholder="Filter by property type"
                                 // defaultValue={regionOptions[0]}
                                 className="select_container_country"
                                 classNamePrefix="select_country"
@@ -489,7 +489,7 @@ function CountryPlaceToStay(props) {
                             </div>
                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                               <Select
-                                placeholder="Filter by month"
+                                placeholder="Filter by date of travel"
                                 className="select_container_country"
                                 classNamePrefix="select_country"
                                 // defaultValue={monthOptions[0]}
@@ -541,7 +541,7 @@ function CountryPlaceToStay(props) {
                       <div className="col-12">
                         <div className="destination_filter_result d-block d-lg-flex">
                           <p>
-                            We've found {metaData?.total} hotels in asia for you
+                            We've found {metaData?.total} hotels in {countryData?.country_name}{" "} for you
                             <button
                               type="button"
                               className="btn btn-primary modal_link_btn"
