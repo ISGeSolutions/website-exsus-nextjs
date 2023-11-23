@@ -26,6 +26,7 @@ function CountryItinararies(props) {
   const [itineraries, setItineraries] = useState([]);
   const [page, setPage] = useState(0); // Current page
   const itemsPerPage = 12; // Number of items to load per page
+  const [activeItem, setActiveItem] = useState("recommended");
   const [isLoading, setIsLoading] = useState(true);
   const [countryData, setCountryData] = useState(props?.data);
   const [alert, setAlert] = useState(null);
@@ -35,7 +36,6 @@ function CountryItinararies(props) {
     .toLowerCase();
 
   const [metaData, setMetaData] = useState([]);
-  const [activeItem, setActiveItem] = useState("recommended");
 
   const countrycode = router.query?.country
     ?.replace(/-and-/g, " & ")
@@ -292,6 +292,7 @@ function CountryItinararies(props) {
 
   const handleFilterClick = (item) => {
     page = 0;
+    setItineraries([]);
     setActiveItem(item);
     loadMoreData(item);
   };
@@ -345,11 +346,11 @@ function CountryItinararies(props) {
       .getCountryWiseItinerary(countrycode, page + 1, item)
       .then((response) => {
         setMetaData(response.meta.pagination);
-        const responseTemp = [...response.data].sort(
-          (a, b) => a.attributes.serial_number - b.attributes.serial_number
-        );
-        const newItineraries = responseTemp;
-        //const newItineraries = response.data;
+        // const responseTemp = [...response.data].sort(
+        //   (a, b) => a.attributes.serial_number - b.attributes.serial_number
+        // );
+        // const newItineraries = responseTemp;
+        const newItineraries = response.data;
         if (newItineraries.length > 0) {
           setItineraries((prevItineraries) =>
             [...prevItineraries, ...newItineraries].reduce(
@@ -583,8 +584,8 @@ function CountryItinararies(props) {
                     <div className="col-12">
                       <div className="destination_filter_result d-block d-lg-flex">
                         <p>
-                          We've found {metaData?.total} holiday ideas in Asia
-                          for you
+                          We've found {metaData?.total} holiday ideas in {countryData?.country_name}{" "}
+                           for you
                         </p>
                         <div className="destination_contries_filter d-inline-block d-lg-flex">
                           <label className="pt-2 pt-lg-0">Arrange by:</label>

@@ -376,7 +376,7 @@ function ContinentPlacesToStay(props) {
                                 isClearable={isClearable}
                                 isRtl={isRtl}
                                 isSearchable={isSearchable}
-                                value={selectedOptionCountry}
+                                //value={selectedOptionCountry}
                                 onChange={handleOptionCountryChange}
                                 closeMenuOnSelect={false}
                                 hideSelectedOptions={false}
