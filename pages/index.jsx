@@ -557,17 +557,17 @@ function Index() {
                           </h4>
                           <ul>
                             <li>{item?.attributes?.header_text}</li>
-                            {/* <li>Indonesia</li> */}
-                            <li>
-                              {
-                                item?.attributes?.itinerary_country_contents
-                                  ?.data[0]?.attributes
-                                  ?.guideline_price_notes_index
-                              }
-                            </li>
+                            <li>{item?.attributes?.subheader_text}</li>
+                            {item?.attributes?.itinerary_country_contents?.data
+                              .filter(res => res.attributes.website_country.toLowerCase() === region)
+                              .map(res1 => (
+                                <li key={res1.id}>
+                                  {`from ${res1.attributes?.currency_symbol ?? ''}${res1.attributes?.price ?? ' xxxx'} per person`}
+                                </li>
+                              ))}
                             <li>
                               Travel to:
-                              <span>{item?.attributes?.sub_header_text}</span>
+                              <span>{item?.attributes?.travel_to_text}</span>
                             </li>
                           </ul>
                         </div>

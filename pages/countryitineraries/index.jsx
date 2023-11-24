@@ -585,7 +585,7 @@ function CountryItinararies(props) {
                       <div className="destination_filter_result d-block d-lg-flex">
                         <p>
                           We've found {metaData?.total} holiday ideas in {countryData?.country_name}{" "}
-                           for you
+                          for you
                         </p>
                         <div className="destination_contries_filter d-inline-block d-lg-flex">
                           <label className="pt-2 pt-lg-0">Arrange by:</label>
@@ -671,7 +671,7 @@ function CountryItinararies(props) {
                                 </h4>
                               </NavLink>
                               <ul>
-                                <li>{item?.attributes?.header_text}</li>
+                                <li>{item?.attributes?.sub_header_text}</li>
 
                                 <li>
                                   {
@@ -683,7 +683,7 @@ function CountryItinararies(props) {
                                 <li>
                                   Travel to:
                                   <span>
-                                    {item?.attributes?.sub_header_text}
+                                    {item?.attributes?.travel_to_text}
                                   </span>
                                 </li>
                               </ul>
