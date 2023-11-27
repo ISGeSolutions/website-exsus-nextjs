@@ -105,8 +105,6 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
               modifiedString = modifiedString.replace(checkStr, replacement);
             }
           });
-
-          // Set the modified string in state
           return modifiedString;
         }
       });
@@ -137,7 +135,6 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
       if (storedData !== null) {
         // debugger;
         // You can access it using localStorage.getItem('yourKey')
-
         if (matches) {
           let replacement = "";
           try {
@@ -166,8 +163,9 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
             }
           }
         }
+      } else {
+
       }
-    } else {
     }
   };
 
@@ -185,6 +183,8 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
     //   });
 
     // setAllExecutives(x.data);
+
+
 
     window.addEventListener("resize", equalHeight(true));
 

@@ -39,21 +39,25 @@ function Layout({ children }) {
       value: "uk",
       label: "UK SITE",
       image: "./../../images/uk-flag-round-circle-icon.svg",
+      country_name: "UK"
     },
     {
       value: "us",
       label: "US SITE",
       image: "/../../images/usa-flag-round-circle-icon.svg",
+      country_name: "US"
     },
     {
       value: "asia",
       label: "ASIA SITE",
       image: "./../../images/thailand-flag-round-circle-icon.svg",
+      country_name: "ASIA"
     },
     {
       value: "in",
       label: "INDIA SITE",
       image: "/../../images/india-flag-round-circle-icon.svg",
+      country_name: "INDIA"
     },
   ];
   const [selected, setSelected] = useState();
@@ -158,9 +162,9 @@ function Layout({ children }) {
   };
 
   useEffect(() => {
-    
+
     // Temporarily disable warnings in the development environment
-    console.warn = () => {};
+    console.warn = () => { };
 
     $(".header_country_list > ul .header_country_label").on(
       "mouseenter",

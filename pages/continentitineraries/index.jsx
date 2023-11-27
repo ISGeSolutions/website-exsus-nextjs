@@ -125,7 +125,9 @@ function ContinentItinararies(props) {
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
+      if (window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+      }
     }
   }
 
@@ -149,7 +151,7 @@ function ContinentItinararies(props) {
   const loadMoreData = (item) => {
     // console.log(page);
     destinationService
-      .getItinerariesByDestination(dcode, page + 1, item)
+      .getItinerariesByDestination(dcode, page + 1, item, region)
       .then((response) => {
         setMetaData(response.meta.pagination);
         const newItineraries = response.data;
@@ -666,25 +668,26 @@ function ContinentItinararies(props) {
                                 )}
                               >
                                 <h4>
-                                  <a>{item?.attributes?.itin_name}</a>
+                                  <a>{dictioneryFunction(item?.attributes?.itin_name)}</a>
                                 </h4>
                               </NavLink>
                               <ul>
-                                <li>{item?.attributes?.header_text}</li>
+                                <li>{item?.attributes?.sub_header_text}</li>
+                                {item?.attributes?.itinerary_country_contents?.data
+                                  .filter(res => res.attributes.website_country.toLowerCase() === region)
+                                  .map(res1 => (
+                                    <li key={res1.id}>
+                                      {`from ${res1.attributes?.currency_symbol ?? ''}${res1.attributes?.price ?? ' xxxx'} per person`}
+                                    </li>
+                                  ))}
                                 <li>
-                                  {
-                                    item?.attributes?.itinerary_country_contents
-                                      ?.data[0]?.attributes
-                                      ?.guideline_price_notes_index
-                                  }
                                 </li>
                                 <li>
                                   Travel to:
                                   <span>
-                                    {item?.attributes?.sub_header_text}
+                                    {item?.attributes?.travel_to_text}
                                   </span>
                                 </li>
-                                tock
                               </ul>
                             </div>
                             <button

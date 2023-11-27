@@ -7,11 +7,14 @@ import { userService } from "services";
 import { NavLink } from "components";
 import Head from "next/head";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { whyusService, destinationService } from "../../../services";
+import {
+  whyusService,
+  destinationService,
+  homeService,
+} from "../../../services";
 var Carousel = require("react-responsive-carousel").Carousel;
 import { FriendlyUrl } from "../../../components";
 import { EnquiryButton } from "../../../components/common/EnquiryBtn";
-//import Index from "..";
 export default Index;
 
 function Index() {
@@ -28,6 +31,7 @@ function Index() {
   const [rightHeader, setRightHeader] = useState(null);
   const [rightCorner, setRightContent] = useState(null);
   const [backgroundImage, setBackgroundImage] = useState([]);
+  const [dictionaryFlag, setDictinaryFlag] = useState(false);
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -80,7 +84,6 @@ function Index() {
     homeService
       .getAllWebsiteContent()
       .then((x) => {
-        // debugger;
         const response = x?.data;
 
         // Calculate the expiration time (1 day from the current time)
@@ -175,6 +178,9 @@ function Index() {
   useEffect(() => {
     setFriendlyUrl(`Home/Why us/Our people`);
     const localStorageDictionary = localStorage.getItem("websitecontent_uk");
+    if (!localStorageDictionary) {
+      websiteContentCheck();
+    }
 
     whyusService
       .getAllExecutives()
