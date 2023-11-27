@@ -31,17 +31,17 @@ function Index() {
     setVisibleItems((prevVisibleItems) => prevVisibleItems + itemsPerPage);
   };
 
-  let regionWiseUrl = "/uk";
+  let region = "uk";
+  let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      regionWiseUrl = "/" + window.site_region;
-      // setMyVariable(window.site_region);
+      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
     }
   }
 
   const loadMoreData = () => {
     destinationService
-      .getItinerariesInAdvanceSearch(dcodestr, page + 1)
+      .getItinerariesInAdvanceSearch(dcodestr, page + 1, region)
       .then((response) => {
         setMetaData(response.meta.pagination);
         const newItineraries = response.data;
@@ -70,7 +70,7 @@ function Index() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/destinations/africa/africa-itineraries/vietnam-in-classic-style`
+      `/destinations/africa/africa-itineraries/vietnam-in-classic-style`
     );
   };
 
@@ -214,7 +214,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                      "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}
