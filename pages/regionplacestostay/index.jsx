@@ -187,7 +187,7 @@ function RegionPlacesToStay(props) {
 
     const loadMoreData = (item) => {
         destinationService
-            .getRegionWiseHotels(page + 1, regionName, item)
+            .getRegionWiseHotels(page + 1, regionName, item, region)
             .then((response) => {
                 setMetaData(response.meta.pagination);
                 const newHotels = response?.data;

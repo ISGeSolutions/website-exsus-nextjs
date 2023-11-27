@@ -197,7 +197,7 @@ function CountryPlaceToStay(props) {
 
   const loadMoreData = (item) => {
     destinationService
-      .getAllCountryWiseHotels(page + 1, item, countrycode)
+      .getAllCountryWiseHotels(page + 1, item, countrycode, region)
       .then((response) => {
         // console.log(response);
         setMetaData(response.meta.pagination);
@@ -438,7 +438,7 @@ function CountryPlaceToStay(props) {
                         <div className="destination_dropdwn_row d-block d-md-flex">
                           <div className="dropdown_grp_blk">
                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                            <Select
+                              <Select
                                 id="long-value-select"
                                 instanceId="long-value-select"
                                 className="select_container_country"

@@ -218,7 +218,7 @@ function Index() {
 
   const loadMoreData = () => {
     destinationService
-      .getAllItineraries(page + 1)
+      .getAllItineraries(page + 1, region)
       .then((response) => {
         setMetaData(response.meta.pagination);
         const newItineraries = response.data;
@@ -248,11 +248,11 @@ function Index() {
     } else {
       router.push(
         `advance-search?where=` +
-          data?.destination +
-          `&what=` +
-          data?.reason +
-          `&when=` +
-          data?.month
+        data?.destination +
+        `&what=` +
+        data?.reason +
+        `&when=` +
+        data?.month
       );
     }
   }
@@ -287,7 +287,7 @@ function Index() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=${region}`
+      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=${region}`
     );
   };
 
@@ -654,7 +654,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                      "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}

@@ -25,6 +25,14 @@ function Index() {
   const [travelTimes, setTraveltimes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  let region = "uk";
+  let regionWiseUrl = "";
+  if (typeof window !== "undefined") {
+    if (window && window.site_region) {
+      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
+    }
+  }
+
   useEffect(() => {
     const carousel = document.querySelector("#carouselExampleInterval");
     const carouselMain = document.querySelector("#carouselExampleIntervalMain");
@@ -32,8 +40,10 @@ function Index() {
       new bootstrap.Carousel(carouselMain);
     }
 
+
+
     destinationService
-      .getHotelById(hotelId)
+      .getHotelById(hotelId, region)
       .then((x) => {
         // setWhyusDetails(x.data.attributes);
         setHotelData(x.data.attributes);
