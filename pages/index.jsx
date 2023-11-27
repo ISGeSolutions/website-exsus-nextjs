@@ -40,7 +40,7 @@ function Index() {
   }
 
   const generateDynamicLink = (item) => {
-    return `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`;
+    return `destinations/${item?.destination_name}/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`;
   };
 
   const generateDynamicLinkBlog = (item) => {
@@ -131,6 +131,68 @@ function Index() {
       return "#";
     }
   };
+
+
+  const dictioneryFunction = (data) => {
+    let modifiedString = data;
+    if (modifiedString) {
+      const regex = /{[a-zA-Z0-9-]+}/g;
+      const matches = [...new Set(modifiedString.match(regex))];
+
+      let storedDataString = "";
+      let storedData = "";
+      // debugger;
+      if (region == "uk") {
+        storedDataString = localStorage.getItem("websitecontent_uk");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "us") {
+        storedDataString = localStorage.getItem("websitecontent_us");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "asia") {
+        storedDataString = localStorage.getItem("websitecontent_asia");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "in") {
+        storedDataString = localStorage.getItem("websitecontent_india");
+        storedData = JSON.parse(storedDataString);
+      }
+      if (storedData !== null) {
+
+        // debugger;
+        // You can access it using localStorage.getItem('yourKey')
+
+        if (matches) {
+          let replacement = "";
+          try {
+            matches.forEach((match, index, matches) => {
+              const matchString = match.replace(/{|}/g, "");
+              if (!storedData[matchString]) {
+                modifiedString = websiteContentCheck(matches, region, modifiedString);
+                throw new Error("Loop break");
+              } else {
+                replacement = storedData[matchString];
+              }
+              const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+              if (checkStr && replacement) {
+                modifiedString = modifiedString.replace(
+                  checkStr,
+                  replacement
+                );
+              }
+            });
+            return modifiedString;
+            setIsLoading(false);
+          } catch (error) {
+            if (error.message === "Loop break") {
+
+            } else if (error.message === "Region not found") {
+
+            }
+          }
+        }
+      }
+    } else {
+    }
+  }
 
 
   useEffect(() => {
@@ -476,8 +538,8 @@ function Index() {
                           <div className="row align-items-center">
                             <div className="col-11">
                               <div className="card_blk_txt">
-                                <h3>{holidaytypesItem?.home_page_title}</h3>
-                                <p>{holidaytypesItem?.home_page_short_text}</p>
+                                <h3>{dictioneryFunction(holidaytypesItem?.home_page_title)}</h3>
+                                <p>{dictioneryFunction(holidaytypesItem?.home_page_short_text)}</p>
                               </div>
                             </div>
                             <div className="col-1 ps-0">
@@ -553,11 +615,11 @@ function Index() {
                         </NavLink>
                         <div className="card_slider_cnt">
                           <h4>
-                            <a href="#">{item?.attributes?.itin_name}</a>
+                            <a href="#">{dictioneryFunction(item?.attributes?.itin_name)}</a>
                           </h4>
                           <ul>
-                            <li>{item?.attributes?.header_text}</li>
-                            <li>{item?.attributes?.subheader_text}</li>
+                            <li>{dictioneryFunction(item?.attributes?.header_text)}</li>
+                            <li>{dictioneryFunction(item?.attributes?.subheader_text)}</li>
                             {item?.attributes?.itinerary_country_contents?.data
                               .filter(res => res.attributes.website_country.toLowerCase() === region)
                               .map(res1 => (
@@ -567,7 +629,7 @@ function Index() {
                               ))}
                             <li>
                               Travel to:
-                              <span>{item?.attributes?.travel_to_text}</span>
+                              <span>{dictioneryFunction(item?.attributes?.travel_to_text)}</span>
                             </li>
                           </ul>
                         </div>
@@ -641,7 +703,7 @@ function Index() {
                       <div className="carousel-caption">
                         <p
                           dangerouslySetInnerHTML={{
-                            __html: text?.attributes.review_short_text,
+                            __html: dictioneryFunction(text?.attributes.review_short_text),
                           }}
                         />
                         <span
