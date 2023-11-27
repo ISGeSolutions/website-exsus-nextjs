@@ -116,6 +116,17 @@ function CountryItinararies(props) {
     );
   };
 
+  let region = "uk";
+  let regionWiseUrl = "";
+  if (typeof window !== "undefined") {
+    if (window && window.site_region) {
+      if (window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+        region = window.site_region;
+      }
+    }
+  }
+
   const websiteContentCheck = (matches, region, modifiedString) => {
     destinationService
       .getDictionaryDetails(matches, region)
@@ -322,28 +333,19 @@ function CountryItinararies(props) {
     } else {
       router.push(
         `advance-search?where=` +
-        e?.destination +
-        `&what=` +
-        e?.reason +
-        `&when=` +
-        e?.month
+          e?.destination +
+          `&what=` +
+          e?.reason +
+          `&when=` +
+          e?.month
       );
     }
   }
 
-  let region = "uk";
-  let regionWiseUrl = "";
-  if (typeof window !== "undefined") {
-    if (window && window.site_region) {
-      if (window.site_region !== "uk") {
-        regionWiseUrl = "/" + window.site_region;
-        region = window.site_region;
-      }
-    }
-  }
   const loadMoreData = (item) => {
+    // debugger;
     destinationService
-      .getCountryWiseItinerary(countrycode, page + 1, item)
+      .getCountryWiseItinerary(countrycode, page + 1, item, region)
       .then((response) => {
         setMetaData(response.meta.pagination);
         // const responseTemp = [...response.data].sort(
@@ -385,10 +387,10 @@ function CountryItinararies(props) {
     const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${destinationcode}/${countrycode?.replace(
-        / /g,
-        "-"
-      )}/${destinationcode}-iteneraries/${modifiedName}`
+        `/destinations/${destinationcode}/${countrycode?.replace(
+          / /g,
+          "-"
+        )}/${destinationcode}-iteneraries/${modifiedName}`
     );
   };
 
@@ -584,8 +586,8 @@ function CountryItinararies(props) {
                     <div className="col-12">
                       <div className="destination_filter_result d-block d-lg-flex">
                         <p>
-                          We've found {metaData?.total} holiday ideas in {countryData?.country_name}{" "}
-                          for you
+                          We've found {metaData?.total} holiday ideas in{" "}
+                          {countryData?.country_name} for you
                         </p>
                         <div className="destination_contries_filter d-inline-block d-lg-flex">
                           <label className="pt-2 pt-lg-0">Arrange by:</label>
@@ -647,7 +649,7 @@ function CountryItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -673,13 +675,21 @@ function CountryItinararies(props) {
                               <ul>
                                 <li>{item?.attributes?.sub_header_text}</li>
 
-                                <li>
-                                  {
-                                    item?.attributes?.itinerary_country_contents
-                                      ?.data[0]?.attributes
-                                      ?.guideline_price_notes_index
-                                  }
-                                </li>
+                                {item?.attributes?.itinerary_country_contents?.data
+                                  .filter(
+                                    (res) =>
+                                      res.attributes.website_country.toLowerCase() ===
+                                      region
+                                  )
+                                  .map((res1) => (
+                                    <li key={res1.id}>
+                                      {`from ${
+                                        res1.attributes?.currency_symbol ?? ""
+                                      }${
+                                        res1.attributes?.price ?? " xxxx"
+                                      } per person`}
+                                    </li>
+                                  ))}
                                 <li>
                                   Travel to:
                                   <span>

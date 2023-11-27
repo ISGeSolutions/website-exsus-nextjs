@@ -224,26 +224,25 @@ function Index() {
     }
 
     destinationService
-      .getItineraryDetails(itin_name)
+      .getItineraryDetails(itin_name, region)
       .then((x) => {
-        //
+        setItineraries(x.data[0]);
         const bannerImages = [];
-        const imageCheck = x.data[0]?.attributes?.itinerary_details.data;
+        const imageCheck = x.data[0]?.attributes?.itinerary_images?.data;
+        console.log(imageCheck);
         setFriendlyUrl(
-          `home/destinations/${router.query?.continent}/${router.query?.country
-          }/${x.data[0].attributes.friendly_url
-          }`
+          `home/destinations/${router.query?.continent}/${router.query?.country}/${x.data[0].attributes.friendly_url}`
         );
         setTitle(x.data[0].attributes.meta_title);
         imageCheck.forEach((banner, index) => {
-          bannerImages.push(banner?.attributes?.image_path);
-          // if (banner?.attributes?.image_type == 'banner') {
-          //     bannerImages.push(banner?.attributes?.image_path);
-          // }
+          // bannerImages.push(banner?.attributes?.image_path);
+          if (banner?.attributes?.image_type == "banner") {
+            bannerImages.push(banner?.attributes?.image_path);
+          }
         });
 
+        console.log(bannerImages);
         setBannerImages(bannerImages);
-        setItineraries(x.data[0]);
 
         // const carousel = document.querySelector('#Testimonials');
         // new bootstrap.Carousel(carousel);
@@ -288,18 +287,19 @@ function Index() {
             >
               <div className="carousel-indicators">
                 {bannerImages?.map(
-                  (element, index) =>
-                    element?.attributes?.image_type == "banner" && (
-                      <button
-                        key={index}
-                        type="button"
-                        data-bs-target="#carouselExampleInterval"
-                        data-bs-slide-to={index}
-                        className={index === 0 ? "active" : ""}
-                        aria-current={index === 0 ? "true" : "false"}
-                        aria-label={`Slide ${index + 1}`}
-                      ></button>
-                    )
+                  (__, index) => (
+                    <button
+                      key={index}
+                      type="button"
+                      data-bs-target="#carouselExampleInterval"
+                      data-bs-slide-to={index}
+                      className={index === 0 ? "active" : ""}
+                      aria-current={index === 0 ? "true" : "false"}
+                      aria-label={`Slide ${index + 1}`}
+                    ></button>
+                  )
+                  // element?.attributes?.image_type == "banner" && (
+                  // )
                 )}
                 {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
               </div>
@@ -307,9 +307,9 @@ function Index() {
                 {bannerImages?.map((element, index) => (
                   <NavLink
                     href="#"
-                    className="carousel-item active"
-                    data-bs-interval="5000"
                     key={index}
+                    className={`carousel-item ${index === 0 ? "active" : ""}`}
+                    data-bs-interval="5000"
                   >
                     <div
                       className="banner_commn_cls"
@@ -401,11 +401,33 @@ function Index() {
                 </p>
                 <p className="mb-4">
                   <span>Price: </span>
+                  From{" "}
+                  {
+                    itineraries?.attributes?.itinerary_country_contents?.data[0]
+                      ?.attributes?.currency_symbol
+                  }
+                  {
+                    itineraries?.attributes?.itinerary_country_contents?.data[0]
+                      ?.attributes?.price
+                  }{" "}
+                  {
+                    itineraries?.attributes?.itinerary_country_contents?.data[0]
+                      ?.attributes?.guideline_price_notes_index
+                  }{" "}
                   {
                     itineraries?.attributes?.itinerary_country_contents?.data[0]
                       ?.attributes?.guideline_price_notes
                   }
                 </p>
+
+                {/* {itineraries?.attributes?.itinerary_country_content?.data[0].map(
+                  (res) => (
+                    <p>
+                      <span>Price: </span> From{" "}
+                      {res?.attributes?.currency_symbol}
+                    </p>
+                  )
+                )} */}
                 <p
                   dangerouslySetInnerHTML={{
                     __html: dictioneryFunction(
