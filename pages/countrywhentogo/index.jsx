@@ -97,10 +97,7 @@ function CountryWhentogo(props) {
               }
               const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
               if (checkStr && replacement) {
-                modifiedString = modifiedString.replace(
-                  checkStr,
-                  replacement
-                );
+                modifiedString = modifiedString.replace(checkStr, replacement);
               }
             });
             return modifiedString;
@@ -112,7 +109,7 @@ function CountryWhentogo(props) {
         }
       }
     }
-  }
+  };
 
   useEffect(() => {
     // Using window.onload to detect full page load
@@ -131,7 +128,12 @@ function CountryWhentogo(props) {
     <>
       <div className="container">
         <section className="destination_para">
-          <p dangerouslySetInnerHTML={{ __html: dictioneryFunction(countryData?.whentogo_intro_text) }} />
+          <p
+            dangerouslySetInnerHTML={{
+              __html: dictioneryFunction(countryData?.whentogo_intro_text),
+            }}
+          />
+          <p>{countryData?.country_month_activities?.data}</p>
         </section>
       </div>
 
