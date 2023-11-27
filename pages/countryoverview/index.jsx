@@ -28,8 +28,6 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
     setVisibleItems((prevVisibleItems) => prevVisibleItems + itemsPerPage);
   };
 
-
-
   let region = "uk";
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
@@ -61,7 +59,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
+        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
     );
   };
 
@@ -112,7 +110,6 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
       });
   };
 
-
   const dictioneryFunction = (data) => {
     let modifiedString = data;
     if (modifiedString) {
@@ -144,26 +141,25 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(matches, region, modifiedString);
+                modifiedString = websiteContentCheck(
+                  matches,
+                  region,
+                  modifiedString
+                );
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
               }
               const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
               if (checkStr && replacement) {
-                modifiedString = modifiedString.replace(
-                  checkStr,
-                  replacement
-                );
+                modifiedString = modifiedString.replace(checkStr, replacement);
               }
             });
             return modifiedString;
             setIsLoading(false);
           } catch (error) {
             if (error.message === "Loop break") {
-
             } else if (error.message === "Region not found") {
-
             }
           }
         }
@@ -171,7 +167,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
 
       }
     }
-  }
+  };
 
   equalHeight(true);
 
@@ -185,7 +181,6 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
     //   .catch((error) => {
     //     setIsLoading(false);
     //   });
-
 
     // setAllExecutives(x.data);
 
@@ -219,12 +214,20 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
         <div>
           <div className="container">
             <section className="destination_para">
-              <p dangerouslySetInnerHTML={{ __html: dictioneryFunction(countryData?.overview_text) }} />
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: dictioneryFunction(countryData?.overview_text),
+                }}
+              />
             </section>
           </div>
           <section className="country_highlight_row">
-            <div className="country_highlight_inr" dangerouslySetInnerHTML={{ __html: dictioneryFunction(countryData?.country_highlights) }}>
-            </div>
+            <p
+              className="country_highlight_inr"
+              dangerouslySetInnerHTML={{
+                __html: dictioneryFunction(countryData?.country_highlights),
+              }}
+            ></p>
           </section>
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
             <div className="container-md">
@@ -359,7 +362,8 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
           <section className="favrites_blk_row favrites_blk_no_slider_row light_grey">
             <div className="container-md">
               <h3 className="title_cls pt-5">
-                PLACES TO STAY IN {countryData?.country_name} HANDPICKED BY EXSUS
+                PLACES TO STAY IN {countryData?.country_name} HANDPICKED BY
+                EXSUS
               </h3>
               <div className="card_slider_row">
                 {/* <div className="carousel00 region_carousel00">
@@ -574,9 +578,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
               <div className="row">
                 <div className="col-sm-6">
                   <div className="card_blk_inr card_blk_overlay">
-                    <a
-                      onClick={() => sendDataToParentHandler("itineraries")}
-                    >
+                    <a onClick={() => sendDataToParentHandler("itineraries")}>
                       <img
                         src="./../../../images/destination_overview01.jpg"
                         alt="Card image 07"
@@ -586,7 +588,10 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                         <div className="row align-items-center">
                           <div className="col-11">
                             <div className="card_blk_txt">
-                              <h3>See all Itinerary Ideas in {countryData?.country_name}</h3>
+                              <h3>
+                                See all Itinerary Ideas in{" "}
+                                {countryData?.country_name}
+                              </h3>
                             </div>
                           </div>
                           <div className="col-1 ps-0">
@@ -614,7 +619,9 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
 
                 <div className="col-sm-6">
                   <div className="card_blk_inr card_blk_overlay">
-                    <a onClick={() => sendDataToParentHandler("places-to-stay")}>
+                    <a
+                      onClick={() => sendDataToParentHandler("places-to-stay")}
+                    >
                       <img
                         src="./../../../images/destination_overview02.jpg"
                         alt="Card image 08"
@@ -624,7 +631,10 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                         <div className="row align-items-center">
                           <div className="col-11">
                             <div className="card_blk_txt">
-                              <h3>See all Places to Stay in {countryData?.country_name}</h3>
+                              <h3>
+                                See all Places to Stay in{" "}
+                                {countryData?.country_name}
+                              </h3>
                             </div>
                           </div>
                           <div className="col-1 ps-0">

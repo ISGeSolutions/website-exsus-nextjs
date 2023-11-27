@@ -7,7 +7,11 @@ import { userService } from "services";
 import { NavLink } from "components";
 import Head from "next/head";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { whyusService, destinationService, homeService } from "../../../services";
+import {
+  whyusService,
+  destinationService,
+  homeService,
+} from "../../../services";
 var Carousel = require("react-responsive-carousel").Carousel;
 import { FriendlyUrl } from "../../../components";
 import { EnquiryButton } from "../../../components/common/EnquiryBtn";
@@ -75,7 +79,6 @@ function Index() {
     const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(regionWiseUrl + `/why-us/our-people/${modifiedName}`);
   };
-
 
   const websiteContentCheck = () => {
     homeService
@@ -188,7 +191,6 @@ function Index() {
         if (data) {
           let modifiedString = "";
           data.forEach((element, index) => {
-            // debugger;
             let content = {};
             modifiedString = element?.attributes?.intro_text;
             if (modifiedString) {
@@ -197,7 +199,7 @@ function Index() {
 
               let storedDataString = "";
               let storedData = "";
-              // debugger;
+
               if (region == "uk") {
                 storedDataString = localStorage.getItem("websitecontent_uk");
                 storedData = JSON.parse(storedDataString);
@@ -213,7 +215,6 @@ function Index() {
               }
 
               if (storedData !== null) {
-
                 if (matches) {
                   let replacement = "";
                   try {
@@ -225,7 +226,10 @@ function Index() {
                       } else {
                         replacement = storedData[matchString];
                       }
-                      const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+                      const checkStr = new RegExp(
+                        `\\$\\{${matchString}\\}`,
+                        "g"
+                      );
                       if (checkStr && replacement) {
                         modifiedString = modifiedString.replace(
                           checkStr,
@@ -239,9 +243,7 @@ function Index() {
                     setIsLoading(false);
                   } catch (error) {
                     if (error.message === "Loop break") {
-
                     } else if (error.message === "Region not found") {
-
                     }
                   }
                 }
@@ -254,7 +256,7 @@ function Index() {
           });
         }
         // console.log(modifiedData);
-        setAllExecutives(modifiedData)
+        setAllExecutives(modifiedData);
 
         setIsLoading(false);
       })
@@ -381,7 +383,8 @@ function Index() {
                 {allExecutives?.map((res, index) => (
                   <div className="col-sm-6 col-lg-4 col-xxl-3" key={res.id}>
                     <div className="our_exprts_inr" key={res.id}>
-                      <img key={res.id}
+                      <img
+                        key={res.id}
                         src={res?.executive_image_path}
                         alt="expert01"
                         className="img-fluid"
@@ -395,11 +398,10 @@ function Index() {
                           }}
                         />
                       </div>
-                      <button key={res.id}
+                      <button
+                        key={res.id}
                         className="btn prmry_btn make_enqury_btn"
-                        onClick={() =>
-                          handleRedirect(res?.executive_name)
-                        }
+                        onClick={() => handleRedirect(res?.executive_name)}
                       >
                         Read more
                         <svg
