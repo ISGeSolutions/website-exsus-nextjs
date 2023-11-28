@@ -285,22 +285,22 @@ const nextConfig = {
       // itinerarydetail
       {
         source:
-          "/destinations/:continent/:country/:itineraries/:itineraryName?",
+          "/destinations/:continent/itinerary/:country/:itineraries/:itineraryName?",
         destination: "/itinerarydetail",
       },
       {
         source:
-          "/us/destinations/:continent/:country/:itineraries/:itineraryName?",
+          "/us/destinations/:continent/itinerary/:country/:itineraries/:itineraryName?",
         destination: "/itinerarydetail",
       },
       {
         source:
-          "/asia/destinations/:continent/:country/:itineraries/:itineraryName?",
+          "/asia/destinations/:continent/itinerary/:country/:itineraries/:itineraryName?",
         destination: "/itinerarydetail",
       },
       {
         source:
-          "/in/destinations/:continent/:country/:itineraries/:itineraryName?",
+          "/in/destinations/:continent/itinerary/:country/:itineraries/:itineraryName?",
         destination: "/itinerarydetail",
       },
 

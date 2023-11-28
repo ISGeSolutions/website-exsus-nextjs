@@ -65,7 +65,10 @@ export const destinationService = {
   getItinerariesInspireMe,
   getAllCountryWiseHotels,
   getCountryWiseItinerary,
+  getDestinationFavItineraries,
   getAllRegionItineraries,
+  getCountryFavItineraries,
+  getCountryFavHotels
 };
 
 function getAllDropdown() {
@@ -174,6 +177,33 @@ function getFavIti() {
   return fetchWrapper.get(itinerariesDetailsUrl);
 }
 
+function getDestinationFavItineraries(name, region) {
+  const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl
+    }/api/itineraries?filters[destination][destination_name][$eq]=${name?.replace(
+      /&/g,
+      "%26"
+    )}&filters[destination_favourite_ind][$eq]=true&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&sort[0]=country_favourite_serial_number`;
+  return fetchWrapper.get(itinerariesDetailsUrl);
+}
+
+function getCountryFavItineraries(name, region) {
+  const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl
+    }/api/itineraries?filters[country][country_name][$eq]=${name?.replace(
+      /&/g,
+      "%26"
+    )}&filters[country_favourite_ind][$eq]=true&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&sort[0]=country_favourite_serial_number`;
+  return fetchWrapper.get(itinerariesDetailsUrl);
+}
+
+function getCountryFavHotels(name, region) {
+  const hotelsDetailsUrl = `${publicRuntimeConfig.apiUrl
+    }/api/hotels?filters[country][country_name][$eq]=${name?.replace(
+      /&/g,
+      "%26"
+    )}&filters[country_favourite_ind][$eq]=true&populate[hotel_images][fields][0]=image_path&populate[hotel_images][fields][1]=image_type&populate[hotel_country_contents][filters][website_country][$eq]=${region}&sort[0]=country_favourite_serial_number`;
+  return fetchWrapper.get(hotelsDetailsUrl);
+}
+
 function getItineraryDetails(name, region) {
   const itinerariesDetailsUrl = `${
     publicRuntimeConfig.apiUrl
@@ -183,6 +213,9 @@ function getItineraryDetails(name, region) {
   )}&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type`;
   return fetchWrapper.get(itinerariesDetailsUrl);
 }
+
+
+
 
 function getItinerariesByDestination(dcode, page, item, region) {
   if (item == "price") {
