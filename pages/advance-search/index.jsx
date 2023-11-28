@@ -25,7 +25,7 @@ function Index() {
   const LoadMorePagination = ({ data }) => {
     const [visibleItems, setVisibleItems] = useState(itemsPerPage);
   };
-  const [activeItem, setActiveItem] = useState("recommended");
+  const [activeItem, setActiveItem] = useState("duration");
 
   const handleLoadMore = () => {
     setVisibleItems((prevVisibleItems) => prevVisibleItems + itemsPerPage);
@@ -39,9 +39,9 @@ function Index() {
     }
   }
 
-  const loadMoreData = () => {
+  const loadMoreData = (item) => {
     destinationService
-      .getItinerariesInAdvanceSearch(dcodestr, page + 1, region)
+      .getItinerariesInAdvanceSearch(dcodestr, page + 1, region, item)
       .then((response) => {
         setMetaData(response.meta.pagination);
         const newItineraries = response.data;
@@ -70,7 +70,7 @@ function Index() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-      `/destinations/africa/africa-itineraries/vietnam-in-classic-style`
+        `/destinations/africa/africa-itineraries/vietnam-in-classic-style`
     );
   };
 
@@ -175,10 +175,22 @@ function Index() {
                           <label className="pt-2 pt-lg-0">Arrange by:</label>
                           <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
                             <li>
-                              <a href="#">Low - High</a>
+                              <a
+                                className={
+                                  activeItem === "Low-High" ? "active" : ""
+                                }
+                                onClick={() => handleFilterClick("Low-High")}
+                              >
+                                Low - High
+                              </a>
                             </li>
                             <li>
-                              <a href="#" className="active">
+                              <a
+                                className={
+                                  activeItem === "High-Low" ? "active" : ""
+                                }
+                                onClick={() => handleFilterClick("High-Low")}
+                              >
                                 High - Low
                               </a>
                             </li>
@@ -214,7 +226,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                      "thumbnail" ? (
+                                    "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}
@@ -232,19 +244,29 @@ function Index() {
                                 </h4>
                                 <ul>
                                   <li>{item?.attributes?.header_text}</li>
-                                  <li>Indonesia</li>
+                                  {/* <li>Indonesia</li> */}
                                   <li>
-                                    {
-                                      item?.attributes
-                                        ?.itinerary_country_contents?.data[0]
-                                        ?.attributes
-                                        ?.guideline_price_notes_index
-                                    }
+                                    {item?.attributes?.itinerary_country_contents?.data
+                                      .filter(
+                                        (res) =>
+                                          res.attributes.website_country.toLowerCase() ===
+                                          region
+                                      )
+                                      .map((res1) => (
+                                        <li key={res1.id}>
+                                          {`from ${
+                                            res1.attributes?.currency_symbol ??
+                                            ""
+                                          }${
+                                            res1.attributes?.price ?? " xxxx"
+                                          } per person`}
+                                        </li>
+                                      ))}
                                   </li>
                                   <li>
                                     Travel to:
                                     <span>
-                                      {item?.attributes?.sub_header_text}
+                                      {item?.attributes?.travel_to_text}
                                     </span>
                                   </li>
                                 </ul>
@@ -269,7 +291,8 @@ function Index() {
                     <div className="col-12">
                       {metaData.total > page * itemsPerPage && (
                         <button
-                          onClick={loadMoreData}
+                          type="button"
+                          onClick={() => loadMoreData(activeItem)}
                           className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
                           fdprocessedid="r5vpm6s"
                         >
