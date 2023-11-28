@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { destinationService } from "../../services";
+import { NavLink } from "react-router-dom";
 
 export default CountryWhentogo;
 
@@ -40,6 +41,11 @@ function CountryWhentogo(props) {
       }
     }
   }
+
+  const generateDynamicLink = (item) => {
+    // console.log('item', item);
+    return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
+  };
 
   const websiteContentCheck = (matches, region, modifiedString) => {
     destinationService
@@ -133,7 +139,7 @@ function CountryWhentogo(props) {
               __html: dictioneryFunction(countryData?.whentogo_intro_text),
             }}
           />
-          <p>{countryData?.country_month_activities?.data}</p>
+          {/* <p>{countryData?.country_month_activities?.data}</p> */}
         </section>
       </div>
       <section class="calender_blk_row light_dark_grey">
@@ -209,6 +215,31 @@ function CountryWhentogo(props) {
                   <td></td>
                   <td></td>
                 </tr>
+                {/* <tr>
+                  {countryData?.map((item) => (
+                    <td colspan="2" class="calender_trip_detls">
+                      <NavLink href={generateDynamicLink()}>
+                        {item?.link_text}
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="#ffffff"
+                          shape-rendering="geometricPrecision"
+                          text-rendering="geometricPrecision"
+                          image-rendering="optimizeQuality"
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          viewBox="0 0 267 512.43"
+                        >
+                          <path
+                            fill-rule="nonzero"
+                            d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                          />
+                        </svg>
+                      </NavLink>
+                    </td>
+                  ))}
+                </tr> */}
+
                 <tr>
                   <td></td>
                   <td></td>
@@ -380,7 +411,10 @@ function CountryWhentogo(props) {
                     <div className="row align-items-center">
                       <div className="col-11">
                         <div className="card_blk_txt">
-                          <h3>See all Itinerary Ideas in China</h3>
+                          <h3>
+                            See all Itinerary Ideas in{" "}
+                            {countryData?.country_name}
+                          </h3>
                         </div>
                       </div>
                       <div className="col-1 ps-0">
@@ -418,7 +452,10 @@ function CountryWhentogo(props) {
                     <div className="row align-items-center">
                       <div className="col-11">
                         <div className="card_blk_txt">
-                          <h3>See all Places to Stay in China</h3>
+                          <h3>
+                            See all Places to Stay in{" "}
+                            {countryData?.country_name}
+                          </h3>
                         </div>
                       </div>
                       <div className="col-1 ps-0">
