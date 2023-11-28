@@ -258,18 +258,18 @@ function ContinentOverview({ sendDataToParent }) {
         setIsLoading(false);
       });
 
-    // destinationService
-    //   .getAllItineraries()
-    //   .then((x) => {
-    //     setItineraries(x.data);
-    //     setIsLoading(false);
-    //   })
-    //   .catch((error) => {
-    //     setIsLoading(false);
-    //   });
+    destinationService
+      .getDestinationFavItineraries(destinationcode, region)
+      .then((x) => {
+        setItineraries(x.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+      });
 
     // destinationService.getAllCountries().then(x => {
-    //     setAllCountries(x.data);
+    //   setAllCountries(x.data);
     // })
 
     window.addEventListener("resize", equalHeight(true));
@@ -410,7 +410,7 @@ function ContinentOverview({ sendDataToParent }) {
                 <div className="carousel00 region_carousel00">
                   <div className="row">
                     {itineraries?.map((item) => (
-                      <div className="col-sm-6 col-lg-4" key={item.id}>
+                      <div className="col-sm-6 col-lg-4 col-xxl-3" key={item.id}>
                         <div className="card_slider_inr">
                           <div className="card_slider">
                             <NavLink
@@ -437,8 +437,8 @@ function ContinentOverview({ sendDataToParent }) {
                                 <a href="#">{item?.attributes?.itin_name}</a>
                               </h4>
                               <ul>
-                                <li>{item?.attributes?.header_text}</li>
-                                <li>Indonesia</li>
+                                <li>{dictioneryFunction(item?.attributes?.header_text)}</li>
+                                <li>{dictioneryFunction(item?.attributes?.sub_header_text)}</li>
                                 <li>
                                   {
                                     item?.attributes?.itinerary_country_contents
@@ -449,7 +449,7 @@ function ContinentOverview({ sendDataToParent }) {
                                 <li>
                                   Travel to:
                                   <span>
-                                    {item?.attributes?.sub_header_text}
+                                    {item?.attributes?.travel_to_text}
                                   </span>
                                 </li>
                               </ul>

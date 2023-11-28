@@ -9,6 +9,7 @@ export default CountryOverview;
 function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
   const router = useRouter();
   const [itineraries, setItineraries] = useState(null);
+  const [hotels, setHotels] = useState(null);
   const itemsPerPage = 9; // Number of items to load per page
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
   const [countryData, setCountryData] = useState(dataToChild);
@@ -59,7 +60,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
+      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
     );
   };
 
@@ -172,18 +173,27 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
   equalHeight(true);
 
   useEffect(() => {
-    // destinationService
-    //   .getAllItineraries()
-    //   .then((x) => {
-    //     setItineraries(x.data);
-    //     setIsLoading(false);
-    //   })
-    //   .catch((error) => {
-    //     setIsLoading(false);
-    //   });
+    destinationService
+      .getCountryFavItineraries(countryData?.country_name, region)
+      .then((x) => {
+        setItineraries(x.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+      });
 
     // setAllExecutives(x.data);
 
+    destinationService
+      .getCountryFavHotels(countryData?.country_name, region)
+      .then((x) => {
+        setHotels(x.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+      });
 
 
     window.addEventListener("resize", equalHeight(true));
@@ -229,298 +239,228 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
               }}
             ></p>
           </section>
-          <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
-            <div className="container-md">
-              <h3 className="title_cls pt-5">
-                Holidays in {countryData?.country_name} Handpicked by Exsus
-              </h3>
+
+          <section className="favrites_blk_row">
+            <div className="container">
+              <h3 className="title_cls">Holidays in {countryData?.country_name} Handpicked by Exsus</h3>
               <div className="card_slider_row">
-                {/* <div className="carousel00 region_carousel00">
-                  <div className="row">
-                    <div className="col-sm-6 col-lg-3 col-xxl-3">
-                      <div className="card_slider_inr">
-                        <div className="card_slider">
-                          <a className="card_slider_img">
-                            <img
-                              src="images/country_card01.jpg"
-                              alt="country card01"
-                              className="img-fluid"
-                            />
-                          </a>
-                          <div className="card_slider_cnt">
-                            <h4>
-                              <a href="#">China Like an Emperor</a>
-                            </h4>
-                            <ul>
-                              <li>China in Ultimate Style</li>
-                              <li>China</li>
-                              <li>From £11,250 per person</li>
-                              <li>
-                                Travel to:
-                                <span>
-                                  Beijing & Northern China, Shanghai, Hangzhou &
-                                  Eastern China, Yunnan
-                                </span>
-                              </li>
-                            </ul>
-                          </div>
-                          <button className="btn card_slider_btn">
-                            <span>12 nights</span>
-                            <span className="view_itnry_link">
-                              View this itinerary
-                              <em className="fa-solid fa-chevron-right"></em>
-                            </span>
-                          </button>
+                <i id="left">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="#ffffff"
+                    shapeRendering="geometricPrecision"
+                    textRendering="geometricPrecision"
+                    imageRendering="optimizeQuality"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    viewBox="0 0 267 512.43"
+                  >
+                    <path
+                      fillRule="nonzero"
+                      d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z"
+                    />
+                  </svg>
+                </i>
+                <div className="carousel00 region_carousel00">
+                  {itineraries?.map((item) => (
+                    <div className="card_slider_inr" key={item.id}>
+                      <div className="card_slider">
+                        <NavLink
+                          href={generateDynamicLink(item)}
+                          className="card_slider_img"
+                        >
+                          {item?.attributes?.itinerary_images?.data.map(
+                            (element, index) =>
+                              element.attributes.image_type == "thumbnail" ? (
+                                <img
+                                  key={index}
+                                  src={element.attributes.image_path}
+                                  alt="destination card01"
+                                  className="img-fluid"
+                                />
+                              ) : (
+                                ""
+                              )
+                          )}
+                          {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
+                        </NavLink>
+                        <div className="card_slider_cnt">
+                          <h4>
+                            <a href="#">{dictioneryFunction(item?.attributes?.itin_name)}</a>
+                          </h4>
+                          <ul>
+                            <li>{dictioneryFunction(item?.attributes?.header_text)}</li>
+                            <li>{dictioneryFunction(item?.attributes?.subheader_text)}</li>
+                            {item?.attributes?.itinerary_country_contents?.data
+                              .filter(res => res.attributes.website_country.toLowerCase() === region)
+                              .map(res1 => (
+                                <li key={res1.id}>
+                                  {`from ${res1.attributes?.currency_symbol ?? ''}${res1.attributes?.price ?? ' xxxx'} per person`}
+                                </li>
+                              ))}
+                            <li>
+                              Travel to:
+                              <span>{dictioneryFunction(item?.attributes?.travel_to_text)}</span>
+                            </li>
+                          </ul>
                         </div>
+                        <button
+                          className="btn card_slider_btn"
+                          onClick={() => handleRedirect(item)}
+                        >
+                          <span>{item?.attributes?.no_of_nites_notes}</span>
+                          <span className="view_itnry_link">
+                            View this itinerary
+                            <em className="fa-solid fa-chevron-right"></em>
+                          </span>
+                        </button>
                       </div>
                     </div>
-                    <div className="col-sm-6 col-lg-3 col-xxl-3">
-                      <div className="card_slider_inr">
-                        <div className="card_slider">
-                          <div className="card_slider_img">
-                            <img
-                              src="images/country_card02.jpg"
-                              alt="country card02"
-                              className="img-fluid"
-                            />
-                          </div>
-                          <div className="card_slider_cnt">
-                            <h4>
-                              <a href="#">In Search of Pandas</a>
-                            </h4>
-                            <ul>
-                              <li>Family Adventure to China</li>
-                              <li>China</li>
-                              <li>From £6,750 per person</li>
-                              <li>
-                                Travel to:
-                                <span>
-                                  Beijing & Northern China, Hong Kong & Macau,
-                                  Southern China, Xi'an, Sichuan & Central China
-                                </span>
-                              </li>
-                            </ul>
-                          </div>
-                          <button className="btn card_slider_btn">
-                            <span>13 nights</span>
-                            <span
-                              className="view_itnry_link"
-                              onclick="window.location.href='itinerary_detail.html'"
-                            >
-                              View this itinerary
-                              <em className="fa-solid fa-chevron-right"></em>
-                            </span>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-sm-6 col-lg-3 col-xxl-3">
-                      <div className="card_slider_inr">
-                        <div className="card_slider">
-                          <div className="card_slider_img">
-                            <img
-                              src="images/country_card03.jpg"
-                              alt="country card03"
-                              className="img-fluid"
-                            />
-                          </div>
-                          <div className="card_slider_cnt">
-                            <h4>
-                              <a href="#">STYLISH HONEYMOON TO CHINA</a>
-                            </h4>
-                            <ul>
-                              <li>A Chinese Romance</li>
-                              <li>China</li>
-                              <li>From £5,450 per person</li>
-                              <li>
-                                Travel to:
-                                <span>
-                                  Beijing & Northern China, Hong Kong & Macau,
-                                  Southern China
-                                </span>
-                              </li>
-                            </ul>
-                          </div>
-                          <button className="btn card_slider_btn">
-                            <span>12 nights</span>
-                            <span
-                              className="view_itnry_link"
-                              onclick="window.location.href='itinerary_detail.html'"
-                            >
-                              View itinerary
-                              <em className="fa-solid fa-chevron-right"></em>
-                            </span>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div> */}
+                  ))}
+                </div>
+                <i id="right">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="#ffffff"
+                    shapeRendering="geometricPrecision"
+                    textRendering="geometricPrecision"
+                    imageRendering="optimizeQuality"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    viewBox="0 0 267 512.43"
+                  >
+                    <path
+                      fillRule="nonzero"
+                      d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                    />
+                  </svg>
+                </i>
               </div>
             </div>
+            {/* <div className="full_loader_parnt_blk loader_parnt_blk" style="display: block;"><div className="loader-circle-2"></div></div> */}
           </section>
-          <section className="favrites_blk_row favrites_blk_no_slider_row light_grey">
-            <div className="container-md">
-              <h3 className="title_cls pt-5">
-                PLACES TO STAY IN {countryData?.country_name} HANDPICKED BY
-                EXSUS
-              </h3>
+          <section className="favrites_blk_row">
+            <div className="container">
+              <h3 className="title_cls">PLACES TO STAY IN {countryData?.country_name} HANDPICKED BY
+                EXSUSs</h3>
               <div className="card_slider_row">
-                {/* <div className="carousel00 region_carousel00">
-                  <div className="row">
-                    <div className="col-sm-6 col-lg-3 col-xxl-3">
-                      <div className="card_slider_inr">
-                        <div className="card_slider">
-                          <a className="card_slider_img">
-                            <img
-                              src="images/country_hotel01.jpg"
-                              alt="country_hotel01"
-                              className="img-fluid"
-                            />
-                          </a>
-                          <div className="card_slider_cnt">
-                            <h4>
-                              <a href="#">Capella Shanghai</a>
-                            </h4>
-                            <ul>
-                              <li>
-                                Location: Shanghai, Hangzhou & Eastern China |
-                                China
-                              </li>
-                              <li>
-                                Price guide:
-                                <span
-                                  tabindex="0"
-                                  data-bs-toggle="tooltip"
-                                  data-bs-placement="right"
-                                  data-bs-title="£200-£350 per person per night"
-                                >
-                                  £££<label>££</label>
-                                </span>
-                              </li>
-                              <li>
-                                Travel to:
-                                <span>
-                                  Boutique Hotel, History & Heritage, Cultural
-                                  Immersion, Food & Wine
-                                </span>
-                              </li>
-                            </ul>
-                          </div>
-                          <button className="btn card_slider_btn justify-content-end light_grey_btn_bg">
-                            <span
-                              className="view_itnry_link"
-                              onclick="window.location.href='accomodation_detail.html'"
-                            >
-                              View hotel
-                              <em className="fa-solid fa-chevron-right"></em>
-                            </span>
-                          </button>
+                <i id="left">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="#ffffff"
+                    shapeRendering="geometricPrecision"
+                    textRendering="geometricPrecision"
+                    imageRendering="optimizeQuality"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    viewBox="0 0 267 512.43"
+                  >
+                    <path
+                      fillRule="nonzero"
+                      d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z"
+                    />
+                  </svg>
+                </i>
+                <div className="carousel01 region_carousel01">
+                  {hotels?.map((item) => (
+                    <div className="card_slider_inr" key={item.id}>
+                      <div className="card_slider">
+                        <NavLink
+                          href={generateDynamicLink(item.id)}
+                          className="card_slider_img"
+                        >
+                          {item?.attributes?.hotel_images?.data.map(
+                            (element, index) =>
+                              element.attributes.image_type ==
+                                "thumbnail" ? (
+                                <img
+                                  key={index}
+                                  src={element.attributes.image_path}
+                                  alt={element.attributes.image_alt_text}
+                                  className="img-fluid"
+                                />
+                              ) : (
+                                ""
+                              )
+                          )}
+                          {/* <img
+                                src=""
+                                alt="destination_hotel01"
+                                className="img-fluid"
+                              /> */}
+                        </NavLink>
+                        <div className="card_slider_cnt places_to_stay_cnt">
+                          <h4>
+                            <a href="#">{item?.attributes?.hotel_name}</a>
+                          </h4>
+                          <ul>
+                            <li>Location: {item?.attributes?.location}</li>
+                            {item?.attributes?.hotel_country_contents?.data?.map(item => {
+                              return (
+                                <li>
+                                  Price guide:
+                                  <span
+                                    key={item?.id}
+                                    tabIndex="0"
+                                    title={item?.attributes?.price_guide_text}
+                                  >{item?.attributes?.currency_symbol.repeat(Math.abs(item?.attributes?.price_guide_value))}
+                                    <label>
+                                      {item?.attributes?.currency_symbol.repeat(Math.abs(5 - item?.attributes?.price_guide_value))}
+                                    </label>
+                                  </span>
+                                </li>
+                              );
+                            })}
+
+                            <li>
+                              <p
+                                dangerouslySetInnerHTML={{
+                                  __html: item?.attributes?.intro_text,
+                                }}
+                              />
+                            </li>
+                            {/* <li>{item?.attributes?.intro_text}</li> */}
+                            <li>
+                              Best for:
+                              <span>
+                                {item?.attributes?.recommended_for_text}
+                              </span>
+                            </li>
+                          </ul>
                         </div>
+                        <button
+                          className="btn card_slider_btn justify-content-end"
+                          onClick={() => handleRedirect(item.id)}
+                        >
+                          <span className="view_itnry_link">
+                            View this hotel
+                            <em className="fa-solid fa-chevron-right"></em>
+                          </span>
+                        </button>
                       </div>
                     </div>
-                    <div className="col-sm-6 col-lg-3 col-xxl-3">
-                      <div className="card_slider_inr">
-                        <div className="card_slider">
-                          <div className="card_slider_img">
-                            <img
-                              src="images/country_hotel02.jpg"
-                              alt="country_hotel02"
-                              className="img-fluid"
-                            />
-                          </div>
-                          <div className="card_slider_cnt">
-                            <h4>
-                              <a href="#">Six Senses Qing Cheng Mountain</a>
-                            </h4>
-                            <ul>
-                              <li>
-                                Location: Xi'an, Sichuan & Central China | China
-                              </li>
-                              <li>
-                                Price guide:
-                                <span
-                                  tabindex="0"
-                                  data-bs-toggle="tooltip"
-                                  data-bs-placement="right"
-                                  data-bs-title="£200-£350 per person per night"
-                                >
-                                  £££<label>££</label>
-                                </span>
-                              </li>
-                              <li>
-                                Travel to:
-                                <span>
-                                  Wildlife & Nature, Walking & Trekking, Setting
-                                  & Views, Landscapes & Scenery
-                                </span>
-                              </li>
-                            </ul>
-                          </div>
-                          <button className="btn card_slider_btn justify-content-end light_grey_btn_bg">
-                            <span
-                              className="view_itnry_link"
-                              onclick="window.location.href='accomodation_detail.html'"
-                            >
-                              View hotel
-                              <em className="fa-solid fa-chevron-right"></em>
-                            </span>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-sm-6 col-lg-3 col-xxl-3">
-                      <div className="card_slider_inr">
-                        <div className="card_slider">
-                          <div className="card_slider_img">
-                            <img
-                              src="images/country_hotel03.jpg"
-                              alt="country_hotel03"
-                              className="img-fluid"
-                            />
-                          </div>
-                          <div className="card_slider_cnt">
-                            <h4>
-                              <a href="#">Alila Yangshuo</a>
-                            </h4>
-                            <ul>
-                              <li>Location: Southern China | China</li>
-                              <li>
-                                Price guide:
-                                <span
-                                  tabindex="0"
-                                  data-bs-toggle="tooltip"
-                                  data-bs-placement="right"
-                                  data-bs-title="£200-£350 per person per night"
-                                >
-                                  £££<label>££</label>
-                                </span>
-                              </li>
-                              <li>
-                                Travel to:
-                                <span>
-                                  Couples, First-timers, Landscapes & Scenery,
-                                  Setting & Views
-                                </span>
-                              </li>
-                            </ul>
-                          </div>
-                          <button className="btn card_slider_btn justify-content-end light_grey_btn_bg">
-                            <span
-                              className="view_itnry_link"
-                              onclick="window.location.href='accomodation_detail.html'"
-                            >
-                              View hotel
-                              <em className="fa-solid fa-chevron-right"></em>
-                            </span>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div> */}
+                  ))}
+                </div>
+                <i id="right">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="#ffffff"
+                    shapeRendering="geometricPrecision"
+                    textRendering="geometricPrecision"
+                    imageRendering="optimizeQuality"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    viewBox="0 0 267 512.43"
+                  >
+                    <path
+                      fillRule="nonzero"
+                      d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                    />
+                  </svg>
+                </i>
               </div>
             </div>
+            {/* <div className="full_loader_parnt_blk loader_parnt_blk" style="display: block;"><div className="loader-circle-2"></div></div> */}
           </section>
 
           {/* <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">

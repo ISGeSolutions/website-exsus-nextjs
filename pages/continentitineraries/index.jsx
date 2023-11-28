@@ -293,7 +293,7 @@ function ContinentItinararies(props) {
     const modifiedName = item.replace(/ /g, "-").toLowerCase();
     return (
       regionWiseUrl +
-      `/destinations/${destinationcode}/${destinationcode}-iteneraries/${modifiedName}`
+      `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${modifiedName}`
     );
   };
 
@@ -301,7 +301,7 @@ function ContinentItinararies(props) {
     const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${destinationcode}/${destinationcode}-iteneraries/${modifiedName}`
+      `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${modifiedName}`
     );
   };
 
