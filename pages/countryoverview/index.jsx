@@ -58,18 +58,37 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
   // };
 
   const handleRedirect = () => {
+    const modifiedName = item?.attributes?.itin_name
+      ?.replace(/ /g, "-")
+      .toLowerCase();
     router.push(
       regionWiseUrl +
-      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
+      `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
+        / /g,
+        "-"
+      )}/${destinationcode}-iteneraries/${modifiedName}`
     );
   };
 
   const generateDynamicLink = (item) => {
+    const modifiedName = item?.attributes?.itin_name
+      ?.replace(/ /g, "-")
+      .toLowerCase();
     return (
       regionWiseUrl +
-      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
+      `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
+        / /g,
+        "-"
+      )}/${destinationcode}-iteneraries/${modifiedName}`
     );
   };
+
+  // const generateDynamicLink = (item) => {
+  //   return (
+  //     regionWiseUrl +
+  //     `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
+  //   );
+  // };
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -165,7 +184,6 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
           }
         }
       } else {
-
       }
     }
   };
@@ -194,7 +212,6 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
       .catch((error) => {
         setIsLoading(false);
       });
-
 
     window.addEventListener("resize", equalHeight(true));
 
@@ -242,7 +259,9 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
 
           <section className="favrites_blk_row">
             <div className="container">
-              <h3 className="title_cls">Holidays in {countryData?.country_name} Handpicked by Exsus</h3>
+              <h3 className="title_cls">
+                Holidays in {countryData?.country_name} Handpicked by Exsus
+              </h3>
               <div className="card_slider_row">
                 <i id="left">
                   <svg
@@ -285,22 +304,46 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                           {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
                         </NavLink>
                         <div className="card_slider_cnt">
-                          <h4>
-                            <a href="#">{dictioneryFunction(item?.attributes?.itin_name)}</a>
-                          </h4>
+                          <NavLink href={generateDynamicLink(item)}>
+                            <h4>
+                              <a>
+                                {dictioneryFunction(
+                                  item?.attributes?.itin_name
+                                )}
+                              </a>
+                            </h4>
+                          </NavLink>
                           <ul>
-                            <li>{dictioneryFunction(item?.attributes?.header_text)}</li>
-                            <li>{dictioneryFunction(item?.attributes?.subheader_text)}</li>
+                            <li>
+                              {dictioneryFunction(
+                                item?.attributes?.header_text
+                              )}
+                            </li>
+                            <li>
+                              {dictioneryFunction(
+                                item?.attributes?.subheader_text
+                              )}
+                            </li>
                             {item?.attributes?.itinerary_country_contents?.data
-                              .filter(res => res.attributes.website_country.toLowerCase() === region)
-                              .map(res1 => (
+                              .filter(
+                                (res) =>
+                                  res.attributes.website_country.toLowerCase() ===
+                                  region
+                              )
+                              .map((res1) => (
                                 <li key={res1.id}>
-                                  {`from ${res1.attributes?.currency_symbol ?? ''}${res1.attributes?.price ?? ' xxxx'} per person`}
+                                  {`from ${res1.attributes?.currency_symbol ?? ""
+                                    }${res1.attributes?.price ?? " xxxx"
+                                    } per person`}
                                 </li>
                               ))}
                             <li>
                               Travel to:
-                              <span>{dictioneryFunction(item?.attributes?.travel_to_text)}</span>
+                              <span>
+                                {dictioneryFunction(
+                                  item?.attributes?.travel_to_text
+                                )}
+                              </span>
                             </li>
                           </ul>
                         </div>
@@ -341,9 +384,11 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
           </section>
           <section className="favrites_blk_row">
             <div className="container">
-              <h3 className="title_cls">PLACES TO STAY IN {countryData?.country_name} HANDPICKED BY
-                EXSUSs</h3>
-              <div className="card_slider_row01">
+              <h3 className="title_cls">
+                PLACES TO STAY IN {countryData?.country_name} HANDPICKED BY
+                EXSUS
+              </h3>
+              <div className="card_slider_row">
                 <i id="left">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -371,8 +416,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                         >
                           {item?.attributes?.hotel_images?.data.map(
                             (element, index) =>
-                              element.attributes.image_type ==
-                                "thumbnail" ? (
+                              element.attributes.image_type == "thumbnail" ? (
                                 <img
                                   key={index}
                                   src={element.attributes.image_path}
@@ -395,22 +439,35 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                           </h4>
                           <ul>
                             <li>Location: {item?.attributes?.location}</li>
-                            {item?.attributes?.hotel_country_contents?.data?.map(item => {
-                              return (
-                                <li>
-                                  Price guide:
-                                  <span
-                                    key={item?.id}
-                                    tabIndex="0"
-                                    title={item?.attributes?.price_guide_text}
-                                  >{item?.attributes?.currency_symbol.repeat(Math.abs(item?.attributes?.price_guide_value))}
-                                    <label>
-                                      {item?.attributes?.currency_symbol.repeat(Math.abs(5 - item?.attributes?.price_guide_value))}
-                                    </label>
-                                  </span>
-                                </li>
-                              );
-                            })}
+                            {item?.attributes?.hotel_country_contents?.data?.map(
+                              (item) => {
+                                return (
+                                  <li>
+                                    Price guide:
+                                    <span
+                                      key={item?.id}
+                                      tabIndex="0"
+                                      title={item?.attributes?.price_guide_text}
+                                    >
+                                      {item?.attributes?.currency_symbol.repeat(
+                                        Math.abs(
+                                          item?.attributes?.price_guide_value
+                                        )
+                                      )}
+                                      <label>
+                                        {item?.attributes?.currency_symbol.repeat(
+                                          Math.abs(
+                                            5 -
+                                            item?.attributes
+                                              ?.price_guide_value
+                                          )
+                                        )}
+                                      </label>
+                                    </span>
+                                  </li>
+                                );
+                              }
+                            )}
 
                             <li>
                               <p
