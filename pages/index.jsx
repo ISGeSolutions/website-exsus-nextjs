@@ -28,6 +28,7 @@ function Index() {
   const [isLoading, setIsLoading] = useState(true);
   const [websiteContent, setWebsiteContent] = useState(null);
   const [backgroundImage, setBackgroundImage] = useState([]);
+  const router = useRouter();
 
   let regionWiseUrl = "";
   let region = "uk";
@@ -39,8 +40,23 @@ function Index() {
     }
   }
 
+  // const generateDynamicLink = (item) => {
+  //   return `destinations/${item?.destination_name}/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`;
+  // };
+
   const generateDynamicLink = (item) => {
-    return `destinations/${item?.destination_name}/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`;
+    const modifiedName = item.attributes?.itin_name
+      ?.replace(/ /g, "-")
+      .toLowerCase();
+    const modifiedDestinationName = item.attributes?.destination_name
+      ?.replace(/ /g, "-")
+      .replace(/&/g, "&")
+      .toLowerCase();
+
+    return (
+      regionWiseUrl +
+      `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-iteneraries/${modifiedName}`
+    );
   };
 
   const generateDynamicLinkBlog = (item) => {
@@ -52,9 +68,17 @@ function Index() {
   };
 
   const handleRedirect = () => {
+    const modifiedName = item.attributes?.itin_name
+      ?.replace(/ /g, "-")
+      .toLowerCase();
+    const modifiedDestinationName = item.attributes?.destination_name
+      ?.replace(/ /g, "-")
+      .replace(/&/g, "&")
+      .toLowerCase();
+
     router.push(
       regionWiseUrl +
-      `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`
+        `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-iteneraries/${modifiedName}`
     );
   };
 
@@ -132,7 +156,6 @@ function Index() {
     }
   };
 
-
   const dictioneryFunction = (data) => {
     let modifiedString = data;
     if (modifiedString) {
@@ -156,7 +179,6 @@ function Index() {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-
         // debugger;
         // You can access it using localStorage.getItem('yourKey')
 
@@ -166,34 +188,32 @@ function Index() {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(matches, region, modifiedString);
+                modifiedString = websiteContentCheck(
+                  matches,
+                  region,
+                  modifiedString
+                );
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
               }
               const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
               if (checkStr && replacement) {
-                modifiedString = modifiedString.replace(
-                  checkStr,
-                  replacement
-                );
+                modifiedString = modifiedString.replace(checkStr, replacement);
               }
             });
             return modifiedString;
             setIsLoading(false);
           } catch (error) {
             if (error.message === "Loop break") {
-
             } else if (error.message === "Region not found") {
-
             }
           }
         }
       }
     } else {
     }
-  }
-
+  };
 
   useEffect(() => {
     $(".succss_msg_parnt").hide();
@@ -240,7 +260,8 @@ function Index() {
                   holiday_type_name:
                     elementMain?.attributes?.holiday_type_group_name,
                   image_path: element.attributes.image_path,
-                  home_page_short_text: elementMain?.attributes?.home_page_short_text,
+                  home_page_short_text:
+                    elementMain?.attributes?.home_page_short_text,
                   home_page_title: elementMain?.attributes?.home_page_title,
                 };
                 thumbnailImageArr.push(objThumbnail);
@@ -434,8 +455,6 @@ function Index() {
     window.addEventListener("resize", equalHeight(true));
   }, []);
 
-  const router = useRouter();
-
   return (
     <>
       <Head>
@@ -538,8 +557,16 @@ function Index() {
                           <div className="row align-items-center">
                             <div className="col-11">
                               <div className="card_blk_txt">
-                                <h3>{dictioneryFunction(holidaytypesItem?.home_page_title)}</h3>
-                                <p>{dictioneryFunction(holidaytypesItem?.home_page_short_text)}</p>
+                                <h3>
+                                  {dictioneryFunction(
+                                    holidaytypesItem?.home_page_title
+                                  )}
+                                </h3>
+                                <p>
+                                  {dictioneryFunction(
+                                    holidaytypesItem?.home_page_short_text
+                                  )}
+                                </p>
                               </div>
                             </div>
                             <div className="col-1 ps-0">
@@ -614,22 +641,48 @@ function Index() {
                           {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
                         </NavLink>
                         <div className="card_slider_cnt">
-                          <h4>
-                            <a href="#">{dictioneryFunction(item?.attributes?.itin_name)}</a>
-                          </h4>
+                          <NavLink href={generateDynamicLink(item)}>
+                            <h4>
+                              <a>
+                                {dictioneryFunction(
+                                  item?.attributes?.itin_name
+                                )}
+                              </a>
+                            </h4>
+                          </NavLink>
                           <ul>
-                            <li>{dictioneryFunction(item?.attributes?.header_text)}</li>
-                            <li>{dictioneryFunction(item?.attributes?.subheader_text)}</li>
+                            <li>
+                              {dictioneryFunction(
+                                item?.attributes?.header_text
+                              )}
+                            </li>
+                            <li>
+                              {dictioneryFunction(
+                                item?.attributes?.subheader_text
+                              )}
+                            </li>
                             {item?.attributes?.itinerary_country_contents?.data
-                              .filter(res => res.attributes.website_country.toLowerCase() === region)
-                              .map(res1 => (
+                              .filter(
+                                (res) =>
+                                  res.attributes.website_country.toLowerCase() ===
+                                  region
+                              )
+                              .map((res1) => (
                                 <li key={res1.id}>
-                                  {`from ${res1.attributes?.currency_symbol ?? ''}${res1.attributes?.price ?? ' xxxx'} per person`}
+                                  {`from ${
+                                    res1.attributes?.currency_symbol ?? ""
+                                  }${
+                                    res1.attributes?.price ?? " xxxx"
+                                  } per person`}
                                 </li>
                               ))}
                             <li>
                               Travel to:
-                              <span>{dictioneryFunction(item?.attributes?.travel_to_text)}</span>
+                              <span>
+                                {dictioneryFunction(
+                                  item?.attributes?.travel_to_text
+                                )}
+                              </span>
                             </li>
                           </ul>
                         </div>
@@ -703,7 +756,9 @@ function Index() {
                       <div className="carousel-caption">
                         <p
                           dangerouslySetInnerHTML={{
-                            __html: dictioneryFunction(text?.attributes.review_short_text),
+                            __html: dictioneryFunction(
+                              text?.attributes.review_short_text
+                            ),
                           }}
                         />
                         <span
