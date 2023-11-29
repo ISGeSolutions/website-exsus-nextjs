@@ -8,8 +8,8 @@ export default CountryWhentogo;
 function CountryWhentogo(props) {
   // console.log("country", country);
   const [countryData, setCountryData] = useState(props?.data);
-
   const router = useRouter();
+  const [whenToGoData, setModifiedData] = useState(null);
   const countrycode = router.query?.country
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
@@ -41,6 +41,30 @@ function CountryWhentogo(props) {
       }
     }
   }
+
+
+  const generateTds = (starting_point, quantity, text, url) => {
+    const tds = Array.from({ length: 12 }, (_, i) => {
+      const isColspan = starting_point === i + 1 && quantity > 0;
+
+      if (isColspan) {
+        return (
+          <td key={i} colSpan={quantity} className="calender_trip_detls">
+            <a href={url}>{/* Replace '#' with your actual link */}
+              {text}
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 267 512.43">
+                <path fill-rule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path>
+              </svg>
+            </a>
+          </td>
+        );
+      } else {
+        return <td key={i}></td>;
+      }
+    });
+
+    return tds;
+  };
 
   const generateDynamicLink = (item) => {
     // console.log('item', item);
@@ -118,7 +142,42 @@ function CountryWhentogo(props) {
   };
 
   useEffect(() => {
-    // Using window.onload to detect full page load
+
+    const sortedData = countryData?.country_month_activities?.data?.sort((a, b) => {
+      const seqA = parseInt(a.attributes.serial_number, 10);
+      const seqB = parseInt(b.attributes.serial_number, 10);
+
+      return seqA - seqB;
+    });
+
+    const modifiedData = sortedData?.map(item => {
+      const attributes = item.attributes;
+      const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+
+      // Find the starting point and quantity
+      let startingPoint = null;
+      let quantity = 0;
+
+      for (let i = 0; i < months.length; i++) {
+        if (attributes[months[i]]) {
+          if (startingPoint === null) {
+            startingPoint = i + 1;
+          }
+          quantity++;
+        }
+      }
+
+      return {
+        ...item,
+        attributes: {
+          ...attributes,
+          starting_point: startingPoint,
+          quantity: quantity
+        }
+      };
+    });
+    setModifiedData(modifiedData)
+
     window.onload = () => {
       setTimeout(() => {
         const redirectUrl =
@@ -128,7 +187,7 @@ function CountryWhentogo(props) {
         }
       }, 0);
     };
-  }, [countrycode]);
+  }, [countrycode, countryData]);
 
   return (
     <>
@@ -153,7 +212,7 @@ function CountryWhentogo(props) {
             each trip
           </p>
           <div class="calender_blk_inr">
-            <table>
+            {/* <table>
               <tbody>
                 <tr>
                   <th>Jan</th>
@@ -215,7 +274,7 @@ function CountryWhentogo(props) {
                   <td></td>
                   <td></td>
                 </tr>
-                {/* <tr>
+                <tr>
                   {countryData?.map((item) => (
                     <td colspan="2" class="calender_trip_detls">
                       <NavLink href={generateDynamicLink()}>
@@ -238,7 +297,7 @@ function CountryWhentogo(props) {
                       </NavLink>
                     </td>
                   ))}
-                </tr> */}
+                </tr>
 
                 <tr>
                   <td></td>
@@ -390,13 +449,51 @@ function CountryWhentogo(props) {
                   <td></td>
                 </tr>
               </tbody>
-            </table>
+            </table> */}
+            <table>
+              <tbody>
+                <tr>
+                  <th>Jan</th>
+                  <th>Feb</th>
+                  <th>Mar</th>
+                  <th>Apr</th>
+                  <th>May</th>
+                  <th>Jun</th>
+                  <th>Jul</th>
+                  <th>Aug</th>
+                  <th>Sep</th>
+                  <th>Oct</th>
+                  <th>Nov</th>
+                  <th>Dec</th>
+                </tr>
+                <tr>
+                  {/* Add 12 empty cells */}
+                  {Array.from({ length: 12 }, (_, index) => (
+                    <td key={index}></td>
+                  ))}
+                </tr>
+                {whenToGoData?.map((item, rowIndex) => (
+                  <>
+                    <tr key={item.id}>
+                      {generateTds(item?.attributes?.starting_point, item?.attributes?.quantity, item?.attributes?.link_text, item?.attributes?.link_url)}
+                    </tr>
+                    <tr>
+                      {/* Add 12 empty cells */}
+                      {Array.from({ length: 12 }, (_, index) => (
+                        <td key={index}></td>
+                      ))}
+                    </tr>
+                  </>
+                ))}
+              </tbody>
+            </table >
+
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Card */}
-      <section className="card_blk_row dark_grey">
+      < section className="card_blk_row dark_grey" >
         <div className="container">
           <div className="row">
             <div className="col-sm-6">
@@ -482,7 +579,7 @@ function CountryWhentogo(props) {
             </div>
           </div>
         </div>
-      </section>
+      </section >
     </>
   );
 }

@@ -63,10 +63,10 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
-          / /g,
-          "-"
-        )}/${destinationcode}-iteneraries/${modifiedName}`
+      `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
+        / /g,
+        "-"
+      )}/${destinationcode}-iteneraries/${modifiedName}`
     );
   };
 
@@ -332,11 +332,9 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                               )
                               .map((res1) => (
                                 <li key={res1.id}>
-                                  {`from ${
-                                    res1.attributes?.currency_symbol ?? ""
-                                  }${
-                                    res1.attributes?.price ?? " xxxx"
-                                  } per person`}
+                                  {`from ${res1.attributes?.currency_symbol ?? ""
+                                    }${res1.attributes?.price ?? " xxxx"
+                                    } per person`}
                                 </li>
                               ))}
                             <li>
@@ -408,9 +406,9 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                     />
                   </svg>
                 </i>
-                <div className="carousel01 region_carousel01">
+                <div className="carousel00 region_carousel00">
                   {hotels?.map((item) => (
-                    <div className="card_slider_inr" key={item.id}>
+                    <div className="card_slider_inr01" key={item.id}>
                       <div className="card_slider">
                         <NavLink
                           href={generateDynamicLink(item.id)}
@@ -460,8 +458,8 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                                         {item?.attributes?.currency_symbol.repeat(
                                           Math.abs(
                                             5 -
-                                              item?.attributes
-                                                ?.price_guide_value
+                                            item?.attributes
+                                              ?.price_guide_value
                                           )
                                         )}
                                       </label>

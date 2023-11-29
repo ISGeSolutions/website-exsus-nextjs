@@ -379,7 +379,7 @@ function CountryItinararies(props) {
       `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
         / /g,
         "-"
-      )}/${destinationcode}-iteneraries/${modifiedName}`
+      )}/${countrycode}-iteneraries/${modifiedName}`
     );
   };
 
@@ -387,10 +387,10 @@ function CountryItinararies(props) {
     const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${destinationcode}/${countrycode?.replace(
+      `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
         / /g,
         "-"
-      )}/${destinationcode}-iteneraries/itinerary/${modifiedName}`
+      )}/${countrycode}-iteneraries/${modifiedName}`
     );
   };
 
