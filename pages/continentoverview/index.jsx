@@ -57,24 +57,35 @@ function ContinentOverview({ sendDataToParent }) {
         .replace(/&/g, "and")
         .toLowerCase();
       if (countryName) {
-        return regionWiseUrl + `/destinations/${destinationcode}/${modifieditem}`;
+        return (
+          regionWiseUrl + `/destinations/${destinationcode}/${modifieditem}`
+        );
       }
     }
   };
 
   const handleRedirect = () => {
+    const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`
+        `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${modifiedName}`
     );
   };
 
   const generateDynamicLink = (item) => {
+    const modifiedName = item.replace(/ /g, "-").toLowerCase();
     return (
       regionWiseUrl +
-      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`
+      `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${modifiedName}`
     );
   };
+
+  // const generateDynamicLink = (item) => {
+  //   return (
+  //     regionWiseUrl +
+  //     `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`
+  //   );
+  // };
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -143,7 +154,6 @@ function ContinentOverview({ sendDataToParent }) {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-
         // debugger;
         // You can access it using localStorage.getItem('yourKey')
 
@@ -153,33 +163,32 @@ function ContinentOverview({ sendDataToParent }) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(matches, region, modifiedString);
+                modifiedString = websiteContentCheck(
+                  matches,
+                  region,
+                  modifiedString
+                );
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
               }
               const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
               if (checkStr && replacement) {
-                modifiedString = modifiedString.replace(
-                  checkStr,
-                  replacement
-                );
+                modifiedString = modifiedString.replace(checkStr, replacement);
               }
             });
             return modifiedString;
             setIsLoading(false);
           } catch (error) {
             if (error.message === "Loop break") {
-
             } else if (error.message === "Region not found") {
-
             }
           }
         }
       }
     } else {
     }
-  }
+  };
 
   useEffect(() => {
     destinationService
@@ -300,7 +309,11 @@ function ContinentOverview({ sendDataToParent }) {
         <div>
           <div className="container">
             <section className="destination_para">
-              <div dangerouslySetInnerHTML={{ __html: dictioneryFunction(valueWithBr) }} />
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: dictioneryFunction(valueWithBr),
+                }}
+              />
             </section>
 
             <section className="favrites_blk_row favrites_blk_small_card_row">
@@ -329,56 +342,60 @@ function ContinentOverview({ sendDataToParent }) {
 
                   {/* Continent Overview Countries */}
                   <div className="carousel00 region_carousel00">
-                    {allCountries?.map((countries, i) => (
-                      // Add a condition to check if country_name is not null
-                      countries.attributes.country_name && (
-                        <div
-                          className="card_slider_inr card_slider_inr_sml"
-                          key={countries?.id}
-                        >
-                          <NavLink
-                            href={generateDynamicLinkCountries(
-                              countries?.attributes.country_name
-                            )}
+                    {allCountries?.map(
+                      (countries, i) =>
+                        // Add a condition to check if country_name is not null
+                        countries.attributes.country_name && (
+                          <div
+                            className="card_slider_inr card_slider_inr_sml"
+                            key={countries?.id}
                           >
-                            <div className="card_slider_inr_sml_img">
-                              <img
-                                src={
-                                  countries?.attributes?.country_images?.data.filter(
-                                    (res) => res.attributes.image_type === "thumbnail"
-                                  )[0]?.attributes?.image_path
-                                }
-                                alt={
-                                  countries?.attributes?.country_images?.data.filter(
-                                    (res) => res.attributes?.image_type === "thumbnail"
-                                  )[0]?.attributes?.image_alt_text
-                                }
-                                className="img-fluid"
-                              />
-                            </div>
-                            <h4>
-                              {countries.attributes.country_name}
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="#ffffff"
-                                shapeRendering="geometricPrecision"
-                                textRendering="geometricPrecision"
-                                imageRendering="optimizeQuality"
-                                fillRule="evenodd"
-                                clipRule="evenodd"
-                                viewBox="0 0 267 512.43"
-                              >
-                                <path
-                                  fillRule="nonzero"
-                                  d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                            <NavLink
+                              href={generateDynamicLinkCountries(
+                                countries?.attributes.country_name
+                              )}
+                            >
+                              <div className="card_slider_inr_sml_img">
+                                <img
+                                  src={
+                                    countries?.attributes?.country_images?.data.filter(
+                                      (res) =>
+                                        res.attributes.image_type ===
+                                        "thumbnail"
+                                    )[0]?.attributes?.image_path
+                                  }
+                                  alt={
+                                    countries?.attributes?.country_images?.data.filter(
+                                      (res) =>
+                                        res.attributes?.image_type ===
+                                        "thumbnail"
+                                    )[0]?.attributes?.image_alt_text
+                                  }
+                                  className="img-fluid"
                                 />
-                              </svg>
-                            </h4>
-                          </NavLink>
-                        </div>
-                      )
-                    ))}
-
+                              </div>
+                              <h4>
+                                {countries.attributes.country_name}
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="#ffffff"
+                                  shapeRendering="geometricPrecision"
+                                  textRendering="geometricPrecision"
+                                  imageRendering="optimizeQuality"
+                                  fillRule="evenodd"
+                                  clipRule="evenodd"
+                                  viewBox="0 0 267 512.43"
+                                >
+                                  <path
+                                    fillRule="nonzero"
+                                    d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                                  />
+                                </svg>
+                              </h4>
+                            </NavLink>
+                          </div>
+                        )
+                    )}
                   </div>
                   <i id="right">
                     <svg
@@ -410,17 +427,22 @@ function ContinentOverview({ sendDataToParent }) {
                 <div className="carousel00 region_carousel00">
                   <div className="row">
                     {itineraries?.map((item) => (
-                      <div className="col-sm-6 col-lg-4 col-xxl-3" key={item.id}>
+                      <div
+                        className="col-sm-6 col-lg-4 col-xxl-3"
+                        key={item.id}
+                      >
                         <div className="card_slider_inr">
                           <div className="card_slider">
                             <NavLink
-                              href={generateDynamicLink(item)}
+                              href={generateDynamicLink(
+                                item?.attributes?.itin_name
+                              )}
                               className="card_slider_img"
                             >
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -433,12 +455,26 @@ function ContinentOverview({ sendDataToParent }) {
                               )}
                             </NavLink>
                             <div className="card_slider_cnt">
-                              <h4>
-                                <a href="#">{item?.attributes?.itin_name}</a>
-                              </h4>
+                              <NavLink
+                                href={generateDynamicLink(
+                                  item?.attributes?.itin_name
+                                )}
+                              >
+                                <h4>
+                                  <a>{item?.attributes?.itin_name}</a>
+                                </h4>
+                              </NavLink>
                               <ul>
-                                <li>{dictioneryFunction(item?.attributes?.header_text)}</li>
-                                <li>{dictioneryFunction(item?.attributes?.sub_header_text)}</li>
+                                <li>
+                                  {dictioneryFunction(
+                                    item?.attributes?.header_text
+                                  )}
+                                </li>
+                                <li>
+                                  {dictioneryFunction(
+                                    item?.attributes?.sub_header_text
+                                  )}
+                                </li>
                                 <li>
                                   {
                                     item?.attributes?.itinerary_country_contents

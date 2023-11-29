@@ -40,6 +40,12 @@ function Index() {
   const [selectedOptionMonth, selectedOptionData] = useState(null);
   const [title, setTitle] = useState("");
   const [alert, setAlert] = useState(null);
+  const [activeItem, setActiveItem] = useState("recommended");
+
+  const hcode = router?.query?.holidaytypeitineraries
+    ?.replace(/-and-/g, " & ")
+    .replace(/-/g, " ")
+    .toLowerCase();
 
   const width = "250px";
   const styles = {
@@ -212,13 +218,23 @@ function Index() {
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
+      if (window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+        region = window.site_region;
+      }
     }
   }
+  const handleFilterClick = (item) => {
+    page = 0;
+    setItineraries([]);
+    setActiveItem(item);
+    loadMoreData(item);
+  };
 
-  const loadMoreData = () => {
-    destinationService
-      .getAllItineraries(page + 1, region)
+  const loadMoreData = (item) => {
+   
+    holidaytypesService
+      .getItinerariesByHolidayTypeGroup(page + 1, hcode, region, item)
       .then((response) => {
         setMetaData(response.meta.pagination);
         const newItineraries = response.data;
@@ -248,11 +264,11 @@ function Index() {
     } else {
       router.push(
         `advance-search?where=` +
-        data?.destination +
-        `&what=` +
-        data?.reason +
-        `&when=` +
-        data?.month
+          data?.destination +
+          `&what=` +
+          data?.reason +
+          `&when=` +
+          data?.month
       );
     }
   }
@@ -284,10 +300,18 @@ function Index() {
     );
   };
 
+  // const generateDynamicLink = (item) => {
+  //   const modifiedName = item.replace(/ /g, "-").toLowerCase();
+  //   return (
+  //     regionWiseUrl +
+  //     `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${modifiedName}`
+  //   );
+  // };
+
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=${region}`
+        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=${region}`
     );
   };
 
@@ -306,11 +330,6 @@ function Index() {
     }
     setHeadingText(text);
   };
-
-  const hcode = router.query?.holidaytypeitineraries
-    ?.replace(/-and-/g, " & ")
-    .replace(/-/g, " ")
-    .toLowerCase();
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -469,7 +488,7 @@ function Index() {
     //     setIsLoading(false);
     // });
 
-    loadMoreData();
+    loadMoreData(activeItem);
 
     window.addEventListener("resize", equalHeight(true));
   }, [router, valueWithBr, hcode]);
@@ -625,12 +644,46 @@ function Index() {
                           <label className="pt-2 pt-lg-0">Arrange by:</label>
                           <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
                             <li>
-                              <a href="#" className="active">
+                              <a
+                                className={
+                                  activeItem === "price" ? "active" : ""
+                                }
+                                onClick={() => handleFilterClick("price")}
+                              >
+                                Price
+                              </a>
+                            </li>
+                            <li>
+                              <a
+                                className={
+                                  activeItem === "recommended" ? "active" : ""
+                                }
+                                onClick={() => handleFilterClick("recommended")}
+                              >
                                 Recommended
                               </a>
                             </li>
                             <li>
-                              <a href="#">Alphabetical</a>
+                              <a
+                                className={
+                                  activeItem === "alphabetical" ? "active" : ""
+                                }
+                                onClick={() =>
+                                  handleFilterClick("alphabetical")
+                                }
+                              >
+                                Alphabetical
+                              </a>
+                            </li>
+                            <li>
+                              <a
+                                className={
+                                  activeItem === "duration" ? "active" : ""
+                                }
+                                onClick={() => handleFilterClick("duration")}
+                              >
+                                By duration
+                              </a>
                             </li>
                           </ul>
                         </div>
@@ -654,7 +707,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                      "thumbnail" ? (
+                                    "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}
@@ -667,23 +720,36 @@ function Index() {
                                 )}
                               </NavLink>
                               <div className="card_slider_cnt">
-                                <h4>
-                                  <a href="#">{item?.attributes?.itin_name}</a>
-                                </h4>
+                                <NavLink
+                                  href={generateDynamicLink(
+                                    item?.attributes?.itin_name
+                                  )}
+                                >
+                                  <h4>
+                                    <a>{item?.attributes?.itin_name}</a>
+                                  </h4>
+                                </NavLink>
                                 <ul>
                                   <li>{item?.attributes?.header_text}</li>
-                                  <li>
-                                    {
-                                      item?.attributes
-                                        ?.itinerary_country_contents?.data[0]
-                                        ?.attributes
-                                        ?.guideline_price_notes_index
-                                    }
-                                  </li>
+                                  {item?.attributes?.itinerary_country_contents?.data
+                                    .filter(
+                                      (res) =>
+                                        res.attributes.website_country.toLowerCase() ===
+                                        region
+                                    )
+                                    .map((res1) => (
+                                      <li key={res1.id}>
+                                        {`from ${
+                                          res1.attributes?.currency_symbol ?? ""
+                                        }${
+                                          res1.attributes?.price ?? " xxxx"
+                                        } per person`}
+                                      </li>
+                                    ))}
                                   <li>
                                     Travel to:
                                     <span>
-                                      {item?.attributes?.sub_header_text}
+                                      {item?.attributes?.travel_to_text}
                                     </span>
                                   </li>
                                 </ul>
@@ -709,7 +775,7 @@ function Index() {
                     <div className="col-12">
                       {metaData.total > page * itemsPerPage && (
                         <button
-                          onClick={loadMoreData}
+                          onClick={() => loadMoreData(activeItem)}
                           className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
                           fdprocessedid="r5vpm6s"
                         >
