@@ -343,7 +343,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
             <div className="container">
               <h3 className="title_cls">PLACES TO STAY IN {countryData?.country_name} HANDPICKED BY
                 EXSUSs</h3>
-              <div className="card_slider_row">
+              <div className="card_slider_row01">
                 <i id="left">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -361,9 +361,9 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                     />
                   </svg>
                 </i>
-                <div className="carousel01 region_carousel01">
+                <div className="carousel00 region_carousel00">
                   {hotels?.map((item) => (
-                    <div className="card_slider_inr" key={item.id}>
+                    <div className="card_slider_inr01" key={item.id}>
                       <div className="card_slider">
                         <NavLink
                           href={generateDynamicLink(item.id)}

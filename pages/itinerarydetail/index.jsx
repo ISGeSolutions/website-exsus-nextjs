@@ -67,7 +67,7 @@ function Index() {
     const router = useRouter();
 
     const handleEnquiryClick = () => {
-      router.push(`/contact-us`); // Navigate to the /enquiry page
+      router.push(`/make-an-enquiry`); // Navigate to the /enquiry page
     };
 
     return (
