@@ -231,8 +231,41 @@ function Index() {
     loadMoreData(item);
   };
 
+  const generateDynamicLink = (item) => {
+    const modifiedDestinationName = item?.attributes?.destination_name
+      ?.replace(/ /g, "-")
+      ?.replace(/&/g, "and")
+      .toLowerCase();
+    const country = item?.attributes?.sub_header_text
+      ?.replace(/ /g, "-")
+      .toLowerCase();
+    const modifiedName = item?.attributes?.header_text
+      ?.replace(/ /g, "-")
+      .toLowerCase();
+    return (
+      regionWiseUrl +
+      `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${modifiedName}`
+    );
+  };
+
+  const handleRedirect = () => {
+    const modifiedDestinationName = item?.attributes?.destination_name
+      ?.replace(/ /g, "-")
+      ?.replace(/&/g, "and")
+      .toLowerCase();
+    const country = item?.attributes?.sub_header_text
+      ?.replace(/ /g, "-")
+      .toLowerCase();
+    const modifiedName = item?.attributes?.header_text
+      ?.replace(/ /g, "-")
+      .toLowerCase();
+    router.push(
+      regionWiseUrl +
+        `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${modifiedName}`
+    );
+  };
+
   const loadMoreData = (item) => {
-   
     holidaytypesService
       .getItinerariesByHolidayTypeGroup(page + 1, hcode, region, item)
       .then((response) => {
@@ -293,27 +326,12 @@ function Index() {
     selectedOptionData(selectedOption);
   };
 
-  const generateDynamicLink = (item) => {
-    return (
-      regionWiseUrl +
-      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=${region}`
-    );
-  };
-
   // const generateDynamicLink = (item) => {
-  //   const modifiedName = item.replace(/ /g, "-").toLowerCase();
   //   return (
   //     regionWiseUrl +
-  //     `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${modifiedName}`
+  //     `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=${region}`
   //   );
   // };
-
-  const handleRedirect = () => {
-    router.push(
-      regionWiseUrl +
-        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=${region}`
-    );
-  };
 
   const selectedSec = (itemId) => {
     var text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
@@ -720,11 +738,7 @@ function Index() {
                                 )}
                               </NavLink>
                               <div className="card_slider_cnt">
-                                <NavLink
-                                  href={generateDynamicLink(
-                                    item?.attributes?.itin_name
-                                  )}
-                                >
+                                <NavLink href={generateDynamicLink(item)}>
                                   <h4>
                                     <a>{item?.attributes?.itin_name}</a>
                                   </h4>

@@ -23,51 +23,12 @@ function Index() {
   const [headingText, setHeadingText] = useState(
     "LUXURY SAFARI HOLIDAYS IN AFRICA"
   );
-  const [itineraries, setItineraries] = useState(null);
+  const [itineraries, setItineraries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [friendlyUrl, setFriendlyUrl] = useState("");
-
-  const optionsData = [
-    { value: "", label: "Filter by destination" },
-    { value: "Everything", label: "Everything" },
-    { value: "Barefoot", label: "Barefoot" },
-    { value: "Beach", label: "Beach" },
-    { value: "Boutique hotel", label: "Boutique hotel" },
-    { value: "Chic design", label: "Chic design" },
-    { value: "Cultural Immersion", label: "Cultural Immersion" },
-    { value: "Eco tourism", label: "Eco tourism" },
-    { value: "Family-Friendly", label: "Family-Friendly" },
-    { value: "Food & Wine", label: "Food & Wine" },
-    { value: "Guiding", label: "Guiding" },
-    { value: "Hideaway", label: "Hideaway" },
-    { value: "Honeymoon", label: "Honeymoon" },
-    { value: "Lodge", label: "Lodge" },
-    { value: "Luxury hotel", label: "Luxury Hotel" },
-    { value: "Off the beaten track", label: "Off the beaten track" },
-    { value: "Owner run", label: "Owner run" },
-    { value: "Peace & quiet", label: "Peace & quiet" },
-    { value: "Private groups", label: "Private groups" },
-    { value: "Romantic", label: "Romantic" },
-    { value: "Rustic", label: "Rustic" },
-    { value: "Seriously special", label: "Seriously special" },
-    { value: "Service & Hospitality", label: "Service & Hospitality" },
-    { value: "Setting & Views", label: "Setting & Views" },
-    { value: "Snorkelling & Driving", label: "Snorkelling & Driving" },
-    { value: "Spa & Wellness", label: "Spa & Wellness" },
-    { value: "Unusal", label: "Unusal" },
-    { value: "Village life", label: "Village life" },
-    { value: "Walking & trekking", label: "Walking & trekking" },
-    { value: "Water activities", label: "Water activities" },
-    { value: "Wildlife & Nature", label: "Wildlife & Nature" },
-    { value: "Adventure", label: "Adventure" },
-    { value: "Couples", label: "Couples" },
-    { value: "Educational", label: "Educational" },
-    { value: "Multi-activity", label: "Multi-activity" },
-    { value: "Teenagers", label: "Teenagers" },
-    { value: "Landscapes & Scenery", label: "Landscapes & Scenery" },
-    { value: "City hotel", label: "City hotel" },
-  ];
-
+  const [activeItem, setActiveItem] = useState("recommended");
+  const [page, setPage] = useState(0); // Current page
+  const [metaData, setMetaData] = useState([]);
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(true);
   const [isDisabled, setIsDisabled] = useState(false);
@@ -87,6 +48,7 @@ function Index() {
     ?.replace(/-/g, " ")
     .replace(/and/g, "&")
     .toLowerCase();
+
   const width = "250px";
   const styles = {
     control: (provided) => ({
@@ -161,6 +123,47 @@ function Index() {
     );
   };
 
+  const optionsData = [
+    { value: "", label: "Filter by destination" },
+    { value: "Everything", label: "Everything" },
+    { value: "Barefoot", label: "Barefoot" },
+    { value: "Beach", label: "Beach" },
+    { value: "Boutique hotel", label: "Boutique hotel" },
+    { value: "Chic design", label: "Chic design" },
+    { value: "Cultural Immersion", label: "Cultural Immersion" },
+    { value: "Eco tourism", label: "Eco tourism" },
+    { value: "Family-Friendly", label: "Family-Friendly" },
+    { value: "Food & Wine", label: "Food & Wine" },
+    { value: "Guiding", label: "Guiding" },
+    { value: "Hideaway", label: "Hideaway" },
+    { value: "Honeymoon", label: "Honeymoon" },
+    { value: "Lodge", label: "Lodge" },
+    { value: "Luxury hotel", label: "Luxury Hotel" },
+    { value: "Off the beaten track", label: "Off the beaten track" },
+    { value: "Owner run", label: "Owner run" },
+    { value: "Peace & quiet", label: "Peace & quiet" },
+    { value: "Private groups", label: "Private groups" },
+    { value: "Romantic", label: "Romantic" },
+    { value: "Rustic", label: "Rustic" },
+    { value: "Seriously special", label: "Seriously special" },
+    { value: "Service & Hospitality", label: "Service & Hospitality" },
+    { value: "Setting & Views", label: "Setting & Views" },
+    { value: "Snorkelling & Driving", label: "Snorkelling & Driving" },
+    { value: "Spa & Wellness", label: "Spa & Wellness" },
+    { value: "Unusal", label: "Unusal" },
+    { value: "Village life", label: "Village life" },
+    { value: "Walking & trekking", label: "Walking & trekking" },
+    { value: "Water activities", label: "Water activities" },
+    { value: "Wildlife & Nature", label: "Wildlife & Nature" },
+    { value: "Adventure", label: "Adventure" },
+    { value: "Couples", label: "Couples" },
+    { value: "Educational", label: "Educational" },
+    { value: "Multi-activity", label: "Multi-activity" },
+    { value: "Teenagers", label: "Teenagers" },
+    { value: "Landscapes & Scenery", label: "Landscapes & Scenery" },
+    { value: "City hotel", label: "City hotel" },
+  ];
+
   const LoadMorePagination = ({ data }) => {
     const [visibleItems, setVisibleItems] = useState(itemsPerPage);
   };
@@ -176,11 +179,11 @@ function Index() {
     selectedOptionData(selectedOption);
   };
 
-  // let regionWiseUrl = "/uk";
+  // let region = "uk";
+  // let regionWiseUrl = "";
   // if (typeof window !== "undefined") {
   //   if (window && window.site_region) {
-  //     regionWiseUrl = "/" + window.site_region;
-  //     // setMyVariable(window.site_region);
+  //     if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
   //   }
   // }
 
@@ -188,22 +191,52 @@ function Index() {
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
+      if (window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+        region = window.site_region;
+      }
     }
   }
 
   const generateDynamicLink = (item) => {
+    const modifiedDestinationName = item?.attributes?.destination_name
+      ?.replace(/ /g, "-")
+      ?.replace(/&/g, "and")
+      .toLowerCase();
+    const country = item?.attributes?.sub_header_text
+      ?.replace(/ /g, "-")
+      .toLowerCase();
+    const modifiedName = item?.attributes?.header_text
+      ?.replace(/ /g, "-")
+      .toLowerCase();
     return (
       regionWiseUrl +
-      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`
+      `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${modifiedName}`
     );
   };
 
   const handleRedirect = () => {
+    const modifiedDestinationName = item?.attributes?.destination_name
+      ?.replace(/ /g, "-")
+      ?.replace(/&/g, "and")
+      .toLowerCase();
+    const country = item?.attributes?.sub_header_text
+      ?.replace(/ /g, "-")
+      .toLowerCase();
+    const modifiedName = item?.attributes?.header_text
+      ?.replace(/ /g, "-")
+      .toLowerCase();
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`
+        `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${modifiedName}`
     );
+  };
+
+  const handleFilterClick = (item) => {
+    page = 0;
+    setItineraries([]);
+    setActiveItem(item);
+    loadMoreData(item);
   };
 
   const selectedSec = (itemId) => {
@@ -246,6 +279,31 @@ function Index() {
     // console.log("closeAlert");
     setAlert(null);
   };
+  debugger;
+  const loadMoreData = (item) => {
+    holidaytypesService
+      .getItinerariesByHolidayTypes(page + 1, holidaytypename, region, item)
+      .then((response) => {
+        setMetaData(response.meta.pagination);
+        const newItineraries = response.data;
+        if (newItineraries.length > 0) {
+          setItineraries((prevItineraries) =>
+            [...prevItineraries, ...newItineraries].reduce(
+              (accumulator, current) =>
+                accumulator.some((item) => item.id === current.id)
+                  ? accumulator
+                  : [...accumulator, current],
+              []
+            )
+          );
+          setPage(page + 1);
+        }
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+      });
+  };
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName("card_slider_cnt"),
@@ -279,15 +337,15 @@ function Index() {
     //     setholidayTypes(desiredHolidayTypes.holiday_type_translations[0].holiday_type_overview_text);
     // });
 
-    destinationService
-      .getAllItineraries()
-      .then((x) => {
-        setItineraries(x.data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-      });
+    // destinationService
+    //   .getAllItineraries()
+    //   .then((x) => {
+    //     //setItineraries(x.data);
+    //     setIsLoading(false);
+    //   })
+    //   .catch((error) => {
+    //     setIsLoading(false);
+    //   });
 
     holidaytypesService
       .getHolidaytypeDetailsById(holidaytypename)
@@ -316,8 +374,11 @@ function Index() {
       .catch((error) => {
         setIsLoading(false);
       });
+
+    loadMoreData(activeItem);
+
     window.addEventListener("resize", equalHeight(true));
-  }, [holidaytypename]);
+  }, [holidaytypename, router]);
 
   return (
     <>
@@ -459,19 +520,53 @@ function Index() {
                     <div className="col-12">
                       <div className="destination_filter_result d-block d-lg-flex">
                         <p>
-                          We've found 25 destinations for{" "}
+                          We've found {metaData?.total} destinations for{" "}
                           {holidaytypesDetails?.header_text}
                         </p>
                         <div className="destination_contries_filter d-inline-block d-lg-flex">
                           <label className="pt-2 pt-lg-0">Arrange by:</label>
                           <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
                             <li>
-                              <a href="#" className="active">
+                              <a
+                                className={
+                                  activeItem === "price" ? "active" : ""
+                                }
+                                onClick={() => handleFilterClick("price")}
+                              >
+                                Price
+                              </a>
+                            </li>
+                            <li>
+                              <a
+                                className={
+                                  activeItem === "recommended" ? "active" : ""
+                                }
+                                onClick={() => handleFilterClick("recommended")}
+                              >
                                 Recommended
                               </a>
                             </li>
                             <li>
-                              <a href="#">Alphabetical</a>
+                              <a
+                                className={
+                                  activeItem === "alphabetical" ? "active" : ""
+                                }
+                                onClick={() =>
+                                  handleFilterClick("alphabetical")
+                                }
+                              >
+                                Alphabetical
+                              </a>
+                            </li>
+                            <li>
+                              <a
+                                className={
+                                  activeItem === "duration" ? "active" : ""
+                                }
+                                onClick={() => handleFilterClick("duration")}
+                              >
+                                By duration
+                              </a>
                             </li>
                           </ul>
                         </div>
@@ -479,74 +574,97 @@ function Index() {
                     </div>
 
                     {/* {itineraries?.map((item) => ( */}
-                    {itineraries?.slice(0, visibleItems).map((item, index) => (
-                      <div className="col-sm-6 col-lg-4" key={item.id}>
-                        <div className="card_slider_inr">
-                          <div className="card_slider">
-                            <NavLink
-                              href={generateDynamicLink(item)}
-                              className="card_slider_img"
-                            >
-                              {item?.attributes?.itinerary_images?.data.map(
-                                (element, index) =>
-                                  element.attributes.image_type ==
-                                  "thumbnail" ? (
-                                    <img
-                                      key={element.id}
-                                      src={element.attributes.image_path}
-                                      alt="destination card01"
-                                      className="img-fluid"
-                                    />
-                                  ) : (
-                                    ""
-                                  )
-                              )}
-                              {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
-                            </NavLink>
-                            <div className="card_slider_cnt">
-                              <h4>
-                                <a href="#">{item?.attributes?.itin_name}</a>
-                              </h4>
-                              <ul>
-                                <li>{item?.attributes?.header_text}</li>
-                                <li>Indonesia</li>
-                                <li>
-                                  {
-                                    item?.attributes?.itinerary_country_contents
-                                      ?.data[0]?.attributes
-                                      ?.guideline_price_notes_index
-                                  }
-                                </li>
-                                <li>
-                                  Travel to:
-                                  <span>
-                                    {item?.attributes?.sub_header_text}
-                                  </span>
-                                </li>
-                              </ul>
-                            </div>
-                            <button className="btn card_slider_btn">
-                              <span>{item?.attributes?.no_of_nites_notes}</span>
-                              <span
-                                className="view_itnry_link"
-                                onClick={handleRedirect}
+                    {itineraries
+                      ?.slice(0, itineraries.length)
+                      .map((item, index) => (
+                        <div
+                          className="col-sm-6 col-lg-4 col-xxl-3"
+                          key={index}
+                        >
+                          <div className="card_slider_inr">
+                            <div className="card_slider">
+                              <NavLink
+                                href={generateDynamicLink(item)}
+                                className="card_slider_img"
                               >
-                                View this itinerary
-                                <em className="fa-solid fa-chevron-right"></em>
-                              </span>
-                            </button>
+                                {item?.attributes?.itinerary_images?.data.map(
+                                  (element, index) =>
+                                    element.attributes.image_type ==
+                                    "thumbnail" ? (
+                                      <img
+                                        key={element.id}
+                                        src={element.attributes.image_path}
+                                        alt="destination card01"
+                                        className="img-fluid"
+                                      />
+                                    ) : (
+                                      ""
+                                    )
+                                )}
+                                {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
+                              </NavLink>
+                              <div className="card_slider_cnt">
+                                <NavLink href={generateDynamicLink(item)}>
+                                  <h4>
+                                    <a>{item?.attributes?.itin_name}</a>
+                                  </h4>
+                                </NavLink>
+                                <ul>
+                                  <li>{item?.attributes?.header_text}</li>
+
+                                  {item?.attributes?.itinerary_country_contents?.data
+                                    .filter(
+                                      (res) =>
+                                        res.attributes.website_country.toLowerCase() ===
+                                        region
+                                    )
+                                    .map((res1) => (
+                                      <li key={res1.id}>
+                                        {`from ${
+                                          res1.attributes?.currency_symbol ?? ""
+                                        }${
+                                          res1.attributes?.price ?? " xxxx"
+                                        } per person`}
+                                      </li>
+                                    ))}
+                                  <li>
+                                    Travel to:
+                                    <span>
+                                      {item?.attributes?.travel_to_text}
+                                    </span>
+                                  </li>
+                                </ul>
+                              </div>
+                              <button className="btn card_slider_btn">
+                                <span>
+                                  {item?.attributes?.no_of_nites_notes}
+                                </span>
+                                <span
+                                  className="view_itnry_link"
+                                  onClick={handleRedirect}
+                                >
+                                  View this itinerary
+                                  <em className="fa-solid fa-chevron-right"></em>
+                                </span>
+                              </button>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+
+                    {/* Pagination */}
                     <div className="col-12">
-                      {visibleItems < itineraries?.length && (
+                      {metaData.total > page * itemsPerPage && (
                         <button
-                          onClick={handleLoadMore}
+                          onClick={() => loadMoreData(activeItem)}
                           className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
                           fdprocessedid="r5vpm6s"
                         >
-                          Show 9 more holiday ideas
+                          Show{" "}
+                          {metaData.total - page * itemsPerPage > 12
+                            ? 12
+                            : metaData.total - page * itemsPerPage > 12}{" "}
+                          more items
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="#ffffff"
