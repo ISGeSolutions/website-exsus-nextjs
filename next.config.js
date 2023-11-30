@@ -331,10 +331,10 @@ const nextConfig = {
       // special-offers
 
       // hotel-detail
-      { source: "/hotel-detail", destination: "/hotel-detail" },
-      { source: "/us/hotel-detail", destination: "/hotel-detail" },
-      { source: "/asia/hotel-detail", destination: "/hotel-detail" },
-      { source: "/asia/hotel-detail", destination: "/hotel-detail" },
+      { source: "/destinations/:continent/hotels/:country/:location/:hotelName", destination: "/hotel-detail" },
+      { source: "/us/destinations/:continent/hotels/:country/:location/:hotelName", destination: "/hotel-detail" },
+      { source: "/asia/destinations/:continent/hotels/:country/:location/:hotelName", destination: "/hotel-detail" },
+      { source: "/in/destinations/:continent/hotels/:country/:location/:hotelName", destination: "/hotel-detail" },
 
       // Blog
       { source: "/blog", destination: "/blog" },

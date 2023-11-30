@@ -282,10 +282,10 @@ function getCountryWiseItinerary(name, page, item, region) {
 
 function getAllHotels(page, item, decode, region) {
   if (item == "recommended") {
-    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/hotels?[filters][destination][destination_code][$eq]=${decode}&populate[0]=hotel_images&populate[hotel_country_contents][filters][website_country]=${region}&pagination[page]=${page}&pagination[pageSize]=12`;
+    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/hotels?[filters][destination][destination_code][$eq]=${decode}&populate[hotel_images][fields][0]=image_path&populate[hotel_images][fields][1]=image_type&populate[hotel_country_contents][filters][website_country]=${region}&pagination[page]=${page}&pagination[pageSize]=12`;
     return fetchWrapper.get(itinerariesDetailsUrl);
   } else if (item == "alphabetical") {
-    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/hotels?[filters][destination][destination_code][$eq]=${decode}&populate[0]=hotel_images&populate[hotel_country_contents][filters][website_country]=${region}&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=hotel_name:asc`;
+    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/hotels?[filters][destination][destination_code][$eq]=${decode}&populate[hotel_images][fields][0]=image_path&populate[hotel_images][fields][1]=image_type&populate[hotel_country_contents][filters][website_country]=${region}&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=hotel_name:asc`;
     return fetchWrapper.get(itinerariesDetailsUrl);
   }
 }
@@ -293,14 +293,14 @@ function getAllHotels(page, item, decode, region) {
 function getAllCountryWiseHotels(page, item, name, region) {
   if (item == "recommended") {
     const countryHotelDetailsUrl = `${publicRuntimeConfig.apiUrl
-      }/api/hotels?populate[0]=hotel_images&populate[1]=hotel_travel_times&populate[hotel_country_contents][filters][website_country]=${region}&pagination[page]=${page}&pagination[pageSize]=12&filters[country][country_name][$eq]=${name?.replace(
+      }/api/hotels?populate[hotel_images][fields][0]=image_path&populate[hotel_images][fields][1]=image_type&populate[1]=hotel_travel_times&populate[hotel_country_contents][filters][website_country]=${region}&pagination[page]=${page}&pagination[pageSize]=12&filters[country][country_name][$eq]=${name?.replace(
         /&/g,
         "%26"
       )}`;
     return fetchWrapper.get(countryHotelDetailsUrl);
   } else if (item == "alphabetical") {
     const countryHotelDetailsUrl = `${publicRuntimeConfig.apiUrl
-      }/api/hotels?populate[0]=hotel_images&populate[1]=hotel_travel_times&pagination[page]=${page}&populate[hotel_country_contents][filters][website_country]=${region}&spagination[pageSize]=12&filters[country][country_name][$eq]=${name?.replace(
+      }/api/hotels?populate[hotel_images][fields][0]=image_path&populate[hotel_images][fields][1]=image_type&populate[1]=hotel_travel_times&pagination[page]=${page}&populate[hotel_country_contents][filters][website_country]=${region}&spagination[pageSize]=12&filters[country][country_name][$eq]=${name?.replace(
         /&/g,
         "%26"
       )}&sort[0]=hotel_name:asc`;
@@ -314,14 +314,14 @@ function getRegionWiseHotels(page, name, filter, region) {
       }/api/hotels?filters[region][region_name][$eq]=${name?.replace(
         /&/g,
         "%26"
-      )}&populate[0]=hotel_images&populate[1]=hotel_travel_times&pagination[page]=${page}&populate[hotel_country_contents][filters][website_country]=${region}&pagination[pageSize]=12`;
+      )}&populate[hotel_images][fields][0]=image_path&populate[hotel_images][fields][1]=image_type&populate[1]=hotel_travel_times&pagination[page]=${page}&populate[hotel_country_contents][filters][website_country]=${region}&pagination[pageSize]=12`;
     return fetchWrapper.get(itinerariesDetailsUrl);
   } else if (filter == "alphabetical") {
     const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl
       }/api/hotels?filters[region][region_name][$eq]=${name?.replace(
         /&/g,
         "%26"
-      )}&populate[0]=hotel_images&populate[1]=hotel_travel_times&populate[hotel_country_contents][filters][website_country]=${region}&pagination[page]=${page}&pagination[pageSize]=12`;
+      )}&populate[hotel_images][fields][0]=image_path&populate[hotel_images][fields][1]=image_type&populate[1]=hotel_travel_times&populate[hotel_country_contents][filters][website_country]=${region}&pagination[page]=${page}&pagination[pageSize]=12`;
     return fetchWrapper.get(itinerariesDetailsUrl);
   }
 }
@@ -345,7 +345,7 @@ function getRegions(countryName) {
 }
 
 function getHotelById(id, region) {
-  const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/hotels/${id}?populate[0]=hotel_images&populate[1]=hotel_country_contents[filters][website_country]=${region}&populate[1]=hotel_travel_times`;
+  const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/hotels/${id}?populate[hotel_images][fields][0]=image_path&populate[hotel_images][fields][1]=image_type&populate[1]=hotel_country_contents[filters][website_country]=${region}&populate[1]=hotel_travel_times`;
   return fetchWrapper.get(itinerariesDetailsUrl);
 }
 

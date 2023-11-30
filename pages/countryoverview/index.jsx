@@ -91,7 +91,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
   // };
 
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt"),
+    var elements = document.getElementsByClassName("card_slider_cnt1"),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -280,7 +280,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                     />
                   </svg>
                 </i>
-                <div className="carousel00 region_carousel00">
+                <div className="carousel00">
                   {itineraries?.map((item) => (
                     <div className="card_slider_inr" key={item.id}>
                       <div className="card_slider">
@@ -388,8 +388,8 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                 PLACES TO STAY IN {countryData?.country_name} HANDPICKED BY
                 EXSUS
               </h3>
-              <div className="card_slider_row">
-                <i id="left">
+              <div className="card_slider_row01">
+                <i id="leftt">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="#ffffff"
@@ -406,7 +406,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                     />
                   </svg>
                 </i>
-                <div className="carousel00 region_carousel00">
+                <div className="carousel01">
                   {hotels?.map((item) => (
                     <div className="card_slider_inr01" key={item.id}>
                       <div className="card_slider">
@@ -480,7 +480,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                             <li>
                               Best for:
                               <span>
-                                {item?.attributes?.recommended_for_text}
+                                {item?.attributes?.best_for_text}
                               </span>
                             </li>
                           </ul>

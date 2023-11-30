@@ -187,6 +187,7 @@ function ContinentPlacesToStay(props) {
         console.log("response", response);
         setMetaData(response.meta.pagination);
         const newItineraries = response.data;
+        debugger;
         if (newItineraries.length > 0) {
           setAllHotels((prevItineraries) =>
             [...prevItineraries, ...newItineraries].reduce(
@@ -271,7 +272,15 @@ function ContinentPlacesToStay(props) {
   };
 
   const generateDynamicLink = (item) => {
-    return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
+    let locationCountry = item?.attributes?.location?.toLowerCase().replace(/&/g, "and");
+    let countryName = locationCountry.match(/\|(.+)/);
+    countryName = countryName ? countryName[1].trim() : null;
+    let location = locationCountry?.match(/(.+?)\|/);
+    location = location ? location[1].trim() : null;
+    let hotelName = item?.attributes?.friendly_url?.replace(/ /g, "-").toLowerCase().replace(/&/g, "and");
+    return regionWiseUrl + `/destinations/${destinationcode?.replace(/&/g, " and ")
+      .replace(/ /g, "-")
+      .toLowerCase()}/hotels/${countryName?.replace(/ /g, "-")}/${location?.replace(/ /g, "-")}/${hotelName}`;
   };
 
   const websiteContentCheck = (matches, region, modifiedString) => {
@@ -587,7 +596,7 @@ function ContinentPlacesToStay(props) {
                         <div className="card_slider_inr">
                           <div className="card_slider">
                             <NavLink
-                              href={generateDynamicLink(item.id)}
+                              href={generateDynamicLink(item)}
                               className="card_slider_img"
                             >
                               {item?.attributes?.hotel_images?.data.map(
@@ -644,7 +653,7 @@ function ContinentPlacesToStay(props) {
                                 <li>
                                   Best for:
                                   <span>
-                                    {item?.attributes?.recommended_for_text}
+                                    {item?.attributes?.best_for_text}
                                   </span>
                                 </li>
                               </ul>

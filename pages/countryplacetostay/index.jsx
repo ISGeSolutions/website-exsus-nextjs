@@ -620,19 +620,22 @@ function CountryPlaceToStay(props) {
                                   <li>
                                     Location: {item?.attributes?.location}
                                   </li>
-                                  <li>
-                                    Price guide:
-                                    <span
-                                      tabIndex="0"
-                                      data-bs-toggle="tooltip"
-                                      data-bs-placement="right"
-                                      data-bs-title="£200-£350 per person per night"
-                                    >
-                                      <label>
-                                        {item?.attributes?.price_guide_text}
-                                      </label>
-                                    </span>
-                                  </li>
+                                  {item?.attributes?.hotel_country_contents?.data?.map(item => {
+                                    return (
+                                      <li>
+                                        Price guide:
+                                        <span
+                                          key={item?.id}
+                                          tabIndex="0"
+                                          title={item?.attributes?.price_guide_text}
+                                        >{item?.attributes?.currency_symbol.repeat(Math.abs(item?.attributes?.price_guide_value))}
+                                          <label>
+                                            {item?.attributes?.currency_symbol.repeat(Math.abs(5 - item?.attributes?.price_guide_value))}
+                                          </label>
+                                        </span>
+                                      </li>
+                                    );
+                                  })}
                                   <li>
                                     <p
                                       dangerouslySetInnerHTML={{
@@ -643,7 +646,7 @@ function CountryPlaceToStay(props) {
                                   <li>
                                     Best for:
                                     <span>
-                                      {item?.attributes?.recommended_for_text}
+                                      {item?.attributes?.best_for_text}
                                     </span>
                                   </li>
                                 </ul>
