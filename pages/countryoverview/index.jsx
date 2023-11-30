@@ -91,7 +91,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
   // };
 
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt"),
+    var elements = document.getElementsByClassName("card_slider_cnt1"),
       allHeights = [],
       i = 0;
     if (resize === true) {

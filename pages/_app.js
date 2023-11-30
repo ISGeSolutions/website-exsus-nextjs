@@ -212,17 +212,6 @@ function App({ Component, pageProps }) {
         type="text/javascript"
         src="/assets/javascripts/card-slider.js"
       ></Script>
-      <Script
-        id="card-slider"
-        type="text/javascript"
-        src="/assets/javascripts/card-slider01.js"
-      ></Script>
-      <Script
-        id="card-slider"
-        type="text/javascript"
-        src="/assets/javascripts/card-slider02.js"
-      ></Script>
-
       {/* <Script id="card-slider-height" type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></Script> */}
       {/* <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script> */}
       {/* <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script> */}
