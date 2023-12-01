@@ -344,8 +344,8 @@ function getRegions(countryName) {
   return fetchWrapper.get(itinerariesDetailsUrl);
 }
 
-function getHotelById(id, region) {
-  const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/hotels/${id}?populate[hotel_images][fields][0]=image_path&populate[hotel_images][fields][1]=image_type&populate[1]=hotel_country_contents[filters][website_country]=${region}&populate[1]=hotel_travel_times`;
+function getHotelById(name, region) {
+  const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/hotels?filters[friendly_url][$eq]=${name}&populate[hotel_images][fields][0]=image_path&populate[hotel_images][fields][1]=image_type&populate[hotel_country_contents][filters][website_country][$eq]=${region}&populate[hotel_travel_times]=hotel_travel_times`;
   return fetchWrapper.get(itinerariesDetailsUrl);
 }
 
