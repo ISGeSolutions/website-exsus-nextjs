@@ -69,6 +69,7 @@ export const destinationService = {
   getAllRegionItineraries,
   getCountryFavItineraries,
   getCountryFavHotels,
+  getRegionWiseHotelsInHotelDetail
 };
 
 function getAllDropdown() {
@@ -324,6 +325,17 @@ function getRegionWiseHotels(page, name, filter, region) {
       )}&populate[hotel_images][fields][0]=image_path&populate[hotel_images][fields][1]=image_type&populate[1]=hotel_travel_times&populate[hotel_country_contents][filters][website_country]=${region}&pagination[page]=${page}&pagination[pageSize]=12`;
     return fetchWrapper.get(itinerariesDetailsUrl);
   }
+}
+
+
+function getRegionWiseHotelsInHotelDetail(name, region) {
+
+  const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl
+    }/api/hotels?filters[region][region_name][$eq]=${name?.replace(
+      /&/g,
+      "%26"
+    )}&populate[hotel_images][fields][0]=image_path&populate[hotel_images][fields][1]=image_type&populate[1]=hotel_travel_times&populate[hotel_country_contents][filters][website_country]=${region}`;
+  return fetchWrapper.get(itinerariesDetailsUrl);
 }
 
 function getCustomPagesData(pageName) {
