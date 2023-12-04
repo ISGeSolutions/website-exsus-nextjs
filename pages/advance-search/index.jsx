@@ -70,12 +70,12 @@ function Index() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/destinations/africa/africa-itineraries/vietnam-in-classic-style`
+      `/destinations/africa/africa-itineraries/vietnam-in-classic-style`
     );
   };
 
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt"),
+    var elements = document.getElementsByClassName("card_slider_cnt places_to_stay_cnt"),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -226,7 +226,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                      "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}
@@ -238,7 +238,7 @@ function Index() {
                                     )
                                 )}
                               </NavLink>
-                              <div className="card_slider_cnt">
+                              <div className="card_slider_cnt places_to_stay_cnt">
                                 <h4>
                                   <a href="#">{item?.attributes?.itin_name}</a>
                                 </h4>
@@ -254,12 +254,10 @@ function Index() {
                                       )
                                       .map((res1) => (
                                         <li key={res1.id}>
-                                          {`from ${
-                                            res1.attributes?.currency_symbol ??
+                                          {`from ${res1.attributes?.currency_symbol ??
                                             ""
-                                          }${
-                                            res1.attributes?.price ?? " xxxx"
-                                          } per person`}
+                                            }${res1.attributes?.price ?? " xxxx"
+                                            } per person`}
                                         </li>
                                       ))}
                                   </li>

@@ -379,7 +379,10 @@ function CountryItinararies(props) {
       `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
         / /g,
         "-"
-      )}/${countrycode}-iteneraries/${modifiedName}`
+      )}/${countrycode?.replace(
+        / /g,
+        "-"
+      )}}-iteneraries/${modifiedName}`
     );
   };
 
@@ -390,12 +393,15 @@ function CountryItinararies(props) {
       `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
         / /g,
         "-"
-      )}/${countrycode}-iteneraries/${modifiedName}`
+      )}/${countrycode?.replace(
+        / /g,
+        "-"
+      )}}-iteneraries/${modifiedName}`
     );
   };
 
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt"),
+    var elements = document.getElementsByClassName("card_slider_cnt places_to_stay_cnt"),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -662,7 +668,7 @@ function CountryItinararies(props) {
                               )}
                               {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
                             </NavLink>
-                            <div className="card_slider_cnt">
+                            <div className="card_slider_cnt places_to_stay_cnt">
                               <NavLink
                                 href={generateDynamicLink(
                                   item?.attributes?.itin_name

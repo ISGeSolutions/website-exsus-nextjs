@@ -185,7 +185,7 @@ function Index() {
                                                         <a className="card_slider_img">
                                                             <img src="images/country_card01.jpg" alt="country card01" className="img-fluid" />
                                                         </a>
-                                                        <div className="card_slider_cnt">
+                                                        <div className="card_slider_cnt places_to_stay_cnt">
                                                             <h4><a href="#">China Like an Emperor</a></h4>
                                                             <ul>
                                                                 <li>China in Ultimate Style</li>
@@ -207,7 +207,7 @@ function Index() {
                                                         <div className="card_slider_img">
                                                             <img src="images/country_card02.jpg" alt="country card02" className="img-fluid" />
                                                         </div>
-                                                        <div className="card_slider_cnt">
+                                                        <div className="card_slider_cnt places_to_stay_cnt">
                                                             <h4><a href="#">In Search of Pandas</a></h4>
                                                             <ul>
                                                                 <li>Family Adventure to China</li>
@@ -229,7 +229,7 @@ function Index() {
                                                         <div className="card_slider_img">
                                                             <img src="images/country_card03.jpg" alt="country card03" className="img-fluid" />
                                                         </div>
-                                                        <div className="card_slider_cnt">
+                                                        <div className="card_slider_cnt places_to_stay_cnt">
                                                             <h4><a href="#">STYLISH HONEYMOON TO CHINA</a></h4>
                                                             <ul>
                                                                 <li>A Chinese Romance</li>
@@ -263,7 +263,7 @@ function Index() {
                                                         <a className="card_slider_img">
                                                             <img src="images/country_hotel01.jpg" alt="country_hotel01" className="img-fluid" />
                                                         </a>
-                                                        <div className="card_slider_cnt">
+                                                        <div className="card_slider_cnt places_to_stay_cnt">
                                                             <h4><a href="#">Capella Shanghai</a></h4>
                                                             <ul>
                                                                 <li>Location: Shanghai, Hangzhou & Eastern China | China</li>
@@ -283,7 +283,7 @@ function Index() {
                                                         <div className="card_slider_img">
                                                             <img src="images/country_hotel02.jpg" alt="country_hotel02" className="img-fluid" />
                                                         </div>
-                                                        <div className="card_slider_cnt">
+                                                        <div className="card_slider_cnt places_to_stay_cnt">
                                                             <h4><a href="#">Six Senses Qing Cheng Mountain</a></h4>
                                                             <ul>
                                                                 <li>Location: Xi'an, Sichuan & Central China | China</li>
@@ -303,7 +303,7 @@ function Index() {
                                                         <div className="card_slider_img">
                                                             <img src="images/country_hotel03.jpg" alt="country_hotel03" className="img-fluid" />
                                                         </div>
-                                                        <div className="card_slider_cnt">
+                                                        <div className="card_slider_cnt places_to_stay_cnt">
                                                             <h4><a href="#">Alila Yangshuo</a></h4>
                                                             <ul>
                                                                 <li>Location: Southern China | China</li>
@@ -715,7 +715,7 @@ function Index() {
                                                         <a className="card_slider_img">
                                                             <img src="images/country_card04.jpg" alt="country card04" className="img-fluid" />
                                                         </a>
-                                                        <div className="card_slider_cnt">
+                                                        <div className="card_slider_cnt places_to_stay_cnt">
                                                             <h4><a href="#">A Journey Through Cathay</a></h4>
                                                             <ul>
                                                                 <li>China in Classic Style</li>
@@ -739,7 +739,7 @@ function Index() {
                                                         <div className="card_slider_img">
                                                             <img src="images/country_card01.jpg" alt="country card01" className="img-fluid" />
                                                         </div>
-                                                        <div className="card_slider_cnt">
+                                                        <div className="card_slider_cnt places_to_stay_cnt">
                                                             <h4><a href="#">China Like an Emperor</a></h4>
                                                             <ul>
                                                                 <li>China in Ultimate Style</li>
@@ -763,7 +763,7 @@ function Index() {
                                                         <div className="card_slider_img">
                                                             <img src="images/country_card02.jpg" alt="country card02" className="img-fluid" />
                                                         </div>
-                                                        <div className="card_slider_cnt">
+                                                        <div className="card_slider_cnt places_to_stay_cnt">
                                                             <h4><a href="#">In Search of Pandas</a></h4>
                                                             <ul>
                                                                 <li>Family Adventure to China</li>
@@ -787,7 +787,7 @@ function Index() {
                                                         <div className="card_slider_img">
                                                             <img src="images/country_card05.jpg" alt="country card05" className="img-fluid" />
                                                         </div>
-                                                        <div className="card_slider_cnt">
+                                                        <div className="card_slider_cnt places_to_stay_cnt">
                                                             <h4><a href="#">Pandas, Temples and Terraces</a></h4>
                                                             <ul>
                                                                 <li>Southern China in Classic Style</li>
@@ -811,7 +811,7 @@ function Index() {
                                                         <div className="card_slider_img">
                                                             <img src="images/country_card03.jpg" alt="country card03" className="img-fluid" />
                                                         </div>
-                                                        <div className="card_slider_cnt">
+                                                        <div className="card_slider_cnt places_to_stay_cnt">
                                                             <h4><a href="#">STYLISH HONEYMOON TO CHINA</a></h4>
                                                             <ul>
                                                                 <li>A Chinese Romance</li>
@@ -835,7 +835,7 @@ function Index() {
                                                         <div className="card_slider_img">
                                                             <img src="images/country_card06.jpg" alt="country card06" className="img-fluid" />
                                                         </div>
-                                                        <div className="card_slider_cnt">
+                                                        <div className="card_slider_cnt places_to_stay_cnt">
                                                             <h4><a href="#">Down the Golden River</a></h4>
                                                             <ul>
                                                                 <li>China & Yangtze in Serious Style</li>
@@ -859,7 +859,7 @@ function Index() {
                                                         <div className="card_slider_img">
                                                             <img src="images/country_card07.jpg" alt="country card07" className="img-fluid" />
                                                         </div>
-                                                        <div className="card_slider_cnt">
+                                                        <div className="card_slider_cnt places_to_stay_cnt">
                                                             <h4><a href="#">Gardens, Water Towns & Misty Peaks</a></h4>
                                                             <ul>
                                                                 <li>Cultural Journey Through the Yangtze Delta & Huangshan Mountains</li>

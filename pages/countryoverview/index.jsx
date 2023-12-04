@@ -219,7 +219,10 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
     window.onload = () => {
       setTimeout(() => {
         const redirectUrl =
-          regionWiseUrl + `/destinations/${destinationcode}/${countrycode}`;
+          regionWiseUrl + `/destinations/${destinationcode}/${countrycode?.replace(
+            / /g,
+            "-"
+          )}`;
         if (redirectUrl) {
           router.push(redirectUrl);
         }
@@ -292,7 +295,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                             (element, index) =>
                               element.attributes.image_type == "thumbnail" ? (
                                 <img
-                                  key={index}
+                                  key={element.id}
                                   src={element.attributes.image_path}
                                   alt="destination card01"
                                   className="img-fluid"
@@ -303,7 +306,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                           )}
                           {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
                         </NavLink>
-                        <div className="card_slider_cnt">
+                        <div className="card_slider_cnt places_to_stay_cnt">
                           <NavLink href={generateDynamicLink(item)}>
                             <h4>
                               <a>
@@ -418,7 +421,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                             (element, index) =>
                               element.attributes.image_type == "thumbnail" ? (
                                 <img
-                                  key={index}
+                                  key={element.id}
                                   src={element.attributes.image_path}
                                   alt={element.attributes.image_alt_text}
                                   className="img-fluid"
@@ -427,11 +430,6 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                                 ""
                               )
                           )}
-                          {/* <img
-                                src=""
-                                alt="destination_hotel01"
-                                className="img-fluid"
-                              /> */}
                         </NavLink>
                         <div className="card_slider_cnt places_to_stay_cnt">
                           <h4>
@@ -442,10 +440,9 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                             {item?.attributes?.hotel_country_contents?.data?.map(
                               (item) => {
                                 return (
-                                  <li>
+                                  <li >
                                     Price guide:
                                     <span
-                                      key={item?.id}
                                       tabIndex="0"
                                       title={item?.attributes?.price_guide_text}
                                     >
@@ -476,7 +473,6 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                                 }}
                               />
                             </li>
-                            {/* <li>{item?.attributes?.intro_text}</li> */}
                             <li>
                               Best for:
                               <span>
@@ -517,8 +513,9 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                 </i>
               </div>
             </div>
-            {/* <div className="full_loader_parnt_blk loader_parnt_blk" style="display: block;"><div className="loader-circle-2"></div></div> */}
           </section>
+
+
 
           {/* <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
                 <div className="container">
@@ -539,7 +536,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                                                         )
                                                     ))}
                                                 </NavLink>
-                                                <div className="card_slider_cnt">
+                                                <div className="card_slider_cnt places_to_stay_cnt">
                                                     <h4><a href="#">{item?.attributes?.itin_name}</a></h4>
                                                     <ul>
                                                         <li>{item?.attributes?.header_text}</li>

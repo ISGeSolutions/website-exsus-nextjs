@@ -153,7 +153,7 @@ function Index() {
   };
 
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt"),
+    var elements = document.getElementsByClassName("card_slider_cnt places_to_stay_cnt"),
       allHeights = [],
       i = 0;
     if (resize === true) {

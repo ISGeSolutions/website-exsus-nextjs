@@ -139,7 +139,7 @@ function Index() {
                                     <a href="#" className="card_slider_img">
                                         <img src="images/month_slider01.jpg" alt="month-slider01" className="img-fluid" />
                                     </a>
-                                    <div className="card_slider_cnt">
+                                    <div className="card_slider_cnt places_to_stay_cnt">
                                         <h4><a href="#">JOURNEY INTO MIDDLE EARTH</a></h4>
                                         <ul>
                                             <li>Family Road Trip to New Zealand</li>
@@ -160,7 +160,7 @@ function Index() {
                                     <a href="#" className="card_slider_img">
                                         <img src="images/month_slider02.jpg" alt="month-slider02" className="img-fluid" />
                                     </a>
-                                    <div className="card_slider_cnt">
+                                    <div className="card_slider_cnt places_to_stay_cnt">
                                         <h4><a href="#">FLAGSHIP NORWAY</a></h4>
                                         <ul>
                                             <li>Norway in Exsus Signature Style</li>
@@ -181,7 +181,7 @@ function Index() {
                                     <a href="#" className="card_slider_img">
                                         <img src="images/month_slider03.jpg" alt="month_slider03" className="img-fluid" />
                                     </a>
-                                    <div className="card_slider_cnt">
+                                    <div className="card_slider_cnt places_to_stay_cnt">
                                         <h4><a href="#">THE KING & I</a></h4>
                                         <ul>
                                             <li>Seriously Stylish Island Hopping in Thailand</li>
@@ -202,7 +202,7 @@ function Index() {
                                     <a href="#" className="card_slider_img">
                                         <img src="images/month_slider04.jpg" alt="month_slider04" className="img-fluid" />
                                     </a>
-                                    <div className="card_slider_cnt">
+                                    <div className="card_slider_cnt places_to_stay_cnt">
                                         <h4><a href="#">Culture, Action and Relaxation</a></h4>
                                         <ul>
                                             <li>The Ultimate Colombia Adventure Holiday</li>
@@ -223,7 +223,7 @@ function Index() {
                                     <a href="#" className="card_slider_img">
                                         <img src="images/month_slider05.jpg" alt="month_slider05" className="img-fluid" />
                                     </a>
-                                    <div className="card_slider_cnt">
+                                    <div className="card_slider_cnt places_to_stay_cnt">
                                         <h4><a href="#">Ultimate Family Adventure to Swedish Lapland</a></h4>
                                         <ul>
                                             <li>Reindeer, Santa & the Northern Lights</li>

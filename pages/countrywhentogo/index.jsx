@@ -181,7 +181,10 @@ function CountryWhentogo(props) {
     window.onload = () => {
       setTimeout(() => {
         const redirectUrl =
-          regionWiseUrl + `/destinations/${destinationcode}/${countrycode}`;
+          regionWiseUrl + `/destinations/${destinationcode}/${countrycode?.replace(
+            / /g,
+            "-"
+          )}`;
         if (redirectUrl) {
           router.push(redirectUrl);
         }
@@ -204,10 +207,10 @@ function CountryWhentogo(props) {
       <section class="calender_blk_row light_dark_grey">
         <div class="container">
           <h3>
-            Our favourite experience-oriented trips to South Africa by month
+            Our favourite experience-oriented trips to ${countrycode} by month
           </h3>
           <p>
-            The team at Exsus has incorporated some of South Africa's best
+            The team at Exsus has incorporated some of ${countrycode}'s best
             experiences into recommended trips. Click on an experience to view
             each trip
           </p>

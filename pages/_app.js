@@ -213,7 +213,7 @@ function App({ Component, pageProps }) {
         src="/assets/javascripts/card-slider.js"
       ></Script>
       {/* <Script id="card-slider-height" type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></Script> */}
-      {/* <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script> */}
+      <Script id="card-slider02" type="text/javascript" src="/assets/javascripts/card-slider02.js"></Script>
       {/* <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script> */}
       <script
         type="text/javascript"

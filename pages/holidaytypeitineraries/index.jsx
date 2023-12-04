@@ -261,7 +261,7 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${modifiedName}`
+      `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${modifiedName}`
     );
   };
 
@@ -297,11 +297,11 @@ function Index() {
     } else {
       router.push(
         `advance-search?where=` +
-          data?.destination +
-          `&what=` +
-          data?.reason +
-          `&when=` +
-          data?.month
+        data?.destination +
+        `&what=` +
+        data?.reason +
+        `&when=` +
+        data?.month
       );
     }
   }
@@ -350,7 +350,7 @@ function Index() {
   };
 
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt"),
+    var elements = document.getElementsByClassName("card_slider_cnt places_to_stay_cnt"),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -405,7 +405,7 @@ function Index() {
         setHolidayName(x.data[0].attributes.holiday_type_group_name);
         setTitle(x.data[0].attributes.page_meta_title);
 
-        const imageCheck = x.data[0].attributes.holiday_type_group_images.data;
+        const imageCheck = x.data[0].attributes?.holiday_type_group_images?.data;
         setHolidaytypesDetails(x.data[0].attributes);
 
         // const oldText = x.data.attributes?.overview_text;
@@ -479,12 +479,13 @@ function Index() {
 
         const newBackgroundImages = [];
         imageCheck.forEach((element) => {
-          if (element.attributes.image_type == "banner") {
-            newBackgroundImages.push(element.attributes.image_path);
+          if (element?.attributes?.image_type == "banner") {
+            newBackgroundImages.push(element?.attributes?.image_path);
           } else if (element.attributes.image_type == "thumbnail") {
           }
         });
         setBackgroundImage(newBackgroundImages);
+        console.log(newBackgroundImages);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -518,8 +519,14 @@ function Index() {
       )}
       <Head>
         <title>{title}</title>
-        {/* <script type="text/javascript" src="/assets/javascripts/card-slider.js"></script> */}
-      </Head>
+        <script
+          type="text/javascript"
+          src="/assets/javascripts/card-slider.js"
+        ></script>
+        <script
+          type="text/javascript"
+          src="/assets/javascripts/card-slider02.js"
+        ></script>      </Head>
       {isLoading ? (
         // <MyLoader />
         <div
@@ -725,7 +732,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                      "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}
@@ -737,7 +744,7 @@ function Index() {
                                     )
                                 )}
                               </NavLink>
-                              <div className="card_slider_cnt">
+                              <div className="card_slider_cnt places_to_stay_cnt">
                                 <NavLink href={generateDynamicLink(item)}>
                                   <h4>
                                     <a>{item?.attributes?.itin_name}</a>
@@ -753,11 +760,9 @@ function Index() {
                                     )
                                     .map((res1) => (
                                       <li key={res1.id}>
-                                        {`from ${
-                                          res1.attributes?.currency_symbol ?? ""
-                                        }${
-                                          res1.attributes?.price ?? " xxxx"
-                                        } per person`}
+                                        {`from ${res1.attributes?.currency_symbol ?? ""
+                                          }${res1.attributes?.price ?? " xxxx"
+                                          } per person`}
                                       </li>
                                     ))}
                                   <li>

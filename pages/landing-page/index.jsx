@@ -334,7 +334,7 @@ function Index() {
                                     <a className="card_slider_img">
                                         <img src="images/card_slider01.jpg" alt="slider image 01" className="img-fluid" />
                                     </a>
-                                    <div className="card_slider_cnt">
+                                    <div className="card_slider_cnt places_to_stay_cnt">
                                         <h4>Luxury Holidays to Egypt</h4>
                                         <ul>
                                             <li>Egypt</li>
@@ -354,7 +354,7 @@ function Index() {
                                     <div className="card_slider_img">
                                         <img src="images/card_slider02.jpg" alt="slider image 02" className="img-fluid" />
                                     </div>
-                                    <div className="card_slider_cnt">
+                                    <div className="card_slider_cnt places_to_stay_cnt">
                                         <h4>Luxury India train journey: Delhi to Mumbai</h4>
                                         <ul>
                                             <li>India</li>
@@ -374,7 +374,7 @@ function Index() {
                                     <div className="card_slider_img">
                                         <img src="images/card_slider03.jpg" alt="slider image 03" className="img-fluid" />
                                     </div>
-                                    <div className="card_slider_cnt">
+                                    <div className="card_slider_cnt places_to_stay_cnt">
                                         <h4>Magical Maldives holiday</h4>
                                         <ul>
                                             <li>Maldives</li>
@@ -394,7 +394,7 @@ function Index() {
                                     <div className="card_slider_img">
                                         <img src="images/card_slider04.jpg" alt="slider image 04" className="img-fluid" />
                                     </div>
-                                    <div className="card_slider_cnt">
+                                    <div className="card_slider_cnt places_to_stay_cnt">
                                         <h4>Masai Mara Migration</h4>
                                         <ul>
                                             <li>Kenya</li>
@@ -414,7 +414,7 @@ function Index() {
                                     <div className="card_slider_img">
                                         <img src="images/card_slider05.jpg" alt="slider image 05" className="img-fluid" />
                                     </div>
-                                    <div className="card_slider_cnt">
+                                    <div className="card_slider_cnt places_to_stay_cnt">
                                         <h4>A luxury british isles cruise</h4>
                                         <ul>
                                             <li>UK</li>
@@ -433,7 +433,7 @@ function Index() {
                                     <div className="card_slider_img">
                                         <img src="images/card_slider06.jpg" alt="slider image 06" className="img-fluid" />
                                     </div>
-                                    <div className="card_slider_cnt">
+                                    <div className="card_slider_cnt places_to_stay_cnt">
                                         <h4>Big game & grapevines</h4>
                                         <ul>
                                             <li>South Africa</li>

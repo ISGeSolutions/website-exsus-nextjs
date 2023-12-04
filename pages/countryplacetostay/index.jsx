@@ -389,7 +389,10 @@ function CountryPlaceToStay(props) {
     window.onload = () => {
       setTimeout(() => {
         const redirectUrl =
-          regionWiseUrl + `/destinations/${destinationcode}/${countrycode}`;
+          regionWiseUrl + `/destinations/${destinationcode}/${countrycode?.replace(
+            / /g,
+            "-"
+          )}`;
         if (redirectUrl) {
           router.push(redirectUrl);
         }

@@ -43,7 +43,7 @@ function Index() {
   }
 
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt"),
+    var elements = document.getElementsByClassName("card_slider_cnt places_to_stay_cnt"),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -173,9 +173,9 @@ function Index() {
 
   equalHeight(true);
 
-  const overTextFun = (text) => {
-    return text?.replace(/\\n/g, "");
-  };
+  // const overTextFun = (text) => {
+  //   return text?.replace(/\\n/g, "");
+  // };
 
   useEffect(() => {
     // console.log(itin_name)
@@ -227,6 +227,7 @@ function Index() {
       .getItineraryDetails(itin_name, region)
       .then((x) => {
         setItineraries(x.data[0]);
+        console.log(x.data[0]);
         const bannerImages = [];
         const imageCheck = x.data[0]?.attributes?.itinerary_images?.data;
         console.log(imageCheck);
@@ -259,15 +260,17 @@ function Index() {
     <>
       <Head>
         <title>{title}</title>
-        {/* <script
+        <script
           type="text/javascript"
           src="/assets/javascripts/card-slider.js"
         ></script>
         <script
           type="text/javascript"
           src="/assets/javascripts/card-slider02.js"
-        ></script> */}
+        ></script>
         {/* <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script> */}
+        <title>{dictioneryFunction(itineraries?.attributes?.meta_title)}</title>
+        <meta content={dictioneryFunction(itineraries?.attributes?.meta_description)}></meta>
       </Head>
       {isLoading ? (
         // <MyLoader />
@@ -441,40 +444,32 @@ function Index() {
                 <div className="row">
                   <div className="col-sm-9">
                     <div className="country_highlight_inr">
-                      <span>Perfect for</span>
-                      <p
-                        dangerouslySetInnerHTML={{
-                          __html: itineraries?.attributes?.perfect_for_text,
-                        }}
-                      ></p>
-                      {/* <p>
-                        {/* dangerouslySetInnerHTML=
-                        {{
-                          __html: itineraries?.attributes?.perfect_for_text,
-                        // }} */}
-                      {/* {itineraries?.attributes?.perfect_for_text} */}
-                      {/* </p>  */}
                       <p>
-                        <span>In the know</span>Combine your holiday in China
-                        with a stopover in glamorous{" "}
-                        <span className="me-0 text-capitalize">Dubai</span>.
+                        <span>Perfect for</span>{itineraries?.attributes?.perfect_for_text}
+                      </p>
+                      <p>
+                        <span>In the know</span>{itineraries?.attributes?.in_the_know_text}
                       </p>
                     </div>
                   </div>
+                  {/* <div className="col-sm-3">
+                    <div className="itinery_highlight_inr">
+                      <h4>Best for</h4>
+                      <ul>
+                        {itineraries?.attributes?.best_for_text?.replace(/{|'}|(\s*)/g, '').split(',').map((value, index) => (
+                          <li key={index}>{value}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div> */}
                   <div className="col-sm-3">
                     <div className="itinery_highlight_inr">
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: itineraries?.attributes?.best_for_text,
-                        }}
-                      />
-                      {/* <ul>
-                                        <li>Best for</li>
-                                        <li>Seriously special</li>
-                                        <li>Luxury hotel</li>
-                                        <li>Cultural immersion</li>
-                                        <li>Honeymoon</li>
-                                    </ul> */}
+                      <ul>
+                        <li>Best for</li>
+                        {itineraries?.attributes?.best_for_text?.replace(/{|'}|(\s*)/g, '')?.split(',')?.map((value, index) => (
+                          <li key={index}>{value}</li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
                 </div>
@@ -514,7 +509,7 @@ function Index() {
                           {/* <h3><span>3 nights</span>BEIJING</h3> */}
                           <div
                             dangerouslySetInnerHTML={{
-                              __html: overTextFun(
+                              __html: dictioneryFunction(
                                 element?.attributes?.overview_text
                               ),
                             }}
@@ -755,7 +750,7 @@ function Index() {
                           className="img-fluid"
                         />
                       </a>
-                      <div className="card_slider_cnt">
+                      <div className="card_slider_cnt places_to_stay_cnt">
                         <h4>Aman Summer Palace</h4>
                         <ul>
                           <li>Location: Beijing & Northern China | China</li>
@@ -797,7 +792,7 @@ function Index() {
                           className="img-fluid"
                         />
                       </div>
-                      <div className="card_slider_cnt">
+                      <div className="card_slider_cnt places_to_stay_cnt">
                         <h4>Amandayan</h4>
                         <ul>
                           <li>Location: Yunnan | China</li>
@@ -839,7 +834,7 @@ function Index() {
                           className="img-fluid"
                         />
                       </div>
-                      <div className="card_slider_cnt">
+                      <div className="card_slider_cnt places_to_stay_cnt">
                         <h4>Amanfayun</h4>
                         <ul>
                           <li>
@@ -883,7 +878,7 @@ function Index() {
                           className="img-fluid"
                         />
                       </div>
-                      <div className="card_slider_cnt">
+                      <div className="card_slider_cnt places_to_stay_cnt">
                         <h4>The Peninsula Shanghai</h4>
                         <ul>
                           <li>
@@ -942,7 +937,7 @@ function Index() {
 
           <section className="favrites_blk_row light_grey">
             <div className="container">
-              <h3 className="title_cls">More itineraries in {countries}</h3>
+              <h3 className="title_cls">More itineraries in {itineraries?.attributes?.country?.data?.attributes?.country_name}</h3>
               <div className="card_slider_row01">
                 <i id="leftt">
                   <svg
@@ -971,7 +966,7 @@ function Index() {
                           className="img-fluid"
                         />
                       </a>
-                      <div className="card_slider_cnt">
+                      <div className="card_slider_cnt places_to_stay_cnt">
                         <h4>
                           <a href="#">A Journey Through Cathay</a>
                         </h4>
@@ -1008,7 +1003,7 @@ function Index() {
                           className="img-fluid"
                         />
                       </div>
-                      <div className="card_slider_cnt">
+                      <div className="card_slider_cnt places_to_stay_cnt">
                         <h4>
                           <a href="#">In Search of Pandas</a>
                         </h4>
@@ -1045,7 +1040,7 @@ function Index() {
                           className="img-fluid"
                         />
                       </div>
-                      <div className="card_slider_cnt">
+                      <div className="card_slider_cnt places_to_stay_cnt">
                         <h4>
                           <a href="#">STYLISH HONEYMOON TO CHINA</a>
                         </h4>
@@ -1081,7 +1076,7 @@ function Index() {
                           className="img-fluid"
                         />
                       </div>
-                      <div className="card_slider_cnt">
+                      <div className="card_slider_cnt places_to_stay_cnt">
                         <h4>
                           <a href="#">Down the Golden River</a>
                         </h4>
@@ -1165,7 +1160,7 @@ function Index() {
                                     )
                                 )}
                               </NavLink>
-                              <div className="card_slider_cnt">
+                              <div className="card_slider_cnt places_to_stay_cnt">
                                 <NavLink
                                   href={generateDynamicLink(
                                     item?.attributes?.itin_name

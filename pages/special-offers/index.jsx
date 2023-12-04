@@ -47,7 +47,7 @@ function Index() {
   };
 
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt"),
+    var elements = document.getElementsByClassName("card_slider_cnt places_to_stay_cnt"),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -347,7 +347,7 @@ function Index() {
                                 </span>
                               </span>
                             </NavLink>
-                            <div className="card_slider_cnt">
+                            <div className="card_slider_cnt places_to_stay_cnt">
                               <NavLink
                                 key={res?.id}
                                 href={generateDynamicLink(res?.id)}

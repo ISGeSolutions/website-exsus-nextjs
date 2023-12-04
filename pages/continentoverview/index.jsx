@@ -88,7 +88,7 @@ function ContinentOverview({ sendDataToParent }) {
   // };
 
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt"),
+    var elements = document.getElementsByClassName("card_slider_cnt places_to_stay_cnt"),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -365,7 +365,7 @@ function ContinentOverview({ sendDataToParent }) {
               <div className="card_slider_row">
                 <div className="carousel00 region_carousel00">
                   <div className="row">
-                    {itineraries?.map((item) => (
+                    {itineraries?.slice(0, 8).map((item) => (
                       <div
                         className="col-sm-6 col-lg-4 col-xxl-3"
                         key={item.id}
@@ -393,7 +393,7 @@ function ContinentOverview({ sendDataToParent }) {
                                   )
                               )}
                             </NavLink>
-                            <div className="card_slider_cnt">
+                            <div className="card_slider_cnt places_to_stay_cnt">
                               <NavLink
                                 href={generateDynamicLink(
                                   item?.attributes?.itin_name
