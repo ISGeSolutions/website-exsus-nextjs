@@ -30,6 +30,7 @@ function CountryItinararies(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [countryData, setCountryData] = useState(props?.data);
   const [alert, setAlert] = useState(null);
+  const [regionOptions, setAllRegion] = useState([]);
   const destinationcode = router.query?.continent
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
@@ -206,7 +207,6 @@ function CountryItinararies(props) {
   };
 
   const countryOptions = [
-    { value: "", label: "Filter by region" },
     { value: "Asia", label: "Asia" },
     { value: "Hong Kong & Macau", label: "Hong Kong & Macau" },
     { value: "Malaysia & Borneo", label: "Malaysia & Borneo" },
@@ -221,49 +221,7 @@ function CountryItinararies(props) {
     { value: "Laos", label: "Laos" },
   ];
 
-  const regionOptions = [
-    { value: "", label: "Filter by region" },
-    { value: "Everything", label: "Everything" },
-    { value: "Barefoot", label: "Barefoot" },
-    { value: "Beach", label: "Beach" },
-    { value: "Boutique hotel", label: "Boutique hotel" },
-    { value: "Chic design", label: "Chic design" },
-    { value: "Cultural Immersion", label: "Cultural Immersion" },
-    { value: "Eco tourism", label: "Eco tourism" },
-    { value: "Family-Friendly", label: "Family-Friendly" },
-    { value: "Food & Wine", label: "Food & Wine" },
-    { value: "Guiding", label: "Guiding" },
-    { value: "Hideaway", label: "Hideaway" },
-    { value: "Honeymoon", label: "Honeymoon" },
-    { value: "Lodge", label: "Lodge" },
-    { value: "Luxury hotel", label: "Luxury Hotel" },
-    { value: "Off the beaten track", label: "Off the beaten track" },
-    { value: "Owner run", label: "Owner run" },
-    { value: "Peace & quiet", label: "Peace & quiet" },
-    { value: "Private groups", label: "Private groups" },
-    { value: "Romantic", label: "Romantic" },
-    { value: "Rustic", label: "Rustic" },
-    { value: "Seriously special", label: "Seriously special" },
-    { value: "Service & Hospitality", label: "Service & Hospitality" },
-    { value: "Setting & Views", label: "Setting & Views" },
-    { value: "Snorkelling & Driving", label: "Snorkelling & Driving" },
-    { value: "Spa & Wellness", label: "Spa & Wellness" },
-    { value: "Unusal", label: "Unusal" },
-    { value: "Village life", label: "Village life" },
-    { value: "Walking & trekking", label: "Walking & trekking" },
-    { value: "Water activities", label: "Water activities" },
-    { value: "Wildlife & Nature", label: "Wildlife & Nature" },
-    { value: "Adventure", label: "Adventure" },
-    { value: "Couples", label: "Couples" },
-    { value: "Educational", label: "Educational" },
-    { value: "Multi-activity", label: "Multi-activity" },
-    { value: "Teenagers", label: "Teenagers" },
-    { value: "Landscapes & Scenery", label: "Landscapes & Scenery" },
-    { value: "City hotel", label: "City hotel" },
-  ];
-
   const monthOptions = [
-    { value: "", label: "Filter by month" },
     { value: "All months", label: "All months" },
     { value: "January", label: "January" },
     { value: "February", label: "February" },
@@ -333,17 +291,16 @@ function CountryItinararies(props) {
     } else {
       router.push(
         `advance-search?where=` +
-        e?.destination +
-        `&what=` +
-        e?.reason +
-        `&when=` +
-        e?.month
+          e?.destination +
+          `&what=` +
+          e?.reason +
+          `&when=` +
+          e?.month
       );
     }
   }
 
   const loadMoreData = (item) => {
-    // debugger;
     destinationService
       .getCountryWiseItinerary(countrycode, page + 1, item, region)
       .then((response) => {
@@ -387,10 +344,10 @@ function CountryItinararies(props) {
     const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
-        / /g,
-        "-"
-      )}/${countrycode}-iteneraries/${modifiedName}`
+        `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
+          / /g,
+          "-"
+        )}/${countrycode}-iteneraries/${modifiedName}`
     );
   };
 
@@ -418,14 +375,25 @@ function CountryItinararies(props) {
   equalHeight(true);
 
   useEffect(() => {
-    setSelectedOptionCountry(countryOptions[0]);
-    setSelectedOptionRegion(regionOptions[0]);
-    setSelectedOptionMonth(monthOptions[0]);
+    setSelectedOptionCountry();
+    setSelectedOptionRegion();
+    setSelectedOptionMonth();
 
     loadMoreData(activeItem);
     // destinationService.getDestinationDetails(destinationcode).then((x) => {
     // });
     window.addEventListener("resize", equalHeight(true));
+
+    destinationService.getPropertyTypeDropDown().then((x) => {
+      setAllRegion(
+        x.data?.map((item) => ({
+          //id: i.id,
+          property_type_code: item?.attributes?.property_type_code,
+          value: item?.attributes?.property_type_name,
+          label: item?.attributes?.property_type_name,
+        }))
+      );
+    });
 
     // Using window.onload to detect full page load
     window.onload = () => {
@@ -487,7 +455,7 @@ function CountryItinararies(props) {
                                 instanceId="long-value-select"
                                 className="select_container_country"
                                 classNamePrefix="select_country"
-                                placeholder="Filter by region"
+                                placeholder={"Filter by region"}
                                 styles={styles}
                                 isMulti
                                 isDisabled={isDisabled}
@@ -508,8 +476,7 @@ function CountryItinararies(props) {
                             </div>
                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                               <Select
-                                placeholder="Filter by reason"
-                                // defaultValue={regionOptions[0]}
+                                placeholder={"Filter by reason"}
                                 className="select_container_country"
                                 classNamePrefix="select_country"
                                 isDisabled={isDisabled}
@@ -520,10 +487,9 @@ function CountryItinararies(props) {
                                 styles={styles}
                                 closeMenuOnSelect={false}
                                 isSearchable={isSearchable}
-                                name="color"
                                 options={regionOptions}
                                 isMulti
-                                // value={selectedOptionRegion}
+                                value={selectedOptionRegion}
                                 onChange={handleOptionRegionChange}
                                 components={{
                                   Option: InputOption,
@@ -649,7 +615,7 @@ function CountryItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -683,9 +649,11 @@ function CountryItinararies(props) {
                                   )
                                   .map((res1) => (
                                     <li key={res1.id}>
-                                      {`from ${res1.attributes?.currency_symbol ?? ""
-                                        }${res1.attributes?.price ?? " xxxx"
-                                        } per person`}
+                                      {`from ${
+                                        res1.attributes?.currency_symbol ?? ""
+                                      }${
+                                        res1.attributes?.price ?? " xxxx"
+                                      } per person`}
                                     </li>
                                   ))}
                                 <li>

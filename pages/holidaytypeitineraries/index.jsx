@@ -37,10 +37,12 @@ function Index() {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isLoader, setIsLoader] = useState(false);
   const [isRtl, setIsRtl] = useState(false);
-  const [selectedOptionMonth, selectedOptionData] = useState(null);
   const [title, setTitle] = useState("");
   const [alert, setAlert] = useState(null);
   const [activeItem, setActiveItem] = useState("recommended");
+  const [selectedOptionDestination, setSelectedOptionDestination] =
+    useState(null);
+  const [destinationOptions, setAllDestination] = useState([]);
 
   const hcode = router?.query?.holidaytypeitineraries
     ?.replace(/-and-/g, " & ")
@@ -319,11 +321,11 @@ function Index() {
     setIsModalOpen(false);
   };
 
-  const handleOptionChange = (selectedOption) => {
+  const handleOptionCountryChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    selectedOptionData(selectedOption);
+    setSelectedOptionDestination(selectedOption);
   };
 
   // const generateDynamicLink = (item) => {
@@ -394,7 +396,7 @@ function Index() {
   };
 
   useEffect(() => {
-    selectedOptionData(optionsData[0]);
+    setSelectedOptionDestination();
     holidaytypesService
       .getHolidaytypeDetails(hcode)
       .then((x) => {
@@ -501,10 +503,16 @@ function Index() {
         setIsLoading(false);
       });
 
-    // destinationService.getAllItineraries().then(x => {
-    //     setItineraries(x.data);
-    //     setIsLoading(false);
-    // });
+    holidaytypesService.getDestinationDropDown().then((x) => {
+      setAllDestination(
+        x.data?.map((item) => ({
+          //id: i.id,
+          destination_code: item?.attributes?.destination_code,
+          value: item?.attributes?.destination_name,
+          label: item?.attributes?.destination_name,
+        }))
+      );
+    });
 
     loadMoreData(activeItem);
 
@@ -599,26 +607,25 @@ function Index() {
                       <div className="col-12">
                         <div className="destination_dropdwn_row d-block d-md-flex">
                           <div className="banner_dropdwn_blk">
-                            <div className="select_drpdwn">
+                            <div className="banner_dropdwn_blk ps-0 ps-md-2">
                               <Select
-                                defaultValue="destination"
                                 id="long-value-select"
-                                placeholder={"Filter by destinations"}
+                                instanceId="long-value-select"
                                 className="select_container_country"
                                 classNamePrefix="select_country"
+                                placeholder={"Filter by destination "}
+                                styles={styles}
+                                isMulti
                                 isDisabled={isDisabled}
-                                isLoading={isLoading}
+                                isLoading={isLoader}
                                 isClearable={isClearable}
                                 isRtl={isRtl}
-                                styles={styles}
                                 isSearchable={isSearchable}
-                                name="color"
-                                options={optionsData}
-                                isMulti
-                                hideSelectedOptions={false}
+                                value={selectedOptionDestination}
+                                onChange={handleOptionCountryChange}
                                 closeMenuOnSelect={false}
-                                onChange={handleOptionChange}
-                                value={selectedOptionMonth}
+                                hideSelectedOptions={false}
+                                options={destinationOptions}
                                 components={{
                                   Option: InputOption,
                                   MultiValue: CustomMultiValue,

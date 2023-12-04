@@ -116,6 +116,7 @@ function ContinentItinararies(props) {
     .replace(/-/g, " ")
     .toLowerCase();
   const [countryOptions, setAllCountries] = useState([]);
+  const [regionOptions, setAllRegion] = useState([]);
   const [destination, setdestination] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [activeItem, setActiveItem] = useState("recommended");
@@ -189,46 +190,6 @@ function ContinentItinararies(props) {
   //     { value: "Laos", label: "Laos" }
   // ];
 
-  const regionOptions = [
-    { value: "Everything", label: "Everything" },
-    { value: "Barefoot", label: "Barefoot" },
-    { value: "Beach", label: "Beach" },
-    { value: "Boutique hotel", label: "Boutique hotel" },
-    { value: "Chic design", label: "Chic design" },
-    { value: "Cultural Immersion", label: "Cultural Immersion" },
-    { value: "Eco tourism", label: "Eco tourism" },
-    { value: "Family-Friendly", label: "Family-Friendly" },
-    { value: "Food & Wine", label: "Food & Wine" },
-    { value: "Guiding", label: "Guiding" },
-    { value: "Hideaway", label: "Hideaway" },
-    { value: "Honeymoon", label: "Honeymoon" },
-    { value: "Lodge", label: "Lodge" },
-    { value: "Luxury hotel", label: "Luxury Hotel" },
-    { value: "Off the beaten track", label: "Off the beaten track" },
-    { value: "Owner run", label: "Owner run" },
-    { value: "Peace & quiet", label: "Peace & quiet" },
-    { value: "Private groups", label: "Private groups" },
-    { value: "Romantic", label: "Romantic" },
-    { value: "Rustic", label: "Rustic" },
-    { value: "Seriously special", label: "Seriously special" },
-    { value: "Service & Hospitality", label: "Service & Hospitality" },
-    { value: "Setting & Views", label: "Setting & Views" },
-    { value: "Snorkelling & Driving", label: "Snorkelling & Driving" },
-    { value: "Spa & Wellness", label: "Spa & Wellness" },
-    { value: "Unusal", label: "Unusal" },
-    { value: "Village life", label: "Village life" },
-    { value: "Walking & trekking", label: "Walking & trekking" },
-    { value: "Water activities", label: "Water activities" },
-    { value: "Wildlife & Nature", label: "Wildlife & Nature" },
-    { value: "Adventure", label: "Adventure" },
-    { value: "Couples", label: "Couples" },
-    { value: "Educational", label: "Educational" },
-    { value: "Multi-activity", label: "Multi-activity" },
-    { value: "Teenagers", label: "Teenagers" },
-    { value: "Landscapes & Scenery", label: "Landscapes & Scenery" },
-    { value: "City hotel", label: "City hotel" },
-  ];
-
   const monthOptions = [
     { value: "All months", label: "All months" },
     { value: "January", label: "January" },
@@ -271,20 +232,20 @@ function ContinentItinararies(props) {
   };
 
   function onSubmit(data) {
-    // console.log("Selected Countries:", selectedOptionCountry);
-    // console.log("Selected Regions:", selectedOptionRegion);
-    // console.log("Selected Months:", selectedOptionMonth);
+    console.log("Selected Countries:", selectedOptionCountry);
+    console.log("Selected Regions:", selectedOptionRegion);
+    console.log("Selected Months:", selectedOptionMonth);
 
     if (!data.destination && !data.reason && !data.month) {
       showAlert("Please select atleast one option", "error");
     } else {
       router.push(
         `advance-search?where=` +
-        data?.destination +
-        `&what=` +
-        data?.reason +
-        `&when=` +
-        data?.month
+          data?.destination +
+          `&what=` +
+          data?.reason +
+          `&when=` +
+          data?.month
       );
     }
   }
@@ -301,7 +262,7 @@ function ContinentItinararies(props) {
     const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${modifiedName}`
+        `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${modifiedName}`
     );
   };
 
@@ -377,7 +338,6 @@ function ContinentItinararies(props) {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-
         // debugger;
         // You can access it using localStorage.getItem('yourKey')
 
@@ -387,27 +347,27 @@ function ContinentItinararies(props) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(matches, region, modifiedString);
+                modifiedString = websiteContentCheck(
+                  matches,
+                  region,
+                  modifiedString
+                );
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
               }
               const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
               if (checkStr && replacement) {
-                modifiedString = modifiedString.replace(
-                  checkStr,
-                  replacement
-                );
+                modifiedString = modifiedString.replace(checkStr, replacement);
               }
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {
-          }
+          } catch (error) {}
         }
       }
     }
-  }
+  };
 
   equalHeight(true);
 
@@ -434,6 +394,17 @@ function ContinentItinararies(props) {
       .catch((error) => {
         setIsLoading(false);
       });
+
+    destinationService.getPropertyTypeDropDown().then((x) => {
+      setAllRegion(
+        x.data?.map((item) => ({
+          //id: i.id,
+          property_type_code: item?.attributes?.property_type_code,
+          value: item?.attributes?.property_type_name,
+          label: item?.attributes?.property_type_name,
+        }))
+      );
+    });
 
     window.addEventListener("resize", equalHeight(true));
 
@@ -468,7 +439,13 @@ function ContinentItinararies(props) {
         <div>
           <div className="container">
             <section className="destination_para">
-              <div dangerouslySetInnerHTML={{ __html: dictioneryFunction(destination.itineraries_intro_text) }} />
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: dictioneryFunction(
+                    destination.itineraries_intro_text
+                  ),
+                }}
+              />
             </section>
           </div>
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
@@ -512,8 +489,7 @@ function ContinentItinararies(props) {
                             </div>
                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                               <Select
-                                placeholder="Filter by region"
-                                // defaultValue={regionOptions[0]}
+                                placeholder={"Filter by reason"}
                                 className="select_container_country"
                                 classNamePrefix="select_country"
                                 isDisabled={isDisabled}
@@ -526,7 +502,7 @@ function ContinentItinararies(props) {
                                 isSearchable={isSearchable}
                                 options={regionOptions}
                                 isMulti
-                                // value={selectedOptionRegion}
+                                value={selectedOptionRegion}
                                 onChange={handleOptionRegionChange}
                                 components={{
                                   Option: InputOption,
@@ -536,10 +512,9 @@ function ContinentItinararies(props) {
                             </div>
                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                               <Select
-                                placeholder="Filter by month"
+                                placeholder={"Filter by month"}
                                 className="select_container_country"
                                 classNamePrefix="select_country"
-                                // defaultValue={monthOptions[0]}
                                 isDisabled={isDisabled}
                                 isLoading={isLoader}
                                 isClearable={isClearable}
@@ -550,7 +525,7 @@ function ContinentItinararies(props) {
                                 options={monthOptions}
                                 hideSelectedOptions={false}
                                 isMulti
-                                // value={selectedOptionMonth}
+                                value={selectedOptionMonth}
                                 onChange={handleOptionMonthChange}
                                 components={{
                                   Option: InputOption,
@@ -596,36 +571,46 @@ function ContinentItinararies(props) {
                           <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
                             {/* <li><a className={activeItem === 'price' ? 'active' : ''} onClick={() => handleFilterClick('price')}>By price</a></li> */}
                             <li>
-                              <a
-                                className={
-                                  activeItem === "recommended" ? "active" : ""
-                                }
-                                onClick={() => handleFilterClick("recommended")}
-                              >
-                                Recommended
-                              </a>
+                              <div>
+                                <a
+                                  className={
+                                    activeItem === "recommended" ? "active" : ""
+                                  }
+                                  onClick={() =>
+                                    handleFilterClick("recommended")
+                                  }
+                                >
+                                  Recommended
+                                </a>
+                              </div>
                             </li>
                             <li>
-                              <a
-                                className={
-                                  activeItem === "alphabetical" ? "active" : ""
-                                }
-                                onClick={() =>
-                                  handleFilterClick("alphabetical")
-                                }
-                              >
-                                Alphabetical
-                              </a>
+                              <div>
+                                <a
+                                  className={
+                                    activeItem === "alphabetical"
+                                      ? "active"
+                                      : ""
+                                  }
+                                  onClick={() =>
+                                    handleFilterClick("alphabetical")
+                                  }
+                                >
+                                  Alphabetical
+                                </a>
+                              </div>
                             </li>
                             <li>
-                              <a
-                                className={
-                                  activeItem === "duration" ? "active" : ""
-                                }
-                                onClick={() => handleFilterClick("duration")}
-                              >
-                                By duration
-                              </a>
+                              <div>
+                                <a
+                                  className={
+                                    activeItem === "duration" ? "active" : ""
+                                  }
+                                  onClick={() => handleFilterClick("duration")}
+                                >
+                                  By duration
+                                </a>
+                              </div>
                             </li>
                           </ul>
                         </div>
@@ -649,7 +634,7 @@ function ContinentItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -668,20 +653,31 @@ function ContinentItinararies(props) {
                                 )}
                               >
                                 <h4>
-                                  <a>{dictioneryFunction(item?.attributes?.itin_name)}</a>
+                                  <a>
+                                    {dictioneryFunction(
+                                      item?.attributes?.itin_name
+                                    )}
+                                  </a>
                                 </h4>
                               </NavLink>
                               <ul>
                                 <li>{item?.attributes?.sub_header_text}</li>
                                 {item?.attributes?.itinerary_country_contents?.data
-                                  .filter(res => res.attributes.website_country.toLowerCase() === region)
-                                  .map(res1 => (
+                                  .filter(
+                                    (res) =>
+                                      res.attributes.website_country.toLowerCase() ===
+                                      region
+                                  )
+                                  .map((res1) => (
                                     <li key={res1.id}>
-                                      {`from ${res1.attributes?.currency_symbol ?? ''}${res1.attributes?.price ?? ' xxxx'} per person`}
+                                      {`from ${
+                                        res1.attributes?.currency_symbol ?? ""
+                                      }${
+                                        res1.attributes?.price ?? " xxxx"
+                                      } per person`}
                                     </li>
                                   ))}
-                                <li>
-                                </li>
+                                <li></li>
                                 <li>
                                   Travel to:
                                   <span>
