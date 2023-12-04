@@ -6,6 +6,7 @@ import { aboutusService } from "services";
 import { NavLink } from "components";
 import { useRouter } from "next/router";
 import Iframe from "react-iframe";
+import Head from "next/head";
 
 var React = require("react");
 
@@ -188,7 +189,19 @@ function Index() {
   }, [hotelName]);
 
   return (
-    <Layout>
+    <>
+      <Head>
+        <script
+          type="text/javascript"
+          src="/assets/javascripts/card-slider.js"
+        ></script>
+        <title>{dictioneryFunction(hotelData?.meta_title)}</title>
+        <meta content={dictioneryFunction(hotelData?.meta_description)}></meta>
+        {/* <script
+          type="text/javascript"
+          src="/assets/javascripts/card-slider-equal-height.js"
+        ></script> */}
+      </Head>
       {isLoading ? (
         // <MyLoader />
         <div
@@ -667,7 +680,7 @@ function Index() {
                                     <a className="card_slider_img">
                                         <img src="images/region_hotel02.jpg" alt="region_hotel02" className="img-fluid" />
                                     </a>
-                                    <div className="card_slider_cnt">
+                                    <div className="card_slider_cnt places_to_stay_cnt">
                                         <h4><a >The Opposite House</a></h4>
                                         <ul>
                                             <li>Location: Beijing &amp; Northern China | China</li>
@@ -686,7 +699,7 @@ function Index() {
                                     <a className="card_slider_img">
                                         <img src="images/country_hotel06.jpg" alt="country_hotel06" className="img-fluid" />
                                     </a>
-                                    <div className="card_slider_cnt">
+                                    <div className="card_slider_cnt places_to_stay_cnt">
                                         <h4><a >Aman Summer Palace</a></h4>
                                         <ul>
                                             <li>Location: Beijing &amp; Northern China | China</li>
@@ -705,7 +718,7 @@ function Index() {
                                     <a className="card_slider_img">
                                         <img src="images/region_hotel03.jpg" alt="region_hotel03" className="img-fluid" />
                                     </a>
-                                    <div className="card_slider_cnt">
+                                    <div className="card_slider_cnt places_to_stay_cnt">
                                         <h4><a >Jing's Residence</a></h4>
                                         <ul>
                                             <li>Location: Beijing &amp; Northern China | China</li>
@@ -724,7 +737,7 @@ function Index() {
                                     <a className="card_slider_img">
                                         <img src="images/region_hotel01.jpg" alt="region_hotel01" className="img-fluid" />
                                     </a>
-                                    <div className="card_slider_cnt">
+                                    <div className="card_slider_cnt places_to_stay_cnt">
                                         <h4><a >Four Seasons Beijing</a></h4>
                                         <ul>
                                             <li>Location: Beijing &amp; Northern China | China</li>
@@ -759,6 +772,7 @@ function Index() {
           </section>
         </div>
       )}
-    </Layout>
+    </>
   );
 }
+

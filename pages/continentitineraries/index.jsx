@@ -274,7 +274,7 @@ function ContinentItinararies(props) {
   };
 
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt"),
+    var elements = document.getElementsByClassName("card_slider_cnt places_to_stay_cnt"),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -646,7 +646,7 @@ function ContinentItinararies(props) {
                                   )
                               )}
                             </NavLink>
-                            <div className="card_slider_cnt">
+                            <div className="card_slider_cnt places_to_stay_cnt">
                               <NavLink
                                 href={generateDynamicLink(
                                   item?.attributes?.itin_name

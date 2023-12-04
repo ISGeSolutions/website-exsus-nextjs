@@ -282,7 +282,7 @@ function RegionItinararies(props) {
   };
 
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt"),
+    var elements = document.getElementsByClassName("card_slider_cnt places_to_stay_cnt"),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -514,7 +514,7 @@ function RegionItinararies(props) {
                               )}
                               {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
                             </NavLink>
-                            <div className="card_slider_cnt">
+                            <div className="card_slider_cnt places_to_stay_cnt">
                               <h4>
                                 <a href="#">{item?.attributes?.itin_name}</a>
                               </h4>

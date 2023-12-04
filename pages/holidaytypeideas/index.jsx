@@ -230,7 +230,7 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${modifiedName}`
+      `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${modifiedName}`
     );
   };
 
@@ -264,11 +264,11 @@ function Index() {
     } else {
       router.push(
         `advance-search?where=` +
-          data?.destination +
-          `&what=` +
-          data?.reason +
-          `&when=` +
-          data?.month
+        data?.destination +
+        `&what=` +
+        data?.reason +
+        `&when=` +
+        data?.month
       );
     }
   }
@@ -281,7 +281,6 @@ function Index() {
     // console.log("closeAlert");
     setAlert(null);
   };
-
   const loadMoreData = (item) => {
     holidaytypesService
       .getItinerariesByHolidayTypes(page + 1, holidaytypename, region, item)
@@ -308,7 +307,7 @@ function Index() {
   };
 
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt"),
+    var elements = document.getElementsByClassName("card_slider_cnt places_to_stay_cnt1"),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -598,7 +597,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                      "thumbnail" ? (
                                       <img
                                         key={element.id}
                                         src={element.attributes.image_path}
@@ -611,7 +610,7 @@ function Index() {
                                 )}
                                 {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
                               </NavLink>
-                              <div className="card_slider_cnt">
+                              <div className="card_slider_cnt places_to_stay_cnt">
                                 <NavLink href={generateDynamicLink(item)}>
                                   <h4>
                                     <a>{item?.attributes?.itin_name}</a>
@@ -628,11 +627,9 @@ function Index() {
                                     )
                                     .map((res1) => (
                                       <li key={res1.id}>
-                                        {`from ${
-                                          res1.attributes?.currency_symbol ?? ""
-                                        }${
-                                          res1.attributes?.price ?? " xxxx"
-                                        } per person`}
+                                        {`from ${res1.attributes?.currency_symbol ?? ""
+                                          }${res1.attributes?.price ?? " xxxx"
+                                          } per person`}
                                       </li>
                                     ))}
                                   <li>

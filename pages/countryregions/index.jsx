@@ -168,7 +168,10 @@ function CountryRegions({ props, sendDataToParent }) {
     // Using window.onload to detect full page load
     window.onload = () => {
       setTimeout(() => {
-        regionWiseUrl + `/ destinations / ${destinationcode} /${countrycode}`;
+        regionWiseUrl + `/ destinations / ${destinationcode} /${countrycode?.replace(
+          / /g,
+          "-"
+        )}`;
         // debugger;
         if (redirectUrl) {
           router.push(redirectUrl);
