@@ -69,7 +69,8 @@ export const destinationService = {
   getAllRegionItineraries,
   getCountryFavItineraries,
   getCountryFavHotels,
-  getRegionWiseHotelsInHotelDetail
+  getRegionWiseHotelsInHotelDetail,
+  getPropertyTypeDropDown,
 };
 
 function getAllDropdown() {
@@ -210,9 +211,6 @@ function getItineraryDetails(name, region) {
   return fetchWrapper.get(itinerariesDetailsUrl);
 }
 
-
-
-
 function getItinerariesByDestination(dcode, page, item, region) {
   if (item == "price") {
     const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl
@@ -327,9 +325,7 @@ function getRegionWiseHotels(page, name, filter, region) {
   }
 }
 
-
 function getRegionWiseHotelsInHotelDetail(name, region) {
-
   const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl
     }/api/hotels?filters[region][region_name][$eq]=${name?.replace(
       /&/g,
@@ -428,4 +424,7 @@ function getCustomeData() {
   return fetchWrapper.get(destinationCustomeData);
 }
 
-
+function getPropertyTypeDropDown() {
+  const regionDropDownData = `${publicRuntimeConfig.apiUrl}/api/property-types`;
+  return fetchWrapper.get(regionDropDownData);
+}

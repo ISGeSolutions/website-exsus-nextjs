@@ -29,6 +29,7 @@ function CountryPlaceToStay(props) {
   const [countryData, setCountryData] = useState(props?.data);
   const [metaData, setMetaData] = useState([]);
   const [alert, setAlert] = useState(null);
+  const [regionOptions, setAllRegion] = useState([]);
   const destinationcode = router.query?.continent
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
@@ -139,45 +140,45 @@ function CountryPlaceToStay(props) {
     { value: "Laos", label: "Laos" },
   ];
 
-  const regionOptions = [
-    { value: "Everything", label: "Everything" },
-    { value: "Barefoot", label: "Barefoot" },
-    { value: "Beach", label: "Beach" },
-    { value: "Boutique hotel", label: "Boutique hotel" },
-    { value: "Chic design", label: "Chic design" },
-    { value: "Cultural Immersion", label: "Cultural Immersion" },
-    { value: "Eco tourism", label: "Eco tourism" },
-    { value: "Family-Friendly", label: "Family-Friendly" },
-    { value: "Food & Wine", label: "Food & Wine" },
-    { value: "Guiding", label: "Guiding" },
-    { value: "Hideaway", label: "Hideaway" },
-    { value: "Honeymoon", label: "Honeymoon" },
-    { value: "Lodge", label: "Lodge" },
-    { value: "Luxury hotel", label: "Luxury Hotel" },
-    { value: "Off the beaten track", label: "Off the beaten track" },
-    { value: "Owner run", label: "Owner run" },
-    { value: "Peace & quiet", label: "Peace & quiet" },
-    { value: "Private groups", label: "Private groups" },
-    { value: "Romantic", label: "Romantic" },
-    { value: "Rustic", label: "Rustic" },
-    { value: "Seriously special", label: "Seriously special" },
-    { value: "Service & Hospitality", label: "Service & Hospitality" },
-    { value: "Setting & Views", label: "Setting & Views" },
-    { value: "Snorkelling & Driving", label: "Snorkelling & Driving" },
-    { value: "Spa & Wellness", label: "Spa & Wellness" },
-    { value: "Unusal", label: "Unusal" },
-    { value: "Village life", label: "Village life" },
-    { value: "Walking & trekking", label: "Walking & trekking" },
-    { value: "Water activities", label: "Water activities" },
-    { value: "Wildlife & Nature", label: "Wildlife & Nature" },
-    { value: "Adventure", label: "Adventure" },
-    { value: "Couples", label: "Couples" },
-    { value: "Educational", label: "Educational" },
-    { value: "Multi-activity", label: "Multi-activity" },
-    { value: "Teenagers", label: "Teenagers" },
-    { value: "Landscapes & Scenery", label: "Landscapes & Scenery" },
-    { value: "City hotel", label: "City hotel" },
-  ];
+  // const regionOptions = [
+  //   { value: "Everything", label: "Everything" },
+  //   { value: "Barefoot", label: "Barefoot" },
+  //   { value: "Beach", label: "Beach" },
+  //   { value: "Boutique hotel", label: "Boutique hotel" },
+  //   { value: "Chic design", label: "Chic design" },
+  //   { value: "Cultural Immersion", label: "Cultural Immersion" },
+  //   { value: "Eco tourism", label: "Eco tourism" },
+  //   { value: "Family-Friendly", label: "Family-Friendly" },
+  //   { value: "Food & Wine", label: "Food & Wine" },
+  //   { value: "Guiding", label: "Guiding" },
+  //   { value: "Hideaway", label: "Hideaway" },
+  //   { value: "Honeymoon", label: "Honeymoon" },
+  //   { value: "Lodge", label: "Lodge" },
+  //   { value: "Luxury hotel", label: "Luxury Hotel" },
+  //   { value: "Off the beaten track", label: "Off the beaten track" },
+  //   { value: "Owner run", label: "Owner run" },
+  //   { value: "Peace & quiet", label: "Peace & quiet" },
+  //   { value: "Private groups", label: "Private groups" },
+  //   { value: "Romantic", label: "Romantic" },
+  //   { value: "Rustic", label: "Rustic" },
+  //   { value: "Seriously special", label: "Seriously special" },
+  //   { value: "Service & Hospitality", label: "Service & Hospitality" },
+  //   { value: "Setting & Views", label: "Setting & Views" },
+  //   { value: "Snorkelling & Driving", label: "Snorkelling & Driving" },
+  //   { value: "Spa & Wellness", label: "Spa & Wellness" },
+  //   { value: "Unusal", label: "Unusal" },
+  //   { value: "Village life", label: "Village life" },
+  //   { value: "Walking & trekking", label: "Walking & trekking" },
+  //   { value: "Water activities", label: "Water activities" },
+  //   { value: "Wildlife & Nature", label: "Wildlife & Nature" },
+  //   { value: "Adventure", label: "Adventure" },
+  //   { value: "Couples", label: "Couples" },
+  //   { value: "Educational", label: "Educational" },
+  //   { value: "Multi-activity", label: "Multi-activity" },
+  //   { value: "Teenagers", label: "Teenagers" },
+  //   { value: "Landscapes & Scenery", label: "Landscapes & Scenery" },
+  //   { value: "City hotel", label: "City hotel" },
+  // ];
 
   const monthOptions = [
     { value: "All months", label: "All months" },
@@ -240,11 +241,11 @@ function CountryPlaceToStay(props) {
     } else {
       router.push(
         `advance-search?where=` +
-        e?.destination +
-        `&what=` +
-        e?.reason +
-        `&when=` +
-        e?.month
+          e?.destination +
+          `&what=` +
+          e?.reason +
+          `&when=` +
+          e?.month
       );
     }
   }
@@ -370,9 +371,9 @@ function CountryPlaceToStay(props) {
   };
 
   useEffect(() => {
-    setSelectedOptionCountry(countryOptions[0]);
-    setSelectedOptionRegion(regionOptions[0]);
-    setSelectedOptionMonth(monthOptions[0]);
+    // setSelectedOptionCountry();
+    // //setSelectedOptionRegion();
+    // setSelectedOptionMonth();
 
     // destinationService.getAllItineraries().then(x => {
     //     setItineraries(x.data);
@@ -382,6 +383,17 @@ function CountryPlaceToStay(props) {
     //     // console.error(error);
     //     setIsLoading(false);
     // });
+
+    destinationService.getPropertyTypeDropDown().then((x) => {
+      setAllRegion(
+        x.data?.map((item) => ({
+          //id: i.id,
+          property_type_code: item?.attributes?.property_type_code,
+          value: item?.attributes?.property_type_name,
+          label: item?.attributes?.property_type_name,
+        }))
+      );
+    });
 
     loadMoreData(activeItem);
 
@@ -467,8 +479,7 @@ function CountryPlaceToStay(props) {
                             </div>
                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                               <Select
-                                placeholder="Filter by property type"
-                                // defaultValue={regionOptions[0]}
+                                placeholder={"Filter by property type"}
                                 className="select_container_country"
                                 classNamePrefix="select_country"
                                 isDisabled={isDisabled}
@@ -479,10 +490,9 @@ function CountryPlaceToStay(props) {
                                 styles={styles}
                                 closeMenuOnSelect={false}
                                 isSearchable={isSearchable}
-                                name="color"
                                 options={regionOptions}
                                 isMulti
-                                // value={selectedOptionRegion}
+                                value={selectedOptionRegion}
                                 onChange={handleOptionRegionChange}
                                 components={{
                                   Option: InputOption,
@@ -544,7 +554,8 @@ function CountryPlaceToStay(props) {
                       <div className="col-12">
                         <div className="destination_filter_result d-block d-lg-flex">
                           <p>
-                            We've found {metaData?.total} hotels in {countryData?.country_name}{" "} for you
+                            We've found {metaData?.total} hotels in{" "}
+                            {countryData?.country_name} for you
                             <button
                               type="button"
                               className="btn btn-primary modal_link_btn"
@@ -603,7 +614,7 @@ function CountryPlaceToStay(props) {
                                 {item?.attributes?.hotel_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                      "thumbnail" ? (
+                                    "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}
@@ -623,22 +634,38 @@ function CountryPlaceToStay(props) {
                                   <li>
                                     Location: {item?.attributes?.location}
                                   </li>
-                                  {item?.attributes?.hotel_country_contents?.data?.map(item => {
-                                    return (
-                                      <li>
-                                        Price guide:
-                                        <span
-                                          key={item?.id}
-                                          tabIndex="0"
-                                          title={item?.attributes?.price_guide_text}
-                                        >{item?.attributes?.currency_symbol.repeat(Math.abs(item?.attributes?.price_guide_value))}
-                                          <label>
-                                            {item?.attributes?.currency_symbol.repeat(Math.abs(5 - item?.attributes?.price_guide_value))}
-                                          </label>
-                                        </span>
-                                      </li>
-                                    );
-                                  })}
+                                  {item?.attributes?.hotel_country_contents?.data?.map(
+                                    (item) => {
+                                      return (
+                                        <li>
+                                          Price guide:
+                                          <span
+                                            key={item?.id}
+                                            tabIndex="0"
+                                            title={
+                                              item?.attributes?.price_guide_text
+                                            }
+                                          >
+                                            {item?.attributes?.currency_symbol.repeat(
+                                              Math.abs(
+                                                item?.attributes
+                                                  ?.price_guide_value
+                                              )
+                                            )}
+                                            <label>
+                                              {item?.attributes?.currency_symbol.repeat(
+                                                Math.abs(
+                                                  5 -
+                                                    item?.attributes
+                                                      ?.price_guide_value
+                                                )
+                                              )}
+                                            </label>
+                                          </span>
+                                        </li>
+                                      );
+                                    }
+                                  )}
                                   <li>
                                     <p
                                       dangerouslySetInnerHTML={{

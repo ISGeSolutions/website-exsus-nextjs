@@ -37,6 +37,7 @@ export const holidaytypesService = {
   getDictionaryDetails,
   getItinerariesByHolidayTypeGroup,
   getItinerariesByHolidayTypes,
+  getDestinationDropDown,
 };
 
 function getAll() {
@@ -169,4 +170,9 @@ function getItinerariesByHolidayTypes(page, name, region, item) {
     )}&sort[0]=itin_name:asc`;
     return fetchWrapper.get(itinerariesDetailsUrl);
   }
+}
+
+function getDestinationDropDown() {
+  const destinationDropDownData = `${publicRuntimeConfig.apiUrl}/api/destinations?filters[main_page_ind][$eq]=true`;
+  return fetchWrapper.get(destinationDropDownData);
 }

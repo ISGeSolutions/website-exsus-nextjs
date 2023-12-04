@@ -39,6 +39,7 @@ function ContinentPlacesToStay(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [activeItem, setActiveItem] = useState("recommended");
   const [alert, setAlert] = useState(null);
+  const [regionOptions, setAllRegion] = useState([]);
 
   const { divRef } = props;
 
@@ -49,46 +50,6 @@ function ContinentPlacesToStay(props) {
       if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
     }
   }
-
-  const regionOptions = [
-    { value: "Everything", label: "Everything" },
-    { value: "Barefoot", label: "Barefoot" },
-    { value: "Beach", label: "Beach" },
-    { value: "Boutique hotel", label: "Boutique hotel" },
-    { value: "Chic design", label: "Chic design" },
-    { value: "Cultural Immersion", label: "Cultural Immersion" },
-    { value: "Eco tourism", label: "Eco tourism" },
-    { value: "Family-Friendly", label: "Family-Friendly" },
-    { value: "Food & Wine", label: "Food & Wine" },
-    { value: "Guiding", label: "Guiding" },
-    { value: "Hideaway", label: "Hideaway" },
-    { value: "Honeymoon", label: "Honeymoon" },
-    { value: "Lodge", label: "Lodge" },
-    { value: "Luxury hotel", label: "Luxury Hotel" },
-    { value: "Off the beaten track", label: "Off the beaten track" },
-    { value: "Owner run", label: "Owner run" },
-    { value: "Peace & quiet", label: "Peace & quiet" },
-    { value: "Private groups", label: "Private groups" },
-    { value: "Romantic", label: "Romantic" },
-    { value: "Rustic", label: "Rustic" },
-    { value: "Seriously special", label: "Seriously special" },
-    { value: "Service & Hospitality", label: "Service & Hospitality" },
-    { value: "Setting & Views", label: "Setting & Views" },
-    { value: "Snorkelling & Driving", label: "Snorkelling & Driving" },
-    { value: "Spa & Wellness", label: "Spa & Wellness" },
-    { value: "Unusal", label: "Unusal" },
-    { value: "Village life", label: "Village life" },
-    { value: "Walking & trekking", label: "Walking & trekking" },
-    { value: "Water activities", label: "Water activities" },
-    { value: "Wildlife & Nature", label: "Wildlife & Nature" },
-    { value: "Adventure", label: "Adventure" },
-    { value: "Couples", label: "Couples" },
-    { value: "Educational", label: "Educational" },
-    { value: "Multi-activity", label: "Multi-activity" },
-    { value: "Teenagers", label: "Teenagers" },
-    { value: "Landscapes & Scenery", label: "Landscapes & Scenery" },
-    { value: "City hotel", label: "City hotel" },
-  ];
 
   const monthOptions = [
     { value: "All months", label: "All months" },
@@ -228,11 +189,11 @@ function ContinentPlacesToStay(props) {
     } else {
       router.push(
         `advance-search?where=` +
-        data?.destination +
-        `&what=` +
-        data?.reason +
-        `&when=` +
-        data?.month
+          data?.destination +
+          `&what=` +
+          data?.reason +
+          `&when=` +
+          data?.month
       );
     }
   }
@@ -272,15 +233,27 @@ function ContinentPlacesToStay(props) {
   };
 
   const generateDynamicLink = (item) => {
-    let locationCountry = item?.attributes?.location?.toLowerCase().replace(/&/g, "and");
+    let locationCountry = item?.attributes?.location
+      ?.toLowerCase()
+      .replace(/&/g, "and");
     let countryName = locationCountry.match(/\|(.+)/);
     countryName = countryName ? countryName[1].trim() : null;
     let location = locationCountry?.match(/(.+?)\|/);
     location = location ? location[1].trim() : null;
-    let hotelName = item?.attributes?.friendly_url?.replace(/ /g, "-").toLowerCase().replace(/&/g, "and");
-    return regionWiseUrl + `/destinations/${destinationcode?.replace(/&/g, " and ")
-      .replace(/ /g, "-")
-      .toLowerCase()}/hotels/${countryName?.replace(/ /g, "-")}/${location?.replace(/ /g, "-")}/${hotelName}`;
+    let hotelName = item?.attributes?.friendly_url
+      ?.replace(/ /g, "-")
+      .toLowerCase()
+      .replace(/&/g, "and");
+    return (
+      regionWiseUrl +
+      `/destinations/${destinationcode
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${countryName?.replace(
+        / /g,
+        "-"
+      )}/${location?.replace(/ /g, "-")}/${hotelName}`
+    );
   };
 
   const websiteContentCheck = (matches, region, modifiedString) => {
@@ -327,7 +300,6 @@ function ContinentPlacesToStay(props) {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-
         // debugger;
         // You can access it using localStorage.getItem('yourKey')
 
@@ -337,32 +309,32 @@ function ContinentPlacesToStay(props) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(matches, region, modifiedString);
+                modifiedString = websiteContentCheck(
+                  matches,
+                  region,
+                  modifiedString
+                );
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
               }
               const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
               if (checkStr && replacement) {
-                modifiedString = modifiedString.replace(
-                  checkStr,
-                  replacement
-                );
+                modifiedString = modifiedString.replace(checkStr, replacement);
               }
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {
-          }
+          } catch (error) {}
         }
       }
     }
-  }
+  };
 
   useEffect(() => {
-    setSelectedOptionCountry(countryOptions[0]);
-    setSelectedOptionRegion(regionOptions[0]);
-    setSelectedOptionMonth(monthOptions[0]);
+    setSelectedOptionCountry();
+    setSelectedOptionRegion();
+    setSelectedOptionMonth();
 
     // destinationService.getAllItineraries().then(x => {
     //     setItineraries(x.data);
@@ -389,6 +361,17 @@ function ContinentPlacesToStay(props) {
       .catch((error) => {
         setIsLoading(false);
       });
+
+    destinationService.getPropertyTypeDropDown().then((x) => {
+      setAllRegion(
+        x.data?.map((item) => ({
+          //id: i.id,
+          property_type_code: item?.attributes?.property_type_code,
+          value: item?.attributes?.property_type_name,
+          label: item?.attributes?.property_type_name,
+        }))
+      );
+    });
 
     loadMoreData(activeItem);
 
@@ -423,7 +406,13 @@ function ContinentPlacesToStay(props) {
         <div>
           <div className="container">
             <section className="destination_para">
-              <div dangerouslySetInnerHTML={{ __html: dictioneryFunction(destination.placestostay_intro_text) }} />
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: dictioneryFunction(
+                    destination.placestostay_intro_text
+                  ),
+                }}
+              />
             </section>
           </div>
 
@@ -468,8 +457,7 @@ function ContinentPlacesToStay(props) {
                             </div>
                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                               <Select
-                                placeholder="Filter by region"
-                                // defaultValue={regionOptions[0]}
+                                placeholder={"Filter by property type"}
                                 className="select_container_country"
                                 classNamePrefix="select_country"
                                 isDisabled={isDisabled}
@@ -480,10 +468,9 @@ function ContinentPlacesToStay(props) {
                                 styles={styles}
                                 closeMenuOnSelect={false}
                                 isSearchable={isSearchable}
-                                name="color"
                                 options={regionOptions}
                                 isMulti
-                                // value={selectedOptionRegion}
+                                value={selectedOptionRegion}
                                 onChange={handleOptionRegionChange}
                                 components={{
                                   Option: InputOption,
@@ -493,7 +480,7 @@ function ContinentPlacesToStay(props) {
                             </div>
                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                               <Select
-                                placeholder="Filter by month"
+                                placeholder="Filter by date of travel"
                                 className="select_container_country"
                                 classNamePrefix="select_country"
                                 // defaultValue={monthOptions[0]}
@@ -602,7 +589,7 @@ function ContinentPlacesToStay(props) {
                               {item?.attributes?.hotel_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -625,22 +612,38 @@ function ContinentPlacesToStay(props) {
                               </h4>
                               <ul>
                                 <li>Location: {item?.attributes?.location}</li>
-                                {item?.attributes?.hotel_country_contents?.data?.map(item => {
-                                  return (
-                                    <li>
-                                      Price guide:
-                                      <span
-                                        key={item?.id}
-                                        tabIndex="0"
-                                        title={item?.attributes?.price_guide_text}
-                                      >{item?.attributes?.currency_symbol.repeat(Math.abs(item?.attributes?.price_guide_value))}
-                                        <label>
-                                          {item?.attributes?.currency_symbol.repeat(Math.abs(5 - item?.attributes?.price_guide_value))}
-                                        </label>
-                                      </span>
-                                    </li>
-                                  );
-                                })}
+                                {item?.attributes?.hotel_country_contents?.data?.map(
+                                  (item) => {
+                                    return (
+                                      <li>
+                                        Price guide:
+                                        <span
+                                          key={item?.id}
+                                          tabIndex="0"
+                                          title={
+                                            item?.attributes?.price_guide_text
+                                          }
+                                        >
+                                          {item?.attributes?.currency_symbol.repeat(
+                                            Math.abs(
+                                              item?.attributes
+                                                ?.price_guide_value
+                                            )
+                                          )}
+                                          <label>
+                                            {item?.attributes?.currency_symbol.repeat(
+                                              Math.abs(
+                                                5 -
+                                                  item?.attributes
+                                                    ?.price_guide_value
+                                              )
+                                            )}
+                                          </label>
+                                        </span>
+                                      </li>
+                                    );
+                                  }
+                                )}
 
                                 <li>
                                   <p
@@ -652,9 +655,7 @@ function ContinentPlacesToStay(props) {
                                 {/* <li>{item?.attributes?.intro_text}</li> */}
                                 <li>
                                   Best for:
-                                  <span>
-                                    {item?.attributes?.best_for_text}
-                                  </span>
+                                  <span>{item?.attributes?.best_for_text}</span>
                                 </li>
                               </ul>
                             </div>
