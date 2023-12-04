@@ -19,17 +19,113 @@ function Index() {
   const [mapVariable, setMapVariable] = useState(null);
 
   const router = useRouter();
-  const hotelId = router.query.hotelid;
+  const hotelName = router?.query?.hotelName;
+  const countryName = router?.query?.countryName;
+  const regionName = router?.query?.location?.replace(/and/g, "&").replace(/-/g, " ").toLowerCase();
   const [hotelData, setHotelData] = useState([]);
+  const [hotels, setAllHotels] = useState([]);
   const [backgroundImage, setBackgroundImage] = useState([]);
   const [travelTimes, setTraveltimes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [location, setLocation] = useState({});
   let region = "uk";
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
+      if (window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+        region = window.site_region;
+      }
+    }
+  }
+
+
+  const generateDynamicLink = (item) => {
+    // let locationCountry = item?.attributes?.location?.toLowerCase().replace(/&/g, "and");
+    // let countryName = locationCountry.match(/\|(.+)/);
+    // countryName = countryName ? countryName[1].trim() : null;
+    // let location = locationCountry?.match(/(.+?)\|/);
+    // location = location ? location[1].trim() : null;
+    // let hotelName = item?.attributes?.friendly_url?.replace(/ /g, "-").toLowerCase().replace(/&/g, "and");
+    // return regionWiseUrl + `/destinations/${destinationcode?.replace(/&/g, " and ")
+    //   .replace(/ /g, "-")
+    //   .toLowerCase()}/hotels/${countryName?.replace(/ /g, "-")}/${location?.replace(/ /g, "-")}/${hotelName}`;
+  };
+
+
+  const websiteContentCheck = (matches, region, modifiedString) => {
+    destinationService
+      .getDictionaryDetails(matches, region)
+      .then((responseObj) => {
+        if (responseObj) {
+          const res = responseObj?.data;
+          res.forEach((element, index) => {
+            const replacement = element?.attributes?.content_translation_text;
+            const matchString = element?.attributes?.content_word;
+            const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+            if (checkStr && replacement) {
+              modifiedString = modifiedString.replace(checkStr, replacement);
+            }
+          });
+
+          // Set the modified string in state
+          setnewValueWithBr(modifiedString);
+        }
+      });
+  };
+
+  const dictioneryFunction = (data) => {
+    let modifiedString = data;
+    if (modifiedString) {
+      const regex = /{[a-zA-Z0-9-]+}/g;
+      const matches = [...new Set(modifiedString.match(regex))];
+
+      let storedDataString = "";
+      let storedData = "";
+      // debugger;
+      if (region == "uk") {
+        storedDataString = localStorage.getItem("websitecontent_uk");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "us") {
+        storedDataString = localStorage.getItem("websitecontent_us");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "asia") {
+        storedDataString = localStorage.getItem("websitecontent_asia");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "in") {
+        storedDataString = localStorage.getItem("websitecontent_india");
+        storedData = JSON.parse(storedDataString);
+      }
+      if (storedData !== null) {
+
+        // debugger;
+        // You can access it using localStorage.getItem('yourKey')
+
+        if (matches) {
+          let replacement = "";
+          try {
+            matches.forEach((match, index, matches) => {
+              const matchString = match.replace(/{|}/g, "");
+              if (!storedData[matchString]) {
+                modifiedString = websiteContentCheck(matches, region, modifiedString);
+                throw new Error("Loop break");
+              } else {
+                replacement = storedData[matchString];
+              }
+              const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+              if (checkStr && replacement) {
+                modifiedString = modifiedString.replace(
+                  checkStr,
+                  replacement
+                );
+              }
+            });
+            return modifiedString;
+            setIsLoading(false);
+          } catch (error) {
+          }
+        }
+      }
     }
   }
 
@@ -43,12 +139,13 @@ function Index() {
 
 
     destinationService
-      .getHotelById(hotelId, region)
+      .getHotelById(hotelName, region)
       .then((x) => {
         // setWhyusDetails(x.data.attributes);
-        setHotelData(x.data.attributes);
+        setHotelData(x.data[0].attributes);
+        setLocation({ "latitude": x.data[0]?.attributes?.map_latitude, longitude: x.data[0]?.attributes?.map_longitude })
         let bestTimeTravelData = [];
-        x.data.attributes?.hotel_travel_times?.data.forEach((res) => {
+        x.data[0].attributes?.hotel_travel_times?.data.forEach((res) => {
           if (res?.attributes?.travel_time_value == "TT2") {
             res.attributes.class_name = "shade03";
           } else if (res?.attributes?.travel_time_value == "TT3") {
@@ -61,7 +158,7 @@ function Index() {
           bestTimeTravelData.push(res);
         });
         setTraveltimes(bestTimeTravelData);
-        const imageCheck = x.data.attributes.hotel_images.data;
+        const imageCheck = x.data[0].attributes.hotel_images.data;
         const newBackgroundImages = [];
         imageCheck.forEach((element) => {
           if (element.attributes.image_type == "banner") {
@@ -77,7 +174,18 @@ function Index() {
       .catch((error) => {
         setIsLoading(false);
       });
-  }, [hotelId]);
+
+
+    destinationService
+      .getRegionWiseHotelsInHotelDetail(regionName, region)
+      .then((response) => {
+        setAllHotels(response?.data);
+        console.log(response?.data);
+        setIsLoading(false);
+      }).catch((error) => {
+        setIsLoading(false);
+      });
+  }, [hotelName]);
 
   return (
     <Layout>
@@ -174,11 +282,11 @@ function Index() {
                   Price guide:
                   <span
                     tabIndex="0"
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="right"
-                    data-bs-title="£200-£350 per person per night"
-                  >
-                    {hotelData.price_guide_text}
+                    title={hotelData?.hotel_country_contents?.data[0]?.attributes?.price_guide_text}
+                  >{hotelData?.hotel_country_contents?.data[0]?.attributes?.currency_symbol.repeat(Math.abs(hotelData?.hotel_country_contents?.data[0]?.attributes?.price_guide_value))}
+                    <label>
+                      {hotelData?.hotel_country_contents?.data[0]?.attributes?.currency_symbol.repeat(Math.abs(5 - hotelData?.hotel_country_contents?.data[0]?.attributes?.price_guide_value))}
+                    </label>
                   </span>
                 </p>
                 {/* <p className="mb-4">The Rosewood is a sanctuary of peace and comfort in the heart of one of the world’s most exciting cities: Beijing. The hotel combines a fantastic location with a world-className hotel experience, including five international restaurants, sleek, luxurious accommodation and personalised spa treatments. It sits in the glitzy neighbourhood of Chaoyang, which is famed for its shops and bars.</p> */}
@@ -388,65 +496,164 @@ function Index() {
                   </div>
                 </div>
               </section>
-              {/* // <section className="map_blk_row">
-                    //     <h3 className="pb-2">Hotel location</h3>
-                    //     <p>The Rosewood is just half an hour’s drive from Beijing Capital International Airport.</p>
-                    //     <div className="map_blk_inr">
-                    //         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    //     </div>
-                    // </section> */}
-            </div>
-          </section>
-
-          <section className="favrites_blk_row favrites_blk_no_slider_row">
-            <div className="container">
-              <h3 className="title_cls">
-                Stay at Rosewood Beijing on these trips
-              </h3>
-              <div className="card_slider_row">
-                <div className="width_100">
-                  <div className="row">
-                    <div className="col-sm-6 col-lg-4 col-xxl-3">
-                      <div className="card_slider_inr">
-                        <div className="card_slider">
-                          <a className="card_slider_img">
-                            <img
-                              src="images/country_card06.jpg"
-                              alt="country_card06"
-                              className="img-fluid"
-                            />
-                          </a>
-                          <div className="card_slider_cnt">
-                            <h4>Down the Golden River</h4>
-                            <ul>
-                              <li>China & Yangtze in Serious Style</li>
-                              <li>China</li>
-                              <li>From £5,850 per person</li>
-                              <li>
-                                Travel to:
-                                <span>
-                                  Beijing & Northern China, Shanghai, Hangzhou &
-                                  Eastern China, Xi'an, Sichuan & Central China
-                                </span>
-                              </li>
-                            </ul>
-                          </div>
-                          <button className="btn card_slider_btn">
-                            <span>11 nights</span>
-                            <span className="view_itnry_link">
-                              VIEW ITINERARY
-                              <em className="fa-solid fa-chevron-right"></em>
-                            </span>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
+              <section className="map_blk_row">
+                <h3 className="pb-2">Hotel location</h3>
+                <p>The Rosewood is just half an hour’s drive from Beijing Capital International Airport.</p>
+                <div className="map_blk_inr">
+                  <div className="map_blk_inr">
+                    <Iframe
+                      width="640px"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin"
+                      style="border:0;"
+                      allowFullScreen=""
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    />
+                    {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" style="border:0;" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe> */}
                   </div>
                 </div>
-              </div>
+              </section>
             </div>
           </section>
 
+          <section className="favrites_blk_row">
+            <div className="container">
+              <h3 className="title_cls">
+                {/* PLACES TO STAY IN {countryData?.country_name} HANDPICKED BY
+                EXSUS */}
+              </h3>
+              <div className="card_slider_row">
+                <i id="leftt">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="#ffffff"
+                    shapeRendering="geometricPrecision"
+                    textRendering="geometricPrecision"
+                    imageRendering="optimizeQuality"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    viewBox="0 0 267 512.43"
+                  >
+                    <path
+                      fillRule="nonzero"
+                      d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z"
+                    />
+                  </svg>
+                </i>
+                <div className="carousel00">
+                  {hotels?.map((item) => (
+                    <div className="card_slider_inr" key={item.id}>
+                      <div className="card_slider">
+                        <NavLink
+                          href=""
+                          className="card_slider_img"
+                        >
+                          {item?.attributes?.hotel_images?.data.map(
+                            (element, index) =>
+                              element.attributes.image_type == "thumbnail" ? (
+                                <img
+                                  key={index}
+                                  src={element.attributes.image_path}
+                                  alt={element.attributes.image_alt_text}
+                                  className="img-fluid"
+                                />
+                              ) : (
+                                ""
+                              )
+                          )}
+                          {/* <img
+                                src=""
+                                alt="destination_hotel01"
+                                className="img-fluid"
+                              /> */}
+                        </NavLink>
+                        <div className="card_slider_cnt places_to_stay_cnt">
+                          <h4>
+                            <a href="#">{item?.attributes?.hotel_name}</a>
+                          </h4>
+                          <ul>
+                            <li>Location: {item?.attributes?.location}</li>
+                            {item?.attributes?.hotel_country_contents?.data?.map(
+                              (item) => {
+                                return (
+                                  <li>
+                                    Price guide:
+                                    <span
+                                      key={item?.id}
+                                      tabIndex="0"
+                                      title={item?.attributes?.price_guide_text}
+                                    >
+                                      {item?.attributes?.currency_symbol.repeat(
+                                        Math.abs(
+                                          item?.attributes?.price_guide_value
+                                        )
+                                      )}
+                                      <label>
+                                        {item?.attributes?.currency_symbol.repeat(
+                                          Math.abs(
+                                            5 -
+                                            item?.attributes
+                                              ?.price_guide_value
+                                          )
+                                        )}
+                                      </label>
+                                    </span>
+                                  </li>
+                                );
+                              }
+                            )}
+
+                            <li>
+                              <p
+                                dangerouslySetInnerHTML={{
+                                  __html: item?.attributes?.intro_text,
+                                }}
+                              />
+                            </li>
+                            {/* <li>{item?.attributes?.intro_text}</li> */}
+                            <li>
+                              Best for:
+                              <span>
+                                {item?.attributes?.best_for_text}
+                              </span>
+                            </li>
+                          </ul>
+                        </div>
+                        <button
+                          className="btn card_slider_btn justify-content-end"
+                        >
+                          <span className="view_itnry_link">
+                            View this hotel
+                            <em className="fa-solid fa-chevron-right"></em>
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                {hotels?.length > 4 && (
+                  <i id="right">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="#ffffff"
+                      shapeRendering="geometricPrecision"
+                      textRendering="geometricPrecision"
+                      imageRendering="optimizeQuality"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      viewBox="0 0 267 512.43"
+                    >
+                      <path
+                        fillRule="nonzero"
+                        d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                      />
+                    </svg>
+                  </i>
+                )}
+              </div>
+            </div>
+            {/* <div className="full_loader_parnt_blk loader_parnt_blk" style="display: block;"><div className="loader-circle-2"></div></div> */}
+          </section>
           {/* <section className="favrites_blk_row light_grey">
                 <div className="container">
                     <h3 className="title_cls">More places to stay in Beijing & Northern China</h3>

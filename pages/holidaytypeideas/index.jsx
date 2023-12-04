@@ -34,12 +34,14 @@ function Index() {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isLoader, setIsLoader] = useState(false);
   const [isRtl, setIsRtl] = useState(false);
-  const [selectedOptionMonth, selectedOptionData] = useState(null);
   const itemsPerPage = 9; // Number of items to load per page
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
   const router = useRouter();
   const { id } = router.query;
   const [alert, setAlert] = useState(null);
+  const [selectedOptionDestination, setSelectedOptionDestination] =
+    useState(null);
+  const [destinationOptions, setAllDestination] = useState([]);
   const holidaytypename = router.query?.holidaytypeideas
     ?.replace(/-/g, " ")
     .replace(/and/g, "&")
@@ -172,11 +174,11 @@ function Index() {
     setVisibleItems((prevVisibleItems) => prevVisibleItems + itemsPerPage);
   };
 
-  const handleOptionChange = (selectedOption) => {
+  const handleOptionCountryChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    selectedOptionData(selectedOption);
+    setSelectedOptionDestination(selectedOption);
   };
 
   // let region = "uk";
@@ -279,7 +281,7 @@ function Index() {
     // console.log("closeAlert");
     setAlert(null);
   };
-  debugger;
+
   const loadMoreData = (item) => {
     holidaytypesService
       .getItinerariesByHolidayTypes(page + 1, holidaytypename, region, item)
@@ -329,7 +331,7 @@ function Index() {
   equalHeight(true);
 
   useEffect(() => {
-    selectedOptionData(optionsData[0]);
+    setSelectedOptionDestination();
     // holidaytypesService.getAll().then(x => {
 
     //     const desiredKey = 1; // The desired key to access
@@ -375,6 +377,17 @@ function Index() {
         setIsLoading(false);
       });
 
+    holidaytypesService.getDestinationDropDown().then((x) => {
+      setAllDestination(
+        x.data?.map((item) => ({
+          //id: i.id,
+          destination_code: item?.attributes?.destination_code,
+          value: item?.attributes?.destination_name,
+          label: item?.attributes?.destination_name,
+        }))
+      );
+    });
+
     loadMoreData(activeItem);
 
     window.addEventListener("resize", equalHeight(true));
@@ -413,7 +426,6 @@ function Index() {
                     aria-label={`Slide ${index + 1}`}
                   ></button>
                 ))}
-                {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
               </div>
               <div className="carousel-inner">
                 {backgroundImage.map((imagePath, index) => (
@@ -444,9 +456,6 @@ function Index() {
                 </h2>
                 <div className="destinations_cntnt_blk destination_para pt-0">
                   <p dangerouslySetInnerHTML={{ __html: valueWithBr }} />
-                  {/* <p>This is the big one, the holiday that you’ve been dreaming of. If you’ve been building up to taking the ultimate journey, we can help. If you want your tailor-made holiday to be the most remarkable, experience-filled time away that you can have than talk to our travel specialists about their ideas for no-holds-barred adventure, escapism and exploration.</p>
-                            <p>Maybe your idea of the ultimate holiday is unadulterated luxury and the chance to enjoy some of the most incredible places to stay anywhere in the world. Perhaps it’s an extra-special experience or exclusive opportunity to do something truly once-in-a-lifetime. Maybe it’s about being away longer, travelling further, going deeper into a destination or even ticking off more than one country in the course of the same trip.</p>
-                            <p>Whatever your definition of the ultimate journey we’re experienced at delivering the most exceptional holidays in the most extraordinary destinations, whether it’s a chance to explore <a href="#">America’s Southwest in incomparable style, undertake a grand tour of Indochina</a> or roam through some of the great wilderness and wildlife areas of the world on our <a href="#">tour of Legendary Southern Africa.</a> For more inspiration contact our team of creative, well-travelled specialists.</p> */}
                 </div>
               </div>
             </div>
@@ -464,26 +473,25 @@ function Index() {
                       <div className="col-12">
                         <div className="destination_dropdwn_row d-block d-md-flex">
                           <div className="banner_dropdwn_blk">
-                            <div className="select_drpdwn">
+                            <div className="banner_dropdwn_blk ps-0 ps-md-2">
                               <Select
-                                defaultValue="destination"
                                 id="long-value-select"
-                                placeholder={"Filter by destinations"}
+                                instanceId="long-value-select"
                                 className="select_container_country"
                                 classNamePrefix="select_country"
+                                placeholder={"Filter by destination "}
+                                styles={styles}
+                                isMulti
                                 isDisabled={isDisabled}
-                                isLoading={isLoading}
+                                isLoading={isLoader}
                                 isClearable={isClearable}
                                 isRtl={isRtl}
-                                styles={styles}
                                 isSearchable={isSearchable}
-                                name="color"
-                                options={optionsData}
-                                isMulti
-                                hideSelectedOptions={false}
+                                value={selectedOptionDestination}
+                                onChange={handleOptionCountryChange}
                                 closeMenuOnSelect={false}
-                                onChange={handleOptionChange}
-                                value={selectedOptionMonth}
+                                hideSelectedOptions={false}
+                                options={destinationOptions}
                                 components={{
                                   Option: InputOption,
                                   MultiValue: CustomMultiValue,

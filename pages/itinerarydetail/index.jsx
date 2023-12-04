@@ -1131,6 +1131,95 @@ function Index() {
             {/* <div className="full_loader_parnt_blk loader_parnt_blk" style="display: none;"><div className="loader-circle-2"></div></div> */}
           </section>
 
+          {/* <section className="favrites_blk_row light_grey">
+              <div className="container">
+                <h3 className="title_cls">More itineraries in {countries}</h3>
+                <div className="card_slider_row">
+                  <div className="carousel00 region_carousel00">
+                    <div className="row">
+                      {itineraries?.map((item) => (
+                        <div
+                          className="col-sm-6 col-lg-4 col-xxl-3"
+                          key={item.id}
+                        >
+                          <div className="card_slider_inr">
+                            <div className="card_slider">
+                              <NavLink
+                                href={generateDynamicLink(
+                                  item?.attributes?.itin_name
+                                )}
+                                className="card_slider_img"
+                              >
+                                {item?.attributes?.itinerary_images?.data.map(
+                                  (element, index) =>
+                                    element.attributes.image_type ==
+                                      "thumbnail" ? (
+                                      <img
+                                        key={index}
+                                        src={element.attributes.image_path}
+                                        alt="destination card01"
+                                        className="img-fluid"
+                                      />
+                                    ) : (
+                                      ""
+                                    )
+                                )}
+                              </NavLink>
+                              <div className="card_slider_cnt">
+                                <NavLink
+                                  href={generateDynamicLink(
+                                    item?.attributes?.itin_name
+                                  )}
+                                >
+                                  <h4>
+                                    <a>{item?.attributes?.itin_name}</a>
+                                  </h4>
+                                </NavLink>
+                                <ul>
+                                  <li>
+                                    {dictioneryFunction(
+                                      item?.attributes?.header_text
+                                    )}
+                                  </li>
+                                  <li>
+                                    {dictioneryFunction(
+                                      item?.attributes?.sub_header_text
+                                    )}
+                                  </li>
+                                  <li>
+                                    {
+                                      item?.attributes?.itinerary_country_contents
+                                        ?.data[0]?.attributes
+                                        ?.guideline_price_notes_index
+                                    }
+                                  </li>
+                                  <li>
+                                    Travel to:
+                                    <span>
+                                      {item?.attributes?.travel_to_text}
+                                    </span>
+                                  </li>
+                                </ul>
+                              </div>
+                              <button className="btn card_slider_btn">
+                                <span>{item?.attributes?.no_of_nites_notes}</span>
+                                <span
+                                  className="view_itnry_link"
+                                  onClick={handleRedirect}
+                                >
+                                  View this itinerary
+                                  <em className="fa-solid fa-chevron-right"></em>
+                                </span>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section> */}
           <section className="make_enqury_row">
             <div className="container">
               <EnquiryButton />
