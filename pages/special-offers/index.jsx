@@ -47,7 +47,9 @@ function Index() {
   };
 
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt places_to_stay_cnt"),
+    var elements = document.getElementsByClassName(
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -68,7 +70,6 @@ function Index() {
   };
 
   equalHeight(true);
-
 
   const generateDynamicLink = (item) => {
     return regionWiseUrl + `/hotel-detail`;
@@ -109,8 +110,7 @@ function Index() {
         setAllOffers(x.data);
         setFriendlyUrl(`home/special offers`);
       })
-      .catch((error) => {
-      });
+      .catch((error) => {});
 
     specialoffersService
       .getOffersCustomePage()
@@ -375,7 +375,6 @@ function Index() {
                                       data-bs-placement="right"
                                       data-bs-title="£200-£350 per person per night"
                                       data-bs-trigger="hover" */}
-
                                       £££<label>££</label>
                                     </span>
                                   </p>

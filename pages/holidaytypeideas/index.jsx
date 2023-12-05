@@ -230,7 +230,7 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${modifiedName}`
+        `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${modifiedName}`
     );
   };
 
@@ -264,11 +264,11 @@ function Index() {
     } else {
       router.push(
         `advance-search?where=` +
-        data?.destination +
-        `&what=` +
-        data?.reason +
-        `&when=` +
-        data?.month
+          data?.destination +
+          `&what=` +
+          data?.reason +
+          `&when=` +
+          data?.month
       );
     }
   }
@@ -307,7 +307,9 @@ function Index() {
   };
 
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt places_to_stay_cnt1"),
+    var elements = document.getElementsByClassName(
+        "card_slider_cnt places_to_stay_cnt1"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -469,34 +471,32 @@ function Index() {
                 <div className="carousel00 region_carousel00">
                   <div className="row">
                     <form onSubmit={onSubmit}>
-                      <div className="col-12">
+                      <div className="col-12 col-md-8 col-lg-6 col-xl-5 m-auto">
                         <div className="destination_dropdwn_row d-block d-md-flex">
                           <div className="banner_dropdwn_blk">
-                            <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                              <Select
-                                id="long-value-select"
-                                instanceId="long-value-select"
-                                className="select_container_country"
-                                classNamePrefix="select_country"
-                                placeholder={"Filter by destination "}
-                                styles={styles}
-                                isMulti
-                                isDisabled={isDisabled}
-                                isLoading={isLoader}
-                                isClearable={isClearable}
-                                isRtl={isRtl}
-                                isSearchable={isSearchable}
-                                value={selectedOptionDestination}
-                                onChange={handleOptionCountryChange}
-                                closeMenuOnSelect={false}
-                                hideSelectedOptions={false}
-                                options={destinationOptions}
-                                components={{
-                                  Option: InputOption,
-                                  MultiValue: CustomMultiValue,
-                                }}
-                              />
-                            </div>
+                            <Select
+                              id="long-value-select"
+                              instanceId="long-value-select"
+                              className="select_container_country"
+                              classNamePrefix="select_country"
+                              placeholder={"Filter by destination "}
+                              styles={styles}
+                              isMulti
+                              isDisabled={isDisabled}
+                              isLoading={isLoader}
+                              isClearable={isClearable}
+                              isRtl={isRtl}
+                              isSearchable={isSearchable}
+                              value={selectedOptionDestination}
+                              onChange={handleOptionCountryChange}
+                              closeMenuOnSelect={false}
+                              hideSelectedOptions={false}
+                              options={destinationOptions}
+                              components={{
+                                Option: InputOption,
+                                MultiValue: CustomMultiValue,
+                              }}
+                            />
                           </div>
                           <div className="banner_inspire_btn ps-0 ps-md-2">
                             <button
@@ -597,7 +597,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                      "thumbnail" ? (
+                                    "thumbnail" ? (
                                       <img
                                         key={element.id}
                                         src={element.attributes.image_path}
@@ -611,11 +611,11 @@ function Index() {
                                 {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
                               </NavLink>
                               <div className="card_slider_cnt places_to_stay_cnt">
-                                <NavLink href={generateDynamicLink(item)}>
-                                  <h4>
-                                    <a>{item?.attributes?.itin_name}</a>
-                                  </h4>
-                                </NavLink>
+                                <h4>
+                                  <a href={generateDynamicLink(item)}>
+                                    {item?.attributes?.itin_name}
+                                  </a>
+                                </h4>
                                 <ul>
                                   <li>{item?.attributes?.header_text}</li>
 
@@ -627,9 +627,11 @@ function Index() {
                                     )
                                     .map((res1) => (
                                       <li key={res1.id}>
-                                        {`from ${res1.attributes?.currency_symbol ?? ""
-                                          }${res1.attributes?.price ?? " xxxx"
-                                          } per person`}
+                                        {`from ${
+                                          res1.attributes?.currency_symbol ?? ""
+                                        }${
+                                          res1.attributes?.price ?? " xxxx"
+                                        } per person`}
                                       </li>
                                     ))}
                                   <li>

@@ -1,6 +1,4 @@
 setTimeout(() => {
-
-
   let carousel01 = document.querySelector(".carousel01"),
     firstImg1 = carousel01?.querySelectorAll(".card_slider_inr01")[0],
     arrowIcons1 = document.querySelectorAll(".card_slider_row01 i");
@@ -14,7 +12,8 @@ setTimeout(() => {
   let showHideIcons1 = () => {
     let scrollWidth = carousel01.scrollWidth - carousel01.clientWidth;
     if (arrowIcons1[0] || arrowIcons1[1]) {
-      arrowIcons1[0].style.display = carousel01.scrollLeft == 0 ? "none" : "block";
+      arrowIcons1[0].style.display =
+        carousel01.scrollLeft == 0 ? "none" : "block";
       arrowIcons1[1].style.display =
         carousel01.scrollLeft == scrollWidth ? "none" : "block";
     }
@@ -32,8 +31,8 @@ setTimeout(() => {
   let autoSlide1 = () => {
     if (
       carousel01.scrollLeft -
-      (carousel01.scrollWidth - carousel01.clientWidth) >
-      -1 ||
+        (carousel01.scrollWidth - carousel01.clientWidth) >
+        -1 ||
       carousel01.scrollLeft <= 0
     )
       return;
@@ -62,7 +61,7 @@ setTimeout(() => {
     if (!isdragStart1) return;
     e.preventDefault();
     isdragging1 = true;
-    carousel01.classList.add("dragging");
+    carousel01?.classList.add("dragging");
     positionDiff1 = (e.pageX || e.touches[0].pageX) - prevPageX1;
     carousel01.scrollLeft = prevScrollLeft1 - positionDiff1;
     showHideIcons1();
@@ -70,7 +69,7 @@ setTimeout(() => {
 
   let dragStop1 = () => {
     isdragStart1 = false;
-    carousel01.classList?.remove("dragging");
+    carousel01?.classList.remove("dragging");
 
     if (!isdragging1) return;
     isdragging1 = false;
@@ -86,4 +85,3 @@ setTimeout(() => {
   document.addEventListener("mouseup", dragStop1);
   carousel01?.addEventListener("touchend", dragStop1);
 }, 1000);
-

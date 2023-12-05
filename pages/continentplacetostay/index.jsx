@@ -148,7 +148,6 @@ function ContinentPlacesToStay(props) {
         console.log("response", response);
         setMetaData(response.meta.pagination);
         const newItineraries = response.data;
-        debugger;
         if (newItineraries.length > 0) {
           setAllHotels((prevItineraries) =>
             [...prevItineraries, ...newItineraries].reduce(
@@ -184,6 +183,11 @@ function ContinentPlacesToStay(props) {
   };
 
   function onSubmit(data) {
+    data.preventDefault();
+    console.log("Selected Countries:", selectedOptionCountry);
+    console.log("Selected Regions:", selectedOptionRegion);
+    console.log("Selected Months:", selectedOptionMonth);
+
     if (!data.destination && !data.reason && !data.month) {
       showAlert("Please select atleast one option", "error");
     } else {
@@ -270,7 +274,6 @@ function ContinentPlacesToStay(props) {
               modifiedString = modifiedString.replace(checkStr, replacement);
             }
           });
-
           // Set the modified string in state
           setnewValueWithBr(modifiedString);
         }
@@ -285,7 +288,7 @@ function ContinentPlacesToStay(props) {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
+
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -300,7 +303,6 @@ function ContinentPlacesToStay(props) {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {

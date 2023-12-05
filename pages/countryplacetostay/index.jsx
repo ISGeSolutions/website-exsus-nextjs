@@ -20,9 +20,9 @@ function CountryPlaceToStay(props) {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isLoader, setIsLoader] = useState(false);
   const [isRtl, setIsRtl] = useState(false);
-  const [selectedOptionCountry, setSelectedOptionCountry] = useState(null);
-  const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
-  const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
+  const [selectedOptionCountry, setSelectedOptionCountry] = useState([]);
+  const [selectedOptionRegion, setSelectedOptionRegion] = useState([]);
+  const [selectedOptionMonth, setSelectedOptionMonth] = useState([]);
   const [itineraries, setItineraries] = useState(null);
   const itemsPerPage = 12; // Number of items to load per page
   const [page, setPage] = useState(0); // Current page
@@ -235,7 +235,9 @@ function CountryPlaceToStay(props) {
 
   function onSubmit(e) {
     e.preventDefault();
-    // console.log(e);
+    console.log("Selected Countries:", selectedOptionCountry);
+    console.log("Selected Regions:", selectedOptionRegion);
+    console.log("Selected Months:", selectedOptionMonth);
     if (!e.destination && !e.reason && !e.month) {
       showAlert("Please select atleast one option", "error");
     } else {
@@ -371,9 +373,9 @@ function CountryPlaceToStay(props) {
   };
 
   useEffect(() => {
-    // setSelectedOptionCountry();
-    // //setSelectedOptionRegion();
-    // setSelectedOptionMonth();
+    setSelectedOptionCountry();
+    setSelectedOptionRegion();
+    setSelectedOptionMonth();
 
     // destinationService.getAllItineraries().then(x => {
     //     setItineraries(x.data);
@@ -401,10 +403,8 @@ function CountryPlaceToStay(props) {
     window.onload = () => {
       setTimeout(() => {
         const redirectUrl =
-          regionWiseUrl + `/destinations/${destinationcode}/${countrycode?.replace(
-            / /g,
-            "-"
-          )}`;
+          regionWiseUrl +
+          `/destinations/${destinationcode}/${countrycode?.replace(/ /g, "-")}`;
         if (redirectUrl) {
           router.push(redirectUrl);
         }
