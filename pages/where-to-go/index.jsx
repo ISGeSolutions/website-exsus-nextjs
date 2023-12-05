@@ -124,7 +124,6 @@ function Index() {
     };
 
     const dictioneryFunction = (data) => {
-        debugger;
         let modifiedString = data;
         if (modifiedString) {
             const regex = /{[a-zA-Z0-9-]+}/g;

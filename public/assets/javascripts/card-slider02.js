@@ -69,12 +69,14 @@ setTimeout(() => {
   };
 
   let dragStop1 = () => {
-    isdragStart1 = false;
-    carousel01.classList?.remove("dragging");
+    if (carousel01?.classList) {
+      isdragStart1 = false;
+      carousel01.classList?.remove("dragging");
 
-    if (!isdragging1) return;
-    isdragging1 = false;
-    autoSlide1();
+      if (!isdragging1) return;
+      isdragging1 = false;
+      autoSlide1();
+    }
   };
 
   carousel01?.addEventListener("mousedown", dragStart1);

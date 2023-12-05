@@ -51,7 +51,7 @@ function Index() {
     });
   };
 
-  
+
   useEffect(() => {
     const carousel = document.querySelector("#carouselExampleInterval");
     if (carousel) {
