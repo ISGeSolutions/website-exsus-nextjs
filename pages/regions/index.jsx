@@ -27,6 +27,7 @@ function Index() {
   const [regionData, setRegionData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [friendlyUrl, setFriendlyUrl] = useState("");
+  const [activeButton, setActiveButton] = useState('images');
   const destinationcode = router?.query?.continent
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
@@ -89,6 +90,8 @@ function Index() {
   //   );
   // };
 
+
+
   <button className="btn header_nav_btn">
     MEET OUR EXPERTS
     <svg
@@ -111,6 +114,10 @@ function Index() {
   const handleDataFromChild = (data) => {
     // Update the parent component's state with data received from the child
     toggleTab(data);
+  };
+
+  const handleTabClick = (tab) => {
+    setActiveButton(tab);
   };
 
   const toggleTab = (itemId) => {
@@ -186,6 +193,16 @@ function Index() {
         setRegionData(x.data[0]);
         const imageCheck = x.data.attributes.region_images.data;
         const newBackgroundImages = [];
+        let latitude = x?.data?.attributes?.map_latitude ? x?.data?.attributes?.map_latitude : "";
+        let longitude = x?.data?.attributes?.map_longitude ? x?.data?.attributes?.map_longitude : "";
+
+        const mapTemp =
+          `https://www.google.com/maps/embed/v1/place?q=` +
+          latitude +
+          `,` +
+          longitude +
+          `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
+        setMapVariable(mapTemp);
         imageCheck.forEach((element) => {
           if (element.attributes.image_type == "banner") {
             newBackgroundImages.push(element.attributes.image_path);
@@ -315,14 +332,22 @@ function Index() {
               </div>
             </div>
             <div className="banner_tab_blk">
-              <button className="btn banner_map_tab">Map</button>
-              <button className="btn banner_img_tab banner_tab_active">
+              <button
+                className={`btn banner_map_tab ${activeButton === 'map' ? 'banner_tab_active' : ''}`}
+                onClick={() => handleTabClick('map')}
+              >
+                Map
+              </button>
+              <button
+                className={`btn banner_img_tab ${activeButton === 'images' ? 'banner_tab_active' : ''}`}
+                onClick={() => handleTabClick('images')}
+              >
                 Images
               </button>
             </div>
 
             {/* Map */}
-            <div className="banner_map_blk">
+            <div className={`banner_map_blk ${activeButton === 'map' ? 'banner_map_active' : ''}`}>
               <Iframe
                 width="640px"
                 height="320px"

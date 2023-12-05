@@ -37,6 +37,9 @@ function Index() {
     itineraries: useRef(null),
     "places-to-stay": useRef(null),
   };
+  const [activeButton, setActiveButton] = useState('images');
+
+
 
   const divRef = useRef();
   const { t } = useTranslation();
@@ -171,6 +174,10 @@ function Index() {
         elements[i].className = elements[i].className + " show";
       }
     }
+  };
+
+  const handleTabClick = (tab) => {
+    setActiveButton(tab);
   };
 
 
@@ -456,12 +463,20 @@ function Index() {
               </div>
             </div>
             <div className="banner_tab_blk">
-              <button className="btn banner_map_tab">Map</button>
-              <button className="btn banner_img_tab banner_tab_active">
+              <button
+                className={`btn banner_map_tab ${activeButton === 'map' ? 'banner_tab_active' : ''}`}
+                onClick={() => handleTabClick('map')}
+              >
+                Map
+              </button>
+              <button
+                className={`btn banner_img_tab ${activeButton === 'images' ? 'banner_tab_active' : ''}`}
+                onClick={() => handleTabClick('images')}
+              >
                 Images
               </button>
             </div>
-            <div className="banner_map_blk">
+            <div className={`banner_map_blk ${activeButton === 'map' ? 'banner_map_active' : ''}`}>
               <Iframe
                 width="640px"
                 height="320px"
@@ -475,6 +490,7 @@ function Index() {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
+
               {/* src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" */}
             </div>
             {/* <p>{mapVariable}</p> */}

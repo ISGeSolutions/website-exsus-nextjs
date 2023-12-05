@@ -137,7 +137,6 @@ function ContinentItinararies(props) {
   };
 
   const showAlert = (message, type) => {
-    debugger;
     setAlert({ message, type });
   };
 
@@ -239,7 +238,7 @@ function ContinentItinararies(props) {
     console.log("Selected Regions:", selectedOptionRegion);
     console.log("Selected Months:", selectedOptionMonth);
     // console.log(data);
-    debugger;
+
     if (
       !selectedOptionCountry.length > 0 ||
       !selectedOptionRegion.length > 0 ||
