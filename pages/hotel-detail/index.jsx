@@ -5,6 +5,7 @@ import { Layout } from "components/users";
 import { aboutusService } from "services";
 import { NavLink } from "components";
 import { useRouter } from "next/router";
+import { FriendlyUrl } from "../../components";
 import Iframe from "react-iframe";
 import Head from "next/head";
 
@@ -32,6 +33,7 @@ function Index() {
   const [travelTimes, setTraveltimes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [location, setLocation] = useState({});
+  const [friendlyUrl, setFriendlyUrl] = useState("");
   let region = "uk";
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
@@ -141,6 +143,9 @@ function Index() {
       .getHotelById(hotelName, region)
       .then((x) => {
         // setWhyusDetails(x.data.attributes);
+        setFriendlyUrl(
+          `home/destinations/${router.query?.continent}/${router.query?.country}/${regionName}/${router.query?.hotelName}`
+        );
         const mapTemp =
           `https://www.google.com/maps/embed/v1/place?q=` +
           x.data[0]?.attributes?.map_latitude +
@@ -280,6 +285,7 @@ function Index() {
           <section className="trvl_info_row">
             <div className="container">
               <div className="bookmark_row">
+                <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
                 {/* <ul>
                             <li><a href="homepage.html">Home</a></li>
                             <li><a href="destinations.html">Destinations</a></li>

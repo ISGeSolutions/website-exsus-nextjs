@@ -243,17 +243,32 @@ function CountryPlaceToStay(props) {
     } else {
       router.push(
         `advance-search?where=` +
-          e?.destination +
-          `&what=` +
-          e?.reason +
-          `&when=` +
-          e?.month
+        e?.destination +
+        `&what=` +
+        e?.reason +
+        `&when=` +
+        e?.month
       );
     }
   }
 
   const handleRedirect = (item) => {
-    return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
+    let hotelName = item?.attributes?.friendly_url
+      ?.replace(/ /g, "-")
+      .toLowerCase()
+      .replace(/&/g, "and");
+    return (
+      regionWiseUrl +
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name?.replace(
+          / /g,
+          "-"
+        ).replace(/&/g, "and").toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name?.replace(
+          / /g,
+          "-"
+        ).replace(/&/g, "and").toLowerCase()}/${hotelName}`)
   };
 
   const handleOptionCountryChange = (selectedOption) => {
@@ -368,8 +383,23 @@ function CountryPlaceToStay(props) {
   };
 
   const generateDynamicLink = (item) => {
-    // console.log('item', item);
-    return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
+    let hotelName = item?.attributes?.friendly_url
+      ?.replace(/ /g, "-")
+      .toLowerCase()
+      .replace(/&/g, "and");
+    return (
+      regionWiseUrl +
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name?.replace(
+          / /g,
+          "-"
+        ).replace(/&/g, "and").toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name?.replace(
+          / /g,
+          "-"
+        ).replace(/&/g, "and").toLowerCase()}/${hotelName}`
+    );
   };
 
   useEffect(() => {
@@ -609,12 +639,12 @@ function CountryPlaceToStay(props) {
                             <div className="card_slider">
                               <NavLink
                                 className="card_slider_img"
-                                href={generateDynamicLink(item.id)}
+                                href={generateDynamicLink(item)}
                               >
                                 {item?.attributes?.hotel_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                      "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}
@@ -656,8 +686,8 @@ function CountryPlaceToStay(props) {
                                               {item?.attributes?.currency_symbol.repeat(
                                                 Math.abs(
                                                   5 -
-                                                    item?.attributes
-                                                      ?.price_guide_value
+                                                  item?.attributes
+                                                    ?.price_guide_value
                                                 )
                                               )}
                                             </label>
@@ -683,7 +713,7 @@ function CountryPlaceToStay(props) {
                               </div>
                               <button
                                 className="btn card_slider_btn justify-content-end"
-                                onClick={() => handleRedirect(item.id)}
+                                onClick={() => handleRedirect(item)}
                               >
                                 <span className="view_itnry_link">
                                   View this hotel

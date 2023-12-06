@@ -99,11 +99,11 @@ function Inspireme(props) {
     } else {
       router.push(
         `advance-search?where=` +
-          destination +
-          `&what=` +
-          reason +
-          `&when=` +
-          month
+        destination +
+        `&what=` +
+        reason +
+        `&when=` +
+        month
       );
       reset();
       setQueryParameters(null);
@@ -144,9 +144,8 @@ function Inspireme(props) {
                     aria-label="Choose a destination"
                     name="destination"
                     {...register("destination")}
-                    className={`form-select ${
-                      errors.destination ? "is-invalid" : ""
-                    }`}
+                    className={`form-select ${errors.destination ? "is-invalid" : ""
+                      }`}
                   >
                     <option value="">Choose a destination</option>
                     {destinationLandingList?.map((element, i) => (
@@ -174,9 +173,8 @@ function Inspireme(props) {
                     aria-label="Choose a reason"
                     name="reason"
                     {...register("reason")}
-                    className={`form-select ${
-                      errors.reason ? "is-invalid" : ""
-                    }`}
+                    className={`form-select ${errors.reason ? "is-invalid" : ""
+                      }`}
                   >
                     <option value="">Choose a reason</option>
                     {holidaytypesLandingList?.map((element, i) => (
@@ -204,9 +202,8 @@ function Inspireme(props) {
                     aria-label="Choose a month"
                     name="month"
                     {...register("month")}
-                    className={`form-select ${
-                      errors.month ? "is-invalid" : ""
-                    }`}
+                    className={`form-select ${errors.month ? "is-invalid" : ""
+                      }`}
                   >
                     <option value="">Choose a month</option>
                     <option value="1" selected={queryParameters?.when == 1}>

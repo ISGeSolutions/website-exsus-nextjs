@@ -5,8 +5,12 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 function Alert({ message, type, onClose }) {
-
     const [isInitialLoad, setIsInitialLoad] = useState(true);
+    if (type == "success") {
+        $(".succss_msg_parnt").show();
+    } else if (type == "error") {
+        $(".error_msg_parnt").show();
+    }
 
     const onCloseFun = () => {
         $(".succss_msg_parnt").hide();

@@ -193,11 +193,11 @@ function ContinentPlacesToStay(props) {
     } else {
       router.push(
         `advance-search?where=` +
-          data?.destination +
-          `&what=` +
-          data?.reason +
-          `&when=` +
-          data?.month
+        data?.destination +
+        `&what=` +
+        data?.reason +
+        `&when=` +
+        data?.month
       );
     }
   }
@@ -210,7 +210,22 @@ function ContinentPlacesToStay(props) {
   };
 
   const handleRedirect = (item) => {
-    return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
+    let hotelName = item?.attributes?.friendly_url
+      ?.replace(/ /g, "-")
+      .toLowerCase()
+      .replace(/&/g, "and");
+    router.push(
+      regionWiseUrl +
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name?.replace(
+          / /g,
+          "-"
+        ).replace(/&/g, "and").toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name?.replace(
+          / /g,
+          "-"
+        ).replace(/&/g, "and").toLowerCase()}/${hotelName}`)
   };
 
   const handleOptionCountryChange = (selectedOption) => {
@@ -237,26 +252,22 @@ function ContinentPlacesToStay(props) {
   };
 
   const generateDynamicLink = (item) => {
-    let locationCountry = item?.attributes?.location
-      ?.toLowerCase()
-      .replace(/&/g, "and");
-    let countryName = locationCountry.match(/\|(.+)/);
-    countryName = countryName ? countryName[1].trim() : null;
-    let location = locationCountry?.match(/(.+?)\|/);
-    location = location ? location[1].trim() : null;
     let hotelName = item?.attributes?.friendly_url
       ?.replace(/ /g, "-")
       .toLowerCase()
       .replace(/&/g, "and");
     return (
       regionWiseUrl +
-      `/destinations/${destinationcode
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
-        .toLowerCase()}/hotels/${countryName?.replace(
-        / /g,
-        "-"
-      )}/${location?.replace(/ /g, "-")}/${hotelName}`
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name?.replace(
+          / /g,
+          "-"
+        ).replace(/&/g, "and").toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name?.replace(
+          / /g,
+          "-"
+        ).replace(/&/g, "and").toLowerCase()}/${hotelName}`
     );
   };
 
@@ -327,7 +338,7 @@ function ContinentPlacesToStay(props) {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -591,7 +602,7 @@ function ContinentPlacesToStay(props) {
                               {item?.attributes?.hotel_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -636,8 +647,8 @@ function ContinentPlacesToStay(props) {
                                             {item?.attributes?.currency_symbol.repeat(
                                               Math.abs(
                                                 5 -
-                                                  item?.attributes
-                                                    ?.price_guide_value
+                                                item?.attributes
+                                                  ?.price_guide_value
                                               )
                                             )}
                                           </label>
@@ -663,7 +674,7 @@ function ContinentPlacesToStay(props) {
                             </div>
                             <button
                               className="btn card_slider_btn justify-content-end"
-                              onClick={() => handleRedirect(item.id)}
+                              onClick={() => handleRedirect(item)}
                             >
                               <span className="view_itnry_link">
                                 View this hotel

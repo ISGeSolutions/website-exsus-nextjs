@@ -57,31 +57,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
   //   sendDataToParent(tempParentData);
   // };
 
-  const handleRedirect = () => {
-    const modifiedName = item?.attributes?.itin_name
-      ?.replace(/ /g, "-")
-      .toLowerCase();
-    router.push(
-      regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
-        / /g,
-        "-"
-      )}/${destinationcode}-iteneraries/${modifiedName}`
-    );
-  };
 
-  const generateDynamicLink = (item) => {
-    const modifiedName = item?.attributes?.itin_name
-      ?.replace(/ /g, "-")
-      .toLowerCase();
-    return (
-      regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
-        / /g,
-        "-"
-      )}/${destinationcode}-iteneraries/${modifiedName}`
-    );
-  };
 
   // const generateDynamicLink = (item) => {
   //   return (
@@ -109,6 +85,92 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
         elements[i].className = elements[i].className + " show";
       }
     }
+  };
+
+  const generateDynamicLink1 = (item) => {
+    let hotelName = item?.attributes?.friendly_url
+      ?.replace(/ /g, "-")
+      .toLowerCase()
+      .replace(/&/g, "and");
+    return (
+      regionWiseUrl +
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name?.replace(
+          / /g,
+          "-"
+        ).replace(/&/g, "and").toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name?.replace(
+          / /g,
+          "-"
+        ).replace(/&/g, "and").toLowerCase()}/${hotelName}`
+    );
+  };
+
+
+
+
+
+  const handleRedirect1 = (item) => {
+    let hotelName = item?.attributes?.friendly_url
+      ?.replace(/ /g, "-")
+      .toLowerCase()
+      .replace(/&/g, "and");
+    router.push(
+      regionWiseUrl +
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name?.replace(
+          / /g,
+          "-"
+        ).replace(/&/g, "and").toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name?.replace(
+          / /g,
+          "-"
+        ).replace(/&/g, "and").toLowerCase()}/${hotelName}`)
+  };
+
+
+
+  const generateDynamicLink = (item) => {
+    let itineraryName = item?.attributes?.itin_name
+      ?.replace(/ /g, "-")
+      .toLowerCase()
+      .replace(/&/g, "and");
+    let countryName = item?.attributes?.country?.data?.attributes?.country_name?.replace(
+      / /g,
+      "-"
+    ).replace(/&/g, "and").toLowerCase();
+    return (
+      regionWiseUrl +
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${itineraryName?.replace(/&/g, " and ")
+          .replace(/ /g, "-")
+          .toLowerCase()}`
+    );
+  };
+
+  const handleRedirect = (item) => {
+    let itineraryName = item?.attributes?.itin_name
+      ?.replace(/ /g, "-")
+      .toLowerCase()
+      .replace(/&/g, "and");
+    let countryName = item?.attributes?.country?.data?.attributes?.country_name?.replace(
+      / /g,
+      "-"
+    ).replace(/&/g, "and").toLowerCase();
+    router.push(
+      regionWiseUrl +
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${itineraryName?.replace(/&/g, " and ")
+          .replace(/ /g, "-")
+          .toLowerCase()}`
+    );
+
   };
 
   const websiteContentCheck = (matches, region, modifiedString) => {
@@ -414,7 +476,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                     <div className="card_slider_inr01" key={item.id}>
                       <div className="card_slider">
                         <NavLink
-                          href={generateDynamicLink(item.id)}
+                          href={generateDynamicLink1(item)}
                           className="card_slider_img"
                         >
                           {item?.attributes?.hotel_images?.data.map(
@@ -433,7 +495,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                         </NavLink>
                         <div className="card_slider_cnt places_to_stay_cnt">
                           <h4>
-                            <a href="#">{item?.attributes?.hotel_name}</a>
+                            <a href={generateDynamicLink1(item)}>{item?.attributes?.hotel_name}</a>
                           </h4>
                           <ul>
                             <li>Location: {item?.attributes?.location}</li>
@@ -483,7 +545,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                         </div>
                         <button
                           className="btn card_slider_btn justify-content-end"
-                          onClick={() => handleRedirect(item.id)}
+                          onClick={() => handleRedirect1(item)}
                         >
                           <span className="view_itnry_link">
                             View this hotel

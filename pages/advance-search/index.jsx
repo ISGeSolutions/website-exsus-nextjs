@@ -61,17 +61,40 @@ function Index() {
   };
 
   const generateDynamicLink = (item) => {
+    let itineraryName = item?.attributes?.itin_name
+      ?.replace(/ /g, "-")
+      .toLowerCase()
+      .replace(/&/g, "and");
+    let countryName = item?.attributes?.country?.data?.attributes?.country_name?.replace(
+      / /g,
+      "-"
+    ).replace(/&/g, "and").toLowerCase();
     return (
       regionWiseUrl +
-      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${itineraryName}`
     );
   };
 
-  const handleRedirect = () => {
+  const handleRedirect = (item) => {
+    let itineraryName = item?.attributes?.itin_name
+      ?.replace(/ /g, "-")
+      .toLowerCase()
+      .replace(/&/g, "and");
+    let countryName = item?.attributes?.country?.data?.attributes?.country_name?.replace(
+      / /g,
+      "-"
+    ).replace(/&/g, "and").toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/africa/africa-itineraries/vietnam-in-classic-style`
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${itineraryName}`
     );
+
   };
 
   const equalHeight = (resize) => {
@@ -240,7 +263,7 @@ function Index() {
                               </NavLink>
                               <div className="card_slider_cnt places_to_stay_cnt">
                                 <h4>
-                                  <a href="#">{item?.attributes?.itin_name}</a>
+                                  <a href={generateDynamicLink(item)}>{item?.attributes?.itin_name}</a>
                                 </h4>
                                 <ul>
                                   <li>{item?.attributes?.header_text}</li>
@@ -269,14 +292,13 @@ function Index() {
                                   </li>
                                 </ul>
                               </div>
-                              <button className="btn card_slider_btn">
+                              <button className="btn card_slider_btn" onClick={() =>
+                                handleRedirect(item?.attributes?.itin_name)}  >
                                 <span>
                                   {item?.attributes?.no_of_nites_notes}
                                 </span>
                                 <span
-                                  className="view_itnry_link"
-                                  onClick={handleRedirect}
-                                >
+                                  className="view_itnry_link">
                                   View this itinerary
                                   <em className="fa-solid fa-chevron-right"></em>
                                 </span>
