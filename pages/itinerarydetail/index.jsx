@@ -124,10 +124,6 @@ function Index() {
     );
   };
 
-
-
-
-
   const handleRedirect1 = (item) => {
     let hotelName = item?.attributes?.friendly_url
       ?.replace(/ /g, "-")
@@ -163,7 +159,9 @@ function Index() {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}-itineraries/${itineraryName}`
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${itineraryName?.replace(/&/g, " and ")
+          .replace(/ /g, "-")
+          .toLowerCase()}`
     );
   };
 
@@ -181,7 +179,9 @@ function Index() {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}-itineraries/${itineraryName}`
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${itineraryName?.replace(/&/g, " and ")
+          .replace(/ /g, "-")
+          .toLowerCase()}`
     );
 
   };
@@ -876,7 +876,7 @@ function Index() {
                         </NavLink>
                         <div className="card_slider_cnt places_to_stay_cnt">
                           <h4>
-                            <a href="#">{item?.attributes?.hotel_name}</a>
+                            <a href={generateDynamicLink1(item)}>{item?.attributes?.hotel_name}</a>
                           </h4>
                           <ul>
                             <li>Location: {item?.attributes?.location}</li>
@@ -998,7 +998,7 @@ function Index() {
                           {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
                         </NavLink>
                         <div className="card_slider_cnt places_to_stay_cnt">
-                          <NavLink href="">
+                          <NavLink href={generateDynamicLink(item)}>
                             <h4>
                               <a>
                                 {dictioneryFunction(

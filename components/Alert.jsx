@@ -18,7 +18,6 @@ function Alert({ message, type, onClose }) {
     };
 
     useEffect(() => {
-        debugger;
         // eslint-disable-next-line react-hooks/exhaustive-deps
         // $(".succss_msg_parnt").hide();
         if (!message && !type) {
