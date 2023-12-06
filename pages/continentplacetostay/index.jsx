@@ -628,12 +628,12 @@ function ContinentPlacesToStay(props) {
                                 {item?.attributes?.hotel_country_contents?.data?.map(
                                   (item) => {
                                     return (
-                                      <li>
+                                      <li class="price_guide_tooltip">
                                         Price guide:
                                         <span
                                           key={item?.id}
                                           tabIndex="0"
-                                          title={
+                                          data-title={
                                             item?.attributes?.price_guide_text
                                           }
                                         >

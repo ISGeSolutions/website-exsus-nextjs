@@ -11,6 +11,9 @@ import CustomMultiValue from "./CustomMultiValue";
 import Select, { components } from "react-select";
 import { Alert } from "../../components";
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 
 export default Index;
 
@@ -43,6 +46,17 @@ function Index() {
   const [selectedOptionDestination, setSelectedOptionDestination] =
     useState(null);
   const [destinationOptions, setAllDestination] = useState([]);
+  const [queryParameters, setQueryParameters] = useState();
+
+  const validationSchema = Yup.object().shape({
+    destination: Yup.string(),
+  });
+
+  const formOptions = { resolver: yupResolver(validationSchema) };
+
+  // get functions to build form with useForm() hook
+  const { register, handleSubmit, formState, reset } = useForm(formOptions);
+  const { errors } = formState;
 
   const hcode = router?.query?.holidaytypeitineraries
     ?.replace(/-and-/g, " & ")
@@ -226,6 +240,26 @@ function Index() {
       }
     }
   }
+  const showAlert = (message, type) => {
+    setAlert({ message, type });
+  };
+
+  const closeAlert = () => {
+    // console.log("closeAlert");
+    setAlert(null);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleOptionCountryChange = (selectedOption) => {
+    selectedOption = selectedOption.filter(
+      (i) => i.value !== "" && typeof i.value !== "undefined"
+    );
+    setSelectedOptionDestination(selectedOption);
+  };
+
   const handleFilterClick = (item) => {
     page = 0;
     setItineraries([]);
@@ -241,7 +275,7 @@ function Index() {
     const country = item?.attributes?.sub_header_text
       ?.replace(/ /g, "-")
       .toLowerCase();
-    const modifiedName = item?.attributes?.header_text
+    const modifiedName = item?.attributes?.itin_name
       ?.replace(/ /g, "-")
       .toLowerCase();
     return (
@@ -258,7 +292,7 @@ function Index() {
     const country = item?.attributes?.sub_header_text
       ?.replace(/ /g, "-")
       .toLowerCase();
-    const modifiedName = item?.attributes?.header_text
+    const modifiedName = item?.attributes?.itin_name
       ?.replace(/ /g, "-")
       .toLowerCase();
     router.push(
@@ -293,40 +327,33 @@ function Index() {
   };
 
   function onSubmit(data) {
-    data.preventDefault();
-    if (!data.destination && !data.reason && !data.month) {
+    //data.preventDefault();
+    debugger;
+    let destination = "";
+
+    if (data?.destination) {
+      destination = data?.destination;
+    } else if (queryParameters?.where) {
+      destination = queryParameters?.where;
+    }
+
+    if (!selectedOptionDestination) {
       showAlert("Please select atleast one option", "error");
+      setQueryParameters(null);
+      reset();
     } else {
-      router.push(
-        `advance-search?where=` +
-          data?.destination +
-          `&what=` +
-          data?.reason +
-          `&when=` +
-          data?.month
-      );
+      // router.push(
+      //   `advance-search?where=` +
+      //     data?.destination +
+      //     `&what=` +
+      //     data?.reason +
+      //     `&when=` +
+      //     data?.month
+      // );
+      reset();
+      setQueryParameters(null);
     }
   }
-
-  const showAlert = (message, type) => {
-    setAlert({ message, type });
-  };
-
-  const closeAlert = () => {
-    // console.log("closeAlert");
-    setAlert(null);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleOptionCountryChange = (selectedOption) => {
-    selectedOption = selectedOption.filter(
-      (i) => i.value !== "" && typeof i.value !== "undefined"
-    );
-    setSelectedOptionDestination(selectedOption);
-  };
 
   // const generateDynamicLink = (item) => {
   //   return (
@@ -398,7 +425,7 @@ function Index() {
   };
 
   useEffect(() => {
-    setSelectedOptionDestination();
+    setSelectedOptionDestination([]);
     holidaytypesService
       .getHolidaytypeDetails(hcode)
       .then((x) => {
@@ -614,7 +641,7 @@ function Index() {
               <div className="card_slider_row">
                 <div className="carousel00 region_carousel00">
                   <div className="row">
-                    <form onSubmit={onSubmit}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                       <div className="col-12 col-md-8 col-lg-6 col-xl-5 m-auto">
                         <div className="destination_dropdwn_row d-block d-md-flex">
                           <div className="banner_dropdwn_blk">
