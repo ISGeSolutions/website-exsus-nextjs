@@ -290,11 +290,11 @@ function CountryItinararies(props) {
     } else {
       router.push(
         `advance-search?where=` +
-          e?.destination +
-          `&what=` +
-          e?.reason +
-          `&when=` +
-          e?.month
+        e?.destination +
+        `&what=` +
+        e?.reason +
+        `&when=` +
+        e?.month
       );
     }
   }
@@ -335,7 +335,7 @@ function CountryItinararies(props) {
       `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
         / /g,
         "-"
-      )}/${countrycode?.replace(/ /g, "-")}}-iteneraries/${modifiedName}`
+      )}/${countrycode?.replace(/ /g, "-")?.replace(/&/g, "and")}-iteneraries/${modifiedName}`
     );
   };
 
@@ -343,17 +343,17 @@ function CountryItinararies(props) {
     const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
-          / /g,
-          "-"
-        )}/${countrycode?.replace(/ /g, "-")}}-iteneraries/${modifiedName}`
+      `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
+        / /g,
+        "-"
+      )}/${countrycode?.replace(/ /g, "-")}}-iteneraries/${modifiedName}`
     );
   };
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -616,7 +616,7 @@ function CountryItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -650,11 +650,9 @@ function CountryItinararies(props) {
                                   )
                                   .map((res1) => (
                                     <li key={res1.id}>
-                                      {`from ${
-                                        res1.attributes?.currency_symbol ?? ""
-                                      }${
-                                        res1.attributes?.price ?? " xxxx"
-                                      } per person`}
+                                      {`from ${res1.attributes?.currency_symbol ?? ""
+                                        }${res1.attributes?.price ?? " xxxx"
+                                        } per person`}
                                     </li>
                                   ))}
                                 <li>

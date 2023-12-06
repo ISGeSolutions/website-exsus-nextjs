@@ -22,8 +22,8 @@ function Index() {
   const [hotels, setHotelData] = useState(null);
   const [bannerImages, setBannerImages] = useState(null);
   const itin_name = router.query?.itineraryName
-    ? router.query?.itineraryName?.replace(/-/g, " ").toLowerCase()
-    : router.query?.itineraries?.replace(/-/g, " ").toLowerCase();
+    ? router.query?.itineraryName?.replace(/-/g, " ").replace(/and/g, "&").toLowerCase()
+    : router.query?.itineraries?.replace(/-/g, " ").replace(/and/g, "&").toLowerCase();
   const itin_code = router.query.itinerarycode;
   const [title, setTitle] = useState("");
   const countrycode = router.query.countrycode;
@@ -102,6 +102,88 @@ function Index() {
         </svg>
       </button>
     );
+  };
+
+  const generateDynamicLink1 = (item) => {
+    let hotelName = item?.attributes?.friendly_url
+      ?.replace(/ /g, "-")
+      .toLowerCase()
+      .replace(/&/g, "and");
+    return (
+      regionWiseUrl +
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name?.replace(
+          / /g,
+          "-"
+        ).replace(/&/g, "and").toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name?.replace(
+          / /g,
+          "-"
+        ).replace(/&/g, "and").toLowerCase()}/${hotelName}`
+    );
+  };
+
+
+
+
+
+  const handleRedirect1 = (item) => {
+    let hotelName = item?.attributes?.friendly_url
+      ?.replace(/ /g, "-")
+      .toLowerCase()
+      .replace(/&/g, "and");
+    router.push(
+      regionWiseUrl +
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name?.replace(
+          / /g,
+          "-"
+        ).replace(/&/g, "and").toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name?.replace(
+          / /g,
+          "-"
+        ).replace(/&/g, "and").toLowerCase()}/${hotelName}`)
+  };
+
+
+
+  const generateDynamicLink = (item) => {
+    let itineraryName = item?.attributes?.itin_name
+      ?.replace(/ /g, "-")
+      .toLowerCase()
+      .replace(/&/g, "and");
+    let countryName = item?.attributes?.country?.data?.attributes?.country_name?.replace(
+      / /g,
+      "-"
+    ).replace(/&/g, "and").toLowerCase();
+    return (
+      regionWiseUrl +
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${itineraryName}`
+    );
+  };
+
+  const handleRedirect = (item) => {
+    let itineraryName = item?.attributes?.itin_name
+      ?.replace(/ /g, "-")
+      .toLowerCase()
+      .replace(/&/g, "and");
+    let countryName = item?.attributes?.country?.data?.attributes?.country_name?.replace(
+      / /g,
+      "-"
+    ).replace(/&/g, "and").toLowerCase();
+    router.push(
+      regionWiseUrl +
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${itineraryName}`
+    );
+
   };
 
   const websiteContentCheck = (matches, region, modifiedString) => {
@@ -186,7 +268,7 @@ function Index() {
   // };
 
   useEffect(() => {
-    // console.log(itin_name)
+    console.log(itin_name)
     // console.log(router.query);
     const tooltipTriggerList = document.querySelectorAll(
       '[data-bs-toggle="tooltip"]'
@@ -241,7 +323,7 @@ function Index() {
         console.log(imageCheck);
 
         setFriendlyUrl(
-          `home/destinations/${router.query?.continent}/${router.query?.country}/${x.data[0].attributes.friendly_url}`
+          `home/destinations/${router.query?.continent}/${router.query?.country}/${x.data[0].attributes.itin_name.toLowerCase()}`
         );
         setTitle(x.data[0].attributes.meta_title);
         imageCheck.forEach((banner, index) => {
@@ -775,7 +857,7 @@ function Index() {
                     <div className="card_slider_inr01" key={item.id}>
                       <div className="card_slider">
                         <NavLink
-                          href=""
+                          href={generateDynamicLink1(item)}
                           className="card_slider_img"
                         >
                           {item?.attributes?.hotel_images?.data.map(
@@ -826,14 +908,6 @@ function Index() {
                                 );
                               }
                             )}
-
-                            <li>
-                              <p
-                                dangerouslySetInnerHTML={{
-                                  __html: item?.attributes?.intro_text,
-                                }}
-                              />
-                            </li>
                             <li>
                               Best for:
                               <span>
@@ -844,7 +918,7 @@ function Index() {
                         </div>
                         <button
                           className="btn card_slider_btn justify-content-end"
-                          onClick={() => handleRedirect(item.id)}
+                          onClick={() => handleRedirect1(item)}
                         >
                           <span className="view_itnry_link">
                             View this hotel
@@ -905,7 +979,7 @@ function Index() {
                     <div className="card_slider_inr" key={item.id}>
                       <div className="card_slider">
                         <NavLink
-                          href=""
+                          href={generateDynamicLink(item)}
                           className="card_slider_img"
                         >
                           {item?.attributes?.itinerary_images?.data.map(

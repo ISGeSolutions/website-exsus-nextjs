@@ -47,10 +47,10 @@ function Index() {
   const generateDynamicLink = (item) => {
     const modifiedName = item.attributes?.itin_name
       ?.replace(/ /g, "-")
-      .toLowerCase();
+      .toLowerCase().replace(/&/g, "and");
     const modifiedDestinationName = item.attributes?.destination_name
       ?.replace(/ /g, "-")
-      .replace(/&/g, "&")
+      .replace(/&/g, "and")
       .toLowerCase();
 
     return (
@@ -67,18 +67,18 @@ function Index() {
     return regionWiseUrl + `/blog/${modifiedGrpName}`;
   };
 
-  const handleRedirect = () => {
+  const handleRedirect = (item) => {
     const modifiedName = item.attributes?.itin_name
       ?.replace(/ /g, "-")
-      .toLowerCase();
+      .toLowerCase().replace(/&/g, "and");;
     const modifiedDestinationName = item.attributes?.destination_name
       ?.replace(/ /g, "-")
-      .replace(/&/g, "&")
+      .replace(/&/g, "and")
       .toLowerCase();
 
     router.push(
       regionWiseUrl +
-        `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-iteneraries/${modifiedName}`
+      `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-iteneraries/${modifiedName}`
     );
   };
 
@@ -104,8 +104,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -216,6 +216,9 @@ function Index() {
     } else {
     }
   };
+
+
+
 
   useEffect(() => {
     $(".succss_msg_parnt").hide();
@@ -670,11 +673,9 @@ function Index() {
                               )
                               .map((res1) => (
                                 <li key={res1.id}>
-                                  {`from ${
-                                    res1.attributes?.currency_symbol ?? ""
-                                  }${
-                                    res1.attributes?.price ?? " xxxx"
-                                  } per person`}
+                                  {`from ${res1.attributes?.currency_symbol ?? ""
+                                    }${res1.attributes?.price ?? " xxxx"
+                                    } per person`}
                                 </li>
                               ))}
                             <li>
