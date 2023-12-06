@@ -19,6 +19,7 @@ function RegionPlacesToStay(props) {
     const [isDisabled, setIsDisabled] = useState(false);
     const [isLoader, setIsisLoader] = useState(false);
     const [isRtl, setIsRtl] = useState(false);
+    const [regionData, setRegionData] = useState([]);
     const [selectedOptionCountry, setSelectedOptionCountry] = useState(null);
     const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
     const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
@@ -109,7 +110,6 @@ function RegionPlacesToStay(props) {
         { value: "November", label: "November" },
         { value: "December", label: "December" }
     ];
-
 
     const width = "250px";
     const styles = {
@@ -239,25 +239,162 @@ function RegionPlacesToStay(props) {
         return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
     };
 
-    // const handleRedirect = () => {
-    //     router.push(regionWiseUrl + `/itinerarydetail?itinerarycode=vi`);
-    // };
+    const websiteContentCheck = (matches, region, modifiedString) => {
+        homeService
+            .getAllWebsiteContent()
+            .then((x) => {
+                const response = x?.data;
+
+                // Calculate the expiration time (1 day from the current time)
+                const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000;
+
+                const dynamicObject = {};
+                const dynamicObjectUk = {};
+                const dynamicObjectUs = {};
+                const dynamicObjectAsia = {};
+                const dynamicObjectIndia = {};
+
+                response.forEach((element, index) => {
+                    // Create an object with the data and expiration time
+                    dynamicObject[element?.attributes?.content_word] =
+                        element?.attributes?.content_translation_text;
+                    dynamicObject["code"] =
+                        element?.attributes?.website_country?.data?.attributes?.code;
+                    dynamicObject["expiration"] = expirationTime;
+
+                    if (
+                        element?.attributes?.website_country?.data?.attributes?.code == "UK"
+                    ) {
+                        dynamicObjectUk[element?.attributes?.content_word] =
+                            element?.attributes?.content_translation_text;
+                        dynamicObjectUk["expiration"] = expirationTime;
+                        localStorage.setItem(
+                            "websitecontent_uk",
+                            JSON.stringify(dynamicObjectUk)
+                        );
+                    }
+                    if (
+                        element?.attributes?.website_country?.data?.attributes?.code == "US"
+                    ) {
+                        dynamicObjectUs[element?.attributes?.content_word] =
+                            element?.attributes?.content_translation_text;
+                        dynamicObjectUs["expiration"] = expirationTime;
+                        localStorage.setItem(
+                            "websitecontent_us",
+                            JSON.stringify(dynamicObjectUs)
+                        );
+                    }
+                    if (
+                        element?.attributes?.website_country?.data?.attributes?.code ==
+                        "ASIA"
+                    ) {
+                        dynamicObjectAsia[element?.attributes?.content_word] =
+                            element?.attributes?.content_translation_text;
+                        dynamicObjectAsia["expiration"] = expirationTime;
+                        localStorage.setItem(
+                            "websitecontent_asia",
+                            JSON.stringify(dynamicObjectAsia)
+                        );
+                    }
+                    if (
+                        element?.attributes?.website_country?.data?.attributes?.code ==
+                        "INDIA"
+                    ) {
+                        dynamicObjectIndia[element?.attributes?.content_word] =
+                            element?.attributes?.content_translation_text;
+                        dynamicObjectIndia["expiration"] = expirationTime;
+                        localStorage.setItem(
+                            "websitecontent_india",
+                            JSON.stringify(dynamicObjectIndia)
+                        );
+                    }
+                });
+
+                setWebsiteContent(x.data);
+                setIsLoading(false);
+            })
+            .catch((error) => {
+                // Handle any errors here
+                setIsLoading(false);
+            });
+    };
+
+    const dictioneryFunction = (data) => {
+        let modifiedString = data;
+        if (modifiedString) {
+            const regex = /{[a-zA-Z0-9-]+}/g;
+            const matches = [...new Set(modifiedString.match(regex))];
+
+            let storedDataString = "";
+            let storedData = "";
+            // debugger;
+            if (region == "uk") {
+                storedDataString = localStorage.getItem("websitecontent_uk");
+                storedData = JSON.parse(storedDataString);
+            } else if (region == "us") {
+                storedDataString = localStorage.getItem("websitecontent_us");
+                storedData = JSON.parse(storedDataString);
+            } else if (region == "asia") {
+                storedDataString = localStorage.getItem("websitecontent_asia");
+                storedData = JSON.parse(storedDataString);
+            } else if (region == "in") {
+                storedDataString = localStorage.getItem("websitecontent_india");
+                storedData = JSON.parse(storedDataString);
+            }
+            if (storedData !== null) {
+
+                // debugger;
+                // You can access it using localStorage.getItem('yourKey')
+
+                if (matches) {
+                    let replacement = "";
+                    try {
+                        matches.forEach((match, index, matches) => {
+                            const matchString = match.replace(/{|}/g, "");
+                            if (!storedData[matchString]) {
+                                modifiedString = websiteContentCheck(matches, region, modifiedString);
+                                throw new Error("Loop break");
+                            } else {
+                                replacement = storedData[matchString];
+                            }
+                            const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+                            if (checkStr && replacement) {
+                                modifiedString = modifiedString.replace(
+                                    checkStr,
+                                    replacement
+                                );
+                            }
+                        });
+                        return modifiedString;
+                        setIsLoading(false);
+                    } catch (error) {
+
+                    }
+                }
+            }
+        }
+    }
+
+
 
     useEffect(() => {
-        setIsLoading(false);
-
+        if (!localStorage.getItem("websitecontent_uk")) {
+            websiteContentCheck();
+        }
         setSelectedOptionCountry(countryOptions[0]);
         setSelectedOptionRegion(regionOptions[0]);
         setSelectedOptionMonth(monthOptions[0]);
 
-        // destinationService.getAllItineraries().then(x => {
-        //     setItineraries(x.data);
-        //     setIsLoading(false);
-        // }).catch((error) => {
-        //     // Handle any errors here
-        //     // console.error(error);
-        //     setIsLoading(false);
-        // });
+        destinationService
+            .getRegionByName(regionName)
+            .then((x) => {
+                setRegionData(x.data[0].attributes);
+                setIsLoading(false);
+            })
+            .catch((error) => {
+                setIsLoading(false);
+            });
+
         destinationService.getDestinationDetails(destinationcode).then((x) => {
             setdestinationName(x.data.attributes.destination_name);
             setAllCountries(
@@ -310,7 +447,9 @@ function RegionPlacesToStay(props) {
             ) : (<div>
                 <div className="container">
                     <section className="destination_para">
-                        <p>Whether you’re after a luxury honeymoon in South-East Asia, a family adventure holiday in Southern Asia or a cultural holiday to the Far East, you can expect some of the most beautiful beaches and most incredible luxury hotels in the world, fast-paced cities, tranquil village life and mouthwatering food. Asia has it all.</p>
+                        <p
+                            dangerouslySetInnerHTML={{ __html: dictioneryFunction(regionData?.places_to_stay_intro_text) }}
+                        />
                     </section>
                 </div>
 

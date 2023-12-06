@@ -452,6 +452,8 @@ function Index() {
       new bootstrap.Carousel(carousel);
     }
 
+
+
     window.addEventListener("resize", equalHeight(true));
   }, []);
 

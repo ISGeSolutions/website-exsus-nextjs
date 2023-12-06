@@ -36,6 +36,7 @@ function Country() {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isLoader, setIsLoader] = useState(false);
   const [isRtl, setIsRtl] = useState(false);
+  const [activeButton, setActiveButton] = useState('images');
   const destinationcode = router.query?.continent
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
@@ -200,6 +201,10 @@ function Country() {
       regionWiseUrl +
       `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
     );
+  };
+
+  const handleTabClick = (tab) => {
+    setActiveButton(tab);
   };
 
   const equalHeight = (resize) => {
@@ -606,12 +611,20 @@ function Country() {
               </div>
             </div>
             <div className="banner_tab_blk">
-              <button className="btn banner_map_tab">Map</button>
-              <button className="btn banner_img_tab banner_tab_active">
+              <button
+                className={`btn banner_map_tab ${activeButton === 'map' ? 'banner_tab_active' : ''}`}
+                onClick={() => handleTabClick('map')}
+              >
+                Map
+              </button>
+              <button
+                className={`btn banner_img_tab ${activeButton === 'images' ? 'banner_tab_active' : ''}`}
+                onClick={() => handleTabClick('images')}
+              >
                 Images
               </button>
             </div>
-            <div className="banner_map_blk">
+            <div className={`banner_map_blk ${activeButton === 'map' ? 'banner_map_active' : ''}`}>
               <Iframe
                 width="640px"
                 height="320px"

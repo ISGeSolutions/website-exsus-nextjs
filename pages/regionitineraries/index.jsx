@@ -19,6 +19,7 @@ function RegionItinararies(props) {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isLoader, setIsLoader] = useState(false);
   const [isRtl, setIsRtl] = useState(false);
+  const [regionData, setRegionData] = useState([]);
   const [selectedOptionCountry, setSelectedOptionCountry] = useState(null);
   const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
   const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
@@ -304,7 +305,68 @@ function RegionItinararies(props) {
 
   equalHeight(true);
 
+
+
+  const dictioneryFunction = (data) => {
+    let modifiedString = data;
+    if (modifiedString) {
+      const regex = /{[a-zA-Z0-9-]+}/g;
+      const matches = [...new Set(modifiedString.match(regex))];
+
+      let storedDataString = "";
+      let storedData = "";
+      // debugger;
+      if (region == "uk") {
+        storedDataString = localStorage.getItem("websitecontent_uk");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "us") {
+        storedDataString = localStorage.getItem("websitecontent_us");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "asia") {
+        storedDataString = localStorage.getItem("websitecontent_asia");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "in") {
+        storedDataString = localStorage.getItem("websitecontent_india");
+        storedData = JSON.parse(storedDataString);
+      }
+      if (storedData !== null) {
+
+        // debugger;
+        // You can access it using localStorage.getItem('yourKey')
+
+        if (matches) {
+          let replacement = "";
+          try {
+            matches.forEach((match, index, matches) => {
+              const matchString = match.replace(/{|}/g, "");
+              if (!storedData[matchString]) {
+                modifiedString = websiteContentCheck(matches, region, modifiedString);
+                throw new Error("Loop break");
+              } else {
+                replacement = storedData[matchString];
+              }
+              const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+              if (checkStr && replacement) {
+                modifiedString = modifiedString.replace(
+                  checkStr,
+                  replacement
+                );
+              }
+            });
+            return modifiedString;
+            setIsLoading(false);
+          } catch (error) {
+
+          }
+        }
+      }
+    }
+  }
+
   useEffect(() => {
+    if (!localStorage.getItem("websitecontent_uk")) {
+      websiteContentCheck();
+    }
     setIsLoading(false);
     setSelectedOptionCountry(countryOptions[0]);
     setSelectedOptionRegion(regionOptions[0]);
@@ -313,6 +375,17 @@ function RegionItinararies(props) {
     loadMoreData(activeItem);
 
     window.addEventListener("resize", equalHeight(true));
+
+    destinationService
+      .getRegionByName(regionName)
+      .then((x) => {
+        setRegionData(x.data[0].attributes);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+      });
+
 
     // Using window.onload to detect full page load
     window.onload = () => {
@@ -348,7 +421,7 @@ function RegionItinararies(props) {
             <section className="destination_para">
               <p
                 dangerouslySetInnerHTML={{
-                  __html: props?.data?.overview_text,
+                  __html: dictioneryFunction(props?.data?.itinerary_intro_text),
                 }}
               />
             </section>
