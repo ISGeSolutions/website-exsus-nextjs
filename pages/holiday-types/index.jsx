@@ -301,7 +301,7 @@ function Index() {
                   </div>
                 </div>
                 {thumbnailImageArr?.map((holidaytypesItem, i) => (
-                  <div className="col-sm-4" key={i}>
+                  <div className="col-sm-6" key={i}>
                     <div className="card_blk_inr">
                       <NavLink
                         href={dynamicLink(

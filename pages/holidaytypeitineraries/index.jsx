@@ -11,6 +11,9 @@ import CustomMultiValue from "./CustomMultiValue";
 import Select, { components } from "react-select";
 import { Alert } from "../../components";
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 
 export default Index;
 
@@ -43,6 +46,17 @@ function Index() {
   const [selectedOptionDestination, setSelectedOptionDestination] =
     useState(null);
   const [destinationOptions, setAllDestination] = useState([]);
+  const [queryParameters, setQueryParameters] = useState();
+
+  const validationSchema = Yup.object().shape({
+    destination: Yup.string(),
+  });
+
+  const formOptions = { resolver: yupResolver(validationSchema) };
+
+  // get functions to build form with useForm() hook
+  const { register, handleSubmit, formState, reset } = useForm(formOptions);
+  const { errors } = formState;
 
   const hcode = router?.query?.holidaytypeitineraries
     ?.replace(/-and-/g, " & ")
@@ -226,6 +240,26 @@ function Index() {
       }
     }
   }
+  const showAlert = (message, type) => {
+    setAlert({ message, type });
+  };
+
+  const closeAlert = () => {
+    // console.log("closeAlert");
+    setAlert(null);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleOptionCountryChange = (selectedOption) => {
+    selectedOption = selectedOption.filter(
+      (i) => i.value !== "" && typeof i.value !== "undefined"
+    );
+    setSelectedOptionDestination(selectedOption);
+  };
+
   const handleFilterClick = (item) => {
     page = 0;
     setItineraries([]);
@@ -241,7 +275,7 @@ function Index() {
     const country = item?.attributes?.sub_header_text
       ?.replace(/ /g, "-")
       .toLowerCase();
-    const modifiedName = item?.attributes?.header_text
+    const modifiedName = item?.attributes?.itin_name
       ?.replace(/ /g, "-")
       .toLowerCase();
     return (
@@ -258,12 +292,12 @@ function Index() {
     const country = item?.attributes?.sub_header_text
       ?.replace(/ /g, "-")
       .toLowerCase();
-    const modifiedName = item?.attributes?.header_text
+    const modifiedName = item?.attributes?.itin_name
       ?.replace(/ /g, "-")
       .toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${modifiedName}`
+        `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${modifiedName}`
     );
   };
 
@@ -293,40 +327,33 @@ function Index() {
   };
 
   function onSubmit(data) {
-    data.preventDefault();
-    if (!data.destination && !data.reason && !data.month) {
+    //data.preventDefault();
+    debugger;
+    let destination = "";
+
+    if (data?.destination) {
+      destination = data?.destination;
+    } else if (queryParameters?.where) {
+      destination = queryParameters?.where;
+    }
+
+    if (!selectedOptionDestination) {
       showAlert("Please select atleast one option", "error");
+      setQueryParameters(null);
+      reset();
     } else {
-      router.push(
-        `advance-search?where=` +
-        data?.destination +
-        `&what=` +
-        data?.reason +
-        `&when=` +
-        data?.month
-      );
+      // router.push(
+      //   `advance-search?where=` +
+      //     data?.destination +
+      //     `&what=` +
+      //     data?.reason +
+      //     `&when=` +
+      //     data?.month
+      // );
+      reset();
+      setQueryParameters(null);
     }
   }
-
-  const showAlert = (message, type) => {
-    setAlert({ message, type });
-  };
-
-  const closeAlert = () => {
-    // console.log("closeAlert");
-    setAlert(null);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleOptionCountryChange = (selectedOption) => {
-    selectedOption = selectedOption.filter(
-      (i) => i.value !== "" && typeof i.value !== "undefined"
-    );
-    setSelectedOptionDestination(selectedOption);
-  };
 
   // const generateDynamicLink = (item) => {
   //   return (
@@ -352,7 +379,9 @@ function Index() {
   };
 
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt places_to_stay_cnt"),
+    var elements = document.getElementsByClassName(
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -396,7 +425,7 @@ function Index() {
   };
 
   useEffect(() => {
-    setSelectedOptionDestination();
+    setSelectedOptionDestination([]);
     holidaytypesService
       .getHolidaytypeDetails(hcode)
       .then((x) => {
@@ -407,7 +436,8 @@ function Index() {
         setHolidayName(x.data[0].attributes.holiday_type_group_name);
         setTitle(x.data[0].attributes.page_meta_title);
 
-        const imageCheck = x.data[0].attributes?.holiday_type_group_images?.data;
+        const imageCheck =
+          x.data[0].attributes?.holiday_type_group_images?.data;
         setHolidaytypesDetails(x.data[0].attributes);
 
         // const oldText = x.data.attributes?.overview_text;
@@ -534,7 +564,8 @@ function Index() {
         <script
           type="text/javascript"
           src="/assets/javascripts/card-slider02.js"
-        ></script>      </Head>
+        ></script>{" "}
+      </Head>
       {isLoading ? (
         // <MyLoader />
         <div
@@ -610,35 +641,35 @@ function Index() {
               <div className="card_slider_row">
                 <div className="carousel00 region_carousel00">
                   <div className="row">
-                    <form onSubmit={onSubmit}>
-                      <div className="col-12">
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                      <div className="col-12 col-md-8 col-lg-6 col-xl-5 m-auto">
                         <div className="destination_dropdwn_row d-block d-md-flex">
                           <div className="banner_dropdwn_blk">
-                            <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                              <Select
-                                id="long-value-select"
-                                instanceId="long-value-select"
-                                className="select_container_country"
-                                classNamePrefix="select_country"
-                                placeholder={"Filter by destination "}
-                                styles={styles}
-                                isMulti
-                                isDisabled={isDisabled}
-                                isLoading={isLoader}
-                                isClearable={isClearable}
-                                isRtl={isRtl}
-                                isSearchable={isSearchable}
-                                value={selectedOptionDestination}
-                                onChange={handleOptionCountryChange}
-                                closeMenuOnSelect={false}
-                                hideSelectedOptions={false}
-                                options={destinationOptions}
-                                components={{
-                                  Option: InputOption,
-                                  MultiValue: CustomMultiValue,
-                                }}
-                              />
-                            </div>
+                            <Select
+                              id="long-value-select"
+                              instanceId="long-value-select"
+                              className="select_container_country"
+                              classNamePrefix="select_country"
+                              placeholder={"Filter by destination "}
+                              styles={styles}
+                              isMulti
+                              isDisabled={isDisabled}
+                              isLoading={isLoader}
+                              isClearable={isClearable}
+                              isRtl={isRtl}
+                              isSearchable={isSearchable}
+                              value={selectedOptionDestination}
+                              onChange={handleOptionCountryChange}
+                              closeMenuOnSelect={false}
+                              hideSelectedOptions={false}
+                              options={destinationOptions}
+                              components={{
+                                Option: InputOption,
+                                MultiValue: CustomMultiValue,
+                              }}
+                            />
+                            {/* <div className="banner_dropdwn_blk ps-0 ps-md-2">
+                            </div> */}
                           </div>
                           <div className="banner_inspire_btn ps-0 ps-md-2">
                             <button
@@ -739,7 +770,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                      "thumbnail" ? (
+                                    "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}
@@ -752,11 +783,14 @@ function Index() {
                                 )}
                               </NavLink>
                               <div className="card_slider_cnt places_to_stay_cnt">
-                                <NavLink href={generateDynamicLink(item)}>
-                                  <h4>
-                                    <a>{item?.attributes?.itin_name}</a>
-                                  </h4>
-                                </NavLink>
+                                <h4>
+                                  <a href={generateDynamicLink(item)}>
+                                    {item?.attributes?.itin_name}
+                                  </a>
+                                </h4>
+                                {/* <NavLink
+                                  href={generateDynamicLink(item)}
+                                ></NavLink> */}
                                 <ul>
                                   <li>{item?.attributes?.header_text}</li>
                                   {item?.attributes?.itinerary_country_contents?.data
@@ -767,9 +801,11 @@ function Index() {
                                     )
                                     .map((res1) => (
                                       <li key={res1.id}>
-                                        {`from ${res1.attributes?.currency_symbol ?? ""
-                                          }${res1.attributes?.price ?? " xxxx"
-                                          } per person`}
+                                        {`from ${
+                                          res1.attributes?.currency_symbol ?? ""
+                                        }${
+                                          res1.attributes?.price ?? " xxxx"
+                                        } per person`}
                                       </li>
                                     ))}
                                   <li>

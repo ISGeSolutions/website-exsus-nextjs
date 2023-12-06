@@ -120,7 +120,7 @@ function ContinentItinararies(props) {
   const [destination, setdestination] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [activeItem, setActiveItem] = useState("recommended");
-  const [alert, setAlert] = useState(null);
+  const [alert, setAlert] = useState("");
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -143,6 +143,7 @@ function ContinentItinararies(props) {
   const closeAlert = () => {
     // console.log("closeAlert");
     setAlert(null);
+    // setAlert("");
   };
 
   const closeModal = () => {
@@ -232,21 +233,19 @@ function ContinentItinararies(props) {
   };
 
   function onSubmit(data) {
+    data.preventDefault();
     console.log("Selected Countries:", selectedOptionCountry);
     console.log("Selected Regions:", selectedOptionRegion);
     console.log("Selected Months:", selectedOptionMonth);
+    // console.log(data);
 
-    if (!data.destination && !data.reason && !data.month) {
+    if (
+      !selectedOptionCountry.length > 0 ||
+      !selectedOptionRegion.length > 0 ||
+      !selectedOptionMonth.length > 0
+    ) {
       showAlert("Please select atleast one option", "error");
     } else {
-      router.push(
-        `advance-search?where=` +
-        data?.destination +
-        `&what=` +
-        data?.reason +
-        `&when=` +
-        data?.month
-      );
     }
   }
 
@@ -262,7 +261,7 @@ function ContinentItinararies(props) {
     const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${modifiedName}`
+        `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${modifiedName}`
     );
   };
 
@@ -274,7 +273,9 @@ function ContinentItinararies(props) {
   };
 
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt places_to_stay_cnt"),
+    var elements = document.getElementsByClassName(
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -363,7 +364,7 @@ function ContinentItinararies(props) {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -372,9 +373,9 @@ function ContinentItinararies(props) {
   equalHeight(true);
 
   useEffect(() => {
-    setSelectedOptionCountry();
-    setSelectedOptionRegion();
-    setSelectedOptionMonth();
+    setSelectedOptionCountry([]);
+    setSelectedOptionRegion([]);
+    setSelectedOptionMonth([]);
     destinationService
       .getDestinationDetails(destinationcode)
       .then((x) => {
@@ -634,7 +635,7 @@ function ContinentItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -647,19 +648,23 @@ function ContinentItinararies(props) {
                               )}
                             </NavLink>
                             <div className="card_slider_cnt places_to_stay_cnt">
-                              <NavLink
-                                href={generateDynamicLink(
-                                  item?.attributes?.itin_name
-                                )}
+                              <h4>
+                                <a
+                                  href={generateDynamicLink(
+                                    item?.attributes?.itin_name
+                                  )}
+                                >
+                                  {dictioneryFunction(
+                                    item?.attributes?.itin_name
+                                  )}
+                                </a>
+                              </h4>
+                              {/* <NavLink
+                              // href={generateDynamicLink(
+                              //   item?.attributes?.itin_name
+                              // )}
                               >
-                                <h4>
-                                  <a>
-                                    {dictioneryFunction(
-                                      item?.attributes?.itin_name
-                                    )}
-                                  </a>
-                                </h4>
-                              </NavLink>
+                              </NavLink> */}
                               <ul>
                                 <li>{item?.attributes?.sub_header_text}</li>
                                 {item?.attributes?.itinerary_country_contents?.data
@@ -670,9 +675,11 @@ function ContinentItinararies(props) {
                                   )
                                   .map((res1) => (
                                     <li key={res1.id}>
-                                      {`from ${res1.attributes?.currency_symbol ?? ""
-                                        }${res1.attributes?.price ?? " xxxx"
-                                        } per person`}
+                                      {`from ${
+                                        res1.attributes?.currency_symbol ?? ""
+                                      }${
+                                        res1.attributes?.price ?? " xxxx"
+                                      } per person`}
                                     </li>
                                   ))}
                                 <li></li>

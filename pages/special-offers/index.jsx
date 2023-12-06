@@ -33,6 +33,7 @@ function Index() {
   const [mapVariable, setMapVariable] = useState(null);
   const [subTitle, setSubTitle] = useState(null);
   const [backgroundImage, setBackgroundImage] = useState([]);
+  const [activeItem, setActiveItem] = useState("recommended");
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -47,7 +48,9 @@ function Index() {
   };
 
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt places_to_stay_cnt"),
+    var elements = document.getElementsByClassName(
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -69,9 +72,23 @@ function Index() {
 
   equalHeight(true);
 
-
   const generateDynamicLink = (item) => {
     return regionWiseUrl + `/hotel-detail`;
+  };
+
+  const handleFilterClick = (item) => {
+    setActiveItem(item);
+    if (item == "alphabetical") {
+      setAllOffers(
+        allOffers.sort((a, b) =>
+          a.attributes.offer_text.localeCompare(b.attributes.offer_text)
+        )
+      );
+      // console.log(allCountries);
+    } else if (item == "recommended") {
+      setAllOffers(allOffers.sort((a, b) => a.id - b.id));
+      // console.log(allCountries);
+    }
   };
 
   const websiteContentCheck = (matches, region, modifiedString) => {
@@ -103,14 +120,14 @@ function Index() {
     const tooltipList = [...tooltipTriggerList].map(
       (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
     );
+
     specialoffersService
       .getAllOffers()
       .then((x) => {
         setAllOffers(x.data);
         setFriendlyUrl(`home/special offers`);
       })
-      .catch((error) => {
-      });
+      .catch((error) => {});
 
     specialoffersService
       .getOffersCustomePage()
@@ -303,12 +320,24 @@ function Index() {
                   <div className="destination_contries_filter d-flex justify-content-around">
                     <ul>
                       <li>
-                        <a href="#" className="active">
-                          Exsus recommends
+                        <a
+                          className={
+                            activeItem === "recommended" ? "active" : ""
+                          }
+                          onClick={() => handleFilterClick("recommended")}
+                        >
+                          Recommended
                         </a>
                       </li>
                       <li>
-                        <a href="#">Alphabetical</a>
+                        <a
+                          className={
+                            activeItem === "alphabetical" ? "active" : ""
+                          }
+                          onClick={() => handleFilterClick("alphabetical")}
+                        >
+                          Alphabetical
+                        </a>
                       </li>
                     </ul>
                   </div>
@@ -348,37 +377,24 @@ function Index() {
                               </span>
                             </NavLink>
                             <div className="card_slider_cnt places_to_stay_cnt">
-                              <NavLink
-                                key={res?.id}
-                                href={generateDynamicLink(res?.id)}
-                              >
-                                <h4>
-                                  {/* console.log error => Dont add anchor tag for the below element. you can use onclick fun. */}
-                                  <span key={res?.id} href="#">
-                                    {res?.attributes?.offer_text}
-                                  </span>
-                                </h4>
-                              </NavLink>
+                              <h4>
+                                {/* console.log error => Dont add anchor tag for the below element. you can use onclick fun. */}
+                                <a
+                                  key={res?.id}
+                                  href={generateDynamicLink(res?.id)}
+                                >
+                                  {res?.attributes?.offer_text}
+                                </a>
+                              </h4>
                               <ul>
                                 <li>
                                   Location: {res?.attributes?.subtitle_text}
                                 </li>
-                                <li>
-                                  <p>
-                                    Price guide:
-                                    <span
-                                      key={res?.id}
-                                      title="£200-£350 per person per night"
-                                      tabIndex="0"
-                                    >
-                                      {/* data-bs-toggle="tooltip"
-                                      data-bs-placement="right"
-                                      data-bs-title="£200-£350 per person per night"
-                                      data-bs-trigger="hover" */}
-
-                                      £££<label>££</label>
-                                    </span>
-                                  </p>
+                                <li class="price_guide_tooltip">
+                                  Price guide:
+                                  <span data-title="£200-£350 per person per night">
+                                    £££<label>££</label>
+                                  </span>
                                 </li>
                                 <li className="pink_text">
                                   Special offer: {res?.attributes?.title_text}
@@ -412,13 +428,13 @@ function Index() {
             </div>
           </section>
 
-          {/* <section className="make_enqury_row">
+          <section className="make_enqury_row">
             <div className="container">
               <EnquiryButton />
             </div>
-          </section> */}
+          </section>
 
-          {/* <section
+          <section
             aria-label="Sign up for newsletter"
             className="newslettr_row"
           >
@@ -427,7 +443,7 @@ function Index() {
               <h5>Receive our latest news and special offers</h5>
               <Signup />
             </div>
-          </section> */}
+          </section>
         </div>
       )}
     </>

@@ -22,7 +22,10 @@ function Index() {
   const router = useRouter();
   const hotelName = router?.query?.hotelName;
   const countryName = router?.query?.countryName;
-  const regionName = router?.query?.location?.replace(/and/g, "&").replace(/-/g, " ").toLowerCase();
+  const regionName = router?.query?.location
+    ?.replace(/and/g, "&")
+    .replace(/-/g, " ")
+    .toLowerCase();
   const [hotelData, setHotelData] = useState([]);
   const [hotels, setAllHotels] = useState([]);
   const [backgroundImage, setBackgroundImage] = useState([]);
@@ -40,7 +43,6 @@ function Index() {
     }
   }
 
-
   const generateDynamicLink = (item) => {
     // let locationCountry = item?.attributes?.location?.toLowerCase().replace(/&/g, "and");
     // let countryName = locationCountry.match(/\|(.+)/);
@@ -52,7 +54,6 @@ function Index() {
     //   .replace(/ /g, "-")
     //   .toLowerCase()}/hotels/${countryName?.replace(/ /g, "-")}/${location?.replace(/ /g, "-")}/${hotelName}`;
   };
-
 
   const websiteContentCheck = (matches, region, modifiedString) => {
     destinationService
@@ -98,7 +99,6 @@ function Index() {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-
         // debugger;
         // You can access it using localStorage.getItem('yourKey')
 
@@ -108,27 +108,27 @@ function Index() {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(matches, region, modifiedString);
+                modifiedString = websiteContentCheck(
+                  matches,
+                  region,
+                  modifiedString
+                );
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
               }
               const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
               if (checkStr && replacement) {
-                modifiedString = modifiedString.replace(
-                  checkStr,
-                  replacement
-                );
+                modifiedString = modifiedString.replace(checkStr, replacement);
               }
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {
-          }
+          } catch (error) {}
         }
       }
     }
-  }
+  };
 
   useEffect(() => {
     const carousel = document.querySelector("#carouselExampleInterval");
@@ -136,8 +136,6 @@ function Index() {
     if (carouselMain) {
       new bootstrap.Carousel(carouselMain);
     }
-
-
 
     destinationService
       .getHotelById(hotelName, region)
@@ -182,14 +180,14 @@ function Index() {
         setIsLoading(false);
       });
 
-
     destinationService
       .getRegionWiseHotelsInHotelDetail(regionName, region)
       .then((response) => {
         setAllHotels(response?.data);
         console.log(response?.data);
         setIsLoading(false);
-      }).catch((error) => {
+      })
+      .catch((error) => {
         setIsLoading(false);
       });
   }, [hotelName]);
@@ -301,10 +299,25 @@ function Index() {
                   Price guide:
                   <span
                     tabIndex="0"
-                    title={hotelData?.hotel_country_contents?.data[0]?.attributes?.price_guide_text}
-                  >{hotelData?.hotel_country_contents?.data[0]?.attributes?.currency_symbol.repeat(Math.abs(hotelData?.hotel_country_contents?.data[0]?.attributes?.price_guide_value))}
+                    data-title={
+                      hotelData?.hotel_country_contents?.data[0]?.attributes
+                        ?.price_guide_text
+                    }
+                  >
+                    {hotelData?.hotel_country_contents?.data[0]?.attributes?.currency_symbol.repeat(
+                      Math.abs(
+                        hotelData?.hotel_country_contents?.data[0]?.attributes
+                          ?.price_guide_value
+                      )
+                    )}
                     <label>
-                      {hotelData?.hotel_country_contents?.data[0]?.attributes?.currency_symbol.repeat(Math.abs(5 - hotelData?.hotel_country_contents?.data[0]?.attributes?.price_guide_value))}
+                      {hotelData?.hotel_country_contents?.data[0]?.attributes?.currency_symbol.repeat(
+                        Math.abs(
+                          5 -
+                            hotelData?.hotel_country_contents?.data[0]
+                              ?.attributes?.price_guide_value
+                        )
+                      )}
                     </label>
                   </span>
                 </p>
@@ -517,7 +530,10 @@ function Index() {
               </section>
               <section className="map_blk_row">
                 <h3 className="pb-2">Hotel location</h3>
-                <p>The Rosewood is just half an hour’s drive from Beijing Capital International Airport.</p>
+                <p>
+                  The Rosewood is just half an hour’s drive from Beijing Capital
+                  International Airport.
+                </p>
                 <div className="map_blk_inr">
                   <div className="map_blk_inr">
                     <Iframe
@@ -563,10 +579,7 @@ function Index() {
                   {hotels?.map((item) => (
                     <div className="card_slider_inr" key={item.id}>
                       <div className="card_slider">
-                        <NavLink
-                          href=""
-                          className="card_slider_img"
-                        >
+                        <NavLink href="" className="card_slider_img">
                           {item?.attributes?.hotel_images?.data.map(
                             (element, index) =>
                               element.attributes.image_type == "thumbnail" ? (
@@ -611,8 +624,8 @@ function Index() {
                                         {item?.attributes?.currency_symbol.repeat(
                                           Math.abs(
                                             5 -
-                                            item?.attributes
-                                              ?.price_guide_value
+                                              item?.attributes
+                                                ?.price_guide_value
                                           )
                                         )}
                                       </label>
@@ -632,15 +645,11 @@ function Index() {
                             {/* <li>{item?.attributes?.intro_text}</li> */}
                             <li>
                               Best for:
-                              <span>
-                                {item?.attributes?.best_for_text}
-                              </span>
+                              <span>{item?.attributes?.best_for_text}</span>
                             </li>
                           </ul>
                         </div>
-                        <button
-                          className="btn card_slider_btn justify-content-end"
-                        >
+                        <button className="btn card_slider_btn justify-content-end">
                           <span className="view_itnry_link">
                             View this hotel
                             <em className="fa-solid fa-chevron-right"></em>
@@ -781,4 +790,3 @@ function Index() {
     </>
   );
 }
-

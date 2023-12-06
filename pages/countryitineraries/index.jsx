@@ -157,7 +157,7 @@ function CountryItinararies(props) {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
+
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -172,7 +172,6 @@ function CountryItinararies(props) {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -285,17 +284,17 @@ function CountryItinararies(props) {
     // console.log("Selected Countries:", selectedOptionCountry);
     // console.log("Selected Regions:", selectedOptionRegion);
     // console.log("Selected Months:", selectedOptionMonth);
-    // console.log(e);
+    console.log(e);
     if (!e.destination && !e.reason && !e.month) {
       showAlert("Please select atleast one option", "error");
     } else {
       router.push(
         `advance-search?where=` +
-        e?.destination +
-        `&what=` +
-        e?.reason +
-        `&when=` +
-        e?.month
+          e?.destination +
+          `&what=` +
+          e?.reason +
+          `&when=` +
+          e?.month
       );
     }
   }
@@ -336,10 +335,7 @@ function CountryItinararies(props) {
       `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
         / /g,
         "-"
-      )}/${countrycode?.replace(
-        / /g,
-        "-"
-      )}}-iteneraries/${modifiedName}`
+      )}/${countrycode?.replace(/ /g, "-")}}-iteneraries/${modifiedName}`
     );
   };
 
@@ -347,18 +343,17 @@ function CountryItinararies(props) {
     const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
-        / /g,
-        "-"
-      )}/${countrycode?.replace(
-        / /g,
-        "-"
-      )}}-iteneraries/${modifiedName}`
+        `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
+          / /g,
+          "-"
+        )}/${countrycode?.replace(/ /g, "-")}}-iteneraries/${modifiedName}`
     );
   };
 
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt places_to_stay_cnt"),
+    var elements = document.getElementsByClassName(
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -381,9 +376,9 @@ function CountryItinararies(props) {
   equalHeight(true);
 
   useEffect(() => {
-    setSelectedOptionCountry();
-    setSelectedOptionRegion();
-    setSelectedOptionMonth();
+    setSelectedOptionCountry([]);
+    setSelectedOptionRegion([]);
+    setSelectedOptionMonth([]);
 
     loadMoreData(activeItem);
     // destinationService.getDestinationDetails(destinationcode).then((x) => {
@@ -621,7 +616,7 @@ function CountryItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -635,15 +630,15 @@ function CountryItinararies(props) {
                               {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
                             </NavLink>
                             <div className="card_slider_cnt places_to_stay_cnt">
-                              <NavLink
-                                href={generateDynamicLink(
-                                  item?.attributes?.itin_name
-                                )}
-                              >
-                                <h4>
-                                  <a>{item?.attributes?.itin_name}</a>
-                                </h4>
-                              </NavLink>
+                              <h4>
+                                <a
+                                  href={generateDynamicLink(
+                                    item?.attributes?.itin_name
+                                  )}
+                                >
+                                  {item?.attributes?.itin_name}
+                                </a>
+                              </h4>
                               <ul>
                                 <li>{item?.attributes?.sub_header_text}</li>
 
@@ -655,9 +650,11 @@ function CountryItinararies(props) {
                                   )
                                   .map((res1) => (
                                     <li key={res1.id}>
-                                      {`from ${res1.attributes?.currency_symbol ?? ""
-                                        }${res1.attributes?.price ?? " xxxx"
-                                        } per person`}
+                                      {`from ${
+                                        res1.attributes?.currency_symbol ?? ""
+                                      }${
+                                        res1.attributes?.price ?? " xxxx"
+                                      } per person`}
                                     </li>
                                   ))}
                                 <li>
