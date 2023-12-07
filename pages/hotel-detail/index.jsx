@@ -34,6 +34,7 @@ function Index() {
   const [isLoading, setIsLoading] = useState(true);
   const [location, setLocation] = useState({});
   const [friendlyUrl, setFriendlyUrl] = useState("");
+
   let region = "uk";
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
@@ -301,8 +302,8 @@ function Index() {
                 <h3 className="trvl_title_sub_white mb-3">
                   Location: {hotelData.location}
                 </h3>
-                <p className="mb-4">
-                  Price guide:
+                <p className="price_guide_hotel_tooltip">
+                  Price guide:{" "}
                   <span
                     tabIndex="0"
                     data-title={

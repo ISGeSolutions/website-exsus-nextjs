@@ -2871,3 +2871,40 @@ nav
   border: 6px solid transparent;
   border-right: 6px solid #8aad56;
 }
+
+.price_guide_hotel_tooltip span {
+  position: relative;
+}
+
+.price_guide_hotel_tooltip [data-title] {
+  font: 300 0.875rem/1.25rem "Roboto", sans-serif;
+}
+
+.price_guide_hotel_tooltip [data-title]:hover::before {
+  content: attr(data-title);
+  position: absolute;
+  top: -15px;
+  display: inline-block;
+  padding: 5px 20px;
+  border-radius: 6px;
+  background: #8aad56;
+  color: #fff;
+  font: 300 0.875rem/1.25rem "Roboto", sans-serif;
+  font-family: sans-serif;
+  left: 45px;
+  min-width: 200px;
+  white-space: initial;
+  text-align: center;
+  min-height: 50px;
+}
+
+.price_guide_hotel_tooltip [data-title]:hover::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 35px;
+  display: inline-block;
+  color: #fff;
+  border: 6px solid transparent;
+  border-right: 6px solid #8aad56;
+}

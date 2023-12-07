@@ -47,7 +47,8 @@ function Index() {
   const generateDynamicLink = (item) => {
     const modifiedName = item.attributes?.itin_name
       ?.replace(/ /g, "-")
-      .toLowerCase().replace(/&/g, "and");
+      .toLowerCase()
+      .replace(/&/g, "and");
     const modifiedDestinationName = item.attributes?.destination_name
       ?.replace(/ /g, "-")
       .replace(/&/g, "and")
@@ -70,7 +71,8 @@ function Index() {
   const handleRedirect = (item) => {
     const modifiedName = item.attributes?.itin_name
       ?.replace(/ /g, "-")
-      .toLowerCase().replace(/&/g, "and");;
+      .toLowerCase()
+      .replace(/&/g, "and");
     const modifiedDestinationName = item.attributes?.destination_name
       ?.replace(/ /g, "-")
       .replace(/&/g, "and")
@@ -78,7 +80,7 @@ function Index() {
 
     router.push(
       regionWiseUrl +
-      `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-iteneraries/${modifiedName}`
+        `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-iteneraries/${modifiedName}`
     );
   };
 
@@ -104,8 +106,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -216,9 +218,6 @@ function Index() {
     } else {
     }
   };
-
-
-
 
   useEffect(() => {
     $(".succss_msg_parnt").hide();
@@ -457,8 +456,6 @@ function Index() {
       new bootstrap.Carousel(carousel);
     }
 
-
-
     window.addEventListener("resize", equalHeight(true));
   }, []);
 
@@ -669,13 +666,15 @@ function Index() {
                               .filter(
                                 (res) =>
                                   res.attributes.website_country.toLowerCase() ===
-                                  region
+                                  region.replace(/in/g, "india")
                               )
                               .map((res1) => (
                                 <li key={res1.id}>
-                                  {`from ${res1.attributes?.currency_symbol ?? ""
-                                    }${res1.attributes?.price ?? " xxxx"
-                                    } per person`}
+                                  {`from ${
+                                    res1.attributes?.currency_symbol ?? ""
+                                  }${
+                                    res1.attributes?.price ?? " xxxx"
+                                  } per person`}
                                 </li>
                               ))}
                             <li>

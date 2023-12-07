@@ -47,9 +47,13 @@ function ContinentOverview({ sendDataToParent }) {
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
+      if (window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+        region = window.site_region;
+      }
     }
   }
+
   const generateDynamicLinkCountries = (countryName) => {
     if (countryName != undefined && countryName) {
       const modifieditem = countryName
@@ -68,7 +72,7 @@ function ContinentOverview({ sendDataToParent }) {
     const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${modifiedName}`
+        `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${modifiedName}`
     );
   };
 
@@ -88,7 +92,9 @@ function ContinentOverview({ sendDataToParent }) {
   // };
 
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt places_to_stay_cnt"),
+    var elements = document.getElementsByClassName(
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -197,7 +203,6 @@ function ContinentOverview({ sendDataToParent }) {
         // const lines = x.data.attributes?.overview_text.split('\n');
         setdestinationName(x.data[0].attributes.destination_name);
         setnewValueWithBr(x.data[0].attributes?.overview_text);
-
 
         setAllCountries(x.data[0]?.attributes?.countries?.data);
         setIsLoading(false);
@@ -381,7 +386,7 @@ function ContinentOverview({ sendDataToParent }) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -394,15 +399,15 @@ function ContinentOverview({ sendDataToParent }) {
                               )}
                             </NavLink>
                             <div className="card_slider_cnt places_to_stay_cnt">
-                              <NavLink
-                                href={generateDynamicLink(
-                                  item?.attributes?.itin_name
-                                )}
-                              >
-                                <h4>
-                                  <a>{item?.attributes?.itin_name}</a>
-                                </h4>
-                              </NavLink>
+                              <h4>
+                                <a
+                                  href={generateDynamicLink(
+                                    item?.attributes?.itin_name
+                                  )}
+                                >
+                                  {item?.attributes?.itin_name}
+                                </a>
+                              </h4>
                               <ul>
                                 <li>
                                   {dictioneryFunction(
@@ -414,13 +419,22 @@ function ContinentOverview({ sendDataToParent }) {
                                     item?.attributes?.sub_header_text
                                   )}
                                 </li>
-                                <li>
-                                  {
-                                    item?.attributes?.itinerary_country_contents
-                                      ?.data[0]?.attributes
-                                      ?.guideline_price_notes_index
-                                  }
-                                </li>
+                                {item?.attributes?.itinerary_country_contents?.data
+                                  .filter(
+                                    (res) =>
+                                      res.attributes.website_country.toLowerCase() ===
+                                      region.replace(/in/g, "india")
+                                  )
+                                  .map((res1) => (
+                                    <li key={res1.id}>
+                                      {`from ${
+                                        res1.attributes?.currency_symbol ?? ""
+                                      }${
+                                        res1.attributes?.price ?? " xxxx"
+                                      } per person`}
+                                    </li>
+                                  ))}
+
                                 <li>
                                   Travel to:
                                   <span>

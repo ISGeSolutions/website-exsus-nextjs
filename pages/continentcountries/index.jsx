@@ -22,21 +22,17 @@ function ContinentCountry({ sendDataToParent }) {
   const [isLoading, setIsLoading] = useState(true);
   const [activeItem, setActiveItem] = useState("recommended");
 
-  // let regionWiseUrl = "/uk";
-  // if (typeof window !== "undefined") {
-  //   if (window && window.site_region) {
-  //     regionWiseUrl = "/" + window.site_region;
-  //     // setMyVariable(window.site_region);
-  //   }
-  // }
-
   let region = "uk";
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
+      if (window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+        region = window.site_region;
+      }
     }
   }
+
   const handleClick = (e) => {
     sendDataToParent(e);
   };
@@ -48,14 +44,16 @@ function ContinentCountry({ sendDataToParent }) {
         .replace(/&/g, "and")
         .toLowerCase();
       if (countryName) {
-        return regionWiseUrl + `/destinations/${destinationcode.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()
-          }/${modifieditem}`;
+        return (
+          regionWiseUrl +
+          `/destinations/${destinationcode
+            .replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${modifieditem}`
+        );
       }
     }
   };
-
 
   const websiteContentCheck = (matches, region, modifiedString) => {
     destinationService
@@ -101,7 +99,6 @@ function ContinentCountry({ sendDataToParent }) {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-
         // debugger;
         // You can access it using localStorage.getItem('yourKey')
 
@@ -111,27 +108,27 @@ function ContinentCountry({ sendDataToParent }) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(matches, region, modifiedString);
+                modifiedString = websiteContentCheck(
+                  matches,
+                  region,
+                  modifiedString
+                );
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
               }
               const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
               if (checkStr && replacement) {
-                modifiedString = modifiedString.replace(
-                  checkStr,
-                  replacement
-                );
+                modifiedString = modifiedString.replace(checkStr, replacement);
               }
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {
-          }
+          } catch (error) {}
         }
       }
     }
-  }
+  };
 
   useEffect(() => {
     destinationService
@@ -213,7 +210,11 @@ function ContinentCountry({ sendDataToParent }) {
         <div>
           <div className="container">
             <section className="destination_para">
-              <div dangerouslySetInnerHTML={{ __html: dictioneryFunction(destination.countries_intro_text) }} />
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: dictioneryFunction(destination.countries_intro_text),
+                }}
+              />
             </section>
           </div>
 
@@ -248,66 +249,68 @@ function ContinentCountry({ sendDataToParent }) {
                 </div>
 
                 {/* Continent countries */}
-                {allCountries?.map((countries, i) => (
-                  // Add a condition to check if country_name is not null
-                  countries.attributes.country_name && (
-                    <div
-                      className="col-sm-6 col-lg-4 col-xxl-3"
-                      key={countries?.id}
-                    >
-                      <div className="card_blk_inr">
-                        <NavLink
-                          href={generateDynamicLinkCountries(
-                            countries?.attributes.country_name
-                          )}
-                        >
-                          <img
-                            src={
-                              countries?.attributes?.country_images?.data.filter(
-                                (res) => res.attributes.image_type === "thumbnail"
-                              )[0]?.attributes?.image_path
-                            }
-                            alt={
-                              countries?.attributes?.country_images?.data.filter(
-                                (res) => res.attributes?.image_type === "thumbnail"
-                              )[0]?.attributes?.image_alt_text
-                            }
-                            className="img-fluid"
-                          />
-                          <div className="card_blk_cntnt card_blk_sml_arw">
-                            <div className="row align-items-center">
-                              <div className="col-11">
-                                <div className="card_blk_txt">
-                                  <h3 className="mb-0">
-                                    {countries?.attributes?.country_name}
-                                  </h3>
+                {allCountries?.map(
+                  (countries, i) =>
+                    // Add a condition to check if country_name is not null
+                    countries.attributes.country_name && (
+                      <div
+                        className="col-sm-6 col-lg-4 col-xxl-3"
+                        key={countries?.id}
+                      >
+                        <div className="card_blk_inr">
+                          <NavLink
+                            href={generateDynamicLinkCountries(
+                              countries?.attributes.country_name
+                            )}
+                          >
+                            <img
+                              src={
+                                countries?.attributes?.country_images?.data.filter(
+                                  (res) =>
+                                    res.attributes.image_type === "thumbnail"
+                                )[0]?.attributes?.image_path
+                              }
+                              alt={
+                                countries?.attributes?.country_images?.data.filter(
+                                  (res) =>
+                                    res.attributes?.image_type === "thumbnail"
+                                )[0]?.attributes?.image_alt_text
+                              }
+                              className="img-fluid"
+                            />
+                            <div className="card_blk_cntnt card_blk_sml_arw">
+                              <div className="row align-items-center">
+                                <div className="col-11">
+                                  <div className="card_blk_txt">
+                                    <h3 className="mb-0">
+                                      {countries?.attributes?.country_name}
+                                    </h3>
+                                  </div>
+                                </div>
+                                <div className="col-1 ps-0">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="#ffffff"
+                                    shapeRendering="geometricPrecision"
+                                    textRendering="geometricPrecision"
+                                    imageRendering="optimizeQuality"
+                                    fillRule="evenodd"
+                                    clipRule="evenodd"
+                                    viewBox="0 0 267 512.43"
+                                  >
+                                    <path
+                                      fillRule="nonzero"
+                                      d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                                    />
+                                  </svg>
                                 </div>
                               </div>
-                              <div className="col-1 ps-0">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  fill="#ffffff"
-                                  shapeRendering="geometricPrecision"
-                                  textRendering="geometricPrecision"
-                                  imageRendering="optimizeQuality"
-                                  fillRule="evenodd"
-                                  clipRule="evenodd"
-                                  viewBox="0 0 267 512.43"
-                                >
-                                  <path
-                                    fillRule="nonzero"
-                                    d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                                  />
-                                </svg>
-                              </div>
                             </div>
-                          </div>
-                        </NavLink>
+                          </NavLink>
+                        </div>
                       </div>
-                    </div>
-                  )
-                ))}
-
+                    )
+                )}
               </div>
             </div>
           </section>
@@ -332,7 +335,8 @@ function ContinentCountry({ sendDataToParent }) {
                           <div className="col-11">
                             <div className="card_blk_txt">
                               <h3>
-                                See all Itinerary Ideas in {destination.destination_name}
+                                See all Itinerary Ideas in{" "}
+                                {destination.destination_name}
                               </h3>
                             </div>
                           </div>
@@ -372,7 +376,8 @@ function ContinentCountry({ sendDataToParent }) {
                           <div className="col-11">
                             <div className="card_blk_txt">
                               <h3>
-                                See all Places to Stay in {destination.destination_name}
+                                See all Places to Stay in{" "}
+                                {destination.destination_name}
                               </h3>
                             </div>
                           </div>
