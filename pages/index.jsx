@@ -212,9 +212,6 @@ function Index() {
     }
   };
 
-
-
-
   useEffect(() => {
     $(".succss_msg_parnt").hide();
 
@@ -451,8 +448,6 @@ function Index() {
     if (carousel) {
       new bootstrap.Carousel(carousel);
     }
-
-
 
     window.addEventListener("resize", equalHeight(true));
   }, []);

@@ -34,11 +34,6 @@ function Index() {
   const [overViewText, setOverViewText] = useState(null);
   const [mapVariable, setMapVariable] = useState(null);
 
-
-
-
-
-
   let region = "uk";
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
@@ -51,7 +46,9 @@ function Index() {
   }
 
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt places_to_stay_cnt"),
+    var elements = document.getElementsByClassName(
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -114,13 +111,13 @@ function Index() {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
-        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name?.replace(
-          / /g,
-          "-"
-        ).replace(/&/g, "and").toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name?.replace(
-          / /g,
-          "-"
-        ).replace(/&/g, "and").toLowerCase()}/${hotelName}`
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -134,16 +131,15 @@ function Index() {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
-        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name?.replace(
-          / /g,
-          "-"
-        ).replace(/&/g, "and").toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name?.replace(
-          / /g,
-          "-"
-        ).replace(/&/g, "and").toLowerCase()}/${hotelName}`)
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
+    );
   };
-
-
 
   const generateDynamicLink = (item) => {
     let countryName = item?.attributes?.country?.data?.attributes?.country_name?.replace(
@@ -171,7 +167,6 @@ function Index() {
         .replace(/ /g, "-")
         .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url}`
     );
-
   };
 
   const websiteContentCheck = (matches, region, modifiedString) => {
@@ -218,7 +213,6 @@ function Index() {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -256,7 +250,7 @@ function Index() {
   // };
 
   useEffect(() => {
-    console.log(itin_name)
+    console.log(itin_name);
     // console.log(router.query);
     const tooltipTriggerList = document.querySelectorAll(
       '[data-bs-toggle="tooltip"]'
@@ -311,7 +305,8 @@ function Index() {
         console.log(imageCheck);
 
         setFriendlyUrl(
-          `home/destinations/${router.query?.continent}/${router.query?.country}/${x.data[0].attributes.itin_name.toLowerCase()}`
+          `home/destinations/${router.query?.continent}/${router.query?.country
+          }/${x.data[0].attributes.itin_name.toLowerCase()}`
         );
         setTitle(x.data[0].attributes.meta_title);
         imageCheck.forEach((banner, index) => {
@@ -321,22 +316,30 @@ function Index() {
           }
         });
         destinationService
-          .getMoreItineraries(x?.data[0]?.attributes?.country?.data?.attributes?.country_name, region)
+          .getMoreItineraries(
+            x?.data[0]?.attributes?.country?.data?.attributes?.country_name,
+            region
+          )
           .then((response) => {
             setMoreItineraries(response?.data);
             console.log(response?.data);
             setIsLoading(false);
-          }).catch((error) => {
+          })
+          .catch((error) => {
             setIsLoading(false);
           });
 
         destinationService
-          .getRegionWiseHotelsInHotelDetail(x?.data[0]?.attributes?.region?.data?.attributes?.region_name, region)
+          .getRegionWiseHotelsInHotelDetail(
+            x?.data[0]?.attributes?.region?.data?.attributes?.region_name,
+            region
+          )
           .then((response) => {
             setHotelData(response?.data);
             console.log(response?.data);
             setIsLoading(false);
-          }).catch((error) => {
+          })
+          .catch((error) => {
             setIsLoading(false);
           });
 
@@ -367,7 +370,11 @@ function Index() {
         ></script>
         {/* <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script> */}
         <title>{dictioneryFunction(itineraries?.attributes?.meta_title)}</title>
-        <meta content={dictioneryFunction(itineraries?.attributes?.meta_description)}></meta>
+        <meta
+          content={dictioneryFunction(
+            itineraries?.attributes?.meta_description
+          )}
+        ></meta>
       </Head>
       {isLoading ? (
         // <MyLoader />
@@ -542,10 +549,12 @@ function Index() {
                   <div className="col-sm-9">
                     <div className="country_highlight_inr">
                       <p>
-                        <span>Perfect for</span>{itineraries?.attributes?.perfect_for_text}
+                        <span>Perfect for</span>
+                        {itineraries?.attributes?.perfect_for_text}
                       </p>
                       <p>
-                        <span>In the know</span>{itineraries?.attributes?.in_the_know_text}
+                        <span>In the know</span>
+                        {itineraries?.attributes?.in_the_know_text}
                       </p>
                     </div>
                   </div>
@@ -563,9 +572,12 @@ function Index() {
                     <div className="itinery_highlight_inr">
                       <ul>
                         <li>Best for</li>
-                        {itineraries?.attributes?.best_for_text?.replace(/{|'}|(\s*)/g, '')?.split(',')?.map((value, index) => (
-                          <li key={index}>{value}</li>
-                        ))}
+                        {itineraries?.attributes?.best_for_text
+                          ?.replace(/{|'}|(\s*)/g, "")
+                          ?.split(",")
+                          ?.map((value, index) => (
+                            <li key={index}>{value}</li>
+                          ))}
                       </ul>
                     </div>
                   </div>
@@ -814,8 +826,6 @@ function Index() {
             </div>
           </section>
 
-
-
           <section className="favrites_blk_row">
             <div className="container">
               <h3 className="title_cls">
@@ -863,18 +873,22 @@ function Index() {
                         </NavLink>
                         <div className="card_slider_cnt places_to_stay_cnt">
                           <h4>
-                            <a href={generateDynamicLink1(item)}>{item?.attributes?.hotel_name}</a>
+                            <a href={generateDynamicLink1(item)}>
+                              {item?.attributes?.hotel_name}
+                            </a>
                           </h4>
                           <ul>
                             <li>Location: {item?.attributes?.location}</li>
                             {item?.attributes?.hotel_country_contents?.data?.map(
                               (item) => {
                                 return (
-                                  <li >
+                                  <li class="price_guide_tooltip">
                                     Price guide:
                                     <span
                                       tabIndex="0"
-                                      title={item?.attributes?.price_guide_text}
+                                      data-title={
+                                        item?.attributes?.price_guide_text
+                                      }
                                     >
                                       {item?.attributes?.currency_symbol.repeat(
                                         Math.abs(
@@ -897,9 +911,7 @@ function Index() {
                             )}
                             <li>
                               Best for:
-                              <span>
-                                {item?.attributes?.best_for_text}
-                              </span>
+                              <span>{item?.attributes?.best_for_text}</span>
                             </li>
                           </ul>
                         </div>
@@ -937,11 +949,14 @@ function Index() {
             </div>
           </section>
 
-
           <section className="favrites_blk_row light_grey">
             <div className="container">
               <h3 className="title_cls">
-                More itineraries in {itineraries?.attributes?.country?.data?.attributes?.country_name}
+                More itineraries in{" "}
+                {
+                  itineraries?.attributes?.country?.data?.attributes
+                    ?.country_name
+                }
               </h3>
               <div className="card_slider_row">
                 <i id="left">
@@ -985,15 +1000,13 @@ function Index() {
                           {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
                         </NavLink>
                         <div className="card_slider_cnt places_to_stay_cnt">
-                          <NavLink href={generateDynamicLink(item)}>
-                            <h4>
-                              <a>
-                                {dictioneryFunction(
-                                  item?.attributes?.itin_name
-                                )}
-                              </a>
-                            </h4>
-                          </NavLink>
+                          <h4>
+                            <a href={generateDynamicLink(item)}>
+                              {dictioneryFunction(item?.attributes?.itin_name)}
+                            </a>
+                          </h4>
+                          {/* <NavLink href={generateDynamicLink(item)}>
+                          </NavLink> */}
                           <ul>
                             <li>
                               {dictioneryFunction(
@@ -1007,14 +1020,15 @@ function Index() {
                             </li>
                             <li>
                               {dictioneryFunction(
-                                item?.attributes?.country?.data?.attributes?.country_name
+                                item?.attributes?.country?.data?.attributes
+                                  ?.country_name
                               )}
                             </li>
                             {item?.attributes?.itinerary_country_contents?.data
                               .filter(
                                 (res) =>
                                   res.attributes.website_country.toLowerCase() ===
-                                  region
+                                  region.replace(/in/g, "india")
                               )
                               .map((res1) => (
                                 <li key={res1.id}>
