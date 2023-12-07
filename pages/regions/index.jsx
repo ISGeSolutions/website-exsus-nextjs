@@ -9,7 +9,7 @@ import { EnquiryButton } from "../../components/common/EnquiryBtn";
 import RegionitIneraries from "../regionitineraries/index"; // Adjust the path accordingly
 import RegionOverview from "../regionoverview/index"; // Adjust the path accordingly
 import RegionPlacesToStay from "../regionplacestostay/index"; // Adjust the path accordingly
-import { FriendlyUrl } from "../../components";
+import { FriendlyUrl, Signup } from "../../components";
 
 export default Index;
 
@@ -27,7 +27,7 @@ function Index() {
   const [regionData, setRegionData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [friendlyUrl, setFriendlyUrl] = useState("");
-  const [activeButton, setActiveButton] = useState('images');
+  const [activeButton, setActiveButton] = useState("images");
   const destinationcode = router?.query?.continent
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
@@ -90,8 +90,6 @@ function Index() {
   //   );
   // };
 
-
-
   <button className="btn header_nav_btn">
     MEET OUR EXPERTS
     <svg
@@ -122,13 +120,14 @@ function Index() {
 
   const toggleTab = (itemId) => {
     var text = regionName;
-    const redirectUrl = regionWiseUrl + "/destinations/" + destinationcode?.replace(/ /g, "-")
-      .replace(/&/g, "and")
-      .toLowerCase() + "/" + countrycode?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase() + "/" + regionName?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase();
+    const redirectUrl =
+      regionWiseUrl +
+      "/destinations/" +
+      destinationcode?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase() +
+      "/" +
+      countrycode?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase() +
+      "/" +
+      regionName?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase();
     if (itemId == "overview") {
       window.history.pushState(null, null, redirectUrl);
       text = regionName;
@@ -146,14 +145,16 @@ function Index() {
       setActiveTab(itemId);
       // window.history.pushState(null, null, redirectUrl); // Update the URL
     }
-    const targetDiv = document.getElementById('targetDiv');
+    const targetDiv = document.getElementById("targetDiv");
     if (targetDiv) {
-      targetDiv.scrollIntoView({ behavior: 'smooth' });
+      targetDiv.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt places_to_stay_cnt"),
+    var elements = document.getElementsByClassName(
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -185,7 +186,9 @@ function Index() {
     //     setTitle(x.data.attributes.page_meta_title);
     // });
 
-    setFriendlyUrl(`home/destinations/${destinationcode}/${countrycode}/${regionName}`)
+    setFriendlyUrl(
+      `home/destinations/${destinationcode}/${countrycode}/${regionName}`
+    );
 
     destinationService
       .getRegionByName(regionName)
@@ -193,8 +196,12 @@ function Index() {
         setRegionData(x.data[0]);
         const imageCheck = x.data.attributes.region_images.data;
         const newBackgroundImages = [];
-        let latitude = x?.data?.attributes?.map_latitude ? x?.data?.attributes?.map_latitude : "";
-        let longitude = x?.data?.attributes?.map_longitude ? x?.data?.attributes?.map_longitude : "";
+        let latitude = x?.data?.attributes?.map_latitude
+          ? x?.data?.attributes?.map_latitude
+          : "";
+        let longitude = x?.data?.attributes?.map_longitude
+          ? x?.data?.attributes?.map_longitude
+          : "";
 
         const mapTemp =
           `https://www.google.com/maps/embed/v1/place?q=` +
@@ -333,21 +340,29 @@ function Index() {
             </div>
             <div className="banner_tab_blk">
               <button
-                className={`btn banner_map_tab ${activeButton === 'map' ? 'banner_tab_active' : ''}`}
-                onClick={() => handleTabClick('map')}
+                className={`btn banner_map_tab ${
+                  activeButton === "map" ? "banner_tab_active" : ""
+                }`}
+                onClick={() => handleTabClick("map")}
               >
                 Map
               </button>
               <button
-                className={`btn banner_img_tab ${activeButton === 'images' ? 'banner_tab_active' : ''}`}
-                onClick={() => handleTabClick('images')}
+                className={`btn banner_img_tab ${
+                  activeButton === "images" ? "banner_tab_active" : ""
+                }`}
+                onClick={() => handleTabClick("images")}
               >
                 Images
               </button>
             </div>
 
             {/* Map */}
-            <div className={`banner_map_blk ${activeButton === 'map' ? 'banner_map_active' : ''}`}>
+            <div
+              className={`banner_map_blk ${
+                activeButton === "map" ? "banner_map_active" : ""
+              }`}
+            >
               <Iframe
                 width="640px"
                 height="320px"
@@ -516,42 +531,7 @@ function Index() {
             <div className="container">
               <h4>Sign up for our newsletter</h4>
               <h5>Receive our latest news and special offers</h5>
-              <form className="newslettr_form d-block d-sm-flex">
-                <div className="newlettr_inpt">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Full name and title"
-                  />
-                </div>
-                <div className="newlettr_inpt ps-0 ps-sm-2">
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder="Your email address"
-                  />
-                </div>
-                <div className="newlettr_btn ps-0 ps-sm-2">
-                  <button type="submit" className="btn btn-primary prmry_btn">
-                    Sign up
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="#ffffff"
-                      shapeRendering="geometricPrecision"
-                      textRendering="geometricPrecision"
-                      imageRendering="optimizeQuality"
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      viewBox="0 0 267 512.43"
-                    >
-                      <path
-                        fillRule="nonzero"
-                        d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </form>
+              <Signup />
             </div>
           </section>
         </div>

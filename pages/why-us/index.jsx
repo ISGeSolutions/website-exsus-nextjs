@@ -38,53 +38,14 @@ function Index() {
   const [careerData, setCareerData] = useState(null);
   const [subTitle, setSubTitle] = useState(null);
 
-  // const EnquiryButton = () => {
-  //   ReactGA.event({
-  //     category: "Enquiry category",
-  //     action: "Enquiry action",
-  //     label: "Enquiry label", // optional
-  //     value: 99, // optional, must be a number
-  //     nonInteraction: true, // optional, true/false
-  //     transport: "xhr", // optional, beacon/xhr/image
-  //   });
-
-  //   const router = useRouter();
-
-  //   const handleEnquiryClick = () => {
-  //     // Perform other button click actions
-  //     router.push("/contact-us"); // Navigate to the /enquiry page
-  //   };
-
-  //   return (
-  //     <button
-  //       className="btn prmry_btn make_enqury_btn"
-  //       onClick={handleEnquiryClick}
-  //     >
-  //       Make an enquiry
-  //       <svg
-  //         xmlns="http://www.w3.org/2000/svg"
-  //         fill="#ffffff"
-  //         shapeRendering="geometricPrecision"
-  //         textRendering="geometricPrecision"
-  //         imageRendering="optimizeQuality"
-  //         fillRule="evenodd"
-  //         clipRule="evenodd"
-  //         viewBox="0 0 267 512.43"
-  //       >
-  //         <path
-  //           fillRule="nonzero"
-  //           d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-  //         />
-  //       </svg>
-  //     </button>
-  //   );
-  // };
-
   let region = "uk";
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
+      if (window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+        region = window.site_region;
+      }
     }
   }
 
@@ -167,6 +128,7 @@ function Index() {
         setIsLoading(false);
       });
   };
+
   useEffect(() => {
     ReactGA.send({
       hitType: "pageview",
@@ -433,7 +395,7 @@ function Index() {
                 <div className="row">
                   <div className="col-sm-6">
                     <div className="card_blk_inr">
-                      <NavLink href="/destinations" target="_blank">
+                      <NavLink href={`/destinations`}>
                         <img
                           src="images/about_us_card01.jpg"
                           alt="Card image 07"
@@ -471,8 +433,7 @@ function Index() {
 
                   <div className="col-sm-6">
                     <div className="card_blk_inr">
-                      {/* <a href="#"> */}
-                      <NavLink href="/holiday-types" target="_blank">
+                      <NavLink href={`/holiday-types`}>
                         <img
                           src="images/about_us_card02.jpg"
                           alt="Card image 08"

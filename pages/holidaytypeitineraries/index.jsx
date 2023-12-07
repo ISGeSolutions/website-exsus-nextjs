@@ -797,7 +797,7 @@ function Index() {
                                     .filter(
                                       (res) =>
                                         res.attributes.website_country.toLowerCase() ===
-                                        region
+                                        region.replace(/in/g, "india")
                                     )
                                     .map((res1) => (
                                       <li key={res1.id}>

@@ -125,6 +125,17 @@ function CountryPlaceToStay(props) {
     loadMoreData(item);
   };
 
+  let region = "uk";
+  let regionWiseUrl = "";
+  if (typeof window !== "undefined") {
+    if (window && window.site_region) {
+      if (window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+        region = window.site_region;
+      }
+    }
+  }
+
   const countryOptions = [
     { value: "Asia", label: "Asia" },
     { value: "Hong Kong & Macau", label: "Hong Kong & Macau" },
@@ -243,11 +254,11 @@ function CountryPlaceToStay(props) {
     } else {
       router.push(
         `advance-search?where=` +
-        e?.destination +
-        `&what=` +
-        e?.reason +
-        `&when=` +
-        e?.month
+          e?.destination +
+          `&what=` +
+          e?.reason +
+          `&when=` +
+          e?.month
       );
     }
   }
@@ -262,13 +273,14 @@ function CountryPlaceToStay(props) {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
-        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name?.replace(
-          / /g,
-          "-"
-        ).replace(/&/g, "and").toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name?.replace(
-          / /g,
-          "-"
-        ).replace(/&/g, "and").toLowerCase()}/${hotelName}`)
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
+    );
   };
 
   const handleOptionCountryChange = (selectedOption) => {
@@ -300,17 +312,6 @@ function CountryPlaceToStay(props) {
   //     setVisiblePagination(false);
   //   }
   // };
-
-  let region = "uk";
-  let regionWiseUrl = "";
-  if (typeof window !== "undefined") {
-    if (window && window.site_region) {
-      if (window.site_region !== "uk") {
-        regionWiseUrl = "/" + window.site_region;
-        region = window.site_region;
-      }
-    }
-  }
 
   const websiteContentCheck = (matches, region, modifiedString) => {
     destinationService
@@ -392,13 +393,13 @@ function CountryPlaceToStay(props) {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
-        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name?.replace(
-          / /g,
-          "-"
-        ).replace(/&/g, "and").toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name?.replace(
-          / /g,
-          "-"
-        ).replace(/&/g, "and").toLowerCase()}/${hotelName}`
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -644,7 +645,7 @@ function CountryPlaceToStay(props) {
                                 {item?.attributes?.hotel_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                      "thumbnail" ? (
+                                    "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}
@@ -686,8 +687,8 @@ function CountryPlaceToStay(props) {
                                               {item?.attributes?.currency_symbol.repeat(
                                                 Math.abs(
                                                   5 -
-                                                  item?.attributes
-                                                    ?.price_guide_value
+                                                    item?.attributes
+                                                      ?.price_guide_value
                                                 )
                                               )}
                                             </label>

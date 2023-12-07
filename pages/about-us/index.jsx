@@ -21,36 +21,47 @@ function Index() {
   const [valueWithBr, setnewValueWithBr] = useState("");
   const [customPageContent, setCustomPage] = useState([]);
 
+  // let regionWiseUrl = "/uk";
+  // let region = "uk";
+  // if (typeof window !== "undefined") {
+  //   if (window && window.site_region) {
+  //     regionWiseUrl = "/" + window.site_region;
+  //     region = window.site_region;
+  //     // setMyVariable(window.site_region);
+  //   }
+  // }
 
-  let regionWiseUrl = "/uk";
   let region = "uk";
+  let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      regionWiseUrl = "/" + window.site_region;
-      region = window.site_region;
-      // setMyVariable(window.site_region);
+      if (window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+        region = window.site_region;
+      }
     }
   }
 
   const websiteContentCheck = (matches, region, modifiedString) => {
-    destinationService.getDictionaryDetails(matches, region).then((responseObj) => {
-      if (responseObj) {
-        const res = responseObj?.data;
-        res.forEach((element, index) => {
-          const replacement = element?.attributes?.content_translation_text;
-          const matchString = element?.attributes?.content_word;
-          const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
-          if (checkStr && replacement) {
-            modifiedString = modifiedString.replace(checkStr, replacement);
-          }
-        });
+    destinationService
+      .getDictionaryDetails(matches, region)
+      .then((responseObj) => {
+        if (responseObj) {
+          const res = responseObj?.data;
+          res.forEach((element, index) => {
+            const replacement = element?.attributes?.content_translation_text;
+            const matchString = element?.attributes?.content_word;
+            const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+            if (checkStr && replacement) {
+              modifiedString = modifiedString.replace(checkStr, replacement);
+            }
+          });
 
-        // Set the modified string in state
-        setnewValueWithBr(modifiedString);
-      }
-    });
+          // Set the modified string in state
+          setnewValueWithBr(modifiedString);
+        }
+      });
   };
-
 
   useEffect(() => {
     const carousel = document.querySelector("#carouselExampleInterval");
@@ -62,7 +73,7 @@ function Index() {
       .getAboutusPage()
       .then((x) => {
         setWhyusDetails(x.data[0].attributes);
-        setCustomPage(x.data[0].attributes?.custom_page_contents)
+        setCustomPage(x.data[0].attributes?.custom_page_contents);
 
         let modifiedString = x.data.attributes?.page_content_1;
         // console.log("console.log ", modifiedString);
@@ -142,7 +153,11 @@ function Index() {
     <>
       <Head>
         <title>
-          {whyusDetails?.custom_page_contents.data?.filter(res => res.content_name == "Title")[0]?.content_value}
+          {
+            whyusDetails?.custom_page_contents.data?.filter(
+              (res) => res.content_name == "Title"
+            )[0]?.content_value
+          }
         </title>
       </Head>
       <Layout>
@@ -210,8 +225,20 @@ function Index() {
                 </div>
 
                 <div className="trvl_info_cntnt">
-                  <h2 className="trvl_title">{customPageContent?.data?.filter(res => res.attributes?.content_name == "HeadingTag")[0]?.attributes?.content_value}</h2>
-                  <div dangerouslySetInnerHTML={{ __html: customPageContent?.data?.filter(res => res.attributes?.content_name == "Long_Text")[0]?.attributes?.content_value }} />
+                  <h2 className="trvl_title">
+                    {
+                      customPageContent?.data?.filter(
+                        (res) => res.attributes?.content_name == "HeadingTag"
+                      )[0]?.attributes?.content_value
+                    }
+                  </h2>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: customPageContent?.data?.filter(
+                        (res) => res.attributes?.content_name == "Long_Text"
+                      )[0]?.attributes?.content_value,
+                    }}
+                  />
                   {/* <div
                   dangerouslySetInnerHTML={{
                     __html: whyusDetails?.page_content_1,
@@ -220,7 +247,6 @@ function Index() {
                 </div>
               </div>
             </section>
-
 
             <section className="card_blk_row dark_grey py-5">
               <div className="container">
@@ -236,11 +262,11 @@ function Index() {
                       <h3>Specialist Expertise</h3>
                       <p>
                         With over 20 years’ experience of creating incredible
-                        journeys and tailor-made luxury honeymoons, all around the
-                        world, our destination experts have first-hand experience
-                        of their dedicated areas and frequently travel to them to
-                        stay on top of what’s best, what’s new and what not to
-                        miss, so can advise you personally.
+                        journeys and tailor-made luxury honeymoons, all around
+                        the world, our destination experts have first-hand
+                        experience of their dedicated areas and frequently
+                        travel to them to stay on top of what’s best, what’s new
+                        and what not to miss, so can advise you personally.
                       </p>
                     </div>
                     <div className="col-lg-4">
@@ -267,7 +293,7 @@ function Index() {
                 <div className="row">
                   <div className="col-sm-6">
                     <div className="card_blk_inr">
-                      <NavLink href={region + `/destinations`}>
+                      <NavLink href={`/destinations`}>
                         <img
                           src="/images/about_us_card01.jpg"
                           alt="Card image 07"
@@ -305,7 +331,7 @@ function Index() {
 
                   <div className="col-sm-6">
                     <div className="card_blk_inr">
-                      <NavLink href={region + `/holiday-types`}>
+                      <NavLink href={`/holiday-types`}>
                         <img
                           src="/images/about_us_card02.jpg"
                           alt="Card image 08"
