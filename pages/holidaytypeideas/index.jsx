@@ -27,7 +27,7 @@ function Index() {
   const [isLoading, setIsLoading] = useState(true);
   const [friendlyUrl, setFriendlyUrl] = useState("");
   const [activeItem, setActiveItem] = useState("recommended");
-  const [page, setPage] = useState(0); // Current page
+  const [page, setPage] = useState(); // Current page
   const [metaData, setMetaData] = useState([]);
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(true);
