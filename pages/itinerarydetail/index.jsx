@@ -22,8 +22,8 @@ function Index() {
   const [hotels, setHotelData] = useState(null);
   const [bannerImages, setBannerImages] = useState(null);
   const itin_name = router.query?.itineraryName
-    ? router.query?.itineraryName?.replace(/-/g, " ").replace(/and/g, "&").toLowerCase()
-    : router.query?.itineraries?.replace(/-/g, " ").replace(/and/g, "&").toLowerCase();
+    ? router.query?.itineraryName
+    : router.query?.itineraries?.toLowerCase();
   const itin_code = router.query.itinerarycode;
   const [title, setTitle] = useState("");
   const countrycode = router.query.countrycode;
@@ -146,10 +146,6 @@ function Index() {
 
 
   const generateDynamicLink = (item) => {
-    let itineraryName = item?.attributes?.itin_name
-      ?.replace(/ /g, "-")
-      .toLowerCase()
-      .replace(/&/g, "and");
     let countryName = item?.attributes?.country?.data?.attributes?.country_name?.replace(
       / /g,
       "-"
@@ -159,17 +155,11 @@ function Index() {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}-itineraries/${itineraryName?.replace(/&/g, " and ")
-          .replace(/ /g, "-")
-          .toLowerCase()}`
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
   const handleRedirect = (item) => {
-    let itineraryName = item?.attributes?.itin_name
-      ?.replace(/ /g, "-")
-      .toLowerCase()
-      .replace(/&/g, "and");
     let countryName = item?.attributes?.country?.data?.attributes?.country_name?.replace(
       / /g,
       "-"
@@ -179,9 +169,7 @@ function Index() {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}-itineraries/${itineraryName?.replace(/&/g, " and ")
-          .replace(/ /g, "-")
-          .toLowerCase()}`
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url}`
     );
 
   };
@@ -345,7 +333,6 @@ function Index() {
         destinationService
           .getRegionWiseHotelsInHotelDetail(x?.data[0]?.attributes?.region?.data?.attributes?.region_name, region)
           .then((response) => {
-            debugger;
             setHotelData(response?.data);
             console.log(response?.data);
             setIsLoading(false);

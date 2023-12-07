@@ -133,10 +133,6 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
 
 
   const generateDynamicLink = (item) => {
-    let itineraryName = item?.attributes?.itin_name
-      ?.replace(/ /g, "-")
-      .toLowerCase()
-      .replace(/&/g, "and");
     let countryName = item?.attributes?.country?.data?.attributes?.country_name?.replace(
       / /g,
       "-"
@@ -146,17 +142,11 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}-itineraries/${itineraryName?.replace(/&/g, " and ")
-          .replace(/ /g, "-")
-          .toLowerCase()}`
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
   const handleRedirect = (item) => {
-    let itineraryName = item?.attributes?.itin_name
-      ?.replace(/ /g, "-")
-      .toLowerCase()
-      .replace(/&/g, "and");
     let countryName = item?.attributes?.country?.data?.attributes?.country_name?.replace(
       / /g,
       "-"
@@ -166,11 +156,8 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}-itineraries/${itineraryName?.replace(/&/g, " and ")
-          .replace(/ /g, "-")
-          .toLowerCase()}`
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url}`
     );
-
   };
 
   const websiteContentCheck = (matches, region, modifiedString) => {

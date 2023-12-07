@@ -30,13 +30,14 @@ function Index() {
   const [backgroundImage, setBackgroundImage] = useState([]);
   const router = useRouter();
 
-  let regionWiseUrl = "";
   let region = "uk";
+  let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      region = window.site_region;
-      regionWiseUrl = "/" + window.site_region;
-      // setMyVariable(window.site_region);
+      if (window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+        region = window.site_region;
+      }
     }
   }
 
@@ -45,9 +46,6 @@ function Index() {
   // };
 
   const generateDynamicLink = (item) => {
-    const modifiedName = item.attributes?.itin_name
-      ?.replace(/ /g, "-")
-      .toLowerCase().replace(/&/g, "and");
     const modifiedDestinationName = item.attributes?.destination_name
       ?.replace(/ /g, "-")
       .replace(/&/g, "and")
@@ -55,7 +53,7 @@ function Index() {
 
     return (
       regionWiseUrl +
-      `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-iteneraries/${modifiedName}`
+      `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-iteneraries/${item.attributes?.friendly_url}`
     );
   };
 
@@ -68,9 +66,6 @@ function Index() {
   };
 
   const handleRedirect = (item) => {
-    const modifiedName = item.attributes?.itin_name
-      ?.replace(/ /g, "-")
-      .toLowerCase().replace(/&/g, "and");;
     const modifiedDestinationName = item.attributes?.destination_name
       ?.replace(/ /g, "-")
       .replace(/&/g, "and")
@@ -78,7 +73,7 @@ function Index() {
 
     router.push(
       regionWiseUrl +
-      `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-iteneraries/${modifiedName}`
+      `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-iteneraries/${item.attributes?.friendly_url}`
     );
   };
 
@@ -669,7 +664,7 @@ function Index() {
                               .filter(
                                 (res) =>
                                   res.attributes.website_country.toLowerCase() ===
-                                  region
+                                  region.replace(/in/g, "india")
                               )
                               .map((res1) => (
                                 <li key={res1.id}>

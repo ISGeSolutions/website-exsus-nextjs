@@ -35,7 +35,10 @@ function Index() {
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
-      if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
+      if (window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+        region = window.site_region;
+      }
     }
   }
 
@@ -61,10 +64,6 @@ function Index() {
   };
 
   const generateDynamicLink = (item) => {
-    let itineraryName = item?.attributes?.itin_name
-      ?.replace(/ /g, "-")
-      .toLowerCase()
-      .replace(/&/g, "and");
     let countryName = item?.attributes?.country?.data?.attributes?.country_name?.replace(
       / /g,
       "-"
@@ -74,15 +73,11 @@ function Index() {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}-itineraries/${itineraryName}`
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
   const handleRedirect = (item) => {
-    let itineraryName = item?.attributes?.itin_name
-      ?.replace(/ /g, "-")
-      .toLowerCase()
-      .replace(/&/g, "and");
     let countryName = item?.attributes?.country?.data?.attributes?.country_name?.replace(
       / /g,
       "-"
@@ -92,7 +87,7 @@ function Index() {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}-itineraries/${itineraryName}`
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url}`
     );
 
   };
@@ -135,7 +130,8 @@ function Index() {
         page,
         dcodestr ? dcodestr : "",
         dcodeReason ? dcodeReason : "",
-        dcodeMonth ? dcodeMonth : ""
+        dcodeMonth ? dcodeMonth : "",
+        region
       )
       .then((x) => {
         setItineraries(x.data);
@@ -293,7 +289,7 @@ function Index() {
                                 </ul>
                               </div>
                               <button className="btn card_slider_btn" onClick={() =>
-                                handleRedirect(item?.attributes?.itin_name)}  >
+                                handleRedirect(item)}  >
                                 <span>
                                   {item?.attributes?.no_of_nites_notes}
                                 </span>

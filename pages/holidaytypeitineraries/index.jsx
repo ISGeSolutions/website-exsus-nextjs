@@ -26,12 +26,13 @@ function Index() {
     "LUXURY SAFARI HOLIDAYS IN AFRICA"
   );
   const [itineraries, setItineraries] = useState([]);
-  const [page, setPage] = useState(0); // Current page
+  let [page, setPage] = useState(0); // Current page
   const itemsPerPage = 12; // Number of items to load per page
   const [metaData, setMetaData] = useState([]);
   const [holidayName, setHolidayName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [friendlyUrl, setFriendlyUrl] = useState("");
+  const [selectedDestinations, setDestinations] = useState("");
 
   // const [visibleItems, setVisibleItems] = useState(itemsPerPage)
   const router = useRouter();
@@ -261,10 +262,18 @@ function Index() {
   };
 
   const handleFilterClick = (item) => {
-    page = 0;
-    setItineraries([]);
-    setActiveItem(item);
-    loadMoreData(item);
+    if (selectedDestinations.length == 0) {
+      page = 0;
+      setItineraries([]);
+      setActiveItem(item);
+      loadMoreData(item);
+    } else {
+      page = 0;
+      setItineraries([]);
+      setActiveItem(item);
+      loadMoreDataWithDestination(item, selectedDestinations);
+    }
+
   };
 
   const generateDynamicLink = (item) => {
@@ -275,12 +284,9 @@ function Index() {
     const country = item?.attributes?.sub_header_text
       ?.replace(/ /g, "-")
       .toLowerCase();
-    const modifiedName = item?.attributes?.itin_name
-      ?.replace(/ /g, "-")
-      .toLowerCase();
     return (
       regionWiseUrl +
-      `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${modifiedName}`
+      `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -292,12 +298,9 @@ function Index() {
     const country = item?.attributes?.sub_header_text
       ?.replace(/ /g, "-")
       .toLowerCase();
-    const modifiedName = item?.attributes?.itin_name
-      ?.replace(/ /g, "-")
-      .toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${modifiedName}`
+      `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -326,32 +329,46 @@ function Index() {
       });
   };
 
-  function onSubmit(data) {
-    //data.preventDefault();
-    debugger;
-    let destination = "";
 
-    if (data?.destination) {
-      destination = data?.destination;
-    } else if (queryParameters?.where) {
-      destination = queryParameters?.where;
-    }
+  const loadMoreDataWithDestination = (item, destinations) => {
+    holidaytypesService
+      .getItinerariesByDestinations(page + 1, destinations, region, item)
+      .then((response) => {
+        setMetaData(response.meta.pagination);
+        const newItineraries = response.data;
+        if (newItineraries.length > 0) {
+          setItineraries((prevItineraries) =>
+            [...prevItineraries, ...newItineraries].reduce(
+              (accumulator, current) =>
+                accumulator.some((item) => item.id === current.id)
+                  ? accumulator
+                  : [...accumulator, current],
+              []
+            )
+          );
+          setPage(page + 1);
+        }
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+      });
+  };
 
-    if (!selectedOptionDestination) {
+  function onSubmit() {
+    if (selectedOptionDestination.length == 0) {
       showAlert("Please select atleast one option", "error");
       setQueryParameters(null);
       reset();
     } else {
-      // router.push(
-      //   `advance-search?where=` +
-      //     data?.destination +
-      //     `&what=` +
-      //     data?.reason +
-      //     `&when=` +
-      //     data?.month
-      // );
-      reset();
-      setQueryParameters(null);
+      page = 0;
+      let destinationArray = [];
+      selectedOptionDestination?.forEach(res => {
+        destinationArray.push(res.destination_code)
+      });
+      setDestinations(destinationArray);
+      setItineraries([]);
+      loadMoreDataWithDestination(activeItem, destinationArray);
     }
   }
 
@@ -380,8 +397,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -770,7 +787,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                      "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}
@@ -797,15 +814,13 @@ function Index() {
                                     .filter(
                                       (res) =>
                                         res.attributes.website_country.toLowerCase() ===
-                                        region
+                                        region.replace(/in/g, "india")
                                     )
                                     .map((res1) => (
                                       <li key={res1.id}>
-                                        {`from ${
-                                          res1.attributes?.currency_symbol ?? ""
-                                        }${
-                                          res1.attributes?.price ?? " xxxx"
-                                        } per person`}
+                                        {`from ${res1.attributes?.currency_symbol ?? ""
+                                          }${res1.attributes?.price ?? " xxxx"
+                                          } per person`}
                                       </li>
                                     ))}
                                   <li>
@@ -837,7 +852,13 @@ function Index() {
                     <div className="col-12">
                       {metaData.total > page * itemsPerPage && (
                         <button
-                          onClick={() => loadMoreData(activeItem)}
+                          onClick={() => {
+                            if (destinationArray.length === 0) {
+                              loadMoreData(activeItem);
+                            } else {
+                              loadMoreDataWithDestination(activeItem, selectedDestinations);
+                            }
+                          }}
                           className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
                           fdprocessedid="r5vpm6s"
                         >

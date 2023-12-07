@@ -64,19 +64,17 @@ function ContinentOverview({ sendDataToParent }) {
     }
   };
 
-  const handleRedirect = () => {
-    const modifiedName = item.replace(/ /g, "-").toLowerCase();
+  const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${modifiedName}`
+      `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${item?.attributes?.friendly_url}`
     );
   };
 
   const generateDynamicLink = (item) => {
-    const modifiedName = item.replace(/ /g, "-").toLowerCase();
     return (
       regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${modifiedName}`
+      `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -374,7 +372,7 @@ function ContinentOverview({ sendDataToParent }) {
                           <div className="card_slider">
                             <NavLink
                               href={generateDynamicLink(
-                                item?.attributes?.itin_name
+                                item
                               )}
                               className="card_slider_img"
                             >
@@ -396,7 +394,7 @@ function ContinentOverview({ sendDataToParent }) {
                             <div className="card_slider_cnt places_to_stay_cnt">
                               <NavLink
                                 href={generateDynamicLink(
-                                  item?.attributes?.itin_name
+                                  item
                                 )}
                               >
                                 <h4>
@@ -433,7 +431,9 @@ function ContinentOverview({ sendDataToParent }) {
                               <span>{item?.attributes?.no_of_nites_notes}</span>
                               <span
                                 className="view_itnry_link"
-                                onClick={handleRedirect}
+                                onClick={() =>
+                                  handleRedirect(item)
+                                }
                               >
                                 View this itinerary
                                 <em className="fa-solid fa-chevron-right"></em>

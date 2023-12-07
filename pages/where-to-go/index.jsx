@@ -168,7 +168,6 @@ function Index() {
                                 );
                             }
                         });
-                        debugger;
                         return modifiedString;
                     } catch (error) {
 
