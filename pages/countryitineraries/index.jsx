@@ -329,24 +329,22 @@ function CountryItinararies(props) {
   };
 
   const generateDynamicLink = (item) => {
-    const modifiedName = item.replace(/ /g, "-").toLowerCase();
     return (
       regionWiseUrl +
       `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
         / /g,
         "-"
-      )}/${countrycode?.replace(/ /g, "-")?.replace(/&/g, "and")}-iteneraries/${modifiedName}`
+      )}/${countrycode?.replace(/ /g, "-")?.replace(/&/g, "and")}-iteneraries/${item?.attributes?.friendly_url}`
     );
   };
 
   const handleRedirect = (item) => {
-    const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
       `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
         / /g,
         "-"
-      )}/${countrycode?.replace(/ /g, "-")}}-iteneraries/${modifiedName}`
+      )}/${countrycode?.replace(/ /g, "-")}}-iteneraries/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -609,7 +607,7 @@ function CountryItinararies(props) {
                           <div className="card_slider">
                             <NavLink
                               href={generateDynamicLink(
-                                item?.attributes?.itin_name
+                                item
                               )}
                               className="card_slider_img"
                             >
@@ -633,7 +631,7 @@ function CountryItinararies(props) {
                               <h4>
                                 <a
                                   href={generateDynamicLink(
-                                    item?.attributes?.itin_name
+                                    item
                                   )}
                                 >
                                   {item?.attributes?.itin_name}
@@ -666,7 +664,7 @@ function CountryItinararies(props) {
                             <button
                               className="btn card_slider_btn"
                               onClick={() =>
-                                handleRedirect(item?.attributes?.itin_name)
+                                handleRedirect(item)
                               }
                             >
                               <span>{item?.attributes?.no_of_nites_notes}</span>

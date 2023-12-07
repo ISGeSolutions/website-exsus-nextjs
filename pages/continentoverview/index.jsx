@@ -68,19 +68,17 @@ function ContinentOverview({ sendDataToParent }) {
     }
   };
 
-  const handleRedirect = () => {
-    const modifiedName = item.replace(/ /g, "-").toLowerCase();
+  const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-        `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${modifiedName}`
+      `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${item?.attributes?.friendly_url}`
     );
   };
 
   const generateDynamicLink = (item) => {
-    const modifiedName = item.replace(/ /g, "-").toLowerCase();
     return (
       regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${modifiedName}`
+      `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -93,8 +91,8 @@ function ContinentOverview({ sendDataToParent }) {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -379,14 +377,14 @@ function ContinentOverview({ sendDataToParent }) {
                           <div className="card_slider">
                             <NavLink
                               href={generateDynamicLink(
-                                item?.attributes?.itin_name
+                                item
                               )}
                               className="card_slider_img"
                             >
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -400,13 +398,9 @@ function ContinentOverview({ sendDataToParent }) {
                             </NavLink>
                             <div className="card_slider_cnt places_to_stay_cnt">
                               <h4>
-                                <a
-                                  href={generateDynamicLink(
-                                    item?.attributes?.itin_name
-                                  )}
-                                >
-                                  {item?.attributes?.itin_name}
-                                </a>
+                                <a href={generateDynamicLink(
+                                  item
+                                )}>{item?.attributes?.itin_name}</a>
                               </h4>
                               <ul>
                                 <li>
@@ -427,11 +421,9 @@ function ContinentOverview({ sendDataToParent }) {
                                   )
                                   .map((res1) => (
                                     <li key={res1.id}>
-                                      {`from ${
-                                        res1.attributes?.currency_symbol ?? ""
-                                      }${
-                                        res1.attributes?.price ?? " xxxx"
-                                      } per person`}
+                                      {`from ${res1.attributes?.currency_symbol ?? ""
+                                        }${res1.attributes?.price ?? " xxxx"
+                                        } per person`}
                                     </li>
                                   ))}
 
@@ -447,7 +439,9 @@ function ContinentOverview({ sendDataToParent }) {
                               <span>{item?.attributes?.no_of_nites_notes}</span>
                               <span
                                 className="view_itnry_link"
-                                onClick={handleRedirect}
+                                onClick={() =>
+                                  handleRedirect(item)
+                                }
                               >
                                 View this itinerary
                                 <em className="fa-solid fa-chevron-right"></em>

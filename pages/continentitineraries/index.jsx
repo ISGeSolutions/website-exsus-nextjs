@@ -13,7 +13,7 @@ import CustomMultiValue from "./CustomMultiValue";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import { Alert } from "../../components";
+import { Alert, FriendlyUrl } from "../../components";
 
 export default ContinentItinararies;
 
@@ -251,18 +251,17 @@ function ContinentItinararies(props) {
   }
 
   const generateDynamicLink = (item) => {
-    const modifiedName = item.replace(/ /g, "-").toLowerCase();
     return (
       regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${modifiedName}`
+      `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${item?.attributes?.friendly_url}`
     );
   };
 
   const handleRedirect = (item) => {
-    const modifiedName = item.replace(/ /g, "-").toLowerCase();
+    // const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${modifiedName}`
+      `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -275,8 +274,8 @@ function ContinentItinararies(props) {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -365,7 +364,7 @@ function ContinentItinararies(props) {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -413,7 +412,7 @@ function ContinentItinararies(props) {
     // Using window.onload to detect full page load
     window.onload = () => {
       setTimeout(() => {
-        const redirectUrl = regionWiseUrl + "/destinations/" + destinationcode;
+        const redirectUrl = regionWiseUrl + "/destinations/" + destinationcode + `${destinationcode}-itineraries`;
 
         if (redirectUrl) {
           router.push(redirectUrl);
@@ -629,14 +628,14 @@ function ContinentItinararies(props) {
                           <div className="card_slider">
                             <NavLink
                               href={generateDynamicLink(
-                                item?.attributes?.itin_name
+                                item
                               )}
                               className="card_slider_img"
                             >
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -652,7 +651,7 @@ function ContinentItinararies(props) {
                               <h4>
                                 <a
                                   href={generateDynamicLink(
-                                    item?.attributes?.itin_name
+                                    item
                                   )}
                                 >
                                   {dictioneryFunction(
@@ -676,11 +675,9 @@ function ContinentItinararies(props) {
                                   )
                                   .map((res1) => (
                                     <li key={res1.id}>
-                                      {`from ${
-                                        res1.attributes?.currency_symbol ?? ""
-                                      }${
-                                        res1.attributes?.price ?? " xxxx"
-                                      } per person`}
+                                      {`from ${res1.attributes?.currency_symbol ?? ""
+                                        }${res1.attributes?.price ?? " xxxx"
+                                        } per person`}
                                     </li>
                                   ))}
                                 <li></li>
@@ -695,7 +692,7 @@ function ContinentItinararies(props) {
                             <button
                               className="btn card_slider_btn"
                               onClick={() =>
-                                handleRedirect(item?.attributes?.itin_name)
+                                handleRedirect(item)
                               }
                             >
                               <span>{item?.attributes?.no_of_nites_notes}</span>

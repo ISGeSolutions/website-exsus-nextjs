@@ -23,13 +23,7 @@ function Index() {
   const [bannerImages, setBannerImages] = useState(null);
   const itin_name = router.query?.itineraryName
     ? router.query?.itineraryName
-        ?.replace(/-/g, " ")
-        .replace(/and/g, "&")
-        .toLowerCase()
-    : router.query?.itineraries
-        ?.replace(/-/g, " ")
-        .replace(/and/g, "&")
-        .toLowerCase();
+    : router.query?.itineraries?.toLowerCase();
   const itin_code = router.query.itinerarycode;
   const [title, setTitle] = useState("");
   const countrycode = router.query.countrycode;
@@ -53,8 +47,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -118,12 +112,12 @@ function Index() {
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${hotelName}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -134,58 +128,44 @@ function Index() {
       .replace(/&/g, "and");
     router.push(
       regionWiseUrl +
-        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-          ?.replace(/&/g, " and ")
-          .replace(/ /g, "-")
-          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${hotelName}`
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
   const generateDynamicLink = (item) => {
-    let itineraryName = item?.attributes?.itin_name
-      ?.replace(/ /g, "-")
-      .toLowerCase()
-      .replace(/&/g, "and");
-    let countryName = item?.attributes?.country?.data?.attributes?.country_name
-      ?.replace(/ /g, "-")
-      .replace(/&/g, "and")
-      .toLowerCase();
+    let countryName = item?.attributes?.country?.data?.attributes?.country_name?.replace(
+      / /g,
+      "-"
+    ).replace(/&/g, "and").toLowerCase();
     return (
       regionWiseUrl +
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}-itineraries/${itineraryName
-        ?.replace(/&/g, " and ")
-        .replace(/ /g, "-")
-        .toLowerCase()}`
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
   const handleRedirect = (item) => {
-    let itineraryName = item?.attributes?.itin_name
-      ?.replace(/ /g, "-")
-      .toLowerCase()
-      .replace(/&/g, "and");
-    let countryName = item?.attributes?.country?.data?.attributes?.country_name
-      ?.replace(/ /g, "-")
-      .replace(/&/g, "and")
-      .toLowerCase();
+    let countryName = item?.attributes?.country?.data?.attributes?.country_name?.replace(
+      / /g,
+      "-"
+    ).replace(/&/g, "and").toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-          ?.replace(/&/g, " and ")
-          .replace(/ /g, "-")
-          .toLowerCase()}/itinerary/${countryName}-itineraries/${itineraryName
-          ?.replace(/&/g, " and ")
-          .replace(/ /g, "-")
-          .toLowerCase()}`
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -325,8 +305,7 @@ function Index() {
         console.log(imageCheck);
 
         setFriendlyUrl(
-          `home/destinations/${router.query?.continent}/${
-            router.query?.country
+          `home/destinations/${router.query?.continent}/${router.query?.country
           }/${x.data[0].attributes.itin_name.toLowerCase()}`
         );
         setTitle(x.data[0].attributes.meta_title);
@@ -920,8 +899,8 @@ function Index() {
                                         {item?.attributes?.currency_symbol.repeat(
                                           Math.abs(
                                             5 -
-                                              item?.attributes
-                                                ?.price_guide_value
+                                            item?.attributes
+                                              ?.price_guide_value
                                           )
                                         )}
                                       </label>
@@ -1053,11 +1032,9 @@ function Index() {
                               )
                               .map((res1) => (
                                 <li key={res1.id}>
-                                  {`from ${
-                                    res1.attributes?.currency_symbol ?? ""
-                                  }${
-                                    res1.attributes?.price ?? " xxxx"
-                                  } per person`}
+                                  {`from ${res1.attributes?.currency_symbol ?? ""
+                                    }${res1.attributes?.price ?? " xxxx"
+                                    } per person`}
                                 </li>
                               ))}
                             <li>
