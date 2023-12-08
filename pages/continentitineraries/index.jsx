@@ -93,8 +93,7 @@ const InputOption = ({
 };
 
 function ContinentItinararies(props) {
-  const { divRef } = props;
-  // const divRef = divRefData;
+  console.log(props);
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
@@ -113,7 +112,7 @@ function ContinentItinararies(props) {
   const router = useRouter();
   const [dcode, setdcode] = useState();
   const destinationcode = router.query.continent
-    .replace(/-and-/g, " & ")
+    ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
   const [countryOptions, setAllCountries] = useState([]);
@@ -122,6 +121,8 @@ function ContinentItinararies(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [activeItem, setActiveItem] = useState("recommended");
   const [alert, setAlert] = useState("");
+  const { divRef } = props;
+
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -262,7 +263,7 @@ function ContinentItinararies(props) {
     // const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${item?.attributes?.friendly_url}`
+      `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -275,8 +276,8 @@ function ContinentItinararies(props) {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -384,7 +385,6 @@ function ContinentItinararies(props) {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -399,7 +399,6 @@ function ContinentItinararies(props) {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -424,7 +423,7 @@ function ContinentItinararies(props) {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -470,24 +469,20 @@ function ContinentItinararies(props) {
       );
     });
 
-    window.addEventListener("resize", equalHeight(true));
+    // window.addEventListener("resize", equalHeight(true));
 
     // Using window.onload to detect full page load
     window.onload = () => {
       setTimeout(() => {
-        const redirectUrl =
-          regionWiseUrl +
-          "/destinations/" +
-          destinationcode +
-          `${destinationcode}-itineraries`;
+        const redirectUrl = `${regionWiseUrl}/destinations/${destinationcode}`;
 
         if (redirectUrl) {
           router.push(redirectUrl);
         }
       }, 0);
     };
-
     divRef?.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+
   }, [destinationcode, router, dcode]);
 
   return (
@@ -700,7 +695,7 @@ function ContinentItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -736,11 +731,9 @@ function ContinentItinararies(props) {
                                   )
                                   .map((res1) => (
                                     <li key={res1.id}>
-                                      {`from ${
-                                        res1.attributes?.currency_symbol ?? ""
-                                      }${
-                                        res1.attributes?.price ?? " xxxx"
-                                      } per person`}
+                                      {`from ${res1.attributes?.currency_symbol ?? ""
+                                        }${res1.attributes?.price ?? " xxxx"
+                                        } per person`}
                                     </li>
                                   ))}
                                 <li></li>

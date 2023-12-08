@@ -153,8 +153,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -193,22 +193,26 @@ function Index() {
     destinationService
       .getRegionByName(regionName)
       .then((x) => {
-        setRegionData(x.data[0]);
-        const imageCheck = x.data.attributes.region_images.data;
-        const newBackgroundImages = [];
-        let latitude = x?.data?.attributes?.map_latitude
-          ? x?.data?.attributes?.map_latitude
-          : "";
-        let longitude = x?.data?.attributes?.map_longitude
-          ? x?.data?.attributes?.map_longitude
-          : "";
+        debugger;
 
+        setRegionData(x.data[0]);
+        const imageCheck = x.data[0].attributes.region_images.data;
+        const newBackgroundImages = [];
+        debugger;
+
+        let latitude = x?.data[0]?.attributes?.map_latitude
+          ? x?.data[0]?.attributes?.map_latitude
+          : "";
+        let longitude = x?.data[0]?.attributes?.map_longitude
+          ? x?.data[0]?.attributes?.map_longitude
+          : "";
+        debugger;
         const mapTemp =
           `https://www.google.com/maps/embed/v1/place?q=` +
           latitude +
           `,` +
           longitude +
-          `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
+          `&zoom=10&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
         setMapVariable(mapTemp);
         imageCheck.forEach((element) => {
           if (element.attributes.image_type == "banner") {
@@ -340,29 +344,19 @@ function Index() {
             </div>
             <div className="banner_tab_blk">
               <button
-                className={`btn banner_map_tab ${
-                  activeButton === "map" ? "banner_tab_active" : ""
-                }`}
-                onClick={() => handleTabClick("map")}
+                className={`btn banner_map_tab ${activeButton === 'map' ? 'banner_tab_active' : ''}`}
+                onClick={() => handleTabClick('map')}
               >
                 Map
               </button>
               <button
-                className={`btn banner_img_tab ${
-                  activeButton === "images" ? "banner_tab_active" : ""
-                }`}
-                onClick={() => handleTabClick("images")}
+                className={`btn banner_img_tab ${activeButton === 'images' ? 'banner_tab_active' : ''}`}
+                onClick={() => handleTabClick('images')}
               >
                 Images
               </button>
             </div>
-
-            {/* Map */}
-            <div
-              className={`banner_map_blk ${
-                activeButton === "map" ? "banner_map_active" : ""
-              }`}
-            >
+            <div className={`banner_map_blk ${activeButton === 'map' ? 'banner_map_active' : ''}`}>
               <Iframe
                 width="640px"
                 height="320px"

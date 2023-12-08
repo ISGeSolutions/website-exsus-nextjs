@@ -26,6 +26,15 @@ function Index() {
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
+  const destinationTab = router.query?.continenttab;
+
+
+  const handleDataFromChild = (data) => {
+    // Update the parent component's state with data received from the child
+    toggleTab(data);
+  };
+
+
   const [friendlyUrl, setFriendlyUrl] = useState("");
   const [destinationName, setdestinationName] = useState("");
   const [metaTitle, setMetaTitle] = useState("");
@@ -35,7 +44,7 @@ function Index() {
     overview: useRef(null),
     countries: useRef(null),
     itineraries: useRef(null),
-    "places-to-stay": useRef(null),
+    places_to_stay: useRef(null),
   };
   const [activeButton, setActiveButton] = useState('images');
 
@@ -107,10 +116,7 @@ function Index() {
     </svg>
   </button>;
 
-  const handleDataFromChild = (data) => {
-    // Update the parent component's state with data received from the child
-    toggleTab(data);
-  };
+
 
   const toggleTab = (itemId) => {
     var text;
@@ -130,7 +136,7 @@ function Index() {
       text = `COUNTRIES IN ${destinationName}`;
     } else if (itemId == "itineraries") {
       const redirectUrl =
-        regionWiseUrl + `/destinations/${destinationDetails?.friendly_url}`;
+        regionWiseUrl + `/destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url}-itineraries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url} Itineraries`
@@ -150,10 +156,12 @@ function Index() {
       setActiveTab(itemId);
       // window.history.pushState(null, null, redirectUrl); // Update the URL
     }
-    if (tabContentRefs[itemId].current) {
-      tabContentRefs[itemId].current.scrollIntoView({ behavior: "smooth" });
+    if (tabContentRefs[itemId]?.current) {
+      tabContentRefs[itemId]?.current.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   };
+
+
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName("card_slider_cnt places_to_stay_cnt"),
@@ -181,7 +189,7 @@ function Index() {
   };
 
 
-  const websiteContentCheck = (matches, region, modifiedString) => {
+  const websiteContentCheck = () => {
     homeService
       .getAllWebsiteContent()
       .then((x) => {
@@ -320,6 +328,17 @@ function Index() {
   equalHeight(true);
 
   useEffect(() => {
+
+    // if (destinationTab) {
+    //   if (destinationTab.includes("itineraries")) {
+    //     toggleTab("itineraries")
+    //     setActiveTab("itineraries");
+    //   } else if (destinationTab.includes("countries")) {
+    //     setActiveTab("countries");
+    //   } else if (destinationTab.includes("places-to-stay")) {
+    //     setActiveTab("places-to-stay");
+    //   }
+    // }
     window.scrollTo(0, 0);
     // console.log(destinationcode);
     // destinationService.getAllItineraries().then(x => {
@@ -642,7 +661,6 @@ function Index() {
                   ref={tabContentRefs["itinararies"]}
                 >
                   <ContinentItinararies
-                    dataProp={destinationcode}
                     divRef={divRef}
                   />
                 </div>

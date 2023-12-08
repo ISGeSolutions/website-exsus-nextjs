@@ -67,7 +67,7 @@ const nextConfig = {
 
       // continentitineraries
       {
-        source: "/destinations/:continent",
+        source: "/destinations/:continent/continentSlug-itineraries",
         destination: "/continentitineraries",
       },
       {
@@ -233,6 +233,7 @@ const nextConfig = {
       { source: "/us/holiday-types", destination: "/holiday-types" },
       { source: "/asia/holiday-types", destination: "/holiday-types" },
       { source: "/in/holiday-types", destination: "/holiday-types" },
+
 
       // holidaytypeitineraries
       {

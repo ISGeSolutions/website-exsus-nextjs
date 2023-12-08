@@ -500,7 +500,7 @@ function Index() {
                 {backgroundImage.map((imagePath, index) => (
                   <NavLink
                     key={index}
-                    href="#"
+                    href=""
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                     data-bs-interval="5000"
                   >

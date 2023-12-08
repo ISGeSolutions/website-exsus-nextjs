@@ -27,7 +27,7 @@ function Index() {
   const [isLoading, setIsLoading] = useState(true);
   const [friendlyUrl, setFriendlyUrl] = useState("");
   const [activeItem, setActiveItem] = useState("recommended");
-  const [page, setPage] = useState(); // Current page
+  let [page, setPage] = useState(); // Current page
   const [metaData, setMetaData] = useState([]);
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(true);
@@ -224,7 +224,7 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
+      `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -335,8 +335,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt1"
-      ),
+      "card_slider_cnt places_to_stay_cnt1"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -624,7 +624,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                      "thumbnail" ? (
                                       <img
                                         key={element.id}
                                         src={element.attributes.image_path}
@@ -654,11 +654,9 @@ function Index() {
                                     )
                                     .map((res1) => (
                                       <li key={res1.id}>
-                                        {`from ${
-                                          res1.attributes?.currency_symbol ?? ""
-                                        }${
-                                          res1.attributes?.price ?? " xxxx"
-                                        } per person`}
+                                        {`from ${res1.attributes?.currency_symbol ?? ""
+                                          }${res1.attributes?.price ?? " xxxx"
+                                          } per person`}
                                       </li>
                                     ))}
                                   <li>
