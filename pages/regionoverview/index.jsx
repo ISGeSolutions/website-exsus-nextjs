@@ -17,6 +17,7 @@ function RegionOverview({ props, onDataFromChild }) {
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
+  debugger;
   const countrycode = router.query?.country
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
@@ -276,7 +277,7 @@ function RegionOverview({ props, onDataFromChild }) {
       setTimeout(() => {
         const redirectUrl = regionWiseUrl + "/destinations/" + destinationcode?.replace(/ /g, "-")
           .replace(/&/g, "and")
-          .toLowerCase() + "/" + countrycode.replace(/ /g, "-")
+          .toLowerCase() + "/" + countrycode.replace(/ /g, "-").replace(/and/g, "&")
             .replace(/&/g, "and")
             .toLowerCase() + "/" + regionName?.attributes?.region_name?.replace(/ /g, "-")
               .replace(/&/g, "and")

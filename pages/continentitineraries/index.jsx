@@ -92,8 +92,7 @@ const InputOption = ({
 };
 
 function ContinentItinararies(props) {
-  const { divRef } = props;
-  // const divRef = divRefData;
+  console.log(props);
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
@@ -112,7 +111,7 @@ function ContinentItinararies(props) {
   const router = useRouter();
   const [dcode, setdcode] = useState();
   const destinationcode = router.query.continent
-    .replace(/-and-/g, " & ")
+    ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
   const [countryOptions, setAllCountries] = useState([]);
@@ -121,6 +120,8 @@ function ContinentItinararies(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [activeItem, setActiveItem] = useState("recommended");
   const [alert, setAlert] = useState("");
+  const { divRef } = props;
+
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -324,7 +325,6 @@ function ContinentItinararies(props) {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -339,7 +339,6 @@ function ContinentItinararies(props) {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -373,6 +372,8 @@ function ContinentItinararies(props) {
   equalHeight(true);
 
   useEffect(() => {
+    // Call the callback function to send data to the parent
+    // window.scroll(0, 0)
     setSelectedOptionCountry([]);
     setSelectedOptionRegion([]);
     setSelectedOptionMonth([]);
@@ -407,20 +408,20 @@ function ContinentItinararies(props) {
       );
     });
 
-    window.addEventListener("resize", equalHeight(true));
+    // window.addEventListener("resize", equalHeight(true));
 
     // Using window.onload to detect full page load
     window.onload = () => {
       setTimeout(() => {
-        const redirectUrl = regionWiseUrl + "/destinations/" + destinationcode + `${destinationcode}-itineraries`;
+        const redirectUrl = `${regionWiseUrl}/destinations/${destinationcode}/${destinationcode}-itineraries`;
 
         if (redirectUrl) {
           router.push(redirectUrl);
         }
       }, 0);
     };
-
     divRef?.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+
   }, [destinationcode, router, dcode]);
 
   return (

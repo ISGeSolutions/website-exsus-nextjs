@@ -43,28 +43,73 @@ function CountryWhentogo(props) {
   }
 
 
-  const generateTds = (starting_point, quantity, text, url) => {
-    const tds = Array.from({ length: 12 }, (_, i) => {
-      const isColspan = starting_point === i + 1 && quantity > 0;
+  // const generateTds = (starting_point, quantity, text, url) => {
+  //   const tds = Array.from({ length: 12 }, (_, i) => {
+  //     const isColspan = starting_point === i + 1 && quantity > 0;
 
-      if (isColspan) {
-        return (
-          <td key={i} colSpan={quantity} className="calender_trip_detls">
-            <a href={url}>{/* Replace '#' with your actual link */}
-              {text}
-              <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 267 512.43">
-                <path fill-rule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path>
-              </svg>
-            </a>
-          </td>
-        );
-      } else {
-        return <td key={i}></td>;
-      }
-    });
+  //     if (isColspan) {
+  //       return (
+  //         <td key={i} colSpan={quantity} className="calender_trip_detls">
+  //           <a href={url}>{/* Replace '#' with your actual link */}
+  //             {text}
+  //             <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 267 512.43">
+  //               <path fill-rule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path>
+  //             </svg>
+  //           </a>
+  //         </td>
+  //       );
+  //     } else {
+  //       return <td key={i}></td>;
+  //     }
+  //   });
+
+  //   return tds;
+  // };
+
+
+  const generateTds = (starting_point, quantity, text, url) => {
+    const tds = [];
+
+    // Generate empty cells before colspan
+    for (let i = 0; i < starting_point - 1; i++) {
+      tds.push(<td key={i}></td>);
+    }
+
+    // Generate colspan cell
+    if (quantity > 0) {
+      tds.push(
+        <td key={starting_point - 1 + quantity} colSpan={quantity} className="calender_trip_detls">
+          <a href={url}>
+            {text}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="#ffffff"
+              shape-rendering="geometricPrecision"
+              text-rendering="geometricPrecision"
+              image-rendering="optimizeQuality"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              viewBox="0 0 267 512.43"
+            >
+              <path
+                fill-rule="nonzero"
+                d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+              />
+            </svg>
+          </a>
+        </td>
+      );
+    }
+
+    // Generate empty cells after colspan
+    for (let i = starting_point - 1 + quantity; i < 12; i++) {
+      tds.push(<td key={i}></td>);
+    }
 
     return tds;
   };
+
+
 
   const generateDynamicLink = (item) => {
     // console.log('item', item);
