@@ -3,359 +3,347 @@ import { useState, useEffect } from "react";
 import { Link, Spinner } from "components";
 import { Layout } from "components/users";
 import { userService } from "services";
-import { useRouter } from 'next/router';
-import { NavLink } from 'components';
+import { useRouter } from "next/router";
+import { NavLink } from "components";
 import { whereToGoService } from "../../services";
-import { FriendlyUrl } from "../../components";
+import { FriendlyUrl, Signup } from "../../components";
 import Head from "next/head";
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
 import { destinationService } from "../../services";
 
-
-
 export default Index;
 
 function Index() {
-    const router = useRouter();
-    const [isLoading, setIsLoading] = useState(true);
-    const [customData, setCustomData] = useState(null);
-    const [friendlyUrl, SetFriendlyUrl] = useState("");
-    const [headingTag, setHeadingTag] = useState(null);
-    const [title, setTitle] = useState(null);
-    const [metaDescription, setMetaDescription] = useState(null);
-    const [longText, setLongText] = useState("");
-    const [shortText, setShortText] = useState("");
-    const [rightHeader, setRightHeader] = useState(null);
-    const [rightCorner, setRightCorner] = useState(null);
-    const [valueWithBr, setnewValueWithBr] = useState("");
-    const [backgroundImage, setBackgroundImage] = useState([]);
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
+  const [customData, setCustomData] = useState(null);
+  const [friendlyUrl, SetFriendlyUrl] = useState("");
+  const [headingTag, setHeadingTag] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [metaDescription, setMetaDescription] = useState(null);
+  const [longText, setLongText] = useState("");
+  const [shortText, setShortText] = useState("");
+  const [rightHeader, setRightHeader] = useState(null);
+  const [rightCorner, setRightCorner] = useState(null);
+  const [valueWithBr, setnewValueWithBr] = useState("");
+  const [backgroundImage, setBackgroundImage] = useState([]);
 
-
-    let region = "uk";
-    let regionWiseUrl = "";
-    if (typeof window !== "undefined") {
-        if (window && window.site_region) {
-            if (window && window.site_region !== "uk") {
-                regionWiseUrl = "/" + window.site_region;
-                region = window.site_region;
-            }
-        }
+  let region = "uk";
+  let regionWiseUrl = "";
+  if (typeof window !== "undefined") {
+    if (window && window.site_region) {
+      if (window && window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+        region = window.site_region;
+      }
     }
+  }
 
+  const websiteContentCheck = (matches, region, modifiedString) => {
+    homeService
+      .getAllWebsiteContent()
+      .then((x) => {
+        const response = x?.data;
 
-    const websiteContentCheck = (matches, region, modifiedString) => {
-        homeService
-            .getAllWebsiteContent()
-            .then((x) => {
-                const response = x?.data;
+        // Calculate the expiration time (1 day from the current time)
+        const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000;
 
-                // Calculate the expiration time (1 day from the current time)
-                const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000;
+        const dynamicObject = {};
+        const dynamicObjectUk = {};
+        const dynamicObjectUs = {};
+        const dynamicObjectAsia = {};
+        const dynamicObjectIndia = {};
 
-                const dynamicObject = {};
-                const dynamicObjectUk = {};
-                const dynamicObjectUs = {};
-                const dynamicObjectAsia = {};
-                const dynamicObjectIndia = {};
+        response.forEach((element, index) => {
+          // Create an object with the data and expiration time
+          dynamicObject[element?.attributes?.content_word] =
+            element?.attributes?.content_translation_text;
+          dynamicObject["code"] =
+            element?.attributes?.website_country?.data?.attributes?.code;
+          dynamicObject["expiration"] = expirationTime;
 
-                response.forEach((element, index) => {
-                    // Create an object with the data and expiration time
-                    dynamicObject[element?.attributes?.content_word] =
-                        element?.attributes?.content_translation_text;
-                    dynamicObject["code"] =
-                        element?.attributes?.website_country?.data?.attributes?.code;
-                    dynamicObject["expiration"] = expirationTime;
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code == "UK"
+          ) {
+            dynamicObjectUk[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectUk["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_uk",
+              JSON.stringify(dynamicObjectUk)
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code == "US"
+          ) {
+            dynamicObjectUs[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectUs["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_us",
+              JSON.stringify(dynamicObjectUs)
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code ==
+            "ASIA"
+          ) {
+            dynamicObjectAsia[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectAsia["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_asia",
+              JSON.stringify(dynamicObjectAsia)
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code ==
+            "INDIA"
+          ) {
+            dynamicObjectIndia[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectIndia["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_india",
+              JSON.stringify(dynamicObjectIndia)
+            );
+          }
+        });
 
-                    if (
-                        element?.attributes?.website_country?.data?.attributes?.code == "UK"
-                    ) {
-                        dynamicObjectUk[element?.attributes?.content_word] =
-                            element?.attributes?.content_translation_text;
-                        dynamicObjectUk["expiration"] = expirationTime;
-                        localStorage.setItem(
-                            "websitecontent_uk",
-                            JSON.stringify(dynamicObjectUk)
-                        );
-                    }
-                    if (
-                        element?.attributes?.website_country?.data?.attributes?.code == "US"
-                    ) {
-                        dynamicObjectUs[element?.attributes?.content_word] =
-                            element?.attributes?.content_translation_text;
-                        dynamicObjectUs["expiration"] = expirationTime;
-                        localStorage.setItem(
-                            "websitecontent_us",
-                            JSON.stringify(dynamicObjectUs)
-                        );
-                    }
-                    if (
-                        element?.attributes?.website_country?.data?.attributes?.code ==
-                        "ASIA"
-                    ) {
-                        dynamicObjectAsia[element?.attributes?.content_word] =
-                            element?.attributes?.content_translation_text;
-                        dynamicObjectAsia["expiration"] = expirationTime;
-                        localStorage.setItem(
-                            "websitecontent_asia",
-                            JSON.stringify(dynamicObjectAsia)
-                        );
-                    }
-                    if (
-                        element?.attributes?.website_country?.data?.attributes?.code ==
-                        "INDIA"
-                    ) {
-                        dynamicObjectIndia[element?.attributes?.content_word] =
-                            element?.attributes?.content_translation_text;
-                        dynamicObjectIndia["expiration"] = expirationTime;
-                        localStorage.setItem(
-                            "websitecontent_india",
-                            JSON.stringify(dynamicObjectIndia)
-                        );
-                    }
-                });
+        setWebsiteContent(x.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        // Handle any errors here
+        setIsLoading(false);
+      });
+  };
 
-                setWebsiteContent(x.data);
-                setIsLoading(false);
-            })
-            .catch((error) => {
-                // Handle any errors here
-                setIsLoading(false);
+  const dictioneryFunction = (data) => {
+    let modifiedString = data;
+    if (modifiedString) {
+      const regex = /{[a-zA-Z0-9-]+}/g;
+      const matches = [...new Set(modifiedString.match(regex))];
+
+      let storedDataString = "";
+      let storedData = "";
+      // debugger;
+      if (region == "uk") {
+        storedDataString = localStorage.getItem("websitecontent_uk");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "us") {
+        storedDataString = localStorage.getItem("websitecontent_us");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "asia") {
+        storedDataString = localStorage.getItem("websitecontent_asia");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "in") {
+        storedDataString = localStorage.getItem("websitecontent_india");
+        storedData = JSON.parse(storedDataString);
+      }
+      if (storedData !== null) {
+        // debugger;
+        // You can access it using localStorage.getItem('yourKey')
+
+        if (matches) {
+          let replacement = "";
+          try {
+            matches.forEach((match, index, matches) => {
+              const matchString = match.replace(/{|}/g, "");
+              if (!storedData[matchString]) {
+                throw new Error("Loop break");
+              } else {
+                replacement = storedData[matchString];
+              }
+              const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+              if (checkStr && replacement) {
+                modifiedString = modifiedString.replace(checkStr, replacement);
+              }
             });
-    };
-
-    const dictioneryFunction = (data) => {
-        let modifiedString = data;
-        if (modifiedString) {
-            const regex = /{[a-zA-Z0-9-]+}/g;
-            const matches = [...new Set(modifiedString.match(regex))];
-
-            let storedDataString = "";
-            let storedData = "";
-            // debugger;
-            if (region == "uk") {
-                storedDataString = localStorage.getItem("websitecontent_uk");
-                storedData = JSON.parse(storedDataString);
-            } else if (region == "us") {
-                storedDataString = localStorage.getItem("websitecontent_us");
-                storedData = JSON.parse(storedDataString);
-            } else if (region == "asia") {
-                storedDataString = localStorage.getItem("websitecontent_asia");
-                storedData = JSON.parse(storedDataString);
-            } else if (region == "in") {
-                storedDataString = localStorage.getItem("websitecontent_india");
-                storedData = JSON.parse(storedDataString);
-            }
-            if (storedData !== null) {
-
-                // debugger;
-                // You can access it using localStorage.getItem('yourKey')
-
-                if (matches) {
-                    let replacement = "";
-                    try {
-                        matches.forEach((match, index, matches) => {
-                            const matchString = match.replace(/{|}/g, "");
-                            if (!storedData[matchString]) {
-                                throw new Error("Loop break");
-                            } else {
-                                replacement = storedData[matchString];
-                            }
-                            const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
-                            if (checkStr && replacement) {
-                                modifiedString = modifiedString.replace(
-                                    checkStr,
-                                    replacement
-                                );
-                            }
-                        });
-                        return modifiedString;
-                    } catch (error) {
-
-                    }
-                }
-            }
+            return modifiedString;
+          } catch (error) {}
         }
+      }
     }
+  };
 
-    const generateDynamicLink = () => {
-        return regionWiseUrl + `/where-to-go-detail`;
-    };
+  const generateDynamicLink = () => {
+    return regionWiseUrl + `/where-to-go-detail`;
+  };
 
-    useEffect(() => {
-        // userService.getAll().then(x => setUsers(x));
-        whereToGoService
-            .getWhereToGoPage()
-            .then((x) => {
-                // debugger;
-                setCustomData(x.data[0]?.attributes?.custom_page_images);
-                SetFriendlyUrl(x.data[0].attributes?.page_friendly_url)
-                const imageCheck = x.data[0].attributes.custom_page_images.data;
-                const newBackgroundImages = [];
-                imageCheck.forEach((element) => {
-                    if (element.attributes.image_type == "banner") {
-                        newBackgroundImages.push(element.attributes.image_path);
-                    }
-                });
-                setBackgroundImage(newBackgroundImages);
-                // console.log(newBackgroundImages);
-                const data = x.data[0]?.attributes?.custom_page_contents?.data;
-                let modifiedString = "";
-                // debugger;
+  useEffect(() => {
+    // userService.getAll().then(x => setUsers(x));
+    whereToGoService
+      .getWhereToGoPage()
+      .then((x) => {
+        // debugger;
+        setCustomData(x.data[0]?.attributes?.custom_page_images);
+        SetFriendlyUrl(x.data[0].attributes?.page_friendly_url);
+        const imageCheck = x.data[0].attributes.custom_page_images.data;
+        const newBackgroundImages = [];
+        imageCheck.forEach((element) => {
+          if (element.attributes.image_type == "banner") {
+            newBackgroundImages.push(element.attributes.image_path);
+          }
+        });
+        setBackgroundImage(newBackgroundImages);
+        // console.log(newBackgroundImages);
+        const data = x.data[0]?.attributes?.custom_page_contents?.data;
+        let modifiedString = "";
+        // debugger;
 
-                if (data) {
-                    data.forEach((element, index) => {
-                        if (element?.attributes?.content_name == 'HeadingTag') {
-                            setHeadingTag(element?.attributes?.content_value);
-                        } else if (element?.attributes?.content_name == 'Title') {
-                            setTitle(element?.attributes?.content_value);
-                        } else if (element?.attributes?.content_name == 'MetaDescription') {
-                            setMetaDescription(element?.attributes?.content_value);
-                        } else if (element?.attributes?.content_name == 'Right_Header') {
-                            setRightHeader(element?.attributes?.content_value);
-                        } else if (element?.attributes?.content_name == 'Right_Corner') {
-                            setRightCorner(element?.attributes?.content_value);
-                        } else if (element?.attributes?.content_name == 'Long_Text') {
-                            // debugger;
-                            // console.log(element?.attributes?.content_value);
-                            setLongText(element?.attributes?.content_value);
-                        }
-                        else if (element?.attributes?.content_name == 'Short_Text') {
-                            // debugger;
-                            // console.log(element?.attributes?.content_value);
-                            setShortText(element?.attributes?.content_value);
-                        }
-                    });
-                }
-
-
-                // Find and store matches in an array
-                // const regex = /{[a-zA-Z0-9-]+}/g;
-                // const matches = [...new Set(modifiedString.match(regex))];
-
-                // let storedDataString = "";
-                // let storedData = "";
-                // if (region == "uk") {
-                //     storedDataString = localStorage.getItem("websitecontent_uk");
-                //     storedData = JSON.parse(storedDataString);
-                // } else if (region == "us") {
-                //     storedDataString = localStorage.getItem("websitecontent_us");
-                //     storedData = JSON.parse(storedDataString);
-                // } else if (region == "asia") {
-                //     storedDataString = localStorage.getItem("websitecontent_asia");
-                //     storedData = JSON.parse(storedDataString);
-                // } else if (region == "in") {
-                //     storedDataString = localStorage.getItem("websitecontent_india");
-                //     storedData = JSON.parse(storedDataString);
-                // }
-                // if (storedData !== null) {
-                //     // You can access it using localStorage.getItem('yourKey')
-                //     if (matches) {
-                //         let replacement = "";
-                //         try {
-                //             matches.forEach((match, index, matches) => {
-                //                 const matchString = match.replace(/{|}/g, "");
-                //                 if (!storedData[matchString]) {
-                //                     websiteContentCheck(matches, region, modifiedString);
-                //                     throw new Error("Loop break");
-                //                 } else {
-                //                     replacement = storedData[matchString];
-                //                 }
-                //                 const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
-                //                 if (checkStr && replacement) {
-                //                     modifiedString = modifiedString.replace(
-                //                         checkStr,
-                //                         replacement
-                //                     );
-                //                 }
-                //             });
-                //             // Set the modified string in state
-                //             setLongText(modifiedString);
-
-                //             setIsLoading(false);
-                //         } catch (error) {
-                //             if (error.message === "Loop break") {
-                //                 // Handle the loop break here
-                //             } else if (error.message === "Region not found") {
-                //                 // Handle the loop break here
-                //                 setLongText(modifiedString);
-
-                //             }
-                //         }
-                //     }
-                // }
-            })
-            .catch((error) => {
-                // Handle any errors here
-                setIsLoading(false);
-            });
-
-
-        const carousel = document.querySelector('#carouselExampleInterval');
-        if (carousel) {
-            new bootstrap.Carousel(carousel);
+        if (data) {
+          data.forEach((element, index) => {
+            if (element?.attributes?.content_name == "HeadingTag") {
+              setHeadingTag(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == "Title") {
+              setTitle(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == "MetaDescription") {
+              setMetaDescription(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == "Right_Header") {
+              setRightHeader(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == "Right_Corner") {
+              setRightCorner(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == "Long_Text") {
+              // debugger;
+              // console.log(element?.attributes?.content_value);
+              setLongText(element?.attributes?.content_value);
+            } else if (element?.attributes?.content_name == "Short_Text") {
+              // debugger;
+              // console.log(element?.attributes?.content_value);
+              setShortText(element?.attributes?.content_value);
+            }
+          });
         }
-    }, []);
 
+        // Find and store matches in an array
+        // const regex = /{[a-zA-Z0-9-]+}/g;
+        // const matches = [...new Set(modifiedString.match(regex))];
 
+        // let storedDataString = "";
+        // let storedData = "";
+        // if (region == "uk") {
+        //     storedDataString = localStorage.getItem("websitecontent_uk");
+        //     storedData = JSON.parse(storedDataString);
+        // } else if (region == "us") {
+        //     storedDataString = localStorage.getItem("websitecontent_us");
+        //     storedData = JSON.parse(storedDataString);
+        // } else if (region == "asia") {
+        //     storedDataString = localStorage.getItem("websitecontent_asia");
+        //     storedData = JSON.parse(storedDataString);
+        // } else if (region == "in") {
+        //     storedDataString = localStorage.getItem("websitecontent_india");
+        //     storedData = JSON.parse(storedDataString);
+        // }
+        // if (storedData !== null) {
+        //     // You can access it using localStorage.getItem('yourKey')
+        //     if (matches) {
+        //         let replacement = "";
+        //         try {
+        //             matches.forEach((match, index, matches) => {
+        //                 const matchString = match.replace(/{|}/g, "");
+        //                 if (!storedData[matchString]) {
+        //                     websiteContentCheck(matches, region, modifiedString);
+        //                     throw new Error("Loop break");
+        //                 } else {
+        //                     replacement = storedData[matchString];
+        //                 }
+        //                 const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+        //                 if (checkStr && replacement) {
+        //                     modifiedString = modifiedString.replace(
+        //                         checkStr,
+        //                         replacement
+        //                     );
+        //                 }
+        //             });
+        //             // Set the modified string in state
+        //             setLongText(modifiedString);
 
+        //             setIsLoading(false);
+        //         } catch (error) {
+        //             if (error.message === "Loop break") {
+        //                 // Handle the loop break here
+        //             } else if (error.message === "Region not found") {
+        //                 // Handle the loop break here
+        //                 setLongText(modifiedString);
 
-    return (
-        <>
-            <Head>
-                <title>{dictioneryFunction(title)}</title>
-                <metadata content={dictioneryFunction(metaDescription)}></metadata>
-            </Head>
-            <Layout>
-                <section className="banner_blk_row">
-                    <div
-                        id="carouselExampleInterval"
-                        className="carousel slide"
-                        data-bs-ride="carousel"
-                    >
-                        <div className="carousel-indicators">
-                            {backgroundImage.map((_, index) => (
-                                <button
-                                    key={index}
-                                    type="button"
-                                    data-bs-target="#carouselExampleInterval"
-                                    data-bs-slide-to={index}
-                                    className={index === 0 ? "active" : ""}
-                                    aria-current={index === 0 ? "true" : "false"}
-                                    aria-label={`Slide ${index + 1}`}
-                                ></button>
-                            ))}
-                            {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
-                        </div>
-                        <div className="carousel-inner">
-                            {backgroundImage.map((imagePath, index) => (
-                                <NavLink
-                                    key={index}
-                                    href="#"
-                                    className={`carousel-item ${index === 0 ? "active" : ""}`}
-                                    data-bs-interval="5000"
-                                >
-                                    <div
-                                        className="banner_commn_cls"
-                                        style={{ backgroundImage: `url(${imagePath})` }}
-                                    ></div>
-                                </NavLink>
-                            ))}
-                        </div>
-                    </div>
-                </section>
+        //             }
+        //         }
+        //     }
+        // }
+      })
+      .catch((error) => {
+        // Handle any errors here
+        setIsLoading(false);
+      });
 
-                <section className="trvl_info_row">
-                    <div className="container">
-                        <div className="bookmark_row">
-                            <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
-                        </div>
+    const carousel = document.querySelector("#carouselExampleInterval");
+    if (carousel) {
+      new bootstrap.Carousel(carousel);
+    }
+  }, []);
 
-                        <div className="trvl_info_cntnt">
-                            <h2 className="trvl_title">{headingTag}</h2>
-                            <div dangerouslySetInnerHTML={{ __html: dictioneryFunction(longText) }} />
-                        </div>
+  return (
+    <>
+      <Head>
+        <title>{dictioneryFunction(title)}</title>
+        <metadata content={dictioneryFunction(metaDescription)}></metadata>
+      </Head>
+      <Layout>
+        <section className="banner_blk_row">
+          <div
+            id="carouselExampleInterval"
+            className="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div className="carousel-indicators">
+              {backgroundImage.map((_, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  data-bs-target="#carouselExampleInterval"
+                  data-bs-slide-to={index}
+                  className={index === 0 ? "active" : ""}
+                  aria-current={index === 0 ? "true" : "false"}
+                  aria-label={`Slide ${index + 1}`}
+                ></button>
+              ))}
+              {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
+            </div>
+            <div className="carousel-inner">
+              {backgroundImage.map((imagePath, index) => (
+                <NavLink
+                  key={index}
+                  href="#"
+                  className={`carousel-item ${index === 0 ? "active" : ""}`}
+                  data-bs-interval="5000"
+                >
+                  <div
+                    className="banner_commn_cls"
+                    style={{ backgroundImage: `url(${imagePath})` }}
+                  ></div>
+                </NavLink>
+              ))}
+            </div>
+          </div>
+        </section>
 
-                        {/* <section className="month_wise_row">
+        <section className="trvl_info_row">
+          <div className="container">
+            <div className="bookmark_row">
+              <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
+            </div>
+
+            <div className="trvl_info_cntnt">
+              <h2 className="trvl_title">{headingTag}</h2>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: dictioneryFunction(longText),
+                }}
+              />
+            </div>
+
+            {/* <section className="month_wise_row">
                             <h3 className="title_cls">Month-by month holiday calendar</h3>
                             <div className="row">
                                 <NavLink href={generateDynamicLink()}>
@@ -603,15 +591,19 @@ function Index() {
                                 </div>
                             </div>
                         </section> */}
-                    </div>
-                </section>
+          </div>
+        </section>
 
-                <section className="card_blk_row dark_grey py-5">
-                    <div className="container">
-                        <div className="book_wth_confdnce">
-                            <div dangerouslySetInnerHTML={{ __html: dictioneryFunction(shortText.replace(/h3/g, "h2")) }} />
+        <section className="card_blk_row dark_grey py-5">
+          <div className="container">
+            <div className="book_wth_confdnce">
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: dictioneryFunction(shortText.replace(/h3/g, "h2")),
+                }}
+              />
 
-                            {/* <h2>THREE REASONS TO BOOK WITH CONFIDENCE</h2>
+              {/* <h2>THREE REASONS TO BOOK WITH CONFIDENCE</h2>
                             <div className="row">
                                 <div className="col-lg-4">
                                     <h3>Specialist Expertise</h3>
@@ -646,194 +638,158 @@ function Index() {
                                     </p>
                                 </div>
                             </div> */}
+            </div>
+
+            <div className="row">
+              <div className="col-md-6">
+                <div className="card_blk_inr card_blk_overlay start_planng_holdy_blk">
+                  <a href="#" target="_blank">
+                    <img
+                      src="images/start_planng_holdy.jpg"
+                      alt="start_planng_holdy"
+                      className="img-fluid"
+                    />
+                    <div className="card_blk_cntnt card_blk_cntnt_top">
+                      <div className="row align-items-center">
+                        <div className="col-11">
+                          <div className="card_blk_txt">
+                            <h3>Start planning your next holiday</h3>
+                          </div>
                         </div>
-
-                        <div className="row">
-                            <div className="col-md-6">
-                                <div className="card_blk_inr card_blk_overlay start_planng_holdy_blk">
-                                    <a href="#" target="_blank">
-                                        <img
-                                            src="images/start_planng_holdy.jpg"
-                                            alt="start_planng_holdy"
-                                            className="img-fluid"
-                                        />
-                                        <div className="card_blk_cntnt card_blk_cntnt_top">
-                                            <div className="row align-items-center">
-                                                <div className="col-11">
-                                                    <div className="card_blk_txt">
-                                                        <h3>Start planning your next holiday</h3>
-                                                    </div>
-                                                </div>
-                                                <div className="col-1 ps-0">
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        fill="#ffffff"
-                                                        shapeRendering="geometricPrecision"
-                                                        textRendering="geometricPrecision"
-                                                        imageRendering="optimizeQuality"
-                                                        fillRule="evenodd"
-                                                        clipRule="evenodd"
-                                                        viewBox="0 0 267 512.43"
-                                                    >
-                                                        <path
-                                                            fillRule="nonzero"
-                                                            d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                                                        />
-                                                    </svg>
-                                                </div>
-                                                <div className="col-12">
-                                                    <button
-                                                        className="btn prmry_btn strt_planng_btn"
-                                                    >{/* onClick="window.open('contact_us.html')" */}
-                                                        Make an enquiry
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            fill="#ffffff"
-                                                            shapeRendering="geometricPrecision"
-                                                            textRendering="geometricPrecision"
-                                                            imageRendering="optimizeQuality"
-                                                            fillRule="evenodd"
-                                                            clipRule="evenodd"
-                                                            viewBox="0 0 267 512.43"
-                                                        >
-                                                            <path
-                                                                fillRule="nonzero"
-                                                                d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                                                            />
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div className="col-md-6">
-                                <div className="card_blk_inr card_blk_overlay mt-3 mt-md-0">
-                                    <a href="#" target="_blank">
-                                        <img
-                                            src="images/about_us_card01.jpg"
-                                            alt="Card image 07"
-                                            className="img-fluid"
-                                        />
-                                        <div className="card_blk_cntnt card_blk_cntnt_top">
-                                            <div className="row align-items-center">
-                                                <div className="col-11">
-                                                    <div className="card_blk_txt">
-                                                        <h3>Explore our destinations</h3>
-                                                    </div>
-                                                </div>
-                                                <div className="col-1 ps-0">
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        fill="#ffffff"
-                                                        shapeRendering="geometricPrecision"
-                                                        textRendering="geometricPrecision"
-                                                        imageRendering="optimizeQuality"
-                                                        fillRule="evenodd"
-                                                        clipRule="evenodd"
-                                                        viewBox="0 0 267 512.43"
-                                                    >
-                                                        <path
-                                                            fillRule="nonzero"
-                                                            d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                                                        />
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div className="card_blk_inr card_blk_overlay mb-0">
-                                    <a href="#">
-                                        <img
-                                            src="images/about_us_card02.jpg"
-                                            alt="Card image 08"
-                                            className="img-fluid"
-                                        />
-                                        <div className="card_blk_cntnt card_blk_cntnt_top">
-                                            <div className="row align-items-center">
-                                                <div className="col-11">
-                                                    <div className="card_blk_txt">
-                                                        <h3>Explore our Holiday types</h3>
-                                                    </div>
-                                                </div>
-                                                <div className="col-1 ps-0">
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        fill="#ffffff"
-                                                        shapeRendering="geometricPrecision"
-                                                        textRendering="geometricPrecision"
-                                                        imageRendering="optimizeQuality"
-                                                        fillRule="evenodd"
-                                                        clipRule="evenodd"
-                                                        viewBox="0 0 267 512.43"
-                                                    >
-                                                        <path
-                                                            fillRule="nonzero"
-                                                            d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                                                        />
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
+                        <div className="col-1 ps-0">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="#ffffff"
+                            shapeRendering="geometricPrecision"
+                            textRendering="geometricPrecision"
+                            imageRendering="optimizeQuality"
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            viewBox="0 0 267 512.43"
+                          >
+                            <path
+                              fillRule="nonzero"
+                              d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                            />
+                          </svg>
                         </div>
+                        <div className="col-12">
+                          <button className="btn prmry_btn strt_planng_btn">
+                            {/* onClick="window.open('contact_us.html')" */}
+                            Make an enquiry
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="#ffffff"
+                              shapeRendering="geometricPrecision"
+                              textRendering="geometricPrecision"
+                              imageRendering="optimizeQuality"
+                              fillRule="evenodd"
+                              clipRule="evenodd"
+                              viewBox="0 0 267 512.43"
+                            >
+                              <path
+                                fillRule="nonzero"
+                                d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
                     </div>
-                </section>
+                  </a>
+                </div>
+              </div>
 
-                <section className="make_enqury_row">
-                    <div className="container">
-                        <EnquiryButton />
+              <div className="col-md-6">
+                <div className="card_blk_inr card_blk_overlay mt-3 mt-md-0">
+                  <a href="#" target="_blank">
+                    <img
+                      src="images/about_us_card01.jpg"
+                      alt="Card image 07"
+                      className="img-fluid"
+                    />
+                    <div className="card_blk_cntnt card_blk_cntnt_top">
+                      <div className="row align-items-center">
+                        <div className="col-11">
+                          <div className="card_blk_txt">
+                            <h3>Explore our destinations</h3>
+                          </div>
+                        </div>
+                        <div className="col-1 ps-0">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="#ffffff"
+                            shapeRendering="geometricPrecision"
+                            textRendering="geometricPrecision"
+                            imageRendering="optimizeQuality"
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            viewBox="0 0 267 512.43"
+                          >
+                            <path
+                              fillRule="nonzero"
+                              d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
                     </div>
-                </section>
+                  </a>
+                </div>
+                <div className="card_blk_inr card_blk_overlay mb-0">
+                  <a href="#">
+                    <img
+                      src="images/about_us_card02.jpg"
+                      alt="Card image 08"
+                      className="img-fluid"
+                    />
+                    <div className="card_blk_cntnt card_blk_cntnt_top">
+                      <div className="row align-items-center">
+                        <div className="col-11">
+                          <div className="card_blk_txt">
+                            <h3>Explore our Holiday types</h3>
+                          </div>
+                        </div>
+                        <div className="col-1 ps-0">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="#ffffff"
+                            shapeRendering="geometricPrecision"
+                            textRendering="geometricPrecision"
+                            imageRendering="optimizeQuality"
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            viewBox="0 0 267 512.43"
+                          >
+                            <path
+                              fillRule="nonzero"
+                              d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-                <section aria-label="Sign up for newsletter" className="newslettr_row">
-                    <div className="container">
-                        <h4>Sign up for our newsletter</h4>
-                        <h5>Receive our latest news and special offers</h5>
-                        <form className="newslettr_form d-block d-sm-flex">
-                            <div className="newlettr_inpt">
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Full name and title"
-                                />
-                            </div>
-                            <div className="newlettr_inpt ps-0 ps-sm-2">
-                                <input
-                                    type="email"
-                                    className="form-control"
-                                    placeholder="Your email address"
-                                />
-                            </div>
-                            <div className="newlettr_btn ps-0 ps-sm-2">
-                                <button type="submit" className="btn btn-primary prmry_btn">
-                                    Sign up
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="#ffffff"
-                                        shapeRendering="geometricPrecision"
-                                        textRendering="geometricPrecision"
-                                        imageRendering="optimizeQuality"
-                                        fillRule="evenodd"
-                                        clipRule="evenodd"
-                                        viewBox="0 0 267 512.43"
-                                    >
-                                        <path
-                                            fillRule="nonzero"
-                                            d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                                        />
-                                    </svg>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </section>
-            </Layout>
-        </>
-    );
+        <section className="make_enqury_row">
+          <div className="container">
+            <EnquiryButton />
+          </div>
+        </section>
+
+        <section aria-label="Sign up for newsletter" className="newslettr_row">
+          <div className="container">
+            <h4>Sign up for our newsletter</h4>
+            <h5>Receive our latest news and special offers</h5>
+            <Signup />
+          </div>
+        </section>
+      </Layout>
+    </>
+  );
 }

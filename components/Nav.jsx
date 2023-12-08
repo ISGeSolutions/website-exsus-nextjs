@@ -323,14 +323,15 @@ function Nav() {
     document.body.appendChild(script);
 
     destinationService.getDestinationLandingList().then((x) => {
-      setDestinationLandingList(x.data);
+      const sortedData = x.data.sort(
+        (a, b) => a.attributes.serial_number - b.attributes.serial_number
+      );
+      setDestinationLandingList(sortedData);
     });
 
     holidaytypesService.getHolidaytypesLandingList().then((x) => {
       const sortedData = x.data.sort(
-        (a, b) =>
-          a.attributes.main_page_serial_number -
-          b.attributes.main_page_serial_number
+        (a, b) => a.attributes.serial_number - b.attributes.serial_number
       );
       setHolidaytypesList(sortedData);
     });
