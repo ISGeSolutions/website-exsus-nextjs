@@ -273,7 +273,6 @@ function Index() {
       setActiveItem(item);
       loadMoreDataWithDestination(item, selectedDestinations);
     }
-
   };
 
   const generateDynamicLink = (item) => {
@@ -300,7 +299,7 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
+        `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -328,7 +327,6 @@ function Index() {
         setIsLoading(false);
       });
   };
-
 
   const loadMoreDataWithDestination = (item, destinations) => {
     holidaytypesService
@@ -363,8 +361,8 @@ function Index() {
     } else {
       page = 0;
       let destinationArray = [];
-      selectedOptionDestination?.forEach(res => {
-        destinationArray.push(res.destination_code)
+      selectedOptionDestination?.forEach((res) => {
+        destinationArray.push(res.destination_code);
       });
       setDestinations(destinationArray);
       setItineraries([]);
@@ -397,8 +395,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -787,7 +785,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                      "thumbnail" ? (
+                                    "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}
@@ -818,9 +816,11 @@ function Index() {
                                     )
                                     .map((res1) => (
                                       <li key={res1.id}>
-                                        {`from ${res1.attributes?.currency_symbol ?? ""
-                                          }${res1.attributes?.price ?? " xxxx"
-                                          } per person`}
+                                        {`from ${
+                                          res1.attributes?.currency_symbol ?? ""
+                                        }${
+                                          res1.attributes?.price ?? " xxxx"
+                                        } per person`}
                                       </li>
                                     ))}
                                   <li>
@@ -853,10 +853,13 @@ function Index() {
                       {metaData.total > page * itemsPerPage && (
                         <button
                           onClick={() => {
-                            if (destinationArray.length === 0) {
+                            if (selectedDestinations.length === 0) {
                               loadMoreData(activeItem);
                             } else {
-                              loadMoreDataWithDestination(activeItem, selectedDestinations);
+                              loadMoreDataWithDestination(
+                                activeItem,
+                                selectedDestinations
+                              );
                             }
                           }}
                           className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"

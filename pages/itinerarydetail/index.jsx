@@ -2,7 +2,12 @@ import { useState, useEffect } from "react";
 import { Link, Spinner, Signup } from "components";
 import { Layout } from "components/users";
 import { FriendlyUrl } from "../../components";
-import { hotelService, destinationService, countriesService } from "services";
+import {
+  hotelService,
+  destinationService,
+  countriesService,
+  homeService,
+} from "services";
 import Iframe from "react-iframe";
 import { useRouter } from "next/router";
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
@@ -47,8 +52,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -112,12 +117,12 @@ function Index() {
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -128,65 +133,128 @@ function Index() {
       .replace(/&/g, "and");
     router.push(
       regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
-        .replace(/ /g, "-")
-        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/&/g, " and ")
+          .replace(/ /g, "-")
+          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${hotelName}`
     );
   };
 
   const generateDynamicLink = (item) => {
-    let countryName = item?.attributes?.country?.data?.attributes?.country_name?.replace(
-      / /g,
-      "-"
-    ).replace(/&/g, "and").toLowerCase();
+    let countryName = item?.attributes?.country?.data?.attributes?.country_name
+      ?.replace(/ /g, "-")
+      .replace(/&/g, "and")
+      .toLowerCase();
     return (
       regionWiseUrl +
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url}`
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${
+        item?.attributes?.friendly_url
+      }`
     );
   };
 
   const handleRedirect = (item) => {
-    let countryName = item?.attributes?.country?.data?.attributes?.country_name?.replace(
-      / /g,
-      "-"
-    ).replace(/&/g, "and").toLowerCase();
+    let countryName = item?.attributes?.country?.data?.attributes?.country_name
+      ?.replace(/ /g, "-")
+      .replace(/&/g, "and")
+      .toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
-        .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url}`
+        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/&/g, " and ")
+          .replace(/ /g, "-")
+          .toLowerCase()}/itinerary/${countryName}-itineraries/${
+          item?.attributes?.friendly_url
+        }`
     );
   };
 
-  const websiteContentCheck = (matches, region, modifiedString) => {
-    destinationService
-      .getDictionaryDetails(matches, region)
-      .then((responseObj) => {
-        if (responseObj) {
-          const res = responseObj?.data;
-          res.forEach((element, index) => {
-            const replacement = element?.attributes?.content_translation_text;
-            const matchString = element?.attributes?.content_word;
-            const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
-            if (checkStr && replacement) {
-              modifiedString = modifiedString.replace(checkStr, replacement);
-            }
-          });
+  const websiteContentCheck = () => {
+    homeService
+      .getAllWebsiteContent()
+      .then((x) => {
+        const response = x?.data;
 
-          // Set the modified string in state
-          // setLongText(modifiedString);
-        }
+        // Calculate the expiration time (1 day from the current time)
+        const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000;
+
+        const dynamicObject = {};
+        const dynamicObjectUk = {};
+        const dynamicObjectUs = {};
+        const dynamicObjectAsia = {};
+        const dynamicObjectIndia = {};
+
+        response.forEach((element, index) => {
+          // Create an object with the data and expiration time
+          dynamicObject[element?.attributes?.content_word] =
+            element?.attributes?.content_translation_text;
+          dynamicObject["code"] =
+            element?.attributes?.website_country?.data?.attributes?.code;
+          dynamicObject["expiration"] = expirationTime;
+
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code == "UK"
+          ) {
+            dynamicObjectUk[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectUk["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_uk",
+              JSON.stringify(dynamicObjectUk)
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code == "US"
+          ) {
+            dynamicObjectUs[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectUs["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_us",
+              JSON.stringify(dynamicObjectUs)
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code ==
+            "ASIA"
+          ) {
+            dynamicObjectAsia[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectAsia["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_asia",
+              JSON.stringify(dynamicObjectAsia)
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code ==
+            "INDIA"
+          ) {
+            dynamicObjectIndia[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectIndia["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_india",
+              JSON.stringify(dynamicObjectIndia)
+            );
+          }
+        });
+
+        setWebsiteContent(x.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        // Handle any errors here
+        setIsLoading(false);
       });
   };
 
@@ -250,8 +318,9 @@ function Index() {
   // };
 
   useEffect(() => {
-    console.log(itin_name);
-    // console.log(router.query);
+    if (!localStorage.getItem("websitecontent_uk")) {
+      websiteContentCheck();
+    }
     const tooltipTriggerList = document.querySelectorAll(
       '[data-bs-toggle="tooltip"]'
     );
@@ -305,7 +374,8 @@ function Index() {
         console.log(imageCheck);
 
         setFriendlyUrl(
-          `home/destinations/${router.query?.continent}/${router.query?.country
+          `home/destinations/${router.query?.continent}/${
+            router.query?.country
           }/${x.data[0].attributes.itin_name.toLowerCase()}`
         );
         setTitle(x.data[0].attributes.meta_title);
@@ -376,6 +446,7 @@ function Index() {
           )}
         ></meta>
       </Head>
+
       {isLoading ? (
         // <MyLoader />
         <div
@@ -477,19 +548,7 @@ function Index() {
           <section className="trvl_info_row">
             <div className="container">
               <div className="bookmark_row">
-                {/* <p style={{ color: `white` }}>
-                  {itineraries?.attributes?.friendly_url}
-                </p> */}
                 <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
-                {/* <ul>
-                            <li><a href="homepage.html">Home</a></li>
-                            <li><a href="destinations.html">Destinations</a></li>
-                            <li><a href="destination_detail.html">Asia</a></li>
-                            <li><a href="country_detail.html">China</a></li>
-                            <li><a href="region_detail.html">Beijing & Northern China</a></li>
-                            <li><a href="region_detail.html">Beijing & Northern China Itineraries</a></li>
-                            <li>China like an Emperor</li>
-                        </ul> */}
               </div>
 
               <div className="trvl_info_cntnt">
@@ -527,14 +586,6 @@ function Index() {
                   }
                 </p>
 
-                {/* {itineraries?.attributes?.itinerary_country_content?.data[0].map(
-                  (res) => (
-                    <p>
-                      <span>Price: </span> From{" "}
-                      {res?.attributes?.currency_symbol}
-                    </p>
-                  )
-                )} */}
                 <p
                   dangerouslySetInnerHTML={{
                     __html: dictioneryFunction(
@@ -594,11 +645,7 @@ function Index() {
                     so your holiday is totally personalised.
                   </p>
                   <div className="btn_grp">
-                    Call 020 7337 9010 or
-                    {/* <button className="btn prmry_btn make_enqury_btn ml-2" style={{ marginLeft: '10px' }}>Make an enquiry
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                                </button> */}
-                    <EnquiryBtn />
+                    Call 020 7337 9010 or <EnquiryBtn />
                   </div>
                 </div>
               </section>
@@ -646,100 +693,6 @@ function Index() {
                   </div>
                 )
               )}
-
-              {/* <div className="itinery_detls_cntnt">
-                        <div className="row">
-                            <div className="col-sm-7 pe-sm-0">
-                                <div className="itinery_detls_para">
-                                    <h3><span>3 nights</span>BEIJING</h3>
-                                    <p>Beijing is simply intoxicating, and you can’t fail to be swept up in the buzz of history, culture and modern flair, from the incredible Forbidden City to the futuristic theatres and galleries.</p>
-                                    <p>Your hotel here, the <a href="#">Aman Summer Palace</a>, is really rather special – this is where former guests stayed, and it is set within its walls, just a few steps</p>
-                                    <div className="itinery_detls_expnded">
-                                        <p>from the East Gate. You’ll enjoy a private guided tour of the palace, which was the summer retreat of the royals of the Qing dynasty, walking along its pretty waterfront paths and around landscaped gardens.</p>
-                                        <p>During your stay here you’ll also be expertly guided around many of Beijing’s other landmarks, including Tiananmen Square, the unmissable Forbidden City, an impressive complex dating back to the Ming and Qing dynasties, and the Temple of Heaven, where you can join in a local tai chi session. In the evening, visit a bustling night market and feast on Peking duck at one of the city’s best restaurants.</p>
-                                        <p>You’ll also spend a day visiting the iconic Great Wall, including a tour of the Tibetan-Buddhist Lama Temple on the way. Get under the wall’s skin with a guided tour of Mutianyu, one of the best-preserved sections of the wall.</p>
-                                    </div>
-                                    <button className="btn itinery_btn">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" className="up_arrow" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
-                                    </button>
-                                </div>
-                            </div>
-                            <div className="col-sm-5 ps-sm-0">
-                                <div className="itinery_detls_img">
-                                    <img src="./../.../../../../../images/itinery_cntnt01.jpg" alt="itinery_cntnt01" className="img-fluid" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="itinery_detls_cntnt">
-                        <div className="row">
-                            <div className="col-sm-7 pe-sm-0">
-                                <div className="itinery_detls_para">
-                                    <h3><span>3 nights</span>LIJIANG</h3>
-                                    <p>From Beijing, you’ll make your way to the attractive hillside city of Lijiang and your second Aman hotel, <a href="#">Amandayan</a>, which sits beneath the imposing Jade Dragon Snow Mountain and takes inspiration for its wow-factor interiors from local cultures and crafts such as Dongba wood carvings.</p>
-                                    <p>Immerse yourself in the area’s pretty villages, which offer a unique insight</p>
-                                    <div className="itinery_detls_expnded">
-                                        <p>into rural China and its age-old traditions. You will spend an afternoon on a private tour of historic Lijiang, which formed part of the Ancient Tea Horse Road and displays cultural influences spanning the centuries, its traditional architecture set against a dramatic backdrop of jagged mountains and lakes.</p>
-                                        <p>Additional tours vary according to the time of year you visit – these may include the ancient town of Yuhu and temples such as Zhiyun.</p>
-                                    </div>
-                                    <button className="btn itinery_btn">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" className="up_arrow" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
-                                    </button>
-                                </div>
-                            </div>
-                            <div className="col-sm-5 ps-sm-0">
-                                <div className="itinery_detls_img">
-                                    <img src="../../../../../images/itinery_cntnt02.jpg" alt="itinery_cntnt01" className="img-fluid" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="itinery_detls_cntnt">
-                        <div className="row">
-                            <div className="col-sm-7 pe-sm-0">
-                                <div className="itinery_detls_para">
-                                    <h3><span>3 nights</span>HANGZHOU</h3>
-                                    <p>Your next stop is Hangzhou and <a href="#">Amanfayun</a>, which is modelled on a traditional Chinese village and is nestled amongst forests, tea plantations, bamboo groves and Buddhist temples near the beautiful West Lake. On arrival you’ll have plenty of time to explore before tucking into a gourmet traditional dinner.</p>
-                                    <div className="itinery_detls_expnded">
-                                        <p>Walk around the lake and head out on its serene waters on a scenic boat trip, and indulge in a private tour of the Temple of Soul’s Retreat, or Lingyin Temple, which is one of China’s most significant Buddhist temples. Discover the history of tea-making in the area and visit verdant tea plantations, flanked by mountains, on a guided tour of Longjing Tea Village. Longjing or Dragon Well tea is a type of green tea and is one of China’s most popular teas (it is also known as Green Queen). You can also venture further on to Nine Creeks, a stretch of forest and mountains, where you can walk through trees shrouded in mist and breathe clear mountain air.</p>
-                                    </div>
-                                    <button className="btn itinery_btn">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" className="up_arrow" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
-                                    </button>
-                                </div>
-                            </div>
-                            <div className="col-sm-5 ps-sm-0">
-                                <div className="itinery_detls_img">
-                                    <img src="../../../../../images/itinery_cntnt03.jpg" alt="itinery_cntnt03" className="img-fluid" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="itinery_detls_cntnt">
-                        <div className="row">
-                            <div className="col-sm-7 pe-sm-0">
-                                <div className="itinery_detls_para">
-                                    <h3><span>3 nights</span>SHANGHAI</h3>
-                                    <p>Your final stop is glittering Shanghai, which offers everything from ancient temples to gourmet restaurants and cocktail bars on the top floors of some of the world’s highest skyscrapers, where you can wine and dine while enjoying the spectacular vistas.</p>
-                                    <p>Take in a dazzling acrobatics show whose performers display superhuman</p>
-                                    <div className="itinery_detls_expnded">
-                                        <p>levels of flexibility, accompanied by a gourmet dinner that showcases Shanghai’s fantastic cuisine, before being taken back to your hotel. We’ve picked the regal <a href="#">Peninsula</a> for your stay here: in a perfect location on the Bund riverfront, this award-winning hotel has world-className facilities, including not one but two Michelin-starred restaurants, and beautiful views over the waterfront and beyond – head to the glamorous rooftop terrace to make the most of them.</p>
-                                    </div>
-                                    <button className="btn itinery_btn">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" className="up_arrow" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
-                                    </button>
-                                </div>
-                            </div>
-                            <div className="col-sm-5 ps-sm-0">
-                                <div className="itinery_detls_img">
-                                    <img src="../../../../../images/itinery_cntnt04.jpg" alt="itinery_cntnt04" className="img-fluid" />
-                                </div>
-                            </div>
-                        </div>
-                    </div> */}
             </div>
           </section>
 
@@ -899,8 +852,8 @@ function Index() {
                                         {item?.attributes?.currency_symbol.repeat(
                                           Math.abs(
                                             5 -
-                                            item?.attributes
-                                              ?.price_guide_value
+                                              item?.attributes
+                                                ?.price_guide_value
                                           )
                                         )}
                                       </label>
@@ -1032,9 +985,11 @@ function Index() {
                               )
                               .map((res1) => (
                                 <li key={res1.id}>
-                                  {`from ${res1.attributes?.currency_symbol ?? ""
-                                    }${res1.attributes?.price ?? " xxxx"
-                                    } per person`}
+                                  {`from ${
+                                    res1.attributes?.currency_symbol ?? ""
+                                  }${
+                                    res1.attributes?.price ?? " xxxx"
+                                  } per person`}
                                 </li>
                               ))}
                             <li>
