@@ -110,11 +110,7 @@ function Index() {
     holidaytypesService
       .getHolidaytypesLandingList()
       .then((x) => {
-        const imageCheckType = x.data.sort(
-          (a, b) =>
-            a.attributes.main_page_serial_number -
-            b.attributes.main_page_serial_number
-        );
+        const imageCheckType = x.data;
         const thumbnailImageArr = [];
         imageCheckType.forEach((elementMain) => {
           if (elementMain.attributes.holiday_type_group_images.data) {
@@ -140,7 +136,7 @@ function Index() {
         });
 
         setBannerImageArr(bannerImageArr);
-        setThumbnailImageArr(thumbnailImageArr.sort((a, b) => a.id - b.id));
+        setThumbnailImageArr(thumbnailImageArr);
         setHolidaytypesLandingList(x.data[0]);
         setIsLoading(false);
       })
@@ -236,7 +232,8 @@ function Index() {
               <div className="row">
                 <div className="col-12 favrites_blk_row pb-0">
                   <h3 className="title_cls pb-0">
-                    {holidaytypes?.attributes?.page_content_2}
+                    {/* {holidaytypes?.attributes?.page_content_2} */}
+                    Our favourite holiday types
                   </h3>
                   <div className="destination_contries_filter d-flex justify-content-around">
                     <ul>
