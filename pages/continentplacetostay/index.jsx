@@ -461,14 +461,13 @@ function ContinentPlacesToStay(props) {
     // Using window.onload to detect full page load
     window.onload = () => {
       setTimeout(() => {
-        const redirectUrl = regionWiseUrl + "/destinations/" + destinationcode;
+        const redirectUrl = `${regionWiseUrl}/destinations/${destinationcode}`;
 
         if (redirectUrl) {
           router.push(redirectUrl);
         }
       }, 0);
     };
-
     divRef?.current?.scrollIntoView({ behavior: "smooth", block: "center" });
   }, [destinationcode, router, decode]);
 

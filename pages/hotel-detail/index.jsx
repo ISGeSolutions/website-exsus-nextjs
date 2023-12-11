@@ -186,7 +186,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -209,12 +209,14 @@ function Index() {
         setFriendlyUrl(
           `home/destinations/${router.query?.continent}/${router.query?.country}/${regionName}/${router.query?.hotelName}`
         );
+        const map_latitude = x.data[0]?.attributes?.map_latitude;
+        const map_longitude = x.data[0]?.attributes?.map_longitude;
+        const map_zoom = x.data[0].attributes.map_zoom_level;
         const mapTemp =
           `https://www.google.com/maps/embed/v1/place?q=` +
-          x.data[0]?.attributes?.map_latitude +
+          map_latitude +
           `,` +
-          x.data[0]?.attributes?.map_longitude +
-          `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
+          map_longitude + `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
         setMapVariable(mapTemp);
         setHotelData(x.data[0].attributes);
         let bestTimeTravelData = [];
@@ -383,8 +385,8 @@ function Index() {
                       {hotelData?.hotel_country_contents?.data[0]?.attributes?.currency_symbol.repeat(
                         Math.abs(
                           5 -
-                            hotelData?.hotel_country_contents?.data[0]
-                              ?.attributes?.price_guide_value
+                          hotelData?.hotel_country_contents?.data[0]
+                            ?.attributes?.price_guide_value
                         )
                       )}
                     </label>
@@ -401,33 +403,26 @@ function Index() {
                 <div className="row">
                   <div className="col-sm-9">
                     <div className="country_highlight_inr">
-                      <div>
+                      <p>
                         <span>Perfect for</span>
-                        <p
-                          dangerouslySetInnerHTML={{
-                            __html: hotelData?.perfect_for_text,
-                          }}
-                        />
-                      </div>
-                      <div>
+                        {hotelData?.perfect_for_text?.replace(/&nbsp/g, "")?.replace(/&rsquo/g, "")?.replace(/:/g, "")?.replace(/;/g, "")}
+                      </p>
+                      <p>
                         <span>In the know</span>
-                        <p
-                          dangerouslySetInnerHTML={{
-                            __html: hotelData?.in_the_know_text,
-                          }}
-                        />
-                      </div>
+                        {hotelData?.in_the_know_text?.replace(/&nbsp/g, "")?.replace(/&rsquo/g, "")?.replace(/:/g, "")?.replace(/;/g, "")}
+                      </p>
                     </div>
                   </div>
                   <div className="col-sm-3">
                     <div className="itinery_highlight_inr">
                       <ul>
                         <li>RECOMMENDED FOR...</li>
-                        <div
-                          dangerouslySetInnerHTML={{
-                            __html: hotelData?.recommended_for_text,
-                          }}
-                        />
+                        {hotelData?.best_for_text
+                          ?.replace(/{|'}|(\s*)/g, "")
+                          ?.split(",")
+                          ?.map((value, index) => (
+                            <li key={index}>{value}</li>
+                          ))}
                       </ul>
                     </div>
                   </div>
@@ -693,8 +688,8 @@ function Index() {
                                         {item?.attributes?.currency_symbol.repeat(
                                           Math.abs(
                                             5 -
-                                              item?.attributes
-                                                ?.price_guide_value
+                                            item?.attributes
+                                              ?.price_guide_value
                                           )
                                         )}
                                       </label>

@@ -193,12 +193,10 @@ function Index() {
     destinationService
       .getRegionByName(regionName)
       .then((x) => {
-        debugger;
 
         setRegionData(x.data[0]);
         const imageCheck = x.data[0].attributes.region_images.data;
         const newBackgroundImages = [];
-        debugger;
 
         let latitude = x?.data[0]?.attributes?.map_latitude
           ? x?.data[0]?.attributes?.map_latitude
@@ -206,7 +204,6 @@ function Index() {
         let longitude = x?.data[0]?.attributes?.map_longitude
           ? x?.data[0]?.attributes?.map_longitude
           : "";
-        debugger;
         const mapTemp =
           `https://www.google.com/maps/embed/v1/place?q=` +
           latitude +

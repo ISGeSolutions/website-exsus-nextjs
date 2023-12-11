@@ -31,20 +31,20 @@ const nextConfig = {
 
       // continentcountries
       {
-        source: "/destinations/:continent",
-        destination: "/continentcountries",
+        source: "/destinations/:continent/:continentSlug-countries",
+        destination: "/continent",
       },
       {
-        source: "/us/destinations/:continent",
-        destination: "/continentcountries",
+        source: "/us/destinations/:continent/:continentSlug-countries",
+        destination: "/continent",
       },
       {
-        source: "/asia/destinations/:continent",
-        destination: "/continentcountries",
+        source: "/asia/destinations/:continent/:continentSlug-countries",
+        destination: "/continent",
       },
       {
-        source: "/in/destinations/:continent",
-        destination: "/continentcountries",
+        source: "/in/destinations/:continent/:continentSlug-countries",
+        destination: "/continent",
       },
 
       // continentexperiences
@@ -67,38 +67,38 @@ const nextConfig = {
 
       // continentitineraries
       {
-        source: "/destinations/:continent/continentSlug-itineraries",
-        destination: "/continentitineraries",
+        source: "/destinations/:continent/:continentSlug-itineraries",
+        destination: "/continent",
       },
       {
-        source: "/us/destinations/:continent",
-        destination: "/continentitineraries",
+        source: "/us/destinations/:continent/:continentSlug-itineraries",
+        destination: "/continent",
       },
       {
-        source: "/asia/destinations/:continent",
-        destination: "/continentitineraries",
+        source: "/asia/destinations/:continent/:continentSlug-itineraries",
+        destination: "/continent",
       },
       {
-        source: "/in/destinations/:continent",
-        destination: "/continentitineraries",
+        source: "/in/destinations/:continent/:continentSlug-itineraries",
+        destination: "/continent",
       },
 
       // continentplacetostay
       {
-        source: "/destinations/:continent",
-        destination: "/continentplacetostay",
+        source: "/destinations/:continent/:continentSlug-places-to-stay",
+        destination: "/continent",
       },
       {
-        source: "/us/destinations/:continent",
-        destination: "/continentplacetostay",
+        source: "/us/destinations/:continent/:continentSlug-places-to-stay",
+        destination: "/continent",
       },
       {
-        source: "/asia/destinations/:continent",
-        destination: "/continentplacetostay",
+        source: "/asia/destinations/:continent/:continentSlug-places-to-stay",
+        destination: "/continent",
       },
       {
-        source: "/in/destinations/:continent",
-        destination: "/continentplacetostay",
+        source: "/in/destinations/:continent/:continentSlug-places-to-stay",
+        destination: "/continent",
       },
 
       // country
@@ -121,74 +121,74 @@ const nextConfig = {
 
       // countryregions
       {
-        source: "/destinations/:continent/:country/countryregions",
-        destination: "/countryregions",
+        source: "/destinations/:continent/:country/:countrySlug-regions",
+        destination: "/country",
       },
       {
-        source: "/us/destinations/:continent/:country/countryregions",
-        destination: "/countryregions",
+        source: "/us/destinations/:continent/:country/:countrySlug-regions",
+        destination: "/country",
       },
       {
-        source: "/asia/destinations/:continent/:country/countryregions",
-        destination: "/countryregions",
+        source: "/asia/destinations/:continent/:country/:countrySlug-regions",
+        destination: "/country",
       },
       {
-        source: "/in/destinations/:continent/:country/countryregions",
-        destination: "/countryregions",
+        source: "/in/destinations/:continent/:country/:countrySlug-regions",
+        destination: "/country",
       },
 
       // countryitineraries
       {
-        source: "/destinations/:continent/:country/countryitineraries",
-        destination: "/countryitineraries",
+        source: "/destinations/:continent/:country/:countrySlug-itineraries",
+        destination: "/country",
       },
       {
-        source: "/us/destinations/:continent/:country/countryitineraries",
-        destination: "/countryitineraries",
+        source: "/us/destinations/:continent/:country/:countrySlug-itineraries",
+        destination: "/country",
       },
       {
-        source: "/asia/destinations/:continent/:country/countryitineraries",
-        destination: "/countryitineraries",
+        source: "/asia/destinations/:continent/:country/:countrySlug-itineraries",
+        destination: "/country",
       },
       {
-        source: "/in/destinations/:continent/:country/countryitineraries",
-        destination: "/countryitineraries",
+        source: "/in/destinations/:continent/:country/:countrySlug-itineraries",
+        destination: "/country",
       },
 
       // countrywhentogo
       {
-        source: "/destinations/:continent/:country/countrywhentogo",
-        destination: "/countrywhentogo",
+        source: "/destinations/:continent/:country/:countrySlug-when-to-go",
+        destination: "/country",
       },
       {
-        source: "/us/destinations/:continent/:country/countrywhentogo",
-        destination: "/countrywhentogo",
+        source: "/us/destinations/:continent/:country/:countrySlug-when-to-go",
+        destination: "/country",
       },
       {
-        source: "/asia/destinations/:continent/:country/countrywhentogo",
-        destination: "/countrywhentogo",
+        source: "/asia/destinations/:continent/:country/:countrySlug-when-to-go",
+        destination: "/country",
       },
       {
-        source: "/in/destinations/:continent/:country/countrywhentogo",
-        destination: "/countrywhentogo",
+        source: "/in/destinations/:continent/:country/:countrySlug-when-to-go",
+        destination: "/country",
       },
 
       // countryplacestostay
       {
-        source: "/destinations/:continent/:country/countryplacestostay",
-        destination: "/countryplacestostay",
+        source: "/destinations/:continent/:country/:countrySlug-places-to-stay",
+        destination: "/country",
       },
       {
-        source: "/us/destinations/:continent/:country/countryplacestostay",
-        destination: "/countryplacestostay",
+        source: "/us/destinations/:continent/:country/:countrySlug-places-to-stay",
+        destination: "/country",
       },
       {
-        source: "/asia/destinations/:continent/:country/countryplacestostay",
-        destination: "/countryplacestostay",
+        source: "/asia/destinations/:continent/:country/:countrySlug-places-to-stay",
+        destination: "/country",
       },
       {
-        source: "/in/destinations/:continent/:country/countryplacestostay",
-        destination: "/countryplacestostay",
+        source: "/in/destinations/:continent/:country/:countrySlug-places-to-stay",
+        destination: "/country",
       },
 
       // country_details

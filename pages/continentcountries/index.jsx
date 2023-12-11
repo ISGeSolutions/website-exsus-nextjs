@@ -188,7 +188,7 @@ function ContinentCountry({ sendDataToParent }) {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -212,7 +212,8 @@ function ContinentCountry({ sendDataToParent }) {
     // Using window.onload to detect full page load
     window.onload = () => {
       setTimeout(() => {
-        const redirectUrl = regionWiseUrl + "/destinations/" + destinationcode;
+        const redirectUrl = `${regionWiseUrl}/destinations/${destinationcode}`;
+
         if (redirectUrl) {
           router.push(redirectUrl);
         }
