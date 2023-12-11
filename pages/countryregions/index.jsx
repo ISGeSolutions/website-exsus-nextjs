@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link, Spinner, Signup } from "components";
-import { destinationService, alertService, userService, countriesService } from "services";
+import {
+  destinationService,
+  alertService,
+  userService,
+  countriesService,
+  homeService,
+} from "services";
 import { Inspireme } from "components";
 import Head from "next/head";
 import { NavLink } from "components";
@@ -36,24 +42,83 @@ function CountryRegions({ props, sendDataToParent }) {
     }
   }
 
-  const websiteContentCheck = (matches, region, modifiedString) => {
-    destinationService
-      .getDictionaryDetails(matches, region)
-      .then((responseObj) => {
-        if (responseObj) {
-          const res = responseObj?.data;
-          res.forEach((element, index) => {
-            const replacement = element?.attributes?.content_translation_text;
-            const matchString = element?.attributes?.content_word;
-            const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
-            if (checkStr && replacement) {
-              modifiedString = modifiedString.replace(checkStr, replacement);
-            }
-          });
+  const websiteContentCheck = () => {
+    homeService
+      .getAllWebsiteContent()
+      .then((x) => {
+        const response = x?.data;
 
-          // Set the modified string in state
-          setnewValueWithBr(modifiedString);
-        }
+        // Calculate the expiration time (1 day from the current time)
+        const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000;
+
+        const dynamicObject = {};
+        const dynamicObjectUk = {};
+        const dynamicObjectUs = {};
+        const dynamicObjectAsia = {};
+        const dynamicObjectIndia = {};
+
+        response.forEach((element, index) => {
+          // Create an object with the data and expiration time
+          dynamicObject[element?.attributes?.content_word] =
+            element?.attributes?.content_translation_text;
+          dynamicObject["code"] =
+            element?.attributes?.website_country?.data?.attributes?.code;
+          dynamicObject["expiration"] = expirationTime;
+
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code == "UK"
+          ) {
+            dynamicObjectUk[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectUk["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_uk",
+              JSON.stringify(dynamicObjectUk)
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code == "US"
+          ) {
+            dynamicObjectUs[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectUs["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_us",
+              JSON.stringify(dynamicObjectUs)
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code ==
+            "ASIA"
+          ) {
+            dynamicObjectAsia[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectAsia["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_asia",
+              JSON.stringify(dynamicObjectAsia)
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code ==
+            "INDIA"
+          ) {
+            dynamicObjectIndia[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectIndia["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_india",
+              JSON.stringify(dynamicObjectIndia)
+            );
+          }
+        });
+
+        setWebsiteContent(x.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        // Handle any errors here
+        setIsLoading(false);
       });
   };
 
@@ -126,18 +191,26 @@ function CountryRegions({ props, sendDataToParent }) {
 
   const generateDynamicLink = (item) => {
     if (item) {
-      const modifiedName = item?.attributes?.region_name?.replace(/ /g, "-")
+      const modifiedName = item?.attributes?.region_name
+        ?.replace(/ /g, "-")
         .replace(/&/g, "and")
         .toLowerCase();
-      return regionWiseUrl + "/destinations/" + destinationcode.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase() + "/" + countrycode.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase() + "/" + modifiedName;
+      return (
+        regionWiseUrl +
+        "/destinations/" +
+        destinationcode.replace(/ /g, "-").replace(/&/g, "and").toLowerCase() +
+        "/" +
+        countrycode.replace(/ /g, "-").replace(/&/g, "and").toLowerCase() +
+        "/" +
+        modifiedName
+      );
     }
   };
 
   useEffect(() => {
+    if (!localStorage.getItem("websitecontent_uk")) {
+      websiteContentCheck();
+    }
     // const newUrl = regionWiseUrl + `/ destinations / africa / africa - countries`;
     // window.history.pushState(null, null, newUrl);
 
@@ -150,7 +223,6 @@ function CountryRegions({ props, sendDataToParent }) {
       .catch((error) => {
         setIsLoading(false);
       });
-
 
     destinationService
       .getRegions(countrycode)
@@ -195,7 +267,9 @@ function CountryRegions({ props, sendDataToParent }) {
             <section className="destination_para">
               <p
                 dangerouslySetInnerHTML={{
-                  __html: dictioneryFunction(countryData?.attributes?.regions_intro_text),
+                  __html: dictioneryFunction(
+                    countryData?.attributes?.regions_intro_text
+                  ),
                 }}
               />
             </section>
@@ -237,8 +311,16 @@ function CountryRegions({ props, sendDataToParent }) {
                     <div className="card_blk_inr flex-column">
                       <NavLink href={generateDynamicLink(item)}>
                         <img
-                          src={item?.attributes?.region_images?.data?.filter(res => res.attributes.image_type == "thumbnail")[0]?.attributes.image_path}
-                          alt={item?.attributes?.region_images?.data?.filter(res => res.attributes.image_type == "thumbnail")[0]?.attributes.image_alt_text}
+                          src={
+                            item?.attributes?.region_images?.data?.filter(
+                              (res) => res.attributes.image_type == "thumbnail"
+                            )[0]?.attributes.image_path
+                          }
+                          alt={
+                            item?.attributes?.region_images?.data?.filter(
+                              (res) => res.attributes.image_type == "thumbnail"
+                            )[0]?.attributes.image_alt_text
+                          }
                           className="img-fluid"
                         />
                         <div className="card_blk_cntnt card_blk_sml_arw">
@@ -270,7 +352,13 @@ function CountryRegions({ props, sendDataToParent }) {
                           </div>
                         </div>
                       </NavLink>
-                      <div dangerouslySetInnerHTML={{ __html: dictioneryFunction(countryData?.attributes?.regions_intro_text) }} />
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: dictioneryFunction(
+                            countryData?.attributes?.regions_intro_text
+                          ),
+                        }}
+                      />
                     </div>
                   </div>
                 ))}

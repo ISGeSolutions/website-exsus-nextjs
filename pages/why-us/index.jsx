@@ -360,35 +360,49 @@ function Index() {
             <section className="card_blk_row dark_grey py-5">
               <div className="container">
                 <div className="book_wth_confdnce">
-                  {/* <h3 dangerouslySetInnerHTML={{ _html: customPageData?.data?.filter(res => res.attributes?.content_name == "Short_Text")[0]?.attributes?.content_value }}></h3> */}
+                  {/* <h3
+                    dangerouslySetInnerHTML={{
+                      _html: whyusDetails?.data?.filter(
+                        (res) => res.attributes?.content_name == "Short_Text"
+                      )[0]?.attributes?.content_value,
+                    }}
+                  ></h3> */}
                   <div className="row">
                     <div className="col-lg-4">
+                      {/* <p
+                        dangerouslySetInnerHTML={{
+                          _html: whyusDetails?.data?.filter(
+                            (res) =>
+                              res.attributes?.content_name == "Short_Text"
+                          )[0]?.attributes?.content_value,
+                        }}
+                      ></p> */}
                       <p
                         dangerouslySetInnerHTML={{
-                          __html: whyusDetails?.sub_content_1,
+                          __html: whyusDetails?.content_value,
                         }}
                       />
                       {/* <h3>Specialist Expertise</h3>
                                 <p>With over 20 years’ experience of creating incredible journeys and tailor-made luxury honeymoons, all around the world, our destination experts have first-hand experience of their dedicated areas and frequently travel to them to stay on top of what’s best, what’s new and what not to miss, so can advise you personally.</p> */}
                     </div>
-                    <div className="col-lg-4">
+                    {/* <div className="col-lg-4">
                       <p
                         dangerouslySetInnerHTML={{
-                          __html: whyusDetails?.sub_content_2,
+                          __html: whyusDetails?.content_value,
                         }}
                       />
                       {/* <h3>Tailor-made trips</h3>
                                 <p>All trips put together through us are designed to suit individual needs and interests. Personalise an itinerary by adding more time in your favourite place, including an incredible experience you’d like to have or adding something out of the ordinary, so your holiday turns into a trip of a lifetime.</p> */}
-                    </div>
-                    <div className="col-lg-4">
+                    {/* </div> */}
+                    {/* <div className="col-lg-4">
                       <p
                         dangerouslySetInnerHTML={{
-                          __html: whyusDetails?.sub_content_3,
+                          __html: whyusDetails?.content_value,
                         }}
-                      />
-                      {/* <h3>Fully protected</h3>
+                      /> */}
+                    {/* <h3>Fully protected</h3>
                                 <p>From the moment you start planning your trip, you will have a dedicated expert looking after you. While away, we’ll provide 24/7 support and emergency contact to ensure that everything runs smoothly. We are members of ABTA, ATOL and AITO so you can rest assured your holiday is fully protected. </p> */}
-                    </div>
+                    {/* </div> */}
                   </div>
                 </div>
 
@@ -465,7 +479,6 @@ function Index() {
                             </div>
                           </div>
                         </div>
-                        {/* </a> */}
                       </NavLink>
                     </div>
                   </div>
