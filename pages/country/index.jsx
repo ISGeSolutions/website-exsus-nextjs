@@ -199,7 +199,7 @@ function Country() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
+      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
     );
   };
 
@@ -209,8 +209,8 @@ function Country() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -249,16 +249,16 @@ function Country() {
     } else if (itemId == "regions") {
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}`;
+        `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url}-regions`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `estinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url} Regions`
+        `estinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url} regions`
       );
       text = "REGIONS IN " + countrycode.toUpperCase(); // action="/countryregions?countrycode=south-africa"
     } else if (itemId == "itineraries") {
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}`;
+        `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url}-itineraries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url} itineraries`
@@ -267,7 +267,7 @@ function Country() {
     } else if (itemId == "places-to-stay") {
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}`;
+        `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url}-places-to-stay`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/places to stay ${countryData?.attributes?.friendly_url}`
@@ -276,7 +276,7 @@ function Country() {
     } else if (itemId == "when-to-go") {
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}`;
+        `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url}-when-to-go-to `;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/when to go to ${countryData?.attributes?.friendly_url}`
@@ -365,7 +365,7 @@ function Country() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -545,6 +545,18 @@ function Country() {
       $(".banner_tab_blk button").removeClass("banner_tab_active");
       $(this).addClass("banner_tab_active");
     });
+
+    window.onload = () => {
+      setTimeout(() => {
+        regionWiseUrl + `/ destinations / ${destinationcode} /${countrycode?.replace(
+          / /g,
+          "-"
+        )}`;
+        if (redirectUrl) {
+          router.push(redirectUrl);
+        }
+      }, 0);
+    };
 
     window.addEventListener("resize", equalHeight(true));
   }, [countrycode]);

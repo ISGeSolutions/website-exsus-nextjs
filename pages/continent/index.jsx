@@ -22,10 +22,11 @@ function Index() {
   const [mapVariable, setMapVariable] = useState(null);
   const [activeTab, setActiveTab] = useState("overview"); // State to track the active tab
   const router = useRouter();
-  const destinationcode = router?.query?.continent
+  const destinationcode = router.query.continent
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
+
   const destinationTab = router.query?.continenttab;
 
 
@@ -128,7 +129,7 @@ function Index() {
       text = destinationDetails?.header_text;
     } else if (itemId == "countries") {
       const redirectUrl =
-        regionWiseUrl + `/destinations/${destinationDetails?.friendly_url}`;
+        regionWiseUrl + `/destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url}-countries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url} countries`
@@ -144,7 +145,7 @@ function Index() {
       text = `TAILOR-MADE ${destinationName} HOLIDAY ITINERARIES`;
     } else if (itemId == "places-to-stay") {
       const redirectUrl =
-        regionWiseUrl + `/destinations/${destinationDetails?.friendly_url}`;
+        regionWiseUrl + `/destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url}-places-to-stay`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationDetails?.friendly_url}/Places to stay in ${destinationDetails?.friendly_url}`
@@ -328,7 +329,10 @@ function Index() {
   equalHeight(true);
 
   useEffect(() => {
-
+    console.log(destinationcode);
+    if (destinationcode != undefined) {
+      localStorage.setItem("destination_code", destinationcode);
+    }
     // if (destinationTab) {
     //   if (destinationTab.includes("itineraries")) {
     //     toggleTab("itineraries")
@@ -373,15 +377,15 @@ function Index() {
           // const map_latitude = x.data[0].attributes?.map_latitude;
           // const map_longitude = x.data[0].attributes?.map_longitude;
           setdestinationName(x.data[0].attributes.destination_name);
-          const map_latitude = "40.7128";
-          const map_longitude = "-74.0060";
+          const map_latitude = x.data[0]?.attributes?.map_latitude;
+          const map_longitude = x.data[0]?.attributes?.map_longitude;
+          const map_zoom = x.data[0].attributes.map_zoom_level;
 
           const mapTemp =
             `https://www.google.com/maps/embed/v1/place?q=` +
-            map_latitude +
-            `,` +
-            map_longitude +
-            `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
+              map_latitude ? map_latitude : "" +
+                `,` +
+                map_longitude ? map_longitude : "" + `&zoom=${map_zoom != null ? map_zoom : 0}` + `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
           setMapVariable(mapTemp);
           const imageCheck = x.data[0].attributes?.destination_images?.data;
           const newBackgroundImages = [];
@@ -416,7 +420,22 @@ function Index() {
         $(this).addClass("active");
       });
     });
+    window.onload = () => {
+      setTimeout(() => {
+        let destCode = "";
+        if (!destinationcode) {
+          destCode = localStorage.getItem("destination_code");
+        } else {
+          destCode = destinationcode;
 
+        }
+        const redirectUrl = `${regionWiseUrl}/destinations/${destCode}`;
+
+        if (redirectUrl) {
+          router.push(redirectUrl);
+        }
+      }, 0);
+    };
     window.addEventListener("resize", equalHeight(true));
   }, [destinationcode]);
 

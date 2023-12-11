@@ -172,7 +172,6 @@ function CountryRegions({ props, sendDataToParent }) {
           / /g,
           "-"
         )}`;
-        // debugger;
         if (redirectUrl) {
           router.push(redirectUrl);
         }
