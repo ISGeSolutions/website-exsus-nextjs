@@ -157,9 +157,15 @@ function Index() {
       setActiveTab(itemId);
       // window.history.pushState(null, null, redirectUrl); // Update the URL
     }
-    if (tabContentRefs[itemId]?.current) {
-      tabContentRefs[itemId]?.current.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
+    var targetDiv = document.getElementById('scrollToElement');
+
+  if (targetDiv) {
+    targetDiv.scrollIntoView({ behavior: 'smooth' });
+  }
+  
+    // if (tabContentRefs[itemId]?.current) {
+    //   tabContentRefs[itemId]?.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    // }
   };
 
 
@@ -535,12 +541,13 @@ function Index() {
           </section>
 
           {/* Continent Sub tabs */}
-          <section className="destination_tab_row light_grey" ref={divRef}>
+          <div>
+          <section className="destination_tab_row light_grey m-3" ref={divRef} id="scrollToElement">
             <div className="container">
               <div className="bookmark_row">
                 <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
               </div>
-              <div className="destination_tab_inr">
+              <div className="destination_tab_inr mt-3">
                 <h2 className="tab_tilte">
                   {/* {destinationDetails?.header_text} */}
                   {dictioneryFunction(headingText)}
@@ -720,6 +727,7 @@ function Index() {
               <Signup />
             </div>
           </section>
+          </div>
         </div>
       )}
     </>

@@ -481,7 +481,7 @@ function ContinentItinararies(props) {
         }
       }, 0);
     };
-    divRef?.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    // divRef?.current?.scrollIntoView({ behavior: "smooth", block: "center" });
 
   }, [destinationcode, router, dcode]);
 
