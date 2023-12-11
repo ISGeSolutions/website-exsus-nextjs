@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { destinationService } from "../../services";
+import { destinationService, homeService } from "../../services";
 import { NavLink } from "react-router-dom";
 
 export default CountryWhentogo;
@@ -20,17 +20,6 @@ function CountryWhentogo(props) {
     .replace(/-/g, " ")
     .toLowerCase();
 
-  // let regionWiseUrl = "/uk";
-  // let region = "uk";
-  // if (typeof window !== "undefined") {
-  //   if (window && window.site_region) {
-  //     regionWiseUrl = "/" + window.site_region;
-  //     region = window.site_region;
-
-  //     // setMyVariable(window.site_region);
-  //   }
-  // }
-
   let region = "uk";
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
@@ -41,7 +30,6 @@ function CountryWhentogo(props) {
       }
     }
   }
-
 
   // const generateTds = (starting_point, quantity, text, url) => {
   //   const tds = Array.from({ length: 12 }, (_, i) => {
@@ -66,7 +54,6 @@ function CountryWhentogo(props) {
   //   return tds;
   // };
 
-
   const generateTds = (starting_point, quantity, text, url) => {
     const tds = [];
 
@@ -78,7 +65,11 @@ function CountryWhentogo(props) {
     // Generate colspan cell
     if (quantity > 0) {
       tds.push(
-        <td key={starting_point - 1 + quantity} colSpan={quantity} className="calender_trip_detls">
+        <td
+          key={starting_point - 1 + quantity}
+          colSpan={quantity}
+          className="calender_trip_detls"
+        >
           <a href={url}>
             {text}
             <svg
@@ -109,31 +100,88 @@ function CountryWhentogo(props) {
     return tds;
   };
 
-
-
   const generateDynamicLink = (item) => {
     // console.log('item', item);
     return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
   };
 
-  const websiteContentCheck = (matches, region, modifiedString) => {
-    destinationService
-      .getDictionaryDetails(matches, region)
-      .then((responseObj) => {
-        if (responseObj) {
-          const res = responseObj?.data;
-          res.forEach((element, index) => {
-            const replacement = element?.attributes?.content_translation_text;
-            const matchString = element?.attributes?.content_word;
-            const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
-            if (checkStr && replacement) {
-              modifiedString = modifiedString.replace(checkStr, replacement);
-            }
-          });
+  const websiteContentCheck = () => {
+    homeService
+      .getAllWebsiteContent()
+      .then((x) => {
+        const response = x?.data;
 
-          // Set the modified string in state
-          setnewValueWithBr(modifiedString);
-        }
+        // Calculate the expiration time (1 day from the current time)
+        const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000;
+
+        const dynamicObject = {};
+        const dynamicObjectUk = {};
+        const dynamicObjectUs = {};
+        const dynamicObjectAsia = {};
+        const dynamicObjectIndia = {};
+
+        response.forEach((element, index) => {
+          // Create an object with the data and expiration time
+          dynamicObject[element?.attributes?.content_word] =
+            element?.attributes?.content_translation_text;
+          dynamicObject["code"] =
+            element?.attributes?.website_country?.data?.attributes?.code;
+          dynamicObject["expiration"] = expirationTime;
+
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code == "UK"
+          ) {
+            dynamicObjectUk[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectUk["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_uk",
+              JSON.stringify(dynamicObjectUk)
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code == "US"
+          ) {
+            dynamicObjectUs[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectUs["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_us",
+              JSON.stringify(dynamicObjectUs)
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code ==
+            "ASIA"
+          ) {
+            dynamicObjectAsia[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectAsia["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_asia",
+              JSON.stringify(dynamicObjectAsia)
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code ==
+            "INDIA"
+          ) {
+            dynamicObjectIndia[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectIndia["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_india",
+              JSON.stringify(dynamicObjectIndia)
+            );
+          }
+        });
+
+        setWebsiteContent(x.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        // Handle any errors here
+        setIsLoading(false);
       });
   };
 
@@ -187,17 +235,34 @@ function CountryWhentogo(props) {
   };
 
   useEffect(() => {
+    if (!localStorage.getItem("websitecontent_uk")) {
+      websiteContentCheck();
+    }
+    const sortedData = countryData?.country_month_activities?.data?.sort(
+      (a, b) => {
+        const seqA = parseInt(a.attributes.serial_number, 10);
+        const seqB = parseInt(b.attributes.serial_number, 10);
 
-    const sortedData = countryData?.country_month_activities?.data?.sort((a, b) => {
-      const seqA = parseInt(a.attributes.serial_number, 10);
-      const seqB = parseInt(b.attributes.serial_number, 10);
+        return seqA - seqB;
+      }
+    );
 
-      return seqA - seqB;
-    });
-
-    const modifiedData = sortedData?.map(item => {
+    const modifiedData = sortedData?.map((item) => {
       const attributes = item.attributes;
-      const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+      const months = [
+        "jan",
+        "feb",
+        "mar",
+        "apr",
+        "may",
+        "jun",
+        "jul",
+        "aug",
+        "sep",
+        "oct",
+        "nov",
+        "dec",
+      ];
 
       // Find the starting point and quantity
       let startingPoint = null;
@@ -217,19 +282,17 @@ function CountryWhentogo(props) {
         attributes: {
           ...attributes,
           starting_point: startingPoint,
-          quantity: quantity
-        }
+          quantity: quantity,
+        },
       };
     });
-    setModifiedData(modifiedData)
+    setModifiedData(modifiedData);
 
     window.onload = () => {
       setTimeout(() => {
         const redirectUrl =
-          regionWiseUrl + `/destinations/${destinationcode}/${countrycode?.replace(
-            / /g,
-            "-"
-          )}`;
+          regionWiseUrl +
+          `/destinations/${destinationcode}/${countrycode?.replace(/ /g, "-")}`;
         if (redirectUrl) {
           router.push(redirectUrl);
         }
@@ -523,7 +586,12 @@ function CountryWhentogo(props) {
                 {whenToGoData?.map((item, rowIndex) => (
                   <>
                     <tr key={item.id}>
-                      {generateTds(item?.attributes?.starting_point, item?.attributes?.quantity, item?.attributes?.link_text, item?.attributes?.link_url)}
+                      {generateTds(
+                        item?.attributes?.starting_point,
+                        item?.attributes?.quantity,
+                        item?.attributes?.link_text,
+                        item?.attributes?.link_url
+                      )}
                     </tr>
                     <tr>
                       {/* Add 12 empty cells */}
@@ -534,14 +602,13 @@ function CountryWhentogo(props) {
                   </>
                 ))}
               </tbody>
-            </table >
-
+            </table>
           </div>
         </div>
-      </section >
+      </section>
 
       {/* Card */}
-      < section className="card_blk_row dark_grey" >
+      <section className="card_blk_row dark_grey">
         <div className="container">
           <div className="row">
             <div className="col-sm-6">
@@ -627,7 +694,7 @@ function CountryWhentogo(props) {
             </div>
           </div>
         </div>
-      </section >
+      </section>
     </>
   );
 }

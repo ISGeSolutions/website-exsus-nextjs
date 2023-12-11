@@ -3,7 +3,12 @@ import { useState, useEffect } from "react";
 import { Link, Spinner, Signup } from "components";
 import { Layout } from "components/users";
 import { FriendlyUrl } from "../../components";
-import { userService, holidaytypesService, destinationService } from "services";
+import {
+  userService,
+  holidaytypesService,
+  destinationService,
+  homeService,
+} from "services";
 import { Inspireme } from "components";
 import { useRouter } from "next/router";
 import { NavLink } from "components";
@@ -26,7 +31,7 @@ function Index() {
   const [itineraries, setItineraries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [friendlyUrl, setFriendlyUrl] = useState("");
-  const [activeItem, setActiveItem] = useState("recommended");
+  const [activeItem, setActiveItem] = useState("price");
   let [page, setPage] = useState(); // Current page
   const [metaData, setMetaData] = useState([]);
   const [isClearable, setIsClearable] = useState(true);
@@ -36,6 +41,7 @@ function Index() {
   const [isRtl, setIsRtl] = useState(false);
   const itemsPerPage = 9; // Number of items to load per page
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
+  const [selectedDestinations, setDestinations] = useState("");
   const router = useRouter();
   const { id } = router.query;
   const [alert, setAlert] = useState(null);
@@ -224,7 +230,7 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
+        `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -335,8 +341,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt1"
-    ),
+        "card_slider_cnt places_to_stay_cnt1"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -356,10 +362,145 @@ function Index() {
     }
   };
 
+  const websiteContentCheck = () => {
+    homeService
+      .getAllWebsiteContent()
+      .then((x) => {
+        const response = x?.data;
+
+        // Calculate the expiration time (1 day from the current time)
+        const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000;
+
+        const dynamicObject = {};
+        const dynamicObjectUk = {};
+        const dynamicObjectUs = {};
+        const dynamicObjectAsia = {};
+        const dynamicObjectIndia = {};
+
+        response.forEach((element, index) => {
+          // Create an object with the data and expiration time
+          dynamicObject[element?.attributes?.content_word] =
+            element?.attributes?.content_translation_text;
+          dynamicObject["code"] =
+            element?.attributes?.website_country?.data?.attributes?.code;
+          dynamicObject["expiration"] = expirationTime;
+
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code == "UK"
+          ) {
+            dynamicObjectUk[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectUk["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_uk",
+              JSON.stringify(dynamicObjectUk)
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code == "US"
+          ) {
+            dynamicObjectUs[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectUs["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_us",
+              JSON.stringify(dynamicObjectUs)
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code ==
+            "ASIA"
+          ) {
+            dynamicObjectAsia[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectAsia["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_asia",
+              JSON.stringify(dynamicObjectAsia)
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code ==
+            "INDIA"
+          ) {
+            dynamicObjectIndia[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectIndia["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_india",
+              JSON.stringify(dynamicObjectIndia)
+            );
+          }
+        });
+
+        setWebsiteContent(x.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        // Handle any errors here
+        setIsLoading(false);
+      });
+  };
+
+  const dictioneryFunction = (data) => {
+    let modifiedString = data;
+    if (modifiedString) {
+      const regex = /{[a-zA-Z0-9-]+}/g;
+      const matches = [...new Set(modifiedString.match(regex))];
+
+      let storedDataString = "";
+      let storedData = "";
+      if (region == "uk") {
+        storedDataString = localStorage.getItem("websitecontent_uk");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "us") {
+        storedDataString = localStorage.getItem("websitecontent_us");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "asia") {
+        storedDataString = localStorage.getItem("websitecontent_asia");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "in") {
+        storedDataString = localStorage.getItem("websitecontent_india");
+        storedData = JSON.parse(storedDataString);
+      }
+      if (storedData !== null) {
+        // You can access it using localStorage.getItem('yourKey')
+
+        if (matches) {
+          let replacement = "";
+          try {
+            matches.forEach((match, index, matches) => {
+              const matchString = match.replace(/{|}/g, "");
+              if (!storedData[matchString]) {
+                modifiedString = websiteContentCheck(
+                  matches,
+                  region,
+                  modifiedString
+                );
+                throw new Error("Loop break");
+              } else {
+                replacement = storedData[matchString];
+              }
+              const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+              if (checkStr && replacement) {
+                modifiedString = modifiedString.replace(checkStr, replacement);
+              }
+            });
+            return modifiedString;
+            setIsLoading(false);
+          } catch (error) {}
+        }
+      }
+    }
+  };
+
   equalHeight(true);
 
   useEffect(() => {
-    setSelectedOptionDestination();
+    if (!localStorage.getItem("websitecontent_uk")) {
+      websiteContentCheck();
+    }
+    setSelectedOptionDestination([]);
     // holidaytypesService.getAll().then(x => {
 
     //     const desiredKey = 1; // The desired key to access
@@ -624,7 +765,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                      "thumbnail" ? (
+                                    "thumbnail" ? (
                                       <img
                                         key={element.id}
                                         src={element.attributes.image_path}
@@ -640,11 +781,17 @@ function Index() {
                               <div className="card_slider_cnt places_to_stay_cnt">
                                 <h4>
                                   <a href={generateDynamicLink(item)}>
-                                    {item?.attributes?.itin_name}
+                                    {dictioneryFunction(
+                                      item?.attributes?.itin_name
+                                    )}
                                   </a>
                                 </h4>
                                 <ul>
-                                  <li>{item?.attributes?.header_text}</li>
+                                  <li>
+                                    {dictioneryFunction(
+                                      item?.attributes?.header_text
+                                    )}
+                                  </li>
 
                                   {item?.attributes?.itinerary_country_contents?.data
                                     .filter(
@@ -654,22 +801,28 @@ function Index() {
                                     )
                                     .map((res1) => (
                                       <li key={res1.id}>
-                                        {`from ${res1.attributes?.currency_symbol ?? ""
-                                          }${res1.attributes?.price ?? " xxxx"
-                                          } per person`}
+                                        {`from ${
+                                          res1.attributes?.currency_symbol ?? ""
+                                        }${
+                                          res1.attributes?.price ?? " xxxx"
+                                        } per person`}
                                       </li>
                                     ))}
                                   <li>
                                     Travel to:
                                     <span>
-                                      {item?.attributes?.travel_to_text}
+                                      {dictioneryFunction(
+                                        item?.attributes?.travel_to_text
+                                      )}
                                     </span>
                                   </li>
                                 </ul>
                               </div>
                               <button className="btn card_slider_btn">
                                 <span>
-                                  {item?.attributes?.no_of_nites_notes}
+                                  {dictioneryFunction(
+                                    item?.attributes?.no_of_nites_notes
+                                  )}
                                 </span>
                                 <span
                                   className="view_itnry_link"
@@ -689,7 +842,7 @@ function Index() {
                       {metaData.total > page * itemsPerPage && (
                         <button
                           onClick={() => {
-                            if (selectedOptionDestination.length === 0) {
+                            if (selectedDestinations.length === 0) {
                               loadMoreData(activeItem);
                             } else {
                               loadMoreDataWithDestination(

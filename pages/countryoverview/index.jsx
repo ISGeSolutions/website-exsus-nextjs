@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { destinationService } from "services";
+import { destinationService, homeService } from "services";
 import { NavLink } from "components";
 import { useRouter } from "next/router";
 import { data } from "jquery";
@@ -96,12 +96,12 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -112,63 +112,128 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
       .replace(/&/g, "and");
     router.push(
       regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
-        .replace(/ /g, "-")
-        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/&/g, " and ")
+          .replace(/ /g, "-")
+          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${hotelName}`
     );
   };
 
   const generateDynamicLink = (item) => {
-    let countryName = item?.attributes?.country?.data?.attributes?.country_name?.replace(
-      / /g,
-      "-"
-    ).replace(/&/g, "and").toLowerCase();
+    let countryName = item?.attributes?.country?.data?.attributes?.country_name
+      ?.replace(/ /g, "-")
+      .replace(/&/g, "and")
+      .toLowerCase();
     return (
       regionWiseUrl +
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url}`
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${
+        item?.attributes?.friendly_url
+      }`
     );
   };
 
   const handleRedirect = (item) => {
-    let countryName = item?.attributes?.country?.data?.attributes?.country_name?.replace(
-      / /g,
-      "-"
-    ).replace(/&/g, "and").toLowerCase();
+    let countryName = item?.attributes?.country?.data?.attributes?.country_name
+      ?.replace(/ /g, "-")
+      .replace(/&/g, "and")
+      .toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
-        .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url}`
+        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/&/g, " and ")
+          .replace(/ /g, "-")
+          .toLowerCase()}/itinerary/${countryName}-itineraries/${
+          item?.attributes?.friendly_url
+        }`
     );
   };
 
-  const websiteContentCheck = (matches, region, modifiedString) => {
-    destinationService
-      .getDictionaryDetails(matches, region)
-      .then((responseObj) => {
-        if (responseObj) {
-          const res = responseObj?.data;
-          res.forEach((element, index) => {
-            const replacement = element?.attributes?.content_translation_text;
-            const matchString = element?.attributes?.content_word;
-            const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
-            if (checkStr && replacement) {
-              modifiedString = modifiedString.replace(checkStr, replacement);
-            }
-          });
-          return modifiedString;
-        }
+  const websiteContentCheck = () => {
+    homeService
+      .getAllWebsiteContent()
+      .then((x) => {
+        const response = x?.data;
+
+        // Calculate the expiration time (1 day from the current time)
+        const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000;
+
+        const dynamicObject = {};
+        const dynamicObjectUk = {};
+        const dynamicObjectUs = {};
+        const dynamicObjectAsia = {};
+        const dynamicObjectIndia = {};
+
+        response.forEach((element, index) => {
+          // Create an object with the data and expiration time
+          dynamicObject[element?.attributes?.content_word] =
+            element?.attributes?.content_translation_text;
+          dynamicObject["code"] =
+            element?.attributes?.website_country?.data?.attributes?.code;
+          dynamicObject["expiration"] = expirationTime;
+
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code == "UK"
+          ) {
+            dynamicObjectUk[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectUk["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_uk",
+              JSON.stringify(dynamicObjectUk)
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code == "US"
+          ) {
+            dynamicObjectUs[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectUs["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_us",
+              JSON.stringify(dynamicObjectUs)
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code ==
+            "ASIA"
+          ) {
+            dynamicObjectAsia[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectAsia["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_asia",
+              JSON.stringify(dynamicObjectAsia)
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code ==
+            "INDIA"
+          ) {
+            dynamicObjectIndia[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectIndia["expiration"] = expirationTime;
+            localStorage.setItem(
+              "websitecontent_india",
+              JSON.stringify(dynamicObjectIndia)
+            );
+          }
+        });
+
+        setWebsiteContent(x.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        // Handle any errors here
+        setIsLoading(false);
       });
   };
 
@@ -233,6 +298,9 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
   equalHeight(true);
 
   useEffect(() => {
+    if (!localStorage.getItem("websitecontent_uk")) {
+      websiteContentCheck();
+    }
     destinationService
       .getCountryFavItineraries(countryData?.country_name, region)
       .then((x) => {
@@ -373,9 +441,11 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                               )
                               .map((res1) => (
                                 <li key={res1.id}>
-                                  {`from ${res1.attributes?.currency_symbol ?? ""
-                                    }${res1.attributes?.price ?? " xxxx"
-                                    } per person`}
+                                  {`from ${
+                                    res1.attributes?.currency_symbol ?? ""
+                                  }${
+                                    res1.attributes?.price ?? " xxxx"
+                                  } per person`}
                                 </li>
                               ))}
                             <li>
@@ -495,8 +565,8 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                                         {item?.attributes?.currency_symbol.repeat(
                                           Math.abs(
                                             5 -
-                                            item?.attributes
-                                              ?.price_guide_value
+                                              item?.attributes
+                                                ?.price_guide_value
                                           )
                                         )}
                                       </label>
