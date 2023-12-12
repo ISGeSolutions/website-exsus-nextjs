@@ -276,7 +276,7 @@ function Country() {
     } else if (itemId == "when-to-go") {
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url}-when-to-go-to `;
+        `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url}-when-to-go`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/when to go to ${countryData?.attributes?.friendly_url}`
