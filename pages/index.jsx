@@ -228,7 +228,6 @@ function Index() {
           }
         });
         setBackgroundImage(newBackgroundImages);
-        console.log(newBackgroundImages);
         setHomePageData(x.data[0].attributes?.custom_page_contents);
         setIsLoading(false);
       })
@@ -495,10 +494,11 @@ function Index() {
                     aria-label={`Slide ${index + 1}`}
                   ></button>
                 ))}
+                {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
               </div>
               <div className="carousel-inner">
                 {backgroundImage.map((imagePath, index) => (
-                  <a
+                  <NavLink
                     key={index}
                     href=""
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
@@ -520,12 +520,13 @@ function Index() {
                         <h2>{imagePath.image_alt_text}</h2>
                       </div>
                     </div>
-                  </a>
+                  </NavLink>
                 ))}
               </div>
             </div>
             <Inspireme />
           </section>
+
           <section className="card_blk_row">
             <div className="container">
               <div className="row">

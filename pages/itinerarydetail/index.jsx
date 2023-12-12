@@ -369,16 +369,15 @@ function Index() {
       .getItineraryDetails(itin_name, region)
       .then((x) => {
         setItineraries(x.data[0]);
-        console.log(x.data[0]);
         const bannerImages = [];
         const imageCheck = x.data[0]?.attributes?.itinerary_images?.data;
-        console.log(imageCheck);
-        debugger;
+
         setFriendlyUrl(
           `home/destinations/${router.query?.continent}/${
             router.query?.country
           }/${x.data[0].attributes.itin_name.toLowerCase()}`
         );
+
         setTitle(x.data[0].attributes.meta_title);
         imageCheck.forEach((banner, index) => {
           // bannerImages.push(banner?.attributes?.image_path);
@@ -393,7 +392,7 @@ function Index() {
           )
           .then((response) => {
             setMoreItineraries(response?.data);
-            console.log(response?.data);
+
             setIsLoading(false);
           })
           .catch((error) => {
@@ -407,7 +406,7 @@ function Index() {
           )
           .then((response) => {
             setHotelData(response?.data);
-            console.log(response?.data);
+
             setIsLoading(false);
           })
           .catch((error) => {
