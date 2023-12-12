@@ -93,6 +93,7 @@ const InputOption = ({
 };
 
 function ContinentItinararies(props) {
+  debugger;
   console.log(props);
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(false);
@@ -122,7 +123,6 @@ function ContinentItinararies(props) {
   const [activeItem, setActiveItem] = useState("recommended");
   const [alert, setAlert] = useState("");
   const { divRef } = props;
-
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -255,7 +255,7 @@ function ContinentItinararies(props) {
   const generateDynamicLink = (item) => {
     return (
       regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${item?.attributes?.friendly_url}`
+      `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -263,7 +263,7 @@ function ContinentItinararies(props) {
     // const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${item?.attributes?.friendly_url}`
+        `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -276,8 +276,8 @@ function ContinentItinararies(props) {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -423,7 +423,7 @@ function ContinentItinararies(props) {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -482,7 +482,6 @@ function ContinentItinararies(props) {
       }, 0);
     };
     // divRef?.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-
   }, [destinationcode, router, dcode]);
 
   return (
@@ -695,7 +694,7 @@ function ContinentItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -731,9 +730,11 @@ function ContinentItinararies(props) {
                                   )
                                   .map((res1) => (
                                     <li key={res1.id}>
-                                      {`from ${res1.attributes?.currency_symbol ?? ""
-                                        }${res1.attributes?.price ?? " xxxx"
-                                        } per person`}
+                                      {`from ${
+                                        res1.attributes?.currency_symbol ?? ""
+                                      }${
+                                        res1.attributes?.price ?? " xxxx"
+                                      } per person`}
                                     </li>
                                   ))}
                                 <li></li>
