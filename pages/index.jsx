@@ -53,7 +53,7 @@ function Index() {
 
     return (
       regionWiseUrl +
-      `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-iteneraries/${item.attributes?.friendly_url}`
+      `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-itineraries/${item.attributes?.friendly_url}`
     );
   };
 
@@ -73,7 +73,7 @@ function Index() {
 
     router.push(
       regionWiseUrl +
-      `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-iteneraries/${item.attributes?.friendly_url}`
+        `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-itineraries/${item.attributes?.friendly_url}`
     );
   };
 
@@ -99,8 +99,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -228,7 +228,6 @@ function Index() {
           }
         });
         setBackgroundImage(newBackgroundImages);
-        console.log(newBackgroundImages);
         setHomePageData(x.data[0].attributes?.custom_page_contents);
         setIsLoading(false);
       })
@@ -495,10 +494,11 @@ function Index() {
                     aria-label={`Slide ${index + 1}`}
                   ></button>
                 ))}
+                {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
               </div>
               <div className="carousel-inner">
                 {backgroundImage.map((imagePath, index) => (
-                  <a
+                  <NavLink
                     key={index}
                     href=""
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
@@ -520,12 +520,13 @@ function Index() {
                         <h2>{imagePath.image_alt_text}</h2>
                       </div>
                     </div>
-                  </a>
+                  </NavLink>
                 ))}
               </div>
             </div>
             <Inspireme />
           </section>
+
           <section className="card_blk_row">
             <div className="container">
               <div className="row">
@@ -662,9 +663,11 @@ function Index() {
                               )
                               .map((res1) => (
                                 <li key={res1.id}>
-                                  {`from ${res1.attributes?.currency_symbol ?? ""
-                                    }${res1.attributes?.price ?? " xxxx"
-                                    } per person`}
+                                  {`from ${
+                                    res1.attributes?.currency_symbol ?? ""
+                                  }${
+                                    res1.attributes?.price ?? " xxxx"
+                                  } per person`}
                                 </li>
                               ))}
                             <li>

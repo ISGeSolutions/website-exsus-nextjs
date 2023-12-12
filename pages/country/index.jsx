@@ -36,7 +36,7 @@ function Country() {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isLoader, setIsLoader] = useState(false);
   const [isRtl, setIsRtl] = useState(false);
-  const [activeButton, setActiveButton] = useState('images');
+  const [activeButton, setActiveButton] = useState("images");
   const destinationcode = router.query?.continent
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
@@ -199,7 +199,7 @@ function Country() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
+        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
     );
   };
 
@@ -209,8 +209,8 @@ function Country() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -365,7 +365,7 @@ function Country() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -548,10 +548,11 @@ function Country() {
 
     window.onload = () => {
       setTimeout(() => {
-        regionWiseUrl + `/ destinations / ${destinationcode} /${countrycode?.replace(
-          / /g,
-          "-"
-        )}`;
+        regionWiseUrl +
+          `/ destinations / ${destinationcode} /${countrycode?.replace(
+            / /g,
+            "-"
+          )}`;
         if (redirectUrl) {
           router.push(redirectUrl);
         }
@@ -630,19 +631,27 @@ function Country() {
             </div>
             <div className="banner_tab_blk">
               <button
-                className={`btn banner_map_tab ${activeButton === 'map' ? 'banner_tab_active' : ''}`}
-                onClick={() => handleTabClick('map')}
+                className={`btn banner_map_tab ${
+                  activeButton === "map" ? "banner_tab_active" : ""
+                }`}
+                onClick={() => handleTabClick("map")}
               >
                 Map
               </button>
               <button
-                className={`btn banner_img_tab ${activeButton === 'images' ? 'banner_tab_active' : ''}`}
-                onClick={() => handleTabClick('images')}
+                className={`btn banner_img_tab ${
+                  activeButton === "images" ? "banner_tab_active" : ""
+                }`}
+                onClick={() => handleTabClick("images")}
               >
                 Images
               </button>
             </div>
-            <div className={`banner_map_blk ${activeButton === 'map' ? 'banner_map_active' : ''}`}>
+            <div
+              className={`banner_map_blk ${
+                activeButton === "map" ? "banner_map_active" : ""
+              }`}
+            >
               <Iframe
                 width="640px"
                 height="320px"

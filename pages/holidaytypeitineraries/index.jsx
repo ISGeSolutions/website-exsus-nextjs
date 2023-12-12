@@ -503,7 +503,62 @@ function Index() {
       });
   };
 
+  const dictioneryFunction = (data) => {
+    let modifiedString = data;
+    if (modifiedString) {
+      const regex = /{[a-zA-Z0-9-]+}/g;
+      const matches = [...new Set(modifiedString.match(regex))];
+
+      let storedDataString = "";
+      let storedData = "";
+      if (region == "uk") {
+        storedDataString = localStorage.getItem("websitecontent_uk");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "us") {
+        storedDataString = localStorage.getItem("websitecontent_us");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "asia") {
+        storedDataString = localStorage.getItem("websitecontent_asia");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "in") {
+        storedDataString = localStorage.getItem("websitecontent_india");
+        storedData = JSON.parse(storedDataString);
+      }
+      if (storedData !== null) {
+        // You can access it using localStorage.getItem('yourKey')
+
+        if (matches) {
+          let replacement = "";
+          try {
+            matches.forEach((match, index, matches) => {
+              const matchString = match.replace(/{|}/g, "");
+              if (!storedData[matchString]) {
+                modifiedString = websiteContentCheck(
+                  matches,
+                  region,
+                  modifiedString
+                );
+                throw new Error("Loop break");
+              } else {
+                replacement = storedData[matchString];
+              }
+              const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+              if (checkStr && replacement) {
+                modifiedString = modifiedString.replace(checkStr, replacement);
+              }
+            });
+            return modifiedString;
+            setIsLoading(false);
+          } catch (error) {}
+        }
+      }
+    }
+  };
+
   useEffect(() => {
+    if (!localStorage.getItem("websitecontent_uk")) {
+      websiteContentCheck();
+    }
     setSelectedOptionDestination([]);
     holidaytypesService
       .getHolidaytypeDetails(hcode)
@@ -518,75 +573,6 @@ function Index() {
         const imageCheck =
           x.data[0].attributes?.holiday_type_group_images?.data;
         setHolidaytypesDetails(x.data[0].attributes);
-
-        // const oldText = x.data.attributes?.overview_text;
-        // var newValueWithBr = oldText?.replace(/\\n/g, "");
-        // setnewValueWithBr(newValueWithBr);
-
-        let modifiedString = x.data[0].attributes?.overview_text;
-
-        // Find and store matches in an array
-        const regex = /{[a-zA-Z0-9-]+}/g;
-        const matches = [...new Set(modifiedString.match(regex))];
-
-        let storedDataString = "";
-        let storedData = "";
-
-        if (region == "uk") {
-          storedDataString = localStorage.getItem("websitecontent_uk");
-          storedData = JSON.parse(storedDataString);
-        } else if (region == "us") {
-          storedDataString = localStorage.getItem("websitecontent_us");
-          storedData = JSON.parse(storedDataString);
-        } else if (region == "asia") {
-          storedDataString = localStorage.getItem("websitecontent_asia");
-          storedData = JSON.parse(storedDataString);
-        } else if (region == "in") {
-          storedDataString = localStorage.getItem("websitecontent_india");
-          storedData = JSON.parse(storedDataString);
-        }
-
-        if (storedData !== null) {
-          // You can access it using localStorage.getItem('yourKey')
-          if (matches) {
-            let replacement = "";
-            try {
-              matches.forEach((match, index, matches) => {
-                const matchString = match.replace(/{|}/g, "");
-                if (!storedData[matchString]) {
-                  websiteContentCheck(matches, region, modifiedString);
-                  throw new Error("Loop break");
-                } else {
-                  replacement = storedData[matchString];
-                }
-                const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
-                if (checkStr && replacement) {
-                  modifiedString = modifiedString.replace(
-                    checkStr,
-                    replacement
-                  );
-                }
-              });
-              // Set the modified string in state
-              setnewValueWithBr(modifiedString);
-            } catch (error) {
-              if (error.message === "Loop break") {
-                // Handle the loop break here
-                // console.log("Loop has been stopped.");
-              } else if (error.message === "Region not found") {
-                // Handle the loop break here
-                // console.log("Loop has been stopped.");
-                setnewValueWithBr(modifiedString);
-              }
-            }
-          }
-        } else {
-          // The item with 'yourKey' does not exist in local storage
-          // Display the matched words
-          if (matches) {
-            websiteContentCheck(matches, region, modifiedString);
-          }
-        }
 
         const newBackgroundImages = [];
         imageCheck.forEach((element) => {
@@ -864,14 +850,20 @@ function Index() {
                               <div className="card_slider_cnt places_to_stay_cnt">
                                 <h4>
                                   <a href={generateDynamicLink(item)}>
-                                    {item?.attributes?.itin_name}
+                                    {dictioneryFunction(
+                                      item?.attributes?.itin_name
+                                    )}
                                   </a>
                                 </h4>
                                 {/* <NavLink
                                   href={generateDynamicLink(item)}
                                 ></NavLink> */}
                                 <ul>
-                                  <li>{item?.attributes?.header_text}</li>
+                                  <li>
+                                    {dictioneryFunction(
+                                      item?.attributes?.header_text
+                                    )}
+                                  </li>
                                   {item?.attributes?.itinerary_country_contents?.data
                                     .filter(
                                       (res) =>
@@ -890,14 +882,18 @@ function Index() {
                                   <li>
                                     Travel to:
                                     <span>
-                                      {item?.attributes?.travel_to_text}
+                                      {dictioneryFunction(
+                                        item?.attributes?.travel_to_text
+                                      )}
                                     </span>
                                   </li>
                                 </ul>
                               </div>
                               <button className="btn card_slider_btn">
                                 <span>
-                                  {item?.attributes?.no_of_nites_notes}
+                                  {dictioneryFunction(
+                                    item?.attributes?.no_of_nites_notes
+                                  )}
                                 </span>
                                 <span
                                   className="view_itnry_link"

@@ -16,6 +16,9 @@ import CustomMultiValue from "./CustomMultiValue";
 import Select, { components } from "react-select";
 import { Alert } from "../../components";
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 
 export default Index;
 
@@ -31,20 +34,21 @@ function Index() {
   const [itineraries, setItineraries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [friendlyUrl, setFriendlyUrl] = useState("");
-  const [activeItem, setActiveItem] = useState("price");
-  let [page, setPage] = useState(); // Current page
+  const [activeItem, setActiveItem] = useState("recommended");
+  let [page, setPage] = useState(0); // Current page
   const [metaData, setMetaData] = useState([]);
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(true);
   const [isDisabled, setIsDisabled] = useState(false);
   const [isLoader, setIsLoader] = useState(false);
   const [isRtl, setIsRtl] = useState(false);
-  const itemsPerPage = 9; // Number of items to load per page
+  const itemsPerPage = 12; // Number of items to load per page
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
   const [selectedDestinations, setDestinations] = useState("");
   const router = useRouter();
   const { id } = router.query;
   const [alert, setAlert] = useState(null);
+  const [queryParameters, setQueryParameters] = useState();
   const [selectedOptionDestination, setSelectedOptionDestination] =
     useState(null);
   const holidaytypename = router.query?.holidaytypeideas
@@ -56,6 +60,15 @@ function Index() {
     .replace(/and/g, "&")
     .toLowerCase();
   const [destinationOptions, setAllDestination] = useState([]);
+
+  const validationSchema = Yup.object().shape({
+    destination: Yup.string(),
+  });
+
+  const formOptions = { resolver: yupResolver(validationSchema) };
+
+  const { register, handleSubmit, formState, reset } = useForm(formOptions);
+  const { errors } = formState;
 
   const width = "250px";
   const styles = {
@@ -187,14 +200,6 @@ function Index() {
     setSelectedOptionDestination(selectedOption);
   };
 
-  // let region = "uk";
-  // let regionWiseUrl = "";
-  // if (typeof window !== "undefined") {
-  //   if (window && window.site_region) {
-  //     if (window.site_region !== "uk") regionWiseUrl = "/" + window.site_region;
-  //   }
-  // }
-
   let region = "uk";
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
@@ -289,7 +294,9 @@ function Index() {
     // console.log("closeAlert");
     setAlert(null);
   };
+
   const loadMoreData = (item) => {
+    debugger;
     holidaytypesService
       .getItinerariesByHolidayTypes(page + 1, holidaytypename, region, item)
       .then((response) => {
@@ -638,7 +645,7 @@ function Index() {
               <div className="card_slider_row">
                 <div className="carousel00 region_carousel00">
                   <div className="row">
-                    <form onSubmit={onSubmit}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                       <div className="col-12 col-md-8 col-lg-6 col-xl-5 m-auto">
                         <div className="destination_dropdwn_row d-block d-md-flex">
                           <div className="banner_dropdwn_blk">

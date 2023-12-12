@@ -15,6 +15,7 @@ import { useTranslation } from "react-i18next";
 export default ContinentOverview;
 
 function ContinentOverview({ sendDataToParent }) {
+  debugger;
   const router = useRouter();
   const [itineraries, setItineraries] = useState(null);
   const [valueWithBr, setnewValueWithBr] = useState("");
@@ -76,14 +77,14 @@ function ContinentOverview({ sendDataToParent }) {
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${item?.attributes?.friendly_url}`
+        `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
   const generateDynamicLink = (item) => {
     return (
       regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${destinationcode}-iteneraries/${item?.attributes?.friendly_url}`
+      `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -96,8 +97,8 @@ function ContinentOverview({ sendDataToParent }) {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -450,7 +451,7 @@ function ContinentOverview({ sendDataToParent }) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -487,9 +488,11 @@ function ContinentOverview({ sendDataToParent }) {
                                   )
                                   .map((res1) => (
                                     <li key={res1.id}>
-                                      {`from ${res1.attributes?.currency_symbol ?? ""
-                                        }${res1.attributes?.price ?? " xxxx"
-                                        } per person`}
+                                      {`from ${
+                                        res1.attributes?.currency_symbol ?? ""
+                                      }${
+                                        res1.attributes?.price ?? " xxxx"
+                                      } per person`}
                                     </li>
                                   ))}
 

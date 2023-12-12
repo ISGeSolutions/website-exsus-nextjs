@@ -398,7 +398,7 @@ function CountryItinararies(props) {
       `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
         / /g,
         "-"
-      )}/${countrycode?.replace(/ /g, "-")?.replace(/&/g, "and")}-iteneraries/${
+      )}/${countrycode?.replace(/ /g, "-")?.replace(/&/g, "and")}-itineraries/${
         item?.attributes?.friendly_url
       }`
     );
@@ -410,7 +410,7 @@ function CountryItinararies(props) {
         `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
           / /g,
           "-"
-        )}/${countrycode?.replace(/ /g, "-")}}-iteneraries/${
+        )}/${countrycode?.replace(/ /g, "-")}}-itineraries/${
           item?.attributes?.friendly_url
         }`
     );

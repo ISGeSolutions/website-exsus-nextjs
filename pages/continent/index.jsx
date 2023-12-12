@@ -16,6 +16,7 @@ import { homeService } from "../../services";
 export default Index;
 
 function Index() {
+  debugger;
   const [destinationDetails, setDestinationDetails] = useState();
   const [backgroundImage, setBackgroundImage] = useState([]);
   const [headingText, setHeadingText] = useState("");
@@ -29,12 +30,10 @@ function Index() {
 
   const destinationTab = router.query?.continenttab;
 
-
   const handleDataFromChild = (data) => {
     // Update the parent component's state with data received from the child
     toggleTab(data);
   };
-
 
   const [friendlyUrl, setFriendlyUrl] = useState("");
   const [destinationName, setdestinationName] = useState("");
@@ -47,9 +46,7 @@ function Index() {
     itineraries: useRef(null),
     places_to_stay: useRef(null),
   };
-  const [activeButton, setActiveButton] = useState('images');
-
-
+  const [activeButton, setActiveButton] = useState("images");
 
   const divRef = useRef();
   const { t } = useTranslation();
@@ -117,8 +114,6 @@ function Index() {
     </svg>
   </button>;
 
-
-
   const toggleTab = (itemId) => {
     var text;
     if (itemId == "overview") {
@@ -129,7 +124,8 @@ function Index() {
       text = destinationDetails?.header_text;
     } else if (itemId == "countries") {
       const redirectUrl =
-        regionWiseUrl + `/destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url}-countries`;
+        regionWiseUrl +
+        `/destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url}-countries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url} countries`
@@ -137,7 +133,8 @@ function Index() {
       text = `COUNTRIES IN ${destinationName}`;
     } else if (itemId == "itineraries") {
       const redirectUrl =
-        regionWiseUrl + `/destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url}-itineraries`;
+        regionWiseUrl +
+        `/destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url}-itineraries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url} Itineraries`
@@ -145,7 +142,8 @@ function Index() {
       text = `TAILOR-MADE ${destinationName} HOLIDAY ITINERARIES`;
     } else if (itemId == "places-to-stay") {
       const redirectUrl =
-        regionWiseUrl + `/destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url}-places-to-stay`;
+        regionWiseUrl +
+        `/destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url}-places-to-stay`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationDetails?.friendly_url}/Places to stay in ${destinationDetails?.friendly_url}`
@@ -157,21 +155,21 @@ function Index() {
       setActiveTab(itemId);
       // window.history.pushState(null, null, redirectUrl); // Update the URL
     }
-    var targetDiv = document.getElementById('scrollToElement');
+    var targetDiv = document.getElementById("scrollToElement");
 
-  if (targetDiv) {
-    targetDiv.scrollIntoView({ behavior: 'smooth' });
-  }
-  
+    if (targetDiv) {
+      targetDiv.scrollIntoView({ behavior: "smooth" });
+    }
+
     // if (tabContentRefs[itemId]?.current) {
     //   tabContentRefs[itemId]?.current.scrollIntoView({ behavior: "smooth", block: "center" });
     // }
   };
 
-
-
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt places_to_stay_cnt"),
+    var elements = document.getElementsByClassName(
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -194,7 +192,6 @@ function Index() {
   const handleTabClick = (tab) => {
     setActiveButton(tab);
   };
-
 
   const websiteContentCheck = () => {
     homeService
@@ -299,7 +296,6 @@ function Index() {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-
         // debugger;
         // You can access it using localStorage.getItem('yourKey')
 
@@ -309,28 +305,27 @@ function Index() {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(matches, region, modifiedString);
+                modifiedString = websiteContentCheck(
+                  matches,
+                  region,
+                  modifiedString
+                );
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
               }
               const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
               if (checkStr && replacement) {
-                modifiedString = modifiedString.replace(
-                  checkStr,
-                  replacement
-                );
+                modifiedString = modifiedString.replace(checkStr, replacement);
               }
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {
-
-          }
+          } catch (error) {}
         }
       }
     }
-  }
+  };
 
   equalHeight(true);
 
@@ -374,8 +369,8 @@ function Index() {
         .getDestinationDetails(destinationcode)
         .then((x) => {
           setDestinationDetails(x.data[0].attributes);
-          console.log(x.data[0].attributes);
-          setHeadingText(x.data[0]?.attributes?.header_text)
+          // console.log(x.data[0].attributes);
+          setHeadingText(x.data[0]?.attributes?.header_text);
           setFriendlyUrl(
             `Home/Destinations/${x.data[0].attributes.friendly_url}`
           );
@@ -388,10 +383,13 @@ function Index() {
           const map_zoom = x.data[0].attributes.map_zoom_level;
 
           const mapTemp =
-            `https://www.google.com/maps/embed/v1/place?q=` +
-              map_latitude ? map_latitude : "" +
-                `,` +
-                map_longitude ? map_longitude : "" + `&zoom=${map_zoom != null ? map_zoom : 0}` + `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
+            `https://www.google.com/maps/embed/v1/place?q=` + map_latitude
+              ? map_latitude
+              : "" + `,` + map_longitude
+              ? map_longitude
+              : "" +
+                `&zoom=${map_zoom != null ? map_zoom : 0}` +
+                `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
           setMapVariable(mapTemp);
           const imageCheck = x.data[0].attributes?.destination_images?.data;
           const newBackgroundImages = [];
@@ -433,7 +431,6 @@ function Index() {
           destCode = localStorage.getItem("destination_code");
         } else {
           destCode = destinationcode;
-
         }
         const redirectUrl = `${regionWiseUrl}/destinations/${destCode}`;
 
@@ -453,7 +450,11 @@ function Index() {
           type="text/javascript"
           src="/assets/javascripts/card-slider.js"
         ></script>
-        <meta content={dictioneryFunction(destinationDetails?.page_meta_description)}></meta>
+        <meta
+          content={dictioneryFunction(
+            destinationDetails?.page_meta_description
+          )}
+        ></meta>
         {/* <script
           type="text/javascript"
           src="/assets/javascripts/card-slider-equal-height.js"
@@ -508,19 +509,27 @@ function Index() {
             </div>
             <div className="banner_tab_blk">
               <button
-                className={`btn banner_map_tab ${activeButton === 'map' ? 'banner_tab_active' : ''}`}
-                onClick={() => handleTabClick('map')}
+                className={`btn banner_map_tab ${
+                  activeButton === "map" ? "banner_tab_active" : ""
+                }`}
+                onClick={() => handleTabClick("map")}
               >
                 Map
               </button>
               <button
-                className={`btn banner_img_tab ${activeButton === 'images' ? 'banner_tab_active' : ''}`}
-                onClick={() => handleTabClick('images')}
+                className={`btn banner_img_tab ${
+                  activeButton === "images" ? "banner_tab_active" : ""
+                }`}
+                onClick={() => handleTabClick("images")}
               >
                 Images
               </button>
             </div>
-            <div className={`banner_map_blk ${activeButton === 'map' ? 'banner_map_active' : ''}`}>
+            <div
+              className={`banner_map_blk ${
+                activeButton === "map" ? "banner_map_active" : ""
+              }`}
+            >
               <Iframe
                 width="640px"
                 height="320px"
@@ -542,191 +551,193 @@ function Index() {
 
           {/* Continent Sub tabs */}
           <div>
-          <section className="destination_tab_row light_grey m-3" ref={divRef} id="scrollToElement">
-            <div className="container">
-              <div className="bookmark_row">
-                <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
+            <section
+              className="destination_tab_row  m-3"
+              ref={divRef}
+              id="scrollToElement"
+            >
+              <div className="container">
+                <div className="bookmark_row">
+                  <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
+                </div>
+                <div className="destination_tab_inr mt-3">
+                  <h2 className="tab_tilte">
+                    {/* {destinationDetails?.header_text} */}
+                    {dictioneryFunction(headingText)}
+                  </h2>
+                  <ul
+                    className="nav nav-pills justify-content-center"
+                    id="pills-tab"
+                    role="tablist"
+                  >
+                    <li className="nav-item" role="presentation">
+                      <button
+                        className={
+                          activeTab === "overview"
+                            ? "active nav-link"
+                            : "nav-link"
+                        }
+                        onClick={() => toggleTab("overview")}
+                        id="pills-overview-tab"
+                        data-bs-toggle="pill"
+                        data-bs-target="#pills-overview"
+                        type="button"
+                        role="tab"
+                        aria-controls="pills-overview"
+                        aria-selected="true"
+                      >
+                        Ovierview
+                      </button>
+                    </li>
+                    <li className="nav-item" role="presentation">
+                      <button
+                        className={
+                          activeTab === "countries"
+                            ? "active nav-link"
+                            : "nav-link"
+                        }
+                        onClick={() => toggleTab("countries")}
+                        id="pills-countries-tab"
+                        data-bs-toggle="pill"
+                        data-bs-target="#pills-countries"
+                        type="button"
+                        role="tab"
+                        aria-controls="pills-countries"
+                        aria-selected="false"
+                      >
+                        Countries
+                      </button>
+                    </li>
+                    <li className="nav-item" role="presentation">
+                      <button
+                        className={
+                          activeTab === "itineraries"
+                            ? "active nav-link"
+                            : "nav-link"
+                        }
+                        onClick={() => toggleTab("itineraries")}
+                        id="pills-itineraries-tab"
+                        data-bs-toggle="pill"
+                        data-bs-target="#pills-itineraries"
+                        type="button"
+                        role="tab"
+                        aria-controls="pills-itineraries"
+                        aria-selected="false"
+                      >
+                        Itineraries
+                      </button>
+                    </li>
+                    <li className="nav-item" role="presentation">
+                      <button
+                        className={
+                          activeTab === "places-to-stay"
+                            ? "active nav-link"
+                            : "nav-link"
+                        }
+                        onClick={() => toggleTab("places-to-stay")}
+                        id="pills-places-to-stay-tab"
+                        data-bs-toggle="pill"
+                        data-bs-target="#pills-places-to-stay"
+                        type="button"
+                        role="tab"
+                        aria-controls="pills-places-to-stay"
+                        aria-selected="false"
+                      >
+                        Places to stay
+                      </button>
+                    </li>
+                  </ul>
+                </div>
               </div>
-              <div className="destination_tab_inr mt-3">
-                <h2 className="tab_tilte">
-                  {/* {destinationDetails?.header_text} */}
-                  {dictioneryFunction(headingText)}
-                </h2>
-                <ul
-                  className="nav nav-pills justify-content-center"
-                  id="pills-tab"
-                  role="tablist"
-                >
-                  <li className="nav-item" role="presentation">
-                    <button
-                      className={
-                        activeTab === "overview"
-                          ? "active nav-link"
-                          : "nav-link"
-                      }
-                      onClick={() => toggleTab("overview")}
-                      id="pills-overview-tab"
-                      data-bs-toggle="pill"
-                      data-bs-target="#pills-overview"
-                      type="button"
-                      role="tab"
-                      aria-controls="pills-overview"
-                      aria-selected="true"
-                    >
-                      Ovierview
-                    </button>
-                  </li>
-                  <li className="nav-item" role="presentation">
-                    <button
-                      className={
-                        activeTab === "countries"
-                          ? "active nav-link"
-                          : "nav-link"
-                      }
-                      onClick={() => toggleTab("countries")}
-                      id="pills-countries-tab"
-                      data-bs-toggle="pill"
-                      data-bs-target="#pills-countries"
-                      type="button"
-                      role="tab"
-                      aria-controls="pills-countries"
-                      aria-selected="false"
-                    >
-                      Countries
-                    </button>
-                  </li>
-                  <li className="nav-item" role="presentation">
-                    <button
-                      className={
-                        activeTab === "itineraries"
-                          ? "active nav-link"
-                          : "nav-link"
-                      }
-                      onClick={() => toggleTab("itineraries")}
-                      id="pills-itineraries-tab"
-                      data-bs-toggle="pill"
-                      data-bs-target="#pills-itineraries"
-                      type="button"
-                      role="tab"
-                      aria-controls="pills-itineraries"
-                      aria-selected="false"
-                    >
-                      Itineraries
-                    </button>
-                  </li>
-                  <li className="nav-item" role="presentation">
-                    <button
-                      className={
-                        activeTab === "places-to-stay"
-                          ? "active nav-link"
-                          : "nav-link"
-                      }
-                      onClick={() => toggleTab("places-to-stay")}
-                      id="pills-places-to-stay-tab"
-                      data-bs-toggle="pill"
-                      data-bs-target="#pills-places-to-stay"
-                      type="button"
-                      role="tab"
-                      aria-controls="pills-places-to-stay"
-                      aria-selected="false"
-                    >
-                      Places to stay
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            </div>
 
-            <div className="tab-content" id="pills-tabContent">
-              {/* {activeTab === 'home' && <div>Home Content</div>}
+              <div className="tab-content" id="pills-tabContent">
+                {/* {activeTab === 'home' && <div>Home Content</div>}
                 {activeTab === 'about' && <div>About Content</div>}
                 {activeTab === 'contact' && <div>Contact Content</div>} */}
-              {activeTab === "overview" && (
-                <div
-                  className={
-                    activeTab === "overview"
-                      ? "active show tab-pane fade"
-                      : "tab-pane fade"
-                  }
-                  id="pills-overview"
-                  role="tabpanel"
-                  aria-labelledby="pills-overview-tab"
-                  tabIndex="0"
-                  ref={tabContentRefs["overview"]}
-                >
-                  <ContinentOverview sendDataToParent={handleDataFromChild} />
-                </div>
-              )}
-              {activeTab === "countries" && (
-                <div
-                  className={
-                    activeTab === "countries"
-                      ? "active show tab-pane fade"
-                      : "tab-pane fade"
-                  }
-                  id="pills-countries"
-                  role="tabpanel"
-                  aria-labelledby="pills-countries-tab"
-                  tabIndex="0"
-                  ref={tabContentRefs["countries"]}
-                >
-                  <ContinentCountry sendDataToParent={handleDataFromChild} />
-                </div>
-              )}
-              {activeTab === "itineraries" && (
-                <div
-                  className={
-                    activeTab === "itineraries"
-                      ? "active show tab-pane fade"
-                      : "tab-pane fade"
-                  }
-                  id="pills-itineraries"
-                  role="tabpanel"
-                  aria-labelledby="pills-itineraries-tab"
-                  tabIndex="0"
-                  ref={tabContentRefs["itinararies"]}
-                >
-                  <ContinentItinararies
-                    divRef={divRef}
-                  />
-                </div>
-              )}
-              {activeTab === "places-to-stay" && (
-                <div
-                  className={
-                    activeTab === "places-to-stay"
-                      ? "active show tab-pane fade"
-                      : "tab-pane fade"
-                  }
-                  id="pills-places-to-stay"
-                  role="tabpanel"
-                  aria-labelledby="pills-places-to-stay-tab"
-                  tabIndex="0"
-                  ref={tabContentRefs["places-to-stay"]}
-                >
-                  <ContinentPlacesToStay divRef={divRef} />
-                </div>
-              )}
-            </div>
-          </section>
+                {activeTab === "overview" && (
+                  <div
+                    className={
+                      activeTab === "overview"
+                        ? "active show tab-pane fade"
+                        : "tab-pane fade"
+                    }
+                    id="pills-overview"
+                    role="tabpanel"
+                    aria-labelledby="pills-overview-tab"
+                    tabIndex="0"
+                    ref={tabContentRefs["overview"]}
+                  >
+                    <ContinentOverview sendDataToParent={handleDataFromChild} />
+                  </div>
+                )}
+                {activeTab === "countries" && (
+                  <div
+                    className={
+                      activeTab === "countries"
+                        ? "active show tab-pane fade"
+                        : "tab-pane fade"
+                    }
+                    id="pills-countries"
+                    role="tabpanel"
+                    aria-labelledby="pills-countries-tab"
+                    tabIndex="0"
+                    ref={tabContentRefs["countries"]}
+                  >
+                    <ContinentCountry sendDataToParent={handleDataFromChild} />
+                  </div>
+                )}
+                {activeTab === "itineraries" && (
+                  <div
+                    className={
+                      activeTab === "itineraries"
+                        ? "active show tab-pane fade"
+                        : "tab-pane fade"
+                    }
+                    id="pills-itineraries"
+                    role="tabpanel"
+                    aria-labelledby="pills-itineraries-tab"
+                    tabIndex="0"
+                    ref={tabContentRefs["itinararies"]}
+                  >
+                    <ContinentItinararies divRef={divRef} />
+                  </div>
+                )}
+                {activeTab === "places-to-stay" && (
+                  <div
+                    className={
+                      activeTab === "places-to-stay"
+                        ? "active show tab-pane fade"
+                        : "tab-pane fade"
+                    }
+                    id="pills-places-to-stay"
+                    role="tabpanel"
+                    aria-labelledby="pills-places-to-stay-tab"
+                    tabIndex="0"
+                    ref={tabContentRefs["places-to-stay"]}
+                  >
+                    <ContinentPlacesToStay divRef={divRef} />
+                  </div>
+                )}
+              </div>
+            </section>
 
-          <section className="make_enqury_row">
-            <div className="container">
-              <EnquiryButton />
-            </div>
-          </section>
+            <section className="make_enqury_row">
+              <div className="container">
+                <EnquiryButton />
+              </div>
+            </section>
 
-          {/* NewsLetter */}
-          <section
-            aria-label="Sign up for newsletter"
-            className="newslettr_row"
-          >
-            <div className="container">
-              <h4>Sign up for our newsletter</h4>
-              <h5>Receive our latest news and special offers</h5>
-              <Signup />
-            </div>
-          </section>
+            {/* NewsLetter */}
+            <section
+              aria-label="Sign up for newsletter"
+              className="newslettr_row"
+            >
+              <div className="container">
+                <h4>Sign up for our newsletter</h4>
+                <h5>Receive our latest news and special offers</h5>
+                <Signup />
+              </div>
+            </section>
           </div>
         </div>
       )}
