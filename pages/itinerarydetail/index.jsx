@@ -21,7 +21,6 @@ var Carousel = require("react-responsive-carousel").Carousel;
 export default Index;
 
 function Index() {
-  debugger;
   const router = useRouter();
   const [itineraries, setItineraries] = useState(null);
   const [moreItineraries, setMoreItineraries] = useState(null);
@@ -39,6 +38,7 @@ function Index() {
   const [friendlyUrl, setFriendlyUrl] = useState("");
   const [overViewText, setOverViewText] = useState(null);
   const [mapVariable, setMapVariable] = useState(null);
+  const [destinationDetails, setDestinationDetails] = useState();
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -314,10 +314,6 @@ function Index() {
 
   equalHeight(true);
 
-  // const overTextFun = (text) => {
-  //   return text?.replace(/\\n/g, "");
-  // };
-
   useEffect(() => {
     if (!localStorage.getItem("websitecontent_uk")) {
       websiteContentCheck();
@@ -356,6 +352,7 @@ function Index() {
           setCountries(
             x.data?.attributes?.countries?.data[0]?.attributes?.country_name
           );
+          setDestinationDetails(x.data[0].attributes);
           setIsLoading(false);
         })
         .catch((error) => {

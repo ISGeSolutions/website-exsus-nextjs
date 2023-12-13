@@ -296,7 +296,6 @@ function Index() {
   };
 
   const loadMoreData = (item) => {
-    debugger;
     holidaytypesService
       .getItinerariesByHolidayTypes(page + 1, holidaytypename, region, item)
       .then((response) => {

@@ -19,7 +19,7 @@ import { Alert } from "../../components";
 export default ContinentPlacesToStay;
 
 function ContinentPlacesToStay(props) {
-  debugger;
+
   console.log(props);
 
   const [isClearable, setIsClearable] = useState(true);

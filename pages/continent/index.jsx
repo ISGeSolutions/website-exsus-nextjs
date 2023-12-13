@@ -16,19 +16,21 @@ import { homeService } from "../../services";
 export default Index;
 
 function Index() {
-  debugger;
   const [destinationDetails, setDestinationDetails] = useState();
   const [backgroundImage, setBackgroundImage] = useState([]);
   const [headingText, setHeadingText] = useState("");
   const [mapVariable, setMapVariable] = useState(null);
   const [activeTab, setActiveTab] = useState("overview"); // State to track the active tab
   const router = useRouter();
+
   const destinationcode = router.query.continent
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
 
   const destinationTab = router.query?.continenttab;
+
+  var itinerarytab = router.components;
 
   const handleDataFromChild = (data) => {
     // Update the parent component's state with data received from the child
@@ -61,39 +63,6 @@ function Index() {
       }
     }
   }
-
-  // const EnquiryButton = () => {
-  //   const router = useRouter();
-
-  //   const handleEnquiryClick = () => {
-  //     router.push(regionWiseUrl + `/contact-us`); // Navigate to the /enquiry page
-  //   };
-
-  //   return (
-  //     <button
-  //       className="btn prmry_btn make_enqury_btn"
-  //       onClick={handleEnquiryClick}
-  //     >
-  //       {" "}
-  //       Make an enquiry
-  //       <svg
-  //         xmlns="http://www.w3.org/2000/svg"
-  //         fill="#ffffff"
-  //         shapeRendering="geometricPrecision"
-  //         textRendering="geometricPrecision"
-  //         imageRendering="optimizeQuality"
-  //         fillRule="evenodd"
-  //         clipRule="evenodd"
-  //         viewBox="0 0 267 512.43"
-  //       >
-  //         <path
-  //           fillRule="nonzero"
-  //           d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-  //         />
-  //       </svg>
-  //     </button>
-  //   );
-  // };
 
   <button className="btn header_nav_btn">
     MEET OUR EXPERTS
@@ -329,11 +298,25 @@ function Index() {
 
   equalHeight(true);
 
+  console.log("console outside", router);
+
+  if (itinerarytab.itinerarydetail?.query === "itineraries") {
+    toggleTab("itineraries");
+  } else {
+    console.log("its not working");
+  }
+
   useEffect(() => {
-    console.log(destinationcode);
     if (destinationcode != undefined) {
       localStorage.setItem("destination_code", destinationcode);
     }
+
+    // debugger;
+    // console.log("console", router.query);
+    // if (itinerarytab === "itineraries") {
+    //   toggleTab("itineraries");
+    // }
+
     // if (destinationTab) {
     //   if (destinationTab.includes("itineraries")) {
     //     toggleTab("itineraries")

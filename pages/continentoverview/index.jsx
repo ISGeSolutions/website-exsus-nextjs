@@ -15,7 +15,6 @@ import { useTranslation } from "react-i18next";
 export default ContinentOverview;
 
 function ContinentOverview({ sendDataToParent }) {
-  debugger;
   const router = useRouter();
   const [itineraries, setItineraries] = useState(null);
   const [valueWithBr, setnewValueWithBr] = useState("");
@@ -296,7 +295,6 @@ function ContinentOverview({ sendDataToParent }) {
     // Using window.onload to detect full page load
     window.onload = () => {
       setTimeout(() => {
-        debugger;
         const redirectUrl = `${regionWiseUrl}/destinations/${destinationcode}`;
 
         if (redirectUrl) {
