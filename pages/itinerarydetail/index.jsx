@@ -314,6 +314,17 @@ function Index() {
 
   equalHeight(true);
 
+  // const overTextFun = (text) => {
+  //   return text?.replace(/\\n/g, "");
+  // };
+  console.log("consolle", router);
+
+  // if (router.query.includes(itin_name)) {
+  //   setFriendlyUrl();
+  // } else {
+  //   setFriendlyUrl();
+  // }
+
   useEffect(() => {
     if (!localStorage.getItem("websitecontent_uk")) {
       websiteContentCheck();
@@ -369,10 +380,22 @@ function Index() {
         const bannerImages = [];
         const imageCheck = x.data[0]?.attributes?.itinerary_images?.data;
 
+        // setFriendlyUrl(
+        //   `home/destinations/${router.query?.continent}/${
+        //     router.query?.country
+        //   }/${x.data[0].attributes.itin_name.toLowerCase()}`
+        // );
+
         setFriendlyUrl(
           `home/destinations/${router.query?.continent}/${
             router.query?.country
-          }/${x.data[0].attributes.itin_name.toLowerCase()}`
+          }/${
+            router.query?.itineraryName
+              ? router.query?.itineraries +
+                "/" +
+                x.data[0].attributes.itin_name.toLowerCase()
+              : x.data[0].attributes.itin_name.toLowerCase()
+          }`
         );
 
         setTitle(x.data[0].attributes.meta_title);

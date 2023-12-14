@@ -297,6 +297,15 @@ function Index() {
   };
 
   equalHeight(true);
+  // debugger;
+  // console.log("continent", router);
+  // if (router.query?.continentSlug) {
+  //   if (router.asPath.includes("itineraries")) {
+  //     toggleTab("itineraries");
+  //   } else if (router.asPath.includes("countries")) {
+  //     toggleTab("countries");
+  //   }
+  // }
 
   console.log("console outside", router);
 
@@ -310,13 +319,14 @@ function Index() {
     if (destinationcode != undefined) {
       localStorage.setItem("destination_code", destinationcode);
     }
-
-    // debugger;
-    // console.log("console", router.query);
-    // if (itinerarytab === "itineraries") {
-    //   toggleTab("itineraries");
-    // }
-
+    console.log("continent", router);
+    if (router.query?.continentSlug) {
+      if (router.asPath.includes("itineraries")) {
+        toggleTab("itineraries");
+      } else if (router.asPath.includes("countries")) {
+        toggleTab("countries");
+      }
+    }
     // if (destinationTab) {
     //   if (destinationTab.includes("itineraries")) {
     //     toggleTab("itineraries")

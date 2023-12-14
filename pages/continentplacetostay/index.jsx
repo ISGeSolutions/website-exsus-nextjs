@@ -19,9 +19,6 @@ import { Alert } from "../../components";
 export default ContinentPlacesToStay;
 
 function ContinentPlacesToStay(props) {
-
-  console.log(props);
-
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(true);
   const [isDisabled, setIsDisabled] = useState(false);

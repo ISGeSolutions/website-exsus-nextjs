@@ -267,6 +267,7 @@ function Index() {
   };
 
   const handleFilterClick = (item) => {
+    setAlert(null);
     if (selectedDestinations.length == 0) {
       page = 0;
       setItineraries([]);
@@ -309,6 +310,7 @@ function Index() {
   };
 
   const loadMoreData = (item) => {
+    setAlert(null);
     holidaytypesService
       .getItinerariesByHolidayTypeGroup(page + 1, hcode, region, item)
       .then((response) => {
@@ -357,7 +359,7 @@ function Index() {
         setIsLoading(false);
       });
   };
-
+  
   function onSubmit() {
     if (selectedOptionDestination.length == 0) {
       showAlert("Please select atleast one option", "error");
@@ -556,6 +558,7 @@ function Index() {
   };
 
   useEffect(() => {
+
     if (!localStorage.getItem("websitecontent_uk")) {
       websiteContentCheck();
     }
