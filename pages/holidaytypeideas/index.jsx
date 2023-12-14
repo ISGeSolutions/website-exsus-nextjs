@@ -240,6 +240,7 @@ function Index() {
   };
 
   const handleFilterClick = (item) => {
+    setAlert(null);
     if (selectedDestinations.length == 0) {
       page = 0;
       setItineraries([]);
@@ -296,7 +297,7 @@ function Index() {
   };
 
   const loadMoreData = (item) => {
-    debugger;
+    setAlert(null);
     holidaytypesService
       .getItinerariesByHolidayTypes(page + 1, holidaytypename, region, item)
       .then((response) => {

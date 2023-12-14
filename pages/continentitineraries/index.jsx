@@ -93,7 +93,6 @@ const InputOption = ({
 };
 
 function ContinentItinararies(props) {
-  debugger;
   console.log(props);
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(false);
@@ -430,6 +429,7 @@ function ContinentItinararies(props) {
   };
 
   equalHeight(true);
+  console.log("continentrouter", router);
 
   useEffect(() => {
     if (!localStorage.getItem("websitecontent_uk")) {

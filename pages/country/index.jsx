@@ -376,6 +376,12 @@ function Country() {
     setSelectedOptionRegion(regionOptions[0]);
     setSelectedOptionMonth(monthOptions[0]);
 
+    if (router.asPath.includes("itineraries")) {
+      toggleTab("itineraries");
+    } else if (router.asPath.includes("countries")) {
+      toggleTab("countries");
+    }
+
     // countriesService.getAll().then(x => {
     //     // console.log('destinationService', x);
     //     const desiredKey = 1; // The desired key to access
