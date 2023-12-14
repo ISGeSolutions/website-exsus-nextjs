@@ -22,12 +22,15 @@ function Index() {
   const [mapVariable, setMapVariable] = useState(null);
   const [activeTab, setActiveTab] = useState("overview"); // State to track the active tab
   const router = useRouter();
+
   const destinationcode = router.query.continent
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
 
   const destinationTab = router.query?.continenttab;
+
+  var itinerarytab = router.components;
 
   const handleDataFromChild = (data) => {
     // Update the parent component's state with data received from the child
@@ -303,6 +306,14 @@ function Index() {
   //     toggleTab("countries");
   //   }
   // }
+
+  console.log("console outside", router);
+
+  if (itinerarytab.itinerarydetail?.query === "itineraries") {
+    toggleTab("itineraries");
+  } else {
+    console.log("its not working");
+  }
 
   useEffect(() => {
     if (destinationcode != undefined) {

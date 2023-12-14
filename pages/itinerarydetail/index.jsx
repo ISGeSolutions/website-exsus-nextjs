@@ -38,6 +38,7 @@ function Index() {
   const [friendlyUrl, setFriendlyUrl] = useState("");
   const [overViewText, setOverViewText] = useState(null);
   const [mapVariable, setMapVariable] = useState(null);
+  const [destinationDetails, setDestinationDetails] = useState();
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -362,6 +363,7 @@ function Index() {
           setCountries(
             x.data?.attributes?.countries?.data[0]?.attributes?.country_name
           );
+          setDestinationDetails(x.data[0].attributes);
           setIsLoading(false);
         })
         .catch((error) => {
