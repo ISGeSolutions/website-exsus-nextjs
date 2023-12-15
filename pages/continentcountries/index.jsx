@@ -188,7 +188,7 @@ function ContinentCountry({ sendDataToParent }) {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }

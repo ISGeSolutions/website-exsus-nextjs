@@ -252,7 +252,7 @@ function RegionPlacesToStay(props) {
     return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
   };
 
-  const websiteContentCheck = (matches, region, modifiedString) => {
+  const websiteContentCheck = () => {
     homeService
       .getAllWebsiteContent()
       .then((x) => {
@@ -390,9 +390,9 @@ function RegionPlacesToStay(props) {
     if (!localStorage.getItem("websitecontent_uk")) {
       websiteContentCheck();
     }
-    setSelectedOptionCountry(countryOptions[0]);
-    setSelectedOptionRegion(regionOptions[0]);
-    setSelectedOptionMonth(monthOptions[0]);
+    setSelectedOptionCountry();
+    setSelectedOptionRegion();
+    setSelectedOptionMonth();
 
     destinationService
       .getRegionByName(regionName)
@@ -486,7 +486,7 @@ function RegionPlacesToStay(props) {
                     <div className="col-12">
                       <div className="destination_dropdwn_row d-block d-md-flex">
                         <div className="dropdown_grp_blk">
-                          <div className="banner_dropdwn_blk ps-0 ps-md-2">
+                          {/* <div className="banner_dropdwn_blk ps-0 ps-md-2">
                             <Select
                               id="long-value-select"
                               instanceId="long-value-select"
@@ -510,7 +510,7 @@ function RegionPlacesToStay(props) {
                                 MultiValue: CustomMultiValue,
                               }}
                             />
-                          </div>
+                          </div> */}
                           <div className="banner_dropdwn_blk ps-0 ps-md-2">
                             <Select
                               placeholder="Filter by region"
