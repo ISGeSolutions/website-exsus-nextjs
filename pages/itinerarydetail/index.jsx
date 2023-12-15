@@ -319,12 +319,6 @@ function Index() {
   // };
   console.log("consolle", router);
 
-  // if (router.query.includes(itin_name)) {
-  //   setFriendlyUrl();
-  // } else {
-  //   setFriendlyUrl();
-  // }
-
   useEffect(() => {
     if (!localStorage.getItem("websitecontent_uk")) {
       websiteContentCheck();

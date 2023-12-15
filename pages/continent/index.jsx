@@ -297,29 +297,12 @@ function Index() {
   };
 
   equalHeight(true);
-  // debugger;
-  // console.log("continent", router);
-  // if (router.query?.continentSlug) {
-  //   if (router.asPath.includes("itineraries")) {
-  //     toggleTab("itineraries");
-  //   } else if (router.asPath.includes("countries")) {
-  //     toggleTab("countries");
-  //   }
-  // }
-
-  console.log("console outside", router);
-
-  if (itinerarytab.itinerarydetail?.query === "itineraries") {
-    toggleTab("itineraries");
-  } else {
-    console.log("its not working");
-  }
 
   useEffect(() => {
     if (destinationcode != undefined) {
       localStorage.setItem("destination_code", destinationcode);
     }
-    console.log("continent", router);
+
     if (router.query?.continentSlug) {
       if (router.asPath.includes("itineraries")) {
         toggleTab("itineraries");
@@ -364,9 +347,22 @@ function Index() {
           setDestinationDetails(x.data[0].attributes);
           // console.log(x.data[0].attributes);
           setHeadingText(x.data[0]?.attributes?.header_text);
+
           setFriendlyUrl(
-            `Home/Destinations/${x.data[0].attributes.friendly_url}`
+            `Home/Destinations/${x.data[0].attributes.friendly_url}/${x.data[0].attributes.friendly_url}-itineraries`
+            // `Home/Destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url}-itineraries`
           );
+          // setFriendlyUrl(
+          //   `home/destinations/${router.query?.continent}/${
+          //     router.query?.country
+          //   }/${
+          //     router.query?.itineraryName
+          //       ? router.query?.itineraries +
+          //         "/" +
+          //         x.data[0].attributes.itin_name.toLowerCase()
+          //       : x.data[0].attributes.itin_name.toLowerCase()
+          //   }`
+          // );
           setMetaTitle(x.data[0].attributes.page_meta_title);
           // const map_latitude = x.data[0].attributes?.map_latitude;
           // const map_longitude = x.data[0].attributes?.map_longitude;
