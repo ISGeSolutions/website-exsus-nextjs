@@ -372,13 +372,21 @@ function Index() {
           const map_zoom = x.data[0].attributes.map_zoom_level;
 
           const mapTemp =
-            `https://www.google.com/maps/embed/v1/place?q=` + map_latitude
-              ? map_latitude
-              : "" + `,` + map_longitude
-              ? map_longitude
-              : "" +
-                `&zoom=${map_zoom != null ? map_zoom : 0}` +
-                `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
+            `https://www.google.com/maps/embed/v1/place?q=` +
+            map_latitude +
+            `,` +
+            map_longitude +
+            "" +
+            `&zoom=${map_zoom != null ? map_zoom : 0}` +
+            `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
+          // const mapTemp =
+          //   `https://www.google.com/maps/embed/v1/place?q=` + map_latitude
+          //     ? map_latitude
+          //     : "" + `,` + map_longitude
+          //     ? map_longitude
+          //     : "" +
+          //       `&zoom=${map_zoom != null ? map_zoom : 0}` +
+          //       `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
           setMapVariable(mapTemp);
           const imageCheck = x.data[0].attributes?.destination_images?.data;
           const newBackgroundImages = [];

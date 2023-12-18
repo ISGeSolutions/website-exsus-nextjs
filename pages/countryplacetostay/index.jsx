@@ -268,6 +268,26 @@ function CountryPlaceToStay(props) {
     }
   }
 
+  const generateDynamicLink = (item) => {
+    let hotelName = item?.attributes?.friendly_url
+      ?.replace(/ /g, "-")
+      .toLowerCase()
+      .replace(/&/g, "and");
+    return (
+      regionWiseUrl +
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
+    );
+  };
+
   const handleRedirect = (item) => {
     let hotelName = item?.attributes?.friendly_url
       ?.replace(/ /g, "-")
@@ -445,26 +465,6 @@ function CountryPlaceToStay(props) {
         }
       }
     }
-  };
-
-  const generateDynamicLink = (item) => {
-    let hotelName = item?.attributes?.friendly_url
-      ?.replace(/ /g, "-")
-      .toLowerCase()
-      .replace(/&/g, "and");
-    return (
-      regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
-        .replace(/ /g, "-")
-        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${hotelName}`
-    );
   };
 
   useEffect(() => {

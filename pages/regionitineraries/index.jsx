@@ -9,6 +9,7 @@ import generateDynamicLink from "components/utils/generateLink";
 import Image from "next/image";
 import CustomMultiValue from "../continentitineraries/CustomMultiValue";
 import Select, { components } from "react-select";
+import { Alert } from "../../components";
 
 export default RegionItinararies;
 
@@ -29,6 +30,7 @@ function RegionItinararies(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [activeItem, setActiveItem] = useState("recommended");
   const [metaData, setMetaData] = useState([]);
+  const [alert, setAlert] = useState(null);
 
   const router = useRouter();
   const destinationcode = router?.query?.continent
@@ -118,6 +120,7 @@ function RegionItinararies(props) {
   };
 
   const handleFilterClick = (item) => {
+    setAlert(null);
     page = 0;
     setItineraries([]);
     setActiveItem(item);
@@ -228,6 +231,15 @@ function RegionItinararies(props) {
     setSelectedOptionMonth(selectedOption);
   };
 
+  const showAlert = (message, type) => {
+    setAlert({ message, type });
+  };
+
+  const closeAlert = () => {
+    // console.log("closeAlert");
+    setAlert(null);
+  };
+
   let region = "uk";
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
@@ -236,6 +248,25 @@ function RegionItinararies(props) {
         region = window.site_region;
         regionWiseUrl = "/" + window.site_region;
       }
+    }
+  }
+
+  function onSubmit(e) {
+    e.preventDefault();
+    // console.log("Selected Countries:", selectedOptionCountry);
+    // console.log("Selected Regions:", selectedOptionRegion);
+    // console.log("Selected Months:", selectedOptionMonth);
+    if (!e.destination && !e.reason && !e.month) {
+      showAlert("Please select atleast one option", "error");
+    } else {
+      router.push(
+        `advance-search?where=` +
+          e?.destination +
+          `&what=` +
+          e?.reason +
+          `&when=` +
+          e?.month
+      );
     }
   }
 
@@ -278,12 +309,14 @@ function RegionItinararies(props) {
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-      `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`
+        `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`
     );
   };
 
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt places_to_stay_cnt"),
+    var elements = document.getElementsByClassName(
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -304,8 +337,6 @@ function RegionItinararies(props) {
   };
 
   equalHeight(true);
-
-
 
   const dictioneryFunction = (data) => {
     let modifiedString = data;
@@ -330,7 +361,6 @@ function RegionItinararies(props) {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-
         // debugger;
         // You can access it using localStorage.getItem('yourKey')
 
@@ -340,28 +370,27 @@ function RegionItinararies(props) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(matches, region, modifiedString);
+                modifiedString = websiteContentCheck(
+                  matches,
+                  region,
+                  modifiedString
+                );
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
               }
               const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
               if (checkStr && replacement) {
-                modifiedString = modifiedString.replace(
-                  checkStr,
-                  replacement
-                );
+                modifiedString = modifiedString.replace(checkStr, replacement);
               }
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {
-
-          }
+          } catch (error) {}
         }
       }
     }
-  }
+  };
 
   useEffect(() => {
     if (!localStorage.getItem("websitecontent_uk")) {
@@ -386,17 +415,23 @@ function RegionItinararies(props) {
         setIsLoading(false);
       });
 
-
     // Using window.onload to detect full page load
     window.onload = () => {
       setTimeout(() => {
-        const redirectUrl = regionWiseUrl + "/destinations/" + destinationcode?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase() + "/" + countrycode.replace(/ /g, "-")
+        const redirectUrl =
+          regionWiseUrl +
+          "/destinations/" +
+          destinationcode
+            ?.replace(/ /g, "-")
             .replace(/&/g, "and")
-            .toLowerCase() + "/" + regionName?.attributes?.region_name?.replace(/ /g, "-")
-              .replace(/&/g, "and")
-              .toLowerCase();;
+            .toLowerCase() +
+          "/" +
+          countrycode.replace(/ /g, "-").replace(/&/g, "and").toLowerCase() +
+          "/" +
+          regionName?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase();
         // debugger;
         if (redirectUrl) {
           router.push(redirectUrl);
@@ -407,6 +442,9 @@ function RegionItinararies(props) {
 
   return (
     <>
+      {alert && alert.message && alert.type && (
+        <Alert message={alert.message} type={alert.type} onClose={closeAlert} />
+      )}
       {isLoading ? (
         // <MyLoader />
         <div
@@ -435,10 +473,10 @@ function RegionItinararies(props) {
               <div className="card_slider_row">
                 <div className="carousel00 region_carousel00">
                   <div className="row">
-                    <div className="col-12">
-                      <div className="destination_dropdwn_row d-block d-md-flex">
-                        <div className="dropdown_grp_blk">
-                          <div className="banner_dropdwn_blk ps-0 ps-md-2">
+                    <form onSubmit={onSubmit}>
+                      <div className="col-12">
+                        <div className="destination_dropdwn_row d-block d-md-flex">
+                          <div className="banner_dropdwn_blk ">
                             <Select
                               placeholder="Filter by reason"
                               // defaultValue={regionOptions[0]}
@@ -488,32 +526,33 @@ function RegionItinararies(props) {
                               }}
                             />
                           </div>
-                        </div>
-                        <div className="banner_inspire_btn ps-0 ps-md-2">
-                          <button
-                            type="button"
-                            className="btn btn-primary prmry_btn"
-                          >
-                            Inspire me
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="#ffffff"
-                              shapeRendering="geometricPrecision"
-                              textRendering="geometricPrecision"
-                              imageRendering="optimizeQuality"
-                              fillRule="evenodd"
-                              clipRule="evenodd"
-                              viewBox="0 0 267 512.43"
+
+                          <div className="banner_inspire_btn ps-0 ps-md-2">
+                            <button
+                              type="submit"
+                              className="btn btn-primary prmry_btn"
                             >
-                              <path
-                                fillRule="nonzero"
-                                d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                              ></path>
-                            </svg>
-                          </button>
+                              Inspire me
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="#ffffff"
+                                shapeRendering="geometricPrecision"
+                                textRendering="geometricPrecision"
+                                imageRendering="optimizeQuality"
+                                fillRule="evenodd"
+                                clipRule="evenodd"
+                                viewBox="0 0 267 512.43"
+                              >
+                                <path
+                                  fillRule="nonzero"
+                                  d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                                ></path>
+                              </svg>
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </form>
                     <div className="col-12">
                       <div className="destination_filter_result d-block d-lg-flex">
                         <p>
@@ -574,7 +613,7 @@ function RegionItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
