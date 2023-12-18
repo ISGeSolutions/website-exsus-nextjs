@@ -141,7 +141,7 @@ function App({ Component, pageProps }) {
     // debugger;
     setTimeout(() => {
       $('.carousel').carousel({
-        interval: 500 * 10
+        interval: 250 * 10
       });
     }, 2000);
 
