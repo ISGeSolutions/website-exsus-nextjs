@@ -16,6 +16,7 @@ import { NavLink } from "components";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { whyusService } from "../services";
+
 var Carousel = require("react-responsive-carousel").Carousel;
 
 export default Index;
@@ -73,7 +74,7 @@ function Index() {
 
     router.push(
       regionWiseUrl +
-        `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-itineraries/${item.attributes?.friendly_url}`
+      `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-itineraries/${item.attributes?.friendly_url}`
     );
   };
 
@@ -99,8 +100,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -211,6 +212,7 @@ function Index() {
     } else {
     }
   };
+
 
   useEffect(() => {
     $(".succss_msg_parnt").hide();
@@ -437,17 +439,15 @@ function Index() {
 
     var site_region = localStorage.getItem("site_region");
 
-    const carouselMain = document.querySelector("#carouselExampleIntervalMain");
-    if (carouselMain) {
-      new bootstrap.Carousel(carouselMain);
-    }
-    // setTimeout(() => {
-    // }, 100);
+    // const carouselMain = document.querySelector("#carouselExampleIntervalMain");
+    // if(carouselMain) {
+    //   new bootstrap.Carousel(carouselMain);
+    // }
 
-    const carousel = document.querySelector("#Testimonials");
-    if (carousel) {
-      new bootstrap.Carousel(carousel);
-    }
+    // const carousel = document.querySelector("#Testimonials");
+    // if (carousel) {
+    //   new bootstrap.Carousel(carousel);
+    // }
 
     window.addEventListener("resize", equalHeight(true));
   }, []);
@@ -473,53 +473,55 @@ function Index() {
       ) : (
         <div>
           <section className="banner_blk_row">
-            <div
-              id="carouselExampleInterval"
-              className="carousel slide"
-              data-bs-ride="carousel"
-            >
-              <div className="carousel-indicators">
-                {backgroundImage.map((_, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    data-bs-target="#carouselExampleInterval"
-                    data-bs-slide-to={index}
-                    className={index === 0 ? "active" : ""}
-                    aria-current={index === 0 ? "true" : "false"}
-                    aria-label={`Slide ${index + 1}`}
-                  ></button>
-                ))}
-                {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
-              </div>
-              <div className="carousel-inner">
-                {backgroundImage.map((imagePath, index) => (
-                  <NavLink
-                    key={index}
-                    href="#"
-                    className={`carousel-item ${index === 0 ? "active" : ""}`}
-                    data-bs-interval="3000"
-                    // target="_blank"
-                  >
-                    <div
-                      className="banner_commn_cls"
-                      style={{
-                        backgroundImage: `url(${imagePath.image_path})`,
-                      }}
+            {backgroundImage ? (
+              <div
+                id="carouselExampleInterval"
+                className="carousel"
+                data-bs-ride="carousel"
+              >
+                <div className="carousel-indicators">
+                  {backgroundImage.map((_, index) => (
+                    <button
+                      key={index}
+                      type="button"
+                      data-bs-target="#carouselExampleInterval"
+                      data-bs-slide-to={index}
+                      className={index === 0 ? "active" : ""}
+                      aria-current={index === 0 ? "true" : "false"}
+                      aria-label={`Slide ${index + 1}`}
+                    ></button>
+                  ))}
+                </div>
+                <div className="carousel-inner">
+                  {backgroundImage.map((imagePath, index) => (
+                    <NavLink
+                      key={index}
+                      href="#"
+                      className={`carousel-item ${index === 0 ? "active" : ""}`}
+                      data-interval="3000"
                     >
-                      <div className="carousel-caption">
-                        <img
-                          src="/images/banner-logo.png"
-                          alt="banner-logo"
-                          className="img-fluid"
-                        />
-                        <h2>{imagePath.image_alt_text}</h2>
+                      <div
+                        className="banner_commn_cls"
+                        style={{
+                          backgroundImage: `url(${imagePath.image_path})`,
+                        }}
+                      >
+                        <div className="carousel-caption">
+                          <img
+                            src="/images/banner-logo.png"
+                            alt="banner-logo"
+                            className="img-fluid"
+                          />
+                          <h2>{imagePath.image_alt_text}</h2>
+                        </div>
                       </div>
-                    </div>
-                  </NavLink>
-                ))}
+                    </NavLink>
+                  ))}
+                </div>
               </div>
-            </div>
+            ) : (
+              ''
+            )}
             <Inspireme />
           </section>
 
@@ -659,11 +661,9 @@ function Index() {
                               )
                               .map((res1) => (
                                 <li key={res1.id}>
-                                  {`from ${
-                                    res1.attributes?.currency_symbol ?? ""
-                                  }${
-                                    res1.attributes?.price ?? " xxxx"
-                                  } per person`}
+                                  {`from ${res1.attributes?.currency_symbol ?? ""
+                                    }${res1.attributes?.price ?? " xxxx"
+                                    } per person`}
                                 </li>
                               ))}
                             <li>

@@ -138,11 +138,20 @@ function App({ Component, pageProps }) {
     //     console.log('x', x);
     // });
 
+    // debugger;
+    setTimeout(() => {
+      $('.carousel').carousel({
+        interval: 500 * 10
+      });
+    }, 2000);
+
     // unsubscribe from events in useEffect return function
     return () => {
       router.events.off("routeChangeStart", hideContent);
       router.events.off("routeChangeComplete", authCheck);
     };
+
+
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
