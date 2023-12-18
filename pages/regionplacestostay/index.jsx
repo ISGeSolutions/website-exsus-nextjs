@@ -9,6 +9,7 @@ import generateDynamicLink from "components/utils/generateLink";
 import Image from "next/image";
 import Select, { components } from "react-select";
 import CustomMultiValue from "./CustomMultiValue";
+import { Alert } from "../../components";
 
 export default RegionPlacesToStay;
 
@@ -31,6 +32,7 @@ function RegionPlacesToStay(props) {
   const [page, setPage] = useState(0); // Current page
   const [metaData, setMetaData] = useState([]);
   const [dcode, setdcode] = useState();
+  const [alert, setAlert] = useState(null);
   const [allHotels, setAllHotels] = useState([]);
   const [countryOptions, setAllCountries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -47,13 +49,6 @@ function RegionPlacesToStay(props) {
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
-
-  const handleFilterClick = (item) => {
-    page = 0;
-    setAllHotels([]);
-    setActiveItem(item);
-    loadMoreData(item);
-  };
 
   const regionOptions = [
     { value: "Everything", label: "Everything" },
@@ -185,33 +180,23 @@ function RegionPlacesToStay(props) {
     );
   };
 
-  const loadMoreData = (item) => {
-    destinationService
-      .getRegionWiseHotels(page + 1, regionName, item, region)
-      .then((response) => {
-        setMetaData(response.meta.pagination);
-        const newHotels = response?.data;
-        if (newHotels.length > 0) {
-          setAllHotels((prevItineraries) =>
-            [...prevItineraries, ...newHotels].reduce(
-              (accumulator, current) =>
-                accumulator.some((item) => item.id === current.id)
-                  ? accumulator
-                  : [...accumulator, current],
-              []
-            )
-          );
-          setPage(page + 1);
-        }
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-      });
-  };
+  let region = "uk";
+  let regionWiseUrl = "";
+  if (typeof window !== "undefined") {
+    if (window && window.site_region) {
+      if (window.site_region !== "uk") {
+        region = window.site_region;
+        regionWiseUrl = "/" + window.site_region;
+      }
+    }
+  }
 
-  const handleRedirect = (item) => {
-    return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
+  const handleFilterClick = (item) => {
+    setAlert(null);
+    page = 0;
+    setAllHotels([]);
+    setActiveItem(item);
+    loadMoreData(item);
   };
 
   const handleOptionCountryChange = (selectedOption) => {
@@ -237,19 +222,64 @@ function RegionPlacesToStay(props) {
     setSelectedOptionMonth(selectedOption);
   };
 
-  let region = "uk";
-  let regionWiseUrl = "";
-  if (typeof window !== "undefined") {
-    if (window && window.site_region) {
-      if (window.site_region !== "uk") {
-        region = window.site_region;
-        regionWiseUrl = "/" + window.site_region;
-      }
+  const handleRedirect = (item) => {
+    return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
+  };
+  const generateDynamicLink = (item) => {
+    return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
+  };
+
+  const showAlert = (message, type) => {
+    setAlert({ message, type });
+  };
+
+  const closeAlert = () => {
+    // console.log("closeAlert");
+    setAlert(null);
+  };
+
+  function onSubmit(e) {
+    e.preventDefault();
+    // console.log("Selected Countries:", selectedOptionCountry);
+    // console.log("Selected Regions:", selectedOptionRegion);
+    // console.log("Selected Months:", selectedOptionMonth);
+    if (!e.destination && !e.reason && !e.month) {
+      showAlert("Please select atleast one option", "error");
+    } else {
+      router.push(
+        `advance-search?where=` +
+          e?.destination +
+          `&what=` +
+          e?.reason +
+          `&when=` +
+          e?.month
+      );
     }
   }
 
-  const generateDynamicLink = (item) => {
-    return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
+  const loadMoreData = (item) => {
+    destinationService
+      .getRegionWiseHotels(page + 1, regionName, item, region)
+      .then((response) => {
+        setMetaData(response.meta.pagination);
+        const newHotels = response?.data;
+        if (newHotels.length > 0) {
+          setAllHotels((prevItineraries) =>
+            [...prevItineraries, ...newHotels].reduce(
+              (accumulator, current) =>
+                accumulator.some((item) => item.id === current.id)
+                  ? accumulator
+                  : [...accumulator, current],
+              []
+            )
+          );
+          setPage(page + 1);
+        }
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+      });
   };
 
   const websiteContentCheck = () => {
@@ -453,6 +483,9 @@ function RegionPlacesToStay(props) {
 
   return (
     <>
+      {alert && alert.message && alert.type && (
+        <Alert message={alert.message} type={alert.type} onClose={closeAlert} />
+      )}
       {isLoading ? (
         // <MyLoader />
         <div
@@ -483,35 +516,10 @@ function RegionPlacesToStay(props) {
               <div className="card_slider_row">
                 <div className="carousel00 region_carousel00">
                   <div className="row">
-                    <div className="col-12">
-                      <div className="destination_dropdwn_row d-block d-md-flex">
-                        <div className="dropdown_grp_blk">
-                          {/* <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                            <Select
-                              id="long-value-select"
-                              instanceId="long-value-select"
-                              className="select_container_country"
-                              classNamePrefix="select_country"
-                              placeholder={"Filter by country"}
-                              styles={styles}
-                              isMulti
-                              isDisabled={isDisabled}
-                              isLoading={isLoader}
-                              isClearable={isClearable}
-                              isRtl={isRtl}
-                              isSearchable={isSearchable}
-                              value={selectedOptionCountry}
-                              onChange={handleOptionCountryChange}
-                              closeMenuOnSelect={false}
-                              hideSelectedOptions={false}
-                              options={countryOptions}
-                              components={{
-                                Option: InputOption,
-                                MultiValue: CustomMultiValue,
-                              }}
-                            />
-                          </div> */}
-                          <div className="banner_dropdwn_blk ps-0 ps-md-2">
+                    <form onSubmit={onSubmit}>
+                      <div className="col-12">
+                        <div className="destination_dropdwn_row d-block d-md-flex">
+                          <div className="banner_dropdwn_blk">
                             <Select
                               placeholder="Filter by region"
                               // defaultValue={regionOptions[0]}
@@ -561,32 +569,33 @@ function RegionPlacesToStay(props) {
                               }}
                             />
                           </div>
-                        </div>
-                        <div className="banner_inspire_btn ps-0 ps-md-2">
-                          <button
-                            type="button"
-                            className="btn btn-primary prmry_btn"
-                          >
-                            Inspire me
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="#ffffff"
-                              shapeRendering="geometricPrecision"
-                              textRendering="geometricPrecision"
-                              imageRendering="optimizeQuality"
-                              fillRule="evenodd"
-                              clipRule="evenodd"
-                              viewBox="0 0 267 512.43"
+
+                          <div className="banner_inspire_btn ps-0 ps-md-2">
+                            <button
+                              type="submit"
+                              className="btn btn-primary prmry_btn"
                             >
-                              <path
-                                fillRule="nonzero"
-                                d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                              ></path>
-                            </svg>
-                          </button>
+                              Inspire me
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="#ffffff"
+                                shapeRendering="geometricPrecision"
+                                textRendering="geometricPrecision"
+                                imageRendering="optimizeQuality"
+                                fillRule="evenodd"
+                                clipRule="evenodd"
+                                viewBox="0 0 267 512.43"
+                              >
+                                <path
+                                  fillRule="nonzero"
+                                  d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                                ></path>
+                              </svg>
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </form>
                     <div className="col-12">
                       <div className="destination_filter_result d-block d-lg-flex">
                         <p>

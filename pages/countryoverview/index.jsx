@@ -358,15 +358,16 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                 }}
               />
             </section>
+            <section className="country_highlight_row">
+              <div class="country_highlight_inr">
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: dictioneryFunction(countryData?.country_highlights),
+                  }}
+                ></p>
+              </div>
+            </section>
           </div>
-          <section className="country_highlight_row">
-            <p
-              className="country_highlight_inr"
-              dangerouslySetInnerHTML={{
-                __html: dictioneryFunction(countryData?.country_highlights),
-              }}
-            ></p>
-          </section>
 
           <section className="favrites_blk_row light_dark_grey">
             <div className="container">

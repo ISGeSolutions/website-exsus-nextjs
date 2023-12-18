@@ -460,10 +460,6 @@ function Index() {
           type="text/javascript"
           src="/assets/javascripts/card-slider.js"
         ></script>
-        {/* <script
-          type="text/javascript"
-          src="/assets/javascripts/card-slider-equal-height.js"
-        ></script> */}
       </Head>
 
       {isLoading ? (
@@ -502,7 +498,8 @@ function Index() {
                     key={index}
                     href="#"
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
-                    data-interval="3000"
+                    data-bs-interval="3000"
+                    // target="_blank"
                   >
                     <div
                       className="banner_commn_cls"
