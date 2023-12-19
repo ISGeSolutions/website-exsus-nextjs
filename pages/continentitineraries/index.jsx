@@ -472,6 +472,7 @@ function ContinentItinararies(props) {
     // window.addEventListener("resize", equalHeight(true));
 
     // Using window.onload to detect full page load
+
     window.onload = () => {
       setTimeout(() => {
         const redirectUrl = `${regionWiseUrl}/destinations/${destinationcode}`;
