@@ -279,7 +279,7 @@ function Index() {
               <div className="container">
                 <div className="bookmark_row">
                   <FriendlyUrl
-                    data={whyusDetails?.page_friendly_url}
+                    data={"home/" + whyusDetails?.page_friendly_url}
                   ></FriendlyUrl>
                 </div>
 

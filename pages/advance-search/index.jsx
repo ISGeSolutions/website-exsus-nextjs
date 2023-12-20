@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import generateDynamicLink from "components/utils/generateLink";
 import Image from "next/image";
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
+import { Alert } from "../../components";
 
 export default Index;
 
@@ -31,6 +32,7 @@ function Index() {
     const [visibleItems, setVisibleItems] = useState(itemsPerPage);
   };
   const [activeItem, setActiveItem] = useState("duration");
+  const [alert, setAlert] = useState(null);
 
   const handleLoadMore = () => {
     setVisibleItems((prevVisibleItems) => prevVisibleItems + itemsPerPage);
@@ -125,11 +127,15 @@ function Index() {
 
   equalHeight(true);
 
+  const closeAlert = () => {
+    setAlert(null);
+  };
+
   const handleFilterClick = (item) => {
+    setAlert(null);
     page = 0;
     setItineraries([]);
     setActiveItem(item);
-    // console.log(page);
 
     loadMoreData(item);
   };
@@ -277,6 +283,27 @@ function Index() {
     if (!localStorage.getItem("websitecontent_uk")) {
       websiteContentCheck();
     }
+
+    // if (dcodestr == null && dcodeReason == null && dcodeMonth == null) {
+    //   destinationService
+    //     .getItinerariesInspireMe(
+    //       page,
+    //       dcodestr ? dcodestr : "",
+    //       dcodeReason ? dcodeReason : "",
+    //       dcodeMonth ? dcodeMonth : "",
+    //       region
+    //     )
+    //     .then((x) => {
+    //       setItineraries(x.data);
+    //       setIsLoading(false);
+    //     })
+    //     .catch((error) => {
+    //       setIsLoading(false);
+    //     });
+    // } else {
+    //   console.log("api is getting called twice");
+    // }
+
     destinationService
       .getItinerariesInspireMe(
         page,
@@ -299,6 +326,9 @@ function Index() {
 
   return (
     <>
+      {alert && alert.message && alert.type && (
+        <Alert message={alert.message} type={alert.type} onClose={closeAlert} />
+      )}
       <Head>
         <script
           type="text/javascript"

@@ -294,42 +294,7 @@ function Index() {
             <div className="container">
               <h4>Sign up for our newsletter</h4>
               <h5>Receive our latest news and special offers</h5>
-              <form className="newslettr_form d-block d-sm-flex">
-                <div className="newlettr_inpt">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Full name and title"
-                  />
-                </div>
-                <div className="newlettr_inpt ps-0 ps-sm-2">
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder="Your email address"
-                  />
-                </div>
-                <div className="newlettr_btn ps-0 ps-sm-2">
-                  <button type="submit" className="btn btn-primary prmry_btn">
-                    Sign up
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="#ffffff"
-                      shapeRendering="geometricPrecision"
-                      textRendering="geometricPrecision"
-                      imageRendering="optimizeQuality"
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      viewBox="0 0 267 512.43"
-                    >
-                      <path
-                        fillRule="nonzero"
-                        d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </form>
+              <Signup />
             </div>
           </section>
         </div>

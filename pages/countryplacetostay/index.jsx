@@ -124,6 +124,7 @@ function CountryPlaceToStay(props) {
   };
 
   const handleFilterClick = (item) => {
+    setAlert(null);
     page = 0;
     setAllHotels([]);
     setActiveItem(item);
