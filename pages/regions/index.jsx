@@ -442,42 +442,46 @@ function Index() {
       ) : (
         <div>
           <section className="banner_blk_row">
-            <div
-              id="carouselExampleInterval"
-              className="carousel slide"
-              data-bs-ride="carousel"
-            >
-              <div className="carousel-indicators">
-                {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
-                {backgroundImage.map((_, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    data-bs-target="#carouselExampleInterval"
-                    data-bs-slide-to={index}
-                    className={index === 0 ? "active" : ""}
-                    aria-current={index === 0 ? "true" : "false"}
-                    aria-label={`Slide ${index + 1}`}
-                  ></button>
-                ))}
+            {backgroundImage ? (
+              <div
+                id="carouselExampleInterval"
+                className="carousel slide"
+                data-bs-ride="carousel"
+              >
+                <div className="carousel-indicators">
+                  {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
+                  {backgroundImage.map((_, index) => (
+                    <button
+                      key={index}
+                      type="button"
+                      data-bs-target="#carouselExampleInterval"
+                      data-bs-slide-to={index}
+                      className={index === 0 ? "active" : ""}
+                      aria-current={index === 0 ? "true" : "false"}
+                      aria-label={`Slide ${index + 1}`}
+                    ></button>
+                  ))}
+                </div>
+                <div className="carousel-inner">
+                  {backgroundImage.map((imagePath, index) => (
+                    <a
+                      href="#"
+                      key={index}
+                      target="_blank"
+                      className={`carousel-item ${index === 0 ? "active" : ""}`}
+                      data-bs-interval="5000"
+                    >
+                      <div
+                        className="banner_commn_cls"
+                        style={{ backgroundImage: `url(${imagePath})` }}
+                      ></div>
+                    </a>
+                  ))}
+                </div>
               </div>
-              <div className="carousel-inner">
-                {backgroundImage.map((imagePath, index) => (
-                  <a
-                    href="#"
-                    key={index}
-                    target="_blank"
-                    className={`carousel-item ${index === 0 ? "active" : ""}`}
-                    data-bs-interval="5000"
-                  >
-                    <div
-                      className="banner_commn_cls"
-                      style={{ backgroundImage: `url(${imagePath})` }}
-                    ></div>
-                  </a>
-                ))}
-              </div>
-            </div>
+            ) : (
+              ""
+            )}
             <div className="banner_tab_blk">
               <button
                 className={`btn banner_map_tab ${

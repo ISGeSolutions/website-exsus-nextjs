@@ -450,9 +450,8 @@ function Index() {
 
     window.addEventListener("resize", equalHeight(true));
     setTimeout(() => {
-      // $('.carousel').carousel();
-      $('.carousel').carousel({
-        interval: 250 * 10
+      $("#carouselExampleIntervalMain").carousel({
+        interval: 250 * 10,
       });
     }, 2000);
   }, []);

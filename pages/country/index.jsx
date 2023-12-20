@@ -256,12 +256,24 @@ function Country() {
       );
       text = "REGIONS IN " + countrycode.toUpperCase(); // action="/countryregions?countrycode=south-africa"
     } else if (itemId == "itineraries") {
+      let destCode = "";
+      if (!countrycode) {
+        destCode = localStorage.getItem("country_code");
+      } else {
+        destCode = countrycode;
+      }
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url}-itineraries`;
+        `/destinations/${destinationcode
+          .replace(/&/g, "and")
+          .replace(/ /g, "-")}/${destCode
+          .replace(/&/g, "and")
+          .replace(/ /g, "-")}/${destCode
+          .replace(/&/g, "and")
+          .replace(/ /g, "-")}-itineraries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `Home/Destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url} itineraries`
+        `Home/Destinations/${destinationcode}/${destCode}/${destCode} itineraries`
       );
       text = countrycode.toUpperCase() + " ITINERARIES"; // action="/countryitineraries?countrycode=south-africa"
     } else if (itemId == "places-to-stay") {
@@ -372,6 +384,9 @@ function Country() {
   };
 
   useEffect(() => {
+    if (countrycode != undefined) {
+      localStorage.setItem("country_code", countrycode);
+    }
     setSelectedOptionCountry(countryOptions[0]);
     setSelectedOptionRegion(regionOptions[0]);
     setSelectedOptionMonth(monthOptions[0]);
@@ -599,42 +614,46 @@ function Country() {
       ) : (
         <div>
           <section className="banner_blk_row">
-            <div
-              id="carouselExampleInterval"
-              className="carousel slide"
-              data-bs-ride="carousel"
-            >
-              <div className="carousel-indicators">
-                {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
-                {backgroundImage.map((_, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    data-bs-target="#carouselExampleInterval"
-                    data-bs-slide-to={index}
-                    className={index === 0 ? "active" : ""}
-                    aria-current={index === 0 ? "true" : "false"}
-                    aria-label={`Slide ${index + 1}`}
-                  ></button>
-                ))}
+            {backgroundImage ? (
+              <div
+                id="carouselExampleInterval"
+                className="carousel slide"
+                data-bs-ride="carousel"
+              >
+                <div className="carousel-indicators">
+                  {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
+                  {backgroundImage.map((_, index) => (
+                    <button
+                      key={index}
+                      type="button"
+                      data-bs-target="#carouselExampleInterval"
+                      data-bs-slide-to={index}
+                      className={index === 0 ? "active" : ""}
+                      aria-current={index === 0 ? "true" : "false"}
+                      aria-label={`Slide ${index + 1}`}
+                    ></button>
+                  ))}
+                </div>
+                <div className="carousel-inner">
+                  {backgroundImage.map((imagePath, index) => (
+                    <a
+                      href="#"
+                      key={index}
+                      target="_blank"
+                      className={`carousel-item ${index === 0 ? "active" : ""}`}
+                      data-bs-interval="5000"
+                    >
+                      <div
+                        className="banner_commn_cls"
+                        style={{ backgroundImage: `url(${imagePath})` }}
+                      ></div>
+                    </a>
+                  ))}
+                </div>
               </div>
-              <div className="carousel-inner">
-                {backgroundImage.map((imagePath, index) => (
-                  <a
-                    href="#"
-                    key={index}
-                    target="_blank"
-                    className={`carousel-item ${index === 0 ? "active" : ""}`}
-                    data-bs-interval="5000"
-                  >
-                    <div
-                      className="banner_commn_cls"
-                      style={{ backgroundImage: `url(${imagePath})` }}
-                    ></div>
-                  </a>
-                ))}
-              </div>
-            </div>
+            ) : (
+              ""
+            )}
             <div className="banner_tab_blk">
               <button
                 className={`btn banner_map_tab ${

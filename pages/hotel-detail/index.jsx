@@ -47,16 +47,43 @@ function Index() {
   }
 
   const generateDynamicLink = (item) => {
-    // let locationCountry = item?.attributes?.location?.toLowerCase().replace(/&/g, "and");
-    // let countryName = locationCountry.match(/\|(.+)/);
-    // countryName = countryName ? countryName[1].trim() : null;
-    // let location = locationCountry?.match(/(.+?)\|/);
-    // location = location ? location[1].trim() : null;
-    // let hotelName = item?.attributes?.friendly_url?.replace(/ /g, "-").toLowerCase().replace(/&/g, "and");
-    // return regionWiseUrl + `/destinations/${destinationcode?.replace(/&/g, " and ")
-    //   .replace(/ /g, "-")
-    //   .toLowerCase()}/hotels/${countryName?.replace(/ /g, "-")}/${location?.replace(/ /g, "-")}/${hotelName}`;
+    return (
+      regionWiseUrl +
+      `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
+    );
   };
+
+  const handleRedirect = (item) => {
+    // const modifiedName = item.replace(/ /g, "-").toLowerCase();
+    router.push(
+      regionWiseUrl +
+        `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
+    );
+  };
+
+  // const generateDynamicLink = (item) => {
+  //   let locationCountry = item?.attributes?.location
+  //     ?.toLowerCase()
+  //     .replace(/&/g, "and");
+  //   let countryName = locationCountry.match(/\|(.+)/);
+  //   countryName = countryName ? countryName[1].trim() : null;
+  //   let location = locationCountry?.match(/(.+?)\|/);
+  //   location = location ? location[1].trim() : null;
+  //   let hotelName = item?.attributes?.friendly_url
+  //     ?.replace(/ /g, "-")
+  //     .toLowerCase()
+  //     .replace(/&/g, "and");
+  //   return (
+  //     regionWiseUrl +
+  //     `/destinations/${destinationcode
+  //       ?.replace(/&/g, " and ")
+  //       .replace(/ /g, "-")
+  //       .toLowerCase()}/hotels/${countryName?.replace(
+  //       / /g,
+  //       "-"
+  //     )}/${location?.replace(/ /g, "-")}/${hotelName}`
+  //   );
+  // };
 
   const websiteContentCheck = () => {
     homeService
@@ -186,7 +213,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -216,7 +243,8 @@ function Index() {
           `https://www.google.com/maps/embed/v1/place?q=` +
           map_latitude +
           `,` +
-          map_longitude + `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
+          map_longitude +
+          `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
         setMapVariable(mapTemp);
         setHotelData(x.data[0].attributes);
         let bestTimeTravelData = [];
@@ -385,8 +413,8 @@ function Index() {
                       {hotelData?.hotel_country_contents?.data[0]?.attributes?.currency_symbol.repeat(
                         Math.abs(
                           5 -
-                          hotelData?.hotel_country_contents?.data[0]
-                            ?.attributes?.price_guide_value
+                            hotelData?.hotel_country_contents?.data[0]
+                              ?.attributes?.price_guide_value
                         )
                       )}
                     </label>
@@ -405,11 +433,19 @@ function Index() {
                     <div className="country_highlight_inr">
                       <p>
                         <span>Perfect for</span>
-                        {hotelData?.perfect_for_text?.replace(/&nbsp/g, "")?.replace(/&rsquo/g, "")?.replace(/:/g, "")?.replace(/;/g, "")}
+                        {hotelData?.perfect_for_text
+                          ?.replace(/&nbsp/g, "")
+                          ?.replace(/&rsquo/g, "")
+                          ?.replace(/:/g, "")
+                          ?.replace(/;/g, "")}
                       </p>
                       <p>
                         <span>In the know</span>
-                        {hotelData?.in_the_know_text?.replace(/&nbsp/g, "")?.replace(/&rsquo/g, "")?.replace(/:/g, "")?.replace(/;/g, "")}
+                        {hotelData?.in_the_know_text
+                          ?.replace(/&nbsp/g, "")
+                          ?.replace(/&rsquo/g, "")
+                          ?.replace(/:/g, "")
+                          ?.replace(/;/g, "")}
                       </p>
                     </div>
                   </div>
@@ -688,8 +724,8 @@ function Index() {
                                         {item?.attributes?.currency_symbol.repeat(
                                           Math.abs(
                                             5 -
-                                            item?.attributes
-                                              ?.price_guide_value
+                                              item?.attributes
+                                                ?.price_guide_value
                                           )
                                         )}
                                       </label>
@@ -713,7 +749,10 @@ function Index() {
                             </li>
                           </ul>
                         </div>
-                        <button className="btn card_slider_btn justify-content-end">
+                        <button
+                          className="btn card_slider_btn justify-content-end"
+                          onClick={() => handleRedirect(item)}
+                        >
                           <span className="view_itnry_link">
                             View this hotel
                             <em className="fa-solid fa-chevron-right"></em>

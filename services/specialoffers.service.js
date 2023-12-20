@@ -26,7 +26,7 @@ export const specialoffersService = {
 };
 
 function getAllOffers() {
-  const specialoffersUrl = `${publicRuntimeConfig.apiUrl}/api/special-offers`;
+  const specialoffersUrl = `${publicRuntimeConfig.apiUrl}/api/special-offers?populate[0]=hotel`;
   return fetchWrapper.get(specialoffersUrl);
 }
 
