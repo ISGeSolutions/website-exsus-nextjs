@@ -74,7 +74,7 @@ function Index() {
 
     router.push(
       regionWiseUrl +
-      `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-itineraries/${item.attributes?.friendly_url}`
+        `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-itineraries/${item.attributes?.friendly_url}`
     );
   };
 
@@ -100,8 +100,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -212,7 +212,6 @@ function Index() {
     } else {
     }
   };
-
 
   useEffect(() => {
     $(".succss_msg_parnt").hide();
@@ -520,10 +519,199 @@ function Index() {
                 </div>
               </div>
             ) : (
-              ''
+              ""
             )}
             <Inspireme />
           </section>
+          {/* <section class="banner_blk_row">
+            <div
+              id="carouselExampleInterval"
+              class="carousel slide"
+              data-bs-ride="carousel"
+            >
+              <div class="carousel-indicators">
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleInterval"
+                  data-bs-slide-to="0"
+                  class="active"
+                  aria-current="true"
+                  aria-label="Slide 1"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleInterval"
+                  data-bs-slide-to="1"
+                  aria-label="Slide 2"
+                ></button>
+                <button
+                  type="button"
+                  data-bs-target="#carouselExampleInterval"
+                  data-bs-slide-to="2"
+                  aria-label="Slide 3"
+                ></button>
+              </div>
+              <div class="carousel-inner">
+                <a
+                  href="#"
+                  target="_blank"
+                  class="carousel-item active"
+                  data-bs-interval="5000"
+                >
+                  <div class="banner_img_custom01 banner_commn_cls"></div>
+                  <div class="carousel-caption">
+                    <img
+                      src="images/banner-logo.png"
+                      alt="banner-logo"
+                      class="img-fluid"
+                    />
+                    <h2>Discover the Seychelles</h2>
+                  </div>
+                </a>
+                <a
+                  href="#"
+                  target="_blank"
+                  class="carousel-item"
+                  data-bs-interval="5000"
+                >
+                  <div class="banner_img_custom02 banner_commn_cls"></div>
+                  <div class="carousel-caption">
+                    <img
+                      src="images/banner-logo.png"
+                      alt="banner-logo"
+                      class="img-fluid"
+                    />
+                    <h2>Perfect for romance</h2>
+                  </div>
+                </a>
+                <a
+                  href="#"
+                  target="_blank"
+                  class="carousel-item"
+                  data-bs-interval="5000"
+                >
+                  <div class="banner_img_custom03 banner_commn_cls"></div>
+                  <div class="carousel-caption">
+                    <img
+                      src="images/banner-logo.png"
+                      alt="banner-logo"
+                      class="img-fluid"
+                    />
+                    <h2>Explore new adventure</h2>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="banner_dropdwn_row">
+              <div class="container-md">
+                <div class="banner_dropdwn_inr d-block d-md-flex">
+                  <div class="banner_dropdwn_blk">
+                    <div class="select_drpdwn">
+                      <select
+                        class="form-select"
+                        aria-label="Choose a destination"
+                      >
+                        <option selected>Choose a destination</option>
+                        <option value="Asia">Asia</option>
+                        <option value="Europe">Europe</option>
+                        <option value="South America">South America</option>
+                        <option value="Indian Subcontinent">
+                          Indian Subcontinent
+                        </option>
+                        <option value="North America & Caribbean">
+                          North America & Caribbean
+                        </option>
+                        <option value="Africa">Africa</option>
+                        <option value="Central America">Central America</option>
+                        <option value="Australasia & South Pacific">
+                          Australasia & South Pacific
+                        </option>
+                        <option value="Middle East & North Africa">
+                          Middle East & North Africa
+                        </option>
+                        <option value="Indian ocean">Indian ocean</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="banner_dropdwn_blk ps-0 ps-md-2">
+                    <div class="select_drpdwn">
+                      <select class="form-select" aria-label="Choose a reason">
+                        <option selected>Choose a reason</option>
+                        <option value="Adventure Holidays">
+                          Adventure Holidays
+                        </option>
+                        <option value="Classic Journeys">
+                          Classic Journeys
+                        </option>
+                        <option value="Trains, Planes, Cars & Cruises">
+                          Trains, Planes, Cars & Cruises
+                        </option>
+                        <option value="Food & Culture Holidays">
+                          Food & Culture Holidays
+                        </option>
+                        <option value="Family Holidays">Family Holidays</option>
+                        <option value="Once in a lifetime holidays">
+                          Once in a lifetime holidays
+                        </option>
+                        <option value="Short breaks & Escapes">
+                          Short breaks & Escapes
+                        </option>
+                        <option value="Wildlife & Safari Holidays">
+                          Wildlife & Safari Holidays
+                        </option>
+                        <option value="Luxury Beach holidays">
+                          Luxury Beach holidays
+                        </option>
+                        <option value="Special occasions">
+                          Special occasions
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="banner_dropdwn_blk ps-0 ps-md-2">
+                    <div class="select_drpdwn">
+                      <select class="form-select" aria-label="Choose a month">
+                        <option selected>Choose a month</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="banner_inspire_btn ps-0 ps-md-2">
+                    <button type="button" class="btn btn-primary prmry_btn">
+                      Inspire me
+                      <img src="images/right-arrow.svg" alt="arrow" />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="#ffffff"
+                        shape-rendering="geometricPrecision"
+                        text-rendering="geometricPrecision"
+                        image-rendering="optimizeQuality"
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        viewBox="0 0 267 512.43"
+                      >
+                        <path
+                          fill-rule="nonzero"
+                          d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section> */}
 
           <section className="card_blk_row">
             <div className="container">
@@ -661,9 +849,11 @@ function Index() {
                               )
                               .map((res1) => (
                                 <li key={res1.id}>
-                                  {`from ${res1.attributes?.currency_symbol ?? ""
-                                    }${res1.attributes?.price ?? " xxxx"
-                                    } per person`}
+                                  {`from ${
+                                    res1.attributes?.currency_symbol ?? ""
+                                  }${
+                                    res1.attributes?.price ?? " xxxx"
+                                  } per person`}
                                 </li>
                               ))}
                             <li>
