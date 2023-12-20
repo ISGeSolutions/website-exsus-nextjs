@@ -318,7 +318,6 @@ function CountryItinararies(props) {
   };
 
   const closeAlert = () => {
-    // console.log("closeAlert");
     setAlert(null);
   };
 
@@ -442,7 +441,6 @@ function CountryItinararies(props) {
 
   equalHeight(true);
 
-  console.log("countryItinerary", router.query);
   useEffect(() => {
     if (!localStorage.getItem("websitecontent_uk")) {
       websiteContentCheck();

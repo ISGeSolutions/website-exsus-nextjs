@@ -100,6 +100,17 @@ function CountryWhentogo(props) {
     return tds;
   };
 
+  // const sendDataToParentHandler = (data) => {
+  //   // Send the data to the parent
+  //   onDataFromChild(data);
+  //   // You can perform other actions related to sending data to the parent
+  // };
+
+  // const handleClick = (e) => {
+  //   // Call the callback function to send data to the parent
+  //   sendDataToParent(e);
+  // };
+
   const generateDynamicLink = (item) => {
     // console.log('item', item);
     return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
@@ -613,7 +624,7 @@ function CountryWhentogo(props) {
           <div className="row">
             <div className="col-sm-6">
               <div className="card_blk_inr card_blk_overlay">
-                <a href="#" target="_blank">
+                <a onClick={() => sendDataToParentHandler("itineraries")}>
                   <img
                     src="./../../images/country_detail01.jpg"
                     alt="Card image 07"
@@ -654,7 +665,7 @@ function CountryWhentogo(props) {
 
             <div className="col-sm-6">
               <div className="card_blk_inr card_blk_overlay">
-                <a href="#">
+                <a target="_blank" onClick={() => handleClick("itineraries")}>
                   <img
                     src="./../../images/country_detail02.jpg"
                     alt="Card image 08"

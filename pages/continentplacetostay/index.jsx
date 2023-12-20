@@ -211,6 +211,7 @@ function ContinentPlacesToStay(props) {
   }
 
   const handleFilterClick = (item) => {
+    setAlert(null);
     page = 0;
     setAllHotels([]);
     setActiveItem(item);
@@ -699,7 +700,7 @@ function ContinentPlacesToStay(props) {
                                 {item?.attributes?.hotel_country_contents?.data?.map(
                                   (item) => {
                                     return (
-                                      <li class="price_guide_tooltip">
+                                      <li class="price_guide_tooltip" key={item?.id}>
                                         Price guide:
                                         <span
                                           key={item?.id}

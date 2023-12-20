@@ -267,6 +267,7 @@ function ContinentItinararies(props) {
   };
 
   const handleFilterClick = (item) => {
+    setAlert(null);
     page = 0;
     setItineraries([]);
     setActiveItem(item);
