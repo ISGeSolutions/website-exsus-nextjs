@@ -47,8 +47,21 @@ function Index() {
     }
   }
 
-  const handleRedirect = () => {
-    router.push(regionWiseUrl + `/hotel-detail`);
+  const handleRedirect = (item) => {
+    // router.push(regionWiseUrl + `/hotel-detail`);
+    router.push(
+      regionWiseUrl +
+        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/&/g, " and ")
+          .replace(/ /g, "-")
+          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.friendly_url}`
+    );
   };
 
   const equalHeight = (resize) => {
@@ -77,7 +90,24 @@ function Index() {
   equalHeight(true);
 
   const generateDynamicLink = (item) => {
-    return regionWiseUrl + `/hotel-detail`;
+    // return regionWiseUrl + `/hotel-detail`;
+    let hotelName = item?.attributes?.friendly_url
+      ?.replace(/ /g, "-")
+      .toLowerCase()
+      .replace(/&/g, "and");
+    return (
+      regionWiseUrl +
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
+    );
   };
 
   const handleFilterClick = (item) => {
@@ -475,7 +505,7 @@ function Index() {
                               <span
                                 key={res?.id}
                                 className="view_itnry_link"
-                                onClick={handleRedirect}
+                                onClick={() => handleRedirect(item)}
                               >
                                 View this hotel
                                 <em className="fa-solid fa-chevron-right"></em>

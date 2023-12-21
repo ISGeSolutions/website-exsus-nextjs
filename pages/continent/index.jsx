@@ -92,9 +92,21 @@ function Index() {
       setFriendlyUrl(`Home/Destinations/${destinationDetails?.friendly_url}`);
       text = destinationDetails?.header_text;
     } else if (itemId == "countries") {
+      let destCode = "";
+      if (!destinationcode) {
+        destCode = localStorage.getItem("destination_code");
+      } else {
+        destCode = destinationcode;
+      }
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url}-countries`;
+        `/destinations/${destCode
+          .replace(/&/g, "and")
+          .replace(/ /g, "-")
+          .toLowerCase()}/${destCode
+          .replace(/&/g, "and")
+          .replace(/ /g, "-")
+          .toLowerCase()}-countries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url} countries`
@@ -447,6 +459,12 @@ function Index() {
       }, 0);
     };
     window.addEventListener("resize", equalHeight(true));
+    setTimeout(() => {
+      // $('.carousel').carousel();
+      $(".carousel").carousel({
+        interval: 250 * 10,
+      });
+    }, 2000);
   }, [destinationcode]);
 
   return (
@@ -505,11 +523,13 @@ function Index() {
                       key={index}
                       target="_blank"
                       className={`carousel-item ${index === 0 ? "active" : ""}`}
-                      data-bs-interval="5000"
+                      data-interval="3000"
                     >
                       <div
                         className="banner_commn_cls"
-                        style={{ backgroundImage: `url(${imagePath})` }}
+                        style={{
+                          backgroundImage: `url(${imagePath})`,
+                        }}
                       ></div>
                     </a>
                   ))}

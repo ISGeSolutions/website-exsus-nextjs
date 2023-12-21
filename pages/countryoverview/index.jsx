@@ -494,7 +494,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
             </div>
             {/* <div className="full_loader_parnt_blk loader_parnt_blk" style="display: block;"><div className="loader-circle-2"></div></div> */}
           </section>
-          <section className="favrites_blk_row  light_grey">
+          <section className="favrites_blk_row light_grey">
             <div className="container">
               <h3 className="title_cls">
                 PLACES TO STAY IN {countryData?.country_name} HANDPICKED BY

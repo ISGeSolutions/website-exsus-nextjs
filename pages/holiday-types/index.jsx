@@ -143,6 +143,12 @@ function Index() {
       .catch((error) => {
         setIsLoading(false);
       });
+    setTimeout(() => {
+      // $('.carousel').carousel();
+      $(".carousel").carousel({
+        interval: 250 * 10,
+      });
+    }, 2000);
   }, []);
 
   return (
