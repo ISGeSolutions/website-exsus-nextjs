@@ -13,6 +13,7 @@ var React = require("react");
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { destinationService } from "../../services";
+import { EnquiryButton } from "../../components/common/EnquiryBtn";
 
 export default Index;
 
@@ -288,6 +289,12 @@ function Index() {
       .catch((error) => {
         setIsLoading(false);
       });
+    setTimeout(() => {
+      // $('.carousel').carousel();
+      $(".carousel").carousel({
+        interval: 250 * 10,
+      });
+    }, 2000);
   }, [hotelName]);
 
   return (
@@ -350,29 +357,6 @@ function Index() {
                 ))}
               </div>
             </div>
-            <div className="banner_tab_blk">
-              <button className="btn banner_map_tab">Map</button>
-              <button className="btn banner_img_tab banner_tab_active">
-                Images
-              </button>
-            </div>
-            <div className="banner_map_blk">
-              <Iframe
-                width="640px"
-                height="320px"
-                id=""
-                className=""
-                display="block"
-                src={mapVariable}
-                position="relative"
-                style="border:0;"
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-              {/* src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" */}
-            </div>
-            {/* <p>{mapVariable}</p> */}
           </section>
 
           <section className="trvl_info_row">
@@ -785,98 +769,12 @@ function Index() {
             </div>
             {/* <div className="full_loader_parnt_blk loader_parnt_blk" style="display: block;"><div className="loader-circle-2"></div></div> */}
           </section>
-          {/* <section className="favrites_blk_row light_grey">
-                <div className="container">
-                    <h3 className="title_cls">More places to stay in Beijing & Northern China</h3>
-                    <div className="card_slider_row">
-                        <i id="left">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z" /></svg>
-                        </i>
-                        <div className="carousel00 region_carousel00">
-                            <div className="card_slider_inr">
-                                <div className="card_slider">
-                                    <a className="card_slider_img">
-                                        <img src="images/region_hotel02.jpg" alt="region_hotel02" className="img-fluid" />
-                                    </a>
-                                    <div className="card_slider_cnt places_to_stay_cnt">
-                                        <h4><a >The Opposite House</a></h4>
-                                        <ul>
-                                            <li>Location: Beijing &amp; Northern China | China</li>
-                                            <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
-                                            <li>Best for:<span>Chic Design, City Hotel, Boutique Hotel, History &amp; Heritage</span></li>
-                                        </ul>
-                                    </div>
-                                    <button className="btn card_slider_btn justify-content-end light_grey_btn_bg">
-                                        <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
-                                    </button>
-                                </div>
-                            </div>
 
-                            <div className="card_slider_inr">
-                                <div className="card_slider">
-                                    <a className="card_slider_img">
-                                        <img src="images/country_hotel06.jpg" alt="country_hotel06" className="img-fluid" />
-                                    </a>
-                                    <div className="card_slider_cnt places_to_stay_cnt">
-                                        <h4><a >Aman Summer Palace</a></h4>
-                                        <ul>
-                                            <li>Location: Beijing &amp; Northern China | China</li>
-                                            <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
-                                            <li>Best for:<span>Luxury Hotel, City Hotel, Chic Design, Setting &amp; Views</span></li>
-                                        </ul>
-                                    </div>
-                                    <button className="btn card_slider_btn justify-content-end light_grey_btn_bg">
-                                        <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div className="card_slider_inr">
-                                <div className="card_slider">
-                                    <a className="card_slider_img">
-                                        <img src="images/region_hotel03.jpg" alt="region_hotel03" className="img-fluid" />
-                                    </a>
-                                    <div className="card_slider_cnt places_to_stay_cnt">
-                                        <h4><a >Jing's Residence</a></h4>
-                                        <ul>
-                                            <li>Location: Beijing &amp; Northern China | China</li>
-                                            <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
-                                            <li>Best for:<span>History &amp; Heritage, Cultural Immersion, Peace &amp; Quiet, Couples</span></li>
-                                        </ul>
-                                    </div>
-                                    <button className="btn card_slider_btn justify-content-end light_grey_btn_bg">
-                                        <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div className="card_slider_inr">
-                                <div className="card_slider">
-                                    <a className="card_slider_img">
-                                        <img src="images/region_hotel01.jpg" alt="region_hotel01" className="img-fluid" />
-                                    </a>
-                                    <div className="card_slider_cnt places_to_stay_cnt">
-                                        <h4><a >Four Seasons Beijing</a></h4>
-                                        <ul>
-                                            <li>Location: Beijing &amp; Northern China | China</li>
-                                            <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
-                                            <li>Best for:<span>Luxury Hotel, City Hotel, Chic Design, Setting &amp; Views</span></li>
-                                        </ul>
-                                    </div>
-                                    <button className="btn card_slider_btn justify-content-end light_grey_btn_bg">
-                                        <span className="view_itnry_link">View this hotel<em className="fa-solid fa-chevron-right"></em></span>
-                                    </button>
-                                </div>
-                            </div>
-
-                        </div>
-                        <i id="right">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                        </i>
-                    </div>
-                </div>
-                <div className="full_loader_parnt_blk loader_parnt_blk" style="display: none;"><div className="loader-circle-2"></div></div>
-            </section> */}
+          <section className="make_enqury_row">
+            <div className="container">
+              <EnquiryButton />
+            </div>
+          </section>
 
           <section
             aria-label="Sign up for newsletter"

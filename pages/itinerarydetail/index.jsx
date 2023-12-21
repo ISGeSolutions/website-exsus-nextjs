@@ -438,6 +438,12 @@ function Index() {
       .catch((error) => {
         setIsLoading(false);
       });
+    setTimeout(() => {
+      // $('.carousel').carousel();
+      $(".carousel").carousel({
+        interval: 250 * 10,
+      });
+    }, 2000);
   }, [itin_name, itin_code, countrycode, destinationcode]);
 
   return (
@@ -512,52 +518,6 @@ function Index() {
               </div>
             </div>
           </section>
-
-          {/* <section className="banner_blk_row">
-                <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel"> */}
-          {/* <div className="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="4" aria-label="Slide 5"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="5" aria-label="Slide 6"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="6" aria-label="Slide 7"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="7" aria-label="Slide 8"></button>
-                    </div> */}
-          {/* <div className="carousel-inner">
-                        {bannerImages?.map((element, index) => (
-                            <img key={index} src={`https://d33ys3jnmuivbg.cloudfront.net/ilimages` + element} alt="destination card01" className="img-fluid" />
-                        ))} */}
-          {/* <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
-                            <div className="banner_commn_cls itinery_overvw_banner01"></div>
-                        </a> */}
-
-          {/* <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                            <div className="itinery_overvw_banner02 banner_commn_cls"></div>
-                        </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                            <div className="itinery_overvw_banner03 banner_commn_cls"></div>
-                        </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                            <div className="itinery_overvw_banner04 banner_commn_cls"></div>
-                        </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                            <div className="itinery_overvw_banner05 banner_commn_cls"></div>
-                        </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                            <div className="itinery_overvw_banner06 banner_commn_cls"></div>
-                        </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                            <div className="itinery_overvw_banner07 banner_commn_cls"></div>
-                        </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
-                            <div className="itinery_overvw_banner08 banner_commn_cls"></div>
-                        </a> */}
-
-          {/* </div>
-                </div>
-            </section> */}
 
           <section className="trvl_info_row">
             <div className="container">

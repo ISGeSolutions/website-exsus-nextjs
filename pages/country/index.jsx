@@ -252,7 +252,7 @@ function Country() {
         `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url}-regions`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `estinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url} regions`
+        `Home/Destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url} regions`
       );
       text = "REGIONS IN " + countrycode.toUpperCase(); // action="/countryregions?countrycode=south-africa"
     } else if (itemId == "itineraries") {
@@ -515,10 +515,10 @@ function Country() {
         });
     }
 
-    const carousel = document.querySelector("#carouselExampleInterval");
-    if (carousel) {
-      new bootstrap.Carousel(carousel);
-    }
+    // const carousel = document.querySelector("#carouselExampleInterval");
+    // if (carousel) {
+    //   new bootstrap.Carousel(carousel);
+    // }
 
     if (countrycode) {
       countriesService
@@ -581,6 +581,12 @@ function Country() {
     };
 
     window.addEventListener("resize", equalHeight(true));
+    setTimeout(() => {
+      // $('.carousel').carousel();
+      $(".carousel").carousel({
+        interval: 250 * 10,
+      });
+    }, 2000);
   }, [countrycode]);
 
   return (
