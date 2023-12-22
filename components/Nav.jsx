@@ -92,6 +92,12 @@ function Nav() {
     setOverlayVisible(false);
   };
 
+  const redirectToHolidayLink = (id) => {
+    const lowercasecountry = id?.replace(/ /g, "-").toLowerCase();
+    router.push(`${regionWiseUrl}/holiday-types/${lowercasecountry}`);
+    setOverlayVisible(false);
+  };
+
   const handleClientReview = () => {
     router.push(`why-us/client-reviews`);
   };
@@ -787,7 +793,7 @@ function Nav() {
                                     <button
                                       className="btn header_nav_btn"
                                       onClick={() =>
-                                        redirectToAllLink(
+                                        redirectToHolidayLink(
                                           holidaystypesItem?.attributes
                                             ?.holiday_type_group_name
                                         )

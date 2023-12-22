@@ -430,7 +430,6 @@ function ContinentItinararies(props) {
   };
 
   equalHeight(true);
-  console.log("continentrouter", router);
 
   useEffect(() => {
     if (!localStorage.getItem("websitecontent_uk")) {
@@ -732,7 +731,7 @@ function ContinentItinararies(props) {
                                   )
                                   .map((res1) => (
                                     <li key={res1.id}>
-                                      {`from ${
+                                      {`From ${
                                         res1.attributes?.currency_symbol ?? ""
                                       }${
                                         res1.attributes?.price ?? " xxxx"

@@ -583,7 +583,7 @@ function Index() {
           {/* Continent Sub tabs */}
           <div>
             <section
-              className="destination_tab_row  m-3"
+              className="destination_tab_row  light_grey pb-0"
               ref={divRef}
               id="scrollToElement"
             >
