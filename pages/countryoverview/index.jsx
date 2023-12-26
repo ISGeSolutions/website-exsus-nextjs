@@ -551,11 +551,16 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                             {item?.attributes?.hotel_country_contents?.data?.map(
                               (item) => {
                                 return (
-                                  <li>
+                                  <li
+                                    class="price_guide_tooltip"
+                                    key={item?.id}
+                                  >
                                     Price guide:
                                     <span
                                       tabIndex="0"
-                                      title={item?.attributes?.price_guide_text}
+                                      data-title={
+                                        item?.attributes?.price_guide_text
+                                      }
                                     >
                                       {item?.attributes?.currency_symbol.repeat(
                                         Math.abs(
@@ -591,7 +596,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                           </ul>
                         </div>
                         <button
-                          className="btn card_slider_btn justify-content-end"
+                          className="btn card_slider_btn justify-content-end light_grey_btn_bg"
                           onClick={() => handleRedirect1(item)}
                         >
                           <span className="view_itnry_link">

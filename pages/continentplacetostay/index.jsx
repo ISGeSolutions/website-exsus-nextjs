@@ -153,7 +153,6 @@ function ContinentPlacesToStay(props) {
     destinationService
       .getAllHotels(page + 1, item, decode, region)
       .then((response) => {
-        console.log("response", response);
         setMetaData(response.meta.pagination);
         const newItineraries = response.data;
         if (newItineraries.length > 0) {
@@ -258,6 +257,7 @@ function ContinentPlacesToStay(props) {
   };
 
   const generateDynamicLink = (item) => {
+    debugger;
     let hotelName = item?.attributes?.friendly_url
       ?.replace(/ /g, "-")
       .toLowerCase()
@@ -700,7 +700,10 @@ function ContinentPlacesToStay(props) {
                                 {item?.attributes?.hotel_country_contents?.data?.map(
                                   (item) => {
                                     return (
-                                      <li class="price_guide_tooltip" key={item?.id}>
+                                      <li
+                                        class="price_guide_tooltip"
+                                        key={item?.id}
+                                      >
                                         Price guide:
                                         <span
                                           key={item?.id}

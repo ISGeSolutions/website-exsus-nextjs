@@ -359,7 +359,7 @@ function Index() {
         setIsLoading(false);
       });
   };
-  
+
   function onSubmit() {
     if (selectedOptionDestination.length == 0) {
       showAlert("Please select atleast one option", "error");
@@ -558,7 +558,6 @@ function Index() {
   };
 
   useEffect(() => {
-
     if (!localStorage.getItem("websitecontent_uk")) {
       websiteContentCheck();
     }
@@ -616,6 +615,12 @@ function Index() {
     loadMoreData(activeItem);
 
     window.addEventListener("resize", equalHeight(true));
+    setTimeout(() => {
+      // $('.carousel').carousel();
+      $(".carousel").carousel({
+        interval: 250 * 10,
+      });
+    }, 2000);
   }, [router, valueWithBr, hcode]);
 
   return (
