@@ -39,25 +39,25 @@ function Layout({ children }) {
       value: "uk",
       label: "UK SITE",
       image: "./../../images/uk-flag-round-circle-icon.svg",
-      country_name: "UK"
+      country_name: "UK",
     },
     {
       value: "us",
       label: "US SITE",
       image: "/../../images/usa-flag-round-circle-icon.svg",
-      country_name: "US"
+      country_name: "US",
     },
     {
       value: "asia",
       label: "ASIA SITE",
       image: "./../../images/thailand-flag-round-circle-icon.svg",
-      country_name: "ASIA"
+      country_name: "ASIA",
     },
     {
       value: "in",
       label: "INDIA SITE",
       image: "/../../images/india-flag-round-circle-icon.svg",
-      country_name: "INDIA"
+      country_name: "INDIA",
     },
   ];
   const [selected, setSelected] = useState();
@@ -77,7 +77,7 @@ function Layout({ children }) {
     if (window && window.site_region) {
       if (window.site_region !== "uk") {
         region = window.site_region;
-        console.log(region)
+        console.log(region);
       }
     }
   }
@@ -109,7 +109,13 @@ function Layout({ children }) {
 
     // debugger;
     const regionArr = ["uk", "us", "asia", "in"];
-    if (router.asPath === '/' || router.asPath === '/uk' || router.asPath === '/us' || router.asPath === '/asia' || router.asPath === '/in') {
+    if (
+      router.asPath === "/" ||
+      router.asPath === "/uk" ||
+      router.asPath === "/us" ||
+      router.asPath === "/asia" ||
+      router.asPath === "/in"
+    ) {
       // console.log("At least one string is found in the sentence.");
       myArray = pathRouter.split("/");
     } else if (isAnyStringInSentence(regionArr, router.asPath)) {
@@ -162,9 +168,8 @@ function Layout({ children }) {
   };
 
   useEffect(() => {
-
     // Temporarily disable warnings in the development environment
-    console.warn = () => { };
+    console.warn = () => {};
 
     $(".header_country_list > ul .header_country_label").on(
       "mouseenter",
@@ -363,7 +368,7 @@ function Layout({ children }) {
                   src="/images/abta_new_logo.png"
                   alt="Abta logo"
                   className="img-fluid"
-                />
+                />{" "}
               </NavLink>
               {/* <img
                 src="/images/abta_new_logo.png"
@@ -375,12 +380,12 @@ function Layout({ children }) {
                 src="/images/atol-new-logo.png"
                 alt="Atol logo"
                 className="img-fluid"
-              />
+              />{" "}
               <img
                 src="/images/AITO.png"
                 alt="Aito logo"
                 className="img-fluid"
-              />
+              />{" "}
               <img
                 src="/images/iata-accredagent.png"
                 alt="Iata logo"

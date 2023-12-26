@@ -967,7 +967,7 @@ function Index() {
                               )
                               .map((res1) => (
                                 <li key={res1.id}>
-                                  {`from ${
+                                  {`From ${
                                     res1.attributes?.currency_symbol ?? ""
                                   }${
                                     res1.attributes?.price ?? " xxxx"
@@ -985,7 +985,7 @@ function Index() {
                           </ul>
                         </div>
                         <button
-                          className="btn card_slider_btn"
+                          className="btn card_slider_btn light_grey_btn_bg"
                           onClick={() => handleRedirect(item)}
                         >
                           <span>{item?.attributes?.no_of_nites_notes}</span>

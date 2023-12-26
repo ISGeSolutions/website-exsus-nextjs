@@ -64,6 +64,28 @@ function Index() {
     );
   };
 
+  const generateDynamicLink = (res) => {
+    debugger;
+    // return regionWiseUrl + `/hotel-detail`;
+    let hotelName = res?.attributes?.friendly_url
+      ?.replace(/ /g, "-")
+      .toLowerCase()
+      .replace(/&/g, "and");
+    return (
+      regionWiseUrl +
+      `/destinations/${res?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${res?.attributes?.country?.data?.attributes?.country_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${res?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
+    );
+  };
+
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
         "card_slider_cnt places_to_stay_cnt"
@@ -88,27 +110,6 @@ function Index() {
   };
 
   equalHeight(true);
-
-  const generateDynamicLink = (item) => {
-    // return regionWiseUrl + `/hotel-detail`;
-    let hotelName = item?.attributes?.friendly_url
-      ?.replace(/ /g, "-")
-      .toLowerCase()
-      .replace(/&/g, "and");
-    return (
-      regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
-        .replace(/ /g, "-")
-        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${hotelName}`
-    );
-  };
 
   const handleFilterClick = (item) => {
     setActiveItem(item);
@@ -217,6 +218,7 @@ function Index() {
     specialoffersService
       .getAllOffers()
       .then((x) => {
+        debugger;
         setAllOffers(x.data);
         setFriendlyUrl(`home/special offers`);
       })
@@ -444,13 +446,13 @@ function Index() {
               <div className="card_slider_row">
                 <div className="carousel00 width_100">
                   <div className="row">
-                    {allOffers?.map((res) => (
+                    {allOffers?.slice(0, allOffers.length).map((res) => (
                       <div className="col-sm-6 col-lg-4 col-xxl-3">
                         <div className="card_slider_inr">
                           <div className="card_slider">
                             <NavLink
                               key={res?.id}
-                              href={generateDynamicLink(res?.id)}
+                              href={generateDynamicLink(res)}
                             >
                               {/* console.log error => Dont add anchor tag for the below element. you can use onclick fun. */}
                               <span
