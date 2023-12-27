@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import { Link, Spinner, Signup, FriendlyUrl } from "components";
 import { Layout } from "components/users";
-import { userService, holidaytypesService } from "services";
+import { userService, holidaytypesService, whyusService } from "services";
 import { Inspireme } from "components";
 import generateDynamicLink from "components/utils/generateLink";
 import { NavLink } from "components";
@@ -29,6 +29,7 @@ function Index() {
   const [isLoading, setIsLoading] = useState(true);
   const [activeItem, setActiveItem] = useState("recommended");
   const [customPageContent, setCustomPage] = useState([]);
+  const [testimonials, setTestimonials] = useState([]);
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -143,6 +144,17 @@ function Index() {
       .catch((error) => {
         setIsLoading(false);
       });
+
+    whyusService
+      .getAllDestinationTravelReviews()
+      .then((x) => {
+        setTestimonials(x.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+      });
+
     setTimeout(() => {
       // $('.carousel').carousel();
       $(".carousel").carousel({
@@ -364,6 +376,56 @@ function Index() {
                     />
                   </svg>
                 </button>
+              </div>
+            </div>
+          </section>
+
+          <section
+            aria-label="Client Testimonials"
+            className="testimonials_blk_row"
+          >
+            <div className="container">
+              <div
+                id="Testimonials"
+                className="carousel slide"
+                data-bs-ride="carousel"
+              >
+                <div className="carousel-indicators">
+                  {testimonials.map((_, index) => (
+                    <button
+                      key={index}
+                      type="button"
+                      data-bs-target="#Testimonials"
+                      data-bs-slide-to={index}
+                      className={index === 0 ? "active" : ""}
+                      aria-current={index === 0 ? "true" : "false"}
+                      aria-label={`Slide ${index + 1}`}
+                    ></button>
+                  ))}
+                </div>
+                <div className="carousel-inner">
+                  {testimonials.map((text, index) => (
+                    <div
+                      key={index}
+                      target="_blank"
+                      className={`carousel-item ${index === 0 ? "active" : ""}`}
+                      data-bs-interval="5000"
+                    >
+                      <div className="carousel-caption">
+                        <p
+                          dangerouslySetInnerHTML={{
+                            __html: text?.attributes.review_short_text,
+                          }}
+                        />
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: text?.attributes.client_name,
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </section>

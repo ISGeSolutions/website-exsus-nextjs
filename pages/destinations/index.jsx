@@ -331,7 +331,7 @@ function Index() {
                 <div className="destinations_cntnt_blk">
                   <h2>{headingTag}</h2>
                   <p
-                    className="mb-4"
+                    // className="mb-3"
                     dangerouslySetInnerHTML={{ __html: longText }}
                   ></p>
                 </div>
