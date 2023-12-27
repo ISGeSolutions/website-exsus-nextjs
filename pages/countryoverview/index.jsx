@@ -442,7 +442,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                               )
                               .map((res1) => (
                                 <li key={res1.id}>
-                                  {`from ${
+                                  {`From ${
                                     res1.attributes?.currency_symbol ?? ""
                                   }${
                                     res1.attributes?.price ?? " xxxx"
@@ -600,7 +600,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                           onClick={() => handleRedirect1(item)}
                         >
                           <span className="view_itnry_link">
-                            View this hotel
+                            View hotel
                             <em className="fa-solid fa-chevron-right"></em>
                           </span>
                         </button>

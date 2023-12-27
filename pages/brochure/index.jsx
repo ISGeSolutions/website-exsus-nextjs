@@ -2,7 +2,12 @@ import { useState, useEffect } from "react";
 
 import { Link, Spinner } from "components";
 import { Layout } from "components/users";
-import { userService, contactusService, alertService, brochureService } from "services";
+import {
+  userService,
+  contactusService,
+  alertService,
+  brochureService,
+} from "services";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
@@ -158,28 +163,34 @@ function Index() {
         <title>Request Brochure - Exsus Travel</title>
       </Head>
       <Layout>
-        <header className="brochure_header_row">
-          <div className="container">
-            <img
-              src="images/brochure_header_img.jpg"
-              alt="brochure_header_img"
-            />
-            <h1>Request Brochures</h1>
-            <p>
-              Our brochure, titled ‘Escape the Obvious’, highlights the very
-              finest experiences in our most popular destinations, and can be
-              used to inspire your clients to discover some of the most
-              spectacular places in the world on a unique, bespoke holiday
-              crafted by our knowledgeable and experienced experts.
-            </p>
-            <p>
-              Below, please specify how many brochures you would like up to the
-              quantity of four, if you require a digital version only please
-              select this option. A digital version will also be sent out to all
-              agents who request brochures in the post.
-            </p>
-          </div>
-        </header>
+        <body className="brochure_body_cls">
+          <header className="brochure_header_row">
+            <div className="container">
+              <img
+                src="images/brochure_header_img.jpg"
+                alt="brochure_header_img"
+              />
+              <h1>Request Brochures</h1>
+              <p>
+                Our brochure, titled ‘Escape the Obvious’, highlights the very
+                finest experiences in our most popular destinations, and can be
+                used to inspire your clients to discover some of the most
+                spectacular places in the world on a unique, bespoke holiday
+                crafted by our knowledgeable and experienced experts.
+              </p>
+              <p>
+                In order to help reduce our impact on the environment, we will
+                only be sending out digital copies of the brochure. To request
+                yours, please provide the information below and one will be sent
+                to you straight away.
+              </p>
+              <p>
+                If you're a Travel Agent, please{" "}
+                <a href="brochure_request_trade.html">click here</a> .{" "}
+              </p>
+            </div>
+          </header>
+        </body>
         <main className="contact_form_row brochure_form_row">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="container">
@@ -190,8 +201,9 @@ function Index() {
                       type="text"
                       name="first_name"
                       {...register("first_name")}
-                      className={`form-control ${errors.first_name ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.first_name ? "is-invalid" : ""
+                      }`}
                       aria-label="First name *"
                       placeholder="First name *"
                     />
@@ -206,8 +218,9 @@ function Index() {
                       type="text"
                       name="title"
                       {...register("last_name")}
-                      className={`form-control ${errors.last_name ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.last_name ? "is-invalid" : ""
+                      }`}
                       aria-label="Last name *"
                       placeholder="Last name *"
                     />
@@ -222,8 +235,9 @@ function Index() {
                       type="email"
                       name="email_id"
                       {...register("email_id")}
-                      className={`form-control ${errors.email_id ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.email_id ? "is-invalid" : ""
+                      }`}
                       aria-label="Email *"
                       placeholder="Email *"
                     />
@@ -241,8 +255,9 @@ function Index() {
                       aria-label="Phone number *"
                       placeholder="Phone number *"
                       {...register("phone_no")}
-                      className={`form-control ${errors.phone_no ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.phone_no ? "is-invalid" : ""
+                      }`}
                     />
                   </div>
                 </div>
@@ -377,8 +392,9 @@ function Index() {
                           type="checkbox"
                           name="newsletter_mail_ind"
                           {...register("newsletter_mail_ind")}
-                          className={`form-check-input ${errors.newsletter_mail_ind ? "is-invalid" : ""
-                            }`}
+                          className={`form-check-input ${
+                            errors.newsletter_mail_ind ? "is-invalid" : ""
+                          }`}
                           id="exampleCheck1"
                         />
                         <label

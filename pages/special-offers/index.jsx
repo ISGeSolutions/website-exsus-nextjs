@@ -397,7 +397,7 @@ function Index() {
                 <div className="destinations_cntnt_blk">
                   <h2>{headingTag}</h2>
                   <p
-                    className="mb-4"
+                    // className="mb-4"
                     dangerouslySetInnerHTML={{ __html: longText }}
                   ></p>
                 </div>
@@ -421,7 +421,7 @@ function Index() {
                           }
                           onClick={() => handleFilterClick("recommended")}
                         >
-                          Recommended
+                          Exsus Recommends
                         </a>
                       </li>
                       <li>
