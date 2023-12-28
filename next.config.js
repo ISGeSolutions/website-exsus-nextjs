@@ -10,8 +10,7 @@ const nextConfig = {
 
   async rewrites() {
     return [
-
-      //index page 
+      //index page
       { source: "/uk", destination: "/" },
       { source: "/us", destination: "/" },
       { source: "/asia", destination: "/" },
@@ -147,7 +146,8 @@ const nextConfig = {
         destination: "/country",
       },
       {
-        source: "/asia/destinations/:continent/:country/:countrySlug-itineraries",
+        source:
+          "/asia/destinations/:continent/:country/:countrySlug-itineraries",
         destination: "/country",
       },
       {
@@ -165,7 +165,8 @@ const nextConfig = {
         destination: "/country",
       },
       {
-        source: "/asia/destinations/:continent/:country/:countrySlug-when-to-go",
+        source:
+          "/asia/destinations/:continent/:country/:countrySlug-when-to-go",
         destination: "/country",
       },
       {
@@ -179,15 +180,18 @@ const nextConfig = {
         destination: "/country",
       },
       {
-        source: "/us/destinations/:continent/:country/:countrySlug-places-to-stay",
+        source:
+          "/us/destinations/:continent/:country/:countrySlug-places-to-stay",
         destination: "/country",
       },
       {
-        source: "/asia/destinations/:continent/:country/:countrySlug-places-to-stay",
+        source:
+          "/asia/destinations/:continent/:country/:countrySlug-places-to-stay",
         destination: "/country",
       },
       {
-        source: "/in/destinations/:continent/:country/:countrySlug-places-to-stay",
+        source:
+          "/in/destinations/:continent/:country/:countrySlug-places-to-stay",
         destination: "/country",
       },
 
@@ -208,7 +212,6 @@ const nextConfig = {
         source: "/in/destinations/:continent/:country",
         destination: "/country_details",
       },
-
 
       // region_details
       {
@@ -233,7 +236,6 @@ const nextConfig = {
       { source: "/us/holiday-types", destination: "/holiday-types" },
       { source: "/asia/holiday-types", destination: "/holiday-types" },
       { source: "/in/holiday-types", destination: "/holiday-types" },
-
 
       // holidaytypeitineraries
       {
@@ -332,10 +334,25 @@ const nextConfig = {
       // special-offers
 
       // hotel-detail
-      { source: "/destinations/:continent/hotels/:country/:location/:hotelName", destination: "/hotel-detail" },
-      { source: "/us/destinations/:continent/hotels/:country/:location/:hotelName", destination: "/hotel-detail" },
-      { source: "/asia/destinations/:continent/hotels/:country/:location/:hotelName", destination: "/hotel-detail" },
-      { source: "/in/destinations/:continent/hotels/:country/:location/:hotelName", destination: "/hotel-detail" },
+      {
+        source: "/destinations/:continent/hotels/:country/:location/:hotelName",
+        destination: "/hotel-detail",
+      },
+      {
+        source:
+          "/us/destinations/:continent/hotels/:country/:location/:hotelName",
+        destination: "/hotel-detail",
+      },
+      {
+        source:
+          "/asia/destinations/:continent/hotels/:country/:location/:hotelName",
+        destination: "/hotel-detail",
+      },
+      {
+        source:
+          "/in/destinations/:continent/hotels/:country/:location/:hotelName",
+        destination: "/hotel-detail",
+      },
 
       // Blog
       { source: "/blog", destination: "/blog" },
@@ -526,15 +543,15 @@ const nextConfig = {
     apiUrl:
       process.env.NODE_ENV === "development"
         ? // ? 'https://e922710a-cb11-401b-ae5b-ef73740e1501.mock.pstmn.io' // development api
-        // : 'https://e922710a-cb11-401b-ae5b-ef73740e1501.mock.pstmn.io' // production api
-        // ? 'http://localhost:4000' // development api
-        // : 'http://localhost:4000' // production api
-        // ? 'https://mock.apidog.com/m1/379394-0-default' // development api
-        // : 'https://mock.apidog.com/m1/379394-0-default' // production api
-        //     ? 'http://13.233.122.205:1337' // development api
-        //     : 'http://13.233.122.205:1337' // production api
+          // : 'https://e922710a-cb11-401b-ae5b-ef73740e1501.mock.pstmn.io' // production api
+          // ? 'http://localhost:4000' // development api
+          // : 'http://localhost:4000' // production api
+          // ? 'https://mock.apidog.com/m1/379394-0-default' // development api
+          // : 'https://mock.apidog.com/m1/379394-0-default' // production api
+          //     ? 'http://13.233.122.205:1337' // development api
+          //     : 'http://13.233.122.205:1337' // production api
 
-        "https://cms-api.excelleresolutions.com" // development api
+          "https://cms-api.excelleresolutions.com" // development api
         : "https://cms-api.excelleresolutions.com", // production api
     apiUrl1:
       process.env.NODE_ENV === "development"

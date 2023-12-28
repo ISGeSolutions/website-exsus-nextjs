@@ -65,7 +65,7 @@ function Index() {
   };
 
   const generateDynamicLink = (res) => {
-    debugger;
+    console.log(res);
     // return regionWiseUrl + `/hotel-detail`;
     let hotelName = res?.attributes?.friendly_url
       ?.replace(/ /g, "-")
@@ -218,8 +218,8 @@ function Index() {
     specialoffersService
       .getAllOffers()
       .then((x) => {
-        debugger;
         setAllOffers(x.data);
+        console.log(x.data);
         setFriendlyUrl(`home/special offers`);
       })
       .catch((error) => {});
@@ -446,7 +446,7 @@ function Index() {
               <div className="card_slider_row">
                 <div className="carousel00 width_100">
                   <div className="row">
-                    {allOffers?.slice(0, allOffers.length).map((res) => (
+                    {allOffers?.map((res) => (
                       <div className="col-sm-6 col-lg-4 col-xxl-3">
                         <div className="card_slider_inr">
                           <div className="card_slider">

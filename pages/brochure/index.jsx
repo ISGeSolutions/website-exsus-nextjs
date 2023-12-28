@@ -145,6 +145,21 @@ function Index() {
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors } = formState;
 
+  let region = "uk";
+  let regionWiseUrl = "";
+  if (typeof window !== "undefined") {
+    if (window && window.site_region) {
+      if (window && window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+        region = window.site_region;
+      }
+    }
+  }
+
+  const generateDynamicLink = () => {
+    return regionWiseUrl + `/travel-agent-brochures`;
+  };
+
   function onSubmit(data) {
     return brochureService
       .sendBrochurerMail({ data })
@@ -163,34 +178,34 @@ function Index() {
         <title>Request Brochure - Exsus Travel</title>
       </Head>
       <Layout>
-        <body className="brochure_body_cls">
-          <header className="brochure_header_row">
-            <div className="container">
-              <img
-                src="images/brochure_header_img.jpg"
-                alt="brochure_header_img"
-              />
-              <h1>Request Brochures</h1>
-              <p>
-                Our brochure, titled ‘Escape the Obvious’, highlights the very
-                finest experiences in our most popular destinations, and can be
-                used to inspire your clients to discover some of the most
-                spectacular places in the world on a unique, bespoke holiday
-                crafted by our knowledgeable and experienced experts.
-              </p>
-              <p>
-                In order to help reduce our impact on the environment, we will
-                only be sending out digital copies of the brochure. To request
-                yours, please provide the information below and one will be sent
-                to you straight away.
-              </p>
-              <p>
-                If you're a Travel Agent, please{" "}
-                <a href="brochure_request_trade.html">click here</a> .{" "}
-              </p>
-            </div>
-          </header>
-        </body>
+        <header className="brochure_header_row">
+          <div className="container">
+            <img
+              src="images/brochure_header_img.jpg"
+              alt="brochure_header_img"
+            />
+            <h1>Request Brochures</h1>
+            <p>
+              Our brochure, titled ‘Escape the Obvious’, highlights the very
+              finest experiences in our most popular destinations, and can be
+              used to inspire your clients to discover some of the most
+              spectacular places in the world on a unique, bespoke holiday
+              crafted by our knowledgeable and experienced experts.
+            </p>
+            <p>
+              In order to help reduce our impact on the environment, we will
+              only be sending out digital copies of the brochure. To request
+              yours, please provide the information below and one will be sent
+              to you straight away.
+            </p>
+            <p>
+              If you're a Travel Agent, please{" "}
+              <a href={generateDynamicLink()}>click here</a> .
+              {/* <a href="/brochure-request-trade">click here</a> . */}
+            </p>
+          </div>
+        </header>
+
         <main className="contact_form_row brochure_form_row">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="container">
