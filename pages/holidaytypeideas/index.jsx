@@ -809,7 +809,7 @@ function Index() {
                                     )
                                     .map((res1) => (
                                       <li key={res1.id}>
-                                        {`from ${
+                                        {`From ${
                                           res1.attributes?.currency_symbol ?? ""
                                         }${
                                           res1.attributes?.price ?? " xxxx"
