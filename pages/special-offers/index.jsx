@@ -65,21 +65,24 @@ function Index() {
   };
 
   const generateDynamicLink = (res) => {
+    debugger;
     console.log(res);
     // return regionWiseUrl + `/hotel-detail`;
-    let hotelName = res?.attributes?.friendly_url
+    let hotelName = res?.attributes?.hotel?.data?.attributes?.friendly_url
       ?.replace(/ /g, "-")
       .toLowerCase()
       .replace(/&/g, "and");
     return (
       regionWiseUrl +
-      `/destinations/${res?.attributes?.destination?.data?.attributes?.destination_name
+      `/destinations/${res?.attributes?.hotel?.data?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
-        .toLowerCase()}/hotels/${res?.attributes?.country?.data?.attributes?.country_name
+        .toLowerCase()}/hotels/${res?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.country_name
         ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${res?.attributes?.region?.data?.attributes?.region_name
+        .replace(
+          /&/g,
+          "and"
+        )}/${res?.attributes?.hotel?.data?.attributes?.region?.data?.attributes?.region_name
         ?.replace(/ /g, "-")
         .replace(/&/g, "and")
         .toLowerCase()}/${hotelName}`
@@ -483,7 +486,11 @@ function Index() {
                               </h4>
                               <ul>
                                 <li>
-                                  Location: {res?.attributes?.subtitle_text}
+                                  Location:{" "}
+                                  {
+                                    res?.attributes?.hotel?.data?.attributes
+                                      ?.location
+                                  }
                                 </li>
                                 <li class="price_guide_tooltip">
                                   Price guide:

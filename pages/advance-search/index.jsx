@@ -507,11 +507,11 @@ function Index() {
                           className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
                           fdprocessedid="r5vpm6s"
                         >
-                          Show{" "}
+                          SHOW{" "}
                           {metaData.total - page * itemsPerPage > 12
                             ? 12
                             : metaData.total - page * itemsPerPage > 12}{" "}
-                          more items
+                          MORE HOLIDAY IDEAS
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="#ffffff"

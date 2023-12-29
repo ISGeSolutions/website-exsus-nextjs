@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-
+import { Inspireme } from "../../../components";
 import { Link, Spinner, Signup } from "components";
 import { Layout } from "components/users";
 import { userService } from "services";
@@ -34,7 +34,9 @@ function Index() {
   const [dictionaryFlag, setDictinaryFlag] = useState(false);
 
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt places_to_stay_cnt"),
+    var elements = document.getElementsByClassName(
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -336,41 +338,46 @@ function Index() {
                         <img src="/assets/./../images//destination_banner.jpg" />
                     </div>
                 </Carousel> */}
-            <div
-              id="carouselExampleInterval"
-              className="carousel slide"
-              data-bs-ride="carousel"
-            >
-              <div className="carousel-indicators">
-                {backgroundImage.map((_, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    data-bs-target="#carouselExampleInterval"
-                    data-bs-slide-to={index}
-                    className={index === 0 ? "active" : ""}
-                    aria-current={index === 0 ? "true" : "false"}
-                    aria-label={`Slide ${index + 1}`}
-                  ></button>
-                ))}
-                {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
+            {backgroundImage ? (
+              <div
+                id="carouselExampleInterval"
+                className="carousel slide"
+                data-bs-ride="carousel"
+              >
+                <div className="carousel-indicators">
+                  {backgroundImage.map((_, index) => (
+                    <button
+                      key={index}
+                      type="button"
+                      data-bs-target="#carouselExampleInterval"
+                      data-bs-slide-to={index}
+                      className={index === 0 ? "active" : ""}
+                      aria-current={index === 0 ? "true" : "false"}
+                      aria-label={`Slide ${index + 1}`}
+                    ></button>
+                  ))}
+                  {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
+                </div>
+                <div className="carousel-inner">
+                  {backgroundImage.map((imagePath, index) => (
+                    <NavLink
+                      key={index}
+                      href="#"
+                      className={`carousel-item ${index === 0 ? "active" : ""}`}
+                      data-bs-interval="5000"
+                    >
+                      <div
+                        className="banner_commn_cls"
+                        style={{ backgroundImage: `url(${imagePath})` }}
+                      ></div>
+                    </NavLink>
+                  ))}
+                </div>
               </div>
-              <div className="carousel-inner">
-                {backgroundImage.map((imagePath, index) => (
-                  <NavLink
-                    key={index}
-                    href="#"
-                    className={`carousel-item ${index === 0 ? "active" : ""}`}
-                    data-bs-interval="5000"
-                  >
-                    <div
-                      className="banner_commn_cls"
-                      style={{ backgroundImage: `url(${imagePath})` }}
-                    ></div>
-                  </NavLink>
-                ))}
-              </div>
-            </div>
+            ) : (
+              ""
+            )}
+            <Inspireme />
           </section>
 
           {/* Meet our experts call */}
