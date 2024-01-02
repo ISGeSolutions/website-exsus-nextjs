@@ -63,7 +63,11 @@
 }
 
 /* line 48, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.card_blk_row .card_blk_inr .card_blk_cntnt.card_blk_cntnt_top .card_blk_txt h3 {
+.card_blk_row
+  .card_blk_inr
+  .card_blk_cntnt.card_blk_cntnt_top
+  .card_blk_txt
+  h3 {
   font: 300 1.875rem/1.875rem "Roboto", sans-serif;
   margin-bottom: 0;
 }
@@ -136,43 +140,1103 @@
 }
 
 /* line 109, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01 {
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01 {
   flex: 0 0 20%;
 }
 
 /* line 112, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml a, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card a, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml a, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01 .holiday_types_card a, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr.card_slider_inr_sml a, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr .holiday_types_card a, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01.card_slider_inr_sml a, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01 .holiday_types_card a, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr.card_slider_inr_sml a, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr .holiday_types_card a, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01.card_slider_inr_sml a, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01 .holiday_types_card a, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr.card_slider_inr_sml a, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr .holiday_types_card a, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01.card_slider_inr_sml a, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01 .holiday_types_card a, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr.card_slider_inr_sml a, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr .holiday_types_card a, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01.card_slider_inr_sml a, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01 .holiday_types_card a, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr.card_slider_inr_sml a, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr .holiday_types_card a, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01.card_slider_inr_sml a, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01 .holiday_types_card a {
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  a,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  a {
   text-decoration: none;
   display: inline-block;
 }
 
 /* line 115, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml a:hover img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card a:hover img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml a:hover img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01 .holiday_types_card a:hover img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr.card_slider_inr_sml a:hover img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr .holiday_types_card a:hover img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01.card_slider_inr_sml a:hover img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01 .holiday_types_card a:hover img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr.card_slider_inr_sml a:hover img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr .holiday_types_card a:hover img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01.card_slider_inr_sml a:hover img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01 .holiday_types_card a:hover img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr.card_slider_inr_sml a:hover img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr .holiday_types_card a:hover img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01.card_slider_inr_sml a:hover img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01 .holiday_types_card a:hover img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr.card_slider_inr_sml a:hover img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr .holiday_types_card a:hover img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01.card_slider_inr_sml a:hover img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01 .holiday_types_card a:hover img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr.card_slider_inr_sml a:hover img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr .holiday_types_card a:hover img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01.card_slider_inr_sml a:hover img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01 .holiday_types_card a:hover img {
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  img {
   transform: scale(1.2);
 }
 
 /* line 118, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml a:hover h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card a:hover h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml a:hover h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01 .holiday_types_card a:hover h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr.card_slider_inr_sml a:hover h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr .holiday_types_card a:hover h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01.card_slider_inr_sml a:hover h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01 .holiday_types_card a:hover h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr.card_slider_inr_sml a:hover h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr .holiday_types_card a:hover h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01.card_slider_inr_sml a:hover h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01 .holiday_types_card a:hover h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr.card_slider_inr_sml a:hover h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr .holiday_types_card a:hover h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01.card_slider_inr_sml a:hover h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01 .holiday_types_card a:hover h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr.card_slider_inr_sml a:hover h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr .holiday_types_card a:hover h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01.card_slider_inr_sml a:hover h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01 .holiday_types_card a:hover h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr.card_slider_inr_sml a:hover h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr .holiday_types_card a:hover h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01.card_slider_inr_sml a:hover h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01 .holiday_types_card a:hover h4 {
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  h4 {
   color: #8aad56;
 }
 
 /* line 121, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml a:hover svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card a:hover svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml a:hover svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01 .holiday_types_card a:hover svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr.card_slider_inr_sml a:hover svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr .holiday_types_card a:hover svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01.card_slider_inr_sml a:hover svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01 .holiday_types_card a:hover svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr.card_slider_inr_sml a:hover svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr .holiday_types_card a:hover svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01.card_slider_inr_sml a:hover svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01 .holiday_types_card a:hover svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr.card_slider_inr_sml a:hover svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr .holiday_types_card a:hover svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01.card_slider_inr_sml a:hover svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01 .holiday_types_card a:hover svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr.card_slider_inr_sml a:hover svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr .holiday_types_card a:hover svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01.card_slider_inr_sml a:hover svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01 .holiday_types_card a:hover svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr.card_slider_inr_sml a:hover svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr .holiday_types_card a:hover svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01.card_slider_inr_sml a:hover svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01 .holiday_types_card a:hover svg {
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  a:hover
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  a:hover
+  svg {
   fill: #8aad56;
 }
 
 /* line 125, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01 .holiday_types_card .card_slider_inr_sml_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01 .holiday_types_card .card_slider_inr_sml_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01 .holiday_types_card .card_slider_inr_sml_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01 .holiday_types_card .card_slider_inr_sml_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01 .holiday_types_card .card_slider_inr_sml_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01 .holiday_types_card .card_slider_inr_sml_img {
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  .card_slider_inr_sml_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  .card_slider_inr_sml_img {
   overflow: hidden;
 }
 
 /* line 127, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01 .holiday_types_card .card_slider_inr_sml_img img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01 .holiday_types_card .card_slider_inr_sml_img img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01 .holiday_types_card .card_slider_inr_sml_img img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01 .holiday_types_card .card_slider_inr_sml_img img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01 .holiday_types_card .card_slider_inr_sml_img img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr .holiday_types_card .card_slider_inr_sml_img img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01.card_slider_inr_sml .card_slider_inr_sml_img img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01 .holiday_types_card .card_slider_inr_sml_img img {
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  .card_slider_inr_sml_img
+  img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  .card_slider_inr_sml_img
+  img {
   transition: all ease 0.3s;
 }
 
 /* line 131, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01 .holiday_types_card h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr.card_slider_inr_sml h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr .holiday_types_card h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01.card_slider_inr_sml h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01 .holiday_types_card h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr.card_slider_inr_sml h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr .holiday_types_card h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01.card_slider_inr_sml h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01 .holiday_types_card h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr.card_slider_inr_sml h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr .holiday_types_card h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01.card_slider_inr_sml h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01 .holiday_types_card h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr.card_slider_inr_sml h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr .holiday_types_card h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01.card_slider_inr_sml h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01 .holiday_types_card h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr.card_slider_inr_sml h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr .holiday_types_card h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01.card_slider_inr_sml h4, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01 .holiday_types_card h4 {
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  h4,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  h4 {
   display: flex;
   justify-content: space-between;
   font: 0.9375rem/1.25rem "Slabo 27px", serif;
@@ -184,14 +1248,198 @@
 }
 
 /* line 140, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml h4 svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr .holiday_types_card h4 svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_inr_sml h4 svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr01 .holiday_types_card h4 svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr.card_slider_inr_sml h4 svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr .holiday_types_card h4 svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01.card_slider_inr_sml h4 svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider_inr01 .holiday_types_card h4 svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr.card_slider_inr_sml h4 svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr .holiday_types_card h4 svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01.card_slider_inr_sml h4 svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider_inr01 .holiday_types_card h4 svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr.card_slider_inr_sml h4 svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr .holiday_types_card h4 svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01.card_slider_inr_sml h4 svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider_inr01 .holiday_types_card h4 svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr.card_slider_inr_sml h4 svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr .holiday_types_card h4 svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01.card_slider_inr_sml h4 svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider_inr01 .holiday_types_card h4 svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr.card_slider_inr_sml h4 svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr .holiday_types_card h4 svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01.card_slider_inr_sml h4 svg, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider_inr01 .holiday_types_card h4 svg {
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr.card_slider_inr_sml
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr
+  .holiday_types_card
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01.card_slider_inr_sml
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01
+  .holiday_types_card
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr.card_slider_inr_sml
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr
+  .holiday_types_card
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01.card_slider_inr_sml
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01
+  .holiday_types_card
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr.card_slider_inr_sml
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr
+  .holiday_types_card
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01.card_slider_inr_sml
+  h4
+  svg,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01
+  .holiday_types_card
+  h4
+  svg {
   width: 15px;
   height: 15px;
   margin-left: 10px;
 }
 
 /* line 150, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider .card_slider_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel01 .card_slider .card_slider_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .width_100 .card_slider .card_slider_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel00 .card_slider .card_slider_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .carousel01 .card_slider .card_slider_img, .favrites_blk_row.favrites_blk_small_card_row .card_slider_row01 .width_100 .card_slider .card_slider_img {
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .card_slider_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .card_slider_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .card_slider_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .card_slider_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .card_slider_img,
+.favrites_blk_row.favrites_blk_small_card_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .card_slider_img {
   height: auto;
 }
 
@@ -201,36 +1449,108 @@
 }
 
 /* line 187, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row, .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 {
+.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row,
+.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 {
   padding: 0;
 }
 
 /* line 189, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel00, .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel01, .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .width_100, .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .carousel00, .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .carousel01, .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .width_100 {
+.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel00,
+.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel01,
+.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .width_100,
+.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .carousel00,
+.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .carousel01,
+.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .width_100 {
   display: inline-block;
   overflow: unset;
 }
 
 /* line 192, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel00.dragging, .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel01.dragging, .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .width_100.dragging, .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .carousel00.dragging, .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .carousel01.dragging, .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .width_100.dragging {
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row
+  .carousel00.dragging,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row
+  .carousel01.dragging,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row
+  .width_100.dragging,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row01
+  .carousel00.dragging,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row01
+  .carousel01.dragging,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row01
+  .width_100.dragging {
   cursor: pointer;
   scroll-behavior: auto;
 }
 
 /* line 196, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel00 .card_slider_inr, .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel00 .card_slider_inr01, .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel01 .card_slider_inr, .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .carousel01 .card_slider_inr01, .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .width_100 .card_slider_inr, .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row .width_100 .card_slider_inr01, .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .carousel00 .card_slider_inr, .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .carousel00 .card_slider_inr01, .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .carousel01 .card_slider_inr, .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .carousel01 .card_slider_inr01, .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .width_100 .card_slider_inr, .favrites_blk_row.favrites_blk_no_slider_row .card_slider_row01 .width_100 .card_slider_inr01 {
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr,
+.favrites_blk_row.favrites_blk_no_slider_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01 {
   padding: 0 0 20px;
   height: 100%;
 }
 
 /* line 204, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row, .favrites_blk_row .card_slider_row01 {
+.favrites_blk_row .card_slider_row,
+.favrites_blk_row .card_slider_row01 {
   position: relative;
   padding: 0 40px;
 }
 
 /* line 207, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row i, .favrites_blk_row .card_slider_row01 i {
+.favrites_blk_row .card_slider_row i,
+.favrites_blk_row .card_slider_row01 i {
   top: 50%;
   height: 40px;
   width: 40px;
@@ -245,7 +1565,8 @@
 }
 
 /* line 219, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row i svg, .favrites_blk_row .card_slider_row01 i svg {
+.favrites_blk_row .card_slider_row i svg,
+.favrites_blk_row .card_slider_row01 i svg {
   width: 15px;
   height: 22px;
   display: inline-block;
@@ -253,28 +1574,37 @@
 }
 
 /* line 225, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row i:active, .favrites_blk_row .card_slider_row01 i:active {
+.favrites_blk_row .card_slider_row i:active,
+.favrites_blk_row .card_slider_row01 i:active {
   transform: translateY(-50%) scale(0.9);
 }
 
 /* line 229, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row i:hover svg, .favrites_blk_row .card_slider_row01 i:hover svg {
+.favrites_blk_row .card_slider_row i:hover svg,
+.favrites_blk_row .card_slider_row01 i:hover svg {
   fill: #8aad56;
 }
 
 /* line 233, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row i:first-child, .favrites_blk_row .card_slider_row01 i:first-child {
+.favrites_blk_row .card_slider_row i:first-child,
+.favrites_blk_row .card_slider_row01 i:first-child {
   left: 0;
   display: none;
 }
 
 /* line 237, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row i:last-child, .favrites_blk_row .card_slider_row01 i:last-child {
+.favrites_blk_row .card_slider_row i:last-child,
+.favrites_blk_row .card_slider_row01 i:last-child {
   right: 0;
 }
 
 /* line 241, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00, .favrites_blk_row .card_slider_row .carousel01, .favrites_blk_row .card_slider_row .width_100, .favrites_blk_row .card_slider_row01 .carousel00, .favrites_blk_row .card_slider_row01 .carousel01, .favrites_blk_row .card_slider_row01 .width_100 {
+.favrites_blk_row .card_slider_row .carousel00,
+.favrites_blk_row .card_slider_row .carousel01,
+.favrites_blk_row .card_slider_row .width_100,
+.favrites_blk_row .card_slider_row01 .carousel00,
+.favrites_blk_row .card_slider_row01 .carousel01,
+.favrites_blk_row .card_slider_row01 .width_100 {
   cursor: pointer;
   overflow: hidden;
   white-space: nowrap;
@@ -285,30 +1615,121 @@
 }
 
 /* line 252, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00.region_carousel00 .card_slider_cnt, .favrites_blk_row .card_slider_row .carousel01.region_carousel00 .card_slider_cnt, .favrites_blk_row .card_slider_row .width_100.region_carousel00 .card_slider_cnt, .favrites_blk_row .card_slider_row01 .carousel00.region_carousel00 .card_slider_cnt, .favrites_blk_row .card_slider_row01 .carousel01.region_carousel00 .card_slider_cnt, .favrites_blk_row .card_slider_row01 .width_100.region_carousel00 .card_slider_cnt {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00.region_carousel00
+  .card_slider_cnt,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01.region_carousel00
+  .card_slider_cnt,
+.favrites_blk_row
+  .card_slider_row
+  .width_100.region_carousel00
+  .card_slider_cnt,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00.region_carousel00
+  .card_slider_cnt,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01.region_carousel00
+  .card_slider_cnt,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100.region_carousel00
+  .card_slider_cnt {
   min-height: 180px;
 }
 
 /* line 259, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00.dragging, .favrites_blk_row .card_slider_row .carousel01.dragging, .favrites_blk_row .card_slider_row .width_100.dragging, .favrites_blk_row .card_slider_row01 .carousel00.dragging, .favrites_blk_row .card_slider_row01 .carousel01.dragging, .favrites_blk_row .card_slider_row01 .width_100.dragging {
+.favrites_blk_row .card_slider_row .carousel00.dragging,
+.favrites_blk_row .card_slider_row .carousel01.dragging,
+.favrites_blk_row .card_slider_row .width_100.dragging,
+.favrites_blk_row .card_slider_row01 .carousel00.dragging,
+.favrites_blk_row .card_slider_row01 .carousel01.dragging,
+.favrites_blk_row .card_slider_row01 .width_100.dragging {
   cursor: grab;
   scroll-behavior: auto;
 }
 
 /* line 263, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00 .card_slider_inr, .favrites_blk_row .card_slider_row .carousel00 .card_slider_inr01, .favrites_blk_row .card_slider_row .carousel01 .card_slider_inr, .favrites_blk_row .card_slider_row .carousel01 .card_slider_inr01, .favrites_blk_row .card_slider_row .width_100 .card_slider_inr, .favrites_blk_row .card_slider_row .width_100 .card_slider_inr01, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider_inr, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider_inr01, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider_inr, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider_inr01, .favrites_blk_row .card_slider_row01 .width_100 .card_slider_inr, .favrites_blk_row .card_slider_row01 .width_100 .card_slider_inr01 {
+.favrites_blk_row .card_slider_row .carousel00 .card_slider_inr,
+.favrites_blk_row .card_slider_row .carousel00 .card_slider_inr01,
+.favrites_blk_row .card_slider_row .carousel01 .card_slider_inr,
+.favrites_blk_row .card_slider_row .carousel01 .card_slider_inr01,
+.favrites_blk_row .card_slider_row .width_100 .card_slider_inr,
+.favrites_blk_row .card_slider_row .width_100 .card_slider_inr01,
+.favrites_blk_row .card_slider_row01 .carousel00 .card_slider_inr,
+.favrites_blk_row .card_slider_row01 .carousel00 .card_slider_inr01,
+.favrites_blk_row .card_slider_row01 .carousel01 .card_slider_inr,
+.favrites_blk_row .card_slider_row01 .carousel01 .card_slider_inr01,
+.favrites_blk_row .card_slider_row01 .width_100 .card_slider_inr,
+.favrites_blk_row .card_slider_row01 .width_100 .card_slider_inr01 {
   position: relative;
   padding: 0 10px;
   flex: 0 0 33.3%;
 }
 
 /* line 267, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00 .card_slider_inr.card_slider_optn02, .favrites_blk_row .card_slider_row .carousel00 .card_slider_inr01.card_slider_optn02, .favrites_blk_row .card_slider_row .carousel01 .card_slider_inr.card_slider_optn02, .favrites_blk_row .card_slider_row .carousel01 .card_slider_inr01.card_slider_optn02, .favrites_blk_row .card_slider_row .width_100 .card_slider_inr.card_slider_optn02, .favrites_blk_row .card_slider_row .width_100 .card_slider_inr01.card_slider_optn02, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider_inr.card_slider_optn02, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider_inr01.card_slider_optn02, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider_inr.card_slider_optn02, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider_inr01.card_slider_optn02, .favrites_blk_row .card_slider_row01 .width_100 .card_slider_inr.card_slider_optn02, .favrites_blk_row .card_slider_row01 .width_100 .card_slider_inr01.card_slider_optn02 {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr.card_slider_optn02,
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider_inr01.card_slider_optn02,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr.card_slider_optn02,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider_inr01.card_slider_optn02,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr.card_slider_optn02,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider_inr01.card_slider_optn02,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr.card_slider_optn02,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_inr01.card_slider_optn02,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr.card_slider_optn02,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_inr01.card_slider_optn02,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr.card_slider_optn02,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider_inr01.card_slider_optn02 {
   flex: 0 0 25%;
 }
 
 /* line 271, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00 .card_slider, .favrites_blk_row .card_slider_row .carousel01 .card_slider, .favrites_blk_row .card_slider_row .width_100 .card_slider, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider, .favrites_blk_row .card_slider_row01 .width_100 .card_slider {
+.favrites_blk_row .card_slider_row .carousel00 .card_slider,
+.favrites_blk_row .card_slider_row .carousel01 .card_slider,
+.favrites_blk_row .card_slider_row .width_100 .card_slider,
+.favrites_blk_row .card_slider_row01 .carousel00 .card_slider,
+.favrites_blk_row .card_slider_row01 .carousel01 .card_slider,
+.favrites_blk_row .card_slider_row01 .width_100 .card_slider {
   width: 100%;
   text-decoration: none;
   color: #ffffff;
@@ -318,12 +1739,22 @@
 }
 
 /* line 279, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00 .card_slider:hover img, .favrites_blk_row .card_slider_row .carousel01 .card_slider:hover img, .favrites_blk_row .card_slider_row .width_100 .card_slider:hover img, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider:hover img, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider:hover img, .favrites_blk_row .card_slider_row01 .width_100 .card_slider:hover img {
+.favrites_blk_row .card_slider_row .carousel00 .card_slider:hover img,
+.favrites_blk_row .card_slider_row .carousel01 .card_slider:hover img,
+.favrites_blk_row .card_slider_row .width_100 .card_slider:hover img,
+.favrites_blk_row .card_slider_row01 .carousel00 .card_slider:hover img,
+.favrites_blk_row .card_slider_row01 .carousel01 .card_slider:hover img,
+.favrites_blk_row .card_slider_row01 .width_100 .card_slider:hover img {
   transform: scale(1.2);
 }
 
 /* line 282, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_img, .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_img, .favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_img, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider .card_slider_img, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider .card_slider_img, .favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_img {
+.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_img,
+.favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_img,
+.favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_img,
+.favrites_blk_row .card_slider_row01 .carousel00 .card_slider .card_slider_img,
+.favrites_blk_row .card_slider_row01 .carousel01 .card_slider .card_slider_img,
+.favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_img {
   margin-bottom: 15px;
   width: 100%;
   height: 180px;
@@ -332,20 +1763,129 @@
 }
 
 /* line 288, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_img img, .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_img img, .favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_img img, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider .card_slider_img img, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider .card_slider_img img, .favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_img img {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .card_slider_img
+  img,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .card_slider_img
+  img,
+.favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_img img,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .card_slider_img
+  img,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .card_slider_img
+  img,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .card_slider_img
+  img {
   width: 100%;
   transition: all ease 0.3s;
   height: 100%;
 }
 
 /* line 294, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt, .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt, .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt, .favrites_blk_row .card_slider_row .carousel01 .card_slider .places_to_stay_cnt, .favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_cnt, .favrites_blk_row .card_slider_row .width_100 .card_slider .places_to_stay_cnt, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider .card_slider_cnt, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider .places_to_stay_cnt, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider .card_slider_cnt, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider .places_to_stay_cnt, .favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_cnt, .favrites_blk_row .card_slider_row01 .width_100 .card_slider .places_to_stay_cnt {
+.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt,
+.favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt,
+.favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt,
+.favrites_blk_row .card_slider_row .carousel01 .card_slider .places_to_stay_cnt,
+.favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_cnt,
+.favrites_blk_row .card_slider_row .width_100 .card_slider .places_to_stay_cnt,
+.favrites_blk_row .card_slider_row01 .carousel00 .card_slider .card_slider_cnt,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt,
+.favrites_blk_row .card_slider_row01 .carousel01 .card_slider .card_slider_cnt,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt,
+.favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_cnt,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .places_to_stay_cnt {
   cursor: default;
   flex: 1;
 }
 
 /* line 297, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt h4, .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt h4, .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt h4, .favrites_blk_row .card_slider_row .carousel01 .card_slider .places_to_stay_cnt h4, .favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_cnt h4, .favrites_blk_row .card_slider_row .width_100 .card_slider .places_to_stay_cnt h4, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider .card_slider_cnt h4, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider .places_to_stay_cnt h4, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider .card_slider_cnt h4, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider .places_to_stay_cnt h4, .favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_cnt h4, .favrites_blk_row .card_slider_row01 .width_100 .card_slider .places_to_stay_cnt h4 {
+.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt h4,
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  h4,
+.favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt h4,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  h4,
+.favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_cnt h4,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  h4,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  h4,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  h4,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  h4,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  h4,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  h4,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  h4 {
   margin-bottom: 15px;
   white-space: pre-wrap;
   font: 1.0625rem/1.375rem "Slabo 27px", serif;
@@ -353,7 +1893,90 @@
 }
 
 /* line 302, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt h4 a, .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt h4 a, .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt h4 a, .favrites_blk_row .card_slider_row .carousel01 .card_slider .places_to_stay_cnt h4 a, .favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_cnt h4 a, .favrites_blk_row .card_slider_row .width_100 .card_slider .places_to_stay_cnt h4 a, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider .card_slider_cnt h4 a, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider .places_to_stay_cnt h4 a, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider .card_slider_cnt h4 a, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider .places_to_stay_cnt h4 a, .favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_cnt h4 a, .favrites_blk_row .card_slider_row01 .width_100 .card_slider .places_to_stay_cnt h4 a {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  h4
+  a,
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  h4
+  a,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  h4
+  a,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  h4
+  a,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  h4
+  a,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  h4
+  a,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  h4
+  a,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  h4
+  a,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  h4
+  a,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  h4
+  a,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  h4
+  a,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  h4
+  a {
   font: 1.0625rem/1.375rem "Slabo 27px", serif;
   text-transform: uppercase;
   text-decoration: none;
@@ -361,44 +1984,627 @@
 }
 
 /* line 307, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt h4 a:hover, .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt h4 a:hover, .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt h4 a:hover, .favrites_blk_row .card_slider_row .carousel01 .card_slider .places_to_stay_cnt h4 a:hover, .favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_cnt h4 a:hover, .favrites_blk_row .card_slider_row .width_100 .card_slider .places_to_stay_cnt h4 a:hover, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider .card_slider_cnt h4 a:hover, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider .places_to_stay_cnt h4 a:hover, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider .card_slider_cnt h4 a:hover, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider .places_to_stay_cnt h4 a:hover, .favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_cnt h4 a:hover, .favrites_blk_row .card_slider_row01 .width_100 .card_slider .places_to_stay_cnt h4 a:hover {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  h4
+  a:hover,
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  h4
+  a:hover,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  h4
+  a:hover,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  h4
+  a:hover,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  h4
+  a:hover,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  h4
+  a:hover,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  h4
+  a:hover,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  h4
+  a:hover,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  h4
+  a:hover,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  h4
+  a:hover,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  h4
+  a:hover,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  h4
+  a:hover {
   color: #8aad56;
 }
 
 /* line 311, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt h4:hover, .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt h4:hover, .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt h4:hover, .favrites_blk_row .card_slider_row .carousel01 .card_slider .places_to_stay_cnt h4:hover, .favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_cnt h4:hover, .favrites_blk_row .card_slider_row .width_100 .card_slider .places_to_stay_cnt h4:hover, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider .card_slider_cnt h4:hover, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider .places_to_stay_cnt h4:hover, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider .card_slider_cnt h4:hover, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider .places_to_stay_cnt h4:hover, .favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_cnt h4:hover, .favrites_blk_row .card_slider_row01 .width_100 .card_slider .places_to_stay_cnt h4:hover {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  h4:hover,
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  h4:hover,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  h4:hover,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  h4:hover,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  h4:hover,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  h4:hover,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  h4:hover,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  h4:hover,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  h4:hover,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  h4:hover,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  h4:hover,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  h4:hover {
   color: #8aad56;
 }
 
 /* line 315, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt ul, .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt ul, .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt ul, .favrites_blk_row .card_slider_row .carousel01 .card_slider .places_to_stay_cnt ul, .favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_cnt ul, .favrites_blk_row .card_slider_row .width_100 .card_slider .places_to_stay_cnt ul, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider .card_slider_cnt ul, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider .places_to_stay_cnt ul, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider .card_slider_cnt ul, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider .places_to_stay_cnt ul, .favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_cnt ul, .favrites_blk_row .card_slider_row01 .width_100 .card_slider .places_to_stay_cnt ul {
+.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt ul,
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  ul,
+.favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt ul,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  ul,
+.favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_cnt ul,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  ul,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  ul,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  ul,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  ul,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  ul,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  ul,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  ul {
   padding-bottom: 20px;
 }
 
 /* line 317, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt ul li, .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt ul li, .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt ul li, .favrites_blk_row .card_slider_row .carousel01 .card_slider .places_to_stay_cnt ul li, .favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_cnt ul li, .favrites_blk_row .card_slider_row .width_100 .card_slider .places_to_stay_cnt ul li, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider .card_slider_cnt ul li, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider .places_to_stay_cnt ul li, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider .card_slider_cnt ul li, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider .places_to_stay_cnt ul li, .favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_cnt ul li, .favrites_blk_row .card_slider_row01 .width_100 .card_slider .places_to_stay_cnt ul li {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  ul
+  li,
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  ul
+  li,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  ul
+  li,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  ul
+  li,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  ul
+  li,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  ul
+  li,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li {
   font: 300 0.875rem/1.25rem "Roboto", sans-serif;
   white-space: pre-wrap;
 }
 
 /* line 320, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt ul li:last-child, .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt ul li:last-child, .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt ul li:last-child, .favrites_blk_row .card_slider_row .carousel01 .card_slider .places_to_stay_cnt ul li:last-child, .favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_cnt ul li:last-child, .favrites_blk_row .card_slider_row .width_100 .card_slider .places_to_stay_cnt ul li:last-child, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider .card_slider_cnt ul li:last-child, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider .places_to_stay_cnt ul li:last-child, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider .card_slider_cnt ul li:last-child, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider .places_to_stay_cnt ul li:last-child, .favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_cnt ul li:last-child, .favrites_blk_row .card_slider_row01 .width_100 .card_slider .places_to_stay_cnt ul li:last-child {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  ul
+  li:last-child,
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li:last-child,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  ul
+  li:last-child,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li:last-child,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  ul
+  li:last-child,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li:last-child,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  ul
+  li:last-child,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li:last-child,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  ul
+  li:last-child,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li:last-child,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  ul
+  li:last-child,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li:last-child {
   margin-bottom: 0;
 }
 
 /* line 323, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt ul li span, .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt ul li span, .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt ul li span, .favrites_blk_row .card_slider_row .carousel01 .card_slider .places_to_stay_cnt ul li span, .favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_cnt ul li span, .favrites_blk_row .card_slider_row .width_100 .card_slider .places_to_stay_cnt ul li span, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider .card_slider_cnt ul li span, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider .places_to_stay_cnt ul li span, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider .card_slider_cnt ul li span, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider .places_to_stay_cnt ul li span, .favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_cnt ul li span, .favrites_blk_row .card_slider_row01 .width_100 .card_slider .places_to_stay_cnt ul li span {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  span,
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li
+  span,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  span,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li
+  span,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  span,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li
+  span,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  span,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li
+  span,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  span,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li
+  span,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  span,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li
+  span {
   color: #8aad56;
   margin-left: 2px;
 }
 
 /* line 326, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt ul li span label, .favrites_blk_row .card_slider_row .carousel00 .card_slider .places_to_stay_cnt ul li span label, .favrites_blk_row .card_slider_row .carousel01 .card_slider .card_slider_cnt ul li span label, .favrites_blk_row .card_slider_row .carousel01 .card_slider .places_to_stay_cnt ul li span label, .favrites_blk_row .card_slider_row .width_100 .card_slider .card_slider_cnt ul li span label, .favrites_blk_row .card_slider_row .width_100 .card_slider .places_to_stay_cnt ul li span label, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider .card_slider_cnt ul li span label, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider .places_to_stay_cnt ul li span label, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider .card_slider_cnt ul li span label, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider .places_to_stay_cnt ul li span label, .favrites_blk_row .card_slider_row01 .width_100 .card_slider .card_slider_cnt ul li span label, .favrites_blk_row .card_slider_row01 .width_100 .card_slider .places_to_stay_cnt ul li span label {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  span
+  label,
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li
+  span
+  label,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  span
+  label,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li
+  span
+  label,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  span
+  label,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li
+  span
+  label,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  span
+  label,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li
+  span
+  label,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  span
+  label,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li
+  span
+  label,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  span
+  label,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider
+  .places_to_stay_cnt
+  ul
+  li
+  span
+  label {
   color: #ffffff;
 }
 
 /* line 334, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn, .favrites_blk_row .card_slider_row .carousel01 .card_slider_btn, .favrites_blk_row .card_slider_row .width_100 .card_slider_btn, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider_btn, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider_btn, .favrites_blk_row .card_slider_row01 .width_100 .card_slider_btn {
+.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn,
+.favrites_blk_row .card_slider_row .carousel01 .card_slider_btn,
+.favrites_blk_row .card_slider_row .width_100 .card_slider_btn,
+.favrites_blk_row .card_slider_row01 .carousel00 .card_slider_btn,
+.favrites_blk_row .card_slider_row01 .carousel01 .card_slider_btn,
+.favrites_blk_row .card_slider_row01 .width_100 .card_slider_btn {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -412,23 +2618,87 @@
 }
 
 /* line 345, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn:hover, .favrites_blk_row .card_slider_row .carousel01 .card_slider_btn:hover, .favrites_blk_row .card_slider_row .width_100 .card_slider_btn:hover, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider_btn:hover, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider_btn:hover, .favrites_blk_row .card_slider_row01 .width_100 .card_slider_btn:hover {
+.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn:hover,
+.favrites_blk_row .card_slider_row .carousel01 .card_slider_btn:hover,
+.favrites_blk_row .card_slider_row .width_100 .card_slider_btn:hover,
+.favrites_blk_row .card_slider_row01 .carousel00 .card_slider_btn:hover,
+.favrites_blk_row .card_slider_row01 .carousel01 .card_slider_btn:hover,
+.favrites_blk_row .card_slider_row01 .width_100 .card_slider_btn:hover {
   background: #363636;
 }
 
 /* line 347, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn:hover .view_itnry_link, .favrites_blk_row .card_slider_row .carousel01 .card_slider_btn:hover .view_itnry_link, .favrites_blk_row .card_slider_row .width_100 .card_slider_btn:hover .view_itnry_link, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider_btn:hover .view_itnry_link, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider_btn:hover .view_itnry_link, .favrites_blk_row .card_slider_row01 .width_100 .card_slider_btn:hover .view_itnry_link {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider_btn:hover
+  .view_itnry_link,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider_btn:hover
+  .view_itnry_link,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider_btn:hover
+  .view_itnry_link,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_btn:hover
+  .view_itnry_link,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_btn:hover
+  .view_itnry_link,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider_btn:hover
+  .view_itnry_link {
   color: #8aad56;
 }
 
 /* line 351, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn span, .favrites_blk_row .card_slider_row .carousel01 .card_slider_btn span, .favrites_blk_row .card_slider_row .width_100 .card_slider_btn span, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider_btn span, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider_btn span, .favrites_blk_row .card_slider_row01 .width_100 .card_slider_btn span {
+.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn span,
+.favrites_blk_row .card_slider_row .carousel01 .card_slider_btn span,
+.favrites_blk_row .card_slider_row .width_100 .card_slider_btn span,
+.favrites_blk_row .card_slider_row01 .carousel00 .card_slider_btn span,
+.favrites_blk_row .card_slider_row01 .carousel01 .card_slider_btn span,
+.favrites_blk_row .card_slider_row01 .width_100 .card_slider_btn span {
   font: 400 0.875rem/0.875rem "Roboto", sans-serif;
   cursor: default;
 }
 
 /* line 355, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn .view_itnry_link, .favrites_blk_row .card_slider_row .carousel01 .card_slider_btn .view_itnry_link, .favrites_blk_row .card_slider_row .width_100 .card_slider_btn .view_itnry_link, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider_btn .view_itnry_link, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider_btn .view_itnry_link, .favrites_blk_row .card_slider_row01 .width_100 .card_slider_btn .view_itnry_link {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider_btn
+  .view_itnry_link,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider_btn
+  .view_itnry_link,
+.favrites_blk_row .card_slider_row .width_100 .card_slider_btn .view_itnry_link,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_btn
+  .view_itnry_link,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_btn
+  .view_itnry_link,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider_btn
+  .view_itnry_link {
   text-transform: uppercase;
   letter-spacing: 0.8px;
   font: 400 0.75rem/0.75rem "Roboto", sans-serif;
@@ -436,7 +2706,42 @@
 }
 
 /* line 360, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn .view_itnry_link em, .favrites_blk_row .card_slider_row .carousel01 .card_slider_btn .view_itnry_link em, .favrites_blk_row .card_slider_row .width_100 .card_slider_btn .view_itnry_link em, .favrites_blk_row .card_slider_row01 .carousel00 .card_slider_btn .view_itnry_link em, .favrites_blk_row .card_slider_row01 .carousel01 .card_slider_btn .view_itnry_link em, .favrites_blk_row .card_slider_row01 .width_100 .card_slider_btn .view_itnry_link em {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider_btn
+  .view_itnry_link
+  em,
+.favrites_blk_row
+  .card_slider_row
+  .carousel01
+  .card_slider_btn
+  .view_itnry_link
+  em,
+.favrites_blk_row
+  .card_slider_row
+  .width_100
+  .card_slider_btn
+  .view_itnry_link
+  em,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel00
+  .card_slider_btn
+  .view_itnry_link
+  em,
+.favrites_blk_row
+  .card_slider_row01
+  .carousel01
+  .card_slider_btn
+  .view_itnry_link
+  em,
+.favrites_blk_row
+  .card_slider_row01
+  .width_100
+  .card_slider_btn
+  .view_itnry_link
+  em {
   margin-left: 10px;
 }
 
@@ -660,7 +2965,8 @@
 }
 
 /* line 517, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.bookmark_row ul li a:hover, .bookmark_row ul li a:focus {
+.bookmark_row ul li a:hover,
+.bookmark_row ul li a:focus {
   color: #8aad56;
 }
 
@@ -717,7 +3023,12 @@
 }
 
 /* line 563, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.trvl_info_row .trvl_info_cntnt > div .para01 p:last-of-type + .gn_videoblkv201 {
+.trvl_info_row
+  .trvl_info_cntnt
+  > div
+  .para01
+  p:last-of-type
+  + .gn_videoblkv201 {
   margin-top: 35px;
 }
 
@@ -1009,17 +3320,28 @@
 }
 
 /* line 787, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row.our_exprts_slider .card_slider_row .carousel00 .card_slider_inr {
+.favrites_blk_row.our_exprts_slider
+  .card_slider_row
+  .carousel00
+  .card_slider_inr {
   flex: 0 0 100%;
 }
 
 /* line 790, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row.our_exprts_slider .card_slider_row .carousel00 .card_slider .card_slider_img {
+.favrites_blk_row.our_exprts_slider
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .card_slider_img {
   width: 50%;
 }
 
 /* line 794, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.favrites_blk_row.our_exprts_slider .card_slider_row .carousel00 .card_slider .card_slider_cnt {
+.favrites_blk_row.our_exprts_slider
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .card_slider_cnt {
   width: 50%;
   float: left;
 }
@@ -1067,7 +3389,8 @@
 }
 
 /* line 830, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.our_exprts_slider .carousel-control-prev, .our_exprts_slider .carousel-control-next {
+.our_exprts_slider .carousel-control-prev,
+.our_exprts_slider .carousel-control-next {
   width: 3%;
 }
 
@@ -1077,7 +3400,11 @@
 }
 
 /* line 837, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.our_exprts_img_txt.card_blk_row .card_blk_inr .card_blk_cntnt .card_blk_txt h3 {
+.our_exprts_img_txt.card_blk_row
+  .card_blk_inr
+  .card_blk_cntnt
+  .card_blk_txt
+  h3 {
   text-transform: capitalize;
   font: 300 1rem/1.25rem "Roboto", sans-serif;
   margin-bottom: 0;
@@ -1226,7 +3553,8 @@
 }
 
 /* line 965, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.destination_tab_row .tab-content > .active:focus-visible, .destination_tab_row .tab-content > .active:focus {
+.destination_tab_row .tab-content > .active:focus-visible,
+.destination_tab_row .tab-content > .active:focus {
   box-shadow: none;
 }
 
@@ -1471,7 +3799,8 @@
 }
 
 /* line 1158, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.destination_dropdwn_row .banner_dropdwn_blk select, .destination_dropdwn_row .banner_dropdwn_blk .bootstrap-select {
+.destination_dropdwn_row .banner_dropdwn_blk select,
+.destination_dropdwn_row .banner_dropdwn_blk .bootstrap-select {
   background: transparent;
   border-radius: 0;
   border-color: #fff;
@@ -1483,14 +3812,16 @@
 }
 
 /* line 1167, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.destination_dropdwn_row .banner_dropdwn_blk select option, .destination_dropdwn_row .banner_dropdwn_blk .bootstrap-select option {
+.destination_dropdwn_row .banner_dropdwn_blk select option,
+.destination_dropdwn_row .banner_dropdwn_blk .bootstrap-select option {
   padding: 10px;
   color: #231f20;
   height: 40px;
 }
 
 /* line 1172, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.destination_dropdwn_row .banner_dropdwn_blk select option:hover, .destination_dropdwn_row .banner_dropdwn_blk .bootstrap-select option:hover {
+.destination_dropdwn_row .banner_dropdwn_blk select option:hover,
+.destination_dropdwn_row .banner_dropdwn_blk .bootstrap-select option:hover {
   background: #8aad56;
 }
 
@@ -1645,7 +3976,7 @@
 
 /* line 1299, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
 .blog_detail_row .blog_detl_link em {
-  font-family: 'Font Awesome 6 Brands';
+  font-family: "Font Awesome 6 Brands";
   margin-right: 5px;
   background: #8aad56;
   width: 22px;
@@ -2053,7 +4384,8 @@
 
 /* line 51, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_contact-us.scss */
 .contact_form_row form .select_drpdwn .form-select {
-  background-image: var(--bs-form-select-bg-img), var(--bs-form-select-bg-icon, none);
+  background-image: var(--bs-form-select-bg-img),
+    var(--bs-form-select-bg-icon, none);
   background-repeat: no-repeat;
   height: 40px;
   font: 400 0.875rem/1rem "Roboto", sans-serif;
@@ -2090,7 +4422,10 @@
 }
 
 /* line 79, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_contact-us.scss */
-.contact_form_row .contact_form_cntnt .contact_form_cntnt_left input[type="checkbox"] {
+.contact_form_row
+  .contact_form_cntnt
+  .contact_form_cntnt_left
+  input[type="checkbox"] {
   background-color: transparent;
   height: 17px;
 }
@@ -2207,6 +4542,10 @@
   padding: 20px 0;
 }
 
+.brochure_header_row.brochure_header_extr_cls {
+  margin-top: -120px;
+}
+
 /* line 16, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_brochure-request.scss */
 .brochure_header_row img {
   margin-bottom: 20px;
@@ -2255,7 +4594,8 @@
 
 /* line 51, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_brochure-request.scss */
 .brochure_select_dropdown .dropdown-toggle::after {
-  background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' fill='black' width='20' viewBox='0 0 512 266.77'%3e%3cpath fill-rule='nonzero' d='M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z'/%3e%3c/svg%3e") no-repeat !important;
+  background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' fill='black' width='20' viewBox='0 0 512 266.77'%3e%3cpath fill-rule='nonzero' d='M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z'/%3e%3c/svg%3e")
+    no-repeat !important;
 }
 
 /* line 55, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_brochure-request.scss */
@@ -2268,7 +4608,7 @@
 /* line 59, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_brochure-request.scss */
 .brochure_testimonial_row p {
   font: 400 1.25rem/1.875rem "Roboto", sans-serif;
-  background: #C8C7C8;
+  background: #c8c7c8;
   padding: 50px 10px;
   font-style: italic;
 }
@@ -2320,7 +4660,10 @@
 }
 
 /* line 18, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
-.country_highlight_row.itinery_hightlight_row .itinery_highlight_inr ul li:first-child {
+.country_highlight_row.itinery_hightlight_row
+  .itinery_highlight_inr
+  ul
+  li:first-child {
   text-transform: uppercase;
   color: #8aad56;
   margin-bottom: 5px;
@@ -2626,7 +4969,8 @@
 }
 
 /* line 254, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
-.select__indicator.select__clear-indicator, .select__input-container {
+.select__indicator.select__clear-indicator,
+.select__input-container {
   display: none;
 }
 
@@ -2642,7 +4986,9 @@
 }
 
 /* line 267, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
-.select__multi-value:nth-child(1) .select__multi-value__label + .select__multi-value__remove {
+.select__multi-value:nth-child(1)
+  .select__multi-value__label
+  + .select__multi-value__remove {
   display: none;
 }
 
@@ -2687,12 +5033,14 @@
 }
 
 /* line 302, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
-.select__indicator.select__clear-indicator, .select__input-container, .select__indicator-separator {
+.select__indicator.select__clear-indicator,
+.select__input-container,
+.select__indicator-separator {
   display: none;
 }
 
 /* line 306, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
-.select__multi-value:nth-child(n+2) {
+.select__multi-value:nth-child(n + 2) {
   background: #8aad56;
   color: #fff;
   display: flex;
@@ -2725,7 +5073,10 @@
 }
 
 /* line 331, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
-.select__option:hover, .select__option:focus, .select__option:active, .select__option--is-focused {
+.select__option:hover,
+.select__option:focus,
+.select__option:active,
+.select__option--is-focused {
   background-color: #8aad56 !important;
   color: #000 !important;
 }
@@ -2752,7 +5103,9 @@
 }
 
 /* line 354, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
-.destination_dropdwn_row .dropdown_grp_blk .banner_dropdwn_blk:nth-child(n+2) {
+.destination_dropdwn_row
+  .dropdown_grp_blk
+  .banner_dropdwn_blk:nth-child(n + 2) {
   padding-left: 10px;
 }
 
@@ -2771,7 +5124,8 @@
 
 /* line 366, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
 .select__dropdown-indicator::after {
-  background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' fill='white' width='20' viewBox='0 0 512 266.77'%3e%3cpath fill-rule='nonzero' d='M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z'/%3e%3c/svg%3e") no-repeat !important;
+  background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' fill='white' width='20' viewBox='0 0 512 266.77'%3e%3cpath fill-rule='nonzero' d='M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z'/%3e%3c/svg%3e")
+    no-repeat !important;
   border: none;
   right: 0;
   top: 0;
@@ -2858,7 +5212,8 @@
 
 /* line 443, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
 .select_country__dropdown-indicator::after {
-  background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' fill='white' width='20' viewBox='0 0 512 266.77'%3e%3cpath fill-rule='nonzero' d='M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z'/%3e%3c/svg%3e") no-repeat !important;
+  background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' fill='white' width='20' viewBox='0 0 512 266.77'%3e%3cpath fill-rule='nonzero' d='M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z'/%3e%3c/svg%3e")
+    no-repeat !important;
   border: none;
   right: 0;
   top: 0;
@@ -2898,7 +5253,7 @@
 }
 
 /* line 480, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
-.select_country__option input[type=checkbox] {
+.select_country__option input[type="checkbox"] {
   margin-right: 10px;
   accent-color: #8aad56;
   margin-bottom: 0;
@@ -2912,7 +5267,8 @@
 }
 
 /* line 492, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
-.select_country__input-container input:focus, .select_country__input-container input:focus-visible {
+.select_country__input-container input:focus,
+.select_country__input-container input:focus-visible {
   box-shadow: none !important;
 }
 
@@ -2925,7 +5281,9 @@
 }
 
 /* line 503, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
-.contact_form_row.brochure_form_row .select_country__value-container--has-value > span {
+.contact_form_row.brochure_form_row
+  .select_country__value-container--has-value
+  > span {
   color: #231f20 !important;
 }
 
@@ -2944,7 +5302,8 @@
 
 /* line 518, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
 .contact_form_row.brochure_form_row .select_country__dropdown-indicator::after {
-  background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' fill='black' width='20' viewBox='0 0 512 266.77'%3e%3cpath fill-rule='nonzero' d='M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z'/%3e%3c/svg%3e") no-repeat !important;
+  background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' shape-rendering='geometricPrecision' text-rendering='geometricPrecision' image-rendering='optimizeQuality' fill-rule='evenodd' clip-rule='evenodd' fill='black' width='20' viewBox='0 0 512 266.77'%3e%3cpath fill-rule='nonzero' d='M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z'/%3e%3c/svg%3e")
+    no-repeat !important;
 }
 
 /* line 525, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
@@ -2953,7 +5312,8 @@
 }
 
 /* line 527, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
-.specl_offer_hghtltd_blk .specl_offer_hghtltd_btn, .specl_offer_hghtltd_blk .btn:first-child:active {
+.specl_offer_hghtltd_blk .specl_offer_hghtltd_btn,
+.specl_offer_hghtltd_blk .btn:first-child:active {
   background: #ab2147;
   font: 1.125rem/1.5rem "Slabo 27px", serif;
   border-radius: 0;
@@ -2968,7 +5328,8 @@
 }
 
 /* line 539, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
-.specl_offer_hghtltd_blk .specl_offer_hghtltd_btn svg, .specl_offer_hghtltd_blk .btn:first-child:active svg {
+.specl_offer_hghtltd_blk .specl_offer_hghtltd_btn svg,
+.specl_offer_hghtltd_blk .btn:first-child:active svg {
   width: 20px;
 }
 
@@ -3070,7 +5431,11 @@
 }
 
 /* line 619, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
-.card_blk_row .card_blk_inr .card_blk_cntnt.card_blk_cntnt_top .strt_planng_btn svg {
+.card_blk_row
+  .card_blk_inr
+  .card_blk_cntnt.card_blk_cntnt_top
+  .strt_planng_btn
+  svg {
   width: 20px;
   height: 20px;
 }
@@ -3259,7 +5624,8 @@
 }
 
 /* line 764, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
-.search_result_pagination .search_result_pagination_inr ul li a:hover, .search_result_pagination .search_result_pagination_inr ul li a:focus {
+.search_result_pagination .search_result_pagination_inr ul li a:hover,
+.search_result_pagination .search_result_pagination_inr ul li a:focus {
   background-color: #8aad56;
   color: #ffffff;
 }
@@ -3271,12 +5637,26 @@
 }
 
 /* line 782, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt ul li span.txt_white {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  span.txt_white {
   color: #ffffff;
 }
 
 /* line 786, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
-.favrites_blk_row .card_slider_row .carousel00 .card_slider .card_slider_cnt ul li a {
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  ul
+  li
+  a {
   color: #8aad56;
   text-decoration: none;
 }
@@ -3347,20 +5727,48 @@
 }
 
 /* line 48, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_tour-landing.scss */
-.tour_detail_parnt.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn {
+.tour_detail_parnt.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider_btn {
   justify-content: space-around;
   background-color: #8aad56;
   border: 1px solid #ffffff;
 }
 
 /* line 52, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_tour-landing.scss */
-.tour_detail_parnt.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn:hover, .tour_detail_parnt.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn:focus, .tour_detail_parnt.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn:active {
+.tour_detail_parnt.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider_btn:hover,
+.tour_detail_parnt.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider_btn:focus,
+.tour_detail_parnt.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider_btn:active {
   background-color: #779e3e !important;
   color: #231f20;
 }
 
 /* line 55, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_tour-landing.scss */
-.tour_detail_parnt.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn:hover span, .tour_detail_parnt.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn:focus span, .tour_detail_parnt.favrites_blk_row .card_slider_row .carousel00 .card_slider_btn:active span {
+.tour_detail_parnt.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider_btn:hover
+  span,
+.tour_detail_parnt.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider_btn:focus
+  span,
+.tour_detail_parnt.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider_btn:active
+  span {
   color: #231f20;
 }
 

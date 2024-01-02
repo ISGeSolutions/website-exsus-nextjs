@@ -140,8 +140,8 @@ function App({ Component, pageProps }) {
 
     // debugger;
     setTimeout(() => {
-      $('.carousel').carousel({
-        interval: 250 * 10
+      $(".carousel").carousel({
+        interval: 250 * 10,
       });
     }, 2000);
 
@@ -150,8 +150,6 @@ function App({ Component, pageProps }) {
       router.events.off("routeChangeStart", hideContent);
       router.events.off("routeChangeComplete", authCheck);
     };
-
-
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -222,7 +220,11 @@ function App({ Component, pageProps }) {
         src="/assets/javascripts/card-slider.js"
       ></Script>
       {/* <Script id="card-slider-height" type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></Script> */}
-      <Script id="card-slider02" type="text/javascript" src="/assets/javascripts/card-slider02.js"></Script>
+      <Script
+        id="card-slider02"
+        type="text/javascript"
+        src="/assets/javascripts/card-slider02.js"
+      ></Script>
       {/* <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script> */}
       <script
         type="text/javascript"

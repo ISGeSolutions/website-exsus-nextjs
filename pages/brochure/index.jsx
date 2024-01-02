@@ -176,9 +176,13 @@ function Index() {
     <>
       <Head>
         <title>Request Brochure - Exsus Travel</title>
+        <script
+          type="text/javascript"
+          src="/assets/javascripts/bootstrap.min.js"
+        ></script>
       </Head>
       <Layout>
-        <header className="brochure_header_row">
+        <header className="brochure_header_row brochure_header_extr_cls">
           <div className="container">
             <img
               src="images/brochure_header_img.jpg"
