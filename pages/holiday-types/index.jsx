@@ -166,7 +166,13 @@ function Index() {
   return (
     <>
       <Head>
-        <title>Holiday Type & Luxury Experience | Exsus Travel</title>
+        <title>
+          {
+            customPageContent?.data?.filter(
+              (res) => res.attributes?.content_name == "Title"
+            )[0]?.attributes?.content_value
+          }
+        </title>
       </Head>
       {isLoading ? (
         // <MyLoader />

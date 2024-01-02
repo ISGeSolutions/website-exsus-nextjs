@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { FriendlyUrl } from "../../components";
 import Iframe from "react-iframe";
 import Head from "next/head";
+import $ from "jquery";
 
 var React = require("react");
 
@@ -224,6 +225,7 @@ function Index() {
     if (!localStorage.getItem("websitecontent_uk")) {
       websiteContentCheck();
     }
+
     const carousel = document.querySelector("#carouselExampleInterval");
     const carouselMain = document.querySelector("#carouselExampleIntervalMain");
     if (carouselMain) {
@@ -247,6 +249,7 @@ function Index() {
           map_longitude +
           `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
         setMapVariable(mapTemp);
+        debugger;
         setHotelData(x.data[0].attributes);
         let bestTimeTravelData = [];
         x.data[0].attributes?.hotel_travel_times?.data.forEach((res) => {
@@ -295,6 +298,16 @@ function Index() {
         interval: 250 * 10,
       });
     }, 2000);
+
+    $(document).ready(function () {
+      $(".specl_offer_hghtltd_expnded").hide();
+      $(".specl_offer_hghtltd_btn").click(function () {
+        $(".specl_offer_hghtltd_expnded").slideDown();
+      });
+      $(".specl_offer_hghtltd_expnded button").click(function () {
+        $(".specl_offer_hghtltd_expnded").slideUp();
+      });
+    });
   }, [hotelName]);
 
   return (
@@ -310,6 +323,17 @@ function Index() {
           type="text/javascript"
           src="/assets/javascripts/card-slider-equal-height.js"
         ></script> */}
+        {/* <script>
+           document.get(".specl_offer_hghtltd_expnded").hide(); 
+           $(".specl_offer_hghtltd_btn").click(function () {   
+               $(".specl_offer_hghtltd_expnded").slideDown();
+           });
+           $(".specl_offer_hghtltd_expnded button").click(function () {  
+               $(".specl_offer_hghtltd_expnded").slideUp();
+           });
+        {/* $(document).ready(function(){     
+        }); */}
+        {/* </script> * */}
       </Head>
       {isLoading ? (
         // <MyLoader />
@@ -404,13 +428,83 @@ function Index() {
                     </label>
                   </span>
                 </p>
-                {/* <p className="mb-4">The Rosewood is a sanctuary of peace and comfort in the heart of one of the world’s most exciting cities: Beijing. The hotel combines a fantastic location with a world-className hotel experience, including five international restaurants, sleek, luxurious accommodation and personalised spa treatments. It sits in the glitzy neighbourhood of Chaoyang, which is famed for its shops and bars.</p> */}
+
                 <p
                   className="mb-4"
                   dangerouslySetInnerHTML={{ __html: hotelData?.video_url }}
                 />
               </div>
 
+              {hotelData?.special_offers?.data?.length > 0 ? (
+                <div className="specl_offer_hghtltd_blk">
+                  <button className="btn specl_offer_hghtltd_btn">
+                    {/* Special offer: save upto 20% off plus complimentary
+                    transfers and high tea */}
+                    Special offer:{" "}
+                    {hotelData?.special_offers?.data[0]?.attributes?.title_text}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="#ffffff"
+                      shape-rendering="geometricPrecision"
+                      text-rendering="geometricPrecision"
+                      image-rendering="optimizeQuality"
+                      className="up_arrow"
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      viewBox="0 0 512 266.77"
+                    >
+                      <path
+                        fill-rule="nonzero"
+                        d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"
+                      />
+                    </svg>
+                  </button>
+                  <div className="specl_offer_hghtltd_expnded">
+                    <p
+                      className="mb-4"
+                      dangerouslySetInnerHTML={{
+                        __html:
+                          hotelData?.special_offers?.data[0]?.attributes
+                            ?.overview_text,
+                      }}
+                    ></p>
+                    {/* <p>
+                      Includes return road transfers to and from Harry Mwanga
+                      Nkumbula International Airport and complimentary high tea.
+                    </p>
+                    <p>Valid for stays until 15 December 2023.</p>
+                    <p>
+                      All offers are subject to availability at the time of
+                      booking, blackout dates, minimum stays may apply and room
+                      exclusions may apply. Terms and conditions apply.
+                    </p> */}
+                    <button
+                      className="btn itinery_btn read_more"
+                      fdprocessedid="wch0hj"
+                      title="Slide up"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="#000000"
+                        shape-rendering="geometricPrecision"
+                        text-rendering="geometricPrecision"
+                        image-rendering="optimizeQuality"
+                        className=""
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        viewBox="0 0 512 266.77"
+                      >
+                        <path
+                          fill-rule="nonzero"
+                          d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"
+                        ></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                ""
+              )}
               <section className="country_highlight_row itinery_hightlight_row mb-0">
                 <div className="row">
                   <div className="col-sm-9">
