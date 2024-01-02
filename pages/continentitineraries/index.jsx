@@ -107,7 +107,7 @@ function ContinentItinararies(props) {
   const [visiblePagination, setVisiblePagination] = useState(true);
   const itemsPerPage = 12; // Number of items to load per page
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
-  const [page, setPage] = useState(0); // Current page
+  let [page, setPage] = useState(0); // Current page
   const [metaData, setMetaData] = useState([]);
   const router = useRouter();
   const [dcode, setdcode] = useState();
@@ -153,29 +153,63 @@ function ContinentItinararies(props) {
   };
 
   const loadMoreData = (item) => {
+    if (!selectedOptionCountry.length > 0 &&
+      !selectedOptionRegion.length > 0 &&
+      !selectedOptionMonth.length > 0) {
+      setIsLoading(true);
+      destinationService
+        .getItinerariesByDestination(dcode, page + 1, item, region)
+        .then((response) => {
+          setMetaData(response.meta.pagination);
+          const newItineraries = response.data;
+          if (newItineraries.length > 0) {
+            setItineraries((prevItineraries) =>
+              [...prevItineraries, ...newItineraries].reduce(
+                (accumulator, current) =>
+                  accumulator.some((item) => item.id === current.id)
+                    ? accumulator
+                    : [...accumulator, current],
+                []
+              )
+            );
+            setPage(page + 1);
+          }
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+        });
+    } else {
+      setIsLoading(true);
+      destinationService
+        .ItineraryFilterOnDestItineraryDetail(selectedOptionCountry, selectedOptionRegion, selectedOptionMonth, item, region, page + 1)
+        .then((response) => {
+          setMetaData(response.meta.pagination);
+          const newItineraries = response.data;
+          if (newItineraries.length > 0) {
+            setItineraries((prevItineraries) =>
+              [...prevItineraries, ...newItineraries].reduce(
+                (accumulator, current) =>
+                  accumulator.some((item) => item.id === current.id)
+                    ? accumulator
+                    : [...accumulator, current],
+                []
+              )
+            );
+            console.log(itineraries);
+            setPage(page + 1);
+          }
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+        });
+    }
     // console.log(page);
-    destinationService
-      .getItinerariesByDestination(dcode, page + 1, item, region)
-      .then((response) => {
-        setMetaData(response.meta.pagination);
-        const newItineraries = response.data;
-        if (newItineraries.length > 0) {
-          setItineraries((prevItineraries) =>
-            [...prevItineraries, ...newItineraries].reduce(
-              (accumulator, current) =>
-                accumulator.some((item) => item.id === current.id)
-                  ? accumulator
-                  : [...accumulator, current],
-              []
-            )
-          );
-          setPage(page + 1);
-        }
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-      });
+
+
+
+
   };
 
   // const countryOptions = [
@@ -194,19 +228,19 @@ function ContinentItinararies(props) {
   // ];
 
   const monthOptions = [
-    { value: "All months", label: "All months" },
-    { value: "January", label: "January" },
-    { value: "February", label: "February" },
-    { value: "March", label: "March" },
-    { value: "April", label: "April" },
-    { value: "May", label: "May" },
-    { value: "June", label: "June" },
-    { value: "July", label: "July" },
-    { value: "August", label: "August" },
-    { value: "September", label: "September" },
-    { value: "October", label: "October" },
-    { value: "November", label: "November" },
-    { value: "December", label: "December" },
+    // { value: "All months", label: "All months" },
+    { value: "1", label: "January" },
+    { value: "2", label: "February" },
+    { value: "3", label: "March" },
+    { value: "4", label: "April" },
+    { value: "5", label: "May" },
+    { value: "6", label: "June" },
+    { value: "7", label: "July" },
+    { value: "8", label: "August" },
+    { value: "9", label: "September" },
+    { value: "10", label: "October" },
+    { value: "11", label: "November" },
+    { value: "12", label: "December" },
   ];
 
   const LoadMorePagination = ({ data }) => {
@@ -240,14 +274,16 @@ function ContinentItinararies(props) {
     console.log("Selected Regions:", selectedOptionRegion);
     console.log("Selected Months:", selectedOptionMonth);
     // console.log(data);
-
     if (
-      !selectedOptionCountry.length > 0 ||
-      !selectedOptionRegion.length > 0 ||
+      !selectedOptionCountry.length > 0 &&
+      !selectedOptionRegion.length > 0 &&
       !selectedOptionMonth.length > 0
     ) {
       showAlert("Please select atleast one option", "error");
     } else {
+      setItineraries([]);
+      page = 0;
+      loadMoreData(activeItem);
     }
   }
 
@@ -262,7 +298,7 @@ function ContinentItinararies(props) {
     // const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
+      `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -276,8 +312,8 @@ function ContinentItinararies(props) {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -423,7 +459,7 @@ function ContinentItinararies(props) {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -696,7 +732,7 @@ function ContinentItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -732,11 +768,9 @@ function ContinentItinararies(props) {
                                   )
                                   .map((res1) => (
                                     <li key={res1.id}>
-                                      {`From ${
-                                        res1.attributes?.currency_symbol ?? ""
-                                      }${
-                                        res1.attributes?.price ?? " xxxx"
-                                      } per person`}
+                                      {`From ${res1.attributes?.currency_symbol ?? ""
+                                        }${res1.attributes?.price ?? " xxxx"
+                                        } per person`}
                                     </li>
                                   ))}
                                 <li></li>
