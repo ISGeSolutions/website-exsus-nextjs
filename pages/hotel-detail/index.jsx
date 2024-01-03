@@ -59,7 +59,7 @@ function Index() {
     // const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
+      `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -215,11 +215,20 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
   };
+
+  const specl_offer_hghtltd_btn = () => {
+    $(".specl_offer_hghtltd_expnded").slideDown();
+  }
+
+  const specl_offer_hghtltd_expnded = () => {
+    $(".specl_offer_hghtltd_expnded").slideUp();
+  }
+
 
   useEffect(() => {
     if (!localStorage.getItem("websitecontent_uk")) {
@@ -421,8 +430,8 @@ function Index() {
                       {hotelData?.hotel_country_contents?.data[0]?.attributes?.currency_symbol.repeat(
                         Math.abs(
                           5 -
-                            hotelData?.hotel_country_contents?.data[0]
-                              ?.attributes?.price_guide_value
+                          hotelData?.hotel_country_contents?.data[0]
+                            ?.attributes?.price_guide_value
                         )
                       )}
                     </label>
@@ -437,7 +446,7 @@ function Index() {
 
               {hotelData?.special_offers?.data?.length > 0 ? (
                 <div className="specl_offer_hghtltd_blk">
-                  <button className="btn specl_offer_hghtltd_btn">
+                  <button className="btn specl_offer_hghtltd_btn" onClick={specl_offer_hghtltd_btn}>
                     {/* Special offer: save upto 20% off plus complimentary
                     transfers and high tea */}
                     Special offer:{" "}
@@ -459,7 +468,7 @@ function Index() {
                       />
                     </svg>
                   </button>
-                  <div className="specl_offer_hghtltd_expnded">
+                  <div className="specl_offer_hghtltd_expnded" onClick={specl_offer_hghtltd_expnded}>
                     <p
                       className="mb-4"
                       dangerouslySetInnerHTML={{
@@ -804,8 +813,8 @@ function Index() {
                                         {item?.attributes?.currency_symbol.repeat(
                                           Math.abs(
                                             5 -
-                                              item?.attributes
-                                                ?.price_guide_value
+                                            item?.attributes
+                                              ?.price_guide_value
                                           )
                                         )}
                                       </label>
