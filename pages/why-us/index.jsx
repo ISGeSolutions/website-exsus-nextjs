@@ -349,7 +349,7 @@ function Index() {
 
                 <div className="row">
                   <div className="col-sm-6">
-                    <div className="card_blk_inr">
+                    <div className="card_blk_inr card_blk_overlay">
                       <NavLink href={`/destinations`}>
                         <img
                           src="images/about_us_card01.jpg"
@@ -387,7 +387,7 @@ function Index() {
                   </div>
 
                   <div className="col-sm-6">
-                    <div className="card_blk_inr">
+                    <div className="card_blk_inr card_blk_overlay">
                       <NavLink href={`/holiday-types`}>
                         <img
                           src="images/about_us_card02.jpg"

@@ -65,7 +65,7 @@ function ContinentCountry({ sendDataToParent }) {
       .getAllWebsiteContent()
       .then((x) => {
         const response = x?.data;
-
+        debugger;
         // Calculate the expiration time (1 day from the current time)
         const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000;
 
@@ -148,7 +148,7 @@ function ContinentCountry({ sendDataToParent }) {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
+      debugger;
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -201,6 +201,7 @@ function ContinentCountry({ sendDataToParent }) {
     destinationService
       .getDestinationDetails(destinationcode)
       .then((x) => {
+        debugger;
         setdestination(x.data[0].attributes);
         setAllCountries(x.data[0].attributes?.countries?.data);
         setIsLoading(false);
@@ -236,34 +237,6 @@ function ContinentCountry({ sendDataToParent }) {
     }
   };
 
-  // useEffect(() => {
-  //   destinationService
-  //     .getDestinationDetails(destinationcode)
-  //     .then((x) => {
-  //       // const lines = x.data.attributes?.overview_text.split('\n');
-  //       // const oldText = x.data.attributes?.overview_text;
-  //       // var newValueWithBr = oldText?.replace(/\\n/g, "");
-  //       // setnewValueWithBr(newValueWithBr);
-  //       setdestinationName(x.data[0].attributes.destination_name);
-  //       setAllCountries(x.data[0].attributes?.countries?.data);
-  //       setIsLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       setIsLoading(false);
-  //     });
-
-  //   // Using window.onload to detect full page load
-  //   window.onload = () => {
-  //     setTimeout(() => {
-  //       const redirectUrl =
-  //         regionWiseUrl + "/continent?destinationcode=" + destinationcode;
-  //       if (redirectUrl) {
-  //         router.push(redirectUrl);
-  //       }
-  //     }, 0);
-  //   };
-  // }, [destinationcode, router]);
-
   return (
     <>
       {isLoading ? (
@@ -280,7 +253,7 @@ function ContinentCountry({ sendDataToParent }) {
             <section className="destination_para">
               <div
                 dangerouslySetInnerHTML={{
-                  __html: dictioneryFunction(destination.countries_intro_text),
+                  __html: dictioneryFunction(destination?.countries_intro_text),
                 }}
               />
             </section>
@@ -394,7 +367,7 @@ function ContinentCountry({ sendDataToParent }) {
                       onClick={() => handleClick("itineraries")}
                     >
                       <img
-                        src="images/destination_overview01.jpg"
+                        src="\images\destination_overview01.jpg"
                         alt="Card image 07"
                         className="img-fluid"
                       />
@@ -435,7 +408,7 @@ function ContinentCountry({ sendDataToParent }) {
                   <div className="card_blk_inr card_blk_overlay">
                     <a onClick={() => handleClick("places-to-stay")}>
                       <img
-                        src="./../../images/destination_overview02.jpg"
+                        src="\images\destination_overview02.jpg"
                         alt="Card image 08"
                         className="img-fluid"
                       />

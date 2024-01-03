@@ -292,22 +292,22 @@ function Index() {
       .catch((error) => {
         setIsLoading(false);
       });
-    setTimeout(() => {
-      // $('.carousel').carousel();
-      $(".carousel").carousel({
-        interval: 250 * 10,
-      });
-    }, 2000);
 
-    $(document).ready(function () {
-      $(".specl_offer_hghtltd_expnded").hide();
-      $(".specl_offer_hghtltd_btn").click(function () {
-        $(".specl_offer_hghtltd_expnded").slideDown();
-      });
-      $(".specl_offer_hghtltd_expnded button").click(function () {
-        $(".specl_offer_hghtltd_expnded").slideUp();
-      });
-    });
+    // $(document).ready(function () {
+    //   $(".specl_offer_hghtltd_expnded").hide();
+    //   $(".specl_offer_hghtltd_btn").click(function () {
+    //     $(".specl_offer_hghtltd_expnded").slideDown();
+    //   });
+    //   $(".specl_offer_hghtltd_expnded button").click(function () {
+    //     $(".specl_offer_hghtltd_expnded").slideUp();
+    //   });
+    // });
+    // setTimeout(() => {
+    //   // $('.carousel').carousel();
+    //   $(".carousel").carousel({
+    //     interval: 250 * 10,
+    //   });
+    // }, 2000);
   }, [hotelName]);
 
   return (

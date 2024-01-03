@@ -116,7 +116,7 @@ function Index() {
               <div className="card_blk_inr card_blk_overlay">
                 <NavLink href={`/destinations`}>
                   <img
-                    src="images/about_us_card01.jpg"
+                    src="\images\about_us_card01.jpg"
                     alt="Card image 07"
                     className="img-fluid"
                   />
@@ -154,7 +154,7 @@ function Index() {
               <div className="card_blk_inr card_blk_overlay">
                 <NavLink href={`/holiday-types`}>
                   <img
-                    src="images/about_us_card02.jpg"
+                    src="\images\about_us_card02.jpg"
                     alt="Card image 08"
                     className="img-fluid"
                   />
