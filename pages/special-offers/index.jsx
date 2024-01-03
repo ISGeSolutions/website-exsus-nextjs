@@ -51,16 +51,16 @@ function Index() {
     // router.push(regionWiseUrl + `/hotel-detail`);
     router.push(
       regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
-        .replace(/ /g, "-")
-        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/&/g, " and ")
+          .replace(/ /g, "-")
+          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${item?.attributes?.friendly_url}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -77,21 +77,21 @@ function Index() {
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${res?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.country_name
-          ?.replace(/ /g, "-")
-          .replace(
-            /&/g,
-            "and"
-          )}/${res?.attributes?.hotel?.data?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
+        ?.replace(/ /g, "-")
+        .replace(
+          /&/g,
+          "and"
+        )}/${res?.attributes?.hotel?.data?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
     );
   };
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -218,13 +218,13 @@ function Index() {
     );
 
     specialoffersService
-      .getAllOffers()
+      .getAllOffers(region)
       .then((x) => {
+        debugger;
         setAllOffers(x.data);
-        console.log(x.data);
         setFriendlyUrl(`home/special offers`);
       })
-      .catch((error) => { });
+      .catch((error) => {});
 
     specialoffersService
       .getOffersCustomePage()
@@ -491,12 +491,40 @@ function Index() {
                                       ?.location
                                   }
                                 </li>
-                                <li class="price_guide_tooltip">
-                                  Price guide:
-                                  <span data-title="£200-£350 per person per night">
-                                    £££<label>££</label>
-                                  </span>
-                                </li>
+                                {res?.attributes?.hotel?.data?.attributes?.hotel_country_contents?.data?.map(
+                                  (res) => {
+                                    return (
+                                      <li
+                                        className="price_guide_tooltip"
+                                        key={res?.id}
+                                      >
+                                        Price guide:
+                                        <span
+                                          key={res?.id}
+                                          tabIndex="0"
+                                          data-title={
+                                            res?.attributes?.price_guide_text
+                                          }
+                                        >
+                                          {res?.attributes?.currency_symbol.repeat(
+                                            Math.abs(
+                                              res?.attributes?.price_guide_value
+                                            )
+                                          )}
+                                          <label>
+                                            {res?.attributes?.currency_symbol.repeat(
+                                              Math.abs(
+                                                5 -
+                                                  res?.attributes
+                                                    ?.price_guide_value
+                                              )
+                                            )}
+                                          </label>
+                                        </span>
+                                      </li>
+                                    );
+                                  }
+                                )}
                                 <li className="pink_text">
                                   Special offer: {res?.attributes?.title_text}
                                 </li>

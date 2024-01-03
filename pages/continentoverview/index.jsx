@@ -533,7 +533,7 @@ function ContinentOverview({ sendDataToParent }) {
                       onClick={() => handleClick("itineraries")}
                     >
                       <img
-                        src="images/destination_overview01.jpg"
+                        src="\images\destination_overview01.jpg"
                         alt="Card image 07"
                         className="img-fluid"
                       />
@@ -573,7 +573,7 @@ function ContinentOverview({ sendDataToParent }) {
                   <div className="card_blk_inr card_blk_overlay">
                     <a onClick={() => handleClick("places-to-stay")}>
                       <img
-                        src="images/destination_overview02.jpg"
+                        src="\images\destination_overview02.jpg"
                         alt="Card image 08"
                         className="img-fluid"
                       />

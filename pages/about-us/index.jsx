@@ -131,6 +131,7 @@ function Index() {
     aboutusService
       .getAboutusPage()
       .then((x) => {
+        debugger;
         setWhyusDetails(x.data[0].attributes);
         setCustomPage(x.data[0].attributes?.custom_page_contents);
 
@@ -313,11 +314,14 @@ function Index() {
                   <h2>{whyusDetails?.page_content_2}</h2>
                   <div className="row">
                     <div className="col-lg-4">
-                      <p
+                      {/* <p
                         dangerouslySetInnerHTML={{
-                          __html: whyusDetails?.sub_content_1,
+                          __html: customPageContent?.data?.filter(
+                            (res) =>
+                              res.attributes?.content_name == "Short_Text"
+                          )[0]?.attributes?.content_value,
                         }}
-                      />
+                      /> */}
                       <h3>Specialist Expertise</h3>
                       <p>
                         With over 20 years’ experience of creating incredible

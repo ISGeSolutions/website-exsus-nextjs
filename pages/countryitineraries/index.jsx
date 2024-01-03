@@ -29,7 +29,7 @@ function CountryItinararies(props) {
   const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
   const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
   const [itineraries, setItineraries] = useState([]);
-  const [page, setPage] = useState(0); // Current page
+  let [page, setPage] = useState(0); // Current page
   const itemsPerPage = 12; // Number of items to load per page
   const [activeItem, setActiveItem] = useState("recommended");
   const [isLoading, setIsLoading] = useState(true);
@@ -321,14 +321,6 @@ function CountryItinararies(props) {
     setAlert(null);
   };
 
-  const handleFilterClick = (item) => {
-    setAlert(null);
-    page = 0;
-    setItineraries([]);
-    setActiveItem(item);
-    loadMoreData(item);
-  };
-
   const handleOptionRegionChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
@@ -348,18 +340,16 @@ function CountryItinararies(props) {
     // console.log("Selected Countries:", selectedOptionCountry);
     // console.log("Selected Regions:", selectedOptionRegion);
     // console.log("Selected Months:", selectedOptionMonth);
-    console.log(e);
-    if (!e.destination && !e.reason && !e.month) {
+    if (
+      !selectedOptionCountry.length > 0 &&
+      !selectedOptionRegion.length > 0 &&
+      !selectedOptionMonth.length > 0
+    ) {
       showAlert("Please select atleast one option", "error");
     } else {
-      router.push(
-        `advance-search?where=` +
-          e?.destination +
-          `&what=` +
-          e?.reason +
-          `&when=` +
-          e?.month
-      );
+      setItineraries([]);
+      page = 0;
+      loadMoreData(activeItem);
     }
   }
 
@@ -414,6 +404,14 @@ function CountryItinararies(props) {
           item?.attributes?.friendly_url
         }`
     );
+  };
+
+  const handleFilterClick = (item) => {
+    setAlert(null);
+    page = 0;
+    setItineraries([]);
+    setActiveItem(item);
+    loadMoreData(item);
   };
 
   const equalHeight = (resize) => {

@@ -626,7 +626,7 @@ function CountryWhentogo(props) {
               <div className="card_blk_inr card_blk_overlay">
                 <a onClick={() => sendDataToParentHandler("itineraries")}>
                   <img
-                    src="./../../images/country_detail01.jpg"
+                    src="\images\country_detail01.jpg"
                     alt="Card image 07"
                     className="img-fluid"
                   />
@@ -667,7 +667,7 @@ function CountryWhentogo(props) {
               <div className="card_blk_inr card_blk_overlay">
                 <a target="_blank" onClick={() => handleClick("itineraries")}>
                   <img
-                    src="./../../images/country_detail02.jpg"
+                    src="\images\country_detail02.jpg"
                     alt="Card image 08"
                     className="img-fluid"
                   />

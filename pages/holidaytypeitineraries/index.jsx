@@ -701,7 +701,13 @@ function Index() {
                   {holidaytypesDetails?.header_text}
                 </h2>
                 <div className="destinations_cntnt_blk destination_para pt-0">
-                  <p dangerouslySetInnerHTML={{ __html: valueWithBr }} />
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: dictioneryFunction(
+                        holidaytypesDetails?.overview_text
+                      ),
+                    }}
+                  />
                 </div>
               </div>
             </div>
