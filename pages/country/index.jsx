@@ -265,17 +265,17 @@ function Country() {
       const redirectUrl =
         regionWiseUrl +
         `/destinations/${destinationcode
-          .replace(/&/g, "and")
-          .replace(/ /g, "-")}/${destCode
-          .replace(/&/g, "and")
-          .replace(/ /g, "-")}/${destCode
-          .replace(/&/g, "and")
-          .replace(/ /g, "-")}-itineraries`;
+          ?.replace(/&/g, "and")
+          ?.replace(/ /g, "-")}/${destCode
+          ?.replace(/&/g, "and")
+          ?.replace(/ /g, "-")}/${destCode
+          ?.replace(/&/g, "and")
+          ?.replace(/ /g, "-")}-itineraries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationcode}/${destCode}/${destCode} itineraries`
       );
-      text = countrycode.toUpperCase() + " ITINERARIES"; // action="/countryitineraries?countrycode=south-africa"
+      text = countrycode?.toUpperCase() + " ITINERARIES"; // action="/countryitineraries?countrycode=south-africa"
     } else if (itemId == "places-to-stay") {
       const redirectUrl =
         regionWiseUrl +
