@@ -59,7 +59,7 @@ function Index() {
     // const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
+        `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -215,7 +215,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -223,23 +223,22 @@ function Index() {
 
   const specl_offer_hghtltd_btn = () => {
     $(".specl_offer_hghtltd_expnded").slideDown();
-  }
+  };
 
   const specl_offer_hghtltd_expnded = () => {
     $(".specl_offer_hghtltd_expnded").slideUp();
-  }
-
+  };
 
   useEffect(() => {
     if (!localStorage.getItem("websitecontent_uk")) {
       websiteContentCheck();
     }
 
-    const carousel = document.querySelector("#carouselExampleInterval");
-    const carouselMain = document.querySelector("#carouselExampleIntervalMain");
-    if (carouselMain) {
-      new bootstrap.Carousel(carouselMain);
-    }
+    // const carousel = document.querySelector("#carouselExampleInterval");
+    // const carouselMain = document.querySelector("#carouselExampleIntervalMain");
+    // if (carouselMain) {
+    //   new bootstrap.Carousel(carouselMain);
+    // }
 
     destinationService
       .getHotelById(hotelName, region)
@@ -302,21 +301,12 @@ function Index() {
         setIsLoading(false);
       });
 
-    // $(document).ready(function () {
-    //   $(".specl_offer_hghtltd_expnded").hide();
-    //   $(".specl_offer_hghtltd_btn").click(function () {
-    //     $(".specl_offer_hghtltd_expnded").slideDown();
-    //   });
-    //   $(".specl_offer_hghtltd_expnded button").click(function () {
-    //     $(".specl_offer_hghtltd_expnded").slideUp();
-    //   });
-    // });
-    // setTimeout(() => {
-    //   // $('.carousel').carousel();
-    //   $(".carousel").carousel({
-    //     interval: 250 * 10,
-    //   });
-    // }, 2000);
+    setTimeout(() => {
+      // $('.carousel').carousel();
+      $(".carousel").carousel({
+        interval: 250 * 10,
+      });
+    }, 2000);
   }, [hotelName]);
 
   return (
@@ -332,17 +322,6 @@ function Index() {
           type="text/javascript"
           src="/assets/javascripts/card-slider-equal-height.js"
         ></script> */}
-        {/* <script>
-           document.get(".specl_offer_hghtltd_expnded").hide(); 
-           $(".specl_offer_hghtltd_btn").click(function () {   
-               $(".specl_offer_hghtltd_expnded").slideDown();
-           });
-           $(".specl_offer_hghtltd_expnded button").click(function () {  
-               $(".specl_offer_hghtltd_expnded").slideUp();
-           });
-        {/* $(document).ready(function(){     
-        }); */}
-        {/* </script> * */}
       </Head>
       {isLoading ? (
         // <MyLoader />
@@ -355,41 +334,46 @@ function Index() {
       ) : (
         <div>
           <section className="banner_blk_row">
-            <div
-              id="carouselExampleInterval"
-              className="carousel slide"
-              data-bs-ride="carousel"
-            >
-              <div className="carousel-indicators">
-                {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
-                {backgroundImage.map((_, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    data-bs-target="#carouselExampleInterval"
-                    data-bs-slide-to={index}
-                    className={index === 0 ? "active" : ""}
-                    aria-current={index === 0 ? "true" : "false"}
-                    aria-label={`Slide ${index + 1}`}
-                  ></button>
-                ))}
+            {backgroundImage ? (
+              <div
+                id="carouselExampleInterval"
+                className="carousel slide"
+                data-bs-ride="carousel"
+              >
+                <div className="carousel-indicators">
+                  {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
+                  {backgroundImage.map((_, index) => (
+                    <button
+                      key={index}
+                      type="button"
+                      data-bs-target="#carouselExampleInterval"
+                      data-bs-slide-to={index}
+                      className={index === 0 ? "active" : ""}
+                      aria-current={index === 0 ? "true" : "false"}
+                      aria-label={`Slide ${index + 1}`}
+                    ></button>
+                  ))}
+                </div>
+                <div className="carousel-inner">
+                  {backgroundImage.map((imagePath, index) => (
+                    <NavLink
+                      key={index}
+                      // target="_blank"
+                      href="#"
+                      className={`carousel-item ${index === 0 ? "active" : ""}`}
+                      data-interval="5000"
+                    >
+                      <div
+                        className="banner_commn_cls"
+                        style={{ backgroundImage: `url(${imagePath})` }}
+                      ></div>
+                    </NavLink>
+                  ))}
+                </div>
               </div>
-              <div className="carousel-inner">
-                {backgroundImage.map((imagePath, index) => (
-                  <a
-                    key={index}
-                    target="_blank"
-                    className={`carousel-item ${index === 0 ? "active" : ""}`}
-                    data-bs-interval="5000"
-                  >
-                    <div
-                      className="banner_commn_cls"
-                      style={{ backgroundImage: `url(${imagePath})` }}
-                    ></div>
-                  </a>
-                ))}
-              </div>
-            </div>
+            ) : (
+              ""
+            )}
           </section>
 
           <section className="trvl_info_row">
@@ -430,8 +414,8 @@ function Index() {
                       {hotelData?.hotel_country_contents?.data[0]?.attributes?.currency_symbol.repeat(
                         Math.abs(
                           5 -
-                          hotelData?.hotel_country_contents?.data[0]
-                            ?.attributes?.price_guide_value
+                            hotelData?.hotel_country_contents?.data[0]
+                              ?.attributes?.price_guide_value
                         )
                       )}
                     </label>
@@ -446,7 +430,10 @@ function Index() {
 
               {hotelData?.special_offers?.data?.length > 0 ? (
                 <div className="specl_offer_hghtltd_blk">
-                  <button className="btn specl_offer_hghtltd_btn" onClick={specl_offer_hghtltd_btn}>
+                  <button
+                    className="btn specl_offer_hghtltd_btn"
+                    onClick={specl_offer_hghtltd_btn}
+                  >
                     {/* Special offer: save upto 20% off plus complimentary
                     transfers and high tea */}
                     Special offer:{" "}
@@ -468,7 +455,10 @@ function Index() {
                       />
                     </svg>
                   </button>
-                  <div className="specl_offer_hghtltd_expnded" onClick={specl_offer_hghtltd_expnded}>
+                  <div
+                    className="specl_offer_hghtltd_expnded"
+                    onClick={specl_offer_hghtltd_expnded}
+                  >
                     <p
                       className="mb-4"
                       dangerouslySetInnerHTML={{
@@ -813,8 +803,8 @@ function Index() {
                                         {item?.attributes?.currency_symbol.repeat(
                                           Math.abs(
                                             5 -
-                                            item?.attributes
-                                              ?.price_guide_value
+                                              item?.attributes
+                                                ?.price_guide_value
                                           )
                                         )}
                                       </label>

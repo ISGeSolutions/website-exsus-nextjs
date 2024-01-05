@@ -698,7 +698,7 @@ function Index() {
 
               <div className="destination_tab_inr">
                 <h2 className="tab_tilte">
-                  {holidaytypesDetails?.header_text}
+                  {dictioneryFunction(holidaytypesDetails?.header_text)}
                 </h2>
                 <div className="destinations_cntnt_blk destination_para pt-0">
                   <p
