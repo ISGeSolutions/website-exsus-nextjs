@@ -42,6 +42,7 @@ function CountryItinararies(props) {
     .toLowerCase();
 
   const [metaData, setMetaData] = useState([]);
+  const [allRegions, setAllRegions] = useState([]);
 
   const countrycode = router.query?.country
     ?.replace(/-and-/g, " & ")
@@ -269,35 +270,35 @@ function CountryItinararies(props) {
     }
   };
 
-  const countryOptions = [
-    { value: "Asia", label: "Asia" },
-    { value: "Hong Kong & Macau", label: "Hong Kong & Macau" },
-    { value: "Malaysia & Borneo", label: "Malaysia & Borneo" },
-    { value: "Singapore", label: "Singapore" },
-    { value: "Indonesia", label: "Indonesia" },
-    { value: "Japan", label: "Japan" },
-    { value: "Cambodia", label: "Cambodia" },
-    { value: "Vietnam", label: "Vietnam" },
-    { value: "China", label: "China" },
-    { value: "Thailand", label: "Thailand" },
-    { value: "Burma", label: "Burma" },
-    { value: "Laos", label: "Laos" },
-  ];
+  // const countryOptions = [
+  //   { value: "Asia", label: "Asia" },
+  //   { value: "Hong Kong & Macau", label: "Hong Kong & Macau" },
+  //   { value: "Malaysia & Borneo", label: "Malaysia & Borneo" },
+  //   { value: "Singapore", label: "Singapore" },
+  //   { value: "Indonesia", label: "Indonesia" },
+  //   { value: "Japan", label: "Japan" },
+  //   { value: "Cambodia", label: "Cambodia" },
+  //   { value: "Vietnam", label: "Vietnam" },
+  //   { value: "China", label: "China" },
+  //   { value: "Thailand", label: "Thailand" },
+  //   { value: "Burma", label: "Burma" },
+  //   { value: "Laos", label: "Laos" },
+  // ];
 
   const monthOptions = [
-    { value: "All months", label: "All months" },
-    { value: "January", label: "January" },
-    { value: "February", label: "February" },
-    { value: "March", label: "March" },
-    { value: "April", label: "April" },
-    { value: "May", label: "May" },
-    { value: "June", label: "June" },
-    { value: "July", label: "July" },
-    { value: "August", label: "August" },
-    { value: "September", label: "September" },
-    { value: "October", label: "October" },
-    { value: "November", label: "November" },
-    { value: "December", label: "December" },
+    { value: "1,2,3,4,5,6,7,8,9,10,11,12", label: "All months" },
+    { value: "1", label: "January" },
+    { value: "2", label: "February" },
+    { value: "3", label: "March" },
+    { value: "4", label: "April" },
+    { value: "5", label: "May" },
+    { value: "6", label: "June" },
+    { value: "7", label: "July" },
+    { value: "8", label: "August" },
+    { value: "9", label: "September" },
+    { value: "10", label: "October" },
+    { value: "11", label: "November" },
+    { value: "12", label: "December" },
   ];
 
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
@@ -335,6 +336,74 @@ function CountryItinararies(props) {
     setSelectedOptionMonth(selectedOption);
   };
 
+  const loadMoreData = (item) => {
+    if (
+      !selectedOptionCountry?.length > 0 &&
+      !selectedOptionRegion?.length > 0 &&
+      !selectedOptionMonth?.length > 0
+    ) {
+      setIsLoading(true);
+      destinationService
+        .getCountryWiseItinerary(countrycode, page + 1, item, region)
+        .then((response) => {
+          setMetaData(response.meta.pagination);
+          // const responseTemp = [...response.data].sort(
+          //   (a, b) => a.attributes.serial_number - b.attributes.serial_number
+          // );
+          // const newItineraries = responseTemp;
+          const newItineraries = response.data;
+          if (newItineraries.length > 0) {
+            setItineraries((prevItineraries) =>
+              [...prevItineraries, ...newItineraries].reduce(
+                (accumulator, current) =>
+                  accumulator.some((item) => item.id === current.id)
+                    ? accumulator
+                    : [...accumulator, current],
+                []
+              )
+            );
+            setPage(page + 1);
+          }
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+        });
+    } else {
+      setIsLoading(true);
+      destinationService
+        .ItineraryFilterOnDestItineraryDetail(
+          selectedOptionCountry,
+          selectedOptionRegion,
+          selectedOptionMonth,
+          item,
+          region,
+          page + 1
+        )
+        .then((response) => {
+          setMetaData(response.meta.pagination);
+          const newItineraries = response.data;
+          if (newItineraries.length > 0) {
+            setItineraries((prevItineraries) =>
+              [...prevItineraries, ...newItineraries].reduce(
+                (accumulator, current) =>
+                  accumulator.some((item) => item.id === current.id)
+                    ? accumulator
+                    : [...accumulator, current],
+                []
+              )
+            );
+            console.log(itineraries);
+            setPage(page + 1);
+          }
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+        });
+    }
+  };
+
   function onSubmit(e) {
     e.preventDefault();
     // console.log("Selected Countries:", selectedOptionCountry);
@@ -352,35 +421,6 @@ function CountryItinararies(props) {
       loadMoreData(activeItem);
     }
   }
-
-  const loadMoreData = (item) => {
-    destinationService
-      .getCountryWiseItinerary(countrycode, page + 1, item, region)
-      .then((response) => {
-        setMetaData(response.meta.pagination);
-        // const responseTemp = [...response.data].sort(
-        //   (a, b) => a.attributes.serial_number - b.attributes.serial_number
-        // );
-        // const newItineraries = responseTemp;
-        const newItineraries = response.data;
-        if (newItineraries.length > 0) {
-          setItineraries((prevItineraries) =>
-            [...prevItineraries, ...newItineraries].reduce(
-              (accumulator, current) =>
-                accumulator.some((item) => item.id === current.id)
-                  ? accumulator
-                  : [...accumulator, current],
-              []
-            )
-          );
-          setPage(page + 1);
-        }
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-      });
-  };
 
   const generateDynamicLink = (item) => {
     return (
@@ -463,6 +503,27 @@ function CountryItinararies(props) {
       );
     });
 
+    destinationService
+      .getRegions(countrycode)
+      .then((x) => {
+        debugger;
+        setAllRegions(
+          x.data[0]?.attributes?.regions?.data?.map((item) => ({
+            region_code: item?.attributes?.region_code,
+            value: item?.attributes?.region_name,
+            label: item?.attributes?.region_name,
+          }))
+        );
+        //setAllRegions(x.data[0]?.attributes?.regions?.data);
+        console.log(x.data[0]?.attributes?.regions?.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        // Handle any errors here
+        // console.error(error);
+        setIsLoading(false);
+      });
+
     // Using window.onload to detect full page load
     window.onload = () => {
       setTimeout(() => {
@@ -535,7 +596,7 @@ function CountryItinararies(props) {
                                 onChange={handleOptionCountryChange}
                                 closeMenuOnSelect={false}
                                 hideSelectedOptions={false}
-                                options={countryOptions}
+                                options={allRegions}
                                 components={{
                                   Option: InputOption,
                                   MultiValue: CustomMultiValue,
