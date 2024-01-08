@@ -8,13 +8,15 @@ import { useRouter } from "next/router";
 import { FriendlyUrl } from "../../components";
 import Iframe from "react-iframe";
 import Head from "next/head";
-import $ from "jquery";
+//import $ from "jquery";
 
 var React = require("react");
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { destinationService } from "../../services";
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
+
+var Carousel = require("react-responsive-carousel").Carousel;
 
 export default Index;
 
@@ -36,6 +38,12 @@ function Index() {
   const [isLoading, setIsLoading] = useState(true);
   const [location, setLocation] = useState({});
   const [friendlyUrl, setFriendlyUrl] = useState("");
+  const [moreItineraries, setMoreItineraries] = useState(null);
+  const [itineraries, setItineraries] = useState(null);
+  debugger;
+  const itin_name = router.query?.itineraryName
+    ? router.query?.itineraryName
+    : router.query?.itineraries?.toLowerCase();
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -48,44 +56,56 @@ function Index() {
     }
   }
 
+  // const generateDynamicLink = (item) => {
+  //   return (
+  //     regionWiseUrl +
+  //     `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
+  //   );
+  // };
+
+  // const handleRedirect = (item) => {
+  //   // const modifiedName = item.replace(/ /g, "-").toLowerCase();
+  //   router.push(
+  //     regionWiseUrl +
+  //       `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
+  //   );
+  // };
+
   const generateDynamicLink = (item) => {
+    let hotelName = item?.attributes?.friendly_url
+      ?.replace(/ /g, "-")
+      .toLowerCase()
+      .replace(/&/g, "and");
     return (
       regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
     );
   };
 
   const handleRedirect = (item) => {
-    // const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
+        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/&/g, " and ")
+          .replace(/ /g, "-")
+          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.friendly_url}`
     );
   };
-
-  // const generateDynamicLink = (item) => {
-  //   let locationCountry = item?.attributes?.location
-  //     ?.toLowerCase()
-  //     .replace(/&/g, "and");
-  //   let countryName = locationCountry.match(/\|(.+)/);
-  //   countryName = countryName ? countryName[1].trim() : null;
-  //   let location = locationCountry?.match(/(.+?)\|/);
-  //   location = location ? location[1].trim() : null;
-  //   let hotelName = item?.attributes?.friendly_url
-  //     ?.replace(/ /g, "-")
-  //     .toLowerCase()
-  //     .replace(/&/g, "and");
-  //   return (
-  //     regionWiseUrl +
-  //     `/destinations/${destinationcode
-  //       ?.replace(/&/g, " and ")
-  //       .replace(/ /g, "-")
-  //       .toLowerCase()}/hotels/${countryName?.replace(
-  //       / /g,
-  //       "-"
-  //     )}/${location?.replace(/ /g, "-")}/${hotelName}`
-  //   );
-  // };
 
   const websiteContentCheck = () => {
     homeService
@@ -301,6 +321,33 @@ function Index() {
         setIsLoading(false);
       });
 
+    destinationService
+      .getItineraryDetails(itin_name, region)
+      .then((x) => {
+        debugger;
+        setItineraries(x.data[0]);
+
+        destinationService
+          .getMoreItineraries(
+            x?.data[0]?.attributes?.country?.data?.attributes?.country_name,
+            region
+          )
+          .then((response) => {
+            setMoreItineraries(response?.data);
+
+            setIsLoading(false);
+          })
+          .catch((error) => {
+            setIsLoading(false);
+          });
+
+        window.addEventListener("resize", equalHeight(true));
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+      });
+
     setTimeout(() => {
       // $('.carousel').carousel();
       $(".carousel").carousel({
@@ -380,14 +427,6 @@ function Index() {
             <div className="container">
               <div className="bookmark_row">
                 <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
-                {/* <ul>
-                            <li><a href="homepage.html">Home</a></li>
-                            <li><a href="destinations.html">Destinations</a></li>
-                            <li><a href="destination_detail.html">Asia</a></li>
-                            <li><a href="country_detail.html">China</a></li>
-                            <li><a href="region_detail.html">Beijing & Northern China</a></li>
-                            <li>Rosewood Beijing</li>
-                        </ul> */}
               </div>
 
               <div className="trvl_info_cntnt">
@@ -731,8 +770,7 @@ function Index() {
           <section className="favrites_blk_row">
             <div className="container">
               <h3 className="title_cls">
-                {/* PLACES TO STAY IN {countryData?.country_name} HANDPICKED BY
-                EXSUS */}
+                MORE PLACE TO STAY IN {hotelData.location}
               </h3>
               <div className="card_slider_row">
                 <i id="leftt">
@@ -756,7 +794,10 @@ function Index() {
                   {hotels?.map((item) => (
                     <div className="card_slider_inr" key={item.id}>
                       <div className="card_slider">
-                        <NavLink href="" className="card_slider_img">
+                        <NavLink
+                          href={generateDynamicLink(item)}
+                          className="card_slider_img"
+                        >
                           {item?.attributes?.hotel_images?.data.map(
                             (element, index) =>
                               element.attributes.image_type == "thumbnail" ? (
@@ -778,7 +819,9 @@ function Index() {
                         </NavLink>
                         <div className="card_slider_cnt places_to_stay_cnt">
                           <h4>
-                            <a href="#">{item?.attributes?.hotel_name}</a>
+                            <a href={generateDynamicLink(item)}>
+                              {item?.attributes?.hotel_name}
+                            </a>
                           </h4>
                           <ul>
                             <li>Location: {item?.attributes?.location}</li>
