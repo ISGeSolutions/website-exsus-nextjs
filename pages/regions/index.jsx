@@ -45,6 +45,7 @@ function Index() {
     itineraries: useRef(null),
     "places-to-stay": useRef(null),
   };
+  let [isShowMap, setIsShowMap] = useState(true);
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -129,12 +130,15 @@ function Index() {
       "/" +
       regionName?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase();
     if (itemId == "overview") {
+      setIsShowMap(true);
       window.history.pushState(null, null, redirectUrl);
       text = regionName;
     } else if (itemId == "itineraries") {
+      setIsShowMap(false);
       window.history.pushState(null, null, redirectUrl);
       text = `TAILOR-MADE ${regionName} HOLIDAY ITINERARIES`;
     } else if (itemId == "places-to-stay") {
+      setIsShowMap(false);
       window.history.pushState(null, null, redirectUrl);
       text = `PLACES TO STAY IN ${regionName}`;
     } else {
@@ -317,7 +321,7 @@ function Index() {
     // });
 
     // destinationService.getDestinationDetails(destinationcode).then((x) => {
-    //     setTitle(x.data.attributes.page_meta_title);
+    //   setHeadingText(x.data.attributes.page_meta_title);
     // });
 
     setFriendlyUrl(
@@ -328,6 +332,7 @@ function Index() {
       .getRegionByName(regionName)
       .then((x) => {
         setRegionData(x.data[0]);
+        setHeadingText(x.data[0]?.attributes?.region_name);
         const imageCheck = x.data[0].attributes.region_images.data;
         const newBackgroundImages = [];
 
@@ -488,24 +493,28 @@ function Index() {
             ) : (
               ""
             )}
-            <div className="banner_tab_blk">
-              <button
-                className={`btn banner_map_tab ${
-                  activeButton === "map" ? "banner_tab_active" : ""
-                }`}
-                onClick={() => handleTabClick("map")}
-              >
-                Map
-              </button>
-              <button
-                className={`btn banner_img_tab ${
-                  activeButton === "images" ? "banner_tab_active" : ""
-                }`}
-                onClick={() => handleTabClick("images")}
-              >
-                Images
-              </button>
-            </div>
+            {isShowMap ? (
+              <div className="banner_tab_blk">
+                <button
+                  className={`btn banner_map_tab ${
+                    activeButton === "map" ? "banner_tab_active" : ""
+                  }`}
+                  onClick={() => handleTabClick("map")}
+                >
+                  Map
+                </button>
+                <button
+                  className={`btn banner_img_tab ${
+                    activeButton === "images" ? "banner_tab_active" : ""
+                  }`}
+                  onClick={() => handleTabClick("images")}
+                >
+                  Images
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
             <div
               className={`banner_map_blk ${
                 activeButton === "map" ? "banner_map_active" : ""
@@ -531,7 +540,8 @@ function Index() {
           </section>
 
           <section className="destination_tab_row light_grey pb-0">
-            <div className="container" id="targetDiv">
+            <div className="container">
+              {/* id="targetDiv" */}
               <div className="bookmark_row">
                 <FriendlyUrl data={friendlyUrl} />
               </div>

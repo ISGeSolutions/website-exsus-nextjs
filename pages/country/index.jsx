@@ -55,6 +55,7 @@ function Country() {
   const [friendlyUrl, setFriendlyUrl] = useState("");
   const [backgroundImage, setBackgroundImage] = useState([]);
   const [headingText, setHeadingText] = useState("");
+  let [isShowMap, setIsShowMap] = useState(true);
 
   const countryOptions = [
     { value: "", label: "Filter by country" },
@@ -238,6 +239,7 @@ function Country() {
   const toggleTab = (itemId) => {
     var text = countryData?.attributes?.header_text;
     if (itemId == "overview") {
+      setIsShowMap(true);
       const redirectUrl =
         regionWiseUrl +
         `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}`;
@@ -247,6 +249,7 @@ function Country() {
       );
       text = "LUXURY HOLIDAYS IN " + countrycode.toUpperCase();
     } else if (itemId == "regions") {
+      setIsShowMap(true);
       const redirectUrl =
         regionWiseUrl +
         `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url}-regions`;
@@ -256,6 +259,7 @@ function Country() {
       );
       text = "REGIONS IN " + countrycode.toUpperCase(); // action="/countryregions?countrycode=south-africa"
     } else if (itemId == "itineraries") {
+      setIsShowMap(false);
       let destCode = "";
       if (!countrycode) {
         destCode = localStorage.getItem("country_code");
@@ -277,6 +281,7 @@ function Country() {
       );
       text = countrycode?.toUpperCase() + " ITINERARIES"; // action="/countryitineraries?countrycode=south-africa"
     } else if (itemId == "places-to-stay") {
+      setIsShowMap(false);
       const redirectUrl =
         regionWiseUrl +
         `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url}-places-to-stay`;
@@ -286,6 +291,7 @@ function Country() {
       );
       text = "LUXURY HOTELS, CAMPS & LODGES IN " + countrycode.toUpperCase(); // action="/countryplacetostay?countrycode=south-africa"
     } else if (itemId == "when-to-go") {
+      setIsShowMap(false);
       const redirectUrl =
         regionWiseUrl +
         `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url}-when-to-go`;
@@ -660,24 +666,28 @@ function Country() {
             ) : (
               ""
             )}
-            <div className="banner_tab_blk">
-              <button
-                className={`btn banner_map_tab ${
-                  activeButton === "map" ? "banner_tab_active" : ""
-                }`}
-                onClick={() => handleTabClick("map")}
-              >
-                Map
-              </button>
-              <button
-                className={`btn banner_img_tab ${
-                  activeButton === "images" ? "banner_tab_active" : ""
-                }`}
-                onClick={() => handleTabClick("images")}
-              >
-                Images
-              </button>
-            </div>
+            {isShowMap ? (
+              <div className="banner_tab_blk">
+                <button
+                  className={`btn banner_map_tab ${
+                    activeButton === "map" ? "banner_tab_active" : ""
+                  }`}
+                  onClick={() => handleTabClick("map")}
+                >
+                  Map
+                </button>
+                <button
+                  className={`btn banner_img_tab ${
+                    activeButton === "images" ? "banner_tab_active" : ""
+                  }`}
+                  onClick={() => handleTabClick("images")}
+                >
+                  Images
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
             <div
               className={`banner_map_blk ${
                 activeButton === "map" ? "banner_map_active" : ""

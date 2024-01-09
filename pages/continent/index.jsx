@@ -52,6 +52,7 @@ function Index() {
 
   const divRef = useRef();
   const { t } = useTranslation();
+  let [isShowMap, setIsShowMap] = useState(true);
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -86,12 +87,14 @@ function Index() {
   const toggleTab = (itemId) => {
     var text;
     if (itemId == "overview") {
+      setIsShowMap(true);
       const redirectUrl =
         regionWiseUrl + `/destinations/${destinationDetails?.friendly_url}`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(`Home/Destinations/${destinationDetails?.friendly_url}`);
       text = destinationDetails?.header_text;
     } else if (itemId == "countries") {
+      setIsShowMap(true);
       let destCode = "";
       if (!destinationcode) {
         destCode = localStorage.getItem("destination_code");
@@ -113,6 +116,7 @@ function Index() {
       );
       text = `COUNTRIES IN ${destinationName}`;
     } else if (itemId == "itineraries") {
+      setIsShowMap(false);
       let destCode = "";
       if (!destinationcode) {
         destCode = localStorage.getItem("destination_code");
@@ -132,6 +136,7 @@ function Index() {
       setFriendlyUrl(`Home/Destinations/${destCode}/${destCode} Itineraries`);
       text = `TAILOR-MADE ${destinationName} HOLIDAY ITINERARIES`;
     } else if (itemId == "places-to-stay") {
+      setIsShowMap(false);
       const redirectUrl =
         regionWiseUrl +
         `/destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url}-places-to-stay`;
@@ -538,24 +543,28 @@ function Index() {
             ) : (
               ""
             )}
-            <div className="banner_tab_blk">
-              <button
-                className={`btn banner_map_tab ${
-                  activeButton === "map" ? "banner_tab_active" : ""
-                }`}
-                onClick={() => handleTabClick("map")}
-              >
-                Map
-              </button>
-              <button
-                className={`btn banner_img_tab ${
-                  activeButton === "images" ? "banner_tab_active" : ""
-                }`}
-                onClick={() => handleTabClick("images")}
-              >
-                Images
-              </button>
-            </div>
+            {isShowMap ? (
+              <div className="banner_tab_blk">
+                <button
+                  className={`btn banner_map_tab ${
+                    activeButton === "map" ? "banner_tab_active" : ""
+                  }`}
+                  onClick={() => handleTabClick("map")}
+                >
+                  Map
+                </button>
+                <button
+                  className={`btn banner_img_tab ${
+                    activeButton === "images" ? "banner_tab_active" : ""
+                  }`}
+                  onClick={() => handleTabClick("images")}
+                >
+                  Images
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
             <div
               className={`banner_map_blk ${
                 activeButton === "map" ? "banner_map_active" : ""
@@ -585,13 +594,13 @@ function Index() {
             <section
               className="destination_tab_row light_grey pb-0"
               ref={divRef}
-              id="scrollToElement"
+              // id="scrollToElement"
             >
               <div className="container">
                 <div className="bookmark_row">
                   <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
                 </div>
-                <div className="destination_tab_inr mt-3">
+                <div className="destination_tab_inr">
                   <h2 className="tab_tilte">
                     {/* {destinationDetails?.header_text} */}
                     {dictioneryFunction(headingText)}

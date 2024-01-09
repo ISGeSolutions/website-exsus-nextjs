@@ -65,7 +65,6 @@ function ContinentCountry({ sendDataToParent }) {
       .getAllWebsiteContent()
       .then((x) => {
         const response = x?.data;
-        debugger;
         // Calculate the expiration time (1 day from the current time)
         const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000;
 
@@ -148,7 +147,6 @@ function ContinentCountry({ sendDataToParent }) {
 
       let storedDataString = "";
       let storedData = "";
-      debugger;
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -201,7 +199,6 @@ function ContinentCountry({ sendDataToParent }) {
     destinationService
       .getDestinationDetails(destinationcode)
       .then((x) => {
-        debugger;
         setdestination(x.data[0].attributes);
         setAllCountries(x.data[0].attributes?.countries?.data);
         setIsLoading(false);

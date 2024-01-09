@@ -220,7 +220,6 @@ function Index() {
     specialoffersService
       .getAllOffers(region)
       .then((x) => {
-        debugger;
         setAllOffers(x.data);
         setFriendlyUrl(`home/special offers`);
       })

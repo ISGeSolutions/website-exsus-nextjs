@@ -10,6 +10,7 @@ import Image from "next/image";
 import Select, { components } from "react-select";
 import CustomMultiValue from "./CustomMultiValue";
 import { Alert } from "../../components";
+import Iframe from "react-iframe";
 
 export default RegionPlacesToStay;
 
@@ -752,6 +753,46 @@ function RegionPlacesToStay(props) {
           </section>
         </div>
       )}
+      <div
+        className="modal fade"
+        id="placesToStayModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="exampleModalLabel">
+                All accomodation on Map
+              </h1>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <div className="modal_map_blk">
+                <Iframe
+                  width="640px"
+                  height="320px"
+                  id=""
+                  className=""
+                  display="block"
+                  src="https://www.google.com/maps/embed/v1/place?q=25.0930200000,55.1487400000&zoom=10&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE"
+                  position="relative"
+                  style="border:0;"
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

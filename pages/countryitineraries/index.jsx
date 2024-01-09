@@ -506,7 +506,6 @@ function CountryItinararies(props) {
     destinationService
       .getRegions(countrycode)
       .then((x) => {
-        debugger;
         setAllRegions(
           x.data[0]?.attributes?.regions?.data?.map((item) => ({
             region_code: item?.attributes?.region_code,

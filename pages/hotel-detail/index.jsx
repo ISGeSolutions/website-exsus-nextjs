@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import { FriendlyUrl } from "../../components";
 import Iframe from "react-iframe";
 import Head from "next/head";
-import $ from "jquery";
+//import $ from "jquery";
 
 var React = require("react");
 
@@ -48,44 +48,56 @@ function Index() {
     }
   }
 
+  // const generateDynamicLink = (item) => {
+  //   return (
+  //     regionWiseUrl +
+  //     `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
+  //   );
+  // };
+
+  // const handleRedirect = (item) => {
+  //   // const modifiedName = item.replace(/ /g, "-").toLowerCase();
+  //   router.push(
+  //     regionWiseUrl +
+  //       `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
+  //   );
+  // };
+
   const generateDynamicLink = (item) => {
+    let hotelName = item?.attributes?.friendly_url
+      ?.replace(/ /g, "-")
+      .toLowerCase()
+      .replace(/&/g, "and");
     return (
       regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
     );
   };
 
   const handleRedirect = (item) => {
-    // const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
+        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/&/g, " and ")
+          .replace(/ /g, "-")
+          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.friendly_url}`
     );
   };
-
-  // const generateDynamicLink = (item) => {
-  //   let locationCountry = item?.attributes?.location
-  //     ?.toLowerCase()
-  //     .replace(/&/g, "and");
-  //   let countryName = locationCountry.match(/\|(.+)/);
-  //   countryName = countryName ? countryName[1].trim() : null;
-  //   let location = locationCountry?.match(/(.+?)\|/);
-  //   location = location ? location[1].trim() : null;
-  //   let hotelName = item?.attributes?.friendly_url
-  //     ?.replace(/ /g, "-")
-  //     .toLowerCase()
-  //     .replace(/&/g, "and");
-  //   return (
-  //     regionWiseUrl +
-  //     `/destinations/${destinationcode
-  //       ?.replace(/&/g, " and ")
-  //       .replace(/ /g, "-")
-  //       .toLowerCase()}/hotels/${countryName?.replace(
-  //       / /g,
-  //       "-"
-  //     )}/${location?.replace(/ /g, "-")}/${hotelName}`
-  //   );
-  // };
 
   const websiteContentCheck = () => {
     homeService
@@ -257,7 +269,6 @@ function Index() {
           map_longitude +
           `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
         setMapVariable(mapTemp);
-        debugger;
         setHotelData(x.data[0].attributes);
         let bestTimeTravelData = [];
         x.data[0].attributes?.hotel_travel_times?.data.forEach((res) => {
@@ -726,8 +737,7 @@ function Index() {
           <section className="favrites_blk_row">
             <div className="container">
               <h3 className="title_cls">
-                {/* PLACES TO STAY IN {countryData?.country_name} HANDPICKED BY
-                EXSUS */}
+                MORE PLACE TO STAY IN {hotelData.location}
               </h3>
               <div className="card_slider_row">
                 <i id="leftt">
@@ -749,9 +759,12 @@ function Index() {
                 </i>
                 <div className="carousel00">
                   {hotels?.map((item) => (
-                    <div className="card_slider_inr" key={item.id}>
+                    <div className="card_slider_inr">
                       <div className="card_slider">
-                        <NavLink href="" className="card_slider_img">
+                        <NavLink
+                          href={generateDynamicLink(item)}
+                          className="card_slider_img"
+                        >
                           {item?.attributes?.hotel_images?.data.map(
                             (element, index) =>
                               element.attributes.image_type == "thumbnail" ? (
@@ -773,7 +786,9 @@ function Index() {
                         </NavLink>
                         <div className="card_slider_cnt places_to_stay_cnt">
                           <h4>
-                            <a href="#">{item?.attributes?.hotel_name}</a>
+                            <a href={generateDynamicLink(item)}>
+                              {dictioneryFunction(item?.attributes?.hotel_name)}
+                            </a>
                           </h4>
                           <ul>
                             <li>Location: {item?.attributes?.location}</li>
@@ -812,14 +827,20 @@ function Index() {
                             <li>
                               <p
                                 dangerouslySetInnerHTML={{
-                                  __html: item?.attributes?.intro_text,
+                                  __html: dictioneryFunction(
+                                    item?.attributes?.intro_text
+                                  ),
                                 }}
                               />
                             </li>
                             {/* <li>{item?.attributes?.intro_text}</li> */}
                             <li>
                               Best for:
-                              <span>{item?.attributes?.best_for_text}</span>
+                              <span>
+                                {dictioneryFunction(
+                                  item?.attributes?.best_for_text
+                                )}
+                              </span>
                             </li>
                           </ul>
                         </div>

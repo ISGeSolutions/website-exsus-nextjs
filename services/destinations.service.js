@@ -566,11 +566,12 @@ function ItineraryFilterOnDestItineraryDetail(
     );
   }
 
-  // if (reason) {
-  //   filters.push(
-  //     `[filters][holiday_type_groups][holiday_type_group_code][$eq]=${reason}`
-  //   );
-  // }
+  if (reasons) {
+    const filterValuesForReasons = reasons.map((reason) => reason.value);
+    filters.push(
+      `[filters][best_for_text][$contains]=${filterValuesForReasons}`
+    );
+  }
 
   if (item == "price") {
     const itinerariesDetailsUrl =
