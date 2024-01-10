@@ -21,7 +21,6 @@ function RegionItinararies(props) {
   const [isLoader, setIsLoader] = useState(false);
   const [isRtl, setIsRtl] = useState(false);
   const [regionData, setRegionData] = useState([]);
-  const [selectedOptionCountry, setSelectedOptionCountry] = useState(null);
   const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
   const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
   const [itineraries, setItineraries] = useState([]);
@@ -31,6 +30,7 @@ function RegionItinararies(props) {
   const [activeItem, setActiveItem] = useState("recommended");
   const [metaData, setMetaData] = useState([]);
   const [alert, setAlert] = useState(null);
+  const [regionOptions, setAllRegion] = useState([]);
 
   const router = useRouter();
   const destinationcode = router?.query?.continent
@@ -127,78 +127,20 @@ function RegionItinararies(props) {
     loadMoreData(item);
   };
 
-  const countryOptions = [
-    { value: "", label: "Filter by region" },
-    { value: "Asia", label: "Asia" },
-    { value: "Hong Kong & Macau", label: "Hong Kong & Macau" },
-    { value: "Malaysia & Borneo", label: "Malaysia & Borneo" },
-    { value: "Singapore", label: "Singapore" },
-    { value: "Indonesia", label: "Indonesia" },
-    { value: "Japan", label: "Japan" },
-    { value: "Cambodia", label: "Cambodia" },
-    { value: "Vietnam", label: "Vietnam" },
-    { value: "China", label: "China" },
-    { value: "Thailand", label: "Thailand" },
-    { value: "Burma", label: "Burma" },
-    { value: "Laos", label: "Laos" },
-  ];
-
-  const regionOptions = [
-    { value: "", label: "Filter by region" },
-    { value: "Everything", label: "Everything" },
-    { value: "Barefoot", label: "Barefoot" },
-    { value: "Beach", label: "Beach" },
-    { value: "Boutique hotel", label: "Boutique hotel" },
-    { value: "Chic design", label: "Chic design" },
-    { value: "Cultural Immersion", label: "Cultural Immersion" },
-    { value: "Eco tourism", label: "Eco tourism" },
-    { value: "Family-Friendly", label: "Family-Friendly" },
-    { value: "Food & Wine", label: "Food & Wine" },
-    { value: "Guiding", label: "Guiding" },
-    { value: "Hideaway", label: "Hideaway" },
-    { value: "Honeymoon", label: "Honeymoon" },
-    { value: "Lodge", label: "Lodge" },
-    { value: "Luxury hotel", label: "Luxury Hotel" },
-    { value: "Off the beaten track", label: "Off the beaten track" },
-    { value: "Owner run", label: "Owner run" },
-    { value: "Peace & quiet", label: "Peace & quiet" },
-    { value: "Private groups", label: "Private groups" },
-    { value: "Romantic", label: "Romantic" },
-    { value: "Rustic", label: "Rustic" },
-    { value: "Seriously special", label: "Seriously special" },
-    { value: "Service & Hospitality", label: "Service & Hospitality" },
-    { value: "Setting & Views", label: "Setting & Views" },
-    { value: "Snorkelling & Driving", label: "Snorkelling & Driving" },
-    { value: "Spa & Wellness", label: "Spa & Wellness" },
-    { value: "Unusal", label: "Unusal" },
-    { value: "Village life", label: "Village life" },
-    { value: "Walking & trekking", label: "Walking & trekking" },
-    { value: "Water activities", label: "Water activities" },
-    { value: "Wildlife & Nature", label: "Wildlife & Nature" },
-    { value: "Adventure", label: "Adventure" },
-    { value: "Couples", label: "Couples" },
-    { value: "Educational", label: "Educational" },
-    { value: "Multi-activity", label: "Multi-activity" },
-    { value: "Teenagers", label: "Teenagers" },
-    { value: "Landscapes & Scenery", label: "Landscapes & Scenery" },
-    { value: "City hotel", label: "City hotel" },
-  ];
-
   const monthOptions = [
-    { value: "", label: "Filter by month" },
-    { value: "All months", label: "All months" },
-    { value: "January", label: "January" },
-    { value: "February", label: "February" },
-    { value: "March", label: "March" },
-    { value: "April", label: "April" },
-    { value: "May", label: "May" },
-    { value: "June", label: "June" },
-    { value: "July", label: "July" },
-    { value: "August", label: "August" },
-    { value: "September", label: "September" },
-    { value: "October", label: "October" },
-    { value: "November", label: "November" },
-    { value: "December", label: "December" },
+    { value: "1,2,3,4,5,6,7,8,9,10,11,12", label: "All months" },
+    { value: "1", label: "January" },
+    { value: "2", label: "February" },
+    { value: "3", label: "March" },
+    { value: "4", label: "April" },
+    { value: "5", label: "May" },
+    { value: "6", label: "June" },
+    { value: "7", label: "July" },
+    { value: "8", label: "August" },
+    { value: "9", label: "September" },
+    { value: "10", label: "October" },
+    { value: "11", label: "November" },
+    { value: "12", label: "December" },
   ];
 
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
@@ -397,9 +339,8 @@ function RegionItinararies(props) {
       websiteContentCheck();
     }
     setIsLoading(false);
-    setSelectedOptionCountry(countryOptions[0]);
-    setSelectedOptionRegion(regionOptions[0]);
-    setSelectedOptionMonth(monthOptions[0]);
+    setSelectedOptionRegion([]);
+    setSelectedOptionMonth([]);
 
     loadMoreData(activeItem);
 
@@ -414,6 +355,17 @@ function RegionItinararies(props) {
       .catch((error) => {
         setIsLoading(false);
       });
+
+    destinationService.getPropertyTypeDropDown().then((x) => {
+      setAllRegion(
+        x.data?.map((item) => ({
+          //id: i.id,
+          property_type_code: item?.attributes?.property_type_code,
+          value: item?.attributes?.property_type_name,
+          label: item?.attributes?.property_type_name,
+        }))
+      );
+    });
 
     // Using window.onload to detect full page load
     window.onload = () => {
@@ -478,8 +430,7 @@ function RegionItinararies(props) {
                         <div className="destination_dropdwn_row d-block d-md-flex">
                           <div className="banner_dropdwn_blk ">
                             <Select
-                              placeholder="Filter by reason"
-                              // defaultValue={regionOptions[0]}
+                              placeholder={"Filter by reason"}
                               className="select_container_country"
                               classNamePrefix="select_country"
                               isDisabled={isDisabled}
@@ -490,10 +441,10 @@ function RegionItinararies(props) {
                               styles={styles}
                               closeMenuOnSelect={false}
                               isSearchable={isSearchable}
-                              name="color"
+                              // name="color"
                               options={regionOptions}
                               isMulti
-                              // value={selectedOptionRegion}
+                              value={selectedOptionRegion}
                               onChange={handleOptionRegionChange}
                               components={{
                                 Option: InputOption,

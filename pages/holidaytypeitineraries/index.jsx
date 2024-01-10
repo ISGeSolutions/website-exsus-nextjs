@@ -602,6 +602,9 @@ function Index() {
       });
 
     holidaytypesService.getDestinationDropDown().then((x) => {
+      // let code = x.data[0]?.attributes?.serial_number;
+      //{ value: {id}, label: "Show All" }
+      debugger;
       setAllDestination(
         x.data?.map((item) => ({
           //id: i.id,

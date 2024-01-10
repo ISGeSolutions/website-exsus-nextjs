@@ -240,6 +240,7 @@ function Country() {
     var text = countryData?.attributes?.header_text;
     if (itemId == "overview") {
       setIsShowMap(true);
+      handleTabClick("images");
       const redirectUrl =
         regionWiseUrl +
         `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}`;
@@ -250,6 +251,7 @@ function Country() {
       text = "LUXURY HOLIDAYS IN " + countrycode.toUpperCase();
     } else if (itemId == "regions") {
       setIsShowMap(true);
+      handleTabClick("images");
       const redirectUrl =
         regionWiseUrl +
         `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url}-regions`;
@@ -260,6 +262,7 @@ function Country() {
       text = "REGIONS IN " + countrycode.toUpperCase(); // action="/countryregions?countrycode=south-africa"
     } else if (itemId == "itineraries") {
       setIsShowMap(false);
+      handleTabClick("images");
       let destCode = "";
       if (!countrycode) {
         destCode = localStorage.getItem("country_code");
@@ -282,6 +285,7 @@ function Country() {
       text = countrycode?.toUpperCase() + " ITINERARIES"; // action="/countryitineraries?countrycode=south-africa"
     } else if (itemId == "places-to-stay") {
       setIsShowMap(false);
+      handleTabClick("images");
       const redirectUrl =
         regionWiseUrl +
         `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url}-places-to-stay`;
@@ -292,6 +296,7 @@ function Country() {
       text = "LUXURY HOTELS, CAMPS & LODGES IN " + countrycode.toUpperCase(); // action="/countryplacetostay?countrycode=south-africa"
     } else if (itemId == "when-to-go") {
       setIsShowMap(false);
+      handleTabClick("images");
       const redirectUrl =
         regionWiseUrl +
         `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url}-when-to-go`;

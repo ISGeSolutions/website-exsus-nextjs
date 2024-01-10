@@ -36,6 +36,7 @@ function Index() {
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
+  debugger;
   const regionName = router.query?.region
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
@@ -131,14 +132,17 @@ function Index() {
       regionName?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase();
     if (itemId == "overview") {
       setIsShowMap(true);
+      handleTabClick("images");
       window.history.pushState(null, null, redirectUrl);
       text = regionName;
     } else if (itemId == "itineraries") {
       setIsShowMap(false);
+      handleTabClick("images");
       window.history.pushState(null, null, redirectUrl);
       text = `TAILOR-MADE ${regionName} HOLIDAY ITINERARIES`;
     } else if (itemId == "places-to-stay") {
       setIsShowMap(false);
+      handleTabClick("images");
       window.history.pushState(null, null, redirectUrl);
       text = `PLACES TO STAY IN ${regionName}`;
     } else {
@@ -315,6 +319,9 @@ function Index() {
   equalHeight(true);
 
   useEffect(() => {
+    if (regionName != undefined) {
+      localStorage.setItem("region_name", regionName);
+    }
     window.scrollTo(0, 0);
     // destinationService.getAllItineraries().then(x => {
     //     setItineraries(x.data);
@@ -412,6 +419,36 @@ function Index() {
         $(this).addClass("active");
       });
     });
+
+    window.onload = () => {
+      setTimeout(() => {
+        let reName = "";
+        if (!regionName) {
+          reName = localStorage.getItem("region_name");
+        } else {
+          reName = regionName;
+        }
+        const redirectUrl =
+          regionWiseUrl +
+          "/destinations/" +
+          destinationcode
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase() +
+          "/" +
+          countrycode
+            .replace(/ /g, "-")
+            .replace(/and/g, "&")
+            .replace(/&/g, "and")
+            .toLowerCase() +
+          "/" +
+          reName?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase();
+
+        if (redirectUrl) {
+          router.push(redirectUrl);
+        }
+      }, 0);
+    };
 
     window.addEventListener("resize", equalHeight(true));
     setTimeout(() => {

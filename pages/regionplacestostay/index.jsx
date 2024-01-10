@@ -22,7 +22,6 @@ function RegionPlacesToStay(props) {
   const [isLoader, setIsisLoader] = useState(false);
   const [isRtl, setIsRtl] = useState(false);
   const [regionData, setRegionData] = useState([]);
-  const [selectedOptionCountry, setSelectedOptionCountry] = useState(null);
   const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
   const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
   const [itineraries, setItineraries] = useState(null);
@@ -51,60 +50,62 @@ function RegionPlacesToStay(props) {
     .replace(/-/g, " ")
     .toLowerCase();
 
-  const regionOptions = [
-    { value: "Everything", label: "Everything" },
-    { value: "Barefoot", label: "Barefoot" },
-    { value: "Beach", label: "Beach" },
-    { value: "Boutique hotel", label: "Boutique hotel" },
-    { value: "Chic design", label: "Chic design" },
-    { value: "Cultural Immersion", label: "Cultural Immersion" },
-    { value: "Eco tourism", label: "Eco tourism" },
-    { value: "Family-Friendly", label: "Family-Friendly" },
-    { value: "Food & Wine", label: "Food & Wine" },
-    { value: "Guiding", label: "Guiding" },
-    { value: "Hideaway", label: "Hideaway" },
-    { value: "Honeymoon", label: "Honeymoon" },
-    { value: "Lodge", label: "Lodge" },
-    { value: "Luxury hotel", label: "Luxury Hotel" },
-    { value: "Off the beaten track", label: "Off the beaten track" },
-    { value: "Owner run", label: "Owner run" },
-    { value: "Peace & quiet", label: "Peace & quiet" },
-    { value: "Private groups", label: "Private groups" },
-    { value: "Romantic", label: "Romantic" },
-    { value: "Rustic", label: "Rustic" },
-    { value: "Seriously special", label: "Seriously special" },
-    { value: "Service & Hospitality", label: "Service & Hospitality" },
-    { value: "Setting & Views", label: "Setting & Views" },
-    { value: "Snorkelling & Driving", label: "Snorkelling & Driving" },
-    { value: "Spa & Wellness", label: "Spa & Wellness" },
-    { value: "Unusal", label: "Unusal" },
-    { value: "Village life", label: "Village life" },
-    { value: "Walking & trekking", label: "Walking & trekking" },
-    { value: "Water activities", label: "Water activities" },
-    { value: "Wildlife & Nature", label: "Wildlife & Nature" },
-    { value: "Adventure", label: "Adventure" },
-    { value: "Couples", label: "Couples" },
-    { value: "Educational", label: "Educational" },
-    { value: "Multi-activity", label: "Multi-activity" },
-    { value: "Teenagers", label: "Teenagers" },
-    { value: "Landscapes & Scenery", label: "Landscapes & Scenery" },
-    { value: "City hotel", label: "City hotel" },
-  ];
+  const [regionOptions, setAllRegion] = useState([]);
+
+  // const regionOptions = [
+  //   { value: "Everything", label: "Everything" },
+  //   { value: "Barefoot", label: "Barefoot" },
+  //   { value: "Beach", label: "Beach" },
+  //   { value: "Boutique hotel", label: "Boutique hotel" },
+  //   { value: "Chic design", label: "Chic design" },
+  //   { value: "Cultural Immersion", label: "Cultural Immersion" },
+  //   { value: "Eco tourism", label: "Eco tourism" },
+  //   { value: "Family-Friendly", label: "Family-Friendly" },
+  //   { value: "Food & Wine", label: "Food & Wine" },
+  //   { value: "Guiding", label: "Guiding" },
+  //   { value: "Hideaway", label: "Hideaway" },
+  //   { value: "Honeymoon", label: "Honeymoon" },
+  //   { value: "Lodge", label: "Lodge" },
+  //   { value: "Luxury hotel", label: "Luxury Hotel" },
+  //   { value: "Off the beaten track", label: "Off the beaten track" },
+  //   { value: "Owner run", label: "Owner run" },
+  //   { value: "Peace & quiet", label: "Peace & quiet" },
+  //   { value: "Private groups", label: "Private groups" },
+  //   { value: "Romantic", label: "Romantic" },
+  //   { value: "Rustic", label: "Rustic" },
+  //   { value: "Seriously special", label: "Seriously special" },
+  //   { value: "Service & Hospitality", label: "Service & Hospitality" },
+  //   { value: "Setting & Views", label: "Setting & Views" },
+  //   { value: "Snorkelling & Driving", label: "Snorkelling & Driving" },
+  //   { value: "Spa & Wellness", label: "Spa & Wellness" },
+  //   { value: "Unusal", label: "Unusal" },
+  //   { value: "Village life", label: "Village life" },
+  //   { value: "Walking & trekking", label: "Walking & trekking" },
+  //   { value: "Water activities", label: "Water activities" },
+  //   { value: "Wildlife & Nature", label: "Wildlife & Nature" },
+  //   { value: "Adventure", label: "Adventure" },
+  //   { value: "Couples", label: "Couples" },
+  //   { value: "Educational", label: "Educational" },
+  //   { value: "Multi-activity", label: "Multi-activity" },
+  //   { value: "Teenagers", label: "Teenagers" },
+  //   { value: "Landscapes & Scenery", label: "Landscapes & Scenery" },
+  //   { value: "City hotel", label: "City hotel" },
+  // ];
 
   const monthOptions = [
-    { value: "All months", label: "All months" },
-    { value: "January", label: "January" },
-    { value: "February", label: "February" },
-    { value: "March", label: "March" },
-    { value: "April", label: "April" },
-    { value: "May", label: "May" },
-    { value: "June", label: "June" },
-    { value: "July", label: "July" },
-    { value: "August", label: "August" },
-    { value: "September", label: "September" },
-    { value: "October", label: "October" },
-    { value: "November", label: "November" },
-    { value: "December", label: "December" },
+    { value: "1,2,3,4,5,6,7,8,9,10,11,12", label: "All months" },
+    { value: "1", label: "January" },
+    { value: "2", label: "February" },
+    { value: "3", label: "March" },
+    { value: "4", label: "April" },
+    { value: "5", label: "May" },
+    { value: "6", label: "June" },
+    { value: "7", label: "July" },
+    { value: "8", label: "August" },
+    { value: "9", label: "September" },
+    { value: "10", label: "October" },
+    { value: "11", label: "November" },
+    { value: "12", label: "December" },
   ];
 
   const width = "250px";
@@ -421,9 +422,8 @@ function RegionPlacesToStay(props) {
     if (!localStorage.getItem("websitecontent_uk")) {
       websiteContentCheck();
     }
-    setSelectedOptionCountry();
-    setSelectedOptionRegion();
-    setSelectedOptionMonth();
+    setSelectedOptionRegion([]);
+    setSelectedOptionMonth([]);
 
     destinationService
       .getRegionByName(regionName)
@@ -454,6 +454,17 @@ function RegionPlacesToStay(props) {
         // console.error(error);
         setIsLoading(false);
       });
+
+    destinationService.getPropertyTypeDropDown().then((x) => {
+      setAllRegion(
+        x.data?.map((item) => ({
+          //id: i.id,
+          property_type_code: item?.attributes?.property_type_code,
+          value: item?.attributes?.property_type_name,
+          label: item?.attributes?.property_type_name,
+        }))
+      );
+    });
 
     loadMoreData(activeItem);
 
@@ -522,8 +533,7 @@ function RegionPlacesToStay(props) {
                         <div className="destination_dropdwn_row d-block d-md-flex">
                           <div className="banner_dropdwn_blk">
                             <Select
-                              placeholder="Filter by region"
-                              // defaultValue={regionOptions[0]}
+                              placeholder={"Filter by region"}
                               className="select_container_country"
                               classNamePrefix="select_country"
                               isDisabled={isDisabled}
@@ -534,10 +544,10 @@ function RegionPlacesToStay(props) {
                               styles={styles}
                               closeMenuOnSelect={false}
                               isSearchable={isSearchable}
-                              name="color"
+                              // name="color"
                               options={regionOptions}
                               isMulti
-                              // value={selectedOptionRegion}
+                              value={selectedOptionRegion}
                               onChange={handleOptionRegionChange}
                               components={{
                                 Option: InputOption,

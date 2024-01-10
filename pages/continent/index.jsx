@@ -88,6 +88,7 @@ function Index() {
     var text;
     if (itemId == "overview") {
       setIsShowMap(true);
+      handleTabClick("images");
       const redirectUrl =
         regionWiseUrl + `/destinations/${destinationDetails?.friendly_url}`;
       window.history.pushState(null, null, redirectUrl);
@@ -95,6 +96,7 @@ function Index() {
       text = destinationDetails?.header_text;
     } else if (itemId == "countries") {
       setIsShowMap(true);
+      handleTabClick("images");
       let destCode = "";
       if (!destinationcode) {
         destCode = localStorage.getItem("destination_code");
@@ -117,6 +119,7 @@ function Index() {
       text = `COUNTRIES IN ${destinationName}`;
     } else if (itemId == "itineraries") {
       setIsShowMap(false);
+      handleTabClick("images");
       let destCode = "";
       if (!destinationcode) {
         destCode = localStorage.getItem("destination_code");
@@ -137,6 +140,7 @@ function Index() {
       text = `TAILOR-MADE ${destinationName} HOLIDAY ITINERARIES`;
     } else if (itemId == "places-to-stay") {
       setIsShowMap(false);
+      handleTabClick("images");
       const redirectUrl =
         regionWiseUrl +
         `/destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url}-places-to-stay`;
