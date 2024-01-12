@@ -9,7 +9,7 @@ import { whereToGoService } from "../../services";
 import { FriendlyUrl, Signup } from "../../components";
 import Head from "next/head";
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
-import { destinationService } from "../../services";
+import { destinationService, homeService } from "../../services";
 
 export default Index;
 
@@ -39,9 +39,9 @@ function Index() {
     }
   }
 
-  const websiteContentCheck = (matches, region, modifiedString) => {
+  const websiteContentCheck = (matches, modifiedString) => {
     homeService
-      .getAllWebsiteContent()
+      .getAllWebsiteContent(region)
       .then((x) => {
         const response = x?.data;
 
@@ -161,7 +161,7 @@ function Index() {
               }
             });
             return modifiedString;
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }

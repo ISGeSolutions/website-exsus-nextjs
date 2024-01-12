@@ -136,7 +136,7 @@ function CountryItinararies(props) {
 
   const websiteContentCheck = () => {
     homeService
-      .getAllWebsiteContent()
+      .getAllWebsiteContent(region)
       .then((x) => {
         const response = x?.data;
 
@@ -428,8 +428,7 @@ function CountryItinararies(props) {
       `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
         / /g,
         "-"
-      )}/${countrycode?.replace(/ /g, "-")?.replace(/&/g, "and")}-itineraries/${
-        item?.attributes?.friendly_url
+      )}/${countrycode?.replace(/ /g, "-")?.replace(/&/g, "and")}-itineraries/${item?.attributes?.friendly_url
       }`
     );
   };
@@ -437,12 +436,11 @@ function CountryItinararies(props) {
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-        `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
-          / /g,
-          "-"
-        )}/${countrycode?.replace(/ /g, "-")}}-itineraries/${
-          item?.attributes?.friendly_url
-        }`
+      `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
+        / /g,
+        "-"
+      )}/${countrycode?.replace(/ /g, "-")}}-itineraries/${item?.attributes?.friendly_url
+      }`
     );
   };
 
@@ -456,8 +454,8 @@ function CountryItinararies(props) {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -480,7 +478,10 @@ function CountryItinararies(props) {
   equalHeight(true);
 
   useEffect(() => {
-    if (!localStorage.getItem("websitecontent_uk")) {
+    if (!localStorage.getItem(`websitecontent_${region.replace(
+      /in/g,
+      "INDIA"
+    ).toLowerCase()}`)) {
       websiteContentCheck();
     }
     setSelectedOptionCountry([]);
@@ -741,7 +742,7 @@ function CountryItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -771,11 +772,9 @@ function CountryItinararies(props) {
                                   )
                                   .map((res1) => (
                                     <li key={res1.id}>
-                                      {`From ${
-                                        res1.attributes?.currency_symbol ?? ""
-                                      }${
-                                        res1.attributes?.price ?? " xxxx"
-                                      } per person`}
+                                      {`From ${res1.attributes?.currency_symbol ?? ""
+                                        }${res1.attributes?.price ?? " xxxx"
+                                        } per person`}
                                     </li>
                                   ))}
                                 <li>

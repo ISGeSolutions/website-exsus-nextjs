@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { destinationService } from "services";
 import { NavLink } from "components";
 import { useRouter } from "next/router";
+import { homeService } from "../../services";
 
 export default RegionOverview;
 
@@ -57,9 +58,9 @@ function RegionOverview({ props, onDataFromChild }) {
             .replace(/ /g, "-")
             .replace(/&/g, "and")
             .toLowerCase()}/${countrycode
-            .replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${modifieditem}`
+              .replace(/ /g, "-")
+              .replace(/&/g, "and")
+              .toLowerCase()}/${modifieditem}`
         );
       }
     }
@@ -75,7 +76,7 @@ function RegionOverview({ props, onDataFromChild }) {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
+      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
     );
   };
 
@@ -88,8 +89,8 @@ function RegionOverview({ props, onDataFromChild }) {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -111,9 +112,9 @@ function RegionOverview({ props, onDataFromChild }) {
 
   equalHeight(true);
 
-  const websiteContentCheck = (matches, region, modifiedString) => {
+  const websiteContentCheck = (matches, modifiedString) => {
     homeService
-      .getAllWebsiteContent()
+      .getAllWebsiteContent(region)
       .then((x) => {
         const response = x?.data;
 
@@ -225,7 +226,6 @@ function RegionOverview({ props, onDataFromChild }) {
               if (!storedData[matchString]) {
                 modifiedString = websiteContentCheck(
                   matches,
-                  region,
                   modifiedString
                 );
                 throw new Error("Loop break");
@@ -239,14 +239,17 @@ function RegionOverview({ props, onDataFromChild }) {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
   };
 
   useEffect(() => {
-    if (!localStorage.getItem("websitecontent_uk")) {
+    if (!localStorage.getItem(`websitecontent_${region.replace(
+      /in/g,
+      "INDIA"
+    ).toLowerCase()}`)) {
       websiteContentCheck();
     }
     destinationService
@@ -273,25 +276,43 @@ function RegionOverview({ props, onDataFromChild }) {
       });
 
     window.addEventListener("resize", equalHeight(true));
-
     // Using window.onload to detect full page load
     window.onload = () => {
       setTimeout(() => {
+        let reName = "";
+        let destName = "";
+        let countryName = "";
+
+        if (!regionName || regionName == "undefined") {
+          reName = localStorage.getItem("region_name");
+        } else {
+          reName = regionName?.attributes?.region_name;
+        }
+        if (!destinationcode) {
+          destName = localStorage.getItem("destination_code");
+        } else {
+          destName = destinationcode;
+        }
+        if (!countrycode) {
+          countryName = localStorage.getItem("country_code");
+        } else {
+          countryName = countrycode;
+        }
         const redirectUrl =
           regionWiseUrl +
           "/destinations/" +
-          destinationcode
+          destName
             ?.replace(/ /g, "-")
             .replace(/&/g, "and")
             .toLowerCase() +
           "/" +
-          countrycode
-            .replace(/ /g, "-")
+          countryName
+            ?.replace(/ /g, "-")
             .replace(/and/g, "&")
             .replace(/&/g, "and")
             .toLowerCase() +
           "/" +
-          regionName?.attributes?.region_name
+          reName
             ?.replace(/ /g, "-")
             .replace(/&/g, "and")
             .toLowerCase();

@@ -49,7 +49,7 @@ function Index() {
     }
   }
 
-  const websiteContentCheck = (matches, region, modifiedString) => {
+  const websiteContentCheck = (matches, modifiedString) => {
     destinationService
       .getDictionaryDetails(matches, region)
       .then((responseObj) => {
@@ -88,7 +88,10 @@ function Index() {
     // const carousel = document.querySelector('#carouselExampleInterval');
     // new bootstrap.Carousel(carousel);
 
-    if (!localStorage.getItem("websitecontent_uk")) {
+    if (!localStorage.getItem(`websitecontent_${region.replace(
+      /in/g,
+      "INDIA"
+    ).toLowerCase()}`)) {
       websiteContentCheck();
     }
     whyusService
@@ -149,7 +152,6 @@ function Index() {
               matches.forEach((match, index, matches) => {
                 const matchString = match.replace(/{|}/g, "");
                 if (!storedData[matchString]) {
-                  websiteContentCheck(matches, region, modifiedString);
                   throw new Error("Loop break");
                 } else {
                   replacement = storedData[matchString];

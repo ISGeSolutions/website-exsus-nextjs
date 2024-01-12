@@ -359,7 +359,7 @@ function Index() {
       });
 
     homeService
-      .getAllWebsiteContent()
+      .getAllWebsiteContent(region)
       .then((x) => {
         // debugger;
         const response = x?.data;

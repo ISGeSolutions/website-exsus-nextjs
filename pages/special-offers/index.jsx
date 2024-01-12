@@ -51,16 +51,16 @@ function Index() {
     // router.push(regionWiseUrl + `/hotel-detail`);
     router.push(
       regionWiseUrl +
-        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-          ?.replace(/&/g, " and ")
-          .replace(/ /g, "-")
-          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${item?.attributes?.friendly_url}`
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -77,21 +77,21 @@ function Index() {
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${res?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(
-          /&/g,
-          "and"
-        )}/${res?.attributes?.hotel?.data?.attributes?.region?.data?.attributes?.region_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${hotelName}`
+          ?.replace(/ /g, "-")
+          .replace(
+            /&/g,
+            "and"
+          )}/${res?.attributes?.hotel?.data?.attributes?.region?.data?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -130,7 +130,7 @@ function Index() {
 
   const websiteContentCheck = () => {
     homeService
-      .getAllWebsiteContent()
+      .getAllWebsiteContent(region)
       .then((x) => {
         const response = x?.data;
 
@@ -223,7 +223,7 @@ function Index() {
         setAllOffers(x.data);
         setFriendlyUrl(`home/special offers`);
       })
-      .catch((error) => {});
+      .catch((error) => { });
 
     specialoffersService
       .getOffersCustomePage()
@@ -514,8 +514,8 @@ function Index() {
                                             {res?.attributes?.currency_symbol.repeat(
                                               Math.abs(
                                                 5 -
-                                                  res?.attributes
-                                                    ?.price_guide_value
+                                                res?.attributes
+                                                  ?.price_guide_value
                                               )
                                             )}
                                           </label>

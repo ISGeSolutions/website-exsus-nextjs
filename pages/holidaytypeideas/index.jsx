@@ -144,46 +144,7 @@ function Index() {
     );
   };
 
-  const optionsData = [
-    { value: "", label: "Filter by destination" },
-    { value: "Everything", label: "Everything" },
-    { value: "Barefoot", label: "Barefoot" },
-    { value: "Beach", label: "Beach" },
-    { value: "Boutique hotel", label: "Boutique hotel" },
-    { value: "Chic design", label: "Chic design" },
-    { value: "Cultural Immersion", label: "Cultural Immersion" },
-    { value: "Eco tourism", label: "Eco tourism" },
-    { value: "Family-Friendly", label: "Family-Friendly" },
-    { value: "Food & Wine", label: "Food & Wine" },
-    { value: "Guiding", label: "Guiding" },
-    { value: "Hideaway", label: "Hideaway" },
-    { value: "Honeymoon", label: "Honeymoon" },
-    { value: "Lodge", label: "Lodge" },
-    { value: "Luxury hotel", label: "Luxury Hotel" },
-    { value: "Off the beaten track", label: "Off the beaten track" },
-    { value: "Owner run", label: "Owner run" },
-    { value: "Peace & quiet", label: "Peace & quiet" },
-    { value: "Private groups", label: "Private groups" },
-    { value: "Romantic", label: "Romantic" },
-    { value: "Rustic", label: "Rustic" },
-    { value: "Seriously special", label: "Seriously special" },
-    { value: "Service & Hospitality", label: "Service & Hospitality" },
-    { value: "Setting & Views", label: "Setting & Views" },
-    { value: "Snorkelling & Driving", label: "Snorkelling & Driving" },
-    { value: "Spa & Wellness", label: "Spa & Wellness" },
-    { value: "Unusal", label: "Unusal" },
-    { value: "Village life", label: "Village life" },
-    { value: "Walking & trekking", label: "Walking & trekking" },
-    { value: "Water activities", label: "Water activities" },
-    { value: "Wildlife & Nature", label: "Wildlife & Nature" },
-    { value: "Adventure", label: "Adventure" },
-    { value: "Couples", label: "Couples" },
-    { value: "Educational", label: "Educational" },
-    { value: "Multi-activity", label: "Multi-activity" },
-    { value: "Teenagers", label: "Teenagers" },
-    { value: "Landscapes & Scenery", label: "Landscapes & Scenery" },
-    { value: "City hotel", label: "City hotel" },
-  ];
+
 
   const LoadMorePagination = ({ data }) => {
     const [visibleItems, setVisibleItems] = useState(itemsPerPage);
@@ -197,7 +158,13 @@ function Index() {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    setSelectedOptionDestination(selectedOption);
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionDestination(selectedOption.filter(res => res.value == "Show_all"));
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionDestination(selectedOption.filter(res => res.value != "Show_all"));
+    } else {
+      setSelectedOptionDestination(selectedOption);
+    }
   };
 
   let region = "uk";
@@ -235,7 +202,7 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
+      `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -349,8 +316,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt1"
-      ),
+      "card_slider_cnt places_to_stay_cnt1"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -372,7 +339,7 @@ function Index() {
 
   const websiteContentCheck = () => {
     homeService
-      .getAllWebsiteContent()
+      .getAllWebsiteContent(region)
       .then((x) => {
         const response = x?.data;
 
@@ -496,7 +463,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -505,7 +472,10 @@ function Index() {
   equalHeight(true);
 
   useEffect(() => {
-    if (!localStorage.getItem("websitecontent_uk")) {
+    if (!localStorage.getItem(`websitecontent_${region.replace(
+      /in/g,
+      "INDIA"
+    ).toLowerCase()}`)) {
       websiteContentCheck();
     }
     setSelectedOptionDestination([]);
@@ -555,14 +525,29 @@ function Index() {
       });
 
     holidaytypesService.getDestinationDropDown().then((x) => {
-      setAllDestination(
-        x.data?.map((item) => ({
-          //id: i.id,
-          destination_code: item?.attributes?.destination_code,
-          value: item?.attributes?.destination_name,
-          label: item?.attributes?.destination_name,
-        }))
-      );
+
+      const commaSeparatedCodes = x.data?.map(obj => obj?.attributes?.destination_code,).join(',');
+      let arrayOfObjects = [{
+        destination_code: "Show_all",
+        value: "Show_all",
+        label: "Show all",
+      }];
+      arrayOfObjects = [...arrayOfObjects, ...x.data?.map((item) => ({
+        destination_code: item?.attributes?.destination_code,
+        value: item?.attributes?.destination_name,
+        label: item?.attributes?.destination_name,
+      }))];
+      setAllDestination(arrayOfObjects);
+
+
+      // setAllDestination(
+      //   x.data?.map((item) => ({
+      //     //id: i.id,
+      //     destination_code: item?.attributes?.destination_code,
+      //     value: item?.attributes?.destination_name,
+      //     label: item?.attributes?.destination_name,
+      //   }))
+      // );
     });
 
     loadMoreData(activeItem);
@@ -655,7 +640,7 @@ function Index() {
                               instanceId="long-value-select"
                               className="select_container_country"
                               classNamePrefix="select_country"
-                              placeholder={"Filter by destination "}
+                              placeholder={"Filter by destinations "}
                               styles={styles}
                               isMulti
                               isDisabled={isDisabled}
@@ -773,7 +758,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                      "thumbnail" ? (
                                       <img
                                         key={element.id}
                                         src={element.attributes.image_path}
@@ -809,11 +794,9 @@ function Index() {
                                     )
                                     .map((res1) => (
                                       <li key={res1.id}>
-                                        {`From ${
-                                          res1.attributes?.currency_symbol ?? ""
-                                        }${
-                                          res1.attributes?.price ?? " xxxx"
-                                        } per person`}
+                                        {`From ${res1.attributes?.currency_symbol ?? ""
+                                          }${res1.attributes?.price ?? " xxxx"
+                                          } per person`}
                                       </li>
                                     ))}
                                   <li>

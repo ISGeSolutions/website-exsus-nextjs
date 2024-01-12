@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, Spinner, Signup } from "components";
-import { destinationService, alertService, userService } from "services";
+import { destinationService, alertService, userService, homeService } from "services";
 import { Inspireme } from "components";
 import Head from "next/head";
 import { NavLink } from "components";
@@ -250,11 +250,11 @@ function RegionPlacesToStay(props) {
     } else {
       router.push(
         `advance-search?where=` +
-          e?.destination +
-          `&what=` +
-          e?.reason +
-          `&when=` +
-          e?.month
+        e?.destination +
+        `&what=` +
+        e?.reason +
+        `&when=` +
+        e?.month
       );
     }
   }
@@ -286,7 +286,7 @@ function RegionPlacesToStay(props) {
 
   const websiteContentCheck = () => {
     homeService
-      .getAllWebsiteContent()
+      .getAllWebsiteContent(region)
       .then((x) => {
         const response = x?.data;
 
@@ -412,14 +412,17 @@ function RegionPlacesToStay(props) {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
   };
 
   useEffect(() => {
-    if (!localStorage.getItem("websitecontent_uk")) {
+    if (!localStorage.getItem(`websitecontent_${region.replace(
+      /in/g,
+      "INDIA"
+    ).toLowerCase()}`)) {
       websiteContentCheck();
     }
     setSelectedOptionRegion([]);
@@ -664,7 +667,7 @@ function RegionPlacesToStay(props) {
                               {item?.attributes?.hotel_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
