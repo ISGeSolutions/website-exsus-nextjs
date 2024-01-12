@@ -16,6 +16,8 @@ import Head from "next/head";
 import { NavLink } from "components";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { element } from "prop-types";
+import { formatPrice } from "../../components/utils/priceFormater";
+
 var Carousel = require("react-responsive-carousel").Carousel;
 
 export default Index;
@@ -546,8 +548,8 @@ function Index() {
                       ?.attributes?.currency_symbol
                   }
                   {
-                    itineraries?.attributes?.itinerary_country_contents?.data[0]
-                      ?.attributes?.price
+                    formatPrice(itineraries?.attributes?.itinerary_country_contents?.data[0]
+                      ?.attributes?.price)
                   }{" "}
                   {
                     itineraries?.attributes?.itinerary_country_contents?.data[0]
@@ -967,7 +969,7 @@ function Index() {
                               .map((res1) => (
                                 <li key={res1.id}>
                                   {`From ${res1.attributes?.currency_symbol ?? ""
-                                    }${res1.attributes?.price ?? " xxxx"
+                                    }${formatPrice(res1.attributes?.price) ?? " xxxx"
                                     } per person`}
                                 </li>
                               ))}

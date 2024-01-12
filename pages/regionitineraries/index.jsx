@@ -10,6 +10,7 @@ import Image from "next/image";
 import CustomMultiValue from "../continentitineraries/CustomMultiValue";
 import Select, { components } from "react-select";
 import { Alert } from "../../components";
+import { formatPrice } from "../../components/utils/priceFormater";
 
 export default RegionItinararies;
 
