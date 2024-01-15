@@ -19,6 +19,7 @@ import { EnquiryButton } from "../../components/common/EnquiryBtn";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { formatPrice } from "../../components/utils/priceFormater";
 
 export default Index;
 
@@ -620,7 +621,6 @@ function Index() {
 
     holidaytypesService.getDestinationDropDown().then((x) => {
 
-      const commaSeparatedCodes = x.data?.map(obj => obj?.attributes?.destination_code,).join(',');
       let arrayOfObjects = [{
         destination_code: "Show_all",
         value: "Show_all",
@@ -909,7 +909,7 @@ function Index() {
                                     .map((res1) => (
                                       <li key={res1.id}>
                                         {`From ${res1.attributes?.currency_symbol ?? ""
-                                          }${res1.attributes?.price ?? " xxxx"
+                                          }${formatPrice(res1.attributes?.price) ?? " xxxx"
                                           } per person`}
                                       </li>
                                     ))}

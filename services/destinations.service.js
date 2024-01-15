@@ -511,36 +511,56 @@ function ItineraryFilterOnDestItineraryDetail(
   months,
   item,
   region,
-  page
+  page,
 ) {
   const filters = [];
+  debugger;
+  // if (destinationArray[0] != "Show_all") {
+  //   destinationArray?.forEach((destination, index) => {
+  //     filters.push(
+  //       `[filters][destination][destination_code][$in][${index + 1}]=${destination}`
+  //     );
+  //   });
+  // }
 
   // Conditionally add filters based on UI parameters
   if (countries.length > 0) {
-    const filterValues = countries.map((country) => country.value);
-
-    // Combine the filter values using commas
-    const combinedFilterValues = filterValues.join(",").replace(/&/g, "%26");
-    filters.push(
-      `[filters][country][country_name][$eq]=${combinedFilterValues}`
-    );
+    if (countries[0]?.value != "Show_all") {
+      // const filterValues = countries.map((country) => country.value);
+  
+      // // Combine the filter values using commas
+      // const combinedFilterValues = filterValues.join(",").replace(/&/g, "%26");
+      countries?.forEach((country,index) => {
+        filters.push(
+          `[filters][country][country_name][$in][${index}]=${country.value}`
+        );
+      })
+    }
   }
 
   if (months.length > 0) {
-    const filterValues = months.map((month) => month.value);
-
-    // Combine the filter values using commas
-    const combinedFilterValues = filterValues.join(",");
-    filters.push(
-      `[filters][itinerary_travel_times][travel_time_month][$eq]=${combinedFilterValues}`
-    );
+    if(months[0]?.value != "Show_all"){
+      // const filterValues = months.map((month) => month.value);
+  
+      // // Combine the filter values using commas
+      // const combinedFilterValues = filterValues.join(",");
+      months?.forEach((month,index) => {
+        filters.push(
+          `[filters][itinerary_travel_times][travel_time_month][$in][${index}]=${month.value}`
+        );
+      })
+    }
   }
 
   if (reasons) {
-    const filterValuesForReasons = reasons.map((reason) => reason.value);
-    filters.push(
-      `[filters][best_for_text][$contains]=${filterValuesForReasons}`
-    );
+    if(reasons[0]?.value != "Show_all"){
+      //const filterValuesForReasons = reasons.map((reason) => reason.value);
+      reasons?.forEach((reason,index) => {
+        filters.push(
+          `[filters][best_for_text][$contains][${index}]=${reason.value}`
+        );
+      })
+    }
   }
 
   if (item == "price") {
@@ -580,7 +600,7 @@ function ItineraryFilterOnDestItineraryDetail(
     const itinerariesDetailsUrl =
       `${publicRuntimeConfig.apiUrl}/api/itineraries` +
       (filters.length > 0 ? "?" + filters.join("&") : "") +
-      `&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&&populate[itinerary_country_contents][filters][website_country][$eq]=${region
+      `&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region
         .replace(/&/g, "%26")
         .replace(
           /in/g,
