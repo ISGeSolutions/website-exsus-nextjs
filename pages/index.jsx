@@ -785,18 +785,13 @@ function Index() {
                       data-bs-interval="5000"
                     >
                       <div className="carousel-caption">
-                        <p
-                          dangerouslySetInnerHTML={{
-                            __html: dictioneryFunction(
-                              text?.attributes.review_short_text
-                            ),
-                          }}
-                        />
-                        <span
-                          dangerouslySetInnerHTML={{
-                            __html: text?.attributes.client_name,
-                          }}
-                        />
+                        <p>{dictioneryFunction(
+                          text?.attributes.review_text
+                        )?.replace(/&nbsp/g, "")
+                          ?.replace(/&rsquo/g, "")
+                          ?.replace(/:/g, "")
+                          ?.replace(/;/g, "")}</p>
+                        <span>{text?.attributes.client_name}</span>
                       </div>
                     </div>
                   ))}
