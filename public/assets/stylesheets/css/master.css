@@ -562,6 +562,16 @@ input::-webkit-inner-spin-button {
 /* line 426, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */
 .header_blk_row .header_blk_inr section.header_item_right > div {
   padding-left: 10px;
+  display: flex;
+  justify-content: end;
+}
+
+.header_blk_row
+  .header_blk_inr
+  section.header_item_right
+  > div
+  .header_mail_icn {
+  margin-right: 40px;
 }
 
 /* line 430, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/master.scss */

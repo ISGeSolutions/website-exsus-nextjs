@@ -204,11 +204,11 @@ function RegionItinararies(props) {
     } else {
       router.push(
         `advance-search?where=` +
-        e?.destination +
-        `&what=` +
-        e?.reason +
-        `&when=` +
-        e?.month
+          e?.destination +
+          `&what=` +
+          e?.reason +
+          `&when=` +
+          e?.month
       );
     }
   }
@@ -252,14 +252,14 @@ function RegionItinararies(props) {
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-      `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`
+        `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`
     );
   };
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -329,17 +329,18 @@ function RegionItinararies(props) {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
   };
 
   useEffect(() => {
-    if (!localStorage.getItem(`websitecontent_${region.replace(
-      /in/g,
-      "INDIA"
-    ).toLowerCase()}`)) {
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
       websiteContentCheck(dictionaryPage);
     }
     setIsLoading(false);
@@ -427,12 +428,12 @@ function RegionItinararies(props) {
                 All Luxury Holiday Ideas in {regionName}
               </h3>
               <div className="card_slider_row">
-                <div className="carousel00 region_carousel00">
+                <div className="carousel00 region_carousel00 dropdown_width100">
                   <div className="row">
-                    <form onSubmit={onSubmit}>
-                      <div className="col-12">
+                    <div className="col-12">
+                      <form onSubmit={onSubmit}>
                         <div className="destination_dropdwn_row d-block d-md-flex">
-                          <div className="banner_dropdwn_blk ">
+                          <div className="banner_dropdwn_blk dropdown_grp_doubl">
                             <Select
                               placeholder={"Filter by reason"}
                               className="select_container_country"
@@ -506,8 +507,8 @@ function RegionItinararies(props) {
                             </button>
                           </div>
                         </div>
-                      </div>
-                    </form>
+                      </form>
+                    </div>
                     <div className="col-12">
                       <div className="destination_filter_result d-block d-lg-flex">
                         <p>
@@ -568,7 +569,7 @@ function RegionItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}

@@ -26,24 +26,24 @@ function CountryItinararies(props) {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isLoader, setIsLoader] = useState(false);
   const [isRtl, setIsRtl] = useState(false);
-  const [selectedOptionCountry, setSelectedOptionCountry] = useState(null);
   const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
+  const [selectedOptionReason, setSelectedOptionReason] = useState(null);
   const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
   const [itineraries, setItineraries] = useState([]);
   let [page, setPage] = useState(0); // Current page
   const itemsPerPage = 12; // Number of items to load per page
   const [activeItem, setActiveItem] = useState("recommended");
   const [isLoading, setIsLoading] = useState(true);
-  const [countryData, setCountryData] = useState(props?.data);
   const [alert, setAlert] = useState(null);
-  const [regionOptions, setAllRegion] = useState([]);
+  const [countryData, setCountryData] = useState(props?.data);
+  const [reasonOptions, setAllReason] = useState([]);
+  const [allRegions, setAllRegions] = useState([]);
   const destinationcode = router.query?.continent
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
 
   const [metaData, setMetaData] = useState([]);
-  const [allRegions, setAllRegions] = useState([]);
   let dictionaryPage = 1;
 
   const countrycode = router.query?.country
@@ -165,7 +165,9 @@ function CountryItinararies(props) {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
-            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
+            let localStorageUk = JSON.parse(
+              localStorage.getItem("websitecontent_uk")
+            );
             localStorage.setItem(
               "websitecontent_uk",
               JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
@@ -177,7 +179,9 @@ function CountryItinararies(props) {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
-            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
+            let localStorageUS = JSON.parse(
+              localStorage.getItem("websitecontent_us")
+            );
             localStorage.setItem(
               "websitecontent_us",
               JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
@@ -190,7 +194,9 @@ function CountryItinararies(props) {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
-            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
+            let localStorageAsia = JSON.parse(
+              localStorage.getItem("websitecontent_asia")
+            );
             localStorage.setItem(
               "websitecontent_asia",
               JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
@@ -203,7 +209,9 @@ function CountryItinararies(props) {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
-            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
+            let localStorageIndia = JSON.parse(
+              localStorage.getItem("websitecontent_india")
+            );
             localStorage.setItem(
               "websitecontent_india",
               JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
@@ -211,8 +219,8 @@ function CountryItinararies(props) {
           }
         });
         if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
-          dictionaryPage = x?.meta?.pagination?.page + 1
-          websiteContentCheck(dictionaryPage)
+          dictionaryPage = x?.meta?.pagination?.page + 1;
+          websiteContentCheck(dictionaryPage);
         }
         setWebsiteContent(x.data);
         setIsLoading(false);
@@ -295,7 +303,7 @@ function CountryItinararies(props) {
   // ];
 
   const monthOptions = [
-    { value: "1,2,3,4,5,6,7,8,9,10,11,12", label: "All months" },
+    { value: "Show_all", label: "All months" },
     { value: "1", label: "January" },
     { value: "2", label: "February" },
     { value: "3", label: "March" },
@@ -316,13 +324,6 @@ function CountryItinararies(props) {
   //     setVisibleItems(prevVisibleItems => prevVisibleItems + itemsPerPage);
   // };
 
-  const handleOptionCountryChange = (selectedOption) => {
-    selectedOption = selectedOption.filter(
-      (i) => i.value !== "" && typeof i.value !== "undefined"
-    );
-    setSelectedOptionCountry(selectedOption);
-  };
-
   const showAlert = (message, type) => {
     setAlert({ message, type });
   };
@@ -331,23 +332,60 @@ function CountryItinararies(props) {
     setAlert(null);
   };
 
+  const handleOptionReasonChange = (selectedOption) => {
+    selectedOption = selectedOption.filter(
+      (i) => i.value !== "" && typeof i.value !== "undefined"
+    );
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionReason(
+        selectedOption.filter((res) => res.value == "Show_all")
+      );
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionReason(
+        selectedOption.filter((res) => res.value != "Show_all")
+      );
+    } else {
+      setSelectedOptionReason(selectedOption);
+    }
+  };
+
   const handleOptionRegionChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    setSelectedOptionRegion(selectedOption);
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionRegion(
+        selectedOption.filter((res) => res.value == "Show_all")
+      );
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionRegion(
+        selectedOption.filter((res) => res.value != "Show_all")
+      );
+    } else {
+      setSelectedOptionRegion(selectedOption);
+    }
   };
 
   const handleOptionMonthChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    setSelectedOptionMonth(selectedOption);
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionMonth(
+        selectedOption.filter((res) => res.value == "Show_all")
+      );
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionMonth(
+        selectedOption.filter((res) => res.value != "Show_all")
+      );
+    } else {
+      setSelectedOptionMonth(selectedOption);
+    }
   };
 
   const loadMoreData = (item) => {
     if (
-      !selectedOptionCountry?.length > 0 &&
+      !selectedOptionReason?.length > 0 &&
       !selectedOptionRegion?.length > 0 &&
       !selectedOptionMonth?.length > 0
     ) {
@@ -381,8 +419,8 @@ function CountryItinararies(props) {
     } else {
       setIsLoading(true);
       destinationService
-        .ItineraryFilterOnDestItineraryDetail(
-          selectedOptionCountry,
+        .ItineraryFilterOnCountryDetail(
+          selectedOptionReason,
           selectedOptionRegion,
           selectedOptionMonth,
           item,
@@ -390,6 +428,7 @@ function CountryItinararies(props) {
           page + 1
         )
         .then((response) => {
+          debugger;
           setMetaData(response.meta.pagination);
           const newItineraries = response.data;
           if (newItineraries.length > 0) {
@@ -419,7 +458,7 @@ function CountryItinararies(props) {
     // console.log("Selected Regions:", selectedOptionRegion);
     // console.log("Selected Months:", selectedOptionMonth);
     if (
-      !selectedOptionCountry.length > 0 &&
+      !selectedOptionReason.length > 0 &&
       !selectedOptionRegion.length > 0 &&
       !selectedOptionMonth.length > 0
     ) {
@@ -437,7 +476,8 @@ function CountryItinararies(props) {
       `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
         / /g,
         "-"
-      )}/${countrycode?.replace(/ /g, "-")?.replace(/&/g, "and")}-itineraries/${item?.attributes?.friendly_url
+      )}/${countrycode?.replace(/ /g, "-")?.replace(/&/g, "and")}-itineraries/${
+        item?.attributes?.friendly_url
       }`
     );
   };
@@ -445,11 +485,12 @@ function CountryItinararies(props) {
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
-        / /g,
-        "-"
-      )}/${countrycode?.replace(/ /g, "-")}}-itineraries/${item?.attributes?.friendly_url
-      }`
+        `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
+          / /g,
+          "-"
+        )}/${countrycode?.replace(/ /g, "-")}}-itineraries/${
+          item?.attributes?.friendly_url
+        }`
     );
   };
 
@@ -463,8 +504,8 @@ function CountryItinararies(props) {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -487,13 +528,14 @@ function CountryItinararies(props) {
   equalHeight(true);
 
   useEffect(() => {
-    if (!localStorage.getItem(`websitecontent_${region.replace(
-      /in/g,
-      "INDIA"
-    ).toLowerCase()}`)) {
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
       websiteContentCheck(dictionaryPage);
     }
-    setSelectedOptionCountry([]);
+    setSelectedOptionReason([]);
     setSelectedOptionRegion([]);
     setSelectedOptionMonth([]);
 
@@ -503,33 +545,46 @@ function CountryItinararies(props) {
     window.addEventListener("resize", equalHeight(true));
 
     destinationService.getPropertyTypeDropDown().then((x) => {
-      setAllRegion(
-        x.data?.map((item) => ({
-          //id: i.id,
+      let arrayOfObjects = [
+        {
+          property_type_code: "Show_all",
+          value: "Show_all",
+          label: "Everything",
+        },
+      ];
+      arrayOfObjects = [
+        ...arrayOfObjects,
+        ...x.data?.map((item) => ({
           property_type_code: item?.attributes?.property_type_code,
           value: item?.attributes?.property_type_name,
           label: item?.attributes?.property_type_name,
-        }))
-      );
+        })),
+      ];
+      setAllReason(arrayOfObjects);
     });
 
     destinationService
       .getRegions(countrycode)
       .then((x) => {
-        setAllRegions(
-          x.data[0]?.attributes?.regions?.data?.map((item) => ({
+        let arrayOfObjects = [
+          {
+            region_code: "Show_all",
+            value: "Show_all",
+            label: x.data[0].attributes.country_name,
+          },
+        ];
+        arrayOfObjects = [
+          ...arrayOfObjects,
+          ...x.data[0]?.attributes?.regions?.data.map((item) => ({
             region_code: item?.attributes?.region_code,
             value: item?.attributes?.region_name,
             label: item?.attributes?.region_name,
-          }))
-        );
-        //setAllRegions(x.data[0]?.attributes?.regions?.data);
-        console.log(x.data[0]?.attributes?.regions?.data);
+          })),
+        ];
+        setAllRegions(arrayOfObjects);
         setIsLoading(false);
       })
       .catch((error) => {
-        // Handle any errors here
-        // console.error(error);
         setIsLoading(false);
       });
 
@@ -601,8 +656,8 @@ function CountryItinararies(props) {
                                 isClearable={isClearable}
                                 isRtl={isRtl}
                                 isSearchable={isSearchable}
-                                value={selectedOptionCountry}
-                                onChange={handleOptionCountryChange}
+                                value={selectedOptionReason}
+                                onChange={handleOptionReasonChange}
                                 closeMenuOnSelect={false}
                                 hideSelectedOptions={false}
                                 options={allRegions}
@@ -625,7 +680,7 @@ function CountryItinararies(props) {
                                 styles={styles}
                                 closeMenuOnSelect={false}
                                 isSearchable={isSearchable}
-                                options={regionOptions}
+                                options={reasonOptions}
                                 isMulti
                                 value={selectedOptionRegion}
                                 onChange={handleOptionRegionChange}
@@ -637,22 +692,21 @@ function CountryItinararies(props) {
                             </div>
                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                               <Select
-                                placeholder="Filter by month"
+                                placeholder={"Filter by month"}
                                 className="select_container_country"
                                 classNamePrefix="select_country"
-                                // defaultValue={monthOptions[0]}
                                 isDisabled={isDisabled}
                                 isLoading={isLoader}
                                 isClearable={isClearable}
                                 styles={styles}
                                 isRtl={isRtl}
                                 isSearchable={isSearchable}
-                                name="color"
+                                //name="color"
                                 closeMenuOnSelect={false}
                                 options={monthOptions}
                                 hideSelectedOptions={false}
                                 isMulti
-                                // value={selectedOptionMonth}
+                                value={selectedOptionMonth}
                                 onChange={handleOptionMonthChange}
                                 components={{
                                   Option: InputOption,
@@ -751,7 +805,7 @@ function CountryItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -781,9 +835,12 @@ function CountryItinararies(props) {
                                   )
                                   .map((res1) => (
                                     <li key={res1.id}>
-                                      {`From ${res1.attributes?.currency_symbol ?? ""
-                                        }${formatPrice(res1.attributes?.price) ?? " xxxx"
-                                        } per person`}
+                                      {`From ${
+                                        res1.attributes?.currency_symbol ?? ""
+                                      }${
+                                        formatPrice(res1.attributes?.price) ??
+                                        " xxxx"
+                                      } per person`}
                                     </li>
                                   ))}
                                 <li>

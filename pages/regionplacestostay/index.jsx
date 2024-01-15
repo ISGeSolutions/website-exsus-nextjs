@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link, Spinner, Signup } from "components";
-import { destinationService, alertService, userService, homeService } from "services";
+import {
+  destinationService,
+  alertService,
+  userService,
+  homeService,
+} from "services";
 import { Inspireme } from "components";
 import Head from "next/head";
 import { NavLink } from "components";
@@ -252,11 +257,11 @@ function RegionPlacesToStay(props) {
     } else {
       router.push(
         `advance-search?where=` +
-        e?.destination +
-        `&what=` +
-        e?.reason +
-        `&when=` +
-        e?.month
+          e?.destination +
+          `&what=` +
+          e?.reason +
+          `&when=` +
+          e?.month
       );
     }
   }
@@ -315,7 +320,9 @@ function RegionPlacesToStay(props) {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
-            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
+            let localStorageUk = JSON.parse(
+              localStorage.getItem("websitecontent_uk")
+            );
             localStorage.setItem(
               "websitecontent_uk",
               JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
@@ -327,7 +334,9 @@ function RegionPlacesToStay(props) {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
-            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
+            let localStorageUS = JSON.parse(
+              localStorage.getItem("websitecontent_us")
+            );
             localStorage.setItem(
               "websitecontent_us",
               JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
@@ -340,7 +349,9 @@ function RegionPlacesToStay(props) {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
-            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
+            let localStorageAsia = JSON.parse(
+              localStorage.getItem("websitecontent_asia")
+            );
             localStorage.setItem(
               "websitecontent_asia",
               JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
@@ -353,7 +364,9 @@ function RegionPlacesToStay(props) {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
-            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
+            let localStorageIndia = JSON.parse(
+              localStorage.getItem("websitecontent_india")
+            );
             localStorage.setItem(
               "websitecontent_india",
               JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
@@ -361,8 +374,8 @@ function RegionPlacesToStay(props) {
           }
         });
         if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
-          dictionaryPage = x?.meta?.pagination?.page + 1
-          websiteContentCheck(dictionaryPage)
+          dictionaryPage = x?.meta?.pagination?.page + 1;
+          websiteContentCheck(dictionaryPage);
         }
         setWebsiteContent(x.data);
         setIsLoading(false);
@@ -421,17 +434,18 @@ function RegionPlacesToStay(props) {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
   };
 
   useEffect(() => {
-    if (!localStorage.getItem(`websitecontent_${region.replace(
-      /in/g,
-      "INDIA"
-    ).toLowerCase()}`)) {
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
       websiteContentCheck(dictionaryPage);
     }
     setSelectedOptionRegion([]);
@@ -538,61 +552,62 @@ function RegionPlacesToStay(props) {
                 All recommended hotels in {regionName}
               </h3>
               <div className="card_slider_row">
-                <div className="carousel00 region_carousel00">
+                <div className="carousel00 region_carousel00 dropdown_width100">
                   <div className="row">
-                    <form onSubmit={onSubmit}>
-                      <div className="col-12">
+                    <div className="col-12">
+                      <form onSubmit={onSubmit}>
                         <div className="destination_dropdwn_row d-block d-md-flex">
-                          <div className="banner_dropdwn_blk">
-                            <Select
-                              placeholder={"Filter by region"}
-                              className="select_container_country"
-                              classNamePrefix="select_country"
-                              isDisabled={isDisabled}
-                              isLoading={isLoader}
-                              isClearable={isClearable}
-                              isRtl={isRtl}
-                              hideSelectedOptions={false}
-                              styles={styles}
-                              closeMenuOnSelect={false}
-                              isSearchable={isSearchable}
-                              // name="color"
-                              options={regionOptions}
-                              isMulti
-                              value={selectedOptionRegion}
-                              onChange={handleOptionRegionChange}
-                              components={{
-                                Option: InputOption,
-                                MultiValue: CustomMultiValue,
-                              }}
-                            />
+                          <div className="dropdown_grp_blk dropdown_grp_doubl">
+                            <div className="banner_dropdwn_blk">
+                              <Select
+                                placeholder={"Filter by region"}
+                                className="select_container_country"
+                                classNamePrefix="select_country"
+                                isDisabled={isDisabled}
+                                isLoading={isLoader}
+                                isClearable={isClearable}
+                                isRtl={isRtl}
+                                hideSelectedOptions={false}
+                                styles={styles}
+                                closeMenuOnSelect={false}
+                                isSearchable={isSearchable}
+                                // name="color"
+                                options={regionOptions}
+                                isMulti
+                                value={selectedOptionRegion}
+                                onChange={handleOptionRegionChange}
+                                components={{
+                                  Option: InputOption,
+                                  MultiValue: CustomMultiValue,
+                                }}
+                              />
+                            </div>
+                            <div className="banner_dropdwn_blk ps-0 ps-md-2">
+                              <Select
+                                placeholder="Filter by month"
+                                className="select_container_country"
+                                classNamePrefix="select_country"
+                                // defaultValue={monthOptions[0]}
+                                isDisabled={isDisabled}
+                                isLoading={isLoader}
+                                isClearable={isClearable}
+                                styles={styles}
+                                isRtl={isRtl}
+                                isSearchable={isSearchable}
+                                name="color"
+                                closeMenuOnSelect={false}
+                                options={monthOptions}
+                                hideSelectedOptions={false}
+                                isMulti
+                                // value={selectedOptionMonth}
+                                onChange={handleOptionMonthChange}
+                                components={{
+                                  Option: InputOption,
+                                  MultiValue: CustomMultiValue,
+                                }}
+                              />
+                            </div>
                           </div>
-                          <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                            <Select
-                              placeholder="Filter by month"
-                              className="select_container_country"
-                              classNamePrefix="select_country"
-                              // defaultValue={monthOptions[0]}
-                              isDisabled={isDisabled}
-                              isLoading={isLoader}
-                              isClearable={isClearable}
-                              styles={styles}
-                              isRtl={isRtl}
-                              isSearchable={isSearchable}
-                              name="color"
-                              closeMenuOnSelect={false}
-                              options={monthOptions}
-                              hideSelectedOptions={false}
-                              isMulti
-                              // value={selectedOptionMonth}
-                              onChange={handleOptionMonthChange}
-                              components={{
-                                Option: InputOption,
-                                MultiValue: CustomMultiValue,
-                              }}
-                            />
-                          </div>
-
                           <div className="banner_inspire_btn ps-0 ps-md-2">
                             <button
                               type="submit"
@@ -617,8 +632,8 @@ function RegionPlacesToStay(props) {
                             </button>
                           </div>
                         </div>
-                      </div>
-                    </form>
+                      </form>
+                    </div>
                     <div className="col-12">
                       <div className="destination_filter_result d-block d-lg-flex">
                         <p>
@@ -676,7 +691,7 @@ function RegionPlacesToStay(props) {
                               {item?.attributes?.hotel_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}

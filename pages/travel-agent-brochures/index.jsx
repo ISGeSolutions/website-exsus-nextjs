@@ -143,18 +143,31 @@ function Index() {
           type="text/javascript"
           src="/assets/javascripts/bootstrap.min.js"
         ></script>
+        {/* <script>
+        $(document).ready(function(){
+            $('.captch_icn_blk').mouseover(function(){
+                $('.captch_parnt_blk').addClass('captch_opn');
+            });
+            $('.brochure_header_row, .contact_form_row .brochure_form_row, .brochure_testimonial_row').mouseover(function(){
+                $('.captch_parnt_blk').removeClass('captch_opn');
+            });
+        });
+    </script> */}
       </Head>
       <Layout>
         <header className="brochure_header_row brochure_header_extr_cls">
           <div className="container">
-            <img src="images/brochure_header_img.jpg" alt="brochure_header_img" />
+            <img
+              src="images/brochure_header_img.jpg"
+              alt="brochure_header_img"
+            />
             <h1>Request Brochures</h1>
             <p>
               Our brochure, titled ‘Escape the Obvious’, highlights the very
-              finest experiences in our most popular destinations, and can be used
-              to inspire your clients to discover some of the most spectacular
-              places in the world on a unique, bespoke holiday crafted by our
-              knowledgeable and experienced experts.
+              finest experiences in our most popular destinations, and can be
+              used to inspire your clients to discover some of the most
+              spectacular places in the world on a unique, bespoke holiday
+              crafted by our knowledgeable and experienced experts.
             </p>
             <p>
               Below, please specify how many brochures you would like up to the
@@ -191,8 +204,9 @@ function Index() {
                       type="text"
                       name="first_name"
                       {...register("first_name")}
-                      className={`form-control ${errors.first_name ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.first_name ? "is-invalid" : ""
+                      }`}
                       aria-label="First name *"
                       placeholder="First name *"
                     />
@@ -207,8 +221,9 @@ function Index() {
                       type="text"
                       name="title"
                       {...register("last_name")}
-                      className={`form-control ${errors.last_name ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.last_name ? "is-invalid" : ""
+                      }`}
                       aria-label="Last name *"
                       placeholder="Last name *"
                     />
@@ -223,8 +238,9 @@ function Index() {
                       type="email"
                       name="email_id"
                       {...register("email_id")}
-                      className={`form-control ${errors.email_id ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.email_id ? "is-invalid" : ""
+                      }`}
                       aria-label="Email *"
                       placeholder="Email *"
                     />
@@ -241,8 +257,9 @@ function Index() {
                       type="number"
                       name="abtanumber"
                       {...register("abtanumber")}
-                      className={`form-control ${errors.abtanumber ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.abtanumber ? "is-invalid" : ""
+                      }`}
                       aria-label="ABTA number *"
                       placeholder="ABTA number *"
                     />
@@ -257,8 +274,9 @@ function Index() {
                       type="text"
                       name="travelagentname"
                       {...register("travelagentname")}
-                      className={`form-control ${errors.travelagentname ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.travelagentname ? "is-invalid" : ""
+                      }`}
                       aria-label="Travel agent name *"
                       placeholder="Travel agent name *"
                     />
@@ -272,8 +290,9 @@ function Index() {
                     <select
                       name="digitalbrochureonly"
                       {...register("digitalbrochureonly")}
-                      className={`form-select  ${errors.digitalbrochureonly ? "is-invalid" : ""
-                        }`}
+                      className={`form-select  ${
+                        errors.digitalbrochureonly ? "is-invalid" : ""
+                      }`}
                       aria-label="How many brochures would you like?"
                     >
                       <option value="">Digital brochures only</option>
@@ -295,8 +314,9 @@ function Index() {
                       type="text"
                       name="addressline1"
                       {...register("addressline1")}
-                      className={`form-control ${errors.addressline1 ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.addressline1 ? "is-invalid" : ""
+                      }`}
                       aria-label="Address line 1"
                       placeholder="Address line 1"
                     />
@@ -311,8 +331,9 @@ function Index() {
                       type="text"
                       name="addressline2"
                       {...register("addressline2")}
-                      className={`form-control ${errors.addressline2 ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.addressline2 ? "is-invalid" : ""
+                      }`}
                       aria-label="Address line 2"
                       placeholder="Address line 2"
                     />
@@ -327,8 +348,9 @@ function Index() {
                       type="text"
                       name="city"
                       {...register("city")}
-                      className={`form-control ${errors.city ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.city ? "is-invalid" : ""
+                      }`}
                       aria-label="City"
                       placeholder="City"
                     />
@@ -343,8 +365,9 @@ function Index() {
                       type="text"
                       name="state"
                       {...register("state")}
-                      className={`form-control ${errors.state ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.state ? "is-invalid" : ""
+                      }`}
                       aria-label="State/Prov/Region"
                       placeholder="State/Prov/Region"
                     />
@@ -359,7 +382,9 @@ function Index() {
                       type="text"
                       name="zip"
                       {...register("zip")}
-                      className={`form-control ${errors.zip ? "is-invalid" : ""}`}
+                      className={`form-control ${
+                        errors.zip ? "is-invalid" : ""
+                      }`}
                       aria-label="Postal/Zip"
                       placeholder="Postal/Zip"
                     />
@@ -374,8 +399,9 @@ function Index() {
                       aria-label="Country"
                       name="country"
                       {...register("country")}
-                      className={`form-select ${errors.country ? "is-invalid" : ""
-                        }`}
+                      className={`form-select ${
+                        errors.country ? "is-invalid" : ""
+                      }`}
                     >
                       <option value="">Country</option>
                       <option value="USA">USA</option>
@@ -395,18 +421,19 @@ function Index() {
                     <div className="contact_form_cntnt_left">
                       <h3>Sign Up To Receive Our Trade Newsletters</h3>
                       <p>
-                        We’d love to contact you by newsletter from time to time,
-                        including holiday inspiration and special offers for your
-                        clients. Please tick the box below if you'd like to hear
-                        from us.
+                        We’d love to contact you by newsletter from time to
+                        time, including holiday inspiration and special offers
+                        for your clients. Please tick the box below if you'd
+                        like to hear from us.
                       </p>
                       <div className="form-check mb-3">
                         <input
                           type="checkbox"
                           name="newsletter_mail_ind"
                           {...register("newsletter_mail_ind")}
-                          className={`form-check-input ${errors.newsletter_mail_ind ? "is-invalid" : ""
-                            }`}
+                          className={`form-check-input ${
+                            errors.newsletter_mail_ind ? "is-invalid" : ""
+                          }`}
                           id="exampleCheck1"
                         />
                         <label
@@ -424,10 +451,11 @@ function Index() {
                         Should you wish to unsubscribe from our e-newsletters at
                         any point, you can do so using the link in the footer of
                         any e-newsletter you receive from us. We will not share
-                        your details at any point. For more information about our
-                        privacy practices please visit our website. By confirming
-                        your subscription below, you agree that we will process
-                        your information in accordance with this policy.
+                        your details at any point. For more information about
+                        our privacy practices please visit our website. By
+                        confirming your subscription below, you agree that we
+                        will process your information in accordance with this
+                        policy.
                       </p>
                     </div>
                   </div>
@@ -443,11 +471,12 @@ function Index() {
                         <div className="contact_form_cntnt_left">
                           <p className="mb-0">
                             We use Mailchimp as our marketing platform. By
-                            clicking below to subscribe, you acknowledge that your
-                            information will be transferred to Mailchimp for
-                            processing.{" "}
+                            clicking below to subscribe, you acknowledge that
+                            your information will be transferred to Mailchimp
+                            for processing.{" "}
                             <a href="https://mailchimp.com/legal/terms/">
-                              Learn more about Mailchimp's privacy practices here.
+                              Learn more about Mailchimp's privacy practices
+                              here.
                             </a>
                           </p>
                         </div>
@@ -477,7 +506,48 @@ function Index() {
                 </div>
               </div>
             </div>
-          </form>{" "}
+          </form>
+
+          <section class="captch_parnt_blk">
+            <div class="captch_icn_blk">
+              <img src="\assets\images\captcha.png" alt="captcha" />
+              <div class="captch_links_blk">
+                <a
+                  href="https://www.google.com/intl/en/policies/privacy/"
+                  target="_blank"
+                >
+                  Privacy
+                </a>{" "}
+                <span>-</span>{" "}
+                <a
+                  href="https://www.google.com/intl/en/policies/terms/"
+                  target="_blank"
+                >
+                  Terms
+                </a>
+              </div>
+            </div>
+            <div class="captch_contnt_blk">
+              <span>
+                protected by <strong>reCAPTCHA</strong>
+              </span>
+              <div class="captch_links_blk">
+                <a
+                  href="https://www.google.com/intl/en/policies/privacy/"
+                  target="_blank"
+                >
+                  Privacy
+                </a>{" "}
+                <span>-</span>{" "}
+                <a
+                  href="https://www.google.com/intl/en/policies/terms/"
+                  target="_blank"
+                >
+                  Terms
+                </a>
+              </div>
+            </div>
+          </section>
         </main>
 
         <section className="brochure_testimonial_row">

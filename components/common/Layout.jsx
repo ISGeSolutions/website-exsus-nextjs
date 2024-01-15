@@ -329,6 +329,12 @@ function Layout({ children }) {
             </section>
             <section className="header_item_right d-flex d-lg-inline-block justify-content-end align-items-center">
               <div className="header_call_icn">
+                <NavLink href="make_an_enquiry.html" class="header_mail_icn">
+                  <em class="material-symbols-outlined" title="Make an enquiry">
+                    mail
+                  </em>
+                  <label class="d-none d-lg-block"></label>
+                </NavLink>
                 <NavLink href="tel:020 7337 9010">
                   <em className="material-symbols-outlined">call</em>
                   <span className="d-none d-lg-block">020 7337 9010</span>
@@ -603,33 +609,33 @@ function Layout({ children }) {
               Conduct. We provide full financial protection for your money.
             </p>
             <p>
-              <strong>International Passenger Protection (IPP)</strong>In
-              accordance with the Passenger protection policy for insolvency
-              cover in respect of the Package Travel & Linked Travel Regulations
-              2018, all passengers booking with Exsus Travel are fully protected
-              for the initial deposit and subsequently the balance of all monies
-              paid to us, including repatriation costs, arising from
-              cancellation or curtailment of your travel arrangements due to the
-              insolvency of Exsus Travel. There is no requirement for financial
-              protection of day trips, and none is provided. Your booking is
-              insured by IPP Ltd and its panel of insurers. This insurance is
-              only valid for passengers who book and pay directly with Exsus
-              Travel. If you have booked and/or paid direct to a Travel Agent
-              for a holiday with Exsus Travel please request proof of how the
-              booking is secured as this will not be covered by IPP Ltd in this
-              instance.
-              <span className="d-block pt-3"></span>
-              This insurance has been arranged by International Passenger
-              Protection Limited and underwritten by Liberty Mutual Insurance
-              Europe SE. For further information please go to{" "}
-              <NavLink href="#">www.ipplondon.co.uk</NavLink>
-              <span className="d-block pt-3"></span>
-              Claims procedure: you must notify IPP as soon as practically
-              possible giving full details of what has happened quoting the name
-              of your Travel Operator to: IPP Claims at Cunningham Lindsey,
-              Oakleigh House, 14-15 Park Place, Cardiff, CF10 3DQ, United
-              Kingdom. Tel: +44 (0)345 266 1872.
-              <span className="d-block pt-3"></span>
+              <strong>International Passenger Protection (IPP)</strong>All
+              passengers booking with Exsus Travel Ltd are fully protected for
+              the initial deposit and subsequently the balance of all monies
+              received by us, including repatriation costs and arrangements,
+              arising from cancellation or curtailment of your single service
+              travel arrangements due to the insolvency of Exsus Travel Ltd.
+              <span class="d-block pt-3"></span>
+              Exsus Travel Ltd has taken out an insurance provided by
+              International Passenger Protection Ltd (IPP) with Liberty Mutual
+              Insurance Europe SE (LMIE) trading as Liberty Specialty Markets, a
+              member of the Liberty Mutual Insurance Group. LMIE's registered
+              office: 5-7 rue Leon Laval, L-3372, Leudelange, Grand Duchy of
+              Luxembourg, Registered Number B232280 (Registre de Commerce et des
+              Sociétés). LMIE is a European public limited liability company and
+              is supervised by the Commissariat aux Assurances and licensed by
+              the Luxembourg Minister of Finance as an insurance and reinsurance
+              company. This insurance is only valid for passengers who book and
+              pay directly with/to Exsus Travel Ltd.
+              <span class="d-block pt-3"></span>
+              In the event of our insolvency please make contact as soon as
+              practically possible giving full details of what has happened
+              quoting the name of your Travel Operator:
+              <span class="d-block pt-3"></span>
+              IPP Claims at Sedgwick
+              <span class="d-block"></span>
+              Telephone: +44 (0)345 266 1872
+              <span class="d-block"></span>
               Email:{" "}
               <NavLink href="mailto:Insolvency-claims@ipplondon.co.uk">
                 Insolvency-claims@ipplondon.co.uk

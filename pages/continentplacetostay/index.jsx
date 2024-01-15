@@ -62,7 +62,7 @@ function ContinentPlacesToStay(props) {
   }
 
   const monthOptions = [
-    { value: "1,2,3,4,5,6,7,8,9,10,11,12", label: "All months" },
+    { value: "Show_all", label: "All months" },
     { value: "1", label: "January" },
     { value: "2", label: "February" },
     { value: "3", label: "March" },
@@ -202,11 +202,11 @@ function ContinentPlacesToStay(props) {
     } else {
       router.push(
         `advance-search?where=` +
-        data?.destination +
-        `&what=` +
-        data?.reason +
-        `&when=` +
-        data?.month
+          data?.destination +
+          `&what=` +
+          data?.reason +
+          `&when=` +
+          data?.month
       );
     }
   }
@@ -222,16 +222,16 @@ function ContinentPlacesToStay(props) {
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
-        .replace(/ /g, "-")
-        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/&/g, " and ")
+          .replace(/ /g, "-")
+          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${item?.attributes?.friendly_url}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -269,12 +269,12 @@ function ContinentPlacesToStay(props) {
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -307,7 +307,9 @@ function ContinentPlacesToStay(props) {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
-            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
+            let localStorageUk = JSON.parse(
+              localStorage.getItem("websitecontent_uk")
+            );
             localStorage.setItem(
               "websitecontent_uk",
               JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
@@ -319,7 +321,9 @@ function ContinentPlacesToStay(props) {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
-            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
+            let localStorageUS = JSON.parse(
+              localStorage.getItem("websitecontent_us")
+            );
             localStorage.setItem(
               "websitecontent_us",
               JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
@@ -332,7 +336,9 @@ function ContinentPlacesToStay(props) {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
-            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
+            let localStorageAsia = JSON.parse(
+              localStorage.getItem("websitecontent_asia")
+            );
             localStorage.setItem(
               "websitecontent_asia",
               JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
@@ -345,7 +351,9 @@ function ContinentPlacesToStay(props) {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
-            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
+            let localStorageIndia = JSON.parse(
+              localStorage.getItem("websitecontent_india")
+            );
             localStorage.setItem(
               "websitecontent_india",
               JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
@@ -353,8 +361,8 @@ function ContinentPlacesToStay(props) {
           }
         });
         if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
-          dictionaryPage = x?.meta?.pagination?.page + 1
-          websiteContentCheck(dictionaryPage)
+          dictionaryPage = x?.meta?.pagination?.page + 1;
+          websiteContentCheck(dictionaryPage);
         }
         setWebsiteContent(x.data);
         setIsLoading(false);
@@ -412,22 +420,23 @@ function ContinentPlacesToStay(props) {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
   };
 
   useEffect(() => {
-    if (!localStorage.getItem(`websitecontent_${region.replace(
-      /in/g,
-      "INDIA"
-    ).toLowerCase()}`)) {
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
       websiteContentCheck(dictionaryPage);
     }
-    setSelectedOptionCountry();
-    setSelectedOptionRegion();
-    setSelectedOptionMonth();
+    setSelectedOptionCountry([]);
+    setSelectedOptionRegion([]);
+    setSelectedOptionMonth([]);
 
     // destinationService.getAllItineraries().then(x => {
     //     setItineraries(x.data);
@@ -441,14 +450,33 @@ function ContinentPlacesToStay(props) {
       .then((x) => {
         setdestination(x.data[0].attributes);
         setdcode(x.data[0].attributes.destination_code);
-        setAllCountries(
-          x.data[0]?.attributes?.countries?.data.map((item) => ({
+
+        let arrayOfObjects = [
+          {
+            destination_code: "Show_all",
+            value: "Show_all",
+            label: x.data[0].attributes.destination_name,
+          },
+        ];
+        arrayOfObjects = [
+          ...arrayOfObjects,
+          ...x.data[0]?.attributes?.countries?.data.map((item) => ({
             id: item.id,
             country_code: item?.attributes?.country_code,
             value: item?.attributes?.country_name,
             label: item?.attributes?.country_name,
-          }))
-        );
+          })),
+        ];
+        setAllCountries(arrayOfObjects);
+
+        // setAllCountries(
+        //   x.data[0]?.attributes?.countries?.data.map((item) => ({
+        //     id: item.id,
+        //     country_code: item?.attributes?.country_code,
+        //     value: item?.attributes?.country_name,
+        //     label: item?.attributes?.country_name,
+        //   }))
+        // );
         setIsLoading(false);
       })
       .catch((error) => {
@@ -518,11 +546,11 @@ function ContinentPlacesToStay(props) {
               <div className="card_slider_row">
                 <div className="carousel00 region_carousel00">
                   <div className="row">
-                    <form onSubmit={onSubmit}>
-                      <div className="col-12">
+                    <div className="col-12">
+                      <form onSubmit={onSubmit}>
                         <div className="destination_dropdwn_row d-block d-md-flex">
                           <div className="dropdown_grp_blk">
-                            <div className="banner_dropdwn_blk ps-0 ps-md-2">
+                            <div className="banner_dropdwn_blk">
                               <Select
                                 id="long-value-select"
                                 instanceId="long-value-select"
@@ -620,8 +648,8 @@ function ContinentPlacesToStay(props) {
                             </button>
                           </div>
                         </div>
-                      </div>
-                    </form>
+                      </form>
+                    </div>
                     <div className="col-12">
                       <div className="destination_filter_result d-block d-lg-flex">
                         <p>
@@ -681,7 +709,7 @@ function ContinentPlacesToStay(props) {
                               {item?.attributes?.hotel_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -733,8 +761,8 @@ function ContinentPlacesToStay(props) {
                                             {item?.attributes?.currency_symbol.repeat(
                                               Math.abs(
                                                 5 -
-                                                item?.attributes
-                                                  ?.price_guide_value
+                                                  item?.attributes
+                                                    ?.price_guide_value
                                               )
                                             )}
                                           </label>
