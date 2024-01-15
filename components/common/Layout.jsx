@@ -77,7 +77,7 @@ function Layout({ children }) {
     if (window && window.site_region) {
       if (window.site_region !== "uk") {
         region = window.site_region;
-        console.log(region);
+        (region);
       }
     }
   }
@@ -107,7 +107,7 @@ function Layout({ children }) {
     const pathRouter = router.asPath;
     let myArray = [];
 
-    // debugger;
+    //  
     const regionArr = ["uk", "us", "asia", "in"];
     if (
       router.asPath === "/" ||
@@ -116,13 +116,13 @@ function Layout({ children }) {
       router.asPath === "/asia" ||
       router.asPath === "/in"
     ) {
-      // console.log("At least one string is found in the sentence.");
+      //  ("At least one string is found in the sentence.");
       myArray = pathRouter.split("/");
     } else if (isAnyStringInSentence(regionArr, router.asPath)) {
-      // console.log("At least one string is found in the sentence.");
+      //  ("At least one string is found in the sentence.");
       myArray = pathRouter.split("/");
     } else {
-      // console.log("None of the strings are found in the sentence.");
+      //  ("None of the strings are found in the sentence.");
       myArray[0] = "";
       myArray[1] = "uk";
       myArray = myArray.concat(pathRouter.split("/").slice(1));
@@ -169,7 +169,7 @@ function Layout({ children }) {
 
   useEffect(() => {
     // Temporarily disable warnings in the development environment
-    console.warn = () => {};
+    console.warn = () => { };
 
     $(".header_country_list > ul .header_country_label").on(
       "mouseenter",

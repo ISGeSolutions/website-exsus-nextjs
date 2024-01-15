@@ -62,7 +62,7 @@ function Index() {
 
   const handleFilterClick = (item) => {
     setActiveItem(item);
-    // console.log(thumbnailImageArr);
+    //  (thumbnailImageArr);
     if (item == "alphabetical") {
       setThumbnailImageArr(
         thumbnailImageArr.sort((a, b) =>
@@ -89,7 +89,7 @@ function Index() {
       .then((x) => {
         setHolidayTypes(x.data[0]);
         setCustomPage(x.data[0]?.attributes?.custom_page_contents);
-        // console.log(x.data[0]);
+        //  (x.data[0]);
         // setDestinationLandingDetails(x);
         const imageCheck = x?.data[0]?.attributes?.custom_page_images?.data;
         const newBackgroundImages = [];
@@ -386,7 +386,7 @@ function Index() {
             </div>
           </section>
 
-          <section
+          {/* <section
             aria-label="Client Testimonials"
             className="testimonials_blk_row"
           >
@@ -434,7 +434,7 @@ function Index() {
                 </div>
               </div>
             </div>
-          </section>
+          </section> */}
 
           <section className="make_enqury_row">
             <div className="container">

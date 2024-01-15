@@ -14,7 +14,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
   const [countryData, setCountryData] = useState(dataToChild);
   // const { overview_text } = props?.data || {};
-  // console.log(props?.data);
+  //  (props?.data);
   let dictionaryPage = 1;
 
   const countrycode = router.query?.country
@@ -178,7 +178,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-          debugger;
+
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {
@@ -251,7 +251,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
+      //  
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -266,7 +266,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
+        //  
         // You can access it using localStorage.getItem('yourKey')
         if (matches) {
           let replacement = "";

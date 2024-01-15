@@ -58,7 +58,7 @@ function Index() {
     privacypolicyService
       .getPrivacyPolicyPage()
       .then((x) => {
-        // debugger;
+        //  
         setprivacyPolicyData(x.data[0]);
         const data = x.data[0]?.attributes?.custom_page_contents?.data;
         let modifiedString = "";
@@ -128,7 +128,7 @@ function Index() {
                 });
                 // Set the modified string in state
                 setLongText(modifiedString);
-                // console.log(modifiedString);
+                //  (modifiedString);
                 setIsLoading(false);
               } catch (error) {
                 if (error.message === "Loop break") {

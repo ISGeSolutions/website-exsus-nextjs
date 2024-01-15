@@ -35,12 +35,12 @@ function Index() {
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors } = formState;
   const onSubmit = (e) => {
-    // console.log("First Name ", first_name);
-    // console.log("Last Name ", las_name);
-    // console.log("Email", email_id);
+    //  ("First Name ", first_name);
+    //  ("Last Name ", las_name);
+    //  ("Email", email_id);
 
-    //console.log(formData);
-    // console.log(e);
+    // (formData);
+    //  (e);
   };
 
   useEffect(() => {

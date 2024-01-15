@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 export default CountryWhentogo;
 
 function CountryWhentogo(props) {
-  // console.log("country", country);
+  //  ("country", country);
   const [countryData, setCountryData] = useState(props?.data);
   const router = useRouter();
   const [whenToGoData, setModifiedData] = useState(null);
@@ -113,7 +113,7 @@ function CountryWhentogo(props) {
   // };
 
   const generateDynamicLink = (item) => {
-    // console.log('item', item);
+    //  ('item', item);
     return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
   };
 
@@ -139,7 +139,7 @@ function CountryWhentogo(props) {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-          debugger;
+
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {

@@ -250,7 +250,7 @@ function Index() {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
+      //  
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -265,7 +265,7 @@ function Index() {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
+        //  
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -307,9 +307,9 @@ function Index() {
     destinationService
       .getCustomPagesData("home")
       .then((x) => {
-        // debugger;
+        //  
         const imageCheck = x.data[0]?.attributes?.custom_page_images.data;
-        console.log(imageCheck);
+        (imageCheck);
         const newBackgroundImages = [];
         imageCheck.forEach((element) => {
           if (element.attributes.image_type == "banner") {
@@ -357,7 +357,7 @@ function Index() {
         });
 
         setThumbnailImageArr(thumbnailImageArr);
-        console.log(thumbnailImageArr);
+        (thumbnailImageArr);
         setIsLoading(false);
       })
       .catch((error) => {

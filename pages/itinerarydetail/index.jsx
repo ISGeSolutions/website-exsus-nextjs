@@ -202,7 +202,7 @@ function Index() {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-          debugger;
+
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {
@@ -325,7 +325,7 @@ function Index() {
   // const overTextFun = (text) => {
   //   return text?.replace(/\\n/g, "");
   // };
-  console.log("consolle", router);
+  ("consolle", router);
 
   useEffect(() => {
     if (!localStorage.getItem(`websitecontent_${region.replace(

@@ -253,7 +253,7 @@ function Index() {
   };
 
   const closeAlert = () => {
-    // console.log("closeAlert");
+    //  ("closeAlert");
     setAlert(null);
   };
 
@@ -290,6 +290,7 @@ function Index() {
   };
 
   const generateDynamicLink = (item) => {
+
     const modifiedDestinationName = item?.attributes?.destination_name
       ?.replace(/ /g, "-")
       ?.replace(/&/g, "and")
@@ -304,6 +305,7 @@ function Index() {
   };
 
   const handleRedirect = () => {
+
     const modifiedDestinationName = item?.attributes?.destination_name
       ?.replace(/ /g, "-")
       ?.replace(/&/g, "and")
@@ -455,7 +457,7 @@ function Index() {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-          debugger;
+
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {
@@ -550,11 +552,7 @@ function Index() {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  region,
-                  modifiedString
-                );
+
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -602,7 +600,7 @@ function Index() {
           }
         });
         setBackgroundImage(newBackgroundImages);
-        console.log(newBackgroundImages);
+        (newBackgroundImages);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -697,7 +695,7 @@ function Index() {
                 {backgroundImage.map((imagePath, index) => (
                   // <img src={imagePath} alt="holiday_types_detls_card02" className="img-fluid" />
                   <NavLink
-
+                    href="#"
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                     data-bs-interval="5000"
                   >

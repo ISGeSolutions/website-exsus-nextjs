@@ -15,7 +15,7 @@ import { formatPrice } from "../../components/utils/priceFormater";
 export default RegionItinararies;
 
 function RegionItinararies(props) {
-  console.log(props);
+  (props);
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(true);
   const [isDisabled, setIsDisabled] = useState(false);
@@ -147,7 +147,7 @@ function RegionItinararies(props) {
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
 
   // const handleLoadMore = () => {
-  // console.log('handleLoadMore')
+  //  ('handleLoadMore')
   //     setVisibleItems(prevVisibleItems => prevVisibleItems + itemsPerPage);
   // };
 
@@ -179,7 +179,7 @@ function RegionItinararies(props) {
   };
 
   const closeAlert = () => {
-    // console.log("closeAlert");
+    //  ("closeAlert");
     setAlert(null);
   };
 
@@ -196,9 +196,9 @@ function RegionItinararies(props) {
 
   function onSubmit(e) {
     e.preventDefault();
-    // console.log("Selected Countries:", selectedOptionCountry);
-    // console.log("Selected Regions:", selectedOptionRegion);
-    // console.log("Selected Months:", selectedOptionMonth);
+    //  ("Selected Countries:", selectedOptionCountry);
+    //  ("Selected Regions:", selectedOptionRegion);
+    //  ("Selected Months:", selectedOptionMonth);
     if (!e.destination && !e.reason && !e.month) {
       showAlert("Please select atleast one option", "error");
     } else {
@@ -289,7 +289,7 @@ function RegionItinararies(props) {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
+      //  
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -304,7 +304,7 @@ function RegionItinararies(props) {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
+        //  
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -313,11 +313,7 @@ function RegionItinararies(props) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  region,
-                  modifiedString
-                );
+
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -388,7 +384,7 @@ function RegionItinararies(props) {
             ?.replace(/ /g, "-")
             .replace(/&/g, "and")
             .toLowerCase();
-        // debugger;
+        //  
         if (redirectUrl) {
           router.push(redirectUrl);
         }

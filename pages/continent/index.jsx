@@ -216,7 +216,6 @@ function Index() {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-          debugger;
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {
@@ -289,7 +288,6 @@ function Index() {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -304,7 +302,6 @@ function Index() {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -360,7 +357,7 @@ function Index() {
         .getDestinationDetails(destinationcode)
         .then((x) => {
           setDestinationDetails(x.data[0].attributes);
-          // console.log(x.data[0].attributes);
+          //  (x.data[0].attributes);
           setHeadingText(x.data[0]?.attributes?.header_text);
 
           setFriendlyUrl(

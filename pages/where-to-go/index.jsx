@@ -62,7 +62,7 @@ function Index() {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-          debugger;
+
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {
@@ -135,7 +135,7 @@ function Index() {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
+      //  
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -150,7 +150,7 @@ function Index() {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
+        //  
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -190,7 +190,7 @@ function Index() {
     whereToGoService
       .getWhereToGoPage()
       .then((x) => {
-        // debugger;
+        //  
         setCustomData(x.data[0]?.attributes?.custom_page_images);
         SetFriendlyUrl(x.data[0].attributes?.page_friendly_url);
         const imageCheck = x.data[0].attributes.custom_page_images.data;
@@ -201,10 +201,10 @@ function Index() {
           }
         });
         setBackgroundImage(newBackgroundImages);
-        // console.log(newBackgroundImages);
+        //  (newBackgroundImages);
         const data = x.data[0]?.attributes?.custom_page_contents?.data;
         let modifiedString = "";
-        // debugger;
+        //  
 
         if (data) {
           data.forEach((element, index) => {
@@ -219,12 +219,12 @@ function Index() {
             } else if (element?.attributes?.content_name == "Right_Corner") {
               setRightCorner(element?.attributes?.content_value);
             } else if (element?.attributes?.content_name == "Long_Text") {
-              // debugger;
-              // console.log(element?.attributes?.content_value);
+              //  
+              //  (element?.attributes?.content_value);
               setLongText(element?.attributes?.content_value);
             } else if (element?.attributes?.content_name == "Short_Text") {
-              // debugger;
-              // console.log(element?.attributes?.content_value);
+              //  
+              //  (element?.attributes?.content_value);
               setShortText(element?.attributes?.content_value);
             }
           });

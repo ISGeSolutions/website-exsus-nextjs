@@ -45,7 +45,7 @@ function Country() {
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
-  // console.log(destinationcode, countrycode);
+  //  (destinationcode, countrycode);
   const [selectedOptionCountry, setSelectedOptionCountry] = useState(null);
   const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
   const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
@@ -342,7 +342,7 @@ function Country() {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-          debugger;
+
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {
@@ -415,7 +415,7 @@ function Country() {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
+      //  
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -430,7 +430,7 @@ function Country() {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
+        //  
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -494,7 +494,7 @@ function Country() {
         .getCountryDetails(countrycode)
         .then((x) => {
           setCountryData(x.data[0]);
-          console.log(x.data[0]);
+          (x.data[0]);
           setDataToSendToChild(x.data[0]?.attributes);
           setHeadingText(x.data[0]?.attributes?.header_text);
           setFriendlyUrl(`Home/Destinations/${destinationcode}/${countrycode}`);

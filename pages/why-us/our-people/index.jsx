@@ -105,7 +105,7 @@ function Index() {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-          debugger;
+
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {
@@ -271,7 +271,7 @@ function Index() {
             setIsLoading(false);
           });
         }
-        // console.log(modifiedData);
+        //  (modifiedData);
         setAllExecutives(modifiedData);
 
         setIsLoading(false);

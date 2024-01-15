@@ -17,7 +17,7 @@ function Index() {
         // const [count, setCount] = useGlobalState("site_region");
         // const [user, setUser, updateUser] = useGlobalState("site_region", {default: null});
         // setCountFun();
-        // console.log('region', window.site_region);
+        //  ('region', window.site_region);
     }, []);
 
     function setCountFun() {
@@ -71,8 +71,8 @@ function Index() {
     // const { errorsSignup } = formStateSignup;
 
     function onSignup(data) {
-        // console.log('onSignup', data);
-        // return debugger;homeService.inspireMe(data)
+        //  ('onSignup', data);
+        // return  homeService.inspireMe(data)
         //     .then(() => {
         //         alertService.success('Sign up successfull', { keepAfterRouteChange: true });
         //         router.push('home');
