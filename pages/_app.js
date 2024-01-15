@@ -135,10 +135,10 @@ function App({ Component, pageProps }) {
     const password = "vpIsg@2023";
 
     // userService.login(identifier, password).then(x => {
-    //     console.log('x', x);
+    //      ('x', x);
     // });
 
-    // debugger;
+    //  
     setTimeout(() => {
       $(".carousel").carousel({
         interval: 250 * 10,

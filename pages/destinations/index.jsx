@@ -52,6 +52,12 @@ function Index() {
     }
   }
 
+  function capitalizeEveryWord(text) {
+    return text?.replace(/\b\w/g, function (match) {
+      return match.toUpperCase();
+    });
+  }
+
   const dynamicImage = (itemId) => {
     return itemId;
   };
@@ -174,6 +180,7 @@ function Index() {
 
 
   const dictioneryFunction = (data) => {
+
     let modifiedString = data;
     if (modifiedString) {
       const regex = /{[a-zA-Z0-9-]+}/g;
@@ -181,7 +188,7 @@ function Index() {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
+      //  
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -196,7 +203,7 @@ function Index() {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
+        //  
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -205,9 +212,14 @@ function Index() {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                throw new Error("Loop break");
+                if (storedData[matchString.toLowerCase()]) {
+                  replacement = storedData[matchString.toLowerCase()]
+                }
               } else {
                 replacement = storedData[matchString];
+                if (!replacement) {
+                  replacement = storedData[matchString.toLowerCase()]
+                }
               }
               const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
               if (checkStr && replacement) {
@@ -261,6 +273,7 @@ function Index() {
       .getCustomPagesData("destinations")
       .then((x) => {
         setDestinations(x.data[0]);
+
         const imageCheck = x.data[0].attributes.custom_page_images.data;
         const newBackgroundImages = [];
         imageCheck.forEach((element) => {
@@ -280,91 +293,6 @@ function Index() {
             : `https://online.exsus.com/${whenToGoImage}`
         );
         setBackgroundImage(newBackgroundImages);
-
-        const data = x.data[0]?.attributes?.custom_page_contents?.data;
-        const modifiedData = [];
-
-        if (data) {
-          let modifiedString = "";
-          data.forEach((element, index) => {
-            let content = {};
-
-            modifiedString = element?.attributes?.content_value;
-            const regex = /{[a-zA-Z0-9-]+}/g;
-            const matches = [...new Set(modifiedString.match(regex))];
-
-            let storedDataString = "";
-            let storedData = "";
-            if (region == "uk") {
-              storedDataString = localStorage.getItem("websitecontent_uk");
-              storedData = JSON.parse(storedDataString);
-            } else if (region == "us") {
-              storedDataString = localStorage.getItem("websitecontent_us");
-              storedData = JSON.parse(storedDataString);
-            } else if (region == "asia") {
-              storedDataString = localStorage.getItem("websitecontent_asia");
-              storedData = JSON.parse(storedDataString);
-            } else if (region == "in") {
-              storedDataString = localStorage.getItem("websitecontent_india");
-              storedData = JSON.parse(storedDataString);
-            }
-
-            if (storedData !== null) {
-              // You can access it using localStorage.getItem('yourKey')
-
-              if (matches) {
-                let replacement = "";
-                try {
-                  matches.forEach((match, index, matches) => {
-                    const matchString = match.replace(/{|}/g, "");
-                    if (!storedData[matchString]) {
-                      throw new Error("Loop break");
-                    } else {
-                      replacement = storedData[matchString];
-                    }
-                    const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
-                    if (checkStr && replacement) {
-                      modifiedString = modifiedString.replace(
-                        checkStr,
-                        replacement
-                      );
-                    }
-                  });
-                  content = element.attributes;
-                  content["content_value"] = modifiedString;
-                  modifiedData.push(content);
-                  setIsLoading(false);
-                } catch (error) {
-                  if (error.message === "Loop break") {
-                    // Handle the loop break here
-                    // console.log("Loop has been stopped.");
-                  } else if (error.message === "Region not found") {
-                    // Handle the loop break here
-                    // console.log("Loop has been stopped.");
-                  }
-                }
-              }
-            }
-            setIsLoading(false);
-          });
-        }
-        modifiedData.forEach((element) => {
-          if (element?.content_name == "LuxuryHolidaysHeader") {
-            setHeadingTag(element?.content_value.toUpperCase());
-          } else if (element?.content_name == "Title") {
-            setTitle(element?.content_value);
-          } else if (element?.content_name == "MetaDescription") {
-            setMetaDescription(element?.content_value);
-          } else if (element?.content_name == "Long_Text") {
-            setLongText(element?.content_value);
-          } else if (element?.content_name == "Right_Header") {
-            setRightHeader(element?.content_value);
-          } else if (element?.content_name == "Right_Corner") {
-            setRightCorner(element?.content_value);
-          } else if (element?.content_name == "Sub_Title") {
-            setSubTitle(element?.content_value);
-          }
-        });
       })
       .catch((error) => {
         setIsLoading(false);
@@ -386,11 +314,14 @@ function Index() {
       <Head>
         <title>
           {
-            destinations?.attributes?.custom_page_contents?.data?.filter(
+            dictioneryFunction(destinations?.attributes?.custom_page_contents?.data?.filter(
               (res) => res.attributes?.content_name == "Title"
-            )[0]?.attributes?.content_value
+            )[0]?.attributes?.content_value)
           }
         </title>
+        <meta name="description" content={dictioneryFunction(destinations?.attributes?.custom_page_contents?.data?.filter(
+          (res) => res.attributes?.content_name == "MetaDescription"
+        )[0]?.attributes?.content_value)}></meta>
         <script
           type="text/javascript"
           src="/assets/javascripts/card-slider.js"
@@ -458,10 +389,18 @@ function Index() {
               </div>
               <div className="row">
                 <div className="destinations_cntnt_blk">
-                  <h2>{headingTag}</h2>
+                  <h2>{
+                    capitalizeEveryWord(dictioneryFunction(destinations?.attributes?.custom_page_contents?.data?.filter(
+                      (res) => res.attributes?.content_name == "LuxuryHolidaysHeader"
+                    )[0]?.attributes?.content_value))
+                  }</h2>
                   <p
                     // className="mb-3"
-                    dangerouslySetInnerHTML={{ __html: longText }}
+                    dangerouslySetInnerHTML={{
+                      __html: dictioneryFunction(destinations?.attributes?.custom_page_contents?.data?.filter(
+                        (res) => res.attributes?.content_name == "Long_Text"
+                      )[0]?.attributes?.content_value)
+                    }}
                   ></p>
                 </div>
               </div>

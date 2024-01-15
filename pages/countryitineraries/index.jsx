@@ -158,7 +158,7 @@ function CountryItinararies(props) {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-          debugger;
+
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {
@@ -262,11 +262,7 @@ function CountryItinararies(props) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  region,
-                  modifiedString
-                );
+
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -441,7 +437,7 @@ function CountryItinararies(props) {
                 []
               )
             );
-            console.log(itineraries);
+            (itineraries);
             setPage(page + 1);
           }
           setIsLoading(false);
@@ -454,9 +450,9 @@ function CountryItinararies(props) {
 
   function onSubmit(e) {
     e.preventDefault();
-    // console.log("Selected Countries:", selectedOptionCountry);
-    // console.log("Selected Regions:", selectedOptionRegion);
-    // console.log("Selected Months:", selectedOptionMonth);
+    //  ("Selected Countries:", selectedOptionCountry);
+    //  ("Selected Regions:", selectedOptionRegion);
+    //  ("Selected Months:", selectedOptionMonth);
     if (
       !selectedOptionReason.length > 0 &&
       !selectedOptionRegion.length > 0 &&

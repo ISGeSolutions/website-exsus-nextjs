@@ -142,7 +142,6 @@ function ContinentOverview({ sendDataToParent }) {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-          debugger;
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {
@@ -215,7 +214,6 @@ function ContinentOverview({ sendDataToParent }) {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -230,7 +228,6 @@ function ContinentOverview({ sendDataToParent }) {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -239,11 +236,7 @@ function ContinentOverview({ sendDataToParent }) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  region,
-                  modifiedString
-                );
+
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];

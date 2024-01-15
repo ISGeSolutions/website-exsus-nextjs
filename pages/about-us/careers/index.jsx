@@ -53,7 +53,6 @@ function Index() {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-          debugger;
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {
@@ -148,11 +147,7 @@ function Index() {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  region,
-                  modifiedString
-                );
+
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -191,7 +186,7 @@ function Index() {
             } else if (element?.attributes?.content_name == "MetaDescription") {
               setMetaDescription(element?.attributes?.content_value);
             } else if (element?.attributes?.content_name == "Long_Text") {
-              // console.log(element?.attributes?.content_value);
+              //  (element?.attributes?.content_value);
               setLongText(element?.attributes?.content_value);
             } else if (element?.attributes?.content_name == "Right_Header") {
               setRightHeader(element?.attributes?.content_value);

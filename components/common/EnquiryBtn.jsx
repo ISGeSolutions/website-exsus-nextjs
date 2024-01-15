@@ -97,10 +97,10 @@ function EnquiryButton() {
                 } catch (error) {
                     if (error.message === "Loop break") {
                         // Handle the loop break here
-                        // console.log("Loop has been stopped.");
+                        //  ("Loop has been stopped.");
                     } else if (error.message === "Region not found") {
                         // Handle the loop break here
-                        // console.log("Loop has been stopped.");
+                        //  ("Loop has been stopped.");
                         SetTelePhoneNumber(modifiedString);
                     }
                 }

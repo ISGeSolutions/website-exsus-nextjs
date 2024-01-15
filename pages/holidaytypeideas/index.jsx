@@ -261,7 +261,7 @@ function Index() {
   };
 
   const closeAlert = () => {
-    // console.log("closeAlert");
+    //  ("closeAlert");
     setAlert(null);
   };
 
@@ -361,7 +361,7 @@ function Index() {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-          debugger;
+
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {
@@ -456,11 +456,7 @@ function Index() {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  region,
-                  modifiedString
-                );
+
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -512,7 +508,7 @@ function Index() {
         setFriendlyUrl(
           `home/holiday-types/${holidayGrpName}/${holidaytypename}`
         );
-        // console.log()
+        //  ()
         const oldText = x.data[0].attributes?.overview_text;
         var newValueWithBr = oldText?.replace(/\\n/g, "");
         setnewValueWithBr(newValueWithBr);
@@ -534,7 +530,7 @@ function Index() {
       });
 
     holidaytypesService.getDestinationDropDown().then((x) => {
-  
+
       let arrayOfObjects = [{
         destination_code: "Show_all",
         value: "Show_all",
@@ -600,7 +596,7 @@ function Index() {
               <div className="carousel-inner">
                 {backgroundImage.map((imagePath, index) => (
                   <NavLink
-
+                    href="#"
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                     data-bs-interval="5000"
                   >

@@ -219,7 +219,7 @@ function CountryPlaceToStay(props) {
     destinationService
       .getAllCountryWiseHotels(page + 1, item, countrycode, region)
       .then((response) => {
-        // console.log(response);
+        //  (response);
         setMetaData(response.meta.pagination);
         const newItineraries = response.data;
         if (newItineraries.length > 0) {
@@ -248,15 +248,15 @@ function CountryPlaceToStay(props) {
   };
 
   const closeAlert = () => {
-    // console.log("closeAlert");
+    //  ("closeAlert");
     setAlert(null);
   };
 
   function onSubmit(e) {
     e.preventDefault();
-    console.log("Selected Countries:", selectedOptionCountry);
-    console.log("Selected Regions:", selectedOptionRegion);
-    console.log("Selected Months:", selectedOptionMonth);
+    ("Selected Countries:", selectedOptionCountry);
+    ("Selected Regions:", selectedOptionRegion);
+    ("Selected Months:", selectedOptionMonth);
     if (!e.destination && !e.reason && !e.month) {
       showAlert("Please select atleast one option", "error");
     } else {
@@ -363,7 +363,7 @@ function CountryPlaceToStay(props) {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-          debugger;
+
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {

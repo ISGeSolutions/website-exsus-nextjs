@@ -36,7 +36,7 @@ function signUp(signUpData) {
 }
 
 function getAllWebsiteContent(region, page) {
-    debugger;
+
     const websitecontentUrl = `${publicRuntimeConfig.apiUrl}/api/website-country-contents?populate[0]=website_country&filters[website_country][code][$eq]=${region.replace(
         /in/g,
         "INDIA"

@@ -20,7 +20,7 @@ import Iframe from "react-iframe";
 export default RegionPlacesToStay;
 
 function RegionPlacesToStay(props) {
-  console.log(props);
+  (props);
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(true);
   const [isDisabled, setIsDisabled] = useState(false);
@@ -243,15 +243,15 @@ function RegionPlacesToStay(props) {
   };
 
   const closeAlert = () => {
-    // console.log("closeAlert");
+    //  ("closeAlert");
     setAlert(null);
   };
 
   function onSubmit(e) {
     e.preventDefault();
-    // console.log("Selected Countries:", selectedOptionCountry);
-    // console.log("Selected Regions:", selectedOptionRegion);
-    // console.log("Selected Months:", selectedOptionMonth);
+    //  ("Selected Countries:", selectedOptionCountry);
+    //  ("Selected Regions:", selectedOptionRegion);
+    //  ("Selected Months:", selectedOptionMonth);
     if (!e.destination && !e.reason && !e.month) {
       showAlert("Please select atleast one option", "error");
     } else {
@@ -313,7 +313,7 @@ function RegionPlacesToStay(props) {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-          debugger;
+
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {
@@ -394,7 +394,7 @@ function RegionPlacesToStay(props) {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
+      //  
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -409,7 +409,7 @@ function RegionPlacesToStay(props) {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
+        //  
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -418,11 +418,7 @@ function RegionPlacesToStay(props) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  region,
-                  modifiedString
-                );
+
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -511,7 +507,7 @@ function RegionPlacesToStay(props) {
             ?.replace(/ /g, "-")
             .replace(/&/g, "and")
             .toLowerCase();
-        // debugger;
+        //  
         if (redirectUrl) {
           router.push(redirectUrl);
         }

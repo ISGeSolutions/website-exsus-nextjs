@@ -66,7 +66,7 @@ function Index() {
   };
 
   const generateDynamicLink = (res) => {
-    console.log(res);
+    (res);
     // return regionWiseUrl + `/hotel-detail`;
     let hotelName = res?.attributes?.hotel?.data?.attributes?.friendly_url
       ?.replace(/ /g, "-")
@@ -122,10 +122,10 @@ function Index() {
           a.attributes.offer_text.localeCompare(b.attributes.offer_text)
         )
       );
-      // console.log(allCountries);
+      //  (allCountries);
     } else if (item == "recommended") {
       setAllOffers(allOffers.sort((a, b) => a.id - b.id));
-      // console.log(allCountries);
+      //  (allCountries);
     }
   };
 
@@ -151,7 +151,7 @@ function Index() {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-          debugger;
+
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {
@@ -320,10 +320,10 @@ function Index() {
             } catch (error) {
               if (error.message === "Loop break") {
                 // Handle the loop break here
-                // console.log("Loop has been stopped.");
+                //  ("Loop has been stopped.");
               } else if (error.message === "Region not found") {
                 // Handle the loop break here
-                // console.log("Loop has been stopped.");
+                //  ("Loop has been stopped.");
                 setLongText(modifiedString);
               }
             }
@@ -470,7 +470,7 @@ function Index() {
                               key={res?.id}
                               href={generateDynamicLink(res)}
                             >
-                              {/* console.log error => Dont add anchor tag for the below element. you can use onclick fun. */}
+                              {/*   error => Dont add anchor tag for the below element. you can use onclick fun. */}
                               <span
                                 key={res?.id}
                                 href="#"
@@ -489,7 +489,7 @@ function Index() {
                             </NavLink>
                             <div className="card_slider_cnt places_to_stay_cnt">
                               <h4>
-                                {/* console.log error => Dont add anchor tag for the below element. you can use onclick fun. */}
+                                {/*   error => Dont add anchor tag for the below element. you can use onclick fun. */}
                                 <a
                                   key={res?.id}
                                   href={generateDynamicLink(res?.id)}

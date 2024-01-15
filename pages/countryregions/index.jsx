@@ -65,7 +65,7 @@ function CountryRegions({ props, sendDataToParent }) {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-          debugger;
+
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {
@@ -239,7 +239,7 @@ function CountryRegions({ props, sendDataToParent }) {
       .getRegions(countrycode)
       .then((x) => {
         setAllRegions(x.data[0]?.attributes?.regions?.data);
-        console.log(x.data[0]?.attributes?.regions?.data);
+        (x.data[0]?.attributes?.regions?.data);
         setIsLoading(false);
       })
       .catch((error) => {

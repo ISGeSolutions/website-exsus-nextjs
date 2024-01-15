@@ -82,7 +82,7 @@ function Index() {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-          debugger;
+
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {
@@ -148,7 +148,7 @@ function Index() {
   };
 
   const dictioneryFunction = (data) => {
-    // debugger;
+    //  
     let modifiedString = data;
     if (modifiedString) {
       const regex = /{[a-zA-Z0-9-]+}/g;
@@ -281,10 +281,10 @@ function Index() {
             } catch (error) {
               if (error.message === "Loop break") {
                 // Handle the loop break here
-                // console.log("Loop has been stopped.");
+                //  ("Loop has been stopped.");
               } else if (error.message === "Region not found") {
                 // Handle the loop break here
-                // console.log("Loop has been stopped.");
+                //  ("Loop has been stopped.");
                 // setLongText(modifiedString);
               }
             }

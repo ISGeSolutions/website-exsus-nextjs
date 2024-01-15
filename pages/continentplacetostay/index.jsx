@@ -183,7 +183,7 @@ function ContinentPlacesToStay(props) {
   };
 
   const closeAlert = () => {
-    // console.log("closeAlert");
+    //  ("closeAlert");
     setAlert(null);
   };
 
@@ -193,9 +193,9 @@ function ContinentPlacesToStay(props) {
 
   function onSubmit(data) {
     data.preventDefault();
-    console.log("Selected Countries:", selectedOptionCountry);
-    console.log("Selected Regions:", selectedOptionRegion);
-    console.log("Selected Months:", selectedOptionMonth);
+    ("Selected Countries:", selectedOptionCountry);
+    ("Selected Regions:", selectedOptionRegion);
+    ("Selected Months:", selectedOptionMonth);
 
     if (!data.destination && !data.reason && !data.month) {
       showAlert("Please select atleast one option", "error");
@@ -300,7 +300,6 @@ function ContinentPlacesToStay(props) {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-          debugger;
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {
@@ -404,11 +403,7 @@ function ContinentPlacesToStay(props) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  region,
-                  modifiedString
-                );
+
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];

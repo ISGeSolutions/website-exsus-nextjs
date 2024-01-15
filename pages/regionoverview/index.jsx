@@ -135,7 +135,7 @@ function RegionOverview({ props, onDataFromChild }) {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-          debugger;
+
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {
@@ -208,7 +208,7 @@ function RegionOverview({ props, onDataFromChild }) {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
+      //  
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -223,7 +223,7 @@ function RegionOverview({ props, onDataFromChild }) {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
+        //  
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -274,7 +274,7 @@ function RegionOverview({ props, onDataFromChild }) {
       .getRegions(countrycode)
       .then((x) => {
         setAllRegions(x.data[0]?.attributes?.regions?.data);
-        console.log(x.data[0]?.attributes?.regions?.data);
+        (x.data[0]?.attributes?.regions?.data);
         setIsLoading(false);
       })
       .catch((error) => {

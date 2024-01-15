@@ -94,7 +94,7 @@ const InputOption = ({
 };
 
 function ContinentItinararies(props) {
-  console.log(props);
+  (props);
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
@@ -145,7 +145,7 @@ function ContinentItinararies(props) {
   };
 
   const closeAlert = () => {
-    // console.log("closeAlert");
+    //  ("closeAlert");
     setAlert(null);
     // setAlert("");
   };
@@ -207,7 +207,7 @@ function ContinentItinararies(props) {
                 []
               )
             );
-            console.log(itineraries);
+            (itineraries);
             setPage(page + 1);
           }
           setIsLoading(false);
@@ -216,7 +216,7 @@ function ContinentItinararies(props) {
           setIsLoading(false);
         });
     }
-    // console.log(page);
+    //  (page);
   };
 
   // const countryOptions = [
@@ -307,10 +307,10 @@ function ContinentItinararies(props) {
 
   function onSubmit(data) {
     data.preventDefault();
-    console.log("Selected Countries:", selectedOptionCountry);
-    console.log("Selected Regions:", selectedOptionRegion);
-    console.log("Selected Months:", selectedOptionMonth);
-    // console.log(data);
+    ("Selected Countries:", selectedOptionCountry);
+    ("Selected Regions:", selectedOptionRegion);
+    ("Selected Months:", selectedOptionMonth);
+    //  (data);
     if (
       !selectedOptionCountry.length > 0 &&
       !selectedOptionRegion.length > 0 &&
@@ -392,7 +392,6 @@ function ContinentItinararies(props) {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-          debugger;
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {
@@ -495,11 +494,7 @@ function ContinentItinararies(props) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  region,
-                  modifiedString
-                );
+
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -547,10 +542,10 @@ function ContinentItinararies(props) {
         arrayOfObjects = [
           ...arrayOfObjects,
           ...x.data[0]?.attributes?.countries?.data.map((item) => ({
-            id: item.id,
-            country_code: item?.attributes?.country_code,
-            value: item?.attributes?.country_name,
-            label: item?.attributes?.country_name,
+          id: item.id,
+          country_code: item?.attributes?.country_code,
+          value: item?.attributes?.country_name,
+          label: item?.attributes?.country_name,
           })),
         ];
         setAllCountries(arrayOfObjects);
@@ -581,8 +576,8 @@ function ContinentItinararies(props) {
         ...arrayOfObjects,
         ...x.data?.map((item) => ({
           property_type_code: item?.attributes?.property_type_code,
-          value: item?.attributes?.property_type_name,
-          label: item?.attributes?.property_type_name,
+        value: item?.attributes?.property_type_name,
+        label: item?.attributes?.property_type_name,
         })),
       ];
       setAllRegion(arrayOfObjects);

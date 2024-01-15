@@ -77,12 +77,12 @@ export const destinationService = {
 };
 
 function getAllDropdown() {
-  // console.log('baseUrl_dropdown', baseUrl_dropdown);
+  //  ('baseUrl_dropdown', baseUrl_dropdown);
   // return fetchWrapper.get(baseUrl_dropdown);
 }
 
 function getAll() {
-  // console.log('baseUrl', baseUrl);
+  //  ('baseUrl', baseUrl);
   // return fetchWrapper.get(baseUrl);
 }
 
@@ -106,7 +106,7 @@ function getDestinationInspireMe() {
 }
 
 function getDestinationDetails(name) {
-  // console.log('baseUrl_dropdown', baseUrl_dropdown);
+  //  ('baseUrl_dropdown', baseUrl_dropdown);
   const destinationDetailsUrl = `${
     publicRuntimeConfig.apiUrl
   }/api/destinations?filters[destination_name][$eq]=${name?.replace(
@@ -290,7 +290,7 @@ function getItinerariesByDestination(dcode, page, item, region) {
     return fetchWrapper.get(destinationDetailsUrl);
   }
 
-  // console.log('baseUrl_dropdown', baseUrl_dropdown);
+  //  ('baseUrl_dropdown', baseUrl_dropdown);
 }
 
 function getCountryWiseItinerary(name, page, item, region) {
@@ -331,7 +331,7 @@ function getCountryWiseItinerary(name, page, item, region) {
     return fetchWrapper.get(destinationDetailsUrl);
   }
 
-  // console.log('baseUrl_dropdown', baseUrl_dropdown);
+  //  ('baseUrl_dropdown', baseUrl_dropdown);
 }
 
 function getMoreItineraries(country, region) {
@@ -456,39 +456,51 @@ function getHotelById(name, region) {
   return fetchWrapper.get(itinerariesDetailsUrl);
 }
 
-function getItinerariesInAdvanceSearch(dcode, page, region, item) {
+function getItinerariesInAdvanceSearch(dcode, dcodeReason, dcodeMonth, page, region, item) {
+
+  const filters = [];
+
+  if (dcode) {
+    filters.push(
+      `[filters][destination][destination_code][$eq]=${dcode}`
+    );
+  }
+
+  if (dcodeMonth) {
+    filters.push(
+      `[filters][itinerary_travel_times][travel_time_month][$eq]=${dcodeMonth}`
+    );
+  }
+
+  if (dcodeReason) {
+    filters.push(
+      `[filters][holiday_type_groups][holiday_type_group_code][$eq]=${dcodeReason}`
+    );
+  }
+
   if (item == "duration") {
-    const destinationadvanceSearchUrl = `${
-      publicRuntimeConfig.apiUrl
-    }/api/itineraries?[filters][destination][destination_code][$eq]=${dcode?.replace(
-      /&/g,
-      "%26"
-    )}&populate[itinerary_country_contents][filters][website_country][$eq]=${region.replace(
-      /in/g,
-      "INDIA"
-    )}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=no_of_nites:asc&populate[destination][fields][0]=destination_name&populate[country][fields][0]=country_name&populate[region][fields][0]=region_name`;
+    const destinationadvanceSearchUrl = `${publicRuntimeConfig.apiUrl
+      }/api/itineraries` +
+      (filters.length > 0 ? "?" + filters.join("&") : "") + `&populate[itinerary_country_contents][filters][website_country][$eq]=${region.replace(
+        /in/g,
+        "INDIA"
+      )}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=no_of_nites:asc&populate[destination][fields][0]=destination_name&populate[country][fields][0]=country_name&populate[region][fields][0]=region_name`;
     return fetchWrapper.get(destinationadvanceSearchUrl);
   } else if (item == "Low-High") {
-    const destinationadvanceSearchUrl = `${
-      publicRuntimeConfig.apiUrl
-    }/api/itineraries?[filters][destination][destination_code][$eq]=${dcode?.replace(
-      /&/g,
-      "%26"
-    )}&populate[itinerary_country_contents][filters][website_country][$eq]=${region.replace(
-      /in/g,
-      "INDIA"
-    )}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=price:asc`;
+    const destinationadvanceSearchUrl = `${publicRuntimeConfig.apiUrl
+      }/api/itineraries` +
+      (filters.length > 0 ? "?" + filters.join("&") : "") + `&populate[itinerary_country_contents][filters][website_country][$eq]=${region.replace(
+        /in/g,
+        "INDIA"
+      )}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=price:asc`;
     return fetchWrapper.get(destinationadvanceSearchUrl);
   } else if (item == "High-Low") {
-    const destinationadvanceSearchUrl = `${
-      publicRuntimeConfig.apiUrl
-    }/api/itineraries?[filters][destination][destination_code][$eq]=${dcode?.replace(
-      /&/g,
-      "%26"
-    )}&populate[itinerary_country_contents][filters][website_country][$eq]=${region.replace(
-      /in/g,
-      "INDIA"
-    )}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=price:des`;
+    const destinationadvanceSearchUrl = `${publicRuntimeConfig.apiUrl
+      }/api/itineraries` +
+      (filters.length > 0 ? "?" + filters.join("&") : "") + `&populate[itinerary_country_contents][filters][website_country][$eq]=${region.replace(
+        /in/g,
+        "INDIA"
+      )}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=price:des`;
     return fetchWrapper.get(destinationadvanceSearchUrl);
   }
 }
@@ -504,7 +516,7 @@ function getRegionByName(name) {
 }
 
 function getDictionaryDetails(matches, region) {
-  debugger;
+
   // https://cms-api.excelleresolutions.com/api/website-country-contents?populate[0]=website_country&filters[content_word][$in][1]=holiday&filters[content_word][$in][2]=Holiday&filters[website_country][code][$eq]=US
   var tempUrl = `${publicRuntimeConfig.apiUrl}/api/website-country-contents?populate[0]=website_country`;
 
@@ -546,7 +558,7 @@ function ItineraryFilterOnDestItineraryDetail(
   page
 ) {
   const filters = [];
-  debugger;
+
   // Conditionally add filters based on UI parameters
   if (countries.length > 0) {
     if (countries[0]?.value != "Show_all") {

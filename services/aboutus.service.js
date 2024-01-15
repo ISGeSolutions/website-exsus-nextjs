@@ -13,12 +13,12 @@ export const aboutusService = {
 };
 
 function getAllDropdown() {
-  // console.log('baseUrl_dropdown', baseUrl_dropdown);
+  //  ('baseUrl_dropdown', baseUrl_dropdown);
   // return fetchWrapper.get(baseUrl_dropdown);
 }
 
 function getAll() {
-  // console.log('baseUrl', baseUrl);
+  //  ('baseUrl', baseUrl);
   // return fetchWrapper.get(baseUrl);
 }
 
@@ -27,7 +27,7 @@ function getById(id) {
 }
 
 function getAboutusPage() {
-  // console.log('baseUrl_dropdown', baseUrl_dropdown);
+  //  ('baseUrl_dropdown', baseUrl_dropdown);
   const aboutusPageUrl = `${publicRuntimeConfig.apiUrl}/api/custom-pages?filters[page_code][$eq]=About-us&populate[0]=custom_page_images&populate[1]=custom_page_contents`;
   return fetchWrapper.get(aboutusPageUrl);
 }

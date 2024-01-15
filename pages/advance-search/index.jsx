@@ -14,6 +14,7 @@ import generateDynamicLink from "components/utils/generateLink";
 import Image from "next/image";
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
 import { Alert } from "../../components";
+import { formatPrice } from "../../components/utils/priceFormater";
 
 export default Index;
 
@@ -53,7 +54,7 @@ function Index() {
 
   const loadMoreData = (item) => {
     destinationService
-      .getItinerariesInAdvanceSearch(dcodestr, page + 1, region, item)
+      .getItinerariesInAdvanceSearch(dcodestr, dcodeReason, dcodeMonth, page + 1, region, item)
       .then((response) => {
         setMetaData(response.meta.pagination);
         const newItineraries = response.data;
@@ -68,8 +69,11 @@ function Index() {
             )
           );
           setPage(page + 1);
+          setIsLoading(false);
         }
       });
+
+
   };
 
   const generateDynamicLink = (item) => {
@@ -162,7 +166,6 @@ function Index() {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-          debugger;
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {
@@ -235,7 +238,6 @@ function Index() {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -250,7 +252,6 @@ function Index() {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -259,11 +260,6 @@ function Index() {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  region,
-                  modifiedString
-                );
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -311,24 +307,24 @@ function Index() {
     //       setIsLoading(false);
     //     });
     // } else {
-    //   console.log("api is getting called twice");
+    //    ("api is getting called twice");
     // }
 
-    destinationService
-      .getItinerariesInspireMe(
-        page,
-        dcodestr ? dcodestr : "",
-        dcodeReason ? dcodeReason : "",
-        dcodeMonth ? dcodeMonth : "",
-        region
-      )
-      .then((x) => {
-        setItineraries(x.data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-      });
+    // destinationService
+    //   .getItinerariesInspireMe(
+    //     page,
+    //     dcodestr ? dcodestr : "",
+    //     dcodeReason ? dcodeReason : "",
+    //     dcodeMonth ? dcodeMonth : "",
+    //     region
+    //   )
+    //   .then((x) => {
+    //     setItineraries(x.data);
+    //     setIsLoading(false);
+    //   })
+    //   .catch((error) => {
+    //     setIsLoading(false);
+    //   });
     loadMoreData(activeItem);
 
     window.addEventListener("resize", equalHeight(true));
@@ -475,7 +471,7 @@ function Index() {
                                         <li key={res1.id}>
                                           {`from ${res1.attributes?.currency_symbol ??
                                             ""
-                                            }${res1.attributes?.price ?? " xxxx"
+                                            }${formatPrice(res1.attributes?.price) ?? " xxxx"
                                             } per person`}
                                         </li>
                                       ))}

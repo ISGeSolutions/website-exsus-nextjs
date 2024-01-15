@@ -62,7 +62,7 @@ function Index() {
     giftListService
       .getGiftListPage()
       .then((x) => {
-        // debugger;
+        //  
         setCustomData(x.data[0]);
         const imageCheck = x.data[0].attributes.custom_page_images.data;
         const newBackgroundImages = [];
