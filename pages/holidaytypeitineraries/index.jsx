@@ -57,6 +57,7 @@ function Index() {
   const validationSchema = Yup.object().shape({
     destination: Yup.string(),
   });
+  let dictionaryPage = 1;
 
   const formOptions = { resolver: yupResolver(validationSchema) };
 
@@ -431,9 +432,9 @@ function Index() {
 
   equalHeight(true);
 
-  const websiteContentCheck = () => {
+  const websiteContentCheck = (pageNo) => {
     homeService
-      .getAllWebsiteContent(region)
+      .getAllWebsiteContent(region, pageNo)
       .then((x) => {
         const response = x?.data;
 
@@ -453,16 +454,17 @@ function Index() {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-
+          debugger;
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
+            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
             localStorage.setItem(
               "websitecontent_uk",
-              JSON.stringify(dynamicObjectUk)
+              JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
             );
           }
           if (
@@ -471,9 +473,10 @@ function Index() {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
+            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
             localStorage.setItem(
               "websitecontent_us",
-              JSON.stringify(dynamicObjectUs)
+              JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
             );
           }
           if (
@@ -483,9 +486,10 @@ function Index() {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
+            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
             localStorage.setItem(
               "websitecontent_asia",
-              JSON.stringify(dynamicObjectAsia)
+              JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
             );
           }
           if (
@@ -495,13 +499,17 @@ function Index() {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
+            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
             localStorage.setItem(
               "websitecontent_india",
-              JSON.stringify(dynamicObjectIndia)
+              JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
             );
           }
         });
-
+        if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
+          dictionaryPage = x?.meta?.pagination?.page + 1
+          websiteContentCheck(dictionaryPage)
+        }
         setWebsiteContent(x.data);
         setIsLoading(false);
       })
@@ -568,7 +576,7 @@ function Index() {
       /in/g,
       "INDIA"
     ).toLowerCase()}`)) {
-      websiteContentCheck();
+      websiteContentCheck(dictionaryPage);
     }
     setSelectedOptionDestination([]);
     holidaytypesService
@@ -689,7 +697,7 @@ function Index() {
                 {backgroundImage.map((imagePath, index) => (
                   // <img src={imagePath} alt="holiday_types_detls_card02" className="img-fluid" />
                   <NavLink
-                    href=""
+
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                     data-bs-interval="5000"
                   >

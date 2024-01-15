@@ -43,6 +43,7 @@ function CountryItinararies(props) {
 
   const [metaData, setMetaData] = useState([]);
   const [allRegions, setAllRegions] = useState([]);
+  let dictionaryPage = 1;
 
   const countrycode = router.query?.country
     ?.replace(/-and-/g, " & ")
@@ -134,9 +135,9 @@ function CountryItinararies(props) {
     }
   }
 
-  const websiteContentCheck = () => {
+  const websiteContentCheck = (pageNo) => {
     homeService
-      .getAllWebsiteContent(region)
+      .getAllWebsiteContent(region, pageNo)
       .then((x) => {
         const response = x?.data;
 
@@ -156,16 +157,17 @@ function CountryItinararies(props) {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-
+          debugger;
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
+            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
             localStorage.setItem(
               "websitecontent_uk",
-              JSON.stringify(dynamicObjectUk)
+              JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
             );
           }
           if (
@@ -174,9 +176,10 @@ function CountryItinararies(props) {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
+            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
             localStorage.setItem(
               "websitecontent_us",
-              JSON.stringify(dynamicObjectUs)
+              JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
             );
           }
           if (
@@ -186,9 +189,10 @@ function CountryItinararies(props) {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
+            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
             localStorage.setItem(
               "websitecontent_asia",
-              JSON.stringify(dynamicObjectAsia)
+              JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
             );
           }
           if (
@@ -198,13 +202,17 @@ function CountryItinararies(props) {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
+            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
             localStorage.setItem(
               "websitecontent_india",
-              JSON.stringify(dynamicObjectIndia)
+              JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
             );
           }
         });
-
+        if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
+          dictionaryPage = x?.meta?.pagination?.page + 1
+          websiteContentCheck(dictionaryPage)
+        }
         setWebsiteContent(x.data);
         setIsLoading(false);
       })
@@ -482,7 +490,7 @@ function CountryItinararies(props) {
       /in/g,
       "INDIA"
     ).toLowerCase()}`)) {
-      websiteContentCheck();
+      websiteContentCheck(dictionaryPage);
     }
     setSelectedOptionCountry([]);
     setSelectedOptionRegion([]);

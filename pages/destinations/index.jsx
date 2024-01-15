@@ -218,9 +218,9 @@ function Index() {
             setIsLoading(false);
           });
         }
-
+        debugger;
         modifiedData.forEach((element) => {
-          if (element?.content_name == "HeadingTag") {
+          if (element?.content_name == "LuxuryHolidaysHeader") {
             setHeadingTag(element?.content_value.toUpperCase());
           } else if (element?.content_name == "Title") {
             setTitle(element?.content_value);

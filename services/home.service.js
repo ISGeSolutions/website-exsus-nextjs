@@ -35,14 +35,12 @@ function signUp(signUpData) {
     // return fetchWrapper.post(`${baseUrl}`, signUpData);
 }
 
-function getAllWebsiteContent(region) {
+function getAllWebsiteContent(region, page) {
     debugger;
-    // https://cms-api.excelleresolutions.com/api/website-country-contents?populate[0]=website_country
     const websitecontentUrl = `${publicRuntimeConfig.apiUrl}/api/website-country-contents?populate[0]=website_country&filters[website_country][code][$eq]=${region.replace(
         /in/g,
         "INDIA"
-    )}&pagination[pageSize]=1000`;
-
+    )}&pagination[page]=${page}&pagination[pageSize]=100`;
     return fetchWrapper.get(websitecontentUrl);
 }
 

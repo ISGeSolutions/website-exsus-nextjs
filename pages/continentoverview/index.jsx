@@ -19,7 +19,7 @@ function ContinentOverview({ sendDataToParent }) {
   const [itineraries, setItineraries] = useState(null);
   const [valueWithBr, setnewValueWithBr] = useState("");
   const destinationcode = router.query.continent
-    .replace(/-and-/g, " & ")
+    ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
   const itemsPerPage = 9; // Number of items to load per page
@@ -28,6 +28,7 @@ function ContinentOverview({ sendDataToParent }) {
   const { t } = useTranslation();
   const [holidayTitle, setHolidayTitle] = useState(t("holidayTitle"));
   const [isLoading, setIsLoading] = useState(true);
+  let dictionaryPage = 1;
 
   const handleLoadMore = () => {
     setVisibleItems((prevVisibleItems) => prevVisibleItems + itemsPerPage);
@@ -119,9 +120,9 @@ function ContinentOverview({ sendDataToParent }) {
 
   equalHeight(true);
 
-  const websiteContentCheck = () => {
+  const websiteContentCheck = (pageNo) => {
     homeService
-      .getAllWebsiteContent(region)
+      .getAllWebsiteContent(region, pageNo)
       .then((x) => {
         const response = x?.data;
 
@@ -141,16 +142,17 @@ function ContinentOverview({ sendDataToParent }) {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-
+          debugger;
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
+            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
             localStorage.setItem(
               "websitecontent_uk",
-              JSON.stringify(dynamicObjectUk)
+              JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
             );
           }
           if (
@@ -159,9 +161,10 @@ function ContinentOverview({ sendDataToParent }) {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
+            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
             localStorage.setItem(
               "websitecontent_us",
-              JSON.stringify(dynamicObjectUs)
+              JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
             );
           }
           if (
@@ -171,9 +174,10 @@ function ContinentOverview({ sendDataToParent }) {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
+            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
             localStorage.setItem(
               "websitecontent_asia",
-              JSON.stringify(dynamicObjectAsia)
+              JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
             );
           }
           if (
@@ -183,13 +187,17 @@ function ContinentOverview({ sendDataToParent }) {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
+            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
             localStorage.setItem(
               "websitecontent_india",
-              JSON.stringify(dynamicObjectIndia)
+              JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
             );
           }
         });
-
+        if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
+          dictionaryPage = x?.meta?.pagination?.page + 1
+          websiteContentCheck(dictionaryPage)
+        }
         setWebsiteContent(x.data);
         setIsLoading(false);
       })
@@ -263,7 +271,7 @@ function ContinentOverview({ sendDataToParent }) {
       /in/g,
       "INDIA"
     ).toLowerCase()}`)) {
-      websiteContentCheck();
+      websiteContentCheck(dictionaryPage);
     }
     destinationService
       .getDestinationDetails(destinationcode)
@@ -296,15 +304,18 @@ function ContinentOverview({ sendDataToParent }) {
     window.addEventListener("resize", equalHeight(true));
 
     // Using window.onload to detect full page load
-    window.onload = () => {
-      setTimeout(() => {
-        const redirectUrl = `${regionWiseUrl}/destinations/${destinationcode}`;
+    // window.onload = () => {
+    //   setTimeout(() => {
+    //     const redirectUrl = `${regionWiseUrl}/destinations/${destinationcode?.replace(
+    //       / /g,
+    //       "-"
+    //     ).replace(/&/g, "and")}`;
 
-        if (redirectUrl) {
-          router.push(redirectUrl);
-        }
-      }, 0);
-    };
+    //     if (redirectUrl) {
+    //       router.push(redirectUrl);
+    //     }
+    //   }, 0);
+    // };
   }, [destinationcode, router, holidayTitle, valueWithBr]);
 
   return (

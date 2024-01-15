@@ -31,6 +31,7 @@ function Index() {
   const [websiteContent, setWebsiteContent] = useState(null);
   const [backgroundImage, setBackgroundImage] = useState([]);
   const router = useRouter();
+  let dictionaryPage = 1;
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -155,6 +156,92 @@ function Index() {
     }
   };
 
+  const websiteContentCheck = (pageNo) => {
+    homeService
+      .getAllWebsiteContent(region, pageNo)
+      .then((x) => {
+        const response = x?.data;
+
+        // Calculate the expiration time (1 day from the current time)
+        const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000;
+
+        const dynamicObject = {};
+        const dynamicObjectUk = {};
+        const dynamicObjectUs = {};
+        const dynamicObjectAsia = {};
+        const dynamicObjectIndia = {};
+
+        response.forEach((element, index) => {
+          // Create an object with the data and expiration time
+          dynamicObject[element?.attributes?.content_word] =
+            element?.attributes?.content_translation_text;
+          dynamicObject["code"] =
+            element?.attributes?.website_country?.data?.attributes?.code;
+          dynamicObject["expiration"] = expirationTime;
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code == "UK"
+          ) {
+            dynamicObjectUk[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectUk["expiration"] = expirationTime;
+            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
+            localStorage.setItem(
+              "websitecontent_uk",
+              JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code == "US"
+          ) {
+            dynamicObjectUs[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectUs["expiration"] = expirationTime;
+            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
+            localStorage.setItem(
+              "websitecontent_us",
+              JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code ==
+            "ASIA"
+          ) {
+            dynamicObjectAsia[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectAsia["expiration"] = expirationTime;
+            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
+            localStorage.setItem(
+              "websitecontent_asia",
+              JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code ==
+            "INDIA"
+          ) {
+            dynamicObjectIndia[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectIndia["expiration"] = expirationTime;
+            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
+            localStorage.setItem(
+              "websitecontent_india",
+              JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
+            );
+          }
+        });
+        if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
+          dictionaryPage = x?.meta?.pagination?.page + 1
+          websiteContentCheck(dictionaryPage)
+        }
+        setWebsiteContent(x.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        // Handle any errors here
+        setIsLoading(false);
+      });
+  };
+
   const dictioneryFunction = (data) => {
     let modifiedString = data;
     if (modifiedString) {
@@ -187,11 +274,6 @@ function Index() {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  region,
-                  modifiedString
-                );
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -216,7 +298,12 @@ function Index() {
 
   useEffect(() => {
     $(".succss_msg_parnt").hide();
-
+    if (!localStorage.getItem(`websitecontent_${region.replace(
+      /in/g,
+      "INDIA"
+    ).toLowerCase()}`)) {
+      websiteContentCheck(dictionaryPage);
+    }
     destinationService
       .getCustomPagesData("home")
       .then((x) => {
@@ -358,84 +445,6 @@ function Index() {
         setIsLoading(false);
       });
 
-    homeService
-      .getAllWebsiteContent(region)
-      .then((x) => {
-        // debugger;
-        const response = x?.data;
-
-        // Calculate the expiration time (1 day from the current time)
-        const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000;
-
-        const dynamicObject = {};
-        const dynamicObjectUk = {};
-        const dynamicObjectUs = {};
-        const dynamicObjectAsia = {};
-        const dynamicObjectIndia = {};
-
-        response.forEach((element, index) => {
-          // Create an object with the data and expiration time
-          dynamicObject[element?.attributes?.content_word] =
-            element?.attributes?.content_translation_text;
-          dynamicObject["code"] =
-            element?.attributes?.website_country?.data?.attributes?.code;
-          dynamicObject["expiration"] = expirationTime;
-
-          if (
-            element?.attributes?.website_country?.data?.attributes?.code == "UK"
-          ) {
-            dynamicObjectUk[element?.attributes?.content_word] =
-              element?.attributes?.content_translation_text;
-            dynamicObjectUk["expiration"] = expirationTime;
-            localStorage.setItem(
-              "websitecontent_uk",
-              JSON.stringify(dynamicObjectUk)
-            );
-          }
-          if (
-            element?.attributes?.website_country?.data?.attributes?.code == "US"
-          ) {
-            dynamicObjectUs[element?.attributes?.content_word] =
-              element?.attributes?.content_translation_text;
-            dynamicObjectUs["expiration"] = expirationTime;
-            localStorage.setItem(
-              "websitecontent_us",
-              JSON.stringify(dynamicObjectUs)
-            );
-          }
-          if (
-            element?.attributes?.website_country?.data?.attributes?.code ==
-            "ASIA"
-          ) {
-            dynamicObjectAsia[element?.attributes?.content_word] =
-              element?.attributes?.content_translation_text;
-            dynamicObjectAsia["expiration"] = expirationTime;
-            localStorage.setItem(
-              "websitecontent_asia",
-              JSON.stringify(dynamicObjectAsia)
-            );
-          }
-          if (
-            element?.attributes?.website_country?.data?.attributes?.code ==
-            "INDIA"
-          ) {
-            dynamicObjectIndia[element?.attributes?.content_word] =
-              element?.attributes?.content_translation_text;
-            dynamicObjectIndia["expiration"] = expirationTime;
-            localStorage.setItem(
-              "websitecontent_india",
-              JSON.stringify(dynamicObjectIndia)
-            );
-          }
-        });
-
-        setWebsiteContent(x.data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        // Handle any errors here
-        setIsLoading(false);
-      });
 
     var site_region = localStorage.getItem("site_region");
 

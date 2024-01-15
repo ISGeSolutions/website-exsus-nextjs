@@ -22,6 +22,7 @@ function Index() {
   const [mapVariable, setMapVariable] = useState(null);
   const [activeTab, setActiveTab] = useState("overview"); // State to track the active tab
   const router = useRouter();
+  let dictionaryPage = 1;
 
   const destinationcode = router.query.continent
     ?.replace(/-and-/g, " & ")
@@ -193,9 +194,9 @@ function Index() {
     setActiveButton(tab);
   };
 
-  const websiteContentCheck = () => {
+  const websiteContentCheck = (pageNo) => {
     homeService
-      .getAllWebsiteContent(region)
+      .getAllWebsiteContent(region, pageNo)
       .then((x) => {
         const response = x?.data;
 
@@ -215,16 +216,17 @@ function Index() {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-
+          debugger;
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
+            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
             localStorage.setItem(
               "websitecontent_uk",
-              JSON.stringify(dynamicObjectUk)
+              JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
             );
           }
           if (
@@ -233,9 +235,10 @@ function Index() {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
+            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
             localStorage.setItem(
               "websitecontent_us",
-              JSON.stringify(dynamicObjectUs)
+              JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
             );
           }
           if (
@@ -245,9 +248,10 @@ function Index() {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
+            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
             localStorage.setItem(
               "websitecontent_asia",
-              JSON.stringify(dynamicObjectAsia)
+              JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
             );
           }
           if (
@@ -257,13 +261,17 @@ function Index() {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
+            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
             localStorage.setItem(
               "websitecontent_india",
-              JSON.stringify(dynamicObjectIndia)
+              JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
             );
           }
         });
-
+        if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
+          dictionaryPage = x?.meta?.pagination?.page + 1
+          websiteContentCheck(dictionaryPage)
+        }
         setWebsiteContent(x.data);
         setIsLoading(false);
       })
@@ -305,11 +313,6 @@ function Index() {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  region,
-                  modifiedString
-                );
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -330,7 +333,7 @@ function Index() {
   equalHeight(true);
 
   useEffect(() => {
-    if (destinationcode != undefined) {
+    if (destinationcode && destinationcode != "undefined") {
       localStorage.setItem("destination_code", destinationcode);
     }
 
@@ -341,37 +344,15 @@ function Index() {
         toggleTab("countries");
       }
     }
-    // if (destinationTab) {
-    //   if (destinationTab.includes("itineraries")) {
-    //     toggleTab("itineraries")
-    //     setActiveTab("itineraries");
-    //   } else if (destinationTab.includes("countries")) {
-    //     setActiveTab("countries");
-    //   } else if (destinationTab.includes("places-to-stay")) {
-    //     setActiveTab("places-to-stay");
-    //   }
-    // }
-    window.scrollTo(0, 0);
-    // console.log(destinationcode);
-    // destinationService.getAllItineraries().then(x => {
-    //     setItineraries(x.data);
-    // });
 
-    // destinationService
-    //   .getDestinationDetails(destinationcode)
-    //   .then((x) => {
-    //     setTitle(x.data.attributes.page_meta_title);
-    //     setIsLoading(false);
-    //   })
-    //   .catch((error) => {
-    //     setIsLoading(false);
-    //   });
+    window.scrollTo(0, 0);
+
 
     if (!localStorage.getItem(`websitecontent_${region.replace(
       /in/g,
       "INDIA"
     ).toLowerCase()}`)) {
-      websiteContentCheck();
+      websiteContentCheck(dictionaryPage);
     }
 
     if (destinationcode) {
@@ -386,17 +367,6 @@ function Index() {
             `Home/Destinations/${x.data[0].attributes.friendly_url}`
             // `Home/Destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url}-itineraries`
           );
-          // setFriendlyUrl(
-          //   `home/destinations/${router.query?.continent}/${
-          //     router.query?.country
-          //   }/${
-          //     router.query?.itineraryName
-          //       ? router.query?.itineraries +
-          //         "/" +
-          //         x.data[0].attributes.itin_name.toLowerCase()
-          //       : x.data[0].attributes.itin_name.toLowerCase()
-          //   }`
-          // );
           setMetaTitle(x.data[0].attributes.page_meta_title);
           // const map_latitude = x.data[0].attributes?.map_latitude;
           // const map_longitude = x.data[0].attributes?.map_longitude;
@@ -457,14 +427,16 @@ function Index() {
     });
     window.onload = () => {
       setTimeout(() => {
-        debugger;
         let destCode = "";
         if (!destinationcode) {
           destCode = localStorage.getItem("destination_code");
         } else {
           destCode = destinationcode;
         }
-        const redirectUrl = `${regionWiseUrl}/destinations/${destCode}`;
+        const redirectUrl = `${regionWiseUrl}/destinations/${destCode?.replace(
+          / /g,
+          "-"
+        ).replace(/&/g, "and")}`;
 
         if (redirectUrl) {
           router.push(redirectUrl);
@@ -532,9 +504,8 @@ function Index() {
                 <div className="carousel-inner">
                   {backgroundImage.map((imagePath, index) => (
                     <a
-                      href="#"
+
                       key={index}
-                      target="_blank"
                       className={`carousel-item ${index === 0 ? "active" : ""}`}
                       data-interval="3000"
                     >

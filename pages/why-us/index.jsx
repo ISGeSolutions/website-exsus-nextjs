@@ -92,7 +92,7 @@ function Index() {
       /in/g,
       "INDIA"
     ).toLowerCase()}`)) {
-      websiteContentCheck();
+      websiteContentCheck(dictionaryPage);
     }
     whyusService
       .getWhyusPage()

@@ -339,7 +339,7 @@ function RegionItinararies(props) {
       /in/g,
       "INDIA"
     ).toLowerCase()}`)) {
-      websiteContentCheck();
+      websiteContentCheck(dictionaryPage);
     }
     setIsLoading(false);
     setSelectedOptionRegion([]);
