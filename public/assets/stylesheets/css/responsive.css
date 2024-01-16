@@ -46,6 +46,11 @@
   .item.next {
     transform: translate(-205%, -50%);
   }
+  .destination_dropdwn_row
+    .banner_dropdwn_blk.single_dropdwn_blk
+    .select_container_country {
+    max-width: 100%;
+  }
 }
 
 @media all and (max-width: 991.98px) {

@@ -262,7 +262,6 @@ function CountryItinararies(props) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -424,7 +423,6 @@ function CountryItinararies(props) {
           page + 1
         )
         .then((response) => {
-          debugger;
           setMetaData(response.meta.pagination);
           const newItineraries = response.data;
           if (newItineraries.length > 0) {
@@ -437,7 +435,7 @@ function CountryItinararies(props) {
                 []
               )
             );
-            (itineraries);
+            itineraries;
             setPage(page + 1);
           }
           setIsLoading(false);

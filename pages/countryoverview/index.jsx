@@ -327,11 +327,10 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
       });
 
     // setAllExecutives(x.data);
-    debugger;
+
     destinationService
       .getCountryFavHotels(countryData?.country_name, region)
       .then((x) => {
-        debugger;
         setHotels(x.data);
         setIsLoading(false);
       })

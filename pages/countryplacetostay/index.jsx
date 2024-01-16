@@ -31,11 +31,12 @@ function CountryPlaceToStay(props) {
   const [selectedOptionMonth, setSelectedOptionMonth] = useState([]);
   const [itineraries, setItineraries] = useState(null);
   const itemsPerPage = 12; // Number of items to load per page
-  const [page, setPage] = useState(0); // Current page
+  let [page, setPage] = useState(0); // Current page
   const [countryData, setCountryData] = useState(props?.data);
   const [metaData, setMetaData] = useState([]);
   const [alert, setAlert] = useState(null);
-  const [regionOptions, setAllRegion] = useState([]);
+  const [reasonOptions, setAllReason] = useState([]);
+  const [allRegions, setAllRegions] = useState([]);
   const destinationcode = router.query?.continent
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
@@ -144,103 +145,102 @@ function CountryPlaceToStay(props) {
     }
   }
 
-  const countryOptions = [
-    { value: "Asia", label: "Asia" },
-    { value: "Hong Kong & Macau", label: "Hong Kong & Macau" },
-    { value: "Malaysia & Borneo", label: "Malaysia & Borneo" },
-    { value: "Singapore", label: "Singapore" },
-    { value: "Indonesia", label: "Indonesia" },
-    { value: "Japan", label: "Japan" },
-    { value: "Cambodia", label: "Cambodia" },
-    { value: "Vietnam", label: "Vietnam" },
-    { value: "China", label: "China" },
-    { value: "Thailand", label: "Thailand" },
-    { value: "Burma", label: "Burma" },
-    { value: "Laos", label: "Laos" },
-  ];
-
-  // const regionOptions = [
-  //   { value: "Everything", label: "Everything" },
-  //   { value: "Barefoot", label: "Barefoot" },
-  //   { value: "Beach", label: "Beach" },
-  //   { value: "Boutique hotel", label: "Boutique hotel" },
-  //   { value: "Chic design", label: "Chic design" },
-  //   { value: "Cultural Immersion", label: "Cultural Immersion" },
-  //   { value: "Eco tourism", label: "Eco tourism" },
-  //   { value: "Family-Friendly", label: "Family-Friendly" },
-  //   { value: "Food & Wine", label: "Food & Wine" },
-  //   { value: "Guiding", label: "Guiding" },
-  //   { value: "Hideaway", label: "Hideaway" },
-  //   { value: "Honeymoon", label: "Honeymoon" },
-  //   { value: "Lodge", label: "Lodge" },
-  //   { value: "Luxury hotel", label: "Luxury Hotel" },
-  //   { value: "Off the beaten track", label: "Off the beaten track" },
-  //   { value: "Owner run", label: "Owner run" },
-  //   { value: "Peace & quiet", label: "Peace & quiet" },
-  //   { value: "Private groups", label: "Private groups" },
-  //   { value: "Romantic", label: "Romantic" },
-  //   { value: "Rustic", label: "Rustic" },
-  //   { value: "Seriously special", label: "Seriously special" },
-  //   { value: "Service & Hospitality", label: "Service & Hospitality" },
-  //   { value: "Setting & Views", label: "Setting & Views" },
-  //   { value: "Snorkelling & Driving", label: "Snorkelling & Driving" },
-  //   { value: "Spa & Wellness", label: "Spa & Wellness" },
-  //   { value: "Unusal", label: "Unusal" },
-  //   { value: "Village life", label: "Village life" },
-  //   { value: "Walking & trekking", label: "Walking & trekking" },
-  //   { value: "Water activities", label: "Water activities" },
-  //   { value: "Wildlife & Nature", label: "Wildlife & Nature" },
-  //   { value: "Adventure", label: "Adventure" },
-  //   { value: "Couples", label: "Couples" },
-  //   { value: "Educational", label: "Educational" },
-  //   { value: "Multi-activity", label: "Multi-activity" },
-  //   { value: "Teenagers", label: "Teenagers" },
-  //   { value: "Landscapes & Scenery", label: "Landscapes & Scenery" },
-  //   { value: "City hotel", label: "City hotel" },
+  // const countryOptions = [
+  //   { value: "Asia", label: "Asia" },
+  //   { value: "Hong Kong & Macau", label: "Hong Kong & Macau" },
+  //   { value: "Malaysia & Borneo", label: "Malaysia & Borneo" },
+  //   { value: "Singapore", label: "Singapore" },
+  //   { value: "Indonesia", label: "Indonesia" },
+  //   { value: "Japan", label: "Japan" },
+  //   { value: "Cambodia", label: "Cambodia" },
+  //   { value: "Vietnam", label: "Vietnam" },
+  //   { value: "China", label: "China" },
+  //   { value: "Thailand", label: "Thailand" },
+  //   { value: "Burma", label: "Burma" },
+  //   { value: "Laos", label: "Laos" },
   // ];
 
   const monthOptions = [
-    { value: "All months", label: "All months" },
-    { value: "January", label: "January" },
-    { value: "February", label: "February" },
-    { value: "March", label: "March" },
-    { value: "April", label: "April" },
-    { value: "May", label: "May" },
-    { value: "June", label: "June" },
-    { value: "July", label: "July" },
-    { value: "August", label: "August" },
-    { value: "September", label: "September" },
-    { value: "October", label: "October" },
-    { value: "November", label: "November" },
-    { value: "December", label: "December" },
+    { value: "Show_all", label: "All months" },
+    { value: "1", label: "January" },
+    { value: "2", label: "February" },
+    { value: "3", label: "March" },
+    { value: "4", label: "April" },
+    { value: "5", label: "May" },
+    { value: "6", label: "June" },
+    { value: "7", label: "July" },
+    { value: "8", label: "August" },
+    { value: "9", label: "September" },
+    { value: "10", label: "October" },
+    { value: "11", label: "November" },
+    { value: "12", label: "December" },
   ];
 
   const loadMoreData = (item) => {
-    destinationService
-      .getAllCountryWiseHotels(page + 1, item, countrycode, region)
-      .then((response) => {
-        //  (response);
-        setMetaData(response.meta.pagination);
-        const newItineraries = response.data;
-        if (newItineraries.length > 0) {
-          setAllHotels((prevItineraries) =>
-            [...prevItineraries, ...newItineraries].reduce(
-              (accumulator, current) =>
-                accumulator.some((item) => item.id === current.id)
-                  ? accumulator
-                  : [...accumulator, current],
-              []
-            )
-          );
-          setPage(page + 1);
-        }
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        // Handle any errors here
-        // console.error(error);
-        setIsLoading(false);
-      });
+    if (
+      !selectedOptionCountry?.length > 0 &&
+      !selectedOptionRegion?.length > 0 &&
+      !selectedOptionMonth?.length > 0
+    ) {
+      setIsLoading(true);
+      destinationService
+        .getAllCountryWiseHotels(page + 1, item, countrycode, region)
+        .then((response) => {
+          //  (response);
+          setMetaData(response.meta.pagination);
+          const newItineraries = response.data;
+          if (newItineraries.length > 0) {
+            setAllHotels((prevItineraries) =>
+              [...prevItineraries, ...newItineraries].reduce(
+                (accumulator, current) =>
+                  accumulator.some((item) => item.id === current.id)
+                    ? accumulator
+                    : [...accumulator, current],
+                []
+              )
+            );
+            setPage(page + 1);
+          }
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          // Handle any errors here
+          // console.error(error);
+          setIsLoading(false);
+        });
+    } else {
+      setIsLoading(true);
+      destinationService
+        .hotelFilterOnCountryPlaceToStay(
+          selectedOptionCountry,
+          selectedOptionRegion,
+          selectedOptionMonth,
+          item,
+          region,
+          page + 1
+        )
+        .then((response) => {
+          setMetaData(response.meta.pagination);
+          const newItineraries = response.data;
+          if (newItineraries.length > 0) {
+            setAllHotels((prevItineraries) =>
+              [...prevItineraries, ...newItineraries].reduce(
+                (accumulator, current) =>
+                  accumulator.some((item) => item.id === current.id)
+                    ? accumulator
+                    : [...accumulator, current],
+                []
+              )
+            );
+            itineraries;
+            setPage(page + 1);
+          }
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+        });
+    }
   };
 
   const showAlert = (message, type) => {
@@ -254,20 +254,20 @@ function CountryPlaceToStay(props) {
 
   function onSubmit(e) {
     e.preventDefault();
-    ("Selected Countries:", selectedOptionCountry);
-    ("Selected Regions:", selectedOptionRegion);
-    ("Selected Months:", selectedOptionMonth);
-    if (!e.destination && !e.reason && !e.month) {
+    "Selected Countries:", selectedOptionCountry;
+    "Selected Regions:", selectedOptionRegion;
+    "Selected Months:", selectedOptionMonth;
+
+    if (
+      !selectedOptionCountry.length > 0 &&
+      !selectedOptionRegion.length > 0 &&
+      !selectedOptionMonth.length > 0
+    ) {
       showAlert("Please select atleast one option", "error");
     } else {
-      router.push(
-        `advance-search?where=` +
-        e?.destination +
-        `&what=` +
-        e?.reason +
-        `&when=` +
-        e?.month
-      );
+      setAllHotels([]);
+      page = 0;
+      loadMoreData(activeItem);
     }
   }
 
@@ -282,12 +282,12 @@ function CountryPlaceToStay(props) {
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -302,12 +302,12 @@ function CountryPlaceToStay(props) {
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -315,23 +315,51 @@ function CountryPlaceToStay(props) {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    setSelectedOptionCountry(selectedOption);
-    // this.setState({ selectedOption }, () =>
-    // );
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionCountry(
+        selectedOption.filter((res) => res.value == "Show_all")
+      );
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionCountry(
+        selectedOption.filter((res) => res.value != "Show_all")
+      );
+    } else {
+      setSelectedOptionCountry(selectedOption);
+    }
   };
 
   const handleOptionRegionChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    setSelectedOptionRegion(selectedOption);
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionRegion(
+        selectedOption.filter((res) => res.value == "Show_all")
+      );
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionRegion(
+        selectedOption.filter((res) => res.value != "Show_all")
+      );
+    } else {
+      setSelectedOptionRegion(selectedOption);
+    }
   };
 
   const handleOptionMonthChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    setSelectedOptionMonth(selectedOption);
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionMonth(
+        selectedOption.filter((res) => res.value == "Show_all")
+      );
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionMonth(
+        selectedOption.filter((res) => res.value != "Show_all")
+      );
+    } else {
+      setSelectedOptionMonth(selectedOption);
+    }
   };
 
   // const showMoreItems = () => {
@@ -370,7 +398,9 @@ function CountryPlaceToStay(props) {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
-            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
+            let localStorageUk = JSON.parse(
+              localStorage.getItem("websitecontent_uk")
+            );
             localStorage.setItem(
               "websitecontent_uk",
               JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
@@ -382,7 +412,9 @@ function CountryPlaceToStay(props) {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
-            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
+            let localStorageUS = JSON.parse(
+              localStorage.getItem("websitecontent_us")
+            );
             localStorage.setItem(
               "websitecontent_us",
               JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
@@ -395,7 +427,9 @@ function CountryPlaceToStay(props) {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
-            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
+            let localStorageAsia = JSON.parse(
+              localStorage.getItem("websitecontent_asia")
+            );
             localStorage.setItem(
               "websitecontent_asia",
               JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
@@ -408,7 +442,9 @@ function CountryPlaceToStay(props) {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
-            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
+            let localStorageIndia = JSON.parse(
+              localStorage.getItem("websitecontent_india")
+            );
             localStorage.setItem(
               "websitecontent_india",
               JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
@@ -416,8 +452,8 @@ function CountryPlaceToStay(props) {
           }
         });
         if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
-          dictionaryPage = x?.meta?.pagination?.page + 1
-          websiteContentCheck(dictionaryPage)
+          dictionaryPage = x?.meta?.pagination?.page + 1;
+          websiteContentCheck(dictionaryPage);
         }
         setWebsiteContent(x.data);
         setIsLoading(false);
@@ -478,15 +514,16 @@ function CountryPlaceToStay(props) {
   };
 
   useEffect(() => {
-    if (!localStorage.getItem(`websitecontent_${region.replace(
-      /in/g,
-      "INDIA"
-    ).toLowerCase()}`)) {
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
       websiteContentCheck(dictionaryPage);
     }
-    setSelectedOptionCountry();
-    setSelectedOptionRegion();
-    setSelectedOptionMonth();
+    setSelectedOptionCountry([]);
+    setSelectedOptionRegion([]);
+    setSelectedOptionMonth([]);
 
     // destinationService.getAllItineraries().then(x => {
     //     setItineraries(x.data);
@@ -498,15 +535,56 @@ function CountryPlaceToStay(props) {
     // });
 
     destinationService.getPropertyTypeDropDown().then((x) => {
-      setAllRegion(
-        x.data?.map((item) => ({
-          //id: i.id,
+      let arrayOfObjects = [
+        {
+          property_type_code: "Show_all",
+          value: "Show_all",
+          label: "Everything",
+        },
+      ];
+      arrayOfObjects = [
+        ...arrayOfObjects,
+        ...x.data?.map((item) => ({
           property_type_code: item?.attributes?.property_type_code,
           value: item?.attributes?.property_type_name,
           label: item?.attributes?.property_type_name,
-        }))
-      );
+        })),
+      ];
+      setAllReason(arrayOfObjects);
+      // setAllReason(
+      //   x.data?.map((item) => ({
+      //     //id: i.id,
+      //     property_type_code: item?.attributes?.property_type_code,
+      //     value: item?.attributes?.property_type_name,
+      //     label: item?.attributes?.property_type_name,
+      //   }))
+      // );
     });
+
+    destinationService
+      .getRegions(countrycode)
+      .then((x) => {
+        let arrayOfObjects = [
+          {
+            region_code: "Show_all",
+            value: "Show_all",
+            label: x.data[0].attributes.country_name,
+          },
+        ];
+        arrayOfObjects = [
+          ...arrayOfObjects,
+          ...x.data[0]?.attributes?.regions?.data.map((item) => ({
+            region_code: item?.attributes?.region_code,
+            value: item?.attributes?.region_name,
+            label: item?.attributes?.region_name,
+          })),
+        ];
+        setAllRegions(arrayOfObjects);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+      });
 
     loadMoreData(activeItem);
 
@@ -558,18 +636,18 @@ function CountryPlaceToStay(props) {
               {/* Inspire Me */}
               <div className="card_slider_row">
                 <div className="carousel00 region_carousel00">
-                  <form onSubmit={onSubmit}>
-                    <div className="row">
+                  <div className="row">
+                    <form onSubmit={onSubmit}>
                       <div className="col-12">
                         <div className="destination_dropdwn_row d-block d-md-flex">
                           <div className="dropdown_grp_blk">
-                            <div className="banner_dropdwn_blk ps-0 ps-md-2">
+                            <div className="banner_dropdwn_blk ">
                               <Select
                                 id="long-value-select"
                                 instanceId="long-value-select"
                                 className="select_container_country"
                                 classNamePrefix="select_country"
-                                placeholder="Filter by region"
+                                placeholder={"Filter by region"}
                                 styles={styles}
                                 isMulti
                                 isDisabled={isDisabled}
@@ -577,11 +655,11 @@ function CountryPlaceToStay(props) {
                                 isClearable={isClearable}
                                 isRtl={isRtl}
                                 isSearchable={isSearchable}
-                                //value={selectedOptionCountry}
+                                value={selectedOptionCountry}
                                 onChange={handleOptionCountryChange}
                                 closeMenuOnSelect={false}
                                 hideSelectedOptions={false}
-                                options={countryOptions}
+                                options={allRegions}
                                 components={{
                                   Option: InputOption,
                                   MultiValue: CustomMultiValue,
@@ -601,7 +679,7 @@ function CountryPlaceToStay(props) {
                                 styles={styles}
                                 closeMenuOnSelect={false}
                                 isSearchable={isSearchable}
-                                options={regionOptions}
+                                options={reasonOptions}
                                 isMulti
                                 value={selectedOptionRegion}
                                 onChange={handleOptionRegionChange}
@@ -613,10 +691,9 @@ function CountryPlaceToStay(props) {
                             </div>
                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                               <Select
-                                placeholder="Filter by date of travel"
+                                placeholder={"Filter by date of travel"}
                                 className="select_container_country"
                                 classNamePrefix="select_country"
-                                // defaultValue={monthOptions[0]}
                                 isDisabled={isDisabled}
                                 isLoading={isLoader}
                                 isClearable={isClearable}
@@ -628,7 +705,7 @@ function CountryPlaceToStay(props) {
                                 options={monthOptions}
                                 hideSelectedOptions={false}
                                 isMulti
-                                // value={selectedOptionMonth}
+                                value={selectedOptionMonth}
                                 onChange={handleOptionMonthChange}
                                 components={{
                                   Option: InputOption,
@@ -637,6 +714,7 @@ function CountryPlaceToStay(props) {
                               />
                             </div>
                           </div>
+
                           <div className="banner_inspire_btn ps-0 ps-md-2">
                             <button
                               type="submit"
@@ -662,184 +740,176 @@ function CountryPlaceToStay(props) {
                           </div>
                         </div>
                       </div>
-                      <div className="col-12">
-                        <div className="destination_filter_result d-block d-lg-flex">
-                          <p>
-                            We've found {metaData?.total} hotels in{" "}
-                            {countryData?.country_name} for you
-                            <button
-                              type="button"
-                              className="btn btn-primary modal_link_btn"
-                              data-bs-toggle="modal"
-                              data-bs-target="#placesToStayModal"
-                            >
-                              See all accomodations on Map
-                            </button>
-                          </p>
-                          <div className="destination_contries_filter d-inline-block d-lg-flex">
-                            <label className="pt-2 pt-lg-0">Arrange by:</label>
-                            <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
-                              <li>
-                                <a
-                                  className={
-                                    activeItem === "recommended" ? "active" : ""
-                                  }
-                                  onClick={() =>
-                                    handleFilterClick("recommended")
-                                  }
-                                >
-                                  Recommended
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  className={
-                                    activeItem === "alphabetical"
-                                      ? "active"
-                                      : ""
-                                  }
-                                  onClick={() =>
-                                    handleFilterClick("alphabetical")
-                                  }
-                                >
-                                  Alphabetical
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Country Place to stay hotels */}
-                      {allHotels?.slice(0, allHotels.length).map((item) => (
-                        <div
-                          className="col-sm-6 col-lg-4 col-xxl-3"
-                          key={item.id}
-                        >
-                          <div className="card_slider_inr">
-                            <div className="card_slider">
-                              <NavLink
-                                className="card_slider_img"
-                                href={generateDynamicLink(item)}
-                              >
-                                {item?.attributes?.hotel_images?.data.map(
-                                  (element, index) =>
-                                    element.attributes.image_type ==
-                                      "thumbnail" ? (
-                                      <img
-                                        key={index}
-                                        src={element.attributes.image_path}
-                                        alt={element.attributes.image_alt_text}
-                                        className="img-fluid"
-                                      />
-                                    ) : (
-                                      ""
-                                    )
-                                )}
-                              </NavLink>
-                              <div className="card_slider_cnt places_to_stay_cnt">
-                                <h4>
-                                  <a href="#">{item?.attributes?.hotel_name}</a>
-                                </h4>
-                                <ul>
-                                  <li>
-                                    Location: {item?.attributes?.location}
-                                  </li>
-                                  {item?.attributes?.hotel_country_contents?.data?.map(
-                                    (item) => {
-                                      return (
-                                        <li class="price_guide_tooltip">
-                                          Price guide:
-                                          <span
-                                            key={item?.id}
-                                            tabIndex="0"
-                                            data-title={
-                                              item?.attributes?.price_guide_text
-                                            }
-                                          >
-                                            {item?.attributes?.currency_symbol.repeat(
-                                              Math.abs(
-                                                item?.attributes
-                                                  ?.price_guide_value
-                                              )
-                                            )}
-                                            <label>
-                                              {item?.attributes?.currency_symbol.repeat(
-                                                Math.abs(
-                                                  5 -
-                                                  item?.attributes
-                                                    ?.price_guide_value
-                                                )
-                                              )}
-                                            </label>
-                                          </span>
-                                        </li>
-                                      );
-                                    }
-                                  )}
-                                  <li>
-                                    <p
-                                      dangerouslySetInnerHTML={{
-                                        __html: item?.attributes?.intro_text,
-                                      }}
-                                    />
-                                  </li>
-                                  <li>
-                                    Best for:
-                                    <span>
-                                      {item?.attributes?.best_for_text}
-                                    </span>
-                                  </li>
-                                </ul>
-                              </div>
-                              <button
-                                className="btn card_slider_btn justify-content-end"
-                                onClick={() => handleRedirect(item)}
-                              >
-                                <span className="view_itnry_link">
-                                  View this hotel
-                                  <em className="fa-solid fa-chevron-right"></em>
-                                </span>
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-
-                      {/* Pagination  */}
-                      <div className="col-12">
-                        {metaData.total > page * itemsPerPage && (
+                    </form>
+                    <div className="col-12">
+                      <div className="destination_filter_result d-block d-lg-flex">
+                        <p>
+                          We've found {metaData?.total} hotels in{" "}
+                          {countryData?.country_name} for you
                           <button
                             type="button"
-                            onClick={() => loadMoreData(activeItem)}
-                            className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
-                            fdprocessedid="r5vpm6s"
+                            className="btn btn-primary modal_link_btn"
+                            data-bs-toggle="modal"
+                            data-bs-target="#placesToStayModal"
                           >
-                            Show{" "}
-                            {metaData.total - page * itemsPerPage > 12
-                              ? 12
-                              : metaData.total - page * itemsPerPage}{" "}
-                            more holiday
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="#ffffff"
-                              shapeRendering="geometricPrecision"
-                              textRendering="geometricPrecision"
-                              imageRendering="optimizeQuality"
-                              fillRule="evenodd"
-                              clipRule="evenodd"
-                              viewBox="0 0 512 266.77"
-                            >
-                              <path
-                                fillRule="nonzero"
-                                d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"
-                              />
-                            </svg>
+                            See all accomodations on Map
                           </button>
-                        )}
+                        </p>
+                        <div className="destination_contries_filter d-inline-block d-lg-flex">
+                          <label className="pt-2 pt-lg-0">Arrange by:</label>
+                          <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
+                            <li>
+                              <a
+                                className={
+                                  activeItem === "recommended" ? "active" : ""
+                                }
+                                onClick={() => handleFilterClick("recommended")}
+                              >
+                                Recommended
+                              </a>
+                            </li>
+                            <li>
+                              <a
+                                className={
+                                  activeItem === "alphabetical" ? "active" : ""
+                                }
+                                onClick={() =>
+                                  handleFilterClick("alphabetical")
+                                }
+                              >
+                                Alphabetical
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
                       </div>
                     </div>
-                  </form>
+
+                    {/* Country Place to stay hotels */}
+                    {allHotels?.slice(0, allHotels.length).map((item) => (
+                      <div
+                        className="col-sm-6 col-lg-4 col-xxl-3"
+                        key={item.id}
+                      >
+                        <div className="card_slider_inr">
+                          <div className="card_slider">
+                            <NavLink
+                              className="card_slider_img"
+                              href={generateDynamicLink(item)}
+                            >
+                              {item?.attributes?.hotel_images?.data.map(
+                                (element, index) =>
+                                  element.attributes.image_type ==
+                                  "thumbnail" ? (
+                                    <img
+                                      key={index}
+                                      src={element.attributes.image_path}
+                                      alt={element.attributes.image_alt_text}
+                                      className="img-fluid"
+                                    />
+                                  ) : (
+                                    ""
+                                  )
+                              )}
+                            </NavLink>
+                            <div className="card_slider_cnt places_to_stay_cnt">
+                              <h4>
+                                <a href="#">{item?.attributes?.hotel_name}</a>
+                              </h4>
+                              <ul>
+                                <li>Location: {item?.attributes?.location}</li>
+                                {item?.attributes?.hotel_country_contents?.data?.map(
+                                  (item) => {
+                                    return (
+                                      <li class="price_guide_tooltip">
+                                        Price guide:
+                                        <span
+                                          key={item?.id}
+                                          tabIndex="0"
+                                          data-title={
+                                            item?.attributes?.price_guide_text
+                                          }
+                                        >
+                                          {item?.attributes?.currency_symbol.repeat(
+                                            Math.abs(
+                                              item?.attributes
+                                                ?.price_guide_value
+                                            )
+                                          )}
+                                          <label>
+                                            {item?.attributes?.currency_symbol.repeat(
+                                              Math.abs(
+                                                5 -
+                                                  item?.attributes
+                                                    ?.price_guide_value
+                                              )
+                                            )}
+                                          </label>
+                                        </span>
+                                      </li>
+                                    );
+                                  }
+                                )}
+                                <li>
+                                  <p
+                                    dangerouslySetInnerHTML={{
+                                      __html: item?.attributes?.intro_text,
+                                    }}
+                                  />
+                                </li>
+                                <li>
+                                  Best for:
+                                  <span>{item?.attributes?.best_for_text}</span>
+                                </li>
+                              </ul>
+                            </div>
+                            <button
+                              className="btn card_slider_btn justify-content-end"
+                              onClick={() => handleRedirect(item)}
+                            >
+                              <span className="view_itnry_link">
+                                View this hotel
+                                <em className="fa-solid fa-chevron-right"></em>
+                              </span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+
+                    {/* Pagination  */}
+                    <div className="col-12">
+                      {metaData.total > page * itemsPerPage && (
+                        <button
+                          type="button"
+                          onClick={() => loadMoreData(activeItem)}
+                          className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
+                          fdprocessedid="r5vpm6s"
+                        >
+                          Show{" "}
+                          {metaData.total - page * itemsPerPage > 12
+                            ? 12
+                            : metaData.total - page * itemsPerPage}{" "}
+                          more holiday
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="#ffffff"
+                            shapeRendering="geometricPrecision"
+                            textRendering="geometricPrecision"
+                            imageRendering="optimizeQuality"
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            viewBox="0 0 512 266.77"
+                          >
+                            <path
+                              fillRule="nonzero"
+                              d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"
+                            />
+                          </svg>
+                        </button>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

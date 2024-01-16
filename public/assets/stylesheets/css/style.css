@@ -3798,6 +3798,12 @@
   max-width: 100%;
 }
 
+.destination_dropdwn_row
+  .banner_dropdwn_blk.single_dropdwn_blk
+  .select_container_country {
+  max-width: 380px;
+}
+
 /* line 1158, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
 .destination_dropdwn_row .banner_dropdwn_blk select,
 .destination_dropdwn_row .banner_dropdwn_blk .bootstrap-select {

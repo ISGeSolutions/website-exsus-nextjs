@@ -29,11 +29,12 @@ function ContinentPlacesToStay(props) {
   const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
   const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
   const [itineraries, setItineraries] = useState(null);
+  const [hotels, setHotels] = useState(null);
   const router = useRouter();
   const [destination, setdestination] = useState("");
   const itemsPerPage = 12; // Number of items to load per page
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
-  const [page, setPage] = useState(0); // Current page
+  let [page, setPage] = useState(0); // Current page
   const [metaData, setMetaData] = useState([]);
   const [decode, setdcode] = useState();
   const destinationcode = router.query.continent
@@ -152,30 +153,69 @@ function ContinentPlacesToStay(props) {
   };
 
   const loadMoreData = (item) => {
-    destinationService
-      .getAllHotels(page + 1, item, decode, region)
-      .then((response) => {
-        setMetaData(response.meta.pagination);
-        const newItineraries = response.data;
-        if (newItineraries.length > 0) {
-          setAllHotels((prevItineraries) =>
-            [...prevItineraries, ...newItineraries].reduce(
-              (accumulator, current) =>
-                accumulator.some((item) => item.id === current.id)
-                  ? accumulator
-                  : [...accumulator, current],
-              []
-            )
-          );
-          setPage(page + 1);
-        }
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        // Handle any errors here
-        // console.error(error);
-        setIsLoading(false);
-      });
+    if (
+      !selectedOptionCountry?.length > 0 &&
+      !selectedOptionRegion?.length > 0 &&
+      !selectedOptionMonth?.length > 0
+    ) {
+      setIsLoading(true);
+      destinationService
+        .getAllHotels(page + 1, item, decode, region)
+        .then((response) => {
+          setMetaData(response.meta.pagination);
+          const newItineraries = response.data;
+          if (newItineraries.length > 0) {
+            setAllHotels((prevItineraries) =>
+              [...prevItineraries, ...newItineraries].reduce(
+                (accumulator, current) =>
+                  accumulator.some((item) => item.id === current.id)
+                    ? accumulator
+                    : [...accumulator, current],
+                []
+              )
+            );
+            setPage(page + 1);
+          }
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          // Handle any errors here
+          // console.error(error);
+          setIsLoading(false);
+        });
+    } else {
+      setIsLoading(true);
+      destinationService
+        .hotelFilterOnContinentPlaceToStay(
+          selectedOptionCountry,
+          selectedOptionRegion,
+          selectedOptionMonth,
+          item,
+          region,
+          page + 1
+        )
+        .then((response) => {
+          setMetaData(response.meta.pagination);
+          const newItineraries = response.data;
+          if (newItineraries.length > 0) {
+            setAllHotels((prevItineraries) =>
+              [...prevItineraries, ...newItineraries].reduce(
+                (accumulator, current) =>
+                  accumulator.some((item) => item.id === current.id)
+                    ? accumulator
+                    : [...accumulator, current],
+                []
+              )
+            );
+            itineraries;
+            setPage(page + 1);
+          }
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+        });
+    }
   };
 
   const showAlert = (message, type) => {
@@ -193,21 +233,20 @@ function ContinentPlacesToStay(props) {
 
   function onSubmit(data) {
     data.preventDefault();
-    ("Selected Countries:", selectedOptionCountry);
-    ("Selected Regions:", selectedOptionRegion);
-    ("Selected Months:", selectedOptionMonth);
+    "Selected Countries:", selectedOptionCountry;
+    "Selected Regions:", selectedOptionRegion;
+    "Selected Months:", selectedOptionMonth;
 
-    if (!data.destination && !data.reason && !data.month) {
+    if (
+      !selectedOptionCountry.length > 0 &&
+      !selectedOptionRegion.length > 0 &&
+      !selectedOptionMonth.length > 0
+    ) {
       showAlert("Please select atleast one option", "error");
     } else {
-      router.push(
-        `advance-search?where=` +
-          data?.destination +
-          `&what=` +
-          data?.reason +
-          `&when=` +
-          data?.month
-      );
+      setAllHotels([]);
+      page = 0;
+      loadMoreData(activeItem);
     }
   }
 
@@ -239,23 +278,51 @@ function ContinentPlacesToStay(props) {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    setSelectedOptionCountry(selectedOption);
-    // this.setState({ selectedOption }, () =>
-    // );
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionCountry(
+        selectedOption.filter((res) => res.value == "Show_all")
+      );
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionCountry(
+        selectedOption.filter((res) => res.value != "Show_all")
+      );
+    } else {
+      setSelectedOptionCountry(selectedOption);
+    }
   };
 
   const handleOptionRegionChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    setSelectedOptionRegion(selectedOption);
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionRegion(
+        selectedOption.filter((res) => res.value == "Show_all")
+      );
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionRegion(
+        selectedOption.filter((res) => res.value != "Show_all")
+      );
+    } else {
+      setSelectedOptionRegion(selectedOption);
+    }
   };
 
   const handleOptionMonthChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    setSelectedOptionMonth(selectedOption);
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionMonth(
+        selectedOption.filter((res) => res.value == "Show_all")
+      );
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionMonth(
+        selectedOption.filter((res) => res.value != "Show_all")
+      );
+    } else {
+      setSelectedOptionMonth(selectedOption);
+    }
   };
 
   const generateDynamicLink = (item) => {
@@ -403,7 +470,6 @@ function ContinentPlacesToStay(props) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -479,14 +545,30 @@ function ContinentPlacesToStay(props) {
       });
 
     destinationService.getPropertyTypeDropDown().then((x) => {
-      setAllRegion(
-        x.data?.map((item) => ({
-          //id: i.id,
+      let arrayOfObjects = [
+        {
+          property_type_code: "Show_all",
+          value: "Show_all",
+          label: "Everything",
+        },
+      ];
+      arrayOfObjects = [
+        ...arrayOfObjects,
+        ...x.data?.map((item) => ({
           property_type_code: item?.attributes?.property_type_code,
           value: item?.attributes?.property_type_name,
           label: item?.attributes?.property_type_name,
-        }))
-      );
+        })),
+      ];
+      setAllRegion(arrayOfObjects);
+      // setAllRegion(
+      //   x.data?.map((item) => ({
+      //     //id: i.id,
+      //     property_type_code: item?.attributes?.property_type_code,
+      //     value: item?.attributes?.property_type_name,
+      //     label: item?.attributes?.property_type_name,
+      //   }))
+      // );
     });
 
     loadMoreData(activeItem);
@@ -559,7 +641,7 @@ function ContinentPlacesToStay(props) {
                                 isClearable={isClearable}
                                 isRtl={isRtl}
                                 isSearchable={isSearchable}
-                                //value={selectedOptionCountry}
+                                value={selectedOptionCountry}
                                 onChange={handleOptionCountryChange}
                                 closeMenuOnSelect={false}
                                 hideSelectedOptions={false}
@@ -610,7 +692,7 @@ function ContinentPlacesToStay(props) {
                                 options={monthOptions}
                                 hideSelectedOptions={false}
                                 isMulti
-                                // value={selectedOptionMonth}
+                                value={selectedOptionMonth}
                                 onChange={handleOptionMonthChange}
                                 components={{
                                   Option: InputOption,

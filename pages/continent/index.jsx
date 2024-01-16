@@ -296,7 +296,7 @@ function Index() {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
+
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -311,7 +311,6 @@ function Index() {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -584,7 +583,7 @@ function Index() {
                 <div className="bookmark_row">
                   <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
                 </div>
-                <div className="destination_tab_inr">
+                <div className="destination_tab_inr mt-5">
                   <h2 className="tab_tilte">
                     {/* {destinationDetails?.header_text} */}
                     {dictioneryFunction(headingText)}
