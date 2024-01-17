@@ -20,7 +20,7 @@ import Iframe from "react-iframe";
 export default RegionPlacesToStay;
 
 function RegionPlacesToStay(props) {
-  (props);
+  props;
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(true);
   const [isDisabled, setIsDisabled] = useState(false);
@@ -34,7 +34,7 @@ function RegionPlacesToStay(props) {
   const [destinationName, setdestinationName] = useState("");
   const itemsPerPage = 12; // Number of items to load per page
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
-  const [page, setPage] = useState(0); // Current page
+  let [page, setPage] = useState(0); // Current page
   const [metaData, setMetaData] = useState([]);
   const [dcode, setdcode] = useState();
   const [alert, setAlert] = useState(null);
@@ -59,48 +59,8 @@ function RegionPlacesToStay(props) {
 
   const [regionOptions, setAllRegion] = useState([]);
 
-  // const regionOptions = [
-  //   { value: "Everything", label: "Everything" },
-  //   { value: "Barefoot", label: "Barefoot" },
-  //   { value: "Beach", label: "Beach" },
-  //   { value: "Boutique hotel", label: "Boutique hotel" },
-  //   { value: "Chic design", label: "Chic design" },
-  //   { value: "Cultural Immersion", label: "Cultural Immersion" },
-  //   { value: "Eco tourism", label: "Eco tourism" },
-  //   { value: "Family-Friendly", label: "Family-Friendly" },
-  //   { value: "Food & Wine", label: "Food & Wine" },
-  //   { value: "Guiding", label: "Guiding" },
-  //   { value: "Hideaway", label: "Hideaway" },
-  //   { value: "Honeymoon", label: "Honeymoon" },
-  //   { value: "Lodge", label: "Lodge" },
-  //   { value: "Luxury hotel", label: "Luxury Hotel" },
-  //   { value: "Off the beaten track", label: "Off the beaten track" },
-  //   { value: "Owner run", label: "Owner run" },
-  //   { value: "Peace & quiet", label: "Peace & quiet" },
-  //   { value: "Private groups", label: "Private groups" },
-  //   { value: "Romantic", label: "Romantic" },
-  //   { value: "Rustic", label: "Rustic" },
-  //   { value: "Seriously special", label: "Seriously special" },
-  //   { value: "Service & Hospitality", label: "Service & Hospitality" },
-  //   { value: "Setting & Views", label: "Setting & Views" },
-  //   { value: "Snorkelling & Driving", label: "Snorkelling & Driving" },
-  //   { value: "Spa & Wellness", label: "Spa & Wellness" },
-  //   { value: "Unusal", label: "Unusal" },
-  //   { value: "Village life", label: "Village life" },
-  //   { value: "Walking & trekking", label: "Walking & trekking" },
-  //   { value: "Water activities", label: "Water activities" },
-  //   { value: "Wildlife & Nature", label: "Wildlife & Nature" },
-  //   { value: "Adventure", label: "Adventure" },
-  //   { value: "Couples", label: "Couples" },
-  //   { value: "Educational", label: "Educational" },
-  //   { value: "Multi-activity", label: "Multi-activity" },
-  //   { value: "Teenagers", label: "Teenagers" },
-  //   { value: "Landscapes & Scenery", label: "Landscapes & Scenery" },
-  //   { value: "City hotel", label: "City hotel" },
-  // ];
-
   const monthOptions = [
-    { value: "1,2,3,4,5,6,7,8,9,10,11,12", label: "All months" },
+    { value: "Show_all", label: "All months" },
     { value: "1", label: "January" },
     { value: "2", label: "February" },
     { value: "3", label: "March" },
@@ -208,27 +168,38 @@ function RegionPlacesToStay(props) {
     loadMoreData(item);
   };
 
-  const handleOptionCountryChange = (selectedOption) => {
-    selectedOption = selectedOption.filter(
-      (i) => i.value !== "" && typeof i.value !== "undefined"
-    );
-    setSelectedOptionCountry(selectedOption);
-    // this.setState({ selectedOption }, () =>
-    // );
-  };
-
   const handleOptionRegionChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    setSelectedOptionRegion(selectedOption);
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionRegion(
+        selectedOption.filter((res) => res.value == "Show_all")
+      );
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionRegion(
+        selectedOption.filter((res) => res.value != "Show_all")
+      );
+    } else {
+      setSelectedOptionRegion(selectedOption);
+    }
   };
 
   const handleOptionMonthChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    setSelectedOptionMonth(selectedOption);
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionMonth(
+        selectedOption.filter((res) => res.value == "Show_all")
+      );
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionMonth(
+        selectedOption.filter((res) => res.value != "Show_all")
+      );
+    } else {
+      setSelectedOptionMonth(selectedOption);
+    }
   };
 
   const handleRedirect = (item) => {
@@ -252,43 +223,73 @@ function RegionPlacesToStay(props) {
     //  ("Selected Countries:", selectedOptionCountry);
     //  ("Selected Regions:", selectedOptionRegion);
     //  ("Selected Months:", selectedOptionMonth);
-    if (!e.destination && !e.reason && !e.month) {
+    if (!selectedOptionRegion.length > 0 && !selectedOptionMonth.length > 0) {
       showAlert("Please select atleast one option", "error");
     } else {
-      router.push(
-        `advance-search?where=` +
-          e?.destination +
-          `&what=` +
-          e?.reason +
-          `&when=` +
-          e?.month
-      );
+      setAllHotels([]);
+      page = 0;
+      loadMoreData(activeItem);
     }
   }
 
   const loadMoreData = (item) => {
-    destinationService
-      .getRegionWiseHotels(page + 1, regionName, item, region)
-      .then((response) => {
-        setMetaData(response.meta.pagination);
-        const newHotels = response?.data;
-        if (newHotels.length > 0) {
-          setAllHotels((prevItineraries) =>
-            [...prevItineraries, ...newHotels].reduce(
-              (accumulator, current) =>
-                accumulator.some((item) => item.id === current.id)
-                  ? accumulator
-                  : [...accumulator, current],
-              []
-            )
-          );
-          setPage(page + 1);
-        }
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-      });
+    if (!selectedOptionRegion?.length > 0 && !selectedOptionMonth?.length > 0) {
+      setIsLoading(true);
+
+      destinationService
+        .getRegionWiseHotels(page + 1, regionName, item, region)
+        .then((response) => {
+          setMetaData(response.meta.pagination);
+          const newHotels = response?.data;
+          if (newHotels.length > 0) {
+            setAllHotels((prevItineraries) =>
+              [...prevItineraries, ...newHotels].reduce(
+                (accumulator, current) =>
+                  accumulator.some((item) => item.id === current.id)
+                    ? accumulator
+                    : [...accumulator, current],
+                []
+              )
+            );
+            setPage(page + 1);
+          }
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+        });
+    } else {
+      setIsLoading(true);
+      destinationService
+        .HotelFilterOnRegionDetail(
+          selectedOptionRegion,
+          selectedOptionMonth,
+          item,
+          region,
+          page + 1
+        )
+        .then((response) => {
+          setMetaData(response.meta.pagination);
+          const newItineraries = response.data;
+          if (newItineraries.length > 0) {
+            setAllHotels((prevItineraries) =>
+              [...prevItineraries, ...newItineraries].reduce(
+                (accumulator, current) =>
+                  accumulator.some((item) => item.id === current.id)
+                    ? accumulator
+                    : [...accumulator, current],
+                []
+              )
+            );
+            itineraries;
+            setPage(page + 1);
+          }
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+        });
+    }
   };
 
   const websiteContentCheck = (pageNo) => {
@@ -394,7 +395,7 @@ function RegionPlacesToStay(props) {
 
       let storedDataString = "";
       let storedData = "";
-      //  
+      //
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -409,7 +410,7 @@ function RegionPlacesToStay(props) {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        //  
+        //
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -418,7 +419,6 @@ function RegionPlacesToStay(props) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -457,35 +457,51 @@ function RegionPlacesToStay(props) {
         setIsLoading(false);
       });
 
-    destinationService
-      .getDestinationDetails(destinationcode)
-      .then((x) => {
-        setdestinationName(x.data.attributes.destination_name);
-        setAllCountries(
-          x.data?.attributes?.countries?.data.map((item) => ({
-            id: item.id,
-            country_code: item?.attributes?.country_code,
-            value: item?.attributes?.country_name,
-            label: item?.attributes?.country_name,
-          }))
-        );
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        // Handle any errors here
-        // console.error(error);
-        setIsLoading(false);
-      });
+    // destinationService
+    //   .getDestinationDetails(destinationcode)
+    //   .then((x) => {
+    //     setdestinationName(x.data.attributes.destination_name);
+    //     setAllCountries(
+    //       x.data?.attributes?.countries?.data.map((item) => ({
+    //         id: item.id,
+    //         country_code: item?.attributes?.country_code,
+    //         value: item?.attributes?.country_name,
+    //         label: item?.attributes?.country_name,
+    //       }))
+    //     );
+    //     setIsLoading(false);
+    //   })
+    //   .catch((error) => {
+    //     // Handle any errors here
+    //     // console.error(error);
+    //     setIsLoading(false);
+    //   });
 
     destinationService.getPropertyTypeDropDown().then((x) => {
-      setAllRegion(
-        x.data?.map((item) => ({
-          //id: i.id,
+      let arrayOfObjects = [
+        {
+          property_type_code: "Show_all",
+          value: "Show_all",
+          label: "Everything",
+        },
+      ];
+      arrayOfObjects = [
+        ...arrayOfObjects,
+        ...x.data?.map((item) => ({
           property_type_code: item?.attributes?.property_type_code,
           value: item?.attributes?.property_type_name,
           label: item?.attributes?.property_type_name,
-        }))
-      );
+        })),
+      ];
+      setAllRegion(arrayOfObjects);
+      // setAllRegion(
+      //   x.data?.map((item) => ({
+      //     //id: i.id,
+      //     property_type_code: item?.attributes?.property_type_code,
+      //     value: item?.attributes?.property_type_name,
+      //     label: item?.attributes?.property_type_name,
+      //   }))
+      // );
     });
 
     loadMoreData(activeItem);
@@ -507,7 +523,7 @@ function RegionPlacesToStay(props) {
             ?.replace(/ /g, "-")
             .replace(/&/g, "and")
             .toLowerCase();
-        //  
+        //
         if (redirectUrl) {
           router.push(redirectUrl);
         }
@@ -567,7 +583,6 @@ function RegionPlacesToStay(props) {
                                 styles={styles}
                                 closeMenuOnSelect={false}
                                 isSearchable={isSearchable}
-                                // name="color"
                                 options={regionOptions}
                                 isMulti
                                 value={selectedOptionRegion}
@@ -580,10 +595,9 @@ function RegionPlacesToStay(props) {
                             </div>
                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                               <Select
-                                placeholder="Filter by month"
+                                placeholder={"Filter by month"}
                                 className="select_container_country"
                                 classNamePrefix="select_country"
-                                // defaultValue={monthOptions[0]}
                                 isDisabled={isDisabled}
                                 isLoading={isLoader}
                                 isClearable={isClearable}
@@ -595,7 +609,7 @@ function RegionPlacesToStay(props) {
                                 options={monthOptions}
                                 hideSelectedOptions={false}
                                 isMulti
-                                // value={selectedOptionMonth}
+                                value={selectedOptionMonth}
                                 onChange={handleOptionMonthChange}
                                 components={{
                                   Option: InputOption,

@@ -508,10 +508,10 @@ function Index() {
             </div>
           </form>
 
-          <section class="captch_parnt_blk">
-            <div class="captch_icn_blk">
+          <section className="captch_parnt_blk">
+            <div className="captch_icn_blk">
               <img src="\assets\images\captcha.png" alt="captcha" />
-              <div class="captch_links_blk">
+              <div className="captch_links_blk">
                 <a
                   href="https://www.google.com/intl/en/policies/privacy/"
                   target="_blank"
@@ -527,11 +527,11 @@ function Index() {
                 </a>
               </div>
             </div>
-            <div class="captch_contnt_blk">
+            <div className="captch_contnt_blk">
               <span>
                 protected by <strong>reCAPTCHA</strong>
               </span>
-              <div class="captch_links_blk">
+              <div className="captch_links_blk">
                 <a
                   href="https://www.google.com/intl/en/policies/privacy/"
                   target="_blank"

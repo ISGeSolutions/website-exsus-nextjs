@@ -246,6 +246,7 @@ function RegionItinararies(props) {
             );
             setPage(page + 1);
           }
+          setIsLoading(false);
         })
         .catch((error) => {
           // Handle any errors here
@@ -596,7 +597,6 @@ function RegionItinararies(props) {
                                 styles={styles}
                                 closeMenuOnSelect={false}
                                 isSearchable={isSearchable}
-                                // name="color"
                                 options={regionOptions}
                                 isMulti
                                 value={selectedOptionRegion}
