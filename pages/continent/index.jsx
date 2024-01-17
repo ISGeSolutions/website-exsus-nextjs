@@ -110,9 +110,9 @@ function Index() {
           .replace(/&/g, "and")
           .replace(/ /g, "-")
           .toLowerCase()}/${destCode
-          .replace(/&/g, "and")
-          .replace(/ /g, "-")
-          .toLowerCase()}-countries`;
+            .replace(/&/g, "and")
+            .replace(/ /g, "-")
+            .toLowerCase()}-countries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url} countries`
@@ -133,9 +133,9 @@ function Index() {
           .replace(/&/g, "and")
           .replace(/ /g, "-")
           .toLowerCase()}/${destCode
-          .replace(/&/g, "and")
-          .replace(/ /g, "-")
-          .toLowerCase()}-itineraries`;
+            .replace(/&/g, "and")
+            .replace(/ /g, "-")
+            .toLowerCase()}-itineraries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(`Home/Destinations/${destCode}/${destCode} Itineraries`);
       text = `TAILOR-MADE ${destinationName} HOLIDAY ITINERARIES`;
@@ -169,8 +169,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -296,7 +296,6 @@ function Index() {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -311,7 +310,6 @@ function Index() {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -331,7 +329,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -390,14 +388,6 @@ function Index() {
             "" +
             `&zoom=${map_zoom != null ? map_zoom : 0}` +
             `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
-          // const mapTemp =
-          //   `https://www.google.com/maps/embed/v1/place?q=` + map_latitude
-          //     ? map_latitude
-          //     : "" + `,` + map_longitude
-          //     ? map_longitude
-          //     : "" +
-          //       `&zoom=${map_zoom != null ? map_zoom : 0}` +
-          //       `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
           setMapVariable(mapTemp);
           const imageCheck = x.data[0].attributes?.destination_images?.data;
           const newBackgroundImages = [];
@@ -530,17 +520,15 @@ function Index() {
             {isShowMap ? (
               <div className="banner_tab_blk">
                 <button
-                  className={`btn banner_map_tab ${
-                    activeButton === "map" ? "banner_tab_active" : ""
-                  }`}
+                  className={`btn banner_map_tab ${activeButton === "map" ? "banner_tab_active" : ""
+                    }`}
                   onClick={() => handleTabClick("map")}
                 >
                   Map
                 </button>
                 <button
-                  className={`btn banner_img_tab ${
-                    activeButton === "images" ? "banner_tab_active" : ""
-                  }`}
+                  className={`btn banner_img_tab ${activeButton === "images" ? "banner_tab_active" : ""
+                    }`}
                   onClick={() => handleTabClick("images")}
                 >
                   Images
@@ -550,9 +538,8 @@ function Index() {
               ""
             )}
             <div
-              className={`banner_map_blk ${
-                activeButton === "map" ? "banner_map_active" : ""
-              }`}
+              className={`banner_map_blk ${activeButton === "map" ? "banner_map_active" : ""
+                }`}
             >
               <Iframe
                 width="640px"
@@ -578,7 +565,7 @@ function Index() {
             <section
               className="destination_tab_row light_grey pb-0"
               ref={divRef}
-              // id="scrollToElement"
+            // id="scrollToElement"
             >
               <div className="container">
                 <div className="bookmark_row">

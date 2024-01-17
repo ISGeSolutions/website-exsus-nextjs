@@ -220,30 +220,11 @@ function Nav() {
       ?.replace(/&/g, "and")
       .toLowerCase();
     if (itemName) {
-      return regionWiseUrl + `/holiday-types/${modifieditem}`;
+      return regionWiseUrl + `/holiday-types/${modifieditem}/${modifieditem}-itineraries`;
     }
   };
 
-  const dynamicLinkHolidayas = (itemId, id) => {
-    // if (itemId && itemId == 'AF') {
-    //     return regionWiseUrl + `/destinations/africa/` + id;
-    // }
-    if (itemId) {
-      return regionWiseUrl + `/holidaytypeitineraries/id`;
-    } else if (itemId && itemId == "HG5") {
-      return regionWiseUrl + `/holidaytypeitineraries/id`;
-    } else if (itemId && itemId == "HG4") {
-      return regionWiseUrl + `/holidaytypeitineraries/id`;
-    } else if (itemId && itemId == "ADHL") {
-      return regionWiseUrl + `/holidaytypeitineraries/id`;
-    } else if (itemId && itemId == "LBHG") {
-      return regionWiseUrl + `/holidaytypeitineraries/id`;
-    } else if (itemId && itemId == "HG3") {
-      return regionWiseUrl + `/holidaytypeitineraries/id`;
-    } else {
-      return "#";
-    }
-  };
+
 
   const dynamicLinkCountryHoliday = (grpName, typeName, id) => {
     const modifiedGrpName = grpName
@@ -491,9 +472,8 @@ function Nav() {
                                 (destinationItem, i) => (
                                   <li
                                     key={i}
-                                    className={`header_country_label ${
-                                      activeIndex === i ? "active" : ""
-                                    }`}
+                                    className={`header_country_label ${activeIndex === i ? "active" : ""
+                                      }`}
                                     onMouseEnter={() => handleMouseEnter(i)}
                                     onMouseLeave={handleMouseLeave}
                                   >
@@ -712,9 +692,8 @@ function Nav() {
                               {holidaytypesList?.map((holidaystypesItem, i) => (
                                 <li
                                   key={holidaystypesItem?.id}
-                                  className={`header_country_label ${
-                                    activeIndexHoliday === i ? "active" : ""
-                                  }`}
+                                  className={`header_country_label ${activeIndexHoliday === i ? "active" : ""
+                                    }`}
                                   onMouseEnter={() =>
                                     handleMouseEnterHoliday(i)
                                   }
@@ -725,15 +704,9 @@ function Nav() {
                                     onClick={hideOverlay}
                                     href={dynamicLinkHoliday(
                                       holidaystypesItem?.attributes
-                                        ?.holiday_type_group_name,
+                                        ?.friendly_url,
                                       holidaystypesItem?.id
-                                    )}
-                                    as={dynamicLinkHolidayas(
-                                      holidaystypesItem?.attributes
-                                        ?.holiday_type_group_code,
-                                      holidaystypesItem?.id
-                                    )}
-                                  >
+                                    )}                                  >
                                     {
                                       holidaystypesItem?.attributes
                                         ?.holiday_type_group_name
@@ -765,7 +738,7 @@ function Nav() {
                                                 onClick={hideOverlay}
                                                 href={dynamicLinkCountryHoliday(
                                                   holidaystypesItem?.attributes
-                                                    ?.holiday_type_group_name,
+                                                    ?.friendly_url,
                                                   holidaytypesCountry
                                                     ?.attributes
                                                     ?.holiday_type_name,

@@ -329,11 +329,11 @@ function Layout({ children }) {
             </section>
             <section className="header_item_right d-flex d-lg-inline-block justify-content-end align-items-center">
               <div className="header_call_icn">
-                <NavLink href="make_an_enquiry.html" class="header_mail_icn">
-                  <em class="material-symbols-outlined" title="Make an enquiry">
+                <NavLink href="make_an_enquiry.html" className="header_mail_icn">
+                  <em className="material-symbols-outlined" title="Make an enquiry">
                     mail
                   </em>
-                  <label class="d-none d-lg-block"></label>
+                  <label className="d-none d-lg-block"></label>
                 </NavLink>
                 <NavLink href="tel:020 7337 9010">
                   <em className="material-symbols-outlined">call</em>
@@ -615,7 +615,7 @@ function Layout({ children }) {
               received by us, including repatriation costs and arrangements,
               arising from cancellation or curtailment of your single service
               travel arrangements due to the insolvency of Exsus Travel Ltd.
-              <span class="d-block pt-3"></span>
+              <span className="d-block pt-3"></span>
               Exsus Travel Ltd has taken out an insurance provided by
               International Passenger Protection Ltd (IPP) with Liberty Mutual
               Insurance Europe SE (LMIE) trading as Liberty Specialty Markets, a
@@ -627,15 +627,15 @@ function Layout({ children }) {
               the Luxembourg Minister of Finance as an insurance and reinsurance
               company. This insurance is only valid for passengers who book and
               pay directly with/to Exsus Travel Ltd.
-              <span class="d-block pt-3"></span>
+              <span className="d-block pt-3"></span>
               In the event of our insolvency please make contact as soon as
               practically possible giving full details of what has happened
               quoting the name of your Travel Operator:
-              <span class="d-block pt-3"></span>
+              <span className="d-block pt-3"></span>
               IPP Claims at Sedgwick
-              <span class="d-block"></span>
+              <span className="d-block"></span>
               Telephone: +44 (0)345 266 1872
-              <span class="d-block"></span>
+              <span className="d-block"></span>
               Email:{" "}
               <NavLink href="mailto:Insolvency-claims@ipplondon.co.uk">
                 Insolvency-claims@ipplondon.co.uk

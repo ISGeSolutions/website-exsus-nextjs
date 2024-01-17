@@ -39,16 +39,6 @@ function ContinentOverview({ sendDataToParent }) {
     sendDataToParent(e);
   };
 
-  // let region = "uk";
-  // let regionWiseUrl = "/uk";
-  // if (typeof window !== "undefined") {
-  //   if (window && window.site_region) {
-  //     regionWiseUrl = "/" + window.site_region;
-  //     region = window.site_region;
-  //     // setMyVariable(window.site_region);
-  //   }
-  // }
-
   let region = "uk";
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
@@ -87,13 +77,6 @@ function ContinentOverview({ sendDataToParent }) {
       `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
-
-  // const generateDynamicLink = (item) => {
-  //   return (
-  //     regionWiseUrl +
-  //     `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`
-  //   );
-  // };
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(

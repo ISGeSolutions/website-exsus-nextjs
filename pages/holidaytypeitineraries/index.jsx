@@ -68,7 +68,6 @@ function Index() {
 
   const hcode = router?.query?.holidaytypeitineraries
     ?.replace(/-and-/g, " & ")
-    .replace(/-/g, " ")
     .toLowerCase();
 
   const width = "250px";
@@ -581,10 +580,14 @@ function Index() {
     holidaytypesService
       .getHolidaytypeDetails(hcode)
       .then((x) => {
+        setTitle(x.data[0].attributes.page_meta_title);
         setHolidaytypesDetails(x.data[0].attributes);
         setFriendlyUrl(
-          `home/holiday types/${x.data[0].attributes.friendly_url}`
+          `home/holiday types/${x.data[0].attributes.friendly_url}/${x.data[0].attributes.friendly_url}-itineraries`
         );
+        // setFriendlyUrl(
+        //   `home/holiday types/holidaytypegroup/${x.data[0].attributes.friendly_url}-itineraries`
+        // );
         setHolidayName(x.data[0].attributes.holiday_type_group_name);
         setTitle(x.data[0].attributes.page_meta_title);
 
@@ -607,15 +610,6 @@ function Index() {
         setIsLoading(false);
       });
 
-    holidaytypesService
-      .getHolidaytypeDetails(hcode)
-      .then((x) => {
-        setTitle(x.data.attributes.page_meta_title);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-      });
 
     holidaytypesService.getDestinationDropDown().then((x) => {
 

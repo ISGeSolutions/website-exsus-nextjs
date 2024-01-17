@@ -826,7 +826,7 @@ function Index() {
                             {item?.attributes?.hotel_country_contents?.data?.map(
                               (item) => {
                                 return (
-                                  <li class="price_guide_tooltip">
+                                  <li className="price_guide_tooltip">
                                     Price guide:
                                     <span
                                       tabIndex="0"

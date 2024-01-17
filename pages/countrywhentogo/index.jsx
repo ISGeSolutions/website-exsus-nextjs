@@ -334,8 +334,8 @@ function CountryWhentogo(props) {
           {/* <p>{countryData?.country_month_activities?.data}</p> */}
         </section>
       </div>
-      <section class="calender_blk_row light_dark_grey">
-        <div class="container">
+      <section className="calender_blk_row light_dark_grey">
+        <div className="container">
           <h3>
             Our favourite experience-oriented trips to {countrycode} by month
           </h3>
@@ -344,7 +344,7 @@ function CountryWhentogo(props) {
             experiences into recommended trips. Click on an experience to view
             each trip
           </p>
-          <div class="calender_blk_inr">
+          <div className="calender_blk_inr">
             {/* <table>
               <tbody>
                 <tr>
@@ -377,7 +377,7 @@ function CountryWhentogo(props) {
                 </tr>
                 <tr>
                   <td></td>
-                  <td colspan="2" class="calender_trip_detls">
+                  <td colspan="2" className="calender_trip_detls">
                     <a href="#">
                       Cape wine harvest
                       <svg
@@ -409,7 +409,7 @@ function CountryWhentogo(props) {
                 </tr>
                 <tr>
                   {countryData?.map((item) => (
-                    <td colspan="2" class="calender_trip_detls">
+                    <td colspan="2" className="calender_trip_detls">
                       <NavLink href={generateDynamicLink()}>
                         {item?.link_text}
                         <svg
@@ -455,7 +455,7 @@ function CountryWhentogo(props) {
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td colspan="1" class="calender_trip_detls">
+                  <td colspan="1" className="calender_trip_detls">
                     <a href="#">
                       Hermanus whale festival
                       <svg
@@ -501,7 +501,7 @@ function CountryWhentogo(props) {
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td colspan="2" class="calender_trip_detls">
+                  <td colspan="2" className="calender_trip_detls">
                     <a href="#">
                       Namaqualand flowers
                       <svg
