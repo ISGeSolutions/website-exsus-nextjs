@@ -458,6 +458,7 @@ function getCustomPagesData(pageName) {
 }
 
 function getRegions(countryName) {
+  getCountryFavHotels;
   const itinerariesDetailsUrl = `${
     publicRuntimeConfig.apiUrl
   }/api/countries?filters[country_name][$eq]=${countryName?.replace(
