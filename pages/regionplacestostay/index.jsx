@@ -266,7 +266,8 @@ function RegionPlacesToStay(props) {
           selectedOptionMonth,
           item,
           region,
-          page + 1
+          page + 1,
+          regionName
         )
         .then((response) => {
           setMetaData(response.meta.pagination);

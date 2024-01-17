@@ -420,7 +420,8 @@ function CountryItinararies(props) {
           selectedOptionMonth,
           item,
           region,
-          page + 1
+          page + 1,
+          countrycode
         )
         .then((response) => {
           setMetaData(response.meta.pagination);
