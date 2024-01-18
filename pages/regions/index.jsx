@@ -408,6 +408,19 @@ function Index() {
       });
     });
 
+    window.onload = () => {
+      setTimeout(() => {
+        regionWiseUrl +
+          `/ destinations / ${destinationcode} /${countrycode?.replace(
+            / /g,
+            "-"
+          )}`;
+        if (redirectUrl) {
+          router.push(redirectUrl);
+        }
+      }, 0);
+    };
+
     window.addEventListener("resize", equalHeight(true));
     setTimeout(() => {
       // $('.carousel').carousel();
@@ -531,7 +544,8 @@ function Index() {
           </section>
 
           <section className="destination_tab_row light_grey pb-0">
-            <div className="container" id="targetDiv">
+            <div className="container">
+              {/* id="targetDiv" */}
               <div className="bookmark_row">
                 <FriendlyUrl data={friendlyUrl} />
               </div>
@@ -565,7 +579,6 @@ function Index() {
                     >
                       Ovierview
                     </button>
-                    {/* <button onClick={handleUrlChange}>Change URL</button> */}
                   </li>
                   <li className="nav-item" role="presentation">
                     <button
