@@ -298,7 +298,7 @@ function CountryItinararies(props) {
   // ];
 
   const monthOptions = [
-    { value: "Show_all", label: "All months" },
+    // { value: "All months", label: "All months" },
     { value: "1", label: "January" },
     { value: "2", label: "February" },
     { value: "3", label: "March" },

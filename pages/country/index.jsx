@@ -56,7 +56,6 @@ function Country() {
   const [backgroundImage, setBackgroundImage] = useState([]);
   const [headingText, setHeadingText] = useState("");
   let [isShowMap, setIsShowMap] = useState(true);
-  let dictionaryPage = 1;
 
   const countryOptions = [
     { value: "", label: "Filter by country" },
@@ -241,7 +240,6 @@ function Country() {
     var text = countryData?.attributes?.header_text;
     if (itemId == "overview") {
       setIsShowMap(true);
-      handleTabClick("images");
       const redirectUrl =
         regionWiseUrl +
         `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}`;
@@ -252,7 +250,6 @@ function Country() {
       text = "LUXURY HOLIDAYS IN " + countrycode.toUpperCase();
     } else if (itemId == "regions") {
       setIsShowMap(true);
-      handleTabClick("images");
       const redirectUrl =
         regionWiseUrl +
         `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url}-regions`;
@@ -263,7 +260,6 @@ function Country() {
       text = "REGIONS IN " + countrycode.toUpperCase(); // action="/countryregions?countrycode=south-africa"
     } else if (itemId == "itineraries") {
       setIsShowMap(false);
-      handleTabClick("images");
       let destCode = "";
       if (!countrycode) {
         destCode = localStorage.getItem("country_code");
@@ -297,7 +293,6 @@ function Country() {
       text = "LUXURY HOTELS, CAMPS & LODGES IN " + countrycode.toUpperCase(); // action="/countryplacetostay?countrycode=south-africa"
     } else if (itemId == "when-to-go") {
       setIsShowMap(false);
-      handleTabClick("images");
       const redirectUrl =
         regionWiseUrl +
         `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url}-when-to-go`;
@@ -320,9 +315,9 @@ function Country() {
     }
   };
 
-  const websiteContentCheck = (pageNo) => {
+  const websiteContentCheck = () => {
     homeService
-      .getAllWebsiteContent(region, pageNo)
+      .getAllWebsiteContent()
       .then((x) => {
         const response = x?.data;
 
@@ -349,10 +344,9 @@ function Country() {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
-            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
             localStorage.setItem(
               "websitecontent_uk",
-              JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
+              JSON.stringify(dynamicObjectUk)
             );
           }
           if (
@@ -361,10 +355,9 @@ function Country() {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
-            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
             localStorage.setItem(
               "websitecontent_us",
-              JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
+              JSON.stringify(dynamicObjectUs)
             );
           }
           if (
@@ -374,10 +367,9 @@ function Country() {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
-            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
             localStorage.setItem(
               "websitecontent_asia",
-              JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
+              JSON.stringify(dynamicObjectAsia)
             );
           }
           if (
@@ -387,17 +379,13 @@ function Country() {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
-            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
             localStorage.setItem(
               "websitecontent_india",
-              JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
+              JSON.stringify(dynamicObjectIndia)
             );
           }
         });
-        if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
-          dictionaryPage = x?.meta?.pagination?.page + 1
-          websiteContentCheck(dictionaryPage)
-        }
+
         setWebsiteContent(x.data);
         setIsLoading(false);
       })
@@ -632,15 +620,17 @@ function Country() {
             {isShowMap ? (
               <div className="banner_tab_blk">
                 <button
-                  className={`btn banner_map_tab ${activeButton === "map" ? "banner_tab_active" : ""
-                    }`}
+                  className={`btn banner_map_tab ${
+                    activeButton === "map" ? "banner_tab_active" : ""
+                  }`}
                   onClick={() => handleTabClick("map")}
                 >
                   Map
                 </button>
                 <button
-                  className={`btn banner_img_tab ${activeButton === "images" ? "banner_tab_active" : ""
-                    }`}
+                  className={`btn banner_img_tab ${
+                    activeButton === "images" ? "banner_tab_active" : ""
+                  }`}
                   onClick={() => handleTabClick("images")}
                 >
                   Images

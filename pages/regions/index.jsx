@@ -437,6 +437,7 @@ function Index() {
 
     window.onload = () => {
       setTimeout(() => {
+<<<<<<< HEAD
         let reName = "";
         let destName = "";
         let countryName = "";
@@ -471,6 +472,13 @@ function Index() {
           "/" +
           reName?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase();
 
+=======
+        regionWiseUrl +
+          `/ destinations / ${destinationcode} /${countrycode?.replace(
+            / /g,
+            "-"
+          )}`;
+>>>>>>> main
         if (redirectUrl) {
           router.push(redirectUrl);
         }
@@ -636,7 +644,6 @@ function Index() {
                     >
                       Ovierview
                     </button>
-                    {/* <button onClick={handleUrlChange}>Change URL</button> */}
                   </li>
                   <li className="nav-item" role="presentation">
                     <button
