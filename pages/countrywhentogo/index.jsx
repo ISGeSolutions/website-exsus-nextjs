@@ -118,7 +118,7 @@ function CountryWhentogo(props) {
 
   const websiteContentCheck = () => {
     homeService
-      .getAllWebsiteContent()
+      .getAllWebsiteContent(region)
       .then((x) => {
         const response = x?.data;
 
@@ -246,7 +246,10 @@ function CountryWhentogo(props) {
   };
 
   useEffect(() => {
-    if (!localStorage.getItem("websitecontent_uk")) {
+    if (!localStorage.getItem(`websitecontent_${region.replace(
+      /in/g,
+      "INDIA"
+    ).toLowerCase()}`)) {
       websiteContentCheck();
     }
     const sortedData = countryData?.country_month_activities?.data?.sort(
@@ -326,10 +329,10 @@ function CountryWhentogo(props) {
       <section class="calender_blk_row light_dark_grey">
         <div class="container">
           <h3>
-            Our favourite experience-oriented trips to ${countrycode} by month
+            Our favourite experience-oriented trips to {countrycode} by month
           </h3>
           <p>
-            The team at Exsus has incorporated some of ${countrycode}'s best
+            The team at Exsus has incorporated some of {countrycode}'s best
             experiences into recommended trips. Click on an experience to view
             each trip
           </p>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { destinationService } from "services";
 import { NavLink } from "components";
 import { useRouter } from "next/router";
+import { homeService } from "../../services";
 
 export default RegionOverview;
 
@@ -29,7 +30,6 @@ function RegionOverview({ props, onDataFromChild }) {
   const { overview_text } = props?.data || {};
   const country_name = props?.data?.country_name || "";
 
-
   const handleLoadMore = () => {
     setVisibleItems((prevVisibleItems) => prevVisibleItems + itemsPerPage);
   };
@@ -52,11 +52,16 @@ function RegionOverview({ props, onDataFromChild }) {
         .replace(/&/g, "and")
         .toLowerCase();
       if (regionName) {
-        return regionWiseUrl + `/destinations/${destinationcode.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${countrycode.replace(/ /g, "-")
+        return (
+          regionWiseUrl +
+          `/destinations/${destinationcode
+            .replace(/ /g, "-")
             .replace(/&/g, "and")
-            .toLowerCase()}/${modifieditem}`;
+            .toLowerCase()}/${countrycode
+              .replace(/ /g, "-")
+              .replace(/&/g, "and")
+              .toLowerCase()}/${modifieditem}`
+        );
       }
     }
   };
@@ -83,7 +88,9 @@ function RegionOverview({ props, onDataFromChild }) {
   };
 
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt places_to_stay_cnt"),
+    var elements = document.getElementsByClassName(
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -105,9 +112,9 @@ function RegionOverview({ props, onDataFromChild }) {
 
   equalHeight(true);
 
-  const websiteContentCheck = (matches, region, modifiedString) => {
+  const websiteContentCheck = (matches, modifiedString) => {
     homeService
-      .getAllWebsiteContent()
+      .getAllWebsiteContent(region)
       .then((x) => {
         const response = x?.data;
 
@@ -208,7 +215,6 @@ function RegionOverview({ props, onDataFromChild }) {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-
         // debugger;
         // You can access it using localStorage.getItem('yourKey')
 
@@ -218,31 +224,32 @@ function RegionOverview({ props, onDataFromChild }) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(matches, region, modifiedString);
+                modifiedString = websiteContentCheck(
+                  matches,
+                  modifiedString
+                );
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
               }
               const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
               if (checkStr && replacement) {
-                modifiedString = modifiedString.replace(
-                  checkStr,
-                  replacement
-                );
+                modifiedString = modifiedString.replace(checkStr, replacement);
               }
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {
-
-          }
+          } catch (error) { }
         }
       }
     }
-  }
+  };
 
   useEffect(() => {
-    if (!localStorage.getItem("websitecontent_uk")) {
+    if (!localStorage.getItem(`websitecontent_${region.replace(
+      /in/g,
+      "INDIA"
+    ).toLowerCase()}`)) {
       websiteContentCheck();
     }
     destinationService
@@ -254,7 +261,6 @@ function RegionOverview({ props, onDataFromChild }) {
       .catch((error) => {
         setIsLoading(false);
       });
-
 
     destinationService
       .getRegions(countrycode)
@@ -270,17 +276,46 @@ function RegionOverview({ props, onDataFromChild }) {
       });
 
     window.addEventListener("resize", equalHeight(true));
-
     // Using window.onload to detect full page load
     window.onload = () => {
       setTimeout(() => {
-        const redirectUrl = regionWiseUrl + "/destinations/" + destinationcode?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase() + "/" + countrycode.replace(/ /g, "-").replace(/and/g, "&")
+        let reName = "";
+        let destName = "";
+        let countryName = "";
+
+        if (!regionName || regionName == "undefined") {
+          reName = localStorage.getItem("region_name");
+        } else {
+          reName = regionName?.attributes?.region_name;
+        }
+        if (!destinationcode) {
+          destName = localStorage.getItem("destination_code");
+        } else {
+          destName = destinationcode;
+        }
+        if (!countrycode) {
+          countryName = localStorage.getItem("country_code");
+        } else {
+          countryName = countrycode;
+        }
+        const redirectUrl =
+          regionWiseUrl +
+          "/destinations/" +
+          destName
+            ?.replace(/ /g, "-")
             .replace(/&/g, "and")
-            .toLowerCase() + "/" + regionName?.attributes?.region_name?.replace(/ /g, "-")
-              .replace(/&/g, "and")
-              .toLowerCase();;
+            .toLowerCase() +
+          "/" +
+          countryName
+            ?.replace(/ /g, "-")
+            .replace(/and/g, "&")
+            .replace(/&/g, "and")
+            .toLowerCase() +
+          "/" +
+          reName
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase();
 
         if (redirectUrl) {
           router.push(redirectUrl);
@@ -304,16 +339,16 @@ function RegionOverview({ props, onDataFromChild }) {
           <div className="container">
             <section className="destination_para">
               <p
-                dangerouslySetInnerHTML={{ __html: dictioneryFunction(regionData.overview_text) }}
+                dangerouslySetInnerHTML={{
+                  __html: dictioneryFunction(regionData.overview_text),
+                }}
               />
             </section>
           </div>
 
           <section className="favrites_blk_row favrites_blk_small_card_row">
             <div className="container">
-              <h3 className="title_cls">
-                Popular regions in {countrycode}
-              </h3>
+              <h3 className="title_cls">Other regions in {countrycode}</h3>
               <div className="card_slider_row">
                 <i id="left">
                   <svg
@@ -335,56 +370,58 @@ function RegionOverview({ props, onDataFromChild }) {
 
                 {/* Continent Overview Countries */}
                 <div className="carousel00 region_carousel00">
-                  {allRegions?.map((regions, i) => (
-                    // Add a condition to check if country_name is not null
-                    regions.attributes.region_name && (
-                      <div
-                        className="card_slider_inr card_slider_inr_sml"
-                        key={regions?.id}
-                      >
-                        <NavLink
-                          href={generateDynamicLinkRegions(
-                            regions?.attributes.region_name
-                          )}
+                  {allRegions?.map(
+                    (regions, i) =>
+                      // Add a condition to check if country_name is not null
+                      regions.attributes.region_name && (
+                        <div
+                          className="card_slider_inr card_slider_inr_sml"
+                          key={regions?.id}
                         >
-                          <div className="card_slider_inr_sml_img">
-                            <img
-                              src={
-                                regions?.attributes?.region_images?.data.filter(
-                                  (res) => res.attributes.image_type === "thumbnail"
-                                )[0]?.attributes?.image_path
-                              }
-                              alt={
-                                regions?.attributes?.region_images?.data.filter(
-                                  (res) => res.attributes?.image_type === "thumbnail"
-                                )[0]?.attributes?.image_alt_text
-                              }
-                              className="img-fluid"
-                            />
-                          </div>
-                          <h4>
-                            {regions.attributes.region_name}
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="#ffffff"
-                              shapeRendering="geometricPrecision"
-                              textRendering="geometricPrecision"
-                              imageRendering="optimizeQuality"
-                              fillRule="evenodd"
-                              clipRule="evenodd"
-                              viewBox="0 0 267 512.43"
-                            >
-                              <path
-                                fillRule="nonzero"
-                                d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                          <NavLink
+                            href={generateDynamicLinkRegions(
+                              regions?.attributes.region_name
+                            )}
+                          >
+                            <div className="card_slider_inr_sml_img">
+                              <img
+                                src={
+                                  regions?.attributes?.region_images?.data.filter(
+                                    (res) =>
+                                      res.attributes.image_type === "thumbnail"
+                                  )[0]?.attributes?.image_path
+                                }
+                                alt={
+                                  regions?.attributes?.region_images?.data.filter(
+                                    (res) =>
+                                      res.attributes?.image_type === "thumbnail"
+                                  )[0]?.attributes?.image_alt_text
+                                }
+                                className="img-fluid"
                               />
-                            </svg>
-                          </h4>
-                        </NavLink>
-                      </div>
-                    )
-                  ))}
-
+                            </div>
+                            <h4>
+                              {regions.attributes.region_name}
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="#ffffff"
+                                shapeRendering="geometricPrecision"
+                                textRendering="geometricPrecision"
+                                imageRendering="optimizeQuality"
+                                fillRule="evenodd"
+                                clipRule="evenodd"
+                                viewBox="0 0 267 512.43"
+                              >
+                                <path
+                                  fillRule="nonzero"
+                                  d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                                />
+                              </svg>
+                            </h4>
+                          </NavLink>
+                        </div>
+                      )
+                  )}
                 </div>
                 <i id="right">
                   <svg
@@ -452,7 +489,9 @@ function RegionOverview({ props, onDataFromChild }) {
 
                 <div className="col-sm-6">
                   <div className="card_blk_inr card_blk_overlay">
-                    <a onClick={() => sendDataToParentHandler("places-to-stay")}>
+                    <a
+                      onClick={() => sendDataToParentHandler("places-to-stay")}
+                    >
                       <img
                         src="./../../../images/destination_overview02.jpg"
                         alt="Card image 08"

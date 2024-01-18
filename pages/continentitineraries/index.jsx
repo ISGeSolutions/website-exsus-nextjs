@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { Alert, FriendlyUrl } from "../../components";
+import { formatPrice } from "../../components/utils/priceFormater";
 
 export default ContinentItinararies;
 
@@ -233,7 +234,7 @@ function ContinentItinararies(props) {
   // ];
 
   const monthOptions = [
-    { value: "1,2,3,4,5,6,7,8,9,10,11,12", label: "All months" },
+    { value: "Show_all", label: "All months" },
     { value: "1", label: "January" },
     { value: "2", label: "February" },
     { value: "3", label: "March" },
@@ -256,21 +257,39 @@ function ContinentItinararies(props) {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    setSelectedOptionCountry(selectedOption);
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionCountry(selectedOption.filter(res => res.value == "Show_all"));
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionCountry(selectedOption.filter(res => res.value != "Show_all"));
+    } else {
+      setSelectedOptionCountry(selectedOption);
+    }
   };
 
   const handleOptionRegionChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    setSelectedOptionRegion(selectedOption);
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionRegion(selectedOption.filter(res => res.value == "Show_all"));
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionRegion(selectedOption.filter(res => res.value != "Show_all"));
+    } else {
+      setSelectedOptionRegion(selectedOption);
+    }
   };
 
   const handleOptionMonthChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    setSelectedOptionMonth(selectedOption);
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionMonth(selectedOption.filter(res => res.value == "Show_all"));
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionMonth(selectedOption.filter(res => res.value != "Show_all"));
+    } else {
+      setSelectedOptionMonth(selectedOption);
+    }
   };
 
   function onSubmit(data) {
@@ -303,7 +322,7 @@ function ContinentItinararies(props) {
     // const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
+      `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -317,8 +336,8 @@ function ContinentItinararies(props) {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -340,7 +359,7 @@ function ContinentItinararies(props) {
 
   const websiteContentCheck = () => {
     homeService
-      .getAllWebsiteContent()
+      .getAllWebsiteContent(region)
       .then((x) => {
         const response = x?.data;
 
@@ -464,7 +483,7 @@ function ContinentItinararies(props) {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -473,7 +492,10 @@ function ContinentItinararies(props) {
   equalHeight(true);
 
   useEffect(() => {
-    if (!localStorage.getItem("websitecontent_uk")) {
+    if (!localStorage.getItem(`websitecontent_${region.replace(
+      /in/g,
+      "INDIA"
+    ).toLowerCase()}`)) {
       websiteContentCheck();
     }
     setSelectedOptionCountry([]);
@@ -482,17 +504,32 @@ function ContinentItinararies(props) {
     destinationService
       .getDestinationDetails(destinationcode)
       .then((x) => {
+        debugger
         setdestination(x.data[0].attributes);
         setdcode(x.data[0].attributes.destination_code);
         loadMoreData(activeItem);
-        setAllCountries(
-          x.data[0]?.attributes?.countries?.data.map((item) => ({
+        
+        let arrayOfObjects = [{
+          destination_code: "Show_all",
+          value: "Show_all",
+          label: x.data[0].attributes.destination_name,
+        }];
+        arrayOfObjects = [...arrayOfObjects, ...x.data[0]?.attributes?.countries?.data.map((item) => ({
             id: item.id,
             country_code: item?.attributes?.country_code,
             value: item?.attributes?.country_name,
             label: item?.attributes?.country_name,
-          }))
-        );
+        }))];
+        setAllCountries(arrayOfObjects);
+
+        // setAllCountries(
+        //   x.data[0]?.attributes?.countries?.data.map((item) => ({
+        //     id: item.id,
+        //     country_code: item?.attributes?.country_code,
+        //     value: item?.attributes?.country_name,
+        //     label: item?.attributes?.country_name,
+        //   }))
+        // );
         setIsLoading(false);
       })
       .catch((error) => {
@@ -500,14 +537,26 @@ function ContinentItinararies(props) {
       });
 
     destinationService.getPropertyTypeDropDown().then((x) => {
-      setAllRegion(
-        x.data?.map((item) => ({
-          //id: i.id,
-          property_type_code: item?.attributes?.property_type_code,
+      
+      let arrayOfObjects = [{
+        property_type_code: "Show_all",
+        value: "Show_all",
+        label: "Everything"
+      }];
+      arrayOfObjects = [...arrayOfObjects, ...x.data?.map((item) => ({
+        property_type_code: item?.attributes?.property_type_code,
           value: item?.attributes?.property_type_name,
           label: item?.attributes?.property_type_name,
-        }))
-      );
+      }))];
+      setAllRegion(arrayOfObjects);
+      // setAllRegion(
+      //   x.data?.map((item) => ({
+      //     //id: i.id,
+      //     property_type_code: item?.attributes?.property_type_code,
+      //     value: item?.attributes?.property_type_name,
+      //     label: item?.attributes?.property_type_name,
+      //   }))
+      // );
     });
 
     // window.addEventListener("resize", equalHeight(true));
@@ -736,7 +785,7 @@ function ContinentItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -772,14 +821,11 @@ function ContinentItinararies(props) {
                                   )
                                   .map((res1) => (
                                     <li key={res1.id}>
-                                      {`From ${
-                                        res1.attributes?.currency_symbol ?? ""
-                                      }${
-                                        res1.attributes?.price ?? " xxxx"
-                                      } per person`}
+                                      {`From ${res1.attributes?.currency_symbol ?? ""
+                                        }${formatPrice(res1.attributes?.price) ?? "xxxx"
+                                        } per person`}
                                     </li>
                                   ))}
-                                <li></li>
                                 <li>
                                   Travel to:
                                   <span>

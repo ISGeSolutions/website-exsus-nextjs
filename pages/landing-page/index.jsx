@@ -72,7 +72,7 @@ function Index() {
 
     function onSignup(data) {
         // console.log('onSignup', data);
-        // return homeService.inspireMe(data)
+        // return debugger;homeService.inspireMe(data)
         //     .then(() => {
         //         alertService.success('Sign up successfull', { keepAfterRouteChange: true });
         //         router.push('home');

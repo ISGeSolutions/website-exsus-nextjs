@@ -15,6 +15,7 @@ import Image from "next/image";
 import Select, { components } from "react-select";
 import CustomMultiValue from "../continentitineraries/CustomMultiValue";
 import { Alert } from "../../components";
+import Iframe from "react-iframe";
 
 export default CountryPlaceToStay;
 
@@ -260,11 +261,11 @@ function CountryPlaceToStay(props) {
     } else {
       router.push(
         `advance-search?where=` +
-          e?.destination +
-          `&what=` +
-          e?.reason +
-          `&when=` +
-          e?.month
+        e?.destination +
+        `&what=` +
+        e?.reason +
+        `&when=` +
+        e?.month
       );
     }
   }
@@ -280,12 +281,12 @@ function CountryPlaceToStay(props) {
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${hotelName}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -300,12 +301,12 @@ function CountryPlaceToStay(props) {
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${hotelName}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -341,7 +342,7 @@ function CountryPlaceToStay(props) {
 
   const websiteContentCheck = () => {
     homeService
-      .getAllWebsiteContent()
+      .getAllWebsiteContent(region)
       .then((x) => {
         const response = x?.data;
 
@@ -469,7 +470,10 @@ function CountryPlaceToStay(props) {
   };
 
   useEffect(() => {
-    if (!localStorage.getItem("websitecontent_uk")) {
+    if (!localStorage.getItem(`websitecontent_${region.replace(
+      /in/g,
+      "INDIA"
+    ).toLowerCase()}`)) {
       websiteContentCheck();
     }
     setSelectedOptionCountry();
@@ -713,7 +717,7 @@ function CountryPlaceToStay(props) {
                                 {item?.attributes?.hotel_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                      "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}
@@ -755,8 +759,8 @@ function CountryPlaceToStay(props) {
                                               {item?.attributes?.currency_symbol.repeat(
                                                 Math.abs(
                                                   5 -
-                                                    item?.attributes
-                                                      ?.price_guide_value
+                                                  item?.attributes
+                                                    ?.price_guide_value
                                                 )
                                               )}
                                             </label>
@@ -834,6 +838,46 @@ function CountryPlaceToStay(props) {
           </section>
         </div>
       )}
+      <div
+        className="modal fade"
+        id="placesToStayModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="exampleModalLabel">
+                All accomodation on Map
+              </h1>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <div className="modal_map_blk">
+                <Iframe
+                  width="640px"
+                  height="320px"
+                  id=""
+                  className=""
+                  display="block"
+                  src="https://www.google.com/maps/embed/v1/place?q=25.0930200000,55.1487400000&zoom=10&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE"
+                  position="relative"
+                  style="border:0;"
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

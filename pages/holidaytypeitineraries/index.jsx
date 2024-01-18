@@ -19,6 +19,7 @@ import { EnquiryButton } from "../../components/common/EnquiryBtn";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { formatPrice } from "../../components/utils/priceFormater";
 
 export default Index;
 
@@ -263,7 +264,13 @@ function Index() {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    setSelectedOptionDestination(selectedOption);
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionDestination(selectedOption.filter(res => res.value == "Show_all"));
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionDestination(selectedOption.filter(res => res.value != "Show_all"));
+    } else {
+      setSelectedOptionDestination(selectedOption);
+    }
   };
 
   const handleFilterClick = (item) => {
@@ -305,7 +312,7 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
+      `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -402,8 +409,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -427,7 +434,7 @@ function Index() {
 
   const websiteContentCheck = () => {
     homeService
-      .getAllWebsiteContent()
+      .getAllWebsiteContent(region)
       .then((x) => {
         const response = x?.data;
 
@@ -551,14 +558,17 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
   };
 
   useEffect(() => {
-    if (!localStorage.getItem("websitecontent_uk")) {
+    if (!localStorage.getItem(`websitecontent_${region.replace(
+      /in/g,
+      "INDIA"
+    ).toLowerCase()}`)) {
       websiteContentCheck();
     }
     setSelectedOptionDestination([]);
@@ -602,14 +612,18 @@ function Index() {
       });
 
     holidaytypesService.getDestinationDropDown().then((x) => {
-      setAllDestination(
-        x.data?.map((item) => ({
-          //id: i.id,
-          destination_code: item?.attributes?.destination_code,
-          value: item?.attributes?.destination_name,
-          label: item?.attributes?.destination_name,
-        }))
-      );
+
+      let arrayOfObjects = [{
+        destination_code: "Show_all",
+        value: "Show_all",
+        label: "Show all",
+      }];
+      arrayOfObjects = [...arrayOfObjects, ...x.data?.map((item) => ({
+        destination_code: item?.attributes?.destination_code,
+        value: item?.attributes?.destination_name,
+        label: item?.attributes?.destination_name,
+      }))];
+      setAllDestination(arrayOfObjects);
     });
 
     loadMoreData(activeItem);
@@ -849,7 +863,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                      "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}
@@ -886,11 +900,9 @@ function Index() {
                                     )
                                     .map((res1) => (
                                       <li key={res1.id}>
-                                        {`From ${
-                                          res1.attributes?.currency_symbol ?? ""
-                                        }${
-                                          res1.attributes?.price ?? " xxxx"
-                                        } per person`}
+                                        {`From ${res1.attributes?.currency_symbol ?? ""
+                                          }${formatPrice(res1.attributes?.price) ?? " xxxx"
+                                          } per person`}
                                       </li>
                                     ))}
                                   <li>

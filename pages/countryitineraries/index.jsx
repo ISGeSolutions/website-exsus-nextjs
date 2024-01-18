@@ -359,7 +359,7 @@ function CountryItinararies(props) {
                   accumulator.some((item) => item.id === current.id)
                     ? accumulator
                     : [...accumulator, current],
-                []
+                [ ]
               )
             );
             setPage(page + 1);

@@ -15,6 +15,7 @@ import Image from "next/image";
 import Select, { components } from "react-select";
 import CustomMultiValue from "./CustomMultiValue";
 import { Alert } from "../../components";
+import Iframe from "react-iframe";
 
 export default ContinentPlacesToStay;
 
@@ -60,19 +61,19 @@ function ContinentPlacesToStay(props) {
   }
 
   const monthOptions = [
-    { value: "All months", label: "All months" },
-    { value: "January", label: "January" },
-    { value: "February", label: "February" },
-    { value: "March", label: "March" },
-    { value: "April", label: "April" },
-    { value: "May", label: "May" },
-    { value: "June", label: "June" },
-    { value: "July", label: "July" },
-    { value: "August", label: "August" },
-    { value: "September", label: "September" },
-    { value: "October", label: "October" },
-    { value: "November", label: "November" },
-    { value: "December", label: "December" },
+    { value: "1,2,3,4,5,6,7,8,9,10,11,12", label: "All months" },
+    { value: "1", label: "January" },
+    { value: "2", label: "February" },
+    { value: "3", label: "March" },
+    { value: "4", label: "April" },
+    { value: "5", label: "May" },
+    { value: "6", label: "June" },
+    { value: "7", label: "July" },
+    { value: "8", label: "August" },
+    { value: "9", label: "September" },
+    { value: "10", label: "October" },
+    { value: "11", label: "November" },
+    { value: "12", label: "December" },
   ];
 
   const width = "250px";
@@ -278,7 +279,7 @@ function ContinentPlacesToStay(props) {
 
   const websiteContentCheck = () => {
     homeService
-      .getAllWebsiteContent()
+      .getAllWebsiteContent(region)
       .then((x) => {
         const response = x?.data;
 
@@ -410,7 +411,10 @@ function ContinentPlacesToStay(props) {
   };
 
   useEffect(() => {
-    if (!localStorage.getItem("websitecontent_uk")) {
+    if (!localStorage.getItem(`websitecontent_${region.replace(
+      /in/g,
+      "INDIA"
+    ).toLowerCase()}`)) {
       websiteContentCheck();
     }
     setSelectedOptionCountry();
@@ -805,6 +809,46 @@ function ContinentPlacesToStay(props) {
           </section>
         </div>
       )}
+      <div
+        className="modal fade"
+        id="placesToStayModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="exampleModalLabel">
+                All accomodation on Map
+              </h1>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <div className="modal_map_blk">
+                <Iframe
+                  width="640px"
+                  height="320px"
+                  id=""
+                  className=""
+                  display="block"
+                  src="https://www.google.com/maps/embed/v1/place?q=25.0930200000,55.1487400000&zoom=10&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE"
+                  position="relative"
+                  style="border:0;"
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

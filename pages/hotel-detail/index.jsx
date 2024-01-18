@@ -82,18 +82,39 @@ function Index() {
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+<<<<<<< HEAD
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
+=======
         ?.replace(/ /g, "-")
         .replace(/&/g, "and")
         .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
         ?.replace(/ /g, "-")
         .replace(/&/g, "and")
         .toLowerCase()}/${hotelName}`
+>>>>>>> main
     );
   };
 
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
+<<<<<<< HEAD
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${item?.attributes?.friendly_url}`
+=======
         `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
           ?.replace(/&/g, " and ")
           .replace(/ /g, "-")
@@ -104,12 +125,13 @@ function Index() {
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.friendly_url}`
+>>>>>>> main
     );
   };
 
   const websiteContentCheck = () => {
     homeService
-      .getAllWebsiteContent()
+      .getAllWebsiteContent(region)
       .then((x) => {
         const response = x?.data;
 
@@ -235,7 +257,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -250,7 +272,10 @@ function Index() {
   };
 
   useEffect(() => {
-    if (!localStorage.getItem("websitecontent_uk")) {
+    if (!localStorage.getItem(`websitecontent_${region.replace(
+      /in/g,
+      "INDIA"
+    ).toLowerCase()}`)) {
       websiteContentCheck();
     }
 
@@ -277,7 +302,6 @@ function Index() {
           map_longitude +
           `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
         setMapVariable(mapTemp);
-        debugger;
         setHotelData(x.data[0].attributes);
         let bestTimeTravelData = [];
         x.data[0].attributes?.hotel_travel_times?.data.forEach((res) => {
@@ -453,8 +477,8 @@ function Index() {
                       {hotelData?.hotel_country_contents?.data[0]?.attributes?.currency_symbol.repeat(
                         Math.abs(
                           5 -
-                            hotelData?.hotel_country_contents?.data[0]
-                              ?.attributes?.price_guide_value
+                          hotelData?.hotel_country_contents?.data[0]
+                            ?.attributes?.price_guide_value
                         )
                       )}
                     </label>
@@ -792,7 +816,7 @@ function Index() {
                 </i>
                 <div className="carousel00">
                   {hotels?.map((item) => (
-                    <div className="card_slider_inr" key={item.id}>
+                    <div className="card_slider_inr">
                       <div className="card_slider">
                         <NavLink
                           href={generateDynamicLink(item)}
@@ -820,7 +844,11 @@ function Index() {
                         <div className="card_slider_cnt places_to_stay_cnt">
                           <h4>
                             <a href={generateDynamicLink(item)}>
+<<<<<<< HEAD
+                              {dictioneryFunction(item?.attributes?.hotel_name)}
+=======
                               {item?.attributes?.hotel_name}
+>>>>>>> main
                             </a>
                           </h4>
                           <ul>
@@ -846,8 +874,8 @@ function Index() {
                                         {item?.attributes?.currency_symbol.repeat(
                                           Math.abs(
                                             5 -
-                                              item?.attributes
-                                                ?.price_guide_value
+                                            item?.attributes
+                                              ?.price_guide_value
                                           )
                                         )}
                                       </label>
@@ -860,14 +888,20 @@ function Index() {
                             <li>
                               <p
                                 dangerouslySetInnerHTML={{
-                                  __html: item?.attributes?.intro_text,
+                                  __html: dictioneryFunction(
+                                    item?.attributes?.intro_text
+                                  ),
                                 }}
                               />
                             </li>
                             {/* <li>{item?.attributes?.intro_text}</li> */}
                             <li>
                               Best for:
-                              <span>{item?.attributes?.best_for_text}</span>
+                              <span>
+                                {dictioneryFunction(
+                                  item?.attributes?.best_for_text
+                                )}
+                              </span>
                             </li>
                           </ul>
                         </div>

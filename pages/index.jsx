@@ -13,6 +13,7 @@ import {
   homeService,
 } from "services";
 import { NavLink } from "components";
+import { formatPrice } from "../components/utils/priceFormater";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { whyusService } from "../services";
@@ -74,7 +75,7 @@ function Index() {
 
     router.push(
       regionWiseUrl +
-        `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-itineraries/${item.attributes?.friendly_url}`
+      `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-itineraries/${item.attributes?.friendly_url}`
     );
   };
 
@@ -100,8 +101,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -358,7 +359,7 @@ function Index() {
       });
 
     homeService
-      .getAllWebsiteContent()
+      .getAllWebsiteContent(region)
       .then((x) => {
         // debugger;
         const response = x?.data;
@@ -692,11 +693,9 @@ function Index() {
                               )
                               .map((res1) => (
                                 <li key={res1.id}>
-                                  {`From ${
-                                    res1.attributes?.currency_symbol ?? ""
-                                  }${
-                                    res1.attributes?.price ?? " xxxx"
-                                  } per person`}
+                                  {`From ${res1.attributes?.currency_symbol ?? ""
+                                    }${formatPrice(res1.attributes?.price) ?? " xxxx"
+                                    } per person`}
                                 </li>
                               ))}
                             <li>

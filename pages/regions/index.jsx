@@ -45,6 +45,7 @@ function Index() {
     itineraries: useRef(null),
     "places-to-stay": useRef(null),
   };
+  let [isShowMap, setIsShowMap] = useState(true);
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -129,12 +130,18 @@ function Index() {
       "/" +
       regionName?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase();
     if (itemId == "overview") {
+      setIsShowMap(true);
+      handleTabClick("images");
       window.history.pushState(null, null, redirectUrl);
       text = regionName;
     } else if (itemId == "itineraries") {
+      setIsShowMap(false);
+      handleTabClick("images");
       window.history.pushState(null, null, redirectUrl);
       text = `TAILOR-MADE ${regionName} HOLIDAY ITINERARIES`;
     } else if (itemId == "places-to-stay") {
+      setIsShowMap(false);
+      handleTabClick("images");
       window.history.pushState(null, null, redirectUrl);
       text = `PLACES TO STAY IN ${regionName}`;
     } else {
@@ -153,8 +160,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -176,7 +183,7 @@ function Index() {
 
   const websiteContentCheck = () => {
     homeService
-      .getAllWebsiteContent()
+      .getAllWebsiteContent(region)
       .then((x) => {
         const response = x?.data;
 
@@ -302,7 +309,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -311,13 +318,22 @@ function Index() {
   equalHeight(true);
 
   useEffect(() => {
+    if (regionName != undefined && regionName != "undefined") {
+      localStorage.setItem("region_name", regionName);
+    }
+    if (destinationcode != undefined) {
+      localStorage.setItem("destination_code", destinationcode);
+    }
+    if (countrycode != undefined) {
+      localStorage.setItem("country_code", countrycode);
+    }
     window.scrollTo(0, 0);
     // destinationService.getAllItineraries().then(x => {
     //     setItineraries(x.data);
     // });
 
     // destinationService.getDestinationDetails(destinationcode).then((x) => {
-    //     setTitle(x.data.attributes.page_meta_title);
+    //   setHeadingText(x.data.attributes.page_meta_title);
     // });
 
     setFriendlyUrl(
@@ -328,6 +344,7 @@ function Index() {
       .getRegionByName(regionName)
       .then((x) => {
         setRegionData(x.data[0]);
+        setHeadingText(x.data[0]?.attributes?.region_name);
         const imageCheck = x.data[0].attributes.region_images.data;
         const newBackgroundImages = [];
 
@@ -410,11 +427,48 @@ function Index() {
 
     window.onload = () => {
       setTimeout(() => {
+<<<<<<< HEAD
+        let reName = "";
+        let destName = "";
+        let countryName = "";
+        if (!regionName || regionName == "undefined") {
+          reName = localStorage.getItem("region_name");
+        } else {
+          reName = regionName;
+        }
+        if (!destinationcode) {
+          destName = localStorage.getItem("destination_code");
+        } else {
+          destName = destinationcode;
+        }
+        if (!countrycode) {
+          countryName = localStorage.getItem("country_code");
+        } else {
+          countryName = countrycode;
+        }
+        const redirectUrl =
+          regionWiseUrl +
+          "/destinations/" +
+          destName
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase() +
+          "/" +
+          countryName
+            ?.replace(/ /g, "-")
+            .replace(/and/g, "&")
+            .replace(/&/g, "and")
+            .toLowerCase() +
+          "/" +
+          reName?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase();
+
+=======
         regionWiseUrl +
           `/ destinations / ${destinationcode} /${countrycode?.replace(
             / /g,
             "-"
           )}`;
+>>>>>>> main
         if (redirectUrl) {
           router.push(redirectUrl);
         }
@@ -501,28 +555,29 @@ function Index() {
             ) : (
               ""
             )}
-            <div className="banner_tab_blk">
-              <button
-                className={`btn banner_map_tab ${
-                  activeButton === "map" ? "banner_tab_active" : ""
-                }`}
-                onClick={() => handleTabClick("map")}
-              >
-                Map
-              </button>
-              <button
-                className={`btn banner_img_tab ${
-                  activeButton === "images" ? "banner_tab_active" : ""
-                }`}
-                onClick={() => handleTabClick("images")}
-              >
-                Images
-              </button>
-            </div>
+            {isShowMap ? (
+              <div className="banner_tab_blk">
+                <button
+                  className={`btn banner_map_tab ${activeButton === "map" ? "banner_tab_active" : ""
+                    }`}
+                  onClick={() => handleTabClick("map")}
+                >
+                  Map
+                </button>
+                <button
+                  className={`btn banner_img_tab ${activeButton === "images" ? "banner_tab_active" : ""
+                    }`}
+                  onClick={() => handleTabClick("images")}
+                >
+                  Images
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
             <div
-              className={`banner_map_blk ${
-                activeButton === "map" ? "banner_map_active" : ""
-              }`}
+              className={`banner_map_blk ${activeButton === "map" ? "banner_map_active" : ""
+                }`}
             >
               <Iframe
                 width="640px"

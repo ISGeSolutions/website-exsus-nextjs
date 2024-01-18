@@ -44,7 +44,7 @@ function Index() {
 
   const websiteContentCheck = () => {
     homeService
-      .getAllWebsiteContent()
+      .getAllWebsiteContent(region)
       .then((x) => {
         const response = x?.data;
 
@@ -131,7 +131,6 @@ function Index() {
     aboutusService
       .getAboutusPage()
       .then((x) => {
-        debugger;
         setWhyusDetails(x.data[0].attributes);
         setCustomPage(x.data[0].attributes?.custom_page_contents);
 

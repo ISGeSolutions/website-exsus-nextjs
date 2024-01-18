@@ -200,7 +200,7 @@ function Country() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
+      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
     );
   };
 
@@ -210,8 +210,8 @@ function Country() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -271,16 +271,18 @@ function Country() {
         `/destinations/${destinationcode
           ?.replace(/&/g, "and")
           ?.replace(/ /g, "-")}/${destCode
-          ?.replace(/&/g, "and")
-          ?.replace(/ /g, "-")}/${destCode
-          ?.replace(/&/g, "and")
-          ?.replace(/ /g, "-")}-itineraries`;
+            ?.replace(/&/g, "and")
+            ?.replace(/ /g, "-")}/${destCode
+              ?.replace(/&/g, "and")
+              ?.replace(/ /g, "-")}-itineraries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationcode}/${destCode}/${destCode} itineraries`
       );
       text = countrycode?.toUpperCase() + " ITINERARIES"; // action="/countryitineraries?countrycode=south-africa"
     } else if (itemId == "places-to-stay") {
+      setIsShowMap(false);
+      handleTabClick("images");
       const redirectUrl =
         regionWiseUrl +
         `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url}-places-to-stay`;
@@ -427,7 +429,6 @@ function Country() {
               if (!storedData[matchString]) {
                 modifiedString = websiteContentCheck(
                   matches,
-                  region,
                   modifiedString
                 );
                 throw new Error("Loop break");
@@ -441,7 +442,7 @@ function Country() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -496,9 +497,12 @@ function Country() {
     // });
 
     // userService.getAll().then(x => setUsers(x));
-    if (!localStorage.getItem("websitecontent_uk")) {
+    if (!localStorage.getItem(`websitecontent_${region.replace(
+      /in/g,
+      "INDIA"
+    ).toLowerCase()}`)) {
       homeService
-        .getAllWebsiteContent()
+        .getAllWebsiteContent(region)
         .then((x) => {
           // debugger;
           const response = x?.data;
@@ -747,9 +751,8 @@ function Country() {
               ""
             )}
             <div
-              className={`banner_map_blk ${
-                activeButton === "map" ? "banner_map_active" : ""
-              }`}
+              className={`banner_map_blk ${activeButton === "map" ? "banner_map_active" : ""
+                }`}
             >
               <Iframe
                 width="640px"

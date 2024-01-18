@@ -62,10 +62,9 @@ function ContinentCountry({ sendDataToParent }) {
 
   const websiteContentCheck = () => {
     homeService
-      .getAllWebsiteContent()
+      .getAllWebsiteContent(region)
       .then((x) => {
         const response = x?.data;
-        debugger;
         // Calculate the expiration time (1 day from the current time)
         const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000;
 
@@ -148,7 +147,6 @@ function ContinentCountry({ sendDataToParent }) {
 
       let storedDataString = "";
       let storedData = "";
-      debugger;
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -188,20 +186,22 @@ function ContinentCountry({ sendDataToParent }) {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
   };
 
   useEffect(() => {
-    if (!localStorage.getItem("websitecontent_uk")) {
+    if (!localStorage.getItem(`websitecontent_${region.replace(
+      /in/g,
+      "INDIA"
+    ).toLowerCase()}`)) {
       websiteContentCheck();
     }
     destinationService
       .getDestinationDetails(destinationcode)
       .then((x) => {
-        debugger;
         setdestination(x.data[0].attributes);
         setAllCountries(x.data[0].attributes?.countries?.data);
         setIsLoading(false);

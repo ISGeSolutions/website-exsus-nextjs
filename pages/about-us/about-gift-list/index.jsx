@@ -39,7 +39,7 @@ function Index() {
     }
   }
 
-  const websiteContentCheck = (matches, region, modifiedString) => {
+  const websiteContentCheck = (matches, modifiedString) => {
     destinationService.getDictionaryDetails(matches, region).then((responseObj) => {
       if (responseObj) {
         const res = responseObj?.data;
@@ -117,7 +117,7 @@ function Index() {
               matches.forEach((match, index, matches) => {
                 const matchString = match.replace(/{|}/g, "");
                 if (!storedData[matchString]) {
-                  websiteContentCheck(matches, region, modifiedString);
+                  websiteContentCheck(matches, modifiedString);
                   throw new Error("Loop break");
                 } else {
                   replacement = storedData[matchString];
