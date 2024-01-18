@@ -437,48 +437,11 @@ function Index() {
 
     window.onload = () => {
       setTimeout(() => {
-<<<<<<< HEAD
-        let reName = "";
-        let destName = "";
-        let countryName = "";
-        if (!regionName || regionName == "undefined") {
-          reName = localStorage.getItem("region_name");
-        } else {
-          reName = regionName;
-        }
-        if (!destinationcode) {
-          destName = localStorage.getItem("destination_code");
-        } else {
-          destName = destinationcode;
-        }
-        if (!countrycode) {
-          countryName = localStorage.getItem("country_code");
-        } else {
-          countryName = countrycode;
-        }
-        const redirectUrl =
-          regionWiseUrl +
-          "/destinations/" +
-          destName
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase() +
-          "/" +
-          countryName
-            ?.replace(/ /g, "-")
-            .replace(/and/g, "&")
-            .replace(/&/g, "and")
-            .toLowerCase() +
-          "/" +
-          reName?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase();
-
-=======
         regionWiseUrl +
           `/ destinations / ${destinationcode} /${countrycode?.replace(
             / /g,
             "-"
           )}`;
->>>>>>> main
         if (redirectUrl) {
           router.push(redirectUrl);
         }
