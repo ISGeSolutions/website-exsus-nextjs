@@ -815,7 +815,11 @@ function CountryPlaceToStay(props) {
                             </NavLink>
                             <div className="card_slider_cnt places_to_stay_cnt">
                               <h4>
-                                <a href="#">{item?.attributes?.hotel_name}</a>
+                                <a href={generateDynamicLink(item)}>
+                                  {dictioneryFunction(
+                                    item?.attributes?.hotel_name
+                                  )}
+                                </a>
                               </h4>
                               <ul>
                                 <li>Location: {item?.attributes?.location}</li>

@@ -71,6 +71,7 @@ export const destinationService = {
   getCountryFavItineraries,
   getCountryFavHotels,
   getRegionWiseHotelsInHotelDetail,
+  getRegionWiseItinerariesInHotelDetail,
   getPropertyTypeDropDown,
   getMoreItineraries,
   ItineraryFilterOnDestItineraryDetail,
@@ -361,11 +362,11 @@ function getMoreItineraries(country, region) {
   const destinationDetailsUrl = `${
     publicRuntimeConfig.apiUrl
   }/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region
-    .replace(/&/g, "%26")
-    .replace(
+    ?.replace(/&/g, "%26")
+    ?.replace(
       /in/g,
       "INDIA"
-    )}&filters[country][country_name][$eq]=${country.replace(
+    )}&filters[country][country_name][$eq]=${country?.replace(
     /&/g,
     "%26"
   )}&populate[destination][fields][0]=destination_name&populate[country][fields][0]=country_name`;
@@ -444,6 +445,16 @@ function getRegionWiseHotelsInHotelDetail(name, region) {
       /in/g,
       "INDIA"
     )}&populate[destination][fields][0]=destination_name&populate[country][fields][0]=country_name&populate[region][fields][0]=region_name`;
+  return fetchWrapper.get(itinerariesDetailsUrl);
+}
+
+function getRegionWiseItinerariesInHotelDetail(region, name) {
+  const itinerariesDetailsUrl = `${
+    publicRuntimeConfig.apiUrl
+  }/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&filters[region][region_name][$eq]=${name?.replace(
+    /&/g,
+    "%26"
+  )}&populate[destination][fields][0]=destination_name&populate[country][fields][0]=country_name`;
   return fetchWrapper.get(itinerariesDetailsUrl);
 }
 

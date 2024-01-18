@@ -202,11 +202,47 @@ function RegionPlacesToStay(props) {
     }
   };
 
-  const handleRedirect = (item) => {
-    return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
-  };
+  // const handleRedirect = (item) => {
+  //   return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
+  // };
+  // const generateDynamicLink = (item) => {
+  //   return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
+  // };
+
   const generateDynamicLink = (item) => {
-    return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
+    let hotelName = item?.attributes?.friendly_url
+      ?.replace(/ /g, "-")
+      .toLowerCase()
+      .replace(/&/g, "and");
+    return (
+      regionWiseUrl +
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
+    );
+  };
+
+  const handleRedirect = (item) => {
+    router.push(
+      regionWiseUrl +
+        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/&/g, " and ")
+          .replace(/ /g, "-")
+          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.friendly_url}`
+    );
   };
 
   const showAlert = (message, type) => {
@@ -696,7 +732,7 @@ function RegionPlacesToStay(props) {
                         <div className="card_slider_inr">
                           <div className="card_slider">
                             <NavLink
-                              href={generateDynamicLink(item.id)}
+                              href={generateDynamicLink(item)}
                               className="card_slider_img"
                             >
                               {item?.attributes?.hotel_images?.data.map(
@@ -717,23 +753,46 @@ function RegionPlacesToStay(props) {
                             </NavLink>
                             <div className="card_slider_cnt places_to_stay_cnt">
                               <h4>
-                                <a href="#">{item?.attributes?.hotel_name}</a>
+                                <a href={generateDynamicLink(item)}>
+                                  {dictioneryFunction(
+                                    item?.attributes?.hotel_name
+                                  )}
+                                </a>
                               </h4>
                               <ul>
                                 <li>Location: {item?.attributes?.location}</li>
-                                <li>
-                                  Price guide:
-                                  <span
-                                    tabIndex="0"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="right"
-                                    data-bs-title="£200-£350 per person per night"
-                                  >
-                                    <label>
-                                      {item?.attributes?.price_guide_text}
-                                    </label>
-                                  </span>
-                                </li>
+                                {item?.attributes?.hotel_country_contents?.data?.map(
+                                  (item) => {
+                                    return (
+                                      <li class="price_guide_tooltip">
+                                        Price guide:
+                                        <span
+                                          key={item?.id}
+                                          tabIndex="0"
+                                          data-title={
+                                            item?.attributes?.price_guide_text
+                                          }
+                                        >
+                                          {item?.attributes?.currency_symbol.repeat(
+                                            Math.abs(
+                                              item?.attributes
+                                                ?.price_guide_value
+                                            )
+                                          )}
+                                          <label>
+                                            {item?.attributes?.currency_symbol.repeat(
+                                              Math.abs(
+                                                5 -
+                                                  item?.attributes
+                                                    ?.price_guide_value
+                                              )
+                                            )}
+                                          </label>
+                                        </span>
+                                      </li>
+                                    );
+                                  }
+                                )}
                                 <li
                                   dangerouslySetInnerHTML={{
                                     __html: dictioneryFunction(
@@ -751,7 +810,7 @@ function RegionPlacesToStay(props) {
                             </div>
                             <button
                               className="btn card_slider_btn justify-content-end"
-                              onClick={() => handleRedirect(item.id)}
+                              onClick={() => handleRedirect(item)}
                             >
                               <span className="view_itnry_link">
                                 View this hotel
