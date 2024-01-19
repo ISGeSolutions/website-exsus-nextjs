@@ -42,13 +42,10 @@ function Index() {
   const [friendlyUrl, setFriendlyUrl] = useState("");
   const [moreItineraries, setMoreItineraries] = useState(null);
   const [itineraries, setItineraries] = useState(null);
-<<<<<<< HEAD
-=======
   debugger;
   const itin_name = router.query?.itineraryName
     ? router.query?.itineraryName
     : router.query?.itineraries?.toLowerCase();
->>>>>>> main
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -87,15 +84,12 @@ function Index() {
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-<<<<<<< HEAD
-=======
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
             ?.replace(/ /g, "-")
             .replace(/&/g, "and")
             .toLowerCase()}/${hotelName}
->>>>>>> main
         ?.replace(/ /g, "-")
         .replace(/&/g, "and")
         .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
@@ -115,42 +109,6 @@ function Index() {
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-<<<<<<< HEAD
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${item?.attributes?.friendly_url}`
-    );
-  };
-
-  const generateDynamicLinkForItinerary = (item) => {
-    return (
-      regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
-        .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${item?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}-itineraries/${item?.attributes?.friendly_url}`
-    );
-  };
-
-  const handleRedirectForItinerary = (item) => {
-    router.push(
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
-        .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${item?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}-itineraries/${item?.attributes?.friendly_url}`
-=======
             ?.replace(/ /g, "-")
             .replace(/&/g, "and")
             .toLowerCase()}/${item?.attributes?.friendly_url}`
@@ -164,7 +122,6 @@ function Index() {
               ?.replace(/ /g, "-")
               .replace(/&/g, "and")
               .toLowerCase()}/${item?.attributes?.friendly_url}`
->>>>>>> main
     );
   };
 
