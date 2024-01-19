@@ -56,8 +56,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -121,12 +121,12 @@ function Index() {
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -137,16 +137,16 @@ function Index() {
       .replace(/&/g, "and");
     router.push(
       regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
-        .replace(/ /g, "-")
-        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/&/g, " and ")
+          .replace(/ /g, "-")
+          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -160,7 +160,8 @@ function Index() {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${
+        item?.attributes?.friendly_url
       }`
     );
   };
@@ -172,11 +173,12 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
-        .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url
-      }`
+        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/&/g, " and ")
+          .replace(/ /g, "-")
+          .toLowerCase()}/itinerary/${countryName}-itineraries/${
+          item?.attributes?.friendly_url
+        }`
     );
   };
 
@@ -209,7 +211,9 @@ function Index() {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
-            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
+            let localStorageUk = JSON.parse(
+              localStorage.getItem("websitecontent_uk")
+            );
             localStorage.setItem(
               "websitecontent_uk",
               JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
@@ -221,7 +225,9 @@ function Index() {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
-            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
+            let localStorageUS = JSON.parse(
+              localStorage.getItem("websitecontent_us")
+            );
             localStorage.setItem(
               "websitecontent_us",
               JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
@@ -234,7 +240,9 @@ function Index() {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
-            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
+            let localStorageAsia = JSON.parse(
+              localStorage.getItem("websitecontent_asia")
+            );
             localStorage.setItem(
               "websitecontent_asia",
               JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
@@ -247,7 +255,9 @@ function Index() {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
-            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
+            let localStorageIndia = JSON.parse(
+              localStorage.getItem("websitecontent_india")
+            );
             localStorage.setItem(
               "websitecontent_india",
               JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
@@ -255,8 +265,8 @@ function Index() {
           }
         });
         if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
-          dictionaryPage = x?.meta?.pagination?.page + 1
-          websiteContentCheck(dictionaryPage)
+          dictionaryPage = x?.meta?.pagination?.page + 1;
+          websiteContentCheck(dictionaryPage);
         }
         setWebsiteContent(x.data);
         setIsLoading(false);
@@ -325,13 +335,14 @@ function Index() {
   // const overTextFun = (text) => {
   //   return text?.replace(/\\n/g, "");
   // };
-  ("consolle", router);
+  "consolle", router;
 
   useEffect(() => {
-    if (!localStorage.getItem(`websitecontent_${region.replace(
-      /in/g,
-      "INDIA"
-    ).toLowerCase()}`)) {
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
       websiteContentCheck(dictionaryPage);
     }
     const tooltipTriggerList = document.querySelectorAll(
@@ -392,12 +403,14 @@ function Index() {
         // );
 
         setFriendlyUrl(
-          `home/destinations/${router.query?.continent}/${router.query?.country
-          }/${router.query?.itineraryName
-            ? router.query?.itineraries +
-            "/" +
-            x.data[0].attributes.itin_name.toLowerCase()
-            : x.data[0].attributes.itin_name.toLowerCase()
+          `home/destinations/${router.query?.continent}/${
+            router.query?.country
+          }/${
+            router.query?.itineraryName
+              ? router.query?.itineraries +
+                "/" +
+                x.data[0].attributes.itin_name.toLowerCase()
+              : x.data[0].attributes.itin_name.toLowerCase()
           }`
         );
 
@@ -447,6 +460,7 @@ function Index() {
       .catch((error) => {
         setIsLoading(false);
       });
+
     setTimeout(() => {
       // $('.carousel').carousel();
       $(".carousel").carousel({
@@ -555,10 +569,10 @@ function Index() {
                     itineraries?.attributes?.itinerary_country_contents?.data[0]
                       ?.attributes?.currency_symbol
                   }
-                  {
-                    formatPrice(itineraries?.attributes?.itinerary_country_contents?.data[0]
-                      ?.attributes?.price)
-                  }{" "}
+                  {formatPrice(
+                    itineraries?.attributes?.itinerary_country_contents?.data[0]
+                      ?.attributes?.price
+                  )}{" "}
                   {
                     itineraries?.attributes?.itinerary_country_contents?.data[0]
                       ?.attributes?.guideline_price_notes_index
@@ -584,7 +598,9 @@ function Index() {
                     <div className="country_highlight_inr">
                       <p>
                         <span>Perfect for</span>
-                        {itineraries?.attributes?.perfect_for_text
+                        {dictioneryFunction(
+                          itineraries?.attributes?.perfect_for_text
+                        )
                           ?.replace(/&nbsp/g, "")
                           ?.replace(/&rsquo/g, "")
                           ?.replace(/:/g, "")
@@ -592,7 +608,9 @@ function Index() {
                       </p>
                       <p>
                         <span>In the know</span>
-                        {itineraries?.attributes?.in_the_know_text
+                        {dictioneryFunction(
+                          itineraries?.attributes?.in_the_know_text
+                        )
                           ?.replace(/&nbsp/g, "")
                           ?.replace(/&rsquo/g, "")
                           ?.replace(/:/g, "")
@@ -843,8 +861,8 @@ function Index() {
                                         {item?.attributes?.currency_symbol.repeat(
                                           Math.abs(
                                             5 -
-                                            item?.attributes
-                                              ?.price_guide_value
+                                              item?.attributes
+                                                ?.price_guide_value
                                           )
                                         )}
                                       </label>
@@ -976,9 +994,12 @@ function Index() {
                               )
                               .map((res1) => (
                                 <li key={res1.id}>
-                                  {`From ${res1.attributes?.currency_symbol ?? ""
-                                    }${formatPrice(res1.attributes?.price) ?? " xxxx"
-                                    } per person`}
+                                  {`From ${
+                                    res1.attributes?.currency_symbol ?? ""
+                                  }${
+                                    formatPrice(res1.attributes?.price) ??
+                                    " xxxx"
+                                  } per person`}
                                 </li>
                               ))}
                             <li>

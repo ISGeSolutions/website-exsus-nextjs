@@ -88,10 +88,11 @@ function Index() {
     // const carousel = document.querySelector('#carouselExampleInterval');
     // new bootstrap.Carousel(carousel);
 
-    if (!localStorage.getItem(`websitecontent_${region.replace(
-      /in/g,
-      "INDIA"
-    ).toLowerCase()}`)) {
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
       websiteContentCheck(dictionaryPage);
     }
     whyusService

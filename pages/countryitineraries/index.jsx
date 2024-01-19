@@ -419,7 +419,8 @@ function CountryItinararies(props) {
           selectedOptionMonth,
           item,
           region,
-          page + 1
+          page + 1,
+          countrycode
         )
         .then((response) => {
           setMetaData(response.meta.pagination);
@@ -819,7 +820,12 @@ function CountryItinararies(props) {
                                       {`From ${
                                         res1.attributes?.currency_symbol ?? ""
                                       }${
+<<<<<<< HEAD
+                                        formatPrice(res1.attributes?.price) ??
+                                        " xxxx"
+=======
                                         res1.attributes?.price ?? " xxxx"
+>>>>>>> main
                                       } per person`}
                                     </li>
                                   ))}

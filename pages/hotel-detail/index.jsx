@@ -15,6 +15,7 @@ var React = require("react");
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { destinationService } from "../../services";
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
+import { formatPrice } from "../../components/utils/priceFormater";
 
 var Carousel = require("react-responsive-carousel").Carousel;
 
@@ -41,10 +42,13 @@ function Index() {
   const [friendlyUrl, setFriendlyUrl] = useState("");
   const [moreItineraries, setMoreItineraries] = useState(null);
   const [itineraries, setItineraries] = useState(null);
+<<<<<<< HEAD
+=======
   debugger;
   const itin_name = router.query?.itineraryName
     ? router.query?.itineraryName
     : router.query?.itineraries?.toLowerCase();
+>>>>>>> main
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -83,12 +87,15 @@ function Index() {
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+<<<<<<< HEAD
+=======
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
             ?.replace(/ /g, "-")
             .replace(/&/g, "and")
             .toLowerCase()}/${hotelName}
+>>>>>>> main
         ?.replace(/ /g, "-")
         .replace(/&/g, "and")
         .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
@@ -101,13 +108,49 @@ function Index() {
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
-        .replace(/ /g, "-")
-        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/&/g, " and ")
+          .replace(/ /g, "-")
+          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+<<<<<<< HEAD
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.friendly_url}`
+    );
+  };
+
+  const generateDynamicLinkForItinerary = (item) => {
+    return (
+      regionWiseUrl +
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/itinerary/${item?.attributes?.country?.data?.attributes?.country_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}-itineraries/${item?.attributes?.friendly_url}`
+    );
+  };
+
+  const handleRedirectForItinerary = (item) => {
+    router.push(
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/itinerary/${item?.attributes?.country?.data?.attributes?.country_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}-itineraries/${item?.attributes?.friendly_url}`
+=======
             ?.replace(/ /g, "-")
             .replace(/&/g, "and")
             .toLowerCase()}/${item?.attributes?.friendly_url}`
@@ -121,6 +164,7 @@ function Index() {
               ?.replace(/ /g, "-")
               .replace(/&/g, "and")
               .toLowerCase()}/${item?.attributes?.friendly_url}`
+>>>>>>> main
     );
   };
 
@@ -153,7 +197,9 @@ function Index() {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
-            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
+            let localStorageUk = JSON.parse(
+              localStorage.getItem("websitecontent_uk")
+            );
             localStorage.setItem(
               "websitecontent_uk",
               JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
@@ -165,7 +211,9 @@ function Index() {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
-            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
+            let localStorageUS = JSON.parse(
+              localStorage.getItem("websitecontent_us")
+            );
             localStorage.setItem(
               "websitecontent_us",
               JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
@@ -178,7 +226,9 @@ function Index() {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
-            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
+            let localStorageAsia = JSON.parse(
+              localStorage.getItem("websitecontent_asia")
+            );
             localStorage.setItem(
               "websitecontent_asia",
               JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
@@ -191,7 +241,9 @@ function Index() {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
-            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
+            let localStorageIndia = JSON.parse(
+              localStorage.getItem("websitecontent_india")
+            );
             localStorage.setItem(
               "websitecontent_india",
               JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
@@ -199,8 +251,8 @@ function Index() {
           }
         });
         if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
-          dictionaryPage = x?.meta?.pagination?.page + 1
-          websiteContentCheck(dictionaryPage)
+          dictionaryPage = x?.meta?.pagination?.page + 1;
+          websiteContentCheck(dictionaryPage);
         }
         setWebsiteContent(x.data);
         setIsLoading(false);
@@ -219,7 +271,7 @@ function Index() {
 
       let storedDataString = "";
       let storedData = "";
-      //  
+      //
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -234,7 +286,7 @@ function Index() {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        //  
+        //
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -243,7 +295,6 @@ function Index() {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -255,7 +306,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -270,10 +321,11 @@ function Index() {
   };
 
   useEffect(() => {
-    if (!localStorage.getItem(`websitecontent_${region.replace(
-      /in/g,
-      "INDIA"
-    ).toLowerCase()}`)) {
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
       websiteContentCheck(dictionaryPage);
     }
 
@@ -286,7 +338,6 @@ function Index() {
     destinationService
       .getHotelById(hotelName, region)
       .then((x) => {
-        // setWhyusDetails(x.data.attributes);
         setFriendlyUrl(
           `home/destinations/${router.query?.continent}/${router.query?.country}/${regionName}/${router.query?.hotelName}`
         );
@@ -336,7 +387,18 @@ function Index() {
       .getRegionWiseHotelsInHotelDetail(regionName, region)
       .then((response) => {
         setAllHotels(response?.data);
-        (response?.data);
+        response?.data;
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+      });
+
+    destinationService
+      .getRegionWiseItinerariesInHotelDetail(region, regionName)
+      .then((response) => {
+        setMoreItineraries(response?.data);
+
         setIsLoading(false);
       })
       .catch((error) => {
@@ -475,8 +537,8 @@ function Index() {
                       {hotelData?.hotel_country_contents?.data[0]?.attributes?.currency_symbol.repeat(
                         Math.abs(
                           5 -
-                          hotelData?.hotel_country_contents?.data[0]
-                            ?.attributes?.price_guide_value
+                            hotelData?.hotel_country_contents?.data[0]
+                              ?.attributes?.price_guide_value
                         )
                       )}
                     </label>
@@ -869,8 +931,8 @@ function Index() {
                                         {item?.attributes?.currency_symbol.repeat(
                                           Math.abs(
                                             5 -
-                                            item?.attributes
-                                              ?.price_guide_value
+                                              item?.attributes
+                                                ?.price_guide_value
                                           )
                                         )}
                                       </label>
@@ -932,6 +994,139 @@ function Index() {
                     </svg>
                   </i>
                 )}
+              </div>
+            </div>
+            {/* <div className="full_loader_parnt_blk loader_parnt_blk" style="display: block;"><div className="loader-circle-2"></div></div> */}
+          </section>
+
+          <section className="favrites_blk_row light_grey">
+            <div className="container">
+              <h3 className="title_cls">
+                STAY AT {hotelData.hotel_name} ON THESE TRIPS
+              </h3>
+              <div className="card_slider_row">
+                <i id="left">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="#ffffff"
+                    shapeRendering="geometricPrecision"
+                    textRendering="geometricPrecision"
+                    imageRendering="optimizeQuality"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    viewBox="0 0 267 512.43"
+                  >
+                    <path
+                      fillRule="nonzero"
+                      d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z"
+                    />
+                  </svg>
+                </i>
+                <div className="carousel00">
+                  {moreItineraries?.map((item) => (
+                    <div className="card_slider_inr" key={item.id}>
+                      <div className="card_slider">
+                        <NavLink
+                          href={generateDynamicLinkForItinerary(item)}
+                          className="card_slider_img"
+                        >
+                          {item?.attributes?.itinerary_images?.data.map(
+                            (element, index) =>
+                              element.attributes.image_type == "thumbnail" ? (
+                                <img
+                                  key={element.id}
+                                  src={element.attributes.image_path}
+                                  alt="destination card01"
+                                  className="img-fluid"
+                                />
+                              ) : (
+                                ""
+                              )
+                          )}
+                          {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
+                        </NavLink>
+                        <div className="card_slider_cnt places_to_stay_cnt">
+                          <h4>
+                            <a href={generateDynamicLinkForItinerary(item)}>
+                              {dictioneryFunction(item?.attributes?.itin_name)}
+                            </a>
+                          </h4>
+                          {/* <NavLink href={generateDynamicLink(item)}>
+                          </NavLink> */}
+                          <ul>
+                            <li>
+                              {dictioneryFunction(
+                                item?.attributes?.header_text
+                              )}
+                            </li>
+                            <li>
+                              {dictioneryFunction(
+                                item?.attributes?.subheader_text
+                              )}
+                            </li>
+                            <li>
+                              {dictioneryFunction(
+                                item?.attributes?.country?.data?.attributes
+                                  ?.country_name
+                              )}
+                            </li>
+                            {item?.attributes?.itinerary_country_contents?.data
+                              .filter(
+                                (res) =>
+                                  res.attributes.website_country.toLowerCase() ===
+                                  region.replace(/in/g, "india")
+                              )
+                              .map((res1) => (
+                                <li key={res1.id}>
+                                  {`From ${
+                                    res1.attributes?.currency_symbol ?? ""
+                                  }${
+                                    formatPrice(res1.attributes?.price) ??
+                                    " xxxx"
+                                  } per person`}
+                                </li>
+                              ))}
+                            <li>
+                              Travel to:
+                              <span>
+                                {dictioneryFunction(
+                                  item?.attributes?.travel_to_text
+                                )}
+                              </span>
+                            </li>
+                          </ul>
+                        </div>
+                        <button
+                          className="btn card_slider_btn light_grey_btn_bg"
+                          onClick={() => handleRedirectForItinerary(item)}
+                        >
+                          <span>{item?.attributes?.no_of_nites_notes}</span>
+                          <span className="view_itnry_link">
+                            View this itinerary
+                            <em className="fa-solid fa-chevron-right"></em>
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <i id="right">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="#ffffff"
+                    shapeRendering="geometricPrecision"
+                    textRendering="geometricPrecision"
+                    imageRendering="optimizeQuality"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    viewBox="0 0 267 512.43"
+                  >
+                    <path
+                      fillRule="nonzero"
+                      d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                    />
+                  </svg>
+                </i>
               </div>
             </div>
             {/* <div className="full_loader_parnt_blk loader_parnt_blk" style="display: block;"><div className="loader-circle-2"></div></div> */}

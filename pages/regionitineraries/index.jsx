@@ -261,7 +261,8 @@ function RegionItinararies(props) {
           selectedOptionMonth,
           item,
           region,
-          page + 1
+          page + 1,
+          regionName
         )
         .then((response) => {
           setMetaData(response.meta.pagination);
@@ -287,17 +288,41 @@ function RegionItinararies(props) {
     }
   };
 
+  // const generateDynamicLink = (item) => {
+  //   return (
+  //     regionWiseUrl +
+  //     `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`
+  //   );
+  // };
+
+  // const handleRedirect = (item) => {
+  //   router.push(
+  //     regionWiseUrl +
+  //       `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`
+  //   );
+  // };
+
   const generateDynamicLink = (item) => {
     return (
       regionWiseUrl +
-      `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`
+      `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
+        / /g,
+        "-"
+      )}/${countrycode?.replace(/ /g, "-")?.replace(/&/g, "and")}-itineraries/${
+        item?.attributes?.friendly_url
+      }`
     );
   };
 
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`
+        `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
+          / /g,
+          "-"
+        )}/${countrycode
+          ?.replace(/ /g, "-")
+          ?.replace(/&/g, "and")}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -733,22 +758,40 @@ function RegionItinararies(props) {
                             </NavLink>
                             <div className="card_slider_cnt places_to_stay_cnt">
                               <h4>
-                                <a href="#">{item?.attributes?.itin_name}</a>
+                                <a href={generateDynamicLink(item)}>
+                                  {dictioneryFunction(
+                                    item?.attributes?.itin_name
+                                  )}
+                                </a>
                               </h4>
                               <ul>
-                                <li>{item?.attributes?.header_text}</li>
-                                {/* <li>Indonesia</li> */}
                                 <li>
-                                  {
-                                    item?.attributes?.itinerary_country_contents
-                                      ?.data[0]?.attributes
-                                      ?.guideline_price_notes_index
-                                  }
+                                  {dictioneryFunction(
+                                    item?.attributes?.header_text
+                                  )}
                                 </li>
+                                {item?.attributes?.itinerary_country_contents?.data
+                                  .filter(
+                                    (res) =>
+                                      res.attributes.website_country.toLowerCase() ===
+                                      region.replace(/in/g, "india")
+                                  )
+                                  .map((res1) => (
+                                    <li key={res1.id}>
+                                      {`From ${
+                                        res1.attributes?.currency_symbol ?? ""
+                                      }${
+                                        formatPrice(res1.attributes?.price) ??
+                                        "xxxx"
+                                      } per person`}
+                                    </li>
+                                  ))}
                                 <li>
                                   Travel to:
                                   <span>
-                                    {item?.attributes?.sub_header_text}
+                                    {dictioneryFunction(
+                                      item?.attributes?.travel_to_text
+                                    )}
                                   </span>
                                 </li>
                               </ul>

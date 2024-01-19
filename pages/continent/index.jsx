@@ -111,9 +111,9 @@ function Index() {
           .replace(/&/g, "and")
           .replace(/ /g, "-")
           .toLowerCase()}/${destCode
-            .replace(/&/g, "and")
-            .replace(/ /g, "-")
-            .toLowerCase()}-countries`;
+          .replace(/&/g, "and")
+          .replace(/ /g, "-")
+          .toLowerCase()}-countries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url} countries`
@@ -133,9 +133,9 @@ function Index() {
           .replace(/&/g, "and")
           .replace(/ /g, "-")
           .toLowerCase()}/${destCode
-            .replace(/&/g, "and")
-            .replace(/ /g, "-")
-            .toLowerCase()}-itineraries`;
+          .replace(/&/g, "and")
+          .replace(/ /g, "-")
+          .toLowerCase()}-itineraries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(`Home/Destinations/${destCode}/${destCode} Itineraries`);
       text = `TAILOR-MADE ${destinationName} HOLIDAY ITINERARIES`;
@@ -175,8 +175,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -336,7 +336,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -548,8 +548,9 @@ function Index() {
               ""
             )}
             <div
-              className={`banner_map_blk ${activeButton === "map" ? "banner_map_active" : ""
-                }`}
+              className={`banner_map_blk ${
+                activeButton === "map" ? "banner_map_active" : ""
+              }`}
             >
               <Iframe
                 width="640px"
@@ -575,7 +576,11 @@ function Index() {
           <div>
             <section
               className="destination_tab_row light_grey pb-0"
+<<<<<<< HEAD
+              ref={divRef}
+=======
               // ref={divRef}
+>>>>>>> main
               // id="scrollToElement"
             >
               <div className="container">
@@ -583,7 +588,10 @@ function Index() {
                   <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
                 </div>
                 <div className="destination_tab_inr">
+<<<<<<< HEAD
+=======
                   {/* mt-3 */}
+>>>>>>> main
                   <h2 className="tab_tilte">
                     {/* {destinationDetails?.header_text} */}
                     {dictioneryFunction(headingText)}

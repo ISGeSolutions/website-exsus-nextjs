@@ -257,6 +257,8 @@ function ContinentOverview({ sendDataToParent }) {
     ) {
       websiteContentCheck(dictionaryPage);
     }
+    window.scrollTo(0, 0);
+
     destinationService
       .getDestinationDetails(destinationcode)
       .then((x) => {
@@ -288,18 +290,17 @@ function ContinentOverview({ sendDataToParent }) {
     window.addEventListener("resize", equalHeight(true));
 
     // Using window.onload to detect full page load
-    // window.onload = () => {
-    //   setTimeout(() => {
-    //     const redirectUrl = `${regionWiseUrl}/destinations/${destinationcode?.replace(
-    //       / /g,
-    //       "-"
-    //     ).replace(/&/g, "and")}`;
+    window.onload = () => {
+      setTimeout(() => {
+        const redirectUrl = `${regionWiseUrl}/destinations/${destinationcode
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")}`;
 
-    //     if (redirectUrl) {
-    //       router.push(redirectUrl);
-    //     }
-    //   }, 0);
-    // };
+        if (redirectUrl) {
+          router.push(redirectUrl);
+        }
+      }, 0);
+    };
   }, [destinationcode, router, holidayTitle, valueWithBr]);
 
   return (
