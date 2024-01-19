@@ -17,6 +17,8 @@ import { destinationService } from "../../services";
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
 import { formatPrice } from "../../components/utils/priceFormater";
 
+var Carousel = require("react-responsive-carousel").Carousel;
+
 export default Index;
 
 function Index() {
@@ -40,6 +42,13 @@ function Index() {
   const [friendlyUrl, setFriendlyUrl] = useState("");
   const [moreItineraries, setMoreItineraries] = useState(null);
   const [itineraries, setItineraries] = useState(null);
+<<<<<<< HEAD
+=======
+  debugger;
+  const itin_name = router.query?.itineraryName
+    ? router.query?.itineraryName
+    : router.query?.itineraries?.toLowerCase();
+>>>>>>> main
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -78,6 +87,15 @@ function Index() {
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+<<<<<<< HEAD
+=======
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}
+>>>>>>> main
         ?.replace(/ /g, "-")
         .replace(/&/g, "and")
         .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
@@ -97,6 +115,7 @@ function Index() {
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+<<<<<<< HEAD
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.friendly_url}`
@@ -131,10 +150,25 @@ function Index() {
         ?.replace(/ /g, "-")
         .replace(/&/g, "and")
         .toLowerCase()}-itineraries/${item?.attributes?.friendly_url}`
+=======
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${item?.attributes?.friendly_url}`
+        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/&/g, " and ")
+          .replace(/ /g, "-")
+          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+              ?.replace(/ /g, "-")
+              .replace(/&/g, "and")
+              .toLowerCase()}/${item?.attributes?.friendly_url}`
+>>>>>>> main
     );
   };
 
-  const websiteContentCheck = (pageNo) => {
+  const websiteContentCheck = () => {
     homeService
       .getAllWebsiteContent(region, pageNo)
       .then((x) => {
@@ -371,6 +405,33 @@ function Index() {
         setIsLoading(false);
       });
 
+    destinationService
+      .getItineraryDetails(itin_name, region)
+      .then((x) => {
+        debugger;
+        setItineraries(x.data[0]);
+
+        destinationService
+          .getMoreItineraries(
+            x?.data[0]?.attributes?.country?.data?.attributes?.country_name,
+            region
+          )
+          .then((response) => {
+            setMoreItineraries(response?.data);
+
+            setIsLoading(false);
+          })
+          .catch((error) => {
+            setIsLoading(false);
+          });
+
+        window.addEventListener("resize", equalHeight(true));
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+      });
+
     setTimeout(() => {
       // $('.carousel').carousel();
       $(".carousel").carousel({
@@ -404,55 +465,52 @@ function Index() {
       ) : (
         <div>
           <section className="banner_blk_row">
-            <div
-              id="carouselExampleInterval"
-              className="carousel slide"
-              data-bs-ride="carousel"
-            >
-              <div className="carousel-indicators">
-                {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
-                {backgroundImage.map((_, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    data-bs-target="#carouselExampleInterval"
-                    data-bs-slide-to={index}
-                    className={index === 0 ? "active" : ""}
-                    aria-current={index === 0 ? "true" : "false"}
-                    aria-label={`Slide ${index + 1}`}
-                  ></button>
-                ))}
+            {backgroundImage ? (
+              <div
+                id="carouselExampleInterval"
+                className="carousel slide"
+                data-bs-ride="carousel"
+              >
+                <div className="carousel-indicators">
+                  {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
+                  {backgroundImage.map((_, index) => (
+                    <button
+                      key={index}
+                      type="button"
+                      data-bs-target="#carouselExampleInterval"
+                      data-bs-slide-to={index}
+                      className={index === 0 ? "active" : ""}
+                      aria-current={index === 0 ? "true" : "false"}
+                      aria-label={`Slide ${index + 1}`}
+                    ></button>
+                  ))}
+                </div>
+                <div className="carousel-inner">
+                  {backgroundImage.map((imagePath, index) => (
+                    <NavLink
+                      key={index}
+                      // target="_blank"
+                      href="#"
+                      className={`carousel-item ${index === 0 ? "active" : ""}`}
+                      data-interval="5000"
+                    >
+                      <div
+                        className="banner_commn_cls"
+                        style={{ backgroundImage: `url(${imagePath})` }}
+                      ></div>
+                    </NavLink>
+                  ))}
+                </div>
               </div>
-              <div className="carousel-inner">
-                {backgroundImage.map((imagePath, index) => (
-                  <a
-                    key={index}
-                    target="_blank"
-                    className={`carousel-item ${index === 0 ? "active" : ""}`}
-                    data-bs-interval="5000"
-                  >
-                    <div
-                      className="banner_commn_cls"
-                      style={{ backgroundImage: `url(${imagePath})` }}
-                    ></div>
-                  </a>
-                ))}
-              </div>
-            </div>
+            ) : (
+              ""
+            )}
           </section>
 
           <section className="trvl_info_row">
             <div className="container">
               <div className="bookmark_row">
                 <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
-                {/* <ul>
-                            <li><a href="homepage.html">Home</a></li>
-                            <li><a href="destinations.html">Destinations</a></li>
-                            <li><a href="destination_detail.html">Asia</a></li>
-                            <li><a href="country_detail.html">China</a></li>
-                            <li><a href="region_detail.html">Beijing & Northern China</a></li>
-                            <li>Rosewood Beijing</li>
-                        </ul> */}
               </div>
 
               <div className="trvl_info_cntnt">
@@ -846,7 +904,8 @@ function Index() {
                         <div className="card_slider_cnt places_to_stay_cnt">
                           <h4>
                             <a href={generateDynamicLink(item)}>
-                              {dictioneryFunction(item?.attributes?.hotel_name)}
+                              {item?.attributes?.hotel_name}
+                              {item?.attributes?.hotel_name}
                             </a>
                           </h4>
                           <ul>
@@ -1094,3 +1153,4 @@ function Index() {
     </>
   );
 }
+

@@ -15,7 +15,6 @@ import Image from "next/image";
 import CustomMultiValue from "../continentitineraries/CustomMultiValue";
 import Select, { components } from "react-select";
 import { Alert } from "../../components";
-import { formatPrice } from "../../components/utils/priceFormater";
 
 export default CountryItinararies;
 
@@ -138,7 +137,7 @@ function CountryItinararies(props) {
 
   const websiteContentCheck = (pageNo) => {
     homeService
-      .getAllWebsiteContent(region, pageNo)
+      .getAllWebsiteContent()
       .then((x) => {
         const response = x?.data;
 
@@ -298,7 +297,7 @@ function CountryItinararies(props) {
   // ];
 
   const monthOptions = [
-    { value: "Show_all", label: "All months" },
+    // { value: "All months", label: "All months" },
     { value: "1", label: "January" },
     { value: "2", label: "February" },
     { value: "3", label: "March" },
@@ -401,7 +400,7 @@ function CountryItinararies(props) {
                   accumulator.some((item) => item.id === current.id)
                     ? accumulator
                     : [...accumulator, current],
-                []
+                [ ]
               )
             );
             setPage(page + 1);
@@ -523,12 +522,8 @@ function CountryItinararies(props) {
   equalHeight(true);
 
   useEffect(() => {
-    if (
-      !localStorage.getItem(
-        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
-      )
-    ) {
-      websiteContentCheck(dictionaryPage);
+    if (!localStorage.getItem("websitecontent_uk")) {
+      websiteContentCheck();
     }
     setSelectedOptionReason([]);
     setSelectedOptionRegion([]);
@@ -561,21 +556,13 @@ function CountryItinararies(props) {
     destinationService
       .getRegions(countrycode)
       .then((x) => {
-        let arrayOfObjects = [
-          {
-            region_code: "Show_all",
-            value: "Show_all",
-            label: x.data[0].attributes.country_name,
-          },
-        ];
-        arrayOfObjects = [
-          ...arrayOfObjects,
-          ...x.data[0]?.attributes?.regions?.data.map((item) => ({
+        debugger;
+        setAllRegions(
+          x.data[0]?.attributes?.regions?.data?.map((item) => ({
             region_code: item?.attributes?.region_code,
             value: item?.attributes?.region_name,
             label: item?.attributes?.region_name,
-          })),
-        ];
+          }))),
         setAllRegions(arrayOfObjects);
         setIsLoading(false);
       })
@@ -833,8 +820,12 @@ function CountryItinararies(props) {
                                       {`From ${
                                         res1.attributes?.currency_symbol ?? ""
                                       }${
+<<<<<<< HEAD
                                         formatPrice(res1.attributes?.price) ??
                                         " xxxx"
+=======
+                                        res1.attributes?.price ?? " xxxx"
+>>>>>>> main
                                       } per person`}
                                     </li>
                                   ))}
