@@ -19,7 +19,7 @@ function ContinentOverview({ sendDataToParent }) {
   const [itineraries, setItineraries] = useState(null);
   const [valueWithBr, setnewValueWithBr] = useState("");
   const destinationcode = router.query.continent
-    .replace(/-and-/g, " & ")
+    ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
   const itemsPerPage = 9; // Number of items to load per page
@@ -28,6 +28,7 @@ function ContinentOverview({ sendDataToParent }) {
   const { t } = useTranslation();
   const [holidayTitle, setHolidayTitle] = useState(t("holidayTitle"));
   const [isLoading, setIsLoading] = useState(true);
+  let dictionaryPage = 1;
 
   const handleLoadMore = () => {
     setVisibleItems((prevVisibleItems) => prevVisibleItems + itemsPerPage);
@@ -37,16 +38,6 @@ function ContinentOverview({ sendDataToParent }) {
     // Call the callback function to send data to the parent
     sendDataToParent(e);
   };
-
-  // let region = "uk";
-  // let regionWiseUrl = "/uk";
-  // if (typeof window !== "undefined") {
-  //   if (window && window.site_region) {
-  //     regionWiseUrl = "/" + window.site_region;
-  //     region = window.site_region;
-  //     // setMyVariable(window.site_region);
-  //   }
-  // }
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -76,7 +67,7 @@ function ContinentOverview({ sendDataToParent }) {
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
+        `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -87,17 +78,10 @@ function ContinentOverview({ sendDataToParent }) {
     );
   };
 
-  // const generateDynamicLink = (item) => {
-  //   return (
-  //     regionWiseUrl +
-  //     `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=asia`
-  //   );
-  // };
-
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -119,9 +103,9 @@ function ContinentOverview({ sendDataToParent }) {
 
   equalHeight(true);
 
-  const websiteContentCheck = () => {
+  const websiteContentCheck = (pageNo) => {
     homeService
-      .getAllWebsiteContent(region)
+      .getAllWebsiteContent(region, pageNo)
       .then((x) => {
         const response = x?.data;
 
@@ -141,16 +125,18 @@ function ContinentOverview({ sendDataToParent }) {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
+            let localStorageUk = JSON.parse(
+              localStorage.getItem("websitecontent_uk")
+            );
             localStorage.setItem(
               "websitecontent_uk",
-              JSON.stringify(dynamicObjectUk)
+              JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
             );
           }
           if (
@@ -159,9 +145,12 @@ function ContinentOverview({ sendDataToParent }) {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
+            let localStorageUS = JSON.parse(
+              localStorage.getItem("websitecontent_us")
+            );
             localStorage.setItem(
               "websitecontent_us",
-              JSON.stringify(dynamicObjectUs)
+              JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
             );
           }
           if (
@@ -171,9 +160,12 @@ function ContinentOverview({ sendDataToParent }) {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
+            let localStorageAsia = JSON.parse(
+              localStorage.getItem("websitecontent_asia")
+            );
             localStorage.setItem(
               "websitecontent_asia",
-              JSON.stringify(dynamicObjectAsia)
+              JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
             );
           }
           if (
@@ -183,13 +175,19 @@ function ContinentOverview({ sendDataToParent }) {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
+            let localStorageIndia = JSON.parse(
+              localStorage.getItem("websitecontent_india")
+            );
             localStorage.setItem(
               "websitecontent_india",
-              JSON.stringify(dynamicObjectIndia)
+              JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
             );
           }
         });
-
+        if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
+          dictionaryPage = x?.meta?.pagination?.page + 1;
+          websiteContentCheck(dictionaryPage);
+        }
         setWebsiteContent(x.data);
         setIsLoading(false);
       })
@@ -207,7 +205,6 @@ function ContinentOverview({ sendDataToParent }) {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -222,7 +219,6 @@ function ContinentOverview({ sendDataToParent }) {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -231,11 +227,6 @@ function ContinentOverview({ sendDataToParent }) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  region,
-                  modifiedString
-                );
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -259,11 +250,12 @@ function ContinentOverview({ sendDataToParent }) {
   };
 
   useEffect(() => {
-    if (!localStorage.getItem(`websitecontent_${region.replace(
-      /in/g,
-      "INDIA"
-    ).toLowerCase()}`)) {
-      websiteContentCheck();
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
+      websiteContentCheck(dictionaryPage);
     }
     destinationService
       .getDestinationDetails(destinationcode)
@@ -296,15 +288,18 @@ function ContinentOverview({ sendDataToParent }) {
     window.addEventListener("resize", equalHeight(true));
 
     // Using window.onload to detect full page load
-    window.onload = () => {
-      setTimeout(() => {
-        const redirectUrl = `${regionWiseUrl}/destinations/${destinationcode}`;
+    // window.onload = () => {
+    //   setTimeout(() => {
+    //     const redirectUrl = `${regionWiseUrl}/destinations/${destinationcode?.replace(
+    //       / /g,
+    //       "-"
+    //     ).replace(/&/g, "and")}`;
 
-        if (redirectUrl) {
-          router.push(redirectUrl);
-        }
-      }, 0);
-    };
+    //     if (redirectUrl) {
+    //       router.push(redirectUrl);
+    //     }
+    //   }, 0);
+    // };
   }, [destinationcode, router, holidayTitle, valueWithBr]);
 
   return (
@@ -452,7 +447,7 @@ function ContinentOverview({ sendDataToParent }) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -489,9 +484,11 @@ function ContinentOverview({ sendDataToParent }) {
                                   )
                                   .map((res1) => (
                                     <li key={res1.id}>
-                                      {`From ${res1.attributes?.currency_symbol ?? ""
-                                        }${res1.attributes?.price ?? " xxxx"
-                                        } per person`}
+                                      {`From ${
+                                        res1.attributes?.currency_symbol ?? ""
+                                      }${
+                                        res1.attributes?.price ?? " xxxx"
+                                      } per person`}
                                     </li>
                                   ))}
 

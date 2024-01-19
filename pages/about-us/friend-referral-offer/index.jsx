@@ -64,7 +64,7 @@ function Index() {
     referralSchmeService
       .getReferralPage()
       .then((x) => {
-        // debugger;
+        //  
         setReferralData(x.data[0]);
         const imageCheck = x.data[0].attributes.custom_page_images.data;
         const newBackgroundImages = [];

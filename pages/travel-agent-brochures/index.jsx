@@ -135,6 +135,33 @@ function Index() {
       .catch(alertService.error);
   }
 
+  const handleMouseOver = () => {
+    document.querySelector('.captch_parnt_blk').classList.add('captch_opn');
+  };
+
+  const handleMouseOverReset = () => {
+    document.querySelector('.captch_parnt_blk').classList.remove('captch_opn');
+  };
+
+  useEffect(() => {
+    const captchIcnBlk = document.querySelector('.captch_icn_blk');
+    const otherElements = document.querySelectorAll('.brochure_header_row, .contact_form_row .brochure_form_row, .brochure_testimonial_row');
+
+    captchIcnBlk.addEventListener('mouseover', handleMouseOver);
+
+    otherElements.forEach(element => {
+      element.addEventListener('mouseover', handleMouseOverReset);
+    });
+
+    return () => {
+      captchIcnBlk.removeEventListener('mouseover', handleMouseOver);
+
+      otherElements.forEach(element => {
+        element.removeEventListener('mouseover', handleMouseOverReset);
+      });
+    };
+  }, []);
+
   return (
     <>
       <Head>
@@ -143,18 +170,31 @@ function Index() {
           type="text/javascript"
           src="/assets/javascripts/bootstrap.min.js"
         ></script>
+        {/* <script>
+        $(document).ready(function(){
+            $('.captch_icn_blk').mouseover(function(){
+                $('.captch_parnt_blk').addClass('captch_opn');
+            });
+            $('.brochure_header_row, .contact_form_row .brochure_form_row, .brochure_testimonial_row').mouseover(function(){
+                $('.captch_parnt_blk').removeClass('captch_opn');
+            });
+        });
+    </script> */}
       </Head>
       <Layout>
         <header className="brochure_header_row brochure_header_extr_cls">
           <div className="container">
-            <img src="images/brochure_header_img.jpg" alt="brochure_header_img" />
+            <img
+              src="images/brochure_header_img.jpg"
+              alt="brochure_header_img"
+            />
             <h1>Request Brochures</h1>
             <p>
               Our brochure, titled ‘Escape the Obvious’, highlights the very
-              finest experiences in our most popular destinations, and can be used
-              to inspire your clients to discover some of the most spectacular
-              places in the world on a unique, bespoke holiday crafted by our
-              knowledgeable and experienced experts.
+              finest experiences in our most popular destinations, and can be
+              used to inspire your clients to discover some of the most
+              spectacular places in the world on a unique, bespoke holiday
+              crafted by our knowledgeable and experienced experts.
             </p>
             <p>
               Below, please specify how many brochures you would like up to the
@@ -359,7 +399,8 @@ function Index() {
                       type="text"
                       name="zip"
                       {...register("zip")}
-                      className={`form-control ${errors.zip ? "is-invalid" : ""}`}
+                      className={`form-control ${errors.zip ? "is-invalid" : ""
+                        }`}
                       aria-label="Postal/Zip"
                       placeholder="Postal/Zip"
                     />
@@ -395,10 +436,10 @@ function Index() {
                     <div className="contact_form_cntnt_left">
                       <h3>Sign Up To Receive Our Trade Newsletters</h3>
                       <p>
-                        We’d love to contact you by newsletter from time to time,
-                        including holiday inspiration and special offers for your
-                        clients. Please tick the box below if you'd like to hear
-                        from us.
+                        We’d love to contact you by newsletter from time to
+                        time, including holiday inspiration and special offers
+                        for your clients. Please tick the box below if you'd
+                        like to hear from us.
                       </p>
                       <div className="form-check mb-3">
                         <input
@@ -424,10 +465,11 @@ function Index() {
                         Should you wish to unsubscribe from our e-newsletters at
                         any point, you can do so using the link in the footer of
                         any e-newsletter you receive from us. We will not share
-                        your details at any point. For more information about our
-                        privacy practices please visit our website. By confirming
-                        your subscription below, you agree that we will process
-                        your information in accordance with this policy.
+                        your details at any point. For more information about
+                        our privacy practices please visit our website. By
+                        confirming your subscription below, you agree that we
+                        will process your information in accordance with this
+                        policy.
                       </p>
                     </div>
                   </div>
@@ -443,11 +485,12 @@ function Index() {
                         <div className="contact_form_cntnt_left">
                           <p className="mb-0">
                             We use Mailchimp as our marketing platform. By
-                            clicking below to subscribe, you acknowledge that your
-                            information will be transferred to Mailchimp for
-                            processing.{" "}
+                            clicking below to subscribe, you acknowledge that
+                            your information will be transferred to Mailchimp
+                            for processing.{" "}
                             <a href="https://mailchimp.com/legal/terms/">
-                              Learn more about Mailchimp's privacy practices here.
+                              Learn more about Mailchimp's privacy practices
+                              here.
                             </a>
                           </p>
                         </div>
@@ -477,7 +520,48 @@ function Index() {
                 </div>
               </div>
             </div>
-          </form>{" "}
+          </form>
+
+          <section className="captch_parnt_blk">
+            <div className="captch_icn_blk">
+              <img src="\assets\images\captcha.png" alt="captcha" />
+              <div className="captch_links_blk">
+                <a
+                  href="https://www.google.com/intl/en/policies/privacy/"
+                  target="_blank"
+                >
+                  Privacy
+                </a>{" "}
+                <span>-</span>{" "}
+                <a
+                  href="https://www.google.com/intl/en/policies/terms/"
+                  target="_blank"
+                >
+                  Terms
+                </a>
+              </div>
+            </div>
+            <div className="captch_contnt_blk">
+              <span>
+                protected by <strong>reCAPTCHA</strong>
+              </span>
+              <div className="captch_links_blk">
+                <a
+                  href="https://www.google.com/intl/en/policies/privacy/"
+                  target="_blank"
+                >
+                  Privacy
+                </a>{" "}
+                <span>-</span>{" "}
+                <a
+                  href="https://www.google.com/intl/en/policies/terms/"
+                  target="_blank"
+                >
+                  Terms
+                </a>
+              </div>
+            </div>
+          </section>
         </main>
 
         <section className="brochure_testimonial_row">

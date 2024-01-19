@@ -36,7 +36,7 @@ function Signup() {
   };
 
   const closeAlert = () => {
-    console.log("closeAlert");
+    ("closeAlert");
     setAlert(null);
   };
 
@@ -61,14 +61,14 @@ function Signup() {
       },
     };
 
-    // return debugger;homeService.saveDataToDB(signupData)
+    // return  homeService.saveDataToDB(signupData)
     //     .then((res) => {
     return homeService
       .signUp(signupData)
       .then(() => {
         showAlert("Operation succeeded", "success");
         reset();
-        // return debugger;homeService.saveDataToDB(res)
+        // return  homeService.saveDataToDB(res)
         //     .then(() => {
         //         reset();
         //     })

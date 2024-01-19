@@ -32,6 +32,7 @@ function Index() {
   const [rightCorner, setRightContent] = useState(null);
   const [backgroundImage, setBackgroundImage] = useState([]);
   const [dictionaryFlag, setDictinaryFlag] = useState(false);
+  let dictionaryPage = 1;
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
@@ -82,9 +83,9 @@ function Index() {
     router.push(regionWiseUrl + `/why-us/our-people/${modifiedName}`);
   };
 
-  const websiteContentCheck = () => {
+  const websiteContentCheck = (pageNo) => {
     homeService
-      .getAllWebsiteContent(region)
+      .getAllWebsiteContent(region, pageNo)
       .then((x) => {
         const response = x?.data;
 
@@ -111,9 +112,10 @@ function Index() {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
+            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
             localStorage.setItem(
               "websitecontent_uk",
-              JSON.stringify(dynamicObjectUk)
+              JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
             );
           }
           if (
@@ -122,9 +124,10 @@ function Index() {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
+            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
             localStorage.setItem(
               "websitecontent_us",
-              JSON.stringify(dynamicObjectUs)
+              JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
             );
           }
           if (
@@ -134,9 +137,10 @@ function Index() {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
+            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
             localStorage.setItem(
               "websitecontent_asia",
-              JSON.stringify(dynamicObjectAsia)
+              JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
             );
           }
           if (
@@ -146,13 +150,17 @@ function Index() {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
+            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
             localStorage.setItem(
               "websitecontent_india",
-              JSON.stringify(dynamicObjectIndia)
+              JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
             );
           }
         });
-
+        if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
+          dictionaryPage = x?.meta?.pagination?.page + 1
+          websiteContentCheck(dictionaryPage)
+        }
         setWebsiteContent(x.data);
         setIsLoading(false);
       })
@@ -178,6 +186,12 @@ function Index() {
   equalHeight(true);
 
   useEffect(() => {
+    if (!localStorage.getItem(`websitecontent_${region.replace(
+      /in/g,
+      "INDIA"
+    ).toLowerCase()}`)) {
+      websiteContentCheck(dictionaryPage);
+    }
     setFriendlyUrl(`Home/Why us/Our people`);
     const localStorageDictionary = localStorage.getItem("websitecontent_uk");
     if (!localStorageDictionary) {
@@ -257,7 +271,7 @@ function Index() {
             setIsLoading(false);
           });
         }
-        // console.log(modifiedData);
+        //  (modifiedData);
         setAllExecutives(modifiedData);
 
         setIsLoading(false);

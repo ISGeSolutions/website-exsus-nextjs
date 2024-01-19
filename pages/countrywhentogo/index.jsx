@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 export default CountryWhentogo;
 
 function CountryWhentogo(props) {
-  // console.log("country", country);
+  //  ("country", country);
   const [countryData, setCountryData] = useState(props?.data);
   const router = useRouter();
   const [whenToGoData, setModifiedData] = useState(null);
@@ -19,6 +19,7 @@ function CountryWhentogo(props) {
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
+  let dictionaryPage = 1;
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -112,13 +113,13 @@ function CountryWhentogo(props) {
   // };
 
   const generateDynamicLink = (item) => {
-    // console.log('item', item);
+    //  ('item', item);
     return regionWiseUrl + `/hotel-detail?hotelid=${item}`;
   };
 
-  const websiteContentCheck = () => {
+  const websiteContentCheck = (pageNo) => {
     homeService
-      .getAllWebsiteContent(region)
+      .getAllWebsiteContent(region, pageNo)
       .then((x) => {
         const response = x?.data;
 
@@ -145,9 +146,10 @@ function CountryWhentogo(props) {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
+            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
             localStorage.setItem(
               "websitecontent_uk",
-              JSON.stringify(dynamicObjectUk)
+              JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
             );
           }
           if (
@@ -156,9 +158,10 @@ function CountryWhentogo(props) {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
+            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
             localStorage.setItem(
               "websitecontent_us",
-              JSON.stringify(dynamicObjectUs)
+              JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
             );
           }
           if (
@@ -168,9 +171,10 @@ function CountryWhentogo(props) {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
+            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
             localStorage.setItem(
               "websitecontent_asia",
-              JSON.stringify(dynamicObjectAsia)
+              JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
             );
           }
           if (
@@ -180,13 +184,17 @@ function CountryWhentogo(props) {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
+            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
             localStorage.setItem(
               "websitecontent_india",
-              JSON.stringify(dynamicObjectIndia)
+              JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
             );
           }
         });
-
+        if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
+          dictionaryPage = x?.meta?.pagination?.page + 1
+          websiteContentCheck(dictionaryPage)
+        }
         setWebsiteContent(x.data);
         setIsLoading(false);
       })
@@ -250,7 +258,7 @@ function CountryWhentogo(props) {
       /in/g,
       "INDIA"
     ).toLowerCase()}`)) {
-      websiteContentCheck();
+      websiteContentCheck(dictionaryPage);
     }
     const sortedData = countryData?.country_month_activities?.data?.sort(
       (a, b) => {
@@ -326,8 +334,8 @@ function CountryWhentogo(props) {
           {/* <p>{countryData?.country_month_activities?.data}</p> */}
         </section>
       </div>
-      <section class="calender_blk_row light_dark_grey">
-        <div class="container">
+      <section className="calender_blk_row light_dark_grey">
+        <div className="container">
           <h3>
             Our favourite experience-oriented trips to {countrycode} by month
           </h3>
@@ -336,7 +344,7 @@ function CountryWhentogo(props) {
             experiences into recommended trips. Click on an experience to view
             each trip
           </p>
-          <div class="calender_blk_inr">
+          <div className="calender_blk_inr">
             {/* <table>
               <tbody>
                 <tr>
@@ -369,7 +377,7 @@ function CountryWhentogo(props) {
                 </tr>
                 <tr>
                   <td></td>
-                  <td colspan="2" class="calender_trip_detls">
+                  <td colspan="2" className="calender_trip_detls">
                     <a href="#">
                       Cape wine harvest
                       <svg
@@ -401,7 +409,7 @@ function CountryWhentogo(props) {
                 </tr>
                 <tr>
                   {countryData?.map((item) => (
-                    <td colspan="2" class="calender_trip_detls">
+                    <td colspan="2" className="calender_trip_detls">
                       <NavLink href={generateDynamicLink()}>
                         {item?.link_text}
                         <svg
@@ -447,7 +455,7 @@ function CountryWhentogo(props) {
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td colspan="1" class="calender_trip_detls">
+                  <td colspan="1" className="calender_trip_detls">
                     <a href="#">
                       Hermanus whale festival
                       <svg
@@ -493,7 +501,7 @@ function CountryWhentogo(props) {
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td colspan="2" class="calender_trip_detls">
+                  <td colspan="2" className="calender_trip_detls">
                     <a href="#">
                       Namaqualand flowers
                       <svg

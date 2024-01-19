@@ -23,6 +23,7 @@ export default Index;
 function Index() {
   const [whyusDetails, setWhyusDetails] = useState(null);
   const [mapVariable, setMapVariable] = useState(null);
+  let dictionaryPage = 1;
 
   const router = useRouter();
   const hotelName = router?.query?.hotelName;
@@ -82,28 +83,24 @@ function Index() {
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-<<<<<<< HEAD
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
             ?.replace(/ /g, "-")
             .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
-=======
+            .toLowerCase()}/${hotelName}
         ?.replace(/ /g, "-")
         .replace(/&/g, "and")
         .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
         ?.replace(/ /g, "-")
         .replace(/&/g, "and")
         .toLowerCase()}/${hotelName}`
->>>>>>> main
     );
   };
 
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-<<<<<<< HEAD
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
@@ -114,7 +111,6 @@ function Index() {
             ?.replace(/ /g, "-")
             .replace(/&/g, "and")
             .toLowerCase()}/${item?.attributes?.friendly_url}`
-=======
         `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
           ?.replace(/&/g, " and ")
           .replace(/ /g, "-")
@@ -125,13 +121,12 @@ function Index() {
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.friendly_url}`
->>>>>>> main
     );
   };
 
   const websiteContentCheck = () => {
     homeService
-      .getAllWebsiteContent(region)
+      .getAllWebsiteContent(region, pageNo)
       .then((x) => {
         const response = x?.data;
 
@@ -158,9 +153,10 @@ function Index() {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
+            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
             localStorage.setItem(
               "websitecontent_uk",
-              JSON.stringify(dynamicObjectUk)
+              JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
             );
           }
           if (
@@ -169,9 +165,10 @@ function Index() {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
+            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
             localStorage.setItem(
               "websitecontent_us",
-              JSON.stringify(dynamicObjectUs)
+              JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
             );
           }
           if (
@@ -181,9 +178,10 @@ function Index() {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
+            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
             localStorage.setItem(
               "websitecontent_asia",
-              JSON.stringify(dynamicObjectAsia)
+              JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
             );
           }
           if (
@@ -193,13 +191,17 @@ function Index() {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
+            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
             localStorage.setItem(
               "websitecontent_india",
-              JSON.stringify(dynamicObjectIndia)
+              JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
             );
           }
         });
-
+        if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
+          dictionaryPage = x?.meta?.pagination?.page + 1
+          websiteContentCheck(dictionaryPage)
+        }
         setWebsiteContent(x.data);
         setIsLoading(false);
       })
@@ -217,7 +219,7 @@ function Index() {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
+      //  
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -232,7 +234,7 @@ function Index() {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
+        //  
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -241,11 +243,7 @@ function Index() {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  region,
-                  modifiedString
-                );
+
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -276,7 +274,7 @@ function Index() {
       /in/g,
       "INDIA"
     ).toLowerCase()}`)) {
-      websiteContentCheck();
+      websiteContentCheck(dictionaryPage);
     }
 
     // const carousel = document.querySelector("#carouselExampleInterval");
@@ -338,7 +336,7 @@ function Index() {
       .getRegionWiseHotelsInHotelDetail(regionName, region)
       .then((response) => {
         setAllHotels(response?.data);
-        console.log(response?.data);
+        (response?.data);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -844,11 +842,8 @@ function Index() {
                         <div className="card_slider_cnt places_to_stay_cnt">
                           <h4>
                             <a href={generateDynamicLink(item)}>
-<<<<<<< HEAD
-                              {dictioneryFunction(item?.attributes?.hotel_name)}
-=======
                               {item?.attributes?.hotel_name}
->>>>>>> main
+                              {item?.attributes?.hotel_name}
                             </a>
                           </h4>
                           <ul>
@@ -856,7 +851,7 @@ function Index() {
                             {item?.attributes?.hotel_country_contents?.data?.map(
                               (item) => {
                                 return (
-                                  <li class="price_guide_tooltip">
+                                  <li className="price_guide_tooltip">
                                     Price guide:
                                     <span
                                       key={item?.id}
@@ -962,4 +957,4 @@ function Index() {
       )}
     </>
   );
-}
+

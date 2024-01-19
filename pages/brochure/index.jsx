@@ -172,6 +172,33 @@ function Index() {
       .catch(alertService.error);
   }
 
+  const handleMouseOver = () => {
+    document.querySelector('.captch_parnt_blk').classList.add('captch_opn');
+  };
+
+  const handleMouseOverReset = () => {
+    document.querySelector('.captch_parnt_blk').classList.remove('captch_opn');
+  };
+
+  useEffect(() => {
+    const captchIcnBlk = document.querySelector('.captch_icn_blk');
+    const otherElements = document.querySelectorAll('.brochure_header_row, .contact_form_row .brochure_form_row, .brochure_testimonial_row');
+
+    captchIcnBlk.addEventListener('mouseover', handleMouseOver);
+
+    otherElements.forEach(element => {
+      element.addEventListener('mouseover', handleMouseOverReset);
+    });
+
+    return () => {
+      captchIcnBlk.removeEventListener('mouseover', handleMouseOver);
+
+      otherElements.forEach(element => {
+        element.removeEventListener('mouseover', handleMouseOverReset);
+      });
+    };
+  }, []);
+
   return (
     <>
       <Head>
@@ -220,9 +247,8 @@ function Index() {
                       type="text"
                       name="first_name"
                       {...register("first_name")}
-                      className={`form-control ${
-                        errors.first_name ? "is-invalid" : ""
-                      }`}
+                      className={`form-control ${errors.first_name ? "is-invalid" : ""
+                        }`}
                       aria-label="First name *"
                       placeholder="First name *"
                     />
@@ -237,9 +263,8 @@ function Index() {
                       type="text"
                       name="title"
                       {...register("last_name")}
-                      className={`form-control ${
-                        errors.last_name ? "is-invalid" : ""
-                      }`}
+                      className={`form-control ${errors.last_name ? "is-invalid" : ""
+                        }`}
                       aria-label="Last name *"
                       placeholder="Last name *"
                     />
@@ -254,9 +279,8 @@ function Index() {
                       type="email"
                       name="email_id"
                       {...register("email_id")}
-                      className={`form-control ${
-                        errors.email_id ? "is-invalid" : ""
-                      }`}
+                      className={`form-control ${errors.email_id ? "is-invalid" : ""
+                        }`}
                       aria-label="Email *"
                       placeholder="Email *"
                     />
@@ -274,9 +298,8 @@ function Index() {
                       aria-label="Phone number *"
                       placeholder="Phone number *"
                       {...register("phone_no")}
-                      className={`form-control ${
-                        errors.phone_no ? "is-invalid" : ""
-                      }`}
+                      className={`form-control ${errors.phone_no ? "is-invalid" : ""
+                        }`}
                     />
                   </div>
                 </div>
@@ -411,9 +434,8 @@ function Index() {
                           type="checkbox"
                           name="newsletter_mail_ind"
                           {...register("newsletter_mail_ind")}
-                          className={`form-check-input ${
-                            errors.newsletter_mail_ind ? "is-invalid" : ""
-                          }`}
+                          className={`form-check-input ${errors.newsletter_mail_ind ? "is-invalid" : ""
+                            }`}
                           id="exampleCheck1"
                         />
                         <label
@@ -487,6 +509,46 @@ function Index() {
               </div>
             </div>
           </form>
+          <section className="captch_parnt_blk">
+            <div className="captch_icn_blk">
+              <img src="\assets\images\captcha.png" alt="captcha" />
+              <div className="captch_links_blk">
+                <a
+                  href="https://www.google.com/intl/en/policies/privacy/"
+                  target="_blank"
+                >
+                  Privacy
+                </a>{" "}
+                <span>-</span>{" "}
+                <a
+                  href="https://www.google.com/intl/en/policies/terms/"
+                  target="_blank"
+                >
+                  Terms
+                </a>
+              </div>
+            </div>
+            <div className="captch_contnt_blk">
+              <span>
+                protected by <strong>reCAPTCHA</strong>
+              </span>
+              <div className="captch_links_blk">
+                <a
+                  href="https://www.google.com/intl/en/policies/privacy/"
+                  target="_blank"
+                >
+                  Privacy
+                </a>{" "}
+                <span>-</span>{" "}
+                <a
+                  href="https://www.google.com/intl/en/policies/terms/"
+                  target="_blank"
+                >
+                  Terms
+                </a>
+              </div>
+            </div>
+          </section>
         </main>
         <section className="brochure_testimonial_row">
           <div className="container">

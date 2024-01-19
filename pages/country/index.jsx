@@ -45,7 +45,7 @@ function Country() {
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
-  // console.log(destinationcode, countrycode);
+  //  (destinationcode, countrycode);
   const [selectedOptionCountry, setSelectedOptionCountry] = useState(null);
   const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
   const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
@@ -403,7 +403,7 @@ function Country() {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
+      //  
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -418,7 +418,7 @@ function Country() {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
+        //  
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -449,7 +449,7 @@ function Country() {
   };
 
   useEffect(() => {
-    if (countrycode != undefined) {
+    if (countrycode && countrycode != "undefined") {
       localStorage.setItem("country_code", countrycode);
     }
     setSelectedOptionCountry(countryOptions[0]);
@@ -462,125 +462,14 @@ function Country() {
       toggleTab("countries");
     }
 
-    // countriesService.getAll().then(x => {
-    //     // console.log('destinationService', x);
-    //     const desiredKey = 1; // The desired key to access
-    //     const desiredCountry = x.find(item => item.id == desiredKey);
-    //     // console.log('desiredCountry2', desiredCountry.country_translations[0].country_overview_text);
-    //     var oldText = desiredCountry.country_translations[0].country_overview_text;
-    //     var newValueWithBr = oldText?.replace(/\\n/g, "");
-    //     setCountry(newValueWithBr);
-    // });
 
-    // itinerariesService.getAll().then(desiredItinerary => {
-    //     // const desiredKey = 1; // The desired key to access
-    //     // const desiredItinerary = x.find(item => item.id == desiredKey);
-    //     // console.log('desiredItinerary', desiredItinerary);
-    //     setItinerary(desiredItinerary);
-    // });
-
-    // destinationService
-    //   .getAllItineraries()
-    //   .then((x) => {
-    //     setItineraries(x.data);
-    //     setIsLoading(false);
-    //   })
-    //   .catch((error) => {
-    //     setIsLoading(false);
-    //   });
-
-    // hotelService.getAll().then(desiredHotel => {
-    //     // const desiredKey = 1; // The desired key to access
-    //     // const desiredHotel = x.find(item => item.id == desiredKey);
-    //     // console.log('desiredHotel', desiredHotel);
-    //     setHotel(desiredHotel);
-    // });
 
     // userService.getAll().then(x => setUsers(x));
     if (!localStorage.getItem(`websitecontent_${region.replace(
       /in/g,
       "INDIA"
     ).toLowerCase()}`)) {
-      homeService
-        .getAllWebsiteContent(region)
-        .then((x) => {
-          // debugger;
-          const response = x?.data;
-
-          // Calculate the expiration time (1 day from the current time)
-          const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000;
-
-          const dynamicObject = {};
-          const dynamicObjectUk = {};
-          const dynamicObjectUs = {};
-          const dynamicObjectAsia = {};
-          const dynamicObjectIndia = {};
-
-          response.forEach((element, index) => {
-            // Create an object with the data and expiration time
-            dynamicObject[element?.attributes?.content_word] =
-              element?.attributes?.content_translation_text;
-            dynamicObject["code"] =
-              element?.attributes?.website_country?.data?.attributes?.code;
-            dynamicObject["expiration"] = expirationTime;
-
-            if (
-              element?.attributes?.website_country?.data?.attributes?.code ==
-              "UK"
-            ) {
-              dynamicObjectUk[element?.attributes?.content_word] =
-                element?.attributes?.content_translation_text;
-              dynamicObjectUk["expiration"] = expirationTime;
-              localStorage.setItem(
-                "websitecontent_uk",
-                JSON.stringify(dynamicObjectUk)
-              );
-            }
-            if (
-              element?.attributes?.website_country?.data?.attributes?.code ==
-              "US"
-            ) {
-              dynamicObjectUs[element?.attributes?.content_word] =
-                element?.attributes?.content_translation_text;
-              dynamicObjectUs["expiration"] = expirationTime;
-              localStorage.setItem(
-                "websitecontent_us",
-                JSON.stringify(dynamicObjectUs)
-              );
-            }
-            if (
-              element?.attributes?.website_country?.data?.attributes?.code ==
-              "ASIA"
-            ) {
-              dynamicObjectAsia[element?.attributes?.content_word] =
-                element?.attributes?.content_translation_text;
-              dynamicObjectAsia["expiration"] = expirationTime;
-              localStorage.setItem(
-                "websitecontent_asia",
-                JSON.stringify(dynamicObjectAsia)
-              );
-            }
-            if (
-              element?.attributes?.website_country?.data?.attributes?.code ==
-              "INDIA"
-            ) {
-              dynamicObjectIndia[element?.attributes?.content_word] =
-                element?.attributes?.content_translation_text;
-              dynamicObjectIndia["expiration"] = expirationTime;
-              localStorage.setItem(
-                "websitecontent_india",
-                JSON.stringify(dynamicObjectIndia)
-              );
-            }
-          });
-
-          setWebsiteContent(x.data);
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          // Handle any errors here
-          setIsLoading(false);
-        });
+      websiteContentCheck(dictionaryPage);
     }
 
     // const carousel = document.querySelector("#carouselExampleInterval");
@@ -593,7 +482,7 @@ function Country() {
         .getCountryDetails(countrycode)
         .then((x) => {
           setCountryData(x.data[0]);
-          console.log(x.data[0]);
+          (x.data[0]);
           setDataToSendToChild(x.data[0]?.attributes);
           setHeadingText(x.data[0]?.attributes?.header_text);
           setFriendlyUrl(`Home/Destinations/${destinationcode}/${countrycode}`);
@@ -711,7 +600,7 @@ function Country() {
                 <div className="carousel-inner">
                   {backgroundImage.map((imagePath, index) => (
                     <a
-                      href="#"
+
                       key={index}
                       target="_blank"
                       className={`carousel-item ${index === 0 ? "active" : ""}`}

@@ -55,7 +55,7 @@ function Index() {
   }
 
   const onSubmit = (e) => {
-    // console.log(e);
+    //  (e);
   };
 
   const generateDynamicLink = (item) => {

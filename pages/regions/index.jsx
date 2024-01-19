@@ -21,6 +21,7 @@ function Index() {
   const [activeTab, setActiveTab] = useState("overview"); // State to track the active tab
   const router = useRouter();
   const regionid = router.query.region;
+  let dictionaryPage = 1;
   const [destinationName, setdestinationName] = useState("");
   const [metaTitle, setMetaTitle] = useState("");
   const [parentData, setParentData] = useState("");
@@ -181,9 +182,9 @@ function Index() {
     }
   };
 
-  const websiteContentCheck = () => {
+  const websiteContentCheck = (pageNo) => {
     homeService
-      .getAllWebsiteContent(region)
+      .getAllWebsiteContent(region, pageNo)
       .then((x) => {
         const response = x?.data;
 
@@ -210,9 +211,10 @@ function Index() {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
+            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
             localStorage.setItem(
               "websitecontent_uk",
-              JSON.stringify(dynamicObjectUk)
+              JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
             );
           }
           if (
@@ -221,9 +223,10 @@ function Index() {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
+            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
             localStorage.setItem(
               "websitecontent_us",
-              JSON.stringify(dynamicObjectUs)
+              JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
             );
           }
           if (
@@ -233,9 +236,10 @@ function Index() {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
+            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
             localStorage.setItem(
               "websitecontent_asia",
-              JSON.stringify(dynamicObjectAsia)
+              JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
             );
           }
           if (
@@ -245,13 +249,17 @@ function Index() {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
+            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
             localStorage.setItem(
               "websitecontent_india",
-              JSON.stringify(dynamicObjectIndia)
+              JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
             );
           }
         });
-
+        if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
+          dictionaryPage = x?.meta?.pagination?.page + 1
+          websiteContentCheck(dictionaryPage)
+        }
         setWebsiteContent(x.data);
         setIsLoading(false);
       })
@@ -269,7 +277,7 @@ function Index() {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
+      //  
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -284,7 +292,7 @@ function Index() {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
+        //  
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -293,11 +301,7 @@ function Index() {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  region,
-                  modifiedString
-                );
+
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -318,6 +322,12 @@ function Index() {
   equalHeight(true);
 
   useEffect(() => {
+    if (!localStorage.getItem(`websitecontent_${region.replace(
+      /in/g,
+      "INDIA"
+    ).toLowerCase()}`)) {
+      websiteContentCheck(dictionaryPage);
+    }
     if (regionName != undefined && regionName != "undefined") {
       localStorage.setItem("region_name", regionName);
     }
@@ -378,7 +388,7 @@ function Index() {
 
     // destinationService.getDestinationDetails(destinationcode).then(x => {
     //     setDestinationDetails(x.data.attributes);
-    // console.log(x.data)
+    //  (x.data)
     //     setMetaTitle(x.data.attributes.page_meta_title);
     //     setHeadingText(x.data.attributes.page_meta_title);
     //     const map_latitude = x.data.attributes?.map_latitude;
@@ -427,7 +437,6 @@ function Index() {
 
     window.onload = () => {
       setTimeout(() => {
-<<<<<<< HEAD
         let reName = "";
         let destName = "";
         let countryName = "";
@@ -462,13 +471,11 @@ function Index() {
           "/" +
           reName?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase();
 
-=======
         regionWiseUrl +
           `/ destinations / ${destinationcode} /${countrycode?.replace(
             / /g,
             "-"
           )}`;
->>>>>>> main
         if (redirectUrl) {
           router.push(redirectUrl);
         }
@@ -538,7 +545,7 @@ function Index() {
                 <div className="carousel-inner">
                   {backgroundImage.map((imagePath, index) => (
                     <a
-                      href="#"
+
                       key={index}
                       target="_blank"
                       className={`carousel-item ${index === 0 ? "active" : ""}`}

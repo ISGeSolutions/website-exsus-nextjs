@@ -38,6 +38,8 @@ function Index() {
   const [subTitle, setSubTitle] = useState(null);
   const [rightHeader, setRightHeader] = useState(null);
   const [rightCorner, setRightCorner] = useState(null);
+  let dictionaryPage = 1;
+
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -48,6 +50,12 @@ function Index() {
         regionWiseUrl = "/" + window.site_region;
       }
     }
+  }
+
+  function capitalizeEveryWord(text) {
+    return text?.replace(/\b\w/g, function (match) {
+      return match.toUpperCase();
+    });
   }
 
   const dynamicImage = (itemId) => {
@@ -84,28 +92,163 @@ function Index() {
     router.push("/where-to-go");
   };
 
-  const websiteContentCheck = (matches, modifiedString) => {
-    destinationService
-      .getDictionaryDetails(matches, region)
-      .then((responseObj) => {
-        if (responseObj) {
-          const res = responseObj?.data;
-          res.forEach((element, index) => {
-            const replacement = element?.attributes?.content_translation_text;
-            const matchString = element?.attributes?.content_word;
-            const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
-            if (checkStr && replacement) {
-              modifiedString = modifiedString.replace(checkStr, replacement);
-            }
-          });
+  const websiteContentCheck = (pageNo) => {
+    homeService
+      .getAllWebsiteContent(region, pageNo)
+      .then((x) => {
+        const response = x?.data;
 
-          // Set the modified string in state
-          // setLongText(modifiedString);
+        // Calculate the expiration time (1 day from the current time)
+        const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000;
+
+        const dynamicObject = {};
+        const dynamicObjectUk = {};
+        const dynamicObjectUs = {};
+        const dynamicObjectAsia = {};
+        const dynamicObjectIndia = {};
+
+        response.forEach((element, index) => {
+          // Create an object with the data and expiration time
+          dynamicObject[element?.attributes?.content_word] =
+            element?.attributes?.content_translation_text;
+          dynamicObject["code"] =
+            element?.attributes?.website_country?.data?.attributes?.code;
+          dynamicObject["expiration"] = expirationTime;
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code == "UK"
+          ) {
+            dynamicObjectUk[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectUk["expiration"] = expirationTime;
+            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
+            localStorage.setItem(
+              "websitecontent_uk",
+              JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code == "US"
+          ) {
+            dynamicObjectUs[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectUs["expiration"] = expirationTime;
+            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
+            localStorage.setItem(
+              "websitecontent_us",
+              JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code ==
+            "ASIA"
+          ) {
+            dynamicObjectAsia[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectAsia["expiration"] = expirationTime;
+            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
+            localStorage.setItem(
+              "websitecontent_asia",
+              JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code ==
+            "INDIA"
+          ) {
+            dynamicObjectIndia[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectIndia["expiration"] = expirationTime;
+            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
+            localStorage.setItem(
+              "websitecontent_india",
+              JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
+            );
+          }
+        });
+        if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
+          dictionaryPage = x?.meta?.pagination?.page + 1
+          websiteContentCheck(dictionaryPage)
         }
+        setWebsiteContent(x.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        // Handle any errors here
+        setIsLoading(false);
       });
   };
 
+
+  const dictioneryFunction = (data) => {
+
+    let modifiedString = data;
+    if (modifiedString) {
+      const regex = /{[a-zA-Z0-9-]+}/g;
+      const matches = [...new Set(modifiedString.match(regex))];
+
+      let storedDataString = "";
+      let storedData = "";
+      //  
+      if (region == "uk") {
+        storedDataString = localStorage.getItem("websitecontent_uk");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "us") {
+        storedDataString = localStorage.getItem("websitecontent_us");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "asia") {
+        storedDataString = localStorage.getItem("websitecontent_asia");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "in") {
+        storedDataString = localStorage.getItem("websitecontent_india");
+        storedData = JSON.parse(storedDataString);
+      }
+      if (storedData !== null) {
+        //  
+        // You can access it using localStorage.getItem('yourKey')
+
+        if (matches) {
+          let replacement = "";
+          try {
+            matches.forEach((match, index, matches) => {
+              const matchString = match.replace(/{|}/g, "");
+              if (!storedData[matchString]) {
+                if (storedData[matchString.toLowerCase()]) {
+                  replacement = storedData[matchString.toLowerCase()]
+                }
+              } else {
+                replacement = storedData[matchString];
+                if (!replacement) {
+                  replacement = storedData[matchString.toLowerCase()]
+                }
+              }
+              const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+              if (checkStr && replacement) {
+                modifiedString = modifiedString.replace(checkStr, replacement);
+              }
+            });
+            return modifiedString;
+            setIsLoading(false);
+          } catch (error) {
+            if (error.message === "Loop break") {
+            } else if (error.message === "Region not found") {
+            }
+          }
+        }
+      }
+    } else {
+    }
+  };
+
   useEffect(() => {
+
+    $(".succss_msg_parnt").hide();
+    if (!localStorage.getItem(`websitecontent_${region.replace(
+      /in/g,
+      "INDIA"
+    ).toLowerCase()}`)) {
+      websiteContentCheck(dictionaryPage);
+    }
+
     destinationService
       .getDestinationLandingList()
       .then((x) => {
@@ -130,6 +273,7 @@ function Index() {
       .getCustomPagesData("destinations")
       .then((x) => {
         setDestinations(x.data[0]);
+
         const imageCheck = x.data[0].attributes.custom_page_images.data;
         const newBackgroundImages = [];
         imageCheck.forEach((element) => {
@@ -149,93 +293,6 @@ function Index() {
             : `https://online.exsus.com/${whenToGoImage}`
         );
         setBackgroundImage(newBackgroundImages);
-
-        const data = x.data[0]?.attributes?.custom_page_contents?.data;
-        const modifiedData = [];
-
-        if (data) {
-          let modifiedString = "";
-          data.forEach((element, index) => {
-            let content = {};
-
-            modifiedString = element?.attributes?.content_value;
-            const regex = /{[a-zA-Z0-9-]+}/g;
-            const matches = [...new Set(modifiedString.match(regex))];
-
-            let storedDataString = "";
-            let storedData = "";
-            if (region == "uk") {
-              storedDataString = localStorage.getItem("websitecontent_uk");
-              storedData = JSON.parse(storedDataString);
-            } else if (region == "us") {
-              storedDataString = localStorage.getItem("websitecontent_us");
-              storedData = JSON.parse(storedDataString);
-            } else if (region == "asia") {
-              storedDataString = localStorage.getItem("websitecontent_asia");
-              storedData = JSON.parse(storedDataString);
-            } else if (region == "in") {
-              storedDataString = localStorage.getItem("websitecontent_india");
-              storedData = JSON.parse(storedDataString);
-            }
-
-            if (storedData !== null) {
-              // You can access it using localStorage.getItem('yourKey')
-
-              if (matches) {
-                let replacement = "";
-                try {
-                  matches.forEach((match, index, matches) => {
-                    const matchString = match.replace(/{|}/g, "");
-                    if (!storedData[matchString]) {
-                      websiteContentCheck(matches, modifiedString);
-                      throw new Error("Loop break");
-                    } else {
-                      replacement = storedData[matchString];
-                    }
-                    const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
-                    if (checkStr && replacement) {
-                      modifiedString = modifiedString.replace(
-                        checkStr,
-                        replacement
-                      );
-                    }
-                  });
-                  content = element.attributes;
-                  content["content_value"] = modifiedString;
-                  modifiedData.push(content);
-                  setIsLoading(false);
-                } catch (error) {
-                  if (error.message === "Loop break") {
-                    // Handle the loop break here
-                    // console.log("Loop has been stopped.");
-                  } else if (error.message === "Region not found") {
-                    // Handle the loop break here
-                    // console.log("Loop has been stopped.");
-                  }
-                }
-              }
-            }
-            setIsLoading(false);
-          });
-        }
-
-        modifiedData.forEach((element) => {
-          if (element?.content_name == "HeadingTag") {
-            setHeadingTag(element?.content_value.toUpperCase());
-          } else if (element?.content_name == "Title") {
-            setTitle(element?.content_value);
-          } else if (element?.content_name == "MetaDescription") {
-            setMetaDescription(element?.content_value);
-          } else if (element?.content_name == "Long_Text") {
-            setLongText(element?.content_value);
-          } else if (element?.content_name == "Right_Header") {
-            setRightHeader(element?.content_value);
-          } else if (element?.content_name == "Right_Corner") {
-            setRightCorner(element?.content_value);
-          } else if (element?.content_name == "Sub_Title") {
-            setSubTitle(element?.content_value);
-          }
-        });
       })
       .catch((error) => {
         setIsLoading(false);
@@ -257,11 +314,14 @@ function Index() {
       <Head>
         <title>
           {
-            destinations?.attributes?.custom_page_contents?.data?.filter(
+            dictioneryFunction(destinations?.attributes?.custom_page_contents?.data?.filter(
               (res) => res.attributes?.content_name == "Title"
-            )[0]?.attributes?.content_value
+            )[0]?.attributes?.content_value)
           }
         </title>
+        <meta name="description" content={dictioneryFunction(destinations?.attributes?.custom_page_contents?.data?.filter(
+          (res) => res.attributes?.content_name == "MetaDescription"
+        )[0]?.attributes?.content_value)}></meta>
         <script
           type="text/javascript"
           src="/assets/javascripts/card-slider.js"
@@ -329,10 +389,18 @@ function Index() {
               </div>
               <div className="row">
                 <div className="destinations_cntnt_blk">
-                  <h2>{headingTag}</h2>
+                  <h2>{
+                    capitalizeEveryWord(dictioneryFunction(destinations?.attributes?.custom_page_contents?.data?.filter(
+                      (res) => res.attributes?.content_name == "LuxuryHolidaysHeader"
+                    )[0]?.attributes?.content_value))
+                  }</h2>
                   <p
                     // className="mb-3"
-                    dangerouslySetInnerHTML={{ __html: longText }}
+                    dangerouslySetInnerHTML={{
+                      __html: dictioneryFunction(destinations?.attributes?.custom_page_contents?.data?.filter(
+                        (res) => res.attributes?.content_name == "Long_Text"
+                      )[0]?.attributes?.content_value)
+                    }}
                   ></p>
                 </div>
               </div>
@@ -480,16 +548,13 @@ function Index() {
                       data-bs-interval="5000"
                     >
                       <div className="carousel-caption">
-                        <p
-                          dangerouslySetInnerHTML={{
-                            __html: text?.attributes.review_short_text,
-                          }}
-                        />
-                        <span
-                          dangerouslySetInnerHTML={{
-                            __html: text?.attributes.client_name,
-                          }}
-                        />
+                        <p>{dictioneryFunction(
+                          text?.attributes.review_text
+                        )?.replace(/&nbsp/g, "")
+                          ?.replace(/&rsquo/g, "")
+                          ?.replace(/:/g, "")
+                          ?.replace(/;/g, "")}</p>
+                        <span>{text?.attributes.client_name}</span>
                       </div>
                     </div>
                   ))}

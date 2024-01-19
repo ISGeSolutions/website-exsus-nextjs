@@ -3798,6 +3798,12 @@
   max-width: 100%;
 }
 
+.destination_dropdwn_row
+  .banner_dropdwn_blk.single_dropdwn_blk
+  .select_container_country {
+  max-width: 380px;
+}
+
 /* line 1158, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
 .destination_dropdwn_row .banner_dropdwn_blk select,
 .destination_dropdwn_row .banner_dropdwn_blk .bootstrap-select {
@@ -4640,6 +4646,84 @@
   color: #ffffff;
 }
 
+.captch_parnt_blk {
+  width: 250px;
+  background-color: #f9f9f9;
+  display: flex;
+  border-radius: 3px 0 0 3px;
+  position: fixed;
+  right: -180px;
+  bottom: 20px;
+  transition: all ease-in 0.3s;
+}
+
+.captch_parnt_blk.captch_opn {
+  right: 0;
+}
+
+.captch_parnt_blk.captch_opn .captch_icn_blk {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.captch_parnt_blk.captch_opn .captch_icn_blk .captch_links_blk {
+  display: none;
+}
+
+.captch_parnt_blk.captch_opn .captch_icn_blk .captch_links_blk a {
+  font-size: 0;
+}
+
+.captch_parnt_blk.captch_opn .captch_icn_blk .captch_links_blk span {
+  font-size: 0;
+}
+
+.captch_parnt_blk .captch_icn_blk {
+  width: 70px;
+  text-align: center;
+  padding: 5px 0;
+  transition: all ease-in 0.3s;
+}
+
+.captch_parnt_blk .captch_icn_blk img {
+  width: 40px;
+  height: 40px;
+}
+
+.captch_parnt_blk .captch_icn_blk a {
+  color: #231f20;
+  font: 400 0.5rem/0.5rem "Roboto", sans-serif;
+  text-decoration: none;
+}
+
+.captch_parnt_blk .captch_icn_blk .captch_links_blk {
+  line-height: 0;
+  margin-top: 2px;
+}
+
+.captch_parnt_blk .captch_icn_blk .captch_links_blk span {
+  vertical-align: middle;
+}
+
+.captch_parnt_blk .captch_contnt_blk {
+  background-color: #1a73e8;
+  font: 400 0.8125rem/1.25rem "Roboto", sans-serif;
+  color: #ffffff;
+  padding: 10px 15px;
+  flex: 1;
+}
+
+.captch_parnt_blk .captch_contnt_blk strong {
+  font-weight: 500;
+}
+
+.captch_parnt_blk .captch_contnt_blk a {
+  color: #ffffff;
+  font: 400 0.625rem/0.625rem "Roboto", sans-serif;
+  text-decoration: none;
+}
+
 /* line 4, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
 .country_highlight_row.itinery_hightlight_row .country_highlight_inr p span {
   color: #8aad56;
@@ -5087,11 +5171,19 @@
   cursor: pointer !important;
 }
 
+.dropdown_width100 {
+  width: 100%;
+}
+
+.dropdown_width100 .dropdown_grp_blk.dropdown_grp_doubl .banner_dropdwn_blk {
+  width: calc(100% - 50%);
+}
+
 /* line 340, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
 .dropdown_grp_blk {
-  width: calc(100% - 160px);
+  width: calc(100% - 170px);
   float: left;
-  margin-left: -10px;
+  margin-left: 0;
 }
 
 /* line 347, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */

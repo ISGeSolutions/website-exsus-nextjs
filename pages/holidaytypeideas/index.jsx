@@ -61,6 +61,7 @@ function Index() {
     .replace(/and/g, "&")
     .toLowerCase();
   const [destinationOptions, setAllDestination] = useState([]);
+  let dictionaryPage = 1;
 
   const validationSchema = Yup.object().shape({
     destination: Yup.string(),
@@ -145,8 +146,6 @@ function Index() {
     );
   };
 
-
-
   const LoadMorePagination = ({ data }) => {
     const [visibleItems, setVisibleItems] = useState(itemsPerPage);
   };
@@ -160,9 +159,13 @@ function Index() {
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
     if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
-      setSelectedOptionDestination(selectedOption.filter(res => res.value == "Show_all"));
+      setSelectedOptionDestination(
+        selectedOption.filter((res) => res.value == "Show_all")
+      );
     } else if (selectedOption[0]?.value == "Show_all") {
-      setSelectedOptionDestination(selectedOption.filter(res => res.value != "Show_all"));
+      setSelectedOptionDestination(
+        selectedOption.filter((res) => res.value != "Show_all")
+      );
     } else {
       setSelectedOptionDestination(selectedOption);
     }
@@ -203,7 +206,7 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
+        `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -260,7 +263,7 @@ function Index() {
   };
 
   const closeAlert = () => {
-    // console.log("closeAlert");
+    //  ("closeAlert");
     setAlert(null);
   };
 
@@ -317,8 +320,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt1"
-    ),
+        "card_slider_cnt places_to_stay_cnt1"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -338,9 +341,9 @@ function Index() {
     }
   };
 
-  const websiteContentCheck = () => {
+  const websiteContentCheck = (pageNo) => {
     homeService
-      .getAllWebsiteContent(region)
+      .getAllWebsiteContent(region, pageNo)
       .then((x) => {
         const response = x?.data;
 
@@ -367,9 +370,12 @@ function Index() {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
+            let localStorageUk = JSON.parse(
+              localStorage.getItem("websitecontent_uk")
+            );
             localStorage.setItem(
               "websitecontent_uk",
-              JSON.stringify(dynamicObjectUk)
+              JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
             );
           }
           if (
@@ -378,9 +384,12 @@ function Index() {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
+            let localStorageUS = JSON.parse(
+              localStorage.getItem("websitecontent_us")
+            );
             localStorage.setItem(
               "websitecontent_us",
-              JSON.stringify(dynamicObjectUs)
+              JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
             );
           }
           if (
@@ -390,9 +399,12 @@ function Index() {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
+            let localStorageAsia = JSON.parse(
+              localStorage.getItem("websitecontent_asia")
+            );
             localStorage.setItem(
               "websitecontent_asia",
-              JSON.stringify(dynamicObjectAsia)
+              JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
             );
           }
           if (
@@ -402,13 +414,19 @@ function Index() {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
+            let localStorageIndia = JSON.parse(
+              localStorage.getItem("websitecontent_india")
+            );
             localStorage.setItem(
               "websitecontent_india",
-              JSON.stringify(dynamicObjectIndia)
+              JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
             );
           }
         });
-
+        if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
+          dictionaryPage = x?.meta?.pagination?.page + 1;
+          websiteContentCheck(dictionaryPage);
+        }
         setWebsiteContent(x.data);
         setIsLoading(false);
       })
@@ -448,11 +466,6 @@ function Index() {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  region,
-                  modifiedString
-                );
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -464,7 +477,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -473,11 +486,12 @@ function Index() {
   equalHeight(true);
 
   useEffect(() => {
-    if (!localStorage.getItem(`websitecontent_${region.replace(
-      /in/g,
-      "INDIA"
-    ).toLowerCase()}`)) {
-      websiteContentCheck();
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
+      websiteContentCheck(dictionaryPage);
     }
     setSelectedOptionDestination([]);
     // holidaytypesService.getAll().then(x => {
@@ -504,7 +518,7 @@ function Index() {
         setFriendlyUrl(
           `home/holiday-types/${holidayGrpName}/${holidaytypename}`
         );
-        // console.log()
+        //  ()
         const oldText = x.data[0].attributes?.overview_text;
         var newValueWithBr = oldText?.replace(/\\n/g, "");
         setnewValueWithBr(newValueWithBr);
@@ -526,19 +540,22 @@ function Index() {
       });
 
     holidaytypesService.getDestinationDropDown().then((x) => {
-  
-      let arrayOfObjects = [{
-        destination_code: "Show_all",
-        value: "Show_all",
-        label: "Show all",
-      }];
-      arrayOfObjects = [...arrayOfObjects, ...x.data?.map((item) => ({
-        destination_code: item?.attributes?.destination_code,
-        value: item?.attributes?.destination_name,
-        label: item?.attributes?.destination_name,
-      }))];
+      let arrayOfObjects = [
+        {
+          destination_code: "Show_all",
+          value: "Show_all",
+          label: "Show all",
+        },
+      ];
+      arrayOfObjects = [
+        ...arrayOfObjects,
+        ...x.data?.map((item) => ({
+          destination_code: item?.attributes?.destination_code,
+          value: item?.attributes?.destination_name,
+          label: item?.attributes?.destination_name,
+        })),
+      ];
       setAllDestination(arrayOfObjects);
-
 
       // setAllDestination(
       //   x.data?.map((item) => ({
@@ -592,7 +609,7 @@ function Index() {
               <div className="carousel-inner">
                 {backgroundImage.map((imagePath, index) => (
                   <NavLink
-                    href=""
+                    href="#"
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                     data-bs-interval="5000"
                   >
@@ -634,7 +651,7 @@ function Index() {
                     <form onSubmit={handleSubmit(onSubmit)}>
                       <div className="col-12 col-md-8 col-lg-6 col-xl-5 m-auto">
                         <div className="destination_dropdwn_row d-block d-md-flex">
-                          <div className="banner_dropdwn_blk">
+                          <div className="banner_dropdwn_blk single_dropdwn_blk">
                             <Select
                               id="long-value-select"
                               instanceId="long-value-select"
@@ -758,7 +775,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                      "thumbnail" ? (
+                                    "thumbnail" ? (
                                       <img
                                         key={element.id}
                                         src={element.attributes.image_path}
@@ -794,9 +811,12 @@ function Index() {
                                     )
                                     .map((res1) => (
                                       <li key={res1.id}>
-                                        {`From ${res1.attributes?.currency_symbol ?? ""
-                                          }${formatPrice(res1.attributes?.price) ?? " xxxx"
-                                          } per person`}
+                                        {`From ${
+                                          res1.attributes?.currency_symbol ?? ""
+                                        }${
+                                          formatPrice(res1.attributes?.price) ??
+                                          " xxxx"
+                                        } per person`}
                                       </li>
                                     ))}
                                   <li>

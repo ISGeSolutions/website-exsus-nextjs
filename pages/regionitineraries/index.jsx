@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link, Spinner, Signup } from "components";
-import { destinationService, alertService, userService } from "services";
+import {
+  destinationService,
+  alertService,
+  userService,
+  homeService,
+} from "services";
 import { Inspireme } from "components";
 import Head from "next/head";
 import { NavLink } from "components";
@@ -15,7 +20,7 @@ import { formatPrice } from "../../components/utils/priceFormater";
 export default RegionItinararies;
 
 function RegionItinararies(props) {
-  console.log(props);
+  props;
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(true);
   const [isDisabled, setIsDisabled] = useState(false);
@@ -25,7 +30,7 @@ function RegionItinararies(props) {
   const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
   const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
   const [itineraries, setItineraries] = useState([]);
-  const [page, setPage] = useState(0); // Current page
+  let [page, setPage] = useState(0); // Current page
   const itemsPerPage = 12; // Number of items to load per page
   const [isLoading, setIsLoading] = useState(true);
   const [activeItem, setActiveItem] = useState("recommended");
@@ -120,6 +125,17 @@ function RegionItinararies(props) {
     );
   };
 
+  let region = "uk";
+  let regionWiseUrl = "";
+  if (typeof window !== "undefined") {
+    if (window && window.site_region) {
+      if (window.site_region !== "uk") {
+        region = window.site_region;
+        regionWiseUrl = "/" + window.site_region;
+      }
+    }
+  }
+
   const handleFilterClick = (item) => {
     setAlert(null);
     page = 0;
@@ -129,7 +145,7 @@ function RegionItinararies(props) {
   };
 
   const monthOptions = [
-    { value: "1,2,3,4,5,6,7,8,9,10,11,12", label: "All months" },
+    { value: "Show_all", label: "All months" },
     { value: "1", label: "January" },
     { value: "2", label: "February" },
     { value: "3", label: "March" },
@@ -147,31 +163,42 @@ function RegionItinararies(props) {
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
 
   // const handleLoadMore = () => {
-  // console.log('handleLoadMore')
+  //  ('handleLoadMore')
   //     setVisibleItems(prevVisibleItems => prevVisibleItems + itemsPerPage);
-  // };
-
-  const handleOptionCountryChange = (selectedOption) => {
-    selectedOption = selectedOption.filter(
-      (i) => i.value !== "" && typeof i.value !== "undefined"
-    );
-    setSelectedOptionCountry(selectedOption);
-    // this.setState({ selectedOption }, () =>
-    // );
-  };
+  // }
 
   const handleOptionRegionChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    setSelectedOptionRegion(selectedOption);
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionRegion(
+        selectedOption.filter((res) => res.value == "Show_all")
+      );
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionRegion(
+        selectedOption.filter((res) => res.value != "Show_all")
+      );
+    } else {
+      setSelectedOptionRegion(selectedOption);
+    }
   };
 
   const handleOptionMonthChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    setSelectedOptionMonth(selectedOption);
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionMonth(
+        selectedOption.filter((res) => res.value == "Show_all")
+      );
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionMonth(
+        selectedOption.filter((res) => res.value != "Show_all")
+      );
+    } else {
+      setSelectedOptionMonth(selectedOption);
+    }
   };
 
   const showAlert = (message, type) => {
@@ -179,67 +206,85 @@ function RegionItinararies(props) {
   };
 
   const closeAlert = () => {
-    // console.log("closeAlert");
+    //  ("closeAlert");
     setAlert(null);
   };
 
-  let region = "uk";
-  let regionWiseUrl = "";
-  if (typeof window !== "undefined") {
-    if (window && window.site_region) {
-      if (window.site_region !== "uk") {
-        region = window.site_region;
-        regionWiseUrl = "/" + window.site_region;
-      }
-    }
-  }
-
   function onSubmit(e) {
     e.preventDefault();
-    // console.log("Selected Countries:", selectedOptionCountry);
-    // console.log("Selected Regions:", selectedOptionRegion);
-    // console.log("Selected Months:", selectedOptionMonth);
-    if (!e.destination && !e.reason && !e.month) {
+    //  ("Selected Countries:", selectedOptionCountry);
+    //  ("Selected Regions:", selectedOptionRegion);
+    //  ("Selected Months:", selectedOptionMonth);
+
+    if (!selectedOptionRegion.length > 0 && !selectedOptionMonth.length > 0) {
       showAlert("Please select atleast one option", "error");
     } else {
-      router.push(
-        `advance-search?where=` +
-        e?.destination +
-        `&what=` +
-        e?.reason +
-        `&when=` +
-        e?.month
-      );
+      setItineraries([]);
+      page = 0;
+      loadMoreData(activeItem);
     }
   }
 
   const loadMoreData = (item) => {
-    destinationService
-      .getAllRegionItineraries(page + 1, regionName, item, region)
-      .then((response) => {
-        setMetaData(response.meta.pagination);
-        const responseTemp = [...response.data].sort(
-          (a, b) => a.attributes.serial_number - b.attributes.serial_number
-        );
-        const newItineraries = responseTemp;
-        if (newItineraries.length > 0) {
-          setItineraries((prevItineraries) =>
-            [...prevItineraries, ...newItineraries].reduce(
-              (accumulator, current) =>
-                accumulator.some((item) => item.id === current.id)
-                  ? accumulator
-                  : [...accumulator, current],
-              []
-            )
-          );
-          setPage(page + 1);
-        }
-      })
-      .catch((error) => {
-        // Handle any errors here
-        // console.error(error);
-        setIsLoading(false);
-      });
+    if (!selectedOptionRegion?.length > 0 && !selectedOptionMonth?.length > 0) {
+      setIsLoading(true);
+
+      destinationService
+        .getAllRegionItineraries(page + 1, regionName, item, region)
+        .then((response) => {
+          setMetaData(response.meta.pagination);
+          const newItineraries = response.data;
+          if (newItineraries.length > 0) {
+            setItineraries((prevItineraries) =>
+              [...prevItineraries, ...newItineraries].reduce(
+                (accumulator, current) =>
+                  accumulator.some((item) => item.id === current.id)
+                    ? accumulator
+                    : [...accumulator, current],
+                []
+              )
+            );
+            setPage(page + 1);
+          }
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          // Handle any errors here
+          // console.error(error);
+          setIsLoading(false);
+        });
+    } else {
+      setIsLoading(true);
+      destinationService
+        .ItineraryFilterOnRegionDetail(
+          selectedOptionRegion,
+          selectedOptionMonth,
+          item,
+          region,
+          page + 1
+        )
+        .then((response) => {
+          setMetaData(response.meta.pagination);
+          const newItineraries = response.data;
+          if (newItineraries.length > 0) {
+            setItineraries((prevItineraries) =>
+              [...prevItineraries, ...newItineraries].reduce(
+                (accumulator, current) =>
+                  accumulator.some((item) => item.id === current.id)
+                    ? accumulator
+                    : [...accumulator, current],
+                []
+              )
+            );
+            itineraries;
+            setPage(page + 1);
+          }
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+        });
+    }
   };
 
   const generateDynamicLink = (item) => {
@@ -252,14 +297,14 @@ function RegionItinararies(props) {
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-      `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`
+        `/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`
     );
   };
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -281,6 +326,100 @@ function RegionItinararies(props) {
 
   equalHeight(true);
 
+  const websiteContentCheck = (pageNo) => {
+    homeService
+      .getAllWebsiteContent(region, pageNo)
+      .then((x) => {
+        const response = x?.data;
+
+        // Calculate the expiration time (1 day from the current time)
+        const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000;
+
+        const dynamicObject = {};
+        const dynamicObjectUk = {};
+        const dynamicObjectUs = {};
+        const dynamicObjectAsia = {};
+        const dynamicObjectIndia = {};
+
+        response.forEach((element, index) => {
+          // Create an object with the data and expiration time
+          dynamicObject[element?.attributes?.content_word] =
+            element?.attributes?.content_translation_text;
+          dynamicObject["code"] =
+            element?.attributes?.website_country?.data?.attributes?.code;
+          dynamicObject["expiration"] = expirationTime;
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code == "UK"
+          ) {
+            dynamicObjectUk[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectUk["expiration"] = expirationTime;
+            let localStorageUk = JSON.parse(
+              localStorage.getItem("websitecontent_uk")
+            );
+            localStorage.setItem(
+              "websitecontent_uk",
+              JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code == "US"
+          ) {
+            dynamicObjectUs[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectUs["expiration"] = expirationTime;
+            let localStorageUS = JSON.parse(
+              localStorage.getItem("websitecontent_us")
+            );
+            localStorage.setItem(
+              "websitecontent_us",
+              JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code ==
+            "ASIA"
+          ) {
+            dynamicObjectAsia[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectAsia["expiration"] = expirationTime;
+            let localStorageAsia = JSON.parse(
+              localStorage.getItem("websitecontent_asia")
+            );
+            localStorage.setItem(
+              "websitecontent_asia",
+              JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code ==
+            "INDIA"
+          ) {
+            dynamicObjectIndia[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectIndia["expiration"] = expirationTime;
+            let localStorageIndia = JSON.parse(
+              localStorage.getItem("websitecontent_india")
+            );
+            localStorage.setItem(
+              "websitecontent_india",
+              JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
+            );
+          }
+        });
+        if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
+          dictionaryPage = x?.meta?.pagination?.page + 1;
+          websiteContentCheck(dictionaryPage);
+        }
+        setWebsiteContent(x.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        // Handle any errors here
+        setIsLoading(false);
+      });
+  };
+
   const dictioneryFunction = (data) => {
     let modifiedString = data;
     if (modifiedString) {
@@ -289,7 +428,7 @@ function RegionItinararies(props) {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
+      //
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -304,7 +443,7 @@ function RegionItinararies(props) {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
+        //
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -313,11 +452,6 @@ function RegionItinararies(props) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  region,
-                  modifiedString
-                );
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -329,18 +463,19 @@ function RegionItinararies(props) {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
   };
 
   useEffect(() => {
-    if (!localStorage.getItem(`websitecontent_${region.replace(
-      /in/g,
-      "INDIA"
-    ).toLowerCase()}`)) {
-      websiteContentCheck();
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
+      websiteContentCheck(dictionaryPage);
     }
     setIsLoading(false);
     setSelectedOptionRegion([]);
@@ -361,14 +496,30 @@ function RegionItinararies(props) {
       });
 
     destinationService.getPropertyTypeDropDown().then((x) => {
-      setAllRegion(
-        x.data?.map((item) => ({
-          //id: i.id,
+      let arrayOfObjects = [
+        {
+          property_type_code: "Show_all",
+          value: "Show_all",
+          label: "Everything",
+        },
+      ];
+      arrayOfObjects = [
+        ...arrayOfObjects,
+        ...x.data?.map((item) => ({
           property_type_code: item?.attributes?.property_type_code,
           value: item?.attributes?.property_type_name,
           label: item?.attributes?.property_type_name,
-        }))
-      );
+        })),
+      ];
+      setAllRegion(arrayOfObjects);
+      // setAllRegion(
+      //   x.data?.map((item) => ({
+      //     //id: i.id,
+      //     property_type_code: item?.attributes?.property_type_code,
+      //     value: item?.attributes?.property_type_name,
+      //     label: item?.attributes?.property_type_name,
+      //   }))
+      // );
     });
 
     // Using window.onload to detect full page load
@@ -388,7 +539,7 @@ function RegionItinararies(props) {
             ?.replace(/ /g, "-")
             .replace(/&/g, "and")
             .toLowerCase();
-        // debugger;
+        //
         if (redirectUrl) {
           router.push(redirectUrl);
         }
@@ -427,61 +578,60 @@ function RegionItinararies(props) {
                 All Luxury Holiday Ideas in {regionName}
               </h3>
               <div className="card_slider_row">
-                <div className="carousel00 region_carousel00">
+                <div className="carousel00 region_carousel00 dropdown_width100">
                   <div className="row">
-                    <form onSubmit={onSubmit}>
-                      <div className="col-12">
+                    <div className="col-12">
+                      <form onSubmit={onSubmit}>
                         <div className="destination_dropdwn_row d-block d-md-flex">
-                          <div className="banner_dropdwn_blk ">
-                            <Select
-                              placeholder={"Filter by reason"}
-                              className="select_container_country"
-                              classNamePrefix="select_country"
-                              isDisabled={isDisabled}
-                              isLoading={isLoader}
-                              isClearable={isClearable}
-                              isRtl={isRtl}
-                              hideSelectedOptions={false}
-                              styles={styles}
-                              closeMenuOnSelect={false}
-                              isSearchable={isSearchable}
-                              // name="color"
-                              options={regionOptions}
-                              isMulti
-                              value={selectedOptionRegion}
-                              onChange={handleOptionRegionChange}
-                              components={{
-                                Option: InputOption,
-                                MultiValue: CustomMultiValue,
-                              }}
-                            />
+                          <div className="dropdown_grp_doubl dropdown_grp_blk">
+                            <div className="banner_dropdwn_blk ">
+                              <Select
+                                placeholder={"Filter by reason"}
+                                className="select_container_country"
+                                classNamePrefix="select_country"
+                                isDisabled={isDisabled}
+                                isLoading={isLoader}
+                                isClearable={isClearable}
+                                isRtl={isRtl}
+                                hideSelectedOptions={false}
+                                styles={styles}
+                                closeMenuOnSelect={false}
+                                isSearchable={isSearchable}
+                                options={regionOptions}
+                                isMulti
+                                value={selectedOptionRegion}
+                                onChange={handleOptionRegionChange}
+                                components={{
+                                  Option: InputOption,
+                                  MultiValue: CustomMultiValue,
+                                }}
+                              />
+                            </div>
+                            <div className="banner_dropdwn_blk ps-0 ps-md-2">
+                              <Select
+                                placeholder="Filter by month"
+                                className="select_container_country"
+                                classNamePrefix="select_country"
+                                isDisabled={isDisabled}
+                                isLoading={isLoader}
+                                isClearable={isClearable}
+                                styles={styles}
+                                isRtl={isRtl}
+                                isSearchable={isSearchable}
+                                name="color"
+                                closeMenuOnSelect={false}
+                                options={monthOptions}
+                                hideSelectedOptions={false}
+                                isMulti
+                                value={selectedOptionMonth}
+                                onChange={handleOptionMonthChange}
+                                components={{
+                                  Option: InputOption,
+                                  MultiValue: CustomMultiValue,
+                                }}
+                              />
+                            </div>
                           </div>
-                          <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                            <Select
-                              placeholder="Filter by month"
-                              className="select_container_country"
-                              classNamePrefix="select_country"
-                              // defaultValue={monthOptions[0]}
-                              isDisabled={isDisabled}
-                              isLoading={isLoader}
-                              isClearable={isClearable}
-                              styles={styles}
-                              isRtl={isRtl}
-                              isSearchable={isSearchable}
-                              name="color"
-                              closeMenuOnSelect={false}
-                              options={monthOptions}
-                              hideSelectedOptions={false}
-                              isMulti
-                              // value={selectedOptionMonth}
-                              onChange={handleOptionMonthChange}
-                              components={{
-                                Option: InputOption,
-                                MultiValue: CustomMultiValue,
-                              }}
-                            />
-                          </div>
-
                           <div className="banner_inspire_btn ps-0 ps-md-2">
                             <button
                               type="submit"
@@ -506,8 +656,8 @@ function RegionItinararies(props) {
                             </button>
                           </div>
                         </div>
-                      </div>
-                    </form>
+                      </form>
+                    </div>
                     <div className="col-12">
                       <div className="destination_filter_result d-block d-lg-flex">
                         <p>
@@ -568,7 +718,7 @@ function RegionItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}

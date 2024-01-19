@@ -11,11 +11,11 @@ function Index() {
 
     useEffect(() => {
         // userService.getAll().then(x => {
-            // console.log('x', x);
+        //  ('x', x);
         //     setUsers(x)
         // });
         // var site_region = localStorage.getItem('site_region');        
-        // console.log('site_region', site_region);
+        //  ('site_region', site_region);
     }, []);
 
     function deleteUser(id) {

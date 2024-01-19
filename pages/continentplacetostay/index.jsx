@@ -29,11 +29,12 @@ function ContinentPlacesToStay(props) {
   const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
   const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
   const [itineraries, setItineraries] = useState(null);
+  const [hotels, setHotels] = useState(null);
   const router = useRouter();
   const [destination, setdestination] = useState("");
   const itemsPerPage = 12; // Number of items to load per page
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
-  const [page, setPage] = useState(0); // Current page
+  let [page, setPage] = useState(0); // Current page
   const [metaData, setMetaData] = useState([]);
   const [decode, setdcode] = useState();
   const destinationcode = router.query.continent
@@ -46,6 +47,7 @@ function ContinentPlacesToStay(props) {
   const [activeItem, setActiveItem] = useState("recommended");
   const [alert, setAlert] = useState(null);
   const [regionOptions, setAllRegion] = useState([]);
+  let dictionaryPage = 1;
 
   const { divRef } = props;
 
@@ -61,7 +63,7 @@ function ContinentPlacesToStay(props) {
   }
 
   const monthOptions = [
-    { value: "1,2,3,4,5,6,7,8,9,10,11,12", label: "All months" },
+    { value: "Show_all", label: "All months" },
     { value: "1", label: "January" },
     { value: "2", label: "February" },
     { value: "3", label: "March" },
@@ -151,30 +153,70 @@ function ContinentPlacesToStay(props) {
   };
 
   const loadMoreData = (item) => {
-    destinationService
-      .getAllHotels(page + 1, item, decode, region)
-      .then((response) => {
-        setMetaData(response.meta.pagination);
-        const newItineraries = response.data;
-        if (newItineraries.length > 0) {
-          setAllHotels((prevItineraries) =>
-            [...prevItineraries, ...newItineraries].reduce(
-              (accumulator, current) =>
-                accumulator.some((item) => item.id === current.id)
-                  ? accumulator
-                  : [...accumulator, current],
-              []
-            )
-          );
-          setPage(page + 1);
-        }
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        // Handle any errors here
-        // console.error(error);
-        setIsLoading(false);
-      });
+    if (
+      !selectedOptionCountry?.length > 0 &&
+      !selectedOptionRegion?.length > 0 &&
+      !selectedOptionMonth?.length > 0
+    ) {
+      setIsLoading(true);
+      destinationService
+        .getAllHotels(page + 1, item, decode, region)
+        .then((response) => {
+          setMetaData(response.meta.pagination);
+          const newItineraries = response.data;
+          if (newItineraries.length > 0) {
+            setAllHotels((prevItineraries) =>
+              [...prevItineraries, ...newItineraries].reduce(
+                (accumulator, current) =>
+                  accumulator.some((item) => item.id === current.id)
+                    ? accumulator
+                    : [...accumulator, current],
+                []
+              )
+            );
+            setPage(page + 1);
+          }
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          // Handle any errors here
+          // console.error(error);
+          setIsLoading(false);
+        });
+    } else {
+      setIsLoading(true);
+      destinationService
+        .hotelFilterOnContinentPlaceToStay(
+          selectedOptionCountry,
+          selectedOptionRegion,
+          selectedOptionMonth,
+          item,
+          region,
+          page + 1,
+          decode
+        )
+        .then((response) => {
+          setMetaData(response.meta.pagination);
+          const newItineraries = response.data;
+          if (newItineraries.length > 0) {
+            setAllHotels((prevItineraries) =>
+              [...prevItineraries, ...newItineraries].reduce(
+                (accumulator, current) =>
+                  accumulator.some((item) => item.id === current.id)
+                    ? accumulator
+                    : [...accumulator, current],
+                []
+              )
+            );
+            itineraries;
+            setPage(page + 1);
+          }
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+        });
+    }
   };
 
   const showAlert = (message, type) => {
@@ -182,7 +224,7 @@ function ContinentPlacesToStay(props) {
   };
 
   const closeAlert = () => {
-    // console.log("closeAlert");
+    //  ("closeAlert");
     setAlert(null);
   };
 
@@ -192,21 +234,20 @@ function ContinentPlacesToStay(props) {
 
   function onSubmit(data) {
     data.preventDefault();
-    console.log("Selected Countries:", selectedOptionCountry);
-    console.log("Selected Regions:", selectedOptionRegion);
-    console.log("Selected Months:", selectedOptionMonth);
+    "Selected Countries:", selectedOptionCountry;
+    "Selected Regions:", selectedOptionRegion;
+    "Selected Months:", selectedOptionMonth;
 
-    if (!data.destination && !data.reason && !data.month) {
+    if (
+      !selectedOptionCountry.length > 0 &&
+      !selectedOptionRegion.length > 0 &&
+      !selectedOptionMonth.length > 0
+    ) {
       showAlert("Please select atleast one option", "error");
     } else {
-      router.push(
-        `advance-search?where=` +
-        data?.destination +
-        `&what=` +
-        data?.reason +
-        `&when=` +
-        data?.month
-      );
+      setAllHotels([]);
+      page = 0;
+      loadMoreData(activeItem);
     }
   }
 
@@ -238,23 +279,51 @@ function ContinentPlacesToStay(props) {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    setSelectedOptionCountry(selectedOption);
-    // this.setState({ selectedOption }, () =>
-    // );
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionCountry(
+        selectedOption.filter((res) => res.value == "Show_all")
+      );
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionCountry(
+        selectedOption.filter((res) => res.value != "Show_all")
+      );
+    } else {
+      setSelectedOptionCountry(selectedOption);
+    }
   };
 
   const handleOptionRegionChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    setSelectedOptionRegion(selectedOption);
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionRegion(
+        selectedOption.filter((res) => res.value == "Show_all")
+      );
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionRegion(
+        selectedOption.filter((res) => res.value != "Show_all")
+      );
+    } else {
+      setSelectedOptionRegion(selectedOption);
+    }
   };
 
   const handleOptionMonthChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    setSelectedOptionMonth(selectedOption);
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionMonth(
+        selectedOption.filter((res) => res.value == "Show_all")
+      );
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionMonth(
+        selectedOption.filter((res) => res.value != "Show_all")
+      );
+    } else {
+      setSelectedOptionMonth(selectedOption);
+    }
   };
 
   const generateDynamicLink = (item) => {
@@ -277,9 +346,9 @@ function ContinentPlacesToStay(props) {
     );
   };
 
-  const websiteContentCheck = () => {
+  const websiteContentCheck = (pageNo) => {
     homeService
-      .getAllWebsiteContent(region)
+      .getAllWebsiteContent(region, pageNo)
       .then((x) => {
         const response = x?.data;
 
@@ -299,16 +368,18 @@ function ContinentPlacesToStay(props) {
           dynamicObject["code"] =
             element?.attributes?.website_country?.data?.attributes?.code;
           dynamicObject["expiration"] = expirationTime;
-
           if (
             element?.attributes?.website_country?.data?.attributes?.code == "UK"
           ) {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
+            let localStorageUk = JSON.parse(
+              localStorage.getItem("websitecontent_uk")
+            );
             localStorage.setItem(
               "websitecontent_uk",
-              JSON.stringify(dynamicObjectUk)
+              JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
             );
           }
           if (
@@ -317,9 +388,12 @@ function ContinentPlacesToStay(props) {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
+            let localStorageUS = JSON.parse(
+              localStorage.getItem("websitecontent_us")
+            );
             localStorage.setItem(
               "websitecontent_us",
-              JSON.stringify(dynamicObjectUs)
+              JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
             );
           }
           if (
@@ -329,9 +403,12 @@ function ContinentPlacesToStay(props) {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
+            let localStorageAsia = JSON.parse(
+              localStorage.getItem("websitecontent_asia")
+            );
             localStorage.setItem(
               "websitecontent_asia",
-              JSON.stringify(dynamicObjectAsia)
+              JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
             );
           }
           if (
@@ -341,13 +418,19 @@ function ContinentPlacesToStay(props) {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
+            let localStorageIndia = JSON.parse(
+              localStorage.getItem("websitecontent_india")
+            );
             localStorage.setItem(
               "websitecontent_india",
-              JSON.stringify(dynamicObjectIndia)
+              JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
             );
           }
         });
-
+        if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
+          dictionaryPage = x?.meta?.pagination?.page + 1;
+          websiteContentCheck(dictionaryPage);
+        }
         setWebsiteContent(x.data);
         setIsLoading(false);
       })
@@ -388,11 +471,6 @@ function ContinentPlacesToStay(props) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  region,
-                  modifiedString
-                );
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -411,15 +489,16 @@ function ContinentPlacesToStay(props) {
   };
 
   useEffect(() => {
-    if (!localStorage.getItem(`websitecontent_${region.replace(
-      /in/g,
-      "INDIA"
-    ).toLowerCase()}`)) {
-      websiteContentCheck();
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
+      websiteContentCheck(dictionaryPage);
     }
-    setSelectedOptionCountry();
-    setSelectedOptionRegion();
-    setSelectedOptionMonth();
+    setSelectedOptionCountry([]);
+    setSelectedOptionRegion([]);
+    setSelectedOptionMonth([]);
 
     // destinationService.getAllItineraries().then(x => {
     //     setItineraries(x.data);
@@ -433,14 +512,33 @@ function ContinentPlacesToStay(props) {
       .then((x) => {
         setdestination(x.data[0].attributes);
         setdcode(x.data[0].attributes.destination_code);
-        setAllCountries(
-          x.data[0]?.attributes?.countries?.data.map((item) => ({
+
+        let arrayOfObjects = [
+          {
+            destination_code: "Show_all",
+            value: "Show_all",
+            label: x.data[0].attributes.destination_name,
+          },
+        ];
+        arrayOfObjects = [
+          ...arrayOfObjects,
+          ...x.data[0]?.attributes?.countries?.data.map((item) => ({
             id: item.id,
             country_code: item?.attributes?.country_code,
             value: item?.attributes?.country_name,
             label: item?.attributes?.country_name,
-          }))
-        );
+          })),
+        ];
+        setAllCountries(arrayOfObjects);
+
+        // setAllCountries(
+        //   x.data[0]?.attributes?.countries?.data.map((item) => ({
+        //     id: item.id,
+        //     country_code: item?.attributes?.country_code,
+        //     value: item?.attributes?.country_name,
+        //     label: item?.attributes?.country_name,
+        //   }))
+        // );
         setIsLoading(false);
       })
       .catch((error) => {
@@ -448,14 +546,30 @@ function ContinentPlacesToStay(props) {
       });
 
     destinationService.getPropertyTypeDropDown().then((x) => {
-      setAllRegion(
-        x.data?.map((item) => ({
-          //id: i.id,
+      let arrayOfObjects = [
+        {
+          property_type_code: "Show_all",
+          value: "Show_all",
+          label: "Everything",
+        },
+      ];
+      arrayOfObjects = [
+        ...arrayOfObjects,
+        ...x.data?.map((item) => ({
           property_type_code: item?.attributes?.property_type_code,
           value: item?.attributes?.property_type_name,
           label: item?.attributes?.property_type_name,
-        }))
-      );
+        })),
+      ];
+      setAllRegion(arrayOfObjects);
+      // setAllRegion(
+      //   x.data?.map((item) => ({
+      //     //id: i.id,
+      //     property_type_code: item?.attributes?.property_type_code,
+      //     value: item?.attributes?.property_type_name,
+      //     label: item?.attributes?.property_type_name,
+      //   }))
+      // );
     });
 
     loadMoreData(activeItem);
@@ -510,11 +624,11 @@ function ContinentPlacesToStay(props) {
               <div className="card_slider_row">
                 <div className="carousel00 region_carousel00">
                   <div className="row">
-                    <form onSubmit={onSubmit}>
-                      <div className="col-12">
+                    <div className="col-12">
+                      <form onSubmit={onSubmit}>
                         <div className="destination_dropdwn_row d-block d-md-flex">
                           <div className="dropdown_grp_blk">
-                            <div className="banner_dropdwn_blk ps-0 ps-md-2">
+                            <div className="banner_dropdwn_blk">
                               <Select
                                 id="long-value-select"
                                 instanceId="long-value-select"
@@ -528,7 +642,7 @@ function ContinentPlacesToStay(props) {
                                 isClearable={isClearable}
                                 isRtl={isRtl}
                                 isSearchable={isSearchable}
-                                //value={selectedOptionCountry}
+                                value={selectedOptionCountry}
                                 onChange={handleOptionCountryChange}
                                 closeMenuOnSelect={false}
                                 hideSelectedOptions={false}
@@ -579,7 +693,7 @@ function ContinentPlacesToStay(props) {
                                 options={monthOptions}
                                 hideSelectedOptions={false}
                                 isMulti
-                                // value={selectedOptionMonth}
+                                value={selectedOptionMonth}
                                 onChange={handleOptionMonthChange}
                                 components={{
                                   Option: InputOption,
@@ -612,8 +726,8 @@ function ContinentPlacesToStay(props) {
                             </button>
                           </div>
                         </div>
-                      </div>
-                    </form>
+                      </form>
+                    </div>
                     <div className="col-12">
                       <div className="destination_filter_result d-block d-lg-flex">
                         <p>
@@ -812,7 +926,7 @@ function ContinentPlacesToStay(props) {
       <div
         className="modal fade"
         id="placesToStayModal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
