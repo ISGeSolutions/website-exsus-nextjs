@@ -11,6 +11,7 @@ import Head from "next/head";
 import { NavLink } from "components";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
+import { formatPrice } from "../../components/utils/priceFormater";
 
 export default ContinentOverview;
 
@@ -488,7 +489,8 @@ function ContinentOverview({ sendDataToParent }) {
                                       {`From ${
                                         res1.attributes?.currency_symbol ?? ""
                                       }${
-                                        res1.attributes?.price ?? " xxxx"
+                                        formatPrice(res1.attributes?.price) ??
+                                        " xxxx"
                                       } per person`}
                                     </li>
                                   ))}
