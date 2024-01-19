@@ -76,7 +76,6 @@ function Index() {
       regionWiseUrl +
       `/destinations/${res?.attributes?.hotel?.data?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, " and ")
-        .replace(/ /g, "-")
         .toLowerCase()}/hotels/${res?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(
@@ -89,27 +88,27 @@ function Index() {
     );
   };
 
-  const generateDynamicLink = (item) => {
-    // return regionWiseUrl + `/hotel-detail`;
+  // const generateDynamicLink = (item) => {
+  //   // return regionWiseUrl + `/hotel-detail`;
 
-    let hotelName = item?.attributes?.friendly_url
-      ?.replace(/ /g, "-")
-      .toLowerCase()
-      .replace(/&/g, "and");
-    return (
-      regionWiseUrl +
-      `/destinations/${item?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.destination?.data?.attributes?.destination_code
-        ?.replace(/&/g, " and ")
-        .replace(/ /g, "-")
-        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${hotelName}`
-    );
-  };
+  //   let hotelName = item?.attributes?.friendly_url
+  //     ?.replace(/ /g, "-")
+  //     .toLowerCase()
+  //     .replace(/&/g, "and");
+  //   return (
+  //     regionWiseUrl +
+  //     `/destinations/${item?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.destination?.data?.attributes?.destination_code
+  //       ?.replace(/&/g, " and ")
+  //       .replace(/ /g, "-")
+  //       .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+  //       ?.replace(/ /g, "-")
+  //       .replace(/&/g, "and")
+  //       .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+  //       ?.replace(/ /g, "-")
+  //       .replace(/&/g, "and")
+  //       .toLowerCase()}/${hotelName}`
+  //   );
+  // };
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
