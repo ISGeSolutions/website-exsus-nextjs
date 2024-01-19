@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 
 export default Index;
 
-function Index() {
+function Index() { 
   const router = useRouter();
   const [whyusDetails, setWhyusDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
