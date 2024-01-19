@@ -576,11 +576,7 @@ function Index() {
           <div>
             <section
               className="destination_tab_row light_grey pb-0"
-<<<<<<< HEAD
-              ref={divRef}
-=======
               // ref={divRef}
->>>>>>> main
               // id="scrollToElement"
             >
               <div className="container">
@@ -588,10 +584,7 @@ function Index() {
                   <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
                 </div>
                 <div className="destination_tab_inr">
-<<<<<<< HEAD
-=======
                   {/* mt-3 */}
->>>>>>> main
                   <h2 className="tab_tilte">
                     {/* {destinationDetails?.header_text} */}
                     {dictioneryFunction(headingText)}
