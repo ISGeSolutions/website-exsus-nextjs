@@ -56,7 +56,10 @@ function Index() {
 
   const divRef = useRef();
   const { t } = useTranslation();
+<<<<<<< HEAD
   // let [isShowMap, setIsShowMap] = useState(true);
+=======
+>>>>>>> main
 
   let region = "uk";
   let regionWiseUrl = "";

@@ -15,7 +15,6 @@ import Image from "next/image";
 import CustomMultiValue from "../continentitineraries/CustomMultiValue";
 import Select, { components } from "react-select";
 import { Alert } from "../../components";
-import { formatPrice } from "../../components/utils/priceFormater";
 
 export default CountryItinararies;
 
@@ -138,7 +137,7 @@ function CountryItinararies(props) {
 
   const websiteContentCheck = (pageNo) => {
     homeService
-      .getAllWebsiteContent(region, pageNo)
+      .getAllWebsiteContent()
       .then((x) => {
         const response = x?.data;
 
@@ -401,7 +400,7 @@ function CountryItinararies(props) {
                   accumulator.some((item) => item.id === current.id)
                     ? accumulator
                     : [...accumulator, current],
-                []
+                [ ]
               )
             );
             setPage(page + 1);
@@ -470,7 +469,8 @@ function CountryItinararies(props) {
       `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
         / /g,
         "-"
-      )}/${countrycode?.replace(/ /g, "-")?.replace(/&/g, "and")}-itineraries/${item?.attributes?.friendly_url
+      )}/${countrycode?.replace(/ /g, "-")?.replace(/&/g, "and")}-itineraries/${
+        item?.attributes?.friendly_url
       }`
     );
   };
@@ -478,11 +478,12 @@ function CountryItinararies(props) {
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
-        / /g,
-        "-"
-      )}/${countrycode?.replace(/ /g, "-")}}-itineraries/${item?.attributes?.friendly_url
-      }`
+        `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
+          / /g,
+          "-"
+        )}/${countrycode?.replace(/ /g, "-")}}-itineraries/${
+          item?.attributes?.friendly_url
+        }`
     );
   };
 
@@ -496,8 +497,8 @@ function CountryItinararies(props) {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -520,12 +521,8 @@ function CountryItinararies(props) {
   equalHeight(true);
 
   useEffect(() => {
-    if (
-      !localStorage.getItem(
-        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
-      )
-    ) {
-      websiteContentCheck(dictionaryPage);
+    if (!localStorage.getItem("websitecontent_uk")) {
+      websiteContentCheck();
     }
     setSelectedOptionReason([]);
     setSelectedOptionRegion([]);
@@ -558,21 +555,13 @@ function CountryItinararies(props) {
     destinationService
       .getRegions(countrycode)
       .then((x) => {
-        let arrayOfObjects = [
-          {
-            region_code: "Show_all",
-            value: "Show_all",
-            label: x.data[0].attributes.country_name,
-          },
-        ];
-        arrayOfObjects = [
-          ...arrayOfObjects,
-          ...x.data[0]?.attributes?.regions?.data.map((item) => ({
+        debugger;
+        setAllRegions(
+          x.data[0]?.attributes?.regions?.data?.map((item) => ({
             region_code: item?.attributes?.region_code,
             value: item?.attributes?.region_name,
             label: item?.attributes?.region_name,
-          })),
-        ];
+          }))),
         setAllRegions(arrayOfObjects);
         setIsLoading(false);
       })
@@ -797,7 +786,7 @@ function CountryItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -827,10 +816,11 @@ function CountryItinararies(props) {
                                   )
                                   .map((res1) => (
                                     <li key={res1.id}>
-                                      {`From ${res1.attributes?.currency_symbol ?? ""
-                                        }${formatPrice(res1.attributes?.price) ??
-                                        " xxxx"
-                                        } per person`}
+                                      {`From ${
+                                        res1.attributes?.currency_symbol ?? ""
+                                      }${
+                                        res1.attributes?.price ?? " xxxx"
+                                      } per person`}
                                     </li>
                                   ))}
                                 <li>
