@@ -25,23 +25,25 @@ function CountryItinararies(props) {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isLoader, setIsLoader] = useState(false);
   const [isRtl, setIsRtl] = useState(false);
-  const [selectedOptionCountry, setSelectedOptionCountry] = useState(null);
   const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
+  const [selectedOptionReason, setSelectedOptionReason] = useState(null);
   const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
   const [itineraries, setItineraries] = useState([]);
-  const [page, setPage] = useState(0); // Current page
+  let [page, setPage] = useState(0); // Current page
   const itemsPerPage = 12; // Number of items to load per page
   const [activeItem, setActiveItem] = useState("recommended");
   const [isLoading, setIsLoading] = useState(true);
-  const [countryData, setCountryData] = useState(props?.data);
   const [alert, setAlert] = useState(null);
-  const [regionOptions, setAllRegion] = useState([]);
+  const [countryData, setCountryData] = useState(props?.data);
+  const [reasonOptions, setAllReason] = useState([]);
+  const [allRegions, setAllRegions] = useState([]);
   const destinationcode = router.query?.continent
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
 
   const [metaData, setMetaData] = useState([]);
+  let dictionaryPage = 1;
 
   const countrycode = router.query?.country
     ?.replace(/-and-/g, " & ")
@@ -133,7 +135,7 @@ function CountryItinararies(props) {
     }
   }
 
-  const websiteContentCheck = () => {
+  const websiteContentCheck = (pageNo) => {
     homeService
       .getAllWebsiteContent()
       .then((x) => {
@@ -162,9 +164,12 @@ function CountryItinararies(props) {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
+            let localStorageUk = JSON.parse(
+              localStorage.getItem("websitecontent_uk")
+            );
             localStorage.setItem(
               "websitecontent_uk",
-              JSON.stringify(dynamicObjectUk)
+              JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
             );
           }
           if (
@@ -173,9 +178,12 @@ function CountryItinararies(props) {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
+            let localStorageUS = JSON.parse(
+              localStorage.getItem("websitecontent_us")
+            );
             localStorage.setItem(
               "websitecontent_us",
-              JSON.stringify(dynamicObjectUs)
+              JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
             );
           }
           if (
@@ -185,9 +193,12 @@ function CountryItinararies(props) {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
+            let localStorageAsia = JSON.parse(
+              localStorage.getItem("websitecontent_asia")
+            );
             localStorage.setItem(
               "websitecontent_asia",
-              JSON.stringify(dynamicObjectAsia)
+              JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
             );
           }
           if (
@@ -197,13 +208,19 @@ function CountryItinararies(props) {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
+            let localStorageIndia = JSON.parse(
+              localStorage.getItem("websitecontent_india")
+            );
             localStorage.setItem(
               "websitecontent_india",
-              JSON.stringify(dynamicObjectIndia)
+              JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
             );
           }
         });
-
+        if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
+          dictionaryPage = x?.meta?.pagination?.page + 1;
+          websiteContentCheck(dictionaryPage);
+        }
         setWebsiteContent(x.data);
         setIsLoading(false);
       })
@@ -244,11 +261,6 @@ function CountryItinararies(props) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  region,
-                  modifiedString
-                );
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -269,35 +281,35 @@ function CountryItinararies(props) {
     }
   };
 
-  const countryOptions = [
-    { value: "Asia", label: "Asia" },
-    { value: "Hong Kong & Macau", label: "Hong Kong & Macau" },
-    { value: "Malaysia & Borneo", label: "Malaysia & Borneo" },
-    { value: "Singapore", label: "Singapore" },
-    { value: "Indonesia", label: "Indonesia" },
-    { value: "Japan", label: "Japan" },
-    { value: "Cambodia", label: "Cambodia" },
-    { value: "Vietnam", label: "Vietnam" },
-    { value: "China", label: "China" },
-    { value: "Thailand", label: "Thailand" },
-    { value: "Burma", label: "Burma" },
-    { value: "Laos", label: "Laos" },
-  ];
+  // const countryOptions = [
+  //   { value: "Asia", label: "Asia" },
+  //   { value: "Hong Kong & Macau", label: "Hong Kong & Macau" },
+  //   { value: "Malaysia & Borneo", label: "Malaysia & Borneo" },
+  //   { value: "Singapore", label: "Singapore" },
+  //   { value: "Indonesia", label: "Indonesia" },
+  //   { value: "Japan", label: "Japan" },
+  //   { value: "Cambodia", label: "Cambodia" },
+  //   { value: "Vietnam", label: "Vietnam" },
+  //   { value: "China", label: "China" },
+  //   { value: "Thailand", label: "Thailand" },
+  //   { value: "Burma", label: "Burma" },
+  //   { value: "Laos", label: "Laos" },
+  // ];
 
   const monthOptions = [
-    { value: "All months", label: "All months" },
-    { value: "January", label: "January" },
-    { value: "February", label: "February" },
-    { value: "March", label: "March" },
-    { value: "April", label: "April" },
-    { value: "May", label: "May" },
-    { value: "June", label: "June" },
-    { value: "July", label: "July" },
-    { value: "August", label: "August" },
-    { value: "September", label: "September" },
-    { value: "October", label: "October" },
-    { value: "November", label: "November" },
-    { value: "December", label: "December" },
+    // { value: "All months", label: "All months" },
+    { value: "1", label: "January" },
+    { value: "2", label: "February" },
+    { value: "3", label: "March" },
+    { value: "4", label: "April" },
+    { value: "5", label: "May" },
+    { value: "6", label: "June" },
+    { value: "7", label: "July" },
+    { value: "8", label: "August" },
+    { value: "9", label: "September" },
+    { value: "10", label: "October" },
+    { value: "11", label: "November" },
+    { value: "12", label: "December" },
   ];
 
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
@@ -305,13 +317,6 @@ function CountryItinararies(props) {
   // const handleLoadMore = () => {
   //     setVisibleItems(prevVisibleItems => prevVisibleItems + itemsPerPage);
   // };
-
-  const handleOptionCountryChange = (selectedOption) => {
-    selectedOption = selectedOption.filter(
-      (i) => i.value !== "" && typeof i.value !== "undefined"
-    );
-    setSelectedOptionCountry(selectedOption);
-  };
 
   const showAlert = (message, type) => {
     setAlert({ message, type });
@@ -321,76 +326,142 @@ function CountryItinararies(props) {
     setAlert(null);
   };
 
-  const handleFilterClick = (item) => {
-    setAlert(null);
-    page = 0;
-    setItineraries([]);
-    setActiveItem(item);
-    loadMoreData(item);
+  const handleOptionReasonChange = (selectedOption) => {
+    selectedOption = selectedOption.filter(
+      (i) => i.value !== "" && typeof i.value !== "undefined"
+    );
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionReason(
+        selectedOption.filter((res) => res.value == "Show_all")
+      );
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionReason(
+        selectedOption.filter((res) => res.value != "Show_all")
+      );
+    } else {
+      setSelectedOptionReason(selectedOption);
+    }
   };
 
   const handleOptionRegionChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    setSelectedOptionRegion(selectedOption);
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionRegion(
+        selectedOption.filter((res) => res.value == "Show_all")
+      );
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionRegion(
+        selectedOption.filter((res) => res.value != "Show_all")
+      );
+    } else {
+      setSelectedOptionRegion(selectedOption);
+    }
   };
 
   const handleOptionMonthChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    setSelectedOptionMonth(selectedOption);
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionMonth(
+        selectedOption.filter((res) => res.value == "Show_all")
+      );
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionMonth(
+        selectedOption.filter((res) => res.value != "Show_all")
+      );
+    } else {
+      setSelectedOptionMonth(selectedOption);
+    }
+  };
+
+  const loadMoreData = (item) => {
+    if (
+      !selectedOptionReason?.length > 0 &&
+      !selectedOptionRegion?.length > 0 &&
+      !selectedOptionMonth?.length > 0
+    ) {
+      setIsLoading(true);
+      destinationService
+        .getCountryWiseItinerary(countrycode, page + 1, item, region)
+        .then((response) => {
+          setMetaData(response.meta.pagination);
+          // const responseTemp = [...response.data].sort(
+          //   (a, b) => a.attributes.serial_number - b.attributes.serial_number
+          // );
+          // const newItineraries = responseTemp;
+          const newItineraries = response.data;
+          if (newItineraries.length > 0) {
+            setItineraries((prevItineraries) =>
+              [...prevItineraries, ...newItineraries].reduce(
+                (accumulator, current) =>
+                  accumulator.some((item) => item.id === current.id)
+                    ? accumulator
+                    : [...accumulator, current],
+                [ ]
+              )
+            );
+            setPage(page + 1);
+          }
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+        });
+    } else {
+      setIsLoading(true);
+      destinationService
+        .ItineraryFilterOnCountryDetail(
+          selectedOptionReason,
+          selectedOptionRegion,
+          selectedOptionMonth,
+          item,
+          region,
+          page + 1
+        )
+        .then((response) => {
+          setMetaData(response.meta.pagination);
+          const newItineraries = response.data;
+          if (newItineraries.length > 0) {
+            setItineraries((prevItineraries) =>
+              [...prevItineraries, ...newItineraries].reduce(
+                (accumulator, current) =>
+                  accumulator.some((item) => item.id === current.id)
+                    ? accumulator
+                    : [...accumulator, current],
+                []
+              )
+            );
+            itineraries;
+            setPage(page + 1);
+          }
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+        });
+    }
   };
 
   function onSubmit(e) {
     e.preventDefault();
-    // console.log("Selected Countries:", selectedOptionCountry);
-    // console.log("Selected Regions:", selectedOptionRegion);
-    // console.log("Selected Months:", selectedOptionMonth);
-    console.log(e);
-    if (!e.destination && !e.reason && !e.month) {
+    //  ("Selected Countries:", selectedOptionCountry);
+    //  ("Selected Regions:", selectedOptionRegion);
+    //  ("Selected Months:", selectedOptionMonth);
+    if (
+      !selectedOptionReason.length > 0 &&
+      !selectedOptionRegion.length > 0 &&
+      !selectedOptionMonth.length > 0
+    ) {
       showAlert("Please select atleast one option", "error");
     } else {
-      router.push(
-        `advance-search?where=` +
-          e?.destination +
-          `&what=` +
-          e?.reason +
-          `&when=` +
-          e?.month
-      );
+      setItineraries([]);
+      page = 0;
+      loadMoreData(activeItem);
     }
   }
-
-  const loadMoreData = (item) => {
-    destinationService
-      .getCountryWiseItinerary(countrycode, page + 1, item, region)
-      .then((response) => {
-        setMetaData(response.meta.pagination);
-        // const responseTemp = [...response.data].sort(
-        //   (a, b) => a.attributes.serial_number - b.attributes.serial_number
-        // );
-        // const newItineraries = responseTemp;
-        const newItineraries = response.data;
-        if (newItineraries.length > 0) {
-          setItineraries((prevItineraries) =>
-            [...prevItineraries, ...newItineraries].reduce(
-              (accumulator, current) =>
-                accumulator.some((item) => item.id === current.id)
-                  ? accumulator
-                  : [...accumulator, current],
-              []
-            )
-          );
-          setPage(page + 1);
-        }
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-      });
-  };
 
   const generateDynamicLink = (item) => {
     return (
@@ -414,6 +485,14 @@ function CountryItinararies(props) {
           item?.attributes?.friendly_url
         }`
     );
+  };
+
+  const handleFilterClick = (item) => {
+    setAlert(null);
+    page = 0;
+    setItineraries([]);
+    setActiveItem(item);
+    loadMoreData(item);
   };
 
   const equalHeight = (resize) => {
@@ -445,7 +524,7 @@ function CountryItinararies(props) {
     if (!localStorage.getItem("websitecontent_uk")) {
       websiteContentCheck();
     }
-    setSelectedOptionCountry([]);
+    setSelectedOptionReason([]);
     setSelectedOptionRegion([]);
     setSelectedOptionMonth([]);
 
@@ -455,15 +534,40 @@ function CountryItinararies(props) {
     window.addEventListener("resize", equalHeight(true));
 
     destinationService.getPropertyTypeDropDown().then((x) => {
-      setAllRegion(
-        x.data?.map((item) => ({
-          //id: i.id,
+      let arrayOfObjects = [
+        {
+          property_type_code: "Show_all",
+          value: "Show_all",
+          label: "Everything",
+        },
+      ];
+      arrayOfObjects = [
+        ...arrayOfObjects,
+        ...x.data?.map((item) => ({
           property_type_code: item?.attributes?.property_type_code,
           value: item?.attributes?.property_type_name,
           label: item?.attributes?.property_type_name,
-        }))
-      );
+        })),
+      ];
+      setAllReason(arrayOfObjects);
     });
+
+    destinationService
+      .getRegions(countrycode)
+      .then((x) => {
+        debugger;
+        setAllRegions(
+          x.data[0]?.attributes?.regions?.data?.map((item) => ({
+            region_code: item?.attributes?.region_code,
+            value: item?.attributes?.region_name,
+            label: item?.attributes?.region_name,
+          }))),
+        setAllRegions(arrayOfObjects);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+      });
 
     // Using window.onload to detect full page load
     window.onload = () => {
@@ -533,11 +637,11 @@ function CountryItinararies(props) {
                                 isClearable={isClearable}
                                 isRtl={isRtl}
                                 isSearchable={isSearchable}
-                                value={selectedOptionCountry}
-                                onChange={handleOptionCountryChange}
+                                value={selectedOptionReason}
+                                onChange={handleOptionReasonChange}
                                 closeMenuOnSelect={false}
                                 hideSelectedOptions={false}
-                                options={countryOptions}
+                                options={allRegions}
                                 components={{
                                   Option: InputOption,
                                   MultiValue: CustomMultiValue,
@@ -557,7 +661,7 @@ function CountryItinararies(props) {
                                 styles={styles}
                                 closeMenuOnSelect={false}
                                 isSearchable={isSearchable}
-                                options={regionOptions}
+                                options={reasonOptions}
                                 isMulti
                                 value={selectedOptionRegion}
                                 onChange={handleOptionRegionChange}
@@ -569,22 +673,21 @@ function CountryItinararies(props) {
                             </div>
                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                               <Select
-                                placeholder="Filter by month"
+                                placeholder={"Filter by month"}
                                 className="select_container_country"
                                 classNamePrefix="select_country"
-                                // defaultValue={monthOptions[0]}
                                 isDisabled={isDisabled}
                                 isLoading={isLoader}
                                 isClearable={isClearable}
                                 styles={styles}
                                 isRtl={isRtl}
                                 isSearchable={isSearchable}
-                                name="color"
+                                //name="color"
                                 closeMenuOnSelect={false}
                                 options={monthOptions}
                                 hideSelectedOptions={false}
                                 isMulti
-                                // value={selectedOptionMonth}
+                                value={selectedOptionMonth}
                                 onChange={handleOptionMonthChange}
                                 components={{
                                   Option: InputOption,

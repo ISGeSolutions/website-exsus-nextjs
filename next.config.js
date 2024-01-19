@@ -10,8 +10,7 @@ const nextConfig = {
 
   async rewrites() {
     return [
-
-      //index page 
+      //index page
       { source: "/uk", destination: "/" },
       { source: "/us", destination: "/" },
       { source: "/asia", destination: "/" },
@@ -147,7 +146,8 @@ const nextConfig = {
         destination: "/country",
       },
       {
-        source: "/asia/destinations/:continent/:country/:countrySlug-itineraries",
+        source:
+          "/asia/destinations/:continent/:country/:countrySlug-itineraries",
         destination: "/country",
       },
       {
@@ -165,7 +165,8 @@ const nextConfig = {
         destination: "/country",
       },
       {
-        source: "/asia/destinations/:continent/:country/:countrySlug-when-to-go",
+        source:
+          "/asia/destinations/:continent/:country/:countrySlug-when-to-go",
         destination: "/country",
       },
       {
@@ -179,15 +180,18 @@ const nextConfig = {
         destination: "/country",
       },
       {
-        source: "/us/destinations/:continent/:country/:countrySlug-places-to-stay",
+        source:
+          "/us/destinations/:continent/:country/:countrySlug-places-to-stay",
         destination: "/country",
       },
       {
-        source: "/asia/destinations/:continent/:country/:countrySlug-places-to-stay",
+        source:
+          "/asia/destinations/:continent/:country/:countrySlug-places-to-stay",
         destination: "/country",
       },
       {
-        source: "/in/destinations/:continent/:country/:countrySlug-places-to-stay",
+        source:
+          "/in/destinations/:continent/:country/:countrySlug-places-to-stay",
         destination: "/country",
       },
 
@@ -208,7 +212,6 @@ const nextConfig = {
         source: "/in/destinations/:continent/:country",
         destination: "/country_details",
       },
-
 
       // region_details
       {
@@ -234,22 +237,21 @@ const nextConfig = {
       { source: "/asia/holiday-types", destination: "/holiday-types" },
       { source: "/in/holiday-types", destination: "/holiday-types" },
 
-
       // holidaytypeitineraries
       {
-        source: "/holiday-types/:holidaytypeitineraries",
+        source: "/holiday-types/:holidaytypeitineraries/:holidaytypeitineraries-itineraries",
         destination: "/holidaytypeitineraries",
       },
       {
-        source: "/us/holiday-types/:holidaytypeitineraries",
+        source: "/us/holiday-types/:holidaytypeitineraries/:holidaytypeitineraries-itineraries",
         destination: "/holidaytypeitineraries",
       },
       {
-        source: "/asia/holiday-types/:holidaytypeitineraries",
+        source: "/asia/holiday-types/:holidaytypeitineraries/:holidaytypeitineraries-itineraries",
         destination: "/holidaytypeitineraries",
       },
       {
-        source: "/in/holiday-types/:holidaytypeitineraries",
+        source: "/in/holiday-types/:holidaytypeitineraries/:holidaytypeitineraries-itineraries",
         destination: "/holidaytypeitineraries",
       },
 
@@ -271,11 +273,25 @@ const nextConfig = {
         destination: "/holidaytypeideas",
       },
 
-      // itinerarydetail
-      // { source: "/itinerarydetail", destination: "/itinerarydetail" },
-      // { source: "/us/itinerarydetail", destination: "/itinerarydetail" },
-      // { source: "/asia/itinerarydetail", destination: "/itinerarydetail" },
-      // { source: "/in/itinerarydetail", destination: "/itinerarydetail" },
+
+      // holidaytypegroups
+      {
+        source: "/holiday-types/:holidaytypegroup",
+        destination: "/holidaytypegroup",
+      },
+      {
+        source: "/us/holiday-types/:holidaytypegroup",
+        destination: "/holidaytypegroup",
+      },
+      {
+        source: "/asia/holiday-types/:holidaytypegroup",
+        destination: "/holidaytypegroup",
+      },
+      {
+        source: "/in/holiday-types/:holidaytypegroup",
+        destination: "/holidaytypegroup",
+      },
+
 
       // special-offers
       { source: "/special-offers", destination: "/special-offers" },
@@ -332,10 +348,25 @@ const nextConfig = {
       // special-offers
 
       // hotel-detail
-      { source: "/destinations/:continent/hotels/:country/:location/:hotelName", destination: "/hotel-detail" },
-      { source: "/us/destinations/:continent/hotels/:country/:location/:hotelName", destination: "/hotel-detail" },
-      { source: "/asia/destinations/:continent/hotels/:country/:location/:hotelName", destination: "/hotel-detail" },
-      { source: "/in/destinations/:continent/hotels/:country/:location/:hotelName", destination: "/hotel-detail" },
+      {
+        source: "/destinations/:continent/hotels/:country/:location/:hotelName",
+        destination: "/hotel-detail",
+      },
+      {
+        source:
+          "/us/destinations/:continent/hotels/:country/:location/:hotelName",
+        destination: "/hotel-detail",
+      },
+      {
+        source:
+          "/asia/destinations/:continent/hotels/:country/:location/:hotelName",
+        destination: "/hotel-detail",
+      },
+      {
+        source:
+          "/in/destinations/:continent/hotels/:country/:location/:hotelName",
+        destination: "/hotel-detail",
+      },
 
       // Blog
       { source: "/blog", destination: "/blog" },

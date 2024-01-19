@@ -12,12 +12,12 @@ export const creatintripsService = {
 };
 
 function getAllDropdown() {
-  // console.log('baseUrl_dropdown', baseUrl_dropdown);
+  //  ('baseUrl_dropdown', baseUrl_dropdown);
   // return fetchWrapper.get(baseUrl_dropdown);
 }
 
 function getAll() {
-  // console.log('baseUrl', baseUrl);
+  //  ('baseUrl', baseUrl);
   // return fetchWrapper.get(baseUrl);
 }
 

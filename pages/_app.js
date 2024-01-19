@@ -131,17 +131,15 @@ function App({ Component, pageProps }) {
     // on route change complete - run auth check
     router.events.on("routeChangeComplete", authCheck);
 
-    const identifier = "vidya@isgesolutions.com";
-    const password = "vpIsg@2023";
 
     // userService.login(identifier, password).then(x => {
-    //     console.log('x', x);
+    //      ('x', x);
     // });
 
-    // debugger;
+    //  
     setTimeout(() => {
-      $('.carousel').carousel({
-        interval: 250 * 10
+      $(".carousel").carousel({
+        interval: 250 * 10,
       });
     }, 2000);
 
@@ -150,8 +148,6 @@ function App({ Component, pageProps }) {
       router.events.off("routeChangeStart", hideContent);
       router.events.off("routeChangeComplete", authCheck);
     };
-
-
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -222,7 +218,11 @@ function App({ Component, pageProps }) {
         src="/assets/javascripts/card-slider.js"
       ></Script>
       {/* <Script id="card-slider-height" type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></Script> */}
-      <Script id="card-slider02" type="text/javascript" src="/assets/javascripts/card-slider02.js"></Script>
+      <Script
+        id="card-slider02"
+        type="text/javascript"
+        src="/assets/javascripts/card-slider02.js"
+      ></Script>
       {/* <script type="text/javascript" src="/assets/javascripts/card-slider-equal-height.js"></script> */}
       <script
         type="text/javascript"

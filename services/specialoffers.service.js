@@ -25,8 +25,8 @@ export const specialoffersService = {
   getOffersCustomePage,
 };
 
-function getAllOffers() {
-  const specialoffersUrl = `${publicRuntimeConfig.apiUrl}/api/special-offers?populate[0]=hotel&populate[hotel][fields][0]=hotel_code&populate[hotel][fields][1]=hotel_name&populate[hotel][populate][country][fields][2]=country_code&populate[hotel][populate][country][fields][3]=country_name&populate[hotel][populate][region][fields][4]=region_code&populate[hotel][populate][region][fields][5]=region_name&populate[hotel][populate][country][populate][destination][fields][6]=destination_code&populate[hotel][populate][country][populate][destination][fields][7]=destination_name`;
+function getAllOffers(region) {
+  const specialoffersUrl = `${publicRuntimeConfig.apiUrl}/api/special-offers?populate[0]=hotel&populate[hotel][populate][country][fields][0]=country_code&populate[hotel][populate][country][fields][1]=country_name&populate[hotel][populate][region][fields][2]=region_code&populate[hotel][populate][region][fields][3]=region_name&populate[hotel][populate][destination][fields][0]=destination_code&populate[hotel][populate][destination][fields][1]=destination_name&populate[hotel][populate][hotel_country_contents][filters][website_country][$eq]=${region}`;
   return fetchWrapper.get(specialoffersUrl);
 }
 

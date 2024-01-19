@@ -35,6 +35,7 @@ function Index() {
   const [subTitle, setSubTitle] = useState(null);
   const [backgroundImage, setBackgroundImage] = useState([]);
   const [activeItem, setActiveItem] = useState("recommended");
+  let dictionaryPage = 1;
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -51,16 +52,40 @@ function Index() {
     // router.push(regionWiseUrl + `/hotel-detail`);
     router.push(
       regionWiseUrl +
-        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-          ?.replace(/&/g, " and ")
-          .replace(/ /g, "-")
-          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${item?.attributes?.friendly_url}`
+    );
+  };
+
+  const generateDynamicLink = (res) => {
+    (res);
+    // return regionWiseUrl + `/hotel-detail`;
+    let hotelName = res?.attributes?.hotel?.data?.attributes?.friendly_url
+      ?.replace(/ /g, "-")
+      .toLowerCase()
+      .replace(/&/g, "and");
+    return (
+      regionWiseUrl +
+      `/destinations/${res?.attributes?.hotel?.data?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${res?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${item?.attributes?.friendly_url}`
+          .replace(
+            /&/g,
+            "and"
+          )}/${res?.attributes?.hotel?.data?.attributes?.region?.data?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -88,8 +113,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -119,16 +144,16 @@ function Index() {
           a.attributes.offer_text.localeCompare(b.attributes.offer_text)
         )
       );
-      // console.log(allCountries);
+      //  (allCountries);
     } else if (item == "recommended") {
       setAllOffers(allOffers.sort((a, b) => a.id - b.id));
-      // console.log(allCountries);
+      //  (allCountries);
     }
   };
 
-  const websiteContentCheck = () => {
+  const websiteContentCheck = (pageNo) => {
     homeService
-      .getAllWebsiteContent()
+      .getAllWebsiteContent(region, pageNo)
       .then((x) => {
         const response = x?.data;
 
@@ -155,9 +180,10 @@ function Index() {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
+            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
             localStorage.setItem(
               "websitecontent_uk",
-              JSON.stringify(dynamicObjectUk)
+              JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
             );
           }
           if (
@@ -166,9 +192,10 @@ function Index() {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
+            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
             localStorage.setItem(
               "websitecontent_us",
-              JSON.stringify(dynamicObjectUs)
+              JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
             );
           }
           if (
@@ -178,9 +205,10 @@ function Index() {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
+            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
             localStorage.setItem(
               "websitecontent_asia",
-              JSON.stringify(dynamicObjectAsia)
+              JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
             );
           }
           if (
@@ -190,13 +218,17 @@ function Index() {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
+            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
             localStorage.setItem(
               "websitecontent_india",
-              JSON.stringify(dynamicObjectIndia)
+              JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
             );
           }
         });
-
+        if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
+          dictionaryPage = x?.meta?.pagination?.page + 1
+          websiteContentCheck(dictionaryPage)
+        }
         setWebsiteContent(x.data);
         setIsLoading(false);
       })
@@ -208,6 +240,13 @@ function Index() {
 
   useEffect(() => {
     // userService.getAll().then(x => setUsers(x));
+
+    if (!localStorage.getItem(`websitecontent_${region.replace(
+      /in/g,
+      "INDIA"
+    ).toLowerCase()}`)) {
+      websiteContentCheck(dictionaryPage);
+    }
     const tooltipTriggerList = document.querySelectorAll(
       '[data-bs-toggle="tooltip"]'
     );
@@ -216,12 +255,12 @@ function Index() {
     );
 
     specialoffersService
-      .getAllOffers()
+      .getAllOffers(region)
       .then((x) => {
         setAllOffers(x.data);
         setFriendlyUrl(`home/special offers`);
       })
-      .catch((error) => {});
+      .catch((error) => { });
 
     specialoffersService
       .getOffersCustomePage()
@@ -303,10 +342,10 @@ function Index() {
             } catch (error) {
               if (error.message === "Loop break") {
                 // Handle the loop break here
-                // console.log("Loop has been stopped.");
+                //  ("Loop has been stopped.");
               } else if (error.message === "Region not found") {
                 // Handle the loop break here
-                // console.log("Loop has been stopped.");
+                //  ("Loop has been stopped.");
                 setLongText(modifiedString);
               }
             }
@@ -396,7 +435,7 @@ function Index() {
                 <div className="destinations_cntnt_blk">
                   <h2>{headingTag}</h2>
                   <p
-                    className="mb-4"
+                    // className="mb-4"
                     dangerouslySetInnerHTML={{ __html: longText }}
                   ></p>
                 </div>
@@ -420,7 +459,7 @@ function Index() {
                           }
                           onClick={() => handleFilterClick("recommended")}
                         >
-                          Recommended
+                          Exsus Recommends
                         </a>
                       </li>
                       <li>
@@ -451,9 +490,9 @@ function Index() {
                           <div className="card_slider">
                             <NavLink
                               key={res?.id}
-                              href={generateDynamicLink(res?.id)}
+                              href={generateDynamicLink(res)}
                             >
-                              {/* console.log error => Dont add anchor tag for the below element. you can use onclick fun. */}
+                              {/*   error => Dont add anchor tag for the below element. you can use onclick fun. */}
                               <span
                                 key={res?.id}
                                 href="#"
@@ -472,7 +511,7 @@ function Index() {
                             </NavLink>
                             <div className="card_slider_cnt places_to_stay_cnt">
                               <h4>
-                                {/* console.log error => Dont add anchor tag for the below element. you can use onclick fun. */}
+                                {/*   error => Dont add anchor tag for the below element. you can use onclick fun. */}
                                 <a
                                   key={res?.id}
                                   href={generateDynamicLink(res?.id)}
@@ -482,14 +521,46 @@ function Index() {
                               </h4>
                               <ul>
                                 <li>
-                                  Location: {res?.attributes?.subtitle_text}
+                                  Location:{" "}
+                                  {
+                                    res?.attributes?.hotel?.data?.attributes
+                                      ?.location
+                                  }
                                 </li>
-                                <li class="price_guide_tooltip">
-                                  Price guide:
-                                  <span data-title="£200-£350 per person per night">
-                                    £££<label>££</label>
-                                  </span>
-                                </li>
+                                {res?.attributes?.hotel?.data?.attributes?.hotel_country_contents?.data?.map(
+                                  (res) => {
+                                    return (
+                                      <li
+                                        className="price_guide_tooltip"
+                                        key={res?.id}
+                                      >
+                                        Price guide:
+                                        <span
+                                          key={res?.id}
+                                          tabIndex="0"
+                                          data-title={
+                                            res?.attributes?.price_guide_text
+                                          }
+                                        >
+                                          {res?.attributes?.currency_symbol.repeat(
+                                            Math.abs(
+                                              res?.attributes?.price_guide_value
+                                            )
+                                          )}
+                                          <label>
+                                            {res?.attributes?.currency_symbol.repeat(
+                                              Math.abs(
+                                                5 -
+                                                res?.attributes
+                                                  ?.price_guide_value
+                                              )
+                                            )}
+                                          </label>
+                                        </span>
+                                      </li>
+                                    );
+                                  }
+                                )}
                                 <li className="pink_text">
                                   Special offer: {res?.attributes?.title_text}
                                 </li>

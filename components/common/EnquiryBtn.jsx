@@ -26,7 +26,7 @@ function EnquiryButton() {
         router.push(regionWiseUrl + `/make-an-enquiry`); // Navigate to the /enquiry page
     };
 
-    const websiteContentCheck = (matches, region, modifiedString) => {
+    const websiteContentCheck = (matches, modifiedString) => {
         destinationService
             .getDictionaryDetails(matches, region)
             .then((responseObj) => {
@@ -79,7 +79,7 @@ function EnquiryButton() {
                     matches.forEach((match, index, matches) => {
                         const matchString = match.replace(/{|}/g, "");
                         if (!storedData[matchString]) {
-                            websiteContentCheck(matches, region, modifiedString);
+                            websiteContentCheck(matches, modifiedString);
                             throw new Error("Loop break");
                         } else {
                             replacement = storedData[matchString];
@@ -97,10 +97,10 @@ function EnquiryButton() {
                 } catch (error) {
                     if (error.message === "Loop break") {
                         // Handle the loop break here
-                        // console.log("Loop has been stopped.");
+                        //  ("Loop has been stopped.");
                     } else if (error.message === "Region not found") {
                         // Handle the loop break here
-                        // console.log("Loop has been stopped.");
+                        //  ("Loop has been stopped.");
                         SetTelePhoneNumber(modifiedString);
                     }
                 }

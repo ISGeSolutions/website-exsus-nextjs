@@ -49,7 +49,7 @@ function Index() {
     }
   }
 
-  const websiteContentCheck = (matches, region, modifiedString) => {
+  const websiteContentCheck = (matches, modifiedString) => {
     destinationService
       .getDictionaryDetails(matches, region)
       .then((responseObj) => {
@@ -88,8 +88,11 @@ function Index() {
     // const carousel = document.querySelector('#carouselExampleInterval');
     // new bootstrap.Carousel(carousel);
 
-    if (!localStorage.getItem("websitecontent_uk")) {
-      websiteContentCheck();
+    if (!localStorage.getItem(`websitecontent_${region.replace(
+      /in/g,
+      "INDIA"
+    ).toLowerCase()}`)) {
+      websiteContentCheck(dictionaryPage);
     }
     whyusService
       .getWhyusPage()
@@ -149,7 +152,6 @@ function Index() {
               matches.forEach((match, index, matches) => {
                 const matchString = match.replace(/{|}/g, "");
                 if (!storedData[matchString]) {
-                  websiteContentCheck(matches, region, modifiedString);
                   throw new Error("Loop break");
                 } else {
                   replacement = storedData[matchString];
@@ -167,10 +169,10 @@ function Index() {
             } catch (error) {
               if (error.message === "Loop break") {
                 // Handle the loop break here
-                // console.log("Loop has been stopped.");
+                //  ("Loop has been stopped.");
               } else if (error.message === "Region not found") {
                 // Handle the loop break here
-                // console.log("Loop has been stopped.");
+                //  ("Loop has been stopped.");
                 setLongText(modifiedString);
               }
             }
@@ -312,17 +314,17 @@ function Index() {
                     <div className="col-lg-4">
                       {/* <p
                         dangerouslySetInnerHTML={{
-                          _html: whyusDetails?.data?.filter(
+                          __html: whyusDetails?.content_value,
+                        }}
+                      /> */}
+                      {/* <p
+                        dangerouslySetInnerHTML={{
+                          __html: customPageData?.data?.filter(
                             (res) =>
                               res.attributes?.content_name == "Short_Text"
                           )[0]?.attributes?.content_value,
                         }}
-                      ></p> */}
-                      <p
-                        dangerouslySetInnerHTML={{
-                          __html: whyusDetails?.content_value,
-                        }}
-                      />
+                      /> */}
                       {/* <h3>Specialist Expertise</h3>
                                 <p>With over 20 years’ experience of creating incredible journeys and tailor-made luxury honeymoons, all around the world, our destination experts have first-hand experience of their dedicated areas and frequently travel to them to stay on top of what’s best, what’s new and what not to miss, so can advise you personally.</p> */}
                     </div>
@@ -349,7 +351,7 @@ function Index() {
 
                 <div className="row">
                   <div className="col-sm-6">
-                    <div className="card_blk_inr">
+                    <div className="card_blk_inr card_blk_overlay">
                       <NavLink href={`/destinations`}>
                         <img
                           src="images/about_us_card01.jpg"
@@ -387,7 +389,7 @@ function Index() {
                   </div>
 
                   <div className="col-sm-6">
-                    <div className="card_blk_inr">
+                    <div className="card_blk_inr card_blk_overlay">
                       <NavLink href={`/holiday-types`}>
                         <img
                           src="images/about_us_card02.jpg"

@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link, Spinner, Signup } from "components";
-import { destinationService, alertService, userService } from "services";
+import {
+  destinationService,
+  alertService,
+  userService,
+  homeService,
+} from "services";
 import { Inspireme } from "components";
 import Head from "next/head";
 import { NavLink } from "components";
@@ -10,18 +15,18 @@ import Image from "next/image";
 import Select, { components } from "react-select";
 import CustomMultiValue from "./CustomMultiValue";
 import { Alert } from "../../components";
+import Iframe from "react-iframe";
 
 export default RegionPlacesToStay;
 
 function RegionPlacesToStay(props) {
-  console.log(props);
+  props;
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(true);
   const [isDisabled, setIsDisabled] = useState(false);
   const [isLoader, setIsisLoader] = useState(false);
   const [isRtl, setIsRtl] = useState(false);
   const [regionData, setRegionData] = useState([]);
-  const [selectedOptionCountry, setSelectedOptionCountry] = useState(null);
   const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
   const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
   const [itineraries, setItineraries] = useState(null);
@@ -29,7 +34,7 @@ function RegionPlacesToStay(props) {
   const [destinationName, setdestinationName] = useState("");
   const itemsPerPage = 12; // Number of items to load per page
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
-  const [page, setPage] = useState(0); // Current page
+  let [page, setPage] = useState(0); // Current page
   const [metaData, setMetaData] = useState([]);
   const [dcode, setdcode] = useState();
   const [alert, setAlert] = useState(null);
@@ -37,6 +42,8 @@ function RegionPlacesToStay(props) {
   const [countryOptions, setAllCountries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeItem, setActiveItem] = useState("recommended");
+  let dictionaryPage = 1;
+
   const destinationcode = router?.query?.continent
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
@@ -50,60 +57,22 @@ function RegionPlacesToStay(props) {
     .replace(/-/g, " ")
     .toLowerCase();
 
-  const regionOptions = [
-    { value: "Everything", label: "Everything" },
-    { value: "Barefoot", label: "Barefoot" },
-    { value: "Beach", label: "Beach" },
-    { value: "Boutique hotel", label: "Boutique hotel" },
-    { value: "Chic design", label: "Chic design" },
-    { value: "Cultural Immersion", label: "Cultural Immersion" },
-    { value: "Eco tourism", label: "Eco tourism" },
-    { value: "Family-Friendly", label: "Family-Friendly" },
-    { value: "Food & Wine", label: "Food & Wine" },
-    { value: "Guiding", label: "Guiding" },
-    { value: "Hideaway", label: "Hideaway" },
-    { value: "Honeymoon", label: "Honeymoon" },
-    { value: "Lodge", label: "Lodge" },
-    { value: "Luxury hotel", label: "Luxury Hotel" },
-    { value: "Off the beaten track", label: "Off the beaten track" },
-    { value: "Owner run", label: "Owner run" },
-    { value: "Peace & quiet", label: "Peace & quiet" },
-    { value: "Private groups", label: "Private groups" },
-    { value: "Romantic", label: "Romantic" },
-    { value: "Rustic", label: "Rustic" },
-    { value: "Seriously special", label: "Seriously special" },
-    { value: "Service & Hospitality", label: "Service & Hospitality" },
-    { value: "Setting & Views", label: "Setting & Views" },
-    { value: "Snorkelling & Driving", label: "Snorkelling & Driving" },
-    { value: "Spa & Wellness", label: "Spa & Wellness" },
-    { value: "Unusal", label: "Unusal" },
-    { value: "Village life", label: "Village life" },
-    { value: "Walking & trekking", label: "Walking & trekking" },
-    { value: "Water activities", label: "Water activities" },
-    { value: "Wildlife & Nature", label: "Wildlife & Nature" },
-    { value: "Adventure", label: "Adventure" },
-    { value: "Couples", label: "Couples" },
-    { value: "Educational", label: "Educational" },
-    { value: "Multi-activity", label: "Multi-activity" },
-    { value: "Teenagers", label: "Teenagers" },
-    { value: "Landscapes & Scenery", label: "Landscapes & Scenery" },
-    { value: "City hotel", label: "City hotel" },
-  ];
+  const [regionOptions, setAllRegion] = useState([]);
 
   const monthOptions = [
-    { value: "All months", label: "All months" },
-    { value: "January", label: "January" },
-    { value: "February", label: "February" },
-    { value: "March", label: "March" },
-    { value: "April", label: "April" },
-    { value: "May", label: "May" },
-    { value: "June", label: "June" },
-    { value: "July", label: "July" },
-    { value: "August", label: "August" },
-    { value: "September", label: "September" },
-    { value: "October", label: "October" },
-    { value: "November", label: "November" },
-    { value: "December", label: "December" },
+    { value: "Show_all", label: "All months" },
+    { value: "1", label: "January" },
+    { value: "2", label: "February" },
+    { value: "3", label: "March" },
+    { value: "4", label: "April" },
+    { value: "5", label: "May" },
+    { value: "6", label: "June" },
+    { value: "7", label: "July" },
+    { value: "8", label: "August" },
+    { value: "9", label: "September" },
+    { value: "10", label: "October" },
+    { value: "11", label: "November" },
+    { value: "12", label: "December" },
   ];
 
   const width = "250px";
@@ -199,27 +168,38 @@ function RegionPlacesToStay(props) {
     loadMoreData(item);
   };
 
-  const handleOptionCountryChange = (selectedOption) => {
-    selectedOption = selectedOption.filter(
-      (i) => i.value !== "" && typeof i.value !== "undefined"
-    );
-    setSelectedOptionCountry(selectedOption);
-    // this.setState({ selectedOption }, () =>
-    // );
-  };
-
   const handleOptionRegionChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    setSelectedOptionRegion(selectedOption);
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionRegion(
+        selectedOption.filter((res) => res.value == "Show_all")
+      );
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionRegion(
+        selectedOption.filter((res) => res.value != "Show_all")
+      );
+    } else {
+      setSelectedOptionRegion(selectedOption);
+    }
   };
 
   const handleOptionMonthChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    setSelectedOptionMonth(selectedOption);
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionMonth(
+        selectedOption.filter((res) => res.value == "Show_all")
+      );
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionMonth(
+        selectedOption.filter((res) => res.value != "Show_all")
+      );
+    } else {
+      setSelectedOptionMonth(selectedOption);
+    }
   };
 
   const handleRedirect = (item) => {
@@ -234,57 +214,87 @@ function RegionPlacesToStay(props) {
   };
 
   const closeAlert = () => {
-    // console.log("closeAlert");
+    //  ("closeAlert");
     setAlert(null);
   };
 
   function onSubmit(e) {
     e.preventDefault();
-    // console.log("Selected Countries:", selectedOptionCountry);
-    // console.log("Selected Regions:", selectedOptionRegion);
-    // console.log("Selected Months:", selectedOptionMonth);
-    if (!e.destination && !e.reason && !e.month) {
+    //  ("Selected Countries:", selectedOptionCountry);
+    //  ("Selected Regions:", selectedOptionRegion);
+    //  ("Selected Months:", selectedOptionMonth);
+    if (!selectedOptionRegion.length > 0 && !selectedOptionMonth.length > 0) {
       showAlert("Please select atleast one option", "error");
     } else {
-      router.push(
-        `advance-search?where=` +
-          e?.destination +
-          `&what=` +
-          e?.reason +
-          `&when=` +
-          e?.month
-      );
+      setAllHotels([]);
+      page = 0;
+      loadMoreData(activeItem);
     }
   }
 
   const loadMoreData = (item) => {
-    destinationService
-      .getRegionWiseHotels(page + 1, regionName, item, region)
-      .then((response) => {
-        setMetaData(response.meta.pagination);
-        const newHotels = response?.data;
-        if (newHotels.length > 0) {
-          setAllHotels((prevItineraries) =>
-            [...prevItineraries, ...newHotels].reduce(
-              (accumulator, current) =>
-                accumulator.some((item) => item.id === current.id)
-                  ? accumulator
-                  : [...accumulator, current],
-              []
-            )
-          );
-          setPage(page + 1);
-        }
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-      });
+    if (!selectedOptionRegion?.length > 0 && !selectedOptionMonth?.length > 0) {
+      setIsLoading(true);
+
+      destinationService
+        .getRegionWiseHotels(page + 1, regionName, item, region)
+        .then((response) => {
+          setMetaData(response.meta.pagination);
+          const newHotels = response?.data;
+          if (newHotels.length > 0) {
+            setAllHotels((prevItineraries) =>
+              [...prevItineraries, ...newHotels].reduce(
+                (accumulator, current) =>
+                  accumulator.some((item) => item.id === current.id)
+                    ? accumulator
+                    : [...accumulator, current],
+                []
+              )
+            );
+            setPage(page + 1);
+          }
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+        });
+    } else {
+      setIsLoading(true);
+      destinationService
+        .HotelFilterOnRegionDetail(
+          selectedOptionRegion,
+          selectedOptionMonth,
+          item,
+          region,
+          page + 1
+        )
+        .then((response) => {
+          setMetaData(response.meta.pagination);
+          const newItineraries = response.data;
+          if (newItineraries.length > 0) {
+            setAllHotels((prevItineraries) =>
+              [...prevItineraries, ...newItineraries].reduce(
+                (accumulator, current) =>
+                  accumulator.some((item) => item.id === current.id)
+                    ? accumulator
+                    : [...accumulator, current],
+                []
+              )
+            );
+            itineraries;
+            setPage(page + 1);
+          }
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+        });
+    }
   };
 
-  const websiteContentCheck = () => {
+  const websiteContentCheck = (pageNo) => {
     homeService
-      .getAllWebsiteContent()
+      .getAllWebsiteContent(region, pageNo)
       .then((x) => {
         const response = x?.data;
 
@@ -311,9 +321,12 @@ function RegionPlacesToStay(props) {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
+            let localStorageUk = JSON.parse(
+              localStorage.getItem("websitecontent_uk")
+            );
             localStorage.setItem(
               "websitecontent_uk",
-              JSON.stringify(dynamicObjectUk)
+              JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
             );
           }
           if (
@@ -322,9 +335,12 @@ function RegionPlacesToStay(props) {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
+            let localStorageUS = JSON.parse(
+              localStorage.getItem("websitecontent_us")
+            );
             localStorage.setItem(
               "websitecontent_us",
-              JSON.stringify(dynamicObjectUs)
+              JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
             );
           }
           if (
@@ -334,9 +350,12 @@ function RegionPlacesToStay(props) {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
+            let localStorageAsia = JSON.parse(
+              localStorage.getItem("websitecontent_asia")
+            );
             localStorage.setItem(
               "websitecontent_asia",
-              JSON.stringify(dynamicObjectAsia)
+              JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
             );
           }
           if (
@@ -346,13 +365,19 @@ function RegionPlacesToStay(props) {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
+            let localStorageIndia = JSON.parse(
+              localStorage.getItem("websitecontent_india")
+            );
             localStorage.setItem(
               "websitecontent_india",
-              JSON.stringify(dynamicObjectIndia)
+              JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
             );
           }
         });
-
+        if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
+          dictionaryPage = x?.meta?.pagination?.page + 1;
+          websiteContentCheck(dictionaryPage);
+        }
         setWebsiteContent(x.data);
         setIsLoading(false);
       })
@@ -370,7 +395,7 @@ function RegionPlacesToStay(props) {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
+      //
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -385,7 +410,7 @@ function RegionPlacesToStay(props) {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
+        //
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -394,11 +419,6 @@ function RegionPlacesToStay(props) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  region,
-                  modifiedString
-                );
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -417,12 +437,15 @@ function RegionPlacesToStay(props) {
   };
 
   useEffect(() => {
-    if (!localStorage.getItem("websitecontent_uk")) {
-      websiteContentCheck();
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
+      websiteContentCheck(dictionaryPage);
     }
-    setSelectedOptionCountry();
-    setSelectedOptionRegion();
-    setSelectedOptionMonth();
+    setSelectedOptionRegion([]);
+    setSelectedOptionMonth([]);
 
     destinationService
       .getRegionByName(regionName)
@@ -434,25 +457,52 @@ function RegionPlacesToStay(props) {
         setIsLoading(false);
       });
 
-    destinationService
-      .getDestinationDetails(destinationcode)
-      .then((x) => {
-        setdestinationName(x.data.attributes.destination_name);
-        setAllCountries(
-          x.data?.attributes?.countries?.data.map((item) => ({
-            id: item.id,
-            country_code: item?.attributes?.country_code,
-            value: item?.attributes?.country_name,
-            label: item?.attributes?.country_name,
-          }))
-        );
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        // Handle any errors here
-        // console.error(error);
-        setIsLoading(false);
-      });
+    // destinationService
+    //   .getDestinationDetails(destinationcode)
+    //   .then((x) => {
+    //     setdestinationName(x.data.attributes.destination_name);
+    //     setAllCountries(
+    //       x.data?.attributes?.countries?.data.map((item) => ({
+    //         id: item.id,
+    //         country_code: item?.attributes?.country_code,
+    //         value: item?.attributes?.country_name,
+    //         label: item?.attributes?.country_name,
+    //       }))
+    //     );
+    //     setIsLoading(false);
+    //   })
+    //   .catch((error) => {
+    //     // Handle any errors here
+    //     // console.error(error);
+    //     setIsLoading(false);
+    //   });
+
+    destinationService.getPropertyTypeDropDown().then((x) => {
+      let arrayOfObjects = [
+        {
+          property_type_code: "Show_all",
+          value: "Show_all",
+          label: "Everything",
+        },
+      ];
+      arrayOfObjects = [
+        ...arrayOfObjects,
+        ...x.data?.map((item) => ({
+          property_type_code: item?.attributes?.property_type_code,
+          value: item?.attributes?.property_type_name,
+          label: item?.attributes?.property_type_name,
+        })),
+      ];
+      setAllRegion(arrayOfObjects);
+      // setAllRegion(
+      //   x.data?.map((item) => ({
+      //     //id: i.id,
+      //     property_type_code: item?.attributes?.property_type_code,
+      //     value: item?.attributes?.property_type_name,
+      //     label: item?.attributes?.property_type_name,
+      //   }))
+      // );
+    });
 
     loadMoreData(activeItem);
 
@@ -473,7 +523,7 @@ function RegionPlacesToStay(props) {
             ?.replace(/ /g, "-")
             .replace(/&/g, "and")
             .toLowerCase();
-        // debugger;
+        //
         if (redirectUrl) {
           router.push(redirectUrl);
         }
@@ -514,62 +564,60 @@ function RegionPlacesToStay(props) {
                 All recommended hotels in {regionName}
               </h3>
               <div className="card_slider_row">
-                <div className="carousel00 region_carousel00">
+                <div className="carousel00 region_carousel00 dropdown_width100">
                   <div className="row">
-                    <form onSubmit={onSubmit}>
-                      <div className="col-12">
+                    <div className="col-12">
+                      <form onSubmit={onSubmit}>
                         <div className="destination_dropdwn_row d-block d-md-flex">
-                          <div className="banner_dropdwn_blk">
-                            <Select
-                              placeholder="Filter by region"
-                              // defaultValue={regionOptions[0]}
-                              className="select_container_country"
-                              classNamePrefix="select_country"
-                              isDisabled={isDisabled}
-                              isLoading={isLoader}
-                              isClearable={isClearable}
-                              isRtl={isRtl}
-                              hideSelectedOptions={false}
-                              styles={styles}
-                              closeMenuOnSelect={false}
-                              isSearchable={isSearchable}
-                              name="color"
-                              options={regionOptions}
-                              isMulti
-                              // value={selectedOptionRegion}
-                              onChange={handleOptionRegionChange}
-                              components={{
-                                Option: InputOption,
-                                MultiValue: CustomMultiValue,
-                              }}
-                            />
+                          <div className="dropdown_grp_blk dropdown_grp_doubl">
+                            <div className="banner_dropdwn_blk">
+                              <Select
+                                placeholder={"Filter by region"}
+                                className="select_container_country"
+                                classNamePrefix="select_country"
+                                isDisabled={isDisabled}
+                                isLoading={isLoader}
+                                isClearable={isClearable}
+                                isRtl={isRtl}
+                                hideSelectedOptions={false}
+                                styles={styles}
+                                closeMenuOnSelect={false}
+                                isSearchable={isSearchable}
+                                options={regionOptions}
+                                isMulti
+                                value={selectedOptionRegion}
+                                onChange={handleOptionRegionChange}
+                                components={{
+                                  Option: InputOption,
+                                  MultiValue: CustomMultiValue,
+                                }}
+                              />
+                            </div>
+                            <div className="banner_dropdwn_blk ps-0 ps-md-2">
+                              <Select
+                                placeholder={"Filter by month"}
+                                className="select_container_country"
+                                classNamePrefix="select_country"
+                                isDisabled={isDisabled}
+                                isLoading={isLoader}
+                                isClearable={isClearable}
+                                styles={styles}
+                                isRtl={isRtl}
+                                isSearchable={isSearchable}
+                                name="color"
+                                closeMenuOnSelect={false}
+                                options={monthOptions}
+                                hideSelectedOptions={false}
+                                isMulti
+                                value={selectedOptionMonth}
+                                onChange={handleOptionMonthChange}
+                                components={{
+                                  Option: InputOption,
+                                  MultiValue: CustomMultiValue,
+                                }}
+                              />
+                            </div>
                           </div>
-                          <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                            <Select
-                              placeholder="Filter by month"
-                              className="select_container_country"
-                              classNamePrefix="select_country"
-                              // defaultValue={monthOptions[0]}
-                              isDisabled={isDisabled}
-                              isLoading={isLoader}
-                              isClearable={isClearable}
-                              styles={styles}
-                              isRtl={isRtl}
-                              isSearchable={isSearchable}
-                              name="color"
-                              closeMenuOnSelect={false}
-                              options={monthOptions}
-                              hideSelectedOptions={false}
-                              isMulti
-                              // value={selectedOptionMonth}
-                              onChange={handleOptionMonthChange}
-                              components={{
-                                Option: InputOption,
-                                MultiValue: CustomMultiValue,
-                              }}
-                            />
-                          </div>
-
                           <div className="banner_inspire_btn ps-0 ps-md-2">
                             <button
                               type="submit"
@@ -594,8 +642,8 @@ function RegionPlacesToStay(props) {
                             </button>
                           </div>
                         </div>
-                      </div>
-                    </form>
+                      </form>
+                    </div>
                     <div className="col-12">
                       <div className="destination_filter_result d-block d-lg-flex">
                         <p>
@@ -752,6 +800,46 @@ function RegionPlacesToStay(props) {
           </section>
         </div>
       )}
+      <div
+        className="modal fade"
+        id="placesToStayModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="exampleModalLabel">
+                All accomodation on Map
+              </h1>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <div className="modal_map_blk">
+                <Iframe
+                  width="640px"
+                  height="320px"
+                  id=""
+                  className=""
+                  display="block"
+                  src="https://www.google.com/maps/embed/v1/place?q=25.0930200000,55.1487400000&zoom=10&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE"
+                  position="relative"
+                  style="border:0;"
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

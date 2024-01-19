@@ -19,6 +19,7 @@ import { EnquiryButton } from "../../components/common/EnquiryBtn";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { formatPrice } from "../../components/utils/priceFormater";
 
 export default Index;
 
@@ -57,6 +58,7 @@ function Index() {
   const validationSchema = Yup.object().shape({
     destination: Yup.string(),
   });
+  let dictionaryPage = 1;
 
   const formOptions = { resolver: yupResolver(validationSchema) };
 
@@ -66,7 +68,6 @@ function Index() {
 
   const hcode = router?.query?.holidaytypeitineraries
     ?.replace(/-and-/g, " & ")
-    .replace(/-/g, " ")
     .toLowerCase();
 
   const width = "250px";
@@ -251,7 +252,7 @@ function Index() {
   };
 
   const closeAlert = () => {
-    // console.log("closeAlert");
+    //  ("closeAlert");
     setAlert(null);
   };
 
@@ -263,7 +264,17 @@ function Index() {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
-    setSelectedOptionDestination(selectedOption);
+    if (selectedOption[selectedOption.length - 1]?.value == "Show_all") {
+      setSelectedOptionDestination(
+        selectedOption.filter((res) => res.value == "Show_all")
+      );
+    } else if (selectedOption[0]?.value == "Show_all") {
+      setSelectedOptionDestination(
+        selectedOption.filter((res) => res.value != "Show_all")
+      );
+    } else {
+      setSelectedOptionDestination(selectedOption);
+    }
   };
 
   const handleFilterClick = (item) => {
@@ -359,7 +370,7 @@ function Index() {
         setIsLoading(false);
       });
   };
-  
+
   function onSubmit() {
     if (selectedOptionDestination.length == 0) {
       showAlert("Please select atleast one option", "error");
@@ -425,9 +436,9 @@ function Index() {
 
   equalHeight(true);
 
-  const websiteContentCheck = () => {
+  const websiteContentCheck = (pageNo) => {
     homeService
-      .getAllWebsiteContent()
+      .getAllWebsiteContent(region, pageNo)
       .then((x) => {
         const response = x?.data;
 
@@ -454,9 +465,12 @@ function Index() {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
+            let localStorageUk = JSON.parse(
+              localStorage.getItem("websitecontent_uk")
+            );
             localStorage.setItem(
               "websitecontent_uk",
-              JSON.stringify(dynamicObjectUk)
+              JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
             );
           }
           if (
@@ -465,9 +479,12 @@ function Index() {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
+            let localStorageUS = JSON.parse(
+              localStorage.getItem("websitecontent_us")
+            );
             localStorage.setItem(
               "websitecontent_us",
-              JSON.stringify(dynamicObjectUs)
+              JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
             );
           }
           if (
@@ -477,9 +494,12 @@ function Index() {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
+            let localStorageAsia = JSON.parse(
+              localStorage.getItem("websitecontent_asia")
+            );
             localStorage.setItem(
               "websitecontent_asia",
-              JSON.stringify(dynamicObjectAsia)
+              JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
             );
           }
           if (
@@ -489,13 +509,19 @@ function Index() {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
+            let localStorageIndia = JSON.parse(
+              localStorage.getItem("websitecontent_india")
+            );
             localStorage.setItem(
               "websitecontent_india",
-              JSON.stringify(dynamicObjectIndia)
+              JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
             );
           }
         });
-
+        if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
+          dictionaryPage = x?.meta?.pagination?.page + 1;
+          websiteContentCheck(dictionaryPage);
+        }
         setWebsiteContent(x.data);
         setIsLoading(false);
       })
@@ -535,11 +561,6 @@ function Index() {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  region,
-                  modifiedString
-                );
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -558,18 +579,25 @@ function Index() {
   };
 
   useEffect(() => {
-
-    if (!localStorage.getItem("websitecontent_uk")) {
-      websiteContentCheck();
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
+      websiteContentCheck(dictionaryPage);
     }
     setSelectedOptionDestination([]);
     holidaytypesService
       .getHolidaytypeDetails(hcode)
       .then((x) => {
+        setTitle(x.data[0].attributes.page_meta_title);
         setHolidaytypesDetails(x.data[0].attributes);
         setFriendlyUrl(
-          `home/holiday types/${x.data[0].attributes.friendly_url}`
+          `home/holiday types/${x.data[0].attributes.friendly_url}/${x.data[0].attributes.friendly_url}-itineraries`
         );
+        // setFriendlyUrl(
+        //   `home/holiday types/holidaytypegroup/${x.data[0].attributes.friendly_url}-itineraries`
+        // );
         setHolidayName(x.data[0].attributes.holiday_type_group_name);
         setTitle(x.data[0].attributes.page_meta_title);
 
@@ -585,37 +613,42 @@ function Index() {
           }
         });
         setBackgroundImage(newBackgroundImages);
-        console.log(newBackgroundImages);
+        newBackgroundImages;
         setIsLoading(false);
       })
       .catch((error) => {
         setIsLoading(false);
       });
 
-    holidaytypesService
-      .getHolidaytypeDetails(hcode)
-      .then((x) => {
-        setTitle(x.data.attributes.page_meta_title);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-      });
 
     holidaytypesService.getDestinationDropDown().then((x) => {
-      setAllDestination(
-        x.data?.map((item) => ({
-          //id: i.id,
+      let arrayOfObjects = [
+        {
+          destination_code: "Show_all",
+          value: "Show_all",
+          label: "Show all",
+        },
+      ];
+      arrayOfObjects = [
+        ...arrayOfObjects,
+        ...x.data?.map((item) => ({
           destination_code: item?.attributes?.destination_code,
           value: item?.attributes?.destination_name,
           label: item?.attributes?.destination_name,
-        }))
-      );
+        })),
+      ];
+      setAllDestination(arrayOfObjects);
     });
 
     loadMoreData(activeItem);
 
     window.addEventListener("resize", equalHeight(true));
+    setTimeout(() => {
+      // $('.carousel').carousel();
+      $(".carousel").carousel({
+        interval: 250 * 10,
+      });
+    }, 2000);
   }, [router, valueWithBr, hcode]);
 
   return (
@@ -670,7 +703,7 @@ function Index() {
                 {backgroundImage.map((imagePath, index) => (
                   // <img src={imagePath} alt="holiday_types_detls_card02" className="img-fluid" />
                   <NavLink
-                    href=""
+                    href="#"
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                     data-bs-interval="5000"
                   >
@@ -693,10 +726,16 @@ function Index() {
 
               <div className="destination_tab_inr">
                 <h2 className="tab_tilte">
-                  {holidaytypesDetails?.header_text}
+                  {dictioneryFunction(holidaytypesDetails?.header_text)}
                 </h2>
                 <div className="destinations_cntnt_blk destination_para pt-0">
-                  <p dangerouslySetInnerHTML={{ __html: valueWithBr }} />
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: dictioneryFunction(
+                        holidaytypesDetails?.overview_text
+                      ),
+                    }}
+                  />
                 </div>
               </div>
             </div>
@@ -712,7 +751,7 @@ function Index() {
                     <form onSubmit={handleSubmit(onSubmit)}>
                       <div className="col-12 col-md-8 col-lg-6 col-xl-5 m-auto">
                         <div className="destination_dropdwn_row d-block d-md-flex">
-                          <div className="banner_dropdwn_blk">
+                          <div className="banner_dropdwn_blk single_dropdwn_blk">
                             <Select
                               id="long-value-select"
                               instanceId="long-value-select"
@@ -875,10 +914,11 @@ function Index() {
                                     )
                                     .map((res1) => (
                                       <li key={res1.id}>
-                                        {`from ${
+                                        {`From ${
                                           res1.attributes?.currency_symbol ?? ""
                                         }${
-                                          res1.attributes?.price ?? " xxxx"
+                                          formatPrice(res1.attributes?.price) ??
+                                          " xxxx"
                                         } per person`}
                                       </li>
                                     ))}

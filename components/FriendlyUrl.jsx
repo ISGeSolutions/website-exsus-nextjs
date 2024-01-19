@@ -7,7 +7,7 @@ import { NavLink } from "components";
 
 export function FriendlyUrl(props) {
   const friendlyUrlArr = props?.data?.split("/");
-  // console.log(friendlyUrlArr);
+  //  (friendlyUrlArr);
   let routeUrl = "";
   // let regionWiseUrl = "/uk";
   // if (typeof window !== "undefined") {

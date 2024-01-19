@@ -36,7 +36,7 @@ function Index() {
     }
   }
 
-  const websiteContentCheck = (matches, region, modifiedString) => {
+  const websiteContentCheck = (matches, modifiedString) => {
     whyusService.destinationService(matches, region).then((responseObj) => {
       if (responseObj) {
         const res = responseObj?.data;
@@ -67,9 +67,9 @@ function Index() {
     //     setClientReviews(x.data);
 
     //     // Dictionary
-    //     debugger;
+    //      
     //     let modifiedString = x.data[0]?.attributes?.review_text;
-    //     console.log("modifiedString", modifiedString);
+    //      ("modifiedString", modifiedString);
     //     // Find and store matches in an array
     //     const regex = /{[a-zA-Z0-9-]+}/g;
     //     const matches = [...new Set(modifiedString.match(regex))];
@@ -115,14 +115,14 @@ function Index() {
 
     //           // Set the modified string in state
     //           setnewValueWithBr(modifiedString);
-    //           // console.log(modifiedString);
+    //           //  (modifiedString);
     //         } catch (error) {
     //           if (error.message === "Loop break") {
     //             // Handle the loop break here
-    //             // console.log("Loop has been stopped.");
+    //             //  ("Loop has been stopped.");
     //           } else if (error.message === "Region not found") {
     //             // Handle the loop break here
-    //             // console.log("Loop has been stopped.");
+    //             //  ("Loop has been stopped.");
     //             setnewValueWithBr(modifiedString);
     //           }
     //         }
@@ -194,7 +194,7 @@ function Index() {
               matches.forEach((match, index, matches) => {
                 const matchString = match.replace(/{|}/g, "");
                 if (!storedData[matchString]) {
-                  websiteContentCheck(matches, region, modifiedString);
+                  websiteContentCheck(matches, modifiedString);
                   throw new Error("Loop break");
                 } else {
                   replacement = storedData[matchString];
@@ -214,10 +214,10 @@ function Index() {
             } catch (error) {
               if (error.message === "Loop break") {
                 // Handle the loop break here
-                // console.log("Loop has been stopped.");
+                //  ("Loop has been stopped.");
               } else if (error.message === "Region not found") {
                 // Handle the loop break here
-                // console.log("Loop has been stopped.");
+                //  ("Loop has been stopped.");
                 setLongText(modifiedString);
               }
             }

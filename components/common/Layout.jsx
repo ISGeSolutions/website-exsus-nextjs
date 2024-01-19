@@ -77,7 +77,7 @@ function Layout({ children }) {
     if (window && window.site_region) {
       if (window.site_region !== "uk") {
         region = window.site_region;
-        console.log(region);
+        (region);
       }
     }
   }
@@ -107,7 +107,7 @@ function Layout({ children }) {
     const pathRouter = router.asPath;
     let myArray = [];
 
-    // debugger;
+    //  
     const regionArr = ["uk", "us", "asia", "in"];
     if (
       router.asPath === "/" ||
@@ -116,13 +116,13 @@ function Layout({ children }) {
       router.asPath === "/asia" ||
       router.asPath === "/in"
     ) {
-      // console.log("At least one string is found in the sentence.");
+      //  ("At least one string is found in the sentence.");
       myArray = pathRouter.split("/");
     } else if (isAnyStringInSentence(regionArr, router.asPath)) {
-      // console.log("At least one string is found in the sentence.");
+      //  ("At least one string is found in the sentence.");
       myArray = pathRouter.split("/");
     } else {
-      // console.log("None of the strings are found in the sentence.");
+      //  ("None of the strings are found in the sentence.");
       myArray[0] = "";
       myArray[1] = "uk";
       myArray = myArray.concat(pathRouter.split("/").slice(1));
@@ -329,6 +329,12 @@ function Layout({ children }) {
             </section>
             <section className="header_item_right d-flex d-lg-inline-block justify-content-end align-items-center">
               <div className="header_call_icn">
+                <NavLink href="make_an_enquiry.html" className="header_mail_icn">
+                  <em className="material-symbols-outlined" title="Make an enquiry">
+                    mail
+                  </em>
+                  <label className="d-none d-lg-block"></label>
+                </NavLink>
                 <NavLink href="tel:020 7337 9010">
                   <em className="material-symbols-outlined">call</em>
                   <span className="d-none d-lg-block">020 7337 9010</span>
@@ -368,8 +374,7 @@ function Layout({ children }) {
                   src="/images/abta_new_logo.png"
                   alt="Abta logo"
                   className="img-fluid"
-                />
-                {""}
+                />{" "}
               </NavLink>
               {/* <img
                 src="/images/abta_new_logo.png"
@@ -604,33 +609,33 @@ function Layout({ children }) {
               Conduct. We provide full financial protection for your money.
             </p>
             <p>
-              <strong>International Passenger Protection (IPP)</strong>In
-              accordance with the Passenger protection policy for insolvency
-              cover in respect of the Package Travel & Linked Travel Regulations
-              2018, all passengers booking with Exsus Travel are fully protected
-              for the initial deposit and subsequently the balance of all monies
-              paid to us, including repatriation costs, arising from
-              cancellation or curtailment of your travel arrangements due to the
-              insolvency of Exsus Travel. There is no requirement for financial
-              protection of day trips, and none is provided. Your booking is
-              insured by IPP Ltd and its panel of insurers. This insurance is
-              only valid for passengers who book and pay directly with Exsus
-              Travel. If you have booked and/or paid direct to a Travel Agent
-              for a holiday with Exsus Travel please request proof of how the
-              booking is secured as this will not be covered by IPP Ltd in this
-              instance.
+              <strong>International Passenger Protection (IPP)</strong>All
+              passengers booking with Exsus Travel Ltd are fully protected for
+              the initial deposit and subsequently the balance of all monies
+              received by us, including repatriation costs and arrangements,
+              arising from cancellation or curtailment of your single service
+              travel arrangements due to the insolvency of Exsus Travel Ltd.
               <span className="d-block pt-3"></span>
-              This insurance has been arranged by International Passenger
-              Protection Limited and underwritten by Liberty Mutual Insurance
-              Europe SE. For further information please go to{" "}
-              <NavLink href="#">www.ipplondon.co.uk</NavLink>
+              Exsus Travel Ltd has taken out an insurance provided by
+              International Passenger Protection Ltd (IPP) with Liberty Mutual
+              Insurance Europe SE (LMIE) trading as Liberty Specialty Markets, a
+              member of the Liberty Mutual Insurance Group. LMIE's registered
+              office: 5-7 rue Leon Laval, L-3372, Leudelange, Grand Duchy of
+              Luxembourg, Registered Number B232280 (Registre de Commerce et des
+              Sociétés). LMIE is a European public limited liability company and
+              is supervised by the Commissariat aux Assurances and licensed by
+              the Luxembourg Minister of Finance as an insurance and reinsurance
+              company. This insurance is only valid for passengers who book and
+              pay directly with/to Exsus Travel Ltd.
               <span className="d-block pt-3"></span>
-              Claims procedure: you must notify IPP as soon as practically
-              possible giving full details of what has happened quoting the name
-              of your Travel Operator to: IPP Claims at Cunningham Lindsey,
-              Oakleigh House, 14-15 Park Place, Cardiff, CF10 3DQ, United
-              Kingdom. Tel: +44 (0)345 266 1872.
+              In the event of our insolvency please make contact as soon as
+              practically possible giving full details of what has happened
+              quoting the name of your Travel Operator:
               <span className="d-block pt-3"></span>
+              IPP Claims at Sedgwick
+              <span className="d-block"></span>
+              Telephone: +44 (0)345 266 1872
+              <span className="d-block"></span>
               Email:{" "}
               <NavLink href="mailto:Insolvency-claims@ipplondon.co.uk">
                 Insolvency-claims@ipplondon.co.uk

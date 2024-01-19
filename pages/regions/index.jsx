@@ -21,6 +21,7 @@ function Index() {
   const [activeTab, setActiveTab] = useState("overview"); // State to track the active tab
   const router = useRouter();
   const regionid = router.query.region;
+  let dictionaryPage = 1;
   const [destinationName, setdestinationName] = useState("");
   const [metaTitle, setMetaTitle] = useState("");
   const [parentData, setParentData] = useState("");
@@ -45,6 +46,7 @@ function Index() {
     itineraries: useRef(null),
     "places-to-stay": useRef(null),
   };
+  let [isShowMap, setIsShowMap] = useState(true);
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -129,12 +131,18 @@ function Index() {
       "/" +
       regionName?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase();
     if (itemId == "overview") {
+      setIsShowMap(true);
+      handleTabClick("images");
       window.history.pushState(null, null, redirectUrl);
       text = regionName;
     } else if (itemId == "itineraries") {
+      setIsShowMap(false);
+      handleTabClick("images");
       window.history.pushState(null, null, redirectUrl);
       text = `TAILOR-MADE ${regionName} HOLIDAY ITINERARIES`;
     } else if (itemId == "places-to-stay") {
+      setIsShowMap(false);
+      handleTabClick("images");
       window.history.pushState(null, null, redirectUrl);
       text = `PLACES TO STAY IN ${regionName}`;
     } else {
@@ -153,8 +161,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -174,9 +182,9 @@ function Index() {
     }
   };
 
-  const websiteContentCheck = () => {
+  const websiteContentCheck = (pageNo) => {
     homeService
-      .getAllWebsiteContent()
+      .getAllWebsiteContent(region, pageNo)
       .then((x) => {
         const response = x?.data;
 
@@ -203,9 +211,10 @@ function Index() {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
+            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
             localStorage.setItem(
               "websitecontent_uk",
-              JSON.stringify(dynamicObjectUk)
+              JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
             );
           }
           if (
@@ -214,9 +223,10 @@ function Index() {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
+            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
             localStorage.setItem(
               "websitecontent_us",
-              JSON.stringify(dynamicObjectUs)
+              JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
             );
           }
           if (
@@ -226,9 +236,10 @@ function Index() {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
+            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
             localStorage.setItem(
               "websitecontent_asia",
-              JSON.stringify(dynamicObjectAsia)
+              JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
             );
           }
           if (
@@ -238,13 +249,17 @@ function Index() {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
+            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
             localStorage.setItem(
               "websitecontent_india",
-              JSON.stringify(dynamicObjectIndia)
+              JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
             );
           }
         });
-
+        if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
+          dictionaryPage = x?.meta?.pagination?.page + 1
+          websiteContentCheck(dictionaryPage)
+        }
         setWebsiteContent(x.data);
         setIsLoading(false);
       })
@@ -262,7 +277,7 @@ function Index() {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
+      //  
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -277,7 +292,7 @@ function Index() {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
+        //  
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -286,11 +301,7 @@ function Index() {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  region,
-                  modifiedString
-                );
+
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -302,7 +313,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -311,13 +322,28 @@ function Index() {
   equalHeight(true);
 
   useEffect(() => {
+    if (!localStorage.getItem(`websitecontent_${region.replace(
+      /in/g,
+      "INDIA"
+    ).toLowerCase()}`)) {
+      websiteContentCheck(dictionaryPage);
+    }
+    if (regionName != undefined && regionName != "undefined") {
+      localStorage.setItem("region_name", regionName);
+    }
+    if (destinationcode != undefined) {
+      localStorage.setItem("destination_code", destinationcode);
+    }
+    if (countrycode != undefined) {
+      localStorage.setItem("country_code", countrycode);
+    }
     window.scrollTo(0, 0);
     // destinationService.getAllItineraries().then(x => {
     //     setItineraries(x.data);
     // });
 
     // destinationService.getDestinationDetails(destinationcode).then((x) => {
-    //     setTitle(x.data.attributes.page_meta_title);
+    //   setHeadingText(x.data.attributes.page_meta_title);
     // });
 
     setFriendlyUrl(
@@ -328,6 +354,7 @@ function Index() {
       .getRegionByName(regionName)
       .then((x) => {
         setRegionData(x.data[0]);
+        setHeadingText(x.data[0]?.attributes?.region_name);
         const imageCheck = x.data[0].attributes.region_images.data;
         const newBackgroundImages = [];
 
@@ -361,7 +388,7 @@ function Index() {
 
     // destinationService.getDestinationDetails(destinationcode).then(x => {
     //     setDestinationDetails(x.data.attributes);
-    // console.log(x.data)
+    //  (x.data)
     //     setMetaTitle(x.data.attributes.page_meta_title);
     //     setHeadingText(x.data.attributes.page_meta_title);
     //     const map_latitude = x.data.attributes?.map_latitude;
@@ -407,6 +434,53 @@ function Index() {
         $(this).addClass("active");
       });
     });
+
+    window.onload = () => {
+      setTimeout(() => {
+        let reName = "";
+        let destName = "";
+        let countryName = "";
+        if (!regionName || regionName == "undefined") {
+          reName = localStorage.getItem("region_name");
+        } else {
+          reName = regionName;
+        }
+        if (!destinationcode) {
+          destName = localStorage.getItem("destination_code");
+        } else {
+          destName = destinationcode;
+        }
+        if (!countrycode) {
+          countryName = localStorage.getItem("country_code");
+        } else {
+          countryName = countrycode;
+        }
+        const redirectUrl =
+          regionWiseUrl +
+          "/destinations/" +
+          destName
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase() +
+          "/" +
+          countryName
+            ?.replace(/ /g, "-")
+            .replace(/and/g, "&")
+            .replace(/&/g, "and")
+            .toLowerCase() +
+          "/" +
+          reName?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase();
+
+        regionWiseUrl +
+          `/ destinations / ${destinationcode} /${countrycode?.replace(
+            / /g,
+            "-"
+          )}`;
+        if (redirectUrl) {
+          router.push(redirectUrl);
+        }
+      }, 0);
+    };
 
     window.addEventListener("resize", equalHeight(true));
     setTimeout(() => {
@@ -471,7 +545,7 @@ function Index() {
                 <div className="carousel-inner">
                   {backgroundImage.map((imagePath, index) => (
                     <a
-                      href="#"
+
                       key={index}
                       target="_blank"
                       className={`carousel-item ${index === 0 ? "active" : ""}`}
@@ -488,28 +562,29 @@ function Index() {
             ) : (
               ""
             )}
-            <div className="banner_tab_blk">
-              <button
-                className={`btn banner_map_tab ${
-                  activeButton === "map" ? "banner_tab_active" : ""
-                }`}
-                onClick={() => handleTabClick("map")}
-              >
-                Map
-              </button>
-              <button
-                className={`btn banner_img_tab ${
-                  activeButton === "images" ? "banner_tab_active" : ""
-                }`}
-                onClick={() => handleTabClick("images")}
-              >
-                Images
-              </button>
-            </div>
+            {isShowMap ? (
+              <div className="banner_tab_blk">
+                <button
+                  className={`btn banner_map_tab ${activeButton === "map" ? "banner_tab_active" : ""
+                    }`}
+                  onClick={() => handleTabClick("map")}
+                >
+                  Map
+                </button>
+                <button
+                  className={`btn banner_img_tab ${activeButton === "images" ? "banner_tab_active" : ""
+                    }`}
+                  onClick={() => handleTabClick("images")}
+                >
+                  Images
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
             <div
-              className={`banner_map_blk ${
-                activeButton === "map" ? "banner_map_active" : ""
-              }`}
+              className={`banner_map_blk ${activeButton === "map" ? "banner_map_active" : ""
+                }`}
             >
               <Iframe
                 width="640px"
@@ -531,7 +606,8 @@ function Index() {
           </section>
 
           <section className="destination_tab_row light_grey pb-0">
-            <div className="container" id="targetDiv">
+            <div className="container">
+              {/* id="targetDiv" */}
               <div className="bookmark_row">
                 <FriendlyUrl data={friendlyUrl} />
               </div>
@@ -565,7 +641,6 @@ function Index() {
                     >
                       Ovierview
                     </button>
-                    {/* <button onClick={handleUrlChange}>Change URL</button> */}
                   </li>
                   <li className="nav-item" role="presentation">
                     <button

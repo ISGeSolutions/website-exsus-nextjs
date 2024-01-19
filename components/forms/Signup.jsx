@@ -14,7 +14,7 @@ function Signup() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [alert, setAlert] = useState(null);
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   const router = useRouter();
 
@@ -36,7 +36,7 @@ function Signup() {
   };
 
   const closeAlert = () => {
-    console.log("closeAlert");
+    ("closeAlert");
     setAlert(null);
   };
 
@@ -61,14 +61,14 @@ function Signup() {
       },
     };
 
-    // return homeService.saveDataToDB(signupData)
+    // return  homeService.saveDataToDB(signupData)
     //     .then((res) => {
     return homeService
       .signUp(signupData)
       .then(() => {
         showAlert("Operation succeeded", "success");
         reset();
-        // return homeService.saveDataToDB(res)
+        // return  homeService.saveDataToDB(res)
         //     .then(() => {
         //         reset();
         //     })
@@ -96,9 +96,8 @@ function Signup() {
             placeholder="Full name and title"
             name="fullnameAndTitle"
             {...register("fullnameAndTitle")}
-            className={`form-control ${
-              errors.fullnameAndTitle ? "is-invalid" : ""
-            }`}
+            className={`form-control ${errors.fullnameAndTitle ? "is-invalid" : ""
+              }`}
           />
           <div className="invalid-feedback mb-1">
             {errors.fullnameAndTitle?.message}

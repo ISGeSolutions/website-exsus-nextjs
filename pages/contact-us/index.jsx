@@ -25,7 +25,6 @@ function Index() {
 
     return (
         <>
-
             <Layout>
                 <h3>This is contact us page!</h3>
             </Layout>

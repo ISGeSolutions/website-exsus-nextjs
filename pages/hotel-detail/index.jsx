@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { FriendlyUrl } from "../../components";
 import Iframe from "react-iframe";
 import Head from "next/head";
+//import $ from "jquery";
 
 var React = require("react");
 
@@ -15,11 +16,14 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { destinationService } from "../../services";
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
 
+var Carousel = require("react-responsive-carousel").Carousel;
+
 export default Index;
 
 function Index() {
   const [whyusDetails, setWhyusDetails] = useState(null);
   const [mapVariable, setMapVariable] = useState(null);
+  let dictionaryPage = 1;
 
   const router = useRouter();
   const hotelName = router?.query?.hotelName;
@@ -35,6 +39,12 @@ function Index() {
   const [isLoading, setIsLoading] = useState(true);
   const [location, setLocation] = useState({});
   const [friendlyUrl, setFriendlyUrl] = useState("");
+  const [moreItineraries, setMoreItineraries] = useState(null);
+  const [itineraries, setItineraries] = useState(null);
+  debugger;
+  const itin_name = router.query?.itineraryName
+    ? router.query?.itineraryName
+    : router.query?.itineraries?.toLowerCase();
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -47,48 +57,76 @@ function Index() {
     }
   }
 
+  // const generateDynamicLink = (item) => {
+  //   return (
+  //     regionWiseUrl +
+  //     `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
+  //   );
+  // };
+
+  // const handleRedirect = (item) => {
+  //   // const modifiedName = item.replace(/ /g, "-").toLowerCase();
+  //   router.push(
+  //     regionWiseUrl +
+  //       `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
+  //   );
+  // };
+
   const generateDynamicLink = (item) => {
+    let hotelName = item?.attributes?.friendly_url
+      ?.replace(/ /g, "-")
+      .toLowerCase()
+      .replace(/&/g, "and");
     return (
       regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
     );
   };
 
   const handleRedirect = (item) => {
-    // const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${item?.attributes?.friendly_url}`
+        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/&/g, " and ")
+          .replace(/ /g, "-")
+          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+              ?.replace(/ /g, "-")
+              .replace(/&/g, "and")
+              .toLowerCase()}/${item?.attributes?.friendly_url}`
     );
   };
 
-  // const generateDynamicLink = (item) => {
-  //   let locationCountry = item?.attributes?.location
-  //     ?.toLowerCase()
-  //     .replace(/&/g, "and");
-  //   let countryName = locationCountry.match(/\|(.+)/);
-  //   countryName = countryName ? countryName[1].trim() : null;
-  //   let location = locationCountry?.match(/(.+?)\|/);
-  //   location = location ? location[1].trim() : null;
-  //   let hotelName = item?.attributes?.friendly_url
-  //     ?.replace(/ /g, "-")
-  //     .toLowerCase()
-  //     .replace(/&/g, "and");
-  //   return (
-  //     regionWiseUrl +
-  //     `/destinations/${destinationcode
-  //       ?.replace(/&/g, " and ")
-  //       .replace(/ /g, "-")
-  //       .toLowerCase()}/hotels/${countryName?.replace(
-  //       / /g,
-  //       "-"
-  //     )}/${location?.replace(/ /g, "-")}/${hotelName}`
-  //   );
-  // };
-
   const websiteContentCheck = () => {
     homeService
-      .getAllWebsiteContent()
+      .getAllWebsiteContent(region, pageNo)
       .then((x) => {
         const response = x?.data;
 
@@ -115,9 +153,10 @@ function Index() {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
+            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
             localStorage.setItem(
               "websitecontent_uk",
-              JSON.stringify(dynamicObjectUk)
+              JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
             );
           }
           if (
@@ -126,9 +165,10 @@ function Index() {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
+            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
             localStorage.setItem(
               "websitecontent_us",
-              JSON.stringify(dynamicObjectUs)
+              JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
             );
           }
           if (
@@ -138,9 +178,10 @@ function Index() {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
+            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
             localStorage.setItem(
               "websitecontent_asia",
-              JSON.stringify(dynamicObjectAsia)
+              JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
             );
           }
           if (
@@ -150,13 +191,17 @@ function Index() {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
+            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
             localStorage.setItem(
               "websitecontent_india",
-              JSON.stringify(dynamicObjectIndia)
+              JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
             );
           }
         });
-
+        if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
+          dictionaryPage = x?.meta?.pagination?.page + 1
+          websiteContentCheck(dictionaryPage)
+        }
         setWebsiteContent(x.data);
         setIsLoading(false);
       })
@@ -174,7 +219,7 @@ function Index() {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
+      //  
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -189,7 +234,7 @@ function Index() {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
+        //  
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -198,11 +243,7 @@ function Index() {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  region,
-                  modifiedString
-                );
+
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -214,21 +255,33 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
   };
 
+  const specl_offer_hghtltd_btn = () => {
+    $(".specl_offer_hghtltd_expnded").slideDown();
+  };
+
+  const specl_offer_hghtltd_expnded = () => {
+    $(".specl_offer_hghtltd_expnded").slideUp();
+  };
+
   useEffect(() => {
-    if (!localStorage.getItem("websitecontent_uk")) {
-      websiteContentCheck();
+    if (!localStorage.getItem(`websitecontent_${region.replace(
+      /in/g,
+      "INDIA"
+    ).toLowerCase()}`)) {
+      websiteContentCheck(dictionaryPage);
     }
-    const carousel = document.querySelector("#carouselExampleInterval");
-    const carouselMain = document.querySelector("#carouselExampleIntervalMain");
-    if (carouselMain) {
-      new bootstrap.Carousel(carouselMain);
-    }
+
+    // const carousel = document.querySelector("#carouselExampleInterval");
+    // const carouselMain = document.querySelector("#carouselExampleIntervalMain");
+    // if (carouselMain) {
+    //   new bootstrap.Carousel(carouselMain);
+    // }
 
     destinationService
       .getHotelById(hotelName, region)
@@ -283,12 +336,40 @@ function Index() {
       .getRegionWiseHotelsInHotelDetail(regionName, region)
       .then((response) => {
         setAllHotels(response?.data);
-        console.log(response?.data);
+        (response?.data);
         setIsLoading(false);
       })
       .catch((error) => {
         setIsLoading(false);
       });
+
+    destinationService
+      .getItineraryDetails(itin_name, region)
+      .then((x) => {
+        debugger;
+        setItineraries(x.data[0]);
+
+        destinationService
+          .getMoreItineraries(
+            x?.data[0]?.attributes?.country?.data?.attributes?.country_name,
+            region
+          )
+          .then((response) => {
+            setMoreItineraries(response?.data);
+
+            setIsLoading(false);
+          })
+          .catch((error) => {
+            setIsLoading(false);
+          });
+
+        window.addEventListener("resize", equalHeight(true));
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+      });
+
     setTimeout(() => {
       // $('.carousel').carousel();
       $(".carousel").carousel({
@@ -322,55 +403,52 @@ function Index() {
       ) : (
         <div>
           <section className="banner_blk_row">
-            <div
-              id="carouselExampleInterval"
-              className="carousel slide"
-              data-bs-ride="carousel"
-            >
-              <div className="carousel-indicators">
-                {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
-                {backgroundImage.map((_, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    data-bs-target="#carouselExampleInterval"
-                    data-bs-slide-to={index}
-                    className={index === 0 ? "active" : ""}
-                    aria-current={index === 0 ? "true" : "false"}
-                    aria-label={`Slide ${index + 1}`}
-                  ></button>
-                ))}
+            {backgroundImage ? (
+              <div
+                id="carouselExampleInterval"
+                className="carousel slide"
+                data-bs-ride="carousel"
+              >
+                <div className="carousel-indicators">
+                  {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
+                  {backgroundImage.map((_, index) => (
+                    <button
+                      key={index}
+                      type="button"
+                      data-bs-target="#carouselExampleInterval"
+                      data-bs-slide-to={index}
+                      className={index === 0 ? "active" : ""}
+                      aria-current={index === 0 ? "true" : "false"}
+                      aria-label={`Slide ${index + 1}`}
+                    ></button>
+                  ))}
+                </div>
+                <div className="carousel-inner">
+                  {backgroundImage.map((imagePath, index) => (
+                    <NavLink
+                      key={index}
+                      // target="_blank"
+                      href="#"
+                      className={`carousel-item ${index === 0 ? "active" : ""}`}
+                      data-interval="5000"
+                    >
+                      <div
+                        className="banner_commn_cls"
+                        style={{ backgroundImage: `url(${imagePath})` }}
+                      ></div>
+                    </NavLink>
+                  ))}
+                </div>
               </div>
-              <div className="carousel-inner">
-                {backgroundImage.map((imagePath, index) => (
-                  <a
-                    key={index}
-                    target="_blank"
-                    className={`carousel-item ${index === 0 ? "active" : ""}`}
-                    data-bs-interval="5000"
-                  >
-                    <div
-                      className="banner_commn_cls"
-                      style={{ backgroundImage: `url(${imagePath})` }}
-                    ></div>
-                  </a>
-                ))}
-              </div>
-            </div>
+            ) : (
+              ""
+            )}
           </section>
 
           <section className="trvl_info_row">
             <div className="container">
               <div className="bookmark_row">
                 <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
-                {/* <ul>
-                            <li><a href="homepage.html">Home</a></li>
-                            <li><a href="destinations.html">Destinations</a></li>
-                            <li><a href="destination_detail.html">Asia</a></li>
-                            <li><a href="country_detail.html">China</a></li>
-                            <li><a href="region_detail.html">Beijing & Northern China</a></li>
-                            <li>Rosewood Beijing</li>
-                        </ul> */}
               </div>
 
               <div className="trvl_info_cntnt">
@@ -397,20 +475,96 @@ function Index() {
                       {hotelData?.hotel_country_contents?.data[0]?.attributes?.currency_symbol.repeat(
                         Math.abs(
                           5 -
-                            hotelData?.hotel_country_contents?.data[0]
-                              ?.attributes?.price_guide_value
+                          hotelData?.hotel_country_contents?.data[0]
+                            ?.attributes?.price_guide_value
                         )
                       )}
                     </label>
                   </span>
                 </p>
-                {/* <p className="mb-4">The Rosewood is a sanctuary of peace and comfort in the heart of one of the world’s most exciting cities: Beijing. The hotel combines a fantastic location with a world-className hotel experience, including five international restaurants, sleek, luxurious accommodation and personalised spa treatments. It sits in the glitzy neighbourhood of Chaoyang, which is famed for its shops and bars.</p> */}
+
                 <p
                   className="mb-4"
                   dangerouslySetInnerHTML={{ __html: hotelData?.video_url }}
                 />
               </div>
 
+              {hotelData?.special_offers?.data?.length > 0 ? (
+                <div className="specl_offer_hghtltd_blk">
+                  <button
+                    className="btn specl_offer_hghtltd_btn"
+                    onClick={specl_offer_hghtltd_btn}
+                  >
+                    {/* Special offer: save upto 20% off plus complimentary
+                    transfers and high tea */}
+                    Special offer:{" "}
+                    {hotelData?.special_offers?.data[0]?.attributes?.title_text}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="#ffffff"
+                      shape-rendering="geometricPrecision"
+                      text-rendering="geometricPrecision"
+                      image-rendering="optimizeQuality"
+                      className="up_arrow"
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      viewBox="0 0 512 266.77"
+                    >
+                      <path
+                        fill-rule="nonzero"
+                        d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"
+                      />
+                    </svg>
+                  </button>
+                  <div
+                    className="specl_offer_hghtltd_expnded"
+                    onClick={specl_offer_hghtltd_expnded}
+                  >
+                    <p
+                      className="mb-4"
+                      dangerouslySetInnerHTML={{
+                        __html:
+                          hotelData?.special_offers?.data[0]?.attributes
+                            ?.overview_text,
+                      }}
+                    ></p>
+                    {/* <p>
+                      Includes return road transfers to and from Harry Mwanga
+                      Nkumbula International Airport and complimentary high tea.
+                    </p>
+                    <p>Valid for stays until 15 December 2023.</p>
+                    <p>
+                      All offers are subject to availability at the time of
+                      booking, blackout dates, minimum stays may apply and room
+                      exclusions may apply. Terms and conditions apply.
+                    </p> */}
+                    <button
+                      className="btn itinery_btn read_more"
+                      fdprocessedid="wch0hj"
+                      title="Slide up"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="#000000"
+                        shape-rendering="geometricPrecision"
+                        text-rendering="geometricPrecision"
+                        image-rendering="optimizeQuality"
+                        className=""
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        viewBox="0 0 512 266.77"
+                      >
+                        <path
+                          fill-rule="nonzero"
+                          d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"
+                        ></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                ""
+              )}
               <section className="country_highlight_row itinery_hightlight_row mb-0">
                 <div className="row">
                   <div className="col-sm-9">
@@ -638,8 +792,7 @@ function Index() {
           <section className="favrites_blk_row">
             <div className="container">
               <h3 className="title_cls">
-                {/* PLACES TO STAY IN {countryData?.country_name} HANDPICKED BY
-                EXSUS */}
+                MORE PLACE TO STAY IN {hotelData.location}
               </h3>
               <div className="card_slider_row">
                 <i id="leftt">
@@ -661,9 +814,12 @@ function Index() {
                 </i>
                 <div className="carousel00">
                   {hotels?.map((item) => (
-                    <div className="card_slider_inr" key={item.id}>
+                    <div className="card_slider_inr">
                       <div className="card_slider">
-                        <NavLink href="" className="card_slider_img">
+                        <NavLink
+                          href={generateDynamicLink(item)}
+                          className="card_slider_img"
+                        >
                           {item?.attributes?.hotel_images?.data.map(
                             (element, index) =>
                               element.attributes.image_type == "thumbnail" ? (
@@ -685,19 +841,24 @@ function Index() {
                         </NavLink>
                         <div className="card_slider_cnt places_to_stay_cnt">
                           <h4>
-                            <a href="#">{item?.attributes?.hotel_name}</a>
+                            <a href={generateDynamicLink(item)}>
+                              {item?.attributes?.hotel_name}
+                              {item?.attributes?.hotel_name}
+                            </a>
                           </h4>
                           <ul>
                             <li>Location: {item?.attributes?.location}</li>
                             {item?.attributes?.hotel_country_contents?.data?.map(
                               (item) => {
                                 return (
-                                  <li>
+                                  <li className="price_guide_tooltip">
                                     Price guide:
                                     <span
                                       key={item?.id}
                                       tabIndex="0"
-                                      title={item?.attributes?.price_guide_text}
+                                      data-title={
+                                        item?.attributes?.price_guide_text
+                                      }
                                     >
                                       {item?.attributes?.currency_symbol.repeat(
                                         Math.abs(
@@ -708,8 +869,8 @@ function Index() {
                                         {item?.attributes?.currency_symbol.repeat(
                                           Math.abs(
                                             5 -
-                                              item?.attributes
-                                                ?.price_guide_value
+                                            item?.attributes
+                                              ?.price_guide_value
                                           )
                                         )}
                                       </label>
@@ -722,14 +883,20 @@ function Index() {
                             <li>
                               <p
                                 dangerouslySetInnerHTML={{
-                                  __html: item?.attributes?.intro_text,
+                                  __html: dictioneryFunction(
+                                    item?.attributes?.intro_text
+                                  ),
                                 }}
                               />
                             </li>
                             {/* <li>{item?.attributes?.intro_text}</li> */}
                             <li>
                               Best for:
-                              <span>{item?.attributes?.best_for_text}</span>
+                              <span>
+                                {dictioneryFunction(
+                                  item?.attributes?.best_for_text
+                                )}
+                              </span>
                             </li>
                           </ul>
                         </div>
@@ -791,3 +958,4 @@ function Index() {
     </>
   );
 }
+

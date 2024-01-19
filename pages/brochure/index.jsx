@@ -2,7 +2,12 @@ import { useState, useEffect } from "react";
 
 import { Link, Spinner } from "components";
 import { Layout } from "components/users";
-import { userService, contactusService, alertService, brochureService } from "services";
+import {
+  userService,
+  contactusService,
+  alertService,
+  brochureService,
+} from "services";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
@@ -140,6 +145,21 @@ function Index() {
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors } = formState;
 
+  let region = "uk";
+  let regionWiseUrl = "";
+  if (typeof window !== "undefined") {
+    if (window && window.site_region) {
+      if (window && window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+        region = window.site_region;
+      }
+    }
+  }
+
+  const generateDynamicLink = () => {
+    return regionWiseUrl + `/travel-agent-brochures`;
+  };
+
   function onSubmit(data) {
     return brochureService
       .sendBrochurerMail({ data })
@@ -152,13 +172,44 @@ function Index() {
       .catch(alertService.error);
   }
 
+  const handleMouseOver = () => {
+    document.querySelector('.captch_parnt_blk').classList.add('captch_opn');
+  };
+
+  const handleMouseOverReset = () => {
+    document.querySelector('.captch_parnt_blk').classList.remove('captch_opn');
+  };
+
+  useEffect(() => {
+    const captchIcnBlk = document.querySelector('.captch_icn_blk');
+    const otherElements = document.querySelectorAll('.brochure_header_row, .contact_form_row .brochure_form_row, .brochure_testimonial_row');
+
+    captchIcnBlk.addEventListener('mouseover', handleMouseOver);
+
+    otherElements.forEach(element => {
+      element.addEventListener('mouseover', handleMouseOverReset);
+    });
+
+    return () => {
+      captchIcnBlk.removeEventListener('mouseover', handleMouseOver);
+
+      otherElements.forEach(element => {
+        element.removeEventListener('mouseover', handleMouseOverReset);
+      });
+    };
+  }, []);
+
   return (
     <>
       <Head>
         <title>Request Brochure - Exsus Travel</title>
+        <script
+          type="text/javascript"
+          src="/assets/javascripts/bootstrap.min.js"
+        ></script>
       </Head>
       <Layout>
-        <header className="brochure_header_row">
+        <header className="brochure_header_row brochure_header_extr_cls">
           <div className="container">
             <img
               src="images/brochure_header_img.jpg"
@@ -173,13 +224,19 @@ function Index() {
               crafted by our knowledgeable and experienced experts.
             </p>
             <p>
-              Below, please specify how many brochures you would like up to the
-              quantity of four, if you require a digital version only please
-              select this option. A digital version will also be sent out to all
-              agents who request brochures in the post.
+              In order to help reduce our impact on the environment, we will
+              only be sending out digital copies of the brochure. To request
+              yours, please provide the information below and one will be sent
+              to you straight away.
+            </p>
+            <p>
+              If you're a Travel Agent, please{" "}
+              <a href={generateDynamicLink()}>click here</a> .
+              {/* <a href="/brochure-request-trade">click here</a> . */}
             </p>
           </div>
         </header>
+
         <main className="contact_form_row brochure_form_row">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="container">
@@ -452,6 +509,46 @@ function Index() {
               </div>
             </div>
           </form>
+          <section className="captch_parnt_blk">
+            <div className="captch_icn_blk">
+              <img src="\assets\images\captcha.png" alt="captcha" />
+              <div className="captch_links_blk">
+                <a
+                  href="https://www.google.com/intl/en/policies/privacy/"
+                  target="_blank"
+                >
+                  Privacy
+                </a>{" "}
+                <span>-</span>{" "}
+                <a
+                  href="https://www.google.com/intl/en/policies/terms/"
+                  target="_blank"
+                >
+                  Terms
+                </a>
+              </div>
+            </div>
+            <div className="captch_contnt_blk">
+              <span>
+                protected by <strong>reCAPTCHA</strong>
+              </span>
+              <div className="captch_links_blk">
+                <a
+                  href="https://www.google.com/intl/en/policies/privacy/"
+                  target="_blank"
+                >
+                  Privacy
+                </a>{" "}
+                <span>-</span>{" "}
+                <a
+                  href="https://www.google.com/intl/en/policies/terms/"
+                  target="_blank"
+                >
+                  Terms
+                </a>
+              </div>
+            </div>
+          </section>
         </main>
         <section className="brochure_testimonial_row">
           <div className="container">

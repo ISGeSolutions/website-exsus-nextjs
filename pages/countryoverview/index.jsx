@@ -14,7 +14,8 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
   const [countryData, setCountryData] = useState(dataToChild);
   // const { overview_text } = props?.data || {};
-  // console.log(props?.data);
+  //  (props?.data);
+  let dictionaryPage = 1;
 
   const countrycode = router.query?.country
     ?.replace(/-/g, " ")
@@ -96,12 +97,12 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${hotelName}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -112,16 +113,16 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
       .replace(/&/g, "and");
     router.push(
       regionWiseUrl +
-        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-          ?.replace(/&/g, " and ")
-          .replace(/ /g, "-")
-          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${hotelName}`
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -135,8 +136,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}-itineraries/${
-        item?.attributes?.friendly_url
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url
       }`
     );
   };
@@ -148,18 +148,17 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-          ?.replace(/&/g, " and ")
-          .replace(/ /g, "-")
-          .toLowerCase()}/itinerary/${countryName}-itineraries/${
-          item?.attributes?.friendly_url
-        }`
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url
+      }`
     );
   };
 
-  const websiteContentCheck = () => {
+  const websiteContentCheck = (pageNo) => {
     homeService
-      .getAllWebsiteContent()
+      .getAllWebsiteContent(region, pageNo)
       .then((x) => {
         const response = x?.data;
 
@@ -186,9 +185,12 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
+            let localStorageUk = JSON.parse(
+              localStorage.getItem("websitecontent_uk")
+            );
             localStorage.setItem(
               "websitecontent_uk",
-              JSON.stringify(dynamicObjectUk)
+              JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
             );
           }
           if (
@@ -197,9 +199,12 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
+            let localStorageUS = JSON.parse(
+              localStorage.getItem("websitecontent_us")
+            );
             localStorage.setItem(
               "websitecontent_us",
-              JSON.stringify(dynamicObjectUs)
+              JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
             );
           }
           if (
@@ -209,9 +214,12 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
+            let localStorageAsia = JSON.parse(
+              localStorage.getItem("websitecontent_asia")
+            );
             localStorage.setItem(
               "websitecontent_asia",
-              JSON.stringify(dynamicObjectAsia)
+              JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
             );
           }
           if (
@@ -221,13 +229,19 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
+            let localStorageIndia = JSON.parse(
+              localStorage.getItem("websitecontent_india")
+            );
             localStorage.setItem(
               "websitecontent_india",
-              JSON.stringify(dynamicObjectIndia)
+              JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
             );
           }
         });
-
+        if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
+          dictionaryPage = x?.meta?.pagination?.page + 1;
+          websiteContentCheck(dictionaryPage);
+        }
         setWebsiteContent(x.data);
         setIsLoading(false);
       })
@@ -245,7 +259,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
 
       let storedDataString = "";
       let storedData = "";
-      // debugger;
+      //
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -260,7 +274,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        // debugger;
+        //
         // You can access it using localStorage.getItem('yourKey')
         if (matches) {
           let replacement = "";
@@ -268,11 +282,6 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  region,
-                  modifiedString
-                );
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -298,8 +307,12 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
   equalHeight(true);
 
   useEffect(() => {
-    if (!localStorage.getItem("websitecontent_uk")) {
-      websiteContentCheck();
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
+      websiteContentCheck(dictionaryPage);
     }
     destinationService
       .getCountryFavItineraries(countryData?.country_name, region)
@@ -312,7 +325,6 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
       });
 
     // setAllExecutives(x.data);
-
     destinationService
       .getCountryFavHotels(countryData?.country_name, region)
       .then((x) => {
@@ -359,7 +371,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
               />
             </section>
             <section className="country_highlight_row">
-              <div class="country_highlight_inr">
+              <div className="country_highlight_inr">
                 <p
                   dangerouslySetInnerHTML={{
                     __html: dictioneryFunction(countryData?.country_highlights),
@@ -442,11 +454,9 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                               )
                               .map((res1) => (
                                 <li key={res1.id}>
-                                  {`from ${
-                                    res1.attributes?.currency_symbol ?? ""
-                                  }${
-                                    res1.attributes?.price ?? " xxxx"
-                                  } per person`}
+                                  {`From ${res1.attributes?.currency_symbol ?? ""
+                                    }${res1.attributes?.price ?? " xxxx"
+                                    } per person`}
                                 </li>
                               ))}
                             <li>
@@ -551,11 +561,16 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                             {item?.attributes?.hotel_country_contents?.data?.map(
                               (item) => {
                                 return (
-                                  <li>
+                                  <li
+                                    className="price_guide_tooltip"
+                                    key={item?.id}
+                                  >
                                     Price guide:
                                     <span
                                       tabIndex="0"
-                                      title={item?.attributes?.price_guide_text}
+                                      data-title={
+                                        item?.attributes?.price_guide_text
+                                      }
                                     >
                                       {item?.attributes?.currency_symbol.repeat(
                                         Math.abs(
@@ -566,8 +581,8 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                                         {item?.attributes?.currency_symbol.repeat(
                                           Math.abs(
                                             5 -
-                                              item?.attributes
-                                                ?.price_guide_value
+                                            item?.attributes
+                                              ?.price_guide_value
                                           )
                                         )}
                                       </label>
@@ -591,11 +606,11 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                           </ul>
                         </div>
                         <button
-                          className="btn card_slider_btn justify-content-end"
+                          className="btn card_slider_btn justify-content-end light_grey_btn_bg"
                           onClick={() => handleRedirect1(item)}
                         >
                           <span className="view_itnry_link">
-                            View this hotel
+                            View hotel
                             <em className="fa-solid fa-chevron-right"></em>
                           </span>
                         </button>
