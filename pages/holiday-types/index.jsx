@@ -137,7 +137,7 @@ function Index() {
                   holiday_type_name:
                     elementMain?.attributes?.holiday_type_group_name,
                   image_path: element?.attributes.image_path,
-                  friendly_url: elementMain?.attributes.friendly_url
+                  friendly_url: elementMain?.attributes.friendly_url,
                 };
 
                 thumbnailImageArr.push(objThumbnail);
