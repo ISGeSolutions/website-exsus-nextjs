@@ -16,6 +16,9 @@ var React = require("react");
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { destinationService } from "../../services";
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
+import { formatPrice } from "../../components/utils/priceFormater";
+
+var Carousel = require("react-responsive-carousel").Carousel;
 
 export default Index;
 
@@ -38,6 +41,11 @@ function Index() {
   const [isLoading, setIsLoading] = useState(true);
   const [location, setLocation] = useState({});
   const [friendlyUrl, setFriendlyUrl] = useState("");
+  const [moreItineraries, setMoreItineraries] = useState(null);
+  const [itineraries, setItineraries] = useState(null);
+  const itin_name = router.query?.itineraryName
+    ? router.query?.itineraryName
+    : router.query?.itineraries?.toLowerCase();
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -76,32 +84,64 @@ function Index() {
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
     );
   };
 
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
-        .replace(/ /g, "-")
-        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/&/g, " and ")
+          .replace(/ /g, "-")
+          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${item?.attributes?.friendly_url}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.friendly_url}`
     );
   };
 
-  const websiteContentCheck = (pageNo) => {
+  const generateDynamicLinkForItinerary = (item) => {
+    return (
+      regionWiseUrl +
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/itinerary/${item?.attributes?.country?.data?.attributes?.country_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}-itineraries/${item?.attributes?.friendly_url}`
+    );
+  };
+
+  const handleRedirectForItinerary = (item) => {
+    return (
+      regionWiseUrl +
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/itinerary/${item?.attributes?.country?.data?.attributes?.country_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}-itineraries/${item?.attributes?.friendly_url}`
+    );
+  };
+
+  const websiteContentCheck = () => {
     homeService
       .getAllWebsiteContent(region, pageNo)
       .then((x) => {
@@ -130,7 +170,9 @@ function Index() {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
-            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
+            let localStorageUk = JSON.parse(
+              localStorage.getItem("websitecontent_uk")
+            );
             localStorage.setItem(
               "websitecontent_uk",
               JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
@@ -142,7 +184,9 @@ function Index() {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
-            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
+            let localStorageUS = JSON.parse(
+              localStorage.getItem("websitecontent_us")
+            );
             localStorage.setItem(
               "websitecontent_us",
               JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
@@ -155,7 +199,9 @@ function Index() {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
-            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
+            let localStorageAsia = JSON.parse(
+              localStorage.getItem("websitecontent_asia")
+            );
             localStorage.setItem(
               "websitecontent_asia",
               JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
@@ -168,7 +214,9 @@ function Index() {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
-            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
+            let localStorageIndia = JSON.parse(
+              localStorage.getItem("websitecontent_india")
+            );
             localStorage.setItem(
               "websitecontent_india",
               JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
@@ -176,8 +224,8 @@ function Index() {
           }
         });
         if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
-          dictionaryPage = x?.meta?.pagination?.page + 1
-          websiteContentCheck(dictionaryPage)
+          dictionaryPage = x?.meta?.pagination?.page + 1;
+          websiteContentCheck(dictionaryPage);
         }
         setWebsiteContent(x.data);
         setIsLoading(false);
@@ -196,7 +244,7 @@ function Index() {
 
       let storedDataString = "";
       let storedData = "";
-      //  
+      //
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -211,7 +259,7 @@ function Index() {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        //  
+        //
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -220,7 +268,6 @@ function Index() {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -232,7 +279,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -247,23 +294,23 @@ function Index() {
   };
 
   useEffect(() => {
-    if (!localStorage.getItem(`websitecontent_${region.replace(
-      /in/g,
-      "INDIA"
-    ).toLowerCase()}`)) {
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
       websiteContentCheck(dictionaryPage);
     }
 
-    const carousel = document.querySelector("#carouselExampleInterval");
-    const carouselMain = document.querySelector("#carouselExampleIntervalMain");
-    if (carouselMain) {
-      new bootstrap.Carousel(carouselMain);
-    }
+    // const carousel = document.querySelector("#carouselExampleInterval");
+    // const carouselMain = document.querySelector("#carouselExampleIntervalMain");
+    // if (carouselMain) {
+    //   new bootstrap.Carousel(carouselMain);
+    // }
 
     destinationService
       .getHotelById(hotelName, region)
       .then((x) => {
-        // setWhyusDetails(x.data.attributes);
         setFriendlyUrl(
           `home/destinations/${router.query?.continent}/${router.query?.country}/${regionName}/${router.query?.hotelName}`
         );
@@ -346,6 +393,43 @@ function Index() {
         setIsLoading(false);
       });
 
+    destinationService
+      .getRegionWiseItinerariesInHotelDetail(region, regionName)
+      .then((response) => {
+        setMoreItineraries(response?.data);
+
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+      });
+
+    // destinationService
+    //   .getItineraryDetails(itin_name, region)
+    //   .then((x) => {
+    //     setItineraries(x.data[0]);
+
+    //     destinationService
+    //       .getMoreItineraries(
+    //         x?.data[0]?.attributes?.country?.data?.attributes?.country_name,
+    //         region
+    //       )
+    //       .then((response) => {
+    //         setMoreItineraries(response?.data);
+
+    //         setIsLoading(false);
+    //       })
+    //       .catch((error) => {
+    //         setIsLoading(false);
+    //       });
+
+    //     window.addEventListener("resize", equalHeight(true));
+    //     setIsLoading(false);
+    //   })
+    //   .catch((error) => {
+    //     setIsLoading(false);
+    //   });
+
     setTimeout(() => {
       // $('.carousel').carousel();
       $(".carousel").carousel({
@@ -379,55 +463,52 @@ function Index() {
       ) : (
         <div>
           <section className="banner_blk_row">
-            <div
-              id="carouselExampleInterval"
-              className="carousel slide"
-              data-bs-ride="carousel"
-            >
-              <div className="carousel-indicators">
-                {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
-                {backgroundImage.map((_, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    data-bs-target="#carouselExampleInterval"
-                    data-bs-slide-to={index}
-                    className={index === 0 ? "active" : ""}
-                    aria-current={index === 0 ? "true" : "false"}
-                    aria-label={`Slide ${index + 1}`}
-                  ></button>
-                ))}
+            {backgroundImage ? (
+              <div
+                id="carouselExampleInterval"
+                className="carousel slide"
+                data-bs-ride="carousel"
+              >
+                <div className="carousel-indicators">
+                  {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
+                  {backgroundImage.map((_, index) => (
+                    <button
+                      key={index}
+                      type="button"
+                      data-bs-target="#carouselExampleInterval"
+                      data-bs-slide-to={index}
+                      className={index === 0 ? "active" : ""}
+                      aria-current={index === 0 ? "true" : "false"}
+                      aria-label={`Slide ${index + 1}`}
+                    ></button>
+                  ))}
+                </div>
+                <div className="carousel-inner">
+                  {backgroundImage.map((imagePath, index) => (
+                    <NavLink
+                      key={index}
+                      // target="_blank"
+                      href="#"
+                      className={`carousel-item ${index === 0 ? "active" : ""}`}
+                      data-interval="5000"
+                    >
+                      <div
+                        className="banner_commn_cls"
+                        style={{ backgroundImage: `url(${imagePath})` }}
+                      ></div>
+                    </NavLink>
+                  ))}
+                </div>
               </div>
-              <div className="carousel-inner">
-                {backgroundImage.map((imagePath, index) => (
-                  <a
-                    key={index}
-                    target="_blank"
-                    className={`carousel-item ${index === 0 ? "active" : ""}`}
-                    data-bs-interval="5000"
-                  >
-                    <div
-                      className="banner_commn_cls"
-                      style={{ backgroundImage: `url(${imagePath})` }}
-                    ></div>
-                  </a>
-                ))}
-              </div>
-            </div>
+            ) : (
+              ""
+            )}
           </section>
 
           <section className="trvl_info_row">
             <div className="container">
               <div className="bookmark_row">
                 <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
-                {/* <ul>
-                            <li><a href="homepage.html">Home</a></li>
-                            <li><a href="destinations.html">Destinations</a></li>
-                            <li><a href="destination_detail.html">Asia</a></li>
-                            <li><a href="country_detail.html">China</a></li>
-                            <li><a href="region_detail.html">Beijing & Northern China</a></li>
-                            <li>Rosewood Beijing</li>
-                        </ul> */}
               </div>
 
               <div className="trvl_info_cntnt">
@@ -454,8 +535,8 @@ function Index() {
                       {hotelData?.hotel_country_contents?.data[0]?.attributes?.currency_symbol.repeat(
                         Math.abs(
                           5 -
-                          hotelData?.hotel_country_contents?.data[0]
-                            ?.attributes?.price_guide_value
+                            hotelData?.hotel_country_contents?.data[0]
+                              ?.attributes?.price_guide_value
                         )
                       )}
                     </label>
@@ -771,130 +852,273 @@ function Index() {
             </div>
           </section>
 
-          <section className="favrites_blk_row">
-            <div className="container">
-              <h3 className="title_cls">
-                MORE PLACE TO STAY IN {hotelData.location}
-              </h3>
-              <div className="card_slider_row">
-                <i id="leftt">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="#ffffff"
-                    shapeRendering="geometricPrecision"
-                    textRendering="geometricPrecision"
-                    imageRendering="optimizeQuality"
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    viewBox="0 0 267 512.43"
-                  >
-                    <path
-                      fillRule="nonzero"
-                      d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z"
-                    />
-                  </svg>
-                </i>
-                <div className="carousel00">
-                  {hotels?.map((item) => (
-                    <div className="card_slider_inr">
-                      <div className="card_slider">
-                        <NavLink
-                          href={generateDynamicLink(item)}
-                          className="card_slider_img"
-                        >
-                          {item?.attributes?.hotel_images?.data.map(
-                            (element, index) =>
-                              element.attributes.image_type == "thumbnail" ? (
-                                <img
-                                  key={index}
-                                  src={element.attributes.image_path}
-                                  alt={element.attributes.image_alt_text}
-                                  className="img-fluid"
-                                />
-                              ) : (
-                                ""
-                              )
-                          )}
-                          {/* <img
+          {hotels?.length > 0 ? (
+            <section className="favrites_blk_row">
+              <div className="container">
+                <h3 className="title_cls">
+                  MORE PLACE TO STAY IN {hotelData.location}
+                </h3>
+                <div className="card_slider_row">
+                  <i id="leftt">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="#ffffff"
+                      shapeRendering="geometricPrecision"
+                      textRendering="geometricPrecision"
+                      imageRendering="optimizeQuality"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      viewBox="0 0 267 512.43"
+                    >
+                      <path
+                        fillRule="nonzero"
+                        d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z"
+                      />
+                    </svg>
+                  </i>
+                  <div className="carousel00">
+                    {hotels?.map((item) => (
+                      <div className="card_slider_inr">
+                        <div className="card_slider">
+                          <NavLink
+                            href={generateDynamicLink(item)}
+                            className="card_slider_img"
+                          >
+                            {item?.attributes?.hotel_images?.data.map(
+                              (element, index) =>
+                                element.attributes.image_type == "thumbnail" ? (
+                                  <img
+                                    key={index}
+                                    src={element.attributes.image_path}
+                                    alt={element.attributes.image_alt_text}
+                                    className="img-fluid"
+                                  />
+                                ) : (
+                                  ""
+                                )
+                            )}
+                            {/* <img
                                 src=""
                                 alt="destination_hotel01"
                                 className="img-fluid"
                               /> */}
-                        </NavLink>
-                        <div className="card_slider_cnt places_to_stay_cnt">
-                          <h4>
-                            <a href={generateDynamicLink(item)}>
-                              {dictioneryFunction(item?.attributes?.hotel_name)}
-                            </a>
-                          </h4>
-                          <ul>
-                            <li>Location: {item?.attributes?.location}</li>
-                            {item?.attributes?.hotel_country_contents?.data?.map(
-                              (item) => {
-                                return (
-                                  <li className="price_guide_tooltip">
-                                    Price guide:
-                                    <span
-                                      key={item?.id}
-                                      tabIndex="0"
-                                      data-title={
-                                        item?.attributes?.price_guide_text
-                                      }
-                                    >
-                                      {item?.attributes?.currency_symbol.repeat(
-                                        Math.abs(
-                                          item?.attributes?.price_guide_value
-                                        )
-                                      )}
-                                      <label>
+                          </NavLink>
+                          <div className="card_slider_cnt places_to_stay_cnt">
+                            <h4>
+                              <a href={generateDynamicLink(item)}>
+                                {item?.attributes?.hotel_name}
+                                {item?.attributes?.hotel_name}
+                              </a>
+                            </h4>
+                            <ul>
+                              <li>Location: {item?.attributes?.location}</li>
+                              {item?.attributes?.hotel_country_contents?.data?.map(
+                                (item) => {
+                                  return (
+                                    <li className="price_guide_tooltip">
+                                      Price guide:
+                                      <span
+                                        key={item?.id}
+                                        tabIndex="0"
+                                        data-title={
+                                          item?.attributes?.price_guide_text
+                                        }
+                                      >
                                         {item?.attributes?.currency_symbol.repeat(
                                           Math.abs(
-                                            5 -
-                                            item?.attributes
-                                              ?.price_guide_value
+                                            item?.attributes?.price_guide_value
                                           )
                                         )}
-                                      </label>
-                                    </span>
-                                  </li>
-                                );
-                              }
-                            )}
+                                        <label>
+                                          {item?.attributes?.currency_symbol.repeat(
+                                            Math.abs(
+                                              5 -
+                                                item?.attributes
+                                                  ?.price_guide_value
+                                            )
+                                          )}
+                                        </label>
+                                      </span>
+                                    </li>
+                                  );
+                                }
+                              )}
 
-                            <li>
-                              <p
-                                dangerouslySetInnerHTML={{
-                                  __html: dictioneryFunction(
-                                    item?.attributes?.intro_text
-                                  ),
-                                }}
-                              />
-                            </li>
-                            {/* <li>{item?.attributes?.intro_text}</li> */}
-                            <li>
-                              Best for:
-                              <span>
-                                {dictioneryFunction(
-                                  item?.attributes?.best_for_text
-                                )}
-                              </span>
-                            </li>
-                          </ul>
+                              <li>
+                                <p
+                                  dangerouslySetInnerHTML={{
+                                    __html: dictioneryFunction(
+                                      item?.attributes?.intro_text
+                                    ),
+                                  }}
+                                />
+                              </li>
+                              {/* <li>{item?.attributes?.intro_text}</li> */}
+                              <li>
+                                Best for:
+                                <span>
+                                  {dictioneryFunction(
+                                    item?.attributes?.best_for_text
+                                  )}
+                                </span>
+                              </li>
+                            </ul>
+                          </div>
+                          <button
+                            className="btn card_slider_btn justify-content-end"
+                            onClick={() => handleRedirect(item)}
+                          >
+                            <span className="view_itnry_link">
+                              View this hotel
+                              <em className="fa-solid fa-chevron-right"></em>
+                            </span>
+                          </button>
                         </div>
-                        <button
-                          className="btn card_slider_btn justify-content-end"
-                          onClick={() => handleRedirect(item)}
-                        >
-                          <span className="view_itnry_link">
-                            View this hotel
-                            <em className="fa-solid fa-chevron-right"></em>
-                          </span>
-                        </button>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                  {hotels?.length > 4 && (
+                    <i id="right">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="#ffffff"
+                        shapeRendering="geometricPrecision"
+                        textRendering="geometricPrecision"
+                        imageRendering="optimizeQuality"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        viewBox="0 0 267 512.43"
+                      >
+                        <path
+                          fillRule="nonzero"
+                          d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                        />
+                      </svg>
+                    </i>
+                  )}
                 </div>
-                {hotels?.length > 4 && (
+              </div>
+              {/* <div className="full_loader_parnt_blk loader_parnt_blk" style="display: block;"><div className="loader-circle-2"></div></div> */}
+            </section>
+          ) : (
+            " "
+          )}
+
+          {moreItineraries?.length > 0 ? (
+            <section className="favrites_blk_row light_grey">
+              {/* {moreItineraries?.data} */}
+              <div className="container">
+                <h3 className="title_cls">
+                  STAY AT {hotelData.hotel_name} ON THESE TRIPS
+                </h3>
+                <div className="card_slider_row">
+                  <i id="left">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="#ffffff"
+                      shapeRendering="geometricPrecision"
+                      textRendering="geometricPrecision"
+                      imageRendering="optimizeQuality"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      viewBox="0 0 267 512.43"
+                    >
+                      <path
+                        fillRule="nonzero"
+                        d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z"
+                      />
+                    </svg>
+                  </i>
+                  <div className="carousel00">
+                    {moreItineraries?.map((item) => (
+                      <div className="card_slider_inr" key={item.id}>
+                        <div className="card_slider">
+                          <NavLink
+                            href={generateDynamicLinkForItinerary(item)}
+                            className="card_slider_img"
+                          >
+                            {item?.attributes?.itinerary_images?.data.map(
+                              (element, index) =>
+                                element.attributes.image_type == "thumbnail" ? (
+                                  <img
+                                    key={element.id}
+                                    src={element.attributes.image_path}
+                                    alt="destination card01"
+                                    className="img-fluid"
+                                  />
+                                ) : (
+                                  ""
+                                )
+                            )}
+                            {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
+                          </NavLink>
+                          <div className="card_slider_cnt places_to_stay_cnt">
+                            <h4>
+                              <a href={generateDynamicLinkForItinerary(item)}>
+                                {dictioneryFunction(
+                                  item?.attributes?.itin_name
+                                )}
+                              </a>
+                            </h4>
+                            {/* <NavLink href={generateDynamicLink(item)}>
+                          </NavLink> */}
+                            <ul>
+                              <li>
+                                {dictioneryFunction(
+                                  item?.attributes?.header_text
+                                )}
+                              </li>
+                              <li>
+                                {dictioneryFunction(
+                                  item?.attributes?.subheader_text
+                                )}
+                              </li>
+                              <li>
+                                {dictioneryFunction(
+                                  item?.attributes?.country?.data?.attributes
+                                    ?.country_name
+                                )}
+                              </li>
+                              {item?.attributes?.itinerary_country_contents?.data
+                                .filter(
+                                  (res) =>
+                                    res.attributes.website_country.toLowerCase() ===
+                                    region.replace(/in/g, "india")
+                                )
+                                .map((res1) => (
+                                  <li key={res1.id}>
+                                    {`From ${
+                                      res1.attributes?.currency_symbol ?? ""
+                                    }${
+                                      formatPrice(res1.attributes?.price) ??
+                                      " xxxx"
+                                    } per person`}
+                                  </li>
+                                ))}
+                              <li>
+                                Travel to:
+                                <span>
+                                  {dictioneryFunction(
+                                    item?.attributes?.travel_to_text
+                                  )}
+                                </span>
+                              </li>
+                            </ul>
+                          </div>
+                          <button
+                            className="btn card_slider_btn light_grey_btn_bg"
+                            onClick={() => handleRedirectForItinerary(item)}
+                          >
+                            <span>{item?.attributes?.no_of_nites_notes}</span>
+                            <span className="view_itnry_link">
+                              View this itinerary
+                              <em className="fa-solid fa-chevron-right"></em>
+                            </span>
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                   <i id="right">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -912,11 +1136,13 @@ function Index() {
                       />
                     </svg>
                   </i>
-                )}
+                </div>
               </div>
-            </div>
-            {/* <div className="full_loader_parnt_blk loader_parnt_blk" style="display: block;"><div className="loader-circle-2"></div></div> */}
-          </section>
+              {/* <div className="full_loader_parnt_blk loader_parnt_blk" style="display: block;"><div className="loader-circle-2"></div></div> */}
+            </section>
+          ) : (
+            ""
+          )}
 
           <section className="make_enqury_row">
             <div className="container">

@@ -11,6 +11,7 @@ import Head from "next/head";
 import { NavLink } from "components";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
+import { formatPrice } from "../../components/utils/priceFormater";
 
 export default ContinentOverview;
 
@@ -257,6 +258,8 @@ function ContinentOverview({ sendDataToParent }) {
     ) {
       websiteContentCheck(dictionaryPage);
     }
+    window.scrollTo(0, 0);
+
     destinationService
       .getDestinationDetails(destinationcode)
       .then((x) => {
@@ -288,18 +291,17 @@ function ContinentOverview({ sendDataToParent }) {
     window.addEventListener("resize", equalHeight(true));
 
     // Using window.onload to detect full page load
-    // window.onload = () => {
-    //   setTimeout(() => {
-    //     const redirectUrl = `${regionWiseUrl}/destinations/${destinationcode?.replace(
-    //       / /g,
-    //       "-"
-    //     ).replace(/&/g, "and")}`;
+    window.onload = () => {
+      setTimeout(() => {
+        const redirectUrl = `${regionWiseUrl}/destinations/${destinationcode
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")}`;
 
-    //     if (redirectUrl) {
-    //       router.push(redirectUrl);
-    //     }
-    //   }, 0);
-    // };
+        if (redirectUrl) {
+          router.push(redirectUrl);
+        }
+      }, 0);
+    };
   }, [destinationcode, router, holidayTitle, valueWithBr]);
 
   return (
@@ -487,7 +489,8 @@ function ContinentOverview({ sendDataToParent }) {
                                       {`From ${
                                         res1.attributes?.currency_symbol ?? ""
                                       }${
-                                        res1.attributes?.price ?? " xxxx"
+                                        formatPrice(res1.attributes?.price) ??
+                                        " xxxx"
                                       } per person`}
                                     </li>
                                   ))}

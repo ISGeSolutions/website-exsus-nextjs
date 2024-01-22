@@ -43,6 +43,9 @@ function Index() {
   const [metaTitle, setMetaTitle] = useState("");
   const [parentData, setParentData] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  let [isShowMap, setIsShowMap] = useState(true);
+  //let isShowMap = true;
+
   const tabContentRefs = {
     overview: useRef(null),
     countries: useRef(null),
@@ -53,7 +56,6 @@ function Index() {
 
   const divRef = useRef();
   const { t } = useTranslation();
-  let [isShowMap, setIsShowMap] = useState(true);
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -66,30 +68,30 @@ function Index() {
     }
   }
 
-  <button className="btn header_nav_btn">
-    MEET OUR EXPERTS
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="#000"
-      shapeRendering="geometricPrecision"
-      textRendering="geometricPrecision"
-      imageRendering="optimizeQuality"
-      fillRule="evenodd"
-      clipRule="evenodd"
-      viewBox="0 0 267 512.43"
-    >
-      <path
-        fillRule="nonzero"
-        d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-      />
-    </svg>
-  </button>;
+  // <button className="btn header_nav_btn">
+  //   MEET OUR EXPERTS
+  //   <svg
+  //     xmlns="http://www.w3.org/2000/svg"
+  //     fill="#000"
+  //     shapeRendering="geometricPrecision"
+  //     textRendering="geometricPrecision"
+  //     imageRendering="optimizeQuality"
+  //     fillRule="evenodd"
+  //     clipRule="evenodd"
+  //     viewBox="0 0 267 512.43"
+  //   >
+  //     <path
+  //       fillRule="nonzero"
+  //       d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+  //     />
+  //   </svg>
+  // </button>;
 
   const toggleTab = (itemId) => {
     var text;
+
     if (itemId == "overview") {
       setIsShowMap(true);
-      handleTabClick("images");
       const redirectUrl =
         regionWiseUrl + `/destinations/${destinationDetails?.friendly_url}`;
       window.history.pushState(null, null, redirectUrl);
@@ -97,7 +99,6 @@ function Index() {
       text = destinationDetails?.header_text;
     } else if (itemId == "countries") {
       setIsShowMap(true);
-      handleTabClick("images");
       let destCode = "";
       if (!destinationcode) {
         destCode = localStorage.getItem("destination_code");
@@ -110,9 +111,9 @@ function Index() {
           .replace(/&/g, "and")
           .replace(/ /g, "-")
           .toLowerCase()}/${destCode
-            .replace(/&/g, "and")
-            .replace(/ /g, "-")
-            .toLowerCase()}-countries`;
+          .replace(/&/g, "and")
+          .replace(/ /g, "-")
+          .toLowerCase()}-countries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url} countries`
@@ -120,7 +121,6 @@ function Index() {
       text = `COUNTRIES IN ${destinationName}`;
     } else if (itemId == "itineraries") {
       setIsShowMap(false);
-      handleTabClick("images");
       let destCode = "";
       if (!destinationcode) {
         destCode = localStorage.getItem("destination_code");
@@ -133,15 +133,14 @@ function Index() {
           .replace(/&/g, "and")
           .replace(/ /g, "-")
           .toLowerCase()}/${destCode
-            .replace(/&/g, "and")
-            .replace(/ /g, "-")
-            .toLowerCase()}-itineraries`;
+          .replace(/&/g, "and")
+          .replace(/ /g, "-")
+          .toLowerCase()}-itineraries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(`Home/Destinations/${destCode}/${destCode} Itineraries`);
       text = `TAILOR-MADE ${destinationName} HOLIDAY ITINERARIES`;
     } else if (itemId == "places-to-stay") {
       setIsShowMap(false);
-      handleTabClick("images");
       const redirectUrl =
         regionWiseUrl +
         `/destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url}-places-to-stay`;
@@ -156,12 +155,19 @@ function Index() {
       setActiveTab(itemId);
       // window.history.pushState(null, null, redirectUrl); // Update the URL
     }
+
     var targetDiv = document.getElementById("scrollToElement");
 
     if (targetDiv) {
       targetDiv.scrollIntoView({ behavior: "smooth" });
     }
 
+    // if (activeTab == "itineraries") {
+    //   //setIsShowMap(false);
+    //   isShowMap = false;
+    // }else if(activeTab ){
+
+    // }
     // if (tabContentRefs[itemId]?.current) {
     //   tabContentRefs[itemId]?.current.scrollIntoView({ behavior: "smooth", block: "center" });
     // }
@@ -169,8 +175,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -330,7 +336,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -518,18 +524,21 @@ function Index() {
             ) : (
               ""
             )}
+
             {isShowMap ? (
               <div className="banner_tab_blk">
                 <button
-                  className={`btn banner_map_tab ${activeButton === "map" ? "banner_tab_active" : ""
-                    }`}
+                  className={`btn banner_map_tab ${
+                    activeButton === "map" ? "banner_tab_active" : ""
+                  }`}
                   onClick={() => handleTabClick("map")}
                 >
                   Map
                 </button>
                 <button
-                  className={`btn banner_img_tab ${activeButton === "images" ? "banner_tab_active" : ""
-                    }`}
+                  className={`btn banner_img_tab ${
+                    activeButton === "images" ? "banner_tab_active" : ""
+                  }`}
                   onClick={() => handleTabClick("images")}
                 >
                   Images
@@ -539,8 +548,9 @@ function Index() {
               ""
             )}
             <div
-              className={`banner_map_blk ${activeButton === "map" ? "banner_map_active" : ""
-                }`}
+              className={`banner_map_blk ${
+                activeButton === "map" ? "banner_map_active" : ""
+              }`}
             >
               <Iframe
                 width="640px"
@@ -558,6 +568,7 @@ function Index() {
 
               {/* src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" */}
             </div>
+
             {/* <p>{mapVariable}</p> */}
           </section>
 
@@ -572,7 +583,8 @@ function Index() {
                 <div className="bookmark_row">
                   <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
                 </div>
-                <div className="destination_tab_inr mt-5">
+                <div className="destination_tab_inr">
+                  {/* mt-3 */}
                   <h2 className="tab_tilte">
                     {/* {destinationDetails?.header_text} */}
                     {dictioneryFunction(headingText)}
