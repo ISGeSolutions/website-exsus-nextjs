@@ -359,34 +359,50 @@ function Index() {
     destinationService
       .getRegionWiseHotelsInHotelDetail(regionName, region)
       .then((response) => {
-        console.log(hotelName)
-        setAllHotels(response?.data?.filter(res => res.attributes?.friendly_url != hotelName));
+        console.log(hotelName);
+        setAllHotels(
+          response?.data?.filter(
+            (res) => res.attributes?.friendly_url != hotelName
+          )
+        );
         console.log(response?.data);
-        const filteredData = response?.data?.filter(item => {
+        const filteredData = response?.data?.filter((item) => {
           const { map_latitude, map_longitude } = item.attributes;
-          return map_latitude !== null && map_latitude !== "" && map_longitude !== null && map_longitude !== "";
+          return (
+            map_latitude !== null &&
+            map_latitude !== "" &&
+            map_longitude !== null &&
+            map_longitude !== ""
+          );
         });
         console.log(filteredData);
-        const newCoordinates = filteredData.map(item => ({
+        const newCoordinates = filteredData.map((item) => ({
           lat: parseFloat(item.attributes.map_latitude),
           lng: parseFloat(item.attributes.map_longitude),
           name: item.attributes?.hotel_name,
-          image: item.attributes?.hotel_images?.data?.filter(res => res?.attributes?.image_type == "thumbnail")[0]?.attributes?.image_path,
-          url: regionWiseUrl +
+          image: item.attributes?.hotel_images?.data?.filter(
+            (res) => res?.attributes?.image_type == "thumbnail"
+          )[0]?.attributes?.image_path,
+          url:
+            regionWiseUrl +
             `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
               ?.replace(/&/g, " and ")
               .replace(/ /g, "-")
               .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-                ?.replace(/ /g, "-")
-                .replace(/&/g, "and")
-                .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-                  ?.replace(/ /g, "-")
-                  .replace(/&/g, "and")
-                  .toLowerCase()}/${item?.attributes?.friendly_url?.replace(/&/g, " and ")
-                    .replace(/ /g, "-")
-                    .toLowerCase()}`
+              ?.replace(/ /g, "-")
+              .replace(/&/g, "and")
+              .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+              ?.replace(/ /g, "-")
+              .replace(/&/g, "and")
+              .toLowerCase()}/${item?.attributes?.friendly_url
+              ?.replace(/&/g, " and ")
+              .replace(/ /g, "-")
+              .toLowerCase()}`,
         }));
-        setCoordinatesArray(prevCoordinates => [...prevCoordinates, ...newCoordinates]);
+        setCoordinatesArray((prevCoordinates) => [
+          ...prevCoordinates,
+          ...newCoordinates,
+        ]);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -542,7 +558,7 @@ function Index() {
                     </label>
                   </span>
                 </p>
-
+                <br />
                 <p
                   className="mb-4"
                   dangerouslySetInnerHTML={{ __html: hotelData?.video_url }}
@@ -635,7 +651,8 @@ function Index() {
                           ?.replace(/&nbsp/g, "")
                           ?.replace(/&rsquo/g, "")
                           ?.replace(/:/g, "")
-                          ?.replace(/;/g, "")?.replace(/<\/?em>/g, '')}
+                          ?.replace(/;/g, "")
+                          ?.replace(/<\/?em>/g, "")}
                       </p>
                       <p>
                         <span>In the know</span>
@@ -643,7 +660,8 @@ function Index() {
                           ?.replace(/&nbsp/g, "")
                           ?.replace(/&rsquo/g, "")
                           ?.replace(/:/g, "")
-                          ?.replace(/;/g, "")?.replace(/<\/?em>/g, '')}
+                          ?.replace(/;/g, "")
+                          ?.replace(/<\/?em>/g, "")}
                       </p>
                     </div>
                   </div>
@@ -827,12 +845,11 @@ function Index() {
                 </div>
               </section>
               {coordinatesArray && (
-
                 <section className="map_blk_row">
                   <h3 className="pb-2">Hotel location</h3>
                   <p>
-                    The Rosewood is just half an hour’s drive from Beijing Capital
-                    International Airport.
+                    The Rosewood is just half an hour’s drive from Beijing
+                    Capital International Airport.
                   </p>
                   <div className="map_blk_inr">
                     <div className="map_blk_inr">
@@ -848,7 +865,8 @@ function Index() {
                       {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" style="border:0;" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe> */}
                     </div>
                   </div>
-                </section>)}
+                </section>
+              )}
             </div>
           </section>
 
@@ -1119,23 +1137,27 @@ function Index() {
                       </div>
                     ))}
                   </div>
-                  <i id="right">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="#ffffff"
-                      shapeRendering="geometricPrecision"
-                      textRendering="geometricPrecision"
-                      imageRendering="optimizeQuality"
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      viewBox="0 0 267 512.43"
-                    >
-                      <path
-                        fillRule="nonzero"
-                        d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                      />
-                    </svg>
-                  </i>
+                  {moreItineraries?.length > 4 ? (
+                    <i id="right">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="#ffffff"
+                        shapeRendering="geometricPrecision"
+                        textRendering="geometricPrecision"
+                        imageRendering="optimizeQuality"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        viewBox="0 0 267 512.43"
+                      >
+                        <path
+                          fillRule="nonzero"
+                          d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                        />
+                      </svg>
+                    </i>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
               {/* <div className="full_loader_parnt_blk loader_parnt_blk" style="display: block;"><div className="loader-circle-2"></div></div> */}
