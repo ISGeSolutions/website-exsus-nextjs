@@ -16,6 +16,8 @@ import Select, { components } from "react-select";
 import CustomMultiValue from "./CustomMultiValue";
 import { Alert } from "../../components";
 import Iframe from "react-iframe";
+import MarkerInfoWindowNext from "../../components/common/MarkerInfoWindowNext";
+
 
 export default RegionPlacesToStay;
 
@@ -42,8 +44,9 @@ function RegionPlacesToStay(props) {
   const [countryOptions, setAllCountries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeItem, setActiveItem] = useState("recommended");
+  const [coordinatesArray, setCoordinatesArray] = useState([]);
   let dictionaryPage = 1;
-
+  const [modalKey, setModalKey] = useState(0);
   const destinationcode = router?.query?.continent
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
@@ -164,6 +167,8 @@ function RegionPlacesToStay(props) {
     setAlert(null);
     page = 0;
     setAllHotels([]);
+    setCoordinatesArray([]);
+    setModalKey(0);
     setActiveItem(item);
     loadMoreData(item);
   };
@@ -227,7 +232,8 @@ function RegionPlacesToStay(props) {
       showAlert("Please select atleast one option", "error");
     } else {
       setAllHotels([]);
-      page = 0;
+      setCoordinatesArray([]);
+      setModalKey(0); page = 0;
       loadMoreData(activeItem);
     }
   }
@@ -241,6 +247,7 @@ function RegionPlacesToStay(props) {
         .then((response) => {
           setMetaData(response.meta.pagination);
           const newHotels = response?.data;
+          console.log(newHotels);
           if (newHotels.length > 0) {
             setAllHotels((prevItineraries) =>
               [...prevItineraries, ...newHotels].reduce(
@@ -253,6 +260,32 @@ function RegionPlacesToStay(props) {
             );
             setPage(page + 1);
           }
+          const filteredData = response?.data?.filter(item => {
+            const { map_latitude, map_longitude } = item.attributes;
+            return map_latitude !== null && map_latitude !== "" && map_longitude !== null && map_longitude !== "";
+          });
+          console.log(filteredData);
+          const newCoordinates = filteredData.map(item => ({
+            lat: parseFloat(item.attributes.map_latitude),
+            lng: parseFloat(item.attributes.map_longitude),
+            name: item.attributes?.hotel_name,
+            image: item.attributes?.hotel_images?.data?.filter(res => res?.attributes?.image_type == "thumbnail")[0]?.attributes?.image_path,
+            url: regionWiseUrl +
+              `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+                ?.replace(/&/g, " and ")
+                .replace(/ /g, "-")
+                .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+                  ?.replace(/ /g, "-")
+                  .replace(/&/g, "and")
+                  .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+                    ?.replace(/ /g, "-")
+                    .replace(/&/g, "and")
+                    .toLowerCase()}/${item?.attributes?.friendly_url?.replace(/&/g, " and ")
+                      .replace(/ /g, "-")
+                      .toLowerCase()}`
+          }));
+          setCoordinatesArray(prevCoordinates => [...prevCoordinates, ...newCoordinates]);
+          setModalKey((prevKey) => prevKey + 1);
           setIsLoading(false);
         })
         .catch((error) => {
@@ -284,6 +317,31 @@ function RegionPlacesToStay(props) {
             itineraries;
             setPage(page + 1);
           }
+          const filteredData = response?.data?.filter(item => {
+            const { map_latitude, map_longitude } = item.attributes;
+            return map_latitude !== null && map_latitude !== "" && map_longitude !== null && map_longitude !== "";
+          });
+          const newCoordinates = filteredData.map(item => ({
+            lat: parseFloat(item.attributes.map_latitude),
+            lng: parseFloat(item.attributes.map_longitude),
+            name: item.attributes?.hotel_name,
+            image: item.attributes?.hotel_images?.data?.filter(res => res?.attributes?.image_type == "thumbnail")[0]?.attributes?.image_path,
+            url: regionWiseUrl +
+              `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+                ?.replace(/&/g, " and ")
+                .replace(/ /g, "-")
+                .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+                  ?.replace(/ /g, "-")
+                  .replace(/&/g, "and")
+                  .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+                    ?.replace(/ /g, "-")
+                    .replace(/&/g, "and")
+                    .toLowerCase()}/${item?.attributes?.friendly_url?.replace(/&/g, " and ")
+                      .replace(/ /g, "-")
+                      .toLowerCase()}`
+          }));
+          setCoordinatesArray(prevCoordinates => [...prevCoordinates, ...newCoordinates]);
+          setModalKey((prevKey) => prevKey + 1);
           setIsLoading(false);
         })
         .catch((error) => {
@@ -430,7 +488,7 @@ function RegionPlacesToStay(props) {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -701,7 +759,7 @@ function RegionPlacesToStay(props) {
                               {item?.attributes?.hotel_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -803,7 +861,7 @@ function RegionPlacesToStay(props) {
       <div
         className="modal fade"
         id="placesToStayModal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
@@ -822,19 +880,7 @@ function RegionPlacesToStay(props) {
             </div>
             <div className="modal-body">
               <div className="modal_map_blk">
-                <Iframe
-                  width="640px"
-                  height="320px"
-                  id=""
-                  className=""
-                  display="block"
-                  src="https://www.google.com/maps/embed/v1/place?q=25.0930200000,55.1487400000&zoom=10&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE"
-                  position="relative"
-                  style="border:0;"
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
+                <MarkerInfoWindowNext key={modalKey} data={coordinatesArray} />
               </div>
             </div>
           </div>

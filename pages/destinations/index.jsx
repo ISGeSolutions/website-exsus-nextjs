@@ -278,13 +278,13 @@ function Index() {
         const newBackgroundImages = [];
         imageCheck.forEach((element) => {
           if (element.attributes.image_type == "center") {
-            setBackgroundImgWhentogo(element.attributes);
+            // setBackgroundImgWhentogo(element.attributes);
           } else if (element.attributes.image_type == "banner") {
             newBackgroundImages.push(element.attributes.image_path);
           }
         });
         const whenToGoImage =
-          destinations?.attributes?.custom_page_contents?.data?.filter(
+          x.data[0]?.attributes?.custom_page_contents?.data?.filter(
             (res) => res.attributes?.content_name == "WhenToGoWhereImagePath"
           )[0]?.attributes?.content_value;
         setBackgroundImgWhentogo(
