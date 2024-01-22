@@ -95,13 +95,22 @@ function Index() {
         const newBackgroundImages = [];
         imageCheck?.forEach((element) => {
           if (element.attributes.image_type == "center") {
-            setBackgroundImgWhentogo(element.attributes);
+            // setBackgroundImgWhentogo(element.attributes);
           } else if (element.attributes.image_type == "banner") {
             newBackgroundImages.push(element.attributes.image_path);
             // setBackgroundImage("https://d33ys3jnmuivbg.cloudfront.net/ilimages/" + x.data[0].attributes.custom_page_images.data[0].attributes.image_path);
           }
         });
         setBackgroundImage(newBackgroundImages);
+        const whenToGoImage =
+          x.data[0]?.attributes?.custom_page_contents?.data?.filter(
+            (res) => res.attributes?.content_name == "WhenToGoWhereImagePath"
+          )[0]?.attributes?.content_value;
+        setBackgroundImgWhentogo(
+          whenToGoImage?.includes("https")
+            ? whenToGoImage
+            : `https://online.exsus.com/${whenToGoImage}`
+        );
         setIsLoading(false);
       })
       .catch((error) => {
@@ -112,6 +121,7 @@ function Index() {
       .getHolidaytypesLandingList()
       .then((x) => {
         const imageCheckType = x.data;
+        debugger;
         const thumbnailImageArr = [];
         imageCheckType.forEach((elementMain) => {
           if (elementMain.attributes.holiday_type_group_images.data) {
@@ -127,7 +137,8 @@ function Index() {
                     elementMain?.attributes?.holiday_type_group_code,
                   holiday_type_name:
                     elementMain?.attributes?.holiday_type_group_name,
-                  image_path: element.attributes.image_path,
+                  image_path: element?.attributes.image_path,
+                  friendly_url: elementMain?.attributes.friendly_url
                 };
 
                 thumbnailImageArr.push(objThumbnail);
@@ -289,7 +300,7 @@ function Index() {
                     <div className="card_blk_inr">
                       <NavLink
                         href={dynamicLink(
-                          holidaytypesItem?.holiday_type_name,
+                          holidaytypesItem?.friendly_url,
                           holidaytypesItem?.id
                         )}
                       >
@@ -339,7 +350,7 @@ function Index() {
           <section
             className="destination_text_overlay_row"
             style={{
-              backgroundImage: `url(${backgroundImgWhentogo?.image_path})`,
+              backgroundImage: `url(${backgroundImgWhentogo})`,
             }}
           >
             <div className="container">

@@ -576,8 +576,8 @@ function Index() {
           <div>
             <section
               className="destination_tab_row light_grey pb-0"
-              // ref={divRef}
-              // id="scrollToElement"
+              ref={divRef}
+              id="scrollToElement"
             >
               <div className="container">
                 <div className="bookmark_row">

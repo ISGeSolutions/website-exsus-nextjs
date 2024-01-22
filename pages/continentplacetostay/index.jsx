@@ -16,6 +16,7 @@ import Select, { components } from "react-select";
 import CustomMultiValue from "./CustomMultiValue";
 import { Alert } from "../../components";
 import Iframe from "react-iframe";
+import MarkerInfoWindowNext from "../../components/common/MarkerInfoWindowNext";
 
 export default ContinentPlacesToStay;
 
@@ -47,7 +48,9 @@ function ContinentPlacesToStay(props) {
   const [activeItem, setActiveItem] = useState("recommended");
   const [alert, setAlert] = useState(null);
   const [regionOptions, setAllRegion] = useState([]);
+  const [coordinatesArray, setCoordinatesArray] = useState([]);
   let dictionaryPage = 1;
+  const [modalKey, setModalKey] = useState(0);
 
   const { divRef } = props;
 
@@ -176,6 +179,35 @@ function ContinentPlacesToStay(props) {
             );
             setPage(page + 1);
           }
+
+          const filteredData = response?.data?.filter(item => {
+            const { map_latitude, map_longitude } = item.attributes;
+            return map_latitude !== null && map_latitude !== "" && map_longitude !== null && map_longitude !== "";
+          });
+          // Create an array of objects with parsed latitude and longitude
+          const newCoordinates = filteredData.map(item => ({
+            lat: parseFloat(item.attributes.map_latitude),
+            lng: parseFloat(item.attributes.map_longitude),
+            name: item.attributes?.hotel_name,
+            image: item.attributes?.hotel_images?.data?.filter(res => res?.attributes?.image_type == "thumbnail")[0]?.attributes?.image_path,
+            url: regionWiseUrl +
+              `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+                ?.replace(/&/g, " and ")
+                .replace(/ /g, "-")
+                .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+                  ?.replace(/ /g, "-")
+                  .replace(/&/g, "and")
+                  .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+                    ?.replace(/ /g, "-")
+                    .replace(/&/g, "and")
+                    .toLowerCase()}/${item?.attributes?.friendly_url?.replace(/&/g, " and ")
+                      .replace(/ /g, "-")
+                      .toLowerCase()}`
+          }));
+          // Update the state with the accumulated coordinates
+          setCoordinatesArray(prevCoordinates => [...prevCoordinates, ...newCoordinates]);
+          setModalKey((prevKey) => prevKey + 1);
+
           setIsLoading(false);
         })
         .catch((error) => {
@@ -211,6 +243,35 @@ function ContinentPlacesToStay(props) {
             itineraries;
             setPage(page + 1);
           }
+          const filteredData = response?.data?.filter(item => {
+            const { map_latitude, map_longitude } = item.attributes;
+            return map_latitude !== null && map_latitude !== "" && map_longitude !== null && map_longitude !== "";
+          });
+
+          // Create an array of objects with parsed latitude and longitude
+          const newCoordinates = filteredData.map(item => ({
+            lat: parseFloat(item.attributes.map_latitude),
+            lng: parseFloat(item.attributes.map_longitude),
+            name: item.attributes?.hotel_name,
+            image: item.attributes?.hotel_images?.data?.filter(res => res?.attributes?.image_type == "thumbnail")[0]?.attributes?.image_path,
+            url: regionWiseUrl +
+              `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+                ?.replace(/&/g, " and ")
+                .replace(/ /g, "-")
+                .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+                  ?.replace(/ /g, "-")
+                  .replace(/&/g, "and")
+                  .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+                    ?.replace(/ /g, "-")
+                    .replace(/&/g, "and")
+                    .toLowerCase()}/${item?.attributes?.friendly_url?.replace(/&/g, " and ")
+                      .replace(/ /g, "-")
+                      .toLowerCase()}`
+          }));
+          console.log(newCoordinates);
+          // Update the state with the accumulated coordinates
+          setCoordinatesArray(prevCoordinates => [...prevCoordinates, ...newCoordinates]);
+          setModalKey((prevKey) => prevKey + 1);
           setIsLoading(false);
         })
         .catch((error) => {
@@ -246,6 +307,8 @@ function ContinentPlacesToStay(props) {
       showAlert("Please select atleast one option", "error");
     } else {
       setAllHotels([]);
+      setCoordinatesArray([]);
+      setModalKey(0);
       page = 0;
       loadMoreData(activeItem);
     }
@@ -255,6 +318,8 @@ function ContinentPlacesToStay(props) {
     setAlert(null);
     page = 0;
     setAllHotels([]);
+    setCoordinatesArray([]);
+    setModalKey(0);
     setActiveItem(item);
     loadMoreData(item);
   };
@@ -945,19 +1010,7 @@ function ContinentPlacesToStay(props) {
             </div>
             <div className="modal-body">
               <div className="modal_map_blk">
-                <Iframe
-                  width="640px"
-                  height="320px"
-                  id=""
-                  className=""
-                  display="block"
-                  src="https://www.google.com/maps/embed/v1/place?q=25.0930200000,55.1487400000&zoom=10&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE"
-                  position="relative"
-                  style="border:0;"
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
+                <MarkerInfoWindowNext key={modalKey} data={coordinatesArray} />
               </div>
             </div>
           </div>
