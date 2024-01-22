@@ -244,7 +244,7 @@ function getCountryFavHotels(name, region) {
   }/api/hotels?filters[country][country_name][$eq]=${name?.replace(
     /&/g,
     "%26"
-  )}&filters[country_favourite_ind][$eq]=true&populate[hotel_images][fields][0]=image_path&populate[hotel_images][fields][1]=image_type&populate[hotel_country_contents][filters][website_country][$eq]=${region}&sort[0]=country_favourite_serial_number&populate[destination][fields][0]=destination_name&populate[country][fields][0]=country_name&populate[region][fields][0]=region_name`;
+  )}&filters[country_favorite_ind][$eq]=true&populate[hotel_images][fields][0]=image_path&populate[hotel_images][fields][1]=image_type&populate[hotel_country_contents][filters][website_country][$eq]=${region}&sort[0]=country_favorite_serial_number&populate[destination][fields][0]=destination_name&populate[country][fields][0]=country_name&populate[region][fields][0]=region_name`;
   return fetchWrapper.get(hotelsDetailsUrl);
 }
 

@@ -400,7 +400,7 @@ function CountryItinararies(props) {
                   accumulator.some((item) => item.id === current.id)
                     ? accumulator
                     : [...accumulator, current],
-                [ ]
+                []
               )
             );
             setPage(page + 1);
@@ -556,14 +556,14 @@ function CountryItinararies(props) {
     destinationService
       .getRegions(countrycode)
       .then((x) => {
-        debugger;
         setAllRegions(
           x.data[0]?.attributes?.regions?.data?.map((item) => ({
             region_code: item?.attributes?.region_code,
             value: item?.attributes?.region_name,
             label: item?.attributes?.region_name,
-          }))),
-        setAllRegions(arrayOfObjects);
+          }))
+        ),
+          setAllRegions(arrayOfObjects);
         setIsLoading(false);
       })
       .catch((error) => {

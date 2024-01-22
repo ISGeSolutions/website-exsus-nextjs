@@ -89,7 +89,7 @@ function Index() {
 
   const toggleTab = (itemId) => {
     var text;
-    debugger;
+
     if (itemId == "overview") {
       setIsShowMap(true);
       const redirectUrl =
