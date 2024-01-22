@@ -3,13 +3,12 @@ var nodemailer = require("nodemailer");
 // import { EmailTemplate } from '../components/MyEmailTemplate';
 // import { renderEmail } from '@react-email/html';
 import { renderEmail } from "react-html-email";
-import { consultant_records } from "./../data/consultants_list.json";
+import { constant_data } from "./../data/email_template_constants.json";
 
 import { render } from "@react-email/render";
 // import nodemailer from 'nodemailer';
 import { ContactUsEmailTemplate } from "../components/ContactUsEmailTemplate";
 import { NewsLetterEmailTemplate } from "../components/NewsLetterEmailTemplate";
-
 //-----------------------------------------------------------------------------
 export async function sendMail(subject, toEmail, otpText, data, emailpage) {
   return new Promise((resolve, reject) => {
@@ -30,18 +29,21 @@ export async function sendMail(subject, toEmail, otpText, data, emailpage) {
       // debug: true,
       // logger:true
     });
-
     // const emailHtml = renderEmail(<MyEmailTemplate url="https://example.com" />);
-
+    let mailTo = [];
+    let mailFrom = "";
     let emailHtml = "";
     if (emailpage == "contactus") {
       emailHtml = render(<ContactUsEmailTemplate emailDetails={data} />);
     } else if (emailpage == "newsletter") {
       emailHtml = render(<NewsLetterEmailTemplate emailDetails={data} />);
+      mailTo = constant_data?.newsLetter[0]?.NewsLetterMailTo.split(",");
+      subject = constant_data?.newsLetter[0]?.NewsLetterMailSubject;
+      mailFrom = constant_data?.newsLetter[0]?.NewsLetterMailFrom;
     }
 
     var mailOptions = {
-      from: "noreply@exsus.com",
+      from: mailFrom,
       to: toEmail,
       subject: subject,
       text: otpText,
@@ -51,14 +53,12 @@ export async function sendMail(subject, toEmail, otpText, data, emailpage) {
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         resolve(false);
-        // throw new Error(error);
       } else {
-        // return true;
-        if (consultant_records?.length > 0) {
-          consultant_records.forEach(element => {
+        if (mailTo.length > 0) {
+          mailTo.forEach(element => {
             var mailOptions_consultant = {
-              from: "noreply@exsus.com",
-              to: element.email_id,
+              from: mailFrom,
+              to: element,
               subject: subject,
               text: otpText,
               html: emailHtml,

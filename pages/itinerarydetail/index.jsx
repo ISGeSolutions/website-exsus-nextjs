@@ -58,8 +58,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -123,12 +123,12 @@ function Index() {
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${hotelName}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -139,16 +139,16 @@ function Index() {
       .replace(/&/g, "and");
     router.push(
       regionWiseUrl +
-        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-          ?.replace(/&/g, " and ")
-          .replace(/ /g, "-")
-          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${hotelName}`
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -162,8 +162,7 @@ function Index() {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}-itineraries/${
-        item?.attributes?.friendly_url
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url
       }`
     );
   };
@@ -175,12 +174,11 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-          ?.replace(/&/g, " and ")
-          .replace(/ /g, "-")
-          .toLowerCase()}/itinerary/${countryName}-itineraries/${
-          item?.attributes?.friendly_url
-        }`
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url
+      }`
     );
   };
 
@@ -405,14 +403,12 @@ function Index() {
         // );
 
         setFriendlyUrl(
-          `home/destinations/${router.query?.continent}/${
-            router.query?.country
-          }/${
-            router.query?.itineraryName
-              ? router.query?.itineraries +
-                "/" +
-                x.data[0].attributes.itin_name.toLowerCase()
-              : x.data[0].attributes.itin_name.toLowerCase()
+          `home/destinations/${router.query?.continent}/${router.query?.country
+          }/${router.query?.itineraryName
+            ? router.query?.itineraries +
+            "/" +
+            x.data[0].attributes.itin_name.toLowerCase()
+            : x.data[0].attributes.itin_name.toLowerCase()
           }`
         );
 
@@ -571,12 +567,12 @@ function Index() {
           <section className="trvl_info_row">
             <div className="container">
               <div className="bookmark_row">
-                <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
+                <FriendlyUrl data={dictioneryFunction(friendlyUrl)}></FriendlyUrl>
               </div>
 
               <div className="trvl_info_cntnt">
                 <h2 className="trvl_title">
-                  {itineraries?.attributes?.itin_name}
+                  {dictioneryFunction(itineraries?.attributes?.itin_name)}
                   <span className="mt-2 d-block white_text_colr">
                     {dictioneryFunction(itineraries?.attributes?.header_text)}
                   </span>
@@ -586,7 +582,7 @@ function Index() {
                 </h3>
                 <p className="mb-4">
                   <span>Duration: </span>
-                  {itineraries?.attributes?.no_of_nites_notes}
+                  {dictioneryFunction(itineraries?.attributes?.no_of_nites_notes)}
                 </p>
                 <p className="mb-4">
                   <span>Price: </span>
@@ -890,8 +886,8 @@ function Index() {
                                           {item?.attributes?.currency_symbol.repeat(
                                             Math.abs(
                                               5 -
-                                                item?.attributes
-                                                  ?.price_guide_value
+                                              item?.attributes
+                                                ?.price_guide_value
                                             )
                                           )}
                                         </label>
@@ -1029,12 +1025,10 @@ function Index() {
                                 )
                                 .map((res1) => (
                                   <li key={res1.id}>
-                                    {`From ${
-                                      res1.attributes?.currency_symbol ?? ""
-                                    }${
-                                      formatPrice(res1.attributes?.price) ??
+                                    {`From ${res1.attributes?.currency_symbol ?? ""
+                                      }${formatPrice(res1.attributes?.price) ??
                                       " xxxx"
-                                    } per person`}
+                                      } per person`}
                                   </li>
                                 ))}
                               <li>

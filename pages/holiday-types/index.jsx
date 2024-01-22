@@ -121,7 +121,6 @@ function Index() {
       .getHolidaytypesLandingList()
       .then((x) => {
         const imageCheckType = x.data;
-        debugger;
         const thumbnailImageArr = [];
         imageCheckType.forEach((elementMain) => {
           if (elementMain.attributes.holiday_type_group_images.data) {
