@@ -7,8 +7,8 @@ import { constant_data } from "./../data/email_template_constants.json";
 
 import { render } from "@react-email/render";
 // import nodemailer from 'nodemailer';
-import { ContactUsEmailTemplate } from "../components/ContactUsEmailTemplate";
-import { NewsLetterEmailTemplate } from "../components/NewsLetterEmailTemplate";
+import { ContactUsEmailTemplate } from "../components/email_templates/ContactUsEmailTemplate";
+import { NewsLetterEmailTemplate } from "../components/email_templates/NewsLetterEmailTemplate";
 //-----------------------------------------------------------------------------
 export async function sendMail(subject, toEmail, otpText, data, emailpage) {
   return new Promise((resolve, reject) => {
