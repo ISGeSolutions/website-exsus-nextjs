@@ -129,9 +129,9 @@ const MarkerInfoWindowNext = (props) => {
 
     const getInfoWindowString = (place) => {
         return `
-        <div>
-            <img src="${place.image}" alt="${place.name}" style="width: 50px; height: 50px;" />
-            <p style="cursor: pointer;"><a href="${place.url}">${place.name}</a></p>
+        <div style="text-align: center;">
+            <img src="${place.image}" alt="${place.name}" style="max-width: 100%; height: 60px;" />
+            <p style="cursor: pointer;"><a style="text-decoration: none;color: #8aad56;padding: 0px 0px;line-height: 20px; width: 100%; display: inline-block;" href="${place.url}">${place.name}</a></p>
         </div>
     `;
     };
