@@ -3,8 +3,8 @@ const handler = async (req, res) => {
     try {
         const { method } = req;
         const { data, emailpage } = req.body;
-        const { email_id, first_name, note } = req.body.data;
-
+        const { email_id } = req.body.data;
+        console.log(res);
         switch (method) {
             case "POST": {
                 //Do some thing
@@ -17,7 +17,7 @@ const handler = async (req, res) => {
                 );
                 res.status(200).send({
                     "message": "Success"
-                  });
+                });
                 break;
             }
             case "GET": {

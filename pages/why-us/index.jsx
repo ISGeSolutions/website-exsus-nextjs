@@ -318,14 +318,14 @@ function Index() {
                           __html: whyusDetails?.content_value,
                         }}
                       /> */}
-                      {/* <p
+                      <p
                         dangerouslySetInnerHTML={{
                           __html: customPageData?.data?.filter(
                             (res) =>
                               res.attributes?.content_name == "Short_Text"
                           )[0]?.attributes?.content_value,
                         }}
-                      /> */}
+                      />
                       {/* <h3>Specialist Expertise</h3>
                                 <p>With over 20 years’ experience of creating incredible journeys and tailor-made luxury honeymoons, all around the world, our destination experts have first-hand experience of their dedicated areas and frequently travel to them to stay on top of what’s best, what’s new and what not to miss, so can advise you personally.</p> */}
                     </div>
