@@ -483,7 +483,7 @@ function Index() {
         </div>
       ) : (
         <div>
-          <section className="banner_blk_row">
+          <section className="banner_blk_row" id="scrollToElement">
             {backgroundImage ? (
               <div
                 id="carouselExampleInterval"
@@ -577,7 +577,6 @@ function Index() {
             <section
               className="destination_tab_row light_grey pb-0"
               ref={divRef}
-              id="scrollToElement"
             >
               <div className="container">
                 <div className="bookmark_row">
