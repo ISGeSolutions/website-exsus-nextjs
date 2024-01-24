@@ -228,7 +228,6 @@ function ContinentCountry({ sendDataToParent }) {
   const handleFilterClick = (item) => {
     setActiveItem(item);
     if (item == "alphabetical") {
-      debugger;
       setAllCountries(
         allCountries.sort((a, b) =>
           a.attributes?.country_name?.localeCompare(b.attributes.country_name)

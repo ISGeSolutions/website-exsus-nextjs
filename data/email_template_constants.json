@@ -6,6 +6,16 @@
                 "NewsLetterMailTo": "deokarg201920@gmail.com,ganesh@isgesolutions.com",
                 "NewsLetterMailSubject": "Subscription for e-news letters"
             }
+        ],
+        "makeAnEnquiry": [
+            {
+                "EnquiryConsultantMailSubject": "Enquiry request",
+                "EnquiryConsultantMailFrom": "noreply@exsus.com",
+                "EnquiryConsultantMailTo": "deokarg201920@gmail.com,ganesh@isgesolutions.com",
+                "EnquiryEnquirerMailFileNotFound": "Enquiry was registered on exsus.com.&lt;br&gt; Email address : @Email ",
+                "EnquiryEnquirerMailSubject": "Thank you for your enquiry",
+                "EnquiryEnquirerMailFrom": "noreply@exsus.com"
+            }
         ]
     }
 }

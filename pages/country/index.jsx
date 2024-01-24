@@ -56,6 +56,7 @@ function Country() {
   const [backgroundImage, setBackgroundImage] = useState([]);
   const [headingText, setHeadingText] = useState("");
   let [isShowMap, setIsShowMap] = useState(true);
+  let dictionaryPage = 1;
 
   const countryOptions = [
     { value: "", label: "Filter by country" },
@@ -620,17 +621,15 @@ function Country() {
             {isShowMap ? (
               <div className="banner_tab_blk">
                 <button
-                  className={`btn banner_map_tab ${
-                    activeButton === "map" ? "banner_tab_active" : ""
-                  }`}
+                  className={`btn banner_map_tab ${activeButton === "map" ? "banner_tab_active" : ""
+                    }`}
                   onClick={() => handleTabClick("map")}
                 >
                   Map
                 </button>
                 <button
-                  className={`btn banner_img_tab ${
-                    activeButton === "images" ? "banner_tab_active" : ""
-                  }`}
+                  className={`btn banner_img_tab ${activeButton === "images" ? "banner_tab_active" : ""
+                    }`}
                   onClick={() => handleTabClick("images")}
                 >
                   Images
