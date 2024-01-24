@@ -3,13 +3,14 @@ var nodemailer = require("nodemailer");
 // import { EmailTemplate } from '../components/MyEmailTemplate';
 // import { renderEmail } from '@react-email/html';
 import { renderEmail } from "react-html-email";
-import { consultant_records } from "./../data/consultants_list.json";
+import { constant_data } from "./../data/email_template_constants.json";
 
 import { render } from "@react-email/render";
 // import nodemailer from 'nodemailer';
-import { ContactUsEmailTemplate } from "../components/ContactUsEmailTemplate";
-import { NewsLetterEmailTemplate } from "../components/NewsLetterEmailTemplate";
-
+import { ContactUsEmailTemplate } from "../components/email_templates/ContactUsEmailTemplate";
+import { NewsLetterEmailTemplate } from "../components/email_templates/NewsLetterEmailTemplate";
+import { MakeAnEnquiryConsultant } from "../components/email_templates/MakeAnEnquiryConsultant";
+import { MakeAnEnquiryEnquirer } from "../components/email_templates/MakeAnEnquiryEnquirer";
 //-----------------------------------------------------------------------------
 export async function sendMail(subject, toEmail, otpText, data, emailpage) {
   return new Promise((resolve, reject) => {
@@ -30,49 +31,71 @@ export async function sendMail(subject, toEmail, otpText, data, emailpage) {
       // debug: true,
       // logger:true
     });
-
     // const emailHtml = renderEmail(<MyEmailTemplate url="https://example.com" />);
+    let mailTo = [];
+    let mailFrom = "";
+    let emailHtmlConsultant = "";
+    let emailHtmlUser = "";
+    let subjectConsultant = "";
+    let subjectUser = "";
+    switch (emailpage) {
+      case "contactus":
+        emailHtmlConsultant = render(<ContactUsEmailTemplate emailDetails={data} />);
+        break;
 
-    let emailHtml = "";
-    if (emailpage == "contactus") {
-      emailHtml = render(<ContactUsEmailTemplate emailDetails={data} />);
-    } else if (emailpage == "newsletter") {
-      emailHtml = render(<NewsLetterEmailTemplate emailDetails={data} />);
+      case "newsletter":
+        emailHtmlConsultant = render(<NewsLetterEmailTemplate emailDetails={data} />);
+        mailTo = constant_data?.newsLetter[0]?.NewsLetterMailTo.split(",");
+        subjectConsultant = constant_data?.newsLetter[0]?.NewsLetterMailSubject;
+        mailFrom = constant_data?.newsLetter[0]?.NewsLetterMailFrom;
+        break;
+
+      case "makeAnEnquiry":
+        emailHtmlConsultant = render(<MakeAnEnquiryConsultant emailDetails={data} />);
+        mailTo = constant_data?.makeAnEnquiry[0]?.EnquiryConsultantMailTo?.split(",");
+        subjectConsultant = constant_data?.makeAnEnquiry[0]?.EnquiryConsultantMailSubject;
+        mailFrom = constant_data?.makeAnEnquiry[0]?.EnquiryConsultantMailFrom;
+        emailHtmlUser = render(<MakeAnEnquiryEnquirer emailDetails={data} />);
+        subjectUser = constant_data?.makeAnEnquiry[0]?.EnquiryEnquirerMailSubject;
+        break;
+
+      default:
+        // Handle the default case if emailpage doesn't match any of the cases
+        break;
     }
 
-    var mailOptions = {
-      from: "noreply@exsus.com",
-      to: toEmail,
-      subject: subject,
-      text: otpText,
-      html: emailHtml,
-    };
+    if (emailHtmlUser) {
+      var mailOptions = {
+        from: mailFrom,
+        to: toEmail,
+        subject: subjectUser,
+        text: otpText,
+        html: emailHtmlUser,
+      };
+    }
+
 
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         resolve(false);
-        // throw new Error(error);
-      } else {
-        // return true;
-        if (consultant_records?.length > 0) {
-          consultant_records.forEach(element => {
-            var mailOptions_consultant = {
-              from: "noreply@exsus.com",
-              to: element.email_id,
-              subject: subject,
-              text: otpText,
-              html: emailHtml,
-            };
-            transporter.sendMail(mailOptions_consultant, function (error, info) {
-              if (error) {
-                resolve(false);
-              } else {
-                resolve(true);
-              }
-            });
+      }
+      if (mailTo.length > 0) {
+        mailTo.forEach(element => {
+          var mailOptions_consultant = {
+            from: mailFrom,
+            to: element,
+            subject: subjectConsultant,
+            text: otpText,
+            html: emailHtmlConsultant,
+          };
+          transporter.sendMail(mailOptions_consultant, function (error, info) {
+            if (error) {
+              resolve(false);
+            } else {
+              resolve(true);
+            }
           });
-        }
-        resolve(true);
+        });
       }
     });
   });

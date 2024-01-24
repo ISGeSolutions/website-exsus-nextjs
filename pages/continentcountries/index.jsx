@@ -206,7 +206,7 @@ function ContinentCountry({ sendDataToParent }) {
       .getDestinationDetails(destinationcode)
       .then((x) => {
         setdestination(x.data[0].attributes);
-        setAllCountries(x.data[0].attributes?.countries?.data);
+        setAllCountries(x.data[0]?.attributes?.countries?.data);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -230,7 +230,7 @@ function ContinentCountry({ sendDataToParent }) {
     if (item == "alphabetical") {
       setAllCountries(
         allCountries.sort((a, b) =>
-          a.attributes.country_name.localeCompare(b.attributes.country_name)
+          a.attributes?.country_name?.localeCompare(b.attributes.country_name)
         )
       );
       //  (allCountries);

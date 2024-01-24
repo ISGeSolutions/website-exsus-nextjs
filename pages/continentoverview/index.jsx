@@ -68,7 +68,7 @@ function ContinentOverview({ sendDataToParent }) {
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-        `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
+      `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -81,8 +81,8 @@ function ContinentOverview({ sendDataToParent }) {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -258,7 +258,6 @@ function ContinentOverview({ sendDataToParent }) {
     ) {
       websiteContentCheck(dictionaryPage);
     }
-    window.scrollTo(0, 0);
 
     destinationService
       .getDestinationDetails(destinationcode)
@@ -266,8 +265,8 @@ function ContinentOverview({ sendDataToParent }) {
         // const lines = x.data.attributes?.overview_text.split('\n');
         setdestinationName(x.data[0].attributes.destination_name);
         setnewValueWithBr(x.data[0].attributes?.overview_text);
-
-        setAllCountries(x.data[0]?.attributes?.countries?.data);
+        console.log(x.data[0]?.attributes?.countries?.data);
+        setAllCountries(x.data[0]?.attributes?.countries?.data?.filter(item => item.attributes?.popular_ind)?.sort((a, b) => a.attributes?.popular_serial_no - b.attributes?.popular_serial_no));
         setIsLoading(false);
       })
       .catch((error) => {
@@ -406,23 +405,27 @@ function ContinentOverview({ sendDataToParent }) {
                         )
                     )}
                   </div>
-                  <i id="right">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="#ffffff"
-                      shapeRendering="geometricPrecision"
-                      textRendering="geometricPrecision"
-                      imageRendering="optimizeQuality"
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      viewBox="0 0 267 512.43"
-                    >
-                      <path
-                        fillRule="nonzero"
-                        d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                      />
-                    </svg>
-                  </i>
+                  {allCountries?.length > 5 ? (
+                    <i id="right">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="#ffffff"
+                        shapeRendering="geometricPrecision"
+                        textRendering="geometricPrecision"
+                        imageRendering="optimizeQuality"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        viewBox="0 0 267 512.43"
+                      >
+                        <path
+                          fillRule="nonzero"
+                          d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                        />
+                      </svg>
+                    </i>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
             </section>
@@ -449,7 +452,7 @@ function ContinentOverview({ sendDataToParent }) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -486,12 +489,10 @@ function ContinentOverview({ sendDataToParent }) {
                                   )
                                   .map((res1) => (
                                     <li key={res1.id}>
-                                      {`From ${
-                                        res1.attributes?.currency_symbol ?? ""
-                                      }${
-                                        formatPrice(res1.attributes?.price) ??
+                                      {`From ${res1.attributes?.currency_symbol ?? ""
+                                        }${formatPrice(res1.attributes?.price) ??
                                         " xxxx"
-                                      } per person`}
+                                        } per person`}
                                     </li>
                                   ))}
 

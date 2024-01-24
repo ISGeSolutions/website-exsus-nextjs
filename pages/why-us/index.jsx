@@ -37,6 +37,7 @@ function Index() {
   const [longText, setLongText] = useState(null);
   const [careerData, setCareerData] = useState(null);
   const [subTitle, setSubTitle] = useState(null);
+  let dictionaryPage = 1;
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -49,25 +50,152 @@ function Index() {
     }
   }
 
-  const websiteContentCheck = (matches, modifiedString) => {
-    destinationService
-      .getDictionaryDetails(matches, region)
-      .then((responseObj) => {
-        if (responseObj) {
-          const res = responseObj?.data;
-          res.forEach((element, index) => {
-            const replacement = element?.attributes?.content_translation_text;
-            const matchString = element?.attributes?.content_word;
-            const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
-            if (checkStr && replacement) {
-              modifiedString = modifiedString.replace(checkStr, replacement);
-            }
-          });
+  const websiteContentCheck = (pageNo) => {
+    homeService
+      .getAllWebsiteContent(region, pageNo)
+      .then((x) => {
+        const response = x?.data;
 
-          // Set the modified string in state
-          setLongText(modifiedString);
+        // Calculate the expiration time (1 day from the current time)
+        const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000;
+
+        const dynamicObject = {};
+        const dynamicObjectUk = {};
+        const dynamicObjectUs = {};
+        const dynamicObjectAsia = {};
+        const dynamicObjectIndia = {};
+
+        response.forEach((element, index) => {
+          // Create an object with the data and expiration time
+          dynamicObject[element?.attributes?.content_word] =
+            element?.attributes?.content_translation_text;
+          dynamicObject["code"] =
+            element?.attributes?.website_country?.data?.attributes?.code;
+          dynamicObject["expiration"] = expirationTime;
+
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code == "UK"
+          ) {
+            dynamicObjectUk[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectUk["expiration"] = expirationTime;
+            let localStorageUk = JSON.parse(
+              localStorage.getItem("websitecontent_uk")
+            );
+            localStorage.setItem(
+              "websitecontent_uk",
+              JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code == "US"
+          ) {
+            dynamicObjectUs[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectUs["expiration"] = expirationTime;
+            let localStorageUS = JSON.parse(
+              localStorage.getItem("websitecontent_us")
+            );
+            localStorage.setItem(
+              "websitecontent_us",
+              JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code ==
+            "ASIA"
+          ) {
+            dynamicObjectAsia[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectAsia["expiration"] = expirationTime;
+            let localStorageAsia = JSON.parse(
+              localStorage.getItem("websitecontent_asia")
+            );
+            localStorage.setItem(
+              "websitecontent_asia",
+              JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
+            );
+          }
+          if (
+            element?.attributes?.website_country?.data?.attributes?.code ==
+            "INDIA"
+          ) {
+            dynamicObjectIndia[element?.attributes?.content_word] =
+              element?.attributes?.content_translation_text;
+            dynamicObjectIndia["expiration"] = expirationTime;
+            let localStorageIndia = JSON.parse(
+              localStorage.getItem("websitecontent_india")
+            );
+            localStorage.setItem(
+              "websitecontent_india",
+              JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
+            );
+          }
+        });
+        if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
+          dictionaryPage = x?.meta?.pagination?.page + 1;
+          websiteContentCheck(dictionaryPage);
         }
+        setWebsiteContent(x.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        // Handle any errors here
+        setIsLoading(false);
       });
+  };
+
+  const dictioneryFunction = (data) => {
+    let modifiedString = data;
+    if (modifiedString) {
+      const regex = /{[a-zA-Z0-9-]+}/g;
+      const matches = [...new Set(modifiedString.match(regex))];
+
+      let storedDataString = "";
+      let storedData = "";
+      //
+      if (region == "uk") {
+        storedDataString = localStorage.getItem("websitecontent_uk");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "us") {
+        storedDataString = localStorage.getItem("websitecontent_us");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "asia") {
+        storedDataString = localStorage.getItem("websitecontent_asia");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "in") {
+        storedDataString = localStorage.getItem("websitecontent_india");
+        storedData = JSON.parse(storedDataString);
+      }
+      if (storedData !== null) {
+        //
+        // You can access it using localStorage.getItem('yourKey')
+        if (matches) {
+          let replacement = "";
+          try {
+            matches.forEach((match, index, matches) => {
+              const matchString = match.replace(/{|}/g, "");
+              if (!storedData[matchString]) {
+                throw new Error("Loop break");
+              } else {
+                replacement = storedData[matchString];
+              }
+              const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+              if (checkStr && replacement) {
+                modifiedString = modifiedString.replace(checkStr, replacement);
+              }
+            });
+            return modifiedString;
+            setIsLoading(false);
+          } catch (error) {
+            if (error.message === "Loop break") {
+            } else if (error.message === "Region not found") {
+            }
+          }
+        }
+      } else {
+      }
+    }
   };
 
   useEffect(() => {
@@ -101,84 +229,88 @@ function Index() {
         setWhyusDetails(x?.data[0]?.attributes);
 
         setCustomData(x.data[0]?.attributes?.custom_page_contents);
+        setLongText(
+          x.data[0]?.attributes?.custom_page_contents?.data?.[4].attributes
+            .content_value
+        );
 
-        const data = x.data[0]?.attributes?.custom_page_contents?.data;
+        // const data = x.data[0]?.attributes?.custom_page_contents?.data;[4].attributes.content_value
 
-        let modifiedString = "";
-        if (data) {
-          data.forEach((element, index) => {
-            if (element?.attributes?.content_name == "HeadingTag") {
-              setHeadingTag(element?.attributes?.content_value.toUpperCase());
-            } else if (element?.attributes?.content_name == "Title") {
-              setTitle(element?.attributes?.content_value);
-            } else if (element?.attributes?.content_name == "MetaDescription") {
-              setMetaDescription(element?.attributes?.content_value);
-            } else if (element?.attributes?.content_name == "Long_Text") {
-              modifiedString = element?.attributes?.content_value;
-              // setLongText(element?.attributes?.content_value);
-            } else if (element?.attributes?.content_name == "Right_Header") {
-              setRightHeader(element?.attributes?.content_value);
-            } else if (element?.attributes?.content_name == "Right_Corner") {
-              setRightCorner(element?.attributes?.content_value);
-            } else if (element?.attributes?.content_name == "Sub_Title") {
-              setSubTitle(element?.attributes?.content_value);
-            }
-          });
-        }
+        // let modifiedString = "";
+        // if (data) {
+        //   data.forEach((element, index) => {
+        //     if (element?.attributes?.content_name == "HeadingTag") {
+        //       setHeadingTag(element?.attributes?.content_value.toUpperCase());
+        //     } else if (element?.attributes?.content_name == "Title") {
+        //       setTitle(element?.attributes?.content_value);
+        //     } else if (element?.attributes?.content_name == "MetaDescription") {
+        //       setMetaDescription(element?.attributes?.content_value);
+        //     } else if (element?.attributes?.content_name == "Long_Text") {
+        //       modifiedString = element?.attributes?.content_value;
+        //       // setLongText(element?.attributes?.content_value);
+        //     } else if (element?.attributes?.content_name == "Right_Header") {
+        //       setRightHeader(element?.attributes?.content_value);
+        //     } else if (element?.attributes?.content_name == "Right_Corner") {
+        //       setRightCorner(element?.attributes?.content_value);
+        //     } else if (element?.attributes?.content_name == "Sub_Title") {
+        //       setSubTitle(element?.attributes?.content_value);
+        //     }
+        //   });
+        // }
 
-        const regex = /{[a-zA-Z0-9-]+}/g;
-        const matches = [...new Set(modifiedString.match(regex))];
+        // const regex = /{[a-zA-Z0-9-]+}/g;
+        // const matches = [...new Set(modifiedString.match(regex))];
 
-        let storedDataString = "";
-        let storedData = "";
-        if (region == "uk") {
-          storedDataString = localStorage.getItem("websitecontent_uk");
-          storedData = JSON.parse(storedDataString);
-        } else if (region == "us") {
-          storedDataString = localStorage.getItem("websitecontent_us");
-          storedData = JSON.parse(storedDataString);
-        } else if (region == "asia") {
-          storedDataString = localStorage.getItem("websitecontent_asia");
-          storedData = JSON.parse(storedDataString);
-        } else if (region == "in") {
-          storedDataString = localStorage.getItem("websitecontent_india");
-          storedData = JSON.parse(storedDataString);
-        }
+        // let storedDataString = "";
+        // let storedData = "";
+        // if (region == "uk") {
+        //   storedDataString = localStorage.getItem("websitecontent_uk");
+        //   storedData = JSON.parse(storedDataString);
+        // } else if (region == "us") {
+        //   storedDataString = localStorage.getItem("websitecontent_us");
+        //   storedData = JSON.parse(storedDataString);
+        // } else if (region == "asia") {
+        //   storedDataString = localStorage.getItem("websitecontent_asia");
+        //   storedData = JSON.parse(storedDataString);
+        // } else if (region == "in") {
+        //   storedDataString = localStorage.getItem("websitecontent_india");
+        //   storedData = JSON.parse(storedDataString);
+        // }
 
-        if (storedData !== null) {
-          // You can access it using localStorage.getItem('yourKey')
-          if (matches) {
-            let replacement = "";
-            try {
-              matches.forEach((match, index, matches) => {
-                const matchString = match.replace(/{|}/g, "");
-                if (!storedData[matchString]) {
-                  throw new Error("Loop break");
-                } else {
-                  replacement = storedData[matchString];
-                }
-                const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
-                if (checkStr && replacement) {
-                  modifiedString = modifiedString.replace(
-                    checkStr,
-                    replacement
-                  );
-                }
-              });
-              setLongText(modifiedString);
-              setIsLoading(false);
-            } catch (error) {
-              if (error.message === "Loop break") {
-                // Handle the loop break here
-                //  ("Loop has been stopped.");
-              } else if (error.message === "Region not found") {
-                // Handle the loop break here
-                //  ("Loop has been stopped.");
-                setLongText(modifiedString);
-              }
-            }
-          }
-        }
+        // if (storedData !== null) {
+        //   // You can access it using localStorage.getItem('yourKey')
+        //   if (matches) {
+        //     let replacement = "";
+        //     try {
+        //       matches.forEach((match, index, matches) => {
+        //         const matchString = match.replace(/{|}/g, "");
+        //         if (!storedData[matchString]) {
+        //           throw new Error("Loop break");
+        //         } else {
+        //           replacement = storedData[matchString];
+        //         }
+        //         const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+        //         if (checkStr && replacement) {
+        //           modifiedString = modifiedString.replace(
+        //             checkStr,
+        //             replacement
+        //           );
+        //         }
+        //       });
+        //       setLongText(modifiedString);
+        //       setIsLoading(false);
+        //     } catch (error) {
+        //       if (error.message === "Loop break") {
+        //         // Handle the loop break here
+        //         //  ("Loop has been stopped.");
+        //       } else if (error.message === "Region not found") {
+        //         // Handle the loop break here
+        //         //  ("Loop has been stopped.");
+        //         setLongText(modifiedString);
+        //       }
+        //     }
+        //   }
+        // }
         setIsLoading(false);
       })
       .catch((error) => {
@@ -269,11 +401,6 @@ function Index() {
             <section className="trvl_info_row">
               <div className="container">
                 <div className="bookmark_row">
-                  {/* <div>
-                                        <h1>{t('appTitle')}</h1>
-                                        <p>{t('welcomeMessage')}</p>
-                                    </div> */}
-                  {/* {/ <p style={{ color: `white` }}>{destinations?.attributes?.page_friendly_url}</p > /} */}
                   <FriendlyUrl
                     data={"home/" + whyusDetails?.page_friendly_url}
                   ></FriendlyUrl>
@@ -286,16 +413,11 @@ function Index() {
                       )[0]?.attributes?.content_value
                     }
                   </h2>
-                  {/* <p
-                    dangerouslySetInnerHTML={{
-                      __html: customPageData?.data?.filter(
-                        (res) => res.attributes?.content_name == "Long_Text"
-                      )[0]?.attributes?.content_value,
-                    }}
-                  /> */}
                   <p
                     className="mb-4"
-                    dangerouslySetInnerHTML={{ __html: longText }}
+                    dangerouslySetInnerHTML={{
+                      __html: dictioneryFunction(longText),
+                    }}
                   ></p>
                 </div>
               </div>
@@ -304,13 +426,6 @@ function Index() {
             <section className="card_blk_row dark_grey py-5">
               <div className="container">
                 <div className="book_wth_confdnce">
-                  {/* <h3
-                    dangerouslySetInnerHTML={{
-                      _html: whyusDetails?.data?.filter(
-                        (res) => res.attributes?.content_name == "Short_Text"
-                      )[0]?.attributes?.content_value,
-                    }}
-                  ></h3> */}
                   <div className="row">
                     <div className="col-lg-4">
                       {/* <p
@@ -318,35 +433,17 @@ function Index() {
                           __html: whyusDetails?.content_value,
                         }}
                       /> */}
-                      {/* <p
-                        dangerouslySetInnerHTML={{
-                          __html: customPageData?.data?.filter(
-                            (res) =>
-                              res.attributes?.content_name == "Short_Text"
-                          )[0]?.attributes?.content_value,
-                        }}
-                      /> */}
-                      {/* <h3>Specialist Expertise</h3>
-                                <p>With over 20 years’ experience of creating incredible journeys and tailor-made luxury honeymoons, all around the world, our destination experts have first-hand experience of their dedicated areas and frequently travel to them to stay on top of what’s best, what’s new and what not to miss, so can advise you personally.</p> */}
-                    </div>
-                    {/* <div className="col-lg-4">
                       <p
                         dangerouslySetInnerHTML={{
-                          __html: whyusDetails?.content_value,
+                          __html: dictioneryFunction(
+                            customPageData?.data?.filter(
+                              (res) =>
+                                res.attributes?.content_name == "Short_Text"
+                            )[0]?.attributes?.content_value
+                          ),
                         }}
                       />
-                      {/* <h3>Tailor-made trips</h3>
-                                <p>All trips put together through us are designed to suit individual needs and interests. Personalise an itinerary by adding more time in your favourite place, including an incredible experience you’d like to have or adding something out of the ordinary, so your holiday turns into a trip of a lifetime.</p> */}
-                    {/* </div> */}
-                    {/* <div className="col-lg-4">
-                      <p
-                        dangerouslySetInnerHTML={{
-                          __html: whyusDetails?.content_value,
-                        }}
-                      /> */}
-                    {/* <h3>Fully protected</h3>
-                                <p>From the moment you start planning your trip, you will have a dedicated expert looking after you. While away, we’ll provide 24/7 support and emergency contact to ensure that everything runs smoothly. We are members of ABTA, ATOL and AITO so you can rest assured your holiday is fully protected. </p> */}
-                    {/* </div> */}
+                    </div>
                   </div>
                 </div>
 

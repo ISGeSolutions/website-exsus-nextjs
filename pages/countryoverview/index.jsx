@@ -316,6 +316,9 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
     ) {
       websiteContentCheck(dictionaryPage);
     }
+
+    window.scrollTo(0, 0);
+
     destinationService
       .getCountryFavItineraries(countryData?.country_name, region)
       .then((x) => {
@@ -383,131 +386,141 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
             </section>
           </div>
 
-          <section className="favrites_blk_row light_dark_grey">
-            <div className="container">
-              <h3 className="title_cls">
-                Holidays in {countryData?.country_name} Handpicked by Exsus
-              </h3>
-              <div className="card_slider_row">
-                <i id="left">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="#ffffff"
-                    shapeRendering="geometricPrecision"
-                    textRendering="geometricPrecision"
-                    imageRendering="optimizeQuality"
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    viewBox="0 0 267 512.43"
-                  >
-                    <path
-                      fillRule="nonzero"
-                      d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z"
-                    />
-                  </svg>
-                </i>
-                <div className="carousel00">
-                  {itineraries?.map((item) => (
-                    <div className="card_slider_inr" key={item.id}>
-                      <div className="card_slider">
-                        <NavLink
-                          href={generateDynamicLink(item)}
-                          className="card_slider_img"
-                        >
-                          {item?.attributes?.itinerary_images?.data.map(
-                            (element, index) =>
-                              element.attributes.image_type == "thumbnail" ? (
-                                <img
-                                  key={element.id}
-                                  src={element.attributes.image_path}
-                                  alt="destination card01"
-                                  className="img-fluid"
-                                />
-                              ) : (
-                                ""
-                              )
-                          )}
-                          {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
-                        </NavLink>
-                        <div className="card_slider_cnt places_to_stay_cnt">
-                          <h4>
-                            <a href={generateDynamicLink(item)}>
-                              {dictioneryFunction(item?.attributes?.itin_name)}
-                            </a>
-                          </h4>
-                          {/* <NavLink href={generateDynamicLink(item)}>
-                          </NavLink> */}
-                          <ul>
-                            <li>
-                              {dictioneryFunction(
-                                item?.attributes?.header_text
-                              )}
-                            </li>
-                            <li>
-                              {dictioneryFunction(
-                                item?.attributes?.subheader_text
-                              )}
-                            </li>
-                            {item?.attributes?.itinerary_country_contents?.data
-                              .filter(
-                                (res) =>
-                                  res.attributes.website_country.toLowerCase() ===
-                                  region.replace(/in/g, "india")
-                              )
-                              .map((res1) => (
-                                <li key={res1.id}>
-                                  {`From ${
-                                    res1.attributes?.currency_symbol ?? ""
-                                  }${
-                                    res1.attributes?.price ?? " xxxx"
-                                  } per person`}
-                                </li>
-                              ))}
-                            <li>
-                              Travel to:
-                              <span>
+          {itineraries?.length > 0 ? (
+            <section className="favrites_blk_row light_dark_grey">
+              <div className="container">
+                <h3 className="title_cls">
+                  Holidays in {countryData?.country_name} Handpicked by Exsus
+                </h3>
+                <div className="card_slider_row">
+                  <i id="left">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="#ffffff"
+                      shapeRendering="geometricPrecision"
+                      textRendering="geometricPrecision"
+                      imageRendering="optimizeQuality"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      viewBox="0 0 267 512.43"
+                    >
+                      <path
+                        fillRule="nonzero"
+                        d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z"
+                      />
+                    </svg>
+                  </i>
+                  <div className="carousel00">
+                    {itineraries?.map((item) => (
+                      <div className="card_slider_inr" key={item.id}>
+                        <div className="card_slider">
+                          <NavLink
+                            href={generateDynamicLink(item)}
+                            className="card_slider_img"
+                          >
+                            {item?.attributes?.itinerary_images?.data.map(
+                              (element, index) =>
+                                element.attributes.image_type == "thumbnail" ? (
+                                  <img
+                                    key={element.id}
+                                    src={element.attributes.image_path}
+                                    alt="destination card01"
+                                    className="img-fluid"
+                                  />
+                                ) : (
+                                  ""
+                                )
+                            )}
+                            {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
+                          </NavLink>
+                          <div className="card_slider_cnt places_to_stay_cnt">
+                            <h4>
+                              <a href={generateDynamicLink(item)}>
                                 {dictioneryFunction(
-                                  item?.attributes?.travel_to_text
+                                  item?.attributes?.itin_name
                                 )}
-                              </span>
-                            </li>
-                          </ul>
+                              </a>
+                            </h4>
+                            {/* <NavLink href={generateDynamicLink(item)}>
+                          </NavLink> */}
+                            <ul>
+                              <li>
+                                {dictioneryFunction(
+                                  item?.attributes?.header_text
+                                )}
+                              </li>
+                              <li>
+                                {dictioneryFunction(
+                                  item?.attributes?.subheader_text
+                                )}
+                              </li>
+                              {item?.attributes?.itinerary_country_contents?.data
+                                .filter(
+                                  (res) =>
+                                    res.attributes.website_country.toLowerCase() ===
+                                    region.replace(/in/g, "india")
+                                )
+                                .map((res1) => (
+                                  <li key={res1.id}>
+                                    {`From ${
+                                      res1.attributes?.currency_symbol ?? ""
+                                    }${
+                                      res1.attributes?.price ?? " xxxx"
+                                    } per person`}
+                                  </li>
+                                ))}
+                              <li>
+                                Travel to:
+                                <span>
+                                  {dictioneryFunction(
+                                    item?.attributes?.travel_to_text
+                                  )}
+                                </span>
+                              </li>
+                            </ul>
+                          </div>
+                          <button
+                            className="btn card_slider_btn"
+                            onClick={() => handleRedirect(item)}
+                          >
+                            <span>{item?.attributes?.no_of_nites_notes}</span>
+                            <span className="view_itnry_link">
+                              View this itinerary
+                              <em className="fa-solid fa-chevron-right"></em>
+                            </span>
+                          </button>
                         </div>
-                        <button
-                          className="btn card_slider_btn"
-                          onClick={() => handleRedirect(item)}
-                        >
-                          <span>{item?.attributes?.no_of_nites_notes}</span>
-                          <span className="view_itnry_link">
-                            View this itinerary
-                            <em className="fa-solid fa-chevron-right"></em>
-                          </span>
-                        </button>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                  {itineraries?.length > 4 ? (
+                    <i id="right">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="#ffffff"
+                        shapeRendering="geometricPrecision"
+                        textRendering="geometricPrecision"
+                        imageRendering="optimizeQuality"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        viewBox="0 0 267 512.43"
+                      >
+                        <path
+                          fillRule="nonzero"
+                          d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                        />
+                      </svg>
+                    </i>
+                  ) : (
+                    " "
+                  )}
                 </div>
-                <i id="right">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="#ffffff"
-                    shapeRendering="geometricPrecision"
-                    textRendering="geometricPrecision"
-                    imageRendering="optimizeQuality"
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    viewBox="0 0 267 512.43"
-                  >
-                    <path
-                      fillRule="nonzero"
-                      d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                    />
-                  </svg>
-                </i>
               </div>
-            </div>
-            {/* <div className="full_loader_parnt_blk loader_parnt_blk" style="display: block;"><div className="loader-circle-2"></div></div> */}
-          </section>
+            </section>
+          ) : (
+            ""
+          )}
+
           <section className="favrites_blk_row light_grey">
             <div className="container">
               <h3 className="title_cls">
@@ -614,23 +627,27 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                     </div>
                   ))}
                 </div>
-                <i id="right">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="#ffffff"
-                    shapeRendering="geometricPrecision"
-                    textRendering="geometricPrecision"
-                    imageRendering="optimizeQuality"
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    viewBox="0 0 267 512.43"
-                  >
-                    <path
-                      fillRule="nonzero"
-                      d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                    />
-                  </svg>
-                </i>
+                {hotels?.length > 4 ? (
+                  <i id="right">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="#ffffff"
+                      shapeRendering="geometricPrecision"
+                      textRendering="geometricPrecision"
+                      imageRendering="optimizeQuality"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      viewBox="0 0 267 512.43"
+                    >
+                      <path
+                        fillRule="nonzero"
+                        d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                      />
+                    </svg>
+                  </i>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           </section>
@@ -690,7 +707,10 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
               <div className="row">
                 <div className="col-sm-6">
                   <div className="card_blk_inr card_blk_overlay">
-                    <a onClick={() => sendDataToParentHandler("itineraries")}>
+                    <a
+                      target="_blank"
+                      onClick={() => sendDataToParentHandler("itineraries")}
+                    >
                       <img
                         src="./../../../images/destination_overview01.jpg"
                         alt="Card image 07"
