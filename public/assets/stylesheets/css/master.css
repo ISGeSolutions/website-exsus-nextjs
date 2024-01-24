@@ -2919,3 +2919,47 @@ nav
   border: 6px solid transparent;
   border-right: 6px solid #8aad56;
 }
+
+.favrites_blk_row
+  .card_slider_row
+  .carousel00
+  .card_slider
+  .card_slider_cnt
+  ul
+  li.place_to_stay_para
+  p
+  > span {
+  color: #ffffff;
+}
+
+.trvl_info_cntnt.about_us_para_blk {
+  margin: 0;
+}
+
+.trvl_info_cntnt.about_us_para_blk h2 + div p {
+  margin-bottom: 24px;
+}
+
+.trvl_info_cntnt.about_us_para_blk h2 + div p br:first-child {
+  display: none;
+}
+
+.trvl_info_cntnt.client_review_para_blk p {
+  margin-bottom: 24px;
+}
+
+.trvl_info_cntnt.client_review_para_blk p br {
+  display: none;
+}
+
+.trvl_info_cntnt.client_review_para_blk h4 {
+  font: 1.75rem/1.875rem "Slabo 27px", serif;
+  color: #8aad56;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.trvl_info_row .trvl_info_cntnt.client_review_para_blk p span {
+  color: #ffffff;
+}

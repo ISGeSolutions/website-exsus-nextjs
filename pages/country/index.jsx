@@ -46,9 +46,9 @@ function Country() {
     .replace(/-/g, " ")
     .toLowerCase();
   //  (destinationcode, countrycode);
-  const [selectedOptionCountry, setSelectedOptionCountry] = useState(null);
-  const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
-  const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
+  // const [selectedOptionCountry, setSelectedOptionCountry] = useState(null);
+  // const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
+  // const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
   const [countryData, setCountryData] = useState(null);
   const [mapVariable, setMapVariable] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -65,79 +65,79 @@ function Country() {
     places_to_stay: useRef(null),
   };
 
-  const countryOptions = [
-    { value: "", label: "Filter by country" },
-    { value: "Asia", label: "Asia" },
-    { value: "Hong Kong & Macau", label: "Hong Kong & Macau" },
-    { value: "Malaysia & Borneo", label: "Malaysia & Borneo" },
-    { value: "Singapore", label: "Singapore" },
-    { value: "Indonesia", label: "Indonesia" },
-    { value: "Japan", label: "Japan" },
-    { value: "Cambodia", label: "Cambodia" },
-    { value: "Vietnam", label: "Vietnam" },
-    { value: "China", label: "China" },
-    { value: "Thailand", label: "Thailand" },
-    { value: "Burma", label: "Burma" },
-    { value: "Laos", label: "Laos" },
-  ];
+  // const countryOptions = [
+  //   { value: "", label: "Filter by country" },
+  //   { value: "Asia", label: "Asia" },
+  //   { value: "Hong Kong & Macau", label: "Hong Kong & Macau" },
+  //   { value: "Malaysia & Borneo", label: "Malaysia & Borneo" },
+  //   { value: "Singapore", label: "Singapore" },
+  //   { value: "Indonesia", label: "Indonesia" },
+  //   { value: "Japan", label: "Japan" },
+  //   { value: "Cambodia", label: "Cambodia" },
+  //   { value: "Vietnam", label: "Vietnam" },
+  //   { value: "China", label: "China" },
+  //   { value: "Thailand", label: "Thailand" },
+  //   { value: "Burma", label: "Burma" },
+  //   { value: "Laos", label: "Laos" },
+  // ];
 
-  const regionOptions = [
-    { value: "", label: "Filter by region" },
-    { value: "Everything", label: "Everything" },
-    { value: "Barefoot", label: "Barefoot" },
-    { value: "Beach", label: "Beach" },
-    { value: "Boutique hotel", label: "Boutique hotel" },
-    { value: "Chic design", label: "Chic design" },
-    { value: "Cultural Immersion", label: "Cultural Immersion" },
-    { value: "Eco tourism", label: "Eco tourism" },
-    { value: "Family-Friendly", label: "Family-Friendly" },
-    { value: "Food & Wine", label: "Food & Wine" },
-    { value: "Guiding", label: "Guiding" },
-    { value: "Hideaway", label: "Hideaway" },
-    { value: "Honeymoon", label: "Honeymoon" },
-    { value: "Lodge", label: "Lodge" },
-    { value: "Luxury hotel", label: "Luxury Hotel" },
-    { value: "Off the beaten track", label: "Off the beaten track" },
-    { value: "Owner run", label: "Owner run" },
-    { value: "Peace & quiet", label: "Peace & quiet" },
-    { value: "Private groups", label: "Private groups" },
-    { value: "Romantic", label: "Romantic" },
-    { value: "Rustic", label: "Rustic" },
-    { value: "Seriously special", label: "Seriously special" },
-    { value: "Service & Hospitality", label: "Service & Hospitality" },
-    { value: "Setting & Views", label: "Setting & Views" },
-    { value: "Snorkelling & Driving", label: "Snorkelling & Driving" },
-    { value: "Spa & Wellness", label: "Spa & Wellness" },
-    { value: "Unusal", label: "Unusal" },
-    { value: "Village life", label: "Village life" },
-    { value: "Walking & trekking", label: "Walking & trekking" },
-    { value: "Water activities", label: "Water activities" },
-    { value: "Wildlife & Nature", label: "Wildlife & Nature" },
-    { value: "Adventure", label: "Adventure" },
-    { value: "Couples", label: "Couples" },
-    { value: "Educational", label: "Educational" },
-    { value: "Multi-activity", label: "Multi-activity" },
-    { value: "Teenagers", label: "Teenagers" },
-    { value: "Landscapes & Scenery", label: "Landscapes & Scenery" },
-    { value: "City hotel", label: "City hotel" },
-  ];
+  // const regionOptions = [
+  //   { value: "", label: "Filter by region" },
+  //   { value: "Everything", label: "Everything" },
+  //   { value: "Barefoot", label: "Barefoot" },
+  //   { value: "Beach", label: "Beach" },
+  //   { value: "Boutique hotel", label: "Boutique hotel" },
+  //   { value: "Chic design", label: "Chic design" },
+  //   { value: "Cultural Immersion", label: "Cultural Immersion" },
+  //   { value: "Eco tourism", label: "Eco tourism" },
+  //   { value: "Family-Friendly", label: "Family-Friendly" },
+  //   { value: "Food & Wine", label: "Food & Wine" },
+  //   { value: "Guiding", label: "Guiding" },
+  //   { value: "Hideaway", label: "Hideaway" },
+  //   { value: "Honeymoon", label: "Honeymoon" },
+  //   { value: "Lodge", label: "Lodge" },
+  //   { value: "Luxury hotel", label: "Luxury Hotel" },
+  //   { value: "Off the beaten track", label: "Off the beaten track" },
+  //   { value: "Owner run", label: "Owner run" },
+  //   { value: "Peace & quiet", label: "Peace & quiet" },
+  //   { value: "Private groups", label: "Private groups" },
+  //   { value: "Romantic", label: "Romantic" },
+  //   { value: "Rustic", label: "Rustic" },
+  //   { value: "Seriously special", label: "Seriously special" },
+  //   { value: "Service & Hospitality", label: "Service & Hospitality" },
+  //   { value: "Setting & Views", label: "Setting & Views" },
+  //   { value: "Snorkelling & Driving", label: "Snorkelling & Driving" },
+  //   { value: "Spa & Wellness", label: "Spa & Wellness" },
+  //   { value: "Unusal", label: "Unusal" },
+  //   { value: "Village life", label: "Village life" },
+  //   { value: "Walking & trekking", label: "Walking & trekking" },
+  //   { value: "Water activities", label: "Water activities" },
+  //   { value: "Wildlife & Nature", label: "Wildlife & Nature" },
+  //   { value: "Adventure", label: "Adventure" },
+  //   { value: "Couples", label: "Couples" },
+  //   { value: "Educational", label: "Educational" },
+  //   { value: "Multi-activity", label: "Multi-activity" },
+  //   { value: "Teenagers", label: "Teenagers" },
+  //   { value: "Landscapes & Scenery", label: "Landscapes & Scenery" },
+  //   { value: "City hotel", label: "City hotel" },
+  // ];
 
-  const monthOptions = [
-    { value: "", label: "Filter by month" },
-    { value: "All months", label: "All months" },
-    { value: "January", label: "January" },
-    { value: "February", label: "February" },
-    { value: "March", label: "March" },
-    { value: "April", label: "April" },
-    { value: "May", label: "May" },
-    { value: "June", label: "June" },
-    { value: "July", label: "July" },
-    { value: "August", label: "August" },
-    { value: "September", label: "September" },
-    { value: "October", label: "October" },
-    { value: "November", label: "November" },
-    { value: "December", label: "December" },
-  ];
+  // const monthOptions = [
+  //   { value: "", label: "Filter by month" },
+  //   { value: "All months", label: "All months" },
+  //   { value: "January", label: "January" },
+  //   { value: "February", label: "February" },
+  //   { value: "March", label: "March" },
+  //   { value: "April", label: "April" },
+  //   { value: "May", label: "May" },
+  //   { value: "June", label: "June" },
+  //   { value: "July", label: "July" },
+  //   { value: "August", label: "August" },
+  //   { value: "September", label: "September" },
+  //   { value: "October", label: "October" },
+  //   { value: "November", label: "November" },
+  //   { value: "December", label: "December" },
+  // ];
 
   const [users, setUsers] = useState(null);
   // const [destinationDropdown, setDestinationDropdown] = useState(null);
@@ -459,9 +459,9 @@ function Country() {
     if (countrycode && countrycode != "undefined") {
       localStorage.setItem("country_code", countrycode);
     }
-    setSelectedOptionCountry(countryOptions[0]);
-    setSelectedOptionRegion(regionOptions[0]);
-    setSelectedOptionMonth(monthOptions[0]);
+    // setSelectedOptionCountry(countryOptions[0]);
+    // setSelectedOptionRegion(regionOptions[0]);
+    // setSelectedOptionMonth(monthOptions[0]);
 
     if (router.asPath.includes("itineraries")) {
       toggleTab("itineraries");
@@ -627,15 +627,17 @@ function Country() {
             {isShowMap ? (
               <div className="banner_tab_blk">
                 <button
-                  className={`btn banner_map_tab ${activeButton === "map" ? "banner_tab_active" : ""
-                    }`}
+                  className={`btn banner_map_tab ${
+                    activeButton === "map" ? "banner_tab_active" : ""
+                  }`}
                   onClick={() => handleTabClick("map")}
                 >
                   Map
                 </button>
                 <button
-                  className={`btn banner_img_tab ${activeButton === "images" ? "banner_tab_active" : ""
-                    }`}
+                  className={`btn banner_img_tab ${
+                    activeButton === "images" ? "banner_tab_active" : ""
+                  }`}
                   onClick={() => handleTabClick("images")}
                 >
                   Images
