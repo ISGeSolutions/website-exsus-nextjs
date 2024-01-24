@@ -220,21 +220,6 @@ function ContinentItinararies(props) {
     //  (page);
   };
 
-  // const countryOptions = [
-  //     { value: "Asia", label: "Asia" },
-  //     { value: "Hong Kong & Macau", label: "Hong Kong & Macau" },
-  //     { value: "Malaysia & Borneo", label: "Malaysia & Borneo" },
-  //     { value: "Singapore", label: "Singapore" },
-  //     { value: "Indonesia", label: "Indonesia" },
-  //     { value: "Japan", label: "Japan" },
-  //     { value: "Cambodia", label: "Cambodia" },
-  //     { value: "Vietnam", label: "Vietnam" },
-  //     { value: "China", label: "China" },
-  //     { value: "Thailand", label: "Thailand" },
-  //     { value: "Burma", label: "Burma" },
-  //     { value: "Laos", label: "Laos" }
-  // ];
-
   const monthOptions = [
     { value: "Show_all", label: "All months" },
     { value: "1", label: "January" },

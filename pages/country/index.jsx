@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { Link, Spinner, Signup } from "components";
 import { Layout } from "components/users";
@@ -57,6 +57,13 @@ function Country() {
   const [headingText, setHeadingText] = useState("");
   let [isShowMap, setIsShowMap] = useState(true);
   let dictionaryPage = 1;
+  const divRef = useRef();
+  const tabContentRefs = {
+    overview: useRef(null),
+    countries: useRef(null),
+    itineraries: useRef(null),
+    places_to_stay: useRef(null),
+  };
 
   const countryOptions = [
     { value: "", label: "Filter by country" },
@@ -201,7 +208,7 @@ function Country() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
+        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
     );
   };
 
@@ -211,8 +218,8 @@ function Country() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -272,10 +279,10 @@ function Country() {
         `/destinations/${destinationcode
           ?.replace(/&/g, "and")
           ?.replace(/ /g, "-")}/${destCode
-            ?.replace(/&/g, "and")
-            ?.replace(/ /g, "-")}/${destCode
-              ?.replace(/&/g, "and")
-              ?.replace(/ /g, "-")}-itineraries`;
+          ?.replace(/&/g, "and")
+          ?.replace(/ /g, "-")}/${destCode
+          ?.replace(/&/g, "and")
+          ?.replace(/ /g, "-")}-itineraries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationcode}/${destCode}/${destCode} itineraries`
@@ -310,7 +317,9 @@ function Country() {
       setActiveTab(itemId);
       // window.history.pushState(null, null, redirectUrl); // Update the URL
     }
-    const targetDiv = document.getElementById("targetDiv");
+
+    var targetDiv = document.getElementById("scrollToElement");
+
     if (targetDiv) {
       targetDiv.scrollIntoView({ behavior: "smooth" });
     }
@@ -404,7 +413,7 @@ function Country() {
 
       let storedDataString = "";
       let storedData = "";
-      //  
+      //
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -419,7 +428,7 @@ function Country() {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        //  
+        //
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -428,10 +437,7 @@ function Country() {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  modifiedString
-                );
+                modifiedString = websiteContentCheck(matches, modifiedString);
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -443,7 +449,7 @@ function Country() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -463,13 +469,14 @@ function Country() {
       toggleTab("countries");
     }
 
-
+    window.scrollTo(0, 0);
 
     // userService.getAll().then(x => setUsers(x));
-    if (!localStorage.getItem(`websitecontent_${region.replace(
-      /in/g,
-      "INDIA"
-    ).toLowerCase()}`)) {
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
       websiteContentCheck(dictionaryPage);
     }
 
@@ -483,7 +490,7 @@ function Country() {
         .getCountryDetails(countrycode)
         .then((x) => {
           setCountryData(x.data[0]);
-          (x.data[0]);
+          x.data[0];
           setDataToSendToChild(x.data[0]?.attributes);
           setHeadingText(x.data[0]?.attributes?.header_text);
           setFriendlyUrl(`Home/Destinations/${destinationcode}/${countrycode}`);
@@ -577,7 +584,7 @@ function Country() {
         </div>
       ) : (
         <div>
-          <section className="banner_blk_row">
+          <section className="banner_blk_row" id="scrollToElement">
             {backgroundImage ? (
               <div
                 id="carouselExampleInterval"
@@ -601,7 +608,6 @@ function Country() {
                 <div className="carousel-inner">
                   {backgroundImage.map((imagePath, index) => (
                     <a
-
                       key={index}
                       target="_blank"
                       className={`carousel-item ${index === 0 ? "active" : ""}`}
@@ -639,8 +645,9 @@ function Country() {
               ""
             )}
             <div
-              className={`banner_map_blk ${activeButton === "map" ? "banner_map_active" : ""
-                }`}
+              className={`banner_map_blk ${
+                activeButton === "map" ? "banner_map_active" : ""
+              }`}
             >
               <Iframe
                 width="640px"
@@ -662,13 +669,17 @@ function Country() {
           </section>
 
           {/* Country sub tabs */}
-          <section className="destination_tab_row light_grey pb-0">
+          <section
+            className="destination_tab_row light_grey pb-0"
+            ref={divRef}
+            // id="scrollToElement"
+          >
             <div className="container">
               <div className="bookmark_row">
                 <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
               </div>
               <div className="destination_tab_inr">
-                <h2 className="tab_tilte">{headingText}</h2>
+                <h2 className="tab_tilte">{dictioneryFunction(headingText)}</h2>
                 <ul
                   className="nav nav-pills justify-content-center"
                   id="pills-tab"
@@ -783,6 +794,7 @@ function Country() {
                   role="tabpanel"
                   aria-labelledby="pills-overview-tab"
                   tabIndex="0"
+                  ref={tabContentRefs["overview"]}
                 >
                   <CountryOverview
                     // data={countryData?.attributes}
@@ -805,6 +817,7 @@ function Country() {
                   role="tabpanel"
                   aria-labelledby="pills-countries-tab"
                   tabIndex="0"
+                  ref={tabContentRefs["regions"]}
                 >
                   <CountryRegions
                     data={countryData?.attributes}
@@ -823,10 +836,12 @@ function Country() {
                   role="tabpanel"
                   aria-labelledby="pills-itineraries-tab"
                   tabIndex="0"
+                  ref={tabContentRefs["itineraries"]}
                 >
                   <CountrytItinararies
                     data={countryData?.attributes}
                     sendDataToParent={handleDataFromChild}
+                    divRef={divRef}
                   />
                 </div>
               )}
@@ -841,10 +856,12 @@ function Country() {
                   role="tabpanel"
                   aria-labelledby="pills-places-to-stay-tab"
                   tabIndex="0"
+                  ref={tabContentRefs["places-to-stay"]}
                 >
                   <CountryPlaceToStay
                     data={countryData?.attributes}
                     sendDataToParent={handleDataFromChild}
+                    divRef={divRef}
                   />
                 </div>
               )}

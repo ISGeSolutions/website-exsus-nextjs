@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 export default CountryWhentogo;
 
-function CountryWhentogo(props) {
+function CountryWhentogo(props, onDataFromChild) {
   //  ("country", country);
   const [countryData, setCountryData] = useState(props?.data);
   const router = useRouter();
@@ -101,16 +101,16 @@ function CountryWhentogo(props) {
     return tds;
   };
 
-  // const sendDataToParentHandler = (data) => {
-  //   // Send the data to the parent
-  //   onDataFromChild(data);
-  //   // You can perform other actions related to sending data to the parent
-  // };
+  const sendDataToParentHandler = (data) => {
+    // Send the data to the parent
+    onDataFromChild(data);
+    // You can perform other actions related to sending data to the parent
+  };
 
-  // const handleClick = (e) => {
-  //   // Call the callback function to send data to the parent
-  //   sendDataToParent(e);
-  // };
+  const handleClick = (e) => {
+    // Call the callback function to send data to the parent
+    sendDataToParent(e);
+  };
 
   const generateDynamicLink = (item) => {
     //  ('item', item);
@@ -146,7 +146,9 @@ function CountryWhentogo(props) {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
-            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
+            let localStorageUk = JSON.parse(
+              localStorage.getItem("websitecontent_uk")
+            );
             localStorage.setItem(
               "websitecontent_uk",
               JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
@@ -158,7 +160,9 @@ function CountryWhentogo(props) {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
-            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
+            let localStorageUS = JSON.parse(
+              localStorage.getItem("websitecontent_us")
+            );
             localStorage.setItem(
               "websitecontent_us",
               JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
@@ -171,7 +175,9 @@ function CountryWhentogo(props) {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
-            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
+            let localStorageAsia = JSON.parse(
+              localStorage.getItem("websitecontent_asia")
+            );
             localStorage.setItem(
               "websitecontent_asia",
               JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
@@ -184,7 +190,9 @@ function CountryWhentogo(props) {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
-            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
+            let localStorageIndia = JSON.parse(
+              localStorage.getItem("websitecontent_india")
+            );
             localStorage.setItem(
               "websitecontent_india",
               JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
@@ -192,8 +200,8 @@ function CountryWhentogo(props) {
           }
         });
         if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
-          dictionaryPage = x?.meta?.pagination?.page + 1
-          websiteContentCheck(dictionaryPage)
+          dictionaryPage = x?.meta?.pagination?.page + 1;
+          websiteContentCheck(dictionaryPage);
         }
         setWebsiteContent(x.data);
         setIsLoading(false);
@@ -254,10 +262,11 @@ function CountryWhentogo(props) {
   };
 
   useEffect(() => {
-    if (!localStorage.getItem(`websitecontent_${region.replace(
-      /in/g,
-      "INDIA"
-    ).toLowerCase()}`)) {
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
       websiteContentCheck(dictionaryPage);
     }
     const sortedData = countryData?.country_month_activities?.data?.sort(
