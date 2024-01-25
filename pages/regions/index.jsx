@@ -526,14 +526,14 @@ function Index() {
         </div>
       ) : (
         <div>
-          <section className="banner_blk_row" id="targetDiv">
+          <section className="banner_blk_row">
             {backgroundImage ? (
               <div
                 id="carouselExampleInterval"
                 className="carousel slide"
                 data-bs-ride="carousel"
               >
-                <div className="carousel-indicators">
+                <div className="carousel-indicators" id="targetDiv">
                   {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
                   {backgroundImage.map((_, index) => (
                     <button

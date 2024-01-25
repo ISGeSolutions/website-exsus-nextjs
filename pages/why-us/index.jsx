@@ -390,18 +390,6 @@ function Index() {
                           </NavLink>
                         )
                     )}
-                    {/* <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
-                            <div className="banner_commn_cls about_us_banner01"></div>
-                        </a>
-                        <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
-                            <div className="banner_commn_cls about_us_banner02"></div>
-                        </a>
-                        <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
-                            <div className="banner_commn_cls about_us_banner03"></div>
-                        </a>
-                        <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
-                            <div className="banner_commn_cls about_us_banner04"></div>
-                        </a> */}
                   </div>
                 </div>
               ) : (
@@ -416,7 +404,7 @@ function Index() {
                     data={"home/" + whyusDetails?.page_friendly_url}
                   ></FriendlyUrl>
                 </div>
-                <div className="trvl_info_cntnt">
+                <div className="trvl_info_cntnt why_us_para_blk">
                   <h2 className="trvl_title">
                     {
                       customPageData?.data?.filter(

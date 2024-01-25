@@ -223,14 +223,14 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
+        `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
     );
   };
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -405,7 +405,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -431,7 +431,6 @@ function Index() {
         );
         setHolidayName(x.data[0].attributes.holiday_type_group_name);
         setTitle(x.data[0].attributes.page_meta_title);
-        debugger;
         const imageCheck =
           x.data[0].attributes?.holiday_type_group_images?.data;
         setHolidaytypesDetails(x.data[0].attributes);

@@ -84,28 +84,28 @@ function Index() {
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
     );
   };
 
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
-        .replace(/ /g, "-")
-        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/&/g, " and ")
+          .replace(/ /g, "-")
+          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${item?.attributes?.friendly_url}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -116,12 +116,12 @@ function Index() {
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
         .toLowerCase()}/itinerary/${item?.attributes?.country?.data?.attributes?.country_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}-itineraries/${item?.attributes?.friendly_url}`
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -132,12 +132,12 @@ function Index() {
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
         .toLowerCase()}/itinerary/${item?.attributes?.country?.data?.attributes?.country_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}-itineraries/${item?.attributes?.friendly_url}`
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -279,7 +279,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -389,15 +389,15 @@ function Index() {
               ?.replace(/&/g, " and ")
               .replace(/ /g, "-")
               .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-                ?.replace(/ /g, "-")
-                .replace(/&/g, "and")
-                .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-                  ?.replace(/ /g, "-")
-                  .replace(/&/g, "and")
-                  .toLowerCase()}/${item?.attributes?.friendly_url
-                    ?.replace(/&/g, " and ")
-                    .replace(/ /g, "-")
-                    .toLowerCase()}`,
+              ?.replace(/ /g, "-")
+              .replace(/&/g, "and")
+              .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+              ?.replace(/ /g, "-")
+              .replace(/&/g, "and")
+              .toLowerCase()}/${item?.attributes?.friendly_url
+              ?.replace(/&/g, " and ")
+              .replace(/ /g, "-")
+              .toLowerCase()}`,
         }));
         setCoordinatesArray((prevCoordinates) => [
           ...prevCoordinates,
@@ -524,11 +524,15 @@ function Index() {
           <section className="trvl_info_row">
             <div className="container">
               <div className="bookmark_row">
-                <FriendlyUrl data={dictioneryFunction(friendlyUrl)}></FriendlyUrl>
+                <FriendlyUrl
+                  data={dictioneryFunction(friendlyUrl)}
+                ></FriendlyUrl>
               </div>
 
               <div className="trvl_info_cntnt">
-                <h2 className="trvl_title mb-3">{dictioneryFunction(hotelData.hotel_name)}</h2>
+                <h2 className="trvl_title mb-3">
+                  {dictioneryFunction(hotelData.hotel_name)}
+                </h2>
                 <h3 className="trvl_title_sub_white mb-3">
                   Location: {hotelData.location}
                 </h3>
@@ -551,8 +555,8 @@ function Index() {
                       {hotelData?.hotel_country_contents?.data[0]?.attributes?.currency_symbol.repeat(
                         Math.abs(
                           5 -
-                          hotelData?.hotel_country_contents?.data[0]
-                            ?.attributes?.price_guide_value
+                            hotelData?.hotel_country_contents?.data[0]
+                              ?.attributes?.price_guide_value
                         )
                       )}
                     </label>
@@ -574,7 +578,9 @@ function Index() {
                     {/* Special offer: save upto 20% off plus complimentary
                     transfers and high tea */}
                     Special offer:{" "}
-                    {dictioneryFunction(hotelData?.special_offers?.data[0]?.attributes?.title_text)}
+                    {dictioneryFunction(
+                      hotelData?.special_offers?.data[0]?.attributes?.title_text
+                    )}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="#ffffff"
@@ -599,9 +605,10 @@ function Index() {
                     <p
                       className="mb-4"
                       dangerouslySetInnerHTML={{
-                        __html:
-                          dictioneryFunction(hotelData?.special_offers?.data[0]?.attributes
-                            ?.overview_text),
+                        __html: dictioneryFunction(
+                          hotelData?.special_offers?.data[0]?.attributes
+                            ?.overview_text
+                        ),
                       }}
                     ></p>
                     {/* <p>
@@ -686,7 +693,9 @@ function Index() {
           <section className="itinery_detls_row">
             <div className="container">
               <div
-                dangerouslySetInnerHTML={{ __html: dictioneryFunction(hotelData?.overview_text) }}
+                dangerouslySetInnerHTML={{
+                  __html: dictioneryFunction(hotelData?.overview_text),
+                }}
               />
             </div>
           </section>
@@ -896,7 +905,7 @@ function Index() {
                   </i>
                   <div className="carousel00">
                     {hotels?.map((item) => (
-                      <div className="card_slider_inr">
+                      <div className="card_slider_inr" key={item.id}>
                         <div className="card_slider">
                           <NavLink
                             href={generateDynamicLink(item)}
@@ -924,12 +933,17 @@ function Index() {
                           <div className="card_slider_cnt places_to_stay_cnt">
                             <h4>
                               <a href={generateDynamicLink(item)}>
-                                {item?.attributes?.hotel_name}
-                                {item?.attributes?.hotel_name}
+                                {dictioneryFunction(
+                                  item?.attributes?.hotel_name
+                                )}
+                                {/* {item?.attributes?.hotel_name} */}
                               </a>
                             </h4>
                             <ul>
-                              <li>Location: {item?.attributes?.location}</li>
+                              <li>
+                                Location:{" "}
+                                {dictioneryFunction(item?.attributes?.location)}
+                              </li>
                               {item?.attributes?.hotel_country_contents?.data?.map(
                                 (item) => {
                                   return (
@@ -951,8 +965,8 @@ function Index() {
                                           {item?.attributes?.currency_symbol.repeat(
                                             Math.abs(
                                               5 -
-                                              item?.attributes
-                                                ?.price_guide_value
+                                                item?.attributes
+                                                  ?.price_guide_value
                                             )
                                           )}
                                         </label>
@@ -962,7 +976,7 @@ function Index() {
                                 }
                               )}
 
-                              <li>
+                              {/* <li>
                                 <p
                                   dangerouslySetInnerHTML={{
                                     __html: dictioneryFunction(
@@ -971,7 +985,7 @@ function Index() {
                                   }}
                                 />
                               </li>
-                              {/* <li>{item?.attributes?.intro_text}</li> */}
+                              <li>{item?.attributes?.intro_text}</li> */}
                               <li>
                                 Best for:
                                 <span>
@@ -995,7 +1009,7 @@ function Index() {
                       </div>
                     ))}
                   </div>
-                  {hotels?.length > 4 && (
+                  {hotels?.length > 4 ? (
                     <i id="right">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -1013,10 +1027,11 @@ function Index() {
                         />
                       </svg>
                     </i>
+                  ) : (
+                    ""
                   )}
                 </div>
               </div>
-              {/* <div className="full_loader_parnt_blk loader_parnt_blk" style="display: block;"><div className="loader-circle-2"></div></div> */}
             </section>
           ) : (
             " "
@@ -1024,10 +1039,10 @@ function Index() {
 
           {moreItineraries?.length > 0 ? (
             <section className="favrites_blk_row light_grey">
-              {/* {moreItineraries?.data} */}
               <div className="container">
                 <h3 className="title_cls">
-                  STAY AT {hotelData.hotel_name} ON THESE TRIPS
+                  STAY AT {dictioneryFunction(hotelData.hotel_name)} ON THESE
+                  TRIPS
                 </h3>
                 <div className="card_slider_row">
                   <i id="left">
@@ -1105,10 +1120,12 @@ function Index() {
                                 )
                                 .map((res1) => (
                                   <li key={res1.id}>
-                                    {`From ${res1.attributes?.currency_symbol ?? ""
-                                      }${formatPrice(res1.attributes?.price) ??
+                                    {`From ${
+                                      res1.attributes?.currency_symbol ?? ""
+                                    }${
+                                      formatPrice(res1.attributes?.price) ??
                                       " xxxx"
-                                      } per person`}
+                                    } per person`}
                                   </li>
                                 ))}
                               <li>
