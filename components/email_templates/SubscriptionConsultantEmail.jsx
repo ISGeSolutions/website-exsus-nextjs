@@ -58,7 +58,7 @@ export function SubscriptionConsultantEmail(props) {
                                                 </tr>
                                                 <tr>
                                                     <td bgcolor="#fff" height="25px" style="padding: 15px 5px;">
-                                                        <font face="Verdana" color="#5d5d5d" size="2">The following request was recieved at <a href="#" style="text-decoration:none; color:#8aad56; font-weight:bold;">exsus.com</a> @CreatedDate</font>
+                                                        <font face="Verdana" color="#5d5d5d" size="2">The following request was recieved at <a href="javascript:void(0)" style="text-decoration:none; color:#8aad56; font-weight:bold;">exsus.com</a> @CreatedDate</font>
                                                     </td>
                                                 </tr>
                                                 <tr>

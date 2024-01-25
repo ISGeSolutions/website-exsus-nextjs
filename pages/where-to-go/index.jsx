@@ -328,7 +328,7 @@ function Index() {
               {backgroundImage.map((imagePath, index) => (
                 <NavLink
                   key={index}
-                  href="#"
+                  href="javascript:void(0)"
                   className={`carousel-item ${index === 0 ? "active" : ""}`}
                   data-bs-interval="5000"
                 >
@@ -657,7 +657,7 @@ function Index() {
             <div className="row">
               <div className="col-md-6">
                 <div className="card_blk_inr card_blk_overlay start_planng_holdy_blk">
-                  <a href="#" target="_blank">
+                  <a href="javascript:void(0)" target="_blank">
                     <img
                       src="images/start_planng_holdy.jpg"
                       alt="start_planng_holdy"
@@ -716,7 +716,7 @@ function Index() {
 
               <div className="col-md-6">
                 <div className="card_blk_inr card_blk_overlay mt-3 mt-md-0">
-                  <a href="#" target="_blank">
+                  <a href="javascript:void(0)" target="_blank">
                     <img
                       src="images/about_us_card01.jpg"
                       alt="Card image 07"
@@ -751,7 +751,7 @@ function Index() {
                   </a>
                 </div>
                 <div className="card_blk_inr card_blk_overlay mb-0">
-                  <a href="#">
+                  <a href="javascript:void(0)">
                     <img
                       src="images/about_us_card02.jpg"
                       alt="Card image 08"

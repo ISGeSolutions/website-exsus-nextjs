@@ -506,6 +506,25 @@ const nextConfig = {
         destination: "/about-us/friend-referral-offer",
       },
 
+
+      // Thank you
+      {
+        source: "/make-an-enquiry/thankyou",
+        destination: "/make-an-enquiry/thankyou",
+      },
+      {
+        source: "/us/make-an-enquiry/thankyou",
+        destination: "/make-an-enquiry/thankyou",
+      },
+      {
+        source: "/asia/make-an-enquiry/thankyou",
+        destination: "/make-an-enquiry/thankyou",
+      },
+      {
+        source: "/in/make-an-enquiry/thankyou",
+        destination: "/make-an-enquiry/thankyou",
+      },
+
       // privacy-policy
       { source: "/privacy-policy", destination: "/privacy-policy" },
       { source: "/us/privacy-policy", destination: "/privacy-policy" },

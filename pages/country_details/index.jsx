@@ -71,40 +71,40 @@ function Index() {
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="11" aria-label="Slide 12"></button>
                     </div>
                     <div className="carousel-inner">
-                        <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
+                        <a href="javascript:void(0)" target="_blank" className="carousel-item active" data-bs-interval="5000">
                             <div className="banner_commn_cls country_overvw_banner01"></div>
                         </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                        <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="country_overvw_banner02 banner_commn_cls"></div>
                         </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                        <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="country_overvw_banner03 banner_commn_cls"></div>
                         </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                        <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="country_overvw_banner04 banner_commn_cls"></div>
                         </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                        <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="country_overvw_banner05 banner_commn_cls"></div>
                         </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                        <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="country_overvw_banner06 banner_commn_cls"></div>
                         </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                        <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="country_overvw_banner07 banner_commn_cls"></div>
                         </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                        <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="country_overvw_banner08 banner_commn_cls"></div>
                         </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                        <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="country_overvw_banner09 banner_commn_cls"></div>
                         </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                        <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="country_overvw_banner10 banner_commn_cls"></div>
                         </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                        <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="country_overvw_banner11 banner_commn_cls"></div>
                         </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                        <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="country_overvw_banner12 banner_commn_cls"></div>
                         </a>
                     </div>
@@ -186,7 +186,7 @@ function Index() {
                                                             <img src="images/country_card01.jpg" alt="country card01" className="img-fluid" />
                                                         </a>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">China Like an Emperor</a></h4>
+                                                            <h4><a href="javascript:void(0)">China Like an Emperor</a></h4>
                                                             <ul>
                                                                 <li>China in Ultimate Style</li>
                                                                 <li>China</li>
@@ -208,7 +208,7 @@ function Index() {
                                                             <img src="images/country_card02.jpg" alt="country card02" className="img-fluid" />
                                                         </div>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">In Search of Pandas</a></h4>
+                                                            <h4><a href="javascript:void(0)">In Search of Pandas</a></h4>
                                                             <ul>
                                                                 <li>Family Adventure to China</li>
                                                                 <li>China</li>
@@ -230,7 +230,7 @@ function Index() {
                                                             <img src="images/country_card03.jpg" alt="country card03" className="img-fluid" />
                                                         </div>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">STYLISH HONEYMOON TO CHINA</a></h4>
+                                                            <h4><a href="javascript:void(0)">STYLISH HONEYMOON TO CHINA</a></h4>
                                                             <ul>
                                                                 <li>A Chinese Romance</li>
                                                                 <li>China</li>
@@ -264,7 +264,7 @@ function Index() {
                                                             <img src="images/country_hotel01.jpg" alt="country_hotel01" className="img-fluid" />
                                                         </a>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">Capella Shanghai</a></h4>
+                                                            <h4><a href="javascript:void(0)">Capella Shanghai</a></h4>
                                                             <ul>
                                                                 <li>Location: Shanghai, Hangzhou & Eastern China | China</li>
                                                                 <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
@@ -284,7 +284,7 @@ function Index() {
                                                             <img src="images/country_hotel02.jpg" alt="country_hotel02" className="img-fluid" />
                                                         </div>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">Six Senses Qing Cheng Mountain</a></h4>
+                                                            <h4><a href="javascript:void(0)">Six Senses Qing Cheng Mountain</a></h4>
                                                             <ul>
                                                                 <li>Location: Xi'an, Sichuan & Central China | China</li>
                                                                 <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
@@ -304,7 +304,7 @@ function Index() {
                                                             <img src="images/country_hotel03.jpg" alt="country_hotel03" className="img-fluid" />
                                                         </div>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">Alila Yangshuo</a></h4>
+                                                            <h4><a href="javascript:void(0)">Alila Yangshuo</a></h4>
                                                             <ul>
                                                                 <li>Location: Southern China | China</li>
                                                                 <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
@@ -329,7 +329,7 @@ function Index() {
                                 <div className="row">
                                     <div className="col-sm-6">
                                         <div className="card_blk_inr card_blk_overlay">
-                                            <a href="#" target="_blank">
+                                            <a href="javascript:void(0)" target="_blank">
                                                 <img src="images/country_detail01.jpg" alt="Card image 07" className="img-fluid" />
                                                 <div className="card_blk_cntnt card_blk_cntnt_top">
                                                     <div className="row align-items-center">
@@ -349,7 +349,7 @@ function Index() {
 
                                     <div className="col-sm-6">
                                         <div className="card_blk_inr card_blk_overlay">
-                                            <a href="#">
+                                            <a href="javascript:void(0)">
                                                 <img src="images/country_detail02.jpg" alt="Card image 08" className="img-fluid" />
                                                 <div className="card_blk_cntnt card_blk_cntnt_top">
                                                     <div className="row align-items-center">
@@ -387,14 +387,14 @@ function Index() {
                                     <div className="col-12">
                                         <div className="destination_contries_filter d-block d-md-flex">
                                             <ul>
-                                                <li><a href="#" className="active">Exsus recommends</a></li>
-                                                <li><a href="#">Alphabetical</a></li>
+                                                <li><a href="javascript:void(0)" className="active">Exsus recommends</a></li>
+                                                <li><a href="javascript:void(0)">Alphabetical</a></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div className="col-sm-6 col-md-4">
                                         <div className="card_blk_inr flex-column">
-                                            <a href="#" target="_blank">
+                                            <a href="javascript:void(0)" target="_blank">
                                                 <img src="images/region_countries01.jpg" alt="region_countries01" className="img-fluid" />
                                                 <div className="card_blk_cntnt card_blk_sml_arw">
                                                     <div className="row align-items-center">
@@ -415,7 +415,7 @@ function Index() {
 
                                     <div className="col-sm-6 col-md-4">
                                         <div className="card_blk_inr flex-column">
-                                            <a href="#" target="_blank">
+                                            <a href="javascript:void(0)" target="_blank">
                                                 <img src="images/region_countries02.jpg" alt="region_countries02" className="img-fluid" />
                                                 <div className="card_blk_cntnt card_blk_sml_arw">
                                                     <div className="row align-items-center">
@@ -436,7 +436,7 @@ function Index() {
 
                                     <div className="col-sm-6 col-md-4">
                                         <div className="card_blk_inr flex-column">
-                                            <a href="#" target="_blank">
+                                            <a href="javascript:void(0)" target="_blank">
                                                 <img src="images/region_countries03.jpg" alt="region_countries03" className="img-fluid" />
                                                 <div className="card_blk_cntnt card_blk_sml_arw">
                                                     <div className="row align-items-center">
@@ -457,7 +457,7 @@ function Index() {
 
                                     <div className="col-sm-6 col-md-4">
                                         <div className="card_blk_inr flex-column">
-                                            <a href="#" target="_blank">
+                                            <a href="javascript:void(0)" target="_blank">
                                                 <img src="images/region_countries04.jpg" alt="region_countries04" className="img-fluid" />
                                                 <div className="card_blk_cntnt card_blk_sml_arw">
                                                     <div className="row align-items-center">
@@ -478,7 +478,7 @@ function Index() {
 
                                     <div className="col-sm-6 col-md-4">
                                         <div className="card_blk_inr flex-column">
-                                            <a href="#" target="_blank">
+                                            <a href="javascript:void(0)" target="_blank">
                                                 <img src="images/region_countries05.jpg" alt="region_countries05" className="img-fluid" />
                                                 <div className="card_blk_cntnt card_blk_sml_arw">
                                                     <div className="row align-items-center">
@@ -499,7 +499,7 @@ function Index() {
 
                                     <div className="col-sm-6 col-md-4">
                                         <div className="card_blk_inr flex-column">
-                                            <a href="#" target="_blank">
+                                            <a href="javascript:void(0)" target="_blank">
                                                 <img src="images/region_countries06.jpg" alt="region_countries06" className="img-fluid" />
                                                 <div className="card_blk_cntnt card_blk_sml_arw">
                                                     <div className="row align-items-center">
@@ -521,7 +521,7 @@ function Index() {
 
                                     <div className="col-sm-6 col-md-4">
                                         <div className="card_blk_inr flex-column">
-                                            <a href="#" target="_blank">
+                                            <a href="javascript:void(0)" target="_blank">
                                                 <img src="images/region_countries07.jpg" alt="region_countries07" className="img-fluid" />
                                                 <div className="card_blk_cntnt card_blk_sml_arw">
                                                     <div className="row align-items-center">
@@ -549,7 +549,7 @@ function Index() {
 
                                     <div className="col-sm-6">
                                         <div className="card_blk_inr card_blk_overlay">
-                                            <a href="#" target="_blank">
+                                            <a href="javascript:void(0)" target="_blank">
                                                 <img src="images/country_detail01.jpg" alt="Card image 07" className="img-fluid" />
                                                 <div className="card_blk_cntnt card_blk_cntnt_top">
                                                     <div className="row align-items-center">
@@ -570,7 +570,7 @@ function Index() {
 
                                     <div className="col-sm-6">
                                         <div className="card_blk_inr card_blk_overlay">
-                                            <a href="#">
+                                            <a href="javascript:void(0)">
                                                 <img src="images/country_detail02.jpg" alt="Card image 08" className="img-fluid" />
                                                 <div className="card_blk_cntnt card_blk_cntnt_top">
                                                     <div className="row align-items-center">
@@ -699,10 +699,10 @@ function Index() {
                                                     <div className="destination_contries_filter d-inline-block d-lg-flex">
                                                         <label className="pt-2 pt-lg-0">Arrange by:</label>
                                                         <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
-                                                            <li><a href="#">By price</a></li>
-                                                            <li><a href="#" className="active">Recommended</a></li>
-                                                            <li><a href="#">Alphabetical</a></li>
-                                                            <li><a href="#">By duration</a></li>
+                                                            <li><a href="javascript:void(0)">By price</a></li>
+                                                            <li><a href="javascript:void(0)" className="active">Recommended</a></li>
+                                                            <li><a href="javascript:void(0)">Alphabetical</a></li>
+                                                            <li><a href="javascript:void(0)">By duration</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -716,7 +716,7 @@ function Index() {
                                                             <img src="images/country_card04.jpg" alt="country card04" className="img-fluid" />
                                                         </a>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">A Journey Through Cathay</a></h4>
+                                                            <h4><a href="javascript:void(0)">A Journey Through Cathay</a></h4>
                                                             <ul>
                                                                 <li>China in Classic Style</li>
                                                                 <li>China</li>
@@ -740,7 +740,7 @@ function Index() {
                                                             <img src="images/country_card01.jpg" alt="country card01" className="img-fluid" />
                                                         </div>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">China Like an Emperor</a></h4>
+                                                            <h4><a href="javascript:void(0)">China Like an Emperor</a></h4>
                                                             <ul>
                                                                 <li>China in Ultimate Style</li>
                                                                 <li>China</li>
@@ -764,7 +764,7 @@ function Index() {
                                                             <img src="images/country_card02.jpg" alt="country card02" className="img-fluid" />
                                                         </div>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">In Search of Pandas</a></h4>
+                                                            <h4><a href="javascript:void(0)">In Search of Pandas</a></h4>
                                                             <ul>
                                                                 <li>Family Adventure to China</li>
                                                                 <li>China</li>
@@ -788,7 +788,7 @@ function Index() {
                                                             <img src="images/country_card05.jpg" alt="country card05" className="img-fluid" />
                                                         </div>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">Pandas, Temples and Terraces</a></h4>
+                                                            <h4><a href="javascript:void(0)">Pandas, Temples and Terraces</a></h4>
                                                             <ul>
                                                                 <li>Southern China in Classic Style</li>
                                                                 <li>China</li>
@@ -812,7 +812,7 @@ function Index() {
                                                             <img src="images/country_card03.jpg" alt="country card03" className="img-fluid" />
                                                         </div>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">STYLISH HONEYMOON TO CHINA</a></h4>
+                                                            <h4><a href="javascript:void(0)">STYLISH HONEYMOON TO CHINA</a></h4>
                                                             <ul>
                                                                 <li>A Chinese Romance</li>
                                                                 <li>China</li>
@@ -836,7 +836,7 @@ function Index() {
                                                             <img src="images/country_card06.jpg" alt="country card06" className="img-fluid" />
                                                         </div>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">Down the Golden River</a></h4>
+                                                            <h4><a href="javascript:void(0)">Down the Golden River</a></h4>
                                                             <ul>
                                                                 <li>China & Yangtze in Serious Style</li>
                                                                 <li>CHina</li>
@@ -860,7 +860,7 @@ function Index() {
                                                             <img src="images/country_card07.jpg" alt="country card07" className="img-fluid" />
                                                         </div>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">Gardens, Water Towns & Misty Peaks</a></h4>
+                                                            <h4><a href="javascript:void(0)">Gardens, Water Towns & Misty Peaks</a></h4>
                                                             <ul>
                                                                 <li>Cultural Journey Through the Yangtze Delta & Huangshan Mountains</li>
                                                                 <li>CHina</li>
@@ -945,8 +945,8 @@ function Index() {
                                                     <div className="destination_contries_filter d-inline-block d-lg-flex">
                                                         <label className="pt-2 pt-lg-0">Arrange by:</label>
                                                         <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
-                                                            <li><a href="#" className="active">Recommended</a></li>
-                                                            <li><a href="#">Alphabetical</a></li>
+                                                            <li><a href="javascript:void(0)" className="active">Recommended</a></li>
+                                                            <li><a href="javascript:void(0)">Alphabetical</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -959,7 +959,7 @@ function Index() {
                                                             <img src="images/country_hotel04.jpg" alt="country_hotel04" className="img-fluid" />
                                                         </a>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">Jing's Residence</a></h4>
+                                                            <h4><a href="javascript:void(0)">Jing's Residence</a></h4>
                                                             <ul>
                                                                 <li>Location: Beijing & Northern China | China</li>
                                                                 <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
@@ -981,7 +981,7 @@ function Index() {
                                                             <img src="images/country_hotel05.jpg" alt="country_hotel05" className="img-fluid" />
                                                         </a>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">The Peninsula Shanghai</a></h4>
+                                                            <h4><a href="javascript:void(0)">The Peninsula Shanghai</a></h4>
                                                             <ul>
                                                                 <li>Location: Shanghai, Hangzhou & Eastern China | China</li>
                                                                 <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
@@ -1003,7 +1003,7 @@ function Index() {
                                                             <img src="images/country_hotel06.jpg" alt="country_hotel06" className="img-fluid" />
                                                         </a>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">Aman Summer Palace</a></h4>
+                                                            <h4><a href="javascript:void(0)">Aman Summer Palace</a></h4>
                                                             <ul>
                                                                 <li>Location: Beijing & Northern China | China</li>
                                                                 <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
@@ -1025,7 +1025,7 @@ function Index() {
                                                             <img src="images/country_hotel07.jpg" alt="country_hotel07" className="img-fluid" />
                                                         </a>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">Alila Yangshuo</a></h4>
+                                                            <h4><a href="javascript:void(0)">Alila Yangshuo</a></h4>
                                                             <ul>
                                                                 <li>Location: Southern China | China</li>
                                                                 <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
@@ -1047,7 +1047,7 @@ function Index() {
                                                             <img src="images/country_hotel08.jpg" alt="country_hotel08" className="img-fluid" />
                                                         </a>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">LUX* Tea Horse Road</a></h4>
+                                                            <h4><a href="javascript:void(0)">LUX* Tea Horse Road</a></h4>
                                                             <ul>
                                                                 <li>Location: Yunnan | China</li>
                                                                 <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
@@ -1069,7 +1069,7 @@ function Index() {
                                                             <img src="images/country_hotel09.jpg" alt="country_hotel09" className="img-fluid" />
                                                         </a>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">Rosewood Beijing</a></h4>
+                                                            <h4><a href="javascript:void(0)">Rosewood Beijing</a></h4>
                                                             <ul>
                                                                 <li>Location: Beijing & Northern China | China</li>
                                                                 <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
@@ -1091,7 +1091,7 @@ function Index() {
                                                             <img src="images/country_hotel10.jpg" alt="country_hotel10" className="img-fluid" />
                                                         </a>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">Amandayan</a></h4>
+                                                            <h4><a href="javascript:void(0)">Amandayan</a></h4>
                                                             <ul>
                                                                 <li>Location: Yunnan | China</li>
                                                                 <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
@@ -1113,7 +1113,7 @@ function Index() {
                                                             <img src="images/country_hotel11.jpg" alt="country_hotel11" className="img-fluid" />
                                                         </a>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">Banyan Tree Yangshuo</a></h4>
+                                                            <h4><a href="javascript:void(0)">Banyan Tree Yangshuo</a></h4>
                                                             <ul>
                                                                 <li>Location: Southern China | China</li>
                                                                 <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
@@ -1135,7 +1135,7 @@ function Index() {
                                                             <img src="images/country_hotel12.jpg" alt="country_hotel12" className="img-fluid" />
                                                         </a>
                                                         <div className="card_slider_cnt places_to_stay_cnt">
-                                                            <h4><a href="#">Sanctuary Yangzi Explorer</a></h4>
+                                                            <h4><a href="javascript:void(0)">Sanctuary Yangzi Explorer</a></h4>
                                                             <ul>
                                                                 <li>Location: Xi'an, Sichuan & Central China | China</li>
                                                                 <li>Price guide:<span tabIndex="0" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="£200-£350 per person per night">£££<label>££</label></span></li>
@@ -1174,7 +1174,7 @@ function Index() {
                                 <div className="row">
                                     <div className="col-sm-6">
                                         <div className="card_blk_inr card_blk_overlay">
-                                            <a href="#" target="_blank">
+                                            <a href="javascript:void(0)" target="_blank">
                                                 <img src="images/country_detail01.jpg" alt="Card image 07" className="img-fluid" />
                                                 <div className="card_blk_cntnt card_blk_cntnt_top">
                                                     <div className="row align-items-center">
@@ -1194,7 +1194,7 @@ function Index() {
 
                                     <div className="col-sm-6">
                                         <div className="card_blk_inr card_blk_overlay">
-                                            <a href="#">
+                                            <a href="javascript:void(0)">
                                                 <img src="images/country_detail02.jpg" alt="Card image 08" className="img-fluid" />
                                                 <div className="card_blk_cntnt card_blk_cntnt_top">
                                                     <div className="row align-items-center">

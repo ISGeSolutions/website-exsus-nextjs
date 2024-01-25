@@ -20,6 +20,7 @@ function Index() {
   const [isLoading, setIsLoading] = useState(true);
   const [valueWithBr, setnewValueWithBr] = useState("");
   const [customPageContent, setCustomPage] = useState([]);
+  const [friendlyUrl, setFriendlyUrl] = useState();
   let dictionaryPage = 1;
 
   // let regionWiseUrl = "/uk";
@@ -156,7 +157,7 @@ function Index() {
       .then((x) => {
         setWhyusDetails(x.data[0].attributes);
         setCustomPage(x.data[0].attributes?.custom_page_contents);
-
+        setFriendlyUrl(`make-an-enquiry/${x.data[0]?.attributes?.page_friendly_url}`);
         let modifiedString = x.data.attributes?.page_content_1;
         //  ("  ", modifiedString);
 
@@ -280,7 +281,7 @@ function Index() {
                     (element, index) =>
                       element?.attributes?.image_type == "banner" && (
                         <NavLink
-                          href="#"
+                          href="javascript:void(0)"
                           className="carousel-item active"
                           data-bs-interval="5000"
                           key={index}

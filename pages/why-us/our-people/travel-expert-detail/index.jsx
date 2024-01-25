@@ -385,13 +385,13 @@ function Index() {
                       />
                       <ul>
                         <li>
-                          <a href="#">
+                          <a href="javascript:void(0)">
                             <em className="material-symbols-outlined">call</em>
                             {expertData?.attributes?.contact_no}
                           </a>
                         </li>
                         <li>
-                          <a href="#">
+                          <a href="javascript:void(0)">
                             <em className="material-symbols-outlined">mail</em>
                             Email
                           </a>

@@ -387,7 +387,7 @@ function CountryWhentogo(props, onDataFromChild) {
                 <tr>
                   <td></td>
                   <td colspan="2" className="calender_trip_detls">
-                    <a href="#">
+                    <a href="javascript:void(0)">
                       Cape wine harvest
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -465,7 +465,7 @@ function CountryWhentogo(props, onDataFromChild) {
                   <td></td>
                   <td></td>
                   <td colspan="1" className="calender_trip_detls">
-                    <a href="#">
+                    <a href="javascript:void(0)">
                       Hermanus whale festival
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -511,7 +511,7 @@ function CountryWhentogo(props, onDataFromChild) {
                   <td></td>
                   <td></td>
                   <td colspan="2" className="calender_trip_detls">
-                    <a href="#">
+                    <a href="javascript:void(0)">
                       Namaqualand flowers
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -555,7 +555,7 @@ function CountryWhentogo(props, onDataFromChild) {
                   <td></td>
                   <td></td>
                   <td colspan="6">
-                    <a href="#">
+                    <a href="javascript:void(0)">
                       Whale watching peak season
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

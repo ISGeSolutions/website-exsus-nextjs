@@ -223,14 +223,14 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
+      `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
     );
   };
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -405,7 +405,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -431,7 +431,7 @@ function Index() {
         );
         setHolidayName(x.data[0].attributes.holiday_type_group_name);
         setTitle(x.data[0].attributes.page_meta_title);
-
+        debugger;
         const imageCheck =
           x.data[0].attributes?.holiday_type_group_images?.data;
         setHolidaytypesDetails(x.data[0].attributes);
@@ -526,12 +526,12 @@ function Index() {
                 ))}
               </div>
               <div className="carousel-inner">
-                {/* <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
+                {/* <a href="javascript:void(0)" target="_blank" className="carousel-item active" data-bs-interval="5000">
                             <div className="banner_commn_cls"> */}
                 {backgroundImage.map((imagePath, index) => (
                   // <img src={imagePath} alt="holiday_types_detls_card02" className="img-fluid" />
                   <NavLink
-                    href="#"
+                    href="javascript:void(0)"
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                     data-bs-interval="5000"
                   >

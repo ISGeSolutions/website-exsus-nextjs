@@ -36,6 +36,24 @@ function Index() {
   const [backgroundImage, setBackgroundImage] = useState([]);
   const [activeItem, setActiveItem] = useState("recommended");
   let dictionaryPage = 1;
+  const [isMinimized, setMinimized] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(false);
+  const [textareaValue, setTextareaValue] = useState('');
+
+  const handleExpandButtonClick = () => {
+    setMinimized((prev) => !prev);
+  };
+
+  const handleNextButtonClick = () => {
+    if (textareaValue.trim() !== '') {
+      setShowThankYou(true);
+    }
+  };
+
+  const handleTextareaChange = (e) => {
+    setTextareaValue(e.target.value);
+  };
+
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -109,6 +127,11 @@ function Index() {
   //       .toLowerCase()}/${hotelName}`
   //   );
   // };
+
+
+  const getDynamicPage = (item) => {
+    return `${regionWiseUrl}/${item}`;
+  }
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
@@ -257,6 +280,8 @@ function Index() {
       .getAllOffers(region)
       .then((x) => {
         setAllOffers(x.data);
+        // setAllOffers([]);
+
         setFriendlyUrl(`home/special offers`);
       })
       .catch((error) => { });
@@ -409,9 +434,8 @@ function Index() {
               <div className="carousel-inner">
                 {backgroundImage.map((imagePath, index) => (
                   <a
-                    href="#"
+                    href="javascript:void(0)"
                     key={index}
-                    target="_blank"
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                     data-bs-interval="5000"
                   >
@@ -441,153 +465,205 @@ function Index() {
               </div>
             </div>
           </section>
+          {allOffers.length > 0 ? (
+            <>
+              <section className="card_blk_row destinations_blk_row pb-0">
+                <div className="container">
+                  <div className="row">
+                    <div className="col-12 favrites_blk_row pb-0">
+                      <h3 className="title_cls pb-0">
+                        Our favourite special offers on luxury holidays
+                      </h3>
+                      <div className="destination_contries_filter d-flex justify-content-around">
+                        <ul>
+                          <li>
+                            <a
+                              className={
+                                activeItem === "recommended" ? "active" : ""
+                              }
+                              onClick={() => handleFilterClick("recommended")}
+                            >
+                              Exsus Recommends
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              className={
+                                activeItem === "alphabetical" ? "active" : ""
+                              }
+                              onClick={() => handleFilterClick("alphabetical")}
+                            >
+                              Alphabetical
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
 
-          <section className="card_blk_row destinations_blk_row pb-0">
-            <div className="container">
-              <div className="row">
-                <div className="col-12 favrites_blk_row pb-0">
-                  <h3 className="title_cls pb-0">
-                    Our favourite special offers on luxury holidays
-                  </h3>
-                  <div className="destination_contries_filter d-flex justify-content-around">
-                    <ul>
-                      <li>
-                        <a
-                          className={
-                            activeItem === "recommended" ? "active" : ""
-                          }
-                          onClick={() => handleFilterClick("recommended")}
-                        >
-                          Exsus Recommends
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className={
-                            activeItem === "alphabetical" ? "active" : ""
-                          }
-                          onClick={() => handleFilterClick("alphabetical")}
-                        >
-                          Alphabetical
-                        </a>
-                      </li>
-                    </ul>
+              <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
+                <div className="container">
+                  <div className="card_slider_row">
+                    <div className="carousel00 width_100">
+                      <div className="row">
+                        {allOffers?.map((res) => (
+                          <div className="col-sm-6 col-lg-4 col-xxl-3">
+                            <div className="card_slider_inr">
+                              <div className="card_slider">
+                                <NavLink
+                                  key={res?.id}
+                                  href={generateDynamicLink(res)}
+                                >
+                                  {/*   error => Dont add anchor tag for the below element. you can use onclick fun. */}
+                                  <span
+                                    key={res?.id}
+                                    href="javascript:void(0)"
+                                    className="card_slider_img"
+                                  >
+                                    <img
+                                      key={res?.id}
+                                      src={res.attributes.thumbnail_image_path}
+                                      alt="offer_card01"
+                                      className="img-fluid"
+                                    />
+                                    <span className="img_specl_offer">
+                                      Special offer
+                                    </span>
+                                  </span>
+                                </NavLink>
+                                <div className="card_slider_cnt places_to_stay_cnt">
+                                  <h4>
+                                    {/*   error => Dont add anchor tag for the below element. you can use onclick fun. */}
+                                    <a
+                                      key={res?.id}
+                                      href={generateDynamicLink(res?.id)}
+                                    >
+                                      {res?.attributes?.offer_text}
+                                    </a>
+                                  </h4>
+                                  <ul>
+                                    <li>
+                                      Location:{" "}
+                                      {
+                                        res?.attributes?.hotel?.data?.attributes
+                                          ?.location
+                                      }
+                                    </li>
+                                    {res?.attributes?.hotel?.data?.attributes?.hotel_country_contents?.data?.map(
+                                      (res) => {
+                                        return (
+                                          <li
+                                            className="price_guide_tooltip"
+                                            key={res?.id}
+                                          >
+                                            Price guide:
+                                            <span
+                                              key={res?.id}
+                                              tabIndex="0"
+                                              data-title={
+                                                res?.attributes?.price_guide_text
+                                              }
+                                            >
+                                              {res?.attributes?.currency_symbol.repeat(
+                                                Math.abs(
+                                                  res?.attributes?.price_guide_value
+                                                )
+                                              )}
+                                              <label>
+                                                {res?.attributes?.currency_symbol.repeat(
+                                                  Math.abs(
+                                                    5 -
+                                                    res?.attributes
+                                                      ?.price_guide_value
+                                                  )
+                                                )}
+                                              </label>
+                                            </span>
+                                          </li>
+                                        );
+                                      }
+                                    )}
+                                    <li className="pink_text">
+                                      Special offer: {res?.attributes?.title_text}
+                                    </li>
+                                    <li>
+                                      Best for:
+                                      <span>
+                                        Luxury Hotel, Setting & Views, Beach,
+                                        Family-friendly
+                                      </span>
+                                    </li>
+                                  </ul>
+                                </div>
+                                <button className="btn card_slider_btn justify-content-end">
+                                  <span
+                                    key={res?.id}
+                                    className="view_itnry_link"
+                                    onClick={() => handleRedirect(item)}
+                                  >
+                                    View this hotel
+                                    <em className="fa-solid fa-chevron-right"></em>
+                                  </span>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </>) : (
+            <section className="card_blk_row destinations_blk_row pb-0">
+              <div className="container">
+                <div className="row">
+                  <div className="col-12">
+                    <div className="no_offer_found_blk">
+                      <p>We've found 0 holiday ideas that match your search criteria.</p>
+                      <p>Please try changing one of the elements of your query and search again.</p>
+                      <p>Alternatively, explore our <a href={getDynamicPage("destinations")}>destinations</a> or <a href={getDynamicPage("holiday-types")}>holiday collections</a> to start planning your next escape.</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
+          )}
 
-          <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
-            <div className="container">
-              <div className="card_slider_row">
-                <div className="carousel00 width_100">
-                  <div className="row">
-                    {allOffers?.map((res) => (
-                      <div className="col-sm-6 col-lg-4 col-xxl-3">
-                        <div className="card_slider_inr">
-                          <div className="card_slider">
-                            <NavLink
-                              key={res?.id}
-                              href={generateDynamicLink(res)}
-                            >
-                              {/*   error => Dont add anchor tag for the below element. you can use onclick fun. */}
-                              <span
-                                key={res?.id}
-                                href="#"
-                                className="card_slider_img"
-                              >
-                                <img
-                                  key={res?.id}
-                                  src={res.attributes.thumbnail_image_path}
-                                  alt="offer_card01"
-                                  className="img-fluid"
-                                />
-                                <span className="img_specl_offer">
-                                  Special offer
-                                </span>
-                              </span>
-                            </NavLink>
-                            <div className="card_slider_cnt places_to_stay_cnt">
-                              <h4>
-                                {/*   error => Dont add anchor tag for the below element. you can use onclick fun. */}
-                                <a
-                                  key={res?.id}
-                                  href={generateDynamicLink(res?.id)}
-                                >
-                                  {res?.attributes?.offer_text}
-                                </a>
-                              </h4>
-                              <ul>
-                                <li>
-                                  Location:{" "}
-                                  {
-                                    res?.attributes?.hotel?.data?.attributes
-                                      ?.location
-                                  }
-                                </li>
-                                {res?.attributes?.hotel?.data?.attributes?.hotel_country_contents?.data?.map(
-                                  (res) => {
-                                    return (
-                                      <li
-                                        className="price_guide_tooltip"
-                                        key={res?.id}
-                                      >
-                                        Price guide:
-                                        <span
-                                          key={res?.id}
-                                          tabIndex="0"
-                                          data-title={
-                                            res?.attributes?.price_guide_text
-                                          }
-                                        >
-                                          {res?.attributes?.currency_symbol.repeat(
-                                            Math.abs(
-                                              res?.attributes?.price_guide_value
-                                            )
-                                          )}
-                                          <label>
-                                            {res?.attributes?.currency_symbol.repeat(
-                                              Math.abs(
-                                                5 -
-                                                res?.attributes
-                                                  ?.price_guide_value
-                                              )
-                                            )}
-                                          </label>
-                                        </span>
-                                      </li>
-                                    );
-                                  }
-                                )}
-                                <li className="pink_text">
-                                  Special offer: {res?.attributes?.title_text}
-                                </li>
-                                <li>
-                                  Best for:
-                                  <span>
-                                    Luxury Hotel, Setting & Views, Beach,
-                                    Family-friendly
-                                  </span>
-                                </li>
-                              </ul>
-                            </div>
-                            <button className="btn card_slider_btn justify-content-end">
-                              <span
-                                key={res?.id}
-                                className="view_itnry_link"
-                                onClick={() => handleRedirect(item)}
-                              >
-                                View this hotel
-                                <em className="fa-solid fa-chevron-right"></em>
-                              </span>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+          <section className={`chat_window_parnt_blk ${isMinimized ? 'chat_window_minised' : ''}`}>
+            <div className="chat_window_inr_blk" style={{ display: showThankYou ? 'none' : 'block' }}>
+              <p>
+                Is there anything we should improve on this special offer page?
+                <button className="btn chat_window_expnd_btn" onClick={handleExpandButtonClick}>
+                  <span className="material-symbols-outlined">expand_more</span>
+                </button>
+              </p>
+              <textarea value={textareaValue} onChange={handleTextareaChange}></textarea>
+              <p className="chat_window_footer_blk">
+                <a href="https://www.hotjar.com/try/surveys/?utm_source=client&utm_medium=poll&utm_campaign=insights">
+                  <img src="images/hotjar-logo-small.svg" alt="hotjar" /> Made with Hotjar
+                </a>
+                <button className="btn prmry_btn chat_window_next_btn" onClick={handleNextButtonClick} disabled={!textareaValue.trim()}>
+                  Next
+                </button>
+              </p>
+            </div>
+
+            <div className="chat_thank_you_blk" style={{ display: showThankYou ? 'block' : 'none' }}>
+              <p className="chat_thank_you_title">Thank you for answering this survey. Your feedback is highly appreciated!</p>
+              <p>
+                Before you go, can we connect your response with data (device, usage, cookies, behavior, and interactions) related to your visits?
+                This will help us give you a better experience. <a href="https://www.hotjarconsent.com/">More information</a>
+              </p>
+              <div className="chat_thank_you_btn">
+                <button className="btn">No thanks</button>
+                <button className="btn prmry_btn">Yes, Sure</button>
+              </div>
+              <div className="chat_thank_you_footer">
+                Exsus Travel Limited
+                <a href="privacy-policy">Privacy policy</a>
               </div>
             </div>
           </section>

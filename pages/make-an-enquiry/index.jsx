@@ -346,7 +346,7 @@ function Index() {
                     <div className="contact_form_cntnt_right mt-3 mt-lg-0">
                       <p>
                         Alternatively, call <span>020 7337 9010</span> or email{" "}
-                        <a href="#">escape@exsus.com</a> to speak to one of our
+                        <a href="javascript:void(0)">escape@exsus.com</a> to speak to one of our
                         travel experts
                       </p>
                     </div>

@@ -390,7 +390,7 @@ function Index() {
             </div>
             <p className="mb-4">
               To apply, please send your CV and cover letter to{" "}
-              <a href="#">recruitment@exsus.com</a>
+              <a href="javascript:void(0)">recruitment@exsus.com</a>
             </p>
           </div>
           <div className="trvl_info_cntnt">
@@ -464,7 +464,7 @@ function Index() {
             <p className="mb-4">
               To apply, please send your CV and cover letter, stating clearly
               which area/s you specialise in, to{" "}
-              <a href="#">recruitment@exsus.com </a>
+              <a href="javascript:void(0)">recruitment@exsus.com </a>
             </p>
           </div> */}
         </div>

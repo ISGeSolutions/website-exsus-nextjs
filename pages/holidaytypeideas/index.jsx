@@ -206,7 +206,7 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
+      `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -320,8 +320,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt1"
-      ),
+      "card_slider_cnt places_to_stay_cnt1"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -477,7 +477,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -609,7 +609,7 @@ function Index() {
               <div className="carousel-inner">
                 {backgroundImage.map((imagePath, index) => (
                   <NavLink
-                    href="#"
+                    href="javascript:void(0)"
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                     data-bs-interval="5000"
                   >
@@ -775,7 +775,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                      "thumbnail" ? (
                                       <img
                                         key={element.id}
                                         src={element.attributes.image_path}
@@ -811,12 +811,10 @@ function Index() {
                                     )
                                     .map((res1) => (
                                       <li key={res1.id}>
-                                        {`From ${
-                                          res1.attributes?.currency_symbol ?? ""
-                                        }${
-                                          formatPrice(res1.attributes?.price) ??
+                                        {`From ${res1.attributes?.currency_symbol ?? ""
+                                          }${formatPrice(res1.attributes?.price) ??
                                           " xxxx"
-                                        } per person`}
+                                          } per person`}
                                       </li>
                                     ))}
                                   <li>

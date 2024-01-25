@@ -42,20 +42,20 @@ function Header() {
             <div className="container">
                 <div className="header_blk_inr">
                     <section className="header_item_left ">
-                        <div className="mobile_trigger_btn d-block d-lg-none" onClick={() => openLeftNav()}><a href="#"><em className="fa-solid fa-ellipsis"></em></a></div>
+                        <div className="mobile_trigger_btn d-block d-lg-none" onClick={() => openLeftNav()}><a href="javascript:void(0)"><em className="fa-solid fa-ellipsis"></em></a></div>
                         <div className="side_menu_left" id="sideMenuLeft">
                             <div className="side_menu_hdr">
                                 <button className="btn fa-solid fa-xmark" onClick={() => closeLeftNav()}></button>
                             </div>
                             <div className="dropdown header_drpdown">
-                                <a className="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a className="btn btn-secondary dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="images/uk-flag-round-circle-icon.svg" alt="united-kingdom-flag-icon" />UK site
                                 </a>
                                 <ul className="dropdown-menu">
 
-                                    <li><a className="dropdown-item" href="#"><img src="images/usa-flag-round-circle-icon.svg" alt="usa-flag-round-circle-icon" />US site</a></li>
-                                    <li><a className="dropdown-item" href="#"><img src="images/thailand-flag-round-circle-icon.svg" alt="thailand-flag-round-circle-icon" /> Asia site</a></li>
-                                    <li><a className="dropdown-item" href="#"><img src="images/india-flag-round-circle-icon.svg" alt="india-flag-round-circle-icon" />India site</a></li>
+                                    <li><a className="dropdown-item" href="javascript:void(0)"><img src="images/usa-flag-round-circle-icon.svg" alt="usa-flag-round-circle-icon" />US site</a></li>
+                                    <li><a className="dropdown-item" href="javascript:void(0)"><img src="images/thailand-flag-round-circle-icon.svg" alt="thailand-flag-round-circle-icon" /> Asia site</a></li>
+                                    <li><a className="dropdown-item" href="javascript:void(0)"><img src="images/india-flag-round-circle-icon.svg" alt="india-flag-round-circle-icon" />India site</a></li>
                                 </ul>
                             </div>
                             <div className="input-group srch_site_box">
@@ -68,8 +68,8 @@ function Header() {
                         <h1><a href="homepage.html">Exsus<span>Travel</span></a></h1>
                     </section>
                     <section className="header_item_right d-flex d-lg-inline-block justify-content-end align-items-center">
-                        <div className="header_call_icn"><a href="#"><em className="material-symbols-outlined">call</em><span className="d-none d-lg-block">020 7337 9010</span></a></div>
-                        <div className="mobile_trigger_btn mobile-menu-trigger d-block d-lg-none"><a href="#"><em className="fa-solid fa-bars"></em></a></div>
+                        <div className="header_call_icn"><a href="javascript:void(0)"><em className="material-symbols-outlined">call</em><span className="d-none d-lg-block">020 7337 9010</span></a></div>
+                        <div className="mobile_trigger_btn mobile-menu-trigger d-block d-lg-none"><a href="javascript:void(0)"><em className="fa-solid fa-bars"></em></a></div>
                     </section>
                 </div>
                 <nav>
@@ -85,7 +85,7 @@ function Header() {
                         </div>
                         <ul className="menu-main">
                             <li className="menu-item-has-children">
-                                <a href="#">Destinations
+                                <a href="javascript:void(0)">Destinations
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                 </a>
                                 <div className="sub-menu mega-menu mega-menu-column-4">
@@ -96,40 +96,40 @@ function Header() {
                                                     <div className="header_country_list">
                                                         <ul>
                                                             <li className="header_country_label active">
-                                                                <a href="#">Africa
+                                                                <a href="javascript:void(0)">Africa
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </a>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><a href="#">South Africa</a></li>
-                                                                        <li><a href="#">Tanzania</a></li>
-                                                                        <li><a href="#">Kenya</a></li>
-                                                                        <li><a href="#">Zimbabwe</a></li>
-                                                                        <li><a href="#">Namibia</a></li>
-                                                                        <li><a href="#">Malawi</a></li>
-                                                                        <li><a href="#">Zambia</a></li>
-                                                                        <li><a href="#">Uganda</a></li>
+                                                                        <li><a href="javascript:void(0)">South Africa</a></li>
+                                                                        <li><a href="javascript:void(0)">Tanzania</a></li>
+                                                                        <li><a href="javascript:void(0)">Kenya</a></li>
+                                                                        <li><a href="javascript:void(0)">Zimbabwe</a></li>
+                                                                        <li><a href="javascript:void(0)">Namibia</a></li>
+                                                                        <li><a href="javascript:void(0)">Malawi</a></li>
+                                                                        <li><a href="javascript:void(0)">Zambia</a></li>
+                                                                        <li><a href="javascript:void(0)">Uganda</a></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Africa
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                     </button>
                                                                 </div>
                                                             </li>
-                                                            <li className="header_country_label"><a href="#">Antartica</a></li>
+                                                            <li className="header_country_label"><a href="javascript:void(0)">Antartica</a></li>
                                                             <li className="header_country_label">
-                                                                <a href="#">Asia
+                                                                <a href="javascript:void(0)">Asia
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </a>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><a href="#">Indonesia</a></li>
-                                                                        <li><a href="#">Japan</a></li>
-                                                                        <li><a href="#">Cambodia</a></li>
-                                                                        <li><a href="#">Vietnam</a></li>
-                                                                        <li><a href="#">China</a></li>
-                                                                        <li><a href="#">Thailand</a></li>
-                                                                        <li><a href="#">Malaysia & Borneo</a></li>
-                                                                        <li><a href="#">Burma</a></li>
+                                                                        <li><a href="javascript:void(0)">Indonesia</a></li>
+                                                                        <li><a href="javascript:void(0)">Japan</a></li>
+                                                                        <li><a href="javascript:void(0)">Cambodia</a></li>
+                                                                        <li><a href="javascript:void(0)">Vietnam</a></li>
+                                                                        <li><a href="javascript:void(0)">China</a></li>
+                                                                        <li><a href="javascript:void(0)">Thailand</a></li>
+                                                                        <li><a href="javascript:void(0)">Malaysia & Borneo</a></li>
+                                                                        <li><a href="javascript:void(0)">Burma</a></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Asia
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -137,16 +137,16 @@ function Header() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <a href="#">Australasia & South Pacific
+                                                                <a href="javascript:void(0)">Australasia & South Pacific
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </a>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><a href="#">Australia</a></li>
-                                                                        <li><a href="#">New Zealand</a></li>
-                                                                        <li><a href="#">Cook Islands</a></li>
-                                                                        <li><a href="#">Fiji</a></li>
-                                                                        <li><a href="#">French Polynesia</a></li>
+                                                                        <li><a href="javascript:void(0)">Australia</a></li>
+                                                                        <li><a href="javascript:void(0)">New Zealand</a></li>
+                                                                        <li><a href="javascript:void(0)">Cook Islands</a></li>
+                                                                        <li><a href="javascript:void(0)">Fiji</a></li>
+                                                                        <li><a href="javascript:void(0)">French Polynesia</a></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Australasia & South Pacific
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -154,18 +154,18 @@ function Header() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <a href="#">Central America
+                                                                <a href="javascript:void(0)">Central America
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </a>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><a href="#">Belize</a></li>
-                                                                        <li><a href="#">Honduras</a></li>
-                                                                        <li><a href="#">Mexico</a></li>
-                                                                        <li><a href="#">Panama</a></li>
-                                                                        <li><a href="#">Costa Rica</a></li>
-                                                                        <li><a href="#">Guatemala</a></li>
-                                                                        <li><a href="#">Nicaragua</a></li>
+                                                                        <li><a href="javascript:void(0)">Belize</a></li>
+                                                                        <li><a href="javascript:void(0)">Honduras</a></li>
+                                                                        <li><a href="javascript:void(0)">Mexico</a></li>
+                                                                        <li><a href="javascript:void(0)">Panama</a></li>
+                                                                        <li><a href="javascript:void(0)">Costa Rica</a></li>
+                                                                        <li><a href="javascript:void(0)">Guatemala</a></li>
+                                                                        <li><a href="javascript:void(0)">Nicaragua</a></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Central America
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -173,19 +173,19 @@ function Header() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <a href="#">Europe
+                                                                <a href="javascript:void(0)">Europe
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </a>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><a href="#">Italy</a></li>
-                                                                        <li><a href="#">Greece</a></li>
-                                                                        <li><a href="#">Spain</a></li>
-                                                                        <li><a href="#">Iceland</a></li>
-                                                                        <li><a href="#">Turkey</a></li>
-                                                                        <li><a href="#">Norway</a></li>
-                                                                        <li><a href="#">Sweden</a></li>
-                                                                        <li><a href="#">Croatia</a></li>
+                                                                        <li><a href="javascript:void(0)">Italy</a></li>
+                                                                        <li><a href="javascript:void(0)">Greece</a></li>
+                                                                        <li><a href="javascript:void(0)">Spain</a></li>
+                                                                        <li><a href="javascript:void(0)">Iceland</a></li>
+                                                                        <li><a href="javascript:void(0)">Turkey</a></li>
+                                                                        <li><a href="javascript:void(0)">Norway</a></li>
+                                                                        <li><a href="javascript:void(0)">Sweden</a></li>
+                                                                        <li><a href="javascript:void(0)">Croatia</a></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Europe
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -193,14 +193,14 @@ function Header() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <a href="#">Indian Ocean
+                                                                <a href="javascript:void(0)">Indian Ocean
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </a>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><a href="#">Seychelles</a></li>
-                                                                        <li><a href="#">Mauritius</a></li>
-                                                                        <li><a href="#">Maldives</a></li>
+                                                                        <li><a href="javascript:void(0)">Seychelles</a></li>
+                                                                        <li><a href="javascript:void(0)">Mauritius</a></li>
+                                                                        <li><a href="javascript:void(0)">Maldives</a></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Indian Ocean
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -208,14 +208,14 @@ function Header() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <a href="#">Indian Subcontinent
+                                                                <a href="javascript:void(0)">Indian Subcontinent
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </a>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><a href="#">Bhutan</a></li>
-                                                                        <li><a href="#">India</a></li>
-                                                                        <li><a href="#">Sri Lanka</a></li>
+                                                                        <li><a href="javascript:void(0)">Bhutan</a></li>
+                                                                        <li><a href="javascript:void(0)">India</a></li>
+                                                                        <li><a href="javascript:void(0)">Sri Lanka</a></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Indian Subcontinent
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -223,18 +223,18 @@ function Header() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <a href="#">Middle East & North Africa
+                                                                <a href="javascript:void(0)">Middle East & North Africa
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </a>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><a href="#">Egypt</a></li>
-                                                                        <li><a href="#">Oman</a></li>
-                                                                        <li><a href="#">Israel</a></li>
-                                                                        <li><a href="#">Morocco</a></li>
-                                                                        <li><a href="#">Jordan</a></li>
-                                                                        <li><a href="#">UAE</a></li>
-                                                                        <li><a href="#">Qatar</a></li>
+                                                                        <li><a href="javascript:void(0)">Egypt</a></li>
+                                                                        <li><a href="javascript:void(0)">Oman</a></li>
+                                                                        <li><a href="javascript:void(0)">Israel</a></li>
+                                                                        <li><a href="javascript:void(0)">Morocco</a></li>
+                                                                        <li><a href="javascript:void(0)">Jordan</a></li>
+                                                                        <li><a href="javascript:void(0)">UAE</a></li>
+                                                                        <li><a href="javascript:void(0)">Qatar</a></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Middle East & North Africa
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -242,19 +242,19 @@ function Header() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <a href="#">North America & Caribbean
+                                                                <a href="javascript:void(0)">North America & Caribbean
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </a>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><a href="#">USA</a></li>
-                                                                        <li><a href="#">Canada</a></li>
-                                                                        <li><a href="#">St Lucia</a></li>
-                                                                        <li><a href="#">Grenada</a></li>
-                                                                        <li><a href="#">Barbados</a></li>
-                                                                        <li><a href="#">Antigua</a></li>
-                                                                        <li><a href="#">Guadeloupe</a></li>
-                                                                        <li><a href="#">Cuba</a></li>
+                                                                        <li><a href="javascript:void(0)">USA</a></li>
+                                                                        <li><a href="javascript:void(0)">Canada</a></li>
+                                                                        <li><a href="javascript:void(0)">St Lucia</a></li>
+                                                                        <li><a href="javascript:void(0)">Grenada</a></li>
+                                                                        <li><a href="javascript:void(0)">Barbados</a></li>
+                                                                        <li><a href="javascript:void(0)">Antigua</a></li>
+                                                                        <li><a href="javascript:void(0)">Guadeloupe</a></li>
+                                                                        <li><a href="javascript:void(0)">Cuba</a></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all North America & Caribbean
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -262,19 +262,19 @@ function Header() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <a href="#">South America
+                                                                <a href="javascript:void(0)">South America
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </a>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><a href="#">Peru</a></li>
-                                                                        <li><a href="#">Ecuador & the Galapagos</a></li>
-                                                                        <li><a href="#">Brazil</a></li>
-                                                                        <li><a href="#">Argentina</a></li>
-                                                                        <li><a href="#">Chile</a></li>
-                                                                        <li><a href="#">Colombia</a></li>
-                                                                        <li><a href="#">Antarctica</a></li>
-                                                                        <li><a href="#">Bolivia</a></li>
+                                                                        <li><a href="javascript:void(0)">Peru</a></li>
+                                                                        <li><a href="javascript:void(0)">Ecuador & the Galapagos</a></li>
+                                                                        <li><a href="javascript:void(0)">Brazil</a></li>
+                                                                        <li><a href="javascript:void(0)">Argentina</a></li>
+                                                                        <li><a href="javascript:void(0)">Chile</a></li>
+                                                                        <li><a href="javascript:void(0)">Colombia</a></li>
+                                                                        <li><a href="javascript:void(0)">Antarctica</a></li>
+                                                                        <li><a href="javascript:void(0)">Bolivia</a></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all South America
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -312,7 +312,7 @@ function Header() {
                                 </div>
                             </li>
                             <li className="menu-item-has-children">
-                                <a href="#">Holiday types
+                                <a href="javascript:void(0)">Holiday types
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                 </a>
                                 <div className="sub-menu mega-menu mega-menu-column-4">
@@ -323,13 +323,13 @@ function Header() {
                                                     <div className="header_country_list">
                                                         <ul>
                                                             <li className="header_country_label active">
-                                                                <a href="#">Once In A Lifetime Holidays
+                                                                <a href="javascript:void(0)">Once In A Lifetime Holidays
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </a>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><a href="#">Ultimate Journeys</a></li>
-                                                                        <li><a href="#">Ultimate Adventures</a></li>
+                                                                        <li><a href="javascript:void(0)">Ultimate Journeys</a></li>
+                                                                        <li><a href="javascript:void(0)">Ultimate Adventures</a></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Once In A Lifetime Holidays
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -337,16 +337,16 @@ function Header() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <a href="#">Honeymoons
+                                                                <a href="javascript:void(0)">Honeymoons
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </a>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><a href="#">Ultimate Honeymoons</a></li>
-                                                                        <li><a href="#">Perfect Honeymoons</a></li>
-                                                                        <li><a href="#">Beach Honeymoons</a></li>
-                                                                        <li><a href="#">Adventure Honeymoons</a></li>
-                                                                        <li><a href="#">Mini-Moons</a></li>
+                                                                        <li><a href="javascript:void(0)">Ultimate Honeymoons</a></li>
+                                                                        <li><a href="javascript:void(0)">Perfect Honeymoons</a></li>
+                                                                        <li><a href="javascript:void(0)">Beach Honeymoons</a></li>
+                                                                        <li><a href="javascript:void(0)">Adventure Honeymoons</a></li>
+                                                                        <li><a href="javascript:void(0)">Mini-Moons</a></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Honeymoons
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -354,18 +354,18 @@ function Header() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <a href="#">Family Holidays
+                                                                <a href="javascript:void(0)">Family Holidays
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </a>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><a href="#">Half-term Escapes</a></li>
-                                                                        <li><a href="#">Easter Family Holidays</a></li>
-                                                                        <li><a href="#">Summer Family Holidays</a></li>
-                                                                        <li><a href="#">Winter Family Holidays</a></li>
-                                                                        <li><a href="#">Family Adventure Holidays</a></li>
-                                                                        <li><a href="#">Family Safaris & Wildlife Holidays</a></li>
-                                                                        <li><a href="#">Family Road Trips</a></li>
+                                                                        <li><a href="javascript:void(0)">Half-term Escapes</a></li>
+                                                                        <li><a href="javascript:void(0)">Easter Family Holidays</a></li>
+                                                                        <li><a href="javascript:void(0)">Summer Family Holidays</a></li>
+                                                                        <li><a href="javascript:void(0)">Winter Family Holidays</a></li>
+                                                                        <li><a href="javascript:void(0)">Family Adventure Holidays</a></li>
+                                                                        <li><a href="javascript:void(0)">Family Safaris & Wildlife Holidays</a></li>
+                                                                        <li><a href="javascript:void(0)">Family Road Trips</a></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Family Holidays
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -373,18 +373,18 @@ function Header() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <a href="#">Adventure Holidays
+                                                                <a href="javascript:void(0)">Adventure Holidays
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </a>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><a href="#">Active Adventures</a></li>
-                                                                        <li><a href="#">Magnificent Landscapes</a></li>
-                                                                        <li><a href="#">Walking & Trekking Holidays</a></li>
-                                                                        <li><a href="#">Ranches, Estancias & Country Retreats</a></li>
-                                                                        <li><a href="#">4x4 Adventures</a></li>
-                                                                        <li><a href="#">Guatemala</a></li>
-                                                                        <li><a href="#">Nicaragua</a></li>
+                                                                        <li><a href="javascript:void(0)">Active Adventures</a></li>
+                                                                        <li><a href="javascript:void(0)">Magnificent Landscapes</a></li>
+                                                                        <li><a href="javascript:void(0)">Walking & Trekking Holidays</a></li>
+                                                                        <li><a href="javascript:void(0)">Ranches, Estancias & Country Retreats</a></li>
+                                                                        <li><a href="javascript:void(0)">4x4 Adventures</a></li>
+                                                                        <li><a href="javascript:void(0)">Guatemala</a></li>
+                                                                        <li><a href="javascript:void(0)">Nicaragua</a></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Adventure Holidays
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -392,17 +392,17 @@ function Header() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <a href="#">Luxury Beach Holidays
+                                                                <a href="javascript:void(0)">Luxury Beach Holidays
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </a>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><a href="#">Beach Holidays For Couples</a></li>
-                                                                        <li><a href="#">Family Beach Holidays</a></li>
-                                                                        <li><a href="#">Beach Holidays In Europe</a></li>
-                                                                        <li><a href="#">Exotic Beach Holidays</a></li>
-                                                                        <li><a href="#">Beach & Culture Holidays</a></li>
-                                                                        <li><a href="#">Alternative Beach Holidays</a></li>
+                                                                        <li><a href="javascript:void(0)">Beach Holidays For Couples</a></li>
+                                                                        <li><a href="javascript:void(0)">Family Beach Holidays</a></li>
+                                                                        <li><a href="javascript:void(0)">Beach Holidays In Europe</a></li>
+                                                                        <li><a href="javascript:void(0)">Exotic Beach Holidays</a></li>
+                                                                        <li><a href="javascript:void(0)">Beach & Culture Holidays</a></li>
+                                                                        <li><a href="javascript:void(0)">Alternative Beach Holidays</a></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Luxury Beach Holidays
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -410,14 +410,14 @@ function Header() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <a href="#">Food & Culture Holidays
+                                                                <a href="javascript:void(0)">Food & Culture Holidays
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </a>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><a href="#">Food & Wine Holidays</a></li>
-                                                                        <li><a href="#">People & Festivals</a></li>
-                                                                        <li><a href="#">History & Heritage</a></li>
+                                                                        <li><a href="javascript:void(0)">Food & Wine Holidays</a></li>
+                                                                        <li><a href="javascript:void(0)">People & Festivals</a></li>
+                                                                        <li><a href="javascript:void(0)">History & Heritage</a></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Food & Culture Holidays
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -425,16 +425,16 @@ function Header() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <a href="#">Wildlife & Safari Holidays
+                                                                <a href="javascript:void(0)">Wildlife & Safari Holidays
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </a>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><a href="#">African Safaris</a></li>
-                                                                        <li><a href="#">Wildlife Holidays Beyond Africa</a></li>
-                                                                        <li><a href="#">Specialist Wildlife Encounters</a></li>
-                                                                        <li><a href="#">Wildlife Cruises</a></li>
-                                                                        <li><a href="#">Wonders of the Natural World</a></li>
+                                                                        <li><a href="javascript:void(0)">African Safaris</a></li>
+                                                                        <li><a href="javascript:void(0)">Wildlife Holidays Beyond Africa</a></li>
+                                                                        <li><a href="javascript:void(0)">Specialist Wildlife Encounters</a></li>
+                                                                        <li><a href="javascript:void(0)">Wildlife Cruises</a></li>
+                                                                        <li><a href="javascript:void(0)">Wonders of the Natural World</a></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Wildlife & Safari Holidays
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -442,18 +442,18 @@ function Header() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <a href="#">Special Occasions
+                                                                <a href="javascript:void(0)">Special Occasions
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </a>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><a href="#">Milestone Birthdays & Anniversaries</a></li>
-                                                                        <li><a href="#">Exclusive-Use Hotels</a></li>
-                                                                        <li><a href="#">Proposals</a></li>
-                                                                        <li><a href="#">Morocco</a></li>
-                                                                        <li><a href="#">Jordan</a></li>
-                                                                        <li><a href="#">UAE</a></li>
-                                                                        <li><a href="#">Qatar</a></li>
+                                                                        <li><a href="javascript:void(0)">Milestone Birthdays & Anniversaries</a></li>
+                                                                        <li><a href="javascript:void(0)">Exclusive-Use Hotels</a></li>
+                                                                        <li><a href="javascript:void(0)">Proposals</a></li>
+                                                                        <li><a href="javascript:void(0)">Morocco</a></li>
+                                                                        <li><a href="javascript:void(0)">Jordan</a></li>
+                                                                        <li><a href="javascript:void(0)">UAE</a></li>
+                                                                        <li><a href="javascript:void(0)">Qatar</a></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Special Occasions
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -461,15 +461,15 @@ function Header() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <a href="#">Short Breaks & Escapes
+                                                                <a href="javascript:void(0)">Short Breaks & Escapes
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </a>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><a href="#">Adventure Escapes</a></li>
-                                                                        <li><a href="#">Cultural Escapes</a></li>
-                                                                        <li><a href="#">Food & Wine Escapes</a></li>
-                                                                        <li><a href="#">Spa & Wellness Escapes</a></li>
+                                                                        <li><a href="javascript:void(0)">Adventure Escapes</a></li>
+                                                                        <li><a href="javascript:void(0)">Cultural Escapes</a></li>
+                                                                        <li><a href="javascript:void(0)">Food & Wine Escapes</a></li>
+                                                                        <li><a href="javascript:void(0)">Spa & Wellness Escapes</a></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Short Breaks & Escapes
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -477,15 +477,15 @@ function Header() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <a href="#">Trains, Planes, Cars & Cruises
+                                                                <a href="javascript:void(0)">Trains, Planes, Cars & Cruises
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </a>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><a href="#">Self-Drive Holidays</a></li>
-                                                                        <li><a href="#">Train Journeys</a></li>
-                                                                        <li><a href="#">Cruising & Sailing</a></li>
-                                                                        <li><a href="#">Private Jets & Flying Adventures</a></li>
+                                                                        <li><a href="javascript:void(0)">Self-Drive Holidays</a></li>
+                                                                        <li><a href="javascript:void(0)">Train Journeys</a></li>
+                                                                        <li><a href="javascript:void(0)">Cruising & Sailing</a></li>
+                                                                        <li><a href="javascript:void(0)">Private Jets & Flying Adventures</a></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Trains, Planes, Cars & Cruises
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -493,15 +493,15 @@ function Header() {
                                                                 </div>
                                                             </li>
                                                             <li className="header_country_label">
-                                                                <a href="#">Classic Journeys
+                                                                <a href="javascript:void(0)">Classic Journeys
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                                                 </a>
                                                                 <div className="header_country_list_inr">
                                                                     <ul>
-                                                                        <li><a href="#">Immersive Journeys</a></li>
-                                                                        <li><a href="#">Essential Journeys</a></li>
-                                                                        <li><a href="#">Off-the-beaten-track Journeys</a></li>
-                                                                        <li><a href="#">Signature Journeys</a></li>
+                                                                        <li><a href="javascript:void(0)">Immersive Journeys</a></li>
+                                                                        <li><a href="javascript:void(0)">Essential Journeys</a></li>
+                                                                        <li><a href="javascript:void(0)">Off-the-beaten-track Journeys</a></li>
+                                                                        <li><a href="javascript:void(0)">Signature Journeys</a></li>
                                                                     </ul>
                                                                     <button className="btn header_nav_btn">See all Classic Journeys
                                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#000" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
@@ -538,10 +538,10 @@ function Header() {
                                     </div>
                                 </div>
                             </li>
-                            <li className="menu-item-has-children"><a href="#">Special offers</a></li>
-                            <li className="menu-item-has-children"><a href="#">Blog</a></li>
+                            <li className="menu-item-has-children"><a href="javascript:void(0)">Special offers</a></li>
+                            <li className="menu-item-has-children"><a href="javascript:void(0)">Blog</a></li>
                             <li className="menu-item-has-children">
-                                <a href="#">Why us
+                                <a href="javascript:void(0)">Why us
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
                                 </a>
                                 <div className="sub-menu mega-menu mega-menu-column-4">
@@ -551,13 +551,13 @@ function Header() {
                                                 <div className="col-lg-6">
                                                     <div className="header_country_list">
                                                         <ul>
-                                                            <li className="header_country_label active"><a href="#">About us</a></li>
-                                                            <li className="header_country_label"><a href="#">Request a brochure</a></li>
-                                                            <li className="header_country_label"><a href="#">Creating your trip</a></li>
-                                                            <li className="header_country_label"><a href="#">Meet the Exsus Team</a></li>
-                                                            <li className="header_country_label"><a href="#">Client reviews</a></li>
-                                                            <li className="header_country_label"><a href="#">Honeymoon Gift List</a></li>
-                                                            <li className="header_country_label"><a href="#">Contact Us</a></li>
+                                                            <li className="header_country_label active"><a href="javascript:void(0)">About us</a></li>
+                                                            <li className="header_country_label"><a href="javascript:void(0)">Request a brochure</a></li>
+                                                            <li className="header_country_label"><a href="javascript:void(0)">Creating your trip</a></li>
+                                                            <li className="header_country_label"><a href="javascript:void(0)">Meet the Exsus Team</a></li>
+                                                            <li className="header_country_label"><a href="javascript:void(0)">Client reviews</a></li>
+                                                            <li className="header_country_label"><a href="javascript:void(0)">Honeymoon Gift List</a></li>
+                                                            <li className="header_country_label"><a href="javascript:void(0)">Contact Us</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -588,7 +588,7 @@ function Header() {
                                     </div>
                                 </div>
                             </li>
-                            <li className="menu-item-has-children"><a href="#">Brochure</a></li>
+                            <li className="menu-item-has-children"><a href="javascript:void(0)">Brochure</a></li>
                         </ul>
                         <button className="btn prmry_btn make_enqury_btn">Make an enquiry
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>

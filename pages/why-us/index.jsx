@@ -368,7 +368,7 @@ function Index() {
                     (element, index) =>
                       element?.attributes?.image_type == "banner" && (
                         <NavLink
-                          href="#"
+                          href="javascript:void(0)"
                           className="carousel-item active"
                           data-bs-interval="5000"
                           key={index}
@@ -382,16 +382,16 @@ function Index() {
                         </NavLink>
                       )
                   )}
-                  {/* <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
+                  {/* <a href="javascript:void(0)" target="_blank" className="carousel-item active" data-bs-interval="5000">
                             <div className="banner_commn_cls about_us_banner01"></div>
                         </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                        <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="banner_commn_cls about_us_banner02"></div>
                         </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                        <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="banner_commn_cls about_us_banner03"></div>
                         </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                        <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="banner_commn_cls about_us_banner04"></div>
                         </a> */}
                 </div>

@@ -97,12 +97,12 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${hotelName}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -113,16 +113,16 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
       .replace(/&/g, "and");
     router.push(
       regionWiseUrl +
-        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-          ?.replace(/&/g, " and ")
-          .replace(/ /g, "-")
-          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${hotelName}`
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -136,8 +136,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}-itineraries/${
-        item?.attributes?.friendly_url
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url
       }`
     );
   };
@@ -149,12 +148,11 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-          ?.replace(/&/g, " and ")
-          .replace(/ /g, "-")
-          .toLowerCase()}/itinerary/${countryName}-itineraries/${
-          item?.attributes?.friendly_url
-        }`
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url
+      }`
     );
   };
 
@@ -462,11 +460,9 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                                 )
                                 .map((res1) => (
                                   <li key={res1.id}>
-                                    {`From ${
-                                      res1.attributes?.currency_symbol ?? ""
-                                    }${
-                                      res1.attributes?.price ?? " xxxx"
-                                    } per person`}
+                                    {`From ${res1.attributes?.currency_symbol ?? ""
+                                      }${res1.attributes?.price ?? " xxxx"
+                                      } per person`}
                                   </li>
                                 ))}
                               <li>
@@ -598,8 +594,8 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                                         {item?.attributes?.currency_symbol.repeat(
                                           Math.abs(
                                             5 -
-                                              item?.attributes
-                                                ?.price_guide_value
+                                            item?.attributes
+                                              ?.price_guide_value
                                           )
                                         )}
                                       </label>
@@ -672,7 +668,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                                                     ))}
                                                 </NavLink>
                                                 <div className="card_slider_cnt places_to_stay_cnt">
-                                                    <h4><a href="#">{item?.attributes?.itin_name}</a></h4>
+                                                    <h4><a href="javascript:void(0)">{item?.attributes?.itin_name}</a></h4>
                                                     <ul>
                                                         <li>{item?.attributes?.header_text}</li>
                                                         <li>Indonesia</li>
