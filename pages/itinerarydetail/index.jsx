@@ -466,15 +466,15 @@ function Index() {
                   ?.replace(/&/g, " and ")
                   .replace(/ /g, "-")
                   .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-                  ?.replace(/ /g, "-")
-                  .replace(/&/g, "and")
-                  .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-                  ?.replace(/ /g, "-")
-                  .replace(/&/g, "and")
-                  .toLowerCase()}/${item?.attributes?.friendly_url
-                  ?.replace(/&/g, " and ")
-                  .replace(/ /g, "-")
-                  .toLowerCase()}`,
+                    ?.replace(/ /g, "-")
+                    .replace(/&/g, "and")
+                    .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+                      ?.replace(/ /g, "-")
+                      .replace(/&/g, "and")
+                      .toLowerCase()}/${item?.attributes?.friendly_url
+                        ?.replace(/&/g, " and ")
+                        .replace(/ /g, "-")
+                        .toLowerCase()}`,
             }));
             setCoordinatesArray((prevCoordinates) => [
               ...prevCoordinates,
@@ -565,7 +565,7 @@ function Index() {
               <div className="carousel-inner">
                 {bannerImages?.map((element, index) => (
                   <NavLink
-                    href="#"
+                    href="javascript:void(0)"
                     key={index}
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                     data-bs-interval="5000"

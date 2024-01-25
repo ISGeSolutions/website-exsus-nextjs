@@ -69,8 +69,8 @@ function Footer() {
                                 <h6>Services</h6>
                                 <ul>
                                     <li><a href="homepage.html">Home</a></li>
-                                    <li><a href="#">Contact us</a></li>
-                                    <li><a href="#">Online Enquiry</a></li>
+                                    <li><a href="javascript:void(0)">Contact us</a></li>
+                                    <li><a href="javascript:void(0)">Online Enquiry</a></li>
                                     <li><a href="travel_information.html">Travel Information</a></li>
                                     <li><a href="coronavirus_information.html">Coronavirus Information</a></li>
                                 </ul>
@@ -81,11 +81,11 @@ function Footer() {
                             <div className="quick_links_parnt" aria-label="More Exsus">
                                 <h6>More Exsus</h6>
                                 <ul>
-                                    <li><a href="#">Destinations</a></li>
-                                    <li><a href="#">Holiday Types</a></li>
-                                    <li><a href="#">Offers</a></li>
-                                    <li><a href="#">Blog</a></li>
-                                    <li><a href="#">When to go</a></li>
+                                    <li><a href="javascript:void(0)">Destinations</a></li>
+                                    <li><a href="javascript:void(0)">Holiday Types</a></li>
+                                    <li><a href="javascript:void(0)">Offers</a></li>
+                                    <li><a href="javascript:void(0)">Blog</a></li>
+                                    <li><a href="javascript:void(0)">When to go</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -94,10 +94,10 @@ function Footer() {
                             <div className="quick_links_parnt" aria-label="Exsus Sites">
                                 <h6>Exsus Sites</h6>
                                 <ul>
-                                    <li><a href="#">UK</a></li>
-                                    <li><a href="#">Asia</a></li>
-                                    <li><a href="#">India</a></li>
-                                    <li><a href="#">USA</a></li>
+                                    <li><a href="javascript:void(0)">UK</a></li>
+                                    <li><a href="javascript:void(0)">Asia</a></li>
+                                    <li><a href="javascript:void(0)">India</a></li>
+                                    <li><a href="javascript:void(0)">USA</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -107,10 +107,10 @@ function Footer() {
                                 <h6>About Exsus</h6>
                                 <ul>
                                     <li><a href="about_us.html">About us</a></li>
-                                    <li><a href="#">Meet our travel experts</a></li>
-                                    <li><a href="#">Careers at Exsus</a></li>
-                                    <li><a href="#">Exsus referral scheme</a></li>
-                                    <li><a href="#">Travel agent brochures</a></li>
+                                    <li><a href="javascript:void(0)">Meet our travel experts</a></li>
+                                    <li><a href="javascript:void(0)">Careers at Exsus</a></li>
+                                    <li><a href="javascript:void(0)">Exsus referral scheme</a></li>
+                                    <li><a href="javascript:void(0)">Travel agent brochures</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -121,9 +121,9 @@ function Footer() {
                     <p className="copyright_text">&copy; 2022 Exsus Travel. Experts in luxury tailor-made holidays.</p>
                     <div className="prvcy_polcy_list">
                         <ul>
-                            <li><a href="#">Privacy policy & cookies</a></li>
-                            <li><a href="#">Website terms of use</a></li>
-                            <li><a href="#">Booking terms & conditions</a></li>
+                            <li><a href="javascript:void(0)">Privacy policy & cookies</a></li>
+                            <li><a href="javascript:void(0)">Website terms of use</a></li>
+                            <li><a href="javascript:void(0)">Booking terms & conditions</a></li>
                         </ul>
                     </div>
                 </section>
@@ -141,7 +141,7 @@ function Footer() {
                     <p>
                         <strong>International Passenger Protection (IPP)</strong>In accordance with the Passenger protection policy for insolvency cover in respect of the Package Travel & Linked Travel Regulations 2018, all passengers booking with Exsus Travel are fully protected for the initial deposit and subsequently the balance of all monies paid to us, including repatriation costs, arising from cancellation or curtailment of your travel arrangements due to the insolvency of Exsus Travel. There is no requirement for financial protection of day trips, and none is provided. Your booking is insured by IPP Ltd and its panel of insurers. This insurance is only valid for passengers who book and pay directly with Exsus Travel. If you have booked and/or paid direct to a Travel Agent for a holiday with Exsus Travel please request proof of how the booking is secured as this will not be covered by IPP Ltd in this instance.
                         <span className="d-block pt-3"></span>
-                        This insurance has been arranged by International Passenger Protection Limited and underwritten by Liberty Mutual Insurance Europe SE. For further information please go to <a href="#">www.ipplondon.co.uk</a>
+                        This insurance has been arranged by International Passenger Protection Limited and underwritten by Liberty Mutual Insurance Europe SE. For further information please go to <a href="javascript:void(0)">www.ipplondon.co.uk</a>
                         <span className="d-block pt-3"></span>
                         Claims procedure: you must notify IPP as soon as practically possible giving full details of what has happened quoting the name of your Travel Operator to: IPP Claims at Cunningham Lindsey, Oakleigh House, 14-15 Park Place, Cardiff,  CF10 3DQ, United Kingdom. Tel: +44 (0)345 266 1872.
                         <span className="d-block pt-3"></span>

@@ -1,0 +1,144 @@
+.chat_window_parnt_blk {
+  width: 100%;
+  max-width: 380px;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  padding: 15px;
+  z-index: 2;
+}
+
+.chat_window_parnt_blk .chat_window_inr_blk {
+  background: #434142;
+  padding: 15px;
+  box-shadow: 3px 2px 1px 1px rgba(0, 0, 0, 0.3);
+  border: 1px solid #555555;
+  transition: all ease 0.3s;
+  border-radius: 4px;
+}
+
+.chat_window_parnt_blk.chat_window_minised textarea, .chat_window_parnt_blk.chat_window_minised .chat_window_footer_blk {
+  display: none;
+}
+
+.chat_window_parnt_blk.chat_window_minised .chat_window_expnd_btn {
+  transform: rotate(180deg);
+}
+
+.chat_window_parnt_blk p {
+  font: 400 1rem/1.5rem "Roboto", sans-serif;
+  display: flex;
+  color: #ffffff;
+}
+
+.chat_window_parnt_blk p button {
+  color: #ffffff;
+  transition: all ease 0.3s;
+}
+
+.chat_window_parnt_blk textarea {
+  width: 100%;
+  resize: none;
+  height: 100px;
+  border-radius: 4px;
+  background: transparent;
+  border: 1px solid #8aad56;
+  padding: 10px;
+  margin: 15px 0;
+  color: #ffffff;
+  transition: all ease 0.3s;
+}
+
+.chat_window_parnt_blk .chat_window_footer_blk {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all ease 0.3s;
+}
+
+.chat_window_parnt_blk .chat_window_footer_blk a {
+  font: 400 0.75rem/0.875rem "Roboto", sans-serif;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.chat_window_parnt_blk .chat_window_footer_blk a img {
+  height: 12px;
+  margin-right: 5px;
+  float: left;
+}
+
+.chat_window_parnt_blk .chat_window_footer_blk button {
+  background: #8aad56;
+  color: #ffffff;
+  border-radius: 0;
+  font: 1rem/1.5rem "Slabo 27px", serif;
+  text-transform: uppercase;
+  border: none;
+}
+
+.chat_window_parnt_blk .chat_window_footer_blk button:hover {
+  color: #231f20;
+}
+
+.chat_window_parnt_blk .chat_thank_you_blk {
+  text-align: center;
+  display: none;
+  background: #434142;
+  padding: 15px;
+  box-shadow: 3px 2px 1px 1px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+.chat_window_parnt_blk .chat_thank_you_blk .chat_thank_you_title {
+  font: 1.125rem/1.5rem "Slabo 27px", serif;
+  color: #ffffff;
+  padding: 10px 0 0;
+  margin: 0;
+}
+
+.chat_window_parnt_blk .chat_thank_you_blk p {
+  font: 400 1rem/1.5rem "Roboto", sans-serif;
+  color: #ffffff;
+  display: inline-block;
+  margin-top: 15px;
+}
+
+.chat_window_parnt_blk .chat_thank_you_blk p a {
+  color: #8aad56;
+  text-decoration: none;
+}
+
+.chat_window_parnt_blk .chat_thank_you_blk .chat_thank_you_btn {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+}
+
+.chat_window_parnt_blk .chat_thank_you_blk .chat_thank_you_btn button {
+  background: #555;
+  color: #ffffff;
+  border-radius: 0;
+  font: 1rem/1.5rem "Slabo 27px", serif;
+  text-transform: uppercase;
+  border: none;
+}
+
+.chat_window_parnt_blk .chat_thank_you_blk .chat_thank_you_btn button.prmry_btn {
+  background: #8aad56;
+}
+
+.chat_window_parnt_blk .chat_thank_you_blk .chat_thank_you_btn button:hover {
+  color: #231f20;
+}
+
+.chat_window_parnt_blk .chat_thank_you_blk .chat_thank_you_footer {
+  color: #ffffff;
+}
+
+.chat_window_parnt_blk .chat_thank_you_blk .chat_thank_you_footer a {
+  display: block;
+  color: #8aad56;
+  text-decoration: none;
+  font: 400 0.75rem/1.125rem "Roboto", sans-serif;
+}

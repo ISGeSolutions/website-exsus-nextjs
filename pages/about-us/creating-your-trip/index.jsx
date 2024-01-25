@@ -78,7 +78,7 @@ function Index() {
         >
           <div className="carousel-inner">
             <a
-              href="#"
+              href="javascript:void(0)"
               target="_blank"
               className="carousel-item active"
               data-bs-interval="5000"

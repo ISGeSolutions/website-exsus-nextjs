@@ -186,57 +186,6 @@ function Index() {
   //     setVisibleItems(prevVisibleItems => prevVisibleItems + itemsPerPage);
   // };
 
-  const optionsData = [
-    { value: "", label: "Filter by destination" },
-    { value: "Everything", label: "Everything" },
-    { value: "Barefoot", label: "Barefoot" },
-    { value: "Beach", label: "Beach" },
-    { value: "Boutique hotel", label: "Boutique hotel" },
-    { value: "Chic design", label: "Chic design" },
-    { value: "Cultural Immersion", label: "Cultural Immersion" },
-    { value: "Eco tourism", label: "Eco tourism" },
-    { value: "Family-Friendly", label: "Family-Friendly" },
-    { value: "Food & Wine", label: "Food & Wine" },
-    { value: "Guiding", label: "Guiding" },
-    { value: "Hideaway", label: "Hideaway" },
-    { value: "Honeymoon", label: "Honeymoon" },
-    { value: "Lodge", label: "Lodge" },
-    { value: "Luxury hotel", label: "Luxury Hotel" },
-    { value: "Off the beaten track", label: "Off the beaten track" },
-    { value: "Owner run", label: "Owner run" },
-    { value: "Peace & quiet", label: "Peace & quiet" },
-    { value: "Private groups", label: "Private groups" },
-    { value: "Romantic", label: "Romantic" },
-    { value: "Rustic", label: "Rustic" },
-    { value: "Seriously special", label: "Seriously special" },
-    { value: "Service & Hospitality", label: "Service & Hospitality" },
-    { value: "Setting & Views", label: "Setting & Views" },
-    { value: "Snorkelling & Driving", label: "Snorkelling & Driving" },
-    { value: "Spa & Wellness", label: "Spa & Wellness" },
-    { value: "Unusal", label: "Unusal" },
-    { value: "Village life", label: "Village life" },
-    { value: "Walking & trekking", label: "Walking & trekking" },
-    { value: "Water activities", label: "Water activities" },
-    { value: "Wildlife & Nature", label: "Wildlife & Nature" },
-    { value: "Adventure", label: "Adventure" },
-    { value: "Couples", label: "Couples" },
-    { value: "Educational", label: "Educational" },
-    { value: "Multi-activity", label: "Multi-activity" },
-    { value: "Teenagers", label: "Teenagers" },
-    { value: "Landscapes & Scenery", label: "Landscapes & Scenery" },
-    { value: "City hotel", label: "City hotel" },
-  ];
-
-  // let regionWiseUrl = "/uk";
-  // let region = "uk";
-  // if (typeof window !== "undefined") {
-  //   if (window && window.site_region) {
-  //     regionWiseUrl = "/" + window.site_region;
-  //     region = window.site_region;
-  //     // setMyVariable(window.site_region);
-  //   }
-  // }
-
   let region = "uk";
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
@@ -316,7 +265,7 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
+      `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -413,8 +362,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -572,7 +521,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -620,7 +569,6 @@ function Index() {
         setIsLoading(false);
       });
 
-
     holidaytypesService.getDestinationDropDown().then((x) => {
       let arrayOfObjects = [
         {
@@ -657,7 +605,7 @@ function Index() {
         <Alert message={alert.message} type={alert.type} onClose={closeAlert} />
       )}
       <Head>
-        <title>{title}</title>
+        <title>{dictioneryFunction(title)}</title>
         <script
           type="text/javascript"
           src="/assets/javascripts/card-slider.js"
@@ -698,12 +646,12 @@ function Index() {
                 ))}
               </div>
               <div className="carousel-inner">
-                {/* <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
+                {/* <a href="javascript:void(0)" target="_blank" className="carousel-item active" data-bs-interval="5000">
                             <div className="banner_commn_cls"> */}
                 {backgroundImage.map((imagePath, index) => (
                   // <img src={imagePath} alt="holiday_types_detls_card02" className="img-fluid" />
                   <NavLink
-                    href="#"
+                    href="javascript:void(0)"
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                     data-bs-interval="5000"
                   >
@@ -877,7 +825,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                      "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}
@@ -914,12 +862,10 @@ function Index() {
                                     )
                                     .map((res1) => (
                                       <li key={res1.id}>
-                                        {`From ${
-                                          res1.attributes?.currency_symbol ?? ""
-                                        }${
-                                          formatPrice(res1.attributes?.price) ??
+                                        {`From ${res1.attributes?.currency_symbol ?? ""
+                                          }${formatPrice(res1.attributes?.price) ??
                                           " xxxx"
-                                        } per person`}
+                                          } per person`}
                                       </li>
                                     ))}
                                   <li>

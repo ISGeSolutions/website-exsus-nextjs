@@ -148,7 +148,7 @@ function Index() {
                         <li>
                           Luxury family holidays in the Galapagos Galapagos
                           Galapagos
-                          <a href="#">
+                          <a href="javascript:void(0)">
                             Read more
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -169,7 +169,7 @@ function Index() {
                         </li>
                         <li>
                           Bespoke Luxury Holidays
-                          <a href="#">
+                          <a href="javascript:void(0)">
                             Read more
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -190,7 +190,7 @@ function Index() {
                         </li>
                         <li>
                           Luxury Land-based Holidays in the Galapagos
-                          <a href="#">
+                          <a href="javascript:void(0)">
                             Read more
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -211,7 +211,7 @@ function Index() {
                         </li>
                         <li>
                           Luxury Caribbean Beach Holidays
-                          <a href="#">
+                          <a href="javascript:void(0)">
                             Read more
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -232,7 +232,7 @@ function Index() {
                         </li>
                         <li>
                           Luxury Safari Holidays
-                          <a href="#">
+                          <a href="javascript:void(0)">
                             Read more
                             <svg
                               xmlns="http://www.w3.org/2000/svg"

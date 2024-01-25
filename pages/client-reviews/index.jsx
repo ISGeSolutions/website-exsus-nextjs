@@ -67,7 +67,7 @@ function Index() {
     //     setClientReviews(x.data);
 
     //     // Dictionary
-    //      
+    //
     //     let modifiedString = x.data[0]?.attributes?.review_text;
     //      ("modifiedString", modifiedString);
     //     // Find and store matches in an array
@@ -251,7 +251,7 @@ function Index() {
             >
               <div className="carousel-inner">
                 <a
-                  href="#"
+                  href="javascript:void(0)"
                   target="_blank"
                   className="carousel-item active"
                   data-bs-interval="5000"
@@ -267,7 +267,7 @@ function Index() {
                 <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
               </div>
 
-              <div className="trvl_info_cntnt">
+              <div className="trvl_info_cntnt client_review_para_blk">
                 <h2 className="trvl_title">{headingTag}</h2>
                 <p
                   className="mb-4"

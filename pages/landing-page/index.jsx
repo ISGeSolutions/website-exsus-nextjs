@@ -90,21 +90,21 @@ function Index() {
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2" aria-label="Slide 3"></button>
                     </div>
                     <div className="carousel-inner">
-                        <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
+                        <a href="javascript:void(0)" target="_blank" className="carousel-item active" data-bs-interval="5000">
                             <div className="banner_img_custom01 banner_commn_cls"></div>
                             <div className="carousel-caption">
                                 <img src="images/banner-logo.png" alt="banner-logo" className="img-fluid" />
                                 <h2>Discover the Seychelles</h2>
                             </div>
                         </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                        <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="banner_img_custom02 banner_commn_cls"></div>
                             <div className="carousel-caption">
                                 <img src="images/banner-logo.png" alt="banner-logo" className="img-fluid" />
                                 <h2>Perfect for romance</h2>
                             </div>
                         </a>
-                        <a href="#" target="_blank" className="carousel-item" data-bs-interval="5000">
+                        <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="banner_img_custom03 banner_commn_cls"></div>
                             <div className="carousel-caption">
                                 <img src="images/banner-logo.png" alt="banner-logo" className="img-fluid" />
@@ -189,7 +189,7 @@ function Index() {
                     <div className="row">
                         <div className="col-sm-6 col-md-6 col-lg-4">
                             <div className="card_blk_inr">
-                                <a href="#" target="_blank">
+                                <a href="javascript:void(0)" target="_blank">
                                     <img src="images/card_img01.jpg" alt="Card image 01" className="img-fluid" />
                                     <div className="card_blk_cntnt">
                                         <div className="row align-items-center">
@@ -210,7 +210,7 @@ function Index() {
 
                         <div className="col-sm-6 col-md-6 col-lg-4">
                             <div className="card_blk_inr">
-                                <a href="#">
+                                <a href="javascript:void(0)">
                                     <img src="images/card_img02.jpg" alt="Card image 02" className="img-fluid" />
                                     <div className="card_blk_cntnt">
                                         <div className="row align-items-center">
@@ -232,7 +232,7 @@ function Index() {
 
                         <div className="col-sm-6 col-md-6 col-lg-4">
                             <div className="card_blk_inr">
-                                <a href="#">
+                                <a href="javascript:void(0)">
                                     <img src="images/card_img03.jpg" alt="Card image 03" className="img-fluid" />
                                     <div className="card_blk_cntnt">
                                         <div className="row align-items-center">
@@ -253,7 +253,7 @@ function Index() {
 
                         <div className="col-sm-6 col-md-6 col-lg-4">
                             <div className="card_blk_inr">
-                                <a href="#">
+                                <a href="javascript:void(0)">
                                     <img src="images/card_img04.jpg" alt="Card image 04" className="img-fluid" />
                                     <div className="card_blk_cntnt">
                                         <div className="row align-items-center">
@@ -275,7 +275,7 @@ function Index() {
 
                         <div className="col-sm-6 col-md-6 col-lg-4">
                             <div className="card_blk_inr">
-                                <a href="#">
+                                <a href="javascript:void(0)">
                                     <img src="images/card_img05.jpg" alt="Card image 05" className="img-fluid" />
                                     <div className="card_blk_cntnt">
                                         <div className="row align-items-center">
@@ -297,7 +297,7 @@ function Index() {
 
                         <div className="col-sm-6 col-md-6 col-lg-4">
                             <div className="card_blk_inr">
-                                <a href="#">
+                                <a href="javascript:void(0)">
                                     <img src="images/card_img06.jpg" alt="Card image 06" className="img-fluid" />
                                     <div className="card_blk_cntnt">
                                         <div className="row align-items-center">
@@ -527,7 +527,7 @@ function Index() {
                     <div className="row">
                         <div className="col-sm-6 col-md-6 col-lg-4">
                             <div className="card_blk_inr">
-                                <a href="#" target="_blank">
+                                <a href="javascript:void(0)" target="_blank">
                                     <img src="images/card_img07.jpg" alt="Card image 07" className="img-fluid" />
                                     <div className="card_blk_cntnt">
                                         <div className="row align-items-center">
@@ -548,7 +548,7 @@ function Index() {
 
                         <div className="col-sm-6 col-md-6 col-lg-4">
                             <div className="card_blk_inr">
-                                <a href="#">
+                                <a href="javascript:void(0)">
                                     <img src="images/card_img08.jpg" alt="Card image 08" className="img-fluid" />
                                     <div className="card_blk_cntnt">
                                         <div className="row align-items-center">

@@ -565,7 +565,7 @@ function Index() {
             If you have any issues requesting a brochure,
             <br />
             please call us on 0207 563 1304 or email{" "}
-            <a href="#">escape@exsus.com</a>
+            <a href="javascript:void(0)">escape@exsus.com</a>
           </p>
         </footer>
       </Layout>

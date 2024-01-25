@@ -169,7 +169,7 @@ function Layout({ children }) {
 
   useEffect(() => {
     // Temporarily disable warnings in the development environment
-    console.warn = () => {};
+    console.warn = () => { };
 
     $(".header_country_list > ul .header_country_label").on(
       "mouseenter",
@@ -215,7 +215,7 @@ function Layout({ children }) {
               <div className="mobile_trigger_btn d-block d-lg-none">
                 <a
                   className="btn-link"
-                  href="#"
+                  href="javascript:void(0)"
                   onClick={() => {
                     document.getElementById("sideMenuLeft").style.width =
                       "100%";
@@ -278,24 +278,24 @@ function Layout({ children }) {
                                         <option data-img_src="images/thailand-flag-round-circle-icon.svg">Asia site</option>
                                         <option data-img_src="images/india-flag-round-circle-icon.svg">India site</option>
                                     </select> */}
-                  {/* <NavLink className="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {/* <NavLink className="btn btn-secondary dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <img className="main-role-image" src="./../../images/uk-flag-round-circle-icon.svg" alt="united-kingdom-flag-icon" /><span className=' main-role'>
                                             UK site
                                         </span>
                                     </NavLink>
                                     <ul className="dropdown-menu">
                                         <li>
-                                            <NavLink className="dropdown-item" value="uk-uk-flag-round-circle-icon.svg" href="#">
+                                            <NavLink className="dropdown-item" value="uk-uk-flag-round-circle-icon.svg" href="javascript:void(0)">
                                                 <img src="./../../images/uk-flag-round-circle-icon.svg" alt="usa-flag-round-circle-icon" />
                                                 UK site
                                             </NavLink></li>
                                         <li>
-                                            <NavLink className="dropdown-item" value="us-usa-flag-round-circle-icon.svg" href="#">
+                                            <NavLink className="dropdown-item" value="us-usa-flag-round-circle-icon.svg" href="javascript:void(0)">
                                                 <img src="./../../images/usa-flag-round-circle-icon.svg" alt="usa-flag-round-circle-icon" />
                                                 US site
                                             </NavLink></li>
-                                        <li><NavLink className="dropdown-item" value="asia" href="#"><img src="./../.././../../images/thailand-flag-round-circle-icon.svg" alt="thailand-flag-round-circle-icon" />Asia site</NavLink></li>
-                                        <li><NavLink className="dropdown-item" value="in" href="#"><img src="./../../images/india-flag-round-circle-icon.svg" alt="india-flag-round-circle-icon" />India site</NavLink></li>
+                                        <li><NavLink className="dropdown-item" value="asia" href="javascript:void(0)"><img src="./../.././../../images/thailand-flag-round-circle-icon.svg" alt="thailand-flag-round-circle-icon" />Asia site</NavLink></li>
+                                        <li><NavLink className="dropdown-item" value="in" href="javascript:void(0)"><img src="./../../images/india-flag-round-circle-icon.svg" alt="india-flag-round-circle-icon" />India site</NavLink></li>
                                     </ul> */}
                 </div>
                 <form onSubmit={handleSubmit(handleSearch)}>
@@ -342,7 +342,7 @@ function Layout({ children }) {
               </div>
               <div className="mobile_trigger_btn mobile-menu-trigger d-block d-lg-none">
                 <a
-                  href="#"
+                  href="javascript:void(0)"
                   onClick={() => {
                     const menuLayout = document.querySelector(".menu"); //Nav tag
                     menuLayout.classList.toggle("active");

@@ -81,7 +81,7 @@ function getHolidaytypeDetailsByFriendlyUrl(groupName) {
   const holidaytypesDetailsUrl = `${publicRuntimeConfig.apiUrl}/api/holiday-type-groups?filters[friendly_url][$eq]=${groupName?.replace(
     /&/g,
     "%26"
-  )}&populate[0]=holiday_type_group_images&populate[holiday_types][fields][0]=holiday_types&populate[holiday_types][fields]1]=holiday_type_code&populate[holiday_types][fields]1]=holiday_type_name&populate[holiday_types][populate][0]=holiday_type_images`;
+  )}&populate[holiday_type_group_images]=holiday_type_group_images&populate[holiday_types][fields][0]=holiday_types&populate[holiday_types][fields]1]=holiday_type_code&populate[holiday_types][fields]1]=holiday_type_name&populate[holiday_types][populate][0]=holiday_type_images`;
   return fetchWrapper.get(holidaytypesDetailsUrl);
 }
 

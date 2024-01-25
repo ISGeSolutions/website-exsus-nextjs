@@ -196,7 +196,7 @@ function Index() {
                   {backgroundImage.map((imagePath, index) => (
                     <NavLink
                       key={index}
-                      href="#"
+                      href="javascript:void(0)"
                       className={`carousel-item ${index === 0 ? "active" : ""}`}
                       data-bs-interval="5000"
                     >
@@ -273,7 +273,7 @@ function Index() {
                                     </ul>
                                     <p>
                                         If you have any further queries about the Gift List, please call
-                                        our team on <a href="#">020 3613 5556</a>
+                                        our team on <a href="javascript:void(0)">020 3613 5556</a>
                                     </p>
                                 </div>
                                 <div className="gift_list_parnt">
@@ -294,7 +294,7 @@ function Index() {
                                     </ul>
                                     <p className="mb-4">
                                         If you have any queries, please contact our team on{" "}
-                                        <a href="#">020 3613 5556</a>
+                                        <a href="javascript:void(0)">020 3613 5556</a>
                                     </p>
                                     <button
                                         className="btn prmry_btn mx-auto"

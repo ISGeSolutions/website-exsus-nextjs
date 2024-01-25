@@ -26,22 +26,11 @@ export function ContactUsEmailTemplate(props) {
   return (
     <Html lang="en">
       {/* <Button href={url}>Click me</Button> */}
-      <style jsx>{`
-    body {
-      margin: 0;
-      padding: 0;
-      min-width: 100% !important;
-    }
-    .content {
-      width: 100%;
-      max-width: 600px;
-    }
-      `}</style>
       <table align="center" border="0" cellPadding="0" cellSpacing="0" width="100%">
         <tbody>
           <tr>
             <td>
-              <table className="content" bgColor="#fff" align="center" style={{ border: `1px solid #666666`, margin: `15px auto` }} cellPadding="0" cellSpacing="0" width="600px">
+              <table className="content" bgcolor="#fff" align="center" style={{ border: `1px solid #666666`, margin: `15px auto` }} cellPadding="0" cellSpacing="0" width="600px">
                 <tr>
                   <td align="center" bgcolor="#252525" style={{ padding: `15px` }}>
                     <img src="@hosturlimages/images/logo.png" alt="emailer_logo" width="120" height="36" align="center" />

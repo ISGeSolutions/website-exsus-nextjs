@@ -12,6 +12,7 @@ import {
 import { Inspireme } from "components";
 import { useRouter } from "next/router";
 import { NavLink } from "components";
+import Head from "next/head";
 import CustomMultiValue from "./CustomMultiValue";
 import Select, { components } from "react-select";
 import { Alert } from "../../components";
@@ -40,6 +41,7 @@ function Index() {
   const [metaData, setMetaData] = useState([]);
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(true);
+  const [title, setTitle] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
   const [isLoader, setIsLoader] = useState(false);
   const [isRtl, setIsRtl] = useState(false);
@@ -206,7 +208,7 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
+      `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -320,8 +322,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt1"
-      ),
+      "card_slider_cnt places_to_stay_cnt1"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -477,7 +479,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -514,6 +516,7 @@ function Index() {
     holidaytypesService
       .getHolidaytypeDetailsById(holidaytypename)
       .then((x) => {
+        setTitle(x.data[0].attributes?.page_meta_title);
         setHolidaytypesDetails(x.data[0].attributes);
         setFriendlyUrl(
           `home/holiday-types/${holidayGrpName}/${holidaytypename}`
@@ -574,6 +577,9 @@ function Index() {
 
   return (
     <>
+      <Head>
+        <title>{dictioneryFunction(title)}</title>
+      </Head>
       {alert && alert.message && alert.type && (
         <Alert message={alert.message} type={alert.type} onClose={closeAlert} />
       )}
@@ -609,7 +615,7 @@ function Index() {
               <div className="carousel-inner">
                 {backgroundImage.map((imagePath, index) => (
                   <NavLink
-                    href="#"
+                    href="javascript:void(0)"
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                     data-bs-interval="5000"
                   >
@@ -775,7 +781,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                      "thumbnail" ? (
                                       <img
                                         key={element.id}
                                         src={element.attributes.image_path}
@@ -811,12 +817,10 @@ function Index() {
                                     )
                                     .map((res1) => (
                                       <li key={res1.id}>
-                                        {`From ${
-                                          res1.attributes?.currency_symbol ?? ""
-                                        }${
-                                          formatPrice(res1.attributes?.price) ??
+                                        {`From ${res1.attributes?.currency_symbol ?? ""
+                                          }${formatPrice(res1.attributes?.price) ??
                                           " xxxx"
-                                        } per person`}
+                                          } per person`}
                                       </li>
                                     ))}
                                   <li>

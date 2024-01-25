@@ -9,9 +9,10 @@ setTimeout(() => {
 
         const showHideIcons = () => {
             let scrollWidth = carousel.scrollWidth - carousel.clientWidth;
-            if (arrowIcons[0] || arrowIcons[1]) {
-
+            if (arrowIcons[0]) {
                 arrowIcons[0].style.display = carousel.scrollLeft == 0 ? "none" : "block";
+            }
+            if (arrowIcons[1]) {
                 arrowIcons[1].style.display = carousel.scrollLeft == scrollWidth ? "none" : "block";
             }
         }

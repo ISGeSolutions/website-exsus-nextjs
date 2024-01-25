@@ -15,6 +15,7 @@ import Image from "next/image";
 import CustomMultiValue from "../continentitineraries/CustomMultiValue";
 import Select, { components } from "react-select";
 import { Alert } from "../../components";
+import { formatPrice } from "../../components/utils/priceFormater";
 
 export default CountryItinararies;
 
@@ -470,8 +471,7 @@ function CountryItinararies(props) {
       `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
         / /g,
         "-"
-      )}/${countrycode?.replace(/ /g, "-")?.replace(/&/g, "and")}-itineraries/${
-        item?.attributes?.friendly_url
+      )}/${countrycode?.replace(/ /g, "-")?.replace(/&/g, "and")}-itineraries/${item?.attributes?.friendly_url
       }`
     );
   };
@@ -479,12 +479,11 @@ function CountryItinararies(props) {
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-        `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
-          / /g,
-          "-"
-        )}/${countrycode?.replace(/ /g, "-")}}-itineraries/${
-          item?.attributes?.friendly_url
-        }`
+      `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
+        / /g,
+        "-"
+      )}/${countrycode?.replace(/ /g, "-")}}-itineraries/${item?.attributes?.friendly_url
+      }`
     );
   };
 
@@ -498,8 +497,8 @@ function CountryItinararies(props) {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -733,7 +732,7 @@ function CountryItinararies(props) {
                           <label className="pt-2 pt-lg-0">Arrange by:</label>
                           <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
                             <li>
-                              <a href="#">By price</a>
+                              <a href="javascript:void(0)">By price</a>
                             </li>
                             <li>
                               <a
@@ -787,7 +786,7 @@ function CountryItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -820,7 +819,8 @@ function CountryItinararies(props) {
                                       {`From ${
                                         res1.attributes?.currency_symbol ?? ""
                                       }${
-                                        res1.attributes?.price ?? " xxxx"
+                                        formatPrice(res1.attributes?.price) ??
+                                        " xxxx"
                                       } per person`}
                                     </li>
                                   ))}

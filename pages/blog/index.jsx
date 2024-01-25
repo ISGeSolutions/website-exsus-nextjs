@@ -230,7 +230,7 @@ function Index() {
                 </div>
                 <div className="carousel-inner">
                   <a
-                    href="#"
+                    href="javascript:void(0)"
                     target="_blank"
                     className="carousel-item active"
                     data-bs-interval="5000"
@@ -238,7 +238,7 @@ function Index() {
                     <div className="banner_commn_cls blog_banner01"></div>
                   </a>
                   <a
-                    href="#"
+                    href="javascript:void(0)"
                     target="_blank"
                     className="carousel-item"
                     data-bs-interval="5000"
@@ -246,7 +246,7 @@ function Index() {
                     <div className="blog_banner02 banner_commn_cls"></div>
                   </a>
                   <a
-                    href="#"
+                    href="javascript:void(0)"
                     target="_blank"
                     className="carousel-item"
                     data-bs-interval="5000"

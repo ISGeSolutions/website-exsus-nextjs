@@ -504,7 +504,7 @@ function Index() {
                     <NavLink
                       key={index}
                       // target="_blank"
-                      href="#"
+                      href="javascript:void(0)"
                       className={`carousel-item ${index === 0 ? "active" : ""}`}
                       data-interval="5000"
                     >
