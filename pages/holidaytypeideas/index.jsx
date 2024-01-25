@@ -12,6 +12,7 @@ import {
 import { Inspireme } from "components";
 import { useRouter } from "next/router";
 import { NavLink } from "components";
+import Head from "next/head";
 import CustomMultiValue from "./CustomMultiValue";
 import Select, { components } from "react-select";
 import { Alert } from "../../components";
@@ -40,6 +41,7 @@ function Index() {
   const [metaData, setMetaData] = useState([]);
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(true);
+  const [title, setTitle] = useState("");
   const [isDisabled, setIsDisabled] = useState(false);
   const [isLoader, setIsLoader] = useState(false);
   const [isRtl, setIsRtl] = useState(false);
@@ -514,6 +516,7 @@ function Index() {
     holidaytypesService
       .getHolidaytypeDetailsById(holidaytypename)
       .then((x) => {
+        setTitle(x.data[0].attributes?.page_meta_title);
         setHolidaytypesDetails(x.data[0].attributes);
         setFriendlyUrl(
           `home/holiday-types/${holidayGrpName}/${holidaytypename}`
@@ -574,6 +577,9 @@ function Index() {
 
   return (
     <>
+      <Head>
+        <title>{dictioneryFunction(title)}</title>
+      </Head>
       {alert && alert.message && alert.type && (
         <Alert message={alert.message} type={alert.type} onClose={closeAlert} />
       )}

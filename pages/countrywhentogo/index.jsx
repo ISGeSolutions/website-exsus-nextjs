@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { destinationService, homeService } from "../../services";
+import {
+  destinationService,
+  homeService,
+  countriesService,
+} from "../../services";
 import { NavLink } from "react-router-dom";
 
 export default CountryWhentogo;
 
-function CountryWhentogo(props, onDataFromChild) {
+function CountryWhentogo({ onDataFromChild, sendDataToParent }) {
   //  ("country", country);
-  const [countryData, setCountryData] = useState(props?.data);
+  const [countryData, setCountryData] = useState();
   const router = useRouter();
   const [whenToGoData, setModifiedData] = useState(null);
   const countrycode = router.query?.country
@@ -269,14 +273,26 @@ function CountryWhentogo(props, onDataFromChild) {
     ) {
       websiteContentCheck(dictionaryPage);
     }
-    const sortedData = countryData?.country_month_activities?.data?.sort(
-      (a, b) => {
+
+    countriesService
+      .getCountryDetails(countrycode)
+      .then((x) => {
+        debugger;
+        setCountryData(x.data[0]);
+        //?.attributes?.country_month_activities  attributes.whentogo_intro_text
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+      });
+
+    const sortedData =
+      countryData?.attributes?.country_month_activities?.data?.sort((a, b) => {
         const seqA = parseInt(a.attributes.serial_number, 10);
         const seqB = parseInt(b.attributes.serial_number, 10);
 
         return seqA - seqB;
-      }
-    );
+      });
 
     const modifiedData = sortedData?.map((item) => {
       const attributes = item.attributes;
@@ -337,7 +353,9 @@ function CountryWhentogo(props, onDataFromChild) {
         <section className="destination_para">
           <p
             dangerouslySetInnerHTML={{
-              __html: dictioneryFunction(countryData?.whentogo_intro_text),
+              __html: dictioneryFunction(
+                countryData?.attributes?.whentogo_intro_text
+              ),
             }}
           />
           {/* <p>{countryData?.country_month_activities?.data}</p> */}
@@ -354,244 +372,6 @@ function CountryWhentogo(props, onDataFromChild) {
             each trip
           </p>
           <div className="calender_blk_inr">
-            {/* <table>
-              <tbody>
-                <tr>
-                  <th>Jan</th>
-                  <th>Feb</th>
-                  <th>Mar</th>
-                  <th>Apr</th>
-                  <th>May</th>
-                  <th>Jun</th>
-                  <th>July</th>
-                  <th>Aug</th>
-                  <th>Sep</th>
-                  <th>Oct</th>
-                  <th>Nov</th>
-                  <th>Dec</th>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td colspan="2" className="calender_trip_detls">
-                    <a href="javascript:void(0)">
-                      Cape wine harvest
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="#ffffff"
-                        shape-rendering="geometricPrecision"
-                        text-rendering="geometricPrecision"
-                        image-rendering="optimizeQuality"
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        viewBox="0 0 267 512.43"
-                      >
-                        <path
-                          fill-rule="nonzero"
-                          d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                        />
-                      </svg>
-                    </a>
-                  </td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  {countryData?.map((item) => (
-                    <td colspan="2" className="calender_trip_detls">
-                      <NavLink href={generateDynamicLink()}>
-                        {item?.link_text}
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="#ffffff"
-                          shape-rendering="geometricPrecision"
-                          text-rendering="geometricPrecision"
-                          image-rendering="optimizeQuality"
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          viewBox="0 0 267 512.43"
-                        >
-                          <path
-                            fill-rule="nonzero"
-                            d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                          />
-                        </svg>
-                      </NavLink>
-                    </td>
-                  ))}
-                </tr>
-
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td colspan="1" className="calender_trip_detls">
-                    <a href="javascript:void(0)">
-                      Hermanus whale festival
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="#ffffff"
-                        shape-rendering="geometricPrecision"
-                        text-rendering="geometricPrecision"
-                        image-rendering="optimizeQuality"
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        viewBox="0 0 267 512.43"
-                      >
-                        <path
-                          fill-rule="nonzero"
-                          d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                        />
-                      </svg>
-                    </a>
-                  </td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td colspan="2" className="calender_trip_detls">
-                    <a href="javascript:void(0)">
-                      Namaqualand flowers
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="#ffffff"
-                        shape-rendering="geometricPrecision"
-                        text-rendering="geometricPrecision"
-                        image-rendering="optimizeQuality"
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        viewBox="0 0 267 512.43"
-                      >
-                        <path
-                          fill-rule="nonzero"
-                          d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                        />
-                      </svg>
-                    </a>
-                  </td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td colspan="6">
-                    <a href="javascript:void(0)">
-                      Whale watching peak season
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="#ffffff"
-                        shape-rendering="geometricPrecision"
-                        text-rendering="geometricPrecision"
-                        image-rendering="optimizeQuality"
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        viewBox="0 0 267 512.43"
-                      >
-                        <path
-                          fill-rule="nonzero"
-                          d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                        />
-                      </svg>
-                    </a>
-                  </td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table> */}
             <table>
               <tbody>
                 <tr>
@@ -644,7 +424,7 @@ function CountryWhentogo(props, onDataFromChild) {
           <div className="row">
             <div className="col-sm-6">
               <div className="card_blk_inr card_blk_overlay">
-                <a onClick={() => sendDataToParentHandler("itineraries")}>
+                <a onClick={() => handleClick("itineraries")}>
                   <img
                     src="\images\country_detail01.jpg"
                     alt="Card image 07"
@@ -656,7 +436,7 @@ function CountryWhentogo(props, onDataFromChild) {
                         <div className="card_blk_txt">
                           <h3>
                             See all Itinerary Ideas in{" "}
-                            {countryData?.country_name}
+                            {countryData?.attributes?.country_name}
                           </h3>
                         </div>
                       </div>
@@ -685,7 +465,7 @@ function CountryWhentogo(props, onDataFromChild) {
 
             <div className="col-sm-6">
               <div className="card_blk_inr card_blk_overlay">
-                <a target="_blank" onClick={() => handleClick("itineraries")}>
+                <a onClick={() => handleClick("places-to-stay")}>
                   <img
                     src="\images\country_detail02.jpg"
                     alt="Card image 08"
@@ -697,7 +477,7 @@ function CountryWhentogo(props, onDataFromChild) {
                         <div className="card_blk_txt">
                           <h3>
                             See all Places to Stay in{" "}
-                            {countryData?.country_name}
+                            {countryData?.attributes?.country_name}
                           </h3>
                         </div>
                       </div>

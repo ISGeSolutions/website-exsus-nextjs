@@ -307,7 +307,7 @@ function Index() {
                   ></FriendlyUrl>
                 </div>
 
-                <div className="trvl_info_cntnt">
+                <div className="trvl_info_cntnt about_us_para_blk">
                   <h2 className="trvl_title">
                     {
                       customPageContent?.data?.filter(

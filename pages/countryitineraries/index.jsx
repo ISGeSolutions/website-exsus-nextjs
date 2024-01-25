@@ -15,6 +15,7 @@ import Image from "next/image";
 import CustomMultiValue from "../continentitineraries/CustomMultiValue";
 import Select, { components } from "react-select";
 import { Alert } from "../../components";
+import { formatPrice } from "../../components/utils/priceFormater";
 
 export default CountryItinararies;
 
@@ -815,9 +816,12 @@ function CountryItinararies(props) {
                                   )
                                   .map((res1) => (
                                     <li key={res1.id}>
-                                      {`From ${res1.attributes?.currency_symbol ?? ""
-                                        }${res1.attributes?.price ?? " xxxx"
-                                        } per person`}
+                                      {`From ${
+                                        res1.attributes?.currency_symbol ?? ""
+                                      }${
+                                        formatPrice(res1.attributes?.price) ??
+                                        " xxxx"
+                                      } per person`}
                                     </li>
                                   ))}
                                 <li>

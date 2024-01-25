@@ -318,6 +318,13 @@ function Index() {
         // console.error(error);
         setIsLoading(false);
       });
+
+    setTimeout(() => {
+      // $('.carousel').carousel();
+      $(".carousel").carousel({
+        interval: 250 * 10,
+      });
+    }, 2000);
   }, []);
 
   return (
@@ -338,51 +345,52 @@ function Index() {
         ) : (
           <div>
             <section className="banner_blk_row">
-              <div
-                id="carouselExampleInterval"
-                className="carousel slide"
-                data-bs-ride="carousel"
-              >
-                <div className="carousel-indicators">
-                  {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+              {whyusDetails?.custom_page_images?.data ? (
+                <div
+                  id="carouselExampleInterval"
+                  className="carousel slide"
+                  data-bs-ride="carousel"
+                >
+                  <div className="carousel-indicators">
+                    {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2"></button> */}
-                  {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2" aria-label="Slide 3"></button>
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="3" aria-label="Slide 4"></button> */}
-                  {whyusDetails?.custom_page_images?.data?.map(
-                    (element, index) =>
-                      element?.attributes?.image_type == "banner" && (
-                        <button
-                          key={index}
-                          type="button"
-                          data-bs-target="#carouselExampleInterval"
-                          data-bs-slide-to={index}
-                          className={index === 0 ? "active" : ""}
-                          aria-current={index === 0 ? "true" : "false"}
-                          aria-label={`Slide ${index + 1}`}
-                        ></button>
-                      )
-                  )}
-                </div>
-                <div className="carousel-inner">
-                  {whyusDetails?.custom_page_images?.data?.map(
-                    (element, index) =>
-                      element?.attributes?.image_type == "banner" && (
-                        <NavLink
-                          href="javascript:void(0)"
-                          className="carousel-item active"
-                          data-bs-interval="5000"
-                          key={index}
-                        >
-                          <div
-                            className="banner_commn_cls"
-                            style={{
-                              backgroundImage: `url(${element?.attributes?.image_path})`,
-                            }}
-                          ></div>
-                        </NavLink>
-                      )
-                  )}
-                  {/* <a href="javascript:void(0)" target="_blank" className="carousel-item active" data-bs-interval="5000">
+                    {whyusDetails?.custom_page_images?.data?.map(
+                      (element, index) =>
+                        element?.attributes?.image_type == "banner" && (
+                          <button
+                            key={index}
+                            type="button"
+                            data-bs-target="#carouselExampleInterval"
+                            data-bs-slide-to={index}
+                            className={index === 0 ? "active" : ""}
+                            aria-current={index === 0 ? "true" : "false"}
+                            aria-label={`Slide ${index + 1}`}
+                          ></button>
+                        )
+                    )}
+                  </div>
+                  <div className="carousel-inner">
+                    {whyusDetails?.custom_page_images?.data?.map(
+                      (element, index) =>
+                        element?.attributes?.image_type == "banner" && (
+                          <NavLink
+                            href="#"
+                            className="carousel-item active"
+                            data-bs-interval="5000"
+                            key={index}
+                          >
+                            <div
+                              className="banner_commn_cls"
+                              style={{
+                                backgroundImage: `url(${element?.attributes?.image_path})`,
+                              }}
+                            ></div>
+                          </NavLink>
+                        )
+                    )}
+                    {/* <a href="#" target="_blank" className="carousel-item active" data-bs-interval="5000">
                             <div className="banner_commn_cls about_us_banner01"></div>
                         </a>
                         <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
@@ -394,8 +402,11 @@ function Index() {
                         <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="banner_commn_cls about_us_banner04"></div>
                         </a> */}
+                  </div>
                 </div>
-              </div>
+              ) : (
+                ""
+              )}
             </section>
 
             <section className="trvl_info_row">

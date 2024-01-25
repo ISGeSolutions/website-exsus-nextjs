@@ -3,6 +3,7 @@ import { destinationService, homeService } from "services";
 import { NavLink } from "components";
 import { useRouter } from "next/router";
 import { data } from "jquery";
+import { formatPrice } from "../../components/utils/priceFormater";
 
 export default CountryOverview;
 
@@ -460,9 +461,12 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                                 )
                                 .map((res1) => (
                                   <li key={res1.id}>
-                                    {`From ${res1.attributes?.currency_symbol ?? ""
-                                      }${res1.attributes?.price ?? " xxxx"
-                                      } per person`}
+                                    {`From ${
+                                      res1.attributes?.currency_symbol ?? ""
+                                    }${
+                                      formatPrice(res1.attributes?.price) ??
+                                      " xxxx"
+                                    } per person`}
                                   </li>
                                 ))}
                               <li>
