@@ -385,7 +385,6 @@ function Index() {
               );
             }
           );
-          console.log(filteredData);
           // Create an array of objects with parsed latitude and longitude
           const newCoordinates = filteredData.map((item) => ({
             lat: parseFloat(item.attributes.map_latitude),
@@ -520,14 +519,14 @@ function Index() {
         </div>
       ) : (
         <div>
-          <section className="banner_blk_row" id="scrollToElement">
+          <section className="banner_blk_row">
             {backgroundImage ? (
               <div
                 id="carouselExampleInterval"
                 className="carousel slide"
                 data-bs-ride="carousel"
               >
-                <div className="carousel-indicators">
+                <div className="carousel-indicators" id="scrollToElement">
                   {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
                   {backgroundImage.map((_, index) => (
                     <button

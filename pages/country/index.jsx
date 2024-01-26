@@ -64,88 +64,10 @@ function Country() {
     itineraries: useRef(null),
     places_to_stay: useRef(null),
   };
-
-  // const countryOptions = [
-  //   { value: "", label: "Filter by country" },
-  //   { value: "Asia", label: "Asia" },
-  //   { value: "Hong Kong & Macau", label: "Hong Kong & Macau" },
-  //   { value: "Malaysia & Borneo", label: "Malaysia & Borneo" },
-  //   { value: "Singapore", label: "Singapore" },
-  //   { value: "Indonesia", label: "Indonesia" },
-  //   { value: "Japan", label: "Japan" },
-  //   { value: "Cambodia", label: "Cambodia" },
-  //   { value: "Vietnam", label: "Vietnam" },
-  //   { value: "China", label: "China" },
-  //   { value: "Thailand", label: "Thailand" },
-  //   { value: "Burma", label: "Burma" },
-  //   { value: "Laos", label: "Laos" },
-  // ];
-
-  // const regionOptions = [
-  //   { value: "", label: "Filter by region" },
-  //   { value: "Everything", label: "Everything" },
-  //   { value: "Barefoot", label: "Barefoot" },
-  //   { value: "Beach", label: "Beach" },
-  //   { value: "Boutique hotel", label: "Boutique hotel" },
-  //   { value: "Chic design", label: "Chic design" },
-  //   { value: "Cultural Immersion", label: "Cultural Immersion" },
-  //   { value: "Eco tourism", label: "Eco tourism" },
-  //   { value: "Family-Friendly", label: "Family-Friendly" },
-  //   { value: "Food & Wine", label: "Food & Wine" },
-  //   { value: "Guiding", label: "Guiding" },
-  //   { value: "Hideaway", label: "Hideaway" },
-  //   { value: "Honeymoon", label: "Honeymoon" },
-  //   { value: "Lodge", label: "Lodge" },
-  //   { value: "Luxury hotel", label: "Luxury Hotel" },
-  //   { value: "Off the beaten track", label: "Off the beaten track" },
-  //   { value: "Owner run", label: "Owner run" },
-  //   { value: "Peace & quiet", label: "Peace & quiet" },
-  //   { value: "Private groups", label: "Private groups" },
-  //   { value: "Romantic", label: "Romantic" },
-  //   { value: "Rustic", label: "Rustic" },
-  //   { value: "Seriously special", label: "Seriously special" },
-  //   { value: "Service & Hospitality", label: "Service & Hospitality" },
-  //   { value: "Setting & Views", label: "Setting & Views" },
-  //   { value: "Snorkelling & Driving", label: "Snorkelling & Driving" },
-  //   { value: "Spa & Wellness", label: "Spa & Wellness" },
-  //   { value: "Unusal", label: "Unusal" },
-  //   { value: "Village life", label: "Village life" },
-  //   { value: "Walking & trekking", label: "Walking & trekking" },
-  //   { value: "Water activities", label: "Water activities" },
-  //   { value: "Wildlife & Nature", label: "Wildlife & Nature" },
-  //   { value: "Adventure", label: "Adventure" },
-  //   { value: "Couples", label: "Couples" },
-  //   { value: "Educational", label: "Educational" },
-  //   { value: "Multi-activity", label: "Multi-activity" },
-  //   { value: "Teenagers", label: "Teenagers" },
-  //   { value: "Landscapes & Scenery", label: "Landscapes & Scenery" },
-  //   { value: "City hotel", label: "City hotel" },
-  // ];
-
-  // const monthOptions = [
-  //   { value: "", label: "Filter by month" },
-  //   { value: "All months", label: "All months" },
-  //   { value: "January", label: "January" },
-  //   { value: "February", label: "February" },
-  //   { value: "March", label: "March" },
-  //   { value: "April", label: "April" },
-  //   { value: "May", label: "May" },
-  //   { value: "June", label: "June" },
-  //   { value: "July", label: "July" },
-  //   { value: "August", label: "August" },
-  //   { value: "September", label: "September" },
-  //   { value: "October", label: "October" },
-  //   { value: "November", label: "November" },
-  //   { value: "December", label: "December" },
-  // ];
-
-  const [users, setUsers] = useState(null);
-  // const [destinationDropdown, setDestinationDropdown] = useState(null);
-  // const [destination, setDestination] = useState(null);
-  const [country, setCountry] = useState(null);
-  const [itinerary, setItinerary] = useState(null);
-  const [hotel, setHotel] = useState(null);
-  const [itineraries, setItineraries] = useState(null);
+  const [redirectUrl, setRedirectUrl] = useState(null);
+  const [activeTab, setActiveTab] = useState("overview"); // State to track the active tab
+  const [dataToSendToChild, setDataToSendToChild] = useState("Initial Data");
+  const [dataReceivedFromChild, setDataReceivedFromChild] = useState(null);
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -166,9 +88,6 @@ function Country() {
     // this.setState({ selectedOption }, () =>
     // );
   };
-
-  const [dataToSendToChild, setDataToSendToChild] = useState("Initial Data");
-  const [dataReceivedFromChild, setDataReceivedFromChild] = useState(null);
 
   // Function to send data to the child
   const sendDataToChild = () => {
@@ -240,9 +159,6 @@ function Country() {
   };
 
   equalHeight(true);
-
-  const [redirectUrl, setRedirectUrl] = useState(null);
-  const [activeTab, setActiveTab] = useState("overview"); // State to track the active tab
 
   const toggleTab = (itemId) => {
     var text = countryData?.attributes?.header_text;
@@ -492,7 +408,7 @@ function Country() {
           setCountryData(x.data[0]);
           x.data[0];
           setDataToSendToChild(x.data[0]?.attributes);
-          setHeadingText(x.data[0]?.attributes?.header_text);
+          setHeadingText("LUXURY HOLIDAYS IN " + countrycode.toUpperCase());
           setFriendlyUrl(`Home/Destinations/${destinationcode}/${countrycode}`);
           const map_latitude = x.data[0].attributes?.map_latitude;
           const map_longitude = x.data[0].attributes?.map_longitude;
@@ -584,14 +500,14 @@ function Country() {
         </div>
       ) : (
         <div>
-          <section className="banner_blk_row" id="scrollToElement">
+          <section className="banner_blk_row">
             {backgroundImage ? (
               <div
                 id="carouselExampleInterval"
                 className="carousel slide"
                 data-bs-ride="carousel"
               >
-                <div className="carousel-indicators">
+                <div className="carousel-indicators" id="scrollToElement">
                   {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
                   {backgroundImage.map((_, index) => (
                     <button
