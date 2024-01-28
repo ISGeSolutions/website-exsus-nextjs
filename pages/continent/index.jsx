@@ -25,21 +25,16 @@ function Index() {
   const router = useRouter();
   let dictionaryPage = 1;
   const [coordinatesArray, setCoordinatesArray] = useState([]);
-
   const destinationcode = router.query.continent
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
-
   const destinationTab = router.query?.continenttab;
-
   var itinerarytab = router.components;
-
   const handleDataFromChild = (data) => {
     // Update the parent component's state with data received from the child
     toggleTab(data);
   };
-
   const [friendlyUrl, setFriendlyUrl] = useState("");
   const [destinationName, setdestinationName] = useState("");
   const [metaTitle, setMetaTitle] = useState("");
@@ -55,7 +50,6 @@ function Index() {
     places_to_stay: useRef(null),
   };
   const [activeButton, setActiveButton] = useState("images");
-
   const divRef = useRef();
   const { t } = useTranslation();
 
@@ -349,15 +343,32 @@ function Index() {
   useEffect(() => {
 
     const handlePopState = (event) => {
-      // Your custom logic when the user navigates back
-      console.log('User navigated back', event);
-
       // Perform any actions you want when the back button is pressed
       router.push("/destinations/" + destinationcode);
     };
 
-    // Add event listener when the component mounts
-    window.addEventListener('popstate', handlePopState);
+    // Get the current URL
+    const currentUrl = window.location.href;
+
+    // Create a URL object
+    const urlObject = new URL(currentUrl);
+
+    // Extract elements
+    const pathname = urlObject.pathname;
+    // const protocol = urlObject.protocol;
+    // const host = urlObject.host;
+    // const search = urlObject.search;
+    // const hash = urlObject.hash;
+
+    const myArrayPath = pathname.split("/");
+
+    if (myArrayPath[1] == "destinations") {
+      // debugger;
+      // Add event listener when the component mounts
+      window.addEventListener('popstate', handlePopState);
+    }
+
+    // window.addEventListener('popstate', handlePopState);
 
     if (destinationcode && destinationcode != "undefined") {
       localStorage.setItem("destination_code", destinationcode);
