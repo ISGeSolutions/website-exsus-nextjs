@@ -31,12 +31,8 @@ function Index() {
   const [isLoading, setIsLoading] = useState(true);
   const { t } = useTranslation();
   const [customPageData, setCustomData] = useState([]);
-  const [headingTag, setHeadingTag] = useState(null);
-  const [title, setTitle] = useState(null);
-  const [metaDescription, setMetaDescription] = useState(null);
   const [longText, setLongText] = useState(null);
-  const [careerData, setCareerData] = useState(null);
-  const [subTitle, setSubTitle] = useState(null);
+
   let dictionaryPage = 1;
 
   let region = "uk";
@@ -213,9 +209,6 @@ function Index() {
       transport: "xhr", // optional, beacon/xhr/image
     });
 
-    // const carousel = document.querySelector('#carouselExampleInterval');
-    // new bootstrap.Carousel(carousel);
-
     if (
       !localStorage.getItem(
         `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
@@ -234,83 +227,6 @@ function Index() {
             .content_value
         );
 
-        // const data = x.data[0]?.attributes?.custom_page_contents?.data;[4].attributes.content_value
-
-        // let modifiedString = "";
-        // if (data) {
-        //   data.forEach((element, index) => {
-        //     if (element?.attributes?.content_name == "HeadingTag") {
-        //       setHeadingTag(element?.attributes?.content_value.toUpperCase());
-        //     } else if (element?.attributes?.content_name == "Title") {
-        //       setTitle(element?.attributes?.content_value);
-        //     } else if (element?.attributes?.content_name == "MetaDescription") {
-        //       setMetaDescription(element?.attributes?.content_value);
-        //     } else if (element?.attributes?.content_name == "Long_Text") {
-        //       modifiedString = element?.attributes?.content_value;
-        //       // setLongText(element?.attributes?.content_value);
-        //     } else if (element?.attributes?.content_name == "Right_Header") {
-        //       setRightHeader(element?.attributes?.content_value);
-        //     } else if (element?.attributes?.content_name == "Right_Corner") {
-        //       setRightCorner(element?.attributes?.content_value);
-        //     } else if (element?.attributes?.content_name == "Sub_Title") {
-        //       setSubTitle(element?.attributes?.content_value);
-        //     }
-        //   });
-        // }
-
-        // const regex = /{[a-zA-Z0-9-]+}/g;
-        // const matches = [...new Set(modifiedString.match(regex))];
-
-        // let storedDataString = "";
-        // let storedData = "";
-        // if (region == "uk") {
-        //   storedDataString = localStorage.getItem("websitecontent_uk");
-        //   storedData = JSON.parse(storedDataString);
-        // } else if (region == "us") {
-        //   storedDataString = localStorage.getItem("websitecontent_us");
-        //   storedData = JSON.parse(storedDataString);
-        // } else if (region == "asia") {
-        //   storedDataString = localStorage.getItem("websitecontent_asia");
-        //   storedData = JSON.parse(storedDataString);
-        // } else if (region == "in") {
-        //   storedDataString = localStorage.getItem("websitecontent_india");
-        //   storedData = JSON.parse(storedDataString);
-        // }
-
-        // if (storedData !== null) {
-        //   // You can access it using localStorage.getItem('yourKey')
-        //   if (matches) {
-        //     let replacement = "";
-        //     try {
-        //       matches.forEach((match, index, matches) => {
-        //         const matchString = match.replace(/{|}/g, "");
-        //         if (!storedData[matchString]) {
-        //           throw new Error("Loop break");
-        //         } else {
-        //           replacement = storedData[matchString];
-        //         }
-        //         const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
-        //         if (checkStr && replacement) {
-        //           modifiedString = modifiedString.replace(
-        //             checkStr,
-        //             replacement
-        //           );
-        //         }
-        //       });
-        //       setLongText(modifiedString);
-        //       setIsLoading(false);
-        //     } catch (error) {
-        //       if (error.message === "Loop break") {
-        //         // Handle the loop break here
-        //         //  ("Loop has been stopped.");
-        //       } else if (error.message === "Region not found") {
-        //         // Handle the loop break here
-        //         //  ("Loop has been stopped.");
-        //         setLongText(modifiedString);
-        //       }
-        //     }
-        //   }
-        // }
         setIsLoading(false);
       })
       .catch((error) => {
@@ -352,10 +268,6 @@ function Index() {
                   data-bs-ride="carousel"
                 >
                   <div className="carousel-indicators">
-                    {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1" aria-label="Slide 2"></button> */}
-                    {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                        <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="3" aria-label="Slide 4"></button> */}
                     {whyusDetails?.custom_page_images?.data?.map(
                       (element, index) =>
                         element?.attributes?.image_type == "banner" && (
@@ -375,11 +287,12 @@ function Index() {
                     {whyusDetails?.custom_page_images?.data?.map(
                       (element, index) =>
                         element?.attributes?.image_type == "banner" && (
-                          <NavLink
-                            href="#"
-                            className="carousel-item active"
-                            data-bs-interval="5000"
+                          <a
                             key={index}
+                            className={`carousel-item ${
+                              index === 0 ? "active" : ""
+                            }`}
+                            data-interval="5000"
                           >
                             <div
                               className="banner_commn_cls"
@@ -387,7 +300,7 @@ function Index() {
                                 backgroundImage: `url(${element?.attributes?.image_path})`,
                               }}
                             ></div>
-                          </NavLink>
+                          </a>
                         )
                     )}
                   </div>

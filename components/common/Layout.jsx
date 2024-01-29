@@ -31,6 +31,7 @@ function Layout({ children }) {
     searchText: Yup.string().required(),
   });
 
+  const route = router.query;
   const formOptions = { resolver: yupResolver(validationSchema) };
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors } = formState;
@@ -72,12 +73,12 @@ function Layout({ children }) {
     return true;
   };
 
-  let region = "";
+  let region = "uk";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
       if (window.site_region !== "uk") {
         region = window.site_region;
-        (region);
+        region;
       }
     }
   }
@@ -98,6 +99,7 @@ function Layout({ children }) {
 
   const handleChange = (selectedOption) => {
     // Do something
+
     setMyVariable(selectedOption.value);
     setSelected(selectedOption);
     i18n.changeLanguage(selectedOption.value);
@@ -107,7 +109,7 @@ function Layout({ children }) {
     const pathRouter = router.asPath;
     let myArray = [];
 
-    //  
+    //
     const regionArr = ["uk", "us", "asia", "in"];
     if (
       router.asPath === "/" ||
@@ -169,7 +171,18 @@ function Layout({ children }) {
 
   useEffect(() => {
     // Temporarily disable warnings in the development environment
-    console.warn = () => { };
+    console.warn = () => {};
+
+    console.log(router.asPath);
+    if (currentUrl?.includes("/us")) {
+      setMyVariable("us");
+    } else if (currentUrl?.includes("/asia")) {
+      setMyVariable("asia");
+    } else if (currentUrl?.includes("/in")) {
+      setMyVariable("in");
+    } else {
+      setMyVariable("uk");
+    }
 
     $(".header_country_list > ul .header_country_label").on(
       "mouseenter",
@@ -201,7 +214,7 @@ function Layout({ children }) {
     }
 
     i18n.changeLanguage(region);
-  }, [ver, region]);
+  }, [ver, region, route]);
 
   return (
     <div>
@@ -329,8 +342,11 @@ function Layout({ children }) {
             </section>
             <section className="header_item_right d-flex d-lg-inline-block justify-content-end align-items-center">
               <div className="header_call_icn">
-                <NavLink href="make_an_enquiry.html" className="header_mail_icn">
-                  <em className="material-symbols-outlined" title="Make an enquiry">
+                <NavLink href="/make-an-enquiry" className="header_mail_icn">
+                  <em
+                    className="material-symbols-outlined"
+                    title="Make an enquiry"
+                  >
                     mail
                   </em>
                   <label className="d-none d-lg-block"></label>

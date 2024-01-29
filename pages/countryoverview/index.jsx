@@ -463,10 +463,12 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                                 )
                                 .map((res1) => (
                                   <li key={res1.id}>
-                                    {`From ${res1.attributes?.currency_symbol ?? ""
-                                      }${formatPrice(res1.attributes?.price) ??
+                                    {`From ${
+                                      res1.attributes?.currency_symbol ?? ""
+                                    }${
+                                      formatPrice(res1.attributes?.price) ??
                                       " xxxx"
-                                      } per person`}
+                                    } per person`}
                                   </li>
                                 ))}
                               <li>
