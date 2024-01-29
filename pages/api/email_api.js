@@ -4,7 +4,6 @@ const handler = async (req, res) => {
         const { method } = req;
         const { data, emailpage } = req.body;
         const { email_id } = req.body.data;
-        console.log(res);
         switch (method) {
             case "POST": {
                 //Do some thing

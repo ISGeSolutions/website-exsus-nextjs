@@ -31,16 +31,12 @@ function Index() {
   const itin_name = router.query?.itineraryName
     ? router.query?.itineraryName
     : router.query?.itineraries?.toLowerCase();
-  const itin_code = router.query.itinerarycode;
+  const itin_code = router.query?.itinerarycode;
   const [title, setTitle] = useState("");
-  const countrycode = router.query.countrycode;
-  const destinationcode = router.query.destinationcode;
-  const [countries, setCountries] = useState([]);
+  const countrycode = router.query?.countrycode;
+  const destinationcode = router.query?.destinationcode;
   const [isLoading, setIsLoading] = useState(true);
   const [friendlyUrl, setFriendlyUrl] = useState("");
-  const [overViewText, setOverViewText] = useState(null);
-  const [mapVariable, setMapVariable] = useState(null);
-  const [destinationDetails, setDestinationDetails] = useState();
   let dictionaryPage = 1;
   const [coordinatesArray, setCoordinatesArray] = useState([]);
   const [modalKey, setModalKey] = useState(0);

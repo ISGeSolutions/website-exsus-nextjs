@@ -277,7 +277,6 @@ function CountryWhentogo({ onDataFromChild, sendDataToParent }) {
     countriesService
       .getCountryDetails(countrycode)
       .then((x) => {
-        debugger;
         setCountryData(x.data[0]);
         //?.attributes?.country_month_activities  attributes.whentogo_intro_text
         setIsLoading(false);

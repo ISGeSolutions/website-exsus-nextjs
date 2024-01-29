@@ -10,21 +10,21 @@ export const brochureService = {
     sendBrochurerMail
 };
 
-function sendBrochurerMail(contactusData) {
-    let postdata = contactusData;
-    postdata.emailpage = 'contactus';
+function sendBrochurerMail(brochureData) {
+    let postdata = brochureData;
+    postdata.emailpage = 'brochureRequest';
     const currentUrl = window?.location?.origin + '/api/email_api';
     return fetchWrapper.post(`${currentUrl}`, postdata);
 }
 
 function saveDataToDB(brochureData) {
-    if (brochureData.data.id) {
-        brouchereData["email_flag"] = true;
-        return fetchWrapper.put(`${baseUrlEnquiries}`, brochureData);
-    } else {
-        brochureData["email_flag"] = false;
-        return fetchWrapper.post(`${baseUrlEnquiries}`, brochureData);
-    }
+    // if (brochureData.data.id) {
+    //     brouchereData["email_flag"] = true;
+    return fetchWrapper.post(`${baseUrlEnquiries}`, brochureData);
+    // } else {
+    //     brochureData["email_flag"] = false;
+    //     return fetchWrapper.post(`${baseUrlEnquiries}`, brochureData);
+    // }
 }
 
 

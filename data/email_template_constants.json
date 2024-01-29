@@ -16,6 +16,16 @@
                 "EnquiryEnquirerMailSubject": "Thank you for your enquiry",
                 "EnquiryEnquirerMailFrom": "noreply@exsus.com"
             }
+        ],
+        "brochureRequest": [
+            {
+                "BrochureConsultantMailSubject": "Brochure request",
+                "BrochureConsultantMailFrom": "noreply@exsus.com",
+                "BrochureConsultantMailTo": "deokarg201920@gmail.com,ganesh@isgesolutions.com",
+                "BrochureEnquirerMailFileNotFound": "Brochure was registered on exsus.com.&lt;br&gt; Email address : @Email ",
+                "BrochureEnquirerMailSubject": "Thank you for your enquiry",
+                "BrochureEnquirerMailFrom": "noreply@exsus.com"
+            }
         ]
     }
 }

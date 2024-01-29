@@ -342,16 +342,16 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
     window.addEventListener("resize", equalHeight(true));
 
     // Using window.onload to detect full page load
-    window.onload = () => {
-      setTimeout(() => {
-        const redirectUrl =
-          regionWiseUrl +
-          `/destinations/${destinationcode}/${countrycode?.replace(/ /g, "-")}`;
-        if (redirectUrl) {
-          router.push(redirectUrl);
-        }
-      }, 0);
-    };
+    // window.onload = () => {
+    //   setTimeout(() => {
+    //     const redirectUrl =
+    //       regionWiseUrl +
+    //       `/destinations/${destinationcode}/${countrycode?.replace(/ /g, "-")}`;
+    //     if (redirectUrl) {
+    //       router.push(redirectUrl);
+    //     }
+    //   }, 0);
+    // };
   }, [countrycode, dataToChild]);
 
   return (
@@ -461,12 +461,10 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                                 )
                                 .map((res1) => (
                                   <li key={res1.id}>
-                                    {`From ${
-                                      res1.attributes?.currency_symbol ?? ""
-                                    }${
-                                      formatPrice(res1.attributes?.price) ??
+                                    {`From ${res1.attributes?.currency_symbol ?? ""
+                                      }${formatPrice(res1.attributes?.price) ??
                                       " xxxx"
-                                    } per person`}
+                                      } per person`}
                                   </li>
                                 ))}
                               <li>

@@ -431,7 +431,6 @@ function Index() {
         );
         setHolidayName(x.data[0].attributes.holiday_type_group_name);
         setTitle(x.data[0].attributes.page_meta_title);
-        debugger;
         const imageCheck =
           x.data[0].attributes?.holiday_type_group_images?.data;
         setHolidaytypesDetails(x.data[0].attributes);
