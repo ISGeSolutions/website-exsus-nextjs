@@ -340,33 +340,37 @@ function Index() {
 
   equalHeight(true);
 
+  const handlePopState = (event) => {
+    // Perform any actions you want when the back button is pressed
+    if (myArrayPath[1] === "destinations") {
+      router.push("/destinations/" + destinationcode);
+    }
+  };
+
   useEffect(() => {
 
-    const handlePopState = (event) => {
-      // Perform any actions you want when the back button is pressed
-      router.push("/destinations/" + destinationcode);
+    window.onpopstate = () => {
+      // Your logic here
+      window.location.reload();
     };
 
     // Get the current URL
-    const currentUrl = window.location.href;
+    // const currentUrl = window.location.href;
 
     // Create a URL object
-    const urlObject = new URL(currentUrl);
+    // const urlObject = new URL(currentUrl);
 
     // Extract elements
-    const pathname = urlObject.pathname;
+    // const pathname = urlObject.pathname;
     // const protocol = urlObject.protocol;
     // const host = urlObject.host;
     // const search = urlObject.search;
     // const hash = urlObject.hash;
 
-    const myArrayPath = pathname.split("/");
+    // const myArrayPath = pathname.split("/");
 
-    if (myArrayPath[1] == "destinations") {
-      // debugger;
-      // Add event listener when the component mounts
-      window.addEventListener('popstate', handlePopState);
-    }
+    // Add event listener when the component mounts
+    // window.addEventListener('popstate', handlePopState);
 
     // window.addEventListener('popstate', handlePopState);
 
@@ -513,6 +517,12 @@ function Index() {
         interval: 250 * 10,
       });
     }, 2000);
+
+    return () => {
+      // Remove event listener when the component is unmounted
+      window.removeEventListener('popstate', handlePopState);
+    };
+
   }, [destinationcode]);
 
   return (
