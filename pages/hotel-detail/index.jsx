@@ -352,13 +352,11 @@ function Index() {
       destinationService
         .getRegionWiseHotelsInHotelDetail(regionName, region)
         .then((response) => {
-          console.log(hotelName);
           setAllHotels(
             response?.data?.filter(
               (res) => res.attributes?.friendly_url != hotelName
             )
           );
-          console.log(response?.data);
           const filteredData = response?.data?.filter((item) => {
             const { map_latitude, map_longitude } = item.attributes;
             return (
