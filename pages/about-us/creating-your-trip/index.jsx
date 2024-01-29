@@ -99,7 +99,7 @@ function Index() {
             ></FriendlyUrl>
           </div>
 
-          <div className="trvl_info_cntnt">
+          <div className="trvl_info_cntnt creating_trips_para_blk">
             <h2 className="trvl_title">{headingTag}</h2>
             <p
               className="mb-4"

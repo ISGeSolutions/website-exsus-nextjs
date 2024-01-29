@@ -13,7 +13,7 @@ import { EnquiryButton } from "../../../components/common/EnquiryBtn";
 var React = require("react");
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-
+ 
 export default Index;
 
 function Index() {

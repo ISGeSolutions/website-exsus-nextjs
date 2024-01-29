@@ -492,11 +492,15 @@ function Index() {
           <section className="trvl_info_row">
             <div className="container">
               <div className="bookmark_row">
-                <FriendlyUrl data={dictioneryFunction(friendlyUrl)}></FriendlyUrl>
+                <FriendlyUrl
+                  data={dictioneryFunction(friendlyUrl)}
+                ></FriendlyUrl>
               </div>
 
               <div className="trvl_info_cntnt">
-                <h2 className="trvl_title mb-3">{dictioneryFunction(hotelData.hotel_name)}</h2>
+                <h2 className="trvl_title mb-3">
+                  {dictioneryFunction(hotelData.hotel_name)}
+                </h2>
                 <h3 className="trvl_title_sub_white mb-3">
                   Location: {hotelData.location}
                 </h3>
@@ -542,7 +546,9 @@ function Index() {
                     {/* Special offer: save upto 20% off plus complimentary
                     transfers and high tea */}
                     Special offer:{" "}
-                    {dictioneryFunction(hotelData?.special_offers?.data[0]?.attributes?.title_text)}
+                    {dictioneryFunction(
+                      hotelData?.special_offers?.data[0]?.attributes?.title_text
+                    )}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="#ffffff"
@@ -567,9 +573,10 @@ function Index() {
                     <p
                       className="mb-4"
                       dangerouslySetInnerHTML={{
-                        __html:
-                          dictioneryFunction(hotelData?.special_offers?.data[0]?.attributes
-                            ?.overview_text),
+                        __html: dictioneryFunction(
+                          hotelData?.special_offers?.data[0]?.attributes
+                            ?.overview_text
+                        ),
                       }}
                     ></p>
                     {/* <p>
@@ -654,7 +661,9 @@ function Index() {
           <section className="itinery_detls_row">
             <div className="container">
               <div
-                dangerouslySetInnerHTML={{ __html: dictioneryFunction(hotelData?.overview_text) }}
+                dangerouslySetInnerHTML={{
+                  __html: dictioneryFunction(hotelData?.overview_text),
+                }}
               />
             </div>
           </section>
@@ -864,7 +873,7 @@ function Index() {
                   </i>
                   <div className="carousel00">
                     {hotels?.map((item) => (
-                      <div className="card_slider_inr">
+                      <div className="card_slider_inr" key={item.id}>
                         <div className="card_slider">
                           <NavLink
                             href={generateDynamicLink(item)}
@@ -887,12 +896,17 @@ function Index() {
                           <div className="card_slider_cnt places_to_stay_cnt">
                             <h4>
                               <a href={generateDynamicLink(item)}>
-                                {item?.attributes?.hotel_name}
-                                {item?.attributes?.hotel_name}
+                                {dictioneryFunction(
+                                  item?.attributes?.hotel_name
+                                )}
+                                {/* {item?.attributes?.hotel_name} */}
                               </a>
                             </h4>
                             <ul>
-                              <li>Location: {item?.attributes?.location}</li>
+                              <li>
+                                Location:{" "}
+                                {dictioneryFunction(item?.attributes?.location)}
+                              </li>
                               {item?.attributes?.hotel_country_contents?.data?.map(
                                 (item) => {
                                   return (
@@ -925,7 +939,7 @@ function Index() {
                                 }
                               )}
 
-                              <li>
+                              {/* <li>
                                 <p
                                   dangerouslySetInnerHTML={{
                                     __html: dictioneryFunction(
@@ -934,6 +948,7 @@ function Index() {
                                   }}
                                 />
                               </li>
+                              <li>{item?.attributes?.intro_text}</li> */}
                               <li>
                                 Best for:
                                 <span>
@@ -957,7 +972,7 @@ function Index() {
                       </div>
                     ))}
                   </div>
-                  {hotels?.length > 4 && (
+                  {hotels?.length > 4 ? (
                     <i id="right">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -975,6 +990,8 @@ function Index() {
                         />
                       </svg>
                     </i>
+                  ) : (
+                    ""
                   )}
                 </div>
               </div>
@@ -987,7 +1004,8 @@ function Index() {
             <section className="favrites_blk_row light_grey">
               <div className="container">
                 <h3 className="title_cls">
-                  STAY AT {hotelData.hotel_name} ON THESE TRIPS
+                  STAY AT {dictioneryFunction(hotelData.hotel_name)} ON THESE
+                  TRIPS
                 </h3>
                 <div className="card_slider_row">
                   <i id="left">

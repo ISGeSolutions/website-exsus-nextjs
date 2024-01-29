@@ -54,8 +54,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -119,12 +119,12 @@ function Index() {
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -135,16 +135,16 @@ function Index() {
       .replace(/&/g, "and");
     router.push(
       regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
-        .replace(/ /g, "-")
-        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/&/g, " and ")
+          .replace(/ /g, "-")
+          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -158,7 +158,8 @@ function Index() {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${
+        item?.attributes?.friendly_url
       }`
     );
   };
@@ -170,11 +171,12 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
-        .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url
-      }`
+        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/&/g, " and ")
+          .replace(/ /g, "-")
+          .toLowerCase()}/itinerary/${countryName}-itineraries/${
+          item?.attributes?.friendly_url
+        }`
     );
   };
 
@@ -399,12 +401,14 @@ function Index() {
         // );
 
         setFriendlyUrl(
-          `home/destinations/${router.query?.continent}/${router.query?.country
-          }/${router.query?.itineraryName
-            ? router.query?.itineraries +
-            "/" +
-            x.data[0].attributes.itin_name.toLowerCase()
-            : x.data[0].attributes.itin_name.toLowerCase()
+          `home/destinations/${router.query?.continent}/${
+            router.query?.country
+          }/${
+            router.query?.itineraryName
+              ? router.query?.itineraries +
+                "/" +
+                x.data[0].attributes.itin_name.toLowerCase()
+              : x.data[0].attributes.itin_name.toLowerCase()
           }`
         );
 
@@ -462,15 +466,15 @@ function Index() {
                   ?.replace(/&/g, " and ")
                   .replace(/ /g, "-")
                   .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-                    ?.replace(/ /g, "-")
-                    .replace(/&/g, "and")
-                    .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-                      ?.replace(/ /g, "-")
-                      .replace(/&/g, "and")
-                      .toLowerCase()}/${item?.attributes?.friendly_url
-                        ?.replace(/&/g, " and ")
-                        .replace(/ /g, "-")
-                        .toLowerCase()}`,
+                  ?.replace(/ /g, "-")
+                  .replace(/&/g, "and")
+                  .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+                  ?.replace(/ /g, "-")
+                  .replace(/&/g, "and")
+                  .toLowerCase()}/${item?.attributes?.friendly_url
+                  ?.replace(/&/g, " and ")
+                  .replace(/ /g, "-")
+                  .toLowerCase()}`,
             }));
             setCoordinatesArray((prevCoordinates) => [
               ...prevCoordinates,
@@ -579,7 +583,9 @@ function Index() {
           <section className="trvl_info_row">
             <div className="container">
               <div className="bookmark_row">
-                <FriendlyUrl data={dictioneryFunction(friendlyUrl)}></FriendlyUrl>
+                <FriendlyUrl
+                  data={dictioneryFunction(friendlyUrl)}
+                ></FriendlyUrl>
               </div>
 
               <div className="trvl_info_cntnt">
@@ -594,7 +600,9 @@ function Index() {
                 </h3>
                 <p className="mb-4">
                   <span>Duration: </span>
-                  {dictioneryFunction(itineraries?.attributes?.no_of_nites_notes)}
+                  {dictioneryFunction(
+                    itineraries?.attributes?.no_of_nites_notes
+                  )}
                 </p>
                 <p className="mb-4">
                   <span>Price: </span>
@@ -879,11 +887,16 @@ function Index() {
                           <div className="card_slider_cnt places_to_stay_cnt">
                             <h4>
                               <a href={generateDynamicLink1(item)}>
-                                {item?.attributes?.hotel_name}
+                                {dictioneryFunction(
+                                  item?.attributes?.hotel_name
+                                )}
                               </a>
                             </h4>
                             <ul>
-                              <li>Location: {item?.attributes?.location}</li>
+                              <li>
+                                Location:{" "}
+                                {dictioneryFunction(item?.attributes?.location)}
+                              </li>
                               {item?.attributes?.hotel_country_contents?.data?.map(
                                 (item) => {
                                   return (
@@ -904,8 +917,8 @@ function Index() {
                                           {item?.attributes?.currency_symbol.repeat(
                                             Math.abs(
                                               5 -
-                                              item?.attributes
-                                                ?.price_guide_value
+                                                item?.attributes
+                                                  ?.price_guide_value
                                             )
                                           )}
                                         </label>
@@ -916,7 +929,11 @@ function Index() {
                               )}
                               <li>
                                 Best for:
-                                <span>{item?.attributes?.best_for_text}</span>
+                                <span>
+                                  {dictioneryFunction(
+                                    item?.attributes?.best_for_text
+                                  )}
+                                </span>
                               </li>
                             </ul>
                           </div>
@@ -966,10 +983,10 @@ function Index() {
               <div className="container">
                 <h3 className="title_cls">
                   More itineraries in{" "}
-                  {
+                  {dictioneryFunction(
                     itineraries?.attributes?.country?.data?.attributes
                       ?.country_name
-                  }
+                  )}
                 </h3>
                 <div className="card_slider_row">
                   <i id="left">
@@ -1047,10 +1064,12 @@ function Index() {
                                 )
                                 .map((res1) => (
                                   <li key={res1.id}>
-                                    {`From ${res1.attributes?.currency_symbol ?? ""
-                                      }${formatPrice(res1.attributes?.price) ??
+                                    {`From ${
+                                      res1.attributes?.currency_symbol ?? ""
+                                    }${
+                                      formatPrice(res1.attributes?.price) ??
                                       " xxxx"
-                                      } per person`}
+                                    } per person`}
                                   </li>
                                 ))}
                               <li>
@@ -1106,95 +1125,6 @@ function Index() {
             " "
           )}
 
-          {/* <section className="favrites_blk_row light_grey">
-              <div className="container">
-                <h3 className="title_cls">More itineraries in {countries}</h3>
-                <div className="card_slider_row">
-                  <div className="carousel00 region_carousel00">
-                    <div className="row">
-                      {itineraries?.map((item) => (
-                        <div
-                          className="col-sm-6 col-lg-4 col-xxl-3"
-                          key={item.id}
-                        >
-                          <div className="card_slider_inr">
-                            <div className="card_slider">
-                              <NavLink
-                                href={generateDynamicLink(
-                                  item?.attributes?.itin_name
-                                )}
-                                className="card_slider_img"
-                              >
-                                {item?.attributes?.itinerary_images?.data.map(
-                                  (element, index) =>
-                                    element.attributes.image_type ==
-                                      "thumbnail" ? (
-                                      <img
-                                        key={index}
-                                        src={element.attributes.image_path}
-                                        alt="destination card01"
-                                        className="img-fluid"
-                                      />
-                                    ) : (
-                                      ""
-                                    )
-                                )}
-                              </NavLink>
-                              <div className="card_slider_cnt places_to_stay_cnt">
-                                <NavLink
-                                  href={generateDynamicLink(
-                                    item?.attributes?.itin_name
-                                  )}
-                                >
-                                  <h4>
-                                    <a>{item?.attributes?.itin_name}</a>
-                                  </h4>
-                                </NavLink>
-                                <ul>
-                                  <li>
-                                    {dictioneryFunction(
-                                      item?.attributes?.header_text
-                                    )}
-                                  </li>
-                                  <li>
-                                    {dictioneryFunction(
-                                      item?.attributes?.sub_header_text
-                                    )}
-                                  </li>
-                                  <li>
-                                    {
-                                      item?.attributes?.itinerary_country_contents
-                                        ?.data[0]?.attributes
-                                        ?.guideline_price_notes_index
-                                    }
-                                  </li>
-                                  <li>
-                                    Travel to:
-                                    <span>
-                                      {item?.attributes?.travel_to_text}
-                                    </span>
-                                  </li>
-                                </ul>
-                              </div>
-                              <button className="btn card_slider_btn">
-                                <span>{item?.attributes?.no_of_nites_notes}</span>
-                                <span
-                                  className="view_itnry_link"
-                                  onClick={handleRedirect}
-                                >
-                                  View this itinerary
-                                  <em className="fa-solid fa-chevron-right"></em>
-                                </span>
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section> */}
           <section className="make_enqury_row">
             <div className="container">
               <EnquiryButton />
