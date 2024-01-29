@@ -11,6 +11,8 @@ import { ContactUsEmailTemplate } from "../components/email_templates/ContactUsE
 import { NewsLetterEmailTemplate } from "../components/email_templates/NewsLetterEmailTemplate";
 import { MakeAnEnquiryConsultant } from "../components/email_templates/MakeAnEnquiryConsultant";
 import { MakeAnEnquiryEnquirer } from "../components/email_templates/MakeAnEnquiryEnquirer";
+import { BrochureConsultant } from "../components/email_templates/BrochureConsultant";
+import { BrochureRequester } from "../components/email_templates/BrochureRequester";
 //-----------------------------------------------------------------------------
 export async function sendMail(subject, toEmail, otpText, data, emailpage) {
   return new Promise((resolve, reject) => {
@@ -51,12 +53,21 @@ export async function sendMail(subject, toEmail, otpText, data, emailpage) {
         break;
 
       case "makeAnEnquiry":
-        emailHtmlConsultant = render(<MakeAnEnquiryConsultant emailDetails={data} />);
+        emailHtmlConsultant = render(<MakeAnEnquiryConsultant enquiryDetails={data} />);
         mailTo = constant_data?.makeAnEnquiry[0]?.EnquiryConsultantMailTo?.split(",");
         subjectConsultant = constant_data?.makeAnEnquiry[0]?.EnquiryConsultantMailSubject;
         mailFrom = constant_data?.makeAnEnquiry[0]?.EnquiryConsultantMailFrom;
-        emailHtmlUser = render(<MakeAnEnquiryEnquirer emailDetails={data} />);
+        emailHtmlUser = render(<MakeAnEnquiryEnquirer enquiryDetails={data} />);
         subjectUser = constant_data?.makeAnEnquiry[0]?.EnquiryEnquirerMailSubject;
+        break;
+
+      case "brochureRequest":
+        emailHtmlConsultant = render(<BrochureConsultant enquiryDetails={data} />);
+        mailTo = constant_data?.brochureRequest[0]?.BrochureConsultantMailTo?.split(",");
+        subjectConsultant = constant_data?.brochureRequest[0]?.BrochureConsultantMailSubject;
+        mailFrom = constant_data?.brochureRequest[0]?.BrochureConsultantMailFrom;
+        emailHtmlUser = render(<BrochureRequester enquiryDetails={data} />);
+        subjectUser = constant_data?.brochureRequest[0]?.BrochureEnquirerMailSubject;
         break;
 
       default:

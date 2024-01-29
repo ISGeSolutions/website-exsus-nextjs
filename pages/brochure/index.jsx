@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { Link, Spinner } from "components";
+import { Link, Spinner, Alert } from "components";
 import { Layout } from "components/users";
 import {
   userService,
@@ -99,28 +99,19 @@ function Index() {
   const [isLoading, setIsLoading] = useState(false);
   const [isRtl, setIsRtl] = useState(false);
   const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
+  const [alert, setAlert] = useState(null);
 
   // form validation rules
   const validationSchema = Yup.object().shape({
-    title: Yup.string().required("Title is required"),
     first_name: Yup.string().required("First Name is required"),
     last_name: Yup.string().required("Last Name is required"),
     email_id: Yup.string().required("Email id is required"),
-    abtanumber: Yup.string().required("EBTA number is required"),
-    travelagentname: Yup.string().required("Travel agent name is required"),
-    digitalbrochureonly: Yup.string().required("digital brochure is required"),
-    addressline1: Yup.string().required("Address line 1 required"),
-    addressline2: Yup.string().required("Address line 2 is required"),
-    city: Yup.string().required("City is required"),
-    state: Yup.string().required("State is required"),
-    zip: Yup.string().required("Zip code is required"),
-    country: Yup.string().required("Country is required"),
     newsletter_mail_ind: Yup.string().required(
       "Newsletter mail indicator is required"
     ),
     phone_no: Yup.string().required("Phone number is required"),
     destination: Yup.string(),
-    region: Yup.string().required("Region is required"),
+    // region: Yup.string().required("Region is required"),
   });
 
   const formOptions = { resolver: yupResolver(validationSchema) };
@@ -145,6 +136,15 @@ function Index() {
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors } = formState;
 
+  const showAlert = (message, type) => {
+    setAlert({ message, type });
+  };
+
+  const closeAlert = () => {
+    //  ("closeAlert");
+    setAlert(null);
+  };
+
   let region = "uk";
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
@@ -161,15 +161,27 @@ function Index() {
   };
 
   function onSubmit(data) {
-    return brochureService
-      .sendBrochurerMail({ data })
-      .then(() => {
-        alertService.success("Brochure request is sent successfully", {
-          keepAfterRouteChange: true,
+    data["site_region"] = region == "us" ? "Yes" : "No";
+    data["submitted_at"] = new Date().toLocaleDateString();
+    data["previous_page"] = document.referrer;
+    const data1 = {
+      data: data,
+    };
+    return brochureService.saveDataToDB(data1).then((res) => {
+      return brochureService
+        .sendBrochurerMail({ data })
+        .then(() => {
+          alertService.success("Brochure request is sent successfully", {
+            keepAfterRouteChange: true,
+          });
+          router.push("brochure");
+        })
+        .catch((error) => {
+          showAlert("Operation failed", "error");
         });
-        router.push("brochure");
-      })
-      .catch(alertService.error);
+    }).catch((error) => {
+      showAlert("Operation failed", "error");
+    });;
   }
 
   const handleMouseOver = () => {
@@ -238,6 +250,13 @@ function Index() {
         </header>
 
         <main className="contact_form_row brochure_form_row">
+          {alert && alert.message && alert.type && (
+            <Alert
+              message={alert.message}
+              type={alert.type}
+              onClose={closeAlert}
+            />
+          )}
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="container">
               <div className="row pt-4">
@@ -303,18 +322,6 @@ function Index() {
                     />
                   </div>
                 </div>
-                {/* <div className="col-md-4">
-                                <div className="form-input">
-                                    <input type="number" name="abtanumber" {...register('abtanumber')} className={`form-control ${errors.abtanumber ? 'is-invalid' : ''}`} aria-label="ABTA number *" placeholder="ABTA number *" />
-                                    <div className="invalid-feedback mb-1">{errors.abtanumber?.message}</div>
-                                </div>
-                            </div>
-                            <div className="col-md-4">
-                                <div className="form-input">
-                                    <input type="text" name="travelagentname" {...register('travelagentname')} className={`form-control ${errors.travelagentname ? 'is-invalid' : ''}`} aria-label="Travel agent name *" placeholder="Travel agent name *" />
-                                    <div className="invalid-feedback mb-1">{errors.travelagentname?.message}</div>
-                                </div>
-                            </div> */}
                 <div className="col-md-4">
                   <div className="brochure_select_dropdown">
                     <div className="banner_dropdwn_blk">
@@ -358,66 +365,6 @@ function Index() {
                   </div>
                 </div>
               </div>
-              {/* <div className="row pt-4">
-                            <div className="col-md-4">
-                                <div className="select_drpdwn">
-                                    <select name="digitalbrochureonly" {...register('digitalbrochureonly')} className={`form-select select_drpdwn ${errors.digitalbrochureonly ? 'is-invalid' : ''}`} aria-label="How many brochures would you like?">
-                                        <option value="">Digital brochures only</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                    </select>
-                                    <div className="invalid-feedback mb-1">{errors.digitalbrochureonly?.message}</div>
-                                </div>
-                            </div>
-                            <div className="col-md-4">
-                                <div className="form-input">
-                                    <input type="text" name="addressline1" {...register('addressline1')} className={`form-control ${errors.addressline1 ? 'is-invalid' : ''}`} aria-label="Address line 1" placeholder="Address line 1" />
-                                    <div className="invalid-feedback mb-1">{errors.addressline1?.message}</div>
-                                </div>
-                            </div>
-                            <div className="col-md-4">
-                                <div className="form-input">
-                                    <input type="text" name="addressline2" {...register('addressline2')} className={`form-control ${errors.addressline2 ? 'is-invalid' : ''}`} aria-label="Address line 2" placeholder="Address line 2" />
-                                    <div className="invalid-feedback mb-1">{errors.addressline2?.message}</div>
-                                </div>
-                            </div>
-                            <div className="row pt-4">
-                                <div className="col-md-4">
-                                    <div className="form-input">
-                                        <input type="text" name="city" {...register('city')} className={`form-control ${errors.city ? 'is-invalid' : ''}`} aria-label="City" placeholder="City" />
-                                        <div className="invalid-feedback mb-1">{errors.city?.message}</div>
-                                    </div>
-                                </div>
-                                <div className="col-md-4">
-                                    <div className="form-input">
-                                        <input type="text" name="state" {...register('state')} className={`form-control ${errors.state ? 'is-invalid' : ''}`} aria-label="State/Prov/Region" placeholder="State/Prov/Region" />
-                                        <div className="invalid-feedback mb-1">{errors.state?.message}</div>
-                                    </div>
-                                </div>
-                                <div className="col-md-4">
-                                    <div className="form-input">
-                                        <input type="text" name="zip" {...register('zip')} className={`form-control ${errors.zip ? 'is-invalid' : ''}`} aria-label="Postal/Zip" placeholder="Postal/Zip" />
-                                        <div className="invalid-feedback mb-1">{errors.zip?.message}</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row pt-4 mb-5">
-                                <div className="col-md-4">
-                                    <div className="select_drpdwn">
-                                        <select aria-label="Country" name="country" {...register('country')} className={`form-select select_drpdwn ${errors.country ? 'is-invalid' : ''}`}>
-                                            <option value="">Country</option>
-                                            <option value="USA">USA</option>
-                                            <option value="Bangladesh">Bangladesh</option>
-                                            <option value="Chad">Chad</option>
-                                            <option value="China">China</option>
-                                        </select>
-                                        <div className="invalid-feedback">{errors.country?.message}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
               <div className="contact_form_cntnt">
                 <div className="row">
                   <div className="col-12">
@@ -486,7 +433,10 @@ function Index() {
                     </div>
                   </div>
                   <div className="col-12">
-                    <button className="btn prmry_btn make_enqury_btn mx-auto text-uppercase">
+                    <button className="btn prmry_btn make_enqury_btn mx-auto text-uppercase" type="submit" disabled={formState.isSubmitting}>
+                      {formState.isSubmitting && (
+                        <span className="spinner-border spinner-border-sm mr-1"></span>
+                      )}
                       Request Brochures
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

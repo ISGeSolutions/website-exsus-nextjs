@@ -36,7 +36,7 @@ function signUp(signUpData) {
 }
 
 function getAllWebsiteContent(region, page) {
-    const websitecontentUrl = `${publicRuntimeConfig.apiUrl}/api/website-country-contents?populate[0]=website_country&filters[website_country][code][$eq]=${region.replace(
+    const websitecontentUrl = `${publicRuntimeConfig.apiUrl}/api/website-country-contents?populate[0]=website_country&filters[website_country][code][$eq]=${region?.replace(
         /in/g,
         "INDIA"
     )}&pagination[page]=${page}&pagination[pageSize]=100`;

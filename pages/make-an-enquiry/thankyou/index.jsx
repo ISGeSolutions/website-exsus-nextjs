@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, Spinner, Alert, Signup } from "components";
 import { Layout } from "components/users";
-import { contactusService, alertService, thankyouService } from "services";
+import { enquiryService, alertService, thankyouService } from "services";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";

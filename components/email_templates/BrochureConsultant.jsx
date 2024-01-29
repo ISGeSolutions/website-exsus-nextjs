@@ -3,8 +3,8 @@ import { Html, style } from '@react-email/html';
 import { Button } from '@react-email/button';
 import React, { useState, useEffect } from 'react';
 
-export function MakeAnEnquiryConsultant(props) {
-    console.log(props);
+export function BrochureConsultant(props) {
+
     const { enquiryDetails } = props;
     const [currentDate, setCurrentDate] = useState(new Date());
 
@@ -44,7 +44,7 @@ export function MakeAnEnquiryConsultant(props) {
                                             <table border="0" cellPadding="0" cellSpacing="0" width="95%" align="center" style={{ padding: `0 0 20px` }}>
                                                 <tr>
                                                     <td bgcolor="#fff" height="20px" style={{ padding: `15px 5px 0`, fontWeight: `bold`, textTransform: `uppercase` }}>
-                                                        <font face="Verdana" color="#5d5d5d" size="2">Holiday Enquire Request</font>
+                                                        <font face="Verdana" color="#5d5d5d" size="2">Holiday Brochure Request</font>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -57,14 +57,16 @@ export function MakeAnEnquiryConsultant(props) {
                                                         <font face="Verdana" color="#333333" size="2"><strong>Contact Information </strong></font>
                                                     </td>
                                                 </tr>
-                                                <tr>
+                                                {/* <tr>
                                                     <td bgcolor="#fff" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>Title: </strong>{enquiryDetails?.title}</font>
+                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>Title: </strong>{enquiryDetails?.title
+                                                        }</font>
                                                     </td>
-                                                </tr>
+                                                </tr> */}
                                                 <tr>
                                                     <td bgcolor="#fff" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>First Name: </strong>{enquiryDetails?.first_name}</font>
+                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>First Name: </strong>{enquiryDetails?.first_name
+                                                        }</font>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -84,7 +86,7 @@ export function MakeAnEnquiryConsultant(props) {
                                                 </tr>
                                                 <tr>
                                                     <td bgcolor="#fff" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>US Site?: </strong>{enquiryDetails?.site_region}</font>
+                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>US Site?: </strong>{enquiryDetails?.isUs}</font>
                                                     </td>
                                                 </tr>
                                                 {/* <!--<tr>
@@ -92,24 +94,24 @@ export function MakeAnEnquiryConsultant(props) {
                                                     <font face="Verdana" color="#5d5d5d" size="2"><strong>Country of residence: </strong> @Country</font>
                                                 </td>
                                             </tr>--> */}
-                                                <tr>
+                                                {/* <tr>
                                                     <td bgcolor="#fff" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
                                                         <font face="Verdana" color="#5d5d5d" size="2"><strong>Best Time To Contact: </strong>{enquiryDetails?.best_time_to_call}</font>
                                                     </td>
-                                                </tr>
+                                                </tr> */}
                                                 {/* <!--<tr>
                                                 <td bgcolor="#fff" height="20px" style={{padding:`10px 5px`, borderBottom: `1px solid #f0f0f0`}}>
                                                     <font face="Verdana" color="#5d5d5d" size="2"><strong>Holiday Budget: </strong> @HolidayBudget</font>
                                                 </td>
                                             </tr>--> */}
-                                                <tr>
+                                                {/* <tr>
                                                     <td bgcolor="#fff" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
                                                         <font face="Verdana" color="#5d5d5d" size="2"><strong>Note: </strong>{enquiryDetails?.note}</font>
                                                     </td>
-                                                </tr>
+                                                </tr> */}
                                                 <tr>
                                                     <td bgcolor="#fff" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>Preferred Destinations: </strong>{enquiryDetails?.preferred_place_time}</font>
+                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>Preferred Destinations: </strong>{enquiryDetails?.preferred_place}</font>
                                                     </td>
                                                 </tr>
                                                 {/* <tr>
@@ -117,9 +119,9 @@ export function MakeAnEnquiryConsultant(props) {
                                                     <font face="Verdana" color="#5d5d5d" size="2"><strong>Approximate Departure Date: </strong> @DepartureDate</font>
                                                 </td>
                                             </tr>--> */}
-                                                <tr>
-                                                    <td bgcolor="#fff" width="580" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>How did you hear about us: </strong>{enquiryDetails?.source_of_marketing}</font>
+                                                {/* <tr>
+                                                     <td bgcolor="#fff" width="580" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
+                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>How did you hear about us: </strong>{enquiryDetails?.hear}</font>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -134,7 +136,7 @@ export function MakeAnEnquiryConsultant(props) {
                                                 </tr>
                                                 <tr>
                                                     <td bgcolor="#fff" width="580" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>Page Url: </strong>{enquiryDetails?.previous_page}</font>
+                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>Page Url: </strong>{enquiryDetails?.pageUrl}</font>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -191,6 +193,11 @@ export function MakeAnEnquiryConsultant(props) {
                                                     <td bgcolor="#fff" width="580" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
                                                         <font face="Verdana" color="#5d5d5d" size="2"><strong>Receive offers: </strong>{enquiryDetails?.receivedOffers}</font>
                                                     </td>
+                                                </tr> */}
+                                                <tr>
+                                                    <td bgcolor="#fff" width="580" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
+                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>Receive offers: </strong>{enquiryDetails?.newsletter_mail_ind}</font>
+                                                    </td>
                                                 </tr>
                                             </table>
                                         </td>
@@ -201,6 +208,6 @@ export function MakeAnEnquiryConsultant(props) {
                     </tbody>
                 </table>
             </body>
-        </Html >
+        </Html>
     );
 }

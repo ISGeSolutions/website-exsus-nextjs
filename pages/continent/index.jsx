@@ -617,7 +617,7 @@ function Index() {
           </section>
 
           {/* Continent Sub tabs */}
-          <div>
+          <div >
             <section
               className="destination_tab_row light_grey pb-0"
               ref={divRef}
@@ -626,7 +626,7 @@ function Index() {
                 <div className="bookmark_row">
                   <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
                 </div>
-                <div className="destination_tab_inr">
+                <div className="destination_tab_inr" id="scrollToElement">
                   {/* mt-3 */}
                   <h2 className="tab_tilte">
                     {/* {destinationDetails?.header_text} */}

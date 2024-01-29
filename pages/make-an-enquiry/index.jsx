@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, Spinner, Alert, Signup } from "components";
 import { Layout } from "components/users";
-import { contactusService, alertService } from "services";
+import { enquiryService, alertService } from "services";
 
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
@@ -20,7 +20,6 @@ function Index() {
   const [alert, setAlert] = useState(null);
   // const [formOptions, setFormOptions] = useState(null);
   const router = useRouter();
-
   // form validation rules
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Please select title"),
@@ -50,6 +49,17 @@ function Index() {
     setAlert({ message, type });
   };
 
+  let region = "uk";
+  let regionWiseUrl = "";
+  if (typeof window !== "undefined") {
+    if (window && window.site_region) {
+      if (window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+        region = window.site_region;
+      }
+    }
+  }
+
   const closeAlert = () => {
     //  ("closeAlert");
     setAlert(null);
@@ -64,29 +74,34 @@ function Index() {
   };
 
   function onSubmit(data) {
+    data["site_region"] = region == "us" ? "Yes" : "No";
+    data["submitted_at"] = new Date().toLocaleDateString();
+    data["previous_page"] = document.referrer;
     const data1 = {
       data: data,
     };
 
-    // return contactusService.makeanenquiry(data1).then((res) => {
-    return contactusService
-      .sendEnquiryMail({ data })
-      .then(() => {
-        // return contactusService
-        //   .makeanenquiry(res)
-        //   .then(() => {
-        router.push('thank-you');
-        // showAlert("Operation succeeded", "success");
-        // reset();
-        // })
-        // .catch((error) => {
-        //   showAlert("Operation failed", "error");
-        // });
-      })
-      .catch((error) => {
-        showAlert("Operation failed", "error");
-      });
-    // });
+    return enquiryService.makeanenquiry(data1).then((res) => {
+      return enquiryService
+        .sendEnquiryMail({ data })
+        .then(() => {
+          // return contactusService
+          //   .makeanenquiry(res)
+          //   .then(() => {
+          router.push('thank-you');
+          // showAlert("Operation succeeded", "success");
+          // reset();
+          // })
+          // .catch((error) => {
+          //   showAlert("Operation failed", "error");
+          // });
+        })
+        .catch((error) => {
+          showAlert("Operation failed", "error");
+        });
+    }).catch((error) => {
+      showAlert("Operation failed", "error");
+    });;
   }
 
   useEffect(() => { }, []);
