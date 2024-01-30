@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, Spinner, Alert, Signup } from "components";
 import { Layout } from "components/users";
-import { enquiryService, alertService, thankyouService } from "services";
+import { enquiryService, alertService, thankyouService, homeService } from "services";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -172,6 +172,13 @@ function Index() {
   };
 
   useEffect(() => {
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
+      websiteContentCheck(dictionaryPage);
+    }
     thankyouService
       .getThankYouPage()
       .then((x) => {

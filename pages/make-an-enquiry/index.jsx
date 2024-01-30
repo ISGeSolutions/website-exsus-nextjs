@@ -88,7 +88,7 @@ function Index() {
           // return contactusService
           //   .makeanenquiry(res)
           //   .then(() => {
-          router.push('thank-you');
+          router.push('make-an-enquiry/thankyou');
           // showAlert("Operation succeeded", "success");
           // reset();
           // })

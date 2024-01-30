@@ -265,7 +265,6 @@ function ContinentOverview({ sendDataToParent }) {
         // const lines = x.data.attributes?.overview_text.split('\n');
         setdestinationName(x.data[0].attributes.destination_name);
         setnewValueWithBr(x.data[0].attributes?.overview_text);
-        console.log(x.data[0]?.attributes?.countries?.data);
         setAllCountries(x.data[0]?.attributes?.countries?.data?.filter(item => item.attributes?.popular_ind)?.sort((a, b) => a.attributes?.popular_serial_no - b.attributes?.popular_serial_no));
         setIsLoading(false);
       })
