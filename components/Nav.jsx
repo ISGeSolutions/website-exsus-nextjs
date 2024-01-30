@@ -39,8 +39,17 @@ function Nav() {
   };
 
   const wildlifeholiday = () => {
-    router.push("/holiday-types/wildlife-and-safari-holidays");
+    router.push(
+      "/holiday-types/wildlife-holidays/wildlife-holidays-itineraries"
+    );
   };
+
+  const foodies = () => {
+    router.push(
+      "/holiday-types/wildlife-holidays/wildlife-holidays-itineraries"
+    );
+  };
+
   const handleMouseEnter = (index) => {
     setActiveIndex(index);
   };
@@ -94,7 +103,9 @@ function Nav() {
 
   const redirectToHolidayLink = (id) => {
     const lowercasecountry = id?.replace(/ /g, "-").toLowerCase();
-    router.push(`${regionWiseUrl}/holiday-types/${lowercasecountry}/${lowercasecountry}-itineraries`);
+    router.push(
+      `${regionWiseUrl}/holiday-types/${lowercasecountry}/${lowercasecountry}-itineraries`
+    );
     setOverlayVisible(false);
   };
 
@@ -226,11 +237,12 @@ function Nav() {
       ?.replace(/&/g, "and")
       .toLowerCase();
     if (itemName) {
-      return regionWiseUrl + `/holiday-types/${modifieditem}/${modifieditem}-itineraries`;
+      return (
+        regionWiseUrl +
+        `/holiday-types/${modifieditem}/${modifieditem}-itineraries`
+      );
     }
   };
-
-
 
   const dynamicLinkCountryHoliday = (grpName, typeName, id) => {
     const modifiedGrpName = grpName
@@ -478,8 +490,9 @@ function Nav() {
                                 (destinationItem, i) => (
                                   <li
                                     key={i}
-                                    className={`header_country_label ${activeIndex === i ? "active" : ""
-                                      }`}
+                                    className={`header_country_label ${
+                                      activeIndex === i ? "active" : ""
+                                    }`}
                                     onMouseEnter={() => handleMouseEnter(i)}
                                     onMouseLeave={handleMouseLeave}
                                   >
@@ -698,8 +711,9 @@ function Nav() {
                               {holidaytypesList?.map((holidaystypesItem, i) => (
                                 <li
                                   key={holidaystypesItem?.id}
-                                  className={`header_country_label ${activeIndexHoliday === i ? "active" : ""
-                                    }`}
+                                  className={`header_country_label ${
+                                    activeIndexHoliday === i ? "active" : ""
+                                  }`}
                                   onMouseEnter={() =>
                                     handleMouseEnterHoliday(i)
                                   }
@@ -712,7 +726,8 @@ function Nav() {
                                       holidaystypesItem?.attributes
                                         ?.friendly_url,
                                       holidaystypesItem?.id
-                                    )}                                  >
+                                    )}
+                                  >
                                     {
                                       holidaystypesItem?.attributes
                                         ?.holiday_type_group_name
@@ -814,7 +829,10 @@ function Nav() {
                               world-renowned wines in sun-dappled vineyards in
                               stunning worldwide locations.
                             </p>
-                            <button className="btn header_nav_btn">
+                            <button
+                              className="btn header_nav_btn"
+                              onClick={foodies}
+                            >
                               Discover more
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"

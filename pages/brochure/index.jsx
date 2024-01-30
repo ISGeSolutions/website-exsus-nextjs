@@ -100,6 +100,7 @@ function Index() {
   const [isRtl, setIsRtl] = useState(false);
   const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
   const [alert, setAlert] = useState(null);
+  const [formSubmit, setFormSubmit] = useState(false);
 
   // form validation rules
   const validationSchema = Yup.object().shape({
@@ -167,46 +168,54 @@ function Index() {
     const data1 = {
       data: data,
     };
-    return brochureService.saveDataToDB(data1).then((res) => {
-      return brochureService
-        .sendBrochurerMail({ data })
-        .then(() => {
-          alertService.success("Brochure request is sent successfully", {
-            keepAfterRouteChange: true,
+    return brochureService
+      .saveDataToDB(data1)
+      .then((res) => {
+        return brochureService
+          .sendBrochurerMail({ data })
+          .then(() => {
+            alertService.success("Brochure request is sent successfully", {
+              keepAfterRouteChange: true,
+            });
+            router.push("brochure");
+            // setFormSubmit(true);
+          })
+          .catch((error) => {
+            showAlert("Operation failed", "error");
           });
-          router.push("brochure");
-        })
-        .catch((error) => {
-          showAlert("Operation failed", "error");
-        });
-    }).catch((error) => {
-      showAlert("Operation failed", "error");
-    });;
+      })
+      .catch((error) => {
+        showAlert("Operation failed", "error");
+      });
   }
 
   const handleMouseOver = () => {
-    document.querySelector('.captch_parnt_blk').classList.add('captch_opn');
+    document.querySelector(".captch_parnt_blk").classList.add("captch_opn");
   };
 
   const handleMouseOverReset = () => {
-    document.querySelector('.captch_parnt_blk').classList.remove('captch_opn');
+    document.querySelector(".captch_parnt_blk").classList.remove("captch_opn");
   };
 
   useEffect(() => {
-    const captchIcnBlk = document.querySelector('.captch_icn_blk');
-    const otherElements = document.querySelectorAll('.brochure_header_row, .contact_form_row .brochure_form_row, .brochure_testimonial_row');
+    const captchIcnBlk = document.querySelector(".captch_icn_blk");
+    const otherElements = document.querySelectorAll(
+      ".brochure_header_row, .contact_form_row .brochure_form_row, .brochure_testimonial_row"
+    );
 
-    captchIcnBlk.addEventListener('mouseover', handleMouseOver);
+    // setFormSubmit(false);
 
-    otherElements.forEach(element => {
-      element.addEventListener('mouseover', handleMouseOverReset);
+    captchIcnBlk.addEventListener("mouseover", handleMouseOver);
+
+    otherElements.forEach((element) => {
+      element.addEventListener("mouseover", handleMouseOverReset);
     });
 
     return () => {
-      captchIcnBlk.removeEventListener('mouseover', handleMouseOver);
+      captchIcnBlk.removeEventListener("mouseover", handleMouseOver);
 
-      otherElements.forEach(element => {
-        element.removeEventListener('mouseover', handleMouseOverReset);
+      otherElements.forEach((element) => {
+        element.removeEventListener("mouseover", handleMouseOverReset);
       });
     };
   }, []);
@@ -266,8 +275,9 @@ function Index() {
                       type="text"
                       name="first_name"
                       {...register("first_name")}
-                      className={`form-control ${errors.first_name ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.first_name ? "is-invalid" : ""
+                      }`}
                       aria-label="First name *"
                       placeholder="First name *"
                     />
@@ -282,8 +292,9 @@ function Index() {
                       type="text"
                       name="title"
                       {...register("last_name")}
-                      className={`form-control ${errors.last_name ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.last_name ? "is-invalid" : ""
+                      }`}
                       aria-label="Last name *"
                       placeholder="Last name *"
                     />
@@ -298,8 +309,9 @@ function Index() {
                       type="email"
                       name="email_id"
                       {...register("email_id")}
-                      className={`form-control ${errors.email_id ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.email_id ? "is-invalid" : ""
+                      }`}
                       aria-label="Email *"
                       placeholder="Email *"
                     />
@@ -317,8 +329,9 @@ function Index() {
                       aria-label="Phone number *"
                       placeholder="Phone number *"
                       {...register("phone_no")}
-                      className={`form-control ${errors.phone_no ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.phone_no ? "is-invalid" : ""
+                      }`}
                     />
                   </div>
                 </div>
@@ -381,8 +394,9 @@ function Index() {
                           type="checkbox"
                           name="newsletter_mail_ind"
                           {...register("newsletter_mail_ind")}
-                          className={`form-check-input ${errors.newsletter_mail_ind ? "is-invalid" : ""
-                            }`}
+                          className={`form-check-input ${
+                            errors.newsletter_mail_ind ? "is-invalid" : ""
+                          }`}
                           id="exampleCheck1"
                         />
                         <label
@@ -433,7 +447,11 @@ function Index() {
                     </div>
                   </div>
                   <div className="col-12">
-                    <button className="btn prmry_btn make_enqury_btn mx-auto text-uppercase" type="submit" disabled={formState.isSubmitting}>
+                    <button
+                      className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
+                      type="submit"
+                      disabled={formState.isSubmitting}
+                    >
                       {formState.isSubmitting && (
                         <span className="spinner-border spinner-border-sm mr-1"></span>
                       )}
@@ -459,6 +477,10 @@ function Index() {
               </div>
             </div>
           </form>
+          {/* {formSubmit ? (
+          ) : (
+            <p>Thank you page</p>
+          )} */}
           <section className="captch_parnt_blk">
             <div className="captch_icn_blk">
               <img src="\assets\images\captcha.png" alt="captcha" />
