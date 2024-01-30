@@ -710,7 +710,7 @@ function Index() {
                   <div className="itinery_detls_cntnt" key={index}>
                     <div className="row">
                       <div className="col-sm-7 pe-sm-0">
-                        <div className="itinery_detls_para">
+                        <div className="itinery_detls_para itinery_para_blk">
                           {/* <h3><span>3 nights</span>BEIJING</h3> */}
                           <div
                             dangerouslySetInnerHTML={{

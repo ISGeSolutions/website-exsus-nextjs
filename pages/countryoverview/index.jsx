@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { destinationService, homeService } from "services";
+import { destinationService, homeService, countriesService } from "services";
 import { NavLink } from "components";
 import { useRouter } from "next/router";
 import { data } from "jquery";
@@ -15,6 +15,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
   const itemsPerPage = 9; // Number of items to load per page
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
   const [countryData, setCountryData] = useState(dataToChild);
+  const [countryHighlight, setCountryHighlight] = useState("");
   // const { overview_text } = props?.data || {};
   //  (props?.data);
   let dictionaryPage = 1;
@@ -99,12 +100,12 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -122,9 +123,9 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -138,7 +139,8 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}/${countryName}-itineraries/${item?.attributes?.friendly_url
+        .toLowerCase()}/itinerary/${countryName}/${countryName}-itineraries/${
+        item?.attributes?.friendly_url
       }`
     );
   };
@@ -614,8 +616,8 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                                         {item?.attributes?.currency_symbol.repeat(
                                           Math.abs(
                                             5 -
-                                            item?.attributes
-                                              ?.price_guide_value
+                                              item?.attributes
+                                                ?.price_guide_value
                                           )
                                         )}
                                       </label>

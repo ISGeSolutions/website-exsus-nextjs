@@ -3327,6 +3327,14 @@ nav
   letter-spacing: 1px;
 }
 
+.trvl_info_cntnt.client_review_para_blk h4 span {
+  font: 1.75rem/1.875rem "Slabo 27px", serif;
+  color: #8aad56 !important;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
 .trvl_info_row .trvl_info_cntnt.client_review_para_blk p span {
   color: #ffffff;
 }
@@ -3388,4 +3396,68 @@ nav
 
 .trvl_info_cntnt.itinry_para_blk p:last-child span {
   color: #ffffff;
+}
+
+.trvl_info_row.terms_conditions_row section h2 {
+  text-transform: none;
+  font: 1.25rem/1.625rem "Slabo 27px", serif;
+  letter-spacing: 0;
+  color: #8aad56;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.trvl_info_row.terms_conditions_row section ul {
+  text-align: center;
+}
+
+.trvl_info_row.terms_conditions_row section ul li {
+  color: #ffffff;
+  font: 400 1rem/1.5rem "Roboto", sans-serif;
+  margin-bottom: 24px;
+}
+
+.trvl_info_row.terms_conditions_row section ul li i {
+  font: 1rem/1.25rem "Slabo 27px", serif;
+  letter-spacing: 0;
+  width: 100%;
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #8aad56;
+}
+
+.trvl_info_row.terms_conditions_row section ul li span {
+  width: 100%;
+  display: inline-block;
+  margin-bottom: 24px;
+}
+
+.trvl_info_row.terms_conditions_row section ul li span b {
+  color: #8aad56;
+  font-weight: normal;
+  font: 0.9375rem/1.5rem "Slabo 27px", serif;
+  margin-right: 3px;
+}
+
+.trvl_info_row.terms_conditions_row section ul li span > span {
+  margin-top: 24px;
+}
+
+.itinery_detls_cntnt .itinery_detls_para.itinery_para_blk {
+  color: #ffffff;
+  font: 300 1rem/1.375rem "Roboto", sans-serif;
+  margin-bottom: 10px;
+}
+
+.itinery_detls_cntnt .itinery_detls_para.itinery_para_blk a {
+  color: #8aad56;
+  text-decoration: none;
+}
+
+.itinery_detls_cntnt .itinery_detls_para.itinery_para_blk h2 {
+  font: 1.5rem/1.75rem "Slabo 27px", serif;
+  text-align: left;
+  padding: 0;
+  margin-bottom: 10px;
+  text-transform: uppercase;
 }
