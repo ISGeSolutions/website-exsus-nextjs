@@ -222,7 +222,7 @@ function RegionPlacesToStay(props) {
     return (
       regionWiseUrl +
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
+        ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
@@ -238,7 +238,7 @@ function RegionPlacesToStay(props) {
     router.push(
       regionWiseUrl +
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
+        ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
@@ -306,7 +306,7 @@ function RegionPlacesToStay(props) {
             image: item.attributes?.hotel_images?.data?.filter(res => res?.attributes?.image_type == "thumbnail")[0]?.attributes?.image_path,
             url: regionWiseUrl +
               `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-                ?.replace(/&/g, " and ")
+                ?.replace(/&/g, "and")
                 .replace(/ /g, "-")
                 .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
                   ?.replace(/ /g, "-")
@@ -314,7 +314,7 @@ function RegionPlacesToStay(props) {
                   .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
                     ?.replace(/ /g, "-")
                     .replace(/&/g, "and")
-                    .toLowerCase()}/${item?.attributes?.friendly_url?.replace(/&/g, " and ")
+                    .toLowerCase()}/${item?.attributes?.friendly_url?.replace(/&/g, "and")
                       .replace(/ /g, "-")
                       .toLowerCase()}`
           }));
@@ -363,7 +363,7 @@ function RegionPlacesToStay(props) {
             image: item.attributes?.hotel_images?.data?.filter(res => res?.attributes?.image_type == "thumbnail")[0]?.attributes?.image_path,
             url: regionWiseUrl +
               `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-                ?.replace(/&/g, " and ")
+                ?.replace(/&/g, "and")
                 .replace(/ /g, "-")
                 .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
                   ?.replace(/ /g, "-")
@@ -371,7 +371,7 @@ function RegionPlacesToStay(props) {
                   .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
                     ?.replace(/ /g, "-")
                     .replace(/&/g, "and")
-                    .toLowerCase()}/${item?.attributes?.friendly_url?.replace(/&/g, " and ")
+                    .toLowerCase()}/${item?.attributes?.friendly_url?.replace(/&/g, "and")
                       .replace(/ /g, "-")
                       .toLowerCase()}`
           }));

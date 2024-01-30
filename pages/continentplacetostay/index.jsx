@@ -199,7 +199,7 @@ function ContinentPlacesToStay(props) {
             url:
               regionWiseUrl +
               `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-                ?.replace(/&/g, " and ")
+                ?.replace(/&/g, "and")
                 .replace(/ /g, "-")
                 .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
                   ?.replace(/ /g, "-")
@@ -208,7 +208,7 @@ function ContinentPlacesToStay(props) {
                     ?.replace(/ /g, "-")
                     .replace(/&/g, "and")
                     .toLowerCase()}/${item?.attributes?.friendly_url
-                      ?.replace(/&/g, " and ")
+                      ?.replace(/&/g, "and")
                       .replace(/ /g, "-")
                       .toLowerCase()}`,
           }));
@@ -275,7 +275,7 @@ function ContinentPlacesToStay(props) {
             url:
               regionWiseUrl +
               `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-                ?.replace(/&/g, " and ")
+                ?.replace(/&/g, "and")
                 .replace(/ /g, "-")
                 .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
                   ?.replace(/ /g, "-")
@@ -284,7 +284,7 @@ function ContinentPlacesToStay(props) {
                     ?.replace(/ /g, "-")
                     .replace(/&/g, "and")
                     .toLowerCase()}/${item?.attributes?.friendly_url
-                      ?.replace(/&/g, " and ")
+                      ?.replace(/&/g, "and")
                       .replace(/ /g, "-")
                       .toLowerCase()}`,
           }));
@@ -354,7 +354,7 @@ function ContinentPlacesToStay(props) {
     return (
       regionWiseUrl +
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
+        ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
@@ -370,7 +370,7 @@ function ContinentPlacesToStay(props) {
     router.push(
       regionWiseUrl +
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
+        ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")

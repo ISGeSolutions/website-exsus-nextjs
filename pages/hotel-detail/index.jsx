@@ -25,6 +25,7 @@ export default Index;
 function Index() {
   const [mapVariable, setMapVariable] = useState(null);
   let dictionaryPage = 1;
+  const [modalKey, setModalKey] = useState(0);
   const [coordinatesArray, setCoordinatesArray] = useState([]);
   const router = useRouter();
   const hotelName = router?.query?.hotelName;
@@ -78,31 +79,31 @@ function Index() {
     return (
       regionWiseUrl +
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
+        ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${hotelName}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-          ?.replace(/&/g, " and ")
-          .replace(/ /g, "-")
-          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, "and")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${item?.attributes?.friendly_url}`
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -110,15 +111,15 @@ function Index() {
     return (
       regionWiseUrl +
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
+        ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/itinerary/${item?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}-itineraries/${item?.attributes?.friendly_url}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -126,15 +127,15 @@ function Index() {
     return (
       regionWiseUrl +
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
+        ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/itinerary/${item?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}-itineraries/${item?.attributes?.friendly_url}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -276,7 +277,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -375,23 +376,24 @@ function Index() {
             url:
               regionWiseUrl +
               `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-                ?.replace(/&/g, " and ")
+                ?.replace(/&/g, "and")
                 .replace(/ /g, "-")
                 .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-                ?.replace(/ /g, "-")
-                .replace(/&/g, "and")
-                .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-                ?.replace(/ /g, "-")
-                .replace(/&/g, "and")
-                .toLowerCase()}/${item?.attributes?.friendly_url
-                ?.replace(/&/g, " and ")
-                .replace(/ /g, "-")
-                .toLowerCase()}`,
+                  ?.replace(/ /g, "-")
+                  .replace(/&/g, "and")
+                  .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+                    ?.replace(/ /g, "-")
+                    .replace(/&/g, "and")
+                    .toLowerCase()}/${item?.attributes?.friendly_url
+                      ?.replace(/&/g, "and")
+                      .replace(/ /g, "-")
+                      .toLowerCase()}`,
           }));
           setCoordinatesArray((prevCoordinates) => [
             ...prevCoordinates,
             ...newCoordinates,
           ]);
+          setModalKey((prevKey) => prevKey + 1);
           setIsLoading(false);
         })
         .catch((error) => {
@@ -424,6 +426,10 @@ function Index() {
         <script
           type="text/javascript"
           src="/assets/javascripts/card-slider.js"
+        ></script>
+        <script
+          type="text/javascript"
+          src="/assets/javascripts/card-slider02.js"
         ></script>
         <title>{dictioneryFunction(hotelData?.meta_title)}</title>
         <meta content={dictioneryFunction(hotelData?.meta_description)}></meta>
@@ -500,7 +506,7 @@ function Index() {
                 <h3 className="trvl_title_sub_white mb-3">
                   Location: {hotelData.location}
                 </h3>
-                <p className="price_guide_hotel_tooltip">
+                <p className="price_guide_hotel_tooltip">coordinatesArray
                   Price guide:{" "}
                   <span
                     tabIndex="0"
@@ -519,8 +525,8 @@ function Index() {
                       {hotelData?.hotel_country_contents?.data[0]?.attributes?.currency_symbol.repeat(
                         Math.abs(
                           5 -
-                            hotelData?.hotel_country_contents?.data[0]
-                              ?.attributes?.price_guide_value
+                          hotelData?.hotel_country_contents?.data[0]
+                            ?.attributes?.price_guide_value
                         )
                       )}
                     </label>
@@ -817,7 +823,7 @@ function Index() {
                   </div>
                 </div>
               </section>
-              {coordinatesArray && (
+              {coordinatesArray.length > 0 && (
                 <section className="map_blk_row">
                   <h3 className="pb-2">Hotel location</h3>
                   <p>
@@ -923,8 +929,8 @@ function Index() {
                                           {item?.attributes?.currency_symbol.repeat(
                                             Math.abs(
                                               5 -
-                                                item?.attributes
-                                                  ?.price_guide_value
+                                              item?.attributes
+                                                ?.price_guide_value
                                             )
                                           )}
                                         </label>
@@ -1064,12 +1070,10 @@ function Index() {
                                 )
                                 .map((res1) => (
                                   <li key={res1.id}>
-                                    {`From ${
-                                      res1.attributes?.currency_symbol ?? ""
-                                    }${
-                                      formatPrice(res1.attributes?.price) ??
+                                    {`From ${res1.attributes?.currency_symbol ?? ""
+                                      }${formatPrice(res1.attributes?.price) ??
                                       " xxxx"
-                                    } per person`}
+                                      } per person`}
                                   </li>
                                 ))}
                               <li>

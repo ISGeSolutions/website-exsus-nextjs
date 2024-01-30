@@ -4,6 +4,7 @@ import { NavLink } from "components";
 import { useRouter } from "next/router";
 import { data } from "jquery";
 import { formatPrice } from "../../components/utils/priceFormater";
+import Head from "next/head";
 
 export default CountryOverview;
 
@@ -95,7 +96,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
     return (
       regionWiseUrl +
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
+        ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
@@ -115,7 +116,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
     router.push(
       regionWiseUrl +
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
+        ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
@@ -135,7 +136,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
     return (
       regionWiseUrl +
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
+        ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/itinerary/${countryName}/${countryName}-itineraries/${item?.attributes?.friendly_url
       }`
@@ -150,7 +151,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
     router.push(
       regionWiseUrl +
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
+        ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/itinerary/${countryName}/${countryName}-itineraries/${item?.attributes?.friendly_url
       }`
@@ -283,9 +284,14 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                throw new Error("Loop break");
+                if (storedData[matchString.toLowerCase()]) {
+                  replacement = storedData[matchString.toLowerCase()]
+                }
               } else {
                 replacement = storedData[matchString];
+                if (!replacement) {
+                  replacement = storedData[matchString.toLowerCase()]
+                }
               }
               const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
               if (checkStr && replacement) {
@@ -293,7 +299,6 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
               }
             });
             return modifiedString;
-            setIsLoading(false);
           } catch (error) {
             if (error.message === "Loop break") {
             } else if (error.message === "Region not found") {
@@ -356,6 +361,16 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
 
   return (
     <>
+      <Head>
+        <script
+          type="text/javascript"
+          src="/assets/javascripts/card-slider.js"
+        ></script>
+        <script
+          type="text/javascript"
+          src="/assets/javascripts/card-slider02.js"
+        ></script>
+      </Head>
       {isLoading ? (
         // <MyLoader />
         <div
@@ -376,6 +391,9 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
             </section>
             <section className="country_highlight_row">
               <div className="country_highlight_inr">
+                <p>
+                  {/* {countryData?.country_highlights} */}
+                </p>
                 <p
                   dangerouslySetInnerHTML={{
                     __html: dictioneryFunction(countryData?.country_highlights),
@@ -461,12 +479,10 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                                 )
                                 .map((res1) => (
                                   <li key={res1.id}>
-                                    {`From ${
-                                      res1.attributes?.currency_symbol ?? ""
-                                    }${
-                                      formatPrice(res1.attributes?.price) ??
+                                    {`From ${res1.attributes?.currency_symbol ?? ""
+                                      }${formatPrice(res1.attributes?.price) ??
                                       " xxxx"
-                                    } per person`}
+                                      } per person`}
                                   </li>
                                 ))}
                               <li>

@@ -468,7 +468,7 @@ function CountryItinararies(props) {
   const generateDynamicLink = (item) => {
     return (
       regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
+      `/destinations/${destinationcode?.replace(/ /g, "-")?.replace(/&/g, "and")}/itinerary/${countrycode?.replace(
         / /g,
         "-"
       )}/${countrycode?.replace(/ /g, "-")?.replace(/&/g, "and")}-itineraries/${item?.attributes?.friendly_url
@@ -479,7 +479,7 @@ function CountryItinararies(props) {
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
+      `/destinations/${destinationcode?.replace(/ /g, "-")?.replace(/&/g, "and")}/itinerary/${countrycode?.replace(
         / /g,
         "-"
       )}/${countrycode?.replace(/ /g, "-")}}-itineraries/${item?.attributes?.friendly_url
@@ -816,12 +816,10 @@ function CountryItinararies(props) {
                                   )
                                   .map((res1) => (
                                     <li key={res1.id}>
-                                      {`From ${
-                                        res1.attributes?.currency_symbol ?? ""
-                                      }${
-                                        formatPrice(res1.attributes?.price) ??
+                                      {`From ${res1.attributes?.currency_symbol ?? ""
+                                        }${formatPrice(res1.attributes?.price) ??
                                         " xxxx"
-                                      } per person`}
+                                        } per person`}
                                     </li>
                                   ))}
                                 <li>

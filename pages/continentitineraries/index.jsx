@@ -313,7 +313,7 @@ function ContinentItinararies(props) {
   const generateDynamicLink = (item) => {
     return (
       regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
+      `/destinations/${destinationcode.replace(/ & /g, "-and-").replace(/ /g, "-")}/itinerary/${destinationcode.replace(/ & /g, "-and-").replace(/ /g, "-")}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -321,7 +321,7 @@ function ContinentItinararies(props) {
     // const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
+      `/destinations/${destinationcode.replace(/ & /g, "-and-").replace(/ /g, "-")}/itinerary/${destinationcode.replace(/ & /g, "-and-").replace(/ /g, "-")}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -335,8 +335,8 @@ function ContinentItinararies(props) {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -491,7 +491,7 @@ function ContinentItinararies(props) {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -582,7 +582,7 @@ function ContinentItinararies(props) {
 
     window.onload = () => {
       setTimeout(() => {
-        const redirectUrl = `${regionWiseUrl}/destinations/${destinationcode}`;
+        const redirectUrl = `${regionWiseUrl}/destinations/${destinationcode.replace(/ & /g, "-and-").replace(/ /g, "-")}`;
 
         if (redirectUrl) {
           router.push(redirectUrl);
@@ -802,7 +802,7 @@ function ContinentItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -838,12 +838,10 @@ function ContinentItinararies(props) {
                                   )
                                   .map((res1) => (
                                     <li key={res1.id}>
-                                      {`From ${
-                                        res1.attributes?.currency_symbol ?? ""
-                                      }${
-                                        formatPrice(res1.attributes?.price) ??
+                                      {`From ${res1.attributes?.currency_symbol ?? ""
+                                        }${formatPrice(res1.attributes?.price) ??
                                         "xxxx"
-                                      } per person`}
+                                        } per person`}
                                     </li>
                                   ))}
                                 <li>
