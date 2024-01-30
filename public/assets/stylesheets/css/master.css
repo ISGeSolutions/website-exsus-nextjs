@@ -3330,3 +3330,62 @@ nav
 .trvl_info_row .trvl_info_cntnt.client_review_para_blk p span {
   color: #ffffff;
 }
+
+.trvl_info_cntnt.specl_offr_para_blk > p.mb-4 span {
+  font: 400 1rem/1.5rem "Roboto", sans-serif;
+  color: #ffffff;
+}
+
+.specl_offer_hghtltd_blk.specl_offer_accordn_blk
+  .specl_offer_hghtltd_expnded
+  p {
+  text-transform: none;
+  font-weight: normal;
+  letter-spacing: 0;
+}
+
+.specl_offer_hghtltd_blk.specl_offer_accordn_blk
+  .specl_offer_hghtltd_expnded
+  p.mb-4
+  p:first-child {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.specl_offer_hghtltd_blk.specl_offer_accordn_blk
+  .specl_offer_hghtltd_expnded
+  p
+  br {
+  display: none;
+}
+
+.specl_offer_hghtltd_blk.specl_offer_accordn_blk
+  .specl_offer_hghtltd_expnded
+  p
+  span {
+  width: 100%;
+  display: inline-block;
+  margin-top: 15px;
+}
+
+.trvl_info_cntnt.privacy_para_blk section > h2 {
+  text-transform: none;
+}
+
+.trvl_info_cntnt.privacy_para_blk section p {
+  margin-bottom: 24px;
+}
+
+.trvl_info_cntnt.privacy_para_blk section h4 {
+  font: 1.75rem/1.875rem "Slabo 27px", serif;
+  color: #8aad56;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  margin-top: 30px;
+}
+
+.trvl_info_cntnt.itinry_para_blk p:last-child span {
+  color: #ffffff;
+}

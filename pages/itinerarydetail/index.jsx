@@ -588,7 +588,7 @@ function Index() {
                 ></FriendlyUrl>
               </div>
 
-              <div className="trvl_info_cntnt">
+              <div className="trvl_info_cntnt itinry_para_blk">
                 <h2 className="trvl_title">
                   {dictioneryFunction(itineraries?.attributes?.itin_name)}
                   <span className="mt-2 d-block white_text_colr">

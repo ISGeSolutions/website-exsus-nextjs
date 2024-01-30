@@ -58,7 +58,7 @@ function Index() {
     privacypolicyService
       .getPrivacyPolicyPage()
       .then((x) => {
-        //  
+        //
         setprivacyPolicyData(x.data[0]);
         const data = x.data[0]?.attributes?.custom_page_contents?.data;
         let modifiedString = "";
@@ -175,7 +175,7 @@ function Index() {
                     }
                   ></FriendlyUrl>
                 </div>
-                <div className="trvl_info_cntnt">
+                <div className="trvl_info_cntnt privacy_para_blk">
                   <h2 className="trvl_title">{headingTag}</h2>
                   {/* {longText} */}
                   <div dangerouslySetInnerHTML={{ __html: longText }} />
