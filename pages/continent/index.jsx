@@ -412,7 +412,6 @@ function Index() {
               );
             }
           );
-          console.log(filteredData);
           // Create an array of objects with parsed latitude and longitude
           const newCoordinates = filteredData.map((item) => ({
             lat: parseFloat(item.attributes.map_latitude),

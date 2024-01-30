@@ -352,13 +352,11 @@ function Index() {
       destinationService
         .getRegionWiseHotelsInHotelDetail(regionName, region)
         .then((response) => {
-          console.log(hotelName);
           setAllHotels(
             response?.data?.filter(
               (res) => res.attributes?.friendly_url != hotelName
             )
           );
-          console.log(response?.data);
           const filteredData = response?.data?.filter((item) => {
             const { map_latitude, map_longitude } = item.attributes;
             return (
@@ -854,7 +852,7 @@ function Index() {
                   MORE PLACE TO STAY IN {hotelData.location}
                 </h3>
                 <div className="card_slider_row">
-                  <i id="leftt">
+                  <i id="left">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="#ffffff"
@@ -899,7 +897,6 @@ function Index() {
                                 {dictioneryFunction(
                                   item?.attributes?.hotel_name
                                 )}
-                                {/* {item?.attributes?.hotel_name} */}
                               </a>
                             </h4>
                             <ul>
@@ -938,17 +935,6 @@ function Index() {
                                   );
                                 }
                               )}
-
-                              {/* <li>
-                                <p
-                                  dangerouslySetInnerHTML={{
-                                    __html: dictioneryFunction(
-                                      item?.attributes?.intro_text
-                                    ),
-                                  }}
-                                />
-                              </li>
-                              <li>{item?.attributes?.intro_text}</li> */}
                               <li>
                                 Best for:
                                 <span>
@@ -1007,8 +993,8 @@ function Index() {
                   STAY AT {dictioneryFunction(hotelData.hotel_name)} ON THESE
                   TRIPS
                 </h3>
-                <div className="card_slider_row">
-                  <i id="left">
+                <div className="card_slider_row01">
+                  <i id="leftt">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="#ffffff"
@@ -1025,9 +1011,9 @@ function Index() {
                       />
                     </svg>
                   </i>
-                  <div className="carousel00">
+                  <div className="carousel01">
                     {moreItineraries?.map((item) => (
-                      <div className="card_slider_inr" key={item.id}>
+                      <div className="card_slider_inr01" key={item.id}>
                         <div className="card_slider">
                           <NavLink
                             href={generateDynamicLinkForItinerary(item)}
@@ -1111,7 +1097,7 @@ function Index() {
                     ))}
                   </div>
                   {moreItineraries?.length > 4 ? (
-                    <i id="right">
+                    <i id="rightt">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="#ffffff"
@@ -1137,7 +1123,6 @@ function Index() {
           ) : (
             ""
           )}
-
 
 
           <section className="make_enqury_row">

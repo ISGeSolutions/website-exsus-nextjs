@@ -225,28 +225,28 @@ function RegionPlacesToStay(props) {
         ?.replace(/&/g, " and ")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${hotelName}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-          ?.replace(/&/g, " and ")
-          .replace(/ /g, "-")
-          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, " and ")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${item?.attributes?.friendly_url}`
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -283,7 +283,6 @@ function RegionPlacesToStay(props) {
         .then((response) => {
           setMetaData(response.meta.pagination);
           const newHotels = response?.data;
-          console.log(newHotels);
           if (newHotels.length > 0) {
             setAllHotels((prevItineraries) =>
               [...prevItineraries, ...newHotels].reduce(
@@ -300,7 +299,6 @@ function RegionPlacesToStay(props) {
             const { map_latitude, map_longitude } = item.attributes;
             return map_latitude !== null && map_latitude !== "" && map_longitude !== null && map_longitude !== "";
           });
-          console.log(filteredData);
           const newCoordinates = filteredData.map(item => ({
             lat: parseFloat(item.attributes.map_latitude),
             lng: parseFloat(item.attributes.map_longitude),
@@ -841,8 +839,8 @@ function RegionPlacesToStay(props) {
                                             {item?.attributes?.currency_symbol.repeat(
                                               Math.abs(
                                                 5 -
-                                                  item?.attributes
-                                                    ?.price_guide_value
+                                                item?.attributes
+                                                  ?.price_guide_value
                                               )
                                             )}
                                           </label>

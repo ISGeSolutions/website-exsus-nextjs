@@ -4,7 +4,6 @@ import { Button } from '@react-email/button';
 import React, { useState, useEffect } from 'react';
 
 export function MakeAnEnquiryConsultant(props) {
-    console.log(props);
     const { enquiryDetails } = props;
     const [currentDate, setCurrentDate] = useState(new Date());
 
