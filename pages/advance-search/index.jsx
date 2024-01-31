@@ -84,7 +84,7 @@ function Index() {
     return (
       regionWiseUrl +
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
+        ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url
       }`
@@ -99,7 +99,7 @@ function Index() {
     router.push(
       regionWiseUrl +
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
+        ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url
       }`

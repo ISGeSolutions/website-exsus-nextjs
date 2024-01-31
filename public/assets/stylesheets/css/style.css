@@ -2894,11 +2894,15 @@
 }
 
 /* line 63, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
-.map_blk_row P {
+.map_blk_row p {
   font: 400 1rem/1.375rem "Roboto", sans-serif;
   color: #ffffff;
   text-align: center;
   padding-bottom: 30px;
+}
+
+.map_blk_row .map_blk_inr {
+  height: 500px;
 }
 
 /* line 70, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
@@ -4006,3 +4010,308 @@
 }
 
 /*# sourceMappingURL=style.css.map */
+
+
+.make_enqry_form_row {
+  padding: 50px 0;
+  background: #434142;
+}
+
+.make_enqry_form_row h2 {
+  font: 2.5rem/2.5rem "Slabo 27px", serif;
+  color: #8aad56;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.make_enqry_form_row .make_enqry_wrapper_blk {
+  margin: 20px auto;
+  border-top: 1px solid #555;
+}
+
+.make_enqry_form_row .make_enqry_wrapper_blk>.row>div {
+  margin-bottom: 20px;
+}
+
+.make_enqry_form_row .make_enqry_left_blk h3 {
+  font: 1.25rem/1.5rem "Slabo 27px", serif;
+  text-transform: uppercase;
+  text-align: left;
+  color: #8aad56;
+  margin-bottom: 15px;
+}
+
+.make_enqry_form_row .make_enqry_left_blk .make_enqry_left_inr {
+  border-bottom: 1px solid #555;
+  padding: 30px 0;
+}
+
+.make_enqry_form_row .make_enqry_left_blk .make_enqry_info_blk {
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  background: #8aad56;
+}
+
+.make_enqry_form_row .make_enqry_left_blk .make_enqry_info_blk .make_enqry_info_icn_blk {
+  min-width: 40px;
+  background-color: #8aad56;
+  text-align: center;
+  border-radius: 4px 0 0 4px;
+  padding: 0 10px;
+}
+
+.make_enqry_form_row .make_enqry_left_blk .make_enqry_info_blk .make_enqry_info_icn_blk span {
+  color: #ffffff;
+  line-height: 36px;
+}
+
+.make_enqry_form_row .make_enqry_left_blk .make_enqry_info_blk .make_enqry_cntnt_blk {
+  font: 400 0.875rem/1.0625rem "Roboto", sans-serif;
+  color: #231f20;
+  padding: 10px;
+  background: #f3ffe2;
+  border-radius: 0 4px 4px 0;
+  flex: 1;
+}
+
+.make_enqry_form_row .make_enqry_left_blk .make_enqry_info_blk .make_enqry_cntnt_blk a {
+  color: #231f20;
+}
+
+.make_enqry_form_row .make_enqry_left_blk .make_enqry_checkbx_blk {
+  margin-bottom: 20px;
+}
+
+.make_enqry_form_row .make_enqry_left_blk .make_enqry_checkbx_blk p {
+  font: 400 1rem/1rem "Roboto", sans-serif;
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+.make_enqry_form_row .make_enqry_left_blk .make_enqry_checkbx_blk .make_enqry_checkbx_grp {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.make_enqry_form_row .make_enqry_left_blk .make_enqry_checkbx_blk .make_enqry_checkbx_grp .form-check {
+  margin-right: 15px;
+  margin-bottom: 10px;
+}
+
+.make_enqry_form_row .make_enqry_left_blk .make_enqry_checkbx_blk .make_enqry_checkbx_grp .form-check input[type="radio"] {
+  background-color: transparent;
+  height: 17px;
+  color: #ffffff;
+}
+
+.make_enqry_form_row .make_enqry_left_blk .make_enqry_checkbx_blk .make_enqry_checkbx_grp .form-check label {
+  font: 400 0.875rem/1rem "Roboto", sans-serif;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.make_enqry_form_row .make_enqry_left_blk .make_enqry_checkbx_blk .promotion_checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.make_enqry_form_row .make_enqry_left_blk .make_enqry_checkbx_blk .promotion_checkbox.form-check input.form-check-input:checked {
+  background-repeat: no-repeat;
+  background-size: 20px;
+  background-position: center;
+}
+
+.make_enqry_form_row .make_enqry_left_blk .make_enqry_checkbx_blk .promotion_checkbox input[type="checkbox"] {
+  background-color: transparent;
+  height: 24px;
+  min-width: 24px;
+  color: #ffffff;
+}
+
+.make_enqry_form_row .make_enqry_left_blk .make_enqry_checkbx_blk .promotion_checkbox .form-check-label {
+  color: #ffffff;
+  padding-left: 10px;
+}
+
+.make_enqry_form_row .make_enqry_left_blk .other_reason_input {
+  width: 100%;
+  display: none;
+}
+
+.make_enqry_form_row .make_enqry_left_blk .other_reason_input input {
+  box-shadow: inset 0 0 0 2px #dc3545;
+}
+
+.make_enqry_form_row .make_enqry_left_blk .make_enqry_send_inq_btn {
+  max-width: 200px;
+  margin: auto;
+}
+
+.make_enqry_form_row .make_enqry_right_blk h3 {
+  font: 1.25rem/1.5rem "Slabo 27px", serif;
+  text-transform: uppercase;
+  text-align: center;
+  color: #8aad56;
+  margin-bottom: 15px;
+}
+
+.make_enqry_form_row .make_enqry_right_blk .make_enqry_call_blk {
+  text-align: center;
+  padding: 30px 0 15px;
+}
+
+.make_enqry_form_row .make_enqry_right_blk .make_enqry_call_blk span {
+  font-size: 25px;
+  color: #ffffff;
+  margin-bottom: 15px;
+  background: #8aad56;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+}
+
+.make_enqry_form_row .make_enqry_right_blk .make_enqry_call_blk ul li {
+  font: 400 1rem/1.125rem "Roboto", sans-serif;
+  color: #ffffff;
+  margin-bottom: 5px;
+}
+
+.make_enqry_form_row .make_enqry_right_blk .make_enqry_call_blk ul li:last-child {
+  margin-bottom: 0;
+}
+
+.make_enqry_form_row .make_enqry_right_blk .make_enqry_call_blk ul li strong {
+  font: 400 1.5rem/1.875rem "Roboto", sans-serif;
+}
+
+.make_enqry_form_row .make_enqry_right_blk .make_enqry_offce_hrs_blk {
+  text-align: center;
+  padding: 30px 0 15px;
+}
+
+.make_enqry_form_row .make_enqry_right_blk .make_enqry_offce_hrs_blk span {
+  font-size: 25px;
+  color: #ffffff;
+  margin-bottom: 15px;
+  background: #8aad56;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+}
+
+.make_enqry_form_row .make_enqry_right_blk .make_enqry_offce_hrs_blk ul li {
+  font: 400 1rem/1.125rem "Roboto", sans-serif;
+  color: #ffffff;
+  margin-bottom: 5px;
+}
+
+.make_enqry_form_row .make_enqry_right_blk .make_enqry_offce_hrs_blk ul li:last-child {
+  margin-bottom: 0;
+}
+
+.make_enqry_form_row .make_enqry_right_blk .make_enqry_offce_hrs_blk ul li strong {
+  font: 400 1.5rem/1.875rem "Roboto", sans-serif;
+  color: #8aad56;
+}
+
+.make_enqry_form_row form input {
+  background: #c8c7c8;
+  font: 400 1rem/1rem "Roboto", sans-serif;
+  border-radius: 0;
+  color: #231f20;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.make_enqry_form_row form input::placeholder {
+  color: #231f20;
+}
+
+.make_enqry_form_row form input:focus {
+  background: #c8c7c8;
+}
+
+.make_enqry_form_row form textarea {
+  background: #c8c7c8;
+  font: 400 1rem/1rem "Roboto", sans-serif;
+  border-radius: 0;
+  color: #231f20;
+  margin-bottom: 10px;
+}
+
+.make_enqry_form_row form textarea::placeholder {
+  color: #231f20;
+}
+
+.make_enqry_form_row form textarea:focus {
+  background: #c8c7c8;
+}
+
+.make_enqry_form_row form .form_input_info {
+  font: 400 0.625rem/0.625rem "Roboto", sans-serif;
+  color: #ffffff;
+}
+
+.make_enqry_form_row form .select_drpdwn {
+  background: #c8c7c8;
+  border-radius: 0;
+  color: #231f20;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.make_enqry_form_row form .select_drpdwn .form-select {
+  background-image: var(--bs-form-select-bg-img), var(--bs-form-select-bg-icon, none);
+  background-repeat: no-repeat;
+  height: 40px;
+  font: 400 1rem/1rem "Roboto", sans-serif;
+  border-radius: 0;
+}
+
+.make_enqry_form_row form button {
+  width: 100%;
+  border: 1px solid #ffffff;
+}
+
+.make_enqry_form_row .contact_form_cntnt {
+  color: #ffffff;
+  padding-top: 50px;
+}
+
+.make_enqry_form_row .contact_form_cntnt .contact_form_cntnt_left h3 {
+  font: 1.5rem/1.5rem "Slabo 27px", serif;
+  margin-bottom: 15px;
+}
+
+.make_enqry_form_row .contact_form_cntnt .contact_form_cntnt_left p {
+  font: 300 0.75rem/1.125rem "Roboto", sans-serif;
+  margin-bottom: 15px;
+}
+
+.make_enqry_form_row .contact_form_cntnt .contact_form_cntnt_left p a {
+  color: #ffffff;
+}
+
+.make_enqry_form_row .contact_form_cntnt .contact_form_cntnt_left input[type="checkbox"] {
+  background-color: transparent;
+  height: 17px;
+}
+
+.make_enqry_form_row .contact_form_cntnt img {
+  max-height: 63px;
+}
+
+.make_enqry_form_row .contact_form_cntnt .contact_form_cntnt_right p {
+  font: 300 1.375rem/1.75rem "Roboto", sans-serif;
+}
+
+.make_enqry_form_row .contact_form_cntnt .contact_form_cntnt_right p span {
+  font-weight: 400;
+}
+
+.make_enqry_form_row .contact_form_cntnt .contact_form_cntnt_right p a {
+  color: #ffffff;
+}
