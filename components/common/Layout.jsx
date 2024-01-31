@@ -73,7 +73,7 @@ function Layout({ children }) {
     return true;
   };
 
-  let region = "uk";
+  let region = "";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
       if (window.site_region !== "uk") {
@@ -173,16 +173,16 @@ function Layout({ children }) {
     // Temporarily disable warnings in the development environment
     console.warn = () => {};
 
-    console.log(router.asPath);
-    if (currentUrl?.includes("/us")) {
-      setMyVariable("us");
-    } else if (currentUrl?.includes("/asia")) {
-      setMyVariable("asia");
-    } else if (currentUrl?.includes("/in")) {
-      setMyVariable("in");
-    } else {
-      setMyVariable("uk");
-    }
+    // console.log(router.asPath);
+    // if (currentUrl?.includes("/us")) {
+    //   setMyVariable("us");
+    // } else if (currentUrl?.includes("/asia")) {
+    //   setMyVariable("asia");
+    // } else if (currentUrl?.includes("/in")) {
+    //   setMyVariable("in");
+    // } else {
+    //   setMyVariable("uk");
+    // }
 
     $(".header_country_list > ul .header_country_label").on(
       "mouseenter",
