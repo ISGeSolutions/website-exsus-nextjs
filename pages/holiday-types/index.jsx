@@ -396,56 +396,6 @@ function Index() {
             </div>
           </section>
 
-          {/* <section
-            aria-label="Client Testimonials"
-            className="testimonials_blk_row"
-          >
-            <div className="container">
-              <div
-                id="Testimonials"
-                className="carousel slide"
-                data-bs-ride="carousel"
-              >
-                <div className="carousel-indicators">
-                  {testimonials.map((_, index) => (
-                    <button
-                      key={index}
-                      type="button"
-                      data-bs-target="#Testimonials"
-                      data-bs-slide-to={index}
-                      className={index === 0 ? "active" : ""}
-                      aria-current={index === 0 ? "true" : "false"}
-                      aria-label={`Slide ${index + 1}`}
-                    ></button>
-                  ))}
-                </div>
-                <div className="carousel-inner">
-                  {testimonials.map((text, index) => (
-                    <div
-                      key={index}
-                      target="_blank"
-                      className={`carousel-item ${index === 0 ? "active" : ""}`}
-                      data-bs-interval="5000"
-                    >
-                      <div className="carousel-caption">
-                        <p
-                          dangerouslySetInnerHTML={{
-                            __html: text?.attributes.review_short_text,
-                          }}
-                        />
-                        <span
-                          dangerouslySetInnerHTML={{
-                            __html: text?.attributes.client_name,
-                          }}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section> */}
-
           <section className="make_enqury_row">
             <div className="container">
               <EnquiryButton />
