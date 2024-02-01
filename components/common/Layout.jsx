@@ -73,7 +73,7 @@ function Layout({ children }) {
   };
 
   let region = "";
-
+  
   const handleSearch = () => {
     router.push("/search");
   };
