@@ -36,6 +36,10 @@ function Index() {
     }
   }
 
+  const handleHrefClick = (event) => {
+    event.preventDefault();
+  };
+
   const websiteContentCheck = (matches, modifiedString) => {
     whyusService.destinationService(matches, region).then((responseObj) => {
       if (responseObj) {
@@ -251,7 +255,8 @@ function Index() {
             >
               <div className="carousel-inner">
                 <a
-                  href="javascript:void(0)"
+                  href="#"
+                  onClick={handleHrefClick}
                   target="_blank"
                   className="carousel-item active"
                   data-bs-interval="5000"

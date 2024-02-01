@@ -53,7 +53,7 @@ function Index() {
 
   const handleRadioChange = (e) => {
     // Check if the selected option is "Other*"
-    setShowOtherInput(e.target.value === 'Other*');
+    setShowOtherInput(e.target.value === "Other*");
   };
 
   let region = "uk";
@@ -66,6 +66,10 @@ function Index() {
       }
     }
   }
+
+  const handleHrefClick = (event) => {
+    event.preventDefault();
+  };
 
   const closeAlert = () => {
     //  ("closeAlert");
@@ -88,30 +92,33 @@ function Index() {
       data: data,
     };
 
-    return enquiryService.makeanenquiry(data1).then((res) => {
-      return enquiryService
-        .sendEnquiryMail({ data })
-        .then(() => {
-          // return contactusService
-          //   .makeanenquiry(res)
-          //   .then(() => {
-          router.push('make-an-enquiry/thankyou');
-          // showAlert("Operation succeeded", "success");
-          // reset();
-          // })
-          // .catch((error) => {
-          //   showAlert("Operation failed", "error");
-          // });
-        })
-        .catch((error) => {
-          showAlert("Operation failed", "error");
-        });
-    }).catch((error) => {
-      showAlert("Operation failed", "error");
-    });;
+    return enquiryService
+      .makeanenquiry(data1)
+      .then((res) => {
+        return enquiryService
+          .sendEnquiryMail({ data })
+          .then(() => {
+            // return contactusService
+            //   .makeanenquiry(res)
+            //   .then(() => {
+            router.push("make-an-enquiry/thankyou");
+            // showAlert("Operation succeeded", "success");
+            // reset();
+            // })
+            // .catch((error) => {
+            //   showAlert("Operation failed", "error");
+            // });
+          })
+          .catch((error) => {
+            showAlert("Operation failed", "error");
+          });
+      })
+      .catch((error) => {
+        showAlert("Operation failed", "error");
+      });
   }
 
-  useEffect(() => { }, []);
+  useEffect(() => {}, []);
 
   return (
     <Layout>
@@ -366,7 +373,7 @@ function Index() {
                     <div className="contact_form_cntnt_right mt-3 mt-lg-0">
                       <p>
                         Alternatively, call <span>020 7337 9010</span> or email{" "}
-                        <a href="javascript:void(0)">escape@exsus.com</a> to speak to one of our
+                        <a href="#" onClick={handleHrefClick}>escape@exsus.com</a> to speak to one of our
                         travel experts
                       </p>
                     </div>
@@ -405,10 +412,6 @@ function Index() {
         </div>
       </section> */}
 
-
-
-
-
       <section className="make_enqry_form_row">
         <div className="container">
           <h2>Start planning your trip</h2>
@@ -422,7 +425,10 @@ function Index() {
           <div className="make_enqry_wrapper_blk">
             <div className="row">
               <div className="col-lg-8">
-                <form className="needs-validation" onSubmit={handleSubmit(onSubmit)}>
+                <form
+                  className="needs-validation"
+                  onSubmit={handleSubmit(onSubmit)}
+                >
                   <div className="make_enqry_left_blk">
                     <div className="make_enqry_left_inr">
                       <h3>Your travel plans</h3>
@@ -435,12 +441,14 @@ function Index() {
                               placeholder="Where you would like to go? *"
                               name="preferred_place_time"
                               {...register("preferred_place_time")}
-                              className={`form-control ${errors.preferred_place_time ? "is-invalid" : ""
-                                }`}
+                              className={`form-control ${
+                                errors.preferred_place_time ? "is-invalid" : ""
+                              }`}
                             />
                             <div className="invalid-feedback mb-1">
                               {errors.preferred_place_time?.message}
-                            </div>                          </div>
+                            </div>{" "}
+                          </div>
                         </div>
                         <div className="col-12">
                           <div className="form_textarea">
@@ -449,8 +457,9 @@ function Index() {
                               rows="3"
                               name="note"
                               {...register("note")}
-                              className={`form-control ${errors.note ? "is-invalid" : ""
-                                }`}
+                              className={`form-control ${
+                                errors.note ? "is-invalid" : ""
+                              }`}
                             ></textarea>
                             <div className="invalid-feedback mb-1">
                               {errors.note?.message}
@@ -462,8 +471,17 @@ function Index() {
                     <div className="make_enqry_left_inr">
                       <h3>Your details</h3>
                       <div className="make_enqry_info_blk">
-                        <div className="make_enqry_info_icn_blk"><span className="material-symbols-outlined">info</span></div>
-                        <div className="make_enqry_cntnt_blk">Exsus Travel takes the security and privacy of your data very seriously. Please read our <a href="privacy_policy.html">privacy policy</a> for further details.</div>
+                        <div className="make_enqry_info_icn_blk">
+                          <span className="material-symbols-outlined">
+                            info
+                          </span>
+                        </div>
+                        <div className="make_enqry_cntnt_blk">
+                          Exsus Travel takes the security and privacy of your
+                          data very seriously. Please read our{" "}
+                          <a href="privacy_policy.html">privacy policy</a> for
+                          further details.
+                        </div>
                       </div>
                       <div className="row pt-3">
                         <div className="col-sm-6 col-lg-4">
@@ -472,8 +490,9 @@ function Index() {
                               aria-label="Title"
                               name="title"
                               {...register("title")}
-                              className={`form-select ${errors.title ? "is-invalid" : ""
-                                }`}
+                              className={`form-select ${
+                                errors.title ? "is-invalid" : ""
+                              }`}
                             >
                               <option value="">Title *</option>
                               <option value="Mr">Mr</option>
@@ -499,8 +518,9 @@ function Index() {
                               placeholder="First name *"
                               name="first_name"
                               {...register("first_name")}
-                              className={`form-control ${errors.first_name ? "is-invalid" : ""
-                                }`}
+                              className={`form-control ${
+                                errors.first_name ? "is-invalid" : ""
+                              }`}
                             />
                             <div className="invalid-feedback mb-1">
                               {errors.first_name?.message}
@@ -515,8 +535,9 @@ function Index() {
                               placeholder="last name *"
                               name="last_name"
                               {...register("last_name")}
-                              className={`form-control ${errors.last_name ? "is-invalid" : ""
-                                }`}
+                              className={`form-control ${
+                                errors.last_name ? "is-invalid" : ""
+                              }`}
                             />
                             <div className="invalid-feedback mb-1">
                               {errors.last_name?.message}
@@ -531,8 +552,9 @@ function Index() {
                               placeholder="Email *"
                               name="email_id"
                               {...register("email_id")}
-                              className={`form-control ${errors.email_id ? "is-invalid" : ""
-                                }`}
+                              className={`form-control ${
+                                errors.email_id ? "is-invalid" : ""
+                              }`}
                             />
                             <div className="invalid-feedback mb-1">
                               {errors.email_id?.message}
@@ -547,12 +569,14 @@ function Index() {
                               placeholder="Telephone *"
                               name="telephone_no"
                               {...register("telephone_no")}
-                              className={`form-control ${errors.telephone_no ? "is-invalid" : ""
-                                }`}
+                              className={`form-control ${
+                                errors.telephone_no ? "is-invalid" : ""
+                              }`}
                             />
                             <div className="invalid-feedback mb-1">
                               {errors.telephone_no?.message}
-                            </div>                          </div>
+                            </div>{" "}
+                          </div>
                         </div>
                         <div className="col-sm-6 col-lg-4 position-relative">
                           <div className="select_drpdwn">
@@ -560,17 +584,26 @@ function Index() {
                               aria-label="Best time to call"
                               name="Best time to call"
                               {...register("best_time_to_call")}
-                              className={`form-select ${errors.best_time_to_call ? "is-invalid" : ""
-                                }`}
+                              className={`form-select ${
+                                errors.best_time_to_call ? "is-invalid" : ""
+                              }`}
                             >
                               <option value="">Best time to call</option>
-                              <option value="No Preference">No Preference</option>
+                              <option value="No Preference">
+                                No Preference
+                              </option>
                               <option value="8.30am - 12pm (GMT)">
                                 8.30am - 12pm (GMT)
                               </option>
-                              <option value="12pm - 3pm (GMT)">12pm - 3pm (GMT)</option>
-                              <option value="12pm - 3pm (GMT)">12pm - 3pm (GMT)</option>
-                              <option value="3pm - 6pm (GMT)">3pm - 6pm (GMT)</option>
+                              <option value="12pm - 3pm (GMT)">
+                                12pm - 3pm (GMT)
+                              </option>
+                              <option value="12pm - 3pm (GMT)">
+                                12pm - 3pm (GMT)
+                              </option>
+                              <option value="3pm - 6pm (GMT)">
+                                3pm - 6pm (GMT)
+                              </option>
                             </select>
                             <div className="invalid-feedback mb-1">
                               {errors.best_time_to_call?.message}
@@ -594,7 +627,10 @@ function Index() {
                               "Website or blog",
                               "Other*",
                             ].map((option, index) => (
-                              <div key={index} className="form-check make_enqry_checkbx_inr">
+                              <div
+                                key={index}
+                                className="form-check make_enqry_checkbx_inr"
+                              >
                                 <input
                                   type="radio"
                                   className="form-check-input"
@@ -634,7 +670,10 @@ function Index() {
                               className="form-check-label"
                               htmlFor="exampleCheck5"
                             >
-                              We’d like to keep you up to date with travel news, inspiration from our experts, and our latest offers. Please tick this box if you’d prefer not to hear from us.
+                              We’d like to keep you up to date with travel news,
+                              inspiration from our experts, and our latest
+                              offers. Please tick this box if you’d prefer not
+                              to hear from us.
                             </label>
                           </div>
                           {/* </>
@@ -651,7 +690,21 @@ function Index() {
                             <span className="spinner-border spinner-border-sm mr-1"></span>
                           )}
                           Send Enquiry
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path></svg>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="#ffffff"
+                            shapeRendering="geometricPrecision"
+                            textRendering="geometricPrecision"
+                            imageRendering="optimizeQuality"
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            viewBox="0 0 267 512.43"
+                          >
+                            <path
+                              fillRule="nonzero"
+                              d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                            ></path>
+                          </svg>
                         </button>
                       </div>
                     </div>
@@ -676,7 +729,9 @@ function Index() {
                   <div className="col-sm-6 col-lg-12">
                     <div className="make_enqry_right_blk">
                       <div className="make_enqry_offce_hrs_blk">
-                        <span className="material-symbols-outlined">schedule</span>
+                        <span className="material-symbols-outlined">
+                          schedule
+                        </span>
                         <h3>Office hours (GMT)</h3>
                         <ul>
                           <li>Monday - Thursday (09:00am - 05:30pm)</li>
@@ -687,20 +742,14 @@ function Index() {
                     </div>
                   </div>
                 </div>
-
-
               </div>
             </div>
           </div>
-
-
-
-
         </div>
-        <div className="full_loader_parnt_blk" style={{ display: 'none' }}><div className="loader-circle-2"></div></div>
+        <div className="full_loader_parnt_blk" style={{ display: "none" }}>
+          <div className="loader-circle-2"></div>
+        </div>
       </section>
-
-
 
       <section className="text_overlay_row">
         <div className="container">
@@ -715,7 +764,6 @@ function Index() {
           </ul>
         </div>
       </section>
-
 
       <CustomModal isOpen={isModalOpen} onClose={closeModal} />
     </Layout>

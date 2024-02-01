@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { userService } from "services";
+import { userService, destinationService } from "services";
 import { NavLink } from "./../NavLink";
 import { Nav, Alert } from "components";
 import { Analytics } from "@vercel/analytics/react";
@@ -22,9 +22,10 @@ function Layout({ children }) {
   const router = useRouter();
   const currentUrl = router.asPath;
   // const regionWiseUrl = '/uk';
-  const [regionWiseUrl, setMyVariable] = useState("uk");
+  const [regionWiseUrll, setMyVariable] = useState("uk");
   const [selectedRegion, setVariable] = useState("");
   const { ver } = router.query;
+  const [telePhoneNumber, SetTelePhoneNumber] = useState();
 
   // form validation rules
   const validationSchema = Yup.object().shape({
@@ -73,7 +74,18 @@ function Layout({ children }) {
   };
 
   let region = "";
-  
+
+  //let region = "uk";
+  let regionWiseUrl = "";
+  if (typeof window !== "undefined") {
+    if (window && window.site_region) {
+      if (window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+        region = window.site_region;
+      }
+    }
+  }
+
   const handleSearch = () => {
     router.push("/search");
   };
@@ -99,7 +111,7 @@ function Layout({ children }) {
     const pathRouter = router.asPath;
     let myArray = [];
 
-    //  
+    //
     const regionArr = ["uk", "us", "asia", "in"];
     if (
       router.asPath === "/" ||
@@ -159,9 +171,30 @@ function Layout({ children }) {
     this.plusSlides.openLeftNav();
   };
 
+  const websiteContentCheck = (matches, modifiedString) => {
+    destinationService
+      .getDictionaryDetails(matches, region)
+      .then((responseObj) => {
+        if (responseObj) {
+          const res = responseObj?.data;
+          res.forEach((element, index) => {
+            const replacement = element?.attributes?.content_translation_text;
+            const matchString = element?.attributes?.content_word;
+            const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+            if (checkStr && replacement) {
+              modifiedString = modifiedString.replace(checkStr, replacement);
+            }
+          });
+
+          // Set the modified string in state
+          // setnewValueWithBr(modifiedString);
+        }
+      });
+  };
+
   useEffect(() => {
     // Temporarily disable warnings in the development environment
-    console.warn = () => { };
+    console.warn = () => {};
 
     $(".header_country_list > ul .header_country_label").on(
       "mouseenter",
@@ -198,7 +231,7 @@ function Layout({ children }) {
       // The variable is set in local storage and is not undefined
       window.region = site_region_local;
       region = site_region_local;
-      countries.forEach(element => {
+      countries.forEach((element) => {
         if (element.value == site_region_local) {
           handleChange(element);
           setSelected(element);
@@ -213,7 +246,7 @@ function Layout({ children }) {
         if (window && window.site_region) {
           if (window.site_region !== "uk") {
             region = window.site_region;
-            countries.forEach(element => {
+            countries.forEach((element) => {
               if (element.value == window.site_region) {
                 handleChange(element);
                 setSelected(element);
@@ -228,6 +261,65 @@ function Layout({ children }) {
     }
 
     i18n.changeLanguage(region);
+
+    let modifiedString = "${TelephoneNumber}";
+
+    // Find and store matches in an array
+    const regex = /{[a-zA-Z0-9-]+}/g;
+    const matches = [...new Set(modifiedString.match(regex))];
+
+    let storedDataString = "";
+    let storedData = "";
+    if (region == "uk") {
+      storedDataString = localStorage.getItem("websitecontent_uk");
+      storedData = JSON.parse(storedDataString);
+    } else if (region == "us") {
+      storedDataString = localStorage.getItem("websitecontent_us");
+      storedData = JSON.parse(storedDataString);
+    } else if (region == "asia") {
+      storedDataString = localStorage.getItem("websitecontent_asia");
+      storedData = JSON.parse(storedDataString);
+    } else if (region == "in") {
+      storedDataString = localStorage.getItem("websitecontent_india");
+      storedData = JSON.parse(storedDataString);
+    }
+
+    if (storedData !== null) {
+      // You can access it using localStorage.getItem('yourKey')
+      if (matches) {
+        let replacement = "";
+        try {
+          matches.forEach((match, index, matches) => {
+            const matchString = match.replace(/{|}/g, "");
+            if (!storedData[matchString]) {
+              websiteContentCheck(matches, modifiedString);
+              throw new Error("Loop break");
+            } else {
+              replacement = storedData[matchString];
+            }
+            const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+            if (checkStr && replacement) {
+              modifiedString = modifiedString.replace(checkStr, replacement);
+            }
+          });
+          // Set the modified string in state
+          SetTelePhoneNumber(modifiedString);
+        } catch (error) {
+          if (error.message === "Loop break") {
+            // Handle the loop break here
+            //  ("Loop has been stopped.");
+          } else if (error.message === "Region not found") {
+            // Handle the loop break here
+            //  ("Loop has been stopped.");
+            SetTelePhoneNumber(modifiedString);
+          }
+        }
+      }
+    } else {
+      if (matches) {
+        websiteContentCheck(matches, region, modifiedString);
+      }
+    }
   }, [ver, region]);
 
   return (
@@ -242,7 +334,7 @@ function Layout({ children }) {
               <div className="mobile_trigger_btn d-block d-lg-none">
                 <a
                   className="btn-link"
-                  href="javascript:void(0)"
+                  href="#"
                   onClick={() => {
                     document.getElementById("sideMenuLeft").style.width =
                       "100%";
@@ -356,20 +448,29 @@ function Layout({ children }) {
             </section>
             <section className="header_item_right d-flex d-lg-inline-block justify-content-end align-items-center">
               <div className="header_call_icn">
-                <NavLink href="make_an_enquiry.html" className="header_mail_icn">
-                  <em className="material-symbols-outlined" title="Make an enquiry">
+                <NavLink
+                  href="make_an_enquiry.html"
+                  className="header_mail_icn"
+                >
+                  <em
+                    className="material-symbols-outlined"
+                    title="Make an enquiry"
+                  >
                     mail
                   </em>
                   <label className="d-none d-lg-block"></label>
                 </NavLink>
                 <NavLink href="tel:020 7337 9010">
                   <em className="material-symbols-outlined">call</em>
-                  <span className="d-none d-lg-block">020 7337 9010</span>
+                  <span
+                    className="d-none d-lg-block"
+                    dangerouslySetInnerHTML={{ __html: telePhoneNumber }}
+                  ></span>
                 </NavLink>
               </div>
               <div className="mobile_trigger_btn mobile-menu-trigger d-block d-lg-none">
                 <a
-                  href="javascript:void(0)"
+                  href="#"
                   onClick={() => {
                     const menuLayout = document.querySelector(".menu"); //Nav tag
                     menuLayout.classList.toggle("active");

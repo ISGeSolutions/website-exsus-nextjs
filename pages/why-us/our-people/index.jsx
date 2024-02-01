@@ -36,8 +36,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -55,6 +55,10 @@ function Index() {
         elements[i].className = elements[i].className + " show";
       }
     }
+  };
+
+  const handleHrefClick = (event) => {
+    event.preventDefault();
   };
 
   // let regionWiseUrl = "/uk";
@@ -112,7 +116,9 @@ function Index() {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
-            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
+            let localStorageUk = JSON.parse(
+              localStorage.getItem("websitecontent_uk")
+            );
             localStorage.setItem(
               "websitecontent_uk",
               JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
@@ -124,7 +130,9 @@ function Index() {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
-            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
+            let localStorageUS = JSON.parse(
+              localStorage.getItem("websitecontent_us")
+            );
             localStorage.setItem(
               "websitecontent_us",
               JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
@@ -137,7 +145,9 @@ function Index() {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
-            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
+            let localStorageAsia = JSON.parse(
+              localStorage.getItem("websitecontent_asia")
+            );
             localStorage.setItem(
               "websitecontent_asia",
               JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
@@ -150,7 +160,9 @@ function Index() {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
-            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
+            let localStorageIndia = JSON.parse(
+              localStorage.getItem("websitecontent_india")
+            );
             localStorage.setItem(
               "websitecontent_india",
               JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
@@ -158,8 +170,8 @@ function Index() {
           }
         });
         if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
-          dictionaryPage = x?.meta?.pagination?.page + 1
-          websiteContentCheck(dictionaryPage)
+          dictionaryPage = x?.meta?.pagination?.page + 1;
+          websiteContentCheck(dictionaryPage);
         }
         setWebsiteContent(x.data);
         setIsLoading(false);
@@ -186,10 +198,11 @@ function Index() {
   equalHeight(true);
 
   useEffect(() => {
-    if (!localStorage.getItem(`websitecontent_${region.replace(
-      /in/g,
-      "INDIA"
-    ).toLowerCase()}`)) {
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
       websiteContentCheck(dictionaryPage);
     }
     setFriendlyUrl(`Home/Why us/Our people`);
@@ -376,7 +389,8 @@ function Index() {
                   {backgroundImage.map((imagePath, index) => (
                     <NavLink
                       key={index}
-                      href="javascript:void(0)"
+                      href="#"
+                      onClick={handleHrefClick}
                       className={`carousel-item ${index === 0 ? "active" : ""}`}
                       data-bs-interval="5000"
                     >

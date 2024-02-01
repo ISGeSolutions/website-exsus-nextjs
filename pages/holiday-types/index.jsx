@@ -82,6 +82,10 @@ function Index() {
     return item;
   };
 
+  const handleHrefClick = (event) => {
+    event.preventDefault();
+  };
+
   useEffect(() => {
     // userService.getAll().then(x => setUsers(x));
     holidaytypesService
@@ -216,7 +220,8 @@ function Index() {
               <div className="carousel-inner">
                 {backgroundImage.map((imagePath, index) => (
                   <NavLink
-                    href="javascript:void(0)"
+                    href="#"
+                    onClick={handleHrefClick}
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                     data-bs-interval="5000"
                     key={index}

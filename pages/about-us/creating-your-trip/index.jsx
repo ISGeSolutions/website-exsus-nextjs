@@ -26,6 +26,10 @@ function Index() {
   const [rightHeader, setRightHeader] = useState(null);
   const [rightCorner, setRightContent] = useState(null);
 
+  const handleHrefClick = (event) => {
+    event.preventDefault();
+  };
+
   useEffect(() => {
     const carousel = document.querySelector("#carouselExampleInterval");
     new bootstrap.Carousel(carousel);
@@ -78,7 +82,8 @@ function Index() {
         >
           <div className="carousel-inner">
             <a
-              href="javascript:void(0)"
+              href="#"
+              onClick={handleHrefClick}
               target="_blank"
               className="carousel-item active"
               data-bs-interval="5000"

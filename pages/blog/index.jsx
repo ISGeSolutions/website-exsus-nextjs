@@ -45,7 +45,6 @@ function Index() {
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors } = formState;
 
-
   let regionWiseUrl = "/uk";
   if (typeof window !== "undefined") {
     if (window && window.site_region) {
@@ -56,6 +55,10 @@ function Index() {
 
   const onSubmit = (e) => {
     //  (e);
+  };
+
+  const handleHrefClick = (event) => {
+    event.preventDefault();
   };
 
   const generateDynamicLink = (item) => {
@@ -113,7 +116,9 @@ function Index() {
   };
 
   const equalHeight = (resize) => {
-    var elements = document.getElementsByClassName("card_slider_cnt places_to_stay_cnt"),
+    var elements = document.getElementsByClassName(
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -230,7 +235,8 @@ function Index() {
                 </div>
                 <div className="carousel-inner">
                   <a
-                    href="javascript:void(0)"
+                    href="#"
+                    onClick={handleHrefClick}
                     target="_blank"
                     className="carousel-item active"
                     data-bs-interval="5000"
@@ -238,7 +244,8 @@ function Index() {
                     <div className="banner_commn_cls blog_banner01"></div>
                   </a>
                   <a
-                    href="javascript:void(0)"
+                    href="#"
+                    onClick={handleHrefClick}
                     target="_blank"
                     className="carousel-item"
                     data-bs-interval="5000"
@@ -246,7 +253,8 @@ function Index() {
                     <div className="blog_banner02 banner_commn_cls"></div>
                   </a>
                   <a
-                    href="javascript:void(0)"
+                    href="#"
+                    onClick={handleHrefClick}
                     target="_blank"
                     className="carousel-item"
                     data-bs-interval="5000"
@@ -320,8 +328,9 @@ function Index() {
                                 aria-label="Choose a destination"
                                 name="destination"
                                 {...register("destination")}
-                                className={`form-select ${errors.destination ? "is-invalid" : ""
-                                  }`}
+                                className={`form-select ${
+                                  errors.destination ? "is-invalid" : ""
+                                }`}
                               >
                                 <option value="">Choose a destination</option>
                                 {destinationLandingList?.map((element, i) => (
@@ -346,8 +355,9 @@ function Index() {
                                 aria-label="Choose a reason"
                                 name="reason"
                                 {...register("reason")}
-                                className={`form-select ${errors.reason ? "is-invalid" : ""
-                                  }`}
+                                className={`form-select ${
+                                  errors.reason ? "is-invalid" : ""
+                                }`}
                               >
                                 <option value="">Choose a category</option>
                                 {holidaytypesLandingList?.map((element, i) => (
@@ -578,7 +588,6 @@ function Index() {
                       travel offers from our specialists straight to your inbox
                     </p>
                     <div className="contact_form_row">
-
                       <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="container">
                           <div className="row">
@@ -588,7 +597,7 @@ function Index() {
                                   name="title"
                                   className="form-select"
                                   aria-label="Title"
-                                  {...register('title')} // Register the select field with react-hook-form
+                                  {...register("title")} // Register the select field with react-hook-form
                                 >
                                   <option defaultValue>Title *</option>
                                   <option value="Mr">Mr</option>
@@ -608,8 +617,10 @@ function Index() {
                                 <input
                                   type="text"
                                   name="first_name"
-                                  {...register('first_name')} // Register the input field with react-hook-form
-                                  className={`form-control ${errors.first_name ? 'is-invalid' : ''}`}
+                                  {...register("first_name")} // Register the input field with react-hook-form
+                                  className={`form-control ${
+                                    errors.first_name ? "is-invalid" : ""
+                                  }`}
                                   aria-label="First name *"
                                   placeholder="First name *"
                                 />
@@ -623,8 +634,10 @@ function Index() {
                                 <input
                                   type="text"
                                   name="last_name"
-                                  {...register('last_name')} // Register the input field with react-hook-form
-                                  className={`form-control ${errors.last_name ? 'is-invalid' : ''}`}
+                                  {...register("last_name")} // Register the input field with react-hook-form
+                                  className={`form-control ${
+                                    errors.last_name ? "is-invalid" : ""
+                                  }`}
                                   aria-label="Last name *"
                                   placeholder="Last name *"
                                 />
@@ -638,8 +651,10 @@ function Index() {
                                 <input
                                   type="email"
                                   name="email_id"
-                                  {...register('email_id')} // Register the input field with react-hook-form
-                                  className={`form-control ${errors.email_id ? 'is-invalid' : ''}`}
+                                  {...register("email_id")} // Register the input field with react-hook-form
+                                  className={`form-control ${
+                                    errors.email_id ? "is-invalid" : ""
+                                  }`}
                                   aria-label="Email *"
                                   placeholder="Email *"
                                 />
@@ -648,7 +663,10 @@ function Index() {
                                 </div>
                               </div>
                             </div>
-                            <button className="btn prmry_btn mx-auto" type="submit">
+                            <button
+                              className="btn prmry_btn mx-auto"
+                              type="submit"
+                            >
                               Subscribe
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -669,7 +687,6 @@ function Index() {
                           </div>
                         </div>
                       </form>
-
                     </div>
                     <p>* Required form fields</p>
                     <p>

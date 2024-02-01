@@ -38,14 +38,14 @@ function Index() {
   let dictionaryPage = 1;
   const [isMinimized, setMinimized] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
-  const [textareaValue, setTextareaValue] = useState('');
+  const [textareaValue, setTextareaValue] = useState("");
 
   const handleExpandButtonClick = () => {
     setMinimized((prev) => !prev);
   };
 
   const handleNextButtonClick = () => {
-    if (textareaValue.trim() !== '') {
+    if (textareaValue.trim() !== "") {
       setShowThankYou(true);
     }
   };
@@ -53,7 +53,6 @@ function Index() {
   const handleTextareaChange = (e) => {
     setTextareaValue(e.target.value);
   };
-
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -66,25 +65,35 @@ function Index() {
     }
   }
 
-  const handleRedirect = (item) => {
-    // router.push(regionWiseUrl + `/hotel-detail`);
+  const handleRedirect = (res) => {
+    res;
+    // return regionWiseUrl + `/hotel-detail`;
+    let hotelName = res?.attributes?.hotel?.data?.attributes?.friendly_url
+      ?.replace(/ /g, "-")
+      .toLowerCase()
+      .replace(/&/g, "and");
     router.push(
       regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, "and")
-        .replace(/ /g, "-")
-        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+        `/destinations/${res?.attributes?.hotel?.data?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/ /g, "-")
+          .toLowerCase()
+          .replace(
+            /&/g,
+            "and"
+          )}/hotels/${res?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.country_name
+          ?.replace(/ /g, "-")
+          .replace(
+            /&/g,
+            "and"
+          )}/${res?.attributes?.hotel?.data?.attributes?.region?.data?.attributes?.region_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
-          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${item?.attributes?.friendly_url}`
+          .toLowerCase()}/${hotelName}`
     );
   };
 
   const generateDynamicLink = (res) => {
-    (res);
+    res;
     // return regionWiseUrl + `/hotel-detail`;
     let hotelName = res?.attributes?.hotel?.data?.attributes?.friendly_url
       ?.replace(/ /g, "-")
@@ -95,14 +104,14 @@ function Index() {
       `/destinations/${res?.attributes?.hotel?.data?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, "and").replace(/ /g, "-")
         .toLowerCase()}/hotels/${res?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.country_name
-          ?.replace(/ /g, "-")
-          .replace(
-            /&/g,
-            "and"
-          )}/${res?.attributes?.hotel?.data?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
+        ?.replace(/ /g, "-")
+        .replace(
+          /&/g,
+          "and"
+        )}/${res?.attributes?.hotel?.data?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -128,15 +137,18 @@ function Index() {
   //   );
   // };
 
-
   const getDynamicPage = (item) => {
     return `${regionWiseUrl}/${item}`;
-  }
+  };
+
+  const handleHrefClick = (event) => {
+    event.preventDefault();
+  };
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -202,7 +214,9 @@ function Index() {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
-            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
+            let localStorageUk = JSON.parse(
+              localStorage.getItem("websitecontent_uk")
+            );
             localStorage.setItem(
               "websitecontent_uk",
               JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
@@ -214,7 +228,9 @@ function Index() {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
-            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
+            let localStorageUS = JSON.parse(
+              localStorage.getItem("websitecontent_us")
+            );
             localStorage.setItem(
               "websitecontent_us",
               JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
@@ -227,7 +243,9 @@ function Index() {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
-            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
+            let localStorageAsia = JSON.parse(
+              localStorage.getItem("websitecontent_asia")
+            );
             localStorage.setItem(
               "websitecontent_asia",
               JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
@@ -240,7 +258,9 @@ function Index() {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
-            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
+            let localStorageIndia = JSON.parse(
+              localStorage.getItem("websitecontent_india")
+            );
             localStorage.setItem(
               "websitecontent_india",
               JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
@@ -248,8 +268,8 @@ function Index() {
           }
         });
         if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
-          dictionaryPage = x?.meta?.pagination?.page + 1
-          websiteContentCheck(dictionaryPage)
+          dictionaryPage = x?.meta?.pagination?.page + 1;
+          websiteContentCheck(dictionaryPage);
         }
         setWebsiteContent(x.data);
         setIsLoading(false);
@@ -263,10 +283,11 @@ function Index() {
   useEffect(() => {
     // userService.getAll().then(x => setUsers(x));
 
-    if (!localStorage.getItem(`websitecontent_${region.replace(
-      /in/g,
-      "INDIA"
-    ).toLowerCase()}`)) {
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
       websiteContentCheck(dictionaryPage);
     }
     const tooltipTriggerList = document.querySelectorAll(
@@ -284,7 +305,7 @@ function Index() {
 
         setFriendlyUrl(`home/special offers`);
       })
-      .catch((error) => { });
+      .catch((error) => {});
 
     specialoffersService
       .getOffersCustomePage()
@@ -434,7 +455,8 @@ function Index() {
               <div className="carousel-inner">
                 {backgroundImage.map((imagePath, index) => (
                   <a
-                    href="javascript:void(0)"
+                    href="#"
+                    onClick={handleHrefClick}
                     key={index}
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                     data-bs-interval="5000"
@@ -519,7 +541,8 @@ function Index() {
                                   {/*   error => Dont add anchor tag for the below element. you can use onclick fun. */}
                                   <span
                                     key={res?.id}
-                                    href="javascript:void(0)"
+                                    href="#"
+                                    onClick={handleHrefClick}
                                     className="card_slider_img"
                                   >
                                     <img
@@ -538,7 +561,7 @@ function Index() {
                                     {/*   error => Dont add anchor tag for the below element. you can use onclick fun. */}
                                     <a
                                       key={res?.id}
-                                      href={generateDynamicLink(res?.id)}
+                                      href={generateDynamicLink(res)}
                                     >
                                       {res?.attributes?.offer_text}
                                     </a>
@@ -563,20 +586,22 @@ function Index() {
                                               key={res?.id}
                                               tabIndex="0"
                                               data-title={
-                                                res?.attributes?.price_guide_text
+                                                res?.attributes
+                                                  ?.price_guide_text
                                               }
                                             >
                                               {res?.attributes?.currency_symbol.repeat(
                                                 Math.abs(
-                                                  res?.attributes?.price_guide_value
+                                                  res?.attributes
+                                                    ?.price_guide_value
                                                 )
                                               )}
                                               <label>
                                                 {res?.attributes?.currency_symbol.repeat(
                                                   Math.abs(
                                                     5 -
-                                                    res?.attributes
-                                                      ?.price_guide_value
+                                                      res?.attributes
+                                                        ?.price_guide_value
                                                   )
                                                 )}
                                               </label>
@@ -586,7 +611,8 @@ function Index() {
                                       }
                                     )}
                                     <li className="pink_text">
-                                      Special offer: {res?.attributes?.title_text}
+                                      Special offer:{" "}
+                                      {res?.attributes?.title_text}
                                     </li>
                                     <li>
                                       Best for:
@@ -597,11 +623,13 @@ function Index() {
                                     </li>
                                   </ul>
                                 </div>
-                                <button className="btn card_slider_btn justify-content-end">
+                                <button
+                                  className="btn card_slider_btn justify-content-end"
+                                  onClick={() => handleRedirect(res)}
+                                >
                                   <span
                                     key={res?.id}
                                     className="view_itnry_link"
-                                    onClick={() => handleRedirect(item)}
                                   >
                                     View this hotel
                                     <em className="fa-solid fa-chevron-right"></em>
@@ -616,15 +644,32 @@ function Index() {
                   </div>
                 </div>
               </section>
-            </>) : (
+            </>
+          ) : (
             <section className="card_blk_row destinations_blk_row pb-0">
               <div className="container">
                 <div className="row">
                   <div className="col-12">
                     <div className="no_offer_found_blk">
-                      <p>We've found 0 holiday ideas that match your search criteria.</p>
-                      <p>Please try changing one of the elements of your query and search again.</p>
-                      <p>Alternatively, explore our <a href={getDynamicPage("destinations")}>destinations</a> or <a href={getDynamicPage("holiday-types")}>holiday collections</a> to start planning your next escape.</p>
+                      <p>
+                        We've found 0 holiday ideas that match your search
+                        criteria.
+                      </p>
+                      <p>
+                        Please try changing one of the elements of your query
+                        and search again.
+                      </p>
+                      <p>
+                        Alternatively, explore our{" "}
+                        <a href={getDynamicPage("destinations")}>
+                          destinations
+                        </a>{" "}
+                        or{" "}
+                        <a href={getDynamicPage("holiday-types")}>
+                          holiday collections
+                        </a>{" "}
+                        to start planning your next escape.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -632,30 +677,56 @@ function Index() {
             </section>
           )}
 
-          <section className={`chat_window_parnt_blk ${isMinimized ? 'chat_window_minised' : ''}`}>
-            <div className="chat_window_inr_blk" style={{ display: showThankYou ? 'none' : 'block' }}>
+          <section
+            className={`chat_window_parnt_blk ${
+              isMinimized ? "chat_window_minised" : ""
+            }`}
+          >
+            <div
+              className="chat_window_inr_blk"
+              style={{ display: showThankYou ? "none" : "block" }}
+            >
               <p>
                 Is there anything we should improve on this special offer page?
-                <button className="btn chat_window_expnd_btn" onClick={handleExpandButtonClick}>
+                <button
+                  className="btn chat_window_expnd_btn"
+                  onClick={handleExpandButtonClick}
+                >
                   <span className="material-symbols-outlined">expand_more</span>
                 </button>
               </p>
-              <textarea value={textareaValue} onChange={handleTextareaChange}></textarea>
+              <textarea
+                value={textareaValue}
+                onChange={handleTextareaChange}
+              ></textarea>
               <p className="chat_window_footer_blk">
                 <a href="https://www.hotjar.com/try/surveys/?utm_source=client&utm_medium=poll&utm_campaign=insights">
-                  <img src="images/hotjar-logo-small.svg" alt="hotjar" /> Made with Hotjar
+                  <img src="images/hotjar-logo-small.svg" alt="hotjar" /> Made
+                  with Hotjar
                 </a>
-                <button className="btn prmry_btn chat_window_next_btn" onClick={handleNextButtonClick} disabled={!textareaValue.trim()}>
+                <button
+                  className="btn prmry_btn chat_window_next_btn"
+                  onClick={handleNextButtonClick}
+                  disabled={!textareaValue.trim()}
+                >
                   Next
                 </button>
               </p>
             </div>
 
-            <div className="chat_thank_you_blk" style={{ display: showThankYou ? 'block' : 'none' }}>
-              <p className="chat_thank_you_title">Thank you for answering this survey. Your feedback is highly appreciated!</p>
+            <div
+              className="chat_thank_you_blk"
+              style={{ display: showThankYou ? "block" : "none" }}
+            >
+              <p className="chat_thank_you_title">
+                Thank you for answering this survey. Your feedback is highly
+                appreciated!
+              </p>
               <p>
-                Before you go, can we connect your response with data (device, usage, cookies, behavior, and interactions) related to your visits?
-                This will help us give you a better experience. <a href="https://www.hotjarconsent.com/">More information</a>
+                Before you go, can we connect your response with data (device,
+                usage, cookies, behavior, and interactions) related to your
+                visits? This will help us give you a better experience.{" "}
+                <a href="https://www.hotjarconsent.com/">More information</a>
               </p>
               <div className="chat_thank_you_btn">
                 <button className="btn">No thanks</button>
