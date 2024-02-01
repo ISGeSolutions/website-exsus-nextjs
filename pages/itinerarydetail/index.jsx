@@ -40,6 +40,15 @@ function Index() {
   let dictionaryPage = 1;
   const [coordinatesArray, setCoordinatesArray] = useState([]);
   const [modalKey, setModalKey] = useState(0);
+  const [showAllParagraphs, setShowAllParagraphs] = useState(false);
+
+  // Function to toggle between all paragraphs and only the first paragraph
+  const toggleParagraphs = (index) => {
+    setShowAllParagraphs((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -77,7 +86,6 @@ function Index() {
 
   const EnquiryBtn = () => {
     const router = useRouter();
-
     const handleEnquiryClick = () => {
       router.push(`/make-an-enquiry`); // Navigate to the /enquiry page
     };
@@ -107,6 +115,10 @@ function Index() {
       </button>
     );
   };
+
+  const formattedHtml = (htmlData) => {
+    return htmlData?.replace(/<br \/>\s*<br \/>/g, '<br /><br /></p><p>');
+  }
 
   const generateDynamicLink1 = (item) => {
     let hotelName = item?.attributes?.friendly_url
@@ -710,33 +722,30 @@ function Index() {
                     <div className="row">
                       <div className="col-sm-7 pe-sm-0">
                         <div className="itinery_detls_para itinery_para_blk">
-                          <div
+                          {/* <div
                             key={index}
                             dangerouslySetInnerHTML={{
-                              __html: dictioneryFunction(
-                                element?.attributes?.overview_text
+                              __html: dictioneryFunction(formattedHtml(
+                                element?.attributes?.overview_text)
                               ),
                             }}
                           />
-                          <div className="itinery_detls_expnded"></div>
                           <button className="btn itinery_btn">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="#ffffff"
-                              shapeRendering="geometricPrecision"
-                              textRendering="geometricPrecision"
-                              imageRendering="optimizeQuality"
-                              className="up_arrow"
-                              fillRule="evenodd"
-                              clipRule="evenodd"
-                              viewBox="0 0 512 266.77"
-                            >
-                              <path
-                                fillRule="nonzero"
-                                d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"
-                              />
-                            </svg>
-                          </button>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" className="up_arrow" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
+                          </button> */}
+                          {/* Render paragraphs based on toggle state */}
+                          <div dangerouslySetInnerHTML={{
+                            __html: dictioneryFunction(formattedHtml(showAllParagraphs[index] ? element?.attributes?.overview_text : element?.attributes?.overview_text.split('<br />')[0]))
+                          }} />
+
+                          {/* Button to toggle between all paragraphs and only the first paragraph */}
+                          {element?.attributes?.overview_text && element?.attributes?.overview_text.split('<br />').length > 1 && (
+                            <button className={`btn itinery_btn ${showAllParagraphs[index] ? ' itinery_para_expnd' : ''}`} onClick={() => toggleParagraphs(index)}>
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" className="up_arrow" viewBox="0 0 512 266.77">
+                                <path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" />
+                              </svg>
+                            </button>
+                          )}
                         </div>
                       </div>
                       <div className="col-sm-5 ps-sm-0">

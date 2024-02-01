@@ -289,9 +289,8 @@ function Index() {
                         element?.attributes?.image_type == "banner" && (
                           <a
                             key={index}
-                            className={`carousel-item ${
-                              index === 0 ? "active" : ""
-                            }`}
+                            className={`carousel-item ${index === 0 ? "active" : ""
+                              }`}
                             data-interval="5000"
                           >
                             <div
@@ -339,7 +338,7 @@ function Index() {
               <div className="container">
                 <div className="book_wth_confdnce">
                   <div className="row">
-                    <div className="col-lg-4">
+                    <div className="col-12">
                       {/* <p
                         dangerouslySetInnerHTML={{
                           __html: whyusDetails?.content_value,

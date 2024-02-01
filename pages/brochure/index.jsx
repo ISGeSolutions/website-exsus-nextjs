@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 
 import { Link, Spinner, Alert } from "components";
 import { Layout } from "components/users";
+import ReCAPTCHA from "react-google-recaptcha";
 import {
   userService,
   contactusService,
   alertService,
+  holidaytypesService,
   brochureService,
 } from "services";
 import { useRouter } from "next/router";
@@ -101,6 +103,8 @@ function Index() {
   const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
   const [alert, setAlert] = useState(null);
   const [formSubmit, setFormSubmit] = useState(false);
+  const [countinentOptions, setCountinentOptions] = useState([]);
+
 
   // form validation rules
   const validationSchema = Yup.object().shape({
@@ -122,17 +126,6 @@ function Index() {
     );
     setSelectedOptionRegion(selectedOption);
   };
-  const countinentOptions = [
-    { value: "Europe", label: "Europe" },
-    { value: "North Africa", label: "North Africa" },
-    { value: "Africa", label: "Africa" },
-    { value: "Asia", label: "Asia" },
-    { value: "Indian subcontinent", label: "Indian subcontinent" },
-    { value: "Australasia", label: "Australasia" },
-    { value: "USA and Canada", label: "USA and Canada" },
-    { value: "Latin America", label: "Latin America" },
-  ];
-
   // get functions to build form with useForm() hook
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors } = formState;
@@ -178,7 +171,7 @@ function Index() {
               keepAfterRouteChange: true,
             });
             router.push("brochure");
-            // setFormSubmit(true);
+            setFormSubmit(true);
           })
           .catch((error) => {
             showAlert("Operation failed", "error");
@@ -198,6 +191,20 @@ function Index() {
   };
 
   useEffect(() => {
+
+    holidaytypesService.getDestinationDropDown().then((x) => {
+      let arrayOfObjects = [];
+      arrayOfObjects = [
+        ...arrayOfObjects,
+        ...x.data?.map((item) => ({
+          destination_code: item?.attributes?.destination_code,
+          value: item?.attributes?.destination_name,
+          label: item?.attributes?.destination_name,
+        })),
+      ];
+      setCountinentOptions(arrayOfObjects);
+    });
+
     const captchIcnBlk = document.querySelector(".captch_icn_blk");
     const otherElements = document.querySelectorAll(
       ".brochure_header_row, .contact_form_row .brochure_form_row, .brochure_testimonial_row"
@@ -266,221 +273,215 @@ function Index() {
               onClose={closeAlert}
             />
           )}
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="container">
-              <div className="row pt-4">
-                <div className="col-md-4">
-                  <div className="form-input">
-                    <input
-                      type="text"
-                      name="first_name"
-                      {...register("first_name")}
-                      className={`form-control ${
-                        errors.first_name ? "is-invalid" : ""
-                      }`}
-                      aria-label="First name *"
-                      placeholder="First name *"
-                    />
-                    <div className="invalid-feedback mb-1">
-                      {errors.first_name?.message}
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-4">
-                  <div className="form-input">
-                    <input
-                      type="text"
-                      name="title"
-                      {...register("last_name")}
-                      className={`form-control ${
-                        errors.last_name ? "is-invalid" : ""
-                      }`}
-                      aria-label="Last name *"
-                      placeholder="Last name *"
-                    />
-                    <div className="invalid-feedback mb-1">
-                      {errors.last_name?.message}
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-4">
-                  <div className="form-input">
-                    <input
-                      type="email"
-                      name="email_id"
-                      {...register("email_id")}
-                      className={`form-control ${
-                        errors.email_id ? "is-invalid" : ""
-                      }`}
-                      aria-label="Email *"
-                      placeholder="Email *"
-                    />
-                    <div className="invalid-feedback mb-1">
-                      {errors.email_id?.message}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="row pt-4">
-                <div className="col-md-4">
-                  <div className="form-input">
-                    <input
-                      type="number"
-                      aria-label="Phone number *"
-                      placeholder="Phone number *"
-                      {...register("phone_no")}
-                      className={`form-control ${
-                        errors.phone_no ? "is-invalid" : ""
-                      }`}
-                    />
-                  </div>
-                </div>
-                <div className="col-md-4">
-                  <div className="brochure_select_dropdown">
-                    <div className="banner_dropdwn_blk">
-                      <div className="select_drpdwn">
-                        <Select
-                          id="long-value-select"
-                          instanceId="long-value-select"
-                          className="select_container_country"
-                          classNamePrefix="select_country"
-                          placeholder={"Filter by regions"}
-                          styles={styles}
-                          isMulti
-                          isDisabled={isDisabled}
-                          isLoading={isLoading}
-                          isClearable={isClearable}
-                          isRtl={isRtl}
-                          isSearchable={isSearchable}
-                          value={selectedOptionRegion}
-                          onChange={handleOptionRegionChange}
-                          closeMenuOnSelect={false}
-                          hideSelectedOptions={false}
-                          options={countinentOptions}
-                          components={{
-                            Option: InputOption,
-                            MultiValue: CustomMultiValue,
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-4">
-                  <div className="form-input">
-                    <input
-                      type="text"
-                      className="form-control"
-                      aria-label="Where would you like to go?"
-                      {...register("destination")}
-                      placeholder="Where would you like to go? (Optional)"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="contact_form_cntnt">
-                <div className="row">
-                  <div className="col-12">
-                    <div className="contact_form_cntnt_left">
-                      <h3>Sign Up To Receive Our Trade Newsletters</h3>
-                      <p>
-                        We’d love to contact you by newsletter from time to
-                        time, including holiday inspiration and special offers
-                        for your clients. Please tick the box below if you'd
-                        like to hear from us.
-                      </p>
-                      <div className="form-check mb-3">
-                        <input
-                          type="checkbox"
-                          name="newsletter_mail_ind"
-                          {...register("newsletter_mail_ind")}
-                          className={`form-check-input ${
-                            errors.newsletter_mail_ind ? "is-invalid" : ""
+          {!formSubmit ? (
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="container">
+                <div className="row pt-4">
+                  <div className="col-md-4">
+                    <div className="form-input">
+                      <input
+                        type="text"
+                        name="first_name"
+                        {...register("first_name")}
+                        className={`form-control ${errors.first_name ? "is-invalid" : ""
                           }`}
-                          id="exampleCheck1"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="exampleCheck1"
-                        >
-                          YES, I'd like to receive the latest news, offers and
-                          brochure by email.
-                        </label>
-                        <div className="invalid-feedback mb-1">
-                          {errors.newsletter_mail_ind?.message}
-                        </div>
-                      </div>
-                      <p>
-                        Should you wish to unsubscribe from our e-newsletters at
-                        any point, you can do so using the link in the footer of
-                        any e-newsletter you receive from us. We will not share
-                        your details at any point. For more information about
-                        our privacy practices please visit our website. By
-                        confirming your subscription below, you agree that we
-                        will process your information in accordance with this
-                        policy.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="row align-items-center mb-3">
-                      <div className="col-sm-2 col-md-1 text-center mb-3 mb-sm-0">
-                        <img
-                          src="images/mailchimp-gdpr.svg"
-                          alt="mailchimp-gdpr"
-                        />
-                      </div>
-                      <div className="col-sm-10 col-md-11">
-                        <div className="contact_form_cntnt_left">
-                          <p className="mb-0">
-                            We use Mailchimp as our marketing platform. By
-                            clicking below to subscribe, you acknowledge that
-                            your information will be transferred to Mailchimp
-                            for processing.{" "}
-                            <a href="https://mailchimp.com/legal/terms/">
-                              Learn more about Mailchimp's privacy practices
-                              here.
-                            </a>
-                          </p>
-                        </div>
+                        aria-label="First name *"
+                        placeholder="First name *"
+                      />
+                      <div className="invalid-feedback mb-1">
+                        {errors.first_name?.message}
                       </div>
                     </div>
                   </div>
-                  <div className="col-12">
-                    <button
-                      className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
-                      type="submit"
-                      disabled={formState.isSubmitting}
-                    >
-                      {formState.isSubmitting && (
-                        <span className="spinner-border spinner-border-sm mr-1"></span>
-                      )}
-                      Request Brochures
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="#ffffff"
-                        shapeRendering="geometricPrecision"
-                        textRendering="geometricPrecision"
-                        imageRendering="optimizeQuality"
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        viewBox="0 0 267 512.43"
+                  <div className="col-md-4">
+                    <div className="form-input">
+                      <input
+                        type="text"
+                        name="title"
+                        {...register("last_name")}
+                        className={`form-control ${errors.last_name ? "is-invalid" : ""
+                          }`}
+                        aria-label="Last name *"
+                        placeholder="Last name *"
+                      />
+                      <div className="invalid-feedback mb-1">
+                        {errors.last_name?.message}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-md-4">
+                    <div className="form-input">
+                      <input
+                        type="email"
+                        name="email_id"
+                        {...register("email_id")}
+                        className={`form-control ${errors.email_id ? "is-invalid" : ""
+                          }`}
+                        aria-label="Email *"
+                        placeholder="Email *"
+                      />
+                      <div className="invalid-feedback mb-1">
+                        {errors.email_id?.message}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="row pt-4">
+                  <div className="col-md-4">
+                    <div className="form-input">
+                      <input
+                        type="number"
+                        aria-label="Phone number *"
+                        placeholder="Phone number *"
+                        {...register("phone_no")}
+                        className={`form-control ${errors.phone_no ? "is-invalid" : ""
+                          }`}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-4">
+                    <div className="brochure_select_dropdown">
+                      <div className="banner_dropdwn_blk">
+                        <div className="select_drpdwn">
+                          <Select
+                            id="long-value-select"
+                            instanceId="long-value-select"
+                            className="select_container_country"
+                            classNamePrefix="select_country"
+                            placeholder={"Filter by regions "}
+                            styles={styles}
+                            isMulti
+                            isDisabled={isDisabled}
+                            isClearable={isClearable}
+                            isRtl={isRtl}
+                            isSearchable={isSearchable}
+                            value={selectedOptionRegion}
+                            onChange={handleOptionRegionChange}
+                            closeMenuOnSelect={false}
+                            hideSelectedOptions={false}
+                            options={countinentOptions}
+                            components={{
+                              Option: InputOption,
+                              MultiValue: CustomMultiValue,
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-md-4">
+                    <div className="form-input">
+                      <input
+                        type="text"
+                        className="form-control"
+                        aria-label="Where would you like to go?"
+                        {...register("destination")}
+                        placeholder="Where would you like to go? (Optional)"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="contact_form_cntnt">
+                  <div className="row">
+                    <div className="col-12">
+                      <div className="contact_form_cntnt_left">
+                        <h3>Sign Up To Receive Our Trade Newsletters</h3>
+                        <p>
+                          We’d love to contact you by newsletter from time to
+                          time, including holiday inspiration and special offers
+                          for your clients. Please tick the box below if you'd
+                          like to hear from us.
+                        </p>
+                        <div className="form-check mb-3">
+                          <input
+                            type="checkbox"
+                            name="newsletter_mail_ind"
+                            {...register("newsletter_mail_ind")}
+                            className={`form-check-input ${errors.newsletter_mail_ind ? "is-invalid" : ""
+                              }`}
+                            id="exampleCheck1"
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="exampleCheck1"
+                          >
+                            YES, I'd like to receive the latest news, offers and
+                            brochure by email.
+                          </label>
+                          <div className="invalid-feedback mb-1">
+                            {errors.newsletter_mail_ind?.message}
+                          </div>
+                        </div>
+                        <p>
+                          Should you wish to unsubscribe from our e-newsletters at
+                          any point, you can do so using the link in the footer of
+                          any e-newsletter you receive from us. We will not share
+                          your details at any point. For more information about
+                          our privacy practices please visit our website. By
+                          confirming your subscription below, you agree that we
+                          will process your information in accordance with this
+                          policy.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="col-12">
+                      <div className="row align-items-center mb-3">
+                        <div className="col-sm-2 col-md-1 text-center mb-3 mb-sm-0">
+                          <img
+                            src="images/mailchimp-gdpr.svg"
+                            alt="mailchimp-gdpr"
+                          />
+                        </div>
+                        <div className="col-sm-10 col-md-11">
+                          <div className="contact_form_cntnt_left">
+                            <p className="mb-0">
+                              We use Mailchimp as our marketing platform. By
+                              clicking below to subscribe, you acknowledge that
+                              your information will be transferred to Mailchimp
+                              for processing.{" "}
+                              <a href="https://mailchimp.com/legal/terms/">
+                                Learn more about Mailchimp's privacy practices
+                                here.
+                              </a>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-12">
+                      <button
+                        className="btn prmry_btn make_enqury_btn mx-auto text-uppercase"
+                        type="submit"
+                        disabled={formState.isSubmitting}
                       >
-                        <path
-                          fillRule="nonzero"
-                          d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                        />
-                      </svg>
-                    </button>
+                        {formState.isSubmitting && (
+                          <span className="spinner-border spinner-border-sm mr-1"></span>
+                        )}
+                        Request Brochures
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="#ffffff"
+                          shapeRendering="geometricPrecision"
+                          textRendering="geometricPrecision"
+                          imageRendering="optimizeQuality"
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          viewBox="0 0 267 512.43"
+                        >
+                          <path
+                            fillRule="nonzero"
+                            d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                          />
+                        </svg>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </form>
-          {/* {formSubmit ? (
-          ) : (
-            <p>Thank you page</p>
-          )} */}
+            </form>
+          ) : (<p>Thank you page</p>
+          )}
+
           <section className="captch_parnt_blk">
             <div className="captch_icn_blk">
               <img src="\assets\images\captcha.png" alt="captcha" />

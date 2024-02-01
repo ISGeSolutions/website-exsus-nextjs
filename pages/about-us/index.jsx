@@ -336,7 +336,7 @@ function Index() {
                 <div className="book_wth_confdnce">
                   <h2>{whyusDetails?.page_content_2}</h2>
                   <div className="row">
-                    <div className="col-lg-4">
+                    <div className="col-12">
                       <p
                         dangerouslySetInnerHTML={{
                           __html: customPageContent?.data?.filter(
@@ -354,24 +354,6 @@ function Index() {
                         travel to them to stay on top of what’s best, what’s new
                         and what not to miss, so can advise you personally.
                       </p> */}
-                    </div>
-                    <div className="col-lg-4">
-                      <p
-                        dangerouslySetInnerHTML={{
-                          __html: whyusDetails?.sub_content_2,
-                        }}
-                      />
-                      {/* <h3>Tailor-made trips</h3>
-                                <p>All trips put together through us are designed to suit individual needs and interests. Personalise an itinerary by adding more time in your favourite place, including an incredible experience you’d like to have or adding something out of the ordinary, so your holiday turns into a trip of a lifetime.</p> */}
-                    </div>
-                    <div className="col-lg-4">
-                      <p
-                        dangerouslySetInnerHTML={{
-                          __html: whyusDetails?.sub_content_3,
-                        }}
-                      />
-                      {/* <h3>Fully protected</h3>
-                                <p>From the moment you start planning your trip, you will have a dedicated expert looking after you. While away, we’ll provide 24/7 support and emergency contact to ensure that everything runs smoothly. We are members of ABTA, ATOL and AITO so you can rest assured your holiday is fully protected. </p> */}
                     </div>
                   </div>
                 </div>
