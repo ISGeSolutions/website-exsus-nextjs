@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link, Spinner, Alert, Signup } from "components";
 import { Layout } from "components/users";
-import { enquiryService, alertService, thankyouService, homeService } from "services";
+import {
+  enquiryService,
+  alertService,
+  thankyouService,
+  homeService,
+} from "services";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -165,7 +170,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -221,11 +226,13 @@ function Index() {
           </div>
 
           <div className="trvl_info_cntnt">
-            <h2 className="trvl_title">{dictioneryFunction(thankyouData?.custom_page_contents?.data.filter(
-              (res) =>
-                res.attributes.content_name ===
-                "title"
-            )[0]?.attributes?.content_value)}</h2>
+            <h2 className="trvl_title">
+              {dictioneryFunction(
+                thankyouData?.custom_page_contents?.data.filter(
+                  (res) => res.attributes.content_name === "title"
+                )[0]?.attributes?.content_value
+              )}
+            </h2>
             {/* <p className="mb-4">
               Exsus is a little different to other travel companies. All of our
               holidays are truly tailor-made, offering you complete choice and
@@ -246,35 +253,34 @@ function Index() {
             </p> */}
             <div
               dangerouslySetInnerHTML={{
-                __html: dictioneryFunction(thankyouData?.custom_page_contents?.data.filter(
-                  (res) =>
-                    res.attributes.content_name ===
-                    "MakeAnEnquiryThankYouText"
-                )[0]?.attributes?.content_value),
+                __html: dictioneryFunction(
+                  thankyouData?.custom_page_contents?.data.filter(
+                    (res) =>
+                      res.attributes.content_name ===
+                      "MakeAnEnquiryThankYouText"
+                  )[0]?.attributes?.content_value
+                ),
               }}
             />
           </div>
         </div>
       </section>
-      <section class="card_blk_row dark_grey py-5">
-        <div class="container">
-          <div class="book_wth_confdnce">
+      <section className="card_blk_row dark_grey py-5">
+        <div className="container">
+          <div className="book_wth_confdnce">
             <div
               dangerouslySetInnerHTML={{
-                __html: dictioneryFunction(thankyouData?.custom_page_contents?.data.filter(
-                  (res) =>
-                    res.attributes.content_name ===
-                    "Short_Text"
-                )[0]?.attributes?.content_value),
+                __html: dictioneryFunction(
+                  thankyouData?.custom_page_contents?.data.filter(
+                    (res) => res.attributes.content_name === "Short_Text"
+                  )[0]?.attributes?.content_value
+                ),
               }}
             />
           </div>
         </div>
       </section>
-      <section
-        aria-label="Sign up for newsletter"
-        className="newslettr_row"
-      >
+      <section aria-label="Sign up for newsletter" className="newslettr_row">
         <div className="container">
           <h4>Sign up for our newsletter</h4>
           <h5>Receive our latest news and special offers</h5>
