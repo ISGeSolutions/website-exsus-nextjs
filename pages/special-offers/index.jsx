@@ -71,7 +71,7 @@ function Index() {
     router.push(
       regionWiseUrl +
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
+        ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
@@ -93,7 +93,7 @@ function Index() {
     return (
       regionWiseUrl +
       `/destinations/${res?.attributes?.hotel?.data?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
+        ?.replace(/&/g, "and")
         .toLowerCase()}/hotels/${res?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(
@@ -116,7 +116,7 @@ function Index() {
   //   return (
   //     regionWiseUrl +
   //     `/destinations/${item?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.destination?.data?.attributes?.destination_code
-  //       ?.replace(/&/g, " and ")
+  //       ?.replace(/&/g, "and")
   //       .replace(/ /g, "-")
   //       .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
   //       ?.replace(/ /g, "-")

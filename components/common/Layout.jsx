@@ -73,8 +73,7 @@ function Layout({ children }) {
   };
 
   let region = "";
-
-
+  
   const handleSearch = () => {
     router.push("/search");
   };
@@ -229,7 +228,7 @@ function Layout({ children }) {
     }
 
     i18n.changeLanguage(region);
-  }, [ver, region, route]);
+  }, [ver, region]);
 
   return (
     <div>

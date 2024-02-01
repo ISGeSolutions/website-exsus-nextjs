@@ -116,7 +116,7 @@ function Index() {
     return (
       regionWiseUrl +
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
+        ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
         ?.replace(/ /g, "-")
@@ -136,7 +136,7 @@ function Index() {
     router.push(
       regionWiseUrl +
         `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-          ?.replace(/&/g, " and ")
+          ?.replace(/&/g, "and")
           .replace(/ /g, "-")
           .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
@@ -156,7 +156,7 @@ function Index() {
     return (
       regionWiseUrl +
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
+        ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/itinerary/${countryName}-itineraries/${
         item?.attributes?.friendly_url
@@ -172,7 +172,7 @@ function Index() {
     router.push(
       regionWiseUrl +
         `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-          ?.replace(/&/g, " and ")
+          ?.replace(/&/g, "and")
           .replace(/ /g, "-")
           .toLowerCase()}/itinerary/${countryName}-itineraries/${
           item?.attributes?.friendly_url
@@ -330,11 +330,6 @@ function Index() {
 
   equalHeight(true);
 
-  // const overTextFun = (text) => {
-  //   return text?.replace(/\\n/g, "");
-  // };
-  "consolle", router;
-
   useEffect(() => {
     if (
       !localStorage.getItem(
@@ -463,7 +458,7 @@ function Index() {
               url:
                 regionWiseUrl +
                 `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-                  ?.replace(/&/g, " and ")
+                  ?.replace(/&/g, "and")
                   .replace(/ /g, "-")
                   .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
                   ?.replace(/ /g, "-")
@@ -472,7 +467,7 @@ function Index() {
                   ?.replace(/ /g, "-")
                   .replace(/&/g, "and")
                   .toLowerCase()}/${item?.attributes?.friendly_url
-                  ?.replace(/&/g, " and ")
+                  ?.replace(/&/g, "and")
                   .replace(/ /g, "-")
                   .toLowerCase()}`,
             }));
@@ -714,27 +709,38 @@ function Index() {
                   <div className="itinery_detls_cntnt" key={index}>
                     <div className="row">
                       <div className="col-sm-7 pe-sm-0">
-                        <div className="itinery_detls_para">
-                          {/* <h3><span>3 nights</span>BEIJING</h3> */}
+                        <div className="itinery_detls_para itinery_para_blk">
                           <div
+                            key={index}
                             dangerouslySetInnerHTML={{
                               __html: dictioneryFunction(
                                 element?.attributes?.overview_text
                               ),
                             }}
                           />
-                          <div className="itinery_detls_expnded">
-                            {/* <p>from the East Gate. You’ll enjoy a private guided tour of the palace, which was the summer retreat of the royals of the Qing dynasty, walking along its pretty waterfront paths and around landscaped gardens.</p>
-                                        <p>During your stay here you’ll also be expertly guided around many of Beijing’s other landmarks, including Tiananmen Square, the unmissable Forbidden City, an impressive complex dating back to the Ming and Qing dynasties, and the Temple of Heaven, where you can join in a local tai chi session. In the evening, visit a bustling night market and feast on Peking duck at one of the city’s best restaurants.</p>
-                                        <p>You’ll also spend a day visiting the iconic Great Wall, including a tour of the Tibetan-Buddhist Lama Temple on the way. Get under the wall’s skin with a guided tour of Mutianyu, one of the best-preserved sections of the wall.</p> */}
-                          </div>
-                          {/* <button className="btn itinery_btn">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" className="up_arrow" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
-                                    </button> */}
+                          <div className="itinery_detls_expnded"></div>
+                          <button className="btn itinery_btn">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="#ffffff"
+                              shapeRendering="geometricPrecision"
+                              textRendering="geometricPrecision"
+                              imageRendering="optimizeQuality"
+                              className="up_arrow"
+                              fillRule="evenodd"
+                              clipRule="evenodd"
+                              viewBox="0 0 512 266.77"
+                            >
+                              <path
+                                fillRule="nonzero"
+                                d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"
+                              />
+                            </svg>
+                          </button>
                         </div>
                       </div>
                       <div className="col-sm-5 ps-sm-0">
-                        <div className="itinery_detls_img">
+                        <div className="itinery_detls_img" key={index}>
                           <img
                             src={element?.attributes?.image_path}
                             alt={element?.attributes?.image_text}
@@ -867,6 +873,7 @@ function Index() {
                       <div className="card_slider_inr01" key={item.id}>
                         <div className="card_slider">
                           <NavLink
+                            key={item.id}
                             href={generateDynamicLink1(item)}
                             className="card_slider_img"
                           >
@@ -885,7 +892,7 @@ function Index() {
                             )}
                           </NavLink>
                           <div className="card_slider_cnt places_to_stay_cnt">
-                            <h4>
+                            <h4 key={item.id}>
                               <a href={generateDynamicLink1(item)}>
                                 {dictioneryFunction(
                                   item?.attributes?.hotel_name
@@ -929,7 +936,7 @@ function Index() {
                               )}
                               <li>
                                 Best for:
-                                <span>
+                                <span key={item.id}>
                                   {dictioneryFunction(
                                     item?.attributes?.best_for_text
                                   )}
@@ -1011,6 +1018,7 @@ function Index() {
                       <div className="card_slider_inr" key={item.id}>
                         <div className="card_slider">
                           <NavLink
+                            key={item.id}
                             href={generateDynamicLink(item)}
                             className="card_slider_img"
                           >
@@ -1030,7 +1038,7 @@ function Index() {
                             {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
                           </NavLink>
                           <div className="card_slider_cnt places_to_stay_cnt">
-                            <h4>
+                            <h4 key={item.id}>
                               <a href={generateDynamicLink(item)}>
                                 {dictioneryFunction(
                                   item?.attributes?.itin_name
@@ -1074,7 +1082,7 @@ function Index() {
                                 ))}
                               <li>
                                 Travel to:
-                                <span>
+                                <span key={item.id}>
                                   {dictioneryFunction(
                                     item?.attributes?.travel_to_text
                                   )}

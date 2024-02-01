@@ -225,7 +225,7 @@ function CountryPlaceToStay(props) {
             url:
               regionWiseUrl +
               `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-                ?.replace(/&/g, " and ")
+                ?.replace(/&/g, "and")
                 .replace(/ /g, "-")
                 .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
                 ?.replace(/ /g, "-")
@@ -234,7 +234,7 @@ function CountryPlaceToStay(props) {
                 ?.replace(/ /g, "-")
                 .replace(/&/g, "and")
                 .toLowerCase()}/${item?.attributes?.friendly_url
-                ?.replace(/&/g, " and ")
+                ?.replace(/&/g, "and")
                 .replace(/ /g, "-")
                 .toLowerCase()}`,
           }));
@@ -299,7 +299,7 @@ function CountryPlaceToStay(props) {
             url:
               regionWiseUrl +
               `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-                ?.replace(/&/g, " and ")
+                ?.replace(/&/g, "and")
                 .replace(/ /g, "-")
                 .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
                 ?.replace(/ /g, "-")
@@ -308,7 +308,7 @@ function CountryPlaceToStay(props) {
                 ?.replace(/ /g, "-")
                 .replace(/&/g, "and")
                 .toLowerCase()}/${item?.attributes?.friendly_url
-                ?.replace(/&/g, " and ")
+                ?.replace(/&/g, "and")
                 .replace(/ /g, "-")
                 .toLowerCase()}`,
           }));
@@ -364,7 +364,7 @@ function CountryPlaceToStay(props) {
     return (
       regionWiseUrl +
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
+        ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
         ?.replace(/ /g, "-")
@@ -384,7 +384,7 @@ function CountryPlaceToStay(props) {
     return (
       regionWiseUrl +
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, " and ")
+        ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
         ?.replace(/ /g, "-")
@@ -898,7 +898,7 @@ function CountryPlaceToStay(props) {
                               )}
                             </NavLink>
                             <div className="card_slider_cnt places_to_stay_cnt">
-                              <h4>
+                              <h4 key={item.id}>
                                 <a href={generateDynamicLink(item)}>
                                   {dictioneryFunction(
                                     item?.attributes?.hotel_name
@@ -910,7 +910,10 @@ function CountryPlaceToStay(props) {
                                 {item?.attributes?.hotel_country_contents?.data?.map(
                                   (item) => {
                                     return (
-                                      <li class="price_guide_tooltip">
+                                      <li
+                                        className="price_guide_tooltip"
+                                        key={item?.id}
+                                      >
                                         Price guide:
                                         <span
                                           key={item?.id}
@@ -948,7 +951,9 @@ function CountryPlaceToStay(props) {
                                 </li>
                                 <li>
                                   Best for:
-                                  <span>{item?.attributes?.best_for_text}</span>
+                                  <span key={item.id}>
+                                    {item?.attributes?.best_for_text}
+                                  </span>
                                 </li>
                               </ul>
                             </div>
