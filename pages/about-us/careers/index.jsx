@@ -19,7 +19,6 @@ function Index() {
   const [rightCornet, setRightContent] = useState(null);
   let dictionaryPage = 1;
 
-
   let region = "uk";
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
@@ -30,6 +29,10 @@ function Index() {
       }
     }
   }
+
+  const handleHrefClick = (event) => {
+    event.preventDefault();
+  };
 
   const websiteContentCheck = (pageNo) => {
     homeService
@@ -59,7 +62,9 @@ function Index() {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
-            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
+            let localStorageUk = JSON.parse(
+              localStorage.getItem("websitecontent_uk")
+            );
             localStorage.setItem(
               "websitecontent_uk",
               JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
@@ -71,7 +76,9 @@ function Index() {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
-            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
+            let localStorageUS = JSON.parse(
+              localStorage.getItem("websitecontent_us")
+            );
             localStorage.setItem(
               "websitecontent_us",
               JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
@@ -84,7 +91,9 @@ function Index() {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
-            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
+            let localStorageAsia = JSON.parse(
+              localStorage.getItem("websitecontent_asia")
+            );
             localStorage.setItem(
               "websitecontent_asia",
               JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
@@ -97,7 +106,9 @@ function Index() {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
-            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
+            let localStorageIndia = JSON.parse(
+              localStorage.getItem("websitecontent_india")
+            );
             localStorage.setItem(
               "websitecontent_india",
               JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
@@ -105,8 +116,8 @@ function Index() {
           }
         });
         if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
-          dictionaryPage = x?.meta?.pagination?.page + 1
-          websiteContentCheck(dictionaryPage)
+          dictionaryPage = x?.meta?.pagination?.page + 1;
+          websiteContentCheck(dictionaryPage);
         }
         setWebsiteContent(x.data);
         setIsLoading(false);
@@ -147,7 +158,6 @@ function Index() {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -159,17 +169,18 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
   };
 
   useEffect(() => {
-    if (!localStorage.getItem(`websitecontent_${region.replace(
-      /in/g,
-      "INDIA"
-    ).toLowerCase()}`)) {
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
       websiteContentCheck(dictionaryPage);
     }
     careeratexsusService
@@ -390,7 +401,7 @@ function Index() {
             </div>
             <p className="mb-4">
               To apply, please send your CV and cover letter to{" "}
-              <a href="javascript:void(0)">recruitment@exsus.com</a>
+              <a href="#" onClick={handleHrefClick}>recruitment@exsus.com</a>
             </p>
           </div>
           <div className="trvl_info_cntnt">
@@ -464,7 +475,7 @@ function Index() {
             <p className="mb-4">
               To apply, please send your CV and cover letter, stating clearly
               which area/s you specialise in, to{" "}
-              <a href="javascript:void(0)">recruitment@exsus.com </a>
+              <a href="#" onClick={handleHrefClick}>recruitment@exsus.com </a>
             </p>
           </div> */}
         </div>

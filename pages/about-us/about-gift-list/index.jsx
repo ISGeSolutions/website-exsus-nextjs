@@ -13,7 +13,7 @@ import { EnquiryButton } from "../../../components/common/EnquiryBtn";
 var React = require("react");
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
- 
+
 export default Index;
 
 function Index() {
@@ -39,30 +39,36 @@ function Index() {
     }
   }
 
-  const websiteContentCheck = (matches, modifiedString) => {
-    destinationService.getDictionaryDetails(matches, region).then((responseObj) => {
-      if (responseObj) {
-        const res = responseObj?.data;
-        res.forEach((element, index) => {
-          const replacement = element?.attributes?.content_translation_text;
-          const matchString = element?.attributes?.content_word;
-          const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
-          if (checkStr && replacement) {
-            modifiedString = modifiedString.replace(checkStr, replacement);
-          }
-        });
+  const handleHrefClick = (event) => {
+    event.preventDefault();
+  };
 
-        // Set the modified string in state
-        setLongText(modifiedString);
-      }
-    });
+  const websiteContentCheck = (matches, modifiedString) => {
+    destinationService
+      .getDictionaryDetails(matches, region)
+      .then((responseObj) => {
+        if (responseObj) {
+          const res = responseObj?.data;
+          res.forEach((element, index) => {
+            const replacement = element?.attributes?.content_translation_text;
+            const matchString = element?.attributes?.content_word;
+            const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+            if (checkStr && replacement) {
+              modifiedString = modifiedString.replace(checkStr, replacement);
+            }
+          });
+
+          // Set the modified string in state
+          setLongText(modifiedString);
+        }
+      });
   };
 
   useEffect(() => {
     giftListService
       .getGiftListPage()
       .then((x) => {
-        //  
+        //
         setCustomData(x.data[0]);
         const imageCheck = x.data[0].attributes.custom_page_images.data;
         const newBackgroundImages = [];
@@ -196,7 +202,8 @@ function Index() {
                   {backgroundImage.map((imagePath, index) => (
                     <NavLink
                       key={index}
-                      href="javascript:void(0)"
+                      href="#"
+                      onClick={handleHrefClick}
                       className={`carousel-item ${index === 0 ? "active" : ""}`}
                       data-bs-interval="5000"
                     >
@@ -273,7 +280,7 @@ function Index() {
                                     </ul>
                                     <p>
                                         If you have any further queries about the Gift List, please call
-                                        our team on <a href="javascript:void(0)">020 3613 5556</a>
+                                        our team on <a href="#" onClick={handleHrefClick}>020 3613 5556</a>
                                     </p>
                                 </div>
                                 <div className="gift_list_parnt">
@@ -294,7 +301,7 @@ function Index() {
                                     </ul>
                                     <p className="mb-4">
                                         If you have any queries, please contact our team on{" "}
-                                        <a href="javascript:void(0)">020 3613 5556</a>
+                                        <a href="#" onClick={handleHrefClick}>020 3613 5556</a>
                                     </p>
                                     <button
                                         className="btn prmry_btn mx-auto"

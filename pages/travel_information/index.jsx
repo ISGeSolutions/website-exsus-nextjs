@@ -10,6 +10,10 @@ export default Index;
 function Index() {
   const [users, setUsers] = useState(null);
 
+  const handleHrefClick = (event) => {
+    event.preventDefault();
+  };
+
   useEffect(() => {
     // userService.getAll().then(x => setUsers(x));
   }, []);
@@ -46,7 +50,9 @@ function Index() {
               advice on staying safe and healthy abroad. For the latest travel
               advice from the Foreign & Commonwealth Office including security
               and local laws, plus passport and visa information check:{" "}
-              <a href="javascript:void(0)">www.gov.uk/foreign-travel-advice</a>
+              <a href="#" onClick={handleHrefClick}>
+                www.gov.uk/foreign-travel-advice
+              </a>
             </p>
           </div>
           <div className="trvl_info_cntnt">
@@ -59,15 +65,24 @@ function Index() {
               by ABTA’s Code of Conduct. We can also offer you ABTA’s scheme for
               the resolution of disputes which is approved by the Chartered
               Trading Standards Institute. If we can’t resolve your complaint,
-              go to <a href="javascript:void(0)">www.abta.com</a> to use ABTA’s simple procedure.
-              Further information on the Code and ABTA’s assistance in resolving
-              disputes can be found on <a href="javascript:void(0)">www.abta.com.</a>
+              go to{" "}
+              <a href="#" onClick={handleHrefClick}>
+                www.abta.com
+              </a>{" "}
+              to use ABTA’s simple procedure. Further information on the Code
+              and ABTA’s assistance in resolving disputes can be found on{" "}
+              <a href="#" onClick={handleHrefClick}>
+                www.abta.com.
+              </a>
             </p>
             <p>
               For further information about ABTA, the Code of Conduct and the
               arbitration scheme available to you if you have a complaint,
               contact ABTA, 30 Park Street, London SE1 9EQ. Tel: 020 3117 0500
-              or <a href="javascript:void(0)">www.abta.com.</a>
+              or{" "}
+              <a href="#" onClick={handleHrefClick}>
+                www.abta.com.
+              </a>
             </p>
           </div>
           <div className="trvl_info_cntnt">
@@ -80,7 +95,11 @@ function Index() {
               an ATOL Certificate then the booking will not be ATOL-protected.
               Please see our booking terms for information or for more
               information about financial protection and the ATOL Certificate go
-              to: <a href="javascript:void(0)">www.caa.co.uk.</a> Our ATOL number is 5126.
+              to:{" "}
+              <a href="#" onClick={handleHrefClick}>
+                www.caa.co.uk.
+              </a>{" "}
+              Our ATOL number is 5126.
             </p>
           </div>
           <div className="trvl_info_cntnt">
@@ -92,7 +111,11 @@ function Index() {
               Association’s Code of Conduct and Quality Charter.
             </p>
             <p>
-              Visit <a href="javascript:void(0)">www.aito.com</a> for more information
+              Visit{" "}
+              <a href="#" onClick={handleHrefClick}>
+                www.aito.com
+              </a>{" "}
+              for more information
             </p>
           </div>
           <div className="trvl_info_cntnt">
@@ -103,7 +126,10 @@ function Index() {
               responsibility to ensure you obtain the appropriate visa for the
               country you are visiting and hold valid passports. You can check
               your visa requirements by contacting your local embassy or by
-              visiting: <a href="javascript:void(0)">www.cibtvisas.co.uk/exsus.</a>
+              visiting:{" "}
+              <a href="#" onClick={handleHrefClick}>
+                www.cibtvisas.co.uk/exsus.
+              </a>
             </p>
           </div>
           <div className="trvl_info_cntnt">
@@ -113,7 +139,10 @@ function Index() {
               Program are subject to enhanced security requirements. All
               eligible travellers who wish to travel under the Visa Waiver
               Program must apply for authorisation before travel using the
-              following process: <a href="javascript:void(0)">https://esta.cbp.dhs.gov</a>
+              following process:{" "}
+              <a href="#" onClick={handleHrefClick}>
+                https://esta.cbp.dhs.gov
+              </a>
             </p>
           </div>
           <div className="trvl_info_cntnt">
@@ -123,7 +152,9 @@ function Index() {
               and note that some countries require certificates for mandatory
               vaccinations. Visit the NHS website for advice and speak with your
               GP or a travel clinic well in advance of your journey.{" "}
-              <a href="javascript:void(0)">www.fitfortravel.nhs.uk</a>
+              <a href="#" onClick={handleHrefClick}>
+                www.fitfortravel.nhs.uk
+              </a>
             </p>
           </div>
           <div className="trvl_info_cntnt">

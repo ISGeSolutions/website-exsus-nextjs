@@ -23,8 +23,6 @@ function Index() {
   const [isLoading, setIsLoading] = useState(true);
   const [friendlyUrl, setFriendlyUrl] = useState("");
 
-
-
   const validationSchema = Yup.object().shape({
     //title: Yup.string().required("Title is required"),
     first_name: Yup.string().required("First Name is required"),
@@ -38,9 +36,12 @@ function Index() {
     //  ("First Name ", first_name);
     //  ("Last Name ", las_name);
     //  ("Email", email_id);
-
     // (formData);
     //  (e);
+  };
+
+  const handleHrefClick = (event) => {
+    event.preventDefault();
   };
 
   useEffect(() => {
@@ -148,7 +149,7 @@ function Index() {
                         <li>
                           Luxury family holidays in the Galapagos Galapagos
                           Galapagos
-                          <a href="javascript:void(0)">
+                          <a href="#" onClick={handleHrefClick}>
                             Read more
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -169,7 +170,7 @@ function Index() {
                         </li>
                         <li>
                           Bespoke Luxury Holidays
-                          <a href="javascript:void(0)">
+                          <a href="#" onClick={handleHrefClick}>
                             Read more
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -190,7 +191,7 @@ function Index() {
                         </li>
                         <li>
                           Luxury Land-based Holidays in the Galapagos
-                          <a href="javascript:void(0)">
+                          <a href="#" onClick={handleHrefClick}>
                             Read more
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -211,7 +212,7 @@ function Index() {
                         </li>
                         <li>
                           Luxury Caribbean Beach Holidays
-                          <a href="javascript:void(0)">
+                          <a href="#" onClick={handleHrefClick}>
                             Read more
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -232,7 +233,7 @@ function Index() {
                         </li>
                         <li>
                           Luxury Safari Holidays
-                          <a href="javascript:void(0)">
+                          <a href="#" onClick={handleHrefClick}>
                             Read more
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -401,8 +402,9 @@ function Index() {
                                 type="text"
                                 name="first_name"
                                 {...register("first_name")}
-                                className={`form-control ${errors.first_name ? "is-invalid" : ""
-                                  }`}
+                                className={`form-control ${
+                                  errors.first_name ? "is-invalid" : ""
+                                }`}
                                 aria-label="First name *"
                                 placeholder="First name *"
                               />
@@ -429,8 +431,9 @@ function Index() {
                                 type="text"
                                 name="title"
                                 {...register("last_name")}
-                                className={`form-control ${errors.last_name ? "is-invalid" : ""
-                                  }`}
+                                className={`form-control ${
+                                  errors.last_name ? "is-invalid" : ""
+                                }`}
                                 aria-label="Last name *"
                                 placeholder="Last name *"
                               />
@@ -457,8 +460,9 @@ function Index() {
                                 type="email"
                                 name="email_id"
                                 {...register("email_id")}
-                                className={`form-control ${errors.email_id ? "is-invalid" : ""
-                                  }`}
+                                className={`form-control ${
+                                  errors.email_id ? "is-invalid" : ""
+                                }`}
                                 aria-label="Email *"
                                 placeholder="Email *"
                               />

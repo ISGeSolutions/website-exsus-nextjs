@@ -76,7 +76,7 @@ function Index() {
 
     router.push(
       regionWiseUrl +
-      `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-itineraries/${item.attributes?.friendly_url}`
+        `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-itineraries/${item.attributes?.friendly_url}`
     );
   };
 
@@ -102,8 +102,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -184,7 +184,9 @@ function Index() {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
-            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
+            let localStorageUk = JSON.parse(
+              localStorage.getItem("websitecontent_uk")
+            );
             localStorage.setItem(
               "websitecontent_uk",
               JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
@@ -196,7 +198,9 @@ function Index() {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
-            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
+            let localStorageUS = JSON.parse(
+              localStorage.getItem("websitecontent_us")
+            );
             localStorage.setItem(
               "websitecontent_us",
               JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
@@ -209,7 +213,9 @@ function Index() {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
-            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
+            let localStorageAsia = JSON.parse(
+              localStorage.getItem("websitecontent_asia")
+            );
             localStorage.setItem(
               "websitecontent_asia",
               JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
@@ -222,7 +228,9 @@ function Index() {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
-            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
+            let localStorageIndia = JSON.parse(
+              localStorage.getItem("websitecontent_india")
+            );
             localStorage.setItem(
               "websitecontent_india",
               JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
@@ -230,8 +238,8 @@ function Index() {
           }
         });
         if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
-          dictionaryPage = x?.meta?.pagination?.page + 1
-          websiteContentCheck(dictionaryPage)
+          dictionaryPage = x?.meta?.pagination?.page + 1;
+          websiteContentCheck(dictionaryPage);
         }
         setWebsiteContent(x.data);
         setIsLoading(false);
@@ -250,7 +258,7 @@ function Index() {
 
       let storedDataString = "";
       let storedData = "";
-      //  
+      //
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -265,7 +273,7 @@ function Index() {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        //  
+        //
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -296,20 +304,25 @@ function Index() {
     }
   };
 
+  const handleHrefClick = (event) => {
+    event.preventDefault();
+  };
+
   useEffect(() => {
     $(".succss_msg_parnt").hide();
-    if (!localStorage.getItem(`websitecontent_${region.replace(
-      /in/g,
-      "INDIA"
-    ).toLowerCase()}`)) {
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
       websiteContentCheck(dictionaryPage);
     }
     destinationService
       .getCustomPagesData("home")
       .then((x) => {
-        //  
+        //
         const imageCheck = x.data[0]?.attributes?.custom_page_images.data;
-        (imageCheck);
+        imageCheck;
         const newBackgroundImages = [];
         imageCheck.forEach((element) => {
           if (element.attributes.image_type == "banner") {
@@ -357,7 +370,7 @@ function Index() {
         });
 
         setThumbnailImageArr(thumbnailImageArr);
-        (thumbnailImageArr);
+        thumbnailImageArr;
         setIsLoading(false);
       })
       .catch((error) => {
@@ -444,7 +457,6 @@ function Index() {
         // Handle any errors here
         setIsLoading(false);
       });
-
 
     var site_region = localStorage.getItem("site_region");
 
@@ -537,7 +549,8 @@ function Index() {
                   {backgroundImage.map((imagePath, index) => (
                     <NavLink
                       key={index}
-                      href="javascript:void(0)"
+                      href="#"
+                      onClick={handleHrefClick}
                       className={`carousel-item ${index === 0 ? "active" : ""}`}
                       data-interval="3000"
                     >
@@ -702,9 +715,12 @@ function Index() {
                               )
                               .map((res1) => (
                                 <li key={res1.id}>
-                                  {`From ${res1.attributes?.currency_symbol ?? ""
-                                    }${formatPrice(res1.attributes?.price) ?? " xxxx"
-                                    } per person`}
+                                  {`From ${
+                                    res1.attributes?.currency_symbol ?? ""
+                                  }${
+                                    formatPrice(res1.attributes?.price) ??
+                                    " xxxx"
+                                  } per person`}
                                 </li>
                               ))}
                             <li>
@@ -785,12 +801,13 @@ function Index() {
                       data-bs-interval="5000"
                     >
                       <div className="carousel-caption">
-                        <p>{dictioneryFunction(
-                          text?.attributes.review_text
-                        )?.replace(/&nbsp/g, "")
-                          ?.replace(/&rsquo/g, "")
-                          ?.replace(/:/g, "")
-                          ?.replace(/;/g, "")}</p>
+                        <p>
+                          {dictioneryFunction(text?.attributes.review_text)
+                            ?.replace(/&nbsp/g, "")
+                            ?.replace(/&rsquo/g, "")
+                            ?.replace(/:/g, "")
+                            ?.replace(/;/g, "")}
+                        </p>
                         <span>{text?.attributes.client_name}</span>
                       </div>
                     </div>

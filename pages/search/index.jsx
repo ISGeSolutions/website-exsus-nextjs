@@ -10,6 +10,10 @@ export default Index;
 function Index() {
   const [users, setUsers] = useState(null);
 
+  const handleHrefClick = (event) => {
+    event.preventDefault();
+  };
+
   useEffect(() => {
     // userService.getAll().then(x => setUsers(x));
   }, []);
@@ -61,9 +65,13 @@ function Index() {
               <li className="d-inline-block d-sm-flex">
                 <div className="search_result_inr_cnt">
                   <h3>
-                    <a href="javascript:void(0)">Request a brochure</a>
+                    <a href="#" onClick={handleHrefClick}>
+                      Request a brochure
+                    </a>
                   </h3>
-                  <a href="javascript:void(0)">https://mailchi.mp/exsus.com/brochure-request</a>
+                  <a href="#" onClick={handleHrefClick}>
+                    https://mailchi.mp/exsus.com/brochure-request
+                  </a>
                   <p>
                     Titled ‘Escape the Obvious’, our brochure highlights the
                     very finest experiences in our most popular destinations,
@@ -74,17 +82,21 @@ function Index() {
                 </div>
               </li>
               <li className="d-inline-block d-sm-flex">
-                <a href="javascript:void(0)" className="search_result_img_blk">
+                <a
+                  href="#"
+                  onClick={handleHrefClick}
+                  className="search_result_img_blk"
+                >
                   <img src="images/search_result01.jpg" alt="search_result01" />
                 </a>
                 <div className="search_result_inr_cnt">
                   <h3>
-                    <a href="javascript:void(0)">
+                    <a href="#" onClick={handleHrefClick}>
                       Asia Gardens Hotel & Thai Spa | Luxury Hotels in Spain |
                       Exsus
                     </a>
                   </h3>
-                  <a href="javascript:void(0)">
+                  <a href="#" onClick={handleHrefClick}>
                     https://www.exsus.com/destinations/europe/spain/alicante/asia-gardens-hotel-and-thai-spa
                   </a>
                   <p>
@@ -95,46 +107,62 @@ function Index() {
                 </div>
               </li>
               <li className="d-inline-block d-sm-flex">
-                <a href="javascript:void(0)" className="search_result_img_blk">
+                <a
+                  href="#"
+                  onClick={handleHrefClick}
+                  className="search_result_img_blk"
+                >
                   <img src="images/search_result02.jpg" alt="search_result02" />
                 </a>
                 <div className="search_result_inr_cnt">
                   <h3>
-                    <a href="javascript:void(0)">Articles on Asia | Luxury Travel | Exsus</a>
+                    <a href="#" onClick={handleHrefClick}>
+                      Articles on Asia | Luxury Travel | Exsus
+                    </a>
                   </h3>
-                  <a href="javascript:void(0)">
+                  <a href="#" onClick={handleHrefClick}>
                     https://www.exsus.com/destinations/asia/asia-blog-posts
                   </a>
                   <p>Blogs, articles and top tips on Asia</p>
                 </div>
               </li>
               <li className="d-inline-block d-sm-flex">
-                <a href="javascript:void(0)" className="search_result_img_blk">
+                <a
+                  href="#"
+                  onClick={handleHrefClick}
+                  className="search_result_img_blk"
+                >
                   <img src="images/search_result03.jpg" alt="search_result03" />
                 </a>
                 <div className="search_result_inr_cnt">
                   <h3>
-                    <a href="javascript:void(0)">
+                    <a href="#" onClick={handleHrefClick}>
                       Articles on Indonesia, Asia | Luxury Travel | Exsus
                     </a>
                   </h3>
-                  <a href="javascript:void(0)">
+                  <a href="#" onClick={handleHrefClick}>
                     https://www.exsus.com/destinations/asia/indonesia/indonesia-blog-posts
                   </a>
                   <p>Blogs, articles and top tips on Indonesia and Asia</p>
                 </div>
               </li>
               <li className="d-inline-block d-sm-flex">
-                <a href="javascript:void(0)" className="search_result_img_blk">
+                <a
+                  href="#"
+                  onClick={handleHrefClick}
+                  className="search_result_img_blk"
+                >
                   <img src="images/search_result01.jpg" alt="search_result01" />
                 </a>
                 <div className="search_result_inr_cnt">
                   <h3>
-                    <a href="javascript:void(0)">
+                    <a href="#" onClick={handleHrefClick}>
                       Luxury Holidays to Asia & Where to Stay | Exsus Travel
                     </a>
                   </h3>
-                  <a href="javascript:void(0)">https://www.exsus.com/destinations/asia</a>
+                  <a href="#" onClick={handleHrefClick}>
+                    https://www.exsus.com/destinations/asia
+                  </a>
                   <p>
                     Asia is highly addictive. This colourful continent is
                     jam-packed with culture, adventure and variety - perfect for
@@ -149,7 +177,7 @@ function Index() {
             <div className="search_result_pagination_inr">
               <ul>
                 <li>
-                  <a href="javascript:void(0)">
+                  <a href="#" onClick={handleHrefClick}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -166,25 +194,37 @@ function Index() {
                   </a>
                 </li>
                 <li className="active">
-                  <a href="javascript:void(0)">1</a>
+                  <a href="#" onClick={handleHrefClick}>
+                    1
+                  </a>
                 </li>
                 <li>
-                  <a href="javascript:void(0)">2</a>
+                  <a href="#" onClick={handleHrefClick}>
+                    2
+                  </a>
                 </li>
                 <li>
-                  <a href="javascript:void(0)">3</a>
+                  <a href="#" onClick={handleHrefClick}>
+                    3
+                  </a>
                 </li>
                 <li>
-                  <a href="javascript:void(0)">4</a>
+                  <a href="#" onClick={handleHrefClick}>
+                    4
+                  </a>
                 </li>
                 <li>
-                  <a href="javascript:void(0)">5</a>
+                  <a href="#" onClick={handleHrefClick}>
+                    5
+                  </a>
                 </li>
                 <li>
-                  <a href="javascript:void(0)">6</a>
+                  <a href="#" onClick={handleHrefClick}>
+                    6
+                  </a>
                 </li>
                 <li>
-                  <a href="javascript:void(0)">
+                  <a href="#" onClick={handleHrefClick}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"

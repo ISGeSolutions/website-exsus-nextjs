@@ -138,6 +138,10 @@ function Index() {
       });
   };
 
+  const handleHrefClick = (event) => {
+    event.preventDefault();
+  };
+
   useEffect(() => {
     const carousel = document.querySelector("#carouselExampleInterval");
     if (carousel) {
@@ -157,7 +161,9 @@ function Index() {
       .then((x) => {
         setWhyusDetails(x.data[0].attributes);
         setCustomPage(x.data[0].attributes?.custom_page_contents);
-        setFriendlyUrl(`make-an-enquiry/${x.data[0]?.attributes?.page_friendly_url}`);
+        setFriendlyUrl(
+          `make-an-enquiry/${x.data[0]?.attributes?.page_friendly_url}`
+        );
         let modifiedString = x.data.attributes?.page_content_1;
         //  ("  ", modifiedString);
 
@@ -281,7 +287,8 @@ function Index() {
                     (element, index) =>
                       element?.attributes?.image_type == "banner" && (
                         <NavLink
-                          href="javascript:void(0)"
+                          href="#"
+                          onClick={handleHrefClick}
                           className="carousel-item active"
                           data-bs-interval="5000"
                           key={index}

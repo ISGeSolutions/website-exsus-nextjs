@@ -92,6 +92,10 @@ function Index() {
   //     userService.getAll().then(x => setUsers(x));
   // }, []);
 
+  const handleHrefClick = (event) => {
+    event.preventDefault();
+  };
+
   const router = useRouter();
 
   // form validation rules
@@ -136,28 +140,30 @@ function Index() {
   }
 
   const handleMouseOver = () => {
-    document.querySelector('.captch_parnt_blk').classList.add('captch_opn');
+    document.querySelector(".captch_parnt_blk").classList.add("captch_opn");
   };
 
   const handleMouseOverReset = () => {
-    document.querySelector('.captch_parnt_blk').classList.remove('captch_opn');
+    document.querySelector(".captch_parnt_blk").classList.remove("captch_opn");
   };
 
   useEffect(() => {
-    const captchIcnBlk = document.querySelector('.captch_icn_blk');
-    const otherElements = document.querySelectorAll('.brochure_header_row, .contact_form_row .brochure_form_row, .brochure_testimonial_row');
+    const captchIcnBlk = document.querySelector(".captch_icn_blk");
+    const otherElements = document.querySelectorAll(
+      ".brochure_header_row, .contact_form_row .brochure_form_row, .brochure_testimonial_row"
+    );
 
-    captchIcnBlk.addEventListener('mouseover', handleMouseOver);
+    captchIcnBlk.addEventListener("mouseover", handleMouseOver);
 
-    otherElements.forEach(element => {
-      element.addEventListener('mouseover', handleMouseOverReset);
+    otherElements.forEach((element) => {
+      element.addEventListener("mouseover", handleMouseOverReset);
     });
 
     return () => {
-      captchIcnBlk.removeEventListener('mouseover', handleMouseOver);
+      captchIcnBlk.removeEventListener("mouseover", handleMouseOver);
 
-      otherElements.forEach(element => {
-        element.removeEventListener('mouseover', handleMouseOverReset);
+      otherElements.forEach((element) => {
+        element.removeEventListener("mouseover", handleMouseOverReset);
       });
     };
   }, []);
@@ -231,8 +237,9 @@ function Index() {
                       type="text"
                       name="first_name"
                       {...register("first_name")}
-                      className={`form-control ${errors.first_name ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.first_name ? "is-invalid" : ""
+                      }`}
                       aria-label="First name *"
                       placeholder="First name *"
                     />
@@ -247,8 +254,9 @@ function Index() {
                       type="text"
                       name="title"
                       {...register("last_name")}
-                      className={`form-control ${errors.last_name ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.last_name ? "is-invalid" : ""
+                      }`}
                       aria-label="Last name *"
                       placeholder="Last name *"
                     />
@@ -263,8 +271,9 @@ function Index() {
                       type="email"
                       name="email_id"
                       {...register("email_id")}
-                      className={`form-control ${errors.email_id ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.email_id ? "is-invalid" : ""
+                      }`}
                       aria-label="Email *"
                       placeholder="Email *"
                     />
@@ -281,8 +290,9 @@ function Index() {
                       type="number"
                       name="abtanumber"
                       {...register("abtanumber")}
-                      className={`form-control ${errors.abtanumber ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.abtanumber ? "is-invalid" : ""
+                      }`}
                       aria-label="ABTA number *"
                       placeholder="ABTA number *"
                     />
@@ -297,8 +307,9 @@ function Index() {
                       type="text"
                       name="travelagentname"
                       {...register("travelagentname")}
-                      className={`form-control ${errors.travelagentname ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.travelagentname ? "is-invalid" : ""
+                      }`}
                       aria-label="Travel agent name *"
                       placeholder="Travel agent name *"
                     />
@@ -312,8 +323,9 @@ function Index() {
                     <select
                       name="digitalbrochureonly"
                       {...register("digitalbrochureonly")}
-                      className={`form-select  ${errors.digitalbrochureonly ? "is-invalid" : ""
-                        }`}
+                      className={`form-select  ${
+                        errors.digitalbrochureonly ? "is-invalid" : ""
+                      }`}
                       aria-label="How many brochures would you like?"
                     >
                       <option value="">Digital brochures only</option>
@@ -335,8 +347,9 @@ function Index() {
                       type="text"
                       name="addressline1"
                       {...register("addressline1")}
-                      className={`form-control ${errors.addressline1 ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.addressline1 ? "is-invalid" : ""
+                      }`}
                       aria-label="Address line 1"
                       placeholder="Address line 1"
                     />
@@ -351,8 +364,9 @@ function Index() {
                       type="text"
                       name="addressline2"
                       {...register("addressline2")}
-                      className={`form-control ${errors.addressline2 ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.addressline2 ? "is-invalid" : ""
+                      }`}
                       aria-label="Address line 2"
                       placeholder="Address line 2"
                     />
@@ -367,8 +381,9 @@ function Index() {
                       type="text"
                       name="city"
                       {...register("city")}
-                      className={`form-control ${errors.city ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.city ? "is-invalid" : ""
+                      }`}
                       aria-label="City"
                       placeholder="City"
                     />
@@ -383,8 +398,9 @@ function Index() {
                       type="text"
                       name="state"
                       {...register("state")}
-                      className={`form-control ${errors.state ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.state ? "is-invalid" : ""
+                      }`}
                       aria-label="State/Prov/Region"
                       placeholder="State/Prov/Region"
                     />
@@ -399,8 +415,9 @@ function Index() {
                       type="text"
                       name="zip"
                       {...register("zip")}
-                      className={`form-control ${errors.zip ? "is-invalid" : ""
-                        }`}
+                      className={`form-control ${
+                        errors.zip ? "is-invalid" : ""
+                      }`}
                       aria-label="Postal/Zip"
                       placeholder="Postal/Zip"
                     />
@@ -415,8 +432,9 @@ function Index() {
                       aria-label="Country"
                       name="country"
                       {...register("country")}
-                      className={`form-select ${errors.country ? "is-invalid" : ""
-                        }`}
+                      className={`form-select ${
+                        errors.country ? "is-invalid" : ""
+                      }`}
                     >
                       <option value="">Country</option>
                       <option value="USA">USA</option>
@@ -446,8 +464,9 @@ function Index() {
                           type="checkbox"
                           name="newsletter_mail_ind"
                           {...register("newsletter_mail_ind")}
-                          className={`form-check-input ${errors.newsletter_mail_ind ? "is-invalid" : ""
-                            }`}
+                          className={`form-check-input ${
+                            errors.newsletter_mail_ind ? "is-invalid" : ""
+                          }`}
                           id="exampleCheck1"
                         />
                         <label
@@ -579,7 +598,9 @@ function Index() {
             If you have any issues requesting a brochure,
             <br />
             please call us on 0207 563 1304 or email{" "}
-            <a href="javascript:void(0)">escape@exsus.com</a>
+            <a href="#" onClick={handleHrefClick}>
+              escape@exsus.com
+            </a>
           </p>
         </footer>
       </Layout>

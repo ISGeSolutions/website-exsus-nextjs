@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 
 import { Link, Spinner, Alert } from "components";
 import { Layout } from "components/users";
-import ReCAPTCHA from "react-google-recaptcha";
 import {
   userService,
   contactusService,
@@ -105,7 +104,6 @@ function Index() {
   const [formSubmit, setFormSubmit] = useState(false);
   const [countinentOptions, setCountinentOptions] = useState([]);
 
-
   // form validation rules
   const validationSchema = Yup.object().shape({
     first_name: Yup.string().required("First Name is required"),
@@ -150,6 +148,10 @@ function Index() {
     }
   }
 
+  const handleHrefClick = (event) => {
+    event.preventDefault();
+  };
+
   const generateDynamicLink = () => {
     return regionWiseUrl + `/travel-agent-brochures`;
   };
@@ -191,7 +193,6 @@ function Index() {
   };
 
   useEffect(() => {
-
     holidaytypesService.getDestinationDropDown().then((x) => {
       let arrayOfObjects = [];
       arrayOfObjects = [
@@ -283,8 +284,9 @@ function Index() {
                         type="text"
                         name="first_name"
                         {...register("first_name")}
-                        className={`form-control ${errors.first_name ? "is-invalid" : ""
-                          }`}
+                        className={`form-control ${
+                          errors.first_name ? "is-invalid" : ""
+                        }`}
                         aria-label="First name *"
                         placeholder="First name *"
                       />
@@ -299,8 +301,9 @@ function Index() {
                         type="text"
                         name="title"
                         {...register("last_name")}
-                        className={`form-control ${errors.last_name ? "is-invalid" : ""
-                          }`}
+                        className={`form-control ${
+                          errors.last_name ? "is-invalid" : ""
+                        }`}
                         aria-label="Last name *"
                         placeholder="Last name *"
                       />
@@ -315,8 +318,9 @@ function Index() {
                         type="email"
                         name="email_id"
                         {...register("email_id")}
-                        className={`form-control ${errors.email_id ? "is-invalid" : ""
-                          }`}
+                        className={`form-control ${
+                          errors.email_id ? "is-invalid" : ""
+                        }`}
                         aria-label="Email *"
                         placeholder="Email *"
                       />
@@ -334,8 +338,9 @@ function Index() {
                         aria-label="Phone number *"
                         placeholder="Phone number *"
                         {...register("phone_no")}
-                        className={`form-control ${errors.phone_no ? "is-invalid" : ""
-                          }`}
+                        className={`form-control ${
+                          errors.phone_no ? "is-invalid" : ""
+                        }`}
                       />
                     </div>
                   </div>
@@ -397,8 +402,9 @@ function Index() {
                             type="checkbox"
                             name="newsletter_mail_ind"
                             {...register("newsletter_mail_ind")}
-                            className={`form-check-input ${errors.newsletter_mail_ind ? "is-invalid" : ""
-                              }`}
+                            className={`form-check-input ${
+                              errors.newsletter_mail_ind ? "is-invalid" : ""
+                            }`}
                             id="exampleCheck1"
                           />
                           <label
@@ -413,14 +419,14 @@ function Index() {
                           </div>
                         </div>
                         <p>
-                          Should you wish to unsubscribe from our e-newsletters at
-                          any point, you can do so using the link in the footer of
-                          any e-newsletter you receive from us. We will not share
-                          your details at any point. For more information about
-                          our privacy practices please visit our website. By
-                          confirming your subscription below, you agree that we
-                          will process your information in accordance with this
-                          policy.
+                          Should you wish to unsubscribe from our e-newsletters
+                          at any point, you can do so using the link in the
+                          footer of any e-newsletter you receive from us. We
+                          will not share your details at any point. For more
+                          information about our privacy practices please visit
+                          our website. By confirming your subscription below,
+                          you agree that we will process your information in
+                          accordance with this policy.
                         </p>
                       </div>
                     </div>
@@ -479,7 +485,8 @@ function Index() {
                 </div>
               </div>
             </form>
-          ) : (<p>Thank you page</p>
+          ) : (
+            <p>Thank you page</p>
           )}
 
           <section className="captch_parnt_blk">
@@ -538,7 +545,9 @@ function Index() {
             If you have any issues requesting a brochure,
             <br />
             please call us on 0207 563 1304 or email{" "}
-            <a href="javascript:void(0)">escape@exsus.com</a>
+            <a href="#" onClick={handleHrefClick}>
+              escape@exsus.com
+            </a>
           </p>
         </footer>
       </Layout>

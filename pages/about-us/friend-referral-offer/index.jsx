@@ -38,6 +38,10 @@ function Index() {
     }
   }
 
+  const handleHrefClick = (event) => {
+    event.preventDefault();
+  };
+
   const websiteContentCheck = (matches, modifiedString) => {
     destinationService
       .getDictionaryDetails(matches, region)
@@ -64,7 +68,7 @@ function Index() {
     referralSchmeService
       .getReferralPage()
       .then((x) => {
-        //  
+        //
         setReferralData(x.data[0]);
         const imageCheck = x.data[0].attributes.custom_page_images.data;
         const newBackgroundImages = [];
@@ -206,7 +210,8 @@ function Index() {
                   {backgroundImage.map((imagePath, index) => (
                     <NavLink
                       key={index}
-                      href="javascript:void(0)"
+                      href="#"
+                      onClick={handleHrefClick}
                       className={`carousel-item ${index === 0 ? "active" : ""}`}
                       data-bs-interval="5000"
                     >
