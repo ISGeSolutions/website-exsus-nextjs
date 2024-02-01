@@ -3032,11 +3032,17 @@
   display: block;
 }
 
+.itinery_detls_cntnt .itinery_detls_para button.itinery_para_expnd svg.up_arrow {
+  transform: rotate(180deg);
+  margin: 0 auto;
+}
+
 /* line 158, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
 .itinery_detls_cntnt .itinery_detls_para button.read_more svg.up_arrow {
   transform: rotate(180deg);
   margin: 0 auto;
 }
+
 
 /* line 166, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
 .itinery_detls_cntnt .itinery_detls_para button span.read_less {

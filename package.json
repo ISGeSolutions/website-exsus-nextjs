@@ -42,6 +42,7 @@
         "react-facebook-pixel": "^1.0.4",
         "react-ga": "^3.3.1",
         "react-ga4": "^2.1.0",
+        "react-google-recaptcha": "^3.1.0",
         "react-helmet": "^6.1.0",
         "react-hook-form": "^7.43.9",
         "react-html-email": "^3.0.0",
