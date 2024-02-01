@@ -223,14 +223,14 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
+      `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
     );
   };
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -405,7 +405,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -573,9 +573,9 @@ function Index() {
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="#ffffff"
-                        shape-rendering="geometricPrecision"
-                        text-rendering="geometricPrecision"
-                        image-rendering="optimizeQuality"
+                        shapeRendering="geometricPrecision"
+                        textRendering="geometricPrecision"
+                        imageRendering="optimizeQuality"
                         fill-rule="evenodd"
                         clip-rule="evenodd"
                         viewBox="0 0 267 512.43"

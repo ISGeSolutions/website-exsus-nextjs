@@ -11,13 +11,16 @@ export default Index;
 function Index() {
     const [users, setUsers] = useState(null);
 
+    const handleHrefClick = (event) => {
+        event.preventDefault();
+    }
+
     useEffect(() => {
         // userService.getAll().then(x => setUsers(x));
     }, []);
 
     return (
         <Layout>
-
             <section className="banner_blk_row">
                 <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-indicators">
@@ -29,22 +32,22 @@ function Index() {
                         <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="5" aria-label="Slide 6"></button>
                     </div>
                     <div className="carousel-inner">
-                        <a href="javascript:void(0)" target="_blank" className="carousel-item active" data-bs-interval="5000">
+                        <a href="#" onClick={handleHrefClick} target="_blank" className="carousel-item active" data-bs-interval="5000">
                             <div className="banner_commn_cls when_to_go_banner01"></div>
                         </a>
-                        <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
+                        <a href="#" onClick={handleHrefClick} target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="banner_commn_cls when_to_go_banner02"></div>
                         </a>
-                        <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
+                        <a href="#" onClick={handleHrefClick} target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="banner_commn_cls when_to_go_banner03"></div>
                         </a>
-                        <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
+                        <a href="#" onClick={handleHrefClick} target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="banner_commn_cls when_to_go_banner04"></div>
                         </a>
-                        <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
+                        <a href="#" onClick={handleHrefClick} target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="banner_commn_cls when_to_go_banner05"></div>
                         </a>
-                        <a href="javascript:void(0)" target="_blank" className="carousel-item" data-bs-interval="5000">
+                        <a href="#" onClick={handleHrefClick} target="_blank" className="carousel-item" data-bs-interval="5000">
                             <div className="banner_commn_cls when_to_go_banner06"></div>
                         </a>
                     </div>
@@ -71,36 +74,36 @@ function Index() {
                             <div className="col-lg-6">
                                 <div className="month_wise_cnt_blk">
                                     <h4>Colombia</h4>
-                                    <a href="javascript:void(0)"><img src="images/jan_month_detail01.jpg" alt="jan_month_detail01" className="img-fluid" /></a>
-                                    <p>Have an all-in-one action-packed holiday during <a href="javascript:void(0)">Colombia’s</a> peak season. Now a UNESCO World Heritage Site, the walled port city of Cartagena is definitely worth a look for its historic, colourful buildings and pretty squares with buzzing bars and restaurants, while the Caribbean islands nearby offer some extraordinary diving opportunities. Visit the Coffee Triangle (Zona Cafetera) to sample some of the world’s best coffee in one of the gorgeous haciendas that sit in the lush tropical landscapes.</p>
+                                    <a href="#" onClick={handleHrefClick}><img src="images/jan_month_detail01.jpg" alt="jan_month_detail01" className="img-fluid" /></a>
+                                    <p>Have an all-in-one action-packed holiday during <a href="#" onClick={handleHrefClick}>Colombia’s</a> peak season. Now a UNESCO World Heritage Site, the walled port city of Cartagena is definitely worth a look for its historic, colourful buildings and pretty squares with buzzing bars and restaurants, while the Caribbean islands nearby offer some extraordinary diving opportunities. Visit the Coffee Triangle (Zona Cafetera) to sample some of the world’s best coffee in one of the gorgeous haciendas that sit in the lush tropical landscapes.</p>
                                 </div>
                             </div>
                             <div className="col-lg-6">
                                 <div className="month_wise_cnt_blk">
                                     <h4>Sweden</h4>
-                                    <a href="javascript:void(0)"><img src="images/jan_month_detail02.jpg" alt="jan_month_detail02" className="img-fluid" /></a>
-                                    <p>Following the Christmas season, <a href="javascript:void(0)">Sweden’s</a> crowds largely disappear, making it the perfect time to for a snowy getaway. This is THE place for a wow-factor family adventure to keep your spirits up after the hum of Christmas. Go dog-sledding with the children or visit the unique <a href="javascript:void(0)">ICEHOTEL</a> - with suites carved entirely of ice, it is the first of its kind.</p>
+                                    <a href="#" onClick={handleHrefClick}><img src="images/jan_month_detail02.jpg" alt="jan_month_detail02" className="img-fluid" /></a>
+                                    <p>Following the Christmas season, <a href="#" onClick={handleHrefClick}>Sweden’s</a> crowds largely disappear, making it the perfect time to for a snowy getaway. This is THE place for a wow-factor family adventure to keep your spirits up after the hum of Christmas. Go dog-sledding with the children or visit the unique <a href="#" onClick={handleHrefClick}>ICEHOTEL</a> - with suites carved entirely of ice, it is the first of its kind.</p>
                                 </div>
                             </div>
                             <div className="col-lg-6">
                                 <div className="month_wise_cnt_blk">
                                     <h4>Antigua</h4>
-                                    <a href="javascript:void(0)"><img src="images/jan_month_detail03.jpg" alt="jan_month_detail03" className="img-fluid" /></a>
-                                    <p><a href="javascript:void(0)">Antigua</a> is undoubtedly one of our favourite Caribbean islands, with its 365 beaches meaning you could visit a different one every day of the year if you wanted to. That said, we suggest sticking to the driest months of the year when the beaches are at their very best. Plus, what better way to start the year than with a week or so in the sun on a luxury beach holiday, leaving you feeling relaxed and refreshed ready for the year ahead.</p>
+                                    <a href="#" onClick={handleHrefClick}><img src="images/jan_month_detail03.jpg" alt="jan_month_detail03" className="img-fluid" /></a>
+                                    <p><a href="#" onClick={handleHrefClick}>Antigua</a> is undoubtedly one of our favourite Caribbean islands, with its 365 beaches meaning you could visit a different one every day of the year if you wanted to. That said, we suggest sticking to the driest months of the year when the beaches are at their very best. Plus, what better way to start the year than with a week or so in the sun on a luxury beach holiday, leaving you feeling relaxed and refreshed ready for the year ahead.</p>
                                 </div>
                             </div>
                             <div className="col-lg-6">
                                 <div className="month_wise_cnt_blk">
                                     <h4>Thailand</h4>
-                                    <a href="javascript:void(0)"><img src="images/jan_month_detail04.jpg" alt="jan_month_detail04" className="img-fluid" /></a>
-                                    <p>A luxury wellness holiday to <a href="javascript:void(0)">Thailand</a> might be just the ticket for a healthy start to the New Year. Thanks to its location in the tropics, most of Thailand experiences perfect weather at this time of year: its deep in the midst of its long, dry season and gloriously sunny for days on end. Luxury retreats such as <a href="javascript:void(0)">Kata Rocks</a> in Phuket have excellent wellness programmes, where you can detox and de-stress amidst the azure waters, white-sand beaches and swaying palms.</p>
+                                    <a href="#" onClick={handleHrefClick}><img src="images/jan_month_detail04.jpg" alt="jan_month_detail04" className="img-fluid" /></a>
+                                    <p>A luxury wellness holiday to <a href="#" onClick={handleHrefClick}>Thailand</a> might be just the ticket for a healthy start to the New Year. Thanks to its location in the tropics, most of Thailand experiences perfect weather at this time of year: its deep in the midst of its long, dry season and gloriously sunny for days on end. Luxury retreats such as <a href="#" onClick={handleHrefClick}>Kata Rocks</a> in Phuket have excellent wellness programmes, where you can detox and de-stress amidst the azure waters, white-sand beaches and swaying palms.</p>
                                 </div>
                             </div>
                             <div className="col-lg-6">
                                 <div className="month_wise_cnt_blk">
                                     <h4>New Zealand</h4>
-                                    <a href="javascript:void(0)"><img src="images/jan_month_detail05.jpg" alt="jan_month_detail05" className="img-fluid" /></a>
-                                    <p>A world away, down in the Southern Hemisphere, summer is in full swing. January is <a href="javascript:void(0)">New Zealand’s</a> warmest month and a perfect time of year for exploring its world-className great outdoors. Long, bright days make it fantastic for hiking and mountain biking holidays in the South Island or adventure activities in adrenaline-fuelled Queenstown, while coastal hotspots such as the Bay of Islands are perfect for catching the sun and enjoying coastal walks on gorgeous beaches. Post-Christmas festivities continue into the New Year and you’ll encounter plenty of festivals, concerts and events up and down the country for all the family to enjoy. </p>
+                                    <a href="#" onClick={handleHrefClick}><img src="images/jan_month_detail05.jpg" alt="jan_month_detail05" className="img-fluid" /></a>
+                                    <p>A world away, down in the Southern Hemisphere, summer is in full swing. January is <a href="#" onClick={handleHrefClick}>New Zealand’s</a> warmest month and a perfect time of year for exploring its world-className great outdoors. Long, bright days make it fantastic for hiking and mountain biking holidays in the South Island or adventure activities in adrenaline-fuelled Queenstown, while coastal hotspots such as the Bay of Islands are perfect for catching the sun and enjoying coastal walks on gorgeous beaches. Post-Christmas festivities continue into the New Year and you’ll encounter plenty of festivals, concerts and events up and down the country for all the family to enjoy. </p>
                                 </div>
                             </div>
                         </div>
@@ -114,18 +117,18 @@ function Index() {
                     <div className="month_clickable_links">
                         <p>For where to go in other months, see our Holiday calendar</p>
                         <ul>
-                            <li><a href="javascript:void(0)">January</a></li>
-                            <li><a href="javascript:void(0)">February</a></li>
-                            <li><a href="javascript:void(0)">March</a></li>
-                            <li><a href="javascript:void(0)">April</a></li>
-                            <li><a href="javascript:void(0)">May</a></li>
-                            <li><a href="javascript:void(0)">June</a></li>
-                            <li><a href="javascript:void(0)">July</a></li>
-                            <li><a href="javascript:void(0)">August</a></li>
-                            <li><a href="javascript:void(0)">September</a></li>
-                            <li><a href="javascript:void(0)">October</a></li>
-                            <li><a href="javascript:void(0)">November</a></li>
-                            <li><a href="javascript:void(0)">December</a></li>
+                            <li><a href="#" onClick={handleHrefClick}>January</a></li>
+                            <li><a href="#" onClick={handleHrefClick}>February</a></li>
+                            <li><a href="#" onClick={handleHrefClick}>March</a></li>
+                            <li><a href="#" onClick={handleHrefClick}>April</a></li>
+                            <li><a href="#" onClick={handleHrefClick}>May</a></li>
+                            <li><a href="#" onClick={handleHrefClick}>June</a></li>
+                            <li><a href="#" onClick={handleHrefClick}>July</a></li>
+                            <li><a href="#" onClick={handleHrefClick}>August</a></li>
+                            <li><a href="#" onClick={handleHrefClick}>September</a></li>
+                            <li><a href="#" onClick={handleHrefClick}>October</a></li>
+                            <li><a href="#" onClick={handleHrefClick}>November</a></li>
+                            <li><a href="#" onClick={handleHrefClick}>December</a></li>
                         </ul>
                     </div>
                     <h3 className="title_cls">OUR TOP HOLIDAY IDEAS FOR TRAVEL IN JANUARY</h3>
@@ -136,11 +139,11 @@ function Index() {
                         <div className="carousel01">
                             <div className="card_slider_inr01">
                                 <div className="card_slider">
-                                    <a href="javascript:void(0)" className="card_slider_img">
+                                    <a href="#" onClick={handleHrefClick} className="card_slider_img">
                                         <img src="images/month_slider01.jpg" alt="month-slider01" className="img-fluid" />
                                     </a>
                                     <div className="card_slider_cnt places_to_stay_cnt">
-                                        <h4><a href="javascript:void(0)">JOURNEY INTO MIDDLE EARTH</a></h4>
+                                        <h4><a href="#" onClick={handleHrefClick}>JOURNEY INTO MIDDLE EARTH</a></h4>
                                         <ul>
                                             <li>Family Road Trip to New Zealand</li>
                                             <li>New Zealand</li>
@@ -157,11 +160,11 @@ function Index() {
 
                             <div className="card_slider_inr01">
                                 <div className="card_slider">
-                                    <a href="javascript:void(0)" className="card_slider_img">
+                                    <a href="#" onClick={handleHrefClick} className="card_slider_img">
                                         <img src="images/month_slider02.jpg" alt="month-slider02" className="img-fluid" />
                                     </a>
                                     <div className="card_slider_cnt places_to_stay_cnt">
-                                        <h4><a href="javascript:void(0)">FLAGSHIP NORWAY</a></h4>
+                                        <h4><a href="#" onClick={handleHrefClick}>FLAGSHIP NORWAY</a></h4>
                                         <ul>
                                             <li>Norway in Exsus Signature Style</li>
                                             <li>Norway</li>
@@ -178,11 +181,11 @@ function Index() {
 
                             <div className="card_slider_inr01">
                                 <div className="card_slider">
-                                    <a href="javascript:void(0)" className="card_slider_img">
+                                    <a href="#" onClick={handleHrefClick} className="card_slider_img">
                                         <img src="images/month_slider03.jpg" alt="month_slider03" className="img-fluid" />
                                     </a>
                                     <div className="card_slider_cnt places_to_stay_cnt">
-                                        <h4><a href="javascript:void(0)">THE KING & I</a></h4>
+                                        <h4><a href="#" onClick={handleHrefClick}>THE KING & I</a></h4>
                                         <ul>
                                             <li>Seriously Stylish Island Hopping in Thailand</li>
                                             <li>Thailand</li>
@@ -199,11 +202,11 @@ function Index() {
 
                             <div className="card_slider_inr01">
                                 <div className="card_slider">
-                                    <a href="javascript:void(0)" className="card_slider_img">
+                                    <a href="#" onClick={handleHrefClick} className="card_slider_img">
                                         <img src="images/month_slider04.jpg" alt="month_slider04" className="img-fluid" />
                                     </a>
                                     <div className="card_slider_cnt places_to_stay_cnt">
-                                        <h4><a href="javascript:void(0)">Culture, Action and Relaxation</a></h4>
+                                        <h4><a href="#" onClick={handleHrefClick}>Culture, Action and Relaxation</a></h4>
                                         <ul>
                                             <li>The Ultimate Colombia Adventure Holiday</li>
                                             <li>Colombia</li>
@@ -220,11 +223,11 @@ function Index() {
 
                             <div className="card_slider_inr01">
                                 <div className="card_slider">
-                                    <a href="javascript:void(0)" className="card_slider_img">
+                                    <a href="#" onClick={handleHrefClick} className="card_slider_img">
                                         <img src="images/month_slider05.jpg" alt="month_slider05" className="img-fluid" />
                                     </a>
                                     <div className="card_slider_cnt places_to_stay_cnt">
-                                        <h4><a href="javascript:void(0)">Ultimate Family Adventure to Swedish Lapland</a></h4>
+                                        <h4><a href="#" onClick={handleHrefClick}>Ultimate Family Adventure to Swedish Lapland</a></h4>
                                         <ul>
                                             <li>Reindeer, Santa & the Northern Lights</li>
                                             <li>Sweden</li>

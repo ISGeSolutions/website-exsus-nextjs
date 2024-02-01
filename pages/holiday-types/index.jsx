@@ -219,6 +219,7 @@ function Index() {
                     href="javascript:void(0)"
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                     data-bs-interval="5000"
+                    key={index}
                   >
                     <div
                       className="banner_commn_cls"

@@ -93,7 +93,7 @@ function Index() {
     return (
       regionWiseUrl +
       `/destinations/${res?.attributes?.hotel?.data?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, "and")
+        ?.replace(/&/g, "and").replace(/ /g, "-")
         .toLowerCase()}/hotels/${res?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(

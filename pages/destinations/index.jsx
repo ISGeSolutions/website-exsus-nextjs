@@ -7,6 +7,7 @@ import {
   alertService,
   userService,
   whyusService,
+  homeService
 } from "services";
 import { Inspireme } from "components";
 import Head from "next/head";
@@ -50,6 +51,10 @@ function Index() {
         regionWiseUrl = "/" + window.site_region;
       }
     }
+  }
+
+  const handleHrefClick = (event) => {
+    event.preventDefault();
   }
 
   function capitalizeEveryWord(text) {
@@ -365,7 +370,7 @@ function Index() {
                 {backgroundImage.map((imagePath, index) => (
                   <NavLink
                     key={index}
-                    href="javascript:void(0)"
+                    href="#" onClick={handleHrefClick}
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                     data-bs-interval="5000"
                   >
@@ -529,7 +534,7 @@ function Index() {
                 <div className="carousel-indicators">
                   {testimonials.map((_, index) => (
                     <button
-                      key={index}
+                      key={_?.id}
                       type="button"
                       data-bs-target="#Testimonials"
                       data-bs-slide-to={index}

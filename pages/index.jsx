@@ -135,6 +135,11 @@ function Index() {
     }
   };
 
+
+  const handleHrefClick = (event) => {
+    event.preventDefault();
+  }
+
   const dynamicLinkHolidayas = (itemId, id) => {
     // if (itemId && itemId == 'AF') {
     //     return regionWiseUrl + `/destinations/africa/` + id;
@@ -537,7 +542,8 @@ function Index() {
                   {backgroundImage.map((imagePath, index) => (
                     <NavLink
                       key={index}
-                      href="javascript:void(0)"
+                      href="#"
+                      onClick={handleHrefClick}
                       className={`carousel-item ${index === 0 ? "active" : ""}`}
                       data-interval="3000"
                     >
