@@ -41,6 +41,7 @@ import CookieComponent from "./../components/CookieComponent";
 // import ReactPixel from 'react-facebook-pixel';
 import { Helmet } from "react-helmet";
 import ReactGA from "react-ga4";
+import globalVariables from "../config"; './../config';
 
 ReactGA.initialize("G-2H6GP9JWWY");
 // import './../../CustomModal_css.css'; // Import your custom styles
@@ -72,7 +73,7 @@ function FacebookPixel() {
     import("react-facebook-pixel")
       .then((x) => x.default)
       .then((ReactPixel) => {
-        ReactPixel.init("YOUR_PIXEL_ID"); // 1613634385322868
+        ReactPixel.init("YOUR_PIXEL_ID"); // globalVariables?.PIXEL_ID 1613634385322868
         ReactPixel.pageView();
         Router.events.on("routeChangeComplete", () => {
           ReactPixel.pageView();
@@ -98,7 +99,7 @@ function App({ Component, pageProps }) {
   useEffect(() => {
     $(".succss_msg_parnt").hide();
     // initGA();
-    ReactGA.initialize("G-2H6GP9JWWY");
+    ReactGA.initialize(globalVariables?.ReactGA_ID);
     ReactGA.send({
       hitType: "pageview",
       page: "/why-us",
@@ -176,7 +177,7 @@ function App({ Component, pageProps }) {
         <meta charSet="UTF-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Luxury Holiday Destinations</title>
+        <title>{globalVariables.title}</title>
         <link rel="icon" type="images/png" href="/images/fav-icon.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
