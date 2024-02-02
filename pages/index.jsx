@@ -76,7 +76,7 @@ function Index() {
 
     router.push(
       regionWiseUrl +
-        `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-itineraries/${item.attributes?.friendly_url}`
+      `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-itineraries/${item.attributes?.friendly_url}`
     );
   };
 
@@ -102,8 +102,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -134,6 +134,11 @@ function Index() {
       return regionWiseUrl + `/holiday-types/${modifieditem}`;
     }
   };
+
+
+  const handleHrefClick = (event) => {
+    event.preventDefault();
+  }
 
   const dynamicLinkHolidayas = (itemId, id) => {
     // if (itemId && itemId == 'AF') {
@@ -304,9 +309,9 @@ function Index() {
     }
   };
 
-  const handleHrefClick = (event) => {
-    event.preventDefault();
-  };
+  // const handleHrefClick = (event) => {
+  //   event.preventDefault();
+  // };
 
   useEffect(() => {
     $(".succss_msg_parnt").hide();
@@ -715,12 +720,10 @@ function Index() {
                               )
                               .map((res1) => (
                                 <li key={res1.id}>
-                                  {`From ${
-                                    res1.attributes?.currency_symbol ?? ""
-                                  }${
-                                    formatPrice(res1.attributes?.price) ??
+                                  {`From ${res1.attributes?.currency_symbol ?? ""
+                                    }${formatPrice(res1.attributes?.price) ??
                                     " xxxx"
-                                  } per person`}
+                                    } per person`}
                                 </li>
                               ))}
                             <li>

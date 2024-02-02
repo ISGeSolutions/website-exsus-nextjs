@@ -45,7 +45,7 @@ function CountryWhentogo({ onDataFromChild, sendDataToParent }) {
   //         <td key={i} colSpan={quantity} className="calender_trip_detls">
   //           <a href={url}>{/* Replace '#' with your actual link */}
   //             {text}
-  //             <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 267 512.43">
+  //             <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 267 512.43">
   //               <path fill-rule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path>
   //             </svg>
   //           </a>
@@ -59,19 +59,65 @@ function CountryWhentogo({ onDataFromChild, sendDataToParent }) {
   //   return tds;
   // };
 
-  const generateTds = (starting_point, quantity, text, url) => {
+  // const generateTds = (starting_point, quantity, text, url) => {
+  //   const tds = [];
+
+  //   // Generate empty cells before colspan
+  //   for (let i = 0; i < starting_point - 1; i++) {
+  //     tds.push(<td key={i}></td>);
+  //   }
+
+  //   // Generate colspan cell
+  //   if (quantity > 0) {
+  //     tds.push(
+  //       <td
+  //         key={starting_point - 1 + quantity}
+  //         colSpan={quantity}
+  //         className="calender_trip_detls"
+  //       >
+  //         <a href={url}>
+  //           {text}
+  //           <svg
+  //             xmlns="http://www.w3.org/2000/svg"
+  //             fill="#ffffff"
+  //             shapeRendering="geometricPrecision"
+  //             textRendering="geometricPrecision"
+  //             imageRendering="optimizeQuality"
+  //             fill-rule="evenodd"
+  //             clip-rule="evenodd"
+  //             viewBox="0 0 267 512.43"
+  //           >
+  //             <path
+  //               fill-rule="nonzero"
+  //               d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+  //             />
+  //           </svg>
+  //         </a>
+  //       </td>
+  //     );
+  //   }
+
+  //   // Generate empty cells after colspan
+  //   for (let i = starting_point - 1 + quantity; i < 12; i++) {
+  //     tds.push(<td key={i}></td>);
+  //   }
+
+  //   return tds;
+  // };
+
+  const generateTds = (starting_point, quantity, text, url, rowIndex) => {
     const tds = [];
 
     // Generate empty cells before colspan
     for (let i = 0; i < starting_point - 1; i++) {
-      tds.push(<td key={i}></td>);
+      tds.push(<td key={`empty-before-${rowIndex}-${i}`}></td>);
     }
 
     // Generate colspan cell
     if (quantity > 0) {
       tds.push(
         <td
-          key={starting_point - 1 + quantity}
+          key={`colspan-${rowIndex}`}
           colSpan={quantity}
           className="calender_trip_detls"
         >
@@ -88,7 +134,7 @@ function CountryWhentogo({ onDataFromChild, sendDataToParent }) {
               viewBox="0 0 267 512.43"
             >
               <path
-                fill-rule="nonzero"
+                fillRule="nonzero"
                 d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
               />
             </svg>
@@ -99,11 +145,12 @@ function CountryWhentogo({ onDataFromChild, sendDataToParent }) {
 
     // Generate empty cells after colspan
     for (let i = starting_point - 1 + quantity; i < 12; i++) {
-      tds.push(<td key={i}></td>);
+      tds.push(<td key={`empty-after-${rowIndex}-${i}`}></td>);
     }
 
     return tds;
   };
+
 
   const sendDataToParentHandler = (data) => {
     // Send the data to the parent
@@ -371,6 +418,46 @@ function CountryWhentogo({ onDataFromChild, sendDataToParent }) {
             each trip
           </p>
           <div className="calender_blk_inr">
+            {/* <table>
+              <tbody>
+                <tr>
+                  <th>Jan</th>
+                  <th>Feb</th>
+                  <th>Mar</th>
+                  <th>Apr</th>
+                  <th>May</th>
+                  <th>Jun</th>
+                  <th>Jul</th>
+                  <th>Aug</th>
+                  <th>Sep</th>
+                  <th>Oct</th>
+                  <th>Nov</th>
+                  <th>Dec</th>
+                </tr>
+                <tr>
+                  {Array.from({ length: 12 }, (_, index) => (
+                    <td key={index}></td>
+                  ))}
+                </tr>
+                {whenToGoData?.map((item, rowIndex) => (
+                  <>
+                    <tr key={item.id}>
+                      {generateTds(
+                        item?.attributes?.starting_point,
+                        item?.attributes?.quantity,
+                        item?.attributes?.link_text,
+                        item?.attributes?.link_url
+                      )}
+                    </tr>
+                    <tr>
+                      {Array.from({ length: 12 }, (_, index) => (
+                        <td key={index}></td>
+                      ))}
+                    </tr>
+                  </>
+                ))}
+              </tbody>
+            </table> */}
             <table>
               <tbody>
                 <tr>
@@ -390,29 +477,31 @@ function CountryWhentogo({ onDataFromChild, sendDataToParent }) {
                 <tr>
                   {/* Add 12 empty cells */}
                   {Array.from({ length: 12 }, (_, index) => (
-                    <td key={index}></td>
+                    <td key={`empty-${index}`}></td>
                   ))}
                 </tr>
-                {whenToGoData?.map((item, rowIndex) => (
-                  <>
-                    <tr key={item.id}>
-                      {generateTds(
-                        item?.attributes?.starting_point,
-                        item?.attributes?.quantity,
-                        item?.attributes?.link_text,
-                        item?.attributes?.link_url
-                      )}
-                    </tr>
-                    <tr>
-                      {/* Add 12 empty cells */}
-                      {Array.from({ length: 12 }, (_, index) => (
-                        <td key={index}></td>
-                      ))}
-                    </tr>
-                  </>
-                ))}
+                {whenToGoData?.flatMap((item, rowIndex) => ([
+                  <tr key={`row-${rowIndex}`}>
+                    {generateTds(
+                      item?.attributes?.starting_point,
+                      item?.attributes?.quantity,
+                      item?.attributes?.link_text,
+                      item?.attributes?.link_url,
+                      rowIndex // Ensure rowIndex is unique within the generateTds function
+                    )}
+                  </tr>,
+                  <tr key={`empty-row-${rowIndex}`}>
+                    {/* Add 12 empty cells */}
+                    {Array.from({ length: 12 }, (_, cellIndex) => (
+                      <td key={`empty-${rowIndex}-${cellIndex}`}></td>
+                    ))}
+                  </tr>
+                ]))}
               </tbody>
             </table>
+
+
+
           </div>
         </div>
       </section>

@@ -7,6 +7,7 @@ import {
   alertService,
   userService,
   whyusService,
+  homeService
 } from "services";
 import { Inspireme } from "components";
 import Head from "next/head";
@@ -51,6 +52,10 @@ function Index() {
     }
   }
 
+  const handleHrefClick = (event) => {
+    event.preventDefault();
+  }
+
   function capitalizeEveryWord(text) {
     return text?.replace(/\b\w/g, function (match) {
       return match.toUpperCase();
@@ -91,9 +96,9 @@ function Index() {
     router.push("/where-to-go");
   };
 
-  const handleHrefClick = (event) => {
-    event.preventDefault();
-  };
+  // const handleHrefClick = (event) => {
+  //   event.preventDefault();
+  // };
 
   const websiteContentCheck = (pageNo) => {
     homeService
@@ -379,8 +384,7 @@ function Index() {
                 {backgroundImage.map((imagePath, index) => (
                   <NavLink
                     key={index}
-                    href="#"
-                    onClick={handleHrefClick}
+                    href="#" onClick={handleHrefClick}
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                     data-bs-interval="5000"
                   >
@@ -552,7 +556,7 @@ function Index() {
                 <div className="carousel-indicators">
                   {testimonials.map((_, index) => (
                     <button
-                      key={index}
+                      key={_?.id}
                       type="button"
                       data-bs-target="#Testimonials"
                       data-bs-slide-to={index}

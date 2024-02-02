@@ -78,8 +78,8 @@ function Index() {
                         shapeRendering="geometricPrecision"
                         textRendering="geometricPrecision"
                         imageRendering="optimizeQuality"
-                        fillRule="evenodd"
-                        clipRule="evenodd"
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
                         viewBox="0 0 267 512.43"
                       >
                         <path
