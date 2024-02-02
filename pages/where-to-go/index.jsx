@@ -40,6 +40,10 @@ function Index() {
     }
   }
 
+  const handleHrefClick = (event) => {
+    event.preventDefault();
+  };
+
   const websiteContentCheck = (pageNo) => {
     homeService
       .getAllWebsiteContent(region, pageNo)
@@ -69,7 +73,9 @@ function Index() {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
-            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
+            let localStorageUk = JSON.parse(
+              localStorage.getItem("websitecontent_uk")
+            );
             localStorage.setItem(
               "websitecontent_uk",
               JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
@@ -81,7 +87,9 @@ function Index() {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
-            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
+            let localStorageUS = JSON.parse(
+              localStorage.getItem("websitecontent_us")
+            );
             localStorage.setItem(
               "websitecontent_us",
               JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
@@ -94,7 +102,9 @@ function Index() {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
-            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
+            let localStorageAsia = JSON.parse(
+              localStorage.getItem("websitecontent_asia")
+            );
             localStorage.setItem(
               "websitecontent_asia",
               JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
@@ -107,7 +117,9 @@ function Index() {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
-            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
+            let localStorageIndia = JSON.parse(
+              localStorage.getItem("websitecontent_india")
+            );
             localStorage.setItem(
               "websitecontent_india",
               JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
@@ -115,8 +127,8 @@ function Index() {
           }
         });
         if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
-          dictionaryPage = x?.meta?.pagination?.page + 1
-          websiteContentCheck(dictionaryPage)
+          dictionaryPage = x?.meta?.pagination?.page + 1;
+          websiteContentCheck(dictionaryPage);
         }
         setWebsiteContent(x.data);
         setIsLoading(false);
@@ -135,7 +147,7 @@ function Index() {
 
       let storedDataString = "";
       let storedData = "";
-      //  
+      //
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -150,7 +162,7 @@ function Index() {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        //  
+        //
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -169,7 +181,7 @@ function Index() {
               }
             });
             return modifiedString;
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -181,16 +193,17 @@ function Index() {
 
   useEffect(() => {
     // userService.getAll().then(x => setUsers(x));
-    if (!localStorage.getItem(`websitecontent_${region.replace(
-      /in/g,
-      "INDIA"
-    ).toLowerCase()}`)) {
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
       websiteContentCheck(dictionaryPage);
     }
     whereToGoService
       .getWhereToGoPage()
       .then((x) => {
-        //  
+        //
         setCustomData(x.data[0]?.attributes?.custom_page_images);
         SetFriendlyUrl(x.data[0].attributes?.page_friendly_url);
         const imageCheck = x.data[0].attributes.custom_page_images.data;
@@ -204,7 +217,7 @@ function Index() {
         //  (newBackgroundImages);
         const data = x.data[0]?.attributes?.custom_page_contents?.data;
         let modifiedString = "";
-        //  
+        //
 
         if (data) {
           data.forEach((element, index) => {
@@ -219,11 +232,11 @@ function Index() {
             } else if (element?.attributes?.content_name == "Right_Corner") {
               setRightCorner(element?.attributes?.content_value);
             } else if (element?.attributes?.content_name == "Long_Text") {
-              //  
+              //
               //  (element?.attributes?.content_value);
               setLongText(element?.attributes?.content_value);
             } else if (element?.attributes?.content_name == "Short_Text") {
-              //  
+              //
               //  (element?.attributes?.content_value);
               setShortText(element?.attributes?.content_value);
             }
@@ -328,7 +341,8 @@ function Index() {
               {backgroundImage.map((imagePath, index) => (
                 <NavLink
                   key={index}
-                  href="javascript:void(0)"
+                  href="#"
+                  onClick={handleHrefClick}
                   className={`carousel-item ${index === 0 ? "active" : ""}`}
                   data-bs-interval="5000"
                 >
@@ -657,7 +671,7 @@ function Index() {
             <div className="row">
               <div className="col-md-6">
                 <div className="card_blk_inr card_blk_overlay start_planng_holdy_blk">
-                  <a href="javascript:void(0)" target="_blank">
+                  <a href="#" onClick={handleHrefClick} target="_blank">
                     <img
                       src="images/start_planng_holdy.jpg"
                       alt="start_planng_holdy"
@@ -716,7 +730,7 @@ function Index() {
 
               <div className="col-md-6">
                 <div className="card_blk_inr card_blk_overlay mt-3 mt-md-0">
-                  <a href="javascript:void(0)" target="_blank">
+                  <a href="#" onClick={handleHrefClick} target="_blank">
                     <img
                       src="images/about_us_card01.jpg"
                       alt="Card image 07"
@@ -751,7 +765,7 @@ function Index() {
                   </a>
                 </div>
                 <div className="card_blk_inr card_blk_overlay mb-0">
-                  <a href="javascript:void(0)">
+                  <a href="#" onClick={handleHrefClick}>
                     <img
                       src="images/about_us_card02.jpg"
                       alt="Card image 08"

@@ -71,6 +71,10 @@ function Index() {
   //   );
   // };
 
+  const handleHrefClick = (event) => {
+    event.preventDefault();
+  };
+
   const generateDynamicLink = (item) => {
     let hotelName = item?.attributes?.friendly_url
       ?.replace(/ /g, "-")
@@ -124,18 +128,18 @@ function Index() {
   };
 
   const handleRedirectForItinerary = (item) => {
-    return (
+    router.push(
       regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, "and")
-        .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${item?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}-itineraries/${item?.attributes?.friendly_url}`
+        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/&/g, "and")
+          .replace(/ /g, "-")
+          .toLowerCase()}/itinerary/${item?.attributes?.country?.data?.attributes?.country_name
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -474,7 +478,8 @@ function Index() {
                     <NavLink
                       key={index}
                       // target="_blank"
-                      href="javascript:void(0)"
+                      href="#"
+                      onClick={handleHrefClick}
                       className={`carousel-item ${index === 0 ? "active" : ""}`}
                       data-interval="5000"
                     >

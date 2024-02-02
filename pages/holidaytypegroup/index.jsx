@@ -167,6 +167,10 @@ function Index() {
     setIsModalOpen(false);
   };
 
+  const handleHrefClick = (event) => {
+    event.preventDefault();
+  };
+
   const handleOptionCountryChange = (selectedOption) => {
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
@@ -525,12 +529,13 @@ function Index() {
                 ))}
               </div>
               <div className="carousel-inner">
-                {/* <a href="javascript:void(0)" target="_blank" className="carousel-item active" data-bs-interval="5000">
+                {/* <a href="#" onClick={handleHrefClick} target="_blank" className="carousel-item active" data-bs-interval="5000">
                             <div className="banner_commn_cls"> */}
                 {backgroundImage.map((imagePath, index) => (
                   // <img src={imagePath} alt="holiday_types_detls_card02" className="img-fluid" />
                   <NavLink
-                    href="javascript:void(0)"
+                    href="#"
+                    onClick={handleHrefClick}
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                     data-bs-interval="5000"
                   >

@@ -40,7 +40,6 @@ function Index() {
   const [rightCorner, setRightCorner] = useState(null);
   let dictionaryPage = 1;
 
-
   let region = "uk";
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
@@ -92,6 +91,10 @@ function Index() {
     router.push("/where-to-go");
   };
 
+  const handleHrefClick = (event) => {
+    event.preventDefault();
+  };
+
   const websiteContentCheck = (pageNo) => {
     homeService
       .getAllWebsiteContent(region, pageNo)
@@ -120,7 +123,9 @@ function Index() {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
-            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
+            let localStorageUk = JSON.parse(
+              localStorage.getItem("websitecontent_uk")
+            );
             localStorage.setItem(
               "websitecontent_uk",
               JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
@@ -132,7 +137,9 @@ function Index() {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
-            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
+            let localStorageUS = JSON.parse(
+              localStorage.getItem("websitecontent_us")
+            );
             localStorage.setItem(
               "websitecontent_us",
               JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
@@ -145,7 +152,9 @@ function Index() {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
-            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
+            let localStorageAsia = JSON.parse(
+              localStorage.getItem("websitecontent_asia")
+            );
             localStorage.setItem(
               "websitecontent_asia",
               JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
@@ -158,7 +167,9 @@ function Index() {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
-            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
+            let localStorageIndia = JSON.parse(
+              localStorage.getItem("websitecontent_india")
+            );
             localStorage.setItem(
               "websitecontent_india",
               JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
@@ -166,8 +177,8 @@ function Index() {
           }
         });
         if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
-          dictionaryPage = x?.meta?.pagination?.page + 1
-          websiteContentCheck(dictionaryPage)
+          dictionaryPage = x?.meta?.pagination?.page + 1;
+          websiteContentCheck(dictionaryPage);
         }
         setWebsiteContent(x.data);
         setIsLoading(false);
@@ -178,9 +189,7 @@ function Index() {
       });
   };
 
-
   const dictioneryFunction = (data) => {
-
     let modifiedString = data;
     if (modifiedString) {
       const regex = /{[a-zA-Z0-9-]+}/g;
@@ -188,7 +197,7 @@ function Index() {
 
       let storedDataString = "";
       let storedData = "";
-      //  
+      //
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -203,7 +212,7 @@ function Index() {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        //  
+        //
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -213,12 +222,12 @@ function Index() {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
                 if (storedData[matchString.toLowerCase()]) {
-                  replacement = storedData[matchString.toLowerCase()]
+                  replacement = storedData[matchString.toLowerCase()];
                 }
               } else {
                 replacement = storedData[matchString];
                 if (!replacement) {
-                  replacement = storedData[matchString.toLowerCase()]
+                  replacement = storedData[matchString.toLowerCase()];
                 }
               }
               const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
@@ -240,12 +249,12 @@ function Index() {
   };
 
   useEffect(() => {
-
     $(".succss_msg_parnt").hide();
-    if (!localStorage.getItem(`websitecontent_${region.replace(
-      /in/g,
-      "INDIA"
-    ).toLowerCase()}`)) {
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
       websiteContentCheck(dictionaryPage);
     }
 
@@ -313,15 +322,20 @@ function Index() {
     <>
       <Head>
         <title>
-          {
-            dictioneryFunction(destinations?.attributes?.custom_page_contents?.data?.filter(
+          {dictioneryFunction(
+            destinations?.attributes?.custom_page_contents?.data?.filter(
               (res) => res.attributes?.content_name == "Title"
-            )[0]?.attributes?.content_value)
-          }
+            )[0]?.attributes?.content_value
+          )}
         </title>
-        <meta name="description" content={dictioneryFunction(destinations?.attributes?.custom_page_contents?.data?.filter(
-          (res) => res.attributes?.content_name == "MetaDescription"
-        )[0]?.attributes?.content_value)}></meta>
+        <meta
+          name="description"
+          content={dictioneryFunction(
+            destinations?.attributes?.custom_page_contents?.data?.filter(
+              (res) => res.attributes?.content_name == "MetaDescription"
+            )[0]?.attributes?.content_value
+          )}
+        ></meta>
         <script
           type="text/javascript"
           src="/assets/javascripts/card-slider.js"
@@ -365,7 +379,8 @@ function Index() {
                 {backgroundImage.map((imagePath, index) => (
                   <NavLink
                     key={index}
-                    href="javascript:void(0)"
+                    href="#"
+                    onClick={handleHrefClick}
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                     data-bs-interval="5000"
                   >
@@ -389,17 +404,25 @@ function Index() {
               </div>
               <div className="row">
                 <div className="destinations_cntnt_blk">
-                  <h2>{
-                    capitalizeEveryWord(dictioneryFunction(destinations?.attributes?.custom_page_contents?.data?.filter(
-                      (res) => res.attributes?.content_name == "LuxuryHolidaysHeader"
-                    )[0]?.attributes?.content_value))
-                  }</h2>
+                  <h2>
+                    {capitalizeEveryWord(
+                      dictioneryFunction(
+                        destinations?.attributes?.custom_page_contents?.data?.filter(
+                          (res) =>
+                            res.attributes?.content_name ==
+                            "LuxuryHolidaysHeader"
+                        )[0]?.attributes?.content_value
+                      )
+                    )}
+                  </h2>
                   <p
                     // className="mb-3"
                     dangerouslySetInnerHTML={{
-                      __html: dictioneryFunction(destinations?.attributes?.custom_page_contents?.data?.filter(
-                        (res) => res.attributes?.content_name == "Long_Text"
-                      )[0]?.attributes?.content_value)
+                      __html: dictioneryFunction(
+                        destinations?.attributes?.custom_page_contents?.data?.filter(
+                          (res) => res.attributes?.content_name == "Long_Text"
+                        )[0]?.attributes?.content_value
+                      ),
                     }}
                   ></p>
                 </div>
@@ -548,12 +571,13 @@ function Index() {
                       data-bs-interval="5000"
                     >
                       <div className="carousel-caption">
-                        <p>{dictioneryFunction(
-                          text?.attributes.review_text
-                        )?.replace(/&nbsp/g, "")
-                          ?.replace(/&rsquo/g, "")
-                          ?.replace(/:/g, "")
-                          ?.replace(/;/g, "")}</p>
+                        <p>
+                          {dictioneryFunction(text?.attributes.review_text)
+                            ?.replace(/&nbsp/g, "")
+                            ?.replace(/&rsquo/g, "")
+                            ?.replace(/:/g, "")
+                            ?.replace(/;/g, "")}
+                        </p>
                         <span>{text?.attributes.client_name}</span>
                       </div>
                     </div>
