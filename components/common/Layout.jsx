@@ -225,14 +225,13 @@ function Layout({ children }) {
       }
     }
 
+    const { pathname, search, hash, href } = window.location;
     const site_region_local = localStorage.getItem("site_region");
 
-    if (site_region_local !== null && site_region_local !== undefined) {
-      // The variable is set in local storage and is not undefined
-      window.region = site_region_local;
-      region = site_region_local;
+    if(pathname == '/uk' || pathname == '/us' || pathname == '/asia' || pathname == '/in') {
+      region = pathname;
       countries.forEach((element) => {
-        if (element.value == site_region_local) {
+        if (element.value == pathname.slice(1)) {
           handleChange(element);
           setSelected(element);
           setMyVariable(element.value);
@@ -241,20 +240,35 @@ function Layout({ children }) {
         }
       });
     } else {
-      // The variable is not set in local storage or is undefined
-      if (typeof window !== "undefined") {
-        if (window && window.site_region) {
-          if (window.site_region !== "uk") {
-            region = window.site_region;
-            countries.forEach((element) => {
-              if (element.value == window.site_region) {
-                handleChange(element);
-                setSelected(element);
-                setMyVariable(element.value);
-                localStorage.setItem("site_region", element.value);
-                window.site_region = element.value;
-              }
-            });
+      if (site_region_local !== null && site_region_local !== undefined) {
+        // The variable is set in local storage and is not undefined
+        window.region = site_region_local;
+        region = site_region_local;
+        countries.forEach((element) => {
+          if (element.value == site_region_local) {
+            handleChange(element);
+            setSelected(element);
+            setMyVariable(element.value);
+            localStorage.setItem("site_region", element.value);
+            window.site_region = element.value;
+          }
+        });
+      } else {
+        // The variable is not set in local storage or is undefined
+        if (typeof window !== "undefined") {
+          if (window && window.site_region) {
+            if (window.site_region !== "uk") {
+              region = window.site_region;
+              countries.forEach((element) => {
+                if (element.value == window.site_region) {
+                  handleChange(element);
+                  setSelected(element);
+                  setMyVariable(element.value);
+                  localStorage.setItem("site_region", element.value);
+                  window.site_region = element.value;
+                }
+              });
+            }
           }
         }
       }
