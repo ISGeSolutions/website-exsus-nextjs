@@ -725,7 +725,7 @@ function Index() {
                 (element, index) => (
                   <div className="itinery_detls_cntnt" key={index}>
                     <div className="row">
-                      <div className="col-sm-7 pe-sm-0">
+                      <div className="col-md-7 col-lg-8">
                         <div className="itinery_detls_para itinery_para_blk">
                           {/* <div
                             key={index}
@@ -783,7 +783,7 @@ function Index() {
                             )}
                         </div>
                       </div>
-                      <div className="col-sm-5 ps-sm-0">
+                      <div className="col-md-5 col-lg-4">
                         <div className="itinery_detls_img" key={index}>
                           <img
                             src={element?.attributes?.image_path}
