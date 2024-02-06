@@ -143,7 +143,7 @@ function Index() {
     );
   };
 
-  const websiteContentCheck = () => {
+  const websiteContentCheck = (pageNo) => {
     homeService
       .getAllWebsiteContent(region, pageNo)
       .then((x) => {

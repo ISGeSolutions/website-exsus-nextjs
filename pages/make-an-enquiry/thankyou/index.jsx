@@ -233,7 +233,7 @@ function Index() {
             <h2 className="trvl_title">
               {dictioneryFunction(
                 thankyouData?.custom_page_contents?.data.filter(
-                  (res) => res.attributes.content_name === "title"
+                  (res) => res.attributes.content_name === "Title"
                 )[0]?.attributes?.content_value
               )}
             </h2>
@@ -271,7 +271,7 @@ function Index() {
       </section>
       <section className="card_blk_row dark_grey py-5">
         <div className="container">
-          <div className="book_wth_confdnce">
+          <div className="book_wth_confdnce about_us_sectn">
             <div
               dangerouslySetInnerHTML={{
                 __html: dictioneryFunction(

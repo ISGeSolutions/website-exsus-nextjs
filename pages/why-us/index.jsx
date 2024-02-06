@@ -337,7 +337,7 @@ function Index() {
 
             <section className="card_blk_row dark_grey py-5">
               <div className="container">
-                <div className="book_wth_confdnce">
+                <div className="book_wth_confdnce about_us_sectn">
                   <div className="row">
                     <div className="col-12">
                       {/* <p

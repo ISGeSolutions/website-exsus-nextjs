@@ -239,19 +239,23 @@ const nextConfig = {
 
       // holidaytypeitineraries
       {
-        source: "/holiday-types/:holidaytypeitineraries/:holidaytypeitineraries-itineraries",
+        source:
+          "/holiday-types/:holidaytypeitineraries/:holidaytypeitineraries-itineraries",
         destination: "/holidaytypeitineraries",
       },
       {
-        source: "/us/holiday-types/:holidaytypeitineraries/:holidaytypeitineraries-itineraries",
+        source:
+          "/us/holiday-types/:holidaytypeitineraries/:holidaytypeitineraries-itineraries",
         destination: "/holidaytypeitineraries",
       },
       {
-        source: "/asia/holiday-types/:holidaytypeitineraries/:holidaytypeitineraries-itineraries",
+        source:
+          "/asia/holiday-types/:holidaytypeitineraries/:holidaytypeitineraries-itineraries",
         destination: "/holidaytypeitineraries",
       },
       {
-        source: "/in/holiday-types/:holidaytypeitineraries/:holidaytypeitineraries-itineraries",
+        source:
+          "/in/holiday-types/:holidaytypeitineraries/:holidaytypeitineraries-itineraries",
         destination: "/holidaytypeitineraries",
       },
 
@@ -273,7 +277,6 @@ const nextConfig = {
         destination: "/holidaytypeideas",
       },
 
-
       // holidaytypegroups
       {
         source: "/holiday-types/:holidaytypegroup",
@@ -291,7 +294,6 @@ const nextConfig = {
         source: "/in/holiday-types/:holidaytypegroup",
         destination: "/holidaytypegroup",
       },
-
 
       // special-offers
       { source: "/special-offers", destination: "/special-offers" },
@@ -506,7 +508,6 @@ const nextConfig = {
         destination: "/about-us/friend-referral-offer",
       },
 
-
       // Thank you
       {
         source: "/make-an-enquiry/thankyou",
@@ -523,6 +524,24 @@ const nextConfig = {
       {
         source: "/in/make-an-enquiry/thankyou",
         destination: "/make-an-enquiry/thankyou",
+      },
+
+      // Contact-Us Thank you
+      {
+        source: "/contact-us/thankyou",
+        destination: "/contact-us/thankyou",
+      },
+      {
+        source: "/us/contact-us/thankyou",
+        destination: "/contact-us/thankyou",
+      },
+      {
+        source: "/asia/contact-us/thankyou",
+        destination: "/contact-us/thankyou",
+      },
+      {
+        source: "/in/contact-us/thankyou",
+        destination: "/contact-us/thankyou",
       },
 
       // privacy-policy
@@ -576,15 +595,15 @@ const nextConfig = {
     apiUrl:
       process.env.NODE_ENV === "development"
         ? // ? 'https://e922710a-cb11-401b-ae5b-ef73740e1501.mock.pstmn.io' // development api
-        // : 'https://e922710a-cb11-401b-ae5b-ef73740e1501.mock.pstmn.io' // production api
-        // ? 'http://localhost:4000' // development api
-        // : 'http://localhost:4000' // production api
-        // ? 'https://mock.apidog.com/m1/379394-0-default' // development api
-        // : 'https://mock.apidog.com/m1/379394-0-default' // production api
-        //     ? 'http://13.233.122.205:1337' // development api
-        //     : 'http://13.233.122.205:1337' // production api
+          // : 'https://e922710a-cb11-401b-ae5b-ef73740e1501.mock.pstmn.io' // production api
+          // ? 'http://localhost:4000' // development api
+          // : 'http://localhost:4000' // production api
+          // ? 'https://mock.apidog.com/m1/379394-0-default' // development api
+          // : 'https://mock.apidog.com/m1/379394-0-default' // production api
+          //     ? 'http://13.233.122.205:1337' // development api
+          //     : 'http://13.233.122.205:1337' // production api
 
-        "https://cms-api.excelleresolutions.com" // development api
+          "https://cms-api.excelleresolutions.com" // development api
         : "https://cms-api.excelleresolutions.com", // production api
     apiUrl1:
       process.env.NODE_ENV === "development"

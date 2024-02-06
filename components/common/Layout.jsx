@@ -448,10 +448,7 @@ function Layout({ children }) {
             </section>
             <section className="header_item_right d-flex d-lg-inline-block justify-content-end align-items-center">
               <div className="header_call_icn">
-                <NavLink
-                  href="make_an_enquiry.html"
-                  className="header_mail_icn"
-                >
+                <NavLink href="/make-an-enquiry" className="header_mail_icn">
                   <em
                     className="material-symbols-outlined"
                     title="Make an enquiry"
@@ -571,7 +568,7 @@ function Layout({ children }) {
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink href={region + "/contact-us"}>
+                      <NavLink href={region + "/make-an-enquiry"}>
                         Online Enquiry
                       </NavLink>
                     </li>
@@ -625,22 +622,22 @@ function Layout({ children }) {
                   <h6>Exsus Sites</h6>
                   <ul>
                     <li>
-                      <NavLink href="/?ver=uk" target="_blank">
+                      <NavLink href="#" target="_blank">
                         UK
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink href="/?ver=asia" target="_blank">
+                      <NavLink href="/asia" target="_blank">
                         Asia
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink href="/?ver=in" target="_blank">
+                      <NavLink href="/in" target="_blank">
                         India
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink href="/?ver=us" target="_blank">
+                      <NavLink href="/us" target="_blank">
                         USA
                       </NavLink>
                     </li>
