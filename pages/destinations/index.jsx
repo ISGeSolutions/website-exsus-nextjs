@@ -268,6 +268,7 @@ function Index() {
       .then((x) => {
         setDestinationLandingList(x.data);
         setIsLoading(false);
+        console.log(x.data);
       })
       .catch((error) => {
         setIsLoading(false);
@@ -287,7 +288,7 @@ function Index() {
       .getCustomPagesData("destinations")
       .then((x) => {
         setDestinations(x.data[0]);
-
+        localStorage.setItem("PageInfo", JSON.stringify({ pType: "CUST", pCode: x?.data[0]?.attributes?.page_code }));
         const imageCheck = x.data[0].attributes.custom_page_images.data;
         const newBackgroundImages = [];
         imageCheck.forEach((element) => {

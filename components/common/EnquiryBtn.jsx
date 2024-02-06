@@ -9,6 +9,7 @@ function EnquiryButton() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [alert, setAlert] = useState(null);
     const [telePhoneNumber, SetTelePhoneNumber] = useState();
+    const [pageInfo, SetPageInfo] = useState();
     const router = useRouter();
 
     let region = "uk";
@@ -23,7 +24,9 @@ function EnquiryButton() {
     }
 
     const handleEnquiryClick = () => {
-        router.push(regionWiseUrl + `/make-an-enquiry`); // Navigate to the /enquiry page
+        // router.push(regionWiseUrl + `/make-an-enquiry`); // Navigate to the /enquiry page
+        router.push(regionWiseUrl + `/make-an-enquiry?pType=${pageInfo?.pType}&pCode=${pageInfo?.pCode}`); // Navigate to the /enquiry page
+
     };
 
     const websiteContentCheck = (matches, modifiedString) => {
@@ -48,9 +51,8 @@ function EnquiryButton() {
     };
 
     useEffect(() => {
-
+        SetPageInfo(JSON.parse(localStorage.getItem("PageInfo")))
         let modifiedString = "${TelephoneNumber}";
-
         // Find and store matches in an array
         const regex = /{[a-zA-Z0-9-]+}/g;
         const matches = [...new Set(modifiedString.match(regex))];

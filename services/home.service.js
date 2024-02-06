@@ -2,7 +2,7 @@ import getConfig from 'next/config';
 import { fetchWrapper } from 'helpers';
 
 const { publicRuntimeConfig } = getConfig();
-const baseUrl = `${publicRuntimeConfig.apiUrl1}/api/marketing-clients`;
+const baseUrl = `${publicRuntimeConfig.apiUrl}`;
 
 export const homeService = {
     // inspireMe,
@@ -17,13 +17,14 @@ export const homeService = {
 // }
 
 function saveDataToDB(signUpData) {
-    if (signUpData.id) {
-        signUpData.data["email_flag"] = true;
-        let saveEmailUrl = `http://localhost:4000/email_records/${signUpData.id}`;
-        return fetchWrapper.put(`${saveEmailUrl}`, signUpData);
+    if (signUpData?.data?.id) {
+        signUpData.data.attributes.email_sent_ind = true;
+        let data = { data: signUpData.data.attributes }
+        let saveEmailUrl = `${baseUrl}/api/enquiries/${signUpData?.data?.id}`;
+        return fetchWrapper.put(`${saveEmailUrl}`, data);
     } else {
-        let saveEmailUrl = `http://localhost:4000/email_records`;
-        return fetchWrapper.post(`${saveEmailUrl}`, signUpData.data);
+        let saveEmailUrl = `${baseUrl}/api/enquiries`;
+        return fetchWrapper.post(`${saveEmailUrl}`, signUpData);
     }
 }
 

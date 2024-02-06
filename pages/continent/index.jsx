@@ -532,6 +532,10 @@ function Index() {
           type="text/javascript"
           src="/assets/javascripts/card-slider.js"
         ></script>
+        <script
+          type="text/javascript"
+          src="/assets/javascripts/card-slider02.js"
+        ></script>
         <meta
           content={dictioneryFunction(
             destinationDetails?.page_meta_description
