@@ -44,6 +44,10 @@ function Index() {
     event.preventDefault();
   };
 
+  const handleRedirect = () => {
+    router.push(`/make-an-enquiry`);
+  };
+
   const websiteContentCheck = (pageNo) => {
     homeService
       .getAllWebsiteContent(region, pageNo)
@@ -242,72 +246,22 @@ function Index() {
             }
           });
         }
-
-        // Find and store matches in an array
-        // const regex = /{[a-zA-Z0-9-]+}/g;
-        // const matches = [...new Set(modifiedString.match(regex))];
-
-        // let storedDataString = "";
-        // let storedData = "";
-        // if (region == "uk") {
-        //     storedDataString = localStorage.getItem("websitecontent_uk");
-        //     storedData = JSON.parse(storedDataString);
-        // } else if (region == "us") {
-        //     storedDataString = localStorage.getItem("websitecontent_us");
-        //     storedData = JSON.parse(storedDataString);
-        // } else if (region == "asia") {
-        //     storedDataString = localStorage.getItem("websitecontent_asia");
-        //     storedData = JSON.parse(storedDataString);
-        // } else if (region == "in") {
-        //     storedDataString = localStorage.getItem("websitecontent_india");
-        //     storedData = JSON.parse(storedDataString);
-        // }
-        // if (storedData !== null) {
-        //     // You can access it using localStorage.getItem('yourKey')
-        //     if (matches) {
-        //         let replacement = "";
-        //         try {
-        //             matches.forEach((match, index, matches) => {
-        //                 const matchString = match.replace(/{|}/g, "");
-        //                 if (!storedData[matchString]) {
-        //                     websiteContentCheck(matches, region, modifiedString);
-        //                     throw new Error("Loop break");
-        //                 } else {
-        //                     replacement = storedData[matchString];
-        //                 }
-        //                 const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
-        //                 if (checkStr && replacement) {
-        //                     modifiedString = modifiedString.replace(
-        //                         checkStr,
-        //                         replacement
-        //                     );
-        //                 }
-        //             });
-        //             // Set the modified string in state
-        //             setLongText(modifiedString);
-
-        //             setIsLoading(false);
-        //         } catch (error) {
-        //             if (error.message === "Loop break") {
-        //                 // Handle the loop break here
-        //             } else if (error.message === "Region not found") {
-        //                 // Handle the loop break here
-        //                 setLongText(modifiedString);
-
-        //             }
-        //         }
-        //     }
-        // }
       })
       .catch((error) => {
         // Handle any errors here
         setIsLoading(false);
       });
 
-    const carousel = document.querySelector("#carouselExampleInterval");
-    if (carousel) {
-      new bootstrap.Carousel(carousel);
-    }
+    // const carousel = document.querySelector("#carouselExampleInterval");
+    // if (carousel) {
+    //   new bootstrap.Carousel(carousel);
+    // }
+    setTimeout(() => {
+      // $('.carousel').carousel();
+      $(".carousel").carousel({
+        interval: 250 * 10,
+      });
+    }, 2000);
   }, []);
 
   return (
@@ -318,52 +272,56 @@ function Index() {
       </Head>
       <Layout>
         <section className="banner_blk_row">
-          <div
-            id="carouselExampleInterval"
-            className="carousel slide"
-            data-bs-ride="carousel"
-          >
-            <div className="carousel-indicators">
-              {backgroundImage.map((_, index) => (
-                <button
-                  key={index}
-                  type="button"
-                  data-bs-target="#carouselExampleInterval"
-                  data-bs-slide-to={index}
-                  className={index === 0 ? "active" : ""}
-                  aria-current={index === 0 ? "true" : "false"}
-                  aria-label={`Slide ${index + 1}`}
-                ></button>
-              ))}
-              {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
+          {backgroundImage ? (
+            <div
+              id="carouselExampleInterval"
+              className="carousel slide"
+              data-bs-ride="carousel"
+            >
+              <div className="carousel-indicators">
+                {backgroundImage.map((_, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    data-bs-target="#carouselExampleInterval"
+                    data-bs-slide-to={index}
+                    className={index === 0 ? "active" : ""}
+                    aria-current={index === 0 ? "true" : "false"}
+                    aria-label={`Slide ${index + 1}`}
+                  ></button>
+                ))}
+                {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
+              </div>
+              <div className="carousel-inner">
+                {backgroundImage.map((imagePath, index) => (
+                  <NavLink
+                    key={index}
+                    href="#"
+                    onClick={handleHrefClick}
+                    className={`carousel-item ${index === 0 ? "active" : ""}`}
+                    data-bs-interval="5000"
+                  >
+                    <div
+                      className="banner_commn_cls"
+                      style={{ backgroundImage: `url(${imagePath})` }}
+                    ></div>
+                  </NavLink>
+                ))}
+              </div>
             </div>
-            <div className="carousel-inner">
-              {backgroundImage.map((imagePath, index) => (
-                <NavLink
-                  key={index}
-                  href="#"
-                  onClick={handleHrefClick}
-                  className={`carousel-item ${index === 0 ? "active" : ""}`}
-                  data-bs-interval="5000"
-                >
-                  <div
-                    className="banner_commn_cls"
-                    style={{ backgroundImage: `url(${imagePath})` }}
-                  ></div>
-                </NavLink>
-              ))}
-            </div>
-          </div>
+          ) : (
+            ""
+          )}
         </section>
 
         <section className="trvl_info_row">
           <div className="container">
             <div className="bookmark_row">
-              <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
+              <FriendlyUrl data={"home/" + friendlyUrl}></FriendlyUrl>
             </div>
 
-            <div className="trvl_info_cntnt">
-              <h2 className="trvl_title">{headingTag}</h2>
+            <div className="trvl_info_cntnt when_to_go_para_blk">
+              <h2 className="trvl_title">{dictioneryFunction(headingTag)}</h2>
               <div
                 dangerouslySetInnerHTML={{
                   __html: dictioneryFunction(longText),
@@ -624,10 +582,10 @@ function Index() {
 
         <section className="card_blk_row dark_grey py-5">
           <div className="container">
-            <div className="book_wth_confdnce">
+            <div className="book_wth_confdnce about_us_sectn">
               <div
                 dangerouslySetInnerHTML={{
-                  __html: dictioneryFunction(shortText.replace(/h3/g, "h2")),
+                  __html: dictioneryFunction(shortText),
                 }}
               />
 
@@ -702,8 +660,10 @@ function Index() {
                           </svg>
                         </div>
                         <div className="col-12">
-                          <button className="btn prmry_btn strt_planng_btn">
-                            {/* onClick="window.open('contact_us.html')" */}
+                          <button
+                            className="btn prmry_btn strt_planng_btn"
+                            onClick={handleRedirect}
+                          >
                             Make an enquiry
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -730,7 +690,7 @@ function Index() {
 
               <div className="col-md-6">
                 <div className="card_blk_inr card_blk_overlay mt-3 mt-md-0">
-                  <a href="#" onClick={handleHrefClick} target="_blank">
+                  <NavLink href={`/destinations`}>
                     <img
                       src="images/about_us_card01.jpg"
                       alt="Card image 07"
@@ -762,10 +722,10 @@ function Index() {
                         </div>
                       </div>
                     </div>
-                  </a>
+                  </NavLink>
                 </div>
                 <div className="card_blk_inr card_blk_overlay mb-0">
-                  <a href="#" onClick={handleHrefClick}>
+                  <NavLink href={`/holiday-types`}>
                     <img
                       src="images/about_us_card02.jpg"
                       alt="Card image 08"
@@ -797,7 +757,7 @@ function Index() {
                         </div>
                       </div>
                     </div>
-                  </a>
+                  </NavLink>
                 </div>
               </div>
             </div>
