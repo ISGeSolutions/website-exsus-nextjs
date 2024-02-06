@@ -164,6 +164,7 @@ function Index() {
         setFriendlyUrl(
           `make-an-enquiry/${x.data[0]?.attributes?.page_friendly_url}`
         );
+        localStorage.setItem("PageInfo", JSON.stringify({ pType: "CUST", pCode: x?.data[0]?.attributes?.page_code }));
         let modifiedString = x.data.attributes?.page_content_1;
         //  ("  ", modifiedString);
 

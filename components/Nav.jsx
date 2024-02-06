@@ -10,7 +10,6 @@ export { Nav };
 
 function Nav() {
   const [user, setUser] = useState(null);
-
   // const [regionWiseUrl, setMyVariable] = useState("");
   const [destinationLandingList, setDestinationLandingList] = useState();
   const [holidaytypesList, setHolidaytypesList] = useState();
@@ -22,6 +21,7 @@ function Nav() {
   const [menuTrigger, setmenuTrigger] = useState(null);
   const [closeMenu, setcloseMenu] = useState(null);
   const [overlayVisible, setOverlayVisible] = useState(true);
+  const [pageInfo, setPageInfo] = useState();
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -114,7 +114,10 @@ function Nav() {
   };
 
   const makeAnEnquiry = () => {
-    router.push("/make-an-enquiry");
+    // router.push(`/make-an-enquiry`);
+    let pageinfo = JSON.parse(localStorage.getItem("PageInfo"));
+    router.push(`/make-an-enquiry?pType=${pageinfo?.pType}&pCode=${pageinfo?.pCode}`);
+
   };
 
   const router = useRouter();
@@ -123,7 +126,7 @@ function Nav() {
     const router = useRouter();
 
     const handleClick = () => {
-      router.push(regionWiseUrl + `/why-us/our-people`); // Navigate to the /enquiry page
+      router.push(regionWiseUrl + `/why-us/our-people`);
     };
 
     return (
@@ -279,6 +282,9 @@ function Nav() {
 
     const closeMenu = menu?.querySelector(".mobile-menu-close"); // mobile close
     setmenu(closeMenu);
+
+
+    setPageInfo(JSON.parse(localStorage.getItem("PageInfo")));
 
     window.onresize = function () {
       if (this.innerWidth > 991) {
@@ -952,7 +958,7 @@ function Nav() {
                                 <NavLink
                                   onMouseEnter={showOverlay}
                                   onClick={hideOverlay}
-                                  href="/brochure"
+                                  href="https://mailchi.mp/exsus.com/brochure-request"
                                 >
                                   Request a brochure
                                 </NavLink>
@@ -1073,7 +1079,7 @@ function Nav() {
               <NavLink
                 onMouseEnter={showOverlay}
                 onClick={hideOverlay}
-                href="/brochure"
+                href="https://mailchi.mp/exsus.com/brochure-request"
               >
                 Brochure
               </NavLink>

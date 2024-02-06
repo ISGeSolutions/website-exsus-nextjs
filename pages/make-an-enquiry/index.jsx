@@ -84,6 +84,122 @@ function Index() {
     setIsModalOpen(false);
   };
 
+
+  function getDeviceInfo() {
+    if (typeof navigator !== 'undefined') {
+      const userAgent = navigator.userAgent;
+
+      // Dynamically fetch the device address (replace with a server-side solution)
+      const deviceAddressPromise = fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => data.ip)
+        .catch(error => {
+          console.error('Error fetching device address:', error);
+          return 'unknown';
+        });
+
+      // Dynamically determine the input type (replace with your own logic)
+      const inputTypePromise = new Promise((resolve) => {
+        // Replace this with your logic to determine the input type
+        const inputType = 'keyboard';
+        resolve(inputType);
+      });
+
+      // Dynamically fetch the country and country code
+      const countryInfoPromise = fetch('https://ipinfo.io/json?token=YOUR_API_KEY')
+        .then(response => response.json())
+        .then(data => {
+          return {
+            country: data.country || 'Unknown',
+            countryCode: data.country || 'Unknown'
+          };
+        })
+        .catch(error => {
+          console.error('Error fetching country information:', error);
+          return {
+            country: 'Unknown',
+            countryCode: 'Unknown'
+          };
+        });
+
+      // Combine the promises and format the device information
+      return Promise.all([deviceAddressPromise, inputTypePromise, countryInfoPromise])
+        .then(([deviceAddress, inputType, countryInfo]) => {
+          const browserInfo = getBrowserInfo(userAgent);
+          const osInfo = getOsInfo(navigator.platform);
+          const deviceInfoString = `Device-${osInfo.name} Browser -${browserInfo.name},Version-${browserInfo.version} ,UserAgentDetails: ${userAgent} InputType >${inputType} Device address> ${deviceAddress} Country>${countryInfo.country} CountryCode>${countryInfo.countryCode}`;
+          return deviceInfoString;
+        })
+        .catch(error => {
+          console.error('Error getting device information:', error);
+          return 'Error';
+        });
+    } else {
+      return "Navigator object not available (not in a browser environment).";
+    }
+  }
+
+  function getBrowserInfo(userAgent) {
+    // Detect Chrome
+    if (/Chrome/.test(userAgent)) {
+      const chromeVersion = userAgent.match(/Chrome\/(\d+)/)[1];
+      return { name: "Chrome", version: chromeVersion };
+    }
+
+    // Detect Firefox
+    if (/Firefox/.test(userAgent)) {
+      const firefoxVersion = userAgent.match(/Firefox\/(\d+)/)[1];
+      return { name: "Firefox", version: firefoxVersion };
+    }
+
+    // Detect Safari
+    if (/Safari/.test(userAgent) && !/Chrome/.test(userAgent)) {
+      const safariVersion = userAgent.match(/Version\/(\d+)/)[1];
+      return { name: "Safari", version: safariVersion };
+    }
+
+    // Detect Edge (Chromium)
+    if (/Edg/.test(userAgent)) {
+      const edgeVersion = userAgent.match(/Edg\/(\d+)/)[1];
+      return { name: "Edge", version: edgeVersion };
+    }
+
+    // Add more browser detections as needed...
+
+    // If the browser is not detected, return unknown
+    return { name: "Unknown", version: "Unknown" };
+  }
+
+
+  function getOsInfo(platform) {
+    // Detect Windows
+    if (/Win/.test(platform)) {
+      const versionMatch = platform.match(/Windows NT (\d+\.\d+)/);
+      const version = versionMatch ? versionMatch[1] : "Unknown";
+      return { name: "Windows", version };
+    }
+
+    // Detect macOS
+    if (/Mac/.test(platform)) {
+      return { name: "macOS", version: "Unknown" };
+    }
+
+    // Add more OS detections as needed...
+
+    // If the OS is not detected, return unknown
+    return { name: "Unknown", version: "Unknown" };
+  }
+
+  // Get device information
+  getDeviceInfo().then(deviceInfo => {
+    // Log the device information to the console
+    console.log("Device Information:", deviceInfo);
+  });
+
+
+
+
+
   function onSubmit(data) {
     data["site_region"] = region == "us" ? "Yes" : "No";
     data["submitted_at"] = new Date().toLocaleDateString();
@@ -98,16 +214,15 @@ function Index() {
         return enquiryService
           .sendEnquiryMail({ data })
           .then(() => {
-            // return contactusService
-            //   .makeanenquiry(res)
-            //   .then(() => {
-            router.push("make-an-enquiry/thankyou");
-            // showAlert("Operation succeeded", "success");
-            // reset();
-            // })
-            // .catch((error) => {
-            //   showAlert("Operation failed", "error");
-            // });
+            return enquiryService
+              .makeanenquiry(res)
+              .then(() => {
+                router.push("make-an-enquiry/thankyou");
+                reset();
+              })
+              .catch((error) => {
+                showAlert("Operation failed", "error");
+              });
           })
           .catch((error) => {
             showAlert("Operation failed", "error");
@@ -118,7 +233,13 @@ function Index() {
       });
   }
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    // Get device information
+    getDeviceInfo().then(deviceInfo => {
+      // Log the device information to the console
+      console.log("Device Information:", deviceInfo);
+    });
+  }, []);
 
   return (
     <Layout>
@@ -441,9 +562,8 @@ function Index() {
                               placeholder="Where you would like to go? *"
                               name="preferred_place_time"
                               {...register("preferred_place_time")}
-                              className={`form-control ${
-                                errors.preferred_place_time ? "is-invalid" : ""
-                              }`}
+                              className={`form-control ${errors.preferred_place_time ? "is-invalid" : ""
+                                }`}
                             />
                             <div className="invalid-feedback mb-1">
                               {errors.preferred_place_time?.message}
@@ -457,9 +577,8 @@ function Index() {
                               rows="3"
                               name="note"
                               {...register("note")}
-                              className={`form-control ${
-                                errors.note ? "is-invalid" : ""
-                              }`}
+                              className={`form-control ${errors.note ? "is-invalid" : ""
+                                }`}
                             ></textarea>
                             <div className="invalid-feedback mb-1">
                               {errors.note?.message}
@@ -490,9 +609,8 @@ function Index() {
                               aria-label="Title"
                               name="title"
                               {...register("title")}
-                              className={`form-select ${
-                                errors.title ? "is-invalid" : ""
-                              }`}
+                              className={`form-select ${errors.title ? "is-invalid" : ""
+                                }`}
                             >
                               <option value="">Title *</option>
                               <option value="Mr">Mr</option>
@@ -518,9 +636,8 @@ function Index() {
                               placeholder="First name *"
                               name="first_name"
                               {...register("first_name")}
-                              className={`form-control ${
-                                errors.first_name ? "is-invalid" : ""
-                              }`}
+                              className={`form-control ${errors.first_name ? "is-invalid" : ""
+                                }`}
                             />
                             <div className="invalid-feedback mb-1">
                               {errors.first_name?.message}
@@ -535,9 +652,8 @@ function Index() {
                               placeholder="last name *"
                               name="last_name"
                               {...register("last_name")}
-                              className={`form-control ${
-                                errors.last_name ? "is-invalid" : ""
-                              }`}
+                              className={`form-control ${errors.last_name ? "is-invalid" : ""
+                                }`}
                             />
                             <div className="invalid-feedback mb-1">
                               {errors.last_name?.message}
@@ -552,9 +668,8 @@ function Index() {
                               placeholder="Email *"
                               name="email_id"
                               {...register("email_id")}
-                              className={`form-control ${
-                                errors.email_id ? "is-invalid" : ""
-                              }`}
+                              className={`form-control ${errors.email_id ? "is-invalid" : ""
+                                }`}
                             />
                             <div className="invalid-feedback mb-1">
                               {errors.email_id?.message}
@@ -569,9 +684,8 @@ function Index() {
                               placeholder="Telephone *"
                               name="telephone_no"
                               {...register("telephone_no")}
-                              className={`form-control ${
-                                errors.telephone_no ? "is-invalid" : ""
-                              }`}
+                              className={`form-control ${errors.telephone_no ? "is-invalid" : ""
+                                }`}
                             />
                             <div className="invalid-feedback mb-1">
                               {errors.telephone_no?.message}
@@ -584,9 +698,8 @@ function Index() {
                               aria-label="Best time to call"
                               name="Best time to call"
                               {...register("best_time_to_call")}
-                              className={`form-select ${
-                                errors.best_time_to_call ? "is-invalid" : ""
-                              }`}
+                              className={`form-select ${errors.best_time_to_call ? "is-invalid" : ""
+                                }`}
                             >
                               <option value="">Best time to call</option>
                               <option value="No Preference">

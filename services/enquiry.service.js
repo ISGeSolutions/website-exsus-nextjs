@@ -18,11 +18,13 @@ function sendEnquiryMail(contactusData) {
 }
 
 function makeanenquiry(enquiryData) {
-    // if (brochureData.data.id) {
-    return fetchWrapper.post(`${baseUrlEnquiries}`, enquiryData);
-    // } else {
-    //     return fetchWrapper.post(`${baseUrlEnquiries}`, brochureData);
-    // }
+    if (enquiryData?.data?.id) {
+        enquiryData.data.attributes.email_sent_ind = true;
+        let data = { data: enquiryData.data.attributes }
+        return fetchWrapper.put(`${baseUrlEnquiries}/${enquiryData?.data?.id}`, data);
+    } else {
+        return fetchWrapper.post(`${baseUrlEnquiries}`, enquiryData);
+    }
 }
 
 

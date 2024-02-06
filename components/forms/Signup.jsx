@@ -20,7 +20,7 @@ function Signup() {
 
   // form validation rules
   const validationSchema = Yup.object().shape({
-    fullnameAndTitle: Yup.string().required("Full name and title is required"),
+    first_name: Yup.string().required("Full name and title is required"),
     email: Yup.string()
       .required("Email is required")
       .email("Invalid email format"),
@@ -52,33 +52,31 @@ function Signup() {
   function onSignup(data) {
     let signupData = {
       data: {
-        client_name: `${data.fullnameAndTitle}`,
+        first_name: `${data.first_name}`,
         email_id: `${data.email}`,
-        source_of_origin: "newsletter",
-        source_of_origin_reference: "",
-        opt_in_ind: true,
-        email_flag: false,
+        request_type: "newsletter",
+        email_sent_ind: false,
       },
     };
 
-    // return  homeService.saveDataToDB(signupData)
-    //     .then((res) => {
-    return homeService
-      .signUp(signupData)
-      .then(() => {
-        showAlert("Operation succeeded", "success");
-        reset();
-        // return  homeService.saveDataToDB(res)
-        //     .then(() => {
-        //         reset();
-        //     })
-      })
-      .catch((error) => {
-        showAlert("Operation failed", "error");
+    return homeService.saveDataToDB(signupData)
+      .then((res) => {
+        return homeService
+          .signUp(signupData)
+          .then(() => {
+            showAlert("Operation succeeded", "success");
+            reset();
+            return homeService.saveDataToDB(res)
+              .then(() => {
+                reset();
+              })
+          })
+          .catch((error) => {
+            showAlert("Operation failed", "error");
+          });
+      }).catch((error) => {
+        showAlert('Operation failed', 'error');
       });
-    // }).catch((error) => {
-    //     showAlert('Operation failed', 'error');
-    // });
   }
 
   return (
@@ -95,12 +93,12 @@ function Signup() {
             type="text"
             placeholder="Full name and title"
             name="fullnameAndTitle"
-            {...register("fullnameAndTitle")}
-            className={`form-control ${errors.fullnameAndTitle ? "is-invalid" : ""
+            {...register("first_name")}
+            className={`form-control ${errors.first_name ? "is-invalid" : ""
               }`}
           />
           <div className="invalid-feedback mb-1">
-            {errors.fullnameAndTitle?.message}
+            {errors.first_name?.message}
           </div>
         </div>
         <div className="newlettr_inpt ps-0 ps-sm-2">
