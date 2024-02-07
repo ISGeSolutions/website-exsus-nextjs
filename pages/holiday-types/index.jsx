@@ -93,6 +93,7 @@ function Index() {
       .then((x) => {
         setHolidayTypes(x.data[0]);
         setCustomPage(x.data[0]?.attributes?.custom_page_contents);
+        localStorage.setItem("PageInfo", JSON.stringify({ pType: "CUST", pCode: x?.data[0]?.attributes?.page_code }));
         //  (x.data[0]);
         // setDestinationLandingDetails(x);
         const imageCheck = x?.data[0]?.attributes?.custom_page_images?.data;

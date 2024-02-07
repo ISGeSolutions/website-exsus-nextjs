@@ -7,14 +7,22 @@ import * as Yup from "yup";
 import { homeService, alertService } from "services";
 import CustomModal from "../CustomModal";
 import { Alert } from "../Alert";
-
+import getDeviceInfo from "../utils/getCountryInfo";
 export { Signup };
 
 function Signup() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [alert, setAlert] = useState(null);
+  const [deviceInfo, setDeviceInfo] = useState("");
+  const [country, setCountryInfo] = useState();
+  const [pageUrl, setPageUrl] = useState("");
 
-  useEffect(() => { }, []);
+  useEffect(() => {
+    getDeviceInfo().then(({ deviceInfo, countryInfo }) => {
+      setDeviceInfo(`Device-${deviceInfo.os} Browser -${deviceInfo.browser},Version-${deviceInfo.version} ,UserAgentDetails: ${deviceInfo.userAgent} InputType >${deviceInfo.inputType} Device address> ${deviceInfo.deviceAddress}`);
+      setCountryInfo(countryInfo);
+    });
+  }, []);
 
   const router = useRouter();
 
@@ -56,6 +64,12 @@ function Signup() {
         email_id: `${data.email}`,
         request_type: "newsletter",
         email_sent_ind: false,
+        loc_by_ip_country_name: country?.country,
+        loc_by_ip_country_code: country?.countryCode,
+        page_url: pageUrl,
+        device_info: deviceInfo,
+        submitted_at: new Date().toLocaleDateString(),
+        site_region: region == "us" ? "Yes" : "No"
       },
     };
 
@@ -78,6 +92,8 @@ function Signup() {
         showAlert('Operation failed', 'error');
       });
   }
+
+
 
   return (
     <>

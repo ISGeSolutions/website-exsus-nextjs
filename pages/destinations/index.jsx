@@ -268,7 +268,6 @@ function Index() {
       .then((x) => {
         setDestinationLandingList(x.data);
         setIsLoading(false);
-        console.log(x.data);
       })
       .catch((error) => {
         setIsLoading(false);

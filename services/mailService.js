@@ -52,7 +52,7 @@ export async function sendMail(subject, toEmail, otpText, data, emailpage) {
         mailFrom = constant_data?.newsLetter[0]?.NewsLetterMailFrom;
         break;
 
-      case "makeAnEnquiry":
+      case "Enquiry":
         emailHtmlConsultant = render(<MakeAnEnquiryConsultant enquiryDetails={data} />);
         mailTo = constant_data?.makeAnEnquiry[0]?.EnquiryConsultantMailTo?.split(",");
         subjectConsultant = constant_data?.makeAnEnquiry[0]?.EnquiryConsultantMailSubject;

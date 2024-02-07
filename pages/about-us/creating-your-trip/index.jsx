@@ -43,6 +43,7 @@ function Index() {
       .then((x) => {
         setCreatingTripsData(x.data[0]);
         const data = x.data[0]?.attributes?.custom_page_contents?.data;
+        localStorage.setItem("PageInfo", JSON.stringify({ pType: "CUST", pCode: x?.data[0]?.attributes?.page_code }));
         if (data) {
           data.forEach((element, index) => {
             if (element?.attributes?.content_name == "HeadingTag") {

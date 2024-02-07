@@ -185,7 +185,7 @@ function Index() {
               }
             });
             return modifiedString;
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -208,6 +208,7 @@ function Index() {
       .getWhereToGoPage()
       .then((x) => {
         //
+        localStorage.setItem("PageInfo", JSON.stringify({ pType: "CUST", pCode: x?.data[0]?.attributes?.page_code }));
         setCustomData(x.data[0]?.attributes?.custom_page_images);
         SetFriendlyUrl(x.data[0].attributes?.page_friendly_url);
         const imageCheck = x.data[0].attributes.custom_page_images.data;
