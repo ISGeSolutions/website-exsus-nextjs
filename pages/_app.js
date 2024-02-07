@@ -41,7 +41,7 @@ import CookieComponent from "./../components/CookieComponent";
 // import ReactPixel from 'react-facebook-pixel';
 import { Helmet } from "react-helmet";
 import ReactGA from "react-ga4";
-import globalVariables from "../config"; './../config';
+import globalVariables from "../config";
 
 ReactGA.initialize("G-2H6GP9JWWY");
 // import './../../CustomModal_css.css'; // Import your custom styles
@@ -132,12 +132,11 @@ function App({ Component, pageProps }) {
     // on route change complete - run auth check
     router.events.on("routeChangeComplete", authCheck);
 
-
     // userService.login(identifier, password).then(x => {
     //      ('x', x);
     // });
 
-    //  
+    //
     setTimeout(() => {
       $(".carousel").carousel({
         interval: 250 * 10,

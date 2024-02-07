@@ -3527,3 +3527,27 @@ nav
 .book_wth_confdnce.about_us_sectn h4::first-letter {
   text-transform: uppercase;
 }
+
+.trvl_info_cntnt.careers_para_blk p {
+  margin-bottom: 24px;
+}
+
+.trvl_info_cntnt.careers_para_blk p span strong {
+  font: 400 1rem/1.5rem "Roboto", sans-serif;
+  color: #ffffff;
+  text-transform: capitalize;
+  letter-spacing: 0;
+  font-weight: 500;
+  text-decoration: underline;
+  width: 100%;
+  display: inline-block;
+}
+
+.trvl_info_cntnt.careers_para_blk ul {
+  border: 5px solid #535152;
+  height: 100%;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 24px;
+  list-style-type: none !important;
+}
