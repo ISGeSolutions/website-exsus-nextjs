@@ -1,31 +1,42 @@
 {
-    "constant_data": {
-        "newsLetter": [
-            {
-                "NewsLetterMailFrom": "noreply@exsus.com",
-                "NewsLetterMailTo": "deokarg201920@gmail.com,ganesh@isgesolutions.com",
-                "NewsLetterMailSubject": "Subscription for e-news letters"
-            }
-        ],
-        "makeAnEnquiry": [
-            {
-                "EnquiryConsultantMailSubject": "Enquiry request",
-                "EnquiryConsultantMailFrom": "noreply@exsus.com",
-                "EnquiryConsultantMailTo": "deokarg201920@gmail.com,ganesh@isgesolutions.com",
-                "EnquiryEnquirerMailFileNotFound": "Enquiry was registered on exsus.com.&lt;br&gt; Email address : @Email ",
-                "EnquiryEnquirerMailSubject": "Thank you for your enquiry",
-                "EnquiryEnquirerMailFrom": "noreply@exsus.com"
-            }
-        ],
-        "brochureRequest": [
-            {
-                "BrochureConsultantMailSubject": "Brochure request",
-                "BrochureConsultantMailFrom": "noreply@exsus.com",
-                "BrochureConsultantMailTo": "deokarg201920@gmail.com,ganesh@isgesolutions.com",
-                "BrochureEnquirerMailFileNotFound": "Brochure was registered on exsus.com.&lt;br&gt; Email address : @Email ",
-                "BrochureEnquirerMailSubject": "Thank you for your enquiry",
-                "BrochureEnquirerMailFrom": "noreply@exsus.com"
-            }
-        ]
-    }
+  "constant_data": {
+    "newsLetter": [
+      {
+        "NewsLetterMailFrom": "noreply@exsus.com",
+        "NewsLetterMailTo": "deokarg201920@gmail.com,ganesh@isgesolutions.com",
+        "NewsLetterMailSubject": "Subscription for e-news letters"
+      }
+    ],
+    "makeAnEnquiry": [
+      {
+        "EnquiryConsultantMailSubject": "Enquiry request",
+        "EnquiryConsultantMailFrom": "noreply@exsus.com",
+        "EnquiryConsultantMailTo": "deokarg201920@gmail.com,ganesh@isgesolutions.com",
+        "EnquiryEnquirerMailFileNotFound": "Enquiry was registered on exsus.com.&lt;br&gt; Email address : @Email ",
+        "EnquiryEnquirerMailSubject": "Thank you for your enquiry",
+        "EnquiryEnquirerMailFrom": "noreply@exsus.com"
+      }
+    ],
+    "brochureRequest": [
+      {
+        "BrochureConsultantMailSubject": "Brochure request",
+        "BrochureConsultantMailFrom": "noreply@exsus.com",
+        "BrochureConsultantMailTo": "deokarg201920@gmail.com,ganesh@isgesolutions.com",
+        "BrochureEnquirerMailFileNotFound": "Brochure was registered on exsus.com.&lt;br&gt; Email address : @Email ",
+        "BrochureEnquirerMailSubject": "Thank you for your enquiry",
+        "BrochureEnquirerMailFrom": "noreply@exsus.com"
+      }
+    ],
+
+    "contactUs": [
+      {
+        "ContactUsConsultantMailSubject": "Contact us request",
+        "ContactUsConsultantMailFrom": "noreply@exsus.com",
+        "ContactUsConsultantMailTo": "deokarg201920@gmail.com,chaitanyanarayankar215@gmail.com",
+        "ContactUsEnquirerMailFileNotFound": "Contacted to exsus.com.&lt;br&gt; Email address : @Email ",
+        "ContactUsEnquirerMailSubject": "Thank you for contacting Exsus",
+        "ContactUsEnquirerMailFrom": "noreply@exsus.com"
+      }
+    ]
+  }
 }

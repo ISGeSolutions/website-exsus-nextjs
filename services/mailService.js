@@ -3,6 +3,7 @@ var nodemailer = require("nodemailer");
 // import { EmailTemplate } from '../components/MyEmailTemplate';
 // import { renderEmail } from '@react-email/html';
 import { renderEmail } from "react-html-email";
+//import { constant_data } from "./../data/email_template_constants.json";
 import { constant_data } from "./../data/email_template_constants.json";
 
 import { render } from "@react-email/render";
@@ -13,6 +14,7 @@ import { MakeAnEnquiryConsultant } from "../components/email_templates/MakeAnEnq
 import { MakeAnEnquiryEnquirer } from "../components/email_templates/MakeAnEnquiryEnquirer";
 import { BrochureConsultant } from "../components/email_templates/BrochureConsultant";
 import { BrochureRequester } from "../components/email_templates/BrochureRequester";
+import { ContactUsEnquirer } from "../components/email_templates/ContactUsEnquirer";
 //-----------------------------------------------------------------------------
 export async function sendMail(subject, toEmail, otpText, data, emailpage) {
   return new Promise((resolve, reject) => {
@@ -42,32 +44,56 @@ export async function sendMail(subject, toEmail, otpText, data, emailpage) {
     let subjectUser = "";
     switch (emailpage) {
       case "contactus":
-        emailHtmlConsultant = render(<ContactUsEmailTemplate emailDetails={data} />);
+        emailHtmlConsultant = render(
+          <ContactUsEmailTemplate contactUsDetails={data} />
+        );
+        mailTo =
+          constant_data?.contactUs[0]?.ContactUsConsultantMailTo?.split(",");
+        subjectConsultant =
+          constant_data?.contactUs[0]?.ContactUsConsultantMailSubject;
+        mailFrom = constant_data?.contactUs[0]?.ContactUsConsultantMailFrom;
+        emailHtmlUser = render(<ContactUsEnquirer contactUsDetails={data} />);
+        subjectUser = constant_data?.contactUs[0]?.ContactUsEnquirerMailSubject;
         break;
 
       case "newsletter":
-        emailHtmlConsultant = render(<NewsLetterEmailTemplate emailDetails={data} />);
+        emailHtmlConsultant = render(
+          <NewsLetterEmailTemplate emailDetails={data} />
+        );
         mailTo = constant_data?.newsLetter[0]?.NewsLetterMailTo.split(",");
         subjectConsultant = constant_data?.newsLetter[0]?.NewsLetterMailSubject;
         mailFrom = constant_data?.newsLetter[0]?.NewsLetterMailFrom;
         break;
 
       case "Enquiry":
-        emailHtmlConsultant = render(<MakeAnEnquiryConsultant enquiryDetails={data} />);
-        mailTo = constant_data?.makeAnEnquiry[0]?.EnquiryConsultantMailTo?.split(",");
-        subjectConsultant = constant_data?.makeAnEnquiry[0]?.EnquiryConsultantMailSubject;
+        emailHtmlConsultant = render(
+          <MakeAnEnquiryConsultant enquiryDetails={data} />
+        );
+        mailTo =
+          constant_data?.makeAnEnquiry[0]?.EnquiryConsultantMailTo?.split(",");
+        subjectConsultant =
+          constant_data?.makeAnEnquiry[0]?.EnquiryConsultantMailSubject;
         mailFrom = constant_data?.makeAnEnquiry[0]?.EnquiryConsultantMailFrom;
         emailHtmlUser = render(<MakeAnEnquiryEnquirer enquiryDetails={data} />);
-        subjectUser = constant_data?.makeAnEnquiry[0]?.EnquiryEnquirerMailSubject;
+        subjectUser =
+          constant_data?.makeAnEnquiry[0]?.EnquiryEnquirerMailSubject;
         break;
 
       case "brochureRequest":
-        emailHtmlConsultant = render(<BrochureConsultant enquiryDetails={data} />);
-        mailTo = constant_data?.brochureRequest[0]?.BrochureConsultantMailTo?.split(",");
-        subjectConsultant = constant_data?.brochureRequest[0]?.BrochureConsultantMailSubject;
-        mailFrom = constant_data?.brochureRequest[0]?.BrochureConsultantMailFrom;
+        emailHtmlConsultant = render(
+          <BrochureConsultant enquiryDetails={data} />
+        );
+        mailTo =
+          constant_data?.brochureRequest[0]?.BrochureConsultantMailTo?.split(
+            ","
+          );
+        subjectConsultant =
+          constant_data?.brochureRequest[0]?.BrochureConsultantMailSubject;
+        mailFrom =
+          constant_data?.brochureRequest[0]?.BrochureConsultantMailFrom;
         emailHtmlUser = render(<BrochureRequester enquiryDetails={data} />);
-        subjectUser = constant_data?.brochureRequest[0]?.BrochureEnquirerMailSubject;
+        subjectUser =
+          constant_data?.brochureRequest[0]?.BrochureEnquirerMailSubject;
         break;
 
       default:
@@ -85,13 +111,12 @@ export async function sendMail(subject, toEmail, otpText, data, emailpage) {
       };
     }
 
-
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         resolve(false);
       }
       if (mailTo.length > 0) {
-        mailTo.forEach(element => {
+        mailTo.forEach((element) => {
           var mailOptions_consultant = {
             from: mailFrom,
             to: element,

@@ -13,6 +13,7 @@ import MyModal from "../../components/Modal"; // Adjust the path as needed
 import CustomModal from "../../components/CustomModal";
 import getDeviceInfo from "../../components/utils/getCountryInfo";
 // import './../../styles/globals.css'; // Import the modal styles
+import globalVariables from "../../config";
 
 export default Index;
 
@@ -25,7 +26,6 @@ function Index() {
   const [pCode, setPCode] = useState("");
   const [deviceInfo, setDeviceInfo] = useState("");
   const [country, setCountryInfo] = useState();
-
 
   // form validation rules
   const validationSchema = Yup.object().shape({
@@ -59,9 +59,11 @@ function Index() {
   const handleRadioChange = (e) => {
     // Check if the selected option is "Other*"
     if (e.target.value === "Other*") {
-      document.getElementsByClassName("other_reason_input").style.display = "block";
+      document.getElementsByClassName("other_reason_input").style.display =
+        "block";
     } else {
-      document.getElementsByClassName("other_reason_input").style.display = "none";
+      document.getElementsByClassName("other_reason_input").style.display =
+        "none";
     }
     // setShowOtherInput(e.target.value === "Other*");
   };
@@ -94,15 +96,6 @@ function Index() {
     setIsModalOpen(false);
   };
 
-
-
-
-
-
-
-
-
-
   function onSubmit(data) {
     data["site_region"] = region == "us" ? "Yes" : "No";
     data["submitted_at"] = new Date().toLocaleDateString();
@@ -113,6 +106,7 @@ function Index() {
     data["request_type"] = "Enquiry";
     data["product_code"] = pCode;
     data["device_info"] = deviceInfo;
+    data["ga_account_code"] = globalVariables?.ReactGA_ID;
     const data1 = {
       data: data,
     };
@@ -147,11 +141,11 @@ function Index() {
     setPType(router?.query?.pType);
     setPCode(router?.query?.pCode);
     getDeviceInfo().then(({ deviceInfo, countryInfo }) => {
-      setDeviceInfo(`Device-${deviceInfo.os} Browser -${deviceInfo.browser},Version-${deviceInfo.version} ,UserAgentDetails: ${deviceInfo.userAgent} InputType >${deviceInfo.inputType} Device address> ${deviceInfo.deviceAddress}`);
+      setDeviceInfo(
+        `Device-${deviceInfo.os} Browser -${deviceInfo.browser},Version-${deviceInfo.version} ,UserAgentDetails: ${deviceInfo.userAgent} InputType >${deviceInfo.inputType} Device address> ${deviceInfo.deviceAddress}`
+      );
       setCountryInfo(countryInfo);
     });
-
-
   }, []);
 
   return (
@@ -185,8 +179,9 @@ function Index() {
                               placeholder="Where you would like to go? *"
                               name="preferred_place_time"
                               {...register("preferred_place_time")}
-                              className={`form-control ${errors.preferred_place_time ? "is-invalid" : ""
-                                }`}
+                              className={`form-control ${
+                                errors.preferred_place_time ? "is-invalid" : ""
+                              }`}
                             />
                             <div className="invalid-feedback mb-1">
                               {errors.preferred_place_time?.message}
@@ -200,8 +195,9 @@ function Index() {
                               rows="3"
                               name="note"
                               {...register("note")}
-                              className={`form-control ${errors.note ? "is-invalid" : ""
-                                }`}
+                              className={`form-control ${
+                                errors.note ? "is-invalid" : ""
+                              }`}
                             ></textarea>
                             <div className="invalid-feedback mb-1">
                               {errors.note?.message}
@@ -232,8 +228,9 @@ function Index() {
                               aria-label="Title"
                               name="title"
                               {...register("title")}
-                              className={`form-select ${errors.title ? "is-invalid" : ""
-                                }`}
+                              className={`form-select ${
+                                errors.title ? "is-invalid" : ""
+                              }`}
                             >
                               <option value="">Title *</option>
                               <option value="Mr">Mr</option>
@@ -259,8 +256,9 @@ function Index() {
                               placeholder="First name *"
                               name="first_name"
                               {...register("first_name")}
-                              className={`form-control ${errors.first_name ? "is-invalid" : ""
-                                }`}
+                              className={`form-control ${
+                                errors.first_name ? "is-invalid" : ""
+                              }`}
                             />
                             <div className="invalid-feedback mb-1">
                               {errors.first_name?.message}
@@ -275,8 +273,9 @@ function Index() {
                               placeholder="last name *"
                               name="last_name"
                               {...register("last_name")}
-                              className={`form-control ${errors.last_name ? "is-invalid" : ""
-                                }`}
+                              className={`form-control ${
+                                errors.last_name ? "is-invalid" : ""
+                              }`}
                             />
                             <div className="invalid-feedback mb-1">
                               {errors.last_name?.message}
@@ -291,8 +290,9 @@ function Index() {
                               placeholder="Email *"
                               name="email_id"
                               {...register("email_id")}
-                              className={`form-control ${errors.email_id ? "is-invalid" : ""
-                                }`}
+                              className={`form-control ${
+                                errors.email_id ? "is-invalid" : ""
+                              }`}
                             />
                             <div className="invalid-feedback mb-1">
                               {errors.email_id?.message}
@@ -307,8 +307,9 @@ function Index() {
                               placeholder="Telephone *"
                               name="telephone_no"
                               {...register("telephone_no")}
-                              className={`form-control ${errors.telephone_no ? "is-invalid" : ""
-                                }`}
+                              className={`form-control ${
+                                errors.telephone_no ? "is-invalid" : ""
+                              }`}
                             />
                             <div className="invalid-feedback mb-1">
                               {errors.telephone_no?.message}
@@ -321,8 +322,9 @@ function Index() {
                               aria-label="Best time to call"
                               name="Best time to call"
                               {...register("best_time_to_call")}
-                              className={`form-select ${errors.best_time_to_call ? "is-invalid" : ""
-                                }`}
+                              className={`form-select ${
+                                errors.best_time_to_call ? "is-invalid" : ""
+                              }`}
                             >
                               <option value="">Best time to call</option>
                               <option value="No Preference">
