@@ -833,8 +833,7 @@ function Index() {
                 <section className="map_blk_row">
                   <h3 className="pb-2">Hotel location</h3>
                   <p>
-                    The Rosewood is just half an hour’s drive from Beijing
-                    Capital International Airport.
+                    {hotelData?.map_content}
                   </p>
                   <div className="map_blk_inr">
                     <div className="map_blk_inr">

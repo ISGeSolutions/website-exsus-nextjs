@@ -171,9 +171,10 @@ function Layout({ children }) {
     this.plusSlides.openLeftNav();
   };
 
-  const websiteContentCheck = (matches, modifiedString) => {
+  const websiteContentCheck = (modifiedString) => {
+    let currRegion = region ? region : "uk";
     destinationService
-      .getDictionaryDetails(matches, region)
+      .getDictionaryDetails(modifiedString, currRegion)
       .then((responseObj) => {
         if (responseObj) {
           const res = responseObj?.data;
@@ -182,7 +183,7 @@ function Layout({ children }) {
             const matchString = element?.attributes?.content_word;
             const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
             if (checkStr && replacement) {
-              modifiedString = modifiedString.replace(checkStr, replacement);
+              SetTelePhoneNumber(replacement)
             }
           });
 
@@ -194,7 +195,7 @@ function Layout({ children }) {
 
   useEffect(() => {
     // Temporarily disable warnings in the development environment
-    console.warn = () => {};
+    console.warn = () => { };
 
     $(".header_country_list > ul .header_country_label").on(
       "mouseenter",
@@ -228,7 +229,7 @@ function Layout({ children }) {
     const { pathname, search, hash, href } = window.location;
     const site_region_local = localStorage.getItem("site_region");
 
-    if(pathname == '/uk' || pathname == '/us' || pathname == '/asia' || pathname == '/in') {
+    if (pathname == '/uk' || pathname == '/us' || pathname == '/asia' || pathname == '/in') {
       region = pathname;
       countries.forEach((element) => {
         if (element.value == pathname.slice(1)) {
@@ -297,7 +298,6 @@ function Layout({ children }) {
       storedDataString = localStorage.getItem("websitecontent_india");
       storedData = JSON.parse(storedDataString);
     }
-
     if (storedData !== null) {
       // You can access it using localStorage.getItem('yourKey')
       if (matches) {
@@ -306,7 +306,7 @@ function Layout({ children }) {
           matches.forEach((match, index, matches) => {
             const matchString = match.replace(/{|}/g, "");
             if (!storedData[matchString]) {
-              websiteContentCheck(matches, modifiedString);
+              websiteContentCheck(matchString);
               throw new Error("Loop break");
             } else {
               replacement = storedData[matchString];
@@ -314,10 +314,10 @@ function Layout({ children }) {
             const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
             if (checkStr && replacement) {
               modifiedString = modifiedString.replace(checkStr, replacement);
+              SetTelePhoneNumber(modifiedString);
             }
           });
           // Set the modified string in state
-          SetTelePhoneNumber(modifiedString);
         } catch (error) {
           if (error.message === "Loop break") {
             // Handle the loop break here
@@ -331,7 +331,8 @@ function Layout({ children }) {
       }
     } else {
       if (matches) {
-        websiteContentCheck(matches, region, modifiedString);
+        const matchString = matches[0].replace(/{|}/g, "");
+        websiteContentCheck(matchString);
       }
     }
   }, [ver, region]);
