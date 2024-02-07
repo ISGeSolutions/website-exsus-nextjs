@@ -527,22 +527,11 @@ function getRegionByName(name) {
 }
 
 function getDictionaryDetails(matches, region) {
-  // https://cms-api.excelleresolutions.com/api/website-country-contents?populate[0]=website_country&filters[content_word][$in][1]=holiday&filters[content_word][$in][2]=Holiday&filters[website_country][code][$eq]=US
   var tempUrl = `${publicRuntimeConfig.apiUrl}/api/website-country-contents?populate[0]=website_country`;
-  // matches.forEach((match, index, matches) => {
-  // Use JavaScript string interpolation to replace the variable
-  const matchStr = matches.replace(/{|}/g, "");
-  // if (matchStr) {
-  //   tempUrl =
-  //     tempUrl +
-  //     "&filters[content_word][$in][" +
-  //     inc +
-  //     "]=" +
-  //     matchStr +
-  //     "&filters[website_country][code][$eq]=" +
-  //     region;
-  // } else {
-  debugger;
+  let matchStr = typeof matches === 'string' ? matches : (Array.isArray(matches) && matches.length > 0 ? matches[0] : '');
+  // let output = input.replace(/[{}]/g, '')
+  matchStr = matchStr.replace(/{|}/g, "");
+
 
   tempUrl =
     tempUrl + `&filters[content_word][$in]=${matchStr}&filters[website_country][code][$eq]=${region.replace(/in/g, "INDIA")}`
