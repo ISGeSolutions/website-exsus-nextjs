@@ -529,25 +529,25 @@ function getRegionByName(name) {
 function getDictionaryDetails(matches, region) {
   // https://cms-api.excelleresolutions.com/api/website-country-contents?populate[0]=website_country&filters[content_word][$in][1]=holiday&filters[content_word][$in][2]=Holiday&filters[website_country][code][$eq]=US
   var tempUrl = `${publicRuntimeConfig.apiUrl}/api/website-country-contents?populate[0]=website_country`;
+  // matches.forEach((match, index, matches) => {
+  // Use JavaScript string interpolation to replace the variable
+  const matchStr = matches.replace(/{|}/g, "");
+  // if (matchStr) {
+  //   tempUrl =
+  //     tempUrl +
+  //     "&filters[content_word][$in][" +
+  //     inc +
+  //     "]=" +
+  //     matchStr +
+  //     "&filters[website_country][code][$eq]=" +
+  //     region;
+  // } else {
+  debugger;
 
-  matches.forEach((match, index, matches) => {
-    // Use JavaScript string interpolation to replace the variable
-    const inc = index + 1;
-    const matchStr = match.replace(/{|}/g, "");
-    if (index === matches.length - 1) {
-      tempUrl =
-        tempUrl +
-        "&filters[content_word][$in][" +
-        inc +
-        "]=" +
-        matchStr +
-        "&filters[website_country][code][$eq]=" +
-        region;
-    } else {
-      tempUrl =
-        tempUrl + "&filters[content_word][$in][" + inc + "]=" + matchStr;
-    }
-  });
+  tempUrl =
+    tempUrl + `&filters[content_word][$in]=${matchStr}&filters[website_country][code][$eq]=${region.replace(/in/g, "INDIA")}`
+  // }
+  // });
 
   if (tempUrl) {
     return fetchWrapper.get(tempUrl);
