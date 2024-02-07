@@ -59,7 +59,7 @@ export function NewsLetterEmailTemplate(props) {
                                                 </tr>
                                                 <tr>
                                                     <td bgcolor="#fff" height="25px" style={{ padding: `15px 5px` }}>
-                                                        <font face="Verdana" color="#5d5d5d" size="2">The following request was recieved at <a href="javascript:void(0)" style={{ textDecoration: `none`, color: `#8aad56`, fontWeight: `bold` }}>exsus.com on</a> @CreatedDate</font>
+                                                        <font face="Verdana" color="#5d5d5d" size="2">The following request was recieved at <a href="javascript:void(0)" style={{ textDecoration: `none`, color: `#8aad56`, fontWeight: `bold` }}>exsus.com on</a> {emailDetails?.submitted_at}</font>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -69,7 +69,7 @@ export function NewsLetterEmailTemplate(props) {
                                                 </tr>
                                                 <tr>
                                                     <td bgcolor="#fff" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>Full Name: </strong> {emailDetails?.client_name
+                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>Full Name: </strong> {emailDetails?.first_name
                                                         }</font>
                                                     </td>
                                                 </tr>
@@ -80,7 +80,8 @@ export function NewsLetterEmailTemplate(props) {
                                                 </tr>
                                                 <tr>
                                                     <td bgcolor="#fff" width="580" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>Submitted from: </strong>  </font>
+                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>Submitted from: </strong>{emailDetails?.device_info
+                                                        }  </font>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -90,12 +91,13 @@ export function NewsLetterEmailTemplate(props) {
                                                 </tr>
                                                 <tr>
                                                     <td bgcolor="#fff" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>US Site?: </strong> {emailDetails?.preferred_place_time}</font>
+                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>US Site?: </strong> {emailDetails?.site_region}</font>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td bgcolor="#fff" width="580" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>Submission Location: </strong></font>
+                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>Submission Location: </strong>{emailDetails?.loc_by_ip_country_name
+                                                        }</font>
                                                     </td>
                                                 </tr>
                                             </table>

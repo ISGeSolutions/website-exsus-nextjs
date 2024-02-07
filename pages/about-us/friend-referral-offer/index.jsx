@@ -77,6 +77,7 @@ function Index() {
             newBackgroundImages.push(element.attributes.image_path);
           }
         });
+        localStorage.setItem("PageInfo", JSON.stringify({ pType: "CUST", pCode: x?.data[0]?.attributes?.page_code }));
         setBackgroundImage(newBackgroundImages);
         const data = x.data[0]?.attributes?.custom_page_contents?.data;
         let modifiedString = "";

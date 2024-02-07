@@ -148,6 +148,7 @@ function Index() {
       .getReviewsCustomePage()
       .then((x) => {
         setCareerData(x.data[0]);
+        localStorage.setItem("PageInfo", JSON.stringify({ pType: "CUST", pCode: x?.data[0]?.attributes?.page_code }));
         const data = x.data[0]?.attributes?.custom_page_contents?.data;
 
         let modifiedString = "";

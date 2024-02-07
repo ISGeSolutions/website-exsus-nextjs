@@ -74,21 +74,21 @@ function Index() {
       .replace(/&/g, "and");
     router.push(
       regionWiseUrl +
-        `/destinations/${res?.attributes?.hotel?.data?.attributes?.destination?.data?.attributes?.destination_name
-          ?.replace(/ /g, "-")
-          .toLowerCase()
-          .replace(
-            /&/g,
-            "and"
-          )}/hotels/${res?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.country_name
+      `/destinations/${res?.attributes?.hotel?.data?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/ /g, "-")
+        .toLowerCase()
+        .replace(
+          /&/g,
+          "and"
+        )}/hotels/${res?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(
             /&/g,
             "and"
           )}/${res?.attributes?.hotel?.data?.attributes?.region?.data?.attributes?.region_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${hotelName}`
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -104,14 +104,14 @@ function Index() {
       `/destinations/${res?.attributes?.hotel?.data?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, "and").replace(/ /g, "-")
         .toLowerCase()}/hotels/${res?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(
-          /&/g,
-          "and"
-        )}/${res?.attributes?.hotel?.data?.attributes?.region?.data?.attributes?.region_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${hotelName}`
+          ?.replace(/ /g, "-")
+          .replace(
+            /&/g,
+            "and"
+          )}/${res?.attributes?.hotel?.data?.attributes?.region?.data?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -147,8 +147,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -305,12 +305,13 @@ function Index() {
 
         setFriendlyUrl(`home/special offers`);
       })
-      .catch((error) => {});
+      .catch((error) => { });
 
     specialoffersService
       .getOffersCustomePage()
       .then((x) => {
         setCareerData(x.data[0]);
+        localStorage.setItem("PageInfo", JSON.stringify({ pType: "CUST", pCode: x?.data[0]?.attributes?.page_code }));
         const data = x.data[0]?.attributes?.custom_page_contents?.data;
         const imageCheck = x.data[0].attributes?.custom_page_images?.data;
         const newBackgroundImages = [];
@@ -600,8 +601,8 @@ function Index() {
                                                 {res?.attributes?.currency_symbol.repeat(
                                                   Math.abs(
                                                     5 -
-                                                      res?.attributes
-                                                        ?.price_guide_value
+                                                    res?.attributes
+                                                      ?.price_guide_value
                                                   )
                                                 )}
                                               </label>
@@ -678,9 +679,8 @@ function Index() {
           )}
 
           <section
-            className={`chat_window_parnt_blk ${
-              isMinimized ? "chat_window_minised" : ""
-            }`}
+            className={`chat_window_parnt_blk ${isMinimized ? "chat_window_minised" : ""
+              }`}
           >
             <div
               className="chat_window_inr_blk"

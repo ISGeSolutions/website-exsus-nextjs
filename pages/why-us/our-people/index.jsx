@@ -36,8 +36,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -225,7 +225,6 @@ function Index() {
             if (modifiedString) {
               const regex = /{[a-zA-Z0-9-]+}/g;
               const matches = [...new Set(modifiedString.match(regex))];
-
               let storedDataString = "";
               let storedData = "";
 
@@ -296,6 +295,7 @@ function Index() {
     whyusService
       .getExpertsPage()
       .then((x) => {
+        localStorage.setItem("PageInfo", JSON.stringify({ pType: "CUST", pCode: x?.data[0]?.attributes?.page_code }));
         setCustomData(x.data[0]);
         const imageCheck = x.data[0].attributes.custom_page_images.data;
         const newBackgroundImages = [];

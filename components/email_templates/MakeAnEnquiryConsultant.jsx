@@ -123,7 +123,7 @@ export function MakeAnEnquiryConsultant(props) {
                                                 </tr>
                                                 <tr>
                                                     <td bgcolor="#fff" width="580" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>Would like to receive information on holiday offers: </strong>{enquiryDetails?.receivedOffers}</font>
+                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>Would like to receive information on holiday offers: </strong>{enquiryDetails?.marketing_mail_ind}</font>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -133,7 +133,7 @@ export function MakeAnEnquiryConsultant(props) {
                                                 </tr>
                                                 <tr>
                                                     <td bgcolor="#fff" width="580" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>Page Url: </strong>{enquiryDetails?.previous_page}</font>
+                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>Page Url: </strong>{enquiryDetails?.page_url}</font>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -178,12 +178,12 @@ export function MakeAnEnquiryConsultant(props) {
                                                 </tr>
                                                 <tr>
                                                     <td bgcolor="#fff" width="580" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>Submitted from: </strong>{enquiryDetails?.submittedFrom} </font>
+                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>Submitted from: </strong>{enquiryDetails?.device_info} </font>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td bgcolor="#fff" width="580" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>Submission Location: </strong>{enquiryDetails?.submittedLocationCode}</font>
+                                                        <font face="Verdana" color="#5d5d5d" size="2"><strong>Submission Location: </strong>{enquiryDetails?.loc_by_ip_country_name}</font>
                                                     </td>
                                                 </tr>
                                                 <tr>

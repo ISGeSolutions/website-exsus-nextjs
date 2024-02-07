@@ -220,7 +220,7 @@ function Index() {
       .getWhyusPage()
       .then((x) => {
         setWhyusDetails(x?.data[0]?.attributes);
-
+        localStorage.setItem("PageInfo", JSON.stringify({ pType: "CUST", pCode: x?.data[0]?.attributes?.page_code }));
         setCustomData(x.data[0]?.attributes?.custom_page_contents);
         setLongText(
           x.data[0]?.attributes?.custom_page_contents?.data?.[4].attributes
@@ -289,9 +289,8 @@ function Index() {
                         element?.attributes?.image_type == "banner" && (
                           <a
                             key={index}
-                            className={`carousel-item ${
-                              index === 0 ? "active" : ""
-                            }`}
+                            className={`carousel-item ${index === 0 ? "active" : ""
+                              }`}
                             data-interval="5000"
                           >
                             <div

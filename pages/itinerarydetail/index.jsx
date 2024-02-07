@@ -67,8 +67,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -135,12 +135,12 @@ function Index() {
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${hotelName}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -151,16 +151,16 @@ function Index() {
       .replace(/&/g, "and");
     router.push(
       regionWiseUrl +
-        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-          ?.replace(/&/g, "and")
-          .replace(/ /g, "-")
-          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, "and")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${hotelName}`
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -174,8 +174,7 @@ function Index() {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}-itineraries/${
-        item?.attributes?.friendly_url
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url
       }`
     );
   };
@@ -187,12 +186,11 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-          ?.replace(/&/g, "and")
-          .replace(/ /g, "-")
-          .toLowerCase()}/itinerary/${countryName}-itineraries/${
-          item?.attributes?.friendly_url
-        }`
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, "and")
+        .replace(/ /g, "-")
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url
+      }`
     );
   };
 
@@ -402,6 +400,7 @@ function Index() {
       .getItineraryDetails(itin_name, region)
       .then((x) => {
         setItineraries(x.data[0]);
+        localStorage.setItem("PageInfo", JSON.stringify({ pType: "CTPL", pCode: x?.data[0]?.attributes?.itin_code }));
         const bannerImages = [];
         const imageCheck = x.data[0]?.attributes?.itinerary_images?.data;
 
@@ -412,14 +411,12 @@ function Index() {
         // );
 
         setFriendlyUrl(
-          `home/destinations/${router.query?.continent}/${
-            router.query?.country
-          }/${
-            router.query?.itineraryName
-              ? router.query?.itineraries +
-                "/" +
-                x.data[0].attributes.itin_name.toLowerCase()
-              : x.data[0].attributes.itin_name.toLowerCase()
+          `home/destinations/${router.query?.continent}/${router.query?.country
+          }/${router.query?.itineraryName
+            ? router.query?.itineraries +
+            "/" +
+            x.data[0].attributes.itin_name.toLowerCase()
+            : x.data[0].attributes.itin_name.toLowerCase()
           }`
         );
 
@@ -477,15 +474,15 @@ function Index() {
                   ?.replace(/&/g, "and")
                   .replace(/ /g, "-")
                   .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-                  ?.replace(/ /g, "-")
-                  .replace(/&/g, "and")
-                  .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-                  ?.replace(/ /g, "-")
-                  .replace(/&/g, "and")
-                  .toLowerCase()}/${item?.attributes?.friendly_url
-                  ?.replace(/&/g, "and")
-                  .replace(/ /g, "-")
-                  .toLowerCase()}`,
+                    ?.replace(/ /g, "-")
+                    .replace(/&/g, "and")
+                    .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+                      ?.replace(/ /g, "-")
+                      .replace(/&/g, "and")
+                      .toLowerCase()}/${item?.attributes?.friendly_url
+                        ?.replace(/&/g, "and")
+                        .replace(/ /g, "-")
+                        .toLowerCase()}`,
             }));
             setCoordinatesArray((prevCoordinates) => [
               ...prevCoordinates,
@@ -746,8 +743,8 @@ function Index() {
                                   showAllParagraphs[index]
                                     ? element?.attributes?.overview_text
                                     : element?.attributes?.overview_text.split(
-                                        "<br />"
-                                      )[0]
+                                      "<br />"
+                                    )[0]
                                 )
                               ),
                             }}
@@ -758,11 +755,10 @@ function Index() {
                             element?.attributes?.overview_text.split("<br />")
                               .length > 1 && (
                               <button
-                                className={`btn itinery_btn ${
-                                  showAllParagraphs[index]
+                                className={`btn itinery_btn ${showAllParagraphs[index]
                                     ? " itinery_para_expnd"
                                     : ""
-                                }`}
+                                  }`}
                                 onClick={() => toggleParagraphs(index)}
                               >
                                 <svg
@@ -968,8 +964,8 @@ function Index() {
                                           {item?.attributes?.currency_symbol.repeat(
                                             Math.abs(
                                               5 -
-                                                item?.attributes
-                                                  ?.price_guide_value
+                                              item?.attributes
+                                                ?.price_guide_value
                                             )
                                           )}
                                         </label>
@@ -1116,12 +1112,10 @@ function Index() {
                                 )
                                 .map((res1) => (
                                   <li key={res1.id}>
-                                    {`From ${
-                                      res1.attributes?.currency_symbol ?? ""
-                                    }${
-                                      formatPrice(res1.attributes?.price) ??
+                                    {`From ${res1.attributes?.currency_symbol ?? ""
+                                      }${formatPrice(res1.attributes?.price) ??
                                       " xxxx"
-                                    } per person`}
+                                      } per person`}
                                   </li>
                                 ))}
                               <li>

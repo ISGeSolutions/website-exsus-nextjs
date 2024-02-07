@@ -12,7 +12,7 @@ export const enquiryService = {
 
 function sendEnquiryMail(contactusData) {
     let postdata = contactusData;
-    postdata.emailpage = 'makeAnEnquiry';
+    postdata.emailpage = 'Enquiry';
     const currentUrl = window?.location?.origin + '/api/email_api   ';
     return fetchWrapper.post(`${currentUrl}`, postdata);
 }
