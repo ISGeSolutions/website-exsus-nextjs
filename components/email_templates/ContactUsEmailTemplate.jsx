@@ -1,11 +1,10 @@
 // import * as React from 'react';
-import { Html, style } from '@react-email/html';
-import { Button } from '@react-email/button';
-import React, { useState, useEffect } from 'react';
+import { Html, style } from "@react-email/html";
+import { Button } from "@react-email/button";
+import React, { useState, useEffect } from "react";
 
 export function ContactUsEmailTemplate(props) {
-
-  const { emailDetails } = props;
+  const { contactUsDetails } = props;
   const [currentDate, setCurrentDate] = useState(new Date());
 
   useEffect(() => {
@@ -27,87 +26,242 @@ export function ContactUsEmailTemplate(props) {
     <Html lang="en">
       {/* <Button href={url}>Click me</Button> */}
       <style jsx>{`
-    body {
-      margin: 0;
-      padding: 0;
-      min-width: 100% !important;
-    }
-    .content {
-      width: 100%;
-      max-width: 600px;
-    }
+        body {
+          margin: 0;
+          padding: 0;
+          min-width: 100% !important;
+        }
+        .content {
+          width: 100%;
+          max-width: 600px;
+        }
       `}</style>
-      <table align="center" border="0" cellPadding="0" cellSpacing="0" width="100%">
+      <table
+        align="center"
+        border="0"
+        cellPadding="0"
+        cellSpacing="0"
+        width="100%"
+      >
         <tbody>
           <tr>
             <td>
-              <table className="content" bgColor="#fff" align="center" style={{ border: `1px solid #666666`, margin: `15px auto` }} cellPadding="0" cellSpacing="0" width="600px">
+              <table
+                className="content"
+                bgColor="#fff"
+                align="center"
+                style={{ border: `1px solid #666666`, margin: `15px auto` }}
+                cellPadding="0"
+                cellSpacing="0"
+                width="600px"
+              >
                 <tr>
-                  <td align="center" bgcolor="#252525" style={{ padding: `15px` }}>
-                    <img src="@hosturlimages/images/logo.png" alt="emailer_logo" width="120" height="36" align="center" />
+                  <td
+                    align="center"
+                    bgcolor="#252525"
+                    style={{ padding: `15px` }}
+                  >
+                    <img
+                      src="@hosturlimages/images/logo.png"
+                      alt="emailer_logo"
+                      width="120"
+                      height="36"
+                      align="center"
+                    />
                   </td>
                 </tr>
                 <tr>
                   <td bgcolor="#FFFFFF">
-                    <table border="0" cellPadding="0" cellSpacing="0" width="95%" align="center" style={{ padding: `0 0 20px` }}>
+                    <table
+                      border="0"
+                      cellPadding="0"
+                      cellSpacing="0"
+                      width="95%"
+                      align="center"
+                      style={{ padding: `0 0 20px` }}
+                    >
                       <tr>
-                        <td bgcolor="#fff" height="20px" style={{ padding: `15px 5px 0`, fontWeight: `bold`, textTransform: `uppercase` }}>
-                          <font face="Verdana" color="#5d5d5d" size="2"> CONTACT US REQUEST </font>
+                        <td
+                          bgcolor="#fff"
+                          height="20px"
+                          style={{
+                            padding: `15px 5px 0`,
+                            fontWeight: `bold`,
+                            textTransform: `uppercase`,
+                          }}
+                        >
+                          <font face="Verdana" color="#5d5d5d" size="2">
+                            {" "}
+                            CONTACT US REQUEST{" "}
+                          </font>
                         </td>
                       </tr>
                       <tr>
-                        <td bgcolor="#fff" height="25px" style={{ padding: `15px 5px` }}>
-                          <font face="Verdana" color="#5d5d5d" size="2">The following request was recieved at <a href="javascript:void(0)" style={{ textDecoration: `none`, color: `#8aad56`, fontWeight: `bold` }}>exsus.com on </a> {formattedDate}</font>
+                        <td
+                          bgcolor="#fff"
+                          height="25px"
+                          style={{ padding: `15px 5px` }}
+                        >
+                          <font face="Verdana" color="#5d5d5d" size="2">
+                            The following request was recieved at{" "}
+                            <a
+                              href="#"
+                              style={{
+                                textDecoration: `none`,
+                                color: `#8aad56`,
+                                fontWeight: `bold`,
+                              }}
+                            >
+                              exsus.com on{" "}
+                            </a>{" "}
+                            {contactUsDetails?.submitted_at}
+                          </font>
                         </td>
                       </tr>
                       <tr>
-                        <td bgcolor="#fff" height="25px" style={{ padding: `5px 5px` }}>
-                          <font face="Verdana" color="#333333" size="2"><strong>Contact Information </strong></font>
+                        <td
+                          bgcolor="#fff"
+                          height="25px"
+                          style={{ padding: `5px 5px` }}
+                        >
+                          <font face="Verdana" color="#333333" size="2">
+                            <strong>Contact Information </strong>
+                          </font>
                         </td>
                       </tr>
                       <tr>
-                        <td bgcolor="#fff" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                          <font face="Verdana" color="#5d5d5d" size="2"><strong>First Name: </strong> {emailDetails?.first_name}</font>
+                        <td
+                          bgcolor="#fff"
+                          height="20px"
+                          style={{
+                            padding: `10px 5px`,
+                            borderBottom: `1px solid #f0f0f0`,
+                          }}
+                        >
+                          <font face="Verdana" color="#5d5d5d" size="2">
+                            <strong>First Name: </strong>{" "}
+                            {contactUsDetails?.first_name}
+                          </font>
                         </td>
                       </tr>
                       <tr>
-                        <td bgcolor="#fff" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                          <font face="Verdana" color="#5d5d5d" size="2"><strong>Last Name: </strong> {emailDetails?.last_name}</font>
+                        <td
+                          bgcolor="#fff"
+                          height="20px"
+                          style={{
+                            padding: `10px 5px`,
+                            borderBottom: `1px solid #f0f0f0`,
+                          }}
+                        >
+                          <font face="Verdana" color="#5d5d5d" size="2">
+                            <strong>Last Name: </strong>{" "}
+                            {contactUsDetails?.last_name}
+                          </font>
                         </td>
                       </tr>
                       <tr>
-                        <td bgcolor="#fff" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                          <font face="Verdana" color="#5d5d5d" size="2"><strong>Email: </strong> {emailDetails?.email_id}</font>
+                        <td
+                          bgcolor="#fff"
+                          height="20px"
+                          style={{
+                            padding: `10px 5px`,
+                            borderBottom: `1px solid #f0f0f0`,
+                          }}
+                        >
+                          <font face="Verdana" color="#5d5d5d" size="2">
+                            <strong>Email: </strong>{" "}
+                            {contactUsDetails?.email_id}
+                          </font>
                         </td>
                       </tr>
                       <tr>
-                        <td bgcolor="#fff" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                          <font face="Verdana" color="#5d5d5d" size="2"><strong>Telephone: </strong> {emailDetails?.telephone_no}</font>
+                        <td
+                          bgcolor="#fff"
+                          height="20px"
+                          style={{
+                            padding: `10px 5px`,
+                            borderBottom: `1px solid #f0f0f0`,
+                          }}
+                        >
+                          <font face="Verdana" color="#5d5d5d" size="2">
+                            <strong>Telephone: </strong>{" "}
+                            {contactUsDetails?.telephone_no}
+                          </font>
                         </td>
                       </tr>
                       <tr>
-                        <td bgcolor="#fff" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                          <font face="Verdana" color="#5d5d5d" size="2"><strong>Note: </strong> {emailDetails?.note}</font>
+                        <td
+                          bgcolor="#fff"
+                          height="20px"
+                          style={{
+                            padding: `10px 5px`,
+                            borderBottom: `1px solid #f0f0f0`,
+                          }}
+                        >
+                          <font face="Verdana" color="#5d5d5d" size="2">
+                            <strong>Note: </strong> {contactUsDetails?.note}
+                          </font>
                         </td>
                       </tr>
                       <tr>
-                        <td bgcolor="#fff" width="580" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                          <font face="Verdana" color="#5d5d5d" size="2"><strong>Page Url: </strong> {emailDetails?.source_of_marketing}</font>
+                        <td
+                          bgcolor="#fff"
+                          width="580"
+                          height="20px"
+                          style={{
+                            padding: `10px 5px`,
+                            borderBottom: `1px solid #f0f0f0`,
+                          }}
+                        >
+                          <font face="Verdana" color="#5d5d5d" size="2">
+                            <strong>Page Url: </strong>{" "}
+                            {contactUsDetails?.source_of_marketing}
+                          </font>
                         </td>
                       </tr>
                       <tr>
-                        <td bgcolor="#fff" width="580" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                          <font face="Verdana" color="#5d5d5d" size="2"><strong>Enquiry reference number: </strong> </font>
+                        <td
+                          bgcolor="#fff"
+                          width="580"
+                          height="20px"
+                          style={{
+                            padding: `10px 5px`,
+                            borderBottom: `1px solid #f0f0f0`,
+                          }}
+                        >
+                          <font face="Verdana" color="#5d5d5d" size="2">
+                            <strong>Enquiry reference number: </strong>{" "}
+                          </font>
                         </td>
                       </tr>
                       <tr>
-                        <td bgcolor="#fff" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                          <font face="Verdana" color="#5d5d5d" size="2"><strong>US Site?: </strong> {emailDetails?.preferred_place_time}</font>
+                        <td
+                          bgcolor="#fff"
+                          height="20px"
+                          style={{
+                            padding: `10px 5px`,
+                            borderBottom: `1px solid #f0f0f0`,
+                          }}
+                        >
+                          <font face="Verdana" color="#5d5d5d" size="2">
+                            <strong>US Site?: </strong>{" "}
+                            {contactUsDetails?.preferred_place_time}
+                          </font>
                         </td>
                       </tr>
                       <tr>
-                        <td bgcolor="#fff" width="580" height="20px" style={{ padding: `10px 5px`, borderBottom: `1px solid #f0f0f0` }}>
-                          <font face="Verdana" color="#5d5d5d" size="2"><strong>Submitted at: </strong> {formattedDate}</font>
+                        <td
+                          bgcolor="#fff"
+                          width="580"
+                          height="20px"
+                          style={{
+                            padding: `10px 5px`,
+                            borderBottom: `1px solid #f0f0f0`,
+                          }}
+                        >
+                          <font face="Verdana" color="#5d5d5d" size="2">
+                            <strong>Submitted at: </strong> {formattedDate}
+                          </font>
                         </td>
                       </tr>
                       {/* <tr>
@@ -123,7 +277,6 @@ export function ContactUsEmailTemplate(props) {
                     </table>
                   </td>
                 </tr>
-
               </table>
             </td>
           </tr>
