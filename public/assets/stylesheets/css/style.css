@@ -3081,6 +3081,10 @@
 .trvl_info_row .trvl_info_cntnt h2.trvl_title_white {
   font: 400 1rem/1.5rem "Roboto", sans-serif;
   color: #ffffff;
+  text-transform: capitalize;
+  letter-spacing: 0;
+  font-weight: 500;
+  text-decoration: underline;
 }
 
 /* line 600, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
@@ -3180,7 +3184,7 @@
 
 /* line 678, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
 .careers_list_blk {
-  text-align: left;
+  text-align: center;
   border: 5px solid #535152;
   height: 100%;
   padding: 20px;
@@ -3196,14 +3200,6 @@
   position: relative;
   padding-left: 15px;
   color: #ffffff;
-}
-
-/* line 691, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
-.careers_list_blk ul li::before {
-  position: absolute;
-  content: "•";
-  left: 0;
-  color: #8aad56;
 }
 
 /* line 703, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
@@ -4863,6 +4859,7 @@
 /* line 105, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
 .itinery_detls_cntnt {
   margin-bottom: 25px;
+  background-color: #3e3c3d;
 }
 
 /* line 107, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
@@ -4964,13 +4961,13 @@
   background: #3e3c3d;
   height: 100%;
   display: flex;
+  align-items: center;
 }
 
 /* line 176, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
 .itinery_detls_cntnt .itinery_detls_img img {
   width: 100%;
   max-height: 230px;
-  margin: auto;
 }
 
 /* line 184, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
