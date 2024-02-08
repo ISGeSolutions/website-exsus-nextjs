@@ -174,7 +174,7 @@ function Layout({ children }) {
   const websiteContentCheck = (modifiedString) => {
     let currRegion = region ? region : "uk";
     destinationService
-      .getDictionaryDetails(modifiedString, currRegion)
+      .getDictionaryDetails(modifiedString, currRegion?.replace(/\//g, ""))
       .then((responseObj) => {
         if (responseObj) {
           const res = responseObj?.data;
@@ -285,16 +285,16 @@ function Layout({ children }) {
 
     let storedDataString = "";
     let storedData = "";
-    if (region == "uk") {
+    if (region.replace(/\//g, "") == "uk") {
       storedDataString = localStorage.getItem("websitecontent_uk");
       storedData = JSON.parse(storedDataString);
-    } else if (region == "us") {
+    } else if (region.replace(/\//g, "") == "us") {
       storedDataString = localStorage.getItem("websitecontent_us");
       storedData = JSON.parse(storedDataString);
-    } else if (region == "asia") {
+    } else if (region.replace(/\//g, "") == "asia") {
       storedDataString = localStorage.getItem("websitecontent_asia");
       storedData = JSON.parse(storedDataString);
-    } else if (region == "in") {
+    } else if (region.replace(/\//g, "") == "in") {
       storedDataString = localStorage.getItem("websitecontent_india");
       storedData = JSON.parse(storedDataString);
     }

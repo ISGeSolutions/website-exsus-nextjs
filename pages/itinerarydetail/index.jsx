@@ -556,7 +556,7 @@ function Index() {
                 {bannerImages?.map(
                   (__, index) => (
                     <button
-                      key={index}
+                      key={`index_${index}`}
                       type="button"
                       data-bs-target="#carouselExampleInterval"
                       data-bs-slide-to={index}
@@ -575,7 +575,7 @@ function Index() {
                   <NavLink
                     href="#"
                     onClick={handleHrefClick}
-                    key={index}
+                    key={`ele_${index}`}
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                     data-bs-interval="5000"
                   >
@@ -724,25 +724,14 @@ function Index() {
                     <div className="row">
                       <div className="col-md-7 col-lg-8">
                         <div className="itinery_detls_para itinery_para_blk">
-                          {/* <div
-                            key={index}
-                            dangerouslySetInnerHTML={{
-                              __html: dictioneryFunction(formattedHtml(
-                                element?.attributes?.overview_text)
-                              ),
-                            }}
-                          />
-                          <button className="btn itinery_btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" className="up_arrow" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 512 266.77"><path fillRule="nonzero" d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z" /></svg>
-                          </button> */}
-                          {/* Render paragraphs based on toggle state */}
+                          <h3><span>{element?.attributes?.duration}</span>{element?.attributes?.place_name}</h3>
                           <div
                             dangerouslySetInnerHTML={{
                               __html: dictioneryFunction(
                                 formattedHtml(
                                   showAllParagraphs[index]
-                                    ? element?.attributes?.overview_text
-                                    : element?.attributes?.overview_text.split(
+                                    ? element?.attributes?.day_detail_text
+                                    : element?.attributes?.day_detail_text.split(
                                       "<br />"
                                     )[0]
                                 )
@@ -756,8 +745,8 @@ function Index() {
                               .length > 1 && (
                               <button
                                 className={`btn itinery_btn ${showAllParagraphs[index]
-                                    ? " itinery_para_expnd"
-                                    : ""
+                                  ? " itinery_para_expnd"
+                                  : ""
                                   }`}
                                 onClick={() => toggleParagraphs(index)}
                               >
@@ -913,7 +902,7 @@ function Index() {
                       <div className="card_slider_inr01" key={item.id}>
                         <div className="card_slider">
                           <NavLink
-                            key={item.id}
+                            key={`hotel_${item.id}`}
                             href={generateDynamicLink1(item)}
                             className="card_slider_img"
                           >
@@ -921,7 +910,7 @@ function Index() {
                               (element, index) =>
                                 element.attributes.image_type == "thumbnail" ? (
                                   <img
-                                    key={element.id}
+                                    key={`hotel_ele_${element.id}`}
                                     src={element.attributes.image_path}
                                     alt={element.attributes.image_alt_text}
                                     className="img-fluid"
@@ -932,7 +921,7 @@ function Index() {
                             )}
                           </NavLink>
                           <div className="card_slider_cnt places_to_stay_cnt">
-                            <h4 key={item.id}>
+                            <h4 key={`slider_${item.id}`}>
                               <a href={generateDynamicLink1(item)}>
                                 {dictioneryFunction(
                                   item?.attributes?.hotel_name
@@ -947,7 +936,7 @@ function Index() {
                               {item?.attributes?.hotel_country_contents?.data?.map(
                                 (item) => {
                                   return (
-                                    <li className="price_guide_tooltip">
+                                    <li className="price_guide_tooltip" key={`item_${item?.id}`}>
                                       Price guide:
                                       <span
                                         tabIndex="0"
@@ -1055,7 +1044,7 @@ function Index() {
                   </i>
                   <div className="carousel00">
                     {moreItineraries?.map((item) => (
-                      <div className="card_slider_inr" key={item.id}>
+                      <div className="card_slider_inr" key={`slider_${item?.id}`}>
                         <div className="card_slider">
                           <NavLink
                             key={item.id}
@@ -1066,7 +1055,7 @@ function Index() {
                               (element, index) =>
                                 element.attributes.image_type == "thumbnail" ? (
                                   <img
-                                    key={element.id}
+                                    key={`iti_${element.id}`}
                                     src={element.attributes.image_path}
                                     alt="destination card01"
                                     className="img-fluid"
@@ -1111,7 +1100,7 @@ function Index() {
                                     region.replace(/in/g, "india")
                                 )
                                 .map((res1) => (
-                                  <li key={res1.id}>
+                                  <li key={`filter_${res1.id}`}>
                                     {`From ${res1.attributes?.currency_symbol ?? ""
                                       }${formatPrice(res1.attributes?.price) ??
                                       " xxxx"
