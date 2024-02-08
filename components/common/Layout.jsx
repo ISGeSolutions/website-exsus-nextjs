@@ -193,9 +193,17 @@ function Layout({ children }) {
       });
   };
 
+  const openPdfInNewTab = () => {
+    // Construct the static URL of the PDF file
+    const pdfUrl = '/pdf/bookingforms/ExsusTravelRestofWorldBookingForm.pdf';
+
+    // Open the PDF in a new tab
+    window.open(pdfUrl, '_blank');
+  };
+
   useEffect(() => {
     // Temporarily disable warnings in the development environment
-    console.warn = () => {};
+    console.warn = () => { };
 
     $(".header_country_list > ul .header_country_label").on(
       "mouseenter",
@@ -717,9 +725,10 @@ function Layout({ children }) {
                   </NavLink>
                 </li>
                 <li>
+                  {/* <button onClick={openPdfInNewTab}>Open PDF in New Tab</button> */}
                   <NavLink
-                    href="https://www.exsus.com/pdf/bookingforms/ExsusTravelUKBookingForm.pdf"
-                    target="_blank"
+                    href=""
+                    onClick={openPdfInNewTab}
                   >
                     Booking terms & conditions
                   </NavLink>
