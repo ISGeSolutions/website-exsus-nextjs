@@ -27,6 +27,12 @@ function Layout({ children }) {
   const { ver } = router.query;
   const [telePhoneNumber, SetTelePhoneNumber] = useState();
 
+
+  // // Accessing the current URL properties
+  // const currentUrl = window.location.href;
+  // const currentPathname = window.location.pathname;
+    
+
   // form validation rules
   const validationSchema = Yup.object().shape({
     searchText: Yup.string().required(),
@@ -194,6 +200,8 @@ function Layout({ children }) {
   };
 
   const openPdfInNewTab = () => {
+
+  
     // Construct the static URL of the PDF file
     const pdfUrl = '/pdf/bookingforms/ExsusTravelRestofWorldBookingForm.pdf';
 
@@ -725,13 +733,13 @@ function Layout({ children }) {
                   </NavLink>
                 </li>
                 <li>
-                  {/* <button onClick={openPdfInNewTab}>Open PDF in New Tab</button> */}
-                  <NavLink
-                    href=""
+                  {/* <button className="btn btn-link" onClick={openPdfInNewTab}>Open PDF in New Tab</button> */}
+                  <a
+                    href={currentUrl} 
                     onClick={openPdfInNewTab}
                   >
                     Booking terms & conditions
-                  </NavLink>
+                  </a>
                 </li>
               </ul>
             </div>
