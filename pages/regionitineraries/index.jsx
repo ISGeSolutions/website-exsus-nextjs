@@ -168,6 +168,7 @@ function RegionItinararies(props) {
   // }
 
   const handleOptionRegionChange = (selectedOption) => {
+    setAlert(null);
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
@@ -185,6 +186,7 @@ function RegionItinararies(props) {
   };
 
   const handleOptionMonthChange = (selectedOption) => {
+    setAlert(null);
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );

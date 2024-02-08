@@ -202,15 +202,15 @@ function ContinentPlacesToStay(props) {
                 ?.replace(/&/g, "and")
                 .replace(/ /g, "-")
                 .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-                  ?.replace(/ /g, "-")
-                  .replace(/&/g, "and")
-                  .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-                    ?.replace(/ /g, "-")
-                    .replace(/&/g, "and")
-                    .toLowerCase()}/${item?.attributes?.friendly_url
-                      ?.replace(/&/g, "and")
-                      .replace(/ /g, "-")
-                      .toLowerCase()}`,
+                ?.replace(/ /g, "-")
+                .replace(/&/g, "and")
+                .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+                ?.replace(/ /g, "-")
+                .replace(/&/g, "and")
+                .toLowerCase()}/${item?.attributes?.friendly_url
+                ?.replace(/&/g, "and")
+                .replace(/ /g, "-")
+                .toLowerCase()}`,
           }));
           // Update the state with the accumulated coordinates
           setCoordinatesArray((prevCoordinates) => [
@@ -278,15 +278,15 @@ function ContinentPlacesToStay(props) {
                 ?.replace(/&/g, "and")
                 .replace(/ /g, "-")
                 .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-                  ?.replace(/ /g, "-")
-                  .replace(/&/g, "and")
-                  .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-                    ?.replace(/ /g, "-")
-                    .replace(/&/g, "and")
-                    .toLowerCase()}/${item?.attributes?.friendly_url
-                      ?.replace(/&/g, "and")
-                      .replace(/ /g, "-")
-                      .toLowerCase()}`,
+                ?.replace(/ /g, "-")
+                .replace(/&/g, "and")
+                .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+                ?.replace(/ /g, "-")
+                .replace(/&/g, "and")
+                .toLowerCase()}/${item?.attributes?.friendly_url
+                ?.replace(/&/g, "and")
+                .replace(/ /g, "-")
+                .toLowerCase()}`,
           }));
           // Update the state with the accumulated coordinates
           setCoordinatesArray((prevCoordinates) => [
@@ -357,32 +357,33 @@ function ContinentPlacesToStay(props) {
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
     );
   };
 
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, "and")
-        .replace(/ /g, "-")
-        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/&/g, "and")
+          .replace(/ /g, "-")
+          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${item?.attributes?.friendly_url}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.friendly_url}`
     );
   };
 
   const handleOptionCountryChange = (selectedOption) => {
+    setAlert(null);
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
@@ -400,6 +401,7 @@ function ContinentPlacesToStay(props) {
   };
 
   const handleOptionRegionChange = (selectedOption) => {
+    setAlert(null);
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
@@ -417,6 +419,7 @@ function ContinentPlacesToStay(props) {
   };
 
   const handleOptionMonthChange = (selectedOption) => {
+    setAlert(null);
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
@@ -569,7 +572,7 @@ function ContinentPlacesToStay(props) {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -863,7 +866,7 @@ function ContinentPlacesToStay(props) {
                     {allHotels?.slice(0, allHotels.length).map((item) => (
                       <div
                         className="col-sm-6 col-lg-4 col-xxl-3"
-                        key={item.id}
+                        key={"hotel_" + item.id}
                       >
                         <div className="card_slider_inr">
                           <div className="card_slider">
@@ -874,9 +877,9 @@ function ContinentPlacesToStay(props) {
                               {item?.attributes?.hotel_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
-                                      key={index}
+                                      key={"thumb" + index}
                                       src={element.attributes.image_path}
                                       alt={element.attributes.image_alt_text}
                                       className="img-fluid"
@@ -906,7 +909,7 @@ function ContinentPlacesToStay(props) {
                                     return (
                                       <li
                                         className="price_guide_tooltip"
-                                        key={item?.id}
+                                        key={"hotelPrice_" + item?.id}
                                       >
                                         Price guide:
                                         <span
@@ -926,8 +929,8 @@ function ContinentPlacesToStay(props) {
                                             {item?.attributes?.currency_symbol.repeat(
                                               Math.abs(
                                                 5 -
-                                                item?.attributes
-                                                  ?.price_guide_value
+                                                  item?.attributes
+                                                    ?.price_guide_value
                                               )
                                             )}
                                           </label>

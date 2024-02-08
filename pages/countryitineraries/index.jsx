@@ -332,6 +332,7 @@ function CountryItinararies(props) {
   };
 
   const handleOptionReasonChange = (selectedOption) => {
+    setAlert(null);
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
@@ -349,6 +350,7 @@ function CountryItinararies(props) {
   };
 
   const handleOptionRegionChange = (selectedOption) => {
+    setAlert(null);
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
@@ -366,6 +368,7 @@ function CountryItinararies(props) {
   };
 
   const handleOptionMonthChange = (selectedOption) => {
+    setAlert(null);
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );

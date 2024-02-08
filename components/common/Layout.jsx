@@ -183,7 +183,7 @@ function Layout({ children }) {
             const matchString = element?.attributes?.content_word;
             const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
             if (checkStr && replacement) {
-              SetTelePhoneNumber(replacement)
+              SetTelePhoneNumber(replacement);
             }
           });
 
@@ -195,7 +195,7 @@ function Layout({ children }) {
 
   useEffect(() => {
     // Temporarily disable warnings in the development environment
-    console.warn = () => { };
+    console.warn = () => {};
 
     $(".header_country_list > ul .header_country_label").on(
       "mouseenter",
@@ -229,7 +229,12 @@ function Layout({ children }) {
     const { pathname, search, hash, href } = window.location;
     const site_region_local = localStorage.getItem("site_region");
 
-    if (pathname == '/uk' || pathname == '/us' || pathname == '/asia' || pathname == '/in') {
+    if (
+      pathname == "/uk" ||
+      pathname == "/us" ||
+      pathname == "/asia" ||
+      pathname == "/in"
+    ) {
       region = pathname;
       countries.forEach((element) => {
         if (element.value == pathname.slice(1)) {
