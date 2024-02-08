@@ -535,8 +535,7 @@ function getDictionaryDetails(matches, region) {
 
   tempUrl =
     tempUrl + `&filters[content_word][$in]=${matchStr}&filters[website_country][code][$eq]=${region.replace(/in/g, "INDIA")}`
-  // }
-  // });
+
 
   if (tempUrl) {
     return fetchWrapper.get(tempUrl);
