@@ -40,7 +40,6 @@ function Index() {
   };
   let dictionaryPage = 1;
 
-
   let region = "uk";
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
@@ -54,7 +53,14 @@ function Index() {
 
   const loadMoreData = (item) => {
     destinationService
-      .getItinerariesInAdvanceSearch(dcodestr, dcodeReason, dcodeMonth, page + 1, region, item)
+      .getItinerariesInAdvanceSearch(
+        dcodestr,
+        dcodeReason,
+        dcodeMonth,
+        page + 1,
+        region,
+        item
+      )
       .then((response) => {
         setMetaData(response.meta.pagination);
         const newItineraries = response.data;
@@ -72,8 +78,6 @@ function Index() {
           setIsLoading(false);
         }
       });
-
-
   };
 
   const generateDynamicLink = (item) => {
@@ -86,7 +90,8 @@ function Index() {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url
+        .toLowerCase()}/itinerary/${countryName}-itineraries/${
+        item?.attributes?.friendly_url
       }`
     );
   };
@@ -98,18 +103,19 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, "and")
-        .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}-itineraries/${item?.attributes?.friendly_url
-      }`
+        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/&/g, "and")
+          .replace(/ /g, "-")
+          .toLowerCase()}/itinerary/${countryName}-itineraries/${
+          item?.attributes?.friendly_url
+        }`
     );
   };
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -172,7 +178,9 @@ function Index() {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
-            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
+            let localStorageUk = JSON.parse(
+              localStorage.getItem("websitecontent_uk")
+            );
             localStorage.setItem(
               "websitecontent_uk",
               JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
@@ -184,7 +192,9 @@ function Index() {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
-            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
+            let localStorageUS = JSON.parse(
+              localStorage.getItem("websitecontent_us")
+            );
             localStorage.setItem(
               "websitecontent_us",
               JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
@@ -197,7 +207,9 @@ function Index() {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
-            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
+            let localStorageAsia = JSON.parse(
+              localStorage.getItem("websitecontent_asia")
+            );
             localStorage.setItem(
               "websitecontent_asia",
               JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
@@ -210,7 +222,9 @@ function Index() {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
-            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
+            let localStorageIndia = JSON.parse(
+              localStorage.getItem("websitecontent_india")
+            );
             localStorage.setItem(
               "websitecontent_india",
               JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
@@ -218,8 +232,8 @@ function Index() {
           }
         });
         if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
-          dictionaryPage = x?.meta?.pagination?.page + 1
-          websiteContentCheck(dictionaryPage)
+          dictionaryPage = x?.meta?.pagination?.page + 1;
+          websiteContentCheck(dictionaryPage);
         }
         setWebsiteContent(x.data);
         setIsLoading(false);
@@ -283,10 +297,11 @@ function Index() {
   };
 
   useEffect(() => {
-    if (!localStorage.getItem(`websitecontent_${region.replace(
-      /in/g,
-      "INDIA"
-    ).toLowerCase()}`)) {
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
       websiteContentCheck(dictionaryPage);
     }
 
@@ -433,7 +448,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                      "thumbnail" ? (
+                                    "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}
@@ -459,23 +474,24 @@ function Index() {
                                       item?.attributes?.header_text
                                     )}
                                   </li>
-                                  {/* <li>Indonesia</li> */}
-                                  <li>
-                                    {item?.attributes?.itinerary_country_contents?.data
-                                      .filter(
-                                        (res) =>
-                                          res.attributes.website_country.toLowerCase() ===
-                                          region.replace(/in/g, "india")
-                                      )
-                                      .map((res1) => (
-                                        <li key={res1.id}>
-                                          {`from ${res1.attributes?.currency_symbol ??
-                                            ""
-                                            }${formatPrice(res1.attributes?.price) ?? " xxxx"
-                                            } per person`}
-                                        </li>
-                                      ))}
-                                  </li>
+
+                                  {item?.attributes?.itinerary_country_contents?.data
+                                    .filter(
+                                      (res) =>
+                                        res.attributes.website_country.toLowerCase() ===
+                                        region.replace(/in/g, "india")
+                                    )
+                                    .map((res1) => (
+                                      <li key={res1.id}>
+                                        {`from ${
+                                          res1.attributes?.currency_symbol ?? ""
+                                        }${
+                                          formatPrice(res1.attributes?.price) ??
+                                          " xxxx"
+                                        } per person`}
+                                      </li>
+                                    ))}
+
                                   <li>
                                     Travel to:
                                     <span>

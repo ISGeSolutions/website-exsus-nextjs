@@ -74,21 +74,21 @@ function Index() {
       .replace(/&/g, "and");
     router.push(
       regionWiseUrl +
-      `/destinations/${res?.attributes?.hotel?.data?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/ /g, "-")
-        .toLowerCase()
-        .replace(
-          /&/g,
-          "and"
-        )}/hotels/${res?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.country_name
+        `/destinations/${res?.attributes?.hotel?.data?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/ /g, "-")
+          .toLowerCase()
+          .replace(
+            /&/g,
+            "and"
+          )}/hotels/${res?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(
             /&/g,
             "and"
           )}/${res?.attributes?.hotel?.data?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -102,16 +102,17 @@ function Index() {
     return (
       regionWiseUrl +
       `/destinations/${res?.attributes?.hotel?.data?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, "and").replace(/ /g, "-")
+        ?.replace(/&/g, "and")
+        .replace(/ /g, "-")
         .toLowerCase()}/hotels/${res?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.country_name
-          ?.replace(/ /g, "-")
-          .replace(
-            /&/g,
-            "and"
-          )}/${res?.attributes?.hotel?.data?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
+        ?.replace(/ /g, "-")
+        .replace(
+          /&/g,
+          "and"
+        )}/${res?.attributes?.hotel?.data?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -147,8 +148,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -305,13 +306,19 @@ function Index() {
 
         setFriendlyUrl(`home/special offers`);
       })
-      .catch((error) => { });
+      .catch((error) => {});
 
     specialoffersService
       .getOffersCustomePage()
       .then((x) => {
         setCareerData(x.data[0]);
-        localStorage.setItem("PageInfo", JSON.stringify({ pType: "CUST", pCode: x?.data[0]?.attributes?.page_code }));
+        localStorage.setItem(
+          "PageInfo",
+          JSON.stringify({
+            pType: "CUST",
+            pCode: x?.data[0]?.attributes?.page_code,
+          })
+        );
         const data = x.data[0]?.attributes?.custom_page_contents?.data;
         const imageCheck = x.data[0].attributes?.custom_page_images?.data;
         const newBackgroundImages = [];
@@ -443,7 +450,7 @@ function Index() {
               <div className="carousel-indicators">
                 {backgroundImage.map((_, index) => (
                   <button
-                    key={index}
+                    key={"spcImg" + index}
                     type="button"
                     data-bs-target="#carouselExampleInterval"
                     data-bs-slide-to={index}
@@ -458,7 +465,7 @@ function Index() {
                   <a
                     href="#"
                     onClick={handleHrefClick}
-                    key={index}
+                    key={"spcCarousel" + index}
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                     data-bs-interval="5000"
                   >
@@ -536,18 +543,16 @@ function Index() {
                             <div className="card_slider_inr">
                               <div className="card_slider">
                                 <NavLink
-                                  key={res?.id}
+                                  key={"spcOffer" + res?.id}
                                   href={generateDynamicLink(res)}
                                 >
                                   {/*   error => Dont add anchor tag for the below element. you can use onclick fun. */}
                                   <span
-                                    key={res?.id}
                                     href="#"
                                     onClick={handleHrefClick}
                                     className="card_slider_img"
                                   >
                                     <img
-                                      key={res?.id}
                                       src={res.attributes.thumbnail_image_path}
                                       alt="offer_card01"
                                       className="img-fluid"
@@ -560,10 +565,7 @@ function Index() {
                                 <div className="card_slider_cnt places_to_stay_cnt">
                                   <h4>
                                     {/*   error => Dont add anchor tag for the below element. you can use onclick fun. */}
-                                    <a
-                                      key={res?.id}
-                                      href={generateDynamicLink(res)}
-                                    >
+                                    <a href={generateDynamicLink(res)}>
                                       {res?.attributes?.offer_text}
                                     </a>
                                   </h4>
@@ -580,11 +582,10 @@ function Index() {
                                         return (
                                           <li
                                             className="price_guide_tooltip"
-                                            key={res?.id}
+                                            key={"spcPrice" + res?.id}
                                           >
                                             Price guide:
                                             <span
-                                              key={res?.id}
                                               tabIndex="0"
                                               data-title={
                                                 res?.attributes
@@ -601,8 +602,8 @@ function Index() {
                                                 {res?.attributes?.currency_symbol.repeat(
                                                   Math.abs(
                                                     5 -
-                                                    res?.attributes
-                                                      ?.price_guide_value
+                                                      res?.attributes
+                                                        ?.price_guide_value
                                                   )
                                                 )}
                                               </label>
@@ -628,10 +629,7 @@ function Index() {
                                   className="btn card_slider_btn justify-content-end"
                                   onClick={() => handleRedirect(res)}
                                 >
-                                  <span
-                                    key={res?.id}
-                                    className="view_itnry_link"
-                                  >
+                                  <span className="view_itnry_link">
                                     View this hotel
                                     <em className="fa-solid fa-chevron-right"></em>
                                   </span>
@@ -679,8 +677,9 @@ function Index() {
           )}
 
           <section
-            className={`chat_window_parnt_blk ${isMinimized ? "chat_window_minised" : ""
-              }`}
+            className={`chat_window_parnt_blk ${
+              isMinimized ? "chat_window_minised" : ""
+            }`}
           >
             <div
               className="chat_window_inr_blk"

@@ -214,6 +214,7 @@ function Index() {
   };
 
   const handleOptionCountryChange = (selectedOption) => {
+    setAlert(null);
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
@@ -274,7 +275,6 @@ function Index() {
   };
 
   const loadMoreData = (item) => {
-    setAlert(null);
     holidaytypesService
       .getItinerariesByHolidayTypeGroup(page + 1, hcode, region, item)
       .then((response) => {

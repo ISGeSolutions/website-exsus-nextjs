@@ -173,6 +173,7 @@ function RegionPlacesToStay(props) {
   };
 
   const handleOptionRegionChange = (selectedOption) => {
+    setAlert(null);
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
@@ -190,6 +191,7 @@ function RegionPlacesToStay(props) {
   };
 
   const handleOptionMonthChange = (selectedOption) => {
+    setAlert(null);
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );

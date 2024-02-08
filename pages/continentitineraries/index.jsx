@@ -241,6 +241,7 @@ function ContinentItinararies(props) {
   };
 
   const handleOptionCountryChange = (selectedOption) => {
+    setAlert(null);
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
@@ -258,6 +259,7 @@ function ContinentItinararies(props) {
   };
 
   const handleOptionRegionChange = (selectedOption) => {
+    setAlert(null);
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
@@ -275,6 +277,7 @@ function ContinentItinararies(props) {
   };
 
   const handleOptionMonthChange = (selectedOption) => {
+    setAlert(null);
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );

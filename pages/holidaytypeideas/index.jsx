@@ -157,6 +157,7 @@ function Index() {
   };
 
   const handleOptionCountryChange = (selectedOption) => {
+    setAlert(null);
     selectedOption = selectedOption.filter(
       (i) => i.value !== "" && typeof i.value !== "undefined"
     );
@@ -212,7 +213,7 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
+        `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -326,8 +327,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt1"
-    ),
+        "card_slider_cnt places_to_stay_cnt1"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -483,7 +484,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -520,7 +521,13 @@ function Index() {
     holidaytypesService
       .getHolidaytypeDetailsById(holidaytypename)
       .then((x) => {
-        localStorage.setItem("PageInfo", JSON.stringify({ pType: "HTYP", pCode: x?.data[0]?.attributes?.holiday_type_code }));
+        localStorage.setItem(
+          "PageInfo",
+          JSON.stringify({
+            pType: "HTYP",
+            pCode: x?.data[0]?.attributes?.holiday_type_code,
+          })
+        );
         setTitle(x.data[0].attributes?.page_meta_title);
         setHolidaytypesDetails(x.data[0].attributes);
         setFriendlyUrl(
@@ -787,7 +794,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                      "thumbnail" ? (
+                                    "thumbnail" ? (
                                       <img
                                         key={element.id}
                                         src={element.attributes.image_path}
@@ -823,10 +830,12 @@ function Index() {
                                     )
                                     .map((res1) => (
                                       <li key={res1.id}>
-                                        {`From ${res1.attributes?.currency_symbol ?? ""
-                                          }${formatPrice(res1.attributes?.price) ??
+                                        {`From ${
+                                          res1.attributes?.currency_symbol ?? ""
+                                        }${
+                                          formatPrice(res1.attributes?.price) ??
                                           " xxxx"
-                                          } per person`}
+                                        } per person`}
                                       </li>
                                     ))}
                                   <li>
