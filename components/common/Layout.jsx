@@ -10,7 +10,8 @@ import Head from "next/head";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
+import { Header } from "../Header";
+import { Footer } from "../Footer";
 // import plusSlides from "public/assets/javascripts/navigation.js";
 import { useTranslation } from "react-i18next";
 import i18n from "i18next";
@@ -26,12 +27,6 @@ function Layout({ children }) {
   const [selectedRegion, setVariable] = useState("");
   const { ver } = router.query;
   const [telePhoneNumber, SetTelePhoneNumber] = useState();
-
-
-  // // Accessing the current URL properties
-  // const currentUrl = window.location.href;
-  // const currentPathname = window.location.pathname;
-    
 
   // form validation rules
   const validationSchema = Yup.object().shape({
@@ -160,22 +155,11 @@ function Layout({ children }) {
         newPath = newPath + "/" + element;
       }
     });
-    // myArray.forEach((element, index) => {
-    //   if (index === 0) {
-    //     if (selectedOption.value != "uk") {
-    //       newPath = "/" + selectedOption.value;
-    //     }
-    //   } else {
-    //     newPath = newPath + "/" + element;
-    //   }
-    // });
     router.push(newPath);
     // router?.replace('/uk/continent?destinationcode=africa&id=1');
   };
 
-  const handleChange1 = (selectedOption) => {
-    this.plusSlides.openLeftNav();
-  };
+
 
   const websiteContentCheck = (modifiedString) => {
     let currRegion = region ? region : "uk";
@@ -201,7 +185,7 @@ function Layout({ children }) {
 
   const openPdfInNewTab = () => {
 
-  
+
     // Construct the static URL of the PDF file
     const pdfUrl = '/pdf/bookingforms/ExsusTravelRestofWorldBookingForm.pdf';
 
@@ -360,10 +344,7 @@ function Layout({ children }) {
 
   return (
     <div>
-      <header className="header_blk_row header">
-        <Head>
-          {/* <script type="text/javascript" src="/assets/javascripts/navigation.js"></script> */}
-        </Head>
+      {/* <header className="header_blk_row header">
         <div className="container">
           <div className="header_blk_inr">
             <section className="header_item_left ">
@@ -389,18 +370,6 @@ function Layout({ children }) {
                   ></button>
                 </div>
                 <div className="dropdown header_drpdown">
-                  {/* <Select id="long-value-select" 
-                                        instanceId="long-value-select"
-                                        options={countries}
-                                        value={selected}
-                                        onChange={handleChange} autoFocus={true}
-                                        formatOptionLabel={country => (
-                                            <div className="country-option">
-                                                <img src={country.image} alt="country-image" />
-                                                <span>{country.label}</span>
-                                            </div>
-                                        )}
-                                    /> */}
 
                   <Select
                     id="long-value-select"
@@ -420,38 +389,6 @@ function Layout({ children }) {
                       </div>
                     )}
                   />
-
-                  {/* <select className="btn btn-secondary dropdown-toggle" onChange={e => handleRegion(e.target.value)}>
-                                        <option className="dropdown-item" value="uk">UK</option>
-                                        <option className="dropdown-item" value="us">US</option>
-                                        <option className="dropdown-item" value="asia">Asia</option>
-                                        <option className="dropdown-item" value="in">India</option>
-                                    </select> */}
-                  {/* <select id="id_select2_example" onChange={e => handleRegion(e.target.value)}>
-                                        <option data-img_src="images/uk-flag-round-circle-icon.svg">UK site</option>
-                                        <option data-img_src="images/usa-flag-round-circle-icon.svg">US site</option>
-                                        <option data-img_src="images/thailand-flag-round-circle-icon.svg">Asia site</option>
-                                        <option data-img_src="images/india-flag-round-circle-icon.svg">India site</option>
-                                    </select> */}
-                  {/* <NavLink className="btn btn-secondary dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <img className="main-role-image" src="./../../images/uk-flag-round-circle-icon.svg" alt="united-kingdom-flag-icon" /><span className=' main-role'>
-                                            UK site
-                                        </span>
-                                    </NavLink>
-                                    <ul className="dropdown-menu">
-                                        <li>
-                                            <NavLink className="dropdown-item" value="uk-uk-flag-round-circle-icon.svg" href="javascript:void(0)">
-                                                <img src="./../../images/uk-flag-round-circle-icon.svg" alt="usa-flag-round-circle-icon" />
-                                                UK site
-                                            </NavLink></li>
-                                        <li>
-                                            <NavLink className="dropdown-item" value="us-usa-flag-round-circle-icon.svg" href="javascript:void(0)">
-                                                <img src="./../../images/usa-flag-round-circle-icon.svg" alt="usa-flag-round-circle-icon" />
-                                                US site
-                                            </NavLink></li>
-                                        <li><NavLink className="dropdown-item" value="asia" href="javascript:void(0)"><img src="./../.././../../images/thailand-flag-round-circle-icon.svg" alt="thailand-flag-round-circle-icon" />Asia site</NavLink></li>
-                                        <li><NavLink className="dropdown-item" value="in" href="javascript:void(0)"><img src="./../../images/india-flag-round-circle-icon.svg" alt="india-flag-round-circle-icon" />India site</NavLink></li>
-                                    </ul> */}
                 </div>
                 <form onSubmit={handleSubmit(handleSearch)}>
                   <div className="input-group srch_site_box">
@@ -520,10 +457,11 @@ function Layout({ children }) {
           <Nav />
           <Alert />
         </div>
-      </header>
+      </header> */}
+      <Header></Header>
       <main id="root">{children}</main>
       <Analytics />
-      <footer>
+      {/* <footer>
         <div className="container">
           <section className="footer_img_row d-block d-sm-flex">
             <div className="atol_logo_blk">
@@ -537,12 +475,6 @@ function Layout({ children }) {
                   className="img-fluid"
                 />{" "}
               </NavLink>
-              {/* <img
-                src="/images/abta_new_logo.png"
-                alt="Abta logo"
-                className="img-fluid"
-                href="https://www.abta.com/abta-member-search"
-              /> */}
               <img
                 src="/images/atol-new-logo.png"
                 alt="Atol logo"
@@ -733,9 +665,8 @@ function Layout({ children }) {
                   </NavLink>
                 </li>
                 <li>
-                  {/* <button className="btn btn-link" onClick={openPdfInNewTab}>Open PDF in New Tab</button> */}
                   <a
-                    href={currentUrl} 
+                    href={currentUrl}
                     onClick={openPdfInNewTab}
                   >
                     Booking terms & conditions
@@ -809,7 +740,8 @@ function Layout({ children }) {
             </p>
           </section>
         </div>
-      </footer>
+      </footer> */}
+      <Footer></Footer>
     </div>
   );
 }
