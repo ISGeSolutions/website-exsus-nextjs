@@ -13,6 +13,7 @@ import ContinentOverview from "../continentoverview/index"; // Adjust the path a
 import { useTranslation } from "react-i18next";
 import { homeService } from "../../services";
 import MarkerInfoWindowNext from "../../components/common/MarkerInfoWindowNext";
+import { ImageSlider } from "../../components/ImageSlider";
 
 export default Index;
 
@@ -562,14 +563,14 @@ function Index() {
       ) : (
         <div>
           <section className="banner_blk_row">
-            {backgroundImage ? (
+            <ImageSlider data={backgroundImage}></ImageSlider>
+            {/* {backgroundImage ? (
               <div
                 id="carouselExampleInterval"
                 className="carousel slide"
                 data-bs-ride="carousel"
               >
                 <div className="carousel-indicators" id="scrollToElement">
-                  {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
                   {backgroundImage.map((_, index) => (
                     <button
                       key={index}
@@ -601,7 +602,7 @@ function Index() {
               </div>
             ) : (
               ""
-            )}
+            )} */}
 
             {isShowMap ? (
               <div className="banner_tab_blk">

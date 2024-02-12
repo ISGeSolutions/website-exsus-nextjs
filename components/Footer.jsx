@@ -1,23 +1,49 @@
-import { useState, useEffect } from 'react';
-
-import { NavLink } from '.';
-import { userService } from 'services';
-
-import * as React from 'react';
-
-import { store, useGlobalState } from 'state-pool';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { userService } from "../services";
+import { NavLink } from "./NavLink";
+import { Nav, alert } from "./Nav";
+import React from "react";
+import { useForm } from "react-hook-form";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+// import plusSlides from "public/assets/javascripts/navigation.js";
+import { useTranslation } from "react-i18next";
+import i18n from "i18next";
+import Link from "next/link";
 
 
 export { Footer };
 
 function Footer() {
     const [user, setUser] = useState(null);
+    const router = useRouter();
+    const currentUrl = router.asPath;
+    let region = "";
 
+    //let region = "uk";
+    let regionWiseUrl = "";
+    if (typeof window !== "undefined") {
+        if (window && window.site_region) {
+            if (window.site_region !== "uk") {
+                regionWiseUrl = "/" + window.site_region;
+                region = window.site_region;
+            }
+        }
+    }
     useEffect(() => {
         const subscription = userService.user.subscribe(x => setUser(x));
         return () => subscription.unsubscribe();
     }, []);
+    const openPdfInNewTab = () => {
 
+
+        // Construct the static URL of the PDF file
+        const pdfUrl = '/pdf/bookingforms/ExsusTravelRestofWorldBookingForm.pdf';
+
+        // Open the PDF in a new tab
+        window.open(pdfUrl, '_blank');
+    };
     const [value, setValue] = React.useState('fruit');
 
     const handleChange = (event) => {
@@ -37,26 +63,67 @@ function Footer() {
     // if (!user) return null;
 
     return (
-
         <footer>
             <div className="container">
                 <section className="footer_img_row d-block d-sm-flex">
                     <div className="atol_logo_blk">
-                        <img src="images/abta_new_logo.png" alt="Abta logo" className="img-fluid" />
-                        <img src="images/atol-new-logo.png" alt="Atol logo" className="img-fluid" />
-                        <img src="images/AITO.png" alt="Aito logo" className="img-fluid" />
-                        <img src="images/iata-accredagent.png" alt="Iata logo" className="img-fluid" />
+                        <NavLink
+                            href="https://www.abta.com/abta-member-search"
+                            target="_blank"
+                        >
+                            <img
+                                src="/images/abta_new_logo.png"
+                                alt="Abta logo"
+                                className="img-fluid"
+                            />{" "}
+                        </NavLink>
+                        {/* <img
+                src="/images/abta_new_logo.png"
+                alt="Abta logo"
+                className="img-fluid"
+                href="https://www.abta.com/abta-member-search"
+              /> */}
+                        <img
+                            src="/images/atol-new-logo.png"
+                            alt="Atol logo"
+                            className="img-fluid"
+                        />{" "}
+                        <img
+                            src="/images/AITO.png"
+                            alt="Aito logo"
+                            className="img-fluid"
+                        />{" "}
+                        <img
+                            src="/images/iata-accredagent.png"
+                            alt="Iata logo"
+                            className="img-fluid"
+                        />
                     </div>
                     <div className="social_icons_blk">
                         <ul>
                             <li>
-                                <a target="_blank" href="https://www.facebook.com/ExsusTravel"><em className="fa-brands fa-facebook-f"></em></a>
+                                <NavLink
+                                    target="_blank"
+                                    href="https://www.facebook.com/ExsusTravel"
+                                >
+                                    <em className="fa-brands fa-facebook-f"></em>
+                                </NavLink>
                             </li>
                             <li>
-                                <a target="_blank" href="https://twitter.com/Exsustravel/"><em className="fa-brands fa-twitter"></em></a>
+                                <NavLink
+                                    target="_blank"
+                                    href="https://twitter.com/Exsustravel/"
+                                >
+                                    <em className="fa-brands fa-twitter"></em>
+                                </NavLink>
                             </li>
                             <li>
-                                <a target="_blank" href="https://www.instagram.com/exsustravel/"><em className="fa-brands fa-instagram"></em>  </a>
+                                <NavLink
+                                    target="_blank"
+                                    href="https://www.instagram.com/exsustravel/"
+                                >
+                                    <em className="fa-brands fa-instagram"></em>{" "}
+                                </NavLink>
                             </li>
                         </ul>
                     </div>
@@ -68,11 +135,29 @@ function Footer() {
                             <div className="quick_links_parnt" aria-label="Services">
                                 <h6>Services</h6>
                                 <ul>
-                                    <li><a href="homepage.html">Home</a></li>
-                                    <li><a href="javascript:void(0)">Contact us</a></li>
-                                    <li><a href="javascript:void(0)">Online Enquiry</a></li>
-                                    <li><a href="travel_information.html">Travel Information</a></li>
-                                    <li><a href="coronavirus_information.html">Coronavirus Information</a></li>
+                                    <li>
+                                        <NavLink href="/">Home</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink href={region + "/contact-us"}>
+                                            Contact us
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink href={region + "/make-an-enquiry"}>
+                                            Online Enquiry
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink href="/travel_information">
+                                            Travel Information
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink href="/coronavirus_information">
+                                            Coronavirus Information
+                                        </NavLink>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -81,11 +166,29 @@ function Footer() {
                             <div className="quick_links_parnt" aria-label="More Exsus">
                                 <h6>More Exsus</h6>
                                 <ul>
-                                    <li><a href="javascript:void(0)">Destinations</a></li>
-                                    <li><a href="javascript:void(0)">Holiday Types</a></li>
-                                    <li><a href="javascript:void(0)">Offers</a></li>
-                                    <li><a href="javascript:void(0)">Blog</a></li>
-                                    <li><a href="javascript:void(0)">When to go</a></li>
+                                    <li>
+                                        <NavLink href={region + "/destinations"}>
+                                            Destinations
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink href={region + "/holiday-types"}>
+                                            Holiday Types
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink href={region + "/special-offers"}>
+                                            Offers
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink href={region + "/blog"}>Blog</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink href={region + "/where-to-go"}>
+                                            When to go
+                                        </NavLink>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -94,10 +197,26 @@ function Footer() {
                             <div className="quick_links_parnt" aria-label="Exsus Sites">
                                 <h6>Exsus Sites</h6>
                                 <ul>
-                                    <li><a href="javascript:void(0)">UK</a></li>
-                                    <li><a href="javascript:void(0)">Asia</a></li>
-                                    <li><a href="javascript:void(0)">India</a></li>
-                                    <li><a href="javascript:void(0)">USA</a></li>
+                                    <li>
+                                        <NavLink href="#" target="_blank">
+                                            UK
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink href="/asia" target="_blank">
+                                            Asia
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink href="/in" target="_blank">
+                                            India
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink href="/us" target="_blank">
+                                            USA
+                                        </NavLink>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -106,11 +225,31 @@ function Footer() {
                             <div className="quick_links_parnt" aria-label="About Exsus">
                                 <h6>About Exsus</h6>
                                 <ul>
-                                    <li><a href="about_us.html">About us</a></li>
-                                    <li><a href="javascript:void(0)">Meet our travel experts</a></li>
-                                    <li><a href="javascript:void(0)">Careers at Exsus</a></li>
-                                    <li><a href="javascript:void(0)">Exsus referral scheme</a></li>
-                                    <li><a href="javascript:void(0)">Travel agent brochures</a></li>
+                                    <li>
+                                        <NavLink href={region + "/about-us"}>About us</NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink href={region + "/why-us/our-people"}>
+                                            Meet our travel experts
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink href={"/about-us/careers"}>
+                                            Careers at Exsus
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink
+                                            href={region + "/about-us/friend-referral-offer"}
+                                        >
+                                            Exsus referral scheme
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink href="/travel-agent-brochures">
+                                            Travel agent brochures
+                                        </NavLink>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -118,38 +257,97 @@ function Footer() {
                 </section>
 
                 <section className="copyright_info_row d-block d-lg-flex">
-                    <p className="copyright_text">&copy; 2022 Exsus Travel. Experts in luxury tailor-made holidays.</p>
+                    <p className="copyright_text">
+                        &copy; 2022 Exsus Travel. Experts in luxury tailor-made holidays.
+                    </p>
                     <div className="prvcy_polcy_list">
                         <ul>
-                            <li><a href="javascript:void(0)">Privacy policy & cookies</a></li>
-                            <li><a href="javascript:void(0)">Website terms of use</a></li>
-                            <li><a href="javascript:void(0)">Booking terms & conditions</a></li>
+                            <li>
+                                <NavLink href={region + "/privacy-policy"}>
+                                    Privacy policy & cookies
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink href={region + "/terms-and-conditions"}>
+                                    Website terms of use
+                                </NavLink>
+                            </li>
+                            <li>
+                                {/* <button className="btn btn-link" onClick={openPdfInNewTab}>Open PDF in New Tab</button> */}
+                                <a
+                                    href={currentUrl}
+                                    onClick={openPdfInNewTab}
+                                >
+                                    Booking terms & conditions
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </section>
 
                 <section className="address_blk_row">
-                    Exsus Travel Limited t/a Exsus Travel. Registered in England and Wales at this address: 1 Burwood Place, London, W2 2UT. Company No. 3385363. VAT No. 719-221840.
+                    Exsus Travel Limited t/a Exsus Travel. Registered in England and
+                    Wales at this address: 1 Burwood Place, London, W2 2UT. Company No.
+                    3385363. VAT No. 719-221840.
                 </section>
 
                 <section className="book_with_confidnce_row">
                     <h6>Book with confidence</h6>
-                    <p><strong>ATOL</strong>All the flights and flight-inclusive holidays on this website are financially protected by the ATOL scheme. When you pay you will be supplied with an ATOL Certificate. Please ask for it and check to ensure that everything you booked (flights, hotels and other services) is listed on it. Please see our booking conditions for further information or for more information about financial protection and the ATOL Certificate go to: <a href="http://www.caa.co.uk" target="_blank">www.caa.co.uk</a></p>
-
-                    <p><strong>ABTA</strong>We are a member of ABTA (ABTA No. Y6561) which means you have the benefit of ABTA’s assistance and Code of Conduct. We provide full financial protection for your money.</p>
-
                     <p>
-                        <strong>International Passenger Protection (IPP)</strong>In accordance with the Passenger protection policy for insolvency cover in respect of the Package Travel & Linked Travel Regulations 2018, all passengers booking with Exsus Travel are fully protected for the initial deposit and subsequently the balance of all monies paid to us, including repatriation costs, arising from cancellation or curtailment of your travel arrangements due to the insolvency of Exsus Travel. There is no requirement for financial protection of day trips, and none is provided. Your booking is insured by IPP Ltd and its panel of insurers. This insurance is only valid for passengers who book and pay directly with Exsus Travel. If you have booked and/or paid direct to a Travel Agent for a holiday with Exsus Travel please request proof of how the booking is secured as this will not be covered by IPP Ltd in this instance.
-                        <span className="d-block pt-3"></span>
-                        This insurance has been arranged by International Passenger Protection Limited and underwritten by Liberty Mutual Insurance Europe SE. For further information please go to <a href="javascript:void(0)">www.ipplondon.co.uk</a>
-                        <span className="d-block pt-3"></span>
-                        Claims procedure: you must notify IPP as soon as practically possible giving full details of what has happened quoting the name of your Travel Operator to: IPP Claims at Cunningham Lindsey, Oakleigh House, 14-15 Park Place, Cardiff,  CF10 3DQ, United Kingdom. Tel: +44 (0)345 266 1872.
-                        <span className="d-block pt-3"></span>
-                        Email: <a href="mailto:Insolvency-claims@ipplondon.co.uk">Insolvency-claims@ipplondon.co.uk</a> or online at <a href="http://www.ipplondon.co.uk/claims.as">http://www.ipplondon.co.uk/claims.asp</a>
+                        <strong>ATOL</strong>All the flights and flight-inclusive holidays
+                        on this website are financially protected by the ATOL scheme. When
+                        you pay you will be supplied with an ATOL Certificate. Please ask
+                        for it and check to ensure that everything you booked (flights,
+                        hotels and other services) is listed on it. Please see our booking
+                        conditions for further information or for more information about
+                        financial protection and the ATOL Certificate go to:{" "}
+                        <NavLink href="http://www.caa.co.uk" target="_blank">
+                            www.caa.co.uk
+                        </NavLink>
                     </p>
-
+                    <p>
+                        <strong>ABTA</strong>We are a member of ABTA (ABTA No. Y6561)
+                        which means you have the benefit of ABTA’s assistance and Code of
+                        Conduct. We provide full financial protection for your money.
+                    </p>
+                    <p>
+                        <strong>International Passenger Protection (IPP)</strong>All
+                        passengers booking with Exsus Travel Ltd are fully protected for
+                        the initial deposit and subsequently the balance of all monies
+                        received by us, including repatriation costs and arrangements,
+                        arising from cancellation or curtailment of your single service
+                        travel arrangements due to the insolvency of Exsus Travel Ltd.
+                        <span className="d-block pt-3"></span>
+                        Exsus Travel Ltd has taken out an insurance provided by
+                        International Passenger Protection Ltd (IPP) with Liberty Mutual
+                        Insurance Europe SE (LMIE) trading as Liberty Specialty Markets, a
+                        member of the Liberty Mutual Insurance Group. LMIE's registered
+                        office: 5-7 rue Leon Laval, L-3372, Leudelange, Grand Duchy of
+                        Luxembourg, Registered Number B232280 (Registre de Commerce et des
+                        Sociétés). LMIE is a European public limited liability company and
+                        is supervised by the Commissariat aux Assurances and licensed by
+                        the Luxembourg Minister of Finance as an insurance and reinsurance
+                        company. This insurance is only valid for passengers who book and
+                        pay directly with/to Exsus Travel Ltd.
+                        <span className="d-block pt-3"></span>
+                        In the event of our insolvency please make contact as soon as
+                        practically possible giving full details of what has happened
+                        quoting the name of your Travel Operator:
+                        <span className="d-block pt-3"></span>
+                        IPP Claims at Sedgwick
+                        <span className="d-block"></span>
+                        Telephone: +44 (0)345 266 1872
+                        <span className="d-block"></span>
+                        Email:{" "}
+                        <NavLink href="mailto:Insolvency-claims@ipplondon.co.uk">
+                            Insolvency-claims@ipplondon.co.uk
+                        </NavLink>{" "}
+                        or online at{" "}
+                        <NavLink href="http://www.ipplondon.co.uk/claims.as">
+                            http://www.ipplondon.co.uk/claims.asp
+                        </NavLink>
+                    </p>
                 </section>
-
             </div>
         </footer>
     );
