@@ -24,7 +24,7 @@ import CountryPlaceToStay from "../countryplacetostay/index"; // Adjust the path
 import CountryWhentogo from "../countrywhentogo/index"; // Adjust the path accordingly
 import CountryOverview from "../countryoverview/index"; // Adjust the path accordingly
 import { FriendlyUrl } from "../../components";
-
+import { ImageSlider } from "../../components/ImageSlider";
 import Head from "next/head";
 
 export default Country;
@@ -510,14 +510,14 @@ function Country() {
       ) : (
         <div>
           <section className="banner_blk_row">
-            {backgroundImage ? (
+            <ImageSlider data={backgroundImage}></ImageSlider>
+            {/* {backgroundImage ? (
               <div
                 id="carouselExampleInterval"
                 className="carousel slide"
                 data-bs-ride="carousel"
               >
                 <div className="carousel-indicators" id="scrollToElement">
-                  {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
                   {backgroundImage.map((_, index) => (
                     <button
                       key={index}
@@ -550,7 +550,7 @@ function Country() {
               </div>
             ) : (
               ""
-            )}
+            )} */}
             {isShowMap ? (
               <div className="banner_tab_blk">
                 <button

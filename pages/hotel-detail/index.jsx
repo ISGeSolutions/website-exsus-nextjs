@@ -17,6 +17,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { destinationService } from "../../services";
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
 import { formatPrice } from "../../components/utils/priceFormater";
+import { ImageSlider } from "../../components/ImageSlider";
 
 var Carousel = require("react-responsive-carousel").Carousel;
 
@@ -462,14 +463,14 @@ function Index() {
       ) : (
         <div>
           <section className="banner_blk_row">
-            {backgroundImage ? (
+            <ImageSlider data={backgroundImage}></ImageSlider>
+            {/* {backgroundImage ? (
               <div
                 id="carouselExampleInterval"
                 className="carousel slide"
                 data-bs-ride="carousel"
               >
                 <div className="carousel-indicators">
-                  {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
                   {backgroundImage.map((_, index) => (
                     <button
                       key={index}
@@ -504,7 +505,7 @@ function Index() {
               </div>
             ) : (
               ""
-            )}
+            )} */}
           </section>
 
           <section className="trvl_info_row">

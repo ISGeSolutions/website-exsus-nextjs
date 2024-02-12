@@ -14,6 +14,7 @@ import Head from "next/head";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
 import { useRouter } from "next/router";
+import { ImageSlider } from "../../components/ImageSlider";
 
 var Carousel = require("react-responsive-carousel").Carousel;
 
@@ -444,7 +445,8 @@ function Index() {
       ) : (
         <div>
           <section className="banner_blk_row">
-            <div
+            <ImageSlider data={backgroundImage}></ImageSlider>
+            {/* <div
               id="carouselExampleInterval"
               className="carousel slide"
               data-bs-ride="carousel"
@@ -478,7 +480,7 @@ function Index() {
                   </a>
                 ))}
               </div>
-            </div>
+            </div> */}
           </section>
 
           <section className="card_blk_row destinations_blk_row light_grey">

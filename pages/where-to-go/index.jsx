@@ -10,6 +10,7 @@ import { FriendlyUrl, Signup } from "../../components";
 import Head from "next/head";
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
 import { destinationService, homeService } from "../../services";
+import { ImageSlider } from "../../components/ImageSlider";
 
 export default Index;
 
@@ -185,7 +186,7 @@ function Index() {
               }
             });
             return modifiedString;
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -208,7 +209,13 @@ function Index() {
       .getWhereToGoPage()
       .then((x) => {
         //
-        localStorage.setItem("PageInfo", JSON.stringify({ pType: "CUST", pCode: x?.data[0]?.attributes?.page_code }));
+        localStorage.setItem(
+          "PageInfo",
+          JSON.stringify({
+            pType: "CUST",
+            pCode: x?.data[0]?.attributes?.page_code,
+          })
+        );
         setCustomData(x.data[0]?.attributes?.custom_page_images);
         SetFriendlyUrl(x.data[0].attributes?.page_friendly_url);
         const imageCheck = x.data[0].attributes.custom_page_images.data;
@@ -273,7 +280,8 @@ function Index() {
       </Head>
       <Layout>
         <section className="banner_blk_row">
-          {backgroundImage ? (
+          <ImageSlider data={backgroundImage}></ImageSlider>
+          {/* {backgroundImage ? (
             <div
               id="carouselExampleInterval"
               className="carousel slide"
@@ -291,7 +299,6 @@ function Index() {
                     aria-label={`Slide ${index + 1}`}
                   ></button>
                 ))}
-                {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
               </div>
               <div className="carousel-inner">
                 {backgroundImage.map((imagePath, index) => (
@@ -312,7 +319,7 @@ function Index() {
             </div>
           ) : (
             ""
-          )}
+          )} */}
         </section>
 
         <section className="trvl_info_row">

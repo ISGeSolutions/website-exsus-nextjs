@@ -9,6 +9,7 @@ import { giftListService } from "../../../services";
 import { FriendlyUrl } from "../../../components";
 import Head from "next/head";
 import { EnquiryButton } from "../../../components/common/EnquiryBtn";
+import { ImageSlider } from "../../../components/ImageSlider";
 
 var React = require("react");
 
@@ -70,7 +71,13 @@ function Index() {
       .then((x) => {
         //
         setCustomData(x.data[0]);
-        localStorage.setItem("PageInfo", JSON.stringify({ pType: "CUST", pCode: x?.data[0]?.attributes?.page_code }));
+        localStorage.setItem(
+          "PageInfo",
+          JSON.stringify({
+            pType: "CUST",
+            pCode: x?.data[0]?.attributes?.page_code,
+          })
+        );
         const imageCheck = x.data[0].attributes.custom_page_images.data;
         const newBackgroundImages = [];
         imageCheck.forEach((element) => {
@@ -175,12 +182,8 @@ function Index() {
         ) : (
           <div>
             <section className="banner_blk_row">
-              {/* <Carousel showArrows={true} autoPlay={true} infiniteLoop={true} showIndicators={true} showThumbs={false}>
-                    <div>
-                        <img src="/assets/./../images//destination_banner.jpg" />
-                    </div>
-                </Carousel> */}
-              <div
+              <ImageSlider data={backgroundImage}></ImageSlider>
+              {/* <div
                 id="carouselExampleInterval"
                 className="carousel slide"
                 data-bs-ride="carousel"
@@ -197,7 +200,6 @@ function Index() {
                       aria-label={`Slide ${index + 1}`}
                     ></button>
                   ))}
-                  {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
                 </div>
                 <div className="carousel-inner">
                   {backgroundImage.map((imagePath, index) => (
@@ -215,7 +217,7 @@ function Index() {
                     </NavLink>
                   ))}
                 </div>
-              </div>
+              </div> */}
             </section>
             <section className="trvl_info_row">
               <div className="container">

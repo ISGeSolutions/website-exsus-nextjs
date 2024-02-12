@@ -10,6 +10,7 @@ import RegionitIneraries from "../regionitineraries/index"; // Adjust the path a
 import RegionOverview from "../regionoverview/index"; // Adjust the path accordingly
 import RegionPlacesToStay from "../regionplacestostay/index"; // Adjust the path accordingly
 import { FriendlyUrl, Signup } from "../../components";
+import { ImageSlider } from "../../components/ImageSlider";
 
 export default Index;
 
@@ -161,8 +162,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -320,7 +321,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -362,7 +363,13 @@ function Index() {
       .getRegionByName(regionName)
       .then((x) => {
         setRegionData(x.data[0]);
-        localStorage.setItem("PageInfo", JSON.stringify({ pType: "REGN", pCode: x?.data[0]?.attributes?.region_code }));
+        localStorage.setItem(
+          "PageInfo",
+          JSON.stringify({
+            pType: "REGN",
+            pCode: x?.data[0]?.attributes?.region_code,
+          })
+        );
         setHeadingText(x.data[0]?.attributes?.region_name);
         const imageCheck = x.data[0].attributes.region_images.data;
         const newBackgroundImages = [];
@@ -528,14 +535,15 @@ function Index() {
       ) : (
         <div>
           <section className="banner_blk_row">
-            {backgroundImage ? (
+            <ImageSlider data={backgroundImage}></ImageSlider>
+            {/* {backgroundImage ? (
               <div
                 id="carouselExampleInterval"
                 className="carousel slide"
                 data-bs-ride="carousel"
               >
                 <div className="carousel-indicators" id="targetDiv">
-                  {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
+                  
                   {backgroundImage.map((_, index) => (
                     <button
                       key={index}
@@ -566,19 +574,21 @@ function Index() {
               </div>
             ) : (
               ""
-            )}
+            )} */}
             {isShowMap ? (
               <div className="banner_tab_blk">
                 <button
-                  className={`btn banner_map_tab ${activeButton === "map" ? "banner_tab_active" : ""
-                    }`}
+                  className={`btn banner_map_tab ${
+                    activeButton === "map" ? "banner_tab_active" : ""
+                  }`}
                   onClick={() => handleTabClick("map")}
                 >
                   Map
                 </button>
                 <button
-                  className={`btn banner_img_tab ${activeButton === "images" ? "banner_tab_active" : ""
-                    }`}
+                  className={`btn banner_img_tab ${
+                    activeButton === "images" ? "banner_tab_active" : ""
+                  }`}
                   onClick={() => handleTabClick("images")}
                 >
                   Images
@@ -588,8 +598,9 @@ function Index() {
               ""
             )}
             <div
-              className={`banner_map_blk ${activeButton === "map" ? "banner_map_active" : ""
-                }`}
+              className={`banner_map_blk ${
+                activeButton === "map" ? "banner_map_active" : ""
+              }`}
             >
               <Iframe
                 width="640px"
