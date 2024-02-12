@@ -302,6 +302,7 @@ function Index() {
       .getAllOffers(region)
       .then((x) => {
         setAllOffers(x.data);
+        console.log(x.data);
         // setAllOffers([]);
 
         setFriendlyUrl(`home/special offers`);
@@ -328,6 +329,7 @@ function Index() {
           }
         });
         setBackgroundImage(newBackgroundImages);
+
         let modifiedString = "";
 
         if (data) {

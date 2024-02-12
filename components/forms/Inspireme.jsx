@@ -39,6 +39,17 @@ function Inspireme(props) {
   const { errors } = formState;
   const [alert, setAlert] = useState(null);
 
+  let region = "";
+  let regionWiseUrl = "";
+  if (typeof window !== "undefined") {
+    if (window && window.site_region) {
+      if (window.site_region !== "uk") {
+        regionWiseUrl = "/" + window.site_region;
+        region = window.site_region;
+      }
+    }
+  }
+
   const showAlert = (message, type) => {
     setAlert({ message, type });
   };
@@ -98,7 +109,7 @@ function Inspireme(props) {
       reset();
     } else {
       router.push(
-        `advance-search?where=` +
+        `${region}/advance-search?where=` +
           destination +
           `&what=` +
           reason +

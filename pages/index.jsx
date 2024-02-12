@@ -76,7 +76,7 @@ function Index() {
 
     router.push(
       regionWiseUrl +
-      `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-itineraries/${item.attributes?.friendly_url}`
+        `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-itineraries/${item.attributes?.friendly_url}`
     );
   };
 
@@ -102,8 +102,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -135,10 +135,9 @@ function Index() {
     }
   };
 
-
   const handleHrefClick = (event) => {
     event.preventDefault();
-  }
+  };
 
   const dynamicLinkHolidayas = (itemId, id) => {
     // if (itemId && itemId == 'AF') {
@@ -478,6 +477,7 @@ function Index() {
     window.addEventListener("resize", equalHeight(true));
     setTimeout(() => {
       // $('.carousel').carousel();
+
       $(".carousel").carousel({
         interval: 250 * 10,
       });
@@ -557,7 +557,7 @@ function Index() {
                       href="#"
                       onClick={handleHrefClick}
                       className={`carousel-item ${index === 0 ? "active" : ""}`}
-                      data-interval="3000"
+                      data-bs-interval="5000"
                     >
                       <div
                         className="banner_commn_cls"
@@ -720,10 +720,12 @@ function Index() {
                               )
                               .map((res1) => (
                                 <li key={res1.id}>
-                                  {`From ${res1.attributes?.currency_symbol ?? ""
-                                    }${formatPrice(res1.attributes?.price) ??
+                                  {`From ${
+                                    res1.attributes?.currency_symbol ?? ""
+                                  }${
+                                    formatPrice(res1.attributes?.price) ??
                                     " xxxx"
-                                    } per person`}
+                                  } per person`}
                                 </li>
                               ))}
                             <li>

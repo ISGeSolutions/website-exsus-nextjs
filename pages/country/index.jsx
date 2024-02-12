@@ -473,6 +473,8 @@ function Country() {
       // $('.carousel').carousel();
       $(".carousel").carousel({
         interval: 250 * 10,
+        cycle: true,
+        pause: "none",
       });
     }, 2000);
   }, [countrycode]);
@@ -534,7 +536,9 @@ function Country() {
                       key={index}
                       target="_blank"
                       className={`carousel-item ${index === 0 ? "active" : ""}`}
-                      data-bs-interval="5000"
+                      data-bs-interval="3000"
+                      data-pause="false"
+                      data-ride="carousel"
                     >
                       <div
                         className="banner_commn_cls"
