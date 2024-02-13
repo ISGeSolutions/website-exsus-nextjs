@@ -162,8 +162,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -321,7 +321,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -329,7 +329,31 @@ function Index() {
 
   equalHeight(true);
 
+  const addStringBeforeSecondLastSlash = (inputString, newString) => {
+    // Split the string by slashes
+    const segments = inputString.split('/');
+
+    // Insert the new string before the second last segment
+    segments.splice(-2, 0, newString);
+
+    // Join the segments back into a string
+    const resultString = segments.join('/');
+
+    return resultString;
+  }
+
   useEffect(() => {
+
+    const searchString = 'itineraries';
+    const currentUrl = window.location.href;
+    if (currentUrl.includes(searchString)) {
+      const newUrl = addStringBeforeSecondLastSlash(currentUrl, 'itinerary');
+      router.push(newUrl);
+      // console.log(`The URL contains "${searchString}"`);
+    } else {
+      // console.log(`The URL does not contain "${searchString}"`);
+    }
+
     if (
       !localStorage.getItem(
         `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
@@ -578,17 +602,15 @@ function Index() {
             {isShowMap ? (
               <div className="banner_tab_blk">
                 <button
-                  className={`btn banner_map_tab ${
-                    activeButton === "map" ? "banner_tab_active" : ""
-                  }`}
+                  className={`btn banner_map_tab ${activeButton === "map" ? "banner_tab_active" : ""
+                    }`}
                   onClick={() => handleTabClick("map")}
                 >
                   Map
                 </button>
                 <button
-                  className={`btn banner_img_tab ${
-                    activeButton === "images" ? "banner_tab_active" : ""
-                  }`}
+                  className={`btn banner_img_tab ${activeButton === "images" ? "banner_tab_active" : ""
+                    }`}
                   onClick={() => handleTabClick("images")}
                 >
                   Images
@@ -598,9 +620,8 @@ function Index() {
               ""
             )}
             <div
-              className={`banner_map_blk ${
-                activeButton === "map" ? "banner_map_active" : ""
-              }`}
+              className={`banner_map_blk ${activeButton === "map" ? "banner_map_active" : ""
+                }`}
             >
               <Iframe
                 width="640px"
