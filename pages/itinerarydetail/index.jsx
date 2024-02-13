@@ -524,6 +524,13 @@ function Index() {
         interval: 250 * 10,
       });
     }, 2000);
+
+
+    // Replace 'itinerary' with '' in the current URL
+    const currentUrl = window.location.href;
+    const newUrl = currentUrl.replace('/itinerary', '');
+    window.history.replaceState({}, document.title, newUrl);
+    
   }, [itin_name, itin_code, countrycode, destinationcode]);
 
   return (
