@@ -335,6 +335,12 @@ const nextConfig = {
       { source: "/asia/advance-search", destination: "/advance-search" },
       { source: "/in/advance-search", destination: "/advance-search" },
 
+      //Why-Us advance search
+      { source: "/why-us/advance-search", destination: "/advance-search" },
+      { source: "/us/why-us/advance-search", destination: "/advance-search" },
+      { source: "/asia/why-us/advance-search", destination: "/advance-search" },
+      { source: "/in/why-us/advance-search", destination: "/advance-search" },
+
       // contact-us
       { source: "/contact-us", destination: "/contact-us" },
       { source: "/us/contact-us", destination: "/contact-us" },
@@ -601,15 +607,15 @@ const nextConfig = {
     apiUrl:
       process.env.NODE_ENV === "development"
         ? // ? 'https://e922710a-cb11-401b-ae5b-ef73740e1501.mock.pstmn.io' // development api
-        // : 'https://e922710a-cb11-401b-ae5b-ef73740e1501.mock.pstmn.io' // production api
-        // ? 'http://localhost:4000' // development api
-        // : 'http://localhost:4000' // production api
-        // ? 'https://mock.apidog.com/m1/379394-0-default' // development api
-        // : 'https://mock.apidog.com/m1/379394-0-default' // production api
-        //     ? 'http://13.233.122.205:1337' // development api
-        //     : 'http://13.233.122.205:1337' // production api
+          // : 'https://e922710a-cb11-401b-ae5b-ef73740e1501.mock.pstmn.io' // production api
+          // ? 'http://localhost:4000' // development api
+          // : 'http://localhost:4000' // production api
+          // ? 'https://mock.apidog.com/m1/379394-0-default' // development api
+          // : 'https://mock.apidog.com/m1/379394-0-default' // production api
+          //     ? 'http://13.233.122.205:1337' // development api
+          //     : 'http://13.233.122.205:1337' // production api
 
-        "https://cms-api.excelleresolutions.com" // development api
+          "https://cms-api.excelleresolutions.com" // development api
         : "https://cms-api.excelleresolutions.com", // production api
     apiUrl1:
       process.env.NODE_ENV === "development"

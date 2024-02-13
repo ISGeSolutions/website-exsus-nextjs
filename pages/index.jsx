@@ -76,7 +76,7 @@ function Index() {
 
     router.push(
       regionWiseUrl +
-      `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-itineraries/${item.attributes?.friendly_url}`
+        `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-itineraries/${item.attributes?.friendly_url}`
     );
   };
 
@@ -102,8 +102,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -135,10 +135,9 @@ function Index() {
     }
   };
 
-
   const handleHrefClick = (event) => {
     event.preventDefault();
-  }
+  };
 
   const dynamicLinkHolidayas = (itemId, id) => {
     // if (itemId && itemId == 'AF') {
@@ -478,6 +477,7 @@ function Index() {
     window.addEventListener("resize", equalHeight(true));
     setTimeout(() => {
       // $('.carousel').carousel();
+
       $(".carousel").carousel({
         interval: 250 * 10,
       });
@@ -505,32 +505,6 @@ function Index() {
       ) : (
         <div>
           <section className="banner_blk_row">
-            {/* <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
-              <ol className="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-              </ol>
-              <div className="carousel-inner">
-                <div className="carousel-item active">
-                  <p>Test1</p>
-                </div>
-                <div className="carousel-item">
-                  <p>Test2</p>
-                </div>
-                <div className="carousel-item">
-                  <p>Test3</p>
-                </div>
-              </div>
-              <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span className="sr-only">Previous</span>
-              </a>
-              <a className="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                <span className="sr-only">Next</span>
-              </a>
-            </div> */}
             {backgroundImage ? (
               <div
                 id="carouselExampleInterval"
@@ -557,7 +531,7 @@ function Index() {
                       href="#"
                       onClick={handleHrefClick}
                       className={`carousel-item ${index === 0 ? "active" : ""}`}
-                      data-interval="3000"
+                      data-bs-interval="5000"
                     >
                       <div
                         className="banner_commn_cls"
@@ -720,10 +694,12 @@ function Index() {
                               )
                               .map((res1) => (
                                 <li key={res1.id}>
-                                  {`From ${res1.attributes?.currency_symbol ?? ""
-                                    }${formatPrice(res1.attributes?.price) ??
+                                  {`From ${
+                                    res1.attributes?.currency_symbol ?? ""
+                                  }${
+                                    formatPrice(res1.attributes?.price) ??
                                     " xxxx"
-                                    } per person`}
+                                  } per person`}
                                 </li>
                               ))}
                             <li>

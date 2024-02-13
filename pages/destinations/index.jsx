@@ -7,7 +7,7 @@ import {
   alertService,
   userService,
   whyusService,
-  homeService
+  homeService,
 } from "services";
 import { Inspireme } from "components";
 import Head from "next/head";
@@ -54,7 +54,7 @@ function Index() {
 
   const handleHrefClick = (event) => {
     event.preventDefault();
-  }
+  };
 
   function capitalizeEveryWord(text) {
     return text?.replace(/\b\w/g, function (match) {
@@ -287,7 +287,13 @@ function Index() {
       .getCustomPagesData("destinations")
       .then((x) => {
         setDestinations(x.data[0]);
-        localStorage.setItem("PageInfo", JSON.stringify({ pType: "CUST", pCode: x?.data[0]?.attributes?.page_code }));
+        localStorage.setItem(
+          "PageInfo",
+          JSON.stringify({
+            pType: "CUST",
+            pCode: x?.data[0]?.attributes?.page_code,
+          })
+        );
         const imageCheck = x.data[0].attributes.custom_page_images.data;
         const newBackgroundImages = [];
         imageCheck.forEach((element) => {
@@ -312,15 +318,15 @@ function Index() {
         setIsLoading(false);
       });
 
-    const carousel1 = document.querySelector("#carouselExampleInterval");
-    if (carousel1) {
-      new bootstrap.Carousel(carousel1);
-    }
+    // const carousel1 = document.querySelector("#carouselExampleInterval");
+    // if (carousel1) {
+    //   new bootstrap.Carousel(carousel1);
+    // }
 
-    const carousel = document.querySelector("#Testimonials");
-    if (carousel) {
-      new bootstrap.Carousel(carousel);
-    }
+    // const carousel = document.querySelector("#Testimonials");
+    // if (carousel) {
+    //   new bootstrap.Carousel(carousel);
+    // }
   }, []);
 
   return (
@@ -384,7 +390,8 @@ function Index() {
                 {backgroundImage.map((imagePath, index) => (
                   <NavLink
                     key={index}
-                    href="#" onClick={handleHrefClick}
+                    href="#"
+                    onClick={handleHrefClick}
                     className={`carousel-item ${index === 0 ? "active" : ""}`}
                     data-bs-interval="5000"
                   >

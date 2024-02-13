@@ -17,6 +17,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { destinationService } from "../../services";
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
 import { formatPrice } from "../../components/utils/priceFormater";
+import { ImageSlider } from "../../components/ImageSlider";
 
 var Carousel = require("react-responsive-carousel").Carousel;
 
@@ -86,28 +87,28 @@ function Index() {
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
     );
   };
 
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, "and")
-        .replace(/ /g, "-")
-        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/&/g, "and")
+          .replace(/ /g, "-")
+          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${item?.attributes?.friendly_url}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -118,28 +119,28 @@ function Index() {
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/itinerary/${item?.attributes?.country?.data?.attributes?.country_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}-itineraries/${item?.attributes?.friendly_url}`
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
   const handleRedirectForItinerary = (item) => {
     router.push(
       regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, "and")
-        .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${item?.attributes?.country?.data?.attributes?.country_name
+        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/&/g, "and")
+          .replace(/ /g, "-")
+          .toLowerCase()}/itinerary/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}-itineraries/${item?.attributes?.friendly_url}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -281,7 +282,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -311,7 +312,13 @@ function Index() {
           setFriendlyUrl(
             `home/destinations/${continentCode}/${countryName}/${regionName}/${hotelName}`
           );
-          localStorage.setItem("PageInfo", JSON.stringify({ pType: "STAY", pCode: x?.data[0]?.attributes?.hotel_code }));
+          localStorage.setItem(
+            "PageInfo",
+            JSON.stringify({
+              pType: "STAY",
+              pCode: x?.data[0]?.attributes?.hotel_code,
+            })
+          );
           // const map_latitude = x.data[0]?.attributes?.map_latitude;
           // const map_longitude = x.data[0]?.attributes?.map_longitude;
           // const map_zoom = x.data[0].attributes.map_zoom_level;
@@ -384,15 +391,15 @@ function Index() {
                 ?.replace(/&/g, "and")
                 .replace(/ /g, "-")
                 .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-                  ?.replace(/ /g, "-")
-                  .replace(/&/g, "and")
-                  .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-                    ?.replace(/ /g, "-")
-                    .replace(/&/g, "and")
-                    .toLowerCase()}/${item?.attributes?.friendly_url
-                      ?.replace(/&/g, "and")
-                      .replace(/ /g, "-")
-                      .toLowerCase()}`,
+                ?.replace(/ /g, "-")
+                .replace(/&/g, "and")
+                .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+                ?.replace(/ /g, "-")
+                .replace(/&/g, "and")
+                .toLowerCase()}/${item?.attributes?.friendly_url
+                ?.replace(/&/g, "and")
+                .replace(/ /g, "-")
+                .toLowerCase()}`,
           }));
           setCoordinatesArray((prevCoordinates) => [
             ...prevCoordinates,
@@ -420,6 +427,8 @@ function Index() {
         // $('.carousel').carousel();
         $(".carousel").carousel({
           interval: 250 * 10,
+          cycle: true,
+          pause: "none",
         });
       }, 2000);
     }
@@ -454,14 +463,14 @@ function Index() {
       ) : (
         <div>
           <section className="banner_blk_row">
-            {backgroundImage ? (
+            <ImageSlider data={backgroundImage}></ImageSlider>
+            {/* {backgroundImage ? (
               <div
                 id="carouselExampleInterval"
                 className="carousel slide"
                 data-bs-ride="carousel"
               >
                 <div className="carousel-indicators">
-                  {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
                   {backgroundImage.map((_, index) => (
                     <button
                       key={index}
@@ -483,6 +492,8 @@ function Index() {
                       onClick={handleHrefClick}
                       className={`carousel-item ${index === 0 ? "active" : ""}`}
                       data-interval="5000"
+                      data-pause="false"
+                      data-ride="carousel"
                     >
                       <div
                         className="banner_commn_cls"
@@ -494,7 +505,7 @@ function Index() {
               </div>
             ) : (
               ""
-            )}
+            )} */}
           </section>
 
           <section className="trvl_info_row">
@@ -531,8 +542,8 @@ function Index() {
                       {hotelData?.hotel_country_contents?.data[0]?.attributes?.currency_symbol.repeat(
                         Math.abs(
                           5 -
-                          hotelData?.hotel_country_contents?.data[0]
-                            ?.attributes?.price_guide_value
+                            hotelData?.hotel_country_contents?.data[0]
+                              ?.attributes?.price_guide_value
                         )
                       )}
                     </label>
@@ -832,9 +843,7 @@ function Index() {
               {coordinatesArray.length > 0 && (
                 <section className="map_blk_row">
                   <h3 className="pb-2">Hotel location</h3>
-                  <p>
-                    {hotelData?.map_content}
-                  </p>
+                  <p>{hotelData?.map_content}</p>
                   <div className="map_blk_inr">
                     <div className="map_blk_inr">
                       {/* <Iframe
@@ -934,8 +943,8 @@ function Index() {
                                           {item?.attributes?.currency_symbol.repeat(
                                             Math.abs(
                                               5 -
-                                              item?.attributes
-                                                ?.price_guide_value
+                                                item?.attributes
+                                                  ?.price_guide_value
                                             )
                                           )}
                                         </label>
@@ -1075,10 +1084,12 @@ function Index() {
                                 )
                                 .map((res1) => (
                                   <li key={res1.id}>
-                                    {`From ${res1.attributes?.currency_symbol ?? ""
-                                      }${formatPrice(res1.attributes?.price) ??
+                                    {`From ${
+                                      res1.attributes?.currency_symbol ?? ""
+                                    }${
+                                      formatPrice(res1.attributes?.price) ??
                                       " xxxx"
-                                      } per person`}
+                                    } per person`}
                                   </li>
                                 ))}
                               <li>

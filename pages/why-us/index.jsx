@@ -16,6 +16,7 @@ import { EnquiryButton } from "../../components/common/EnquiryBtn";
 // import ReactPixel from 'react-facebook-pixel';
 
 import ReactGA from "react-ga4";
+import { ImageSlider } from "../../components/ImageSlider";
 // ReactGA.initialize('G-2H6GP9JWWY');
 
 export default Index;
@@ -32,6 +33,7 @@ function Index() {
   const { t } = useTranslation();
   const [customPageData, setCustomData] = useState([]);
   const [longText, setLongText] = useState(null);
+  const [backgroundImage, setBackgroundImage] = useState([]);
 
   let dictionaryPage = 1;
 
@@ -220,12 +222,27 @@ function Index() {
       .getWhyusPage()
       .then((x) => {
         setWhyusDetails(x?.data[0]?.attributes);
-        localStorage.setItem("PageInfo", JSON.stringify({ pType: "CUST", pCode: x?.data[0]?.attributes?.page_code }));
+        localStorage.setItem(
+          "PageInfo",
+          JSON.stringify({
+            pType: "CUST",
+            pCode: x?.data[0]?.attributes?.page_code,
+          })
+        );
         setCustomData(x.data[0]?.attributes?.custom_page_contents);
         setLongText(
           x.data[0]?.attributes?.custom_page_contents?.data?.[4].attributes
             .content_value
         );
+
+        const imageCheck = x?.data[0]?.attributes?.custom_page_images?.data;
+        const newBackgroundImages = [];
+        imageCheck.forEach((element) => {
+          if (element.attributes.image_type == "banner") {
+            newBackgroundImages.push(element.attributes.image_path);
+          }
+        });
+        setBackgroundImage(newBackgroundImages);
 
         setIsLoading(false);
       })
@@ -261,7 +278,8 @@ function Index() {
         ) : (
           <div>
             <section className="banner_blk_row">
-              {whyusDetails?.custom_page_images?.data ? (
+              <ImageSlider data={backgroundImage}></ImageSlider>
+              {/* {whyusDetails?.custom_page_images?.data ? (
                 <div
                   id="carouselExampleInterval"
                   className="carousel slide"
@@ -289,8 +307,9 @@ function Index() {
                         element?.attributes?.image_type == "banner" && (
                           <a
                             key={index}
-                            className={`carousel-item ${index === 0 ? "active" : ""
-                              }`}
+                            className={`carousel-item ${
+                              index === 0 ? "active" : ""
+                            }`}
                             data-interval="5000"
                           >
                             <div
@@ -306,7 +325,7 @@ function Index() {
                 </div>
               ) : (
                 ""
-              )}
+              )} */}
             </section>
 
             <section className="trvl_info_row">

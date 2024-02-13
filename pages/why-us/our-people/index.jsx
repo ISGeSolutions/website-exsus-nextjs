@@ -36,8 +36,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -295,7 +295,13 @@ function Index() {
     whyusService
       .getExpertsPage()
       .then((x) => {
-        localStorage.setItem("PageInfo", JSON.stringify({ pType: "CUST", pCode: x?.data[0]?.attributes?.page_code }));
+        localStorage.setItem(
+          "PageInfo",
+          JSON.stringify({
+            pType: "CUST",
+            pCode: x?.data[0]?.attributes?.page_code,
+          })
+        );
         setCustomData(x.data[0]);
         const imageCheck = x.data[0].attributes.custom_page_images.data;
         const newBackgroundImages = [];
@@ -374,7 +380,7 @@ function Index() {
                 <div className="carousel-indicators">
                   {backgroundImage.map((_, index) => (
                     <button
-                      key={index}
+                      key={`ExpIndex_${index}`}
                       type="button"
                       data-bs-target="#carouselExampleInterval"
                       data-bs-slide-to={index}
@@ -388,7 +394,7 @@ function Index() {
                 <div className="carousel-inner">
                   {backgroundImage.map((imagePath, index) => (
                     <NavLink
-                      key={index}
+                      key={`ExpCarousel_${index}`}
                       href="#"
                       onClick={handleHrefClick}
                       className={`carousel-item ${index === 0 ? "active" : ""}`}
@@ -416,15 +422,18 @@ function Index() {
               </div>
               <div className="row">
                 {allExecutives?.map((res, index) => (
-                  <div className="col-sm-6 col-lg-4 col-xxl-3" key={res.id}>
-                    <div className="our_exprts_inr" key={res.id}>
+                  <div className="col-sm-6 col-lg-4 col-xxl-3">
+                    <div className="our_exprts_inr" key={`Expert_${res.id}`}>
                       <img
-                        key={res.id}
+                        //key={`ExpImage_${res.id}`}
                         src={res?.executive_image_path}
                         alt="expert01"
                         className="img-fluid"
                       />
-                      <div className="expert_info" key={res.id}>
+                      <div
+                        className="expert_info"
+                        key={`Expert_info_${res.id}`}
+                      >
                         <h2>{res?.executive_name}</h2>
                         <h3>{res?.executive_role}</h3>
                         <div
@@ -434,7 +443,7 @@ function Index() {
                         />
                       </div>
                       <button
-                        key={res.id}
+                        key={`Expert_button_${res.id}`}
                         className="btn prmry_btn make_enqury_btn"
                         onClick={() => handleRedirect(res?.executive_name)}
                       >

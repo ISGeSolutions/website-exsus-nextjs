@@ -13,6 +13,7 @@ import ContinentOverview from "../continentoverview/index"; // Adjust the path a
 import { useTranslation } from "react-i18next";
 import { homeService } from "../../services";
 import MarkerInfoWindowNext from "../../components/common/MarkerInfoWindowNext";
+import { ImageSlider } from "../../components/ImageSlider";
 
 export default Index;
 
@@ -107,9 +108,9 @@ function Index() {
           .replace(/&/g, "and")
           .replace(/ /g, "-")
           .toLowerCase()}/${destCode
-            .replace(/&/g, "and")
-            .replace(/ /g, "-")
-            .toLowerCase()}-countries`;
+          .replace(/&/g, "and")
+          .replace(/ /g, "-")
+          .toLowerCase()}-countries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url} countries`
@@ -129,9 +130,9 @@ function Index() {
           .replace(/&/g, "and")
           .replace(/ /g, "-")
           .toLowerCase()}/${destCode
-            .replace(/&/g, "and")
-            .replace(/ /g, "-")
-            .toLowerCase()}-itineraries`;
+          .replace(/&/g, "and")
+          .replace(/ /g, "-")
+          .toLowerCase()}-itineraries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(`Home/Destinations/${destCode}/${destCode} Itineraries`);
       text = `TAILOR-MADE ${destinationName} HOLIDAY ITINERARIES`;
@@ -171,8 +172,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -332,7 +333,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -400,7 +401,13 @@ function Index() {
         .getDestinationDetails(destinationcode)
         .then((x) => {
           setDestinationDetails(x.data[0].attributes);
-          localStorage.setItem("PageInfo", JSON.stringify({ pType: "INTE", pCode: x?.data[0]?.attributes?.destination_code }));
+          localStorage.setItem(
+            "PageInfo",
+            JSON.stringify({
+              pType: "INTE",
+              pCode: x?.data[0]?.attributes?.destination_code,
+            })
+          );
           const filteredData = x.data[0].attributes?.countries?.data?.filter(
             (item) => {
               const { map_latitude, map_longitude } = item.attributes;
@@ -426,9 +433,9 @@ function Index() {
                 ?.replace(/&/g, "and")
                 .replace(/ /g, "-")
                 .toLowerCase()}/${item?.attributes?.friendly_url
-                  ?.replace(/ /g, "-")
-                  .replace(/&/g, "and")
-                  .toLowerCase()}`,
+                ?.replace(/ /g, "-")
+                .replace(/&/g, "and")
+                .toLowerCase()}`,
           }));
           // // Update the state with the accumulated coordinates
           setCoordinatesArray((prevCoordinates) => [
@@ -556,14 +563,14 @@ function Index() {
       ) : (
         <div>
           <section className="banner_blk_row">
-            {backgroundImage ? (
+            <ImageSlider data={backgroundImage}></ImageSlider>
+            {/* {backgroundImage ? (
               <div
                 id="carouselExampleInterval"
                 className="carousel slide"
                 data-bs-ride="carousel"
               >
                 <div className="carousel-indicators" id="scrollToElement">
-                  {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
                   {backgroundImage.map((_, index) => (
                     <button
                       key={index}
@@ -595,20 +602,22 @@ function Index() {
               </div>
             ) : (
               ""
-            )}
+            )} */}
 
             {isShowMap ? (
               <div className="banner_tab_blk">
                 <button
-                  className={`btn banner_map_tab ${activeButton === "map" ? "banner_tab_active" : ""
-                    }`}
+                  className={`btn banner_map_tab ${
+                    activeButton === "map" ? "banner_tab_active" : ""
+                  }`}
                   onClick={() => handleTabClick("map")}
                 >
                   Map
                 </button>
                 <button
-                  className={`btn banner_img_tab ${activeButton === "images" ? "banner_tab_active" : ""
-                    }`}
+                  className={`btn banner_img_tab ${
+                    activeButton === "images" ? "banner_tab_active" : ""
+                  }`}
                   onClick={() => handleTabClick("images")}
                 >
                   Images
@@ -618,8 +627,9 @@ function Index() {
               ""
             )}
             <div
-              className={`banner_map_blk ${activeButton === "map" ? "banner_map_active" : ""
-                }`}
+              className={`banner_map_blk ${
+                activeButton === "map" ? "banner_map_active" : ""
+              }`}
             >
               <MarkerInfoWindowNext data={coordinatesArray} />
               {/* src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" */}
