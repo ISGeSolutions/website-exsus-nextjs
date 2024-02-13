@@ -14,6 +14,7 @@ function CountryWhentogo({ onDataFromChild, sendDataToParent }) {
   const [countryData, setCountryData] = useState();
   const router = useRouter();
   const [whenToGoData, setModifiedData] = useState(null);
+  const currentUrl = router.asPath;
   const countrycode = router.query?.country
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
@@ -36,74 +37,6 @@ function CountryWhentogo({ onDataFromChild, sendDataToParent }) {
     }
   }
 
-  // const generateTds = (starting_point, quantity, text, url) => {
-  //   const tds = Array.from({ length: 12 }, (_, i) => {
-  //     const isColspan = starting_point === i + 1 && quantity > 0;
-
-  //     if (isColspan) {
-  //       return (
-  //         <td key={i} colSpan={quantity} className="calender_trip_detls">
-  //           <a href={url}>{/* Replace '#' with your actual link */}
-  //             {text}
-  //             <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 267 512.43">
-  //               <path fill-rule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"></path>
-  //             </svg>
-  //           </a>
-  //         </td>
-  //       );
-  //     } else {
-  //       return <td key={i}></td>;
-  //     }
-  //   });
-
-  //   return tds;
-  // };
-
-  // const generateTds = (starting_point, quantity, text, url) => {
-  //   const tds = [];
-
-  //   // Generate empty cells before colspan
-  //   for (let i = 0; i < starting_point - 1; i++) {
-  //     tds.push(<td key={i}></td>);
-  //   }
-
-  //   // Generate colspan cell
-  //   if (quantity > 0) {
-  //     tds.push(
-  //       <td
-  //         key={starting_point - 1 + quantity}
-  //         colSpan={quantity}
-  //         className="calender_trip_detls"
-  //       >
-  //         <a href={url}>
-  //           {text}
-  //           <svg
-  //             xmlns="http://www.w3.org/2000/svg"
-  //             fill="#ffffff"
-  //             shapeRendering="geometricPrecision"
-  //             textRendering="geometricPrecision"
-  //             imageRendering="optimizeQuality"
-  //             fill-rule="evenodd"
-  //             clip-rule="evenodd"
-  //             viewBox="0 0 267 512.43"
-  //           >
-  //             <path
-  //               fill-rule="nonzero"
-  //               d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-  //             />
-  //           </svg>
-  //         </a>
-  //       </td>
-  //     );
-  //   }
-
-  //   // Generate empty cells after colspan
-  //   for (let i = starting_point - 1 + quantity; i < 12; i++) {
-  //     tds.push(<td key={i}></td>);
-  //   }
-
-  //   return tds;
-  // };
 
   const generateTds = (starting_point, quantity, text, url, rowIndex) => {
     const tds = [];
@@ -121,7 +54,7 @@ function CountryWhentogo({ onDataFromChild, sendDataToParent }) {
           colSpan={quantity}
           className="calender_trip_detls"
         >
-          <a href={url}>
+          <a href={insertItinerary(url)}>
             {text}
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -312,6 +245,22 @@ function CountryWhentogo({ onDataFromChild, sendDataToParent }) {
     }
   };
 
+  const insertItinerary = (url) => {
+    // Split the URL by "/"
+    const parts = url.split("/");
+
+    // Find the index of the segment containing "itineraries"
+    const index = parts.findIndex(part => part.includes("itineraries"));
+
+    if (index !== -1) {
+      // Insert "itinerary" after the found segment
+      parts.splice(index - 1, 0, "itinerary");
+    }
+
+    // Join the parts back into a URL string
+    return parts.join("/");
+  };
+
   useEffect(() => {
     if (
       !localStorage.getItem(
@@ -325,6 +274,57 @@ function CountryWhentogo({ onDataFromChild, sendDataToParent }) {
       .getCountryDetails(countrycode)
       .then((x) => {
         setCountryData(x.data[0]);
+
+        const sortedData =
+          x.data[0]?.attributes?.country_month_activities?.data?.sort((a, b) => {
+            const seqA = parseInt(a.attributes.serial_number, 10);
+            const seqB = parseInt(b.attributes.serial_number, 10);
+
+            return seqA - seqB;
+          });
+
+        const modifiedData = sortedData?.map((item) => {
+          const attributes = item.attributes;
+          const months = [
+            "jan",
+            "feb",
+            "mar",
+            "apr",
+            "may",
+            "jun",
+            "jul",
+            "aug",
+            "sep",
+            "oct",
+            "nov",
+            "dec",
+          ];
+
+          // Find the starting point and quantity
+          let startingPoint = null;
+          let quantity = 0;
+
+          for (let i = 0; i < months.length; i++) {
+            if (attributes[months[i]]) {
+              if (startingPoint === null) {
+                startingPoint = i + 1;
+              }
+              quantity++;
+            }
+          }
+
+          return {
+            ...item,
+            attributes: {
+              ...attributes,
+              starting_point: startingPoint,
+              quantity: quantity,
+            },
+          };
+        });
+        setModifiedData(modifiedData);
+
+
         //?.attributes?.country_month_activities  attributes.whentogo_intro_text
         setIsLoading(false);
       })
@@ -332,54 +332,7 @@ function CountryWhentogo({ onDataFromChild, sendDataToParent }) {
         setIsLoading(false);
       });
 
-    const sortedData =
-      countryData?.attributes?.country_month_activities?.data?.sort((a, b) => {
-        const seqA = parseInt(a.attributes.serial_number, 10);
-        const seqB = parseInt(b.attributes.serial_number, 10);
 
-        return seqA - seqB;
-      });
-
-    const modifiedData = sortedData?.map((item) => {
-      const attributes = item.attributes;
-      const months = [
-        "jan",
-        "feb",
-        "mar",
-        "apr",
-        "may",
-        "jun",
-        "jul",
-        "aug",
-        "sep",
-        "oct",
-        "nov",
-        "dec",
-      ];
-
-      // Find the starting point and quantity
-      let startingPoint = null;
-      let quantity = 0;
-
-      for (let i = 0; i < months.length; i++) {
-        if (attributes[months[i]]) {
-          if (startingPoint === null) {
-            startingPoint = i + 1;
-          }
-          quantity++;
-        }
-      }
-
-      return {
-        ...item,
-        attributes: {
-          ...attributes,
-          starting_point: startingPoint,
-          quantity: quantity,
-        },
-      };
-    });
-    setModifiedData(modifiedData);
 
     window.onload = () => {
       setTimeout(() => {
@@ -391,7 +344,7 @@ function CountryWhentogo({ onDataFromChild, sendDataToParent }) {
         }
       }, 0);
     };
-  }, [countrycode, countryData]);
+  }, [countrycode]);
 
   return (
     <>
@@ -418,46 +371,6 @@ function CountryWhentogo({ onDataFromChild, sendDataToParent }) {
             each trip
           </p>
           <div className="calender_blk_inr">
-            {/* <table>
-              <tbody>
-                <tr>
-                  <th>Jan</th>
-                  <th>Feb</th>
-                  <th>Mar</th>
-                  <th>Apr</th>
-                  <th>May</th>
-                  <th>Jun</th>
-                  <th>Jul</th>
-                  <th>Aug</th>
-                  <th>Sep</th>
-                  <th>Oct</th>
-                  <th>Nov</th>
-                  <th>Dec</th>
-                </tr>
-                <tr>
-                  {Array.from({ length: 12 }, (_, index) => (
-                    <td key={index}></td>
-                  ))}
-                </tr>
-                {whenToGoData?.map((item, rowIndex) => (
-                  <>
-                    <tr key={item.id}>
-                      {generateTds(
-                        item?.attributes?.starting_point,
-                        item?.attributes?.quantity,
-                        item?.attributes?.link_text,
-                        item?.attributes?.link_url
-                      )}
-                    </tr>
-                    <tr>
-                      {Array.from({ length: 12 }, (_, index) => (
-                        <td key={index}></td>
-                      ))}
-                    </tr>
-                  </>
-                ))}
-              </tbody>
-            </table> */}
             <table>
               <tbody>
                 <tr>

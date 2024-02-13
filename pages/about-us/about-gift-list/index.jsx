@@ -44,6 +44,19 @@ function Index() {
     event.preventDefault();
   };
 
+  const disableAnchorTags = (htmlString) => {
+    const tempElement = document.createElement('div');
+    tempElement.innerHTML = htmlString;
+
+    // Disable anchor tags
+    const anchorTags = tempElement.querySelectorAll('a');
+    anchorTags.forEach(anchor => {
+      anchor.removeAttribute('href');
+    });
+
+    return tempElement.innerHTML;
+  };
+
   const websiteContentCheck = (matches, modifiedString) => {
     destinationService
       .getDictionaryDetails(matches, region)
@@ -97,7 +110,7 @@ function Index() {
             } else if (element?.attributes?.content_name == "MetaDescription") {
               setMetaDescription(element?.attributes?.content_value);
             } else if (element?.attributes?.content_name == "Long_Text") {
-              modifiedString = element?.attributes?.content_value;
+              modifiedString = disableAnchorTags(element?.attributes?.content_value);
             } else if (element?.attributes?.content_name == "Right_Header") {
               setRightHeader(element?.attributes?.content_value);
             } else if (element?.attributes?.content_name == "Right_Corner") {

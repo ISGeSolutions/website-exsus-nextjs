@@ -26,7 +26,7 @@ export const specialoffersService = {
 };
 
 function getAllOffers(region) {
-  const specialoffersUrl = `${publicRuntimeConfig.apiUrl}/api/special-offers?populate[0]=hotel&populate[hotel][populate][country][fields][0]=country_code&populate[hotel][populate][country][fields][1]=country_name&populate[hotel][populate][region][fields][2]=region_code&populate[hotel][populate][region][fields][3]=region_name&populate[hotel][populate][destination][fields][0]=destination_code&populate[hotel][populate][destination][fields][1]=destination_name&populate[hotel][populate][hotel_country_contents][filters][website_country][$eq]=${region}`;
+  const specialoffersUrl = `${publicRuntimeConfig.apiUrl}/api/special-offers?populate[0]=hotel&populate[hotel][fields][0]=hotel_code&populate[hotel][fields][1]=hotel_name&populate[hotel][fields][2]=friendly_url&populate[hotel][populate][country][fields][0]=country_code&populate[hotel][populate][country][fields][1]=country_name&populate[hotel][populate][region][fields][2]=region_code&populate[hotel][populate][region][fields][3]=region_name&populate[hotel][populate][destination][fields][0]=destination_code&populate[hotel][populate][destination][fields][1]=destination_name&populate[hotel][populate][hotel_country_contents][filters][website_country][$eq]=${region}`;
   return fetchWrapper.get(specialoffersUrl);
 }
 
