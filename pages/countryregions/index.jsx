@@ -329,7 +329,7 @@ function CountryRegions({ props, sendDataToParent }) {
                 {/* Country regions */}
                 {allRegions?.slice(0, allRegions.length).map((item) => (
                   <div className="col-sm-6 col-lg-4 col-xxl-3" key={item.id}>
-                    <div className="card_blk_inr flex-column">
+                    <div className="card_blk_inr flex-column card_blk_para_blk">
                       <NavLink href={generateDynamicLink(item)}>
                         <img
                           src={

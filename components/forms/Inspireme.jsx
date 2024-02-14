@@ -108,16 +108,18 @@ function Inspireme(props) {
       setQueryParameters(null);
       reset();
     } else {
-      router.route =
-        `${region}/advance-search?where=` +
+      const currentDomain = window.location.origin;
+      const newRoute =
+        `${currentDomain}/${region}/advance-search?where=` +
         destination +
         `&what=` +
         reason +
         `&when=` +
         month;
-      console.log(router.route);
-      const nextRouter = useRouter();
-      console.log(nextRouter);
+      router.push(newRoute);
+      // console.log(router.route);
+      // const nextRouter = useRouter();
+      // console.log(nextRouter);
       //nextRouter.push(newRoute);
       //   router.route =
       //   `${region}/advance-search?where=` +
