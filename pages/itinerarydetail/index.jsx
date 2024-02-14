@@ -175,7 +175,7 @@ function Index() {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}-itineraries/${
+        .toLowerCase()}/${countryName}-itineraries/${
         item?.attributes?.friendly_url
       }`
     );
@@ -191,7 +191,7 @@ function Index() {
         `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
           ?.replace(/&/g, "and")
           .replace(/ /g, "-")
-          .toLowerCase()}/itinerary/${countryName}-itineraries/${
+          .toLowerCase()}/${countryName}-itineraries/${
           item?.attributes?.friendly_url
         }`
     );
@@ -525,12 +525,10 @@ function Index() {
       });
     }, 2000);
 
-
     // Replace 'itinerary' with '' in the current URL
     const currentUrl = window.location.href;
-    const newUrl = currentUrl.replace('/itinerary', '');
+    const newUrl = currentUrl.replace("/itinerary", "");
     window.history.replaceState({}, document.title, newUrl);
-    
   }, [itin_name, itin_code, countrycode, destinationcode]);
 
   return (
@@ -611,7 +609,9 @@ function Index() {
             <div className="container">
               <div className="bookmark_row">
                 <FriendlyUrl
-                  data={dictioneryFunction(friendlyUrl)}
+                  data={dictioneryFunction(
+                    friendlyUrl?.replace("/itinerary", "")
+                  )}
                 ></FriendlyUrl>
               </div>
 

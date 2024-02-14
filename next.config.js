@@ -329,6 +329,27 @@ const nextConfig = {
         destination: "/itinerarydetail",
       },
 
+      //
+      {
+        source:
+          "/destinations/:continent/:country/:itineraries/:itineraryName?",
+        destination: "/itinerarydetail",
+      },
+      {
+        source:
+          "/us/destinations/:continent/:country/:itineraries/:itineraryName?",
+        destination: "/itinerarydetail",
+      },
+      {
+        source:
+          "/asia/destinations/:continent/:country/:itineraries/:itineraryName?",
+        destination: "/itinerarydetail",
+      },
+      {
+        source:
+          "/in/destinations/:continent/:country/:itineraries/:itineraryName?",
+        destination: "/itinerarydetail",
+      },
       // advance search
       { source: "/advance-search", destination: "/advance-search" },
       { source: "/us/advance-search", destination: "/advance-search" },

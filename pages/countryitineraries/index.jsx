@@ -477,12 +477,14 @@ function CountryItinararies(props) {
       regionWiseUrl +
       `/destinations/${destinationcode
         ?.replace(/ /g, "-")
-        ?.replace(/&/g, "and")}/itinerary/${countrycode?.replace(
-        / /g,
-        "-"
-      )}/${countrycode?.replace(/ /g, "-")?.replace(/&/g, "and")}-itineraries/${
-        item?.attributes?.friendly_url
-      }`
+        ?.replace(/&/g, "and")
+        ?.replace(/%20/g, " ")}/${countrycode?.replace(/ /g, "-")}/${countrycode
+        ?.replace(/ /g, "-")
+        ?.replace(/&/g, "and")
+        ?.replace(
+          /%20/g,
+          " "
+        )}-itineraries/${item?.attributes?.friendly_url?.replace(/%20/g, " ")}`
     );
   };
 
@@ -491,12 +493,19 @@ function CountryItinararies(props) {
       regionWiseUrl +
         `/destinations/${destinationcode
           ?.replace(/ /g, "-")
-          ?.replace(/&/g, "and")}/itinerary/${countrycode?.replace(
+          ?.replace(/&/g, "and")
+          ?.replace(/%20/g, " ")}/${countrycode?.replace(
           / /g,
           "-"
-        )}/${countrycode?.replace(/ /g, "-")}}-itineraries/${
-          item?.attributes?.friendly_url
-        }`
+        )}/${countrycode
+          ?.replace(/ /g, "-")
+          ?.replace(
+            /%20/g,
+            " "
+          )}}-itineraries/${item?.attributes?.friendly_url?.replace(
+          /%20/g,
+          " "
+        )}`
     );
   };
 

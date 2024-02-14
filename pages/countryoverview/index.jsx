@@ -144,7 +144,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}/${countryName}-itineraries/${
+        .toLowerCase()}/${countryName}/${countryName}-itineraries/${
         item?.attributes?.friendly_url
       }`
     );
@@ -160,7 +160,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
         `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
           ?.replace(/&/g, "and")
           .replace(/ /g, "-")
-          .toLowerCase()}/itinerary/${countryName}/${countryName}-itineraries/${
+          .toLowerCase()}/${countryName}/${countryName}-itineraries/${
           item?.attributes?.friendly_url
         }`
     );
