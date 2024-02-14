@@ -336,10 +336,13 @@ const nextConfig = {
       { source: "/in/advance-search", destination: "/advance-search" },
 
       //Why-Us advance search
-      { source: "/why-us/advance-search", destination: "/advance-search" },
-      { source: "/us/why-us/advance-search", destination: "/advance-search" },
-      { source: "/asia/why-us/advance-search", destination: "/advance-search" },
-      { source: "/in/why-us/advance-search", destination: "/advance-search" },
+      { source: "/advance-search", destination: "/advance-search" },
+      {
+        source: "/why-us/advance-search",
+        destination: "/us/advance-search",
+      },
+      { source: "/why-us/advance-search", destination: "/asia/advance-search" },
+      { source: "/why-us/advance-search", destination: "/in/advance-search" },
 
       // contact-us
       { source: "/contact-us", destination: "/contact-us" },
