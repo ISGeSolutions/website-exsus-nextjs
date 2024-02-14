@@ -68,8 +68,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -136,12 +136,12 @@ function Index() {
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${hotelName}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -152,16 +152,16 @@ function Index() {
       .replace(/&/g, "and");
     router.push(
       regionWiseUrl +
-        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-          ?.replace(/&/g, "and")
-          .replace(/ /g, "-")
-          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, "and")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${hotelName}`
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -175,8 +175,7 @@ function Index() {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
-        .toLowerCase()}/${countryName}-itineraries/${
-        item?.attributes?.friendly_url
+        .toLowerCase()}/${countryName}-itineraries/${item?.attributes?.friendly_url
       }`
     );
   };
@@ -188,12 +187,11 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-          ?.replace(/&/g, "and")
-          .replace(/ /g, "-")
-          .toLowerCase()}/${countryName}-itineraries/${
-          item?.attributes?.friendly_url
-        }`
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, "and")
+        .replace(/ /g, "-")
+        .toLowerCase()}/${countryName}-itineraries/${item?.attributes?.friendly_url
+      }`
     );
   };
 
@@ -345,190 +343,209 @@ function Index() {
     }
   };
 
+  const addStringBeforeSecondLastSlash = (inputString, newString) => {
+    // Split the string by slashes
+    const segments = inputString.split("/");
+    console.log(segments);
+    // Insert the new string before the second last segment
+    segments.splice(-3, 0, newString);
+
+    // Join the segments back into a string
+    const resultString = segments.join("/");
+
+    return resultString;
+  };
   equalHeight(true);
 
   useEffect(() => {
-    if (
-      !localStorage.getItem(
-        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
-      )
-    ) {
-      websiteContentCheck(dictionaryPage);
-    }
-    const tooltipTriggerList = document.querySelectorAll(
-      '[data-bs-toggle="tooltip"]'
-    );
-    const tooltipList = [...tooltipTriggerList].map(
-      (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
-    );
 
-    $(document).ready(function () {
-      $(".itinery_detls_expnded").hide();
-      $(".itinery_btn").click(function () {
-        $(this).toggleClass("read_more");
-        $(this).prev(".itinery_detls_expnded").slideToggle("slow");
-      });
-    });
-
-    if (countrycode) {
-      countriesService
-        .getCountryDetails(countrycode)
-        .then((x) => {
-          setCountries(x.data?.attributes?.country_name);
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          // Handle any errors here
-          // console.error(error);
-          setIsLoading(false);
-        });
-    } else if (destinationcode) {
-      destinationService
-        .getDestinationDetails(destinationcode)
-        .then((x) => {
-          setCountries(
-            x.data?.attributes?.countries?.data[0]?.attributes?.country_name
-          );
-          setDestinationDetails(x.data[0].attributes);
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          // Handle any errors here
-          // console.error(error);
-          setIsLoading(false);
-        });
-    }
-
-    destinationService
-      .getItineraryDetails(itin_name, region)
-      .then((x) => {
-        setItineraries(x.data[0]);
-        localStorage.setItem(
-          "PageInfo",
-          JSON.stringify({
-            pType: "CTPL",
-            pCode: x?.data[0]?.attributes?.itin_code,
-          })
-        );
-        const bannerImages = [];
-        const imageCheck = x.data[0]?.attributes?.itinerary_images?.data;
-
-        // setFriendlyUrl(
-        //   `home/destinations/${router.query?.continent}/${
-        //     router.query?.country
-        //   }/${x.data[0].attributes.itin_name.toLowerCase()}`
-        // );
-
-        setFriendlyUrl(
-          `home/destinations/${router.query?.continent}/${
-            router.query?.country
-          }/${
-            router.query?.itineraryName
-              ? router.query?.itineraries +
-                "/" +
-                x.data[0].attributes.itin_name.toLowerCase()
-              : x.data[0].attributes.itin_name.toLowerCase()
-          }`
-        );
-
-        setTitle(x.data[0].attributes.meta_title);
-        imageCheck.forEach((banner, index) => {
-          // bannerImages.push(banner?.attributes?.image_path);
-          if (banner?.attributes?.image_type == "banner") {
-            bannerImages.push(banner?.attributes?.image_path);
-          }
-        });
-        destinationService
-          .getMoreItineraries(
-            x?.data[0]?.attributes?.country?.data?.attributes?.country_name,
-            region
-          )
-          .then((response) => {
-            setMoreItineraries(
-              response?.data?.filter(
-                (res) => res.attributes?.friendly_url != itin_name
-              )
-            );
-
-            setIsLoading(false);
-          })
-          .catch((error) => {
-            setIsLoading(false);
-          });
-
-        destinationService
-          .getRegionWiseHotelsInHotelDetail(
-            x?.data[0]?.attributes?.region?.data?.attributes?.region_name,
-            region
-          )
-          .then((response) => {
-            setHotelData(response?.data);
-            const filteredData = response?.data?.filter((item) => {
-              const { map_latitude, map_longitude } = item.attributes;
-              return (
-                map_latitude !== null &&
-                map_latitude !== "" &&
-                map_longitude !== null &&
-                map_longitude !== ""
-              );
-            });
-            const newCoordinates = filteredData.map((item) => ({
-              lat: parseFloat(item.attributes.map_latitude),
-              lng: parseFloat(item.attributes.map_longitude),
-              name: item.attributes?.hotel_name,
-              image: item.attributes?.hotel_images?.data?.filter(
-                (res) => res?.attributes?.image_type == "thumbnail"
-              )[0]?.attributes?.image_path,
-              url:
-                regionWiseUrl +
-                `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-                  ?.replace(/&/g, "and")
-                  .replace(/ /g, "-")
-                  .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-                  ?.replace(/ /g, "-")
-                  .replace(/&/g, "and")
-                  .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-                  ?.replace(/ /g, "-")
-                  .replace(/&/g, "and")
-                  .toLowerCase()}/${item?.attributes?.friendly_url
-                  ?.replace(/&/g, "and")
-                  .replace(/ /g, "-")
-                  .toLowerCase()}`,
-            }));
-            setCoordinatesArray((prevCoordinates) => [
-              ...prevCoordinates,
-              ...newCoordinates,
-            ]);
-            setModalKey((prevKey) => prevKey + 1);
-            setIsLoading(false);
-          })
-          .catch((error) => {
-            setIsLoading(false);
-          });
-
-        setBannerImages(bannerImages);
-
-        // const carousel = document.querySelector('#Testimonials');
-        // new bootstrap.Carousel(carousel);
-
-        window.addEventListener("resize", equalHeight(true));
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-      });
-
-    setTimeout(() => {
-      // $('.carousel').carousel();
-      $(".carousel").carousel({
-        interval: 250 * 10,
-      });
-    }, 2000);
-
-    // Replace 'itinerary' with '' in the current URL
+    const searchString = "itineraries";
     const currentUrl = window.location.href;
-    const newUrl = currentUrl.replace("/itinerary", "");
-    window.history.replaceState({}, document.title, newUrl);
+    if (!currentUrl.includes(searchString)) {
+      const newUrl = addStringBeforeSecondLastSlash(currentUrl, "hotels");
+      router.push(newUrl);
+      // console.log(`The URL contains "${searchString}"`);
+    } else {
+      if (
+        !localStorage.getItem(
+          `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+        )
+      ) {
+        websiteContentCheck(dictionaryPage);
+      }
+      const tooltipTriggerList = document.querySelectorAll(
+        '[data-bs-toggle="tooltip"]'
+      );
+      const tooltipList = [...tooltipTriggerList].map(
+        (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+      );
+
+      $(document).ready(function () {
+        $(".itinery_detls_expnded").hide();
+        $(".itinery_btn").click(function () {
+          $(this).toggleClass("read_more");
+          $(this).prev(".itinery_detls_expnded").slideToggle("slow");
+        });
+      });
+
+      if (countrycode) {
+        countriesService
+          .getCountryDetails(countrycode)
+          .then((x) => {
+            setCountries(x.data?.attributes?.country_name);
+            setIsLoading(false);
+          })
+          .catch((error) => {
+            // Handle any errors here
+            // console.error(error);
+            setIsLoading(false);
+          });
+      } else if (destinationcode) {
+        destinationService
+          .getDestinationDetails(destinationcode)
+          .then((x) => {
+            setCountries(
+              x.data?.attributes?.countries?.data[0]?.attributes?.country_name
+            );
+            setDestinationDetails(x.data[0].attributes);
+            setIsLoading(false);
+          })
+          .catch((error) => {
+            // Handle any errors here
+            // console.error(error);
+            setIsLoading(false);
+          });
+      }
+
+      destinationService
+        .getItineraryDetails(itin_name, region)
+        .then((x) => {
+          setItineraries(x.data[0]);
+          localStorage.setItem(
+            "PageInfo",
+            JSON.stringify({
+              pType: "CTPL",
+              pCode: x?.data[0]?.attributes?.itin_code,
+            })
+          );
+          const bannerImages = [];
+          const imageCheck = x.data[0]?.attributes?.itinerary_images?.data;
+
+          // setFriendlyUrl(
+          //   `home/destinations/${router.query?.continent}/${
+          //     router.query?.country
+          //   }/${x.data[0].attributes.itin_name.toLowerCase()}`
+          // );
+
+          setFriendlyUrl(
+            `home/destinations/${router.query?.continent}/${router.query?.country
+            }/${router.query?.itineraryName
+              ? router.query?.itineraries +
+              "/" +
+              x.data[0].attributes.itin_name.toLowerCase()
+              : x.data[0].attributes.itin_name.toLowerCase()
+            }`
+          );
+
+          setTitle(x.data[0].attributes.meta_title);
+          imageCheck.forEach((banner, index) => {
+            // bannerImages.push(banner?.attributes?.image_path);
+            if (banner?.attributes?.image_type == "banner") {
+              bannerImages.push(banner?.attributes?.image_path);
+            }
+          });
+          destinationService
+            .getMoreItineraries(
+              x?.data[0]?.attributes?.country?.data?.attributes?.country_name,
+              region
+            )
+            .then((response) => {
+              setMoreItineraries(
+                response?.data?.filter(
+                  (res) => res.attributes?.friendly_url != itin_name
+                )
+              );
+
+              setIsLoading(false);
+            })
+            .catch((error) => {
+              setIsLoading(false);
+            });
+
+          destinationService
+            .getRegionWiseHotelsInHotelDetail(
+              x?.data[0]?.attributes?.region?.data?.attributes?.region_name,
+              region
+            )
+            .then((response) => {
+              setHotelData(response?.data);
+              const filteredData = response?.data?.filter((item) => {
+                const { map_latitude, map_longitude } = item.attributes;
+                return (
+                  map_latitude !== null &&
+                  map_latitude !== "" &&
+                  map_longitude !== null &&
+                  map_longitude !== ""
+                );
+              });
+              const newCoordinates = filteredData.map((item) => ({
+                lat: parseFloat(item.attributes.map_latitude),
+                lng: parseFloat(item.attributes.map_longitude),
+                name: item.attributes?.hotel_name,
+                image: item.attributes?.hotel_images?.data?.filter(
+                  (res) => res?.attributes?.image_type == "thumbnail"
+                )[0]?.attributes?.image_path,
+                url:
+                  regionWiseUrl +
+                  `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+                    ?.replace(/&/g, "and")
+                    .replace(/ /g, "-")
+                    .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+                      ?.replace(/ /g, "-")
+                      .replace(/&/g, "and")
+                      .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+                        ?.replace(/ /g, "-")
+                        .replace(/&/g, "and")
+                        .toLowerCase()}/${item?.attributes?.friendly_url
+                          ?.replace(/&/g, "and")
+                          .replace(/ /g, "-")
+                          .toLowerCase()}`,
+              }));
+              setCoordinatesArray((prevCoordinates) => [
+                ...prevCoordinates,
+                ...newCoordinates,
+              ]);
+              setModalKey((prevKey) => prevKey + 1);
+              setIsLoading(false);
+            })
+            .catch((error) => {
+              setIsLoading(false);
+            });
+
+          setBannerImages(bannerImages);
+
+          // const carousel = document.querySelector('#Testimonials');
+          // new bootstrap.Carousel(carousel);
+
+          window.addEventListener("resize", equalHeight(true));
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+        });
+
+      setTimeout(() => {
+        // $('.carousel').carousel();
+        $(".carousel").carousel({
+          interval: 250 * 10,
+        });
+      }, 2000);
+
+      // Replace 'itinerary' with '' in the current URL
+      const currentUrl = window.location.href;
+      const newUrl = currentUrl.replace("/itinerary", "");
+      window.history.replaceState({}, document.title, newUrl);
+    }
   }, [itin_name, itin_code, countrycode, destinationcode]);
 
   return (
@@ -753,8 +770,8 @@ function Index() {
                                   showAllParagraphs[index]
                                     ? element?.attributes?.day_detail_text
                                     : element?.attributes?.day_detail_text.split(
-                                        "<br />"
-                                      )[0]
+                                      "<br />"
+                                    )[0]
                                 )
                               ),
                             }}
@@ -765,11 +782,10 @@ function Index() {
                             element?.attributes?.overview_text.split("<br />")
                               .length > 1 && (
                               <button
-                                className={`btn itinery_btn ${
-                                  showAllParagraphs[index]
-                                    ? " itinery_para_expnd"
-                                    : ""
-                                }`}
+                                className={`btn itinery_btn ${showAllParagraphs[index]
+                                  ? " itinery_para_expnd"
+                                  : ""
+                                  }`}
                                 onClick={() => toggleParagraphs(index)}
                               >
                                 <svg
@@ -978,8 +994,8 @@ function Index() {
                                           {item?.attributes?.currency_symbol.repeat(
                                             Math.abs(
                                               5 -
-                                                item?.attributes
-                                                  ?.price_guide_value
+                                              item?.attributes
+                                                ?.price_guide_value
                                             )
                                           )}
                                         </label>
@@ -1129,12 +1145,10 @@ function Index() {
                                 )
                                 .map((res1) => (
                                   <li key={`filter_${res1.id}`}>
-                                    {`From ${
-                                      res1.attributes?.currency_symbol ?? ""
-                                    }${
-                                      formatPrice(res1.attributes?.price) ??
+                                    {`From ${res1.attributes?.currency_symbol ?? ""
+                                      }${formatPrice(res1.attributes?.price) ??
                                       " xxxx"
-                                    } per person`}
+                                      } per person`}
                                   </li>
                                 ))}
                               <li>
