@@ -80,7 +80,7 @@ function Signup() {
         email_sent_ind: false,
         loc_by_ip_country_name: country?.country,
         loc_by_ip_country_code: country?.countryCode,
-        page_url: pageUrl,
+        page_url: data["page_url"] = localStorage.getItem("prevUrl") ? localStorage.getItem("prevUrl") : "/",
         device_info: deviceInfo,
         submitted_at: new Date().toLocaleDateString(),
         site_region: region == "us" ? "Yes" : "No",

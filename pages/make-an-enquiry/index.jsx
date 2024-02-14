@@ -87,7 +87,7 @@ function Index() {
   function onSubmit(data) {
     data["site_region"] = region == "us" ? "Yes" : "No";
     data["submitted_at"] = new Date().toLocaleDateString();
-    data["page_url"] = router?.query?.from || '/';
+    data["page_url"] = localStorage.getItem("prevUrl") ? localStorage.getItem("prevUrl") : "/";
     data["loc_by_ip_country_name"] = country?.country;
     data["loc_by_ip_country_code"] = country?.countryCode;
     data["product_type"] = pType;
