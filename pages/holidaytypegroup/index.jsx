@@ -213,7 +213,7 @@ function Index() {
       .toLowerCase();
     return (
       regionWiseUrl +
-      `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
+      `/destinations/${modifiedDestinationName}/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -227,14 +227,14 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${modifiedDestinationName}/itinerary/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
+        `/destinations/${modifiedDestinationName}/${country}/${country}-itinerary/${item?.attributes?.friendly_url}`
     );
   };
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -409,7 +409,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }

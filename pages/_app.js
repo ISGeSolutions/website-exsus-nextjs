@@ -137,11 +137,11 @@ function App({ Component, pageProps }) {
     // });
 
     //
-    setTimeout(() => {
-      $(".carousel").carousel({
-        interval: 250 * 10,
-      });
-    }, 2000);
+    // setTimeout(() => {
+    //   $(".carousel").carousel({
+    //     interval: 250 * 10,
+    //   });
+    // }, 2000);
 
     // unsubscribe from events in useEffect return function
     return () => {

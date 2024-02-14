@@ -90,7 +90,7 @@ function Index() {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${countryName}-itineraries/${
+        .toLowerCase()}/${countryName}-itineraries/${
         item?.attributes?.friendly_url
       }`
     );
@@ -106,7 +106,7 @@ function Index() {
         `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
           ?.replace(/&/g, "and")
           .replace(/ /g, "-")
-          .toLowerCase()}/itinerary/${countryName}-itineraries/${
+          .toLowerCase()}/${countryName}-itineraries/${
           item?.attributes?.friendly_url
         }`
     );
