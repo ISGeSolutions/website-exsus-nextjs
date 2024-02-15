@@ -3551,3 +3551,16 @@ nav
   margin-bottom: 24px;
   list-style-type: none !important;
 }
+
+.destination_para.destination_para_blk {
+  color: #ffffff;
+  font: 400 1rem/1.5rem "Roboto", sans-serif;
+}
+
+.card_blk_row .card_blk_inr.card_blk_para_blk span {
+  color: #ffffff;
+  font: 300 0.875rem/1.5rem "Roboto", sans-serif;
+  text-align: justify;
+  padding-top: 10px;
+  display: inline-block;
+}

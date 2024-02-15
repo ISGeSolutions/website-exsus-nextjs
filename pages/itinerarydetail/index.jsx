@@ -136,7 +136,7 @@ function Index() {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
-        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+        .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
@@ -156,7 +156,7 @@ function Index() {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
-        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+        .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
@@ -347,7 +347,6 @@ function Index() {
   const addStringBeforeSecondLastSlash = (inputString, newString) => {
     // Split the string by slashes
     const segments = inputString.split("/");
-    console.log(segments);
     // Insert the new string before the second last segment
     segments.splice(-3, 0, newString);
 
@@ -359,7 +358,6 @@ function Index() {
   equalHeight(true);
 
   useEffect(() => {
-
     const searchString = "itineraries";
     const currentUrl = window.location.href;
     if (!currentUrl.includes(searchString)) {
@@ -501,7 +499,7 @@ function Index() {
                   `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
                     ?.replace(/&/g, "and")
                     .replace(/ /g, "-")
-                    .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+                    .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
                       ?.replace(/ /g, "-")
                       .replace(/&/g, "and")
                       .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
@@ -784,8 +782,8 @@ function Index() {
                               .length > 1 && (
                               <button
                                 className={`btn itinery_btn ${showAllParagraphs[index]
-                                  ? " itinery_para_expnd"
-                                  : ""
+                                    ? " itinery_para_expnd"
+                                    : ""
                                   }`}
                                 onClick={() => toggleParagraphs(index)}
                               >

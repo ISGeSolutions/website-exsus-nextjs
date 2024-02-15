@@ -81,7 +81,7 @@ function Index() {
         .replace(
           /&/g,
           "and"
-        )}/hotels/${res?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.country_name
+        )}/${res?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(
             /&/g,
@@ -105,7 +105,7 @@ function Index() {
       `/destinations/${res?.attributes?.hotel?.data?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
-        .toLowerCase()}/hotels/${res?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.country_name
+        .toLowerCase()}/${res?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(
             /&/g,
@@ -303,7 +303,6 @@ function Index() {
       .getAllOffers(region)
       .then((x) => {
         setAllOffers(x.data);
-        console.log(x.data);
         // setAllOffers([]);
 
         setFriendlyUrl(`home/special offers`);
@@ -551,10 +550,7 @@ function Index() {
                                   href={generateDynamicLink(res)}
                                 >
                                   {/*   error => Dont add anchor tag for the below element. you can use onclick fun. */}
-                                  <span
-                                    href="#"
-                                    className="card_slider_img"
-                                  >
+                                  <span href="#" className="card_slider_img">
                                     <img
                                       src={res.attributes.thumbnail_image_path}
                                       alt="offer_card01"

@@ -323,7 +323,7 @@ function ContinentOverview({ sendDataToParent }) {
       ) : (
         <div>
           <div className="container">
-            <section className="destination_para">
+            <section className="destination_para destination_para_blk">
               <div
                 dangerouslySetInnerHTML={{
                   __html: dictioneryFunction(valueWithBr),
