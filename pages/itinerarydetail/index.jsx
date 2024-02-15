@@ -42,6 +42,7 @@ function Index() {
   const [coordinatesArray, setCoordinatesArray] = useState([]);
   const [modalKey, setModalKey] = useState(0);
   const [showAllParagraphs, setShowAllParagraphs] = useState(false);
+  const [telephoneNumber, SetTelePhoneNumber] = useState("${TelephoneNumber}")
 
   // Function to toggle between all paragraphs and only the first paragraph
   const toggleParagraphs = (index) => {
@@ -68,8 +69,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -136,12 +137,12 @@ function Index() {
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${hotelName}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -152,16 +153,16 @@ function Index() {
       .replace(/&/g, "and");
     router.push(
       regionWiseUrl +
-        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-          ?.replace(/&/g, "and")
-          .replace(/ /g, "-")
-          .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, "and")
+        .replace(/ /g, "-")
+        .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${hotelName}`
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -175,8 +176,7 @@ function Index() {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
-        .toLowerCase()}/${countryName}-itineraries/${
-        item?.attributes?.friendly_url
+        .toLowerCase()}/${countryName}-itineraries/${item?.attributes?.friendly_url
       }`
     );
   };
@@ -188,12 +188,11 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-          ?.replace(/&/g, "and")
-          .replace(/ /g, "-")
-          .toLowerCase()}/${countryName}-itineraries/${
-          item?.attributes?.friendly_url
-        }`
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, "and")
+        .replace(/ /g, "-")
+        .toLowerCase()}/${countryName}-itineraries/${item?.attributes?.friendly_url
+      }`
     );
   };
 
@@ -348,7 +347,6 @@ function Index() {
   const addStringBeforeSecondLastSlash = (inputString, newString) => {
     // Split the string by slashes
     const segments = inputString.split("/");
-    console.log(segments);
     // Insert the new string before the second last segment
     segments.splice(-3, 0, newString);
 
@@ -439,14 +437,12 @@ function Index() {
           // );
 
           setFriendlyUrl(
-            `home/destinations/${router.query?.continent}/${
-              router.query?.country
-            }/${
-              router.query?.itineraryName
-                ? router.query?.itineraries +
-                  "/" +
-                  x.data[0].attributes.itin_name.toLowerCase()
-                : x.data[0].attributes.itin_name.toLowerCase()
+            `home/destinations/${router.query?.continent}/${router.query?.country
+            }/${router.query?.itineraryName
+              ? router.query?.itineraries +
+              "/" +
+              x.data[0].attributes.itin_name.toLowerCase()
+              : x.data[0].attributes.itin_name.toLowerCase()
             }`
           );
 
@@ -504,15 +500,15 @@ function Index() {
                     ?.replace(/&/g, "and")
                     .replace(/ /g, "-")
                     .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
-                    ?.replace(/ /g, "-")
-                    .replace(/&/g, "and")
-                    .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-                    ?.replace(/ /g, "-")
-                    .replace(/&/g, "and")
-                    .toLowerCase()}/${item?.attributes?.friendly_url
-                    ?.replace(/&/g, "and")
-                    .replace(/ /g, "-")
-                    .toLowerCase()}`,
+                      ?.replace(/ /g, "-")
+                      .replace(/&/g, "and")
+                      .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+                        ?.replace(/ /g, "-")
+                        .replace(/&/g, "and")
+                        .toLowerCase()}/${item?.attributes?.friendly_url
+                          ?.replace(/&/g, "and")
+                          .replace(/ /g, "-")
+                          .toLowerCase()}`,
               }));
               setCoordinatesArray((prevCoordinates) => [
                 ...prevCoordinates,
@@ -745,7 +741,7 @@ function Index() {
                     so your holiday is totally personalised.
                   </p>
                   <div className="btn_grp">
-                    Call 020 7337 9010 or <EnquiryBtn />
+                    Call <span dangerouslySetInnerHTML={{ __html: dictioneryFunction(telephoneNumber) }}></span> or <EnquiryBtn />
                   </div>
                 </div>
               </section>
@@ -773,8 +769,8 @@ function Index() {
                                   showAllParagraphs[index]
                                     ? element?.attributes?.day_detail_text
                                     : element?.attributes?.day_detail_text.split(
-                                        "<br />"
-                                      )[0]
+                                      "<br />"
+                                    )[0]
                                 )
                               ),
                             }}
@@ -785,11 +781,10 @@ function Index() {
                             element?.attributes?.overview_text.split("<br />")
                               .length > 1 && (
                               <button
-                                className={`btn itinery_btn ${
-                                  showAllParagraphs[index]
+                                className={`btn itinery_btn ${showAllParagraphs[index]
                                     ? " itinery_para_expnd"
                                     : ""
-                                }`}
+                                  }`}
                                 onClick={() => toggleParagraphs(index)}
                               >
                                 <svg
@@ -998,8 +993,8 @@ function Index() {
                                           {item?.attributes?.currency_symbol.repeat(
                                             Math.abs(
                                               5 -
-                                                item?.attributes
-                                                  ?.price_guide_value
+                                              item?.attributes
+                                                ?.price_guide_value
                                             )
                                           )}
                                         </label>
@@ -1149,12 +1144,10 @@ function Index() {
                                 )
                                 .map((res1) => (
                                   <li key={`filter_${res1.id}`}>
-                                    {`From ${
-                                      res1.attributes?.currency_symbol ?? ""
-                                    }${
-                                      formatPrice(res1.attributes?.price) ??
+                                    {`From ${res1.attributes?.currency_symbol ?? ""
+                                      }${formatPrice(res1.attributes?.price) ??
                                       " xxxx"
-                                    } per person`}
+                                      } per person`}
                                   </li>
                                 ))}
                               <li>
