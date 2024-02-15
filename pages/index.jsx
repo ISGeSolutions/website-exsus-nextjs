@@ -56,7 +56,7 @@ function Index() {
 
     return (
       regionWiseUrl +
-      `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-itineraries/${item.attributes?.friendly_url}`
+      `/destinations/${modifiedDestinationName}/${modifiedDestinationName}-itineraries/${item.attributes?.friendly_url}`
     );
   };
 
@@ -76,7 +76,7 @@ function Index() {
 
     router.push(
       regionWiseUrl +
-        `/destinations/${modifiedDestinationName}/itinerary/${modifiedDestinationName}-itineraries/${item.attributes?.friendly_url}`
+        `/destinations/${modifiedDestinationName}/${modifiedDestinationName}-itineraries/${item.attributes?.friendly_url}`
     );
   };
 

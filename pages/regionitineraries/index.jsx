@@ -307,7 +307,7 @@ function RegionItinararies(props) {
   const generateDynamicLink = (item) => {
     return (
       regionWiseUrl +
-      `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
+      `/destinations/${destinationcode}/${countrycode?.replace(
         / /g,
         "-"
       )}/${countrycode?.replace(/ /g, "-")?.replace(/&/g, "and")}-itineraries/${
@@ -319,7 +319,7 @@ function RegionItinararies(props) {
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-        `/destinations/${destinationcode}/itinerary/${countrycode?.replace(
+        `/destinations/${destinationcode}/${countrycode?.replace(
           / /g,
           "-"
         )}/${countrycode

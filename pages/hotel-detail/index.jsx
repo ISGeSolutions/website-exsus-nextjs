@@ -57,21 +57,6 @@ function Index() {
     }
   }
 
-  // const generateDynamicLink = (item) => {
-  //   return (
-  //     regionWiseUrl +
-  //     `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
-  //   );
-  // };
-
-  // const handleRedirect = (item) => {
-  //   // const modifiedName = item.replace(/ /g, "-").toLowerCase();
-  //   router.push(
-  //     regionWiseUrl +
-  //       `/destinations/${destinationcode}/itinerary/${destinationcode}-itineraries/${item?.attributes?.friendly_url}`
-  //   );
-  // };
-
   const handleHrefClick = (event) => {
     event.preventDefault();
   };
@@ -86,7 +71,7 @@ function Index() {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
-        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+        .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
         ?.replace(/ /g, "-")
         .replace(/&/g, "and")
         .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
@@ -102,7 +87,7 @@ function Index() {
         `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
           ?.replace(/&/g, "and")
           .replace(/ /g, "-")
-          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+          .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
@@ -118,7 +103,7 @@ function Index() {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
-        .toLowerCase()}/itinerary/${item?.attributes?.country?.data?.attributes?.country_name
+        .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
         ?.replace(/ /g, "-")
         .replace(/&/g, "and")
         .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
@@ -134,7 +119,7 @@ function Index() {
         `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
           ?.replace(/&/g, "and")
           .replace(/ /g, "-")
-          .toLowerCase()}/itinerary/${item?.attributes?.country?.data?.attributes?.country_name
+          .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
@@ -390,7 +375,7 @@ function Index() {
               `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
                 ?.replace(/&/g, "and")
                 .replace(/ /g, "-")
-                .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+                .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
                 ?.replace(/ /g, "-")
                 .replace(/&/g, "and")
                 .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
@@ -431,6 +416,10 @@ function Index() {
           pause: "none",
         });
       }, 2000);
+
+      const currentUrl = window.location.href;
+      const newUrl = currentUrl.replace("/hotels", "");
+      window.history.replaceState({}, document.title, newUrl);
     }
   }, [hotelName, regionName, continentCode, countryName]);
 

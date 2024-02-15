@@ -162,8 +162,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -321,7 +321,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -331,201 +331,200 @@ function Index() {
 
   const addStringBeforeSecondLastSlash = (inputString, newString) => {
     // Split the string by slashes
-    const segments = inputString.split('/');
+    const segments = inputString.split("/");
 
     // Insert the new string before the second last segment
     segments.splice(-2, 0, newString);
 
     // Join the segments back into a string
-    const resultString = segments.join('/');
+    const resultString = segments.join("/");
 
     return resultString;
-  }
+  };
 
   useEffect(() => {
-
-    const searchString = 'itineraries';
+    const searchString = "itineraries";
     const currentUrl = window.location.href;
     if (currentUrl.includes(searchString)) {
-      const newUrl = addStringBeforeSecondLastSlash(currentUrl, 'itinerary');
+      const newUrl = addStringBeforeSecondLastSlash(currentUrl, "itinerary");
       router.push(newUrl);
       // console.log(`The URL contains "${searchString}"`);
     } else {
       // console.log(`The URL does not contain "${searchString}"`);
-    }
 
-    if (
-      !localStorage.getItem(
-        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
-      )
-    ) {
-      websiteContentCheck(dictionaryPage);
-    }
-    if (regionName != undefined && regionName != "undefined") {
-      localStorage.setItem("region_name", regionName);
-    }
-    if (destinationcode != undefined) {
-      localStorage.setItem("destination_code", destinationcode);
-    }
-    if (countrycode != undefined) {
-      localStorage.setItem("country_code", countrycode);
-    }
-    window.scrollTo(0, 0);
-    // destinationService.getAllItineraries().then(x => {
-    //     setItineraries(x.data);
-    // });
+      if (
+        !localStorage.getItem(
+          `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+        )
+      ) {
+        websiteContentCheck(dictionaryPage);
+      }
+      if (regionName != undefined && regionName != "undefined") {
+        localStorage.setItem("region_name", regionName);
+      }
+      if (destinationcode != undefined) {
+        localStorage.setItem("destination_code", destinationcode);
+      }
+      if (countrycode != undefined) {
+        localStorage.setItem("country_code", countrycode);
+      }
+      window.scrollTo(0, 0);
+      // destinationService.getAllItineraries().then(x => {
+      //     setItineraries(x.data);
+      // });
 
-    // destinationService.getDestinationDetails(destinationcode).then((x) => {
-    //   setHeadingText(x.data.attributes.page_meta_title);
-    // });
+      // destinationService.getDestinationDetails(destinationcode).then((x) => {
+      //   setHeadingText(x.data.attributes.page_meta_title);
+      // });
 
-    setFriendlyUrl(
-      `home/destinations/${destinationcode}/${countrycode}/${regionName}`
-    );
+      setFriendlyUrl(
+        `home/destinations/${destinationcode}/${countrycode}/${regionName}`
+      );
 
-    destinationService
-      .getRegionByName(regionName)
-      .then((x) => {
-        setRegionData(x.data[0]);
-        localStorage.setItem(
-          "PageInfo",
-          JSON.stringify({
-            pType: "REGN",
-            pCode: x?.data[0]?.attributes?.region_code,
-          })
-        );
-        setHeadingText(x.data[0]?.attributes?.region_name);
-        const imageCheck = x.data[0].attributes.region_images.data;
-        const newBackgroundImages = [];
+      destinationService
+        .getRegionByName(regionName)
+        .then((x) => {
+          setRegionData(x.data[0]);
+          localStorage.setItem(
+            "PageInfo",
+            JSON.stringify({
+              pType: "REGN",
+              pCode: x?.data[0]?.attributes?.region_code,
+            })
+          );
+          setHeadingText(x.data[0]?.attributes?.region_name);
+          const imageCheck = x.data[0].attributes.region_images.data;
+          const newBackgroundImages = [];
 
-        let latitude = x?.data[0]?.attributes?.map_latitude
-          ? x?.data[0]?.attributes?.map_latitude
-          : "";
-        let longitude = x?.data[0]?.attributes?.map_longitude
-          ? x?.data[0]?.attributes?.map_longitude
-          : "";
-        const mapTemp =
-          `https://www.google.com/maps/embed/v1/place?q=` +
-          latitude +
-          `,` +
-          longitude +
-          `&zoom=10&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
-        setMapVariable(mapTemp);
-        imageCheck.forEach((element) => {
-          if (element.attributes.image_type == "banner") {
-            newBackgroundImages.push(element.attributes.image_path);
-          } else if (element.attributes.image_type == "thumbnail") {
-          }
+          let latitude = x?.data[0]?.attributes?.map_latitude
+            ? x?.data[0]?.attributes?.map_latitude
+            : "";
+          let longitude = x?.data[0]?.attributes?.map_longitude
+            ? x?.data[0]?.attributes?.map_longitude
+            : "";
+          const mapTemp =
+            `https://www.google.com/maps/embed/v1/place?q=` +
+            latitude +
+            `,` +
+            longitude +
+            `&zoom=10&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
+          setMapVariable(mapTemp);
+          imageCheck.forEach((element) => {
+            if (element.attributes.image_type == "banner") {
+              newBackgroundImages.push(element.attributes.image_path);
+            } else if (element.attributes.image_type == "thumbnail") {
+            }
+          });
+          setBackgroundImage(newBackgroundImages);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          // Handle any errors here
+          // console.error(error);
+          setIsLoading(false);
         });
-        setBackgroundImage(newBackgroundImages);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        // Handle any errors here
-        // console.error(error);
-        setIsLoading(false);
+
+      // destinationService.getDestinationDetails(destinationcode).then(x => {
+      //     setDestinationDetails(x.data.attributes);
+      //  (x.data)
+      //     setMetaTitle(x.data.attributes.page_meta_title);
+      //     setHeadingText(x.data.attributes.page_meta_title);
+      //     const map_latitude = x.data.attributes?.map_latitude;
+      //     const map_longitude = x.data.attributes?.map_longitude;
+      //     setdestinationName(x.data.attributes.destination_name);
+      //     // const map_latitude = "40.7128";
+      //     // const map_longitude = "-74.0060";
+
+      //     const mapTemp = `https://www.google.com/maps/embed/v1/place?q=` + map_latitude + `,` + map_longitude + `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
+      //     setMapVariable(mapTemp);
+
+      //     // const lines = x.data.attributes?.overview_text.split('\n');
+      //     // const oldText = x.data.attributes?.overview_text;
+      //     // var newValueWithBr = oldText?.replace(/\\n/g, "");
+      //     // setnewValueWithBr(newValueWithBr);
+      //     const imageCheck = x.data.attributes.destination_images.data;
+      //     const newBackgroundImages = [];
+      //     imageCheck.forEach(element => {
+      //         if (element.attributes.image_type == 'banner') {
+      //             newBackgroundImages.push(element.attributes.image_path);
+      //         } else if (element.attributes.image_type == 'thumbnail') {
+      //         }
+      //     });
+      //     setBackgroundImage(newBackgroundImages);
+      //     // setDestinationLandingDetails(x)
+      // });
+
+      $(".banner_map_tab").click(function () {
+        $(".banner_map_blk").addClass("banner_map_active");
+      });
+      $(".banner_img_tab").click(function () {
+        $(".banner_map_blk").removeClass("banner_map_active");
       });
 
-    // destinationService.getDestinationDetails(destinationcode).then(x => {
-    //     setDestinationDetails(x.data.attributes);
-    //  (x.data)
-    //     setMetaTitle(x.data.attributes.page_meta_title);
-    //     setHeadingText(x.data.attributes.page_meta_title);
-    //     const map_latitude = x.data.attributes?.map_latitude;
-    //     const map_longitude = x.data.attributes?.map_longitude;
-    //     setdestinationName(x.data.attributes.destination_name);
-    //     // const map_latitude = "40.7128";
-    //     // const map_longitude = "-74.0060";
-
-    //     const mapTemp = `https://www.google.com/maps/embed/v1/place?q=` + map_latitude + `,` + map_longitude + `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
-    //     setMapVariable(mapTemp);
-
-    //     // const lines = x.data.attributes?.overview_text.split('\n');
-    //     // const oldText = x.data.attributes?.overview_text;
-    //     // var newValueWithBr = oldText?.replace(/\\n/g, "");
-    //     // setnewValueWithBr(newValueWithBr);
-    //     const imageCheck = x.data.attributes.destination_images.data;
-    //     const newBackgroundImages = [];
-    //     imageCheck.forEach(element => {
-    //         if (element.attributes.image_type == 'banner') {
-    //             newBackgroundImages.push(element.attributes.image_path);
-    //         } else if (element.attributes.image_type == 'thumbnail') {
-    //         }
-    //     });
-    //     setBackgroundImage(newBackgroundImages);
-    //     // setDestinationLandingDetails(x)
-    // });
-
-    $(".banner_map_tab").click(function () {
-      $(".banner_map_blk").addClass("banner_map_active");
-    });
-    $(".banner_img_tab").click(function () {
-      $(".banner_map_blk").removeClass("banner_map_active");
-    });
-
-    $(".banner_tab_blk button").click(function () {
-      $(".banner_tab_blk button").removeClass("banner_tab_active");
-      $(this).addClass("banner_tab_active");
-    });
-
-    $(document).ready(function () {
-      $(".destination_contries_filter li a").click(function () {
-        $(".destination_contries_filter li a").removeClass("active");
-        $(this).addClass("active");
+      $(".banner_tab_blk button").click(function () {
+        $(".banner_tab_blk button").removeClass("banner_tab_active");
+        $(this).addClass("banner_tab_active");
       });
-    });
 
-    window.onload = () => {
-      setTimeout(() => {
-        let reName = "";
-        let destName = "";
-        let countryName = "";
-        if (!regionName || regionName == "undefined") {
-          reName = localStorage.getItem("region_name");
-        } else {
-          reName = regionName;
-        }
-        if (!destinationcode) {
-          destName = localStorage.getItem("destination_code");
-        } else {
-          destName = destinationcode;
-        }
-        if (!countrycode) {
-          countryName = localStorage.getItem("country_code");
-        } else {
-          countryName = countrycode;
-        }
-        const redirectUrl =
+      $(document).ready(function () {
+        $(".destination_contries_filter li a").click(function () {
+          $(".destination_contries_filter li a").removeClass("active");
+          $(this).addClass("active");
+        });
+      });
+
+      window.onload = () => {
+        setTimeout(() => {
+          let reName = "";
+          let destName = "";
+          let countryName = "";
+          if (!regionName || regionName == "undefined") {
+            reName = localStorage.getItem("region_name");
+          } else {
+            reName = regionName;
+          }
+          if (!destinationcode) {
+            destName = localStorage.getItem("destination_code");
+          } else {
+            destName = destinationcode;
+          }
+          if (!countrycode) {
+            countryName = localStorage.getItem("country_code");
+          } else {
+            countryName = countrycode;
+          }
+          const redirectUrl =
+            regionWiseUrl +
+            "/destinations/" +
+            destName?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase() +
+            "/" +
+            countryName
+              ?.replace(/ /g, "-")
+              .replace(/and/g, "&")
+              .replace(/&/g, "and")
+              .toLowerCase() +
+            "/" +
+            reName?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase();
+
           regionWiseUrl +
-          "/destinations/" +
-          destName?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase() +
-          "/" +
-          countryName
-            ?.replace(/ /g, "-")
-            .replace(/and/g, "&")
-            .replace(/&/g, "and")
-            .toLowerCase() +
-          "/" +
-          reName?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase();
+            `/ destinations / ${destinationcode} /${countrycode?.replace(
+              / /g,
+              "-"
+            )}`;
+          if (redirectUrl) {
+            router.push(redirectUrl);
+          }
+        }, 0);
+      };
 
-        regionWiseUrl +
-          `/ destinations / ${destinationcode} /${countrycode?.replace(
-            / /g,
-            "-"
-          )}`;
-        if (redirectUrl) {
-          router.push(redirectUrl);
-        }
-      }, 0);
-    };
-
-    window.addEventListener("resize", equalHeight(true));
-    setTimeout(() => {
-      // $('.carousel').carousel();
-      $(".carousel").carousel({
-        interval: 250 * 10,
-      });
-    }, 2000);
+      window.addEventListener("resize", equalHeight(true));
+      setTimeout(() => {
+        // $('.carousel').carousel();
+        $(".carousel").carousel({
+          interval: 250 * 10,
+        });
+      }, 2000);
+    }
   }, [regionName, destinationcode, countrycode]);
 
   return (
@@ -602,15 +601,17 @@ function Index() {
             {isShowMap ? (
               <div className="banner_tab_blk">
                 <button
-                  className={`btn banner_map_tab ${activeButton === "map" ? "banner_tab_active" : ""
-                    }`}
+                  className={`btn banner_map_tab ${
+                    activeButton === "map" ? "banner_tab_active" : ""
+                  }`}
                   onClick={() => handleTabClick("map")}
                 >
                   Map
                 </button>
                 <button
-                  className={`btn banner_img_tab ${activeButton === "images" ? "banner_tab_active" : ""
-                    }`}
+                  className={`btn banner_img_tab ${
+                    activeButton === "images" ? "banner_tab_active" : ""
+                  }`}
                   onClick={() => handleTabClick("images")}
                 >
                   Images
@@ -620,8 +621,9 @@ function Index() {
               ""
             )}
             <div
-              className={`banner_map_blk ${activeButton === "map" ? "banner_map_active" : ""
-                }`}
+              className={`banner_map_blk ${
+                activeButton === "map" ? "banner_map_active" : ""
+              }`}
             >
               <Iframe
                 width="640px"

@@ -27,7 +27,7 @@ function Layout({ children }) {
   const [selectedRegion, setVariable] = useState("");
   const { ver } = router.query;
   const [telePhoneNumber, SetTelePhoneNumber] = useState();
-
+  const [prevUrl, setPrevUrl] = useState('');
   // form validation rules
   const validationSchema = Yup.object().shape({
     searchText: Yup.string().required(),
@@ -192,6 +192,19 @@ function Layout({ children }) {
     // Open the PDF in a new tab
     window.open(pdfUrl, '_blank');
   };
+
+
+  useEffect(() => {
+    const currentDomain = window.location.origin;
+    if (router.asPath !== '/') {
+      setPrevUrl(currentDomain + router.asPath);
+      localStorage.setItem('prevUrl', prevUrl);
+    }
+  }, [router.asPath]);
+
+
+
+
 
   useEffect(() => {
     // Temporarily disable warnings in the development environment
