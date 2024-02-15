@@ -40,11 +40,13 @@ function Country() {
   const destinationcode = router.query?.continent
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
-    .toLowerCase();
+    .toLowerCase()
+    .replace(/%20/g, "-");
   const countrycode = router.query?.country
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
-    .toLowerCase();
+    .toLowerCase()
+    .replace(/%20/g, "-");
   //  (destinationcode, countrycode);
   // const [selectedOptionCountry, setSelectedOptionCountry] = useState(null);
   // const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
@@ -605,7 +607,9 @@ function Country() {
           >
             <div className="container">
               <div className="bookmark_row">
-                <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
+                <FriendlyUrl
+                  data={friendlyUrl.replace(/%20/g, " ")}
+                ></FriendlyUrl>
               </div>
               <div className="destination_tab_inr">
                 <h2 className="tab_tilte">
