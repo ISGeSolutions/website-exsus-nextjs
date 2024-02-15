@@ -42,6 +42,7 @@ function Index() {
   const [coordinatesArray, setCoordinatesArray] = useState([]);
   const [modalKey, setModalKey] = useState(0);
   const [showAllParagraphs, setShowAllParagraphs] = useState(false);
+  const [telephoneNumber, SetTelePhoneNumber] = useState("${TelephoneNumber}")
 
   // Function to toggle between all paragraphs and only the first paragraph
   const toggleParagraphs = (index) => {
@@ -742,7 +743,7 @@ function Index() {
                     so your holiday is totally personalised.
                   </p>
                   <div className="btn_grp">
-                    Call 020 7337 9010 or <EnquiryBtn />
+                    Call <span dangerouslySetInnerHTML={{ __html: dictioneryFunction(telephoneNumber) }}></span> or <EnquiryBtn />
                   </div>
                 </div>
               </section>
