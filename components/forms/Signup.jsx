@@ -13,7 +13,7 @@ import globalVariables from "../../config";
 
 function Signup() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [alert, setAlert] = useState(null);
+  const [alert, setAlert] = useState("");
   const [deviceInfo, setDeviceInfo] = useState("");
   const [country, setCountryInfo] = useState();
   const [pageUrl, setPageUrl] = useState("");
@@ -80,7 +80,7 @@ function Signup() {
         email_sent_ind: false,
         loc_by_ip_country_name: country?.country,
         loc_by_ip_country_code: country?.countryCode,
-        page_url: data["page_url"] = localStorage.getItem("prevUrl") ? localStorage.getItem("prevUrl") : "/",
+        page_url: window.location.href,
         device_info: deviceInfo,
         submitted_at: new Date().toLocaleDateString(),
         site_region: region == "us" ? "Yes" : "No",
@@ -96,6 +96,7 @@ function Signup() {
           .then(() => {
             showAlert("Operation succeeded", "success");
             reset();
+
             return homeService.saveDataToDB(res).then(() => {
               reset();
             });

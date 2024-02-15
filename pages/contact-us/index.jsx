@@ -31,8 +31,8 @@ function Index() {
 
   // form validation rules
   const validationSchema = Yup.object().shape({
-    first_name: Yup.string().required("First Name is required"),
-    last_name: Yup.string().required("Last Name is required"),
+    first_name: Yup.string().required("First name is required"),
+    last_name: Yup.string().required("Last name is required"),
     email_id: Yup.string().required("Email id address is required"),
     telephone_no: Yup.string().required("Telephone is required"),
     note: Yup.string(),
@@ -218,8 +218,8 @@ function Index() {
                         <div className="form-input">
                           <input
                             type="text"
-                            aria-label="last_name *"
-                            placeholder="last name *"
+                            aria-label="Last_name *"
+                            placeholder="Last name *"
                             name="last_name"
                             {...register("last_name")}
                             className={`form-control ${

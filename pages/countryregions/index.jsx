@@ -16,7 +16,7 @@ import Image from "next/image";
 
 export default CountryRegions;
 
-function CountryRegions({ props, sendDataToParent }) {
+function CountryRegions({ sendDataToParent }) {
   const router = useRouter();
   const [allRegions, setAllRegions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -398,7 +398,7 @@ function CountryRegions({ props, sendDataToParent }) {
                       onClick={() => handleClick("itineraries")}
                     >
                       <img
-                        src="./../../../images/destination_overview01.jpg"
+                        src="/./../../../images/destination_overview01.jpg"
                         alt="Card image 07"
                         className="img-fluid"
                       />
@@ -406,7 +406,10 @@ function CountryRegions({ props, sendDataToParent }) {
                         <div className="row align-items-center">
                           <div className="col-11">
                             <div className="card_blk_txt">
-                              <h3>See all Itinerary Ideas in Asia</h3>
+                              <h3>
+                                See all Itinerary Ideas in{" "}
+                                {countryData?.attributes?.country_name}
+                              </h3>
                             </div>
                           </div>
                           <div className="col-1 ps-0">
@@ -436,7 +439,7 @@ function CountryRegions({ props, sendDataToParent }) {
                   <div className="card_blk_inr card_blk_overlay">
                     <a onClick={() => handleClick("places-to-stay")}>
                       <img
-                        src="./../../../images/destination_overview02.jpg"
+                        src="/./../../../images/destination_overview02.jpg"
                         alt="Card image 08"
                         className="img-fluid"
                       />
@@ -444,7 +447,10 @@ function CountryRegions({ props, sendDataToParent }) {
                         <div className="row align-items-center">
                           <div className="col-11">
                             <div className="card_blk_txt">
-                              <h3>See all Places to Stay in Asia</h3>
+                              <h3>
+                                See all Places to Stay in{" "}
+                                {countryData?.attributes?.country_name}
+                              </h3>
                             </div>
                           </div>
                           <div className="col-1 ps-0">
