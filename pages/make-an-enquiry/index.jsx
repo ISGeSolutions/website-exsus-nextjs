@@ -30,8 +30,8 @@ function Index() {
   // form validation rules
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Please select title"),
-    first_name: Yup.string().required("First Name is required"),
-    last_name: Yup.string().required("Last Name is required"),
+    first_name: Yup.string().required("First name is required"),
+    last_name: Yup.string().required("Last name is required"),
     email_id: Yup.string().required("Email id address is required"),
     telephone_no: Yup.string().required("Telephone is required"),
     best_time_to_call: Yup.string(),
@@ -87,7 +87,9 @@ function Index() {
   function onSubmit(data) {
     data["site_region"] = region == "us" ? "Yes" : "No";
     data["submitted_at"] = new Date().toLocaleDateString();
-    data["page_url"] = localStorage.getItem("prevUrl") ? localStorage.getItem("prevUrl") : "/";
+    data["page_url"] = localStorage.getItem("prevUrl")
+      ? localStorage.getItem("prevUrl")
+      : "/";
     data["loc_by_ip_country_name"] = country?.country;
     data["loc_by_ip_country_code"] = country?.countryCode;
     data["product_type"] = pType;
@@ -167,8 +169,9 @@ function Index() {
                               placeholder="Where you would like to go? *"
                               name="preferred_place_time"
                               {...register("preferred_place_time")}
-                              className={`form-control ${errors.preferred_place_time ? "is-invalid" : ""
-                                }`}
+                              className={`form-control ${
+                                errors.preferred_place_time ? "is-invalid" : ""
+                              }`}
                             />
                             <div className="invalid-feedback mb-1">
                               {errors.preferred_place_time?.message}
@@ -182,8 +185,9 @@ function Index() {
                               rows="3"
                               name="note"
                               {...register("note")}
-                              className={`form-control ${errors.note ? "is-invalid" : ""
-                                }`}
+                              className={`form-control ${
+                                errors.note ? "is-invalid" : ""
+                              }`}
                             ></textarea>
                             <div className="invalid-feedback mb-1">
                               {errors.note?.message}
@@ -203,7 +207,7 @@ function Index() {
                         <div className="make_enqry_cntnt_blk">
                           Exsus Travel takes the security and privacy of your
                           data very seriously. Please read our{" "}
-                          <a href="privacy_policy.html">privacy policy</a> for
+                          <a href="/privacy-policy">privacy policy</a> for
                           further details.
                         </div>
                       </div>
@@ -214,8 +218,9 @@ function Index() {
                               aria-label="Title"
                               name="title"
                               {...register("title")}
-                              className={`form-select ${errors.title ? "is-invalid" : ""
-                                }`}
+                              className={`form-select ${
+                                errors.title ? "is-invalid" : ""
+                              }`}
                             >
                               <option value="">Title *</option>
                               <option value="Mr">Mr</option>
@@ -241,8 +246,9 @@ function Index() {
                               placeholder="First name *"
                               name="first_name"
                               {...register("first_name")}
-                              className={`form-control ${errors.first_name ? "is-invalid" : ""
-                                }`}
+                              className={`form-control ${
+                                errors.first_name ? "is-invalid" : ""
+                              }`}
                             />
                             <div className="invalid-feedback mb-1">
                               {errors.first_name?.message}
@@ -253,12 +259,13 @@ function Index() {
                           <div className="form-input">
                             <input
                               type="text"
-                              aria-label="last_name *"
-                              placeholder="last name *"
+                              aria-label="Last_name *"
+                              placeholder="Last name *"
                               name="last_name"
                               {...register("last_name")}
-                              className={`form-control ${errors.last_name ? "is-invalid" : ""
-                                }`}
+                              className={`form-control ${
+                                errors.last_name ? "is-invalid" : ""
+                              }`}
                             />
                             <div className="invalid-feedback mb-1">
                               {errors.last_name?.message}
@@ -273,8 +280,9 @@ function Index() {
                               placeholder="Email *"
                               name="email_id"
                               {...register("email_id")}
-                              className={`form-control ${errors.email_id ? "is-invalid" : ""
-                                }`}
+                              className={`form-control ${
+                                errors.email_id ? "is-invalid" : ""
+                              }`}
                             />
                             <div className="invalid-feedback mb-1">
                               {errors.email_id?.message}
@@ -289,8 +297,9 @@ function Index() {
                               placeholder="Telephone *"
                               name="telephone_no"
                               {...register("telephone_no")}
-                              className={`form-control ${errors.telephone_no ? "is-invalid" : ""
-                                }`}
+                              className={`form-control ${
+                                errors.telephone_no ? "is-invalid" : ""
+                              }`}
                             />
                             <div className="invalid-feedback mb-1">
                               {errors.telephone_no?.message}
@@ -303,8 +312,9 @@ function Index() {
                               aria-label="Best time to call"
                               name="Best time to call"
                               {...register("best_time_to_call")}
-                              className={`form-select ${errors.best_time_to_call ? "is-invalid" : ""
-                                }`}
+                              className={`form-select ${
+                                errors.best_time_to_call ? "is-invalid" : ""
+                              }`}
                             >
                               <option value="">Best time to call</option>
                               <option value="No Preference">
@@ -369,7 +379,10 @@ function Index() {
                           </div>
                           {/* {showOtherInput && ( */}
                           {sourceOfMarketing === "Other*" && (
-                            <div className="other_reason_input" style={{ display: "block" }}>
+                            <div
+                              className="other_reason_input"
+                              style={{ display: "block" }}
+                            >
                               <input
                                 type="text"
                                 className="form-control"

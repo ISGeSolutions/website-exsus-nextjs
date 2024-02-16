@@ -474,7 +474,9 @@ function ContinentOverview({ sendDataToParent }) {
                             <div className="card_slider_cnt places_to_stay_cnt">
                               <h4>
                                 <a href={generateDynamicLink(item)}>
-                                  {item?.attributes?.itin_name}
+                                  {dictioneryFunction(
+                                    item?.attributes?.itin_name
+                                  )}
                                 </a>
                               </h4>
                               <ul>
@@ -514,7 +516,11 @@ function ContinentOverview({ sendDataToParent }) {
                               </ul>
                             </div>
                             <button className="btn card_slider_btn">
-                              <span>{item?.attributes?.no_of_nites_notes}</span>
+                              <span>
+                                {dictioneryFunction(
+                                  item?.attributes?.no_of_nites_notes
+                                )}
+                              </span>
                               <span
                                 className="view_itnry_link"
                                 onClick={() => handleRedirect(item)}

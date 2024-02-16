@@ -535,7 +535,11 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                             className="btn card_slider_btn"
                             onClick={() => handleRedirect(item)}
                           >
-                            <span>{item?.attributes?.no_of_nites_notes}</span>
+                            <span>
+                              {dictioneryFunction(
+                                item?.attributes?.no_of_nites_notes
+                              )}
+                            </span>
                             <span className="view_itnry_link">
                               View this itinerary
                               <em className="fa-solid fa-chevron-right"></em>
