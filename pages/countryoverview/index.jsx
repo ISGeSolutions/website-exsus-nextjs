@@ -18,7 +18,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
   const [countryHighlight, setCountryHighlight] = useState("");
   // const { overview_text } = props?.data || {};
   //  (props?.data);
-  const [showAllParagraphs, setShowAllParagraphs] = useState(true);
+  const [showAllParagraphs, setShowAllParagraphs] = useState(false);
   let dictionaryPage = 1;
 
   const toggleParagraphs = () => {
@@ -104,7 +104,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
-        .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
@@ -121,10 +121,10 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
       .replace(/&/g, "and");
     router.push(
       regionWiseUrl +
-        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-          ?.replace(/&/g, "and")
-          .replace(/ /g, "-")
-          .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, "and")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
@@ -413,29 +413,28 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                     ),
                   }}
                 ></p>
-                {countryData?.country_highlights && countryData?.country_highlights?.split("<br />")
-                  .length > 1 && (
-                    <button
-                      className="btn itinery_btn"
-                      onClick={toggleParagraphs}
+                {countryData?.country_highlights && (
+                  <button
+                    className="btn itinery_btn"
+                    onClick={toggleParagraphs}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="#ffffff"
+                      shapeRendering="geometricPrecision"
+                      textRendering="geometricPrecision"
+                      imageRendering="optimizeQuality"
+                      className="up_arrow"
+                      viewBox="0 0 512 266.77"
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="#ffffff"
-                        shapeRendering="geometricPrecision"
-                        textRendering="geometricPrecision"
-                        imageRendering="optimizeQuality"
-                        className="up_arrow"
-                        viewBox="0 0 512 266.77"
-                      >
-                        <path
-                          fillRule="nonzero"
-                          d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"
-                        />
-                      </svg>
-                      <span>{showAllParagraphs ? "Read less" : "Read more"}</span>
-                    </button>
-                  )}
+                      <path
+                        fillRule="nonzero"
+                        d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"
+                      />
+                    </svg>
+                    <span>{showAllParagraphs ? "Read less" : "Read more"}</span>
+                  </button>
+                )}
               </div>
             </section>
           </div>
