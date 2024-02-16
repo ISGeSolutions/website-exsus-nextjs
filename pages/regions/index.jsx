@@ -122,30 +122,78 @@ function Index() {
   };
 
   const toggleTab = (itemId) => {
-    var text = regionName;
-    const redirectUrl =
-      regionWiseUrl +
-      "/destinations/" +
-      destinationcode?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase() +
-      "/" +
-      countrycode?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase() +
-      "/" +
-      regionName?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase();
+    var text;
+    // const redirectUrl =
+    //   regionWiseUrl +
+    //   "/destinations/" +
+    //   destinationcode?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase() +
+    //   "/" +
+    //   countrycode?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase() +
+    //   "/" +
+    //   regionName?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase();
     if (itemId == "overview") {
       setIsShowMap(true);
       handleTabClick("images");
+      const redirectUrl =
+        regionWiseUrl +
+        `/destination/${destinationcode.replace(
+          / /g,
+          " "
+        )}/${countrycode.replace(/ /g, "-")}/${regionName.replace(/ /g, "-")}`;
       window.history.pushState(null, null, redirectUrl);
+      setFriendlyUrl(
+        `Home/Destinations/${destinationcode.replace(
+          / /g,
+          " "
+        )}/${countrycode.replace(/ /g, "-")}/${regionName.replace(/ /g, "-")}`
+      );
       text = regionName;
     } else if (itemId == "itineraries") {
       setIsShowMap(false);
       handleTabClick("images");
+      const redirectUrl =
+        regionWiseUrl +
+        `/destination/${destinationcode.replace(
+          / /g,
+          " "
+        )}/${countrycode.replace(/ /g, "-")}/${regionName.replace(
+          / /g,
+          "-"
+        )}/${regionName.replace(/ /g, "-")}-itineraries`;
       window.history.pushState(null, null, redirectUrl);
-      text = `TAILOR-MADE ${regionName} HOLIDAY ITINERARIES`;
+      setFriendlyUrl(
+        `Home/Destinations/${destinationcode.replace(
+          / /g,
+          " "
+        )}/${countrycode.replace(/ /g, "-")}/${regionName.replace(
+          / /g,
+          "-"
+        )} Itineraries`
+      );
+      text = `${regionName} ITINERARIES`;
     } else if (itemId == "places-to-stay") {
       setIsShowMap(false);
       handleTabClick("images");
+      const redirectUrl =
+        regionWiseUrl +
+        `/destination/${destinationcode.replace(
+          / /g,
+          " "
+        )}/${countrycode.replace(/ /g, "-")}/${regionName.replace(
+          / /g,
+          "-"
+        )}/${regionName.replace(/ /g, "-")}-places-to-stay`;
       window.history.pushState(null, null, redirectUrl);
-      text = `PLACES TO STAY IN ${regionName}`;
+      setFriendlyUrl(
+        `Home/Destinations/${destinationcode.replace(
+          / /g,
+          " "
+        )}/${countrycode.replace(
+          / /g,
+          "-"
+        )}/Places to stay in ${regionName.replace(/ /g, "-")}`
+      );
+      text = `LUXURY HOTELS IN THE ${regionName}`;
     } else {
       text = `LUXURY SAFARI HOLIDAYS IN ${regionName}`;
     }
@@ -378,7 +426,10 @@ function Index() {
       // });
 
       setFriendlyUrl(
-        `home/destinations/${destinationcode}/${countrycode}/${regionName}`
+        `home/destinations/${destinationcode?.replace(
+          /%20/g,
+          "-"
+        )}/${countrycode}/${regionName}`
       );
 
       destinationService
@@ -507,10 +558,10 @@ function Index() {
             reName?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase();
 
           regionWiseUrl +
-            `/ destinations / ${destinationcode} /${countrycode?.replace(
-              / /g,
+            `/ destinations / ${destinationcode?.replace(
+              /%20/g,
               "-"
-            )}`;
+            )} /${countrycode?.replace(/ /g, "-")}`;
           if (redirectUrl) {
             router.push(redirectUrl);
           }

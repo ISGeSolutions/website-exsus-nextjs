@@ -40,13 +40,11 @@ function Country() {
   const destinationcode = router.query?.continent
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
-    .toLowerCase()
-    .replace(/%20/g, "-");
+    .toLowerCase();
   const countrycode = router.query?.country
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
-    .toLowerCase()
-    .replace(/%20/g, "-");
+    .toLowerCase();
   //  (destinationcode, countrycode);
   // const [selectedOptionCountry, setSelectedOptionCountry] = useState(null);
   // const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
@@ -168,20 +166,28 @@ function Country() {
       setIsShowMap(true);
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}`;
+        `/destinations/${destinationcode?.replace(/ /g, "-")}/${
+          countryData?.attributes?.friendly_url
+        }`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `Home/Destinations/${destinationcode}/${countryData?.attributes?.friendly_url}`
+        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${
+          countryData?.attributes?.friendly_url
+        }`
       );
       text = "LUXURY HOLIDAYS IN " + countrycode.toUpperCase();
     } else if (itemId == "regions") {
       setIsShowMap(true);
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url}-regions`;
+        `/destinations/${destinationcode?.replace(/ /g, "-")}/${
+          countryData?.attributes?.friendly_url
+        }/${countryData?.attributes?.friendly_url}-regions`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `Home/Destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url} regions`
+        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${
+          countryData?.attributes?.friendly_url
+        }/${countryData?.attributes?.friendly_url} regions`
       );
       text = "REGIONS IN " + countrycode.toUpperCase(); // action="/countryregions?countrycode=south-africa"
     } else if (itemId == "itineraries") {
@@ -203,7 +209,10 @@ function Country() {
           ?.replace(/ /g, "-")}-itineraries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `Home/Destinations/${destinationcode}/${destCode}/${destCode} itineraries`
+        `Home/Destinations/${destinationcode?.replace(
+          / /g,
+          "-"
+        )}/${destCode}/${destCode} itineraries`
       );
       text = countrycode?.toUpperCase() + " ITINERARIES"; // action="/countryitineraries?countrycode=south-africa"
     } else if (itemId == "places-to-stay") {
@@ -211,20 +220,28 @@ function Country() {
       handleTabClick("images");
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url}-places-to-stay`;
+        `/destinations/${destinationcode?.replace(/ /g, "-")}/${
+          countryData?.attributes?.friendly_url
+        }/${countryData?.attributes?.friendly_url}-places-to-stay`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `Home/Destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/places to stay ${countryData?.attributes?.friendly_url}`
+        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${
+          countryData?.attributes?.friendly_url
+        }/places to stay ${countryData?.attributes?.friendly_url}`
       );
       text = "LUXURY HOTELS, CAMPS & LODGES IN " + countrycode.toUpperCase(); // action="/countryplacetostay?countrycode=south-africa"
     } else if (itemId == "when-to-go") {
       setIsShowMap(false);
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/${countryData?.attributes?.friendly_url}-when-to-go`;
+        `/destinations/${destinationcode?.replace(/ /g, "-")}/${
+          countryData?.attributes?.friendly_url
+        }/${countryData?.attributes?.friendly_url}-when-to-go`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `Home/Destinations/${destinationcode}/${countryData?.attributes?.friendly_url}/when to go to ${countryData?.attributes?.friendly_url}`
+        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${
+          countryData?.attributes?.friendly_url
+        }/when to go to ${countryData?.attributes?.friendly_url}`
       );
       text = "WHEN TO GO TO " + countrycode.toUpperCase(); // action="/countryplacetostay?countrycode=south-africa"
     } else {
@@ -415,7 +432,6 @@ function Country() {
             })
           );
           setCountryData(x.data[0]);
-          x.data[0];
           setDataToSendToChild(x.data[0]?.attributes);
           setHeadingText("LUXURY HOLIDAYS IN " + countrycode.toUpperCase());
           setFriendlyUrl(`Home/Destinations/${destinationcode}/${countrycode}`);
@@ -460,10 +476,10 @@ function Country() {
     window.onload = () => {
       setTimeout(() => {
         regionWiseUrl +
-          `/ destinations / ${destinationcode} /${countrycode?.replace(
+          `/ destinations / ${destinationcode?.replace(
             / /g,
             "-"
-          )}`;
+          )} /${countrycode?.replace(/ /g, "-")}`;
         if (redirectUrl) {
           router.push(redirectUrl);
         }

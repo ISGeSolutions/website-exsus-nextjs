@@ -307,22 +307,22 @@ function RegionItinararies(props) {
   const generateDynamicLink = (item) => {
     return (
       regionWiseUrl +
-      `/destinations/${destinationcode}/${countrycode?.replace(
+      `/destinations/${destinationcode?.replace(
         / /g,
         "-"
-      )}/${countrycode?.replace(/ /g, "-")?.replace(/&/g, "and")}-itineraries/${
-        item?.attributes?.friendly_url
-      }`
+      )}/${countrycode?.replace(/ /g, "-")}/${countrycode
+        ?.replace(/ /g, "-")
+        ?.replace(/&/g, "and")}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-        `/destinations/${destinationcode}/${countrycode?.replace(
+        `/destinations/${destinationcode?.replace(
           / /g,
           "-"
-        )}/${countrycode
+        )}/${countrycode?.replace(/ /g, "-")}/${countrycode
           ?.replace(/ /g, "-")
           ?.replace(/&/g, "and")}-itineraries/${item?.attributes?.friendly_url}`
     );
