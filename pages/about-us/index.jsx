@@ -23,16 +23,6 @@ function Index() {
   const [friendlyUrl, setFriendlyUrl] = useState();
   let dictionaryPage = 1;
 
-  // let regionWiseUrl = "/uk";
-  // let region = "uk";
-  // if (typeof window !== "undefined") {
-  //   if (window && window.site_region) {
-  //     regionWiseUrl = "/" + window.site_region;
-  //     region = window.site_region;
-  //     // setMyVariable(window.site_region);
-  //   }
-  // }
-
   let region = "uk";
   let regionWiseUrl = "";
   if (typeof window !== "undefined") {
@@ -164,7 +154,13 @@ function Index() {
         setFriendlyUrl(
           `make-an-enquiry/${x.data[0]?.attributes?.page_friendly_url}`
         );
-        localStorage.setItem("PageInfo", JSON.stringify({ pType: "CUST", pCode: x?.data[0]?.attributes?.page_code }));
+        localStorage.setItem(
+          "PageInfo",
+          JSON.stringify({
+            pType: "CUST",
+            pCode: x?.data[0]?.attributes?.page_code,
+          })
+        );
         let modifiedString = x.data.attributes?.page_content_1;
         //  ("  ", modifiedString);
 
@@ -369,7 +365,7 @@ function Index() {
                 <div className="row">
                   <div className="col-sm-6">
                     <div className="card_blk_inr card_blk_overlay">
-                      <NavLink href={`/destinations`}>
+                      <NavLink href={regionWiseUrl + `/destinations`}>
                         <img
                           src="/images/about_us_card01.jpg"
                           alt="Card image 07"
@@ -407,7 +403,7 @@ function Index() {
 
                   <div className="col-sm-6">
                     <div className="card_blk_inr card_blk_overlay">
-                      <NavLink href={`/holiday-types`}>
+                      <NavLink href={regionWiseUrl + `/holiday-types`}>
                         <img
                           src="/images/about_us_card02.jpg"
                           alt="Card image 08"

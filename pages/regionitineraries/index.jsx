@@ -550,28 +550,28 @@ function RegionItinararies(props) {
     });
 
     // Using window.onload to detect full page load
-    window.onload = () => {
-      setTimeout(() => {
-        const redirectUrl =
-          regionWiseUrl +
-          "/destinations/" +
-          destinationcode
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase() +
-          "/" +
-          countrycode.replace(/ /g, "-").replace(/&/g, "and").toLowerCase() +
-          "/" +
-          regionName?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase();
-        //
-        if (redirectUrl) {
-          router.push(redirectUrl);
-        }
-      }, 0);
-    };
+    // window.onload = () => {
+    //   setTimeout(() => {
+    //     const redirectUrl =
+    //       regionWiseUrl +
+    //       "/destinations/" +
+    //       destinationcode
+    //         ?.replace(/ /g, "-")
+    //         .replace(/&/g, "and")
+    //         .toLowerCase() +
+    //       "/" +
+    //       countrycode.replace(/ /g, "-").replace(/&/g, "and").toLowerCase() +
+    //       "/" +
+    //       regionName?.attributes?.region_name
+    //         ?.replace(/ /g, "-")
+    //         .replace(/&/g, "and")
+    //         .toLowerCase();
+    //     //
+    //     if (redirectUrl) {
+    //       router.push(redirectUrl);
+    //     }
+    //   }, 0);
+    // };
   }, [countrycode, destinationcode, regionName]);
 
   return (

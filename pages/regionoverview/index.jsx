@@ -59,9 +59,9 @@ function RegionOverview({ props, onDataFromChild }) {
             .replace(/ /g, "-")
             .replace(/&/g, "and")
             .toLowerCase()}/${countrycode
-              .replace(/ /g, "-")
-              .replace(/&/g, "and")
-              .toLowerCase()}/${modifieditem}`
+            .replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${modifieditem}`
         );
       }
     }
@@ -77,7 +77,7 @@ function RegionOverview({ props, onDataFromChild }) {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
+        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
     );
   };
 
@@ -90,8 +90,8 @@ function RegionOverview({ props, onDataFromChild }) {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -142,7 +142,9 @@ function RegionOverview({ props, onDataFromChild }) {
             dynamicObjectUk[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUk["expiration"] = expirationTime;
-            let localStorageUk = JSON.parse(localStorage.getItem("websitecontent_uk"));
+            let localStorageUk = JSON.parse(
+              localStorage.getItem("websitecontent_uk")
+            );
             localStorage.setItem(
               "websitecontent_uk",
               JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
@@ -154,7 +156,9 @@ function RegionOverview({ props, onDataFromChild }) {
             dynamicObjectUs[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectUs["expiration"] = expirationTime;
-            let localStorageUS = JSON.parse(localStorage.getItem("websitecontent_us"));
+            let localStorageUS = JSON.parse(
+              localStorage.getItem("websitecontent_us")
+            );
             localStorage.setItem(
               "websitecontent_us",
               JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
@@ -167,7 +171,9 @@ function RegionOverview({ props, onDataFromChild }) {
             dynamicObjectAsia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectAsia["expiration"] = expirationTime;
-            let localStorageAsia = JSON.parse(localStorage.getItem("websitecontent_asia"));
+            let localStorageAsia = JSON.parse(
+              localStorage.getItem("websitecontent_asia")
+            );
             localStorage.setItem(
               "websitecontent_asia",
               JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
@@ -180,7 +186,9 @@ function RegionOverview({ props, onDataFromChild }) {
             dynamicObjectIndia[element?.attributes?.content_word] =
               element?.attributes?.content_translation_text;
             dynamicObjectIndia["expiration"] = expirationTime;
-            let localStorageIndia = JSON.parse(localStorage.getItem("websitecontent_india"));
+            let localStorageIndia = JSON.parse(
+              localStorage.getItem("websitecontent_india")
+            );
             localStorage.setItem(
               "websitecontent_india",
               JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
@@ -188,8 +196,8 @@ function RegionOverview({ props, onDataFromChild }) {
           }
         });
         if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
-          dictionaryPage = x?.meta?.pagination?.page + 1
-          websiteContentCheck(dictionaryPage)
+          dictionaryPage = x?.meta?.pagination?.page + 1;
+          websiteContentCheck(dictionaryPage);
         }
         setWebsiteContent(x.data);
         setIsLoading(false);
@@ -208,7 +216,7 @@ function RegionOverview({ props, onDataFromChild }) {
 
       let storedDataString = "";
       let storedData = "";
-      //  
+      //
       if (region == "uk") {
         storedDataString = localStorage.getItem("websitecontent_uk");
         storedData = JSON.parse(storedDataString);
@@ -223,7 +231,7 @@ function RegionOverview({ props, onDataFromChild }) {
         storedData = JSON.parse(storedDataString);
       }
       if (storedData !== null) {
-        //  
+        //
         // You can access it using localStorage.getItem('yourKey')
 
         if (matches) {
@@ -232,10 +240,7 @@ function RegionOverview({ props, onDataFromChild }) {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                modifiedString = websiteContentCheck(
-                  matches,
-                  modifiedString
-                );
+                modifiedString = websiteContentCheck(matches, modifiedString);
                 throw new Error("Loop break");
               } else {
                 replacement = storedData[matchString];
@@ -247,17 +252,18 @@ function RegionOverview({ props, onDataFromChild }) {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
   };
 
   useEffect(() => {
-    if (!localStorage.getItem(`websitecontent_${region.replace(
-      /in/g,
-      "INDIA"
-    ).toLowerCase()}`)) {
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
       websiteContentCheck(dictionaryPage);
     }
     destinationService
@@ -274,7 +280,7 @@ function RegionOverview({ props, onDataFromChild }) {
       .getRegions(countrycode)
       .then((x) => {
         setAllRegions(x.data[0]?.attributes?.regions?.data);
-        (x.data[0]?.attributes?.regions?.data);
+        x.data[0]?.attributes?.regions?.data;
         setIsLoading(false);
       })
       .catch((error) => {
@@ -458,7 +464,7 @@ function RegionOverview({ props, onDataFromChild }) {
                   <div className="card_blk_inr card_blk_overlay">
                     <a onClick={() => sendDataToParentHandler("itineraries")}>
                       <img
-                        src="./../../../images/destination_overview01.jpg"
+                        src="/./../../../images/destination_overview01.jpg"
                         alt="Card image 07"
                         className="img-fluid"
                       />
@@ -501,7 +507,7 @@ function RegionOverview({ props, onDataFromChild }) {
                       onClick={() => sendDataToParentHandler("places-to-stay")}
                     >
                       <img
-                        src="./../../../images/destination_overview02.jpg"
+                        src="/./../../../images/destination_overview02.jpg"
                         alt="Card image 08"
                         className="img-fluid"
                       />

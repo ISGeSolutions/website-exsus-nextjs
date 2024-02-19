@@ -110,14 +110,15 @@ function Nav() {
   };
 
   const handleClientReview = () => {
-    router.push(`why-us/client-reviews`);
+    router.push(regionWiseUrl + `/why-us/client-reviews`);
   };
 
   const makeAnEnquiry = () => {
     // router.push(`/make-an-enquiry`);
     let pageinfo = JSON.parse(localStorage.getItem("PageInfo"));
-    router.push(`/make-an-enquiry?pType=${pageinfo?.pType}&pCode=${pageinfo?.pCode}`);
-
+    router.push(
+      `/make-an-enquiry?pType=${pageinfo?.pType}&pCode=${pageinfo?.pCode}`
+    );
   };
 
   const router = useRouter();
@@ -282,7 +283,6 @@ function Nav() {
 
     const closeMenu = menu?.querySelector(".mobile-menu-close"); // mobile close
     setmenu(closeMenu);
-
 
     setPageInfo(JSON.parse(localStorage.getItem("PageInfo")));
 
@@ -496,8 +496,9 @@ function Nav() {
                                 (destinationItem, i) => (
                                   <li
                                     key={i}
-                                    className={`header_country_label ${activeIndex === i ? "active" : ""
-                                      }`}
+                                    className={`header_country_label ${
+                                      activeIndex === i ? "active" : ""
+                                    }`}
                                     onMouseEnter={() => handleMouseEnter(i)}
                                     onMouseLeave={handleMouseLeave}
                                   >
@@ -716,8 +717,9 @@ function Nav() {
                               {holidaytypesList?.map((holidaystypesItem, i) => (
                                 <li
                                   key={holidaystypesItem?.id}
-                                  className={`header_country_label ${activeIndexHoliday === i ? "active" : ""
-                                    }`}
+                                  className={`header_country_label ${
+                                    activeIndexHoliday === i ? "active" : ""
+                                  }`}
                                   onMouseEnter={() =>
                                     handleMouseEnterHoliday(i)
                                   }

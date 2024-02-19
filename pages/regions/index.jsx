@@ -138,13 +138,13 @@ function Index() {
         regionWiseUrl +
         `/destination/${destinationcode.replace(
           / /g,
-          " "
+          "-"
         )}/${countrycode.replace(/ /g, "-")}/${regionName.replace(/ /g, "-")}`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationcode.replace(
           / /g,
-          " "
+          "-"
         )}/${countrycode.replace(/ /g, "-")}/${regionName.replace(/ /g, "-")}`
       );
       text = regionName;
@@ -155,7 +155,7 @@ function Index() {
         regionWiseUrl +
         `/destination/${destinationcode.replace(
           / /g,
-          " "
+          "-"
         )}/${countrycode.replace(/ /g, "-")}/${regionName.replace(
           / /g,
           "-"
@@ -164,7 +164,7 @@ function Index() {
       setFriendlyUrl(
         `Home/Destinations/${destinationcode.replace(
           / /g,
-          " "
+          "-"
         )}/${countrycode.replace(/ /g, "-")}/${regionName.replace(
           / /g,
           "-"
@@ -178,7 +178,7 @@ function Index() {
         regionWiseUrl +
         `/destination/${destinationcode.replace(
           / /g,
-          " "
+          "-"
         )}/${countrycode.replace(/ /g, "-")}/${regionName.replace(
           / /g,
           "-"
@@ -187,7 +187,7 @@ function Index() {
       setFriendlyUrl(
         `Home/Destinations/${destinationcode.replace(
           / /g,
-          " "
+          "-"
         )}/${countrycode.replace(
           / /g,
           "-"
@@ -202,7 +202,7 @@ function Index() {
       setActiveTab(itemId);
       // window.history.pushState(null, null, redirectUrl); // Update the URL
     }
-    const targetDiv = document.getElementById("targetDiv");
+    const targetDiv = document.getElementById("scrollToElement");
     if (targetDiv) {
       targetDiv.scrollIntoView({ behavior: "smooth" });
     }
@@ -559,7 +559,7 @@ function Index() {
 
           regionWiseUrl +
             `/ destinations / ${destinationcode?.replace(
-              /%20/g,
+              / /g,
               "-"
             )} /${countrycode?.replace(/ /g, "-")}`;
           if (redirectUrl) {

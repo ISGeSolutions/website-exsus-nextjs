@@ -474,8 +474,6 @@ function Index() {
     //   new bootstrap.Carousel(carousel);
     // }
 
-    debugger;
-
     window.onload = () => {
       setTimeout(() => {
         const redirectUrl =

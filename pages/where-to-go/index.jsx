@@ -639,7 +639,7 @@ function Index() {
                 <div className="card_blk_inr card_blk_overlay start_planng_holdy_blk">
                   <a href="#" onClick={handleHrefClick} target="_blank">
                     <img
-                      src="images/start_planng_holdy.jpg"
+                      src="/images/start_planng_holdy.jpg"
                       alt="start_planng_holdy"
                       className="img-fluid"
                     />
@@ -698,9 +698,9 @@ function Index() {
 
               <div className="col-md-6">
                 <div className="card_blk_inr card_blk_overlay mt-3 mt-md-0">
-                  <NavLink href={`/destinations`}>
+                  <NavLink href={regionWiseUrl + `/destinations`}>
                     <img
-                      src="images/about_us_card01.jpg"
+                      src="/images/about_us_card01.jpg"
                       alt="Card image 07"
                       className="img-fluid"
                     />
@@ -733,9 +733,9 @@ function Index() {
                   </NavLink>
                 </div>
                 <div className="card_blk_inr card_blk_overlay mb-0">
-                  <NavLink href={`/holiday-types`}>
+                  <NavLink href={regionWiseUrl + `/holiday-types`}>
                     <img
-                      src="images/about_us_card02.jpg"
+                      src="/images/about_us_card02.jpg"
                       alt="Card image 08"
                       className="img-fluid"
                     />
