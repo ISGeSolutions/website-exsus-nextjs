@@ -387,6 +387,8 @@ function Index() {
     const searchString = "itineraries";
     const currentUrl = window.location.href;
     if (!currentUrl.includes(searchString)) {
+      const secondPrevUrl = localStorage.getItem("prevUrl")
+      localStorage.setItem("secondPrevUrl", secondPrevUrl)
       const newUrl = addStringBeforeSecondLastSlash(currentUrl, "hotels");
       router.push(newUrl);
       // console.log(`The URL contains "${searchString}"`);

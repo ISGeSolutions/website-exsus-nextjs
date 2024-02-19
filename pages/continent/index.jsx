@@ -514,7 +514,7 @@ function Index() {
         if (redirectUrl) {
           router.push(redirectUrl);
         }
-      }, 500);
+      }, 0);
     };
     window.addEventListener("resize", equalHeight(true));
     setTimeout(() => {
