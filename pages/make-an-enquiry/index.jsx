@@ -53,6 +53,7 @@ function Index() {
   };
 
   const handleRadioChange = (event) => {
+    debugger;
     setSourceOfMarketing(event.target.value);
   };
 
@@ -169,9 +170,8 @@ function Index() {
                               placeholder="Where you would like to go? *"
                               name="preferred_place_time"
                               {...register("preferred_place_time")}
-                              className={`form-control ${
-                                errors.preferred_place_time ? "is-invalid" : ""
-                              }`}
+                              className={`form-control ${errors.preferred_place_time ? "is-invalid" : ""
+                                }`}
                             />
                             <div className="invalid-feedback mb-1">
                               {errors.preferred_place_time?.message}
@@ -185,9 +185,8 @@ function Index() {
                               rows="3"
                               name="note"
                               {...register("note")}
-                              className={`form-control ${
-                                errors.note ? "is-invalid" : ""
-                              }`}
+                              className={`form-control ${errors.note ? "is-invalid" : ""
+                                }`}
                             ></textarea>
                             <div className="invalid-feedback mb-1">
                               {errors.note?.message}
@@ -218,9 +217,8 @@ function Index() {
                               aria-label="Title"
                               name="title"
                               {...register("title")}
-                              className={`form-select ${
-                                errors.title ? "is-invalid" : ""
-                              }`}
+                              className={`form-select ${errors.title ? "is-invalid" : ""
+                                }`}
                             >
                               <option value="">Title *</option>
                               <option value="Mr">Mr</option>
@@ -246,9 +244,8 @@ function Index() {
                               placeholder="First name *"
                               name="first_name"
                               {...register("first_name")}
-                              className={`form-control ${
-                                errors.first_name ? "is-invalid" : ""
-                              }`}
+                              className={`form-control ${errors.first_name ? "is-invalid" : ""
+                                }`}
                             />
                             <div className="invalid-feedback mb-1">
                               {errors.first_name?.message}
@@ -263,9 +260,8 @@ function Index() {
                               placeholder="Last name *"
                               name="last_name"
                               {...register("last_name")}
-                              className={`form-control ${
-                                errors.last_name ? "is-invalid" : ""
-                              }`}
+                              className={`form-control ${errors.last_name ? "is-invalid" : ""
+                                }`}
                             />
                             <div className="invalid-feedback mb-1">
                               {errors.last_name?.message}
@@ -280,9 +276,8 @@ function Index() {
                               placeholder="Email *"
                               name="email_id"
                               {...register("email_id")}
-                              className={`form-control ${
-                                errors.email_id ? "is-invalid" : ""
-                              }`}
+                              className={`form-control ${errors.email_id ? "is-invalid" : ""
+                                }`}
                             />
                             <div className="invalid-feedback mb-1">
                               {errors.email_id?.message}
@@ -297,9 +292,8 @@ function Index() {
                               placeholder="Telephone *"
                               name="telephone_no"
                               {...register("telephone_no")}
-                              className={`form-control ${
-                                errors.telephone_no ? "is-invalid" : ""
-                              }`}
+                              className={`form-control ${errors.telephone_no ? "is-invalid" : ""
+                                }`}
                             />
                             <div className="invalid-feedback mb-1">
                               {errors.telephone_no?.message}
@@ -312,9 +306,8 @@ function Index() {
                               aria-label="Best time to call"
                               name="Best time to call"
                               {...register("best_time_to_call")}
-                              className={`form-select ${
-                                errors.best_time_to_call ? "is-invalid" : ""
-                              }`}
+                              className={`form-select ${errors.best_time_to_call ? "is-invalid" : ""
+                                }`}
                             >
                               <option value="">Best time to call</option>
                               <option value="No Preference">
@@ -346,7 +339,7 @@ function Index() {
                         <div className="make_enqry_checkbx_blk">
                           <p>What prompted you to get in touch today? *</p>
                           <div className="make_enqry_checkbx_grp">
-                            {[
+                            {/* {[
                               "Repeat client",
                               "Friend or Family",
                               "Google search",
@@ -367,6 +360,33 @@ function Index() {
                                   value={option}
                                   onChange={handleRadioChange}
                                   {...register("source_of_marketing")}
+                                />
+                                <label
+                                  className="form-check-label"
+                                  htmlFor={`exampleCheck${index + 1}`}
+                                >
+                                  {option}
+                                </label>
+                              </div>
+                            ))} */}
+                            {[
+                              "Repeat client",
+                              "Friend or Family",
+                              "Google search",
+                              "Google advert",
+                              "Social media",
+                              "Website or blog",
+                              "Other*",
+                            ].map((option, index) => (
+                              <div key={index} className="form-check make_enqry_checkbx_inr">
+                                <input
+                                  type="radio"
+                                  className="form-check-input"
+                                  id={`exampleCheck${index + 1}`}
+                                  name="source_of_marketing"
+                                  value={option}
+                                  checked={sourceOfMarketing === option}
+                                  onChange={handleRadioChange}
                                 />
                                 <label
                                   className="form-check-label"
