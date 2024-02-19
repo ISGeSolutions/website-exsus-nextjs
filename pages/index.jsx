@@ -53,10 +53,14 @@ function Index() {
       ?.replace(/ /g, "-")
       .replace(/&/g, "and")
       .toLowerCase();
+    const countryName = item.attributes?.country?.data?.attributes?.country_name
+      ?.replace(/ /g, "-")
+      .replace(/&/g, "and")
+      .toLowerCase();
 
     return (
       regionWiseUrl +
-      `/destinations/${modifiedDestinationName}/${modifiedDestinationName}-itineraries/${item.attributes?.friendly_url}`
+      `/destinations/${modifiedDestinationName}/${countryName}/${countryName}-itineraries/${item.attributes?.friendly_url}`
     );
   };
 
@@ -324,8 +328,13 @@ function Index() {
     destinationService
       .getCustomPagesData("home")
       .then((x) => {
-        //
-        const imageCheck = x.data[0]?.attributes?.custom_page_images.data;
+        localStorage.setItem(
+          "PageInfo",
+          JSON.stringify({
+            pType: "CUST",
+            pCode: x?.data[0]?.attributes?.page_code,
+          })
+        ); const imageCheck = x.data[0]?.attributes?.custom_page_images.data;
         imageCheck;
         const newBackgroundImages = [];
         imageCheck.forEach((element) => {
@@ -474,7 +483,6 @@ function Index() {
     //   new bootstrap.Carousel(carousel);
     // }
 
-    debugger;
 
     window.onload = () => {
       setTimeout(() => {

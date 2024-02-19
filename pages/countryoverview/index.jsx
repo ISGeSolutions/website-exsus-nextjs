@@ -18,7 +18,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
   const [countryHighlight, setCountryHighlight] = useState("");
   // const { overview_text } = props?.data || {};
   //  (props?.data);
-  const [showAllParagraphs, setShowAllParagraphs] = useState(false);
+  const [showAllParagraphs, setShowAllParagraphs] = useState(true);
   let dictionaryPage = 1;
 
   const toggleParagraphs = () => {
@@ -577,7 +577,139 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
             ""
           )}
 
-          <section className="favrites_blk_row light_grey">
+          {hotels?.length > 0 && (
+            <section className="favrites_blk_row light_grey">
+              <div className="container">
+                <h3 className="title_cls">
+                  PLACES TO STAY IN {countryData?.country_name} HANDPICKED BY
+                  EXSUS
+                </h3>
+                <div className="card_slider_row01">
+                  <i id="leftt">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="#ffffff"
+                      shapeRendering="geometricPrecision"
+                      textRendering="geometricPrecision"
+                      imageRendering="optimizeQuality"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      viewBox="0 0 267 512.43"
+                    >
+                      <path
+                        fillRule="nonzero"
+                        d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z"
+                      />
+                    </svg>
+                  </i>
+                  <div className="carousel01">
+                    {hotels?.map((item) => (
+                      <div className="card_slider_inr01" key={item.id}>
+                        <div className="card_slider">
+                          <NavLink
+                            href={generateDynamicLink1(item)}
+                            className="card_slider_img"
+                          >
+                            {item?.attributes?.hotel_images?.data.map(
+                              (element, index) =>
+                                element.attributes.image_type == "thumbnail" ? (
+                                  <img
+                                    key={element.id}
+                                    src={element.attributes.image_path}
+                                    alt={element.attributes.image_alt_text}
+                                    className="img-fluid"
+                                  />
+                                ) : (
+                                  ""
+                                )
+                            )}
+                          </NavLink>
+                          <div className="card_slider_cnt places_to_stay_cnt">
+                            <h4>
+                              <a href={generateDynamicLink1(item)}>
+                                {item?.attributes?.hotel_name}
+                              </a>
+                            </h4>
+                            <ul>
+                              <li>Location: {item?.attributes?.location}</li>
+                              {item?.attributes?.hotel_country_contents?.data?.map(
+                                (item) => {
+                                  return (
+                                    <li
+                                      className="price_guide_tooltip"
+                                      key={item?.id}
+                                    >
+                                      Price guide:
+                                      <span
+                                        tabIndex="0"
+                                        data-title={
+                                          item?.attributes?.price_guide_text
+                                        }
+                                      >
+                                        {item?.attributes?.currency_symbol.repeat(
+                                          Math.abs(
+                                            item?.attributes?.price_guide_value
+                                          )
+                                        )}
+                                        <label>
+                                          {item?.attributes?.currency_symbol.repeat(
+                                            Math.abs(
+                                              5 -
+                                              item?.attributes
+                                                ?.price_guide_value
+                                            )
+                                          )}
+                                        </label>
+                                      </span>
+                                    </li>
+                                  );
+                                }
+                              )}
+                              <li>
+                                Best for:
+                                <span>{item?.attributes?.best_for_text}</span>
+                              </li>
+                            </ul>
+                          </div>
+                          <button
+                            className="btn card_slider_btn justify-content-end light_grey_btn_bg"
+                            onClick={() => handleRedirect1(item)}
+                          >
+                            <span className="view_itnry_link">
+                              View hotel
+                              <em className="fa-solid fa-chevron-right"></em>
+                            </span>
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  {hotels?.length > 4 ? (
+                    <i id="rightt">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="#ffffff"
+                        shapeRendering="geometricPrecision"
+                        textRendering="geometricPrecision"
+                        imageRendering="optimizeQuality"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        viewBox="0 0 267 512.43"
+                      >
+                        <path
+                          fillRule="nonzero"
+                          d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                        />
+                      </svg>
+                    </i>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
+            </section>
+          )}
+          {/* <section className="favrites_blk_row light_grey">
             <div className="container">
               <h3 className="title_cls">
                 PLACES TO STAY IN {countryData?.country_name} HANDPICKED BY
@@ -706,7 +838,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                 )}
               </div>
             </div>
-          </section>
+          </section> */}
 
           {/* <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
                 <div className="container">
