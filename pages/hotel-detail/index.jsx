@@ -283,15 +283,18 @@ function Index() {
 
   useEffect(() => {
     router.beforePopState(({ as }) => {
-      if ((as !== router?.asPath) && router?.asPath) {
-        const secondPrevUrl = localStorage.getItem("secondPrevUrl");
-        // / Find the index of 'itineraries'
-        const url = new URL(secondPrevUrl);
-        const path = url?.pathname;
-        router.push(path);
-        return false;
+      const secondPrevUrl = localStorage.getItem("secondPrevUrl");
+      if (secondPrevUrl) {
+        if ((as !== router?.asPath) && router?.asPath) {
+
+          // / Find the index of 'itineraries'
+          const url = new URL(secondPrevUrl);
+          const path = url?.pathname;
+          router.push(path);
+          return false;
+        }
+        return true;
       }
-      return true;
     });
 
     return () => {
