@@ -53,7 +53,6 @@ function Index() {
   };
 
   const handleRadioChange = (event) => {
-    debugger;
     setSourceOfMarketing(event.target.value);
   };
 
