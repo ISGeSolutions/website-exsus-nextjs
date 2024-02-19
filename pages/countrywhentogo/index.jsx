@@ -334,16 +334,16 @@ function CountryWhentogo({ onDataFromChild, sendDataToParent }) {
 
 
 
-    window.onload = () => {
-      setTimeout(() => {
-        const redirectUrl =
-          regionWiseUrl +
-          `/destinations/${destinationcode}/${countrycode?.replace(/ /g, "-")}`;
-        if (redirectUrl) {
-          router.push(redirectUrl);
-        }
-      }, 0);
-    };
+    // window.onload = () => {
+    //   setTimeout(() => {
+    //     const redirectUrl =
+    //       regionWiseUrl +
+    //       `/destinations/${destinationcode}/${countrycode?.replace(/ /g, "-")}`;
+    //     if (redirectUrl) {
+    //       router.push(redirectUrl);
+    //     }
+    //   }, 0);
+    // };
   }, [countrycode]);
 
   return (
