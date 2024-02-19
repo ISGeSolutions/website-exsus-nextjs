@@ -99,7 +99,6 @@ function Header() {
 
   const handleChange = (selectedOption) => {
     // Do something
-    debugger;
     setMyVariable(selectedOption.value);
     setSelected(selectedOption);
     i18n.changeLanguage(selectedOption.value);

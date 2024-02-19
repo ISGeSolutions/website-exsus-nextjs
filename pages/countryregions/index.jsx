@@ -258,18 +258,18 @@ function CountryRegions({ sendDataToParent }) {
       });
 
     // Using window.onload to detect full page load
-    window.onload = () => {
-      setTimeout(() => {
-        regionWiseUrl +
-          `/ destinations / ${destinationcode} /${countrycode?.replace(
-            / /g,
-            "-"
-          )}`;
-        if (redirectUrl) {
-          router.push(redirectUrl);
-        }
-      }, 0);
-    };
+    // window.onload = () => {
+    //   setTimeout(() => {
+    //     regionWiseUrl +
+    //       `/ destinations / ${destinationcode} /${countrycode?.replace(
+    //         / /g,
+    //         "-"
+    //       )}`;
+    //     if (redirectUrl) {
+    //       router.push(redirectUrl);
+    //     }
+    //   }, 0);
+    // };
   }, [countrycode, destinationcode]);
 
   return (

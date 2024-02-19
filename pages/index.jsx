@@ -76,7 +76,7 @@ function Index() {
 
     router.push(
       regionWiseUrl +
-        `/destinations/${modifiedDestinationName}/${modifiedDestinationName}-itineraries/${item.attributes?.friendly_url}`
+      `/destinations/${modifiedDestinationName}/${modifiedDestinationName}-itineraries/${item.attributes?.friendly_url}`
     );
   };
 
@@ -102,8 +102,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -474,6 +474,18 @@ function Index() {
     //   new bootstrap.Carousel(carousel);
     // }
 
+    debugger;
+
+    window.onload = () => {
+      setTimeout(() => {
+        const redirectUrl =
+          regionWiseUrl;
+        if (redirectUrl) {
+          router.push(redirectUrl);
+        }
+      }, 0);
+    };
+
     window.addEventListener("resize", equalHeight(true));
     setTimeout(() => {
       // $('.carousel').carousel();
@@ -694,12 +706,10 @@ function Index() {
                               )
                               .map((res1) => (
                                 <li key={res1.id}>
-                                  {`From ${
-                                    res1.attributes?.currency_symbol ?? ""
-                                  }${
-                                    formatPrice(res1.attributes?.price) ??
+                                  {`From ${res1.attributes?.currency_symbol ?? ""
+                                    }${formatPrice(res1.attributes?.price) ??
                                     " xxxx"
-                                  } per person`}
+                                    } per person`}
                                 </li>
                               ))}
                             <li>

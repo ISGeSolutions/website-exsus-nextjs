@@ -28,11 +28,11 @@ function Index() {
   const dcodeMonth = router?.query?.when;
   const [metaData, setMetaData] = useState([]);
   const [itineraries, setItineraries] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const LoadMorePagination = ({ data }) => {
     const [visibleItems, setVisibleItems] = useState(itemsPerPage);
   };
-  const [activeItem, setActiveItem] = useState("duration");
+  const [activeItem, setActiveItem] = useState("asc");
   const [alert, setAlert] = useState(null);
 
   const handleLoadMore = () => {
@@ -52,6 +52,7 @@ function Index() {
   }
 
   const loadMoreData = (item) => {
+    setIsLoading(true);
     destinationService
       .getItinerariesInAdvanceSearch(
         dcodestr,
@@ -77,7 +78,11 @@ function Index() {
           setPage(page + 1);
           setIsLoading(false);
         }
-      });
+      }).catch((error) => {
+        // Handle any errors here
+        setAlert(error);
+        setIsLoading(true);
+      });;
   };
 
   const generateDynamicLink = (item) => {
@@ -90,8 +95,7 @@ function Index() {
       `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
-        .toLowerCase()}/${countryName}-itineraries/${
-        item?.attributes?.friendly_url
+        .toLowerCase()}/${countryName}-itineraries/${item?.attributes?.friendly_url
       }`
     );
   };
@@ -103,19 +107,18 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-          ?.replace(/&/g, "and")
-          .replace(/ /g, "-")
-          .toLowerCase()}/${countryName}-itineraries/${
-          item?.attributes?.friendly_url
-        }`
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, "and")
+        .replace(/ /g, "-")
+        .toLowerCase()}/${countryName}-itineraries/${item?.attributes?.friendly_url
+      }`
     );
   };
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -146,7 +149,6 @@ function Index() {
     page = 0;
     setItineraries([]);
     setActiveItem(item);
-
     loadMoreData(item);
   };
 
@@ -340,6 +342,7 @@ function Index() {
     //   .catch((error) => {
     //     setIsLoading(false);
     //   });
+    setIsLoading(false);
     loadMoreData(activeItem);
 
     window.addEventListener("resize", equalHeight(true));
@@ -399,9 +402,9 @@ function Index() {
                             <li>
                               <a
                                 className={
-                                  activeItem === "Low-High" ? "active" : ""
+                                  activeItem === "asc" ? "active" : ""
                                 }
-                                onClick={() => handleFilterClick("Low-High")}
+                                onClick={() => handleFilterClick("asc")}
                               >
                                 Low - High
                               </a>
@@ -409,9 +412,9 @@ function Index() {
                             <li>
                               <a
                                 className={
-                                  activeItem === "High-Low" ? "active" : ""
+                                  activeItem === "desc" ? "active" : ""
                                 }
-                                onClick={() => handleFilterClick("High-Low")}
+                                onClick={() => handleFilterClick("desc")}
                               >
                                 High - Low
                               </a>
@@ -448,7 +451,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                      "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}
@@ -483,12 +486,10 @@ function Index() {
                                     )
                                     .map((res1) => (
                                       <li key={res1.id}>
-                                        {`from ${
-                                          res1.attributes?.currency_symbol ?? ""
-                                        }${
-                                          formatPrice(res1.attributes?.price) ??
+                                        {`from ${res1.attributes?.currency_symbol ?? ""
+                                          }${formatPrice(res1.attributes?.price) ??
                                           " xxxx"
-                                        } per person`}
+                                          } per person`}
                                       </li>
                                     ))}
 
