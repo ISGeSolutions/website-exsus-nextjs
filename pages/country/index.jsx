@@ -127,7 +127,7 @@ function Country() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
+      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
     );
   };
 
@@ -137,8 +137,8 @@ function Country() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -203,10 +203,10 @@ function Country() {
         `/destinations/${destinationcode
           ?.replace(/&/g, "and")
           ?.replace(/ /g, "-")}/${destCode
-          ?.replace(/&/g, "and")
-          ?.replace(/ /g, "-")}/${destCode
-          ?.replace(/&/g, "and")
-          ?.replace(/ /g, "-")}-itineraries`;
+            ?.replace(/&/g, "and")
+            ?.replace(/ /g, "-")}/${destCode
+              ?.replace(/&/g, "and")
+              ?.replace(/ /g, "-")}-itineraries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationcode?.replace(
@@ -384,7 +384,7 @@ function Country() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -460,7 +460,6 @@ function Country() {
           setIsLoading(false);
         });
     }
-
     $(".banner_map_tab").click(function () {
       $(".banner_map_blk").addClass("banner_map_active");
     });
@@ -572,17 +571,15 @@ function Country() {
             {isShowMap ? (
               <div className="banner_tab_blk">
                 <button
-                  className={`btn banner_map_tab ${
-                    activeButton === "map" ? "banner_tab_active" : ""
-                  }`}
+                  className={`btn banner_map_tab ${activeButton === "map" ? "banner_tab_active" : ""
+                    }`}
                   onClick={() => handleTabClick("map")}
                 >
                   Map
                 </button>
                 <button
-                  className={`btn banner_img_tab ${
-                    activeButton === "images" ? "banner_tab_active" : ""
-                  }`}
+                  className={`btn banner_img_tab ${activeButton === "images" ? "banner_tab_active" : ""
+                    }`}
                   onClick={() => handleTabClick("images")}
                 >
                   Images
@@ -592,9 +589,8 @@ function Country() {
               ""
             )}
             <div
-              className={`banner_map_blk ${
-                activeButton === "map" ? "banner_map_active" : ""
-              }`}
+              className={`banner_map_blk ${activeButton === "map" ? "banner_map_active" : ""
+                }`}
             >
               <Iframe
                 width="640px"
@@ -619,7 +615,7 @@ function Country() {
           <section
             className="destination_tab_row light_grey pb-0"
             ref={divRef}
-            // id="scrollToElement"
+          // id="scrollToElement"
           >
             <div className="container">
               <div className="bookmark_row">
