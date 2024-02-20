@@ -210,8 +210,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -369,7 +369,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -389,6 +389,21 @@ function Index() {
 
     return resultString;
   };
+
+  // useEffect(() => {
+  //   debugger;
+  //   const handleBeforeHistoryChange = (e) => {
+  //     if (e.action === 'POP') {
+  //       console.log('Navigated back to this page using the browser\'s back button');
+  //     }
+  //   };
+
+  //   router.beforeHistoryChange(handleBeforeHistoryChange);
+
+  //   return () => {
+  //     router?.beforeHistoryChange(null);
+  //   };
+  // }, [router]);
 
   useEffect(() => {
     const searchString = "itineraries";
@@ -652,17 +667,15 @@ function Index() {
             {isShowMap ? (
               <div className="banner_tab_blk">
                 <button
-                  className={`btn banner_map_tab ${
-                    activeButton === "map" ? "banner_tab_active" : ""
-                  }`}
+                  className={`btn banner_map_tab ${activeButton === "map" ? "banner_tab_active" : ""
+                    }`}
                   onClick={() => handleTabClick("map")}
                 >
                   Map
                 </button>
                 <button
-                  className={`btn banner_img_tab ${
-                    activeButton === "images" ? "banner_tab_active" : ""
-                  }`}
+                  className={`btn banner_img_tab ${activeButton === "images" ? "banner_tab_active" : ""
+                    }`}
                   onClick={() => handleTabClick("images")}
                 >
                   Images
@@ -672,9 +685,8 @@ function Index() {
               ""
             )}
             <div
-              className={`banner_map_blk ${
-                activeButton === "map" ? "banner_map_active" : ""
-              }`}
+              className={`banner_map_blk ${activeButton === "map" ? "banner_map_active" : ""
+                }`}
             >
               <Iframe
                 width="640px"

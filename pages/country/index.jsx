@@ -26,6 +26,7 @@ import CountryOverview from "../countryoverview/index"; // Adjust the path accor
 import { FriendlyUrl } from "../../components";
 import { ImageSlider } from "../../components/ImageSlider";
 import Head from "next/head";
+import MarkerInfoWindowNext from "../../components/common/MarkerInfoWindowNext";
 
 export default Country;
 
@@ -56,6 +57,7 @@ function Country() {
   const [backgroundImage, setBackgroundImage] = useState([]);
   const [headingText, setHeadingText] = useState("");
   let [isShowMap, setIsShowMap] = useState(true);
+  const [coordinatesArray, setCoordinatesArray] = useState([]);
   let dictionaryPage = 1;
   const divRef = useRef();
   const tabContentRefs = {
@@ -166,13 +168,11 @@ function Country() {
       setIsShowMap(true);
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode?.replace(/ /g, "-")}/${
-          countryData?.attributes?.friendly_url
+        `/destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
         }`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${
-          countryData?.attributes?.friendly_url
+        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
         }`
       );
       text = "LUXURY HOLIDAYS IN " + countrycode.toUpperCase();
@@ -180,13 +180,11 @@ function Country() {
       setIsShowMap(true);
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode?.replace(/ /g, "-")}/${
-          countryData?.attributes?.friendly_url
+        `/destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
         }/${countryData?.attributes?.friendly_url}-regions`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${
-          countryData?.attributes?.friendly_url
+        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
         }/${countryData?.attributes?.friendly_url} regions`
       );
       text = "REGIONS IN " + countrycode.toUpperCase(); // action="/countryregions?countrycode=south-africa"
@@ -220,13 +218,11 @@ function Country() {
       handleTabClick("images");
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode?.replace(/ /g, "-")}/${
-          countryData?.attributes?.friendly_url
+        `/destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
         }/${countryData?.attributes?.friendly_url}-places-to-stay`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${
-          countryData?.attributes?.friendly_url
+        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
         }/places to stay ${countryData?.attributes?.friendly_url}`
       );
       text = "LUXURY HOTELS, CAMPS & LODGES IN " + countrycode.toUpperCase(); // action="/countryplacetostay?countrycode=south-africa"
@@ -234,13 +230,11 @@ function Country() {
       setIsShowMap(false);
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode?.replace(/ /g, "-")}/${
-          countryData?.attributes?.friendly_url
+        `/destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
         }/${countryData?.attributes?.friendly_url}-when-to-go`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${
-          countryData?.attributes?.friendly_url
+        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
         }/when to go to ${countryData?.attributes?.friendly_url}`
       );
       text = "WHEN TO GO TO " + countrycode.toUpperCase(); // action="/countryplacetostay?countrycode=south-africa"
@@ -431,6 +425,40 @@ function Country() {
               pCode: x?.data[0]?.attributes?.country_code,
             })
           );
+          const filteredData = x.data[0].attributes?.regions?.data?.filter(
+            (item) => {
+              const { map_latitude, map_longitude } = item.attributes;
+              return (
+                map_latitude !== null &&
+                map_latitude !== "" &&
+                map_longitude !== null &&
+                map_longitude !== ""
+              );
+            }
+          );
+          // Create an array of objects with parsed latitude and longitude
+          const newCoordinates = filteredData.map((item) => ({
+            lat: parseFloat(item.attributes.map_latitude),
+            lng: parseFloat(item.attributes.map_longitude),
+            name: item.attributes?.hotel_name,
+            image: item.attributes?.hotel_images?.data?.filter(
+              (res) => res?.attributes?.image_type == "thumbnail"
+            )[0]?.attributes?.image_path,
+            url:
+              regionWiseUrl +
+              `/destinations/${x.data[0].attributes?.friendly_url
+                ?.replace(/&/g, "and")
+                .replace(/ /g, "-")
+                .toLowerCase()}/${item?.attributes?.friendly_url
+                  ?.replace(/ /g, "-")
+                  .replace(/&/g, "and")
+                  .toLowerCase()}`,
+          }));
+          // // Update the state with the accumulated coordinates
+          setCoordinatesArray((prevCoordinates) => [
+            ...prevCoordinates,
+            ...newCoordinates,
+          ]);
           setCountryData(x.data[0]);
           setDataToSendToChild(x.data[0]?.attributes);
           setHeadingText("LUXURY HOLIDAYS IN " + countrycode.toUpperCase());
@@ -475,10 +503,10 @@ function Country() {
     window.onload = () => {
       setTimeout(() => {
         regionWiseUrl +
-          `/ destinations / ${destinationcode?.replace(
+          `/destinations/${destinationcode?.replace(
             / /g,
             "-"
-          )} /${countrycode?.replace(/ /g, "-")}`;
+          )}/${countrycode?.replace(/ /g, "-")}`;
         if (redirectUrl) {
           router.push(redirectUrl);
         }
@@ -592,19 +620,8 @@ function Country() {
               className={`banner_map_blk ${activeButton === "map" ? "banner_map_active" : ""
                 }`}
             >
-              <Iframe
-                width="640px"
-                height="320px"
-                id=""
-                className=""
-                display="block"
-                src={mapVariable}
-                position="relative"
-                style="border:0;"
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+              <MarkerInfoWindowNext data={coordinatesArray} />
+
 
               {/* src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" */}
             </div>

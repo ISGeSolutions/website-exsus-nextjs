@@ -478,22 +478,22 @@ function CountryItinararies(props) {
       `/destinations/${destinationcode
         ?.replace(/ /g, "-")
         ?.replace(/&/g, "and")
-        ?.replace(/%20/g, " ")}/${countrycode?.replace(/ /g, "-")}/${countrycode
-        ?.replace(/ /g, "-")
-        ?.replace(/&/g, "and")
-        ?.replace(
-          / /g,
-          "-"
-        )}-itineraries/${item?.attributes?.friendly_url?.replace(/%20/g, " ")}`
+        ?.replace(/ /g, " ")}/${countrycode?.replace(/ /g, "-")?.replace(/&/g, "and")}/${countrycode
+          ?.replace(/ /g, "-")
+          ?.replace(/&/g, "and")
+          ?.replace(
+            / /g,
+            "-"
+          )}-itineraries/${item?.attributes?.friendly_url?.replace(/%20/g, " ")}`
     );
   };
 
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-        `/destinations/${destinationcode
-          ?.replace(/ /g, "-")
-          ?.replace(/&/g, "and")}/${countrycode?.replace(
+      `/destinations/${destinationcode
+        ?.replace(/ /g, "-")
+        ?.replace(/&/g, "and")}/${countrycode?.replace(
           / /g,
           "-"
         )}/${countrycode?.replace(
@@ -513,8 +513,8 @@ function CountryItinararies(props) {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -804,7 +804,7 @@ function CountryItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -834,12 +834,10 @@ function CountryItinararies(props) {
                                   )
                                   .map((res1) => (
                                     <li key={res1.id}>
-                                      {`From ${
-                                        res1.attributes?.currency_symbol ?? ""
-                                      }${
-                                        formatPrice(res1.attributes?.price) ??
+                                      {`From ${res1.attributes?.currency_symbol ?? ""
+                                        }${formatPrice(res1.attributes?.price) ??
                                         " xxxx"
-                                      } per person`}
+                                        } per person`}
                                     </li>
                                   ))}
                                 <li>
