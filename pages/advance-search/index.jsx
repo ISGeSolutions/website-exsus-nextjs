@@ -78,11 +78,12 @@ function Index() {
           setPage(page + 1);
           setIsLoading(false);
         }
-      }).catch((error) => {
+      })
+      .catch((error) => {
         // Handle any errors here
         setAlert(error);
         setIsLoading(true);
-      });;
+      });
   };
 
   const generateDynamicLink = (item) => {
@@ -90,35 +91,41 @@ function Index() {
       ?.replace(/ /g, "-")
       .replace(/&/g, "and")
       .toLowerCase();
+
     return (
       regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+      `/destinations/${item?.attributes?.destination_name
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
-        .toLowerCase()}/${countryName}-itineraries/${item?.attributes?.friendly_url
+        .toLowerCase()}/${countryName}/${countryName}-itineraries/${
+        item?.attributes?.friendly_url
       }`
     );
   };
+
+  //destination_name destination_name
 
   const handleRedirect = (item) => {
     let countryName = item?.attributes?.country?.data?.attributes?.country_name
       ?.replace(/ /g, "-")
       .replace(/&/g, "and")
       .toLowerCase();
+
     router.push(
       regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, "and")
-        .replace(/ /g, "-")
-        .toLowerCase()}/${countryName}-itineraries/${item?.attributes?.friendly_url
-      }`
+        `/destinations/${item?.attributes?.destination_name
+          ?.replace(/&/g, "and")
+          .replace(/ /g, "-")
+          .toLowerCase()}/${countryName}/${countryName}-itineraries/${
+          item?.attributes?.friendly_url
+        }`
     );
   };
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -307,6 +314,7 @@ function Index() {
       websiteContentCheck(dictionaryPage);
     }
 
+    console.log("router", router);
     // if (dcodestr == null && dcodeReason == null && dcodeMonth == null) {
     //   destinationService
     //     .getItinerariesInspireMe(
@@ -401,9 +409,7 @@ function Index() {
                           <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
                             <li>
                               <a
-                                className={
-                                  activeItem === "asc" ? "active" : ""
-                                }
+                                className={activeItem === "asc" ? "active" : ""}
                                 onClick={() => handleFilterClick("asc")}
                               >
                                 Low - High
@@ -451,7 +457,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                      "thumbnail" ? (
+                                    "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}
@@ -486,10 +492,12 @@ function Index() {
                                     )
                                     .map((res1) => (
                                       <li key={res1.id}>
-                                        {`from ${res1.attributes?.currency_symbol ?? ""
-                                          }${formatPrice(res1.attributes?.price) ??
+                                        {`from ${
+                                          res1.attributes?.currency_symbol ?? ""
+                                        }${
+                                          formatPrice(res1.attributes?.price) ??
                                           " xxxx"
-                                          } per person`}
+                                        } per person`}
                                       </li>
                                     ))}
 
