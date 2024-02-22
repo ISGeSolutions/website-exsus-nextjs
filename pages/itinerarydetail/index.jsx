@@ -386,12 +386,21 @@ function Index() {
   useEffect(() => {
     const searchString = "itineraries";
     const currentUrl = window.location.href;
-    if (!currentUrl.includes(searchString)) {
+    const segments = currentUrl?.split('/');
+    if (!currentUrl.includes(searchString) && !segments[segments.length - 1].includes(searchString) && !segments[segments.length - 1].includes('places-to-stay')) {
       const secondPrevUrl = localStorage.getItem("prevUrl")
       localStorage.setItem("secondPrevUrl", secondPrevUrl)
       const newUrl = addStringBeforeSecondLastSlash(currentUrl, "hotels");
       router.push(newUrl);
       // console.log(`The URL contains "${searchString}"`);
+    } else if (!segments[segments.length - 1].includes('intineraries')) {
+      segments.pop();
+      const newUrl = segments.join('/');
+      router.push(newUrl);
+    } else if (!segments[segments.length - 1].includes('places-to-stay')) {
+      segments.pop();
+      const newUrl = segments.join('/');
+      router.push(newUrl);
     } else {
       if (
         !localStorage.getItem(

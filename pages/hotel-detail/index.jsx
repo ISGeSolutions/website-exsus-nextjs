@@ -303,6 +303,7 @@ function Index() {
   }, [router])
 
   useEffect(() => {
+
     if (hotelName || regionName || continentCode || countryName) {
       if (
         !localStorage.getItem(
