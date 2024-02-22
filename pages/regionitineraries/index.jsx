@@ -539,40 +539,54 @@ function RegionItinararies(props) {
         })),
       ];
       setAllRegion(arrayOfObjects);
-      // setAllRegion(
-      //   x.data?.map((item) => ({
-      //     //id: i.id,
-      //     property_type_code: item?.attributes?.property_type_code,
-      //     value: item?.attributes?.property_type_name,
-      //     label: item?.attributes?.property_type_name,
-      //   }))
-      // );
     });
 
     // Using window.onload to detect full page load
     // window.onload = () => {
     //   setTimeout(() => {
+
+    //     let reName = "";
+    //     let destName = "";
+    //     let countryName = "";
+    //     if (!regionName || regionName == "undefined") {
+    //       reName = localStorage.getItem("region_name");
+    //     } else {
+    //       reName = regionName;
+    //     }
+    //     if (!destinationcode) {
+    //       destName = localStorage.getItem("destination_code");
+    //     } else {
+    //       destName = destinationcode;
+    //     }
+    //     if (!countrycode) {
+    //       countryName = localStorage.getItem("country_code");
+    //     } else {
+    //       countryName = countrycode;
+    //     }
     //     const redirectUrl =
     //       regionWiseUrl +
     //       "/destinations/" +
-    //       destinationcode
+    //       destName?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase() +
+    //       "/" +
+    //       countryName
     //         ?.replace(/ /g, "-")
+    //         .replace(/and/g, "&")
     //         .replace(/&/g, "and")
     //         .toLowerCase() +
     //       "/" +
-    //       countrycode.replace(/ /g, "-").replace(/&/g, "and").toLowerCase() +
-    //       "/" +
-    //       regionName?.attributes?.region_name
-    //         ?.replace(/ /g, "-")
-    //         .replace(/&/g, "and")
-    //         .toLowerCase();
-    //     //
+    //       reName?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase();
+
+    //     regionWiseUrl +
+    //       `/ destinations / ${destinationcode?.replace(
+    //         / /g,
+    //         "-"
+    //       )} /${countrycode?.replace(/ /g, "-")}`;
     //     if (redirectUrl) {
     //       router.push(redirectUrl);
     //     }
     //   }, 0);
     // };
-  }, [countrycode, destinationcode, regionName]);
+  }, [router, countrycode, destinationcode, regionName]);
 
   return (
     <>

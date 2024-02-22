@@ -613,42 +613,40 @@ function RegionPlacesToStay(props) {
         })),
       ];
       setAllRegion(arrayOfObjects);
-      // setAllRegion(
-      //   x.data?.map((item) => ({
-      //     //id: i.id,
-      //     property_type_code: item?.attributes?.property_type_code,
-      //     value: item?.attributes?.property_type_name,
-      //     label: item?.attributes?.property_type_name,
-      //   }))
-      // );
     });
 
     loadMoreData(activeItem);
 
     // Using window.onload to detect full page load
-    // window.onload = () => {
-    //   setTimeout(() => {
-    //     const redirectUrl =
-    //       regionWiseUrl +
-    //       "/destinations/" +
-    //       destinationcode
-    //         ?.replace(/ /g, "-")
-    //         .replace(/&/g, "and")
-    //         .toLowerCase() +
-    //       "/" +
-    //       countrycode.replace(/ /g, "-").replace(/&/g, "and").toLowerCase() +
-    //       "/" +
-    //       regionName?.attributes?.region_name
-    //         ?.replace(/ /g, "-")
-    //         .replace(/&/g, "and")
-    //         .toLowerCase();
-    //     //
-    //     if (redirectUrl) {
-    //       router.push(redirectUrl);
-    //     }
-    //   }, 0);
-    // };
-  }, [destinationcode, countrycode, regionName]);
+    window.onload = () => {
+      setTimeout(() => {
+
+        const redirectUrl =
+          regionWiseUrl +
+          "/destinations/" +
+          destinationcode
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase() +
+          "/" +
+          countrycode.replace(/ /g, "-").replace(/&/g, "and").toLowerCase() +
+          "/" +
+          regionName?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase();
+
+        regionWiseUrl +
+          `/ destinations / ${destinationcode?.replace(
+            / /g,
+            "-"
+          )} /${countrycode?.replace(/ /g, "-")}/${regionName}`;
+        if (redirectUrl) {
+          router.push(redirectUrl);
+        }
+      }, 0);
+    };
+  }, [router, destinationcode, countrycode, regionName]);
 
   return (
     <>
