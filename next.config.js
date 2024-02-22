@@ -98686,71 +98686,7 @@ const nextConfig = {
         destination: "/country_details",
       },
 
-<<<<<<< Updated upstream
-      // region_details_itineraries
-      {
-        source:
-          "/destinations/:continent/:country/:region/:regionSlug-itineraries",
-        destination: "/regions",
-      },
-      {
-        source:
-          "/us/destinations/:continent/:country/:region/:regionSlug-itineraries",
-        destination: "/regions",
-      },
-      {
-        source:
-          "/asia/destinations/:continent/:country/:region/:regionSlug-itineraries",
-        destination: "/regions",
-      },
-      {
-        source:
-          "/in/destinations/:continent/:country/:region/:regionSlug-itineraries",
-        destination: "/regions",
-      },
-
-      // region_details_place-to-stay
-      {
-        source:
-          "/destinations/:continent/:country/:region/:regionSlug-places-to-stay",
-        destination: "/regions",
-      },
-      {
-        source:
-          "/us/destinations/:continent/:country/:region/:regionSlug-places-to-stay",
-        destination: "/regions",
-      },
-      {
-        source:
-          "/asia/destinations/:continent/:country/:region/:regionSlug-places-to-stay",
-        destination: "/regions",
-      },
-      {
-        source:
-          "/in/destinations/:continent/:country/:region/:regionSlug-places-to-stay",
-        destination: "/regions",
-      },
-
-      // region_details
-      {
-        source: "/destinations/:continent/:country/:region",
-        destination: "/regions",
-      },
-      {
-        source: "/us/destinations/:continent/:country/:region",
-        destination: "/regions",
-      },
-      {
-        source: "/asia/destinations/:continent/:country/:region",
-        destination: "/regions",
-      },
-      {
-        source: "/in/destinations/:continent/:country/:region",
-        destination: "/regions",
-      },
-=======
       
->>>>>>> Stashed changes
 
       // holiday-types
       { source: "/holiday-types", destination: "/holiday-types" },
