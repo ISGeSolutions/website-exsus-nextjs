@@ -136,7 +136,7 @@ function Index() {
       handleTabClick("images");
       const redirectUrl =
         regionWiseUrl +
-        `/destination/${destinationcode.replace(
+        `/destinations/${destinationcode.replace(
           / /g,
           "-"
         )}/${countrycode.replace(/ /g, "-")}/${regionName.replace(/ /g, "-")}`;
@@ -153,7 +153,7 @@ function Index() {
       handleTabClick("images");
       const redirectUrl =
         regionWiseUrl +
-        `/destination/${destinationcode.replace(
+        `/destinations/${destinationcode.replace(
           / /g,
           "-"
         )}/${countrycode.replace(/ /g, "-")}/${regionName.replace(
@@ -176,7 +176,7 @@ function Index() {
       handleTabClick("images");
       const redirectUrl =
         regionWiseUrl +
-        `/destination/${destinationcode.replace(
+        `/destinations/${destinationcode.replace(
           / /g,
           "-"
         )}/${countrycode.replace(/ /g, "-")}/${regionName.replace(
@@ -408,7 +408,8 @@ function Index() {
   useEffect(() => {
     const searchString = "itineraries";
     const currentUrl = window.location.href;
-    if (currentUrl.includes(searchString)) {
+    const segments = currentUrl?.split('/');
+    if (currentUrl.includes(searchString) && !segments[segments.length - 1].includes('intineraries')) {
       const newUrl = addStringBeforeSecondLastSlash(currentUrl, "itinerary");
       router.push(newUrl);
       // console.log(`The URL contains "${searchString}"`);
