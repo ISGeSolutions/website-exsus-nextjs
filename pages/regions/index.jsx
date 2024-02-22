@@ -391,11 +391,7 @@ function Index() {
   };
 
   useEffect(() => {
-    window.onpopstate = () => {
-      // Your logic here
-      window.location.reload();
-    };
-
+    // debugger;
     const searchString = "itineraries";
     const currentUrl = window.location.href;
     if (currentUrl.includes(searchString)) {
