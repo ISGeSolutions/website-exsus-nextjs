@@ -44,19 +44,16 @@ function Index() {
     }
   }
 
-  // const generateDynamicLink = (item) => {
-  //   return `destinations/${item?.destination_name}/itinerarydetail?itineraryid=${item.id}&itinerarycode=${item.attributes.itin_code}`;
-  // };
-
   const generateDynamicLink = (item) => {
     const modifiedDestinationName = item.attributes?.destination_name
       ?.replace(/ /g, "-")
       .replace(/&/g, "and")
       .toLowerCase();
-    const countryName = item.attributes?.country?.data?.attributes?.country_name
-      ?.replace(/ /g, "-")
-      .replace(/&/g, "and")
-      .toLowerCase();
+    const countryName =
+      item.attributes?.countries?.data[0]?.attributes?.country_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase();
 
     return (
       regionWiseUrl +
@@ -135,7 +132,10 @@ function Index() {
       .replace(/&/g, "and")
       .toLowerCase();
     if (itemName) {
-      return regionWiseUrl + `/holiday-types/${modifieditem}`;
+      return (
+        regionWiseUrl +
+        `/holiday-types/${modifieditem}/${modifieditem}-itineraries`
+      );
     }
   };
 
@@ -355,6 +355,7 @@ function Index() {
     holidaytypesService
       .getHolidaytypesLandingListHomePage()
       .then((x) => {
+
         const imageCheckType = x.data.sort(
           (a, b) =>
             a.attributes.home_page_serial_number -
@@ -473,16 +474,6 @@ function Index() {
       });
 
     var site_region = localStorage.getItem("site_region");
-
-    // const carouselMain = document.querySelector("#carouselExampleIntervalMain");
-    // if(carouselMain) {
-    //   new bootstrap.Carousel(carouselMain);
-    // }
-
-    // const carousel = document.querySelector("#Testimonials");
-    // if (carousel) {
-    //   new bootstrap.Carousel(carousel);
-    // }
 
     window.onload = () => {
       setTimeout(() => {

@@ -391,11 +391,13 @@ function Index() {
   };
 
   useEffect(() => {
-    // debugger;
     const searchString = "itineraries";
     const currentUrl = window.location.href;
-    const segments = currentUrl?.split('/');
-    if (currentUrl.includes(searchString) && !segments[segments.length - 1].includes('intineraries')) {
+    const segments = currentUrl?.split("/");
+    if (
+      currentUrl.includes(searchString) &&
+      !segments[segments.length - 1].includes("intineraries")
+    ) {
       const newUrl = addStringBeforeSecondLastSlash(currentUrl, "itinerary");
       router.push(newUrl);
       // console.log(`The URL contains "${searchString}"`);
