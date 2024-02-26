@@ -333,6 +333,15 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
 
     window.scrollTo(0, 0);
 
+
+    if (countrycode) {
+      countriesService
+        .getCountryDetails(countrycode)
+        .then((x) => {
+          setCountryData(x?.data[0]?.attributes);
+        })
+    }
+
     destinationService
       .getCountryFavItineraries(countryData?.country_name, region)
       .then((x) => {

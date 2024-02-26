@@ -360,64 +360,63 @@ function CountryWhentogo({ onDataFromChild, sendDataToParent }) {
           {/* <p>{countryData?.country_month_activities?.data}</p> */}
         </section>
       </div>
-      <section className="calender_blk_row light_dark_grey">
-        <div className="container">
-          <h3>
-            Our favourite experience-oriented trips to {countrycode} by month
-          </h3>
-          <p>
-            The team at Exsus has incorporated some of {countrycode}'s best
-            experiences into recommended trips. Click on an experience to view
-            each trip
-          </p>
-          <div className="calender_blk_inr">
-            <table>
-              <tbody>
-                <tr>
-                  <th>Jan</th>
-                  <th>Feb</th>
-                  <th>Mar</th>
-                  <th>Apr</th>
-                  <th>May</th>
-                  <th>Jun</th>
-                  <th>Jul</th>
-                  <th>Aug</th>
-                  <th>Sep</th>
-                  <th>Oct</th>
-                  <th>Nov</th>
-                  <th>Dec</th>
-                </tr>
-                <tr>
-                  {/* Add 12 empty cells */}
-                  {Array.from({ length: 12 }, (_, index) => (
-                    <td key={`empty-${index}`}></td>
-                  ))}
-                </tr>
-                {whenToGoData?.flatMap((item, rowIndex) => ([
-                  <tr key={`row-${rowIndex}`}>
-                    {generateTds(
-                      item?.attributes?.starting_point,
-                      item?.attributes?.quantity,
-                      item?.attributes?.link_text,
-                      item?.attributes?.link_url,
-                      rowIndex // Ensure rowIndex is unique within the generateTds function
-                    )}
-                  </tr>,
-                  <tr key={`empty-row-${rowIndex}`}>
+      {whenToGoData?.length > 1 && (
+        <section className="calender_blk_row light_dark_grey">
+          <div className="container">
+            <h3>
+              Our favourite experience-oriented trips to {countrycode} by month
+            </h3>
+            <p>
+              The team at Exsus has incorporated some of {countrycode}'s best
+              experiences into recommended trips. Click on an experience to view
+              each trip
+            </p>
+            <div className="calender_blk_inr">
+              <table>
+                <tbody>
+                  <tr>
+                    <th>Jan</th>
+                    <th>Feb</th>
+                    <th>Mar</th>
+                    <th>Apr</th>
+                    <th>May</th>
+                    <th>Jun</th>
+                    <th>Jul</th>
+                    <th>Aug</th>
+                    <th>Sep</th>
+                    <th>Oct</th>
+                    <th>Nov</th>
+                    <th>Dec</th>
+                  </tr>
+                  <tr>
                     {/* Add 12 empty cells */}
-                    {Array.from({ length: 12 }, (_, cellIndex) => (
-                      <td key={`empty-${rowIndex}-${cellIndex}`}></td>
+                    {Array.from({ length: 12 }, (_, index) => (
+                      <td key={`empty-${index}`}></td>
                     ))}
                   </tr>
-                ]))}
-              </tbody>
-            </table>
-
-
+                  {whenToGoData?.flatMap((item, rowIndex) => ([
+                    <tr key={`row-${rowIndex}`}>
+                      {generateTds(
+                        item?.attributes?.starting_point,
+                        item?.attributes?.quantity,
+                        item?.attributes?.link_text,
+                        item?.attributes?.link_url,
+                        rowIndex // Ensure rowIndex is unique within the generateTds function
+                      )}
+                    </tr>,
+                    <tr key={`empty-row-${rowIndex}`}>
+                      {/* Add 12 empty cells */}
+                      {Array.from({ length: 12 }, (_, cellIndex) => (
+                        <td key={`empty-${rowIndex}-${cellIndex}`}></td>
+                      ))}
+                    </tr>
+                  ]))}
+                </tbody>
+              </table>
+            </div>
 
           </div>
-        </div>
-      </section>
+        </section>)}
 
       {/* Card */}
       <section className="card_blk_row dark_grey">

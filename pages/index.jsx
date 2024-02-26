@@ -77,7 +77,7 @@ function Index() {
 
     router.push(
       regionWiseUrl +
-        `/destinations/${modifiedDestinationName}/${modifiedDestinationName}-itineraries/${item.attributes?.friendly_url}`
+      `/destinations/${modifiedDestinationName}/${modifiedDestinationName}-itineraries/${item.attributes?.friendly_url}`
     );
   };
 
@@ -103,8 +103,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -144,24 +144,7 @@ function Index() {
   };
 
   const dynamicLinkHolidayas = (itemId, id) => {
-    // if (itemId && itemId == 'AF') {
-    //     return regionWiseUrl + `/destinations/africa/` + id;
-    // }
-    if (itemId && itemId == "HG6") {
-      return regionWiseUrl + `/holidaytypeitineraries/incredible-journeys/id`;
-    } else if (itemId && itemId == "HG5") {
-      return regionWiseUrl + `/holidaytypeitineraries/luxury-honeymoons/id`;
-    } else if (itemId && itemId == "HG4") {
-      return regionWiseUrl + `/holidaytypeitineraries/family-holidays/id`;
-    } else if (itemId && itemId == "ADHL") {
-      return regionWiseUrl + `/holidaytypeitineraries/adventure-holidays/id`;
-    } else if (itemId && itemId == "LBHG") {
-      return regionWiseUrl + `/holidaytypeitineraries/luxury-beach-holidays/id`;
-    } else if (itemId && itemId == "HG3") {
-      return regionWiseUrl + `/holidaytypeitineraries/culture-holidays/id`;
-    } else {
-      return "#";
-    }
+    return regionWiseUrl + `/holidaytypeitineraries/incredible-journeys/id`;
   };
 
   const websiteContentCheck = (pageNo) => {
@@ -377,6 +360,7 @@ function Index() {
                   home_page_short_text:
                     elementMain?.attributes?.home_page_short_text,
                   home_page_title: elementMain?.attributes?.home_page_title,
+                  friendly_url: elementMain?.attributes?.friendly_url
                 };
                 thumbnailImageArr.push(objThumbnail);
               }
@@ -576,7 +560,7 @@ function Index() {
                     <div className="card_blk_inr">
                       <NavLink
                         href={dynamicLink(
-                          holidaytypesItem?.holiday_type_name,
+                          holidaytypesItem?.friendly_url,
                           holidaytypesItem?.id
                         )}
                         as={dynamicLinkHolidayas(
@@ -704,12 +688,10 @@ function Index() {
                               )
                               .map((res1) => (
                                 <li key={res1.id}>
-                                  {`From ${
-                                    res1.attributes?.currency_symbol ?? ""
-                                  }${
-                                    formatPrice(res1.attributes?.price) ??
+                                  {`From ${res1.attributes?.currency_symbol ?? ""
+                                    }${formatPrice(res1.attributes?.price) ??
                                     " xxxx"
-                                  } per person`}
+                                    } per person`}
                                 </li>
                               ))}
                             <li>
