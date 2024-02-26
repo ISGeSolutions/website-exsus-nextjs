@@ -8,6 +8,7 @@ const baseUrlEnquiries = `${publicRuntimeConfig.apiUrl}/api/enquiries`;
 export const contactUsService = {
   contactus,
   sendContactUsMail,
+  getCustomeContact,
 };
 
 function sendContactUsMail(contactusData) {
@@ -28,4 +29,9 @@ function contactus(contactUsData) {
   } else {
     return fetchWrapper.post(`${baseUrlEnquiries}`, contactUsData);
   }
+}
+
+function getCustomeContact() {
+  const contactUsCustomeUrl = `${publicRuntimeConfig.apiUrl}/api/custom-pages?populate[0]=custom_page_images&populate[1]=custom_page_contents&filters[page_code][$eq]=Contact-us`;
+  return fetchWrapper.get(contactUsCustomeUrl);
 }

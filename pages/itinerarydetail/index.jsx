@@ -69,8 +69,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -137,12 +137,12 @@ function Index() {
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -153,46 +153,50 @@ function Index() {
       .replace(/&/g, "and");
     router.push(
       regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, "and")
-        .replace(/ /g, "-")
-        .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
+        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/&/g, "and")
+          .replace(/ /g, "-")
+          .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${hotelName}`
     );
   };
 
   const generateDynamicLink = (item) => {
-    let countryName = item?.attributes?.country?.data?.attributes?.country_name
-      ?.replace(/ /g, "-")
-      .replace(/&/g, "and")
-      .toLowerCase();
+    let countryName =
+      item?.attributes?.countries?.data[0]?.attributes?.country_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase();
     return (
       regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+      `/destinations/${item?.attributes?.destinations?.data[0]?.attributes?.destination_name
         ?.replace(/&/g, "and")
         .replace(/ /g, " ")
-        .toLowerCase()}/${countryName}-itineraries/${item?.attributes?.friendly_url
+        .toLowerCase()}/${countryName}-itineraries/${
+        item?.attributes?.friendly_url
       }`
     );
   };
 
   const handleRedirect = (item) => {
-    let countryName = item?.attributes?.country?.data?.attributes?.country_name
-      ?.replace(/ /g, "-")
-      .replace(/&/g, "and")
-      .toLowerCase();
+    let countryName =
+      item?.attributes?.countries?.data[0]?.attributes?.country_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/&/g, "and")
-        .replace(/ /g, " ")
-        .toLowerCase()}/${countryName}-itineraries/${item?.attributes?.friendly_url
-      }`
+        `/destinations/${item?.attributes?.destinations?.data[0]?.attributes?.destination_name
+          ?.replace(/&/g, "and")
+          .replace(/ /g, " ")
+          .toLowerCase()}/${countryName}-itineraries/${
+          item?.attributes?.friendly_url
+        }`
     );
   };
 
@@ -361,13 +365,12 @@ function Index() {
     router.beforePopState(({ as }) => {
       const searchString = "itineraries";
       if (as?.includes(searchString)) {
-        if ((as !== router?.asPath) && router?.asPath) {
-
+        if (as !== router?.asPath && router?.asPath) {
           // / Find the index of 'itineraries'
-          const index = as?.indexOf('itineraries');
+          const index = as?.indexOf("itineraries");
 
           // Extract the substring
-          const result = as?.substring(0, index + 'itineraries'.length);
+          const result = as?.substring(0, index + "itineraries".length);
           router.push(result);
           return false;
         }
@@ -378,28 +381,29 @@ function Index() {
     return () => {
       router.beforePopState(() => true);
     };
-  }, [router])
-
-
-
+  }, [router]);
 
   useEffect(() => {
     const searchString = "itineraries";
     const currentUrl = window.location.href;
-    const segments = currentUrl?.split('/');
-    if (!currentUrl.includes(searchString) && !segments[segments.length - 1].includes(searchString) && !segments[segments.length - 1].includes('places-to-stay')) {
-      const secondPrevUrl = localStorage.getItem("prevUrl")
-      localStorage.setItem("secondPrevUrl", secondPrevUrl)
+    const segments = currentUrl?.split("/");
+    if (
+      !currentUrl.includes(searchString) &&
+      !segments[segments.length - 1].includes(searchString) &&
+      !segments[segments.length - 1].includes("places-to-stay")
+    ) {
+      const secondPrevUrl = localStorage.getItem("prevUrl");
+      localStorage.setItem("secondPrevUrl", secondPrevUrl);
       const newUrl = addStringBeforeSecondLastSlash(currentUrl, "hotels");
       router.push(newUrl);
       // console.log(`The URL contains "${searchString}"`);
-    } else if (!segments[segments.length - 1].includes('intineraries')) {
+    } else if (segments[segments.length - 1].includes(searchString)) {
       segments.pop();
-      const newUrl = segments.join('/');
+      const newUrl = segments.join("/");
       router.push(newUrl);
-    } else if (!segments[segments.length - 1].includes('places-to-stay')) {
+    } else if (segments[segments.length - 1].includes("places-to-stay")) {
       segments.pop();
-      const newUrl = segments.join('/');
+      const newUrl = segments.join("/");
       router.push(newUrl);
     } else {
       if (
@@ -477,11 +481,12 @@ function Index() {
             `home/destinations/${router.query?.continent.replace(
               /%20/g,
               " "
-            )}/${router.query?.country}/${router.query?.itineraryName
-              ? router.query?.itineraries +
-              "/" +
-              x.data[0].attributes.itin_name.toLowerCase()
-              : x.data[0].attributes.itin_name.toLowerCase()
+            )}/${router.query?.country}/${
+              router.query?.itineraryName
+                ? router.query?.itineraries +
+                  "/" +
+                  x.data[0].attributes.itin_name.toLowerCase()
+                : x.data[0].attributes.itin_name.toLowerCase()
             }`
           );
 
@@ -492,9 +497,11 @@ function Index() {
               bannerImages.push(banner?.attributes?.image_path);
             }
           });
+
           destinationService
             .getMoreItineraries(
-              x?.data[0]?.attributes?.country?.data?.attributes?.country_name,
+              x?.data[0]?.attributes?.countries?.data[0]?.attributes
+                ?.country_name,
               region
             )
             .then((response) => {
@@ -512,7 +519,7 @@ function Index() {
 
           destinationService
             .getRegionWiseHotelsInHotelDetail(
-              x?.data[0]?.attributes?.region?.data?.attributes?.region_name,
+              x?.data[0]?.attributes?.regions?.data[0]?.attributes?.region_name,
               region
             )
             .then((response) => {
@@ -539,15 +546,15 @@ function Index() {
                     ?.replace(/&/g, "and")
                     .replace(/ /g, "-")
                     .toLowerCase()}/${item?.attributes?.country?.data?.attributes?.country_name
-                      ?.replace(/ /g, "-")
-                      .replace(/&/g, "and")
-                      .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-                        ?.replace(/ /g, "-")
-                        .replace(/&/g, "and")
-                        .toLowerCase()}/${item?.attributes?.friendly_url
-                          ?.replace(/&/g, "and")
-                          .replace(/ /g, "-")
-                          .toLowerCase()}`,
+                    ?.replace(/ /g, "-")
+                    .replace(/&/g, "and")
+                    .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+                    ?.replace(/ /g, "-")
+                    .replace(/&/g, "and")
+                    .toLowerCase()}/${item?.attributes?.friendly_url
+                    ?.replace(/&/g, "and")
+                    .replace(/ /g, "-")
+                    .toLowerCase()}`,
               }));
               setCoordinatesArray((prevCoordinates) => [
                 ...prevCoordinates,
@@ -814,8 +821,8 @@ function Index() {
                                   showAllParagraphs[index]
                                     ? element?.attributes?.day_detail_text
                                     : element?.attributes?.day_detail_text.split(
-                                      "<br />"
-                                    )[0]
+                                        "<br />"
+                                      )[0]
                                 )
                               ),
                             }}
@@ -826,10 +833,11 @@ function Index() {
                             element?.attributes?.overview_text.split("<br />")
                               .length > 1 && (
                               <button
-                                className={`btn itinery_btn ${showAllParagraphs[index]
-                                  ? " itinery_para_expnd"
-                                  : ""
-                                  }`}
+                                className={`btn itinery_btn ${
+                                  showAllParagraphs[index]
+                                    ? " itinery_para_expnd"
+                                    : ""
+                                }`}
                                 onClick={() => toggleParagraphs(index)}
                               >
                                 <svg
@@ -1038,8 +1046,8 @@ function Index() {
                                           {item?.attributes?.currency_symbol.repeat(
                                             Math.abs(
                                               5 -
-                                              item?.attributes
-                                                ?.price_guide_value
+                                                item?.attributes
+                                                  ?.price_guide_value
                                             )
                                           )}
                                         </label>
@@ -1105,7 +1113,7 @@ function Index() {
                 <h3 className="title_cls">
                   More itineraries in{" "}
                   {dictioneryFunction(
-                    itineraries?.attributes?.country?.data?.attributes
+                    itineraries?.attributes?.countries?.data[0]?.attributes
                       ?.country_name
                   )}
                 </h3>
@@ -1189,10 +1197,12 @@ function Index() {
                                 )
                                 .map((res1) => (
                                   <li key={`filter_${res1.id}`}>
-                                    {`From ${res1.attributes?.currency_symbol ?? ""
-                                      }${formatPrice(res1.attributes?.price) ??
+                                    {`From ${
+                                      res1.attributes?.currency_symbol ?? ""
+                                    }${
+                                      formatPrice(res1.attributes?.price) ??
                                       " xxxx"
-                                      } per person`}
+                                    } per person`}
                                   </li>
                                 ))}
                               <li>

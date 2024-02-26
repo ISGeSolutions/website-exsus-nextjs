@@ -30,6 +30,7 @@ function Index() {
   const [activeItem, setActiveItem] = useState("recommended");
   const [customPageContent, setCustomPage] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
+  const [originalOrder, setOriginalOrder] = useState([]);
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -63,6 +64,7 @@ function Index() {
   const handleFilterClick = (item) => {
     setActiveItem(item);
     //  (thumbnailImageArr);
+
     if (item == "alphabetical") {
       setThumbnailImageArr(
         thumbnailImageArr.sort((a, b) =>
@@ -70,7 +72,8 @@ function Index() {
         )
       );
     } else if (item == "recommended") {
-      setThumbnailImageArr(thumbnailImageArr.sort((a, b) => a.id - b.id));
+      // setThumbnailImageArr(thumbnailImageArr.sort((a, b) => a.id - b.id));
+      setThumbnailImageArr([...originalOrder]);
     }
   };
 
@@ -93,7 +96,13 @@ function Index() {
       .then((x) => {
         setHolidayTypes(x.data[0]);
         setCustomPage(x.data[0]?.attributes?.custom_page_contents);
-        localStorage.setItem("PageInfo", JSON.stringify({ pType: "CUST", pCode: x?.data[0]?.attributes?.page_code }));
+        localStorage.setItem(
+          "PageInfo",
+          JSON.stringify({
+            pType: "CUST",
+            pCode: x?.data[0]?.attributes?.page_code,
+          })
+        );
         //  (x.data[0]);
         // setDestinationLandingDetails(x);
         const imageCheck = x?.data[0]?.attributes?.custom_page_images?.data;
@@ -153,6 +162,7 @@ function Index() {
 
         setBannerImageArr(bannerImageArr);
         setThumbnailImageArr(thumbnailImageArr);
+        setOriginalOrder([...thumbnailImageArr]);
         setHolidaytypesLandingList(x.data[0]);
         setIsLoading(false);
       })

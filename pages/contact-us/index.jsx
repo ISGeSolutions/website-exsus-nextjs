@@ -79,10 +79,14 @@ function Index() {
   function onSubmit(data) {
     data["site_region"] = region == "us" ? "Yes" : "No";
     data["submitted_at"] = new Date().toLocaleDateString();
-    data["page_url"] = document.referrer;
+    data["page_url"] = localStorage.getItem("prevUrl")
+      ? localStorage.getItem("prevUrl")
+      : "/";
     data["loc_by_ip_country_name"] = country?.country;
     data["loc_by_ip_country_code"] = country?.countryCode;
+    data["product_type"] = pType;
     data["request_type"] = "contactus";
+    data["product_code"] = pCode;
     data["device_info"] = deviceInfo;
     data["ga_account_code"] = globalVariables?.ReactGA_ID;
     const data1 = {
@@ -116,11 +120,23 @@ function Index() {
 
   useEffect(() => {
     // Get device information
+    setPType(router?.query?.pType);
+    setPCode(router?.query?.pCode);
     getDeviceInfo().then(({ deviceInfo, countryInfo }) => {
       setDeviceInfo(
         `Device-${deviceInfo.os} Browser -${deviceInfo.browser},Version-${deviceInfo.version} ,UserAgentDetails: ${deviceInfo.userAgent} InputType >${deviceInfo.inputType} Device address> ${deviceInfo.deviceAddress}`
       );
       setCountryInfo(countryInfo);
+    });
+
+    contactUsService.getCustomeContact().then((x) => {
+      localStorage.setItem(
+        "PageInfo",
+        JSON.stringify({
+          pType: "CUST",
+          pCode: x?.data[0]?.attributes?.page_code,
+        })
+      );
     });
   }, []);
 
@@ -209,7 +225,7 @@ function Index() {
                               errors.first_name ? "is-invalid" : ""
                             }`}
                           />
-                          <div className="invalid-tooltip">
+                          <div className="invalid-feedback mb-1">
                             {errors.first_name?.message}
                           </div>
                         </div>
@@ -226,7 +242,7 @@ function Index() {
                               errors.last_name ? "is-invalid" : ""
                             }`}
                           />
-                          <div className="invalid-tooltip">
+                          <div className="invalid-feedback mb-1">
                             {errors.last_name?.message}
                           </div>
                         </div>
@@ -243,7 +259,7 @@ function Index() {
                               errors.email_id ? "is-invalid" : ""
                             }`}
                           />
-                          <div className="invalid-tooltip">
+                          <div className="invalid-feedback mb-1">
                             {errors.email_id?.message}
                           </div>
                         </div>
@@ -260,7 +276,7 @@ function Index() {
                               errors.telephone_no ? "is-invalid" : ""
                             }`}
                           />
-                          <div className="invalid-tooltip">
+                          <div className="invalid-feedback mb-1">
                             {errors.telephone_no?.message}
                           </div>
                         </div>
