@@ -601,16 +601,43 @@ const nextConfig = {
         destination: "/terms-and-conditions",
       },
 
-      // privacy-policy
-      { source: "/travel_information", destination: "/travel_information" },
-      { source: "/us/travel_information", destination: "/travel_information" },
+      // travel information
+      // {
+      //   source: "/about-us/useful-links",
+      //   destination: "/about-us/useful-links",
+      // },
+      // {
+      //   source: "/us/about-us/useful-links",
+      //   destination: "/about-us/useful-links",
+      // },
+      // {
+      //   source: "/asia/about-us/useful-links",
+      //   destination: "/about-us/useful-links",
+      // },
+      // {
+      //   source: "/in/about-us/useful-links",
+      //   destination: "/about-us/useful-links",
+      // },
+
+      // travel information
+      {
+        source: "/travel_information",
+        destination: "/travel_information",
+      },
+      {
+        source: "/us/travel_information",
+        destination: "/travel_information",
+      },
       {
         source: "/asia/travel_information",
         destination: "/travel_information",
       },
-      { source: "/in/travel_information", destination: "/travel_information" },
+      {
+        source: "/in/travel_information",
+        destination: "/travel_information",
+      },
 
-      // privacy-policy
+      // coronavirus_information
       {
         source: "/coronavirus_information",
         destination: "/coronavirus_information",

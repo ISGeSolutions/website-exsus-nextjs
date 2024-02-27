@@ -129,7 +129,7 @@ function Country() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
+        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
     );
   };
 
@@ -139,8 +139,8 @@ function Country() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -168,11 +168,13 @@ function Country() {
       setIsShowMap(true);
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
+        `/destinations/${destinationcode?.replace(/ /g, "-")}/${
+          countryData?.attributes?.friendly_url
         }`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
+        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${
+          countryData?.attributes?.friendly_url
         }`
       );
       text = "LUXURY HOLIDAYS IN " + countrycode.toUpperCase();
@@ -180,11 +182,13 @@ function Country() {
       setIsShowMap(true);
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
+        `/destinations/${destinationcode?.replace(/ /g, "-")}/${
+          countryData?.attributes?.friendly_url
         }/${countryData?.attributes?.friendly_url}-regions`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
+        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${
+          countryData?.attributes?.friendly_url
         }/${countryData?.attributes?.friendly_url} regions`
       );
       text = "REGIONS IN " + countrycode.toUpperCase(); // action="/countryregions?countrycode=south-africa"
@@ -201,10 +205,10 @@ function Country() {
         `/destinations/${destinationcode
           ?.replace(/&/g, "and")
           ?.replace(/ /g, "-")}/${destCode
-            ?.replace(/&/g, "and")
-            ?.replace(/ /g, "-")}/${destCode
-              ?.replace(/&/g, "and")
-              ?.replace(/ /g, "-")}-itineraries`;
+          ?.replace(/&/g, "and")
+          ?.replace(/ /g, "-")}/${destCode
+          ?.replace(/&/g, "and")
+          ?.replace(/ /g, "-")}-itineraries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationcode?.replace(
@@ -218,11 +222,13 @@ function Country() {
       handleTabClick("images");
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
+        `/destinations/${destinationcode?.replace(/ /g, "-")}/${
+          countryData?.attributes?.friendly_url
         }/${countryData?.attributes?.friendly_url}-places-to-stay`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
+        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${
+          countryData?.attributes?.friendly_url
         }/places to stay ${countryData?.attributes?.friendly_url}`
       );
       text = "LUXURY HOTELS, CAMPS & LODGES IN " + countrycode.toUpperCase(); // action="/countryplacetostay?countrycode=south-africa"
@@ -230,11 +236,13 @@ function Country() {
       setIsShowMap(false);
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
+        `/destinations/${destinationcode?.replace(/ /g, "-")}/${
+          countryData?.attributes?.friendly_url
         }/${countryData?.attributes?.friendly_url}-when-to-go`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
+        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${
+          countryData?.attributes?.friendly_url
         }/when to go to ${countryData?.attributes?.friendly_url}`
       );
       text = "WHEN TO GO TO " + countrycode.toUpperCase(); // action="/countryplacetostay?countrycode=south-africa"
@@ -378,7 +386,7 @@ function Country() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -421,7 +429,7 @@ function Country() {
           localStorage.setItem(
             "PageInfo",
             JSON.stringify({
-              pType: "INTE",
+              pType: "COUN",
               pCode: x?.data[0]?.attributes?.country_code,
             })
           );
@@ -450,9 +458,9 @@ function Country() {
                 ?.replace(/&/g, "and")
                 .replace(/ /g, "-")
                 .toLowerCase()}/${item?.attributes?.friendly_url
-                  ?.replace(/ /g, "-")
-                  .replace(/&/g, "and")
-                  .toLowerCase()}`,
+                ?.replace(/ /g, "-")
+                .replace(/&/g, "and")
+                .toLowerCase()}`,
           }));
           // // Update the state with the accumulated coordinates
           setCoordinatesArray((prevCoordinates) => [
@@ -599,15 +607,17 @@ function Country() {
             {isShowMap ? (
               <div className="banner_tab_blk">
                 <button
-                  className={`btn banner_map_tab ${activeButton === "map" ? "banner_tab_active" : ""
-                    }`}
+                  className={`btn banner_map_tab ${
+                    activeButton === "map" ? "banner_tab_active" : ""
+                  }`}
                   onClick={() => handleTabClick("map")}
                 >
                   Map
                 </button>
                 <button
-                  className={`btn banner_img_tab ${activeButton === "images" ? "banner_tab_active" : ""
-                    }`}
+                  className={`btn banner_img_tab ${
+                    activeButton === "images" ? "banner_tab_active" : ""
+                  }`}
                   onClick={() => handleTabClick("images")}
                 >
                   Images
@@ -617,11 +627,11 @@ function Country() {
               ""
             )}
             <div
-              className={`banner_map_blk ${activeButton === "map" ? "banner_map_active" : ""
-                }`}
+              className={`banner_map_blk ${
+                activeButton === "map" ? "banner_map_active" : ""
+              }`}
             >
               <MarkerInfoWindowNext data={coordinatesArray} />
-
 
               {/* src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" */}
             </div>
@@ -632,7 +642,7 @@ function Country() {
           <section
             className="destination_tab_row light_grey pb-0"
             ref={divRef}
-          // id="scrollToElement"
+            // id="scrollToElement"
           >
             <div className="container">
               <div className="bookmark_row">
