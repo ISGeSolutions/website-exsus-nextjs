@@ -148,6 +148,14 @@ function getAllRegionItineraries(page, name, item, region) {
         "%26"
       )}&populate[destinations][fields][0]=destination_name&populate[countries][fields][0]=country_name&sort[0]=no_of_nites:asc`;
     return fetchWrapper.get(itinerariesDetailsUrl);
+  } else if (item == "price") {
+    const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl
+      }/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&pagination[page]=${page}&pagination[pageSize]=12&filters[regions][region_name][$eq]=${name?.replace(
+        /&/g,
+        "%26"
+      )}&populate[destinations][fields][0]=destination_name&populate[countries][fields][0]=country_name12&sort[0]=price${region !== "uk" ? "_" + region?.replace(/in/g, "india") : ""
+      }:asc`;
+    return fetchWrapper.get(itinerariesDetailsUrl);
   }
 }
 
@@ -262,7 +270,8 @@ function getItinerariesByDestination(dcode, page, item, region) {
         ?.replace(
           /in/g,
           "INDIA"
-        )}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12&populate[destinations][fields][0]=destination_name&populate[countries][fields][0]=country_name`;
+        )}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12&populate[destinations][fields][0]=destination_name&populate[countries][fields][0]=country_name&sort[0]=price${region !== "uk" ? "_" + region?.replace(/in/g, "india") : ""
+      }:asc`;
     return fetchWrapper.get(destinationDetailsUrl);
   } else if (item == "recommended") {
     const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl
@@ -309,7 +318,7 @@ function getCountryWiseItinerary(name, page, item, region) {
       }/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region?.replace(
         /in/g,
         "INDIA"
-      )}&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=price${region !== "uk" ? "_" + region?.replace(/in/g, "INDIA") : ""
+      )}&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=price${region !== "uk" ? "_" + region?.replace(/in/g, "india") : ""
       }:asc&filters[countries][country_name][$eq]=${name?.replace(
         /&/g,
         "%26"
@@ -507,7 +516,7 @@ function getItinerariesInAdvanceSearch(
       `&populate[itinerary_country_contents][filters][website_country][$eq]=${region?.replace(
         /in/g,
         "INDIA"
-      )}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=price${region !== "uk" ? "_" + region?.replace(/in/g, "INDIA") : ""
+      )}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=price${region !== "uk" ? "_" + region?.replace(/in/g, "india") : ""
       }:asc&populate[destinations][fields][0]=destination_name&populate[countries][fields][0]=country_name&populate[regions][fields][0]=region_name`;
     return fetchWrapper.get(destinationadvanceSearchUrl);
   } else if (item == "desc") {
@@ -517,7 +526,7 @@ function getItinerariesInAdvanceSearch(
       `&populate[itinerary_country_contents][filters][website_country][$eq]=${region?.replace(
         /in/g,
         "INDIA"
-      )}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=price${region !== "uk" ? "_" + region?.replace(/in/g, "INDIA") : ""
+      )}&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=price${region !== "uk" ? "_" + region?.replace(/in/g, "india") : ""
       }:desc&populate[destinations][fields][0]=destination_name&populate[countries][fields][0]=country_name&populate[regions][fields][0]=region_name`;
     return fetchWrapper.get(destinationadvanceSearchUrl);
   }
@@ -1034,6 +1043,20 @@ function ItineraryFilterOnRegionDetail(
         /&/g,
         "%26"
       )}&populate[destinations][fields][0]=destination_name&populate[countries][fields][0]=country_name&sort[0]=no_of_nites:asc`;
+    return fetchWrapper.get(itinerariesDetailsUrl);
+  } else if (item == "price") {
+    const itinerariesDetailsUrl =
+      `${publicRuntimeConfig.apiUrl
+      }/api/itineraries?[filters][regions][region_name][$eq]=${name?.replace(
+        /&/g,
+        "%26"
+      )}` +
+      (filters.length > 0 ? "&" + filters.join("&") : "") +
+      `&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&pagination[page]=${page}&pagination[pageSize]=12&filters[regions][region_name][$eq]=${name?.replace(
+        /&/g,
+        "%26"
+      )}&populate[destinations][fields][0]=destination_name&populate[countries][fields][0]=country_name&sort[0]=price${region !== "uk" ? "_" + region?.replace(/in/g, "india") : ""
+      }:asc`;
     return fetchWrapper.get(itinerariesDetailsUrl);
   }
 }
