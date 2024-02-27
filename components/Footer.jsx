@@ -231,7 +231,7 @@ function Footer() {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink href="/travel-agent-brochures">
+                    <NavLink href="https://mailchi.mp/exsus.com/brochure-request-trade" target="_blank">
                       Travel agent brochures
                     </NavLink>
                   </li>

@@ -832,7 +832,7 @@ function CountryPlaceToStay(props) {
                     <div className="col-12">
                       <div className="destination_filter_result d-block d-lg-flex">
                         <p>
-                          We've found {metaData?.total} hotels in{" "}
+                          We've found {(metaData?.total > 0) ? metaData?.total : 0} hotels in{" "}
                           {countryData?.country_name} for you
                           <button
                             type="button"

@@ -343,6 +343,7 @@ function Country() {
   };
 
   const dictioneryFunction = (data) => {
+
     let modifiedString = data;
     if (modifiedString) {
       const regex = /{[a-zA-Z0-9-]+}/g;
@@ -396,9 +397,7 @@ function Country() {
     if (countrycode && countrycode != "undefined") {
       localStorage.setItem("country_code", countrycode);
     }
-    // setSelectedOptionCountry(countryOptions[0]);
-    // setSelectedOptionRegion(regionOptions[0]);
-    // setSelectedOptionMonth(monthOptions[0]);
+
 
     if (router.asPath.includes("itineraries")) {
       toggleTab("itineraries");

@@ -319,19 +319,19 @@ function RegionItinararies(props) {
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-        `/destinations/${destinationcode?.replace(
-          / /g,
-          "-"
-        )}/${countrycode?.replace(/ /g, "-")}/${countrycode
-          ?.replace(/ /g, "-")
-          ?.replace(/&/g, "and")}-itineraries/${item?.attributes?.friendly_url}`
+      `/destinations/${destinationcode?.replace(
+        / /g,
+        "-"
+      )}/${countrycode?.replace(/ /g, "-")}/${countrycode
+        ?.replace(/ /g, "-")
+        ?.replace(/&/g, "and")}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -490,7 +490,7 @@ function RegionItinararies(props) {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -708,7 +708,7 @@ function RegionItinararies(props) {
                         <div className="destination_contries_filter d-inline-block d-lg-flex">
                           <label className="pt-2 pt-lg-0">Arrange by:</label>
                           <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
-                            {/* <li><a className={activeItem === 'price' ? 'active' : ''} onClick={() => handleFilterClick('price')}>By price</a></li> */}
+                            <li><a className={activeItem === 'price' ? 'active' : ''} onClick={() => handleFilterClick('price')}>By price</a></li>
                             <li>
                               <a
                                 className={
@@ -759,7 +759,7 @@ function RegionItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -794,12 +794,10 @@ function RegionItinararies(props) {
                                   )
                                   .map((res1) => (
                                     <li key={res1.id}>
-                                      {`From ${
-                                        res1.attributes?.currency_symbol ?? ""
-                                      }${
-                                        formatPrice(res1.attributes?.price) ??
+                                      {`From ${res1.attributes?.currency_symbol ?? ""
+                                        }${formatPrice(res1.attributes?.price) ??
                                         "xxxx"
-                                      } per person`}
+                                        } per person`}
                                     </li>
                                   ))}
                                 <li>

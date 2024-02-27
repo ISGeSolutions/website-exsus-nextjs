@@ -741,14 +741,18 @@ function CountryItinararies(props) {
                     <div className="col-12">
                       <div className="destination_filter_result d-block d-lg-flex">
                         <p>
-                          We've found {metaData?.total} holiday ideas in{" "}
+                          We've found {(metaData?.total > 0) ? metaData?.total : 0} holiday ideas in{" "}
                           {countryData?.country_name} for you
                         </p>
                         <div className="destination_contries_filter d-inline-block d-lg-flex">
                           <label className="pt-2 pt-lg-0">Arrange by:</label>
                           <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
                             <li>
-                              <a href="#" onClick={handleHrefClick}>
+                              <a
+                                className={
+                                  activeItem === "price" ? "active" : ""
+                                }
+                                onClick={() => handleFilterClick("price")}>
                                 By price
                               </a>
                             </li>
@@ -836,7 +840,7 @@ function CountryItinararies(props) {
                                     <li key={res1.id}>
                                       {`From ${res1.attributes?.currency_symbol ?? ""
                                         }${formatPrice(res1.attributes?.price) ??
-                                        " xxxx"
+                                        " XXXX"
                                         } per person`}
                                     </li>
                                   ))}
