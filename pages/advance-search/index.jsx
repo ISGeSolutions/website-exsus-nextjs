@@ -1,11 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, Spinner, Signup } from "components";
-import {
-  destinationService,
-  alertService,
-  userService,
-  homeService,
-} from "services";
+import { destinationService, homeService } from "services";
+import { customeService } from "../../services/custome.service";
 import { Inspireme } from "components";
 import Head from "next/head";
 import { NavLink } from "components";
@@ -311,6 +307,16 @@ function Index() {
     ) {
       websiteContentCheck(dictionaryPage);
     }
+
+    customeService.getAdvanceSearch().then((x) => {
+      localStorage.setItem(
+        "PageInfo",
+        JSON.stringify({
+          pType: "CUST",
+          pCode: x?.data[0]?.attributes?.page_code,
+        })
+      );
+    });
 
     // if (dcodestr == null && dcodeReason == null && dcodeMonth == null) {
     //   destinationService

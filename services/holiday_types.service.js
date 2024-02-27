@@ -191,7 +191,9 @@ function getItinerariesByHolidayTypes(page, name, region, item) {
     }/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region.replace(
       /in/g,
       "INDIA"
-    )}&pagination[page]=${page}&pagination[pageSize]=12&filters[holiday_types][holiday_type_name][$eq]=${name?.replace(
+    )}&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=price${
+      region !== "uk" ? "_" + region?.replace(/in/g, "INDIA") : ""
+    }:asc&filters[holiday_types][holiday_type_name][$eq]=${name?.replace(
       /&/g,
       "%26"
     )}`;
