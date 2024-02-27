@@ -3562,5 +3562,26 @@ nav
   font: 300 0.875rem/1.5rem "Roboto", sans-serif;
   text-align: justify;
   padding-top: 10px;
-  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+}
+
+.trvl_info_row .trvl_info_cntnt.trvl_info_para_blk h3 {
+  font: 1.75rem/1.875rem "Slabo 27px", serif;
+  color: #8aad56;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.trvl_info_row .trvl_info_cntnt.trvl_info_para_blk p {
+  margin-bottom: 35px;
+}
+
+.trvl_info_row .trvl_info_cntnt.trvl_info_para_blk p span {
+  font: 400 1rem/1.5rem "Roboto", sans-serif;
+  color: #fff;
 }
