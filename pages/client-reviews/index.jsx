@@ -6,7 +6,7 @@ import { whyusService, destinationService } from "../../services/whyus.service";
 import { NavLink } from "components";
 import { FriendlyUrl } from "../../components";
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
-
+import Head from "next/head";
 var React = require("react");
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -64,91 +64,18 @@ function Index() {
     if (carousel) {
       new bootstrap.Carousel(carousel);
     }
-    setFriendlyUrl(`home/Why us/Exsus Reviews`);
-    // whyusService
-    //   .getAllReviews()
-    //   .then((x) => {
-    //     setClientReviews(x.data);
-
-    //     // Dictionary
-    //
-    //     let modifiedString = x.data[0]?.attributes?.review_text;
-    //      ("modifiedString", modifiedString);
-    //     // Find and store matches in an array
-    //     const regex = /{[a-zA-Z0-9-]+}/g;
-    //     const matches = [...new Set(modifiedString.match(regex))];
-
-    //     let storedDataString = "";
-    //     let storedData = "";
-
-    //     if (region == "uk") {
-    //       storedDataString = localStorage.getItem("websitecontent_uk");
-    //       storedData = JSON.parse(storedDataString);
-    //     } else if (region == "us") {
-    //       storedDataString = localStorage.getItem("websitecontent_us");
-    //       storedData = JSON.parse(storedDataString);
-    //     } else if (region == "asia") {
-    //       storedDataString = localStorage.getItem("websitecontent_asia");
-    //       storedData = JSON.parse(storedDataString);
-    //     } else if (region == "in") {
-    //       storedDataString = localStorage.getItem("websitecontent_india");
-    //       storedData = JSON.parse(storedDataString);
-    //     }
-
-    //     if (storedData !== null) {
-    //       // You can access it using localStorage.getItem('yourKey')
-    //       if (matches) {
-    //         let replacement = "";
-    //         try {
-    //           matches.forEach((match, index, matches) => {
-    //             const matchString = match.replace(/{|}/g, "");
-    //             if (!storedData[matchString]) {
-    //               websiteContentCheck(matches, region, modifiedString);
-    //               throw new Error("Loop break");
-    //             } else {
-    //               replacement = storedData[matchString];
-    //             }
-    //             const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
-    //             if (checkStr && replacement) {
-    //               modifiedString = modifiedString.replace(
-    //                 checkStr,
-    //                 replacement
-    //               );
-    //             }
-    //           });
-
-    //           // Set the modified string in state
-    //           setnewValueWithBr(modifiedString);
-    //           //  (modifiedString);
-    //         } catch (error) {
-    //           if (error.message === "Loop break") {
-    //             // Handle the loop break here
-    //             //  ("Loop has been stopped.");
-    //           } else if (error.message === "Region not found") {
-    //             // Handle the loop break here
-    //             //  ("Loop has been stopped.");
-    //             setnewValueWithBr(modifiedString);
-    //           }
-    //         }
-    //       }
-    //     } else {
-    //       // The item with 'yourKey' does not exist in local storage
-    //       // Display the matched words
-    //       if (matches) {
-    //         websiteContentCheck(matches, region, modifiedString);
-    //       }
-    //     }
-    //     setIsLoading(false);
-    //   })
-    //   .catch((error) => {
-    //     setIsLoading(false);
-    //   });
 
     whyusService
       .getReviewsCustomePage()
       .then((x) => {
         setCareerData(x.data[0]);
-        localStorage.setItem("PageInfo", JSON.stringify({ pType: "CUST", pCode: x?.data[0]?.attributes?.page_code }));
+        localStorage.setItem(
+          "PageInfo",
+          JSON.stringify({
+            pType: "CUST",
+            pCode: x?.data[0]?.attributes?.page_code,
+          })
+        );
         const data = x.data[0]?.attributes?.custom_page_contents?.data;
 
         let modifiedString = "";
@@ -214,7 +141,7 @@ function Index() {
               });
 
               setLongText(modifiedString);
-
+              setFriendlyUrl(x?.data[0]?.attributes?.page_friendly_url);
               setIsLoading(false);
             } catch (error) {
               if (error.message === "Loop break") {
@@ -238,6 +165,9 @@ function Index() {
 
   return (
     <Layout>
+      <Head>
+        <title>{title}</title>
+      </Head>
       {isLoading ? (
         // <MyLoader />
         <div
@@ -270,7 +200,7 @@ function Index() {
           <section className="trvl_info_row">
             <div className="container">
               <div className="bookmark_row">
-                <FriendlyUrl data={friendlyUrl}></FriendlyUrl>
+                <FriendlyUrl data={"home/" + friendlyUrl}></FriendlyUrl>
               </div>
 
               <div className="trvl_info_cntnt client_review_para_blk">
