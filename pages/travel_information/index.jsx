@@ -163,14 +163,9 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {
-            if (error.message === "Loop break") {
-            } else if (error.message === "Region not found") {
-            }
-          }
+          } catch (error) {}
         }
       }
-    } else {
     }
   };
 

@@ -77,7 +77,13 @@ function Index() {
             newBackgroundImages.push(element.attributes.image_path);
           }
         });
-        localStorage.setItem("PageInfo", JSON.stringify({ pType: "CUST", pCode: x?.data[0]?.attributes?.page_code }));
+        localStorage.setItem(
+          "PageInfo",
+          JSON.stringify({
+            pType: "CUST",
+            pCode: x?.data[0]?.attributes?.page_code,
+          })
+        );
         setBackgroundImage(newBackgroundImages);
         const data = x.data[0]?.attributes?.custom_page_contents?.data;
         let modifiedString = "";
@@ -248,7 +254,7 @@ function Index() {
                 <div className="row">
                   <div className="col-sm-6">
                     <div className="card_blk_inr card_blk_overlay">
-                      <NavLink href={`/destinations`}>
+                      <NavLink href={regionWiseUrl + `/destinations`}>
                         <img
                           src="/images/about_us_card01.jpg"
                           alt="Card image 07"
@@ -285,7 +291,7 @@ function Index() {
                   </div>
                   <div className="col-sm-6">
                     <div className="card_blk_inr card_blk_overlay">
-                      <NavLink href={`/holiday-types`}>
+                      <NavLink href={regionWiseUrl + `/holiday-types`}>
                         <img
                           src="/images/about_us_card02.jpg"
                           alt="Card image 08"

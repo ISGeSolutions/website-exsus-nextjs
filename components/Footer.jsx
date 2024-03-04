@@ -140,12 +140,12 @@ function Footer() {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink href={region + "/travel_information"}>
+                    <NavLink href={region + "/about-us/useful-links"}>
                       Travel Information
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink href={region + "/coronavirus_information"}>
+                    <NavLink href={region + "/landing/coronavirus"}>
                       Coronavirus Information
                     </NavLink>
                   </li>
@@ -221,7 +221,7 @@ function Footer() {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink href={"/about-us/careers"}>
+                    <NavLink href={region + "/about-us/careers"}>
                       Careers at Exsus
                     </NavLink>
                   </li>
@@ -231,7 +231,10 @@ function Footer() {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink href="https://mailchi.mp/exsus.com/brochure-request-trade" target="_blank">
+                    <NavLink
+                      href="https://mailchi.mp/exsus.com/brochure-request-trade"
+                      target="_blank"
+                    >
                       Travel agent brochures
                     </NavLink>
                   </li>

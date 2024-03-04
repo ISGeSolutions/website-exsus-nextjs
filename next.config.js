@@ -485,10 +485,10 @@ const nextConfig = {
       { source: "/in/where-to-go", destination: "/where-to-go" },
 
       // careers
-      { source: "/about-us/careers", destination: "/careers" },
-      { source: "/us/about-us/careers", destination: "/careers" },
-      { source: "/asia/about-us/careers", destination: "/careers" },
-      { source: "/in/about-us/careers", destination: "/careers" },
+      { source: "/about-us/careers", destination: "/about-us/careers" },
+      { source: "/us/about-us/careers", destination: "/about-us/careers" },
+      { source: "/asia/about-us/careers", destination: "/about-us/careers" },
+      { source: "/in/about-us/careers", destination: "/about-us/careers" },
 
       // creating-your-trip
       {
@@ -602,56 +602,56 @@ const nextConfig = {
       },
 
       // travel information
-      // {
-      //   source: "/about-us/useful-links",
-      //   destination: "/about-us/useful-links",
-      // },
-      // {
-      //   source: "/us/about-us/useful-links",
-      //   destination: "/about-us/useful-links",
-      // },
-      // {
-      //   source: "/asia/about-us/useful-links",
-      //   destination: "/about-us/useful-links",
-      // },
-      // {
-      //   source: "/in/about-us/useful-links",
-      //   destination: "/about-us/useful-links",
-      // },
+      {
+        source: "/useful_links",
+        destination: "/useful_links",
+      },
+      {
+        source: "/us/useful_links",
+        destination: "/useful_links",
+      },
+      {
+        source: "/asiauseful_links",
+        destination: "/useful_links",
+      },
+      {
+        source: "/in/useful_links",
+        destination: "/useful_links",
+      },
 
       // travel information
       {
-        source: "/travel_information",
+        source: "/about-us/useful-links",
         destination: "/travel_information",
       },
       {
-        source: "/us/travel_information",
+        source: "/us/about-us/useful-links",
         destination: "/travel_information",
       },
       {
-        source: "/asia/travel_information",
+        source: "/asia/about-us/useful-links",
         destination: "/travel_information",
       },
       {
-        source: "/in/travel_information",
+        source: "/in/about-us/useful-links",
         destination: "/travel_information",
       },
 
       // coronavirus_information
       {
-        source: "/coronavirus_information",
+        source: "/landing/coronavirus",
         destination: "/coronavirus_information",
       },
       {
-        source: "/us/coronavirus_information",
+        source: "/us/landing/coronavirus",
         destination: "/coronavirus_information",
       },
       {
-        source: "/asia/coronavirus_information",
+        source: "/asia/landing/coronavirus",
         destination: "/coronavirus_information",
       },
       {
-        source: "/in/coronavirus_information",
+        source: "/in/landing/coronavirus",
         destination: "/coronavirus_information",
       },
       // Define a custom error page for 404 errors

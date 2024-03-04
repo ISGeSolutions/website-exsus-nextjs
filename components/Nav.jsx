@@ -5,17 +5,16 @@ import { userService, destinationService, holidaytypesService } from "services";
 import Head from "next/head";
 import * as React from "react";
 import { store, useGlobalState } from "state-pool";
-
 export { Nav };
 
 function Nav() {
   const [user, setUser] = useState(null);
+  const [menu, setmenu] = useState(null);
   // const [regionWiseUrl, setMyVariable] = useState("");
   const [destinationLandingList, setDestinationLandingList] = useState();
   const [holidaytypesList, setHolidaytypesList] = useState();
   const [activeIndex, setActiveIndex] = useState(null);
   const [activeIndexHoliday, setActiveIndexHoliday] = useState(null);
-  const [menu, setmenu] = useState(null);
   const [menuMain, setmmenuMain] = useState(null);
   const [goBack, setgoBack] = useState(null);
   const [menuTrigger, setmenuTrigger] = useState(null);
@@ -55,8 +54,8 @@ function Nav() {
   };
 
   const handleMouseLeave = () => {
-    // setActiveIndex(0);
-    // setActiveIndex(null);
+    //setActiveIndex();
+    //setActiveIndex(null);
   };
 
   const handleMouseEnterHoliday = (index) => {
@@ -69,11 +68,20 @@ function Nav() {
   };
 
   const hideOverlay = () => {
-    setOverlayVisible(false);
+    setOverlayVisible(true);
   };
 
   const showOverlay = () => {
+    document.querySelector(".mobile-menu-head").classList.add("active");
     setOverlayVisible(true);
+  };
+
+  const showBackButton = () => {
+    document.querySelector(".mobile-menu-head").classList.add("active");
+  };
+
+  const hideBackButton = () => {
+    document.querySelector(".mobile-menu-head").classList.remove("active");
   };
 
   const generateDynamicLinkCountries = (countryName, destinationcode) => {
@@ -363,12 +371,14 @@ function Nav() {
     if (!menu.classList.contains("active")) {
       return;
     }
+
     if (e.target.closest(".menu-item-has-children")) {
       const hasChildren = e.target.closest(".menu-item-has-children");
       showSubMenu(hasChildren);
     }
   });
   goBack?.addEventListener("click", () => {
+    //showSubMenu();
     hideSubMenu();
   });
   menuTrigger?.addEventListener("click", () => {
@@ -379,8 +389,13 @@ function Nav() {
   });
 
   function toggleMenu() {
-    menu.classList.toggle("active");
-    document.querySelector(".menu-overlay").classList.toggle("active");
+    const menu = document.querySelector(".menu");
+    if (menu) {
+      menu.classList.toggle("active");
+      document.querySelector(".menu-overlay").classList.toggle("active");
+    } else {
+      console.error("Menu element not found");
+    }
   }
 
   function showSubMenu(hasChildren) {
@@ -420,7 +435,10 @@ function Nav() {
     <>
       <nav>
         <Head>
-          {/* <script type="text/javascript" src="/assets/javascripts/navigation.js"></script> */}
+          {/* <script
+            type="text/javascript"
+            src="/assets/javascripts/navigation.js"
+          ></script> */}
         </Head>
         <div className="menu-overlay"></div>
 
@@ -428,6 +446,7 @@ function Nav() {
           <div className="mobile-menu-head">
             <div className="go-back">
               <svg
+                onClick={hideBackButton}
                 xmlns="http://www.w3.org/2000/svg"
                 fill="#fff"
                 shapeRendering="geometricPrecision"
@@ -466,6 +485,7 @@ function Nav() {
               >
                 Destinations
                 <svg
+                  //onClick={showBackButton}
                   xmlns="http://www.w3.org/2000/svg"
                   fill="#ffffff"
                   shapeRendering="geometricPrecision"
@@ -497,7 +517,9 @@ function Nav() {
                                   <li
                                     key={i}
                                     className={`header_country_label ${
-                                      activeIndex === i ? "active" : ""
+                                      activeIndex === i
+                                        ? "active responsive_drpdwn_cls"
+                                        : ""
                                     }`}
                                     onMouseEnter={() => handleMouseEnter(i)}
                                     onMouseLeave={handleMouseLeave}
@@ -683,7 +705,7 @@ function Nav() {
                 </div>
               )}
             </li>
-            <li className="menu-item-has-children overlay">
+            <li className="menu-item-has-children">
               <NavLink
                 onMouseEnter={showOverlay}
                 onClick={hideOverlay}
@@ -718,7 +740,9 @@ function Nav() {
                                 <li
                                   key={holidaystypesItem?.id}
                                   className={`header_country_label ${
-                                    activeIndexHoliday === i ? "active" : ""
+                                    activeIndexHoliday === i
+                                      ? "active responsive_drpdwn_cls"
+                                      : ""
                                   }`}
                                   onMouseEnter={() =>
                                     handleMouseEnterHoliday(i)
@@ -1109,11 +1133,6 @@ function Nav() {
               />
             </svg>
           </button>
-          {/* <button className="btn prmry_btn make_enqury_btn">
-                            <NavLink onMouseEnter={showOverlay} onClick={hideOverlay} className="text-white no-underline-link" href="/contact-us">Make an enquiry
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" shapeRendering="geometricPrecision" textRendering="geometricPrecision" imageRendering="optimizeQuality" fillRule="evenodd" clipRule="evenodd" viewBox="0 0 267 512.43"><path fillRule="nonzero" d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z" /></svg>
-                            </NavLink>
-                        </button> */}
         </div>
       </nav>
     </>
