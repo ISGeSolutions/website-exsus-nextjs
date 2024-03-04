@@ -3557,7 +3557,14 @@ nav
   font: 400 1rem/1.5rem "Roboto", sans-serif;
 }
 
-.card_blk_row .card_blk_inr.card_blk_para_blk span {
+.card_blk_row .card_blk_inr.card_blk_para_blk p {
+  padding-bottom: 0;
+}
+
+.card_blk_row .card_blk_inr.card_blk_para_blk p,
+.card_blk_row .card_blk_inr.card_blk_para_blk p span,
+.card_blk_row .card_blk_inr.card_blk_para_blk span,
+.card_blk_row .card_blk_inr.card_blk_para_blk div {
   color: #ffffff;
   font: 300 0.875rem/1.5rem "Roboto", sans-serif;
   text-align: justify;
@@ -3566,7 +3573,11 @@ nav
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 6;
+  -webkit-line-clamp: 9;
+}
+
+.card_blk_row .card_blk_inr.card_blk_para_blk span:first-child {
+  padding-top: 10px;
 }
 
 .trvl_info_row .trvl_info_cntnt.trvl_info_para_blk h3 {
