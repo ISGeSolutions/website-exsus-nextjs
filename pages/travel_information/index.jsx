@@ -163,14 +163,9 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {
-            if (error.message === "Loop break") {
-            } else if (error.message === "Region not found") {
-            }
-          }
+          } catch (error) {}
         }
       }
-    } else {
     }
   };
 
@@ -209,7 +204,7 @@ function Index() {
                 )}`}
               ></FriendlyUrl>
             </div>
-            <div className="trvl_info_cntnt">
+            <div className="trvl_info_cntnt trvl_info_para_blk">
               <h2 className="trvl_title">
                 {
                   travelInfo?.custom_page_contents?.data?.filter(

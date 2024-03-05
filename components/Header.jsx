@@ -437,7 +437,6 @@ function Header() {
             </div>
             <div className="mobile_trigger_btn mobile-menu-trigger d-block d-lg-none">
               <a
-                href="#"
                 onClick={() => {
                   const menuLayout = document.querySelector(".menu"); //Nav tag
                   menuLayout.classList.toggle("active");

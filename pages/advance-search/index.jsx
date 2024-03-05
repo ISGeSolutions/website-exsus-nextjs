@@ -6,8 +6,6 @@ import { Inspireme } from "components";
 import Head from "next/head";
 import { NavLink } from "components";
 import { useRouter } from "next/router";
-import generateDynamicLink from "components/utils/generateLink";
-import Image from "next/image";
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
 import { Alert } from "../../components";
 import { formatPrice } from "../../components/utils/priceFormater";
@@ -30,6 +28,7 @@ function Index() {
   };
   const [activeItem, setActiveItem] = useState("asc");
   const [alert, setAlert] = useState(null);
+  const [advanceSearch, setAdvanceSearch] = useState(null);
 
   const handleLoadMore = () => {
     setVisibleItems((prevVisibleItems) => prevVisibleItems + itemsPerPage);
@@ -83,17 +82,19 @@ function Index() {
   };
 
   const generateDynamicLink = (item) => {
-    let countryName = item?.attributes?.country?.data?.attributes?.country_name
-      ?.replace(/ /g, "-")
-      .replace(/&/g, "and")
-      .toLowerCase();
+    let countryName =
+      item?.attributes?.countries?.data[0]?.attributes?.country_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase();
 
     return (
       regionWiseUrl +
       `/destinations/${item?.attributes?.destination_name
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
-        .toLowerCase()}/${countryName}/${countryName}-itineraries/${item?.attributes?.friendly_url
+        .toLowerCase()}/${countryName}/${countryName}-itineraries/${
+        item?.attributes?.friendly_url
       }`
     );
   };
@@ -101,25 +102,27 @@ function Index() {
   //destination_name destination_name
 
   const handleRedirect = (item) => {
-    let countryName = item?.attributes?.country?.data?.attributes?.country_name
-      ?.replace(/ /g, "-")
-      .replace(/&/g, "and")
-      .toLowerCase();
+    let countryName =
+      item?.attributes?.countries?.data?.attributes?.country_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase();
 
     router.push(
       regionWiseUrl +
-      `/destinations/${item?.attributes?.destination_name
-        ?.replace(/&/g, "and")
-        .replace(/ /g, "-")
-        .toLowerCase()}/${countryName}/${countryName}-itineraries/${item?.attributes?.friendly_url
-      }`
+        `/destinations/${item?.attributes?.destination_name
+          ?.replace(/&/g, "and")
+          .replace(/ /g, "-")
+          .toLowerCase()}/${countryName}/${countryName}-itineraries/${
+          item?.attributes?.friendly_url
+        }`
     );
   };
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -309,6 +312,7 @@ function Index() {
     }
 
     customeService.getAdvanceSearch().then((x) => {
+      setAdvanceSearch(x.data[0]?.attributes);
       localStorage.setItem(
         "PageInfo",
         JSON.stringify({
@@ -317,42 +321,6 @@ function Index() {
         })
       );
     });
-
-    // if (dcodestr == null && dcodeReason == null && dcodeMonth == null) {
-    //   destinationService
-    //     .getItinerariesInspireMe(
-    //       page,
-    //       dcodestr ? dcodestr : "",
-    //       dcodeReason ? dcodeReason : "",
-    //       dcodeMonth ? dcodeMonth : "",
-    //       region
-    //     )
-    //     .then((x) => {
-    //       setItineraries(x.data);
-    //       setIsLoading(false);
-    //     })
-    //     .catch((error) => {
-    //       setIsLoading(false);
-    //     });
-    // } else {
-    //    ("api is getting called twice");
-    // }
-
-    // destinationService
-    //   .getItinerariesInspireMe(
-    //     page,
-    //     dcodestr ? dcodestr : "",
-    //     dcodeReason ? dcodeReason : "",
-    //     dcodeMonth ? dcodeMonth : "",
-    //     region
-    //   )
-    //   .then((x) => {
-    //     setItineraries(x.data);
-    //     setIsLoading(false);
-    //   })
-    //   .catch((error) => {
-    //     setIsLoading(false);
-    //   });
     setIsLoading(false);
     loadMoreData(activeItem);
 
@@ -369,10 +337,13 @@ function Index() {
           type="text/javascript"
           src="/assets/javascripts/card-slider.js"
         ></script>
-        {/* <script
-          type="text/javascript"
-          src="/assets/javascripts/card-slider-equal-height.js"
-        ></script> */}
+        <title>
+          {
+            advanceSearch?.custom_page_contents?.data?.filter(
+              (res) => res?.attributes?.content_name == "Title"
+            )[0]?.attributes?.content_value
+          }
+        </title>
       </Head>
 
       {isLoading ? (
@@ -387,7 +358,13 @@ function Index() {
         <div>
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey pt-5">
             <div className="container">
-              <h2 className="search_result_title">Your search result</h2>
+              <h2 className="search_result_title">
+                {
+                  advanceSearch?.custom_page_contents?.data?.filter(
+                    (res) => res.attributes?.content_name == "HeadingTag"
+                  )[0]?.attributes?.content_value
+                }
+              </h2>
               <h3 className="title_cls search_result_title_green">
                 Find and plan your perfect tailor-made holiday worldwide
               </h3>
@@ -404,8 +381,9 @@ function Index() {
                     <div className="col-12">
                       <div className="destination_filter_result d-block d-lg-flex">
                         <p>
-                          We've found {metaData.total} holiday ideas that are
-                          right for you.
+                          We've found{" "}
+                          {metaData?.total > 0 ? metaData?.total : 0} holiday
+                          ideas that are right for you.
                         </p>
                         <div className="destination_contries_filter d-inline-block d-lg-flex">
                           <label className="pt-2 pt-lg-0">Arrange by:</label>
@@ -460,7 +438,7 @@ function Index() {
                                 {item?.attributes?.itinerary_images?.data.map(
                                   (element, index) =>
                                     element.attributes.image_type ==
-                                      "thumbnail" ? (
+                                    "thumbnail" ? (
                                       <img
                                         key={index}
                                         src={element.attributes.image_path}
@@ -495,10 +473,12 @@ function Index() {
                                     )
                                     .map((res1) => (
                                       <li key={res1.id}>
-                                        {`from ${res1.attributes?.currency_symbol ?? ""
-                                          }${formatPrice(res1.attributes?.price) ??
+                                        {`from ${
+                                          res1.attributes?.currency_symbol ?? ""
+                                        }${
+                                          formatPrice(res1.attributes?.price) ??
                                           " xxxx"
-                                          } per person`}
+                                        } per person`}
                                       </li>
                                     ))}
 
