@@ -21,3 +21,4 @@ export * from "./thankyou.service";
 export * from "./terms_and_condition.service";
 export * from "./whereToGo.service";
 export * from "./contactUs.service";
+export * from "./search.service";
