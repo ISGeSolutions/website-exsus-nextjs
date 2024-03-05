@@ -4,19 +4,60 @@ import { Link, Spinner } from "components";
 import { Layout } from "components/users";
 import { userService } from "services";
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
+import { useRouter } from "next/router";
+import { searchService } from "../../services";
 
 export default Index;
 
 function Index() {
   const [users, setUsers] = useState(null);
-
+  const router = useRouter();
+  const searchTerm = router.query?.search;
+  const [searchResult, setSearchResult] = useState([]);
   const handleHrefClick = (event) => {
     event.preventDefault();
   };
 
+
+  const loadMoreData = (param) => {
+    searchService
+      .searchSite(param)
+      .then((response) => {
+        setSearchResult(response.meta.pagination);
+        const newItineraries = response.data;
+        // setIsLoading(false);
+      })
+      .catch((error) => {
+        // Handle any errors here
+        // console.error(error);
+        // setIsLoading(false);
+      });
+  };
+
   useEffect(() => {
+    // console.log(searchTerm);
+    // const searchData = router.query?.search;
+    searchService
+      .customPage()
+      .then((x) => {
+        localStorage.setItem(
+          "PageInfo",
+          JSON.stringify({
+            pType: "CUST",
+            pCode: x?.data[0]?.attributes?.page_code,
+          })
+        );
+      })
+      .catch((error) => {
+        showAlert(error);
+      });
+
     // userService.getAll().then(x => setUsers(x));
-  }, []);
+    if (searchTerm) {
+
+      loadMoreData(searchTerm)
+    }
+  }, [searchTerm]);
 
   return (
     <Layout>
@@ -29,7 +70,7 @@ function Index() {
               id="search"
               type="search"
               placeholder="Search here"
-              autocomplete="off"
+              autoComplete="off"
             />
             <div className="banner_inspire_btn ps-0 ps-md-2">
               <button

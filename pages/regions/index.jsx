@@ -11,6 +11,7 @@ import RegionOverview from "../regionoverview/index"; // Adjust the path accordi
 import RegionPlacesToStay from "../regionplacestostay/index"; // Adjust the path accordingly
 import { FriendlyUrl, Signup } from "../../components";
 import { ImageSlider } from "../../components/ImageSlider";
+import MarkerInfoWindowNext from "../../components/common/MarkerInfoWindowNext";
 
 export default Index;
 
@@ -30,6 +31,7 @@ function Index() {
   const [isLoading, setIsLoading] = useState(true);
   const [friendlyUrl, setFriendlyUrl] = useState("");
   const [activeButton, setActiveButton] = useState("images");
+  const [coordinatesArray, setCoordinatesArray] = useState([]);
   const destinationcode = router?.query?.continent
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
@@ -38,7 +40,7 @@ function Index() {
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
-  const regionName = router.query?.region
+  let regionName = router.query?.region
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
@@ -123,14 +125,8 @@ function Index() {
 
   const toggleTab = (itemId) => {
     var text;
-    // const redirectUrl =
-    //   regionWiseUrl +
-    //   "/destinations/" +
-    //   destinationcode?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase() +
-    //   "/" +
-    //   countrycode?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase() +
-    //   "/" +
-    //   regionName?.replace(/ /g, "-").replace(/&/g, "and").toLowerCase();
+    setActiveButton("images");
+
     if (itemId == "overview") {
       setIsShowMap(true);
       handleTabClick("images");
@@ -210,8 +206,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -369,7 +365,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -402,8 +398,9 @@ function Index() {
       router.push(newUrl);
       // console.log(`The URL contains "${searchString}"`);
     } else {
-      // console.log(`The URL does not contain "${searchString}"`);
-
+      regionName = segments[segments.length - 1]?.replace(/-and-/g, " & ")
+        .replace(/-/g, " ")
+        .toLowerCase();;
       if (
         !localStorage.getItem(
           `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
@@ -447,23 +444,11 @@ function Index() {
               pCode: x?.data[0]?.attributes?.region_code,
             })
           );
+          debugger;
+
           setHeadingText(x.data[0]?.attributes?.region_name);
           const imageCheck = x.data[0].attributes.region_images.data;
           const newBackgroundImages = [];
-
-          let latitude = x?.data[0]?.attributes?.map_latitude
-            ? x?.data[0]?.attributes?.map_latitude
-            : "";
-          let longitude = x?.data[0]?.attributes?.map_longitude
-            ? x?.data[0]?.attributes?.map_longitude
-            : "";
-          const mapTemp =
-            `https://www.google.com/maps/embed/v1/place?q=` +
-            latitude +
-            `,` +
-            longitude +
-            `&zoom=10&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
-          setMapVariable(mapTemp);
           imageCheck.forEach((element) => {
             if (element.attributes.image_type == "banner") {
               newBackgroundImages.push(element.attributes.image_path);
@@ -479,35 +464,54 @@ function Index() {
           setIsLoading(false);
         });
 
-      // destinationService.getDestinationDetails(destinationcode).then(x => {
-      //     setDestinationDetails(x.data.attributes);
-      //  (x.data)
-      //     setMetaTitle(x.data.attributes.page_meta_title);
-      //     setHeadingText(x.data.attributes.page_meta_title);
-      //     const map_latitude = x.data.attributes?.map_latitude;
-      //     const map_longitude = x.data.attributes?.map_longitude;
-      //     setdestinationName(x.data.attributes.destination_name);
-      //     // const map_latitude = "40.7128";
-      //     // const map_longitude = "-74.0060";
+      destinationService
+        .getRegions(countrycode)
+        .then((x) => {
+          const filteredData = x.data[0].attributes?.regions?.data?.filter(
+            (item) => {
+              const { map_latitude, map_longitude } = item.attributes;
+              return (
+                map_latitude !== null &&
+                map_latitude !== "" &&
+                map_longitude !== null &&
+                map_longitude !== ""
+              );
+            }
+          );
+          // Create an array of objects with parsed latitude and longitude
+          const newCoordinates = filteredData.map((item) => ({
+            lat: parseFloat(item.attributes.map_latitude),
+            lng: parseFloat(item.attributes.map_longitude),
+            name: item.attributes?.region_name,
+            image: item.attributes?.region_images?.data?.filter(
+              (res) => res?.attributes?.image_type == "thumbnail"
+            )[0]?.attributes?.image_path,
+            url:
+              regionWiseUrl +
+              `/destinations/${destinationcode?.replace(/&/g, "and")
+                .replace(/ /g, "-")
+                .toLowerCase()}/${x.data[0].attributes?.friendly_url
+                  ?.replace(/&/g, "and")
+                  .replace(/ /g, "-")
+                  .toLowerCase()}/${item?.attributes?.friendly_url
+                    ?.replace(/ /g, "-")
+                    .replace(/&/g, "and")
+                    .toLowerCase()}`,
+          }));
+          // // Update the state with the accumulated coordinates
+          setCoordinatesArray((prevCoordinates) => [
+            ...prevCoordinates,
+            ...newCoordinates,
+          ]);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          // Handle any errors here
+          // console.error(error);
+          setIsLoading(false);
+        });
 
-      //     const mapTemp = `https://www.google.com/maps/embed/v1/place?q=` + map_latitude + `,` + map_longitude + `&key=AIzaSyDIZK8Xr6agksui1bV6WjpyRtgtxK-YQzE`;
-      //     setMapVariable(mapTemp);
 
-      //     // const lines = x.data.attributes?.overview_text.split('\n');
-      //     // const oldText = x.data.attributes?.overview_text;
-      //     // var newValueWithBr = oldText?.replace(/\\n/g, "");
-      //     // setnewValueWithBr(newValueWithBr);
-      //     const imageCheck = x.data.attributes.destination_images.data;
-      //     const newBackgroundImages = [];
-      //     imageCheck.forEach(element => {
-      //         if (element.attributes.image_type == 'banner') {
-      //             newBackgroundImages.push(element.attributes.image_path);
-      //         } else if (element.attributes.image_type == 'thumbnail') {
-      //         }
-      //     });
-      //     setBackgroundImage(newBackgroundImages);
-      //     // setDestinationLandingDetails(x)
-      // });
 
       $(".banner_map_tab").click(function () {
         $(".banner_map_blk").addClass("banner_map_active");
@@ -656,17 +660,15 @@ function Index() {
             {isShowMap ? (
               <div className="banner_tab_blk">
                 <button
-                  className={`btn banner_map_tab ${
-                    activeButton === "map" ? "banner_tab_active" : ""
-                  }`}
+                  className={`btn banner_map_tab ${activeButton === "map" ? "banner_tab_active" : ""
+                    }`}
                   onClick={() => handleTabClick("map")}
                 >
                   Map
                 </button>
                 <button
-                  className={`btn banner_img_tab ${
-                    activeButton === "images" ? "banner_tab_active" : ""
-                  }`}
+                  className={`btn banner_img_tab ${activeButton === "images" ? "banner_tab_active" : ""
+                    }`}
                   onClick={() => handleTabClick("images")}
                 >
                   Images
@@ -676,23 +678,11 @@ function Index() {
               ""
             )}
             <div
-              className={`banner_map_blk ${
-                activeButton === "map" ? "banner_map_active" : ""
-              }`}
+              className={`banner_map_blk ${activeButton === "map" ? "banner_map_active" : ""
+                }`}
             >
-              <Iframe
-                width="640px"
-                height="320px"
-                id=""
-                className=""
-                display="block"
-                src={mapVariable}
-                position="relative"
-                style="border:0;"
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+              <MarkerInfoWindowNext data={coordinatesArray} />
+
 
               {/* src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" */}
             </div>

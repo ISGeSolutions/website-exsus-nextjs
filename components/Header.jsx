@@ -83,8 +83,8 @@ function Header() {
     }
   }
 
-  const handleSearch = () => {
-    router.push("/search");
+  const handleSearch = (data) => {
+    router.push(`/search?search=${data?.searchText}`);
   };
 
   // Function to check if any string in the array is present in the sentence
@@ -187,7 +187,7 @@ function Header() {
   // };
 
   useEffect(() => {
-    console.warn = () => {};
+    console.warn = () => { };
 
     $(".header_country_list > ul .header_country_label").on(
       "mouseenter",

@@ -544,6 +544,8 @@ function ContinentItinararies(props) {
             label: item?.attributes?.country_name,
           })),
         ];
+        console.log(arrayOfObjects);
+        arrayOfObjects = arrayOfObjects.filter(res => res.value !== null);
         setAllCountries(arrayOfObjects);
 
         // setAllCountries(
