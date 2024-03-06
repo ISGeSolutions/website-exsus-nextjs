@@ -444,7 +444,7 @@ function Index() {
               pCode: x?.data[0]?.attributes?.region_code,
             })
           );
-          debugger;
+         
 
           setHeadingText(x.data[0]?.attributes?.region_name);
           const imageCheck = x.data[0].attributes.region_images.data;

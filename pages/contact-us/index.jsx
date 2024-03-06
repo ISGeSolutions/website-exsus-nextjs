@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Signup, FriendlyUrl, Alert } from "components";
-import { Link, Spinner } from "components";
 import { Layout } from "components/users";
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
 import { useRouter } from "next/router";
@@ -71,10 +70,6 @@ function Index() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
-  // const handleRedirect = () => {
-  //   router.push("contact-us/thankyou");
-  // };
 
   function onSubmit(data) {
     data["site_region"] = region == "us" ? "Yes" : "No";

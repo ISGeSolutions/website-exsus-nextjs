@@ -22,9 +22,7 @@ export default Index;
 
 function Index() {
   const router = useRouter();
-  const [users, setUsers] = useState(null);
   const [allOffers, setAllOffers] = useState([]);
-  const [destinations, setDestinations] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [friendlyUrl, setFriendlyUrl] = useState("");
   const [headingTag, setHeadingTag] = useState(null);
@@ -32,7 +30,6 @@ function Index() {
   const [metaDescription, setMetaDescription] = useState(null);
   const [longText, setLongText] = useState(null);
   const [careerData, setCareerData] = useState(null);
-  const [mapVariable, setMapVariable] = useState(null);
   const [subTitle, setSubTitle] = useState(null);
   const [backgroundImage, setBackgroundImage] = useState([]);
   const [activeItem, setActiveItem] = useState("recommended");
@@ -75,21 +72,21 @@ function Index() {
       .replace(/&/g, "and");
     router.push(
       regionWiseUrl +
-      `/destinations/${res?.attributes?.hotel?.data?.attributes?.destination?.data?.attributes?.destination_name
-        ?.replace(/ /g, "-")
-        .toLowerCase()
-        .replace(
-          /&/g,
-          "and"
-        )}/${res?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.country_name
+        `/destinations/${res?.attributes?.hotel?.data?.attributes?.destination?.data?.attributes?.destination_name
+          ?.replace(/ /g, "-")
+          .toLowerCase()
+          .replace(
+            /&/g,
+            "and"
+          )}/${res?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(
             /&/g,
             "and"
           )}/${res?.attributes?.hotel?.data?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -106,38 +103,16 @@ function Index() {
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/${res?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.country_name
-          ?.replace(/ /g, "-")
-          .replace(
-            /&/g,
-            "and"
-          )}/${res?.attributes?.hotel?.data?.attributes?.region?.data?.attributes?.region_name
-            ?.replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${hotelName}`
+        ?.replace(/ /g, "-")
+        .replace(
+          /&/g,
+          "and"
+        )}/${res?.attributes?.hotel?.data?.attributes?.region?.data?.attributes?.region_name
+        ?.replace(/ /g, "-")
+        .replace(/&/g, "and")
+        .toLowerCase()}/${hotelName}`
     );
   };
-
-  // const generateDynamicLink = (item) => {
-  //   // return regionWiseUrl + `/hotel-detail`;
-
-  //   let hotelName = item?.attributes?.friendly_url
-  //     ?.replace(/ /g, "-")
-  //     .toLowerCase()
-  //     .replace(/&/g, "and");
-  //   return (
-  //     regionWiseUrl +
-  //     `/destinations/${item?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.destination?.data?.attributes?.destination_code
-  //       ?.replace(/&/g, "and")
-  //       .replace(/ /g, "-")
-  //       .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-  //       ?.replace(/ /g, "-")
-  //       .replace(/&/g, "and")
-  //       .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-  //       ?.replace(/ /g, "-")
-  //       .replace(/&/g, "and")
-  //       .toLowerCase()}/${hotelName}`
-  //   );
-  // };
 
   const getDynamicPage = (item) => {
     return `${regionWiseUrl}/${item}`;
@@ -149,8 +124,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -283,8 +258,6 @@ function Index() {
   };
 
   useEffect(() => {
-    // userService.getAll().then(x => setUsers(x));
-
     if (
       !localStorage.getItem(
         `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
@@ -307,7 +280,7 @@ function Index() {
 
         setFriendlyUrl(`home/special offers`);
       })
-      .catch((error) => { });
+      .catch((error) => {});
 
     specialoffersService
       .getOffersCustomePage()
@@ -411,16 +384,7 @@ function Index() {
         setIsLoading(false);
       });
 
-    const carousel = document.querySelector("#carouselExampleInterval");
-    if (carousel) {
-      new bootstrap.Carousel(carousel);
-    }
-
     window.addEventListener("resize", equalHeight(true));
-    // return () => {
-    //   // Cleanup code (if needed) when the component unmounts
-    //   tooltipList.forEach(tooltip => tooltip.dispose());
-    // };
   }, []);
 
   return (
@@ -445,41 +409,6 @@ function Index() {
         <div>
           <section className="banner_blk_row">
             <ImageSlider data={backgroundImage}></ImageSlider>
-            {/* <div
-              id="carouselExampleInterval"
-              className="carousel slide"
-              data-bs-ride="carousel"
-            >
-              <div className="carousel-indicators">
-                {backgroundImage.map((_, index) => (
-                  <button
-                    key={"spcImg" + index}
-                    type="button"
-                    data-bs-target="#carouselExampleInterval"
-                    data-bs-slide-to={index}
-                    className={index === 0 ? "active" : ""}
-                    aria-current={index === 0 ? "true" : "false"}
-                    aria-label={`Slide ${index + 1}`}
-                  ></button>
-                ))}
-              </div>
-              <div className="carousel-inner">
-                {backgroundImage.map((imagePath, index) => (
-                  <a
-                    href="#"
-                    onClick={handleHrefClick}
-                    key={"spcCarousel" + index}
-                    className={`carousel-item ${index === 0 ? "active" : ""}`}
-                    data-bs-interval="5000"
-                  >
-                    <div
-                      className="banner_commn_cls"
-                      style={{ backgroundImage: `url(${imagePath})` }}
-                    ></div>
-                  </a>
-                ))}
-              </div>
-            </div> */}
           </section>
 
           <section className="card_blk_row destinations_blk_row light_grey">
@@ -504,9 +433,7 @@ function Index() {
                 <div className="container">
                   <div className="row">
                     <div className="col-12 favrites_blk_row pb-0">
-                      <h3 className="title_cls pb-0">
-                        Our favourite special offers on luxury holidays
-                      </h3>
+                      <h3 className="title_cls pb-0">{subTitle}</h3>
                       <div className="destination_contries_filter d-flex justify-content-around">
                         <ul>
                           <li>
@@ -601,8 +528,8 @@ function Index() {
                                                 {res?.attributes?.currency_symbol.repeat(
                                                   Math.abs(
                                                     5 -
-                                                    res?.attributes
-                                                      ?.price_guide_value
+                                                      res?.attributes
+                                                        ?.price_guide_value
                                                   )
                                                 )}
                                               </label>
@@ -676,8 +603,9 @@ function Index() {
           )}
 
           <section
-            className={`chat_window_parnt_blk ${isMinimized ? "chat_window_minised" : ""
-              }`}
+            className={`chat_window_parnt_blk ${
+              isMinimized ? "chat_window_minised" : ""
+            }`}
           >
             <div
               className="chat_window_inr_blk"
@@ -736,12 +664,14 @@ function Index() {
             </div>
           </section>
 
+          {/* Enquiry */}
           <section className="make_enqury_row">
             <div className="container">
               <EnquiryButton />
             </div>
           </section>
 
+          {/* NewsLetter */}
           <section
             aria-label="Sign up for newsletter"
             className="newslettr_row"

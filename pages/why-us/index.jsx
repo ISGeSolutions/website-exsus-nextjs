@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Signup, FriendlyUrl } from "components";
-import { MyLoader } from "./../../components/MyLoader";
-// import { Link, Spinner } from 'components';
 import { Layout } from "components/users";
 import { whyusService, destinationService, homeService } from "services";
 import { NavLink } from "components";
@@ -279,53 +277,6 @@ function Index() {
           <div>
             <section className="banner_blk_row">
               <ImageSlider data={backgroundImage}></ImageSlider>
-              {/* {whyusDetails?.custom_page_images?.data ? (
-                <div
-                  id="carouselExampleInterval"
-                  className="carousel slide"
-                  data-bs-ride="carousel"
-                >
-                  <div className="carousel-indicators">
-                    {whyusDetails?.custom_page_images?.data?.map(
-                      (element, index) =>
-                        element?.attributes?.image_type == "banner" && (
-                          <button
-                            key={index}
-                            type="button"
-                            data-bs-target="#carouselExampleInterval"
-                            data-bs-slide-to={index}
-                            className={index === 0 ? "active" : ""}
-                            aria-current={index === 0 ? "true" : "false"}
-                            aria-label={`Slide ${index + 1}`}
-                          ></button>
-                        )
-                    )}
-                  </div>
-                  <div className="carousel-inner">
-                    {whyusDetails?.custom_page_images?.data?.map(
-                      (element, index) =>
-                        element?.attributes?.image_type == "banner" && (
-                          <a
-                            key={index}
-                            className={`carousel-item ${
-                              index === 0 ? "active" : ""
-                            }`}
-                            data-interval="5000"
-                          >
-                            <div
-                              className="banner_commn_cls"
-                              style={{
-                                backgroundImage: `url(${element?.attributes?.image_path})`,
-                              }}
-                            ></div>
-                          </a>
-                        )
-                    )}
-                  </div>
-                </div>
-              ) : (
-                ""
-              )} */}
             </section>
 
             <section className="trvl_info_row">
@@ -358,11 +309,6 @@ function Index() {
                 <div className="book_wth_confdnce about_us_sectn">
                   <div className="row">
                     <div className="col-12">
-                      {/* <p
-                        dangerouslySetInnerHTML={{
-                          __html: whyusDetails?.content_value,
-                        }}
-                      /> */}
                       <p
                         dangerouslySetInnerHTML={{
                           __html: dictioneryFunction(
@@ -457,12 +403,14 @@ function Index() {
               </div>
             </section>
 
+            {/* Enquiry */}
             <section className="make_enqury_row">
               <div className="container">
                 <EnquiryButton />
               </div>
             </section>
 
+            {/* NewsLetter */}
             <section
               aria-label="Sign up for newsletter"
               className="newslettr_row"

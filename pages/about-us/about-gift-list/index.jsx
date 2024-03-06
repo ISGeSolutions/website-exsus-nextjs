@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import { Signup } from "components";
-import { Link, Spinner } from "components";
 import { Layout } from "components/users";
-import { whyusService } from "../../../services/whyus.service";
-import { NavLink } from "components";
 import { destinationService } from "../../../services";
 import { giftListService } from "../../../services";
 import { FriendlyUrl } from "../../../components";
@@ -45,13 +42,13 @@ function Index() {
   };
 
   const disableAnchorTags = (htmlString) => {
-    const tempElement = document.createElement('div');
+    const tempElement = document.createElement("div");
     tempElement.innerHTML = htmlString;
 
     // Disable anchor tags
-    const anchorTags = tempElement.querySelectorAll('a');
-    anchorTags.forEach(anchor => {
-      anchor.removeAttribute('href');
+    const anchorTags = tempElement.querySelectorAll("a");
+    anchorTags.forEach((anchor) => {
+      anchor.removeAttribute("href");
     });
 
     return tempElement.innerHTML;
@@ -110,7 +107,9 @@ function Index() {
             } else if (element?.attributes?.content_name == "MetaDescription") {
               setMetaDescription(element?.attributes?.content_value);
             } else if (element?.attributes?.content_name == "Long_Text") {
-              modifiedString = disableAnchorTags(element?.attributes?.content_value);
+              modifiedString = disableAnchorTags(
+                element?.attributes?.content_value
+              );
             } else if (element?.attributes?.content_name == "Right_Header") {
               setRightHeader(element?.attributes?.content_value);
             } else if (element?.attributes?.content_name == "Right_Corner") {
@@ -196,41 +195,6 @@ function Index() {
           <div>
             <section className="banner_blk_row">
               <ImageSlider data={backgroundImage}></ImageSlider>
-              {/* <div
-                id="carouselExampleInterval"
-                className="carousel slide"
-                data-bs-ride="carousel"
-              >
-                <div className="carousel-indicators">
-                  {backgroundImage.map((_, index) => (
-                    <button
-                      key={index}
-                      type="button"
-                      data-bs-target="#carouselExampleInterval"
-                      data-bs-slide-to={index}
-                      className={index === 0 ? "active" : ""}
-                      aria-current={index === 0 ? "true" : "false"}
-                      aria-label={`Slide ${index + 1}`}
-                    ></button>
-                  ))}
-                </div>
-                <div className="carousel-inner">
-                  {backgroundImage.map((imagePath, index) => (
-                    <NavLink
-                      key={index}
-                      href="#"
-                      onClick={handleHrefClick}
-                      className={`carousel-item ${index === 0 ? "active" : ""}`}
-                      data-bs-interval="5000"
-                    >
-                      <div
-                        className="banner_commn_cls"
-                        style={{ backgroundImage: `url(${imagePath})` }}
-                      ></div>
-                    </NavLink>
-                  ))}
-                </div>
-              </div> */}
             </section>
             <section className="trvl_info_row">
               <div className="container">
@@ -241,115 +205,19 @@ function Index() {
                 </div>
                 <div className="trvl_info_cntnt">
                   <h2 className="trvl_title">{headingTag}</h2>
-                  {/* <div className="mb-4" dangerouslySetInnerHTML={{ _html: longText }}> */}
-                  {/* </div> */}
-                  {/* <button
-                                    className="btn prmry_btn mx-auto mb-5"
-
-                                >
-                                    Login to your Gift List
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="#ffffff"
-                                        shapeRendering="geometricPrecision"
-                                        textRendering="geometricPrecision"
-                                        imageRendering="optimizeQuality"
-                                        fillRule="evenodd"
-                                        clipRule="evenodd"
-                                        viewBox="0 0 267 512.43"
-                                    >
-                                        <path
-                                            fillRule="nonzero"
-                                            d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                                        ></path>
-                                    </svg>
-                                </button>
-                                <div className="gift_list_parnt">
-                                    <h2 className="text-capitalize">How to set up a Gift List</h2>
-                                    <p className="mb-4">
-                                        Always wanted to explore Angkor Wat? Dreamed of romantic dinners
-                                        under a starry sky? The Exsus Gift List allows your friends and
-                                        family to purchase these special experiences by making cash
-                                        contributions towards your holiday.
-                                    </p>
-                                    <ul className="gift_list_blk">
-                                        <li>
-                                            To personalise your gift list, you can provide us with a photo
-                                            of your choice and a welcome message to your friends and
-                                            family to be displayed at the top of your list so you can tell
-                                            them a little about your trip and what you will be doing.
-                                        </li>
-                                        <li>
-                                            When we've set up your gift list, you can send your friends
-                                            and family the Gift List reference number, which allows them
-                                            to view your Gift List online and make cash contributions.
-                                            They will then receive an automated confirmation of purchase
-                                            email from Exsus.
-                                        </li>
-                                        <li>
-                                            You can log in to your Exsus Gift List using your reference
-                                            number and password at any time to see what has been purchased
-                                            and by whom. Whilst the Gift List will close for contributions
-                                            on the final day of your holiday, you will be able to access
-                                            the list for up to a month after you return.
-                                        </li>
-                                    </ul>
-                                    <p>
-                                        If you have any further queries about the Gift List, please call
-                                        our team on <a href="#" onClick={handleHrefClick}>020 3613 5556</a>
-                                    </p>
-                                </div>
-                                <div className="gift_list_parnt">
-                                    <h2 className="text-capitalize">How to buy a gift</h2>
-                                    <ul className="gift_list_blk">
-                                        <li>
-                                            Buying a gift is simple. Once you have logged in using the
-                                            reference number given to you, a Gift List created by the
-                                            travellers will appear. You will then have the option of
-                                            donating a cash gift to contribute to the holiday fund.
-                                        </li>
-                                        <li>
-                                            Once you have selected the amount you would like to
-                                            contribute, payment details will be taken and you have the
-                                            option of sending a personal message if you wish. You will
-                                            also receive a confirmation email after your purchase.
-                                        </li>
-                                    </ul>
-                                    <p className="mb-4">
-                                        If you have any queries, please contact our team on{" "}
-                                        <a href="#" onClick={handleHrefClick}>020 3613 5556</a>
-                                    </p>
-                                    <button
-                                        className="btn prmry_btn mx-auto"
-                                    >
-                                        Contribute to a Gift List
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="#ffffff"
-                                            shapeRendering="geometricPrecision"
-                                            textRendering="geometricPrecision"
-                                            imageRendering="optimizeQuality"
-                                            fillRule="evenodd"
-                                            clipRule="evenodd"
-                                            viewBox="0 0 267 512.43"
-                                        >
-                                            <path
-                                                fillRule="nonzero"
-                                                d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                                            ></path>
-                                        </svg>
-                                    </button>
-                                </div> */}
                 </div>
                 <div dangerouslySetInnerHTML={{ __html: longText }} />
               </div>
             </section>
 
+            {/* Enquiry */}
             <section className="make_enqury_row">
               <div className="container">
                 <EnquiryButton />
               </div>
             </section>
+
+            {/* NewsLetter */}
             <section
               aria-label="Sign up for newsletter"
               className="newslettr_row"

@@ -1,17 +1,12 @@
 import { useState, useEffect } from "react";
-import { Link, Spinner, Signup } from "components";
 import {
   destinationService,
   alertService,
   userService,
   homeService,
 } from "services";
-import { Inspireme } from "components";
-import Head from "next/head";
 import { NavLink } from "components";
 import { useRouter } from "next/router";
-import generateDynamicLink from "components/utils/generateLink";
-import Image from "next/image";
 import CustomMultiValue from "../continentitineraries/CustomMultiValue";
 import Select, { components } from "react-select";
 import { Alert } from "../../components";
@@ -286,21 +281,6 @@ function CountryItinararies(props) {
     }
   };
 
-  // const countryOptions = [
-  //   { value: "Asia", label: "Asia" },
-  //   { value: "Hong Kong & Macau", label: "Hong Kong & Macau" },
-  //   { value: "Malaysia & Borneo", label: "Malaysia & Borneo" },
-  //   { value: "Singapore", label: "Singapore" },
-  //   { value: "Indonesia", label: "Indonesia" },
-  //   { value: "Japan", label: "Japan" },
-  //   { value: "Cambodia", label: "Cambodia" },
-  //   { value: "Vietnam", label: "Vietnam" },
-  //   { value: "China", label: "China" },
-  //   { value: "Thailand", label: "Thailand" },
-  //   { value: "Burma", label: "Burma" },
-  //   { value: "Laos", label: "Laos" },
-  // ];
-
   const monthOptions = [
     // { value: "All months", label: "All months" },
     { value: "1", label: "January" },
@@ -318,10 +298,6 @@ function CountryItinararies(props) {
   ];
 
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
-
-  // const handleLoadMore = () => {
-  //     setVisibleItems(prevVisibleItems => prevVisibleItems + itemsPerPage);
-  // };
 
   const showAlert = (message, type) => {
     setAlert({ message, type });
@@ -456,9 +432,6 @@ function CountryItinararies(props) {
 
   function onSubmit(e) {
     e.preventDefault();
-    //  ("Selected Countries:", selectedOptionCountry);
-    //  ("Selected Regions:", selectedOptionRegion);
-    //  ("Selected Months:", selectedOptionMonth);
     if (
       !selectedOptionReason.length > 0 &&
       !selectedOptionRegion.length > 0 &&
@@ -478,22 +451,24 @@ function CountryItinararies(props) {
       `/destinations/${destinationcode
         ?.replace(/ /g, "-")
         ?.replace(/&/g, "and")
-        ?.replace(/ /g, " ")}/${countrycode?.replace(/ /g, "-")?.replace(/&/g, "and")}/${countrycode
-          ?.replace(/ /g, "-")
-          ?.replace(/&/g, "and")
-          ?.replace(
-            / /g,
-            "-"
-          )}-itineraries/${item?.attributes?.friendly_url?.replace(/%20/g, " ")}`
+        ?.replace(/ /g, " ")}/${countrycode
+        ?.replace(/ /g, "-")
+        ?.replace(/&/g, "and")}/${countrycode
+        ?.replace(/ /g, "-")
+        ?.replace(/&/g, "and")
+        ?.replace(
+          / /g,
+          "-"
+        )}-itineraries/${item?.attributes?.friendly_url?.replace(/%20/g, " ")}`
     );
   };
 
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-      `/destinations/${destinationcode
-        ?.replace(/ /g, "-")
-        ?.replace(/&/g, "and")}/${countrycode?.replace(
+        `/destinations/${destinationcode
+          ?.replace(/ /g, "-")
+          ?.replace(/&/g, "and")}/${countrycode?.replace(
           / /g,
           "-"
         )}/${countrycode?.replace(
@@ -513,8 +488,8 @@ function CountryItinararies(props) {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -584,18 +559,6 @@ function CountryItinararies(props) {
       .catch((error) => {
         setIsLoading(false);
       });
-
-    // Using window.onload to detect full page load
-    // window.onload = () => {
-    //   setTimeout(() => {
-    //     const redirectUrl =
-    //       regionWiseUrl + `/destinations/${destinationcode}/${countrycode}`;
-
-    //     if (redirectUrl) {
-    //       router.push(redirectUrl);
-    //     }
-    //   }, 0);
-    // };
   }, [router, countrycode]);
 
   return (
@@ -698,7 +661,6 @@ function CountryItinararies(props) {
                                 styles={styles}
                                 isRtl={isRtl}
                                 isSearchable={isSearchable}
-                                //name="color"
                                 closeMenuOnSelect={false}
                                 options={monthOptions}
                                 hideSelectedOptions={false}
@@ -741,8 +703,9 @@ function CountryItinararies(props) {
                     <div className="col-12">
                       <div className="destination_filter_result d-block d-lg-flex">
                         <p>
-                          We've found {(metaData?.total > 0) ? metaData?.total : 0} holiday ideas in{" "}
-                          {countryData?.country_name} for you
+                          We've found{" "}
+                          {metaData?.total > 0 ? metaData?.total : 0} holiday
+                          ideas in {countryData?.country_name} for you
                         </p>
                         <div className="destination_contries_filter d-inline-block d-lg-flex">
                           <label className="pt-2 pt-lg-0">Arrange by:</label>
@@ -752,7 +715,8 @@ function CountryItinararies(props) {
                                 className={
                                   activeItem === "price" ? "active" : ""
                                 }
-                                onClick={() => handleFilterClick("price")}>
+                                onClick={() => handleFilterClick("price")}
+                              >
                                 By price
                               </a>
                             </li>
@@ -808,7 +772,7 @@ function CountryItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -819,7 +783,6 @@ function CountryItinararies(props) {
                                     ""
                                   )
                               )}
-                              {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
                             </NavLink>
                             <div className="card_slider_cnt places_to_stay_cnt">
                               <h4>
@@ -838,10 +801,12 @@ function CountryItinararies(props) {
                                   )
                                   .map((res1) => (
                                     <li key={res1.id}>
-                                      {`From ${res1.attributes?.currency_symbol ?? ""
-                                        }${formatPrice(res1.attributes?.price) ??
+                                      {`From ${
+                                        res1.attributes?.currency_symbol ?? ""
+                                      }${
+                                        formatPrice(res1.attributes?.price) ??
                                         " XXXX"
-                                        } per person`}
+                                      } per person`}
                                     </li>
                                   ))}
                                 <li>

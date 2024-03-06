@@ -104,8 +104,6 @@ function ContinentItinararies(props) {
   const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
   const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
   const [itineraries, setItineraries] = useState([]);
-  const [visible, setVisible] = useState(3);
-  const [visiblePagination, setVisiblePagination] = useState(true);
   const itemsPerPage = 12; // Number of items to load per page
   const [visibleItems, setVisibleItems] = useState(itemsPerPage);
   let [page, setPage] = useState(0); // Current page
@@ -319,8 +317,8 @@ function ContinentItinararies(props) {
       `/destinations/${destinationcode
         .replace(/ & /g, "-and-")
         .replace(/ /g, "-")}/${destinationcode
-          .replace(/ & /g, "-and-")
-          .replace(/ /g, "-")}-itineraries/${item?.attributes?.friendly_url}`
+        .replace(/ & /g, "-and-")
+        .replace(/ /g, "-")}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
@@ -328,9 +326,9 @@ function ContinentItinararies(props) {
     // const modifiedName = item.replace(/ /g, "-").toLowerCase();
     router.push(
       regionWiseUrl +
-      `/destinations/${destinationcode
-        .replace(/ & /g, "-and-")
-        .replace(/ /g, "-")}/${destinationcode
+        `/destinations/${destinationcode
+          .replace(/ & /g, "-and-")
+          .replace(/ /g, "-")}/${destinationcode
           .replace(/ & /g, "-and-")
           .replace(/ /g, "-")}-itineraries/${item?.attributes?.friendly_url}`
     );
@@ -346,8 +344,8 @@ function ContinentItinararies(props) {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -502,7 +500,7 @@ function ContinentItinararies(props) {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -545,17 +543,9 @@ function ContinentItinararies(props) {
           })),
         ];
         console.log(arrayOfObjects);
-        arrayOfObjects = arrayOfObjects.filter(res => res.value !== null);
+        arrayOfObjects = arrayOfObjects.filter((res) => res.value !== null);
         setAllCountries(arrayOfObjects);
 
-        // setAllCountries(
-        //   x.data[0]?.attributes?.countries?.data.map((item) => ({
-        //     id: item.id,
-        //     country_code: item?.attributes?.country_code,
-        //     value: item?.attributes?.country_name,
-        //     label: item?.attributes?.country_name,
-        //   }))
-        // );
         setIsLoading(false);
       })
       .catch((error) => {
@@ -579,14 +569,6 @@ function ContinentItinararies(props) {
         })),
       ];
       setAllRegion(arrayOfObjects);
-      // setAllRegion(
-      //   x.data?.map((item) => ({
-      //     //id: i.id,
-      //     property_type_code: item?.attributes?.property_type_code,
-      //     value: item?.attributes?.property_type_name,
-      //     label: item?.attributes?.property_type_name,
-      //   }))
-      // );
     });
 
     // window.addEventListener("resize", equalHeight(true));
@@ -604,7 +586,6 @@ function ContinentItinararies(props) {
         }
       }, 0);
     };
-    // divRef?.current?.scrollIntoView({ behavior: "smooth", block: "center" });
   }, [destinationcode, router, dcode]);
 
   return (
@@ -748,13 +729,23 @@ function ContinentItinararies(props) {
                     <div className="col-12">
                       <div className="destination_filter_result d-block d-lg-flex">
                         <p>
-                          We've found {(metaData?.total > 0) ? metaData?.total : 0} holiday ideas in{" "}
-                          {destination.destination_name} for you
+                          We've found{" "}
+                          {metaData?.total > 0 ? metaData?.total : 0} holiday
+                          ideas in {destination.destination_name} for you
                         </p>
                         <div className="destination_contries_filter d-inline-block d-lg-flex">
                           <label className="pt-2 pt-lg-0">Arrange by:</label>
                           <ul className="d-inline-block d-lg-flex pt-2 pt-lg-0">
-                            <li><a className={activeItem === 'price' ? 'active' : ''} onClick={() => handleFilterClick('price')}>By price</a></li>
+                            <li>
+                              <a
+                                className={
+                                  activeItem === "price" ? "active" : ""
+                                }
+                                onClick={() => handleFilterClick("price")}
+                              >
+                                By price
+                              </a>
+                            </li>
                             <li>
                               <div>
                                 <a
@@ -817,7 +808,7 @@ function ContinentItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                    "thumbnail" ? (
+                                  "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -837,12 +828,6 @@ function ContinentItinararies(props) {
                                   )}
                                 </a>
                               </h4>
-                              {/* <NavLink
-                              // href={generateDynamicLink(
-                              //   item?.attributes?.itin_name
-                              // )}
-                              >
-                              </NavLink> */}
                               <ul>
                                 <li>{item?.attributes?.sub_header_text}</li>
                                 {item?.attributes?.itinerary_country_contents?.data
@@ -853,10 +838,12 @@ function ContinentItinararies(props) {
                                   )
                                   .map((res1) => (
                                     <li key={res1.id}>
-                                      {`From ${res1.attributes?.currency_symbol ?? ""
-                                        }${formatPrice(res1.attributes?.price) ??
+                                      {`From ${
+                                        res1.attributes?.currency_symbol ?? ""
+                                      }${
+                                        formatPrice(res1.attributes?.price) ??
                                         "xxxx"
-                                        } per person`}
+                                      } per person`}
                                     </li>
                                   ))}
                                 <li>

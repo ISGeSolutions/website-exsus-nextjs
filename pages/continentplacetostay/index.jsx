@@ -1,21 +1,15 @@
 import { useState, useEffect } from "react";
-import { Link, Spinner, Signup } from "components";
 import {
   destinationService,
   alertService,
   userService,
   homeService,
 } from "services";
-import { Inspireme } from "components";
-import Head from "next/head";
 import { NavLink } from "components";
 import { useRouter } from "next/router";
-import generateDynamicLink from "components/utils/generateLink";
-import Image from "next/image";
 import Select, { components } from "react-select";
 import CustomMultiValue from "./CustomMultiValue";
 import { Alert } from "../../components";
-import Iframe from "react-iframe";
 import MarkerInfoWindowNext from "../../components/common/MarkerInfoWindowNext";
 
 export default ContinentPlacesToStay;
@@ -590,13 +584,6 @@ function ContinentPlacesToStay(props) {
     setSelectedOptionRegion([]);
     setSelectedOptionMonth([]);
 
-    // destinationService.getAllItineraries().then(x => {
-    //     setItineraries(x.data);
-    //     setIsLoading(false);
-    // }).catch((error) => {
-
-    //     setIsLoading(false);
-    // });
     destinationService
       .getDestinationDetails(destinationcode)
       .then((x) => {
@@ -621,14 +608,6 @@ function ContinentPlacesToStay(props) {
         ];
         setAllCountries(arrayOfObjects);
 
-        // setAllCountries(
-        //   x.data[0]?.attributes?.countries?.data.map((item) => ({
-        //     id: item.id,
-        //     country_code: item?.attributes?.country_code,
-        //     value: item?.attributes?.country_name,
-        //     label: item?.attributes?.country_name,
-        //   }))
-        // );
         setIsLoading(false);
       })
       .catch((error) => {
@@ -652,14 +631,6 @@ function ContinentPlacesToStay(props) {
         })),
       ];
       setAllRegion(arrayOfObjects);
-      // setAllRegion(
-      //   x.data?.map((item) => ({
-      //     //id: i.id,
-      //     property_type_code: item?.attributes?.property_type_code,
-      //     value: item?.attributes?.property_type_name,
-      //     label: item?.attributes?.property_type_name,
-      //   }))
-      // );
     });
 
     loadMoreData(activeItem);
@@ -888,11 +859,6 @@ function ContinentPlacesToStay(props) {
                                     ""
                                   )
                               )}
-                              {/* <img
-                                src=""
-                                alt="destination_hotel01"
-                                className="img-fluid"
-                              /> */}
                             </NavLink>
                             <div className="card_slider_cnt places_to_stay_cnt">
                               <h4>

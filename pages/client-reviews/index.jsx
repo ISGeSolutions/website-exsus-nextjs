@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import { Signup } from "components";
-import { Link, Spinner } from "components";
 import { Layout } from "components/users";
 import { whyusService, destinationService } from "../../services/whyus.service";
-import { NavLink } from "components";
 import { FriendlyUrl } from "../../components";
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
 import Head from "next/head";
