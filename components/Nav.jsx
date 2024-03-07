@@ -72,13 +72,7 @@ function Nav() {
   };
 
   const showOverlay = () => {
-    document.querySelector(".mobile-menu-head").classList.add("active");
-
     setOverlayVisible(true);
-  };
-
-  const showBackButton = () => {
-    document.querySelector(".mobile-menu-head").classList.add("active");
   };
 
   const hideBackButton = () => {
@@ -126,7 +120,7 @@ function Nav() {
     // router.push(`/make-an-enquiry`);
     let pageinfo = JSON.parse(localStorage.getItem("PageInfo"));
     router.push(
-      `/make-an-enquiry?pType=${pageinfo?.pType}&pCode=${pageinfo?.pCode}`
+      `${regionWiseUrl}/make-an-enquiry?pType=${pageinfo?.pType}&pCode=${pageinfo?.pCode}`
     );
   };
 
@@ -322,6 +316,28 @@ function Nav() {
       toggleMenu();
     });
 
+    let subMenu;
+    menuMain?.addEventListener("click", (e) => {
+      if (!menu.classList.contains("active")) {
+        return;
+      }
+
+      if (e.target.closest(".menu-item-has-children")) {
+        const hasChildren = e.target.closest(".menu-item-has-children");
+        showSubMenu(hasChildren);
+      }
+    });
+
+    goBack?.addEventListener("click", () => {
+      hideSubMenu();
+    });
+    menuTrigger?.addEventListener("click", () => {
+      toggleMenu();
+    });
+    closeMenu?.addEventListener("click", () => {
+      toggleMenu();
+    });
+
     const script = document.createElement("script");
 
     script.src = "https://use.typekit.net/foobar.js";
@@ -379,7 +395,6 @@ function Nav() {
     }
   });
   goBack?.addEventListener("click", () => {
-    //showSubMenu();
     hideSubMenu();
   });
   menuTrigger?.addEventListener("click", () => {
@@ -401,12 +416,12 @@ function Nav() {
 
   function showSubMenu(hasChildren) {
     subMenu = hasChildren.querySelector(".sub-menu");
-    subMenu.classList.add("active");
+    subMenu?.classList.add("active");
     subMenu.style.animation = "slideLeft 0.5s ease forwards";
     const menuTitle =
       hasChildren.querySelector("svg").parentNode.childNodes[0].textContent;
-    menu.querySelector(".current-menu-title").innerHTML = menuTitle;
-    menu.querySelector(".mobile-menu-head").classList.add("active");
+    document.querySelector(".mobile-menu-head").classList.add("active");
+    document.querySelector(".current-menu-title").innerHTML = menuTitle;
   }
 
   function hideSubMenu() {
@@ -414,16 +429,8 @@ function Nav() {
     setTimeout(() => {
       subMenu.classList.remove("active");
     }, 300);
-    menu.querySelector(".current-menu-title").innerHTML = "";
-    menu.querySelector(".mobile-menu-head").classList.remove("active");
-  }
-
-  function closeLeftNav() {
-    document.getElementById("sideMenuLeft").style.width = "0";
-  }
-
-  function openLeftNav() {
-    document.getElementById("sideMenuLeft").style.width = "100%";
+    document.querySelector(".current-menu-title").innerHTML = "";
+    document.querySelector(".mobile-menu-head").classList.remove("active");
   }
 
   // only show nav when logged in
@@ -486,7 +493,7 @@ function Nav() {
               >
                 Destinations
                 <svg
-                  //onClick={showBackButton}
+                  //onClick={() => showBackButton("Destinations")}
                   xmlns="http://www.w3.org/2000/svg"
                   fill="#ffffff"
                   shapeRendering="geometricPrecision"
@@ -925,8 +932,8 @@ function Nav() {
             </li>
             <li className="menu-item-has-children">
               <NavLink
-                onMouseEnter={showOverlay}
-                onClick={hideOverlay}
+                // onMouseEnter={showOverlay}
+                //onClick={hideOverlay}
                 href={regionWiseUrl + "/special-offers"}
               >
                 Special offers
@@ -934,8 +941,8 @@ function Nav() {
             </li>
             <li className="menu-item-has-children">
               <NavLink
-                onMouseEnter={showOverlay}
-                onClick={hideOverlay}
+                //onMouseEnter={showOverlay}
+                // onClick={hideOverlay}
                 href={regionWiseUrl + "/blog"}
               >
                 Blog

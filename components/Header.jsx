@@ -84,8 +84,17 @@ function Header() {
   }
 
   const handleSearch = (data) => {
-    router.push(`/search?search=${data?.searchText}`);
+    router.push(regionWiseUrl + `/search?search=${data?.searchText}`);
   };
+
+  // const makeAnEnquiry = () => {
+  //   debugger;
+  //   //router.push(`/make-an-enquiry`);
+  //   const pageinfo = JSON.parse(localStorage.getItem("PageInfo"));
+  //   router.push(
+  //     `${regionWiseUrl}/make-an-enquiry?pType=${pageinfo?.pType}&pCode=${pageinfo?.pCode}`
+  //   );
+  // };
 
   // Function to check if any string in the array is present in the sentence
   const isAnyStringInSentence = (strings, sentence) => {
@@ -187,7 +196,7 @@ function Header() {
   // };
 
   useEffect(() => {
-    console.warn = () => { };
+    console.warn = () => {};
 
     $(".header_country_list > ul .header_country_label").on(
       "mouseenter",
@@ -418,7 +427,10 @@ function Header() {
           </section>
           <section className="header_item_right d-flex d-lg-inline-block justify-content-end align-items-center">
             <div className="header_call_icn">
-              <NavLink href="/make-an-enquiry" className="header_mail_icn">
+              <NavLink
+                href={regionWiseUrl + "/make-an-enquiry"}
+                className="header_mail_icn"
+              >
                 <em
                   className="material-symbols-outlined"
                   title="Make an enquiry"
