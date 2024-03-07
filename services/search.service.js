@@ -8,8 +8,8 @@ export const searchService = {
 };
 
 
-function searchSite(param) {
-    const searchSiteUrl = `${publicRuntimeConfig.apiUrl}/api/search-sites/${param}`;
+function searchSite(param, page, size) {
+    const searchSiteUrl = `${publicRuntimeConfig.apiUrl}/api/search-sites/${param?.toLowerCase()}?pagination[page]=${page}&pagination[size]=${size}`;
     return fetchWrapper.get(searchSiteUrl);
 }
 

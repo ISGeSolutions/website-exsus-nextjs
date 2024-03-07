@@ -12,24 +12,24 @@ const Custom404 = () => {
   };
 
   return (
-    <section class="page_not_found_parnt">
-      <div class="container">
-        <span class="bigger_circle"></span>
-        <span class="smaller_circle"></span>
-        <div class="page_not_found_cnt">
+    <section className="page_not_found_parnt">
+      <div className="container">
+        <span className="bigger_circle"></span>
+        <span className="smaller_circle"></span>
+        <div className="page_not_found_cnt">
           <ul>
             <li></li>
-            <li class="web_page_yellow_dot"></li>
-            <li class="web_page_green_dot"></li>
+            <li className="web_page_yellow_dot"></li>
+            <li className="web_page_green_dot"></li>
           </ul>
-          <div class="page_not_found_cnt_inr">
+          <div className="page_not_found_cnt_inr">
             <h2>
               404<span>Page not found</span>
             </h2>
             <p>
               We're sorry, the page you requested could not be found. Please go
               back to homepage.
-              <button class="btn btn-primary prmry_btn" onClick={home}>
+              <button className="btn btn-primary prmry_btn" onClick={home}>
                 Back to Homepage
               </button>
             </p>
