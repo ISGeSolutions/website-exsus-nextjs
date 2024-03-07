@@ -73,6 +73,7 @@ function Nav() {
 
   const showOverlay = () => {
     document.querySelector(".mobile-menu-head").classList.add("active");
+
     setOverlayVisible(true);
   };
 

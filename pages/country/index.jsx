@@ -32,11 +32,6 @@ export default Country;
 
 function Country() {
   const router = useRouter();
-  const [isClearable, setIsClearable] = useState(true);
-  const [isSearchable, setIsSearchable] = useState(true);
-  const [isDisabled, setIsDisabled] = useState(false);
-  const [isLoader, setIsLoader] = useState(false);
-  const [isRtl, setIsRtl] = useState(false);
   const [activeButton, setActiveButton] = useState("images");
   const destinationcode = router.query?.continent
     ?.replace(/-and-/g, " & ")
@@ -46,10 +41,6 @@ function Country() {
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
-  //  (destinationcode, countrycode);
-  // const [selectedOptionCountry, setSelectedOptionCountry] = useState(null);
-  // const [selectedOptionRegion, setSelectedOptionRegion] = useState(null);
-  // const [selectedOptionMonth, setSelectedOptionMonth] = useState(null);
   const [countryData, setCountryData] = useState(null);
   const [mapVariable, setMapVariable] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -69,7 +60,6 @@ function Country() {
   const [redirectUrl, setRedirectUrl] = useState(null);
   const [activeTab, setActiveTab] = useState("overview"); // State to track the active tab
   const [dataToSendToChild, setDataToSendToChild] = useState("Initial Data");
-  const [dataReceivedFromChild, setDataReceivedFromChild] = useState(null);
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -129,7 +119,7 @@ function Country() {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
+        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
     );
   };
 
@@ -139,8 +129,8 @@ function Country() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -169,11 +159,13 @@ function Country() {
       setIsShowMap(true);
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
+        `/destinations/${destinationcode?.replace(/ /g, "-")}/${
+          countryData?.attributes?.friendly_url
         }`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
+        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${
+          countryData?.attributes?.friendly_url
         }`
       );
       text = "LUXURY HOLIDAYS IN " + countrycode.toUpperCase();
@@ -181,11 +173,13 @@ function Country() {
       setIsShowMap(true);
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
+        `/destinations/${destinationcode?.replace(/ /g, "-")}/${
+          countryData?.attributes?.friendly_url
         }/${countryData?.attributes?.friendly_url}-regions`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
+        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${
+          countryData?.attributes?.friendly_url
         }/${countryData?.attributes?.friendly_url} regions`
       );
       text = "REGIONS IN " + countrycode.toUpperCase(); // action="/countryregions?countrycode=south-africa"
@@ -202,10 +196,10 @@ function Country() {
         `/destinations/${destinationcode
           ?.replace(/&/g, "and")
           ?.replace(/ /g, "-")}/${destCode
-            ?.replace(/&/g, "and")
-            ?.replace(/ /g, "-")}/${destCode
-              ?.replace(/&/g, "and")
-              ?.replace(/ /g, "-")}-itineraries`;
+          ?.replace(/&/g, "and")
+          ?.replace(/ /g, "-")}/${destCode
+          ?.replace(/&/g, "and")
+          ?.replace(/ /g, "-")}-itineraries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationcode?.replace(
@@ -219,11 +213,13 @@ function Country() {
       handleTabClick("images");
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
+        `/destinations/${destinationcode?.replace(/ /g, "-")}/${
+          countryData?.attributes?.friendly_url
         }/${countryData?.attributes?.friendly_url}-places-to-stay`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
+        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${
+          countryData?.attributes?.friendly_url
         }/places to stay ${countryData?.attributes?.friendly_url}`
       );
       text = "LUXURY HOTELS, CAMPS & LODGES IN " + countrycode.toUpperCase(); // action="/countryplacetostay?countrycode=south-africa"
@@ -231,11 +227,13 @@ function Country() {
       setIsShowMap(false);
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
+        `/destinations/${destinationcode?.replace(/ /g, "-")}/${
+          countryData?.attributes?.friendly_url
         }/${countryData?.attributes?.friendly_url}-when-to-go`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
+        `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${
+          countryData?.attributes?.friendly_url
         }/when to go to ${countryData?.attributes?.friendly_url}`
       );
       text = "WHEN TO GO TO " + countrycode.toUpperCase(); // action="/countryplacetostay?countrycode=south-africa"
@@ -336,7 +334,6 @@ function Country() {
   };
 
   const dictioneryFunction = (data) => {
-
     let modifiedString = data;
     if (modifiedString) {
       const regex = /{[a-zA-Z0-9-]+}/g;
@@ -380,7 +377,7 @@ function Country() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -390,7 +387,6 @@ function Country() {
     if (countrycode && countrycode != "undefined") {
       localStorage.setItem("country_code", countrycode);
     }
-
 
     if (router.asPath.includes("itineraries")) {
       toggleTab("itineraries");
@@ -408,11 +404,6 @@ function Country() {
     ) {
       websiteContentCheck(dictionaryPage);
     }
-
-    // const carousel = document.querySelector("#carouselExampleInterval");
-    // if (carousel) {
-    //   new bootstrap.Carousel(carousel);
-    // }
 
     if (countrycode) {
       countriesService
@@ -450,9 +441,9 @@ function Country() {
                 ?.replace(/&/g, "and")
                 .replace(/ /g, "-")
                 .toLowerCase()}/${item?.attributes?.friendly_url
-                  ?.replace(/ /g, "-")
-                  .replace(/&/g, "and")
-                  .toLowerCase()}`,
+                ?.replace(/ /g, "-")
+                .replace(/&/g, "and")
+                .toLowerCase()}`,
           }));
           // // Update the state with the accumulated coordinates
           setCoordinatesArray((prevCoordinates) => [
@@ -556,58 +547,21 @@ function Country() {
         <div>
           <section className="banner_blk_row">
             <ImageSlider data={backgroundImage}></ImageSlider>
-            {/* {backgroundImage ? (
-              <div
-                id="carouselExampleInterval"
-                className="carousel slide"
-                data-bs-ride="carousel"
-              >
-                <div className="carousel-indicators" id="scrollToElement">
-                  {backgroundImage.map((_, index) => (
-                    <button
-                      key={index}
-                      type="button"
-                      data-bs-target="#carouselExampleInterval"
-                      data-bs-slide-to={index}
-                      className={index === 0 ? "active" : ""}
-                      aria-current={index === 0 ? "true" : "false"}
-                      aria-label={`Slide ${index + 1}`}
-                    ></button>
-                  ))}
-                </div>
-                <div className="carousel-inner">
-                  {backgroundImage.map((imagePath, index) => (
-                    <a
-                      key={index}
-                      target="_blank"
-                      className={`carousel-item ${index === 0 ? "active" : ""}`}
-                      data-bs-interval="3000"
-                      data-pause="false"
-                      data-ride="carousel"
-                    >
-                      <div
-                        className="banner_commn_cls"
-                        style={{ backgroundImage: `url(${imagePath})` }}
-                      ></div>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              ""
-            )} */}
+
             {isShowMap ? (
               <div className="banner_tab_blk">
                 <button
-                  className={`btn banner_map_tab ${activeButton === "map" ? "banner_tab_active" : ""
-                    }`}
+                  className={`btn banner_map_tab ${
+                    activeButton === "map" ? "banner_tab_active" : ""
+                  }`}
                   onClick={() => handleTabClick("map")}
                 >
                   Map
                 </button>
                 <button
-                  className={`btn banner_img_tab ${activeButton === "images" ? "banner_tab_active" : ""
-                    }`}
+                  className={`btn banner_img_tab ${
+                    activeButton === "images" ? "banner_tab_active" : ""
+                  }`}
                   onClick={() => handleTabClick("images")}
                 >
                   Images
@@ -617,8 +571,9 @@ function Country() {
               ""
             )}
             <div
-              className={`banner_map_blk ${activeButton === "map" ? "banner_map_active" : ""
-                }`}
+              className={`banner_map_blk ${
+                activeButton === "map" ? "banner_map_active" : ""
+              }`}
             >
               <MarkerInfoWindowNext data={coordinatesArray} />
 
@@ -631,7 +586,7 @@ function Country() {
           <section
             className="destination_tab_row light_grey pb-0"
             ref={divRef}
-          // id="scrollToElement"
+            // id="scrollToElement"
           >
             <div className="container">
               <div className="bookmark_row">

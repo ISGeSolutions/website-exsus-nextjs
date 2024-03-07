@@ -30,6 +30,12 @@ function Footer() {
       }
     }
   }
+
+  const generateDyanmicLink = (params) => {
+    const newurl = regionWiseUrl + params;
+    return newurl;
+  };
+
   useEffect(() => {
     const subscription = userService.user.subscribe((x) => setUser(x));
     return () => subscription.unsubscribe();
@@ -46,8 +52,8 @@ function Footer() {
   const handleChange = (event) => {
     setValue(event.target.value);
 
-    // localStorage.setItem('site_region', event.target.value);
-    // store.setState("site_region", event.target.value);
+    localStorage.setItem("site_region", event.target.value);
+    store.setState("site_region", event.target.value);
 
     window.site_region = event.target.value;
   };
@@ -74,12 +80,6 @@ function Footer() {
                 className="img-fluid"
               />{" "}
             </NavLink>
-            {/* <img
-                src="/images/abta_new_logo.png"
-                alt="Abta logo"
-                className="img-fluid"
-                href="https://www.abta.com/abta-member-search"
-              /> */}
             <img
               src="/images/atol-new-logo.png"
               alt="Atol logo"
@@ -132,20 +132,24 @@ function Footer() {
                     <NavLink href="/">Home</NavLink>
                   </li>
                   <li>
-                    <NavLink href={region + "/contact-us"}>Contact us</NavLink>
+                    <NavLink href={generateDyanmicLink("/contact-us")}>
+                      Contact us
+                    </NavLink>
                   </li>
                   <li>
-                    <NavLink href={region + "/make-an-enquiry"}>
+                    <NavLink href={generateDyanmicLink("/make-an-enquiry")}>
                       Online Enquiry
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink href={region + "/about-us/useful-links"}>
+                    <NavLink
+                      href={generateDyanmicLink("/about-us/useful-links")}
+                    >
                       Travel Information
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink href={region + "/landing/coronavirus"}>
+                    <NavLink href={generateDyanmicLink("/landing/coronavirus")}>
                       Coronavirus Information
                     </NavLink>
                   </li>
@@ -158,23 +162,27 @@ function Footer() {
                 <h6>More Exsus</h6>
                 <ul>
                   <li>
-                    <NavLink href={region + "/destinations"}>
+                    <NavLink href={generateDyanmicLink("/destinations")}>
                       Destinations
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink href={region + "/holiday-types"}>
+                    <NavLink href={generateDyanmicLink("/holiday-types")}>
                       Holiday Types
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink href={region + "/special-offers"}>Offers</NavLink>
+                    <NavLink href={generateDyanmicLink("/special-offers")}>
+                      Offers
+                    </NavLink>
                   </li>
                   <li>
-                    <NavLink href={region + "/blog"}>Blog</NavLink>
+                    <NavLink href={generateDyanmicLink("/blog")}>Blog</NavLink>
                   </li>
                   <li>
-                    <NavLink href={region + "/where-to-go"}>When to go</NavLink>
+                    <NavLink href={generateDyanmicLink("/where-to-go")}>
+                      When to go
+                    </NavLink>
                   </li>
                 </ul>
               </div>
@@ -213,20 +221,26 @@ function Footer() {
                 <h6>About Exsus</h6>
                 <ul>
                   <li>
-                    <NavLink href={region + "/about-us"}>About us</NavLink>
+                    <NavLink href={generateDyanmicLink("/about-us")}>
+                      About us
+                    </NavLink>
                   </li>
                   <li>
-                    <NavLink href={region + "/why-us/our-people"}>
+                    <NavLink href={generateDyanmicLink("/why-us/our-people")}>
                       Meet our travel experts
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink href={region + "/about-us/careers"}>
+                    <NavLink
+                      href={generateDyanmicLink(
+                        "/about-us/friend-referral-offer"
+                      )}
+                    >
                       Careers at Exsus
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink href={region + "/about-us/friend-referral-offer"}>
+                    <NavLink href={generateDyanmicLink("/about-us/careers")}>
                       Exsus referral scheme
                     </NavLink>
                   </li>
@@ -251,12 +265,12 @@ function Footer() {
           <div className="prvcy_polcy_list">
             <ul>
               <li>
-                <NavLink href={region + "/privacy-policy"}>
+                <NavLink href={generateDyanmicLink("/privacy-policy")}>
                   Privacy policy & cookies
                 </NavLink>
               </li>
               <li>
-                <NavLink href={region + "/terms-and-conditions"}>
+                <NavLink href={generateDyanmicLink("/terms-and-conditions")}>
                   Website terms of use
                 </NavLink>
               </li>

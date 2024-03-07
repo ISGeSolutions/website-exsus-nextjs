@@ -65,25 +65,6 @@ function Index() {
     }
   }
 
-  // <button className="btn header_nav_btn">
-  //   MEET OUR EXPERTS
-  //   <svg
-  //     xmlns="http://www.w3.org/2000/svg"
-  //     fill="#000"
-  //     shapeRendering="geometricPrecision"
-  //     textRendering="geometricPrecision"
-  //     imageRendering="optimizeQuality"
-  //     fillRule="evenodd"
-  //     clipRule="evenodd"
-  //     viewBox="0 0 267 512.43"
-  //   >
-  //     <path
-  //       fillRule="nonzero"
-  //       d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-  //     />
-  //   </svg>
-  // </button>;
-
   const toggleTab = (itemId) => {
     var text;
     setActiveButton("images");
@@ -108,9 +89,9 @@ function Index() {
           .replace(/&/g, "and")
           .replace(/ /g, "-")
           .toLowerCase()}/${destCode
-            .replace(/&/g, "and")
-            .replace(/ /g, "-")
-            .toLowerCase()}-countries`;
+          .replace(/&/g, "and")
+          .replace(/ /g, "-")
+          .toLowerCase()}-countries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url} countries`
@@ -130,9 +111,9 @@ function Index() {
           .replace(/&/g, "and")
           .replace(/ /g, "-")
           .toLowerCase()}/${destCode
-            .replace(/&/g, "and")
-            .replace(/ /g, "-")
-            .toLowerCase()}-itineraries`;
+          .replace(/&/g, "and")
+          .replace(/ /g, "-")
+          .toLowerCase()}-itineraries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(`Home/Destinations/${destCode}/${destCode} Itineraries`);
       text = `TAILOR-MADE ${destinationName} HOLIDAY ITINERARIES`;
@@ -158,22 +139,12 @@ function Index() {
     if (targetDiv) {
       targetDiv.scrollIntoView({ behavior: "smooth" });
     }
-
-    // if (activeTab == "itineraries") {
-    //   //setIsShowMap(false);
-    //   isShowMap = false;
-    // }else if(activeTab ){
-
-    // }
-    // if (tabContentRefs[itemId]?.current) {
-    //   tabContentRefs[itemId]?.current.scrollIntoView({ behavior: "smooth", block: "center" });
-    // }
   };
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-      "card_slider_cnt places_to_stay_cnt"
-    ),
+        "card_slider_cnt places_to_stay_cnt"
+      ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -333,7 +304,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) { }
+          } catch (error) {}
         }
       }
     }
@@ -353,26 +324,6 @@ function Index() {
       // Your logic here
       window.location.reload();
     };
-
-    // Get the current URL
-    // const currentUrl = window.location.href;
-
-    // Create a URL object
-    // const urlObject = new URL(currentUrl);
-
-    // Extract elements
-    // const pathname = urlObject.pathname;
-    // const protocol = urlObject.protocol;
-    // const host = urlObject.host;
-    // const search = urlObject.search;
-    // const hash = urlObject.hash;
-
-    // const myArrayPath = pathname.split("/");
-
-    // Add event listener when the component mounts
-    // window.addEventListener('popstate', handlePopState);
-
-    // window.addEventListener('popstate', handlePopState);
 
     if (destinationcode && destinationcode != "undefined") {
       localStorage.setItem("destination_code", destinationcode);
@@ -434,9 +385,9 @@ function Index() {
                 ?.replace(/&/g, "and")
                 .replace(/ /g, "-")
                 .toLowerCase()}/${item?.attributes?.friendly_url
-                  ?.replace(/ /g, "-")
-                  .replace(/&/g, "and")
-                  .toLowerCase()}`,
+                ?.replace(/ /g, "-")
+                .replace(/&/g, "and")
+                .toLowerCase()}`,
           }));
           // // Update the state with the accumulated coordinates
           setCoordinatesArray((prevCoordinates) => [
@@ -502,7 +453,6 @@ function Index() {
     });
     window.onload = () => {
       setTimeout(() => {
-
         let destCode = "";
         if (!destinationcode) {
           destCode = localStorage.getItem("destination_code");
@@ -566,58 +516,21 @@ function Index() {
         <div>
           <section className="banner_blk_row">
             <ImageSlider data={backgroundImage}></ImageSlider>
-            {/* {backgroundImage ? (
-              <div
-                id="carouselExampleInterval"
-                className="carousel slide"
-                data-bs-ride="carousel"
-              >
-                <div className="carousel-indicators" id="scrollToElement">
-                  {backgroundImage.map((_, index) => (
-                    <button
-                      key={index}
-                      type="button"
-                      data-bs-target="#carouselExampleInterval"
-                      data-bs-slide-to={index}
-                      className={index === 0 ? "active" : ""}
-                      aria-current={index === 0 ? "true" : "false"}
-                      aria-label={`Slide ${index + 1}`}
-                    ></button>
-                  ))}
-                </div>
-                <div className="carousel-inner">
-                  {backgroundImage.map((imagePath, index) => (
-                    <a
-                      key={index}
-                      className={`carousel-item ${index === 0 ? "active" : ""}`}
-                      data-interval="5000"
-                    >
-                      <div
-                        className="banner_commn_cls"
-                        style={{
-                          backgroundImage: `url(${imagePath})`,
-                        }}
-                      ></div>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              ""
-            )} */}
 
             {isShowMap ? (
               <div className="banner_tab_blk">
                 <button
-                  className={`btn banner_map_tab ${activeButton === "map" ? "banner_tab_active" : ""
-                    }`}
+                  className={`btn banner_map_tab ${
+                    activeButton === "map" ? "banner_tab_active" : ""
+                  }`}
                   onClick={() => handleTabClick("map")}
                 >
                   Map
                 </button>
                 <button
-                  className={`btn banner_img_tab ${activeButton === "images" ? "banner_tab_active" : ""
-                    }`}
+                  className={`btn banner_img_tab ${
+                    activeButton === "images" ? "banner_tab_active" : ""
+                  }`}
                   onClick={() => handleTabClick("images")}
                 >
                   Images
@@ -627,11 +540,11 @@ function Index() {
               ""
             )}
             <div
-              className={`banner_map_blk ${activeButton === "map" ? "banner_map_active" : ""
-                }`}
+              className={`banner_map_blk ${
+                activeButton === "map" ? "banner_map_active" : ""
+              }`}
             >
               <MarkerInfoWindowNext data={coordinatesArray} />
-              {/* src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15934863.062786615!2d90.8116600393164!3d12.820811668700316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304d8df747424db1%3A0x9ed72c880757e802!2sThailand!5e0!3m2!1sen!2sin!4v1682416568153!5m2!1sen!2sin" */}
             </div>
 
             {/* <p>{mapVariable}</p> */}
@@ -739,9 +652,6 @@ function Index() {
               </div>
 
               <div className="tab-content" id="pills-tabContent">
-                {/* {activeTab === 'home' && <div>Home Content</div>}
-                {activeTab === 'about' && <div>About Content</div>}
-                {activeTab === 'contact' && <div>Contact Content</div>} */}
                 {activeTab === "overview" && (
                   <div
                     className={
