@@ -93,7 +93,11 @@ function Index() {
   const EnquiryBtn = () => {
     const router = useRouter();
     const handleEnquiryClick = () => {
-      router.push(`/make-an-enquiry`); // Navigate to the /enquiry page
+      let pageinfo = JSON.parse(localStorage.getItem("PageInfo"));
+      //router.push(region + `/make-an-enquiry`); // Navigate to the /enquiry page
+      router.push(
+        `${regionWiseUrl}/make-an-enquiry?pType=${pageinfo?.pType}&pCode=${pageinfo?.pCode}`
+      );
     };
 
     return (
