@@ -23,11 +23,18 @@ function Header() {
   const [selectedRegion, setVariable] = useState("");
   const { ver } = router.query;
   const [telePhoneNumber, SetTelePhoneNumber] = useState();
+  // let pageInfo = JSON.parse(localStorage.getItem("PageInfo"));
 
   // form validation rules
   const validationSchema = Yup.object().shape({
     searchText: Yup.string().required(),
   });
+
+  // const generateDynamicLink = (param) => {
+  //   pageInfo = JSON.parse(localStorage.getItem("PageInfo"));
+  //   return `/${param}?pType=${pageInfo?.pType}&pCode=${pageInfo?.pCode}`;
+  // }
+
 
   const formOptions = { resolver: yupResolver(validationSchema) };
   const { register, handleSubmit, formState } = useForm(formOptions);
@@ -96,6 +103,7 @@ function Header() {
     }
     return false; // Return false if none of the strings are found
   };
+
 
   const handleChange = (selectedOption) => {
     // Do something
@@ -218,6 +226,8 @@ function Header() {
       }
     }
 
+    // setPageInfo(JSON.parse(localStorage.getItem("PageInfo")));
+    // pageInfo = JSON.parse(localStorage.getItem("PageInfo"));
     const { pathname, search, hash, href } = window.location;
     const site_region_local = localStorage.getItem("site_region");
 
@@ -418,7 +428,7 @@ function Header() {
           </section>
           <section className="header_item_right d-flex d-lg-inline-block justify-content-end align-items-center">
             <div className="header_call_icn">
-              <NavLink href="/make-an-enquiry" className="header_mail_icn">
+              <NavLink href={`${region}/make-an-enquiry`} className="header_mail_icn">
                 <em
                   className="material-symbols-outlined"
                   title="Make an enquiry"

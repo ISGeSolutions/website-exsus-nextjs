@@ -25,6 +25,7 @@ function Index() {
   let pageSize = 4;
   const [activeIndex, setActiveIndex] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
+  let dictionaryPage = 1;
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -401,7 +402,7 @@ function Index() {
                           <img src={item?.image_path} alt="search_result01" />
                         </a>
                         <div class="search_result_inr_cnt">
-                          <h3><a href={generateDynamicUrl(item?.friendly_url)}>{item?.header_text}</a></h3>
+                          <h3><a href={generateDynamicUrl(item?.friendly_url)}>{dictioneryFunction(item?.header_text)}</a></h3>
                           <a href="#" onClick={handleHrefClick}>{generateDynamicUrl(item?.friendly_url)}</a>
                           <p
                             dangerouslySetInnerHTML={{
