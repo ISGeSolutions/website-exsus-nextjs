@@ -41,6 +41,19 @@ const MarkerInfoWindowNext = (props) => {
         content: getInfoWindowString(place),
       });
 
+      marker.addListener("click", () => {
+        // Close the previous info window, if any
+        if (openInfoWindowRef.current) {
+          openInfoWindowRef.current.close();
+        }
+
+        // Open the current info window
+        infowindow.open(map, marker);
+
+        // Update the ref to the current info window
+        openInfoWindowRef.current = infowindow;
+      });
+
       marker.addListener("mouseover", () => {
         // Close the previous info window, if any
         if (openInfoWindowRef.current) {
