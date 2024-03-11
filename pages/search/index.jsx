@@ -5,7 +5,7 @@ import { Layout } from "components/users";
 import { userService } from "services";
 import { EnquiryButton } from "../../components/common/EnquiryBtn";
 import { useRouter } from "next/router";
-import { searchService } from "../../services";
+import { searchService, homeService } from "../../services";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";

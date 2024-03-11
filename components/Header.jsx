@@ -23,18 +23,14 @@ function Header() {
   const [selectedRegion, setVariable] = useState("");
   const { ver } = router.query;
   const [telePhoneNumber, SetTelePhoneNumber] = useState();
-  // let pageInfo = JSON.parse(localStorage.getItem("PageInfo"));
+  // let pageinfo = JSON.parse(localStorage.getItem("PageInfo"));
+  const [pType, setPType] = useState("");
+  const [pCode, setPCode] = useState("");
 
   // form validation rules
   const validationSchema = Yup.object().shape({
     searchText: Yup.string().required(),
   });
-
-  // const generateDynamicLink = (param) => {
-  //   pageInfo = JSON.parse(localStorage.getItem("PageInfo"));
-  //   return `/${param}?pType=${pageInfo?.pType}&pCode=${pageInfo?.pCode}`;
-  // }
-
 
   const formOptions = { resolver: yupResolver(validationSchema) };
   const { register, handleSubmit, formState } = useForm(formOptions);
@@ -94,14 +90,9 @@ function Header() {
     router.push(regionWiseUrl + `/search?search=${data?.searchText}`);
   };
 
-  // const makeAnEnquiry = () => {
-  //   debugger;
-  //   //router.push(`/make-an-enquiry`);
-  //   const pageinfo = JSON.parse(localStorage.getItem("PageInfo"));
-  //   router.push(
-  //     `${regionWiseUrl}/make-an-enquiry?pType=${pageinfo?.pType}&pCode=${pageinfo?.pCode}`
-  //   );
-  // };
+  const generateDynamicLink = () => {
+    return `${regionWiseUrl}/make-an-enquiry?pType=${pType}&pCode=${pCode}`;
+  };
 
   // Function to check if any string in the array is present in the sentence
   const isAnyStringInSentence = (strings, sentence) => {
@@ -112,7 +103,6 @@ function Header() {
     }
     return false; // Return false if none of the strings are found
   };
-
 
   const handleChange = (selectedOption) => {
     // Do something
@@ -205,6 +195,8 @@ function Header() {
 
   useEffect(() => {
     console.warn = () => {};
+    setPType(JSON.parse(localStorage.getItem("PageInfo"))?.pType);
+    setPCode(JSON.parse(localStorage.getItem("PageInfo"))?.pCode);
 
     $(".header_country_list > ul .header_country_label").on(
       "mouseenter",
@@ -235,8 +227,6 @@ function Header() {
       }
     }
 
-    // setPageInfo(JSON.parse(localStorage.getItem("PageInfo")));
-    // pageInfo = JSON.parse(localStorage.getItem("PageInfo"));
     const { pathname, search, hash, href } = window.location;
     const site_region_local = localStorage.getItem("site_region");
 
@@ -351,6 +341,13 @@ function Header() {
         websiteContentCheck(matchString);
       }
     }
+
+    setInterval(() => {
+      if (JSON.parse(localStorage.getItem("PageInfo"))?.pType) {
+        setPType(JSON.parse(localStorage.getItem("PageInfo"))?.pType);
+        setPCode(JSON.parse(localStorage.getItem("PageInfo"))?.pCode);
+      }
+    }, 10);
   }, [ver, region]);
 
   const [value, setValue] = React.useState("fruit");
@@ -437,7 +434,11 @@ function Header() {
           </section>
           <section className="header_item_right d-flex d-lg-inline-block justify-content-end align-items-center">
             <div className="header_call_icn">
-              <NavLink href={`${region}/make-an-enquiry`} className="header_mail_icn">
+              <NavLink
+                //href={regionWiseUrl + "/make-an-enquiry"}
+                href={generateDynamicLink()}
+                className="header_mail_icn"
+              >
                 <em
                   className="material-symbols-outlined"
                   title="Make an enquiry"
