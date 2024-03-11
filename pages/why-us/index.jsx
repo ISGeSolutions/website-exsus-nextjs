@@ -172,9 +172,14 @@ function Index() {
             matches.forEach((match, index, matches) => {
               const matchString = match.replace(/{|}/g, "");
               if (!storedData[matchString]) {
-                throw new Error("Loop break");
+                if (storedData[matchString.toLowerCase()]) {
+                  replacement = storedData[matchString.toLowerCase()];
+                }
               } else {
                 replacement = storedData[matchString];
+                if (!replacement) {
+                  replacement = storedData[matchString.toLowerCase()];
+                }
               }
               const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
               if (checkStr && replacement) {
@@ -182,7 +187,6 @@ function Index() {
               }
             });
             return modifiedString;
-            setIsLoading(false);
           } catch (error) {
             if (error.message === "Loop break") {
             } else if (error.message === "Region not found") {
@@ -195,6 +199,16 @@ function Index() {
   };
 
   useEffect(() => {
+
+    if (
+      !localStorage.getItem(
+        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+      )
+    ) {
+      websiteContentCheck(dictionaryPage);
+    }
+
+
     ReactGA.send({
       hitType: "pageview",
       page: "/why-us",
@@ -209,13 +223,7 @@ function Index() {
       transport: "xhr", // optional, beacon/xhr/image
     });
 
-    if (
-      !localStorage.getItem(
-        `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
-      )
-    ) {
-      websiteContentCheck(dictionaryPage);
-    }
+
     whyusService
       .getWhyusPage()
       .then((x) => {
@@ -297,7 +305,9 @@ function Index() {
                   <p
                     className="mb-4"
                     dangerouslySetInnerHTML={{
-                      __html: dictioneryFunction(longText),
+                      __html: dictioneryFunction(customPageData?.data?.filter(
+                        (res) => res.attributes?.content_name == "Long_Text"
+                      )[0]?.attributes?.content_value),
                     }}
                   ></p>
                 </div>
