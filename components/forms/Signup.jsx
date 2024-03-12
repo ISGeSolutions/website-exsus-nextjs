@@ -19,6 +19,7 @@ function Signup() {
   const [pageUrl, setPageUrl] = useState("");
 
   useEffect(() => {
+    setAlert(null);
     getDeviceInfo().then(({ deviceInfo, countryInfo }) => {
       setDeviceInfo(
         `Device-${deviceInfo.os} Browser -${deviceInfo.browser},Version-${deviceInfo.version} ,UserAgentDetails: ${deviceInfo.userAgent} InputType >${deviceInfo.inputType} Device address> ${deviceInfo.deviceAddress}`

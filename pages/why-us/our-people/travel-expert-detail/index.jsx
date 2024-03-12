@@ -311,10 +311,10 @@ function Index() {
         setIsLoading(false);
       });
 
-    const carousel1 = document.querySelector("#Testimonials");
-    if (carousel1) {
-      new bootstrap.Carousel(carousel1);
-    }
+    // const carousel1 = document.querySelector("#Testimonials");
+    // if (carousel1) {
+    //   new bootstrap.Carousel(carousel1);
+    // }
 
     window.addEventListener("resize", equalHeight(true));
     const slider = document.querySelector(".items");
@@ -365,6 +365,14 @@ function Index() {
         slides[next].classList.add("next");
       }
     };
+    setTimeout(() => {
+      // $('.carousel').carousel();
+      $(".carousel").carousel({
+        interval: 250 * 10,
+        cycle: true,
+        pause: "none",
+      });
+    }, 2000);
   }, [expertName]);
 
   return (
@@ -430,18 +438,27 @@ function Index() {
               <h3>My Top Tips</h3>
               <div
                 id="carouselExampleAutoplaying"
-                className="carousel slide "
+                className="carousel slide"
                 data-bs-ride="carousel"
               >
                 <div className="carousel-inner">
                   {travelContent?.attributes?.travel_executive_contents.data
                     ?.filter((res) => res.attributes.content_type == "Top_tips")
-                    ?.map((res1) => (
-                      <div className="carousel-item active" key={res1.id}>
+                    ?.map((res1, index) => (
+                      <div
+                        className={`carousel-item ${
+                          index === 0 ? "active" : ""
+                        }`}
+                        key={res1.id}
+                        data-bs-interval="3000"
+                        data-pause="false"
+                        data-ride="carousel"
+                      >
                         <div className="our_exprts_slider_grp">
                           <div className="row">
                             <div className="col-md-6 m-auto">
                               <p
+                                className="mb-3 mb-md-0"
                                 dangerouslySetInnerHTML={{
                                   __html: dictioneryFunction(
                                     res1?.attributes?.intro_text
@@ -452,7 +469,7 @@ function Index() {
                             <div className="col-md-6">
                               <img
                                 src={res1.attributes?.image_path}
-                                className=""
+                                // className=""
                                 alt="our_exprts_slider01"
                               />
                             </div>
@@ -562,7 +579,7 @@ function Index() {
                   ?.map((res1) => (
                     <div className="item active">
                       <img
-                        src={res1.attributes?.image_url}
+                        src={res1.attributes?.image_path}
                         alt="expert_favourite_pic01"
                         className="img-fluid"
                       />

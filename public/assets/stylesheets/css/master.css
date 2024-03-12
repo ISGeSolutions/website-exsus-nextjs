@@ -3325,6 +3325,7 @@ nav
   text-transform: uppercase;
   margin-bottom: 20px;
   letter-spacing: 1px;
+  word-wrap: break-word;
 }
 
 .trvl_info_cntnt.client_review_para_blk h4 span {
@@ -3595,4 +3596,43 @@ nav
 .trvl_info_row .trvl_info_cntnt.trvl_info_para_blk p span {
   font: 400 1rem/1.5rem "Roboto", sans-serif;
   color: #fff;
+}
+
+.card_blk_row .card_blk_inr.card_blk_para_blk .card_blk_cntnt.card_blk_sml_arw {
+  padding: 15px;
+}
+
+.card_blk_row
+  .card_blk_inr.card_blk_para_blk
+  .card_blk_cntnt.card_blk_sml_arw
+  .row {
+  display: flex;
+  padding-top: 0;
+}
+
+.card_blk_row
+  .card_blk_inr.card_blk_para_blk
+  .card_blk_cntnt.card_blk_sml_arw
+  .row
+  > div {
+  padding-top: 0;
+}
+
+.card_blk_row
+  .card_blk_inr.card_blk_para_blk
+  .card_blk_cntnt.card_blk_sml_arw
+  .row
+  > div
+  .card_blk_txt {
+  padding-top: 0;
+}
+
+.card_blk_row
+  .card_blk_inr.card_blk_para_blk
+  .card_blk_cntnt.card_blk_sml_arw
+  .row
+  > div
+  .card_blk_txt
+  h3 {
+  font: 1.125rem/1.5rem "Slabo 27px", serif;
 }
