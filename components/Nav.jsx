@@ -331,12 +331,6 @@ function Nav() {
     goBack?.addEventListener("click", () => {
       hideSubMenu();
     });
-    menuTrigger?.addEventListener("click", () => {
-      toggleMenu();
-    });
-    closeMenu?.addEventListener("click", () => {
-      toggleMenu();
-    });
 
     const script = document.createElement("script");
 
