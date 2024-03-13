@@ -93,7 +93,7 @@ function Index() {
   };
 
   const handleWhenToGoClick = () => {
-    router.push(region + "/where-to-go");
+    router.push(regionWiseUrl + "/where-to-go");
   };
 
   // const handleHrefClick = (event) => {
