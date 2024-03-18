@@ -24,6 +24,7 @@ function Index() {
   const [friendlyUrl, setFriendlyUrl] = useState("");
   const [expertData, setExpertData] = useState();
   const [travelContent, setTravelContent] = useState();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   let dictionaryPage = 1;
 
   const equalHeight = (resize) => {
@@ -62,6 +63,23 @@ function Index() {
 
   const handleHrefClick = (event) => {
     event.preventDefault();
+  };
+
+  const nextImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex ===
+      travelContent.attributes.travel_executive_contents.data.length - 1
+        ? 0
+        : prevIndex + 1
+    );
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0
+        ? travelContent.attributes.travel_executive_contents.data.length - 1
+        : prevIndex - 1
+    );
   };
 
   const websiteContentCheck = (pageNo) => {
@@ -576,18 +594,23 @@ function Index() {
                   ?.filter(
                     (res) => res.attributes.content_type == "Client_images"
                   )
-                  ?.map((res1) => (
-                    <div className="item active">
+                  ?.map((res1, index) => (
+                    <div
+                      key={index}
+                      className={`item ${
+                        index === 0 ? "prev" : index === 1 ? "active" : "next"
+                      }`}
+                    >
                       <img
                         src={res1.attributes?.image_path}
-                        alt="expert_favourite_pic01"
+                        alt={`expert_favourite_pic${index + 1}`}
                         className="img-fluid"
                       />
                       <p>{res1?.attributes?.intro_text}</p>
                     </div>
                   ))}
                 <div className="button-container">
-                  <div className="button">
+                  <div className="button" onClick={prevImage}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="#fff"
@@ -604,7 +627,7 @@ function Index() {
                       ></path>
                     </svg>
                   </div>
-                  <div className="button">
+                  <div className="button" onClick={nextImage}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="#fff"
