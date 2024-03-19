@@ -284,7 +284,7 @@ function Index() {
 
     const { search } = router.query;
     if (search) {
-      setSearchTerm(search);
+      setSearchTerm(search?.replace(/_/g, " "));
     }
 
     if (
@@ -311,7 +311,7 @@ function Index() {
       });
     // userService.getAll().then(x => setUsers(x));
     if (search) {
-      loadMoreData(search)
+      loadMoreData(search?.replace(/_/g, " "))
     }
   }, [router.query, page]);
 
