@@ -26,11 +26,31 @@ function Index() {
   const [travelContent, setTravelContent] = useState();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   let dictionaryPage = 1;
+  const [activeIndex, setActiveIndex] = useState(0);
 
+  const prevImage = () => {
+    setActiveIndex((prevIndex) => {
+      if (prevIndex === 0) {
+        return travelContent.length - 1;
+      } else {
+        return prevIndex - 1;
+      }
+    });
+  };
+
+  const nextImage = () => {
+    setActiveIndex((prevIndex) => {
+      if (prevIndex === travelContent.length - 1) {
+        return 0;
+      } else {
+        return prevIndex + 1;
+      }
+    });
+  };
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -65,22 +85,6 @@ function Index() {
     event.preventDefault();
   };
 
-  const nextImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex ===
-      travelContent.attributes.travel_executive_contents.data.length - 1
-        ? 0
-        : prevIndex + 1
-    );
-  };
-
-  const prevImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0
-        ? travelContent.attributes.travel_executive_contents.data.length - 1
-        : prevIndex - 1
-    );
-  };
 
   const websiteContentCheck = (pageNo) => {
     homeService
@@ -334,55 +338,55 @@ function Index() {
     //   new bootstrap.Carousel(carousel1);
     // }
 
-    window.addEventListener("resize", equalHeight(true));
-    const slider = document.querySelector(".items");
-    const slides = document.querySelectorAll(".item");
-    const button = document.querySelectorAll(".button");
+    // window.addEventListener("resize", equalHeight(true));
+    // const slider = document.querySelector(".items");
+    // const slides = document.querySelectorAll(".item");
+    // const button = document.querySelectorAll(".button");
 
-    let current = 0;
-    let prev = 2;
-    let next = 1;
+    // let current = 0;
+    // let prev = 2;
+    // let next = 1;
 
-    for (let i = 0; i < button.length; i++) {
-      button[i].addEventListener("click", () =>
-        i == 0 ? gotoPrev() : gotoNext()
-      );
-    }
+    // for (let i = 0; i < button.length; i++) {
+    //   button[i].addEventListener("click", () =>
+    //     i == 0 ? gotoPrev() : gotoNext()
+    //   );
+    // }
 
-    const gotoPrev = () =>
-      current > 0 ? gotoNum(current - 1) : gotoNum(slides.length - 1);
+    // const gotoPrev = () =>
+    //   current > 0 ? gotoNum(current - 1) : gotoNum(slides.length - 1);
 
-    const gotoNext = () => (current < 2 ? gotoNum(current + 1) : gotoNum(0));
+    // const gotoNext = () => (current < 2 ? gotoNum(current + 1) : gotoNum(0));
 
-    const gotoNum = (number) => {
-      current = number;
-      prev = current - 1;
-      next = current + 1;
+    // const gotoNum = (number) => {
+    //   current = number;
+    //   prev = current - 1;
+    //   next = current + 1;
 
-      for (let i = 0; i < slides.length; i++) {
-        slides[i].classList.remove("active");
-        slides[i].classList.remove("prev");
-        slides[i].classList.remove("next");
-      }
+    //   for (let i = 0; i < slides.length; i++) {
+    //     slides[i].classList.remove("active");
+    //     slides[i].classList.remove("prev");
+    //     slides[i].classList.remove("next");
+    //   }
 
-      if (next == 3) {
-        next = 0;
-      }
+    //   if (next == 3) {
+    //     next = 0;
+    //   }
 
-      if (prev == -1) {
-        prev = 2;
-      }
+    //   if (prev == -1) {
+    //     prev = 2;
+    //   }
 
-      if (slides[current] != undefined) {
-        slides[current].classList.add("active");
-      }
-      if (slides[prev] != undefined) {
-        slides[prev].classList.add("prev");
-      }
-      if (slides[next] != undefined) {
-        slides[next].classList.add("next");
-      }
-    };
+    //   if (slides[current] != undefined) {
+    //     slides[current].classList.add("active");
+    //   }
+    //   if (slides[prev] != undefined) {
+    //     slides[prev].classList.add("prev");
+    //   }
+    //   if (slides[next] != undefined) {
+    //     slides[next].classList.add("next");
+    //   }
+    // };
     setTimeout(() => {
       // $('.carousel').carousel();
       $(".carousel").carousel({
@@ -464,9 +468,8 @@ function Index() {
                     ?.filter((res) => res.attributes.content_type == "Top_tips")
                     ?.map((res1, index) => (
                       <div
-                        className={`carousel-item ${
-                          index === 0 ? "active" : ""
-                        }`}
+                        className={`carousel-item ${index === 0 ? "active" : ""
+                          }`}
                         key={res1.id}
                         data-bs-interval="3000"
                         data-pause="false"
@@ -533,7 +536,7 @@ function Index() {
                     <div className="col-sm-6 col-lg-4 col-xxl-3">
                       <div className="card_blk_inr">
                         <div className="item active">
-                          <a>
+                          <a href={res1.attributes?.image_url}>
                             <img
                               src={res1.attributes?.image_path}
                               alt="expert_favourite_pic01"
@@ -591,24 +594,24 @@ function Index() {
               <h3>My favourite pictures</h3>
               <div className="items">
                 {travelContent?.attributes?.travel_executive_contents?.data
-                  ?.filter(
-                    (res) => res.attributes.content_type == "Client_images"
-                  )
-                  ?.map((res1, index) => (
-                    <div
-                      key={index}
-                      className={`item ${
-                        index === 0 ? "prev" : index === 1 ? "active" : "next"
-                      }`}
-                    >
-                      <img
-                        src={res1.attributes?.image_path}
-                        alt={`expert_favourite_pic${index + 1}`}
-                        className="img-fluid"
-                      />
-                      <p>{res1?.attributes?.intro_text}</p>
-                    </div>
-                  ))}
+                  ?.filter((res) => res.attributes.content_type === "Client_images")
+                  ?.map((res1, index) => {
+                    const currentIndex = index % 3; // Ensure the index is within 0-2
+                    let className = "item";
+                    if (currentIndex === activeIndex % 3) {
+                      className += " active";
+                    } else if (currentIndex === (activeIndex + 1) % 3) {
+                      className += " next";
+                    } else if (currentIndex === (activeIndex + 2) % 3) {
+                      className += " prev";
+                    }
+                    return (
+                      <div key={index} className={className}>
+                        <img src={res1.attributes?.image_path} alt={`expert_favourite_pic${index + 1}`} className="img-fluid" />
+                        <p>{res1?.attributes?.image_text}</p>
+                      </div>
+                    );
+                  })}
                 <div className="button-container">
                   <div className="button" onClick={prevImage}>
                     <svg
@@ -647,48 +650,52 @@ function Index() {
                 </div>
               </div>
             </div>
+
           </section>
-          {/* <section
-            aria-label="Client Testimonials"
-            className="testimonials_blk_row"
-          >
-            <div className="container">
-              <div
-                id="Testimonials"
-                className="carousel slide"
-                data-bs-ride="carousel"
-              >
-                <div className="carousel-indicators">
-                  {testimonials.map((_, index) => (
-                    <button
-                      key={index}
-                      type="button"
-                      data-bs-target="#Testimonials"
-                      data-bs-slide-to={index}
-                      className={index === 0 ? "active" : ""}
-                      aria-current={index === 0 ? "true" : "false"}
-                      aria-label={`Slide ${index + 1}`}
-                    ></button>
-                  ))}
-                </div>
-                <div className="carousel-inner">
-                  {testimonials.map((text, index) => (
-                    <div
-                      key={index}
-                      target="_blank"
-                      className={`carousel-item ${index === 0 ? "active" : ""}`}
-                      data-bs-interval="5000"
-                    >
-                      <div className="carousel-caption">
-                        <p>{text?.attributes.review_short_text}</p>
-                        <span>{text?.attributes.client_name}</span>
+          {testimonials.length > 0 && (
+            <section
+              aria-label="Client Testimonials"
+              className="testimonials_blk_row"
+            >
+              <div className="container">
+                <div
+                  id="Testimonials"
+                  className="carousel slide"
+                  data-bs-ride="carousel"
+                >
+                  <div className="carousel-indicators">
+                    {testimonials.map((_, index) => (
+                      <button
+                        key={index}
+                        type="button"
+                        data-bs-target="#Testimonials"
+                        data-bs-slide-to={index}
+                        className={index === 0 ? "active" : ""}
+                        aria-current={index === 0 ? "true" : "false"}
+                        aria-label={`Slide ${index + 1}`}
+                      ></button>
+                    ))}
+                  </div>
+                  <div className="carousel-inner">
+                    {testimonials.map((text, index) => (
+                      <div
+                        key={index}
+                        target="_blank"
+                        className={`carousel-item ${index === 0 ? "active" : ""}`}
+                        data-bs-interval="5000"
+                      >
+                        <div className="carousel-caption">
+                          <p>{text?.attributes.review_short_text}</p>
+                          <span>{text?.attributes.client_name}</span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          </section> */}
+            </section>
+          )}
+
 
           <section className="make_enqury_row">
             <div className="container">

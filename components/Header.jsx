@@ -87,7 +87,7 @@ function Header() {
   }
 
   const handleSearch = (data) => {
-    router.push(regionWiseUrl + `/search?search=${data?.searchText}`);
+    router.push(regionWiseUrl + `/search?search=${data?.searchText.replace(/ /g, "_").toLowerCase()}`);
   };
 
   const generateDynamicLink = () => {
@@ -194,7 +194,7 @@ function Header() {
   // };
 
   useEffect(() => {
-    console.warn = () => {};
+    console.warn = () => { };
     setPType(JSON.parse(localStorage.getItem("PageInfo"))?.pType);
     setPCode(JSON.parse(localStorage.getItem("PageInfo"))?.pCode);
 
