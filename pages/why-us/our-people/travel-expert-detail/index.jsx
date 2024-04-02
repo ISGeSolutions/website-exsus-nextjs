@@ -593,7 +593,7 @@ function Index() {
             <div className="container">
               <h3>My favourite pictures</h3>
               <div className="items">
-                {travelContent?.attributes?.travel_executive_contents?.data
+                {/* {travelContent?.attributes?.travel_executive_contents?.data
                   ?.filter((res) => res.attributes.content_type === "Client_images")
                   ?.map((res1, index) => {
                     const currentIndex = index % 3; // Ensure the index is within 0-2
@@ -611,7 +611,32 @@ function Index() {
                         <p>{res1?.attributes?.image_text}</p>
                       </div>
                     );
+                  })} */}
+                {travelContent?.attributes?.travel_executive_contents?.data
+                  ?.filter((res) => res.attributes.content_type === "Client_images")
+                  ?.map((res1, index) => {
+                    const numImages = travelContent?.attributes?.travel_executive_contents?.data
+                      ?.filter((res) => res.attributes.content_type === "Client_images")
+                      ?.length || 1; // Default to 1 if length is not available
+
+                    const currentIndex = index % numImages; // Ensure the index is within 0 to numImages-1
+                    let className = "item";
+
+                    if (currentIndex === activeIndex % numImages) {
+                      className += " active";
+                    } else if (currentIndex === (activeIndex + 1) % numImages) {
+                      className += " next";
+                    } else if (currentIndex === (activeIndex + 2) % numImages) {
+                      className += " prev";
+                    }
+                    return (
+                      <div key={index} className={className}>
+                        <img src={res1.attributes?.image_path} alt={`expert_favourite_pic${index + 1}`} className="img-fluid" />
+                        <p>{res1?.attributes?.image_text}</p>
+                      </div>
+                    );
                   })}
+
                 <div className="button-container">
                   <div className="button" onClick={prevImage}>
                     <svg
