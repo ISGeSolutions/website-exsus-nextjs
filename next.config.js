@@ -4736,16 +4736,16 @@ const nextConfig = {
     apiUrl:
       process.env.NODE_ENV === "development"
         ? // ? 'https://e922710a-cb11-401b-ae5b-ef73740e1501.mock.pstmn.io' // development api
-          // : 'https://e922710a-cb11-401b-ae5b-ef73740e1501.mock.pstmn.io' // production api
-          // ? 'http://localhost:4000' // development api
-          // : 'http://localhost:4000' // production api
-          // ? 'https://mock.apidog.com/m1/379394-0-default' // development api
-          // : 'https://mock.apidog.com/m1/379394-0-default' // production api
-          //     ? 'http://13.233.122.205:1337' // development api
-          //     : 'http://13.233.122.205:1337' // production api
+        // : 'https://e922710a-cb11-401b-ae5b-ef73740e1501.mock.pstmn.io' // production api
+        // ? 'http://localhost:4000' // development api
+        // : 'http://localhost:4000' // production api
+        // ? 'https://mock.apidog.com/m1/379394-0-default' // development api
+        // : 'https://mock.apidog.com/m1/379394-0-default' // production api
+        //     ? 'http://13.233.122.205:1337' // development api
+        //     : 'http://13.233.122.205:1337' // production api
 
-          "https://cms-api.excelleresolutions.com" // development api
-        : "https://cms-api.excelleresolutions.com", // production api
+        "https://cms-api-dev.excelleresolutions.com" // development api
+        : "https://cms-api-dev.excelleresolutions.com", // production api
     apiUrl1:
       process.env.NODE_ENV === "development"
         ? "http://3.110.223.197:1337" // client data development api
