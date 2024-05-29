@@ -702,7 +702,7 @@ function RegionItinararies(props) {
                     <div className="col-12">
                       <div className="destination_filter_result d-block d-lg-flex">
                         <p>
-                          We've found {metaData?.total} holiday ideas in Asia
+                          We've found {metaData?.total} holiday ideas in {regionName + " "}
                           for you
                         </p>
                         <div className="destination_contries_filter d-inline-block d-lg-flex">
