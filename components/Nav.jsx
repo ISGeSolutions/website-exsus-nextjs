@@ -518,11 +518,10 @@ function Nav() {
                                 (destinationItem, i) => (
                                   <li
                                     key={i}
-                                    className={`header_country_label ${
-                                      activeIndex === i
-                                        ? "active responsive_drpdwn_cls"
-                                        : ""
-                                    }`}
+                                    className={`header_country_label ${activeIndex === i
+                                      ? "active responsive_drpdwn_cls"
+                                      : ""
+                                      }`}
                                     onMouseEnter={() => handleMouseEnter(i)}
                                     onMouseLeave={handleMouseLeave}
                                   >
@@ -741,11 +740,10 @@ function Nav() {
                               {holidaytypesList?.map((holidaystypesItem, i) => (
                                 <li
                                   key={holidaystypesItem?.id}
-                                  className={`header_country_label ${
-                                    activeIndexHoliday === i
-                                      ? "active responsive_drpdwn_cls"
-                                      : ""
-                                  }`}
+                                  className={`header_country_label ${activeIndexHoliday === i
+                                    ? "active responsive_drpdwn_cls"
+                                    : ""
+                                    }`}
                                   onMouseEnter={() =>
                                     handleMouseEnterHoliday(i)
                                   }

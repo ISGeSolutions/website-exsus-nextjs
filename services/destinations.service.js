@@ -220,7 +220,7 @@ function getDestinationFavItineraries(name, region) {
       ?.replace(
         /in/g,
         "INDIA"
-      )}&sort[0]=country_favourite_serial_number&populate[destinations][fields][0]=destination_name&populate[countries][fields][0]=country_name`;
+      )}&sort[0]=destination_favourite_serial_number&populate[destinations][fields][0]=destination_name&populate[countries][fields][0]=country_name`;
   return fetchWrapper.get(itinerariesDetailsUrl);
 }
 
@@ -410,7 +410,7 @@ function getRegionWiseHotels(page, name, item, region) {
       }/api/hotels?filters[region][region_name][$eq]=${name?.replace(
         /&/g,
         "%26"
-      )}&populate[hotel_images][fields][0]=image_path&populate[hotel_images][fields][1]=image_type&populate[1]=hotel_travel_times&pagination[page]=${page}&populate[hotel_country_contents][filters][website_country]=${region}&pagination[pageSize]=12&populate[destination][fields][0]=destination_name&populate[country][fields][0]=country_name&populate[region][fields][0]=region_name`;
+      )}&populate[hotel_images][fields][0]=image_path&populate[hotel_images][fields][1]=image_type&populate[1]=hotel_travel_times&pagination[page]=${page}&populate[hotel_country_contents][filters][website_country]=${region}&pagination[pageSize]=12&populate[destination][fields][0]=destination_name&populate[country][fields][0]=country_name&populate[region][fields][0]=region_name&sort[0]=region_recommended_serial_number:asc`;
     return fetchWrapper.get(itinerariesDetailsUrl);
   } else if (item == "alphabetical") {
     const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl

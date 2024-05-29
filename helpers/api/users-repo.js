@@ -27,10 +27,8 @@ function create(user) {
 
 function update(id, params) {
     const user = users.find(x => x.id.toString() === id.toString());
-
     // set date updated
     user.dateUpdated = new Date().toISOString();
-
     // update and save
     Object.assign(user, params);
     saveData();
@@ -41,7 +39,7 @@ function _delete(id) {
     // filter out deleted user and save
     users = users.filter(x => x.id.toString() !== id.toString());
     saveData();
-    
+
 }
 
 // private helper functions

@@ -379,7 +379,7 @@ function ContinentCountry({ sendDataToParent }) {
                           <div className="col-11">
                             <div className="card_blk_txt">
                               <h3>
-                                See all Itinerary Ideas in{" "}
+                                See all Itinerary Ideas in the{" "}
                                 {destination.destination_name}
                               </h3>
                             </div>
@@ -420,7 +420,7 @@ function ContinentCountry({ sendDataToParent }) {
                           <div className="col-11">
                             <div className="card_blk_txt">
                               <h3>
-                                See all Places to Stay in{" "}
+                                See all Places to Stay in the{" "}
                                 {destination.destination_name}
                               </h3>
                             </div>
