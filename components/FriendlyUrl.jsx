@@ -26,7 +26,7 @@ export function FriendlyUrl(props) {
   const dynamicFriendlyLink = (element, index) => {
     const link = element
       .trim()
-      ?.replace(/\s+/g, "-")
+      ?.replace(/\s+/g, "-")?.replace(/&/g, 'and')
       ?.replace(/ /g, "-")
       .toLowerCase();
     if (index == 0) {

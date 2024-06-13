@@ -1004,17 +1004,18 @@
   padding: 50px 0;
   color: #231f20;
   text-align: center;
+  border-top: 5px solid #333132;
 }
 
 /* line 462, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
 .make_enqury_row h3 {
-  font: 300 2.25rem/2.8125rem "Roboto", sans-serif;
+  font: 300 2.25rem/2.75rem "Roboto", sans-serif;
   margin-bottom: 10px;
 }
 
 /* line 466, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
 .make_enqury_row p {
-  font: 300 1.5rem/1.875rem "Roboto", sans-serif;
+  font: 400 1.5rem/1.875rem "Roboto", sans-serif;
   margin-bottom: 25px;
 }
 
@@ -2593,10 +2594,10 @@
 
 /* line 129, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_contact-us.scss */
 .destination_text_overlay_row {
-  padding: 140px 0;
+  padding: 84px 0;
   background: url("../../images/destination_overlay.jpg") no-repeat;
-  background-size: cover;
   text-align: center;
+  height: 396px;
 }
 
 /* line 134, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_contact-us.scss */
@@ -4467,4 +4468,22 @@
 
 .favrites_blk_row.favrites_blk_small_card_row .card_slider_row .carousel00 .card_slider_inr.card_slider_inr_sml .card_slider_inr_sml_img {
   min-height: 150px;
+}
+
+.card_blk_row.destinations_blk_row .card_blk_inr .card_blk_cntnt .card_blk_txt h3 {
+  text-align: center;
+}
+
+.card_blk_row.destinations_blk_row .card_blk_inr .card_blk_cntnt.card_blk_sml_arw svg {
+  margin-left: auto;
+  display: block;
+}
+
+.trvl_info_cntnt.when_to_go_para_blk p span {
+  font: 400 1rem/1.5rem "Roboto", sans-serif;
+  color: #ffffff;
+}
+
+.card_blk_row .card_blk_inr.card_blk_overlay {
+  height: auto;
 }

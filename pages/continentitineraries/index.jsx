@@ -111,9 +111,6 @@ function ContinentItinararies(props) {
   const router = useRouter();
   const [dcode, setdcode] = useState();
   const destinationcode = router.query.continent
-    ?.replace(/-and-/g, " & ")
-    .replace(/-/g, " ")
-    .toLowerCase();
   const [countryOptions, setAllCountries] = useState([]);
   const [regionOptions, setAllRegion] = useState([]);
   const [destination, setdestination] = useState("");
@@ -544,6 +541,7 @@ function ContinentItinararies(props) {
         ];
         arrayOfObjects = arrayOfObjects.filter((res) => res.value !== null);
         setAllCountries(arrayOfObjects);
+        setSelectedOptionCountry([arrayOfObjects[0]]);
 
         setIsLoading(false);
       })
@@ -568,12 +566,15 @@ function ContinentItinararies(props) {
         })),
       ];
       setAllRegion(arrayOfObjects);
+      setSelectedOptionRegion([arrayOfObjects[0]]);
+
     });
 
+
+    setSelectedOptionMonth([monthOptions[0]]);
     // window.addEventListener("resize", equalHeight(true));
 
     // Using window.onload to detect full page load
-
     window.onload = () => {
       setTimeout(() => {
         const redirectUrl = `${regionWiseUrl}/destinations/${destinationcode

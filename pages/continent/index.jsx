@@ -26,10 +26,7 @@ function Index() {
   const router = useRouter();
   let dictionaryPage = 1;
   const [coordinatesArray, setCoordinatesArray] = useState([]);
-  const destinationcode = router.query.continent
-    ?.replace(/-and-/g, " & ")
-    .replace(/-/g, " ")
-    .toLowerCase();
+  const destinationcode = router.query.continent;
   const destinationTab = router.query?.continenttab;
   var itinerarytab = router.components;
   const handleDataFromChild = (data) => {
@@ -89,9 +86,9 @@ function Index() {
           .replace(/&/g, "and")
           .replace(/ /g, "-")
           .toLowerCase()}/${destCode
-          .replace(/&/g, "and")
-          .replace(/ /g, "-")
-          .toLowerCase()}-countries`;
+            .replace(/&/g, "and")
+            .replace(/ /g, "-")
+            .toLowerCase()}-countries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url} countries`
@@ -111,9 +108,9 @@ function Index() {
           .replace(/&/g, "and")
           .replace(/ /g, "-")
           .toLowerCase()}/${destCode
-          .replace(/&/g, "and")
-          .replace(/ /g, "-")
-          .toLowerCase()}-itineraries`;
+            .replace(/&/g, "and")
+            .replace(/ /g, "-")
+            .toLowerCase()}-itineraries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(`Home/Destinations/${destCode}/${destCode} Itineraries`);
       text = `TAILOR-MADE ${destinationName} HOLIDAY ITINERARIES`;
@@ -143,8 +140,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -304,7 +301,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -385,9 +382,9 @@ function Index() {
                 ?.replace(/&/g, "and")
                 .replace(/ /g, "-")
                 .toLowerCase()}/${item?.attributes?.friendly_url
-                ?.replace(/ /g, "-")
-                .replace(/&/g, "and")
-                .toLowerCase()}`,
+                  ?.replace(/ /g, "-")
+                  .replace(/&/g, "and")
+                  .toLowerCase()}`,
           }));
           // // Update the state with the accumulated coordinates
           setCoordinatesArray((prevCoordinates) => [
@@ -520,17 +517,15 @@ function Index() {
             {isShowMap ? (
               <div className="banner_tab_blk">
                 <button
-                  className={`btn banner_map_tab ${
-                    activeButton === "map" ? "banner_tab_active" : ""
-                  }`}
+                  className={`btn banner_map_tab ${activeButton === "map" ? "banner_tab_active" : ""
+                    }`}
                   onClick={() => handleTabClick("map")}
                 >
                   Map
                 </button>
                 <button
-                  className={`btn banner_img_tab ${
-                    activeButton === "images" ? "banner_tab_active" : ""
-                  }`}
+                  className={`btn banner_img_tab ${activeButton === "images" ? "banner_tab_active" : ""
+                    }`}
                   onClick={() => handleTabClick("images")}
                 >
                   Images
@@ -540,9 +535,8 @@ function Index() {
               ""
             )}
             <div
-              className={`banner_map_blk ${
-                activeButton === "map" ? "banner_map_active" : ""
-              }`}
+              className={`banner_map_blk ${activeButton === "map" ? "banner_map_active" : ""
+                }`}
             >
               <MarkerInfoWindowNext data={coordinatesArray} />
             </div>
@@ -587,7 +581,7 @@ function Index() {
                         aria-controls="pills-overview"
                         aria-selected="true"
                       >
-                        Ovierview
+                        Overview
                       </button>
                     </li>
                     <li className="nav-item" role="presentation">

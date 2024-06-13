@@ -331,7 +331,7 @@ function Index() {
           <>
             <section className="favrites_blk_row dark_grey pt-5">
               <div className="container-md">
-                <h2 className="search_result_title">Search result for Asia site</h2>
+                <h2 className="search_result_title">Search result for {region.replace(/in/g, 'india').toUpperCase()} site</h2>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="search_result_input d-block d-md-flex">
                     <input

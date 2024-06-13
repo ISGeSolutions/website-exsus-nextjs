@@ -102,7 +102,7 @@ function getDestinationLandingPage() {
 }
 
 function getDestinationLandingList() {
-  const destinationLandingListUrl = `${publicRuntimeConfig.apiUrl}/api/destinations?filters[main_page_ind][$eq]=true&fields[0]=destination_code&fields[1]=destination_name&fields[2]=serial_number&populate[destination_images][fields][2]=image_path&populate[destination_images][fields][3]=image_type&populate[countries][fields][4]=country_code&populate[countries][fields][5]=country_name&populate[countries][fields][6]=serial_number&populate[countries][sort][0]=serial_number&populate[countries][filters][serial_number][$gt]=0&sort[0]=main_page_serial_number`;
+  const destinationLandingListUrl = `${publicRuntimeConfig.apiUrl}/api/destinations?filters[main_page_ind][$eq]=true&fields[0]=destination_code&fields[1]=destination_name&fields[2]=serial_number&fields[3]=friendly_url&populate[destination_images][fields][2]=image_path&populate[destination_images][fields][3]=image_type&populate[countries][fields][4]=country_code&populate[countries][fields][5]=country_name&populate[countries][fields][6]=serial_number&populate[countries][sort][0]=serial_number&populate[countries][filters][serial_number][$gt]=0&sort[0]=main_page_serial_number`;
   return fetchWrapper.get(destinationLandingListUrl);
 }
 
@@ -114,10 +114,7 @@ function getDestinationInspireMe() {
 function getDestinationDetails(name) {
   //  ('baseUrl_dropdown', baseUrl_dropdown);
   const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl
-    }/api/destinations?filters[destination_name][$eq]=${name?.replace(
-      /&/g,
-      "%26"
-    )}&populate[destination_images][filters][image_type][$eq]=banner&populate[countries][populate][country_images][filters][image_type][$eq]=thumbnail`;
+    }/api/destinations?filters[friendly_url][$eq]=${name}&populate[destination_images][filters][image_type][$eq]=banner&populate[countries][populate][country_images][filters][image_type][$eq]=thumbnail`;
   return fetchWrapper.get(destinationDetailsUrl);
 }
 
@@ -212,10 +209,7 @@ function getFavIti() {
 
 function getDestinationFavItineraries(name, region) {
   const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl
-    }/api/itineraries?filters[destinations][destination_name][$eq]=${name?.replace(
-      /&/g,
-      "%26"
-    )}&filters[destination_favourite_ind][$eq]=true&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region
+    }/api/itineraries?filters[destinations][friendly_url][$eq]=${name}&filters[destination_favourite_ind][$eq]=true&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region
       ?.replace(/&/g, "%26")
       ?.replace(
         /in/g,
@@ -633,7 +627,8 @@ function ItineraryFilterOnDestItineraryDetail(
         ?.replace(
           /in/g,
           "INDIA"
-        )}&pagination[page]=${page}&pagination[pageSize]=12&populate[destinations][fields][0]=destination_name&populate[countries][fields][0]=country_name`;
+        )}&pagination[page]=${page}&pagination[pageSize]=12&populate[destinations][fields][0]=destination_name&populate[countries][fields][0]=country_name&sort[0]=price${region !== "uk" ? "_" + region?.replace(/in/g, "india") : ""
+      }:asc`;
     return fetchWrapper.get(itinerariesDetailsUrl);
   } else if (item == "recommended") {
     const itinerariesDetailsUrl =

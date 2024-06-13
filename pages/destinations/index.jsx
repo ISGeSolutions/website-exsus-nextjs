@@ -57,8 +57,11 @@ function Index() {
   };
 
   function capitalizeEveryWord(text) {
-    return text?.replace(/\b\w/g, function (match) {
-      return match.toUpperCase();
+    return text?.replace(/\b\w+/g, function (match) {
+      if (match.toLowerCase() === "made") {
+        return match.toLowerCase();
+      }
+      return match.charAt(0).toUpperCase() + match.slice(1).toLowerCase();
     });
   }
 
@@ -351,13 +354,8 @@ function Index() {
           type="text/javascript"
           src="/assets/javascripts/card-slider.js"
         ></script>
-        {/* <script
-          type="text/javascript"
-          src="/assets/javascripts/card-slider-equal-height.js"
-        ></script> */}
       </Head>
       {isLoading ? (
-        // <MyLoader />
         <div
           className="full_loader_parnt_blk loader_parnt_blk"
           style={{ display: `block !important` }}
@@ -384,7 +382,6 @@ function Index() {
                     aria-label={`Slide ${index + 1}`}
                   ></button>
                 ))}
-                {/* <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button> */}
               </div>
               <div className="carousel-inner">
                 {backgroundImage.map((imagePath, index) => (
@@ -449,7 +446,7 @@ function Index() {
                     <div className="card_blk_inr">
                       <NavLink
                         href={dynamicLink(
-                          destinationItem?.attributes?.destination_name,
+                          destinationItem?.attributes?.friendly_url,
                           destinationItem?.id
                         )}
                       >
@@ -583,10 +580,9 @@ function Index() {
                     >
                       <div className="carousel-caption">
                         <p>
-                          {dictioneryFunction(text?.attributes.review_text)
+                          {dictioneryFunction(text?.attributes.review_text.replace(/&nbsp;/g, ' '))
                             ?.replace(/&nbsp/g, "")
-                            ?.replace(/&rsquo/g, "")
-                            ?.replace(/:/g, "")
+                            ?.replace(/&rsquo/g, "'")
                             ?.replace(/;/g, "")}
                         </p>
                         <span>{text?.attributes.client_name}</span>

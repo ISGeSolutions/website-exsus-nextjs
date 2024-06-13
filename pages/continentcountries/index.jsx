@@ -17,10 +17,7 @@ export default ContinentCountry;
 
 function ContinentCountry({ sendDataToParent }) {
   const router = useRouter();
-  const destinationcode = router.query.continent
-    .replace(/-and-/g, " & ")
-    .replace(/-/g, " ")
-    .toLowerCase();
+  const destinationcode = router.query.continent;
   const query = router.query;
   const [allCountries, setAllCountries] = useState([]);
   const [destination, setdestination] = useState("");

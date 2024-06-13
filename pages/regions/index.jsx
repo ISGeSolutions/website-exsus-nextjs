@@ -444,7 +444,7 @@ function Index() {
               pCode: x?.data[0]?.attributes?.region_code,
             })
           );
-         
+
 
           setHeadingText(x.data[0]?.attributes?.region_name);
           const imageCheck = x.data[0].attributes.region_images.data;
@@ -723,7 +723,7 @@ function Index() {
                       aria-controls="pills-overview"
                       aria-selected="true"
                     >
-                      Ovierview
+                      Overview
                     </button>
                   </li>
                   <li className="nav-item" role="presentation">
