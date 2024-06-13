@@ -165,8 +165,8 @@ function Index() {
                           <div className="form_input">
                             <input
                               type="text"
-                              aria-label="Where you would like to go?"
-                              placeholder="Where you would like to go? *"
+                              aria-label="Where and when you would like to go?"
+                              placeholder="Where and when you would like to go? *"
                               name="preferred_place_time"
                               {...register("preferred_place_time")}
                               className={`form-control ${errors.preferred_place_time ? "is-invalid" : ""
@@ -256,7 +256,7 @@ function Index() {
                             <input
                               type="text"
                               aria-label="Last_name *"
-                              placeholder="Last name *"
+                              placeholder="Surname *"
                               name="last_name"
                               {...register("last_name")}
                               className={`form-control ${errors.last_name ? "is-invalid" : ""
@@ -517,7 +517,16 @@ function Index() {
           </ul>
         </div>
       </section>
-
+      <section
+        aria-label="Sign up for newsletter"
+        className="newslettr_row"
+      >
+        <div className="container">
+          <h4>Sign up for our newsletter</h4>
+          <h5>Receive our latest news and special offers</h5>
+          <Signup />
+        </div>
+      </section>
       <CustomModal isOpen={isModalOpen} onClose={closeModal} />
     </Layout>
   );

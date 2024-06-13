@@ -376,7 +376,7 @@ function CountryRegions({ sendDataToParent }) {
                       <div
                         dangerouslySetInnerHTML={{
                           __html: dictioneryFunction(
-                            countryData?.attributes?.regions_intro_text
+                            item?.attributes?.intro_text
                           ),
                         }}
                       />

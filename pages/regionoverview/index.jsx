@@ -23,6 +23,7 @@ function RegionOverview({ props, onDataFromChild }) {
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
+  const friendlyUrl = router.query?.region;
   const regionName = router.query?.region
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
@@ -59,9 +60,9 @@ function RegionOverview({ props, onDataFromChild }) {
             .replace(/ /g, "-")
             .replace(/&/g, "and")
             .toLowerCase()}/${countrycode
-            .replace(/ /g, "-")
-            .replace(/&/g, "and")
-            .toLowerCase()}/${modifieditem}`
+              .replace(/ /g, "-")
+              .replace(/&/g, "and")
+              .toLowerCase()}/${modifieditem}`
         );
       }
     }
@@ -77,7 +78,7 @@ function RegionOverview({ props, onDataFromChild }) {
   const handleRedirect = () => {
     router.push(
       regionWiseUrl +
-        `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
+      `/itinerarydetail?itinerarycode=vietnam-in-classic-style&countrycode=asia`
     );
   };
 
@@ -90,8 +91,8 @@ function RegionOverview({ props, onDataFromChild }) {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -252,7 +253,7 @@ function RegionOverview({ props, onDataFromChild }) {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -279,7 +280,7 @@ function RegionOverview({ props, onDataFromChild }) {
     destinationService
       .getRegions(countrycode)
       .then((x) => {
-        setAllRegions(x.data[0]?.attributes?.regions?.data);
+        setAllRegions(x.data[0]?.attributes?.regions?.data.filter(res => res.attributes.friendly_url != friendlyUrl));
         x.data[0]?.attributes?.regions?.data;
         setIsLoading(false);
       })

@@ -593,7 +593,7 @@ function Country() {
             <div className="container">
               <div className="bookmark_row">
                 <FriendlyUrl
-                  data={friendlyUrl.replace(/%20/g, " ")}
+                  data={friendlyUrl.replace(/%20/g, " ".replace(/&/g, 'and'))}
                 ></FriendlyUrl>
               </div>
               <div className="destination_tab_inr">
@@ -621,7 +621,7 @@ function Country() {
                       aria-controls="pills-overview"
                       aria-selected="true"
                     >
-                      Ovierview
+                      Overview
                     </button>
                   </li>
                   <li className="nav-item" role="presentation">

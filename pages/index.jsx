@@ -139,9 +139,9 @@ function Index() {
     }
   };
 
-  const handleHrefClick = (event) => {
-    event.preventDefault();
-  };
+  // const handleHrefClick = (event) => {
+  //   event.preventDefault();
+  // };
 
   const dynamicLinkHolidayas = (itemId, id) => {
     return regionWiseUrl + `/holidaytypeitineraries/incredible-journeys/id`;
@@ -308,6 +308,7 @@ function Index() {
     ) {
       websiteContentCheck(dictionaryPage);
     }
+
     destinationService
       .getCustomPagesData("home")
       .then((x) => {
@@ -522,10 +523,11 @@ function Index() {
                   {backgroundImage.map((imagePath, index) => (
                     <NavLink
                       key={index}
-                      href="#"
-                      onClick={handleHrefClick}
+                      href={imagePath.banner_href_url ? imagePath.banner_href_url : "#"}
                       className={`carousel-item ${index === 0 ? "active" : ""}`}
                       data-bs-interval="5000"
+                      target="_blank"
+                      style={{ cursor: 'pointer' }}
                     >
                       <div
                         className="banner_commn_cls"
@@ -773,7 +775,7 @@ function Index() {
                     >
                       <div className="carousel-caption">
                         <p>
-                          {dictioneryFunction(text?.attributes.review_text)
+                          {dictioneryFunction(text?.attributes.review_text.replace(/&nbsp;/g, ' '))
                             ?.replace(/&nbsp/g, "")
                             ?.replace(/&rsquo/g, "")
                             ?.replace(/:/g, "")

@@ -19,10 +19,7 @@ function ContinentOverview({ sendDataToParent }) {
   const router = useRouter();
   const [itineraries, setItineraries] = useState(null);
   const [valueWithBr, setnewValueWithBr] = useState("");
-  const destinationcode = router.query.continent
-    ?.replace(/-and-/g, " & ")
-    .replace(/-/g, " ")
-    .toLowerCase();
+  const destinationcode = router.query.continent;
   const itemsPerPage = 9; // Number of items to load per page
   const [allCountries, setAllCountries] = useState([]);
   const [destinationName, setdestinationName] = useState("");

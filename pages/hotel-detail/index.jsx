@@ -710,7 +710,7 @@ function Index() {
                       <ul>
                         <li>RECOMMENDED FOR...</li>
                         {hotelData?.best_for_text
-                          .replace(/[{}']/g, "") // Remove { and } and '
+                          ?.replace(/[{}']/g, "") // Remove { and } and '
                           .split(",")
                           .map((value, index) => (
                             <li key={index}>{value.trim()}</li>

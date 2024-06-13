@@ -119,7 +119,7 @@ function EnquiryButton() {
         <>
             <h3>YOUR JOURNEY STARTS HERE</h3>
             <p>
-                call us on <span dangerouslySetInnerHTML={{ __html: telePhoneNumber }} /> to start planning your perfect trip
+                Call us on <span dangerouslySetInnerHTML={{ __html: telePhoneNumber }} /> to start planning your perfect trip
             </p>
             <button
                 className="btn prmry_btn make_enqury_btn"

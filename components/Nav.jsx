@@ -340,9 +340,11 @@ function Nav() {
     document.body.appendChild(script);
 
     destinationService.getDestinationLandingList().then((x) => {
-      const sortedData = x.data.sort(
-        (a, b) => a.attributes.serial_number - b.attributes.serial_number
-      );
+      // const sortedData = x.data
+      //   .sort(
+      //     (a, b) => a.attributes.id - b.attributes.id
+      //   );
+      const sortedData = x.data.sort((a, b) => a.attributes.destination_name.localeCompare(b.attributes.destination_name));
       setDestinationLandingList(sortedData);
     });
 
@@ -530,7 +532,7 @@ function Nav() {
                                       onClick={hideOverlay}
                                       href={dynamicLink(
                                         destinationItem?.attributes
-                                          ?.destination_name,
+                                          ?.friendly_url,
                                         destinationItem?.id
                                       )}
                                       as={dynamicLinkas(

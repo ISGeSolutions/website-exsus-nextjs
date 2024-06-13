@@ -505,8 +505,7 @@ function RegionItinararies(props) {
       websiteContentCheck(dictionaryPage);
     }
     setIsLoading(false);
-    setSelectedOptionRegion([]);
-    setSelectedOptionMonth([]);
+    setSelectedOptionMonth(monthOptions[0]);
 
     loadMoreData(activeItem);
 
@@ -516,6 +515,7 @@ function RegionItinararies(props) {
       .getRegionByName(regionName)
       .then((x) => {
         setRegionData(x.data[0].attributes);
+
         setIsLoading(false);
       })
       .catch((error) => {
@@ -539,6 +539,7 @@ function RegionItinararies(props) {
         })),
       ];
       setAllRegion(arrayOfObjects);
+      setSelectedOptionRegion(arrayOfObjects[0]);
     });
 
     // Using window.onload to detect full page load
