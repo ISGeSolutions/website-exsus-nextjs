@@ -253,6 +253,7 @@ function Index() {
       .toLowerCase();
     const country = item?.attributes?.sub_header_text
       ?.replace(/ /g, "-")
+      ?.replace(/&/g, "and")
       .toLowerCase();
     return (
       regionWiseUrl +
@@ -267,6 +268,7 @@ function Index() {
       .toLowerCase();
     const country = item?.attributes?.sub_header_text
       ?.replace(/ /g, "-")
+      ?.replace(/&/g, "and")
       .toLowerCase();
     router.push(
       regionWiseUrl +
@@ -539,7 +541,6 @@ function Index() {
     ) {
       websiteContentCheck(dictionaryPage);
     }
-    setSelectedOptionDestination([]);
     holidaytypesService
       .getHolidaytypeDetails(hcode)
       .then((x) => {
@@ -590,6 +591,8 @@ function Index() {
         })),
       ];
       setAllDestination(arrayOfObjects);
+      setSelectedOptionDestination(arrayOfObjects[0]);
+
     });
 
     loadMoreData(activeItem);

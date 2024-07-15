@@ -364,10 +364,10 @@ function CountryWhentogo({ onDataFromChild, sendDataToParent }) {
         <section className="calender_blk_row light_dark_grey">
           <div className="container">
             <h3>
-              Our favourite experience-oriented trips to {countrycode} by month
+              Our favourite experience-oriented trips to {countryData?.attributes?.country_name} by month
             </h3>
             <p>
-              The team at Exsus has incorporated some of {countrycode}'s best
+              The team at Exsus has incorporated some of {countryData?.attributes?.country_name}'s best
               experiences into recommended trips. Click on an experience to view
               each trip
             </p>

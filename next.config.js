@@ -4748,8 +4748,8 @@ const nextConfig = {
         : "https://cms-api-dev.excelleresolutions.com", // production api
     apiUrl1:
       process.env.NODE_ENV === "development"
-        ? "http://3.110.223.197:1337" // client data development api
-        : "http://3.110.223.197:1337", // client data production api
+        ? "http://13.232.231.118:1337" // client data development api
+        : "http://13.232.231.118:1337", // client data production api
   },
   async headers() {
     return [
