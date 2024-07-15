@@ -114,7 +114,7 @@ function getDestinationInspireMe() {
 function getDestinationDetails(name) {
   //  ('baseUrl_dropdown', baseUrl_dropdown);
   const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl
-    }/api/destinations?filters[friendly_url][$eq]=${name}&populate[destination_images][filters][image_type][$eq]=banner&populate[countries][populate][country_images][filters][image_type][$eq]=thumbnail`;
+    }/api/destinations?filters[friendly_url][$eq]=${name}&populate[destination_images][filters][image_type][$eq]=banner&&populate[countries][sort]=recommended_serial_number&populate[countries][populate][country_images][filters][image_type][$eq]=thumbnail`;
   return fetchWrapper.get(destinationDetailsUrl);
 }
 
@@ -743,12 +743,13 @@ function ItineraryFilterOnCountryDetail(
         "%26"
       )}` +
       (filters.length > 0 ? "&" + filters.join("&") : "") +
-      `&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&&populate[itinerary_country_contents][filters][website_country][$eq]=${region
+      `&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region
         ?.replace(/&/g, "%26")
         ?.replace(
           /in/g,
           "INDIA"
-        )}&pagination[page]=${page}&pagination[pageSize]=12&populate[destinations][fields][0]=destination_name&populate[countries][fields][0]=country_name`;
+        )}&pagination[page]=${page}&pagination[pageSize]=12&populate[destinations][fields][0]=destination_name&populate[countries][fields][0]=country_name&sort[0]=price${region !== "uk" ? "_" + region?.replace(/in/g, "india") : ""
+      }:asc`;
     return fetchWrapper.get(itinerariesDetailsUrl);
   } else if (item == "recommended") {
     const itinerariesDetailsUrl =

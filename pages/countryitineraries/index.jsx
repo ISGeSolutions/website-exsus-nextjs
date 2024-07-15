@@ -282,7 +282,7 @@ function CountryItinararies(props) {
   };
 
   const monthOptions = [
-    // { value: "All months", label: "All months" },
+    { value: "Show_all", label: "All year" },
     { value: "1", label: "January" },
     { value: "2", label: "February" },
     { value: "3", label: "March" },
@@ -452,23 +452,23 @@ function CountryItinararies(props) {
         ?.replace(/ /g, "-")
         ?.replace(/&/g, "and")
         ?.replace(/ /g, " ")}/${countrycode
-        ?.replace(/ /g, "-")
-        ?.replace(/&/g, "and")}/${countrycode
-        ?.replace(/ /g, "-")
-        ?.replace(/&/g, "and")
-        ?.replace(
-          / /g,
-          "-"
-        )}-itineraries/${item?.attributes?.friendly_url?.replace(/%20/g, " ")}`
+          ?.replace(/ /g, "-")
+          ?.replace(/&/g, "and")}/${countrycode
+            ?.replace(/ /g, "-")
+            ?.replace(/&/g, "and")
+            ?.replace(
+              / /g,
+              "-"
+            )}-itineraries/${item?.attributes?.friendly_url?.replace(/%20/g, " ")}`
     );
   };
 
   const handleRedirect = (item) => {
     router.push(
       regionWiseUrl +
-        `/destinations/${destinationcode
-          ?.replace(/ /g, "-")
-          ?.replace(/&/g, "and")}/${countrycode?.replace(
+      `/destinations/${destinationcode
+        ?.replace(/ /g, "-")
+        ?.replace(/&/g, "and")}/${countrycode?.replace(
           / /g,
           "-"
         )}/${countrycode?.replace(
@@ -488,8 +488,8 @@ function CountryItinararies(props) {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -517,7 +517,7 @@ function CountryItinararies(props) {
     }
     setSelectedOptionReason([]);
     setSelectedOptionRegion([]);
-    setSelectedOptionMonth([]);
+    setSelectedOptionMonth(monthOptions[0]);
 
     loadMoreData(activeItem);
     // destinationService.getDestinationDetails(destinationcode).then((x) => {
@@ -541,19 +541,28 @@ function CountryItinararies(props) {
         })),
       ];
       setAllReason(arrayOfObjects);
+      setSelectedOptionReason(arrayOfObjects[0]);
+
     });
 
     destinationService
       .getRegions(countrycode)
       .then((x) => {
-        setAllRegions(
-          x.data[0]?.attributes?.regions?.data?.map((item) => ({
-            region_code: item?.attributes?.region_code,
-            value: item?.attributes?.region_name,
-            label: item?.attributes?.region_name,
-          }))
-        ),
-          setAllRegions(arrayOfObjects);
+        let arrayOfObjects = [
+          {
+            property_type_code: "Show_all",
+            value: "Show_all",
+            label: countrycode?.toUpperCase(),
+          },
+        ];
+
+        arrayOfObjects = [...arrayOfObjects, ...x.data[0]?.attributes?.regions?.data?.map((item) => ({
+          region_code: item?.attributes?.region_code,
+          value: item?.attributes?.region_name,
+          label: item?.attributes?.region_name,
+        }))]
+        setAllRegions(arrayOfObjects);
+        setSelectedOptionRegion(arrayOfObjects[0]);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -616,8 +625,8 @@ function CountryItinararies(props) {
                                 isClearable={isClearable}
                                 isRtl={isRtl}
                                 isSearchable={isSearchable}
-                                value={selectedOptionReason}
-                                onChange={handleOptionReasonChange}
+                                value={selectedOptionRegion}
+                                onChange={handleOptionRegionChange}
                                 closeMenuOnSelect={false}
                                 hideSelectedOptions={false}
                                 options={allRegions}
@@ -642,8 +651,8 @@ function CountryItinararies(props) {
                                 isSearchable={isSearchable}
                                 options={reasonOptions}
                                 isMulti
-                                value={selectedOptionRegion}
-                                onChange={handleOptionRegionChange}
+                                value={selectedOptionReason}
+                                onChange={handleOptionReasonChange}
                                 components={{
                                   Option: InputOption,
                                   MultiValue: CustomMultiValue,
@@ -772,7 +781,7 @@ function CountryItinararies(props) {
                               {item?.attributes?.itinerary_images?.data.map(
                                 (element, index) =>
                                   element.attributes.image_type ==
-                                  "thumbnail" ? (
+                                    "thumbnail" ? (
                                     <img
                                       key={index}
                                       src={element.attributes.image_path}
@@ -801,12 +810,10 @@ function CountryItinararies(props) {
                                   )
                                   .map((res1) => (
                                     <li key={res1.id}>
-                                      {`From ${
-                                        res1.attributes?.currency_symbol ?? ""
-                                      }${
-                                        formatPrice(res1.attributes?.price) ??
+                                      {`From ${res1.attributes?.currency_symbol ?? ""
+                                        }${formatPrice(res1.attributes?.price) ??
                                         " XXXX"
-                                      } per person`}
+                                        } per person`}
                                     </li>
                                   ))}
                                 <li>

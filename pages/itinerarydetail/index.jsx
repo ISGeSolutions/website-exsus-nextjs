@@ -731,7 +731,7 @@ function Index() {
                       <p>
                         <span>Perfect for</span>
                         {dictioneryFunction(
-                          itineraries?.attributes?.perfect_for_text
+                          itineraries?.attributes?.perfect_for_text?.replace(/&ndash/g, "-")
                         )
                           ?.replace(/&nbsp/g, "")
                           ?.replace(/&rsquo/g, "")
@@ -767,7 +767,7 @@ function Index() {
                       <ul>
                         <li>Best for</li>
                         {itineraries?.attributes?.best_for_text
-                          .replace(/[{}']/g, "") // Remove { and } and '
+                          ?.replace(/[{}']/g, "") // Remove { and } and '
                           .split(",")
                           .map((value, index) => (
                             <li key={index}>{value.trim()}</li>
@@ -813,7 +813,7 @@ function Index() {
                         <div className="itinery_detls_para itinery_para_blk">
                           <h3>
                             <span>{element?.attributes?.duration}</span>
-                            {element?.attributes?.place_name}
+                            {element?.attributes?.place_name.replace(/&nbsp;/g, " ").replace(/<\/?span>/g, "")}
                           </h3>
                           <div
                             dangerouslySetInnerHTML={{
@@ -835,8 +835,8 @@ function Index() {
                               .length > 1 && (
                               <button
                                 className={`btn itinery_btn ${showAllParagraphs[index]
-                                    ? " itinery_para_expnd"
-                                    : ""
+                                  ? " itinery_para_expnd"
+                                  : ""
                                   }`}
                                 onClick={() => toggleParagraphs(index)}
                               >

@@ -232,7 +232,7 @@ function ContinentCountry({ sendDataToParent }) {
       );
       //  (allCountries);
     } else if (item == "recommended") {
-      setAllCountries(allCountries.sort((a, b) => a.id - b.id));
+      setAllCountries(allCountries.sort((a, b) => a.attributes?.recommended_serial_number - b.attributes?.recommended_serial_number));
       //  (allCountries);
     }
   };
