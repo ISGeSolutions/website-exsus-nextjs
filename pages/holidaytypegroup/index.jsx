@@ -67,8 +67,7 @@ function Index() {
   const { errors } = formState;
 
   const hcode = router?.query?.holidaytypegroup
-    ?.replace(/-and-/g, " & ")
-    .toLowerCase();
+    ?.toLowerCase();
 
   const width = "250px";
   const styles = {
@@ -227,14 +226,14 @@ function Index() {
       .toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${modifiedDestinationName}/${country}/${country}-itineraries/${item?.attributes?.friendly_url}`
+      `/destinations/${modifiedDestinationName}/${country}/${country}-itineraries/${item?.attributes?.friendly_url}`
     );
   };
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -409,13 +408,14 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
   };
 
   useEffect(() => {
+
     if (
       !localStorage.getItem(
         `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
@@ -431,7 +431,7 @@ function Index() {
 
         setHolidaytypesDetails(x.data[0].attributes);
         setFriendlyUrl(
-          `home/holiday types/${x.data[0].attributes.friendly_url}`
+          `home/holiday types/${x.data[0].attributes.holiday_type_group_name}`
         );
         setHolidayName(x.data[0].attributes.holiday_type_group_name);
         setTitle(x.data[0].attributes.page_meta_title);
@@ -687,8 +687,8 @@ function Index() {
             className="newslettr_row"
           >
             <div className="container">
-              <h4>Sign up for our newsletter</h4>
-              <h5>Receive our latest news and special offers</h5>
+              <h4>Sign up for our newsletter
+                <span>Receive our latest news and special offers</span></h4>
               <Signup />
             </div>
           </section>

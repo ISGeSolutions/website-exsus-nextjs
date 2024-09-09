@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import {
   destinationService,
   alertService,
@@ -42,8 +42,9 @@ function ContinentPlacesToStay(props) {
   const [coordinatesArray, setCoordinatesArray] = useState([]);
   let dictionaryPage = 1;
   const [modalKey, setModalKey] = useState(0);
-
+  let newItemsRef = useRef([]);
   const { divRef } = props;
+  let firstLoad = false;
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -168,6 +169,7 @@ function ContinentPlacesToStay(props) {
                 []
               )
             );
+            newItemsRef.current = [];
             setPage(page + 1);
           }
           const filteredData = response?.data?.filter((item) => {
@@ -211,6 +213,12 @@ function ContinentPlacesToStay(props) {
           setModalKey((prevKey) => prevKey + 1);
 
           setIsLoading(false);
+          setTimeout(() => {
+            if (newItemsRef.current.length > 0 && allHotels.length > 0) {
+              newItemsRef?.current[0]?.scrollIntoView();
+            }
+          }, 0);
+
         })
         .catch((error) => {
           // Handle any errors here
@@ -242,8 +250,8 @@ function ContinentPlacesToStay(props) {
                 []
               )
             );
-            itineraries;
-            setPage(page + 1);
+            newItemsRef.current = [];
+            setPage(page + 0);
           }
           const filteredData = response?.data?.filter((item) => {
             const { map_latitude, map_longitude } = item.attributes;
@@ -286,6 +294,12 @@ function ContinentPlacesToStay(props) {
           ]);
           setModalKey((prevKey) => prevKey + 1);
           setIsLoading(false);
+          setTimeout(() => {
+            if (newItemsRef.current.length > 0 && allHotels.length > 0) {
+              newItemsRef.current[0].scrollIntoView();
+            }
+          }, 0);
+
         })
         .catch((error) => {
           setIsLoading(false);
@@ -601,6 +615,7 @@ function ContinentPlacesToStay(props) {
             label: item?.attributes?.country_name,
           })),
         ];
+        arrayOfObjects = arrayOfObjects.filter((res) => res.value !== null);
         setAllCountries(arrayOfObjects);
         setSelectedOptionCountry(arrayOfObjects[0]);
 
@@ -675,7 +690,7 @@ function ContinentPlacesToStay(props) {
 
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
             <div className="container">
-              <h3 className="title_cls">
+              <h3 className="title_cls text_lowercase">
                 All recommended hotels in {destination.destination_name}
               </h3>
 
@@ -684,7 +699,7 @@ function ContinentPlacesToStay(props) {
                 <div className="carousel00 region_carousel00">
                   <div className="row">
                     <div className="col-12">
-                      <form onSubmit={onSubmit}>
+                      <form onSubmit={onSubmit} className="form_padg">
                         <div className="destination_dropdwn_row d-block d-md-flex">
                           <div className="dropdown_grp_blk">
                             <div className="banner_dropdwn_blk">
@@ -832,10 +847,11 @@ function ContinentPlacesToStay(props) {
                     </div>
 
                     {/* Continent place to stay Hotels */}
-                    {allHotels?.slice(0, allHotels.length).map((item) => (
+                    {allHotels?.slice(0, allHotels.length).map((item, ind) => (
                       <div
                         className="col-sm-6 col-lg-4 col-xxl-3"
                         key={"hotel_" + item.id}
+                        ref={ind >= allHotels.length - 12 ? el => newItemsRef.current.push(el) : null}
                       >
                         <div className="card_slider_inr">
                           <div className="card_slider">
@@ -951,7 +967,7 @@ function ContinentPlacesToStay(props) {
                           {metaData.total - page * itemsPerPage > 12
                             ? 12
                             : metaData.total - page * itemsPerPage}{" "}
-                          more holiday
+                          more places to stay
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="#ffffff"

@@ -70,7 +70,7 @@ function Index() {
       const redirectUrl =
         regionWiseUrl + `/destinations/${destinationDetails?.friendly_url}`;
       window.history.pushState(null, null, redirectUrl);
-      setFriendlyUrl(`Home/Destinations/${destinationDetails?.friendly_url}`);
+      setFriendlyUrl(`Home/Destinations/${destinationName}`);
       text = destinationDetails?.header_text;
     } else if (itemId == "countries") {
       setIsShowMap(true);
@@ -91,7 +91,7 @@ function Index() {
             .toLowerCase()}-countries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `Home/Destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url} countries`
+        `Home/Destinations/${destinationName}/${destinationName} countries`
       );
       text = `COUNTRIES IN ${destinationName}`;
     } else if (itemId == "itineraries") {
@@ -112,7 +112,7 @@ function Index() {
             .replace(/ /g, "-")
             .toLowerCase()}-itineraries`;
       window.history.pushState(null, null, redirectUrl);
-      setFriendlyUrl(`Home/Destinations/${destCode}/${destCode} Itineraries`);
+      setFriendlyUrl(`Home/Destinations/${destinationName}/${destinationName}  Itineraries`);
       text = `TAILOR-MADE ${destinationName} HOLIDAY ITINERARIES`;
     } else if (itemId == "places-to-stay") {
       setIsShowMap(false);
@@ -121,7 +121,7 @@ function Index() {
         `/destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url}-places-to-stay`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
-        `Home/Destinations/${destinationDetails?.friendly_url}/Places to stay in ${destinationDetails?.friendly_url}`
+        `Home/Destinations/${destinationName}/Places to stay in ${destinationName}`
       );
       text = `PLACES TO STAY IN ${destinationName}`;
     }
@@ -395,7 +395,7 @@ function Index() {
           setHeadingText(x.data[0]?.attributes?.header_text);
 
           setFriendlyUrl(
-            `Home/Destinations/${x.data[0].attributes.friendly_url}`
+            `Home/Destinations/${x.data[0].attributes.destination_name}`
             // `Home/Destinations/${destinationDetails?.friendly_url}/${destinationDetails?.friendly_url}-itineraries`
           );
           setMetaTitle(x.data[0].attributes.page_meta_title);
@@ -584,25 +584,27 @@ function Index() {
                         Overview
                       </button>
                     </li>
-                    <li className="nav-item" role="presentation">
-                      <button
-                        className={
-                          activeTab === "countries"
-                            ? "active nav-link"
-                            : "nav-link"
-                        }
-                        onClick={() => toggleTab("countries")}
-                        id="pills-countries-tab"
-                        data-bs-toggle="pill"
-                        data-bs-target="#pills-countries"
-                        type="button"
-                        role="tab"
-                        aria-controls="pills-countries"
-                        aria-selected="false"
-                      >
-                        Countries
-                      </button>
-                    </li>
+                    {destinationDetails?.countries?.data?.length > 0 && (
+                      <li className="nav-item" role="presentation">
+                        <button
+                          className={
+                            activeTab === "countries"
+                              ? "active nav-link"
+                              : "nav-link"
+                          }
+                          onClick={() => toggleTab("countries")}
+                          id="pills-countries-tab"
+                          data-bs-toggle="pill"
+                          data-bs-target="#pills-countries"
+                          type="button"
+                          role="tab"
+                          aria-controls="pills-countries"
+                          aria-selected="false"
+                        >
+                          Countries
+                        </button>
+                      </li>
+                    )}
                     <li className="nav-item" role="presentation">
                       <button
                         className={
@@ -725,8 +727,8 @@ function Index() {
               className="newslettr_row"
             >
               <div className="container">
-                <h4>Sign up for our newsletter</h4>
-                <h5>Receive our latest news and special offers</h5>
+                <h4>Sign up for our newsletter
+                  <span>Receive our latest news and special offers</span></h4>
                 <Signup />
               </div>
             </section>

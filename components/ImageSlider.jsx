@@ -58,7 +58,7 @@ export function ImageSlider(props) {
             {backgroundImage.map((imagePath, index) => (
               <a
                 key={index}
-                className={`carousel-item ${index === 0 ? "active" : ""}`}
+                className={`carousel-item no-click ${index === 0 ? "active" : ""}`}
                 data-bs-interval="3000"
                 data-pause="false"
                 data-ride="carousel"

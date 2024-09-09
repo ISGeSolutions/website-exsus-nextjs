@@ -7,11 +7,17 @@ const { publicRuntimeConfig } = getConfig();
 
 export const whereToGoService = {
     getWhereToGoPage,
+    getWhereToGoDetailPage
 };
 
 
 function getWhereToGoPage() {
     //  
     const wheretogoPageUrl = `${publicRuntimeConfig.apiUrl}/api/custom-pages?populate[0]=custom_page_images&populate[1]=custom_page_contents&filters[page_code][$eq]=where-to-go`;
+    return fetchWrapper.get(wheretogoPageUrl);
+}
+
+function getWhereToGoDetailPage(monthName) {
+    const wheretogoPageUrl = `${publicRuntimeConfig.apiUrl}/api/custom-pages?populate[0]=custom_page_images&populate[1]=custom_page_contents&filters[page_code][$eq]=${monthName}`;
     return fetchWrapper.get(wheretogoPageUrl);
 }

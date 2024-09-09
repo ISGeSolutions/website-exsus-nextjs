@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, Spinner, Signup } from "components";
 import {
   destinationService,
@@ -21,6 +21,7 @@ export default RegionItinararies;
 
 function RegionItinararies(props) {
   props;
+  const newItemsRef = useRef([]);
   const [isClearable, setIsClearable] = useState(true);
   const [isSearchable, setIsSearchable] = useState(true);
   const [isDisabled, setIsDisabled] = useState(false);
@@ -37,6 +38,7 @@ function RegionItinararies(props) {
   const [metaData, setMetaData] = useState([]);
   const [alert, setAlert] = useState(null);
   const [regionOptions, setAllRegion] = useState([]);
+  let [regionName, setRegionName] = useState("");
 
   const router = useRouter();
   const destinationcode = router?.query?.continent
@@ -47,10 +49,7 @@ function RegionItinararies(props) {
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
-  const regionName = router.query?.region
-    ?.replace(/-and-/g, " & ")
-    .replace(/-/g, " ")
-    .toLowerCase();
+  const regionFrdUrl = router.query?.region;
   const width = "250px";
   const styles = {
     control: (provided) => ({
@@ -246,8 +245,14 @@ function RegionItinararies(props) {
                 []
               )
             );
+            newItemsRef.current = [];
             setPage(page + 1);
           }
+          setTimeout(() => {
+            if (newItemsRef.current.length > 0 && itineraries?.length > 0) {
+              newItemsRef?.current[0]?.scrollIntoView();
+            }
+          }, 0);
           setIsLoading(false);
         })
         .catch((error) => {
@@ -279,9 +284,14 @@ function RegionItinararies(props) {
                 []
               )
             );
-            itineraries;
+            newItemsRef.current = [];
             setPage(page + 1);
           }
+          setTimeout(() => {
+            if (newItemsRef.current.length > 0 && itineraries?.length > 0) {
+              newItemsRef?.current[0]?.scrollIntoView();
+            }
+          }, 0);
           setIsLoading(false);
         })
         .catch((error) => {
@@ -512,10 +522,10 @@ function RegionItinararies(props) {
     window.addEventListener("resize", equalHeight(true));
 
     destinationService
-      .getRegionByName(regionName)
+      .getRegionByName(regionFrdUrl)
       .then((x) => {
         setRegionData(x.data[0].attributes);
-
+        setRegionName(x.data[0]?.attributes?.region_name);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -616,14 +626,14 @@ function RegionItinararies(props) {
 
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
             <div className="container">
-              <h3 className="title_cls">
-                All Luxury Holiday Ideas in {regionName}
+              <h3 className="title_cls text_lowercase">
+                All Luxury Holiday Ideas in {regionName?.replace(/\b\w/g, (char) => char.toUpperCase())}
               </h3>
               <div className="card_slider_row">
                 <div className="carousel00 region_carousel00 dropdown_width100">
                   <div className="row">
                     <div className="col-12">
-                      <form onSubmit={onSubmit}>
+                      <form onSubmit={onSubmit} className="form_padg">
                         <div className="destination_dropdwn_row d-block d-md-flex">
                           <div className="dropdown_grp_doubl dropdown_grp_blk">
                             <div className="banner_dropdwn_blk ">
@@ -746,10 +756,12 @@ function RegionItinararies(props) {
                         </div>
                       </div>
                     </div>
-                    {itineraries?.slice(0, itineraries.length).map((item) => (
+                    {itineraries?.slice(0, itineraries.length).map((item, ind) => (
                       <div
                         className="col-sm-6 col-lg-4 col-xxl-3"
                         key={item.id}
+                        ref={ind >= itineraries?.length - 12 ? el => newItemsRef.current.push(el) : null}
+
                       >
                         <div className="card_slider_inr">
                           <div className="card_slider">

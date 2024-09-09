@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   destinationService,
   homeService,
@@ -119,6 +119,7 @@ function ContinentItinararies(props) {
   const [alert, setAlert] = useState("");
   const { divRef } = props;
   let dictionaryPage = 1;
+  const newItemsRef = useRef([]);
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -171,9 +172,15 @@ function ContinentItinararies(props) {
                 []
               )
             );
+            newItemsRef.current = [];
             setPage(page + 1);
           }
           setIsLoading(false);
+          setTimeout(() => {
+            if (newItemsRef.current.length > 0 && itineraries.length > 0) {
+              newItemsRef.current[0]?.scrollIntoView();
+            }
+          }, 0);
         })
         .catch((error) => {
           setIsLoading(false);
@@ -204,9 +211,15 @@ function ContinentItinararies(props) {
               )
             );
             itineraries;
+            newItemsRef.current = [];
             setPage(page + 1);
           }
           setIsLoading(false);
+          setTimeout(() => {
+            if (newItemsRef.current.length > 0 && itineraries.length > 0) {
+              newItemsRef?.current[0]?.scrollIntoView();
+            }
+          }, 0);
         })
         .catch((error) => {
           setIsLoading(false);
@@ -550,21 +563,22 @@ function ContinentItinararies(props) {
       });
 
     destinationService.getPropertyTypeDropDown().then((x) => {
-      let arrayOfObjects = [
+      let arrayOfObjectsInitial = [
         {
           property_type_code: "Show_all",
           value: "Show_all",
           label: "Everything",
         },
       ];
-      arrayOfObjects = [
-        ...arrayOfObjects,
+      let arrayOfObjects = [
         ...x.data?.map((item) => ({
           property_type_code: item?.attributes?.property_type_code,
           value: item?.attributes?.property_type_name,
           label: item?.attributes?.property_type_name,
         })),
       ];
+      arrayOfObjects = arrayOfObjects?.sort((a, b) => a.value.localeCompare(b.value));
+      arrayOfObjects = [...arrayOfObjectsInitial, ...arrayOfObjects];
       setAllRegion(arrayOfObjects);
       setSelectedOptionRegion([arrayOfObjects[0]]);
 
@@ -616,7 +630,7 @@ function ContinentItinararies(props) {
           </div>
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
             <div className="container">
-              <h3 className="title_cls">
+              <h3 className="title_cls text_lowercase">
                 All Luxury Holiday Ideas in {destination.destination_name}
               </h3>
 
@@ -625,7 +639,7 @@ function ContinentItinararies(props) {
                 <div className="carousel00 region_carousel00">
                   <div className="row">
                     <div className="col-12">
-                      <form onSubmit={onSubmit}>
+                      <form onSubmit={onSubmit} className="form_padg">
                         <div className="destination_dropdwn_row d-block d-md-flex">
                           <div className="dropdown_grp_blk">
                             <div className="banner_dropdwn_blk">
@@ -794,10 +808,11 @@ function ContinentItinararies(props) {
                     </div>
 
                     {/* Continent Itineraries */}
-                    {itineraries?.slice(0, itineraries.length).map((item) => (
+                    {itineraries?.slice(0, itineraries.length).map((item, ind) => (
                       <div
                         className="col-sm-6 col-lg-4 col-xxl-3"
                         key={item.id}
+                        ref={ind >= itineraries.length - 12 ? el => newItemsRef.current.push(el) : null}
                       >
                         <div className="card_slider_inr">
                           <div className="card_slider">

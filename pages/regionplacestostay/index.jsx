@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, Spinner, Signup } from "components";
 import {
   destinationService,
@@ -46,6 +46,8 @@ function RegionPlacesToStay(props) {
   const [coordinatesArray, setCoordinatesArray] = useState([]);
   let dictionaryPage = 1;
   const [modalKey, setModalKey] = useState(0);
+  let [regionName, setRegionName] = useState("");
+
   const destinationcode = router?.query?.continent
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
@@ -54,12 +56,10 @@ function RegionPlacesToStay(props) {
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
-  const regionName = router.query?.region
-    ?.replace(/-and-/g, " & ")
-    .replace(/-/g, " ")
-    .toLowerCase();
+  const regionFrdUrl = router.query?.region;
 
   const [regionOptions, setAllRegion] = useState([]);
+  const newItemsRef = useRef([]);
 
   const monthOptions = [
     { value: "Show_all", label: "All year" },
@@ -297,6 +297,7 @@ function RegionPlacesToStay(props) {
                 []
               )
             );
+            newItemsRef.current = [];
             setPage(page + 1);
           }
           const filteredData = response?.data?.filter((item) => {
@@ -336,6 +337,11 @@ function RegionPlacesToStay(props) {
             ...newCoordinates,
           ]);
           setModalKey((prevKey) => prevKey + 1);
+          setTimeout(() => {
+            if (newItemsRef.current.length > 0 && allHotels?.length > 0) {
+              newItemsRef?.current[0]?.scrollIntoView();
+            }
+          }, 0);
           setIsLoading(false);
         })
         .catch((error) => {
@@ -365,7 +371,7 @@ function RegionPlacesToStay(props) {
                 []
               )
             );
-            itineraries;
+            newItemsRef.current = [];
             setPage(page + 1);
           }
           const filteredData = response?.data?.filter((item) => {
@@ -405,6 +411,11 @@ function RegionPlacesToStay(props) {
             ...newCoordinates,
           ]);
           setModalKey((prevKey) => prevKey + 1);
+          setTimeout(() => {
+            if (newItemsRef.current.length > 0 && allHotels?.length > 0) {
+              newItemsRef?.current[0]?.scrollIntoView();
+            }
+          }, 0);
           setIsLoading(false);
         })
         .catch((error) => {
@@ -570,9 +581,10 @@ function RegionPlacesToStay(props) {
     setSelectedOptionMonth(monthOptions[0]);
 
     destinationService
-      .getRegionByName(regionName)
+      .getRegionByName(regionFrdUrl)
       .then((x) => {
         setRegionData(x.data[0].attributes);
+        setRegionName(x.data[0]?.attributes?.region_name);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -682,19 +694,19 @@ function RegionPlacesToStay(props) {
 
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
             <div className="container">
-              <h3 className="title_cls">
-                All recommended hotels in {regionName}
+              <h3 className="title_cls text_lowercase">
+                All recommended hotels in {regionName?.replace(/\b\w/g, (char) => char.toUpperCase())}
               </h3>
               <div className="card_slider_row">
                 <div className="carousel00 region_carousel00 dropdown_width100">
                   <div className="row">
                     <div className="col-12">
-                      <form onSubmit={onSubmit}>
+                      <form onSubmit={onSubmit} className="form_padg">
                         <div className="destination_dropdwn_row d-block d-md-flex">
                           <div className="dropdown_grp_blk dropdown_grp_doubl">
                             <div className="banner_dropdwn_blk">
                               <Select
-                                placeholder={"Filter by region"}
+                                placeholder={"Filter by property type"}
                                 className="select_container_country"
                                 classNamePrefix="select_country"
                                 isDisabled={isDisabled}
@@ -717,7 +729,7 @@ function RegionPlacesToStay(props) {
                             </div>
                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                               <Select
-                                placeholder={"Filter by month"}
+                                placeholder={"Filter by date of travel"}
                                 className="select_container_country"
                                 classNamePrefix="select_country"
                                 isDisabled={isDisabled}
@@ -809,10 +821,11 @@ function RegionPlacesToStay(props) {
                         </div>
                       </div>
                     </div>
-                    {allHotels?.slice(0, allHotels.length).map((item) => (
+                    {allHotels?.slice(0, allHotels.length).map((item, ind) => (
                       <div
                         className="col-sm-6 col-lg-4 col-xxl-3"
                         key={item.id}
+                        ref={ind >= allHotels.length - 12 ? el => newItemsRef.current.push(el) : null}
                       >
                         <div className="card_slider_inr">
                           <div className="card_slider">

@@ -34,6 +34,6 @@ function getAll() {
 }
 
 function getCountryDetails(country_name) {
-  const countryPageUrl = `${publicRuntimeConfig.apiUrl}/api/countries?filters[country_name][$eq]=${country_name?.replace(/&/g, "%26")}&populate[0]=country_images&populate[1]=country_month_activities&populate[2]=regions.region_images`;
+  const countryPageUrl = `${publicRuntimeConfig.apiUrl}/api/countries?filters[country_name][$eq]=${country_name?.replace(/ & /g, " %26 ")?.replace(/ and /g, " %26 ")}&populate[country_images]=true&populate[country_month_activities]=true&&populate[regions][sort][0]=serial_number&populate[regions][filters][show_on_web_ind][$eq]=true&populate[regions][populate]=region_images`;
   return fetchWrapper.get(countryPageUrl);
 }

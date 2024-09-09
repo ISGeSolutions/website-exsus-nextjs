@@ -2,694 +2,786 @@ import { useState, useEffect } from "react";
 
 import { Link, Spinner } from "components";
 import { Layout } from "components/users";
-import { userService } from "services";
+import { homeService } from "../../../services";
+import { useRouter } from "next/router";
+import { FriendlyUrl, Signup } from "../../../components";
+import Head from "next/head";
+import { EnquiryButton } from "../../../components/common/EnquiryBtn";
+import { ImageSlider } from "../../../components/ImageSlider";
+import { whereToGoService } from "../../../services";
 import { NavLink } from "components";
 
 export default Index;
 
 function Index() {
-    const [users, setUsers] = useState(null);
+    const router = useRouter();
+    const [isLoading, setIsLoading] = useState(true);
+    const [customData, setCustomData] = useState(null);
+    const [friendlyUrl, SetFriendlyUrl] = useState("");
+    const [headingTag, setHeadingTag] = useState(null);
+    const [title, setTitle] = useState(null);
+    const [metaDescription, setMetaDescription] = useState(null);
+    const [longText, setLongText] = useState("");
+    const [shortText, setShortText] = useState("");
+    const [rightHeader, setRightHeader] = useState(null);
+    const [rightCorner, setRightCorner] = useState(null);
+    const [valueWithBr, setnewValueWithBr] = useState("");
+    const [backgroundImage, setBackgroundImage] = useState([]);
+    const monthName = router?.query?.whereToGoDetail
+    let dictionaryPage = 1;
+
+    let region = "uk";
+    let regionWiseUrl = "";
+    if (typeof window !== "undefined") {
+        if (window && window.site_region) {
+            if (window && window.site_region !== "uk") {
+                regionWiseUrl = "/" + window.site_region;
+                region = window.site_region;
+            }
+        }
+    }
 
     const handleHrefClick = (event) => {
         event.preventDefault();
     };
 
+    const handleRedirect = () => {
+        router.push(`/make-an-enquiry`);
+    };
+
+    const websiteContentCheck = (pageNo) => {
+        homeService
+            .getAllWebsiteContent(region, pageNo)
+            .then((x) => {
+                const response = x?.data;
+
+                // Calculate the expiration time (1 day from the current time)
+                const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000;
+
+                const dynamicObject = {};
+                const dynamicObjectUk = {};
+                const dynamicObjectUs = {};
+                const dynamicObjectAsia = {};
+                const dynamicObjectIndia = {};
+
+                response.forEach((element, index) => {
+                    // Create an object with the data and expiration time
+                    dynamicObject[element?.attributes?.content_word] =
+                        element?.attributes?.content_translation_text;
+                    dynamicObject["code"] =
+                        element?.attributes?.website_country?.data?.attributes?.code;
+                    dynamicObject["expiration"] = expirationTime;
+
+                    if (
+                        element?.attributes?.website_country?.data?.attributes?.code == "UK"
+                    ) {
+                        dynamicObjectUk[element?.attributes?.content_word] =
+                            element?.attributes?.content_translation_text;
+                        dynamicObjectUk["expiration"] = expirationTime;
+                        let localStorageUk = JSON.parse(
+                            localStorage.getItem("websitecontent_uk")
+                        );
+                        localStorage.setItem(
+                            "websitecontent_uk",
+                            JSON.stringify({ ...localStorageUk, ...dynamicObjectUk })
+                        );
+                    }
+                    if (
+                        element?.attributes?.website_country?.data?.attributes?.code == "US"
+                    ) {
+                        dynamicObjectUs[element?.attributes?.content_word] =
+                            element?.attributes?.content_translation_text;
+                        dynamicObjectUs["expiration"] = expirationTime;
+                        let localStorageUS = JSON.parse(
+                            localStorage.getItem("websitecontent_us")
+                        );
+                        localStorage.setItem(
+                            "websitecontent_us",
+                            JSON.stringify({ ...localStorageUS, ...dynamicObjectUs })
+                        );
+                    }
+                    if (
+                        element?.attributes?.website_country?.data?.attributes?.code ==
+                        "ASIA"
+                    ) {
+                        dynamicObjectAsia[element?.attributes?.content_word] =
+                            element?.attributes?.content_translation_text;
+                        dynamicObjectAsia["expiration"] = expirationTime;
+                        let localStorageAsia = JSON.parse(
+                            localStorage.getItem("websitecontent_asia")
+                        );
+                        localStorage.setItem(
+                            "websitecontent_asia",
+                            JSON.stringify({ ...localStorageAsia, ...dynamicObjectAsia })
+                        );
+                    }
+                    if (
+                        element?.attributes?.website_country?.data?.attributes?.code ==
+                        "INDIA"
+                    ) {
+                        dynamicObjectIndia[element?.attributes?.content_word] =
+                            element?.attributes?.content_translation_text;
+                        dynamicObjectIndia["expiration"] = expirationTime;
+                        let localStorageIndia = JSON.parse(
+                            localStorage.getItem("websitecontent_india")
+                        );
+                        localStorage.setItem(
+                            "websitecontent_india",
+                            JSON.stringify({ ...localStorageIndia, ...dynamicObjectIndia })
+                        );
+                    }
+                });
+                if (x?.meta?.pagination?.pageCount > x?.meta?.pagination?.page) {
+                    dictionaryPage = x?.meta?.pagination?.page + 1;
+                    websiteContentCheck(dictionaryPage);
+                }
+                setWebsiteContent(x.data);
+                setIsLoading(false);
+            })
+            .catch((error) => {
+                // Handle any errors here
+                setIsLoading(false);
+            });
+    };
+
+    const dictioneryFunction = (data) => {
+        let modifiedString = data;
+        if (modifiedString) {
+            const regex = /{[a-zA-Z0-9-]+}/g;
+            const matches = [...new Set(modifiedString.match(regex))];
+
+            let storedDataString = "";
+            let storedData = "";
+            //
+            if (region == "uk") {
+                storedDataString = localStorage.getItem("websitecontent_uk");
+                storedData = JSON.parse(storedDataString);
+            } else if (region == "us") {
+                storedDataString = localStorage.getItem("websitecontent_us");
+                storedData = JSON.parse(storedDataString);
+            } else if (region == "asia") {
+                storedDataString = localStorage.getItem("websitecontent_asia");
+                storedData = JSON.parse(storedDataString);
+            } else if (region == "in") {
+                storedDataString = localStorage.getItem("websitecontent_india");
+                storedData = JSON.parse(storedDataString);
+            }
+            if (storedData !== null) {
+                //
+                // You can access it using localStorage.getItem('yourKey')
+
+                if (matches) {
+                    let replacement = "";
+                    try {
+                        matches.forEach((match, index, matches) => {
+                            const matchString = match.replace(/{|}/g, "");
+                            if (!storedData[matchString]) {
+                                throw new Error("Loop break");
+                            } else {
+                                replacement = storedData[matchString];
+                            }
+                            const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+                            if (checkStr && replacement) {
+                                modifiedString = modifiedString.replace(checkStr, replacement);
+                            }
+                        });
+                        return modifiedString;
+                    } catch (error) { }
+                }
+            }
+        }
+    };
+
+
     useEffect(() => {
-        // userService.getAll().then(x => setUsers(x));
-    }, []);
+        if (
+            !localStorage.getItem(
+                `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
+            )
+        ) {
+            websiteContentCheck(dictionaryPage);
+        }
+        whereToGoService
+            .getWhereToGoDetailPage(monthName)
+            .then((x) => {
+                //
+                localStorage.setItem(
+                    "PageInfo",
+                    JSON.stringify({
+                        pType: "CUST",
+                        pCode: x?.data[0]?.attributes?.page_code,
+                    })
+                );
+                setCustomData(x.data[0]?.attributes?.custom_page_images);
+                SetFriendlyUrl(x.data[0].attributes?.page_friendly_url);
+                const imageCheck = x.data[0].attributes.custom_page_images.data;
+                const newBackgroundImages = [];
+                imageCheck.forEach((element) => {
+                    if (element.attributes.image_type == "banner") {
+                        newBackgroundImages.push(element.attributes.image_path);
+                    }
+                });
+                setBackgroundImage(newBackgroundImages);
+                //  (newBackgroundImages);
+                const data = x.data[0]?.attributes?.custom_page_contents?.data;
+                let modifiedString = "";
+                //
+
+                if (data) {
+                    data.forEach((element, index) => {
+                        if (element?.attributes?.content_name == "HeadingTag") {
+                            setHeadingTag(element?.attributes?.content_value);
+                        } else if (element?.attributes?.content_name == "Title") {
+                            setTitle(element?.attributes?.content_value);
+                        } else if (element?.attributes?.content_name == "MetaDescription") {
+                            setMetaDescription(element?.attributes?.content_value);
+                        } else if (element?.attributes?.content_name == "Right_Header") {
+                            setRightHeader(element?.attributes?.content_value);
+                        } else if (element?.attributes?.content_name == "Right_Corner") {
+                            setRightCorner(element?.attributes?.content_value);
+                        } else if (element?.attributes?.content_name == "Long_Text") {
+                            //
+                            //  (element?.attributes?.content_value);
+                            setLongText(element?.attributes?.content_value);
+                        } else if (element?.attributes?.content_name == "Short_Text") {
+                            //
+                            //  (element?.attributes?.content_value);
+                            setShortText(element?.attributes?.content_value);
+                        }
+                    });
+                }
+            })
+            .catch((error) => {
+                // Handle any errors here
+                setIsLoading(false);
+            });
+
+        // const carousel = document.querySelector("#carouselExampleInterval");
+        // if (carousel) {
+        //   new bootstrap.Carousel(carousel);
+        // }
+        setTimeout(() => {
+            // $('.carousel').carousel();
+            $(".carousel").carousel({
+                interval: 250 * 10,
+            });
+        }, 2000);
+    }, [monthName]);
 
     return (
-        <Layout>
-            <section className="banner_blk_row">
-                <div
-                    id="carouselExampleInterval"
-                    className="carousel slide"
-                    data-bs-ride="carousel"
-                >
-                    <div className="carousel-indicators">
-                        <button
-                            type="button"
-                            data-bs-target="#carouselExampleInterval"
-                            data-bs-slide-to="0"
-                            className="active"
-                            aria-current="true"
-                            aria-label="Slide 1"
-                        ></button>
-                        <button
-                            type="button"
-                            data-bs-target="#carouselExampleInterval"
-                            data-bs-slide-to="1"
-                            aria-label="Slide 2"
-                        ></button>
-                        <button
-                            type="button"
-                            data-bs-target="#carouselExampleInterval"
-                            data-bs-slide-to="2"
-                            aria-label="Slide 3"
-                        ></button>
-                        <button
-                            type="button"
-                            data-bs-target="#carouselExampleInterval"
-                            data-bs-slide-to="3"
-                            aria-label="Slide 4"
-                        ></button>
-                        <button
-                            type="button"
-                            data-bs-target="#carouselExampleInterval"
-                            data-bs-slide-to="4"
-                            aria-label="Slide 5"
-                        ></button>
-                        <button
-                            type="button"
-                            data-bs-target="#carouselExampleInterval"
-                            data-bs-slide-to="5"
-                            aria-label="Slide 6"
-                        ></button>
-                    </div>
-                    <div className="carousel-inner">
-                        <a
-                            href="#"
-                            onClick={handleHrefClick}
-                            target="_blank"
-                            className="carousel-item active"
-                            data-bs-interval="5000"
-                        >
-                            <div className="banner_commn_cls when_to_go_banner01"></div>
-                        </a>
-                        <a
-                            href="#"
-                            onClick={handleHrefClick}
-                            target="_blank"
-                            className="carousel-item"
-                            data-bs-interval="5000"
-                        >
-                            <div className="banner_commn_cls when_to_go_banner02"></div>
-                        </a>
-                        <a
-                            href="#"
-                            onClick={handleHrefClick}
-                            target="_blank"
-                            className="carousel-item"
-                            data-bs-interval="5000"
-                        >
-                            <div className="banner_commn_cls when_to_go_banner03"></div>
-                        </a>
-                        <a
-                            href="#"
-                            onClick={handleHrefClick}
-                            target="_blank"
-                            className="carousel-item"
-                            data-bs-interval="5000"
-                        >
-                            <div className="banner_commn_cls when_to_go_banner04"></div>
-                        </a>
-                        <a
-                            href="#"
-                            onClick={handleHrefClick}
-                            target="_blank"
-                            className="carousel-item"
-                            data-bs-interval="5000"
-                        >
-                            <div className="banner_commn_cls when_to_go_banner05"></div>
-                        </a>
-                        <a
-                            href="#"
-                            onClick={handleHrefClick}
-                            target="_blank"
-                            className="carousel-item"
-                            data-bs-interval="5000"
-                        >
-                            <div className="banner_commn_cls when_to_go_banner06"></div>
-                        </a>
-                    </div>
-                </div>
-            </section>
+        <>
+            <Head>
+                <title>{dictioneryFunction(title)}</title>
+                <metadata content={dictioneryFunction(metaDescription)}></metadata>
+            </Head>
+            <Layout>
+                <section className="banner_blk_row">
+                    <ImageSlider data={backgroundImage}></ImageSlider>
+                    {/* {backgroundImage ? (
+            <div
+              id="carouselExampleInterval"
+              className="carousel slide"
+              data-bs-ride="carousel"
+            >
+              <div className="carousel-indicators">
+                {backgroundImage.map((_, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    data-bs-target="#carouselExampleInterval"
+                    data-bs-slide-to={index}
+                    className={index === 0 ? "active" : ""}
+                    aria-current={index === 0 ? "true" : "false"}
+                    aria-label={`Slide ${index + 1}`}
+                  ></button>
+                ))}
+              </div>
+              <div className="carousel-inner">
+                {backgroundImage.map((imagePath, index) => (
+                  <NavLink
+                    key={index}
+                    href="#"
+                    onClick={handleHrefClick}
+                    className={`carousel-item ${index === 0 ? "active" : ""}`}
+                    data-bs-interval="5000"
+                  >
+                    <div
+                      className="banner_commn_cls"
+                      style={{ backgroundImage: `url(${imagePath})` }}
+                    ></div>
+                  </NavLink>
+                ))}
+              </div>
+            </div>
+          ) : (
+            ""
+          )} */}
+                </section>
 
-            <section className="trvl_info_row">
-                <div className="container">
-                    <div className="bookmark_row">
-                        <ul>
-                            <li>
-                                <a href="homepage.html">Home</a>
-                            </li>
-                            <li>
-                                <a href="when_to_go.html">When to go</a>
-                            </li>
-                            <li>January</li>
-                        </ul>
-                    </div>
-                    <div className="trvl_info_cntnt">
-                        <h2 className="trvl_title">
-                            WHERE TO GO ON A LUXURY HOLIDAY IN MARCH
-                        </h2>
-                        <p className="when_to_go_para">
-                            Find our travel expert recommendations below
-                        </p>
-                        <p className="mb-4">
-                            With the festive season well and truly over and detoxes in full
-                            swing, what better way to beat the January blues than with a
-                            luxury holiday? January is a fantastic time to travel, seeing huge
-                            slashes in flight and accommodation prices and superb deals to be
-                            found worldwide. Europe’s ski season is in full swing, while
-                            further afield, the tropics are enjoying their glorious long
-                            sunny, dry months. So, whether it’s a cosy winter getaway you
-                            seek, or some much-needed winter sun, our experts are here to
-                            advise and inspire you with their recommendations for where to
-                            holiday in January.
-                        </p>
-                    </div>
+                <section className="trvl_info_row">
+                    <div className="container">
+                        <div className="bookmark_row">
+                            <FriendlyUrl data={"home/" + friendlyUrl}></FriendlyUrl>
+                        </div>
 
-                    <section className="month_wise_row">
+                        <div className="trvl_info_cntnt when_to_go_para_blk">
+                            <h2 className="trvl_title">{dictioneryFunction(headingTag)}</h2>
+                            <div
+                                dangerouslySetInnerHTML={{
+                                    __html: dictioneryFunction(longText),
+                                }}
+                            />
+                        </div>
+
+                        {/* <section className="month_wise_row">
+                            <h3 className="title_cls">Month-by month holiday calendar</h3>
+                            <div className="row">
+                                <NavLink href={generateDynamicLink()}>
+                                    <div className="col-lg-6">
+                                        <div className="month_wise_cnt_blk">
+                                            <h4>Where to go on holiday in January</h4>
+                                            <a href="when_to_go_detail.html">
+                                                <img
+                                                    src="images/jan_month.jpg"
+                                                    alt="jan-month"
+                                                    className="img-fluid"
+                                                />
+                                            </a>
+                                            <p>
+                                                Kick off the New Year somewhere amazing and uplifting,
+                                                whether you go in search of winter sun or embrace the snow
+                                                for a season of activity and adventure.{" "}
+                                                <a href="when_to_go_detail.html">
+                                                    See where we'd recommend in January &gt;
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </NavLink>
+                                <div className="col-lg-6">
+                                    <div className="month_wise_cnt_blk">
+                                        <h4>Where to go on holiday in February</h4>
+                                        <a href="when_to_go_detail.html">
+                                            <img
+                                                src="images/feb_month.jpg"
+                                                alt="feb-month"
+                                                className="img-fluid"
+                                            />
+                                        </a>
+                                        <p>
+                                            Escape the winter and head to the tropics while the
+                                            weather’s still warm and the crowds have thinned or explore
+                                            European cities on a cultural break.{" "}
+                                            <a href="when_to_go_detail.html">
+                                                See where we'd recommend in February &gt;
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <div className="month_wise_cnt_blk">
+                                        <h4>Where to go on holiday in March</h4>
+                                        <a href="when_to_go_detail.html">
+                                            <img
+                                                src="images/march_month.jpg"
+                                                alt="march-month"
+                                                className="img-fluid"
+                                            />
+                                        </a>
+                                        <p>
+                                            Whether it’s a springtime escape, an early Easter break or
+                                            something between winter and summer to see you through, head
+                                            to the beach or catch the last of the Northern Lights.{" "}
+                                            <a href="when_to_go_detail.html">
+                                                See where we'd recommend in March &gt;
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <div className="month_wise_cnt_blk">
+                                        <h4>Where to go on holiday in April</h4>
+                                        <a href="when_to_go_detail.html">
+                                            <img
+                                                src="images/april_month.jpg"
+                                                alt="april-month"
+                                                className="img-fluid"
+                                            />
+                                        </a>
+                                        <p>
+                                            While the Mediterranean hots up, head further afield to
+                                            safari in Namibia, watch wildlife in the Galapagos or
+                                            witness the cherry blossom in Japan.{" "}
+                                            <a href="when_to_go_detail.html">
+                                                See where we'd recommend in April &gt;
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <div className="month_wise_cnt_blk">
+                                        <h4>Where to go on holiday in May</h4>
+                                        <a href="when_to_go_detail.html">
+                                            <img
+                                                src="images/may_month.jpg"
+                                                alt="may-month"
+                                                className="img-fluid"
+                                            />
+                                        </a>
+                                        <p>
+                                            Make the most of the bank holidays with a European escape or
+                                            find wildlife in the vast landscapes of Botswana or Zambia.{" "}
+                                            <a href="when_to_go_detail.html">
+                                                See where we'd recommend in May &gt;
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <div className="month_wise_cnt_blk">
+                                        <h4>Where to go on holiday in June</h4>
+                                        <a href="when_to_go_detail.html">
+                                            <img
+                                                src="images/june_month.jpg"
+                                                alt="june-month"
+                                                className="img-fluid"
+                                            />
+                                        </a>
+                                        <p>
+                                            With the arrival of summer, hit the beach before the crowds,
+                                            go on the ultimate road trip in the USA, or enjoy the dry
+                                            season in Peru.{" "}
+                                            <a href="when_to_go_detail.html">
+                                                See where we'd recommend in June &gt;
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <div className="month_wise_cnt_blk">
+                                        <h4>Where to go on holiday in July</h4>
+                                        <a href="when_to_go_detail.html">
+                                            <img
+                                                src="images/july_month.jpg"
+                                                alt="july-month"
+                                                className="img-fluid"
+                                            />
+                                        </a>
+                                        <p>
+                                            While it’s busy in Europe, head to Iceland or go further for
+                                            adventure and the trip of a lifetime combining safaris and
+                                            Indian Ocean barefoot luxury.{" "}
+                                            <a href="when_to_go_detail.html">
+                                                See where we'd recommend in July &gt;
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <div className="month_wise_cnt_blk">
+                                        <h4>Where to go on holiday in August</h4>
+                                        <a href="when_to_go_detail.html">
+                                            <img
+                                                src="images/aug_month.jpg"
+                                                alt="august-month"
+                                                className="img-fluid"
+                                            />
+                                        </a>
+                                        <p>
+                                            While everyone else is away, look for these hidden gems or
+                                            search for wildlife, activity and adventure in more secluded
+                                            spots.{" "}
+                                            <a href="when_to_go_detail.html">
+                                                See where we'd recommend in August &gt;
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <div className="month_wise_cnt_blk">
+                                        <h4>Where to go on holiday in September</h4>
+                                        <a href="when_to_go_detail.html">
+                                            <img
+                                                src="images/sep_month.jpg"
+                                                alt="sep-month"
+                                                className="img-fluid"
+                                            />
+                                        </a>
+                                        <p>
+                                            As things quieten down after the summer, head to France or
+                                            Santorini, go on safari in Kenya or enjoy the spectacle of
+                                            the Fall foliage in the USA.{" "}
+                                            <a href="when_to_go_detail.html">
+                                                See where we'd recommend in September &gt;
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <div className="month_wise_cnt_blk">
+                                        <h4>Where to go on holiday in October</h4>
+                                        <a href="when_to_go_detail.html">
+                                            <img
+                                                src="images/oct_month.jpg"
+                                                alt="oct-month"
+                                                className="img-fluid"
+                                            />
+                                        </a>
+                                        <p>
+                                            Get a final hit of European sunshine, take the chance to
+                                            bask in the southern hemisphere's springtime, or look out
+                                            for an idyllic island escape in Bali.{" "}
+                                            <a href="when_to_go_detail.html">
+                                                See where we'd recommend in October &gt;
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <div className="month_wise_cnt_blk">
+                                        <h4>Where to go on holiday in November</h4>
+                                        <a href="when_to_go_detail.html">
+                                            <img
+                                                src="images/nov_month.jpg"
+                                                alt="nov-month"
+                                                className="img-fluid"
+                                            />
+                                        </a>
+                                        <p>
+                                            Travel for winter sunshine or a hit of wilderness, with
+                                            wildlife in Brazil, activities in New Zealand, empty spaces
+                                            in Patagonia and the deserts of Oman all ideal places to
+                                            visit this month.{" "}
+                                            <a href="when_to_go_detail.html">
+                                                See where we'd recommend in November &gt;
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <div className="month_wise_cnt_blk">
+                                        <h4>Where to go on holiday in December</h4>
+                                        <a href="when_to_go_detail.html">
+                                            <img
+                                                src="images/dec_month.jpg"
+                                                alt="dec-month"
+                                                className="img-fluid"
+                                            />
+                                        </a>
+                                        <p>
+                                            Whether it’s Christmas in Cuba or snow and sports in Norway,
+                                            blissful beaches in Sri Lanka or sizzling barbecues in
+                                            Australia, or New Year in an overwater villa in the Indian
+                                            Ocean, the festive months make a great time to travel.{" "}
+                                            <a href="when_to_go_detail.html">
+                                                See where we'd recommend in December &gt;
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section> */}
+                    </div>
+                </section>
+
+                <section className="card_blk_row dark_grey py-5">
+                    <div className="container">
+                        <div className="book_wth_confdnce about_us_sectn">
+                            <div
+                                dangerouslySetInnerHTML={{
+                                    __html: dictioneryFunction(shortText),
+                                }}
+                            />
+
+                            {/* <h2>THREE REASONS TO BOOK WITH CONFIDENCE</h2>
+                            <div className="row">
+                                <div className="col-lg-4">
+                                    <h3>Specialist Expertise</h3>
+                                    <p>
+                                        With over 20 years’ experience of creating incredible journeys
+                                        and tailor-made luxury honeymoons, all around the world, our
+                                        destination experts have first-hand experience of their
+                                        dedicated areas and frequently travel to them to stay on top
+                                        of what’s best, what’s new and what not to miss, so can advise
+                                        you personally.
+                                    </p>
+                                </div>
+                                <div className="col-lg-4">
+                                    <h3>Tailor-made trips</h3>
+                                    <p>
+                                        All trips put together through us are designed to suit
+                                        individual needs and interests. Personalise an itinerary by
+                                        adding more time in your favourite place, including an
+                                        incredible experience you’d like to have or adding something
+                                        out of the ordinary, so your holiday turns into a trip of a
+                                        lifetime.
+                                    </p>
+                                </div>
+                                <div className="col-lg-4">
+                                    <h3>Fully protected</h3>
+                                    <p>
+                                        From the moment you start planning your trip, you will have a
+                                        dedicated expert looking after you. While away, we’ll provide
+                                        24/7 support and emergency contact to ensure that everything
+                                        runs smoothly. We are members of ABTA, ATOL and AITO so you
+                                        can rest assured your holiday is fully protected.{" "}
+                                    </p>
+                                </div>
+                            </div> */}
+                        </div>
+
                         <div className="row">
-                            <div className="col-lg-6">
-                                <div className="month_wise_cnt_blk">
-                                    <h4>Colombia</h4>
-                                    <a href="#" onClick={handleHrefClick}>
+                            <div className="col-md-6">
+                                <div className="card_blk_inr card_blk_overlay start_planng_holdy_blk">
+                                    <a href="#" onClick={handleHrefClick} target="_blank">
                                         <img
-                                            src="images/jan_month_detail01.jpg"
-                                            alt="jan_month_detail01"
+                                            src="/images/start_planng_holdy.jpg"
+                                            alt="start_planng_holdy"
                                             className="img-fluid"
                                         />
+                                        <div className="card_blk_cntnt card_blk_cntnt_top">
+                                            <div className="row align-items-center">
+                                                <div className="col-11">
+                                                    <div className="card_blk_txt">
+                                                        <h3>Start planning your next holiday</h3>
+                                                    </div>
+                                                </div>
+                                                <div className="col-1 ps-0">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="#ffffff"
+                                                        shapeRendering="geometricPrecision"
+                                                        textRendering="geometricPrecision"
+                                                        imageRendering="optimizeQuality"
+                                                        fillRule="evenodd"
+                                                        clipRule="evenodd"
+                                                        viewBox="0 0 267 512.43"
+                                                    >
+                                                        <path
+                                                            fillRule="nonzero"
+                                                            d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                                                        />
+                                                    </svg>
+                                                </div>
+                                                <div className="col-12">
+                                                    <button
+                                                        className="btn prmry_btn strt_planng_btn"
+                                                        onClick={handleRedirect}
+                                                    >
+                                                        Make an enquiry
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            fill="#ffffff"
+                                                            shapeRendering="geometricPrecision"
+                                                            textRendering="geometricPrecision"
+                                                            imageRendering="optimizeQuality"
+                                                            fillRule="evenodd"
+                                                            clipRule="evenodd"
+                                                            viewBox="0 0 267 512.43"
+                                                        >
+                                                            <path
+                                                                fillRule="nonzero"
+                                                                d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                                                            />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </a>
-                                    <p>
-                                        Have an all-in-one action-packed holiday during{" "}
-                                        <a href="#" onClick={handleHrefClick}>
-                                            Colombia’s
-                                        </a>{" "}
-                                        peak season. Now a UNESCO World Heritage Site, the walled
-                                        port city of Cartagena is definitely worth a look for its
-                                        historic, colourful buildings and pretty squares with
-                                        buzzing bars and restaurants, while the Caribbean islands
-                                        nearby offer some extraordinary diving opportunities. Visit
-                                        the Coffee Triangle (Zona Cafetera) to sample some of the
-                                        world’s best coffee in one of the gorgeous haciendas that
-                                        sit in the lush tropical landscapes.
-                                    </p>
                                 </div>
                             </div>
-                            <div className="col-lg-6">
-                                <div className="month_wise_cnt_blk">
-                                    <h4>Sweden</h4>
-                                    <a href="#" onClick={handleHrefClick}>
+
+                            <div className="col-md-6">
+                                <div className="card_blk_inr card_blk_overlay mt-3 mt-md-0">
+                                    <NavLink href={regionWiseUrl + `/destinations`}>
                                         <img
-                                            src="images/jan_month_detail02.jpg"
-                                            alt="jan_month_detail02"
+                                            src="/images/about_us_card01.jpg"
+                                            alt="Card image 07"
                                             className="img-fluid"
                                         />
-                                    </a>
-                                    <p>
-                                        Following the Christmas season,{" "}
-                                        <a href="#" onClick={handleHrefClick}>
-                                            Sweden’s
-                                        </a>{" "}
-                                        crowds largely disappear, making it the perfect time to for
-                                        a snowy getaway. This is THE place for a wow-factor family
-                                        adventure to keep your spirits up after the hum of
-                                        Christmas. Go dog-sledding with the children or visit the
-                                        unique{" "}
-                                        <a href="#" onClick={handleHrefClick}>
-                                            ICEHOTEL
-                                        </a>{" "}
-                                        - with suites carved entirely of ice, it is the first of its
-                                        kind.
-                                    </p>
+                                        <div className="card_blk_cntnt card_blk_cntnt_top">
+                                            <div className="row align-items-center">
+                                                <div className="col-11">
+                                                    <div className="card_blk_txt">
+                                                        <h3>Explore our destinations</h3>
+                                                    </div>
+                                                </div>
+                                                <div className="col-1 ps-0">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="#ffffff"
+                                                        shapeRendering="geometricPrecision"
+                                                        textRendering="geometricPrecision"
+                                                        imageRendering="optimizeQuality"
+                                                        fillRule="evenodd"
+                                                        clipRule="evenodd"
+                                                        viewBox="0 0 267 512.43"
+                                                    >
+                                                        <path
+                                                            fillRule="nonzero"
+                                                            d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                                                        />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </NavLink>
                                 </div>
-                            </div>
-                            <div className="col-lg-6">
-                                <div className="month_wise_cnt_blk">
-                                    <h4>Antigua</h4>
-                                    <a href="#" onClick={handleHrefClick}>
+                                <div className="card_blk_inr card_blk_overlay mb-0">
+                                    <NavLink href={regionWiseUrl + `/holiday-types`}>
                                         <img
-                                            src="images/jan_month_detail03.jpg"
-                                            alt="jan_month_detail03"
+                                            src="/images/about_us_card02.jpg"
+                                            alt="Card image 08"
                                             className="img-fluid"
                                         />
-                                    </a>
-                                    <p>
-                                        <a href="#" onClick={handleHrefClick}>
-                                            Antigua
-                                        </a>{" "}
-                                        is undoubtedly one of our favourite Caribbean islands, with
-                                        its 365 beaches meaning you could visit a different one
-                                        every day of the year if you wanted to. That said, we
-                                        suggest sticking to the driest months of the year when the
-                                        beaches are at their very best. Plus, what better way to
-                                        start the year than with a week or so in the sun on a luxury
-                                        beach holiday, leaving you feeling relaxed and refreshed
-                                        ready for the year ahead.
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="col-lg-6">
-                                <div className="month_wise_cnt_blk">
-                                    <h4>Thailand</h4>
-                                    <a href="#" onClick={handleHrefClick}>
-                                        <img
-                                            src="images/jan_month_detail04.jpg"
-                                            alt="jan_month_detail04"
-                                            className="img-fluid"
-                                        />
-                                    </a>
-                                    <p>
-                                        A luxury wellness holiday to{" "}
-                                        <a href="#" onClick={handleHrefClick}>
-                                            Thailand
-                                        </a>{" "}
-                                        might be just the ticket for a healthy start to the New
-                                        Year. Thanks to its location in the tropics, most of
-                                        Thailand experiences perfect weather at this time of year:
-                                        its deep in the midst of its long, dry season and gloriously
-                                        sunny for days on end. Luxury retreats such as{" "}
-                                        <a href="#" onClick={handleHrefClick}>
-                                            Kata Rocks
-                                        </a>{" "}
-                                        in Phuket have excellent wellness programmes, where you can
-                                        detox and de-stress amidst the azure waters, white-sand
-                                        beaches and swaying palms.
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="col-lg-6">
-                                <div className="month_wise_cnt_blk">
-                                    <h4>New Zealand</h4>
-                                    <a href="#" onClick={handleHrefClick}>
-                                        <img
-                                            src="images/jan_month_detail05.jpg"
-                                            alt="jan_month_detail05"
-                                            className="img-fluid"
-                                        />
-                                    </a>
-                                    <p>
-                                        A world away, down in the Southern Hemisphere, summer is in
-                                        full swing. January is{" "}
-                                        <a href="#" onClick={handleHrefClick}>
-                                            New Zealand’s
-                                        </a>{" "}
-                                        warmest month and a perfect time of year for exploring its
-                                        world-className great outdoors. Long, bright days make it
-                                        fantastic for hiking and mountain biking holidays in the
-                                        South Island or adventure activities in adrenaline-fuelled
-                                        Queenstown, while coastal hotspots such as the Bay of
-                                        Islands are perfect for catching the sun and enjoying
-                                        coastal walks on gorgeous beaches. Post-Christmas
-                                        festivities continue into the New Year and you’ll encounter
-                                        plenty of festivals, concerts and events up and down the
-                                        country for all the family to enjoy.{" "}
-                                    </p>
+                                        <div className="card_blk_cntnt card_blk_cntnt_top">
+                                            <div className="row align-items-center">
+                                                <div className="col-11">
+                                                    <div className="card_blk_txt">
+                                                        <h3>Explore our Holiday types</h3>
+                                                    </div>
+                                                </div>
+                                                <div className="col-1 ps-0">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="#ffffff"
+                                                        shapeRendering="geometricPrecision"
+                                                        textRendering="geometricPrecision"
+                                                        imageRendering="optimizeQuality"
+                                                        fillRule="evenodd"
+                                                        clipRule="evenodd"
+                                                        viewBox="0 0 267 512.43"
+                                                    >
+                                                        <path
+                                                            fillRule="nonzero"
+                                                            d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                                                        />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </NavLink>
                                 </div>
                             </div>
                         </div>
-                        <p>
-                            For more suggestions on where to go in January,{" "}
-                            <a href="contact_us.html">make an enquiry online</a> today or give
-                            our specialists a call on 020 7337 9010.
-                        </p>
-                    </section>
-                </div>
-            </section>
-
-            <section className="favrites_blk_row dark_grey py-5">
-                <div className="container">
-                    <div className="month_clickable_links">
-                        <p>For where to go in other months, see our Holiday calendar</p>
-                        <ul>
-                            <li>
-                                <a href="#" onClick={handleHrefClick}>
-                                    January
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={handleHrefClick}>
-                                    February
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={handleHrefClick}>
-                                    March
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={handleHrefClick}>
-                                    April
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={handleHrefClick}>
-                                    May
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={handleHrefClick}>
-                                    June
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={handleHrefClick}>
-                                    July
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={handleHrefClick}>
-                                    August
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={handleHrefClick}>
-                                    September
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={handleHrefClick}>
-                                    October
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={handleHrefClick}>
-                                    November
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" onClick={handleHrefClick}>
-                                    December
-                                </a>
-                            </li>
-                        </ul>
                     </div>
-                    <h3 className="title_cls">
-                        OUR TOP HOLIDAY IDEAS FOR TRAVEL IN JANUARY
-                    </h3>
-                    <div className="card_slider_row01">
-                        <i id="leftt">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="#ffffff"
-                                shapeRendering="geometricPrecision"
-                                textRendering="geometricPrecision"
-                                imageRendering="optimizeQuality"
-                                fillRule="evenodd"
-                                clipRule="evenodd"
-                                viewBox="0 0 267 512.43"
-                            >
-                                <path
-                                    fillRule="nonzero"
-                                    d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z"
-                                />
-                            </svg>
-                        </i>
-                        <div className="carousel01">
-                            <div className="card_slider_inr01">
-                                <div className="card_slider">
-                                    <a
-                                        href="#"
-                                        onClick={handleHrefClick}
-                                        className="card_slider_img"
-                                    >
-                                        <img
-                                            src="images/month_slider01.jpg"
-                                            alt="month-slider01"
-                                            className="img-fluid"
-                                        />
-                                    </a>
-                                    <div className="card_slider_cnt places_to_stay_cnt">
-                                        <h4>
-                                            <a href="#" onClick={handleHrefClick}>
-                                                JOURNEY INTO MIDDLE EARTH
-                                            </a>
-                                        </h4>
-                                        <ul>
-                                            <li>Family Road Trip to New Zealand</li>
-                                            <li>New Zealand</li>
-                                            <li>From £9,850 per person</li>
-                                            <li>
-                                                Travel to:
-                                                <span>
-                                                    Auckland, Bay of Islands & Northland, Coromandel &
-                                                    Waikato, Hawkes Bay
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <button className="btn card_slider_btn light_grey_btn_bg">
-                                        <span>14 nights</span>
-                                        <span className="view_itnry_link">
-                                            View this itinerary
-                                            <em className="fa-solid fa-chevron-right"></em>
-                                        </span>
-                                    </button>
-                                </div>
-                            </div>
+                </section>
 
-                            <div className="card_slider_inr01">
-                                <div className="card_slider">
-                                    <a
-                                        href="#"
-                                        onClick={handleHrefClick}
-                                        className="card_slider_img"
-                                    >
-                                        <img
-                                            src="images/month_slider02.jpg"
-                                            alt="month-slider02"
-                                            className="img-fluid"
-                                        />
-                                    </a>
-                                    <div className="card_slider_cnt places_to_stay_cnt">
-                                        <h4>
-                                            <a href="#" onClick={handleHrefClick}>
-                                                FLAGSHIP NORWAY
-                                            </a>
-                                        </h4>
-                                        <ul>
-                                            <li>Norway in Exsus Signature Style</li>
-                                            <li>Norway</li>
-                                            <li>From £5,550 per person</li>
-                                            <li>
-                                                Travel to:<span>Bergen & the Western Fjords</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <button className="btn card_slider_btn light_grey_btn_bg">
-                                        <span>7 nights</span>
-                                        <span className="view_itnry_link">
-                                            View this itinerary
-                                            <em className="fa-solid fa-chevron-right"></em>
-                                        </span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div className="card_slider_inr01">
-                                <div className="card_slider">
-                                    <a
-                                        href="#"
-                                        onClick={handleHrefClick}
-                                        className="card_slider_img"
-                                    >
-                                        <img
-                                            src="images/month_slider03.jpg"
-                                            alt="month_slider03"
-                                            className="img-fluid"
-                                        />
-                                    </a>
-                                    <div className="card_slider_cnt places_to_stay_cnt">
-                                        <h4>
-                                            <a href="#" onClick={handleHrefClick}>
-                                                THE KING & I
-                                            </a>
-                                        </h4>
-                                        <ul>
-                                            <li>Seriously Stylish Island Hopping in Thailand</li>
-                                            <li>Thailand</li>
-                                            <li>From £5,500 per person</li>
-                                            <li>
-                                                Travel to:
-                                                <span>
-                                                    Bangkok & Central Thailand, Phuket & Western Thailand
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <button className="btn card_slider_btn light_grey_btn_bg">
-                                        <span>12 nights</span>
-                                        <span className="view_itnry_link">
-                                            View itinerary
-                                            <em className="fa-solid fa-chevron-right"></em>
-                                        </span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div className="card_slider_inr01">
-                                <div className="card_slider">
-                                    <a
-                                        href="#"
-                                        onClick={handleHrefClick}
-                                        className="card_slider_img"
-                                    >
-                                        <img
-                                            src="images/month_slider04.jpg"
-                                            alt="month_slider04"
-                                            className="img-fluid"
-                                        />
-                                    </a>
-                                    <div className="card_slider_cnt places_to_stay_cnt">
-                                        <h4>
-                                            <a href="#" onClick={handleHrefClick}>
-                                                Culture, Action and Relaxation
-                                            </a>
-                                        </h4>
-                                        <ul>
-                                            <li>The Ultimate Colombia Adventure Holiday</li>
-                                            <li>Colombia</li>
-                                            <li>From £6,250 per person</li>
-                                            <li>
-                                                Travel to:
-                                                <span>
-                                                    Bogota, Cartagena, Caribbean Coast and Islands,
-                                                    Tayrona National Park, The Coffee Triangle (Zona
-                                                    Cafetera)
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <button className="btn card_slider_btn light_grey_btn_bg">
-                                        <span>23 nights</span>
-                                        <span className="view_itnry_link">
-                                            View this itinerary
-                                            <em className="fa-solid fa-chevron-right"></em>
-                                        </span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div className="card_slider_inr01">
-                                <div className="card_slider">
-                                    <a
-                                        href="#"
-                                        onClick={handleHrefClick}
-                                        className="card_slider_img"
-                                    >
-                                        <img
-                                            src="images/month_slider05.jpg"
-                                            alt="month_slider05"
-                                            className="img-fluid"
-                                        />
-                                    </a>
-                                    <div className="card_slider_cnt places_to_stay_cnt">
-                                        <h4>
-                                            <a href="#" onClick={handleHrefClick}>
-                                                Ultimate Family Adventure to Swedish Lapland
-                                            </a>
-                                        </h4>
-                                        <ul>
-                                            <li>Reindeer, Santa & the Northern Lights</li>
-                                            <li>Sweden</li>
-                                            <li>From £3,350 per person</li>
-                                            <li>
-                                                Travel to:<span>Swedish Lapland</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <button className="btn card_slider_btn light_grey_btn_bg">
-                                        <span>5 nights</span>
-                                        <span className="view_itnry_link">
-                                            View this itinerary
-                                            <em className="fa-solid fa-chevron-right"></em>
-                                        </span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <i id="rightt">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="#ffffff"
-                                shapeRendering="geometricPrecision"
-                                textRendering="geometricPrecision"
-                                imageRendering="optimizeQuality"
-                                fillRule="evenodd"
-                                clipRule="evenodd"
-                                viewBox="0 0 267 512.43"
-                            >
-                                <path
-                                    fillRule="nonzero"
-                                    d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                                />
-                            </svg>
-                        </i>
+                <section className="make_enqury_row">
+                    <div className="container">
+                        <EnquiryButton />
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <section className="make_enqury_row">
-                <div className="container">
-                    <h3>YOUR JOURNEY STARTS HERE</h3>
-                    <p>call us on 020 7337 9010 to start planning your perfect trip</p>
-                    <button
-                        className="btn prmry_btn make_enqury_btn"
-                        onclick="window.open('contact_us.html')"
-                    >
-                        Make an enquiry
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="#ffffff"
-                            shapeRendering="geometricPrecision"
-                            textRendering="geometricPrecision"
-                            imageRendering="optimizeQuality"
-                            fillRule="evenodd"
-                            clipRule="evenodd"
-                            viewBox="0 0 267 512.43"
-                        >
-                            <path
-                                fillRule="nonzero"
-                                d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                            />
-                        </svg>
-                    </button>
-                </div>
-            </section>
-
-            <section aria-label="Sign up for newsletter" className="newslettr_row">
-                <div className="container">
-                    <h4>Sign up for our newsletter</h4>
-                    <h5>Receive our latest news and special offers</h5>
-                    <form className="newslettr_form d-block d-sm-flex">
-                        <div className="newlettr_inpt">
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Full name and title"
-                            />
-                        </div>
-                        <div className="newlettr_inpt ps-0 ps-sm-2">
-                            <input
-                                type="email"
-                                className="form-control"
-                                placeholder="Your email address"
-                            />
-                        </div>
-                        <div className="newlettr_btn ps-0 ps-sm-2">
-                            <button type="submit" className="btn btn-primary prmry_btn">
-                                Sign up
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="#ffffff"
-                                    shapeRendering="geometricPrecision"
-                                    textRendering="geometricPrecision"
-                                    imageRendering="optimizeQuality"
-                                    fillRule="evenodd"
-                                    clipRule="evenodd"
-                                    viewBox="0 0 267 512.43"
-                                >
-                                    <path
-                                        fillRule="nonzero"
-                                        d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                                    />
-                                </svg>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </section>
-        </Layout>
+                <section aria-label="Sign up for newsletter" className="newslettr_row">
+                    <div className="container">
+                        <h4>Sign up for our newsletter</h4>
+                        <h5>Receive our latest news and special offers</h5>
+                        <Signup />
+                    </div>
+                </section>
+            </Layout>
+        </>
     );
 }

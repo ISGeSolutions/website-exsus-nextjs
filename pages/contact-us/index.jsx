@@ -216,9 +216,8 @@ function Index() {
                             placeholder="First name *"
                             name="first_name"
                             {...register("first_name")}
-                            className={`form-control ${
-                              errors.first_name ? "is-invalid" : ""
-                            }`}
+                            className={`form-control ${errors.first_name ? "is-invalid" : ""
+                              }`}
                           />
                           <div className="invalid-feedback mb-1">
                             {errors.first_name?.message}
@@ -233,9 +232,8 @@ function Index() {
                             placeholder="Last name *"
                             name="last_name"
                             {...register("last_name")}
-                            className={`form-control ${
-                              errors.last_name ? "is-invalid" : ""
-                            }`}
+                            className={`form-control ${errors.last_name ? "is-invalid" : ""
+                              }`}
                           />
                           <div className="invalid-feedback mb-1">
                             {errors.last_name?.message}
@@ -250,9 +248,8 @@ function Index() {
                             placeholder="Email *"
                             name="email_id"
                             {...register("email_id")}
-                            className={`form-control ${
-                              errors.email_id ? "is-invalid" : ""
-                            }`}
+                            className={`form-control ${errors.email_id ? "is-invalid" : ""
+                              }`}
                           />
                           <div className="invalid-feedback mb-1">
                             {errors.email_id?.message}
@@ -267,9 +264,8 @@ function Index() {
                             placeholder="Telephone *"
                             name="telephone_no"
                             {...register("telephone_no")}
-                            className={`form-control ${
-                              errors.telephone_no ? "is-invalid" : ""
-                            }`}
+                            className={`form-control ${errors.telephone_no ? "is-invalid" : ""
+                              }`}
                           />
                           <div className="invalid-feedback mb-1">
                             {errors.telephone_no?.message}
@@ -285,9 +281,8 @@ function Index() {
                             name="note"
                             rows="3"
                             {...register("note")}
-                            className={`form-control ${
-                              errors.note ? "is-invalid" : ""
-                            }`}
+                            className={`form-control ${errors.note ? "is-invalid" : ""
+                              }`}
                           ></textarea>
                         </div>
                       </div>
@@ -296,10 +291,10 @@ function Index() {
                           disabled={formState.isSubmitting}
                           type="submit"
                           className="btn btn-primary prmry_btn"
-                          // data-bs-toggle="modal"
-                          // data-bs-target="#staticBackdrop"
-                          // target="_blank"
-                          // onClick={() => handleRedirect()}
+                        // data-bs-toggle="modal"
+                        // data-bs-target="#staticBackdrop"
+                        // target="_blank"
+                        // onClick={() => handleRedirect()}
                         >
                           {formState.isSubmitting && (
                             <span className="spinner-border spinner-border-sm mr-1"></span>
@@ -343,8 +338,8 @@ function Index() {
         {/* NewsLetter */}
         <section aria-label="Sign up for newsletter" className="newslettr_row">
           <div className="container">
-            <h4>Sign up for our newsletter</h4>
-            <h5>Receive our latest news and special offers</h5>
+            <h4>Sign up for our newsletter
+              <span>Receive our latest news and special offers</span></h4>
             <Signup />
           </div>
         </section>

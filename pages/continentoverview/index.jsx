@@ -26,6 +26,7 @@ function ContinentOverview({ sendDataToParent }) {
   const { t } = useTranslation();
   const [holidayTitle, setHolidayTitle] = useState(t("holidayTitle"));
   const [isLoading, setIsLoading] = useState(true);
+  const [destinationDetails, setDestinationDetails] = useState([]);
   let dictionaryPage = 1;
 
   const handleLoadMore = () => {
@@ -262,6 +263,7 @@ function ContinentOverview({ sendDataToParent }) {
         // const lines = x.data.attributes?.overview_text.split('\n');
         setdestinationName(x.data[0].attributes.destination_name);
         setnewValueWithBr(x.data[0].attributes?.overview_text);
+        setDestinationDetails(x.data[0]?.attributes);
         setAllCountries(
           x.data[0]?.attributes?.countries?.data
             ?.filter((item) => item.attributes?.popular_ind)
@@ -309,6 +311,16 @@ function ContinentOverview({ sendDataToParent }) {
 
   return (
     <>
+      <Head>
+        <script
+          type="text/javascript"
+          src="/assets/javascripts/card-slider.js"
+        ></script>
+        <script
+          type="text/javascript"
+          src="/assets/javascripts/card-slider02.js"
+        ></script>
+      </Head>
       {isLoading ? (
         // <MyLoader />
         <div
@@ -323,17 +335,18 @@ function ContinentOverview({ sendDataToParent }) {
             <section className="destination_para destination_para_blk">
               <div
                 dangerouslySetInnerHTML={{
-                  __html: dictioneryFunction(valueWithBr),
+                  __html: dictioneryFunction(valueWithBr?.replace(/\\&quot;/g, '"')?.replace(/\\n/g, ""))?.replace(/\\/g, '')
                 }}
               />
             </section>
 
             <section className="favrites_blk_row favrites_blk_small_card_row">
               <div className="container">
-                <h3 className="title_cls">
+                <h3 className="title_cls text_lowercase">
                   Popular countries in {destinationName}
                 </h3>
-                <div className="card_slider_row">
+                <div className={allCountries?.length < 6 ? 'card_slider_row card_btn_hide' : 'card_slider_row'
+                }>
                   <i id="left">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -409,27 +422,23 @@ function ContinentOverview({ sendDataToParent }) {
                         )
                     )}
                   </div>
-                  {allCountries?.length > 5 ? (
-                    <i id="right">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="#ffffff"
-                        shapeRendering="geometricPrecision"
-                        textRendering="geometricPrecision"
-                        imageRendering="optimizeQuality"
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        viewBox="0 0 267 512.43"
-                      >
-                        <path
-                          fillRule="nonzero"
-                          d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                        />
-                      </svg>
-                    </i>
-                  ) : (
-                    ""
-                  )}
+                  <i id="right">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="#ffffff"
+                      shapeRendering="geometricPrecision"
+                      textRendering="geometricPrecision"
+                      imageRendering="optimizeQuality"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      viewBox="0 0 267 512.43"
+                    >
+                      <path
+                        fillRule="nonzero"
+                        d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                      />
+                    </svg>
+                  </i>
                 </div>
               </div>
             </section>
@@ -545,7 +554,7 @@ function ContinentOverview({ sendDataToParent }) {
                       onClick={() => handleClick("itineraries")}
                     >
                       <img
-                        src="\images\destination_overview01.jpg"
+                        src={destinationDetails?.see_all_itin_image_path}
                         alt="Card image 07"
                         className="img-fluid"
                       />
@@ -554,7 +563,7 @@ function ContinentOverview({ sendDataToParent }) {
                           <div className="col-11">
                             <div className="card_blk_txt">
                               <h3>
-                                See all Itinerary Ideas in the {destinationName}
+                                {dictioneryFunction(destinationDetails?.see_all_itin_text)}
                               </h3>
                             </div>
                           </div>
@@ -585,7 +594,7 @@ function ContinentOverview({ sendDataToParent }) {
                   <div className="card_blk_inr card_blk_overlay">
                     <a onClick={() => handleClick("places-to-stay")}>
                       <img
-                        src="\images\destination_overview02.jpg"
+                        src={destinationDetails?.see_all_hotel_image_path}
                         alt="Card image 08"
                         className="img-fluid"
                       />
@@ -594,7 +603,7 @@ function ContinentOverview({ sendDataToParent }) {
                           <div className="col-11">
                             <div className="card_blk_txt">
                               <h3>
-                                See all Places to Stay in the {destinationName}
+                                {dictioneryFunction(destinationDetails?.see_all_hotel_text)}
                               </h3>
                             </div>
                           </div>

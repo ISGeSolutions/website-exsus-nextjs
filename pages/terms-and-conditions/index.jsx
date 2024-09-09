@@ -218,8 +218,8 @@ function Index() {
               className="newslettr_row"
             >
               <div className="container">
-                <h4>Sign up for our newsletter</h4>
-                <h5>Receive our latest news and special offers</h5>
+                <h4>Sign up for our newsletter
+                  <span>Receive our latest news and special offers</span></h4>
                 <form className="newslettr_form d-block d-sm-flex">
                   <div className="newlettr_inpt">
                     <input

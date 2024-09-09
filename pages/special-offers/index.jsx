@@ -37,6 +37,9 @@ function Index() {
   const [isMinimized, setMinimized] = useState(false);
   const [showThankYou, setShowThankYou] = useState(false);
   const [textareaValue, setTextareaValue] = useState("");
+  const [telePhoneNumber, SetTelePhoneNumber] = useState("${TelephoneNumber}");
+  const pageInfo = { "pType": "CUST", "pCode": "Offers" };
+
 
   const handleExpandButtonClick = () => {
     setMinimized((prev) => !prev);
@@ -72,22 +75,29 @@ function Index() {
       .replace(/&/g, "and");
     router.push(
       regionWiseUrl +
-        `/destinations/${res?.attributes?.hotel?.data?.attributes?.destination?.data?.attributes?.destination_name
-          ?.replace(/ /g, "-")
-          .toLowerCase()
-          .replace(
-            /&/g,
-            "and"
-          )}/${res?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.country_name
+      `/destinations/${res?.attributes?.hotel?.data?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/ /g, "-")
+        .toLowerCase()
+        .replace(
+          /&/g,
+          "and"
+        )}/${res?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(
             /&/g,
             "and"
           )}/${res?.attributes?.hotel?.data?.attributes?.region?.data?.attributes?.region_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${hotelName}`
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
+  };
+
+
+  const handleEnquiryClick = () => {
+    // router.push(regionWiseUrl + `/make-an-enquiry`); // Navigate to the /enquiry page
+    router.push(regionWiseUrl + `/make-an-enquiry?pType=${pageInfo?.pType}&pCode=${pageInfo?.pCode}`); // Navigate to the /enquiry page
+
   };
 
   const generateDynamicLink = (res) => {
@@ -103,14 +113,14 @@ function Index() {
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/${res?.attributes?.hotel?.data?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(
-          /&/g,
-          "and"
-        )}/${res?.attributes?.hotel?.data?.attributes?.region?.data?.attributes?.region_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${hotelName}`
+          ?.replace(/ /g, "-")
+          .replace(
+            /&/g,
+            "and"
+          )}/${res?.attributes?.hotel?.data?.attributes?.region?.data?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -124,8 +134,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -257,6 +267,67 @@ function Index() {
       });
   };
 
+
+  const dictioneryFunction = (data) => {
+    let modifiedString = data;
+    if (modifiedString) {
+      const regex = /{[a-zA-Z0-9-]+}/g;
+      const matches = [...new Set(modifiedString.match(regex))];
+
+      let storedDataString = "";
+      let storedData = "";
+      //
+      if (region == "uk") {
+        storedDataString = localStorage.getItem("websitecontent_uk");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "us") {
+        storedDataString = localStorage.getItem("websitecontent_us");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "asia") {
+        storedDataString = localStorage.getItem("websitecontent_asia");
+        storedData = JSON.parse(storedDataString);
+      } else if (region == "in") {
+        storedDataString = localStorage.getItem("websitecontent_india");
+        storedData = JSON.parse(storedDataString);
+      }
+      if (storedData !== null) {
+        //
+        // You can access it using localStorage.getItem('yourKey')
+
+        if (matches) {
+          let replacement = "";
+          try {
+            matches.forEach((match, index, matches) => {
+              const matchString = match.replace(/{|}/g, "");
+              if (!storedData[matchString]) {
+                if (storedData[matchString.toLowerCase()]) {
+                  replacement = storedData[matchString.toLowerCase()];
+                }
+              } else {
+                replacement = storedData[matchString];
+                if (!replacement) {
+                  replacement = storedData[matchString.toLowerCase()];
+                }
+              }
+              const checkStr = new RegExp(`\\$\\{${matchString}\\}`, "g");
+              if (checkStr && replacement) {
+                modifiedString = modifiedString.replace(checkStr, replacement);
+              }
+            });
+            return modifiedString;
+            setIsLoading(false);
+          } catch (error) {
+            if (error.message === "Loop break") {
+            } else if (error.message === "Region not found") {
+            }
+          }
+        }
+      }
+    } else {
+    }
+  };
+
+
   useEffect(() => {
     if (
       !localStorage.getItem(
@@ -280,7 +351,7 @@ function Index() {
 
         setFriendlyUrl(`home/special offers`);
       })
-      .catch((error) => {});
+      .catch((error) => { });
 
     specialoffersService
       .getOffersCustomePage()
@@ -528,8 +599,8 @@ function Index() {
                                                 {res?.attributes?.currency_symbol.repeat(
                                                   Math.abs(
                                                     5 -
-                                                      res?.attributes
-                                                        ?.price_guide_value
+                                                    res?.attributes
+                                                      ?.price_guide_value
                                                   )
                                                 )}
                                               </label>
@@ -603,9 +674,8 @@ function Index() {
           )}
 
           <section
-            className={`chat_window_parnt_blk ${
-              isMinimized ? "chat_window_minised" : ""
-            }`}
+            className={`chat_window_parnt_blk ${isMinimized ? "chat_window_minised" : ""
+              }`}
           >
             <div
               className="chat_window_inr_blk"
@@ -667,8 +737,32 @@ function Index() {
           {/* Enquiry */}
           <section className="make_enqury_row">
             <div className="container">
-              <EnquiryButton />
-            </div>
+              <h3>START PLANNING YOUR HOLIDAY
+              </h3>
+              <p>
+                Call us on <span dangerouslySetInnerHTML={{ __html: dictioneryFunction(telePhoneNumber) }} /> to start planning your perfect trip
+              </p>
+              <button
+                className="btn prmry_btn make_enqury_btn"
+                onClick={handleEnquiryClick}
+              >
+                Make an enquiry
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="#ffffff"
+                  shapeRendering="geometricPrecision"
+                  textRendering="geometricPrecision"
+                  imageRendering="optimizeQuality"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  viewBox="0 0 267 512.43"
+                >
+                  <path
+                    fillRule="nonzero"
+                    d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                  />
+                </svg>
+              </button>            </div>
           </section>
 
           {/* NewsLetter */}
@@ -677,8 +771,8 @@ function Index() {
             className="newslettr_row"
           >
             <div className="container">
-              <h4>Sign up for our newsletter</h4>
-              <h5>Receive our latest news and special offers</h5>
+              <h4>Sign up for our newsletter
+                <span>Receive our latest news and special offers</span></h4>
               <Signup />
             </div>
           </section>

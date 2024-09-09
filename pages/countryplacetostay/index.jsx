@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, Spinner, Signup } from "components";
 import {
   destinationService,
@@ -53,6 +53,8 @@ function CountryPlaceToStay(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [activeItem, setActiveItem] = useState("recommended");
   let dictionaryPage = 1;
+  const newItemsRef = useRef([]);
+
 
   const width = "250px";
   const styles = {
@@ -188,6 +190,7 @@ function CountryPlaceToStay(props) {
                 []
               )
             );
+            newItemsRef.current = [];
             setPage(page + 1);
           }
           const filteredData = response?.data?.filter((item) => {
@@ -230,6 +233,11 @@ function CountryPlaceToStay(props) {
           ]);
           setModalKey((prevKey) => prevKey + 1);
           setIsLoading(false);
+          setTimeout(() => {
+            if (newItemsRef.current.length > 0 && allHotels.length > 0) {
+              newItemsRef?.current[0]?.scrollIntoView();
+            }
+          }, 0);
         })
         .catch((error) => {
           // Handle any errors here
@@ -261,7 +269,7 @@ function CountryPlaceToStay(props) {
                 []
               )
             );
-            itineraries;
+            newItemsRef.current = [];
             setPage(page + 1);
           }
           const filteredData = response?.data?.filter((item) => {
@@ -304,6 +312,11 @@ function CountryPlaceToStay(props) {
           ]);
           setModalKey((prevKey) => prevKey + 1);
           setIsLoading(false);
+          setTimeout(() => {
+            if (newItemsRef.current.length > 0 && allHotels.length > 0) {
+              newItemsRef?.current[0]?.scrollIntoView();
+            }
+          }, 0);
         })
         .catch((error) => {
           setIsLoading(false);
@@ -680,7 +693,7 @@ function CountryPlaceToStay(props) {
               <p
                 dangerouslySetInnerHTML={{
                   __html: dictioneryFunction(
-                    countryData?.placestostay_intro_text
+                    countryData?.placestostay_intro_text?.replace(/\\n/g, "")
                   ),
                 }}
               />
@@ -688,7 +701,7 @@ function CountryPlaceToStay(props) {
           </div>
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
             <div className="container">
-              <h3 className="title_cls">
+              <h3 className="title_cls text_lowercase">
                 All recommended hotels in {countryData?.country_name}
               </h3>
 
@@ -696,7 +709,7 @@ function CountryPlaceToStay(props) {
               <div className="card_slider_row">
                 <div className="carousel00 region_carousel00">
                   <div className="row">
-                    <form onSubmit={onSubmit}>
+                    <form onSubmit={onSubmit} className="form_padg">
                       <div className="col-12">
                         <div className="destination_dropdwn_row d-block d-md-flex">
                           <div className="dropdown_grp_blk">
@@ -846,10 +859,11 @@ function CountryPlaceToStay(props) {
                     </div>
 
                     {/* Country Place to stay hotels */}
-                    {allHotels?.slice(0, allHotels.length).map((item) => (
+                    {allHotels?.slice(0, allHotels.length).map((item, ind) => (
                       <div
                         className="col-sm-6 col-lg-4 col-xxl-3"
                         key={item.id}
+                        ref={ind >= allHotels.length - 12 ? el => newItemsRef.current.push(el) : null}
                       >
                         <div className="card_slider_inr">
                           <div className="card_slider">
@@ -959,7 +973,7 @@ function CountryPlaceToStay(props) {
                           {metaData.total - page * itemsPerPage > 12
                             ? 12
                             : metaData.total - page * itemsPerPage}{" "}
-                          more holiday
+                          more places to stay
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="#ffffff"

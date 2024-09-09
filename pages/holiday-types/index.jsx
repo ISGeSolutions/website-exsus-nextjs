@@ -282,7 +282,7 @@ function Index() {
             <div className="container">
               <div className="row">
                 <div className="col-12 favrites_blk_row pb-0">
-                  <h3 className="title_cls pb-0">
+                  <h3 className="title_cls pb-0 text_lowercase">
                     {/* {holidaytypes?.attributes?.page_content_2} */}
                     Our favourite holiday types
                   </h3>
@@ -424,8 +424,8 @@ function Index() {
             className="newslettr_row"
           >
             <div className="container">
-              <h4>Sign up for our newsletter</h4>
-              <h5>Receive our latest news and special offers</h5>
+              <h4>Sign up for our newsletter
+                <span>Receive our latest news and special offers</span></h4>
               <Signup />
             </div>
           </section>

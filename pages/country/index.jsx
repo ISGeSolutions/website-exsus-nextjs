@@ -159,26 +159,26 @@ function Country() {
       setIsShowMap(true);
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
+        `/destinations/${destinationcode?.replace(/ /g, "-")?.replace(/&/g, "and")}/${countryData?.attributes?.friendly_url
         }`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
         }`
       );
-      text = "LUXURY HOLIDAYS IN " + countrycode.toUpperCase();
+      text = "LUXURY HOLIDAYS IN " + countrycode?.toUpperCase();
     } else if (itemId == "regions") {
       setIsShowMap(true);
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
+        `/destinations/${destinationcode?.replace(/ /g, "-")?.replace(/&/g, "and")}/${countryData?.attributes?.friendly_url
         }/${countryData?.attributes?.friendly_url}-regions`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
         }/${countryData?.attributes?.friendly_url} regions`
       );
-      text = "REGIONS IN " + countrycode.toUpperCase(); // action="/countryregions?countrycode=south-africa"
+      text = "REGIONS IN " + countrycode?.toUpperCase(); // action="/countryregions?countrycode=south-africa"
     } else if (itemId == "itineraries") {
       setIsShowMap(false);
       let destCode = "";
@@ -209,7 +209,7 @@ function Country() {
       handleTabClick("images");
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
+        `/destinations/${destinationcode?.replace(/ /g, "-")?.replace(/&/g, "and")}/${countryData?.attributes?.friendly_url
         }/${countryData?.attributes?.friendly_url}-places-to-stay`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
@@ -221,7 +221,7 @@ function Country() {
       setIsShowMap(false);
       const redirectUrl =
         regionWiseUrl +
-        `/destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
+        `/destinations/${destinationcode?.replace(/ /g, "-")?.replace(/&/g, "and")}/${countryData?.attributes?.friendly_url
         }/${countryData?.attributes?.friendly_url}-when-to-go`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
@@ -624,23 +624,25 @@ function Country() {
                       Overview
                     </button>
                   </li>
-                  <li className="nav-item" role="presentation">
-                    <button
-                      className={
-                        activeTab === "regions" ? "active nav-link" : "nav-link"
-                      }
-                      onClick={() => toggleTab("regions")}
-                      id="pills-countries-tab"
-                      data-bs-toggle="pill"
-                      data-bs-target="#pills-countries"
-                      type="button"
-                      role="tab"
-                      aria-controls="pills-countries"
-                      aria-selected="false"
-                    >
-                      Regions
-                    </button>
-                  </li>
+                  {countryData?.attributes?.regions?.data?.length > 0 && (
+                    <li className="nav-item" role="presentation" >
+                      <button
+                        className={
+                          activeTab === "regions" ? "active nav-link" : "nav-link"
+                        }
+                        onClick={() => toggleTab("regions")}
+                        id="pills-countries-tab"
+                        data-bs-toggle="pill"
+                        data-bs-target="#pills-countries"
+                        type="button"
+                        role="tab"
+                        aria-controls="pills-countries"
+                        aria-selected="false"
+                      >
+                        Regions
+                      </button>
+                    </li>
+                  )}
                   <li className="nav-item" role="presentation">
                     <button
                       className={
@@ -819,8 +821,8 @@ function Country() {
             className="newslettr_row"
           >
             <div className="container">
-              <h4>Sign up for our newsletter</h4>
-              <h5>Receive our latest news and special offers</h5>
+              <h4>Sign up for our newsletter
+                <span>Receive our latest news and special offers</span></h4>
               <Signup />
             </div>
           </section>

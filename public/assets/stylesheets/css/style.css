@@ -126,6 +126,10 @@
   text-transform: uppercase;
 }
 
+.text_lowercase {
+  text-transform: none !important;
+}
+
 /* line 100, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
 .favrites_blk_row.favrites_blk_small_card_row {
   padding: 10px 0;
@@ -942,6 +946,13 @@
   margin-bottom: 15px;
 }
 
+.newslettr_row span {
+  font: 1.125rem/1.125rem "Slabo 27px", serif;
+  color: #ffffff;
+  margin-bottom: 15px;
+  margin-left: 20px;
+}
+
 /* line 417, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
 .newslettr_row .newslettr_form {
   display: flex;
@@ -1009,7 +1020,7 @@
 
 /* line 462, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_homepage.scss */
 .make_enqury_row h3 {
-  font: 300 2.25rem/2.75rem "Roboto", sans-serif;
+  font: 400 2.25rem/2.75rem "Roboto", sans-serif;
   margin-bottom: 10px;
 }
 
@@ -2594,19 +2605,25 @@
 
 /* line 129, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_contact-us.scss */
 .destination_text_overlay_row {
-  padding: 84px 0;
   background: url("../../images/destination_overlay.jpg") no-repeat;
   text-align: center;
   height: 396px;
+  background-position: center;
 }
 
 /* line 134, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_contact-us.scss */
 .destination_text_overlay_row .destination_text_overlay_inr {
-  background: rgba(255, 255, 255, 0.5);
-  padding: 50px 10px;
-  max-width: 600px;
-  display: inline-block;
-  width: 100%;
+  position: relative;
+  max-width: 996px;
+  height: 396px;
+  margin: auto;
+}
+
+.destination_text_overlay_row .destination_text_overlay_inr .destination_new_inr {
+  position: absolute;
+  bottom: 50px;
+  right: 5px;
+  text-align: right;
 }
 
 /* line 140, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_contact-us.scss */
@@ -2623,7 +2640,7 @@
 
 /* line 148, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_contact-us.scss */
 .destination_text_overlay_row .destination_text_overlay_inr button {
-  margin: auto;
+  float: right;
 }
 
 /* line 1, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_brochure-request.scss */
@@ -3427,7 +3444,7 @@
 
 /* line 467, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
 .select_country__option {
-  border-bottom: 1px solid #4d4d4d;
+  border-bottom: 1px solid #8aad56;
   padding: 8px 5px !important;
   cursor: pointer !important;
   white-space: normal;
@@ -3445,6 +3462,8 @@
   margin-right: 10px;
   accent-color: #8aad56;
   margin-bottom: 0;
+  width: 17px;
+  height: 20px;
 }
 
 /* line 486, ../../Users/ISGUSER27/Desktop/work/exsus_website_full/assets/stylesheets/scss/_itinerary.scss */
@@ -4486,4 +4505,42 @@
 
 .card_blk_row .card_blk_inr.card_blk_overlay {
   height: auto;
+  min-height: 220px;
+}
+
+.favrites_blk_row .card_slider_row .carousel00 {
+  cursor: unset;
+}
+
+.no-click {
+  pointer-events: none;
+}
+
+.form_padg {
+  padding: 0;
+}
+
+.destination_tab_row .destination_para p~h3,
+.destination_tab_row .destination_para h3 p~h3 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-family: "Roboto", sans-serif;
+}
+
+.card_blk_row .card_blk_inr.card_blk_para_blk .card_blk_cntnt.card_blk_sml_arw .row>div .card_blk_txt h3.region_title_txt {
+  font-size: 1.25rem;
+  letter-spacing: 0.5px;
+  line-height: 1.75rem;
+}
+
+.card_blk_row .card_blk_inr.card_blk_para_blk a+div.region_para_new p,
+.card_blk_row .card_blk_inr.card_blk_para_blk a+div.region_para_new {
+  -webkit-line-clamp: unset;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  text-align: center;
+}
+
+.card_blk_row .card_blk_inr.card_blk_para_blk .card_blk_cntnt.card_blk_sml_arw .row>div .card_blk_txt h3.region_title_txt:hover {
+  color: #8aad56;
 }

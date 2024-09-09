@@ -67,8 +67,7 @@ function Index() {
   const { errors } = formState;
 
   const hcode = router?.query?.holidaytypeitineraries
-    ?.replace(/-and-/g, " & ")
-    .toLowerCase();
+    ?.toLowerCase();
 
   const width = "250px";
   const styles = {
@@ -343,12 +342,6 @@ function Index() {
     }
   }
 
-  // const generateDynamicLink = (item) => {
-  //   return (
-  //     regionWiseUrl +
-  //     `/itinerarydetail?itinerarycode=vietnam-in-classic-style&destinationcode=${region}`
-  //   );
-  // };
 
   const selectedSec = (itemId) => {
     var text = "LUXURY SAFARI HOLIDAYS IN AFRICA";
@@ -534,6 +527,7 @@ function Index() {
   };
 
   useEffect(() => {
+
     if (
       !localStorage.getItem(
         `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
@@ -547,7 +541,7 @@ function Index() {
         setTitle(x.data[0].attributes.page_meta_title);
         setHolidaytypesDetails(x.data[0].attributes);
         setFriendlyUrl(
-          `home/holiday types/${x.data[0].attributes.friendly_url}/${x.data[0].attributes.friendly_url}-itineraries`
+          `home/holiday types/${x.data[0].attributes.holiday_type_group_name}?${x.data[0].attributes.friendly_url}/${x.data[0].attributes.holiday_type_group_name}-itineraries`
         );
         // setFriendlyUrl(
         //   `home/holiday types/holidaytypegroup/${x.data[0].attributes.friendly_url}-itineraries`
@@ -862,6 +856,11 @@ function Index() {
                                       item?.attributes?.header_text
                                     )}
                                   </li>
+                                  <li>
+                                    {dictioneryFunction(
+                                      item?.attributes?.sub_header_text
+                                    )}
+                                  </li>
                                   {item?.attributes?.itinerary_country_contents?.data
                                     .filter(
                                       (res) =>
@@ -964,8 +963,8 @@ function Index() {
             className="newslettr_row"
           >
             <div className="container">
-              <h4>Sign up for our newsletter</h4>
-              <h5>Receive our latest news and special offers</h5>
+              <h4>Sign up for our newsletter
+                <span>Receive our latest news and special offers</span></h4>
               <Signup />
             </div>
           </section>

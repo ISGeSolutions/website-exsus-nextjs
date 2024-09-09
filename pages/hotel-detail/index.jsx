@@ -352,7 +352,7 @@ function Index() {
           ]);
           setModalKey((prevKey) => prevKey + 1);
           setFriendlyUrl(
-            `home/destinations/${continentCode}/${countryName}/${regionName}/${hotelName}`
+            `home/destinations/${continentCode?.replace(/-and-/g, " & ")}/${countryName?.replace(/-and-/g, " & ")}/${regionName?.replace(/-and-/g, " & ")}/${hotelName}`
           );
           localStorage.setItem(
             "PageInfo",
@@ -1199,8 +1199,8 @@ function Index() {
             className="newslettr_row"
           >
             <div className="container">
-              <h4>Sign up for our newsletter</h4>
-              <h5>Receive our latest news and special offers</h5>
+              <h4>Sign up for our newsletter
+                <span>Receive our latest news and special offers</span></h4>
               <Signup />
             </div>
           </section>

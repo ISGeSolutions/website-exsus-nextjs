@@ -114,7 +114,7 @@ function getDestinationInspireMe() {
 function getDestinationDetails(name) {
   //  ('baseUrl_dropdown', baseUrl_dropdown);
   const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl
-    }/api/destinations?filters[friendly_url][$eq]=${name}&populate[destination_images][filters][image_type][$eq]=banner&&populate[countries][sort]=recommended_serial_number&populate[countries][populate][country_images][filters][image_type][$eq]=thumbnail`;
+    }/api/destinations?filters[friendly_url][$eq]=${name}&populate[destination_images][filters][0][image_type][$eq]=banner&populate[destination_images][filters][show_on_web_ind][$eq]=true&populate[countries][sort]=recommended_serial_number&populate[countries][populate][country_images][filters][image_type][$eq]=thumbnail`;
   return fetchWrapper.get(destinationDetailsUrl);
 }
 
@@ -126,7 +126,7 @@ function getAllItineraries(page, region) {
 function getAllRegionItineraries(page, name, item, region) {
   if (item == "recommended") {
     const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl
-      }/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&pagination[page]=${page}&pagination[pageSize]=12&filters[regions][region_name][$eq]=${name?.replace(
+      }/api/itineraries?[filters][show_on_web_ind][$eq]=true&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&pagination[page]=${page}&pagination[pageSize]=12&filters[regions][region_name][$eq]=${name?.replace(
         /&/g,
         "%26"
       )}&populate[destinations][fields][0]=destination_name&populate[countries][fields][0]=country_name`;
@@ -220,7 +220,7 @@ function getDestinationFavItineraries(name, region) {
 
 function getCountryFavItineraries(name, region) {
   const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl
-    }/api/itineraries?filters[countries][country_name][$eq]=${name?.replace(
+    }/api/itineraries?[filters][show_on_web_ind][$eq]=true&filters[countries][country_name][$eq]=${name?.replace(
       /&/g,
       "%26"
     )}&filters[country_favourite_ind][$eq]=true&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region
@@ -256,7 +256,7 @@ function getItineraryDetails(name, region) {
 function getItinerariesByDestination(dcode, page, item, region) {
   if (item == "price") {
     const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl
-      }/api/itineraries?[filters][destinations][destination_code][$eq]=${dcode?.replace(
+      }/api/itineraries?[filters][show_on_web_ind][$eq]=true&[filters][destinations][destination_code][$eq]=${dcode?.replace(
         /&/g,
         "%26"
       )}&populate[itinerary_country_contents][filters][website_country][$eq]=${region
@@ -269,7 +269,7 @@ function getItinerariesByDestination(dcode, page, item, region) {
     return fetchWrapper.get(destinationDetailsUrl);
   } else if (item == "recommended") {
     const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl
-      }/api/itineraries?[filters][destinations][destination_code][$eq]=${dcode?.replace(
+      }/api/itineraries?[filters][show_on_web_ind][$eq]=true&[filters][destinations][destination_code][$eq]=${dcode?.replace(
         /&/g,
         "%26"
       )}&populate[itinerary_country_contents][filters][website_country][$eq]=${region
@@ -281,7 +281,7 @@ function getItinerariesByDestination(dcode, page, item, region) {
     return fetchWrapper.get(destinationDetailsUrl);
   } else if (item == "duration") {
     const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl
-      }/api/itineraries?[filters][destinations][destination_code][$eq]=${dcode?.replace(
+      }/api/itineraries?[filters][show_on_web_ind][$eq]=true&[filters][destinations][destination_code][$eq]=${dcode?.replace(
         /&/g,
         "%26"
       )}&populate[itinerary_country_contents][filters][website_country][$eq]=${region?.replace(
@@ -291,7 +291,7 @@ function getItinerariesByDestination(dcode, page, item, region) {
     return fetchWrapper.get(destinationDetailsUrl);
   } else if (item == "alphabetical") {
     const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl
-      }/api/itineraries?[filters][destinations][destination_code][$eq]=${dcode?.replace(
+      }/api/itineraries?[filters][show_on_web_ind][$eq]=true&[filters][destinations][destination_code][$eq]=${dcode?.replace(
         /&/g,
         "%26"
       )}&populate[itinerary_country_contents][filters][website_country][$eq]=${region
@@ -309,7 +309,7 @@ function getItinerariesByDestination(dcode, page, item, region) {
 function getCountryWiseItinerary(name, page, item, region) {
   if (item == "price") {
     const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl
-      }/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region?.replace(
+      }/api/itineraries?[filters][show_on_web_ind][$eq]=true&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region?.replace(
         /in/g,
         "INDIA"
       )}&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=price${region !== "uk" ? "_" + region?.replace(/in/g, "india") : ""
@@ -321,14 +321,14 @@ function getCountryWiseItinerary(name, page, item, region) {
 
   } else if (item == "recommended") {
     const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl
-      }/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&pagination[page]=${page}&pagination[pageSize]=12&filters[countries][country_name][$eq]=${name?.replace(
+      }/api/itineraries?[filters][show_on_web_ind][$eq]=true&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&pagination[page]=${page}&pagination[pageSize]=12&filters[countries][country_name][$eq]=${name?.replace(
         /&/g,
         "%26"
       )}&populate[destinations][fields][0]=destination_name&populate[countries][fields][0]=country_name`;
     return fetchWrapper.get(destinationDetailsUrl);
   } else if (item == "duration") {
     const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl
-      }/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region?.replace(
+      }/api/itineraries?[filters][show_on_web_ind][$eq]=true&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region?.replace(
         /in/g,
         "INDIA"
       )}&pagination[page]=${page}&pagination[pageSize]=12&sort[0]=no_of_nites:asc&filters[countries][country_name][$eq]=${name?.replace(
@@ -338,7 +338,7 @@ function getCountryWiseItinerary(name, page, item, region) {
     return fetchWrapper.get(destinationDetailsUrl);
   } else if (item == "alphabetical") {
     const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl
-      }/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&pagination[page]=${page}&pagination[pageSize]=12&filters[countries][country_name][$eq]=${name?.replace(
+      }/api/itineraries?[filters][show_on_web_ind][$eq]=true&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&pagination[page]=${page}&pagination[pageSize]=12&filters[countries][country_name][$eq]=${name?.replace(
         /&/g,
         "%26"
       )}&sort[0]=itin_name:asc&populate[destinations][fields][0]=destination_name&populate[countries][fields][0]=country_name`;
@@ -350,7 +350,7 @@ function getCountryWiseItinerary(name, page, item, region) {
 
 function getMoreItineraries(country, region) {
   const destinationDetailsUrl = `${publicRuntimeConfig.apiUrl
-    }/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region
+    }/api/itineraries?[filters][show_on_web_ind][$eq]=true&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region
       ?.replace(/&/g, "%26")
       ?.replace(
         /in/g,
@@ -432,7 +432,7 @@ function getRegionWiseHotelsInHotelDetail(name, region) {
 
 function getRegionWiseItinerariesInHotelDetail(region, name) {
   const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl
-    }/api/itineraries?populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&filters[regions][region_name][$eq]=${name?.replace(
+    }/api/itineraries?[filters][show_on_web_ind][$eq]=true&populate[itinerary_images][fields][0]=image_path&populate[itinerary_images][fields][1]=image_type&populate[itinerary_country_contents][filters][website_country][$eq]=${region}&filters[regions][region_name][$eq]=${name?.replace(
       /&/g,
       "%26"
     )}&populate[destinations][fields][0]=destination_name&populate[countries][fields][0]=country_name`;
@@ -449,24 +449,23 @@ function getCustomPagesData(pageName) {
 }
 
 function getRegions(countryName) {
-  getCountryFavHotels;
-  const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl
+  const regionDetailsUrl = `${publicRuntimeConfig.apiUrl
     }/api/countries?filters[country_name][$eq]=${countryName?.replace(
       /&/g,
       "%26"
-    )}&populate[0]=destination&populate[1]=regions.region_images`;
-  return fetchWrapper.get(itinerariesDetailsUrl);
+    )?.replace(/ and /g, " %26 ")}&populate[0]=destination&&populate[regions][sort][0]=serial_number&populate[regions][filters][show_on_web_ind][$eq]=true&populate[regions][populate]=region_images`;
+  return fetchWrapper.get(regionDetailsUrl);
 }
 
 function getHotelById(name, region) {
-  const itinerariesDetailsUrl = `${publicRuntimeConfig.apiUrl
+  const hotelDetailsUrl = `${publicRuntimeConfig.apiUrl
     }/api/hotels?filters[friendly_url][$eq]=${name}&populate[hotel_images][fields][0]=image_path&populate[hotel_images][fields][1]=image_type&populate[hotel_country_contents][filters][website_country][$eq]=${region
       ?.replace(/&/g, "%26")
       ?.replace(
         /in/g,
         "INDIA"
       )}&populate[hotel_travel_times]=hotel_travel_times&populate[destination][fields][0]=destination_name&populate[country][fields][0]=country_name&populate[region][fields][0]=region_name&populate[special_offers]=special-offers`;
-  return fetchWrapper.get(itinerariesDetailsUrl);
+  return fetchWrapper.get(hotelDetailsUrl);
 }
 
 function getItinerariesInAdvanceSearch(
@@ -528,7 +527,7 @@ function getItinerariesInAdvanceSearch(
 
 function getRegionByName(name) {
   const regionsURL = `${publicRuntimeConfig.apiUrl
-    }/api/regions?filters[region_name][$eq]=${name?.replace(
+    }/api/regions?filters[friendly_url][$eq]=${name?.replace(
       /&/g,
       "%26"
     )}&populate[0]=region_images&populate[1]=country`;
@@ -617,7 +616,7 @@ function ItineraryFilterOnDestItineraryDetail(
   if (item == "price") {
     const itinerariesDetailsUrl =
       `${publicRuntimeConfig.apiUrl
-      }/api/itineraries?[filters][destinations][destination_code][$eq]=${dcode?.replace(
+      }/api/itineraries?[filters][show_on_web_ind][$eq]=true&[filters][destinations][destination_code][$eq]=${dcode?.replace(
         /&/g,
         "%26"
       )}` +
@@ -633,7 +632,7 @@ function ItineraryFilterOnDestItineraryDetail(
   } else if (item == "recommended") {
     const itinerariesDetailsUrl =
       `${publicRuntimeConfig.apiUrl
-      }/api/itineraries?[filters][destinations][destination_code][$eq]=${dcode?.replace(
+      }/api/itineraries?[filters][show_on_web_ind][$eq]=true&[filters][destinations][destination_code][$eq]=${dcode?.replace(
         /&/g,
         "%26"
       )}` +
@@ -648,7 +647,7 @@ function ItineraryFilterOnDestItineraryDetail(
   } else if (item == "duration") {
     const itinerariesDetailsUrl =
       `${publicRuntimeConfig.apiUrl
-      }/api/itineraries?[filters][destinations][destination_code][$eq]=${dcode?.replace(
+      }/api/itineraries?[filters][show_on_web_ind][$eq]=true&[filters][destinations][destination_code][$eq]=${dcode?.replace(
         /&/g,
         "%26"
       )}` +
@@ -663,7 +662,7 @@ function ItineraryFilterOnDestItineraryDetail(
   } else if (item == "alphabetical") {
     const itinerariesDetailsUrl =
       `${publicRuntimeConfig.apiUrl
-      }/api/itineraries?[filters][destinations][destination_code][$eq]=${dcode?.replace(
+      }/api/itineraries?[filters][show_on_web_ind][$eq]=true&[filters][destinations][destination_code][$eq]=${dcode?.replace(
         /&/g,
         "%26"
       )}` +
@@ -738,7 +737,7 @@ function ItineraryFilterOnCountryDetail(
   if (item == "price") {
     const itinerariesDetailsUrl =
       `${publicRuntimeConfig.apiUrl
-      }/api/itineraries?[filters][countries][country_name][$eq]=${name?.replace(
+      }/api/itineraries?[filters][show_on_web_ind][$eq]=true&[filters][countries][country_name][$eq]=${name?.replace(
         /&/g,
         "%26"
       )}` +
@@ -754,7 +753,7 @@ function ItineraryFilterOnCountryDetail(
   } else if (item == "recommended") {
     const itinerariesDetailsUrl =
       `${publicRuntimeConfig.apiUrl
-      }/api/itineraries?[filters][countries][country_name][$eq]=${name?.replace(
+      }/api/itineraries?[filters][show_on_web_ind][$eq]=true&[filters][countries][country_name][$eq]=${name?.replace(
         /&/g,
         "%26"
       )}` +
@@ -769,7 +768,7 @@ function ItineraryFilterOnCountryDetail(
   } else if (item == "duration") {
     const itinerariesDetailsUrl =
       `${publicRuntimeConfig.apiUrl
-      }/api/itineraries?[filters][countries][country_name][$eq]=${name?.replace(
+      }/api/itineraries?[filters][show_on_web_ind][$eq]=true&[filters][countries][country_name][$eq]=${name?.replace(
         /&/g,
         "%26"
       )}` +
@@ -784,7 +783,7 @@ function ItineraryFilterOnCountryDetail(
   } else if (item == "alphabetical") {
     const itinerariesDetailsUrl =
       `${publicRuntimeConfig.apiUrl
-      }/api/itineraries?[filters][countries][country_name][$eq]=${name?.replace(
+      }/api/itineraries?[filters][show_on_web_ind][$eq]=true&[filters][countries][country_name][$eq]=${name?.replace(
         /&/g,
         "%26"
       )}` +
@@ -1004,7 +1003,7 @@ function ItineraryFilterOnRegionDetail(
   if (item == "recommended") {
     const itinerariesDetailsUrl =
       `${publicRuntimeConfig.apiUrl
-      }/api/itineraries?[filters][regions][region_name][$eq]=${name?.replace(
+      }/api/itineraries?[filters][show_on_web_ind][$eq]=true&[filters][regions][region_name][$eq]=${name?.replace(
         /&/g,
         "%26"
       )}` +
@@ -1017,7 +1016,7 @@ function ItineraryFilterOnRegionDetail(
   } else if (item == "alphabetical") {
     const itinerariesDetailsUrl =
       `${publicRuntimeConfig.apiUrl
-      }/api/itineraries?[filters][regions][region_name][$eq]=${name?.replace(
+      }/api/itineraries?[filters][show_on_web_ind][$eq]=true&[filters][regions][region_name][$eq]=${name?.replace(
         /&/g,
         "%26"
       )}` +
@@ -1030,7 +1029,7 @@ function ItineraryFilterOnRegionDetail(
   } else if (item == "duration") {
     const itinerariesDetailsUrl =
       `${publicRuntimeConfig.apiUrl
-      }/api/itineraries?[filters][regions][region_name][$eq]=${name?.replace(
+      }/api/itineraries?[filters][show_on_web_ind][$eq]=true&[filters][regions][region_name][$eq]=${name?.replace(
         /&/g,
         "%26"
       )}` +
@@ -1043,7 +1042,7 @@ function ItineraryFilterOnRegionDetail(
   } else if (item == "price") {
     const itinerariesDetailsUrl =
       `${publicRuntimeConfig.apiUrl
-      }/api/itineraries?[filters][regions][region_name][$eq]=${name?.replace(
+      }/api/itineraries?[filters][show_on_web_ind][$eq]=true&[filters][regions][region_name][$eq]=${name?.replace(
         /&/g,
         "%26"
       )}` +

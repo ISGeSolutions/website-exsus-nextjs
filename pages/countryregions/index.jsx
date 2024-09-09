@@ -196,7 +196,7 @@ function CountryRegions({ sendDataToParent }) {
         )
       );
     } else if (item == "recommended") {
-      setAllRegions(allRegions.sort((a, b) => a.id - b.id));
+      setAllRegions(allRegions.sort((a, b) => a.attributes?.serial_number - b.attributes?.serial_number));
     }
   };
 
@@ -206,11 +206,9 @@ function CountryRegions({ sendDataToParent }) {
   };
 
   const generateDynamicLink = (item) => {
+    debugger;
     if (item) {
-      const modifiedName = item?.attributes?.region_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase();
+      const modifiedName = item?.attributes?.friendly_url;
       return (
         regionWiseUrl +
         "/destinations/" +
@@ -289,7 +287,7 @@ function CountryRegions({ sendDataToParent }) {
               <p
                 dangerouslySetInnerHTML={{
                   __html: dictioneryFunction(
-                    countryData?.attributes?.regions_intro_text
+                    countryData?.attributes?.regions_intro_text?.replace(/\\n/g, "")
                   ),
                 }}
               />
@@ -348,7 +346,7 @@ function CountryRegions({ sendDataToParent }) {
                           <div className="row align-items-center">
                             <div className="col-11">
                               <div className="card_blk_txt">
-                                <h3 className="mb-0">
+                                <h3 className="mb-0 region_title_txt" >
                                   {item?.attributes?.region_name}
                                 </h3>
                               </div>
@@ -373,10 +371,10 @@ function CountryRegions({ sendDataToParent }) {
                           </div>
                         </div>
                       </NavLink>
-                      <div
+                      <div className="region_para_new"
                         dangerouslySetInnerHTML={{
                           __html: dictioneryFunction(
-                            item?.attributes?.intro_text
+                            item?.attributes?.intro_text?.replace(/&nbsp;/g, " ")?.replace(/<\/?span>/g, "")?.replace(/<a\b[^>]*>(.*?)<\/a>/gi, '$1')
                           ),
                         }}
                       />
@@ -398,7 +396,7 @@ function CountryRegions({ sendDataToParent }) {
                       onClick={() => handleClick("itineraries")}
                     >
                       <img
-                        src="/./../../../images/destination_overview01.jpg"
+                        src={countryData?.attributes?.see_all_itin_image_path}
                         alt="Card image 07"
                         className="img-fluid"
                       />
@@ -407,8 +405,7 @@ function CountryRegions({ sendDataToParent }) {
                           <div className="col-11">
                             <div className="card_blk_txt">
                               <h3>
-                                See all Itinerary Ideas in{" "}
-                                {countryData?.attributes?.country_name}
+                                {countryData?.attributes?.see_all_itin_text}
                               </h3>
                             </div>
                           </div>
@@ -439,7 +436,7 @@ function CountryRegions({ sendDataToParent }) {
                   <div className="card_blk_inr card_blk_overlay">
                     <a onClick={() => handleClick("places-to-stay")}>
                       <img
-                        src="/./../../../images/destination_overview02.jpg"
+                        src={countryData?.attributes?.see_all_hotel_image_path}
                         alt="Card image 08"
                         className="img-fluid"
                       />
@@ -448,8 +445,7 @@ function CountryRegions({ sendDataToParent }) {
                           <div className="col-11">
                             <div className="card_blk_txt">
                               <h3>
-                                See all Places to Stay in{" "}
-                                {countryData?.attributes?.country_name}
+                                {dictioneryFunction(countryData?.attributes?.see_all_hotel_text)}
                               </h3>
                             </div>
                           </div>
