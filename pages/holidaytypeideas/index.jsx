@@ -56,11 +56,11 @@ function Index() {
     useState(null);
   const holidaytypename = router.query?.holidaytypeideas
     ?.replace(/-/g, " ")
-    .replace(/and/g, "&")
+    .replace(/-and-/g, " & ")
     .toLowerCase();
   const holidayGrpName = router.query?.holidaytypeitineraries
     ?.replace(/-/g, " ")
-    .replace(/and/g, "&")
+    .replace(/-and-/g, " & ")
     .toLowerCase();
   const [destinationOptions, setAllDestination] = useState([]);
   let dictionaryPage = 1;
@@ -493,6 +493,7 @@ function Index() {
   equalHeight(true);
 
   useEffect(() => {
+
     if (
       !localStorage.getItem(
         `websitecontent_${region.replace(/in/g, "INDIA").toLowerCase()}`
@@ -652,7 +653,7 @@ function Index() {
                   {holidaytypesDetails?.header_text}
                 </h2>
                 <div className="destinations_cntnt_blk destination_para pt-0">
-                  <p dangerouslySetInnerHTML={{ __html: valueWithBr }} />
+                  <p dangerouslySetInnerHTML={{ __html: dictioneryFunction(valueWithBr) }} />
                 </div>
               </div>
             </div>
@@ -661,7 +662,7 @@ function Index() {
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
             <div className="container">
               <h3 className="title_cls">
-                TOP DESTINATIONS FOR {holidaytypesDetails?.header_text}
+                TOP DESTINATIONS FOR {dictioneryFunction(holidaytypesDetails?.header_text)}
               </h3>
               <div className="card_slider_row">
                 <div className="carousel00 region_carousel00">
@@ -820,6 +821,11 @@ function Index() {
                                       item?.attributes?.header_text
                                     )}
                                   </li>
+                                  <li>
+                                    {dictioneryFunction(
+                                      item?.attributes?.sub_header_text
+                                    )}
+                                  </li>
 
                                   {item?.attributes?.itinerary_country_contents?.data
                                     .filter(
@@ -921,8 +927,8 @@ function Index() {
             className="newslettr_row"
           >
             <div className="container">
-              <h4>Sign up for our newsletter</h4>
-              <h5>Receive our latest news and special offers</h5>
+              <h4>Sign up for our newsletter
+                <span>Receive our latest news and special offers</span></h4>
               <Signup />
             </div>
           </section>

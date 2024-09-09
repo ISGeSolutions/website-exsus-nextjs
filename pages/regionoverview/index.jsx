@@ -3,6 +3,7 @@ import { destinationService } from "services";
 import { NavLink } from "components";
 import { useRouter } from "next/router";
 import { homeService } from "../../services";
+import Head from "next/head";
 
 export default RegionOverview;
 
@@ -14,6 +15,7 @@ function RegionOverview({ props, onDataFromChild }) {
   const [regionData, setRegionData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [allRegions, setAllRegions] = useState([]);
+  let [regionName, setRegionName] = useState("");
   let dictionaryPage = 1;
   const destinationcode = router?.query?.continent
     ?.replace(/-and-/g, " & ")
@@ -24,11 +26,6 @@ function RegionOverview({ props, onDataFromChild }) {
     .replace(/-/g, " ")
     .toLowerCase();
   const friendlyUrl = router.query?.region;
-  const regionName = router.query?.region
-    ?.replace(/-and-/g, " & ")
-    .replace(/-/g, " ")
-    .toLowerCase();
-
   const { overview_text } = props?.data || {};
   const country_name = props?.data?.country_name || "";
 
@@ -268,9 +265,10 @@ function RegionOverview({ props, onDataFromChild }) {
       websiteContentCheck(dictionaryPage);
     }
     destinationService
-      .getRegionByName(regionName)
+      .getRegionByName(friendlyUrl)
       .then((x) => {
         setRegionData(x.data[0].attributes);
+        setRegionName(x.data[0]?.attributes?.region_name);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -341,6 +339,16 @@ function RegionOverview({ props, onDataFromChild }) {
 
   return (
     <>
+      <Head>
+        <script
+          type="text/javascript"
+          src="/assets/javascripts/card-slider.js"
+        ></script>
+        <script
+          type="text/javascript"
+          src="/assets/javascripts/card-slider02.js"
+        ></script>
+      </Head>
       {isLoading ? (
         // <MyLoader />
         <div
@@ -363,8 +371,9 @@ function RegionOverview({ props, onDataFromChild }) {
 
           <section className="favrites_blk_row favrites_blk_small_card_row">
             <div className="container">
-              <h3 className="title_cls">Other regions in {countrycode}</h3>
-              <div className="card_slider_row">
+              <h3 className="title_cls text_lowercase">Other regions in {countrycode?.replace(/\b\w/g, (char) => char.toUpperCase())}</h3>
+              <div className={allRegions?.length < 5 ? 'card_slider_row card_btn_hide' : 'card_slider_row'
+              }>
                 <i id="left">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -465,7 +474,7 @@ function RegionOverview({ props, onDataFromChild }) {
                   <div className="card_blk_inr card_blk_overlay">
                     <a onClick={() => sendDataToParentHandler("itineraries")}>
                       <img
-                        src="/./../../../images/destination_overview01.jpg"
+                        src={regionData?.see_all_itin_image_path}
                         alt="Card image 07"
                         className="img-fluid"
                       />
@@ -474,8 +483,8 @@ function RegionOverview({ props, onDataFromChild }) {
                           <div className="col-11">
                             <div className="card_blk_txt">
                               <h3>
-                                See all Itinerary Ideas in{" "}
-                                {regionData.region_name}
+                                See all Itinerary Ideas in the{" "}
+                                {regionData?.see_all_itin_text}
                               </h3>
                             </div>
                           </div>
@@ -508,7 +517,7 @@ function RegionOverview({ props, onDataFromChild }) {
                       onClick={() => sendDataToParentHandler("places-to-stay")}
                     >
                       <img
-                        src="/./../../../images/destination_overview02.jpg"
+                        src={regionData?.see_all_hotel_image_path}
                         alt="Card image 08"
                         className="img-fluid"
                       />
@@ -517,8 +526,7 @@ function RegionOverview({ props, onDataFromChild }) {
                           <div className="col-11">
                             <div className="card_blk_txt">
                               <h3>
-                                See all Places to Stay in{" "}
-                                {regionData.region_name}
+                                {regionData?.see_all_hotel_text}
                               </h3>
                             </div>
                           </div>

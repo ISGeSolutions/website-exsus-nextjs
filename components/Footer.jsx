@@ -193,7 +193,7 @@ function Footer() {
                 <h6>Exsus Sites</h6>
                 <ul>
                   <li>
-                    <NavLink href="#" target="_blank">
+                    <NavLink href="/uk" target="_blank">
                       UK
                     </NavLink>
                   </li>

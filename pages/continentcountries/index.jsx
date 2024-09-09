@@ -367,7 +367,7 @@ function ContinentCountry({ sendDataToParent }) {
                       onClick={() => handleClick("itineraries")}
                     >
                       <img
-                        src="\images\destination_overview01.jpg"
+                        src={destination?.see_all_itin_image_path}
                         alt="Card image 07"
                         className="img-fluid"
                       />
@@ -376,8 +376,7 @@ function ContinentCountry({ sendDataToParent }) {
                           <div className="col-11">
                             <div className="card_blk_txt">
                               <h3>
-                                See all Itinerary Ideas in the{" "}
-                                {destination.destination_name}
+                                {dictioneryFunction(destination?.see_all_itin_text)}
                               </h3>
                             </div>
                           </div>
@@ -408,7 +407,7 @@ function ContinentCountry({ sendDataToParent }) {
                   <div className="card_blk_inr card_blk_overlay">
                     <a onClick={() => handleClick("places-to-stay")}>
                       <img
-                        src="\images\destination_overview02.jpg"
+                        src={destination?.see_all_hotel_image_path}
                         alt="Card image 08"
                         className="img-fluid"
                       />
@@ -417,8 +416,7 @@ function ContinentCountry({ sendDataToParent }) {
                           <div className="col-11">
                             <div className="card_blk_txt">
                               <h3>
-                                See all Places to Stay in the{" "}
-                                {destination.destination_name}
+                                {dictioneryFunction(destination?.see_all_hotel_text)}
                               </h3>
                             </div>
                           </div>

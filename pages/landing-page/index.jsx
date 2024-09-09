@@ -173,9 +173,8 @@ function Index() {
                       aria-label="Choose a destination"
                       name="destination"
                       {...register("destination")}
-                      className={`form-select ${
-                        errors.destination ? "is-invalid" : ""
-                      }`}
+                      className={`form-select ${errors.destination ? "is-invalid" : ""
+                        }`}
                     >
                       <option value="">Choose a destination</option>
                       <option value="Asia">Asia</option>
@@ -208,9 +207,8 @@ function Index() {
                       aria-label="Choose a reason"
                       name="reason"
                       {...register("reason")}
-                      className={`form-select ${
-                        errors.reason ? "is-invalid" : ""
-                      }`}
+                      className={`form-select ${errors.reason ? "is-invalid" : ""
+                        }`}
                     >
                       <option value="">Choose a reason</option>
                       <option value="Adventure Holidays">
@@ -251,9 +249,8 @@ function Index() {
                       aria-label="Choose a month"
                       name="month"
                       {...register("month")}
-                      className={`form-select ${
-                        errors.month ? "is-invalid" : ""
-                      }`}
+                      className={`form-select ${errors.month ? "is-invalid" : ""
+                        }`}
                     >
                       <option value="">Choose a month</option>
                       <option value="January">January</option>
@@ -1006,8 +1003,8 @@ function Index() {
 
       <section aria-label="Sign up for newsletter" className="newslettr_row">
         <div className="container">
-          <h4>Sign up for our newsletter</h4>
-          <h5>Receive our latest news and special offers</h5>
+          <h4>Sign up for our newsletter
+            <span>Receive our latest news and special offers</span></h4>
           <form
             className="newslettr_form d-block d-sm-flex"
             onSubmit={handleSubmit2(onSignup)}

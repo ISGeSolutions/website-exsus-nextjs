@@ -26,12 +26,12 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
 
   const countrycode = router.query?.country
     ?.replace(/-/g, " ")
-    .replace(/and/g, "&")
+    .replace(/-and-/g, " & ")
     .toLowerCase();
   const [isLoading, setIsLoading] = useState(false);
   const destinationcode = router.query?.continent
     ?.replace(/-/g, " ")
-    .replace(/and/g, "&")
+    .replace(/-and-/g, " & ")
     .toLowerCase();
   const handleLoadMore = () => {
     setVisibleItems((prevVisibleItems) => prevVisibleItems + itemsPerPage);
@@ -87,12 +87,12 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
         .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-        ?.replace(/ /g, "-")
-        .replace(/&/g, "and")
-        .toLowerCase()}/${hotelName}`
+          ?.replace(/ /g, "-")
+          .replace(/&/g, "and")
+          .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -103,16 +103,16 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
       .replace(/&/g, "and");
     router.push(
       regionWiseUrl +
-        `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
-          ?.replace(/&/g, "and")
-          .replace(/ /g, "-")
-          .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
+      `/destinations/${item?.attributes?.destination?.data?.attributes?.destination_name
+        ?.replace(/&/g, "and")
+        .replace(/ /g, "-")
+        .toLowerCase()}/hotels/${item?.attributes?.country?.data?.attributes?.country_name
           ?.replace(/ /g, "-")
           .replace(/&/g, "and")
           .toLowerCase()}/${item?.attributes?.region?.data?.attributes?.region_name
-          ?.replace(/ /g, "-")
-          .replace(/&/g, "and")
-          .toLowerCase()}/${hotelName}`
+            ?.replace(/ /g, "-")
+            .replace(/&/g, "and")
+            .toLowerCase()}/${hotelName}`
     );
   };
 
@@ -127,8 +127,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
       `/destinations/${item?.attributes?.destinations?.data[0]?.attributes?.destination_name
         ?.replace(/&/g, "and")
         .replace(/ /g, "-")
-        .toLowerCase()}/${countryName}/${countryName}-itineraries/${
-        item?.attributes?.friendly_url
+        .toLowerCase()}/${countryName}/${countryName}-itineraries/${item?.attributes?.friendly_url
       }`
     );
   };
@@ -141,12 +140,11 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
         .toLowerCase();
     router.push(
       regionWiseUrl +
-        `/destinations/${item?.attributes?.destinations?.data[0]?.attributes?.destination_name
-          ?.replace(/&/g, "and")
-          .replace(/ /g, "-")
-          .toLowerCase()}/${countryName}/${countryName}-itineraries/${
-          item?.attributes?.friendly_url
-        }`
+      `/destinations/${item?.attributes?.destinations?.data[0]?.attributes?.destination_name
+        ?.replace(/&/g, "and")
+        .replace(/ /g, "-")
+        .toLowerCase()}/${countryName}/${countryName}-itineraries/${item?.attributes?.friendly_url
+      }`
     );
   };
 
@@ -303,7 +301,9 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
   };
 
   const formattedHtml = (htmlData) => {
-    return htmlData?.replace(/<br \/>\s*<br \/>/g, "<br /><br /></p><p>");
+    const replacedHtml = htmlData?.replace(/\{more\}/g, '...');
+    return replacedHtml?.replace(/<br \/>\s*<br \/>/g, "<br /><br /></p><p>")
+      .replace(/\\n/g, "");
   };
 
   equalHeight(true);
@@ -317,8 +317,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
       websiteContentCheck(dictionaryPage);
     }
 
-    window.scrollTo(0, 0);
-
+    // window.scrollTo(0, 0);
     if (countrycode) {
       countriesService.getCountryDetails(countrycode).then((x) => {
         setCountryData(x?.data[0]?.attributes);
@@ -375,14 +374,15 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
             <section className="destination_para">
               <p
                 dangerouslySetInnerHTML={{
-                  __html: dictioneryFunction(countryData?.overview_text),
+                  __html: dictioneryFunction(countryData?.overview_text?.replace(/\\&quot;/g, '"')?.replace(/\\n/g, ""))?.replace(/\\/g, ''),
+
                 }}
               />
             </section>
             {countryData?.country_highlights?.length > 0 ? (
               <section className="country_highlight_row">
                 <div className="country_highlight_inr country_highlight_para_blk">
-                  <p>{/* {countryData?.country_highlights} */}</p>
+                  {/* <p>{countryData?.country_highlights}</p> */}
                   <p
                     dangerouslySetInnerHTML={{
                       __html: dictioneryFunction(
@@ -390,77 +390,17 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                           showAllParagraphs
                             ? countryData?.country_highlights
                             : countryData?.country_highlights?.split(
-                                "<br />"
-                              )[0]
+                              "<br />"
+                            )[0]
                         )
                       ),
                     }}
                   ></p>
                   {countryData?.country_highlights && (
-                    // <button
-                    //   className="btn itinery_btn"
-                    //   onClick={toggleParagraphs}
-                    // >
-                    //   <svg
-                    //     xmlns="http://www.w3.org/2000/svg"
-                    //     fill="#ffffff"
-                    //     shapeRendering="geometricPrecision"
-                    //     textRendering="geometricPrecision"
-                    //     imageRendering="optimizeQuality"
-                    //     className="up_arrow"
-                    //     viewBox="0 0 512 266.77"
-                    //   >
-                    //     <path
-                    //       fillRule="nonzero"
-                    //       d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"
-                    //     />
-                    //   </svg>
-                    //   <span>{showAllParagraphs ? "Read less" : "Read more"}</span>
-                    // </button>
-
                     <button className="btn" onClick={toggleParagraphs}>
                       <span>
                         {showAllParagraphs ? "Read less" : "Read more"}
                       </span>
-                      {/* {showAllParagraphs &&
-                        (<>
-                          <span class="read_less">Read less</span>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="#ffffff"
-                            shape-rendering="geometricPrecision"
-                            text-rendering="geometricPrecision"
-                            image-rendering="optimizeQuality"
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                            viewBox="0 0 512 266.77"
-                          >
-                            <path
-                              fill-rule="nonzero"
-                              d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"
-                            />
-                          </svg>
-                        </>)(
-                          <>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="#ffffff"
-                              shape-rendering="geometricPrecision"
-                              text-rendering="geometricPrecision"
-                              image-rendering="optimizeQuality"
-                              class="up_arrow"
-                              fill-rule="evenodd"
-                              clip-rule="evenodd"
-                              viewBox="0 0 512 266.77"
-                            >
-                              <path
-                                fill-rule="nonzero"
-                                d="M493.12 3.22c4.3-4.27 11.3-4.3 15.62-.04a10.85 10.85 0 0 1 .05 15.46L263.83 263.55c-4.3 4.28-11.3 4.3-15.63.05L3.21 18.64a10.85 10.85 0 0 1 .05-15.46c4.32-4.26 11.32-4.23 15.62.04L255.99 240.3 493.12 3.22z"
-                              />
-                            </svg>
-                            <span>Read more</span>
-                          </>
-                        )} */}
                     </button>
                   )}
                 </div>
@@ -476,7 +416,8 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                 <h3 className="title_cls">
                   Holidays in {countryData?.country_name} Handpicked by Exsus
                 </h3>
-                <div className="card_slider_row">
+                <div className={itineraries?.length < 5 ? 'card_slider_row card_btn_hide' : 'card_slider_row'
+                }>
                   <i id="left">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -535,7 +476,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                               </li>
                               <li>
                                 {dictioneryFunction(
-                                  item?.attributes?.subheader_text
+                                  item?.attributes?.sub_header_text
                                 )}
                               </li>
                               {item?.attributes?.itinerary_country_contents?.data
@@ -546,12 +487,10 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                                 )
                                 .map((res1) => (
                                   <li key={res1.id}>
-                                    {`From ${
-                                      res1.attributes?.currency_symbol ?? ""
-                                    }${
-                                      formatPrice(res1.attributes?.price) ??
+                                    {`From ${res1.attributes?.currency_symbol ?? ""
+                                      }${formatPrice(res1.attributes?.price) ??
                                       " xxxx"
-                                    } per person`}
+                                      } per person`}
                                   </li>
                                 ))}
                               <li>
@@ -582,27 +521,23 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                       </div>
                     ))}
                   </div>
-                  {itineraries?.length > 4 ? (
-                    <i id="right">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="#ffffff"
-                        shapeRendering="geometricPrecision"
-                        textRendering="geometricPrecision"
-                        imageRendering="optimizeQuality"
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        viewBox="0 0 267 512.43"
-                      >
-                        <path
-                          fillRule="nonzero"
-                          d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                        />
-                      </svg>
-                    </i>
-                  ) : (
-                    " "
-                  )}
+                  <i id="right">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="#ffffff"
+                      shapeRendering="geometricPrecision"
+                      textRendering="geometricPrecision"
+                      imageRendering="optimizeQuality"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      viewBox="0 0 267 512.43"
+                    >
+                      <path
+                        fillRule="nonzero"
+                        d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                      />
+                    </svg>
+                  </i>
                 </div>
               </div>
             </section>
@@ -617,7 +552,8 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                   PLACES TO STAY IN {countryData?.country_name} HANDPICKED BY
                   EXSUS
                 </h3>
-                <div className="card_slider_row01">
+                <div className={hotels?.length < 5 ? 'card_slider_row01 card_btn_hide' : 'card_slider_row01'
+                }>
                   <i id="leftt">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -688,8 +624,8 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                                           {item?.attributes?.currency_symbol.repeat(
                                             Math.abs(
                                               5 -
-                                                item?.attributes
-                                                  ?.price_guide_value
+                                              item?.attributes
+                                                ?.price_guide_value
                                             )
                                           )}
                                         </label>
@@ -717,27 +653,23 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                       </div>
                     ))}
                   </div>
-                  {hotels?.length > 4 ? (
-                    <i id="rightt">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="#ffffff"
-                        shapeRendering="geometricPrecision"
-                        textRendering="geometricPrecision"
-                        imageRendering="optimizeQuality"
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        viewBox="0 0 267 512.43"
-                      >
-                        <path
-                          fillRule="nonzero"
-                          d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                        />
-                      </svg>
-                    </i>
-                  ) : (
-                    ""
-                  )}
+                  <i id="rightt">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="#ffffff"
+                      shapeRendering="geometricPrecision"
+                      textRendering="geometricPrecision"
+                      imageRendering="optimizeQuality"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      viewBox="0 0 267 512.43"
+                    >
+                      <path
+                        fillRule="nonzero"
+                        d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                      />
+                    </svg>
+                  </i>
                 </div>
               </div>
             </section>
@@ -752,7 +684,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                       onClick={() => sendDataToParentHandler("itineraries")}
                     >
                       <img
-                        src="./../../../images/destination_overview01.jpg"
+                        src={countryData?.see_all_itin_image_path}
                         alt="Card image 07"
                         className="img-fluid"
                       />
@@ -761,8 +693,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                           <div className="col-11">
                             <div className="card_blk_txt">
                               <h3>
-                                See all Itinerary Ideas in{" "}
-                                {countryData?.country_name}
+                                {dictioneryFunction(countryData?.see_all_itin_text)}
                               </h3>
                             </div>
                           </div>
@@ -795,7 +726,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                       onClick={() => sendDataToParentHandler("places-to-stay")}
                     >
                       <img
-                        src="./../../../images/destination_overview02.jpg"
+                        src={countryData?.see_all_hotel_image_path}
                         alt="Card image 08"
                         className="img-fluid"
                       />
@@ -804,8 +735,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
                           <div className="col-11">
                             <div className="card_blk_txt">
                               <h3>
-                                See all Places to Stay in{" "}
-                                {countryData?.country_name}
+                                {dictioneryFunction(countryData?.see_all_hotel_text)}
                               </h3>
                             </div>
                           </div>

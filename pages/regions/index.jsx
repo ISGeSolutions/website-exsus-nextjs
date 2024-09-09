@@ -32,6 +32,7 @@ function Index() {
   const [friendlyUrl, setFriendlyUrl] = useState("");
   const [activeButton, setActiveButton] = useState("images");
   const [coordinatesArray, setCoordinatesArray] = useState([]);
+  let [regionName, setRegionName] = useState("");
   const destinationcode = router?.query?.continent
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
@@ -40,10 +41,7 @@ function Index() {
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
-  let regionName = router.query?.region
-    ?.replace(/-and-/g, " & ")
-    .replace(/-/g, " ")
-    .toLowerCase();
+  let regionFrdUrl = router.query?.region;
   const tabContentRefs = {
     overview: useRef(null),
     itineraries: useRef(null),
@@ -135,7 +133,7 @@ function Index() {
         `/destinations/${destinationcode.replace(
           / /g,
           "-"
-        )}/${countrycode.replace(/ /g, "-")}/${regionName.replace(/ /g, "-")}`;
+        )?.replace(/&/g, "and")}/${countrycode.replace(/ /g, "-")?.replace(/&/g, "and")}/${regionName.replace(/ /g, "-")?.replace(/&/g, "and")}`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationcode.replace(
@@ -152,16 +150,19 @@ function Index() {
         `/destinations/${destinationcode.replace(
           / /g,
           "-"
-        )}/${countrycode.replace(/ /g, "-")}/${regionName.replace(
+        )?.replace(/&/g, "and")}/${countrycode.replace(/ /g, "-")?.replace(/&/g, "and")}/${regionName.replace(
           / /g,
           "-"
-        )}/${regionName.replace(/ /g, "-")}-itineraries`;
+        )?.replace(/&/g, "and")}/${regionName.replace(/ /g, "-")?.replace(/&/g, "and")}/${regionName.replace(/ /g, "-")?.replace(/&/g, "and")}-itineraries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationcode.replace(
           / /g,
           "-"
         )}/${countrycode.replace(/ /g, "-")}/${regionName.replace(
+          / /g,
+          "-"
+        )}/${regionName.replace(
           / /g,
           "-"
         )} Itineraries`
@@ -175,10 +176,10 @@ function Index() {
         `/destinations/${destinationcode.replace(
           / /g,
           "-"
-        )}/${countrycode.replace(/ /g, "-")}/${regionName.replace(
+        )?.replace(/&/g, "and")}/${countrycode.replace(/ /g, "-")?.replace(/&/g, "and")}/${regionName.replace(
           / /g,
           "-"
-        )}/${regionName.replace(/ /g, "-")}-places-to-stay`;
+        )?.replace(/&/g, "and")}/${regionName.replace(/ /g, "-")?.replace(/&/g, "and")}/${regionName.replace(/ /g, "-")?.replace(/&/g, "and")}-places-to-stay`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationcode.replace(
@@ -187,7 +188,7 @@ function Index() {
         )}/${countrycode.replace(
           / /g,
           "-"
-        )}/Places to stay in ${regionName.replace(/ /g, "-")}`
+        )}/${regionName.replace(/ /g, "-")}/Places to stay in ${regionName.replace(/ /g, "-")}`
       );
       text = `LUXURY HOTELS IN THE ${regionName}`;
     } else {
@@ -399,7 +400,7 @@ function Index() {
       // console.log(`The URL contains "${searchString}"`);
     } else {
       regionName = segments[segments.length - 1]?.replace(/-and-/g, " & ")
-        .replace(/-/g, " ")
+        .replace(/-/g, " ").replace(/--/g, "-")
         .toLowerCase();;
       if (
         !localStorage.getItem(
@@ -434,9 +435,10 @@ function Index() {
       );
 
       destinationService
-        .getRegionByName(regionName)
+        .getRegionByName(regionFrdUrl)
         .then((x) => {
           setRegionData(x.data[0]);
+          setRegionName(x.data[0]?.attributes?.region_name);
           localStorage.setItem(
             "PageInfo",
             JSON.stringify({
@@ -559,7 +561,6 @@ function Index() {
             "/" +
             countryName
               ?.replace(/ /g, "-")
-              .replace(/and/g, "&")
               .replace(/&/g, "and")
               .toLowerCase() +
             "/" +
@@ -836,8 +837,8 @@ function Index() {
             className="newslettr_row"
           >
             <div className="container">
-              <h4>Sign up for our newsletter</h4>
-              <h5>Receive our latest news and special offers</h5>
+              <h4>Sign up for our newsletter
+                <span>Receive our latest news and special offers</span></h4>
               <Signup />
             </div>
           </section>

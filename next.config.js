@@ -4530,6 +4530,13 @@ const nextConfig = {
       { source: "/asia/where-to-go", destination: "/where-to-go" },
       { source: "/in/where-to-go", destination: "/where-to-go" },
 
+
+      // where-to-go-details
+      { source: "/where-to-go/:whereToGoDetail", destination: "/where-to-go/where-to-go-detail" },
+      { source: "/us/where-to-go/:whereToGoDetail", destination: "/where-to-go/where-to-go-detail" },
+      { source: "/asia/where-to-go/:whereToGoDetail", destination: "/where-to-go/where-to-go-detail" },
+      { source: "/in/where-to-go/:whereToGoDetail", destination: "/where-to-go/where-to-go-detail" },
+
       // careers
       { source: "/about-us/careers", destination: "/about-us/careers" },
       { source: "/us/about-us/careers", destination: "/about-us/careers" },

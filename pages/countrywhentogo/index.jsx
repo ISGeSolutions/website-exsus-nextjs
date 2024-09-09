@@ -353,7 +353,7 @@ function CountryWhentogo({ onDataFromChild, sendDataToParent }) {
           <p
             dangerouslySetInnerHTML={{
               __html: dictioneryFunction(
-                countryData?.attributes?.whentogo_intro_text
+                countryData?.attributes?.whentogo_intro_text?.replace(/\\n/g, "")
               ),
             }}
           />
@@ -426,7 +426,7 @@ function CountryWhentogo({ onDataFromChild, sendDataToParent }) {
               <div className="card_blk_inr card_blk_overlay">
                 <a onClick={() => handleClick("itineraries")}>
                   <img
-                    src="\images\country_detail01.jpg"
+                    src={countryData?.attributes?.see_all_itin_image_path}
                     alt="Card image 07"
                     className="img-fluid"
                   />
@@ -435,8 +435,7 @@ function CountryWhentogo({ onDataFromChild, sendDataToParent }) {
                       <div className="col-11">
                         <div className="card_blk_txt">
                           <h3>
-                            See all Itinerary Ideas in{" "}
-                            {countryData?.attributes?.country_name}
+                            {countryData?.attributes?.see_all_itin_text}
                           </h3>
                         </div>
                       </div>
@@ -467,7 +466,7 @@ function CountryWhentogo({ onDataFromChild, sendDataToParent }) {
               <div className="card_blk_inr card_blk_overlay">
                 <a onClick={() => handleClick("places-to-stay")}>
                   <img
-                    src="\images\country_detail02.jpg"
+                    src={countryData?.attributes?.see_all_hotel_image_path}
                     alt="Card image 08"
                     className="img-fluid"
                   />
@@ -476,8 +475,7 @@ function CountryWhentogo({ onDataFromChild, sendDataToParent }) {
                       <div className="col-11">
                         <div className="card_blk_txt">
                           <h3>
-                            See all Places to Stay in{" "}
-                            {countryData?.attributes?.country_name}
+                            {countryData?.attributes?.see_all_hotel_text}
                           </h3>
                         </div>
                       </div>

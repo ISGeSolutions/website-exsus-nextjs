@@ -163,7 +163,7 @@ function Index() {
             });
             return modifiedString;
             setIsLoading(false);
-          } catch (error) {}
+          } catch (error) { }
         }
       }
     }
@@ -369,8 +369,8 @@ function Index() {
 
         <section aria-label="Sign up for newsletter" className="newslettr_row">
           <div className="container">
-            <h4>Sign up for our newsletter</h4>
-            <h5>Receive our latest news and special offers</h5>
+            <h4>Sign up for our newsletter
+              <span>Receive our latest news and special offers</span></h4>
             <Signup />
           </div>
         </section>

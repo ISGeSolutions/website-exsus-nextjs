@@ -364,6 +364,7 @@ function Index() {
   equalHeight(true);
 
   useEffect(() => {
+
     router.beforePopState(({ as }) => {
       const searchString = "itineraries";
       if (as?.includes(searchString)) {
@@ -386,6 +387,7 @@ function Index() {
   }, [router]);
 
   useEffect(() => {
+
     const searchString = "itineraries";
     const currentUrl = window.location.href;
     const segments = currentUrl?.split("/");
@@ -483,8 +485,17 @@ function Index() {
             `home/destinations/${router.query?.continent.replace(
               /%20/g,
               " "
-            )}/${router.query?.country}/${router.query?.itineraryName
-              ? router.query?.itineraries +
+            )?.replace(
+              /-and-/g,
+              " & "
+            )}/${router.query?.country?.replace(
+              /-and-/g,
+              " & "
+            )}/${router.query?.itineraryName
+              ? router.query?.itineraries.replace(
+                /-and-/g,
+                " & "
+              ) +
               "/" +
               x.data[0].attributes.itin_name.toLowerCase()
               : x.data[0].attributes.itin_name.toLowerCase()
@@ -718,7 +729,11 @@ function Index() {
                 <p
                   dangerouslySetInnerHTML={{
                     __html: dictioneryFunction(
-                      itineraries?.attributes?.overview_text
+                      itineraries?.attributes?.overview_text?.replace(/&nbsp/g, " ")
+                        ?.replace(/&lsquo;/g, "'")
+                        ?.replace(/;/g, "")
+                        ?.replace(/&ndash/g, "-")
+                        ?.replace(/&rsquo/g, "'")
                     ),
                   }}
                 />
@@ -728,28 +743,35 @@ function Index() {
                 <div className="row">
                   <div className="col-sm-9">
                     <div className="country_highlight_inr">
-                      <p>
-                        <span>Perfect for</span>
-                        {dictioneryFunction(
-                          itineraries?.attributes?.perfect_for_text?.replace(/&ndash/g, "-")
-                        )
-                          ?.replace(/&nbsp/g, "")
-                          ?.replace(/&rsquo/g, "")
-                          ?.replace(/:/g, "")
-                          ?.replace(/;/g, "")
-                          ?.replace(/<\/?em>/g, "")}
-                      </p>
-                      <p>
-                        <span>In the know</span>
-                        {dictioneryFunction(
-                          itineraries?.attributes?.in_the_know_text
-                        )
-                          ?.replace(/&nbsp/g, "")
-                          ?.replace(/&rsquo/g, "")
-                          ?.replace(/:/g, "")
-                          ?.replace(/;/g, "")
-                          ?.replace(/<\/?em>/g, "")}
-                      </p>
+                      <p
+                        dangerouslySetInnerHTML={{
+                          __html: `<span>Perfect for</span> ${itineraries?.attributes?.perfect_for_text
+                            ? dictioneryFunction(itineraries.attributes.perfect_for_text)
+                              ?.replace(/&nbsp/g, " ")
+                              ?.replace(/&lsquo;/g, "'")
+                              ?.replace(/;/g, "")
+                              .replace(/<em>/g, "<i>").replace(/<\/em>/g, "</i>")
+                              ?.replace(/&ndash/g, "-")
+                              ?.replace(/&rsquo/g, "'")
+                            : ""
+                            }`,
+                        }}
+                      ></p>
+
+                      <p
+                        dangerouslySetInnerHTML={{
+                          __html: `<span>In the know</span> ${itineraries?.attributes?.in_the_know_text
+                            ? dictioneryFunction(itineraries.attributes.in_the_know_text)
+                              ?.replace(/&nbsp/g, " ")
+                              ?.replace(/&lsquo;/g, "'")
+                              ?.replace(/;/g, "")
+                              .replace(/<em>/g, "<i>").replace(/<\/em>/g, "</i>")
+                              ?.replace(/&ndash/g, "-")
+                              ?.replace(/&rsquo/g, "'")
+                            : ""
+                            }`,
+                        }}
+                      ></p>
                     </div>
                   </div>
                   {/* <div className="col-sm-3">
@@ -799,7 +821,7 @@ function Index() {
                 </div>
               </section>
             </div>
-          </section>
+          </section >
 
           <section className="itinery_detls_row">
             <div className="container">
@@ -812,8 +834,8 @@ function Index() {
                       <div className="col-md-7 col-lg-8">
                         <div className="itinery_detls_para itinery_para_blk">
                           <h3>
-                            <span>{element?.attributes?.duration}</span>
-                            {element?.attributes?.place_name.replace(/&nbsp;/g, " ").replace(/<\/?span>/g, "")}
+                            <span>{element?.attributes?.duration?.replace(/<\/?strong>/g, "")}</span>
+                            {element?.attributes?.place_name.replace(/&nbsp;/g, " ").replace(/<\/?span>/g, "").replace(/<\/?strong>/g, "")}
                           </h3>
                           <div
                             dangerouslySetInnerHTML={{
@@ -963,272 +985,165 @@ function Index() {
             </div>
           </section>
 
-          {hotels?.length > 0 ? (
-            <section className="favrites_blk_row">
-              <div className="container">
-                <h3 className="title_cls">
-                  Hotels we've recommended for this trip
-                </h3>
-                <div className="card_slider_row01">
-                  <i id="leftt">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="#ffffff"
-                      shapeRendering="geometricPrecision"
-                      textRendering="geometricPrecision"
-                      imageRendering="optimizeQuality"
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      viewBox="0 0 267 512.43"
-                    >
-                      <path
-                        fillRule="nonzero"
-                        d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z"
-                      />
-                    </svg>
-                  </i>
-                  <div className="carousel01">
-                    {hotels?.map((item) => (
-                      <div className="card_slider_inr01" key={item.id}>
-                        <div className="card_slider">
-                          <NavLink
-                            key={`hotel_${item.id}`}
-                            href={generateDynamicLink1(item)}
-                            className="card_slider_img"
-                          >
-                            {item?.attributes?.hotel_images?.data.map(
-                              (element, index) =>
-                                element.attributes.image_type == "thumbnail" ? (
-                                  <img
-                                    key={`hotel_ele_${element.id}`}
-                                    src={element.attributes.image_path}
-                                    alt={element.attributes.image_alt_text}
-                                    className="img-fluid"
-                                  />
-                                ) : (
-                                  ""
-                                )
-                            )}
-                          </NavLink>
-                          <div className="card_slider_cnt places_to_stay_cnt">
-                            <h4 key={`slider_${item.id}`}>
-                              <a href={generateDynamicLink1(item)}>
-                                {dictioneryFunction(
-                                  item?.attributes?.hotel_name
-                                )}
-                              </a>
-                            </h4>
-                            <ul>
-                              <li>
-                                Location:{" "}
-                                {dictioneryFunction(item?.attributes?.location)}
-                              </li>
-                              {item?.attributes?.hotel_country_contents?.data?.map(
-                                (item) => {
-                                  return (
-                                    <li
-                                      className="price_guide_tooltip"
-                                      key={`item_${item?.id}`}
-                                    >
-                                      Price guide:
-                                      <span
-                                        tabIndex="0"
-                                        data-title={
-                                          item?.attributes?.price_guide_text
-                                        }
+          {
+            hotels?.length > 0 ? (
+              <section className="favrites_blk_row">
+                <div className="container">
+                  <h3 className="title_cls">
+                    Hotels we've recommended for this trip
+                  </h3>
+                  <div className="card_slider_row01">
+                    <i id="leftt">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="#ffffff"
+                        shapeRendering="geometricPrecision"
+                        textRendering="geometricPrecision"
+                        imageRendering="optimizeQuality"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        viewBox="0 0 267 512.43"
+                      >
+                        <path
+                          fillRule="nonzero"
+                          d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z"
+                        />
+                      </svg>
+                    </i>
+                    <div className="carousel01">
+                      {hotels?.map((item) => (
+                        <div className="card_slider_inr01" key={item.id}>
+                          <div className="card_slider">
+                            <NavLink
+                              key={`hotel_${item.id}`}
+                              href={generateDynamicLink1(item)}
+                              className="card_slider_img"
+                            >
+                              {item?.attributes?.hotel_images?.data.map(
+                                (element, index) =>
+                                  element.attributes.image_type == "thumbnail" ? (
+                                    <img
+                                      key={`hotel_ele_${element.id}`}
+                                      src={element.attributes.image_path}
+                                      alt={element.attributes.image_alt_text}
+                                      className="img-fluid"
+                                    />
+                                  ) : (
+                                    ""
+                                  )
+                              )}
+                            </NavLink>
+                            <div className="card_slider_cnt places_to_stay_cnt">
+                              <h4 key={`slider_${item.id}`}>
+                                <a href={generateDynamicLink1(item)}>
+                                  {dictioneryFunction(
+                                    item?.attributes?.hotel_name
+                                  )}
+                                </a>
+                              </h4>
+                              <ul>
+                                <li>
+                                  Location:{" "}
+                                  {dictioneryFunction(item?.attributes?.location)}
+                                </li>
+                                {item?.attributes?.hotel_country_contents?.data?.map(
+                                  (item) => {
+                                    return (
+                                      <li
+                                        className="price_guide_tooltip"
+                                        key={`item_${item?.id}`}
                                       >
-                                        {item?.attributes?.currency_symbol.repeat(
-                                          Math.abs(
-                                            item?.attributes?.price_guide_value
-                                          )
-                                        )}
-                                        <label>
+                                        Price guide:
+                                        <span
+                                          tabIndex="0"
+                                          data-title={
+                                            item?.attributes?.price_guide_text
+                                          }
+                                        >
                                           {item?.attributes?.currency_symbol.repeat(
                                             Math.abs(
-                                              5 -
-                                              item?.attributes
-                                                ?.price_guide_value
+                                              item?.attributes?.price_guide_value
                                             )
                                           )}
-                                        </label>
-                                      </span>
-                                    </li>
-                                  );
-                                }
-                              )}
-                              <li>
-                                Best for:
-                                <span key={item.id}>
-                                  {dictioneryFunction(
-                                    item?.attributes?.best_for_text
-                                  )}
-                                </span>
-                              </li>
-                            </ul>
+                                          <label>
+                                            {item?.attributes?.currency_symbol.repeat(
+                                              Math.abs(
+                                                5 -
+                                                item?.attributes
+                                                  ?.price_guide_value
+                                              )
+                                            )}
+                                          </label>
+                                        </span>
+                                      </li>
+                                    );
+                                  }
+                                )}
+                                <li>
+                                  Best for:
+                                  <span key={item.id}>
+                                    {dictioneryFunction(
+                                      item?.attributes?.best_for_text
+                                    )}
+                                  </span>
+                                </li>
+                              </ul>
+                            </div>
+                            <button
+                              className="btn card_slider_btn justify-content-end"
+                              onClick={() => handleRedirect1(item)}
+                            >
+                              <span className="view_itnry_link">
+                                View this hotel
+                                <em className="fa-solid fa-chevron-right"></em>
+                              </span>
+                            </button>
                           </div>
-                          <button
-                            className="btn card_slider_btn justify-content-end"
-                            onClick={() => handleRedirect1(item)}
-                          >
-                            <span className="view_itnry_link">
-                              View this hotel
-                              <em className="fa-solid fa-chevron-right"></em>
-                            </span>
-                          </button>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
+                    {hotels?.length > 4 ? (
+                      <i id="right">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="#ffffff"
+                          shapeRendering="geometricPrecision"
+                          textRendering="geometricPrecision"
+                          imageRendering="optimizeQuality"
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          viewBox="0 0 267 512.43"
+                        >
+                          <path
+                            fillRule="nonzero"
+                            d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                          />
+                        </svg>
+                      </i>
+                    ) : (
+                      ""
+                    )}
                   </div>
-                  {hotels?.length > 4 ? (
-                    <i id="right">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="#ffffff"
-                        shapeRendering="geometricPrecision"
-                        textRendering="geometricPrecision"
-                        imageRendering="optimizeQuality"
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        viewBox="0 0 267 512.43"
-                      >
-                        <path
-                          fillRule="nonzero"
-                          d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
-                        />
-                      </svg>
-                    </i>
-                  ) : (
-                    ""
-                  )}
                 </div>
-              </div>
-            </section>
-          ) : (
-            " "
-          )}
+              </section>
+            ) : (
+              " "
+            )
+          }
 
-          {moreItineraries?.length > 0 ? (
-            <section className="favrites_blk_row light_grey">
-              <div className="container">
-                <h3 className="title_cls">
-                  More itineraries in{" "}
-                  {dictioneryFunction(
-                    itineraries?.attributes?.countries?.data[0]?.attributes
-                      ?.country_name
-                  )}
-                </h3>
-                <div className="card_slider_row">
-                  <i id="left">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="#ffffff"
-                      shapeRendering="geometricPrecision"
-                      textRendering="geometricPrecision"
-                      imageRendering="optimizeQuality"
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      viewBox="0 0 267 512.43"
-                    >
-                      <path
-                        fillRule="nonzero"
-                        d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z"
-                      />
-                    </svg>
-                  </i>
-                  <div className="carousel00">
-                    {moreItineraries?.map((item) => (
-                      <div
-                        className="card_slider_inr"
-                        key={`slider_${item?.id}`}
-                      >
-                        <div className="card_slider">
-                          <NavLink
-                            key={item.id}
-                            href={generateDynamicLink(item)}
-                            className="card_slider_img"
-                          >
-                            {item?.attributes?.itinerary_images?.data.map(
-                              (element, index) =>
-                                element.attributes.image_type == "thumbnail" ? (
-                                  <img
-                                    key={`iti_${element.id}`}
-                                    src={element.attributes.image_path}
-                                    alt="destination card01"
-                                    className="img-fluid"
-                                  />
-                                ) : (
-                                  ""
-                                )
-                            )}
-                            {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
-                          </NavLink>
-                          <div className="card_slider_cnt places_to_stay_cnt">
-                            <h4 key={item.id}>
-                              <a href={generateDynamicLink(item)}>
-                                {dictioneryFunction(
-                                  item?.attributes?.itin_name
-                                )}
-                              </a>
-                            </h4>
-                            {/* <NavLink href={generateDynamicLink(item)}>
-                          </NavLink> */}
-                            <ul>
-                              <li>
-                                {dictioneryFunction(
-                                  item?.attributes?.header_text
-                                )}
-                              </li>
-                              <li>
-                                {dictioneryFunction(
-                                  item?.attributes?.subheader_text
-                                )}
-                              </li>
-                              <li>
-                                {dictioneryFunction(
-                                  item?.attributes?.country?.data?.attributes
-                                    ?.country_name
-                                )}
-                              </li>
-                              {item?.attributes?.itinerary_country_contents?.data
-                                .filter(
-                                  (res) =>
-                                    res.attributes.website_country.toLowerCase() ===
-                                    region.replace(/in/g, "india")
-                                )
-                                .map((res1) => (
-                                  <li key={`filter_${res1.id}`}>
-                                    {`From ${res1.attributes?.currency_symbol ?? ""
-                                      }${formatPrice(res1.attributes?.price) ??
-                                      " xxxx"
-                                      } per person`}
-                                  </li>
-                                ))}
-                              <li>
-                                Travel to:
-                                <span key={item.id}>
-                                  {dictioneryFunction(
-                                    item?.attributes?.travel_to_text
-                                  )}
-                                </span>
-                              </li>
-                            </ul>
-                          </div>
-                          <button
-                            className="btn card_slider_btn light_grey_btn_bg"
-                            onClick={() => handleRedirect(item)}
-                          >
-                            <span>{item?.attributes?.no_of_nites_notes}</span>
-                            <span className="view_itnry_link">
-                              View this itinerary
-                              <em className="fa-solid fa-chevron-right"></em>
-                            </span>
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  {moreItineraries?.length > 4 ? (
-                    <i id="right">
+          {
+            moreItineraries?.length > 0 ? (
+              <section className="favrites_blk_row light_grey">
+                <div className="container">
+                  <h3 className="title_cls">
+                    More itineraries in{" "}
+                    {dictioneryFunction(
+                      itineraries?.attributes?.countries?.data[0]?.attributes
+                        ?.country_name
+                    )}
+                  </h3>
+                  <div className="card_slider_row">
+                    <i id="left">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="#ffffff"
@@ -1241,20 +1156,131 @@ function Index() {
                       >
                         <path
                           fillRule="nonzero"
-                          d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                          d="M263.78 18.9c4.28-4.3 4.3-11.31.04-15.64a10.865 10.865 0 0 0-15.48-.04L3.22 248.38c-4.28 4.3-4.3 11.31-.04 15.64l245.16 245.2c4.28 4.3 11.22 4.28 15.48-.05s4.24-11.33-.04-15.63L26.5 256.22 263.78 18.9z"
                         />
                       </svg>
                     </i>
-                  ) : (
-                    ""
-                  )}
+                    <div className="carousel00">
+                      {moreItineraries?.map((item) => (
+                        <div
+                          className="card_slider_inr"
+                          key={`slider_${item?.id}`}
+                        >
+                          <div className="card_slider">
+                            <NavLink
+                              key={item.id}
+                              href={generateDynamicLink(item)}
+                              className="card_slider_img"
+                            >
+                              {item?.attributes?.itinerary_images?.data.map(
+                                (element, index) =>
+                                  element.attributes.image_type == "thumbnail" ? (
+                                    <img
+                                      key={`iti_${element.id}`}
+                                      src={element.attributes.image_path}
+                                      alt="destination card01"
+                                      className="img-fluid"
+                                    />
+                                  ) : (
+                                    ""
+                                  )
+                              )}
+                              {/* <img src={backgroundThumbnailImg(item?.attributes?.itinerary_images?.data)} alt="destination card01" className="img-fluid" /> */}
+                            </NavLink>
+                            <div className="card_slider_cnt places_to_stay_cnt">
+                              <h4 key={item.id}>
+                                <a href={generateDynamicLink(item)}>
+                                  {dictioneryFunction(
+                                    item?.attributes?.itin_name
+                                  )}
+                                </a>
+                              </h4>
+                              {/* <NavLink href={generateDynamicLink(item)}>
+                          </NavLink> */}
+                              <ul>
+                                <li>
+                                  {dictioneryFunction(
+                                    item?.attributes?.header_text
+                                  )}
+                                </li>
+                                <li>
+                                  {dictioneryFunction(
+                                    item?.attributes?.subheader_text
+                                  )}
+                                </li>
+                                <li>
+                                  {dictioneryFunction(
+                                    item?.attributes?.country?.data?.attributes
+                                      ?.country_name
+                                  )}
+                                </li>
+                                {item?.attributes?.itinerary_country_contents?.data
+                                  .filter(
+                                    (res) =>
+                                      res.attributes.website_country.toLowerCase() ===
+                                      region.replace(/in/g, "india")
+                                  )
+                                  .map((res1) => (
+                                    <li key={`filter_${res1.id}`}>
+                                      {`From ${res1.attributes?.currency_symbol ?? ""
+                                        }${formatPrice(res1.attributes?.price) ??
+                                        " xxxx"
+                                        } per person`}
+                                    </li>
+                                  ))}
+                                <li>
+                                  Travel to:
+                                  <span key={item.id}>
+                                    {dictioneryFunction(
+                                      item?.attributes?.travel_to_text
+                                    )}
+                                  </span>
+                                </li>
+                              </ul>
+                            </div>
+                            <button
+                              className="btn card_slider_btn light_grey_btn_bg"
+                              onClick={() => handleRedirect(item)}
+                            >
+                              <span>{item?.attributes?.no_of_nites_notes}</span>
+                              <span className="view_itnry_link">
+                                View this itinerary
+                                <em className="fa-solid fa-chevron-right"></em>
+                              </span>
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    {moreItineraries?.length > 4 ? (
+                      <i id="right">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="#ffffff"
+                          shapeRendering="geometricPrecision"
+                          textRendering="geometricPrecision"
+                          imageRendering="optimizeQuality"
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          viewBox="0 0 267 512.43"
+                        >
+                          <path
+                            fillRule="nonzero"
+                            d="M3.22 18.9c-4.28-4.3-4.3-11.31-.04-15.64s11.2-4.35 15.48-.04l245.12 245.16c4.28 4.3 4.3 11.31.04 15.64L18.66 509.22a10.874 10.874 0 0 1-15.48-.05c-4.26-4.33-4.24-11.33.04-15.63L240.5 256.22 3.22 18.9z"
+                          />
+                        </svg>
+                      </i>
+                    ) : (
+                      ""
+                    )}
+                  </div>
                 </div>
-              </div>
-              {/* <div className="full_loader_parnt_blk loader_parnt_blk" style="display: block;"><div className="loader-circle-2"></div></div> */}
-            </section>
-          ) : (
-            " "
-          )}
+                {/* <div className="full_loader_parnt_blk loader_parnt_blk" style="display: block;"><div className="loader-circle-2"></div></div> */}
+              </section>
+            ) : (
+              " "
+            )
+          }
 
           <section className="make_enqury_row">
             <div className="container">
@@ -1267,13 +1293,14 @@ function Index() {
             className="newslettr_row"
           >
             <div className="container">
-              <h4>Sign up for our newsletter</h4>
-              <h5>Receive our latest news and special offers</h5>
+              <h4>Sign up for our newsletter
+                <span>Receive our latest news and special offers</span></h4>
               <Signup />
             </div>
           </section>
-        </div>
-      )}
+        </div >
+      )
+      }
     </>
   );
 }

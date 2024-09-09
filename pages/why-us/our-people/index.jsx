@@ -36,8 +36,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -654,8 +654,8 @@ function Index() {
             className="newslettr_row"
           >
             <div className="container">
-              <h4>Sign up for our newsletter</h4>
-              <h5>Receive our latest news and special offers</h5>
+              <h4>Sign up for our newsletter
+                <span>Receive our latest news and special offers</span></h4>
               <Signup />
             </div>
           </section>

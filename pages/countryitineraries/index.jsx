@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   destinationService,
   alertService,
@@ -37,6 +37,7 @@ function CountryItinararies(props) {
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
     .toLowerCase();
+  const newItemsRef = useRef([]);
 
   const [metaData, setMetaData] = useState([]);
   let dictionaryPage = 1;
@@ -387,9 +388,15 @@ function CountryItinararies(props) {
                 []
               )
             );
+            newItemsRef.current = [];
             setPage(page + 1);
           }
           setIsLoading(false);
+          setTimeout(() => {
+            if (newItemsRef.current.length > 0 && itineraries.length > 0) {
+              newItemsRef.current[0]?.scrollIntoView();
+            }
+          }, 0);
         })
         .catch((error) => {
           setIsLoading(false);
@@ -419,10 +426,15 @@ function CountryItinararies(props) {
                 []
               )
             );
-            itineraries;
+            newItemsRef.current = [];
             setPage(page + 1);
           }
           setIsLoading(false);
+          setTimeout(() => {
+            if (newItemsRef.current.length > 0 && itineraries.length > 0) {
+              newItemsRef.current[0]?.scrollIntoView();
+            }
+          }, 0);
         })
         .catch((error) => {
           setIsLoading(false);
@@ -555,7 +567,6 @@ function CountryItinararies(props) {
             label: countrycode?.toUpperCase(),
           },
         ];
-
         arrayOfObjects = [...arrayOfObjects, ...x.data[0]?.attributes?.regions?.data?.map((item) => ({
           region_code: item?.attributes?.region_code,
           value: item?.attributes?.region_name,
@@ -590,7 +601,7 @@ function CountryItinararies(props) {
               <p
                 dangerouslySetInnerHTML={{
                   __html: dictioneryFunction(
-                    countryData?.itineraries_intro_text
+                    countryData?.itineraries_intro_text?.replace(/\\n/g, "")
                   ),
                 }}
               />
@@ -599,7 +610,7 @@ function CountryItinararies(props) {
 
           <section className="favrites_blk_row favrites_blk_no_slider_row light_dark_grey">
             <div className="container">
-              <h3 className="title_cls">
+              <h3 className="title_cls text_lowercase">
                 All Luxury Holiday Ideas in {countryData?.country_name}
               </h3>
 
@@ -607,35 +618,38 @@ function CountryItinararies(props) {
               <div className="card_slider_row">
                 <div className="carousel00 region_carousel00">
                   <div className="row">
-                    <form onSubmit={onSubmit}>
+                    <form onSubmit={onSubmit} className="form_padg">
                       <div className="col-12">
                         <div className="destination_dropdwn_row d-block d-md-flex">
                           <div className="dropdown_grp_blk">
-                            <div className="banner_dropdwn_blk ps-0 ps-md-2">
-                              <Select
-                                id="long-value-select"
-                                instanceId="long-value-select"
-                                className="select_container_country"
-                                classNamePrefix="select_country"
-                                placeholder={"Filter by region"}
-                                styles={styles}
-                                isMulti
-                                isDisabled={isDisabled}
-                                isLoading={isLoader}
-                                isClearable={isClearable}
-                                isRtl={isRtl}
-                                isSearchable={isSearchable}
-                                value={selectedOptionRegion}
-                                onChange={handleOptionRegionChange}
-                                closeMenuOnSelect={false}
-                                hideSelectedOptions={false}
-                                options={allRegions}
-                                components={{
-                                  Option: InputOption,
-                                  MultiValue: CustomMultiValue,
-                                }}
-                              />
-                            </div>
+                            {allRegions.length > 1 && (
+
+                              <div className="banner_dropdwn_blk ps-0 ps-md-2">
+                                <Select
+                                  id="long-value-select"
+                                  instanceId="long-value-select"
+                                  className="select_container_country"
+                                  classNamePrefix="select_country"
+                                  placeholder={"Filter by region"}
+                                  styles={styles}
+                                  isMulti
+                                  isDisabled={isDisabled}
+                                  isLoading={isLoader}
+                                  isClearable={isClearable}
+                                  isRtl={isRtl}
+                                  isSearchable={isSearchable}
+                                  value={selectedOptionRegion}
+                                  onChange={handleOptionRegionChange}
+                                  closeMenuOnSelect={false}
+                                  hideSelectedOptions={false}
+                                  options={allRegions}
+                                  components={{
+                                    Option: InputOption,
+                                    MultiValue: CustomMultiValue,
+                                  }}
+                                />
+                              </div>
+                            )}
                             <div className="banner_dropdwn_blk ps-0 ps-md-2">
                               <Select
                                 placeholder={"Filter by reason"}
@@ -767,10 +781,11 @@ function CountryItinararies(props) {
                     </div>
 
                     {/* Country Itineraries */}
-                    {itineraries?.slice(0, itineraries.length).map((item) => (
+                    {itineraries?.slice(0, itineraries.length).map((item, ind) => (
                       <div
                         className="col-sm-6 col-lg-4 col-xxl-3"
                         key={item.id}
+                        ref={ind >= itineraries.length - 12 ? el => newItemsRef.current.push(el) : null}
                       >
                         <div className="card_slider_inr">
                           <div className="card_slider">

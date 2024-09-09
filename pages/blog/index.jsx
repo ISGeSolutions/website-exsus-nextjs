@@ -117,8 +117,8 @@ function Index() {
 
   const equalHeight = (resize) => {
     var elements = document.getElementsByClassName(
-        "card_slider_cnt places_to_stay_cnt"
-      ),
+      "card_slider_cnt places_to_stay_cnt"
+    ),
       allHeights = [],
       i = 0;
     if (resize === true) {
@@ -328,9 +328,8 @@ function Index() {
                                 aria-label="Choose a destination"
                                 name="destination"
                                 {...register("destination")}
-                                className={`form-select ${
-                                  errors.destination ? "is-invalid" : ""
-                                }`}
+                                className={`form-select ${errors.destination ? "is-invalid" : ""
+                                  }`}
                               >
                                 <option value="">Choose a destination</option>
                                 {destinationLandingList?.map((element, i) => (
@@ -355,9 +354,8 @@ function Index() {
                                 aria-label="Choose a reason"
                                 name="reason"
                                 {...register("reason")}
-                                className={`form-select ${
-                                  errors.reason ? "is-invalid" : ""
-                                }`}
+                                className={`form-select ${errors.reason ? "is-invalid" : ""
+                                  }`}
                               >
                                 <option value="">Choose a category</option>
                                 {holidaytypesLandingList?.map((element, i) => (
@@ -552,8 +550,8 @@ function Index() {
               className="newslettr_row"
             >
               <div className="container">
-                <h4>Sign up for our newsletter</h4>
-                <h5>Receive our latest news and special offers</h5>
+                <h4>Sign up for our newsletter
+                  <span>Receive our latest news and special offers</span></h4>
                 <Signup />
               </div>
             </section>
@@ -618,9 +616,8 @@ function Index() {
                                   type="text"
                                   name="first_name"
                                   {...register("first_name")} // Register the input field with react-hook-form
-                                  className={`form-control ${
-                                    errors.first_name ? "is-invalid" : ""
-                                  }`}
+                                  className={`form-control ${errors.first_name ? "is-invalid" : ""
+                                    }`}
                                   aria-label="First name *"
                                   placeholder="First name *"
                                 />
@@ -635,9 +632,8 @@ function Index() {
                                   type="text"
                                   name="last_name"
                                   {...register("last_name")} // Register the input field with react-hook-form
-                                  className={`form-control ${
-                                    errors.last_name ? "is-invalid" : ""
-                                  }`}
+                                  className={`form-control ${errors.last_name ? "is-invalid" : ""
+                                    }`}
                                   aria-label="Last name *"
                                   placeholder="Last name *"
                                 />
@@ -652,9 +648,8 @@ function Index() {
                                   type="email"
                                   name="email_id"
                                   {...register("email_id")} // Register the input field with react-hook-form
-                                  className={`form-control ${
-                                    errors.email_id ? "is-invalid" : ""
-                                  }`}
+                                  className={`form-control ${errors.email_id ? "is-invalid" : ""
+                                    }`}
                                   aria-label="Email *"
                                   placeholder="Email *"
                                 />

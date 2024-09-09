@@ -292,8 +292,8 @@ function Index() {
             className="newslettr_row"
           >
             <div className="container">
-              <h4>Sign up for our newsletter</h4>
-              <h5>Receive our latest news and special offers</h5>
+              <h4>Sign up for our newsletter
+                <span>Receive our latest news and special offers</span></h4>
               <form className="newslettr_form d-block d-sm-flex">
                 <div className="newlettr_inpt">
                   <input
@@ -402,9 +402,8 @@ function Index() {
                                 type="text"
                                 name="first_name"
                                 {...register("first_name")}
-                                className={`form-control ${
-                                  errors.first_name ? "is-invalid" : ""
-                                }`}
+                                className={`form-control ${errors.first_name ? "is-invalid" : ""
+                                  }`}
                                 aria-label="First name *"
                                 placeholder="First name *"
                               />
@@ -431,9 +430,8 @@ function Index() {
                                 type="text"
                                 name="title"
                                 {...register("last_name")}
-                                className={`form-control ${
-                                  errors.last_name ? "is-invalid" : ""
-                                }`}
+                                className={`form-control ${errors.last_name ? "is-invalid" : ""
+                                  }`}
                                 aria-label="Last name *"
                                 placeholder="Last name *"
                               />
@@ -460,9 +458,8 @@ function Index() {
                                 type="email"
                                 name="email_id"
                                 {...register("email_id")}
-                                className={`form-control ${
-                                  errors.email_id ? "is-invalid" : ""
-                                }`}
+                                className={`form-control ${errors.email_id ? "is-invalid" : ""
+                                  }`}
                                 aria-label="Email *"
                                 placeholder="Email *"
                               />

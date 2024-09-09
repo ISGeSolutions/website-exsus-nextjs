@@ -68,7 +68,7 @@ export function FriendlyUrl(props) {
 
   return (
     <>
-      <ul>
+      {/* <ul>
         {friendlyUrlArr?.map((friendlyUrl, i) => (
           <li key={i}>
             {i === friendlyUrlArr.length - 1 ? (
@@ -87,7 +87,48 @@ export function FriendlyUrl(props) {
             )}
           </li>
         ))}
+      </ul> */}
+      <ul>
+        {friendlyUrlArr?.map((friendlyUrl, i) => {
+          // Determine if the friendlyUrl contains a '?'
+          const hasQuestionMark = friendlyUrl.includes('?');
+
+          // Handle the case where '?' is present
+          if (hasQuestionMark) {
+            const [textPart, linkPart] = friendlyUrl.split('?');
+
+            return (
+              <li key={i}>
+                <NavLink href={dynamicFriendlyLink(linkPart, i)}>
+                  {textPart
+                    ?.replace(/-/g, " ")
+                    ?.replace(/\b\w/g, (char) => char.toUpperCase())}
+                </NavLink>
+              </li>
+            );
+          } else {
+            // Handle the case where '?' is not present
+            return (
+              <li key={i}>
+                {i === friendlyUrlArr.length - 1 ? (
+                  <span>
+                    {friendlyUrl
+                      ?.replace(/-/g, " ")
+                      ?.replace(/\b\w/g, (char) => char.toUpperCase())}
+                  </span>
+                ) : (
+                  <NavLink href={dynamicFriendlyLink(friendlyUrl, i)}>
+                    {friendlyUrl
+                      ?.replace(/-/g, " ")
+                      ?.replace(/\b\w/g, (char) => char.toUpperCase())}
+                  </NavLink>
+                )}
+              </li>
+            );
+          }
+        })}
       </ul>
+
     </>
   );
 }
