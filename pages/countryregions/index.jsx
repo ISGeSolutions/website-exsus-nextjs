@@ -206,7 +206,6 @@ function CountryRegions({ sendDataToParent }) {
   };
 
   const generateDynamicLink = (item) => {
-    debugger;
     if (item) {
       const modifiedName = item?.attributes?.friendly_url;
       return (

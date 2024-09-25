@@ -618,7 +618,7 @@ function RegionItinararies(props) {
             <section className="destination_para">
               <p
                 dangerouslySetInnerHTML={{
-                  __html: dictioneryFunction(props?.data?.itinerary_intro_text),
+                  __html: dictioneryFunction(props?.data?.itinerary_intro_text?.replace(/\n/g, '')),
                 }}
               />
             </section>
@@ -761,7 +761,6 @@ function RegionItinararies(props) {
                         className="col-sm-6 col-lg-4 col-xxl-3"
                         key={item.id}
                         ref={ind >= itineraries?.length - 12 ? el => newItemsRef.current.push(el) : null}
-
                       >
                         <div className="card_slider_inr">
                           <div className="card_slider">

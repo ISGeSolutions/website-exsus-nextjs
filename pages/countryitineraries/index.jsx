@@ -811,7 +811,7 @@ function CountryItinararies(props) {
                             <div className="card_slider_cnt places_to_stay_cnt">
                               <h4>
                                 <a href={generateDynamicLink(item)}>
-                                  {item?.attributes?.itin_name}
+                                  {dictioneryFunction(item?.attributes?.itin_name)}
                                 </a>
                               </h4>
                               <ul>

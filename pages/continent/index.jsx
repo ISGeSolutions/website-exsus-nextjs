@@ -15,6 +15,7 @@ import { homeService } from "../../services";
 import MarkerInfoWindowNext from "../../components/common/MarkerInfoWindowNext";
 import { ImageSlider } from "../../components/ImageSlider";
 
+
 export default Index;
 
 function Index() {
@@ -71,7 +72,7 @@ function Index() {
         regionWiseUrl + `/destinations/${destinationDetails?.friendly_url}`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(`Home/Destinations/${destinationName}`);
-      text = destinationDetails?.header_text;
+      text = dictioneryFunction(destinationDetails?.header_text);
     } else if (itemId == "countries") {
       setIsShowMap(true);
       let destCode = "";
@@ -93,7 +94,7 @@ function Index() {
       setFriendlyUrl(
         `Home/Destinations/${destinationName}/${destinationName} countries`
       );
-      text = `COUNTRIES IN ${destinationName}`;
+      text = dictioneryFunction(destinationDetails?.countries_intro_title);
     } else if (itemId == "itineraries") {
       setIsShowMap(false);
       let destCode = "";
@@ -113,7 +114,7 @@ function Index() {
             .toLowerCase()}-itineraries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(`Home/Destinations/${destinationName}/${destinationName}  Itineraries`);
-      text = `TAILOR-MADE ${destinationName} HOLIDAY ITINERARIES`;
+      text = dictioneryFunction(destinationDetails?.itineraries_intro_title);
     } else if (itemId == "places-to-stay") {
       setIsShowMap(false);
       const redirectUrl =
@@ -123,7 +124,7 @@ function Index() {
       setFriendlyUrl(
         `Home/Destinations/${destinationName}/Places to stay in ${destinationName}`
       );
-      text = `PLACES TO STAY IN ${destinationName}`;
+      text = dictioneryFunction(destinationDetails?.placestostay_intro_title);
     }
     setHeadingText(text);
     if (activeTab !== itemId) {

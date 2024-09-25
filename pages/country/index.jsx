@@ -60,6 +60,8 @@ function Country() {
   const [redirectUrl, setRedirectUrl] = useState(null);
   const [activeTab, setActiveTab] = useState("overview"); // State to track the active tab
   const [dataToSendToChild, setDataToSendToChild] = useState("Initial Data");
+  const [itineraries, setItineraries] = useState([]);
+  const [allHotels, setAllHotels] = useState([]);
 
   let region = "uk";
   let regionWiseUrl = "";
@@ -166,7 +168,8 @@ function Country() {
         `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
         }`
       );
-      text = "LUXURY HOLIDAYS IN " + countrycode?.toUpperCase();
+      // text = "LUXURY HOLIDAYS IN " + countrycode?.toUpperCase();
+      text = dictioneryFunction(countryData?.attributes?.header_text);
     } else if (itemId == "regions") {
       setIsShowMap(true);
       const redirectUrl =
@@ -178,7 +181,7 @@ function Country() {
         `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
         }/${countryData?.attributes?.friendly_url} regions`
       );
-      text = "REGIONS IN " + countrycode?.toUpperCase(); // action="/countryregions?countrycode=south-africa"
+      text = dictioneryFunction(countryData?.attributes?.regions_intro_title);// action="/countryregions?countrycode=south-africa"
     } else if (itemId == "itineraries") {
       setIsShowMap(false);
       let destCode = "";
@@ -203,7 +206,7 @@ function Country() {
           "-"
         )}/${destCode}/${destCode} itineraries`
       );
-      text = countrycode?.toUpperCase() + " ITINERARIES"; // action="/countryitineraries?countrycode=south-africa"
+      text = dictioneryFunction(countryData?.attributes?.itineraries_intro_title); // action="/countryitineraries?countrycode=south-africa"
     } else if (itemId == "places-to-stay") {
       setIsShowMap(false);
       handleTabClick("images");
@@ -216,7 +219,7 @@ function Country() {
         `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
         }/places to stay ${countryData?.attributes?.friendly_url}`
       );
-      text = "LUXURY HOTELS, CAMPS & LODGES IN " + countrycode.toUpperCase(); // action="/countryplacetostay?countrycode=south-africa"
+      text = dictioneryFunction(countryData?.attributes?.placestostay_intro_title); // action="/countryplacetostay?countrycode=south-africa"
     } else if (itemId == "when-to-go") {
       setIsShowMap(false);
       const redirectUrl =
@@ -228,7 +231,7 @@ function Country() {
         `Home/Destinations/${destinationcode?.replace(/ /g, "-")}/${countryData?.attributes?.friendly_url
         }/when to go to ${countryData?.attributes?.friendly_url}`
       );
-      text = "WHEN TO GO TO " + countrycode.toUpperCase(); // action="/countryplacetostay?countrycode=south-africa"
+      text = dictioneryFunction(countryData?.attributes?.whentogo_intro_title); // action="/countryplacetostay?countrycode=south-africa"
     } else {
       text = "LUXURY SAFARI HOLIDAYS IN " + countrycode.toUpperCase();
     }
@@ -398,6 +401,40 @@ function Country() {
     }
 
     if (countrycode) {
+      destinationService
+        .getCountryWiseItinerary(countrycode, 1, "recommended", region)
+        .then((response) => {
+
+          const newItineraries = response.data;
+          if (newItineraries.length > 0) {
+            setItineraries(newItineraries);
+          }
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+        });
+    }
+
+    if (countrycode) {
+      destinationService
+        .getAllCountryWiseHotels(1, "recommended", countrycode, region)
+        .then((response) => {
+          //  (response);
+          const newItineraries = response.data;
+          if (newItineraries.length > 0) {
+            setAllHotels(newItineraries);
+          }
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          // Handle any errors here
+          // console.error(error);
+          setIsLoading(false);
+        });
+    }
+
+    if (countrycode) {
       countriesService
         .getCountryDetails(countrycode)
         .then((x) => {
@@ -457,7 +494,8 @@ function Country() {
           ]);
           setCountryData(x.data[0]);
           setDataToSendToChild(x.data[0]?.attributes);
-          setHeadingText("LUXURY HOLIDAYS IN " + countrycode.toUpperCase());
+          setHeadingText(dictioneryFunction(x.data[0]?.attributes?.header_text))
+          // setHeadingText("LUXURY HOLIDAYS IN " + countrycode.toUpperCase());
           setFriendlyUrl(`Home/Destinations/${destinationcode}/${countrycode}`);
           const map_latitude = x.data[0].attributes?.map_latitude;
           const map_longitude = x.data[0].attributes?.map_longitude;
@@ -598,7 +636,7 @@ function Country() {
               </div>
               <div className="destination_tab_inr">
                 <h2 className="tab_tilte">
-                  {dictioneryFunction(headingText.replace(/%20/g, " "))}
+                  {dictioneryFunction(headingText?.replace(/%20/g, " "))}
                 </h2>
                 <ul
                   className="nav nav-pills justify-content-center"
@@ -643,44 +681,48 @@ function Country() {
                       </button>
                     </li>
                   )}
-                  <li className="nav-item" role="presentation">
-                    <button
-                      className={
-                        activeTab === "itineraries"
-                          ? "active nav-link"
-                          : "nav-link"
-                      }
-                      onClick={() => toggleTab("itineraries")}
-                      id="pills-itineraries-tab"
-                      data-bs-toggle="pill"
-                      data-bs-target="#pills-itineraries"
-                      type="button"
-                      role="tab"
-                      aria-controls="pills-itineraries"
-                      aria-selected="false"
-                    >
-                      Itineraries
-                    </button>
-                  </li>
-                  <li className="nav-item" role="presentation">
-                    <button
-                      className={
-                        activeTab === "places-to-stay"
-                          ? "active nav-link"
-                          : "nav-link"
-                      }
-                      onClick={() => toggleTab("places-to-stay")}
-                      id="pills-places-to-stay-tab"
-                      data-bs-toggle="pill"
-                      data-bs-target="#pills-places-to-stay"
-                      type="button"
-                      role="tab"
-                      aria-controls="pills-places-to-stay"
-                      aria-selected="false"
-                    >
-                      Places to stay
-                    </button>
-                  </li>
+                  {itineraries?.length > 0 && (
+                    <li className="nav-item" role="presentation">
+                      <button
+                        className={
+                          activeTab === "itineraries"
+                            ? "active nav-link"
+                            : "nav-link"
+                        }
+                        onClick={() => toggleTab("itineraries")}
+                        id="pills-itineraries-tab"
+                        data-bs-toggle="pill"
+                        data-bs-target="#pills-itineraries"
+                        type="button"
+                        role="tab"
+                        aria-controls="pills-itineraries"
+                        aria-selected="false"
+                      >
+                        Itineraries
+                      </button>
+                    </li>
+                  )}
+                  {allHotels?.length > 0 && (
+                    <li className="nav-item" role="presentation">
+                      <button
+                        className={
+                          activeTab === "places-to-stay"
+                            ? "active nav-link"
+                            : "nav-link"
+                        }
+                        onClick={() => toggleTab("places-to-stay")}
+                        id="pills-places-to-stay-tab"
+                        data-bs-toggle="pill"
+                        data-bs-target="#pills-places-to-stay"
+                        type="button"
+                        role="tab"
+                        aria-controls="pills-places-to-stay"
+                        aria-selected="false"
+                      >
+                        Places to stay
+                      </button>
+                    </li>
+                  )}
                   <li className="nav-item" role="presentation">
                     <button
                       className={
