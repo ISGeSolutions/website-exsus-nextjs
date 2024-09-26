@@ -4544,3 +4544,15 @@
 .card_blk_row .card_blk_inr.card_blk_para_blk .card_blk_cntnt.card_blk_sml_arw .row>div .card_blk_txt h3.region_title_txt:hover {
   color: #8aad56;
 }
+
+.destination_tab_row .destination_para.title_heading h3 {
+  color: #ffffff;
+  padding-bottom: 0;
+  font: 1.5rem/1.75rem "Roboto", sans-serif;
+  text-align: center;
+  text-transform: none;
+}
+
+.country_highlight_row .country_highlight_inr .para01>p {
+  margin-bottom: 0;
+}

@@ -283,7 +283,7 @@ function RegionPlacesToStay(props) {
       setIsLoading(true);
 
       destinationService
-        .getRegionWiseHotels(page + 1, regionName, item, region)
+        .getRegionWiseHotels(page + 1, regionFrdUrl, item, region)
         .then((response) => {
           setMetaData(response.meta.pagination);
           const newHotels = response?.data;
@@ -356,7 +356,7 @@ function RegionPlacesToStay(props) {
           item,
           region,
           page + 1,
-          regionName
+          regionFrdUrl
         )
         .then((response) => {
           setMetaData(response.meta.pagination);
@@ -685,7 +685,7 @@ function RegionPlacesToStay(props) {
               <p
                 dangerouslySetInnerHTML={{
                   __html: dictioneryFunction(
-                    regionData?.places_to_stay_intro_text
+                    regionData?.places_to_stay_intro_text?.replace(/\n/g, ''),
                   ),
                 }}
               />

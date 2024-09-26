@@ -33,6 +33,9 @@ function Index() {
   const [activeButton, setActiveButton] = useState("images");
   const [coordinatesArray, setCoordinatesArray] = useState([]);
   let [regionName, setRegionName] = useState("");
+  const [allHotels, setAllHotels] = useState([]);
+  const [itineraries, setItineraries] = useState(null);
+
   const destinationcode = router?.query?.continent
     ?.replace(/-and-/g, " & ")
     .replace(/-/g, " ")
@@ -133,15 +136,15 @@ function Index() {
         `/destinations/${destinationcode.replace(
           / /g,
           "-"
-        )?.replace(/&/g, "and")}/${countrycode.replace(/ /g, "-")?.replace(/&/g, "and")}/${regionName.replace(/ /g, "-")?.replace(/&/g, "and")}`;
+        )?.replace(/&/g, "and")}/${countrycode.replace(/ /g, "-")?.replace(/&/g, "and")}/${regionFrdUrl}`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationcode.replace(
           / /g,
           "-"
-        )}/${countrycode.replace(/ /g, "-")}/${regionName.replace(/ /g, "-")}`
+        )}/${countrycode.replace(/ /g, "-")}/${regionFrdUrl}`
       );
-      text = regionName;
+      text = dictioneryFunction(regionData?.attributes?.header_text);
     } else if (itemId == "itineraries") {
       setIsShowMap(false);
       handleTabClick("images");
@@ -150,10 +153,7 @@ function Index() {
         `/destinations/${destinationcode.replace(
           / /g,
           "-"
-        )?.replace(/&/g, "and")}/${countrycode.replace(/ /g, "-")?.replace(/&/g, "and")}/${regionName.replace(
-          / /g,
-          "-"
-        )?.replace(/&/g, "and")}/${regionName.replace(/ /g, "-")?.replace(/&/g, "and")}/${regionName.replace(/ /g, "-")?.replace(/&/g, "and")}-itineraries`;
+        )?.replace(/&/g, "and")}/${countrycode.replace(/ /g, "-")?.replace(/&/g, "and").toLowerCase()}/${regionFrdUrl}/${regionFrdUrl}-itineraries`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationcode.replace(
@@ -167,7 +167,7 @@ function Index() {
           "-"
         )} Itineraries`
       );
-      text = `${regionName} ITINERARIES`;
+      text = dictioneryFunction(regionData?.attributes?.itinerary_intro_title);
     } else if (itemId == "places-to-stay") {
       setIsShowMap(false);
       handleTabClick("images");
@@ -176,10 +176,7 @@ function Index() {
         `/destinations/${destinationcode.replace(
           / /g,
           "-"
-        )?.replace(/&/g, "and")}/${countrycode.replace(/ /g, "-")?.replace(/&/g, "and")}/${regionName.replace(
-          / /g,
-          "-"
-        )?.replace(/&/g, "and")}/${regionName.replace(/ /g, "-")?.replace(/&/g, "and")}/${regionName.replace(/ /g, "-")?.replace(/&/g, "and")}-places-to-stay`;
+        )?.replace(/&/g, "and")}/${countrycode.replace(/ /g, "-")?.replace(/&/g, "and")}/${regionFrdUrl}/${regionFrdUrl}-places-to-stay`;
       window.history.pushState(null, null, redirectUrl);
       setFriendlyUrl(
         `Home/Destinations/${destinationcode.replace(
@@ -190,7 +187,7 @@ function Index() {
           "-"
         )}/${regionName.replace(/ /g, "-")}/Places to stay in ${regionName.replace(/ /g, "-")}`
       );
-      text = `LUXURY HOTELS IN THE ${regionName}`;
+      text = dictioneryFunction(regionData?.attributes?.places_to_stay_intro_title);
     } else {
       text = `LUXURY SAFARI HOLIDAYS IN ${regionName}`;
     }
@@ -434,11 +431,29 @@ function Index() {
         )}/${countrycode}/${regionName}`
       );
 
+
+
+      // destinationService
+      //   .getAllRegionItineraries(1, regionName, "recommended", region)
+      //   .then((response) => {
+      //     const newItineraries = response.data;
+      //     if (newItineraries.length > 0) {
+      //       setItineraries(newItineraries);
+      //     }
+      //     setIsLoading(false);
+      //   })
+      //   .catch((error) => {
+      //     setIsLoading(false);
+      //   });
+
+
+
       destinationService
         .getRegionByName(regionFrdUrl)
         .then((x) => {
           setRegionData(x.data[0]);
           setRegionName(x.data[0]?.attributes?.region_name);
+          setHeadingText(x.data[0].header_text);
           localStorage.setItem(
             "PageInfo",
             JSON.stringify({
@@ -448,7 +463,7 @@ function Index() {
           );
 
 
-          setHeadingText(x.data[0]?.attributes?.region_name);
+          setHeadingText(dictioneryFunction(x.data[0]?.attributes?.header_text));
           const imageCheck = x.data[0].attributes.region_images.data;
           const newBackgroundImages = [];
           imageCheck.forEach((element) => {
@@ -463,6 +478,34 @@ function Index() {
         .catch((error) => {
           // Handle any errors here
           // console.error(error);
+          setIsLoading(false);
+        });
+
+
+      destinationService
+        .getRegionWiseHotels(1, regionFrdUrl, "recommended", region)
+        .then((response) => {
+          const newHotels = response?.data;
+          if (newHotels.length > 0) {
+            setAllHotels(newHotels);
+          }
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsLoading(false);
+        });
+
+
+      destinationService
+        .getAllRegionItineraries(1, regionFrdUrl, "recommended", region)
+        .then((response) => {
+          const newItineraries = response.data;
+          if (newItineraries.length > 0) {
+            setItineraries(newItineraries);
+          }
+          setIsLoading(false);
+        })
+        .catch((error) => {
           setIsLoading(false);
         });
 
@@ -585,7 +628,7 @@ function Index() {
         });
       }, 2000);
     }
-  }, [regionName, destinationcode, countrycode]);
+  }, [regionName, destinationcode, countrycode, regionFrdUrl]);
 
   return (
     <>
@@ -727,44 +770,48 @@ function Index() {
                       Overview
                     </button>
                   </li>
-                  <li className="nav-item" role="presentation">
-                    <button
-                      className={
-                        activeTab === "itineraries"
-                          ? "active nav-link"
-                          : "nav-link"
-                      }
-                      onClick={() => toggleTab("itineraries")}
-                      id="pills-itineraries-tab"
-                      data-bs-toggle="pill"
-                      data-bs-target="#pills-itineraries"
-                      type="button"
-                      role="tab"
-                      aria-controls="pills-itineraries"
-                      aria-selected="false"
-                    >
-                      Itineraries
-                    </button>
-                  </li>
-                  <li className="nav-item" role="presentation">
-                    <button
-                      className={
-                        activeTab === "places-to-stay"
-                          ? "active nav-link"
-                          : "nav-link"
-                      }
-                      onClick={() => toggleTab("places-to-stay")}
-                      id="pills-places-to-stay-tab"
-                      data-bs-toggle="pill"
-                      data-bs-target="#pills-places-to-stay"
-                      type="button"
-                      role="tab"
-                      aria-controls="pills-places-to-stay"
-                      aria-selected="false"
-                    >
-                      Places to stay
-                    </button>
-                  </li>
+                  {itineraries?.length > 0 && (
+                    <li className="nav-item" role="presentation">
+                      <button
+                        className={
+                          activeTab === "itineraries"
+                            ? "active nav-link"
+                            : "nav-link"
+                        }
+                        onClick={() => toggleTab("itineraries")}
+                        id="pills-itineraries-tab"
+                        data-bs-toggle="pill"
+                        data-bs-target="#pills-itineraries"
+                        type="button"
+                        role="tab"
+                        aria-controls="pills-itineraries"
+                        aria-selected="false"
+                      >
+                        Itineraries
+                      </button>
+                    </li>
+                  )}
+                  {allHotels?.length > 0 && (
+                    <li className="nav-item" role="presentation">
+                      <button
+                        className={
+                          activeTab === "places-to-stay"
+                            ? "active nav-link"
+                            : "nav-link"
+                        }
+                        onClick={() => toggleTab("places-to-stay")}
+                        id="pills-places-to-stay-tab"
+                        data-bs-toggle="pill"
+                        data-bs-target="#pills-places-to-stay"
+                        type="button"
+                        role="tab"
+                        aria-controls="pills-places-to-stay"
+                        aria-selected="false"
+                      >
+                        Places to stay
+                      </button>
+                    </li>
+                  )}
                 </ul>
               </div>
             </div>

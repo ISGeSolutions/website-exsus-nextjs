@@ -360,7 +360,7 @@ function RegionOverview({ props, onDataFromChild }) {
       ) : (
         <div>
           <div className="container">
-            <section className="destination_para">
+            <section className="destination_para title_heading">
               <p
                 dangerouslySetInnerHTML={{
                   __html: dictioneryFunction(regionData.overview_text),

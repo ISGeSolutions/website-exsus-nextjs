@@ -346,7 +346,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
       });
 
     window.addEventListener("resize", equalHeight(true));
-  }, [countrycode, dataToChild]);
+  }, [countrycode, dataToChild, countryData]);
 
   return (
     <>
@@ -371,7 +371,7 @@ function CountryOverview({ sendDataToChild, onDataFromChild, dataToChild }) {
       ) : (
         <div>
           <div className="container">
-            <section className="destination_para">
+            <section className="destination_para title_heading">
               <p
                 dangerouslySetInnerHTML={{
                   __html: dictioneryFunction(countryData?.overview_text?.replace(/\\&quot;/g, '"')?.replace(/\\n/g, ""))?.replace(/\\/g, ''),
